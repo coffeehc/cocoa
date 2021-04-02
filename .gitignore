@@ -1,0 +1,5 @@
+.idea/
+**/.DS_Store
+response_cache
+__pycache__/
+.vscode/
