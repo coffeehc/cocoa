@@ -6,10 +6,11 @@ package appkit
 // #include <Foundation/NSRange.h>
 import "C"
 import (
-	"github.com/hsiafan/cocoa/foundation"
-	"github.com/hsiafan/cocoa/objc"
-	"github.com/hsiafan/glow/unsafex"
 	"unsafe"
+
+	"github.com/hsiafan/cocoa/foundation"
+	"github.com/hsiafan/cocoa/internal/utils"
+	"github.com/hsiafan/cocoa/objc"
 )
 
 var resources = foundation.NewResourceRegistry()
@@ -66,7 +67,7 @@ func toRange(r C.NSRange) foundation.Range {
 }
 
 func toPointer(o objc.PointerHolder) unsafe.Pointer {
-	if unsafex.InterfaceIsNil(o) {
+	if utils.InterfaceIsNil(o) {
 		return nil
 	}
 	return o.Ptr()

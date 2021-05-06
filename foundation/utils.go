@@ -7,7 +7,7 @@ package foundation
 import "C"
 import (
 	"github.com/hsiafan/cocoa/objc"
-	"github.com/hsiafan/glow/unsafex"
+	"github.com/hsiafan/cocoa/internal/utils"
 	"unsafe"
 )
 
@@ -63,7 +63,7 @@ func toRange(r C.NSRange) Range {
 }
 
 func toPointer(o objc.Object) unsafe.Pointer {
-	if unsafex.InterfaceIsNil(o) {
+	if utils.InterfaceIsNil(o) {
 		return nil
 	}
 	return o.Ptr()
