@@ -1,60 +1,121 @@
 #import <Foundation/Foundation.h>
-#import "number.h"
+#import "url.h"
 
-bool Number_BoolValue(void* ptr) {
-	NSNumber* number = (NSNumber*)ptr;
-	return [number boolValue];
+void* C_Number_Alloc() {
+	return [NSNumber alloc];
 }
 
-float Number_FloatValue(void* ptr) {
-	NSNumber* number = (NSNumber*)ptr;
-	return [number floatValue];
+void* C_NSNumber_InitWithCoder(void* ptr, void* coder) {
+	NSNumber* nSNumber = (NSNumber*)ptr;
+	NSNumber* result = [nSNumber initWithCoder:(NSCoder*)coder];
+	return result;
 }
 
-long Number_IntValue(void* ptr) {
-	NSNumber* number = (NSNumber*)ptr;
-	return [number intValue];
+void* C_NSNumber_Init(void* ptr) {
+	NSNumber* nSNumber = (NSNumber*)ptr;
+	NSNumber* result = [nSNumber init];
+	return result;
 }
 
-long Number_LongLongValue(void* ptr) {
-	NSNumber* number = (NSNumber*)ptr;
-	return [number longLongValue];
+void* C_NSNumber_NumberWithBool(bool value) {
+	NSNumber* result = [NSNumber numberWithBool:value];
+	return result;
 }
 
-unsigned long Number_UnsignedIntValue(void* ptr) {
-	NSNumber* number = (NSNumber*)ptr;
-	return [number unsignedIntValue];
+void* C_NSNumber_NumberWithDouble(double value) {
+	NSNumber* result = [NSNumber numberWithDouble:value];
+	return result;
 }
 
-unsigned long Number_UnsignedLongLongValue(void* ptr) {
-	NSNumber* number = (NSNumber*)ptr;
-	return [number unsignedLongLongValue];
+void* C_NSNumber_NumberWithFloat(float value) {
+	NSNumber* result = [NSNumber numberWithFloat:value];
+	return result;
 }
 
-void* Number_NumberWithBool(bool value) {
-	return [NSNumber numberWithBool:value];
+void* C_NSNumber_NumberWithInteger(int value) {
+	NSNumber* result = [NSNumber numberWithInteger:value];
+	return result;
 }
 
-void* Number_NumberWithDouble(double value) {
-	return [NSNumber numberWithDouble:value];
+void* C_NSNumber_NumberWithUnsignedInteger(unsigned int value) {
+	NSNumber* result = [NSNumber numberWithUnsignedInteger:value];
+	return result;
 }
 
-void* Number_NumberWithFloat(float value) {
-	return [NSNumber numberWithFloat:value];
+void* C_NSNumber_InitWithBool(void* ptr, bool value) {
+	NSNumber* nSNumber = (NSNumber*)ptr;
+	NSNumber* result = [nSNumber initWithBool:value];
+	return result;
 }
 
-void* Number_NumberWithInt(long value) {
-	return [NSNumber numberWithInt:value];
+void* C_NSNumber_InitWithDouble(void* ptr, double value) {
+	NSNumber* nSNumber = (NSNumber*)ptr;
+	NSNumber* result = [nSNumber initWithDouble:value];
+	return result;
 }
 
-void* Number_NumberWithLongLong(long value) {
-	return [NSNumber numberWithLongLong:value];
+void* C_NSNumber_InitWithFloat(void* ptr, float value) {
+	NSNumber* nSNumber = (NSNumber*)ptr;
+	NSNumber* result = [nSNumber initWithFloat:value];
+	return result;
 }
 
-void* Number_NumberWithUnsignedInt(unsigned long value) {
-	return [NSNumber numberWithUnsignedInt:value];
+void* C_NSNumber_InitWithInteger(void* ptr, int value) {
+	NSNumber* nSNumber = (NSNumber*)ptr;
+	NSNumber* result = [nSNumber initWithInteger:value];
+	return result;
 }
 
-void* Number_NumberWithUnsignedLongLong(unsigned long value) {
-	return [NSNumber numberWithUnsignedLongLong:value];
+void* C_NSNumber_InitWithUnsignedInteger(void* ptr, unsigned int value) {
+	NSNumber* nSNumber = (NSNumber*)ptr;
+	NSNumber* result = [nSNumber initWithUnsignedInteger:value];
+	return result;
+}
+
+void* C_NSNumber_DescriptionWithLocale(void* ptr, void* locale) {
+	NSNumber* nSNumber = (NSNumber*)ptr;
+	NSString* result = [nSNumber descriptionWithLocale:(id)locale];
+	return result;
+}
+
+bool C_NSNumber_IsEqualToNumber(void* ptr, void* number) {
+	NSNumber* nSNumber = (NSNumber*)ptr;
+	bool result = [nSNumber isEqualToNumber:(NSNumber*)number];
+	return result;
+}
+
+bool C_NSNumber_BoolValue(void* ptr) {
+	NSNumber* nSNumber = (NSNumber*)ptr;
+	bool result = [nSNumber boolValue];
+	return result;
+}
+
+double C_NSNumber_DoubleValue(void* ptr) {
+	NSNumber* nSNumber = (NSNumber*)ptr;
+	double result = [nSNumber doubleValue];
+	return result;
+}
+
+float C_NSNumber_FloatValue(void* ptr) {
+	NSNumber* nSNumber = (NSNumber*)ptr;
+	float result = [nSNumber floatValue];
+	return result;
+}
+
+int C_NSNumber_IntegerValue(void* ptr) {
+	NSNumber* nSNumber = (NSNumber*)ptr;
+	int result = [nSNumber integerValue];
+	return result;
+}
+
+unsigned int C_NSNumber_UnsignedIntegerValue(void* ptr) {
+	NSNumber* nSNumber = (NSNumber*)ptr;
+	unsigned int result = [nSNumber unsignedIntegerValue];
+	return result;
+}
+
+void* C_NSNumber_StringValue(void* ptr) {
+	NSNumber* nSNumber = (NSNumber*)ptr;
+	NSString* result = [nSNumber stringValue];
+	return result;
 }

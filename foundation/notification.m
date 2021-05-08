@@ -1,16 +1,35 @@
-#import <Foundation/NSNotification.h>
-#import <Foundation/NSString.h>
-#import "notification.h"
-#include "_cgo_export.h"
-#import <objc/runtime.h>
+#import <Foundation/Foundation.h>
+#import "url.h"
 
-
-const char* Notification_Name(void* ptr) {
-    NSNotification* notification = (NSNotification*)ptr;
-    return [[notification name] UTF8String];
+void* C_Notification_Alloc() {
+	return [NSNotification alloc];
 }
 
-void* Notification_Object(void* ptr) {
-    NSNotification* notification = (NSNotification*)ptr;
-    return [notification object];
+void* C_NSNotification_Init(void* ptr) {
+	NSNotification* nSNotification = (NSNotification*)ptr;
+	NSNotification* result = [nSNotification init];
+	return result;
+}
+
+void* C_NSNotification_InitWithCoder(void* ptr, void* coder) {
+	NSNotification* nSNotification = (NSNotification*)ptr;
+	NSNotification* result = [nSNotification initWithCoder:(NSCoder*)coder];
+	return result;
+}
+
+void* C_NSNotification_NotificationWithName_Object(void* aName, void* anObject) {
+	NSNotification* result = [NSNotification notificationWithName:(NSString*)aName object:(id)anObject];
+	return result;
+}
+
+void* C_NSNotification_Name(void* ptr) {
+	NSNotification* nSNotification = (NSNotification*)ptr;
+	NSString* result = [nSNotification name];
+	return result;
+}
+
+void* C_NSNotification_Object(void* ptr) {
+	NSNotification* nSNotification = (NSNotification*)ptr;
+	id result = [nSNotification object];
+	return result;
 }

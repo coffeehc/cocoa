@@ -1,153 +1,309 @@
 #import <Foundation/Foundation.h>
 #import "url.h"
 
-bool URL_IsFileURL(void* ptr) {
-	NSURL* uRL = (NSURL*)ptr;
-	return [uRL isFileURL];
+void* C_URL_Alloc() {
+	return [NSURL alloc];
 }
 
-const char* URL_AbsoluteString(void* ptr) {
-	NSURL* uRL = (NSURL*)ptr;
-	return [[uRL absoluteString] UTF8String];
+void* C_NSURL_InitWithString(void* ptr, void* URLString) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSURL* result = [nSURL initWithString:(NSString*)URLString];
+	return result;
 }
 
-void* URL_AbsoluteURL(void* ptr) {
-	NSURL* uRL = (NSURL*)ptr;
-	return [uRL absoluteURL];
+void* C_NSURL_InitWithString_RelativeToURL(void* ptr, void* URLString, void* baseURL) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSURL* result = [nSURL initWithString:(NSString*)URLString relativeToURL:(NSURL*)baseURL];
+	return result;
 }
 
-void* URL_BaseURL(void* ptr) {
-	NSURL* uRL = (NSURL*)ptr;
-	return [uRL baseURL];
+void* C_NSURL_InitFileURLWithPath_IsDirectory(void* ptr, void* path, bool isDir) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSURL* result = [nSURL initFileURLWithPath:(NSString*)path isDirectory:isDir];
+	return result;
 }
 
-const char* URL_Fragment(void* ptr) {
-	NSURL* uRL = (NSURL*)ptr;
-	return [[uRL fragment] UTF8String];
+void* C_NSURL_InitFileURLWithPath_RelativeToURL(void* ptr, void* path, void* baseURL) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSURL* result = [nSURL initFileURLWithPath:(NSString*)path relativeToURL:(NSURL*)baseURL];
+	return result;
 }
 
-const char* URL_Host(void* ptr) {
-	NSURL* uRL = (NSURL*)ptr;
-	return [[uRL host] UTF8String];
+void* C_NSURL_InitFileURLWithPath_IsDirectory_RelativeToURL(void* ptr, void* path, bool isDir, void* baseURL) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSURL* result = [nSURL initFileURLWithPath:(NSString*)path isDirectory:isDir relativeToURL:(NSURL*)baseURL];
+	return result;
 }
 
-const char* URL_LastPathComponent(void* ptr) {
-	NSURL* uRL = (NSURL*)ptr;
-	return [[uRL lastPathComponent] UTF8String];
+void* C_NSURL_InitFileURLWithPath(void* ptr, void* path) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSURL* result = [nSURL initFileURLWithPath:(NSString*)path];
+	return result;
 }
 
-const char* URL_Password(void* ptr) {
-	NSURL* uRL = (NSURL*)ptr;
-	return [[uRL password] UTF8String];
+void* C_NSURL_InitAbsoluteURLWithDataRepresentation_RelativeToURL(void* ptr, Array data, void* baseURL) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSURL* result = [nSURL initAbsoluteURLWithDataRepresentation:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len] relativeToURL:(NSURL*)baseURL];
+	return result;
 }
 
-const char* URL_Path(void* ptr) {
-	NSURL* uRL = (NSURL*)ptr;
-	return [[uRL path] UTF8String];
+void* C_NSURL_InitWithDataRepresentation_RelativeToURL(void* ptr, Array data, void* baseURL) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSURL* result = [nSURL initWithDataRepresentation:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len] relativeToURL:(NSURL*)baseURL];
+	return result;
 }
 
-Array URL_PathComponents(void* ptr) {
-	NSURL* uRL = (NSURL*)ptr;
-	NSArray* ns_array = [uRL pathComponents];
-	int count = [ns_array count];
-	void** data = malloc(count * sizeof(void*));
-	for (int i = 0; i < count; i++) {
-		 data[i] = (void*)[[ns_array objectAtIndex:i] UTF8String];}
-	Array array;
-	array.data = data;
-	array.len = count;
-	return array;
+void* C_NSURL_Init(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSURL* result = [nSURL init];
+	return result;
 }
 
-const char* URL_PathExtension(void* ptr) {
-	NSURL* uRL = (NSURL*)ptr;
-	return [[uRL pathExtension] UTF8String];
+void* C_NSURL_URLWithString(void* URLString) {
+	NSURL* result = [NSURL URLWithString:(NSString*)URLString];
+	return result;
 }
 
-void* URL_Port(void* ptr) {
-	NSURL* uRL = (NSURL*)ptr;
-	return [uRL port];
+void* C_NSURL_URLWithString_RelativeToURL(void* URLString, void* baseURL) {
+	NSURL* result = [NSURL URLWithString:(NSString*)URLString relativeToURL:(NSURL*)baseURL];
+	return result;
 }
 
-const char* URL_Query(void* ptr) {
-	NSURL* uRL = (NSURL*)ptr;
-	return [[uRL query] UTF8String];
+void* C_NSURL_FileURLWithPath_IsDirectory(void* path, bool isDir) {
+	NSURL* result = [NSURL fileURLWithPath:(NSString*)path isDirectory:isDir];
+	return result;
 }
 
-const char* URL_RelativePath(void* ptr) {
-	NSURL* uRL = (NSURL*)ptr;
-	return [[uRL relativePath] UTF8String];
+void* C_NSURL_FileURLWithPath_RelativeToURL(void* path, void* baseURL) {
+	NSURL* result = [NSURL fileURLWithPath:(NSString*)path relativeToURL:(NSURL*)baseURL];
+	return result;
 }
 
-const char* URL_RelativeString(void* ptr) {
-	NSURL* uRL = (NSURL*)ptr;
-	return [[uRL relativeString] UTF8String];
+void* C_NSURL_FileURLWithPath_IsDirectory_RelativeToURL(void* path, bool isDir, void* baseURL) {
+	NSURL* result = [NSURL fileURLWithPath:(NSString*)path isDirectory:isDir relativeToURL:(NSURL*)baseURL];
+	return result;
 }
 
-const char* URL_ResourceSpecifier(void* ptr) {
-	NSURL* uRL = (NSURL*)ptr;
-	return [[uRL resourceSpecifier] UTF8String];
+void* C_NSURL_FileURLWithPath(void* path) {
+	NSURL* result = [NSURL fileURLWithPath:(NSString*)path];
+	return result;
 }
 
-const char* URL_Scheme(void* ptr) {
-	NSURL* uRL = (NSURL*)ptr;
-	return [[uRL scheme] UTF8String];
+void* C_NSURL_AbsoluteURLWithDataRepresentation_RelativeToURL(Array data, void* baseURL) {
+	NSURL* result = [NSURL absoluteURLWithDataRepresentation:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len] relativeToURL:(NSURL*)baseURL];
+	return result;
 }
 
-void* URL_StandardizedURL(void* ptr) {
-	NSURL* uRL = (NSURL*)ptr;
-	return [uRL standardizedURL];
+void* C_NSURL_URLWithDataRepresentation_RelativeToURL(Array data, void* baseURL) {
+	NSURL* result = [NSURL URLWithDataRepresentation:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len] relativeToURL:(NSURL*)baseURL];
+	return result;
 }
 
-const char* URL_User(void* ptr) {
-	NSURL* uRL = (NSURL*)ptr;
-	return [[uRL user] UTF8String];
+bool C_NSURL_IsFileReferenceURL(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	bool result = [nSURL isFileReferenceURL];
+	return result;
 }
 
-void* URL_FilePathURL(void* ptr) {
-	NSURL* uRL = (NSURL*)ptr;
-	return [uRL filePathURL];
+void C_NSURL_RemoveAllCachedResourceValues(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	[nSURL removeAllCachedResourceValues];
 }
 
-void* URL_URLWithString(const char* URLString) {
-	return [NSURL URLWithString:[NSString stringWithUTF8String:URLString]];
+void C_NSURL_RemoveCachedResourceValueForKey(void* ptr, void* key) {
+	NSURL* nSURL = (NSURL*)ptr;
+	[nSURL removeCachedResourceValueForKey:(NSString*)key];
 }
 
-void* URL_URLWithStringRelativeToURL(const char* URLString, void* baseURL) {
-	return [NSURL URLWithString:[NSString stringWithUTF8String:URLString] relativeToURL:(NSURL*)baseURL];
+void C_NSURL_SetTemporaryResourceValue_ForKey(void* ptr, void* value, void* key) {
+	NSURL* nSURL = (NSURL*)ptr;
+	[nSURL setTemporaryResourceValue:(id)value forKey:(NSString*)key];
 }
 
-void* URL_FileURLWithPath(const char* path) {
-	return [NSURL fileURLWithPath:[NSString stringWithUTF8String:path]];
+void* C_NSURL_FileReferenceURL(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSURL* result = [nSURL fileReferenceURL];
+	return result;
 }
 
-void* URL_FileURLWithPath2(const char* path, bool isDir) {
-	return [NSURL fileURLWithPath:[NSString stringWithUTF8String:path] isDirectory:isDir];
+void* C_NSURL_URLByAppendingPathComponent(void* ptr, void* pathComponent) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSURL* result = [nSURL URLByAppendingPathComponent:(NSString*)pathComponent];
+	return result;
 }
 
-void* URL_FileURLWithPathRelativeToURL(const char* path, void* baseURL) {
-	return [NSURL fileURLWithPath:[NSString stringWithUTF8String:path] relativeToURL:(NSURL*)baseURL];
+void* C_NSURL_URLByAppendingPathComponent_IsDirectory(void* ptr, void* pathComponent, bool isDirectory) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSURL* result = [nSURL URLByAppendingPathComponent:(NSString*)pathComponent isDirectory:isDirectory];
+	return result;
 }
 
-void* URL_FileURLWithPathRelativeToURL2(const char* path, bool isDir, void* baseURL) {
-	return [NSURL fileURLWithPath:[NSString stringWithUTF8String:path] isDirectory:isDir relativeToURL:(NSURL*)baseURL];
+void* C_NSURL_URLByAppendingPathExtension(void* ptr, void* pathExtension) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSURL* result = [nSURL URLByAppendingPathExtension:(NSString*)pathExtension];
+	return result;
 }
 
-void* URL_FileURLWithPathComponents(Array components) {
-    NSMutableArray* objc_components = [[NSMutableArray alloc] init];
-    void** componentsData = (void**)components.data;
-    for (int i = 0; i < components.len; i++) {
-    	[objc_components addObject:[NSString stringWithUTF8String:(const char*)componentsData[i]]];
-    }
-	return [NSURL fileURLWithPathComponents:objc_components];
+bool C_NSURL_StartAccessingSecurityScopedResource(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	bool result = [nSURL startAccessingSecurityScopedResource];
+	return result;
 }
 
-bool URL_IsEqual(void* ptr, void* anObject) {
-	NSURL* uRL = (NSURL*)ptr;
-	return [uRL isEqual:(NSObject*)anObject];
+void C_NSURL_StopAccessingSecurityScopedResource(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	[nSURL stopAccessingSecurityScopedResource];
 }
 
-bool URL_IsFileReferenceURL(void* ptr) {
-	NSURL* uRL = (NSURL*)ptr;
-	return [uRL isFileReferenceURL];
+Array C_NSURL_DataRepresentation(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSData* result = [nSURL dataRepresentation];
+	Array resultarray;
+	resultarray.data = [result bytes];
+	resultarray.len = result.length;
+	return resultarray;
+}
+
+bool C_NSURL_IsFileURL(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	bool result = [nSURL isFileURL];
+	return result;
+}
+
+void* C_NSURL_AbsoluteString(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSString* result = [nSURL absoluteString];
+	return result;
+}
+
+void* C_NSURL_AbsoluteURL(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSURL* result = [nSURL absoluteURL];
+	return result;
+}
+
+void* C_NSURL_BaseURL(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSURL* result = [nSURL baseURL];
+	return result;
+}
+
+void* C_NSURL_Fragment(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSString* result = [nSURL fragment];
+	return result;
+}
+
+void* C_NSURL_Host(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSString* result = [nSURL host];
+	return result;
+}
+
+void* C_NSURL_LastPathComponent(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSString* result = [nSURL lastPathComponent];
+	return result;
+}
+
+void* C_NSURL_Password(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSString* result = [nSURL password];
+	return result;
+}
+
+void* C_NSURL_Path(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSString* result = [nSURL path];
+	return result;
+}
+
+void* C_NSURL_PathExtension(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSString* result = [nSURL pathExtension];
+	return result;
+}
+
+void* C_NSURL_Port(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSNumber* result = [nSURL port];
+	return result;
+}
+
+void* C_NSURL_Query(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSString* result = [nSURL query];
+	return result;
+}
+
+void* C_NSURL_RelativePath(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSString* result = [nSURL relativePath];
+	return result;
+}
+
+void* C_NSURL_RelativeString(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSString* result = [nSURL relativeString];
+	return result;
+}
+
+void* C_NSURL_ResourceSpecifier(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSString* result = [nSURL resourceSpecifier];
+	return result;
+}
+
+void* C_NSURL_Scheme(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSString* result = [nSURL scheme];
+	return result;
+}
+
+void* C_NSURL_StandardizedURL(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSURL* result = [nSURL standardizedURL];
+	return result;
+}
+
+void* C_NSURL_User(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSString* result = [nSURL user];
+	return result;
+}
+
+void* C_NSURL_FilePathURL(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSURL* result = [nSURL filePathURL];
+	return result;
+}
+
+void* C_NSURL_URLByDeletingLastPathComponent(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSURL* result = [nSURL URLByDeletingLastPathComponent];
+	return result;
+}
+
+void* C_NSURL_URLByDeletingPathExtension(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSURL* result = [nSURL URLByDeletingPathExtension];
+	return result;
+}
+
+void* C_NSURL_URLByResolvingSymlinksInPath(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSURL* result = [nSURL URLByResolvingSymlinksInPath];
+	return result;
+}
+
+void* C_NSURL_URLByStandardizingPath(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	NSURL* result = [nSURL URLByStandardizingPath];
+	return result;
+}
+
+bool C_NSURL_HasDirectoryPath(void* ptr) {
+	NSURL* nSURL = (NSURL*)ptr;
+	bool result = [nSURL hasDirectoryPath];
+	return result;
 }

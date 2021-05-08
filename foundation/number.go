@@ -10,19 +10,24 @@ import (
 )
 
 type Number interface {
-	objc.Object
+	Value
+	InitWithBool(value bool) Number
+	InitWithDouble(value float64) Number
+	InitWithFloat(value float32) Number
+	InitWithInteger(value int) Number
+	InitWithUnsignedInteger(value uint) Number
+	DescriptionWithLocale(locale objc.Object) string
+	IsEqualToNumber(number Number) bool
 	BoolValue() bool
+	DoubleValue() float64
 	FloatValue() float32
-	IntValue() int
-	LongLongValue() int64
-	UnsignedIntValue() uint
-	UnsignedLongLongValue() uint64
+	IntegerValue() int
+	UnsignedIntegerValue() uint
+	StringValue() string
 }
 
-var _ Number = (*NSNumber)(nil)
-
 type NSNumber struct {
-	objc.NSObject
+	NSValue
 }
 
 func MakeNumber(ptr unsafe.Pointer) *NSNumber {
@@ -30,58 +35,110 @@ func MakeNumber(ptr unsafe.Pointer) *NSNumber {
 		return nil
 	}
 	return &NSNumber{
-		NSObject: *objc.MakeObject(ptr),
+		NSValue: *MakeValue(ptr),
 	}
 }
 
-func (n *NSNumber) BoolValue() bool {
-	return bool(C.Number_BoolValue(n.Ptr()))
+func AllocNumber() *NSNumber {
+	return MakeNumber(C.C_Number_Alloc())
 }
 
-func (n *NSNumber) FloatValue() float32 {
-	return float32(C.Number_FloatValue(n.Ptr()))
+func (n *NSNumber) InitWithCoder(coder Coder) Number {
+	result := C.C_NSNumber_InitWithCoder(n.Ptr(), toPointer(coder))
+	return MakeNumber(result)
 }
 
-func (n *NSNumber) IntValue() int {
-	return int(C.Number_IntValue(n.Ptr()))
-}
-
-func (n *NSNumber) LongLongValue() int64 {
-	return int64(C.Number_LongLongValue(n.Ptr()))
-}
-
-func (n *NSNumber) UnsignedIntValue() uint {
-	return uint(C.Number_UnsignedIntValue(n.Ptr()))
-}
-
-func (n *NSNumber) UnsignedLongLongValue() uint64 {
-	return uint64(C.Number_UnsignedLongLongValue(n.Ptr()))
+func (n *NSNumber) Init() Number {
+	result := C.C_NSNumber_Init(n.Ptr())
+	return MakeNumber(result)
 }
 
 func NumberWithBool(value bool) Number {
-	return MakeNumber(C.Number_NumberWithBool(C.bool(value)))
+	result := C.C_NSNumber_NumberWithBool(C.bool(value))
+	return MakeNumber(result)
 }
 
 func NumberWithDouble(value float64) Number {
-	return MakeNumber(C.Number_NumberWithDouble(C.double(value)))
+	result := C.C_NSNumber_NumberWithDouble(C.double(value))
+	return MakeNumber(result)
 }
 
 func NumberWithFloat(value float32) Number {
-	return MakeNumber(C.Number_NumberWithFloat(C.float(value)))
+	result := C.C_NSNumber_NumberWithFloat(C.float(value))
+	return MakeNumber(result)
 }
 
-func NumberWithInt(value int) Number {
-	return MakeNumber(C.Number_NumberWithInt(C.long(value)))
+func NumberWithInteger(value int) Number {
+	result := C.C_NSNumber_NumberWithInteger(C.int(value))
+	return MakeNumber(result)
 }
 
-func NumberWithLongLong(value int64) Number {
-	return MakeNumber(C.Number_NumberWithLongLong(C.long(value)))
+func NumberWithUnsignedInteger(value uint) Number {
+	result := C.C_NSNumber_NumberWithUnsignedInteger(C.uint(value))
+	return MakeNumber(result)
 }
 
-func NumberWithUnsignedInt(value uint) Number {
-	return MakeNumber(C.Number_NumberWithUnsignedInt(C.ulong(value)))
+func (n *NSNumber) InitWithBool(value bool) Number {
+	result := C.C_NSNumber_InitWithBool(n.Ptr(), C.bool(value))
+	return MakeNumber(result)
 }
 
-func NumberWithUnsignedLongLong(value uint64) Number {
-	return MakeNumber(C.Number_NumberWithUnsignedLongLong(C.ulong(value)))
+func (n *NSNumber) InitWithDouble(value float64) Number {
+	result := C.C_NSNumber_InitWithDouble(n.Ptr(), C.double(value))
+	return MakeNumber(result)
+}
+
+func (n *NSNumber) InitWithFloat(value float32) Number {
+	result := C.C_NSNumber_InitWithFloat(n.Ptr(), C.float(value))
+	return MakeNumber(result)
+}
+
+func (n *NSNumber) InitWithInteger(value int) Number {
+	result := C.C_NSNumber_InitWithInteger(n.Ptr(), C.int(value))
+	return MakeNumber(result)
+}
+
+func (n *NSNumber) InitWithUnsignedInteger(value uint) Number {
+	result := C.C_NSNumber_InitWithUnsignedInteger(n.Ptr(), C.uint(value))
+	return MakeNumber(result)
+}
+
+func (n *NSNumber) DescriptionWithLocale(locale objc.Object) string {
+	result := C.C_NSNumber_DescriptionWithLocale(n.Ptr(), toPointer(locale))
+	return MakeString(result).String()
+}
+
+func (n *NSNumber) IsEqualToNumber(number Number) bool {
+	result := C.C_NSNumber_IsEqualToNumber(n.Ptr(), toPointer(number))
+	return bool(result)
+}
+
+func (n *NSNumber) BoolValue() bool {
+	result := C.C_NSNumber_BoolValue(n.Ptr())
+	return bool(result)
+}
+
+func (n *NSNumber) DoubleValue() float64 {
+	result := C.C_NSNumber_DoubleValue(n.Ptr())
+	return float64(result)
+}
+
+func (n *NSNumber) FloatValue() float32 {
+	result := C.C_NSNumber_FloatValue(n.Ptr())
+	return float32(result)
+}
+
+func (n *NSNumber) IntegerValue() int {
+	result := C.C_NSNumber_IntegerValue(n.Ptr())
+	return int(result)
+}
+
+func (n *NSNumber) UnsignedIntegerValue() uint {
+	result := C.C_NSNumber_UnsignedIntegerValue(n.Ptr())
+	return uint(result)
+}
+
+func (n *NSNumber) StringValue() string {
+	result := C.C_NSNumber_StringValue(n.Ptr())
+	return MakeString(result).String()
 }
