@@ -1,7 +1,7 @@
 package objc
 
 // #cgo CFLAGS: -x objective-c
-// #cgo LDFLAGS: -framework Cocoa
+// #cgo LDFLAGS: -framework Foundation
 // #import "selector.h"
 import "C"
 import "unsafe"
