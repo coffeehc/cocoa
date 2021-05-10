@@ -21,7 +21,7 @@ func initAndRun() {
 
 	webView := webkit.NewWKWebView(foundation.ZeroRect)
 	webView.SetTranslatesAutoresizingMaskIntoConstraints(false)
-	webView.LoadRequest(foundation.NewURLRequest(foundation.URLWithString("https://www.baidu.com")))
+	webView.LoadRequest(foundation.AllocURLRequest().InitWithURL(foundation.URLWithString("https://www.baidu.com")))
 	//webView.LoadHTMLString("<h1>Test</h1>", "https://www.baidu.com")
 	w.ContentView().AddSubview(webView)
 	w.ContentView().LeadingAnchor().ConstraintEqualToAnchor2(webView.LeadingAnchor(), -10).SetActive(true)
