@@ -19,6 +19,7 @@ type Number interface {
 	DescriptionWithLocale(locale objc.Object) string
 	IsEqualToNumber(number Number) bool
 	BoolValue() bool
+	DecimalValue() Decimal
 	DoubleValue() float64
 	FloatValue() float32
 	IntegerValue() int
@@ -44,7 +45,7 @@ func AllocNumber() *NSNumber {
 }
 
 func (n *NSNumber) InitWithCoder(coder Coder) Number {
-	result := C.C_NSNumber_InitWithCoder(n.Ptr(), toPointer(coder))
+	result := C.C_NSNumber_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeNumber(result)
 }
 
@@ -104,18 +105,23 @@ func (n *NSNumber) InitWithUnsignedInteger(value uint) Number {
 }
 
 func (n *NSNumber) DescriptionWithLocale(locale objc.Object) string {
-	result := C.C_NSNumber_DescriptionWithLocale(n.Ptr(), toPointer(locale))
+	result := C.C_NSNumber_DescriptionWithLocale(n.Ptr(), objc.ExtractPtr(locale))
 	return MakeString(result).String()
 }
 
 func (n *NSNumber) IsEqualToNumber(number Number) bool {
-	result := C.C_NSNumber_IsEqualToNumber(n.Ptr(), toPointer(number))
+	result := C.C_NSNumber_IsEqualToNumber(n.Ptr(), objc.ExtractPtr(number))
 	return bool(result)
 }
 
 func (n *NSNumber) BoolValue() bool {
 	result := C.C_NSNumber_BoolValue(n.Ptr())
 	return bool(result)
+}
+
+func (n *NSNumber) DecimalValue() Decimal {
+	result := C.C_NSNumber_DecimalValue(n.Ptr())
+	return FromNSDecimalPointer(unsafe.Pointer(&result))
 }
 
 func (n *NSNumber) DoubleValue() float64 {

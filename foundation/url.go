@@ -71,7 +71,7 @@ func (n *NSURL) InitWithString(URLString string) URL {
 }
 
 func (n *NSURL) InitWithString_RelativeToURL(URLString string, baseURL URL) URL {
-	result := C.C_NSURL_InitWithString_RelativeToURL(n.Ptr(), NewString(URLString).Ptr(), toPointer(baseURL))
+	result := C.C_NSURL_InitWithString_RelativeToURL(n.Ptr(), NewString(URLString).Ptr(), objc.ExtractPtr(baseURL))
 	return MakeURL(result)
 }
 
@@ -81,12 +81,12 @@ func (n *NSURL) InitFileURLWithPath_IsDirectory(path string, isDir bool) URL {
 }
 
 func (n *NSURL) InitFileURLWithPath_RelativeToURL(path string, baseURL URL) URL {
-	result := C.C_NSURL_InitFileURLWithPath_RelativeToURL(n.Ptr(), NewString(path).Ptr(), toPointer(baseURL))
+	result := C.C_NSURL_InitFileURLWithPath_RelativeToURL(n.Ptr(), NewString(path).Ptr(), objc.ExtractPtr(baseURL))
 	return MakeURL(result)
 }
 
 func (n *NSURL) InitFileURLWithPath_IsDirectory_RelativeToURL(path string, isDir bool, baseURL URL) URL {
-	result := C.C_NSURL_InitFileURLWithPath_IsDirectory_RelativeToURL(n.Ptr(), NewString(path).Ptr(), C.bool(isDir), toPointer(baseURL))
+	result := C.C_NSURL_InitFileURLWithPath_IsDirectory_RelativeToURL(n.Ptr(), NewString(path).Ptr(), C.bool(isDir), objc.ExtractPtr(baseURL))
 	return MakeURL(result)
 }
 
@@ -96,12 +96,12 @@ func (n *NSURL) InitFileURLWithPath(path string) URL {
 }
 
 func (n *NSURL) InitAbsoluteURLWithDataRepresentation_RelativeToURL(data []byte, baseURL URL) URL {
-	result := C.C_NSURL_InitAbsoluteURLWithDataRepresentation_RelativeToURL(n.Ptr(), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, toPointer(baseURL))
+	result := C.C_NSURL_InitAbsoluteURLWithDataRepresentation_RelativeToURL(n.Ptr(), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, objc.ExtractPtr(baseURL))
 	return MakeURL(result)
 }
 
 func (n *NSURL) InitWithDataRepresentation_RelativeToURL(data []byte, baseURL URL) URL {
-	result := C.C_NSURL_InitWithDataRepresentation_RelativeToURL(n.Ptr(), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, toPointer(baseURL))
+	result := C.C_NSURL_InitWithDataRepresentation_RelativeToURL(n.Ptr(), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, objc.ExtractPtr(baseURL))
 	return MakeURL(result)
 }
 
@@ -116,7 +116,7 @@ func URLWithString(URLString string) URL {
 }
 
 func URLWithString_RelativeToURL(URLString string, baseURL URL) URL {
-	result := C.C_NSURL_URLWithString_RelativeToURL(NewString(URLString).Ptr(), toPointer(baseURL))
+	result := C.C_NSURL_URLWithString_RelativeToURL(NewString(URLString).Ptr(), objc.ExtractPtr(baseURL))
 	return MakeURL(result)
 }
 
@@ -126,12 +126,12 @@ func FileURLWithPath_IsDirectory(path string, isDir bool) URL {
 }
 
 func FileURLWithPath_RelativeToURL(path string, baseURL URL) URL {
-	result := C.C_NSURL_FileURLWithPath_RelativeToURL(NewString(path).Ptr(), toPointer(baseURL))
+	result := C.C_NSURL_FileURLWithPath_RelativeToURL(NewString(path).Ptr(), objc.ExtractPtr(baseURL))
 	return MakeURL(result)
 }
 
 func FileURLWithPath_IsDirectory_RelativeToURL(path string, isDir bool, baseURL URL) URL {
-	result := C.C_NSURL_FileURLWithPath_IsDirectory_RelativeToURL(NewString(path).Ptr(), C.bool(isDir), toPointer(baseURL))
+	result := C.C_NSURL_FileURLWithPath_IsDirectory_RelativeToURL(NewString(path).Ptr(), C.bool(isDir), objc.ExtractPtr(baseURL))
 	return MakeURL(result)
 }
 
@@ -141,12 +141,12 @@ func FileURLWithPath(path string) URL {
 }
 
 func AbsoluteURLWithDataRepresentation_RelativeToURL(data []byte, baseURL URL) URL {
-	result := C.C_NSURL_AbsoluteURLWithDataRepresentation_RelativeToURL(C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, toPointer(baseURL))
+	result := C.C_NSURL_AbsoluteURLWithDataRepresentation_RelativeToURL(C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, objc.ExtractPtr(baseURL))
 	return MakeURL(result)
 }
 
 func URLWithDataRepresentation_RelativeToURL(data []byte, baseURL URL) URL {
-	result := C.C_NSURL_URLWithDataRepresentation_RelativeToURL(C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, toPointer(baseURL))
+	result := C.C_NSURL_URLWithDataRepresentation_RelativeToURL(C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, objc.ExtractPtr(baseURL))
 	return MakeURL(result)
 }
 
@@ -164,7 +164,7 @@ func (n *NSURL) RemoveCachedResourceValueForKey(key URLResourceKey) {
 }
 
 func (n *NSURL) SetTemporaryResourceValue_ForKey(value objc.Object, key URLResourceKey) {
-	C.C_NSURL_SetTemporaryResourceValue_ForKey(n.Ptr(), toPointer(value), NewString(string(key)).Ptr())
+	C.C_NSURL_SetTemporaryResourceValue_ForKey(n.Ptr(), objc.ExtractPtr(value), NewString(string(key)).Ptr())
 }
 
 func (n *NSURL) FileReferenceURL() URL {

@@ -90,6 +90,12 @@ bool C_NSNumber_BoolValue(void* ptr) {
 	return result;
 }
 
+NSDecimal C_NSNumber_DecimalValue(void* ptr) {
+	NSNumber* nSNumber = (NSNumber*)ptr;
+	NSDecimal result = [nSNumber decimalValue];
+	return result;
+}
+
 double C_NSNumber_DoubleValue(void* ptr) {
 	NSNumber* nSNumber = (NSNumber*)ptr;
 	double result = [nSNumber doubleValue];

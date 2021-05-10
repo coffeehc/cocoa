@@ -106,5 +106,5 @@ func (g *NSGridRow) CellAtIndex(index int) GridCell {
 }
 
 func (g *NSGridRow) MergeCellsInRange(r foundation.Range) {
-	C.GridRow_MergeCellsInRange(g.Ptr(), toNSRange(r))
+	C.GridRow_MergeCellsInRange(g.Ptr(), *(*C.NSRange)(r.ToNSRangePointer()))
 }

@@ -5,13 +5,14 @@ package objc
 // #import "object.h"
 import "C"
 import (
+	"github.com/hsiafan/cocoa/internal/utils"
 	"sync"
 	"unsafe"
 )
 
 // PointerHolder is a interface for holding a objc pointer
 type PointerHolder interface {
-	// return the delegate objc objc pointer
+	// Ptr return the delegate objc objc pointer
 	Ptr() unsafe.Pointer
 }
 
@@ -21,9 +22,17 @@ type Object interface {
 	Dealloc()
 }
 
+// ExtractPtr return the objc ptr hold by Object. If is nil, or contains a nil pointer, return nil
+func ExtractPtr(o PointerHolder) unsafe.Pointer {
+	if utils.InterfaceIsNil(o) {
+		return nil
+	}
+	return o.Ptr()
+}
+
 var _ Object = (*NSObject)(nil)
 
-// wrapper for NSObject
+// NSObject is wrapper for objc-NSObject
 type NSObject struct {
 	ptr unsafe.Pointer
 }

@@ -1,6 +1,7 @@
 #import <stdbool.h>
 #import <stdlib.h>
 #import <utils.h>
+#import <Foundation/Foundation.h>
 
 void* C_Coder_Alloc();
 
@@ -13,6 +14,7 @@ void C_NSCoder_EncodeConditionalObject(void* ptr, void* object);
 void C_NSCoder_EncodeConditionalObject_ForKey(void* ptr, void* object, void* key);
 void C_NSCoder_EncodeDataObject(void* ptr, Array data);
 void C_NSCoder_EncodeDouble_ForKey(void* ptr, double value, void* key);
+void C_NSCoder_EncodeFloat_ForKey(void* ptr, float value, void* key);
 void C_NSCoder_EncodeInteger_ForKey(void* ptr, int value, void* key);
 void C_NSCoder_EncodeInt32_ForKey(void* ptr, int32_t value, void* key);
 void C_NSCoder_EncodeObject(void* ptr, void* object);
@@ -22,6 +24,7 @@ void C_NSCoder_EncodeRootObject(void* ptr, void* rootObject);
 bool C_NSCoder_DecodeBoolForKey(void* ptr, void* key);
 Array C_NSCoder_DecodeDataObject(void* ptr);
 double C_NSCoder_DecodeDoubleForKey(void* ptr, void* key);
+float C_NSCoder_DecodeFloatForKey(void* ptr, void* key);
 int C_NSCoder_DecodeIntegerForKey(void* ptr, void* key);
 int32_t C_NSCoder_DecodeInt32ForKey(void* ptr, void* key);
 void* C_NSCoder_DecodeObject(void* ptr);

@@ -50,7 +50,7 @@ func (n *NSDate) InitWithTimeIntervalSinceNow(secs TimeInterval) Date {
 }
 
 func (n *NSDate) InitWithTimeInterval_SinceDate(secsToBeAdded TimeInterval, date Date) Date {
-	result := C.C_NSDate_InitWithTimeInterval_SinceDate(n.Ptr(), C.double(float64(secsToBeAdded)), toPointer(date))
+	result := C.C_NSDate_InitWithTimeInterval_SinceDate(n.Ptr(), C.double(float64(secsToBeAdded)), objc.ExtractPtr(date))
 	return MakeDate(result)
 }
 
@@ -65,7 +65,7 @@ func (n *NSDate) InitWithTimeIntervalSince1970(secs TimeInterval) Date {
 }
 
 func (n *NSDate) InitWithCoder(coder Coder) Date {
-	result := C.C_NSDate_InitWithCoder(n.Ptr(), toPointer(coder))
+	result := C.C_NSDate_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeDate(result)
 }
 
@@ -85,7 +85,7 @@ func DateWithTimeIntervalSinceNow(secs TimeInterval) Date {
 }
 
 func DateWithTimeInterval_SinceDate(secsToBeAdded TimeInterval, date Date) Date {
-	result := C.C_NSDate_DateWithTimeInterval_SinceDate(C.double(float64(secsToBeAdded)), toPointer(date))
+	result := C.C_NSDate_DateWithTimeInterval_SinceDate(C.double(float64(secsToBeAdded)), objc.ExtractPtr(date))
 	return MakeDate(result)
 }
 
@@ -100,27 +100,27 @@ func DateWithTimeIntervalSince1970(secs TimeInterval) Date {
 }
 
 func (n *NSDate) IsEqualToDate(otherDate Date) bool {
-	result := C.C_NSDate_IsEqualToDate(n.Ptr(), toPointer(otherDate))
+	result := C.C_NSDate_IsEqualToDate(n.Ptr(), objc.ExtractPtr(otherDate))
 	return bool(result)
 }
 
 func (n *NSDate) EarlierDate(anotherDate Date) Date {
-	result := C.C_NSDate_EarlierDate(n.Ptr(), toPointer(anotherDate))
+	result := C.C_NSDate_EarlierDate(n.Ptr(), objc.ExtractPtr(anotherDate))
 	return MakeDate(result)
 }
 
 func (n *NSDate) LaterDate(anotherDate Date) Date {
-	result := C.C_NSDate_LaterDate(n.Ptr(), toPointer(anotherDate))
+	result := C.C_NSDate_LaterDate(n.Ptr(), objc.ExtractPtr(anotherDate))
 	return MakeDate(result)
 }
 
 func (n *NSDate) TimeIntervalSinceDate(anotherDate Date) TimeInterval {
-	result := C.C_NSDate_TimeIntervalSinceDate(n.Ptr(), toPointer(anotherDate))
+	result := C.C_NSDate_TimeIntervalSinceDate(n.Ptr(), objc.ExtractPtr(anotherDate))
 	return TimeInterval(float64(result))
 }
 
 func (n *NSDate) DescriptionWithLocale(locale objc.Object) string {
-	result := C.C_NSDate_DescriptionWithLocale(n.Ptr(), toPointer(locale))
+	result := C.C_NSDate_DescriptionWithLocale(n.Ptr(), objc.ExtractPtr(locale))
 	return MakeString(result).String()
 }
 

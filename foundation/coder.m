@@ -52,6 +52,11 @@ void C_NSCoder_EncodeDouble_ForKey(void* ptr, double value, void* key) {
 	[nSCoder encodeDouble:value forKey:(NSString*)key];
 }
 
+void C_NSCoder_EncodeFloat_ForKey(void* ptr, float value, void* key) {
+	NSCoder* nSCoder = (NSCoder*)ptr;
+	[nSCoder encodeFloat:value forKey:(NSString*)key];
+}
+
 void C_NSCoder_EncodeInteger_ForKey(void* ptr, int value, void* key) {
 	NSCoder* nSCoder = (NSCoder*)ptr;
 	[nSCoder encodeInteger:value forKey:(NSString*)key];
@@ -100,6 +105,12 @@ Array C_NSCoder_DecodeDataObject(void* ptr) {
 double C_NSCoder_DecodeDoubleForKey(void* ptr, void* key) {
 	NSCoder* nSCoder = (NSCoder*)ptr;
 	double result = [nSCoder decodeDoubleForKey:(NSString*)key];
+	return result;
+}
+
+float C_NSCoder_DecodeFloatForKey(void* ptr, void* key) {
+	NSCoder* nSCoder = (NSCoder*)ptr;
+	float result = [nSCoder decodeFloatForKey:(NSString*)key];
 	return result;
 }
 

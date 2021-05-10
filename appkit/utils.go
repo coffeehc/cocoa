@@ -17,8 +17,8 @@ var resources = foundation.NewResourceRegistry()
 
 func toNSRect(rect foundation.Rect) C.NSRect {
 	return C.NSRect{
-		C.NSPoint{C.double(rect.X), C.double(rect.Y)},
-		C.NSSize{C.double(rect.Width), C.double(rect.Height)},
+		C.NSPoint{C.double(rect.Origin.X), C.double(rect.Origin.Y)},
+		C.NSSize{C.double(rect.Size.Width), C.double(rect.Size.Height)},
 	}
 }
 func toRect(nsRect C.NSRect) foundation.Rect {
@@ -49,20 +49,6 @@ func toEdgeInsets(insets C.NSEdgeInsets) foundation.EdgeInsets {
 		Left:   float64(insets.left),
 		Bottom: float64(insets.bottom),
 		Right:  float64(insets.right),
-	}
-}
-
-func toNSRange(r foundation.Range) C.NSRange {
-	return C.NSRange{
-		location: C.ulong(r.Location),
-		length:   C.ulong(r.Length),
-	}
-}
-
-func toRange(r C.NSRange) foundation.Range {
-	return foundation.Range{
-		Location: uint(r.location),
-		Length:   uint(r.length),
 	}
 }
 

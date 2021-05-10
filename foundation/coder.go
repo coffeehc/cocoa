@@ -19,6 +19,7 @@ type Coder interface {
 	EncodeConditionalObject_ForKey(object objc.Object, key string)
 	EncodeDataObject(data []byte)
 	EncodeDouble_ForKey(value float64, key string)
+	EncodeFloat_ForKey(value float32, key string)
 	EncodeInteger_ForKey(value int, key string)
 	EncodeInt32_ForKey(value int32, key string)
 	EncodeObject(object objc.Object)
@@ -28,6 +29,7 @@ type Coder interface {
 	DecodeBoolForKey(key string) bool
 	DecodeDataObject() []byte
 	DecodeDoubleForKey(key string) float64
+	DecodeFloatForKey(key string) float32
 	DecodeIntegerForKey(key string) int
 	DecodeInt32ForKey(key string) int32
 	DecodeObject() objc.Object
@@ -73,19 +75,19 @@ func (n *NSCoder) EncodeBool_ForKey(value bool, key string) {
 }
 
 func (n *NSCoder) EncodeBycopyObject(anObject objc.Object) {
-	C.C_NSCoder_EncodeBycopyObject(n.Ptr(), toPointer(anObject))
+	C.C_NSCoder_EncodeBycopyObject(n.Ptr(), objc.ExtractPtr(anObject))
 }
 
 func (n *NSCoder) EncodeByrefObject(anObject objc.Object) {
-	C.C_NSCoder_EncodeByrefObject(n.Ptr(), toPointer(anObject))
+	C.C_NSCoder_EncodeByrefObject(n.Ptr(), objc.ExtractPtr(anObject))
 }
 
 func (n *NSCoder) EncodeConditionalObject(object objc.Object) {
-	C.C_NSCoder_EncodeConditionalObject(n.Ptr(), toPointer(object))
+	C.C_NSCoder_EncodeConditionalObject(n.Ptr(), objc.ExtractPtr(object))
 }
 
 func (n *NSCoder) EncodeConditionalObject_ForKey(object objc.Object, key string) {
-	C.C_NSCoder_EncodeConditionalObject_ForKey(n.Ptr(), toPointer(object), NewString(key).Ptr())
+	C.C_NSCoder_EncodeConditionalObject_ForKey(n.Ptr(), objc.ExtractPtr(object), NewString(key).Ptr())
 }
 
 func (n *NSCoder) EncodeDataObject(data []byte) {
@@ -94,6 +96,10 @@ func (n *NSCoder) EncodeDataObject(data []byte) {
 
 func (n *NSCoder) EncodeDouble_ForKey(value float64, key string) {
 	C.C_NSCoder_EncodeDouble_ForKey(n.Ptr(), C.double(value), NewString(key).Ptr())
+}
+
+func (n *NSCoder) EncodeFloat_ForKey(value float32, key string) {
+	C.C_NSCoder_EncodeFloat_ForKey(n.Ptr(), C.float(value), NewString(key).Ptr())
 }
 
 func (n *NSCoder) EncodeInteger_ForKey(value int, key string) {
@@ -105,19 +111,19 @@ func (n *NSCoder) EncodeInt32_ForKey(value int32, key string) {
 }
 
 func (n *NSCoder) EncodeObject(object objc.Object) {
-	C.C_NSCoder_EncodeObject(n.Ptr(), toPointer(object))
+	C.C_NSCoder_EncodeObject(n.Ptr(), objc.ExtractPtr(object))
 }
 
 func (n *NSCoder) EncodeObject_ForKey(object objc.Object, key string) {
-	C.C_NSCoder_EncodeObject_ForKey(n.Ptr(), toPointer(object), NewString(key).Ptr())
+	C.C_NSCoder_EncodeObject_ForKey(n.Ptr(), objc.ExtractPtr(object), NewString(key).Ptr())
 }
 
 func (n *NSCoder) EncodePropertyList(aPropertyList objc.Object) {
-	C.C_NSCoder_EncodePropertyList(n.Ptr(), toPointer(aPropertyList))
+	C.C_NSCoder_EncodePropertyList(n.Ptr(), objc.ExtractPtr(aPropertyList))
 }
 
 func (n *NSCoder) EncodeRootObject(rootObject objc.Object) {
-	C.C_NSCoder_EncodeRootObject(n.Ptr(), toPointer(rootObject))
+	C.C_NSCoder_EncodeRootObject(n.Ptr(), objc.ExtractPtr(rootObject))
 }
 
 func (n *NSCoder) DecodeBoolForKey(key string) bool {
@@ -137,6 +143,11 @@ func (n *NSCoder) DecodeDataObject() []byte {
 func (n *NSCoder) DecodeDoubleForKey(key string) float64 {
 	result := C.C_NSCoder_DecodeDoubleForKey(n.Ptr(), NewString(key).Ptr())
 	return float64(result)
+}
+
+func (n *NSCoder) DecodeFloatForKey(key string) float32 {
+	result := C.C_NSCoder_DecodeFloatForKey(n.Ptr(), NewString(key).Ptr())
+	return float32(result)
 }
 
 func (n *NSCoder) DecodeIntegerForKey(key string) int {
@@ -170,7 +181,7 @@ func (n *NSCoder) DecodePropertyListForKey(key string) objc.Object {
 }
 
 func (n *NSCoder) FailWithError(error Error) {
-	C.C_NSCoder_FailWithError(n.Ptr(), toPointer(error))
+	C.C_NSCoder_FailWithError(n.Ptr(), objc.ExtractPtr(error))
 }
 
 func (n *NSCoder) VersionForClassName(className string) int {

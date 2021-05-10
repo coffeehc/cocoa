@@ -38,12 +38,12 @@ func (n *NSNotification) Init() Notification {
 }
 
 func (n *NSNotification) InitWithCoder(coder Coder) Notification {
-	result := C.C_NSNotification_InitWithCoder(n.Ptr(), toPointer(coder))
+	result := C.C_NSNotification_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeNotification(result)
 }
 
 func NotificationWithName_Object(aName NotificationName, anObject objc.Object) Notification {
-	result := C.C_NSNotification_NotificationWithName_Object(NewString(string(aName)).Ptr(), toPointer(anObject))
+	result := C.C_NSNotification_NotificationWithName_Object(NewString(string(aName)).Ptr(), objc.ExtractPtr(anObject))
 	return MakeNotification(result)
 }
 

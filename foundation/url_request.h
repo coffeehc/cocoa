@@ -1,6 +1,7 @@
 #import <stdbool.h>
 #import <stdlib.h>
 #import <utils.h>
+#import <Foundation/Foundation.h>
 
 void* C_URLRequest_Alloc();
 

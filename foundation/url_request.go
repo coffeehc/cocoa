@@ -43,7 +43,7 @@ func AllocURLRequest() *NSURLRequest {
 }
 
 func (n *NSURLRequest) InitWithURL(URL URL) URLRequest {
-	result := C.C_NSURLRequest_InitWithURL(n.Ptr(), toPointer(URL))
+	result := C.C_NSURLRequest_InitWithURL(n.Ptr(), objc.ExtractPtr(URL))
 	return MakeURLRequest(result)
 }
 
@@ -53,7 +53,7 @@ func (n *NSURLRequest) Init() URLRequest {
 }
 
 func RequestWithURL(URL URL) URLRequest {
-	result := C.C_NSURLRequest_RequestWithURL(toPointer(URL))
+	result := C.C_NSURLRequest_RequestWithURL(objc.ExtractPtr(URL))
 	return MakeURLRequest(result)
 }
 
