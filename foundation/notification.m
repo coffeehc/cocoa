@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import "url.h"
+#import "notification.h"
 
 void* C_Notification_Alloc() {
 	return [NSNotification alloc];

@@ -1,0 +1,4 @@
+package appkit
+
+type TouchBarItemIdentifier string
+type TouchBarCustomizationIdentifier string

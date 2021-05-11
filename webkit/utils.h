@@ -3,5 +3,5 @@
 
 typedef struct {
     int len;
-    void* data;
+    const void* data;
 } Array;

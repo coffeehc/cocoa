@@ -4,17 +4,17 @@ package foundation
 // #cgo LDFLAGS: -framework Foundation
 // #include "geometry.h"
 import "C"
-import "unsafe"
+import (
+	"github.com/hsiafan/cocoa/coregraphics"
+	"unsafe"
+)
 
 // ZeroRect for convenient
 var ZeroRect Rect
 
-type Point struct {
-	X float64
-	Y float64
-}
+type Point coregraphics.Point
 
-func (p *Point) ToNSPointPointer() unsafe.Pointer {
+func ToNSPointPointer(p Point) unsafe.Pointer {
 	return unsafe.Pointer(&C.NSPoint{C.double(p.X), C.double(p.Y)})
 }
 
@@ -26,12 +26,9 @@ func FromNSPointerPointer(p unsafe.Pointer) Point {
 	}
 }
 
-type Size struct {
-	Width  float64
-	Height float64
-}
+type Size coregraphics.Size
 
-func (s *Size) ToNSSizePointer() unsafe.Pointer {
+func ToNSSizePointer(s Size) unsafe.Pointer {
 	return unsafe.Pointer(&C.NSSize{C.double(s.Width), C.double(s.Height)})
 }
 
@@ -43,12 +40,9 @@ func FromNSSizePointer(p unsafe.Pointer) Size {
 	}
 }
 
-type Rect struct {
-	Origin Point
-	Size   Size
-}
+type Rect coregraphics.Rect
 
-func (r *Rect) ToNSRectPointer() unsafe.Pointer {
+func ToNSRectPointer(r Rect) unsafe.Pointer {
 	return unsafe.Pointer(&C.NSRect{
 		C.NSPoint{C.double(r.Origin.X), C.double(r.Origin.Y)},
 		C.NSSize{C.double(r.Size.Width), C.double(r.Size.Height)},
@@ -58,11 +52,11 @@ func (r *Rect) ToNSRectPointer() unsafe.Pointer {
 func FromNSRectPointer(p unsafe.Pointer) Rect {
 	ns := *(*C.NSRect)(p)
 	return Rect{
-		Origin: Point{
+		Origin: coregraphics.Point{
 			X: float64(ns.origin.x),
 			Y: float64(ns.origin.y),
 		},
-		Size: Size{
+		Size: coregraphics.Size{
 			Width:  float64(ns.size.width),
 			Height: float64(ns.size.height),
 		},
@@ -72,8 +66,8 @@ func FromNSRectPointer(p unsafe.Pointer) Rect {
 // MakeRect create a Rect struct
 func MakeRect(x, y, width, height float64) Rect {
 	return Rect{
-		Origin: Point{x, y},
-		Size:   Size{width, height},
+		Origin: coregraphics.Point{X: x, Y: y},
+		Size:   coregraphics.Size{Width: width, Height: height},
 	}
 }
 
@@ -85,7 +79,7 @@ type EdgeInsets struct {
 	Right  float64
 }
 
-func (e *EdgeInsets) ToNSEdgeInsetsPointer() unsafe.Pointer {
+func ToNSEdgeInsetsPointer(e EdgeInsets) unsafe.Pointer {
 	return unsafe.Pointer(&C.NSEdgeInsets{
 		C.double(e.Top),
 		C.double(e.Left),

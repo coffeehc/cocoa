@@ -7,7 +7,7 @@ void* C_URLRequest_Alloc();
 
 void* C_NSURLRequest_InitWithURL(void* ptr, void* URL);
 void* C_NSURLRequest_Init(void* ptr);
-void* C_NSURLRequest_RequestWithURL(void* URL);
+void* C_NSURLRequest_URLRequestRequestWithURL(void* URL);
 void* C_NSURLRequest_ValueForHTTPHeaderField(void* ptr, void* field);
 void* C_NSURLRequest_HTTPMethod(void* ptr);
 void* C_NSURLRequest_URL(void* ptr);

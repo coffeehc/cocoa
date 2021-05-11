@@ -52,8 +52,8 @@ func (n *NSURLRequest) Init() URLRequest {
 	return MakeURLRequest(result)
 }
 
-func RequestWithURL(URL URL) URLRequest {
-	result := C.C_NSURLRequest_RequestWithURL(objc.ExtractPtr(URL))
+func URLRequestRequestWithURL(URL URL) URLRequest {
+	result := C.C_NSURLRequest_URLRequestRequestWithURL(objc.ExtractPtr(URL))
 	return MakeURLRequest(result)
 }
 

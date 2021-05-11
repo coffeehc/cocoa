@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import "url.h"
+#import "error.h"
 
 void* C_Error_Alloc() {
 	return [NSError alloc];
@@ -9,10 +9,6 @@ void* C_NSError_Init(void* ptr) {
 	NSError* nSError = (NSError*)ptr;
 	NSError* result = [nSError init];
 	return result;
-}
-
-void C_NSError_SetUserInfoValueProviderForDomain_Provider(void* errorDomain, void* provider) {
-	[NSError setUserInfoValueProviderForDomain:(NSString*)errorDomain provider:(id)provider];
 }
 
 int C_NSError_Code(void* ptr) {

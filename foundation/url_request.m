@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import "url.h"
+#import "url_request.h"
 
 void* C_URLRequest_Alloc() {
 	return [NSURLRequest alloc];
@@ -17,7 +17,7 @@ void* C_NSURLRequest_Init(void* ptr) {
 	return result;
 }
 
-void* C_NSURLRequest_RequestWithURL(void* URL) {
+void* C_NSURLRequest_URLRequestRequestWithURL(void* URL) {
 	NSURLRequest* result = [NSURLRequest requestWithURL:(NSURL*)URL];
 	return result;
 }

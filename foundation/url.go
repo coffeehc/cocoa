@@ -120,28 +120,28 @@ func URLWithString_RelativeToURL(URLString string, baseURL URL) URL {
 	return MakeURL(result)
 }
 
-func FileURLWithPath_IsDirectory(path string, isDir bool) URL {
-	result := C.C_NSURL_FileURLWithPath_IsDirectory(NewString(path).Ptr(), C.bool(isDir))
+func URLFileURLWithPath_IsDirectory(path string, isDir bool) URL {
+	result := C.C_NSURL_URLFileURLWithPath_IsDirectory(NewString(path).Ptr(), C.bool(isDir))
 	return MakeURL(result)
 }
 
-func FileURLWithPath_RelativeToURL(path string, baseURL URL) URL {
-	result := C.C_NSURL_FileURLWithPath_RelativeToURL(NewString(path).Ptr(), objc.ExtractPtr(baseURL))
+func URLFileURLWithPath_RelativeToURL(path string, baseURL URL) URL {
+	result := C.C_NSURL_URLFileURLWithPath_RelativeToURL(NewString(path).Ptr(), objc.ExtractPtr(baseURL))
 	return MakeURL(result)
 }
 
-func FileURLWithPath_IsDirectory_RelativeToURL(path string, isDir bool, baseURL URL) URL {
-	result := C.C_NSURL_FileURLWithPath_IsDirectory_RelativeToURL(NewString(path).Ptr(), C.bool(isDir), objc.ExtractPtr(baseURL))
+func URLFileURLWithPath_IsDirectory_RelativeToURL(path string, isDir bool, baseURL URL) URL {
+	result := C.C_NSURL_URLFileURLWithPath_IsDirectory_RelativeToURL(NewString(path).Ptr(), C.bool(isDir), objc.ExtractPtr(baseURL))
 	return MakeURL(result)
 }
 
-func FileURLWithPath(path string) URL {
-	result := C.C_NSURL_FileURLWithPath(NewString(path).Ptr())
+func URLFileURLWithPath(path string) URL {
+	result := C.C_NSURL_URLFileURLWithPath(NewString(path).Ptr())
 	return MakeURL(result)
 }
 
-func AbsoluteURLWithDataRepresentation_RelativeToURL(data []byte, baseURL URL) URL {
-	result := C.C_NSURL_AbsoluteURLWithDataRepresentation_RelativeToURL(C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, objc.ExtractPtr(baseURL))
+func URLAbsoluteURLWithDataRepresentation_RelativeToURL(data []byte, baseURL URL) URL {
+	result := C.C_NSURL_URLAbsoluteURLWithDataRepresentation_RelativeToURL(C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, objc.ExtractPtr(baseURL))
 	return MakeURL(result)
 }
 

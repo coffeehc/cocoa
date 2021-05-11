@@ -159,7 +159,7 @@ func (b *NSBox) SetContentViewMargins(contentViewMargins foundation.Size) {
 }
 
 func NewBox(frame foundation.Rect) Box {
-	return MakeBox(C.Box_NewBox(*(*C.NSRect)(frame.ToNSRectPointer())))
+	return MakeBox(C.Box_NewBox(*(*C.NSRect)(foundation.ToNSRectPointer(frame))))
 }
 
 func (b *NSBox) SetFrameFromContentFrame(contentFrame foundation.Rect) {

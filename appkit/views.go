@@ -22,3 +22,6 @@ const (
 	ViewHeightSizable AutoresizingMaskOptions = 16
 	ViewMaxYMargin    AutoresizingMaskOptions = 32
 )
+
+type ToolTipTag int
+type TrackingRectTag int

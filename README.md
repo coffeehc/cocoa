@@ -1,2 +1,1 @@
-
 cocoa binding for go

@@ -42,10 +42,6 @@ func (n *NSError) Init() Error {
 	return MakeError(result)
 }
 
-func SetUserInfoValueProviderForDomain_Provider(errorDomain ErrorDomain, provider objc.Object) {
-	C.C_NSError_SetUserInfoValueProviderForDomain_Provider(NewString(string(errorDomain)).Ptr(), objc.ExtractPtr(provider))
-}
-
 func (n *NSError) Code() int {
 	result := C.C_NSError_Code(n.Ptr())
 	return int(result)

@@ -18,8 +18,6 @@ type PopUpButton interface {
 	SelectedItem() MenuItem
 	TitleOfSelectedItem() string
 	SelectedTag() int
-	Menu() Menu
-	SetMenu(menu Menu)
 	NumberOfItems() int
 	ItemArray() []MenuItem
 	ItemTitles() []string

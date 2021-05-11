@@ -31,7 +31,6 @@ type Slider interface {
 	SetNumberOfTickMarks(numberOfTickMarks int)
 	TickMarkPosition() TickMarkPosition
 	SetTickMarkPosition(tickMarkPosition TickMarkPosition)
-	AcceptsFirstMouse(event Event) bool
 	ClosestTickMarkValueToValue(value float64) float64
 	IndexOfTickMarkAtPoint(point foundation.Point) int
 	RectOfTickMarkAtIndex(index int) foundation.Rect
@@ -147,10 +146,6 @@ func SliderWithTarget(target objc.Object, action *objc.Selector) Control {
 
 func SliderWithValue(value float64, minValue float64, maxValue float64, target objc.Object, action *objc.Selector) Control {
 	return MakeControl(C.Slider_SliderWithValue(C.double(value), C.double(minValue), C.double(maxValue), toPointer(target), toPointer(action)))
-}
-
-func (s *NSSlider) AcceptsFirstMouse(event Event) bool {
-	return bool(C.Slider_AcceptsFirstMouse(s.Ptr(), toPointer(event)))
 }
 
 func (s *NSSlider) ClosestTickMarkValueToValue(value float64) float64 {

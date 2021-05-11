@@ -69,27 +69,27 @@ void* C_NSURL_URLWithString_RelativeToURL(void* URLString, void* baseURL) {
 	return result;
 }
 
-void* C_NSURL_FileURLWithPath_IsDirectory(void* path, bool isDir) {
+void* C_NSURL_URLFileURLWithPath_IsDirectory(void* path, bool isDir) {
 	NSURL* result = [NSURL fileURLWithPath:(NSString*)path isDirectory:isDir];
 	return result;
 }
 
-void* C_NSURL_FileURLWithPath_RelativeToURL(void* path, void* baseURL) {
+void* C_NSURL_URLFileURLWithPath_RelativeToURL(void* path, void* baseURL) {
 	NSURL* result = [NSURL fileURLWithPath:(NSString*)path relativeToURL:(NSURL*)baseURL];
 	return result;
 }
 
-void* C_NSURL_FileURLWithPath_IsDirectory_RelativeToURL(void* path, bool isDir, void* baseURL) {
+void* C_NSURL_URLFileURLWithPath_IsDirectory_RelativeToURL(void* path, bool isDir, void* baseURL) {
 	NSURL* result = [NSURL fileURLWithPath:(NSString*)path isDirectory:isDir relativeToURL:(NSURL*)baseURL];
 	return result;
 }
 
-void* C_NSURL_FileURLWithPath(void* path) {
+void* C_NSURL_URLFileURLWithPath(void* path) {
 	NSURL* result = [NSURL fileURLWithPath:(NSString*)path];
 	return result;
 }
 
-void* C_NSURL_AbsoluteURLWithDataRepresentation_RelativeToURL(Array data, void* baseURL) {
+void* C_NSURL_URLAbsoluteURLWithDataRepresentation_RelativeToURL(Array data, void* baseURL) {
 	NSURL* result = [NSURL absoluteURLWithDataRepresentation:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len] relativeToURL:(NSURL*)baseURL];
 	return result;
 }

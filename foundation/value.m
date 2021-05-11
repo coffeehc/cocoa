@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import "url.h"
+#import "value.h"
 
 void* C_Value_Alloc() {
 	return [NSValue alloc];
@@ -27,6 +27,21 @@ void* C_NSValue_ValueWithRange(NSRange _range) {
 	return result;
 }
 
+void* C_NSValue_ValueWithPoint(CGPoint point) {
+	NSValue* result = [NSValue valueWithPoint:point];
+	return result;
+}
+
+void* C_NSValue_ValueWithSize(CGSize size) {
+	NSValue* result = [NSValue valueWithSize:size];
+	return result;
+}
+
+void* C_NSValue_ValueWithRect(CGRect rect) {
+	NSValue* result = [NSValue valueWithRect:rect];
+	return result;
+}
+
 bool C_NSValue_IsEqualToValue(void* ptr, void* value) {
 	NSValue* nSValue = (NSValue*)ptr;
 	bool result = [nSValue isEqualToValue:(NSValue*)value];
@@ -47,6 +62,24 @@ void* C_NSValue_NonretainedObjectValue(void* ptr) {
 NSRange C_NSValue_RangeValue(void* ptr) {
 	NSValue* nSValue = (NSValue*)ptr;
 	NSRange result = [nSValue rangeValue];
+	return result;
+}
+
+CGPoint C_NSValue_PointValue(void* ptr) {
+	NSValue* nSValue = (NSValue*)ptr;
+	CGPoint result = [nSValue pointValue];
+	return result;
+}
+
+CGSize C_NSValue_SizeValue(void* ptr) {
+	NSValue* nSValue = (NSValue*)ptr;
+	CGSize result = [nSValue sizeValue];
+	return result;
+}
+
+CGRect C_NSValue_RectValue(void* ptr) {
+	NSValue* nSValue = (NSValue*)ptr;
+	CGRect result = [nSValue rectValue];
 	return result;
 }
 

@@ -12,7 +12,9 @@ type Range struct {
 	Length   uint64
 }
 
-func (r *Range) ToNSRangePointer() unsafe.Pointer {
+type RangePointer *Range
+
+func ToNSRangePointer(r Range) unsafe.Pointer {
 	return unsafe.Pointer(&C.NSRange{
 		location: C.ulong(r.Location),
 		length:   C.ulong(r.Length),

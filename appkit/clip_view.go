@@ -24,7 +24,6 @@ type ClipView interface {
 	BackgroundColor() Color
 	SetBackgroundColor(backgroundColor Color)
 	ScrollToPoint(newOrigin foundation.Point)
-	Autoscroll(event Event)
 	ConstrainBoundsRect(proposedBounds foundation.Rect) foundation.Rect
 }
 
@@ -93,10 +92,6 @@ func (c *NSClipView) SetBackgroundColor(backgroundColor Color) {
 
 func (c *NSClipView) ScrollToPoint(newOrigin foundation.Point) {
 	C.ClipView_ScrollToPoint(c.Ptr(), toNSPoint(newOrigin))
-}
-
-func (c *NSClipView) Autoscroll(event Event) {
-	C.ClipView_Autoscroll(c.Ptr(), toPointer(event))
 }
 
 func (c *NSClipView) ConstrainBoundsRect(proposedBounds foundation.Rect) foundation.Rect {

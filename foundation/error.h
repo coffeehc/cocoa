@@ -6,7 +6,6 @@
 void* C_Error_Alloc();
 
 void* C_NSError_Init(void* ptr);
-void C_NSError_SetUserInfoValueProviderForDomain_Provider(void* errorDomain, void* provider);
 int C_NSError_Code(void* ptr);
 void* C_NSError_Domain(void* ptr);
 void* C_NSError_LocalizedDescription(void* ptr);

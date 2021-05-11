@@ -188,5 +188,5 @@ func (g *NSGridView) CellForView(view View) GridCell {
 }
 
 func (g *NSGridView) MergeCellsInHorizontalRange(hRange foundation.Range, vRange foundation.Range) {
-	C.GridView_MergeCellsInHorizontalRange(g.Ptr(), *(*C.NSRange)(hRange.ToNSRangePointer()), *(*C.NSRange)(vRange.ToNSRangePointer()))
+	C.GridView_MergeCellsInHorizontalRange(g.Ptr(), *(*C.NSRange)(foundation.ToNSRangePointer(hRange)), *(*C.NSRange)(foundation.ToNSRangePointer(vRange)))
 }
