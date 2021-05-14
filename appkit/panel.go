@@ -10,11 +10,9 @@ import (
 
 type Panel interface {
 	Window
-	IsFloatingPanel() bool
 	SetFloatingPanel(floatingPanel bool)
 	BecomesKeyOnlyIfNeeded() bool
 	SetBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool)
-	WorksWhenModal() bool
 	SetWorksWhenModal(worksWhenModal bool)
 }
 
@@ -33,10 +31,6 @@ func MakePanel(ptr unsafe.Pointer) *NSPanel {
 	}
 }
 
-func (p *NSPanel) IsFloatingPanel() bool {
-	return bool(C.Panel_IsFloatingPanel(p.Ptr()))
-}
-
 func (p *NSPanel) SetFloatingPanel(floatingPanel bool) {
 	C.Panel_SetFloatingPanel(p.Ptr(), C.bool(floatingPanel))
 }
@@ -47,10 +41,6 @@ func (p *NSPanel) BecomesKeyOnlyIfNeeded() bool {
 
 func (p *NSPanel) SetBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) {
 	C.Panel_SetBecomesKeyOnlyIfNeeded(p.Ptr(), C.bool(becomesKeyOnlyIfNeeded))
-}
-
-func (p *NSPanel) WorksWhenModal() bool {
-	return bool(C.Panel_WorksWhenModal(p.Ptr()))
 }
 
 func (p *NSPanel) SetWorksWhenModal(worksWhenModal bool) {

@@ -149,9 +149,9 @@ func initAndRun() {
 	appkit.MakeTextView(sv2.DocumentView().Ptr()).SetAllowsUndo(true)
 	w.ContentView().AddSubview(sv2)
 
-	w.WindowDidMove(func(notification foundation.Notification) {
-		label.SetStringValue("moved!")
-	})
+	//w.WindowDidMove(func(notification foundation.Notification) {
+	//	label.SetStringValue("moved!")
+	//})
 	w.MakeKeyAndOrderFront(nil)
 	w.Center()
 

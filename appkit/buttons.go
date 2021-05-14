@@ -57,3 +57,7 @@ func NewRadioButton(frame foundation.Rect) Button {
 	btn.SetButtonType(ButtonTypeRadio)
 	return btn
 }
+
+type CellImagePosition uint
+
+type CellStyleMask uint
