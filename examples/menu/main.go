@@ -15,7 +15,7 @@ func init() {
 }
 
 func initAndRun() {
-	app := appkit.InitSharedApplication()
+	app := appkit.SharedApplication()
 	w := appkit.NewPlainWindow(foundation.MakeRect(0, 0, 600, 400))
 	w.SetTitle("Test")
 
@@ -34,17 +34,22 @@ func initAndRun() {
 	w.MakeKeyAndOrderFront(nil)
 	w.Center()
 
-	app.ApplicationWillFinishLaunching(func(notification foundation.Notification) {
-		// should set menubar at ApplicationWillFinishLaunching
-		setMainMenu(app)
-	})
+	app.SetDelegate(appkit.WrapApplicationDelegate(&appkit.ApplicationDelegate{
+		ApplicationDidFinishLaunching: func(notification foundation.Notification) {
+			app.SetActivationPolicy(appkit.ApplicationActivationPolicyRegular)
+			app.ActivateIgnoringOtherApps(true)
+		},
+		ApplicationWillFinishLaunching: func(notification foundation.Notification) {
+			// should set menu bar at ApplicationWillFinishLaunching
+			setMainMenu(app)
+		},
+		ApplicationShouldTerminateAfterLastWindowClosed: func(sender appkit.Application) bool {
+			return true
+		},
+	}))
+
 	// should set system bar after window show
 	setSystemBar(app)
-
-	app.ApplicationDidFinishLaunching(func(notification foundation.Notification) {
-		app.SetActivationPolicy(appkit.ApplicationActivationPolicyRegular)
-		app.ActivateIgnoringOtherApps(true)
-	})
 
 	app.Run()
 }

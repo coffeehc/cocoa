@@ -15,7 +15,7 @@ func init() {
 }
 
 func initAndRun() {
-	app := appkit.InitSharedApplication()
+	app := appkit.SharedApplication()
 	w := appkit.NewPlainWindow(foundation.MakeRect(150, 150, 600, 400))
 	w.SetTitle("Test widgets")
 
@@ -160,10 +160,15 @@ func initAndRun() {
 	w.MakeKeyAndOrderFront(nil)
 	w.Center()
 
-	app.ApplicationDidFinishLaunching(func(notification foundation.Notification) {
-		app.SetActivationPolicy(appkit.ApplicationActivationPolicyRegular)
-		app.ActivateIgnoringOtherApps(true)
-	})
+	app.SetDelegate(appkit.WrapApplicationDelegate(&appkit.ApplicationDelegate{
+		ApplicationDidFinishLaunching: func(notification foundation.Notification) {
+			app.SetActivationPolicy(appkit.ApplicationActivationPolicyRegular)
+			app.ActivateIgnoringOtherApps(true)
+		},
+		ApplicationShouldTerminateAfterLastWindowClosed: func(sender appkit.Application) bool {
+			return true
+		},
+	}))
 
 	app.Run()
 }

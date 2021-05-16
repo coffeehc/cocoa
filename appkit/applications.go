@@ -1,11 +1,6 @@
 package appkit
 
-// InitSharedApplication initializes and return the global application instance.
-func InitSharedApplication() Application {
-	app := SharedApplication()
-	app.(*NSApplication).setDelegate()
-	return app
-}
+import "unsafe"
 
 type ApplicationActivationPolicy int
 
@@ -27,3 +22,14 @@ const (
 	AlertSecondButtonReturn ModalResponse = 1001
 	AlertThirdButtonReturn  ModalResponse = 1002
 )
+
+type ModalSession struct {
+}
+
+func FromNSModalSessionPointer(p unsafe.Pointer) ModalSession {
+	panic("to be implemented")
+}
+
+func ToNSModalSessionPointer(m ModalSession) unsafe.Pointer {
+	panic("to be implemented")
+}

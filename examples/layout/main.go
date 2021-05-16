@@ -14,7 +14,7 @@ func init() {
 }
 
 func initAndRun() {
-	app := appkit.InitSharedApplication()
+	app := appkit.SharedApplication()
 	app.SetActivationPolicy(appkit.ApplicationActivationPolicyRegular)
 	app.ActivateIgnoringOtherApps(true)
 	w := appkit.NewPlainWindow(foundation.MakeRect(0, 0, 600, 400))
@@ -53,6 +53,16 @@ func initAndRun() {
 
 	w.MakeKeyAndOrderFront(nil)
 	w.Center()
+
+	app.SetDelegate(appkit.WrapApplicationDelegate(&appkit.ApplicationDelegate{
+		ApplicationDidFinishLaunching: func(notification foundation.Notification) {
+			app.SetActivationPolicy(appkit.ApplicationActivationPolicyRegular)
+			app.ActivateIgnoringOtherApps(true)
+		},
+		ApplicationShouldTerminateAfterLastWindowClosed: func(sender appkit.Application) bool {
+			return true
+		},
+	}))
 
 	app.Run()
 }
