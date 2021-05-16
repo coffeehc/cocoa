@@ -1,15 +1,21 @@
+#import <stdbool.h>
 #import <stdlib.h>
 #import <utils.h>
+#import <Appkit/Appkit.h>
 
-void* GridCell_Column(void* ptr);
-void* GridCell_Row(void* ptr);
-void* GridCell_ContentView(void* ptr);
-Array GridCell_CustomPlacementConstraints(void* ptr);
-void GridCell_SetCustomPlacementConstraints(void* ptr, Array customPlacementConstraints);
-long GridCell_RowAlignment(void* ptr);
-void GridCell_SetRowAlignment(void* ptr, long rowAlignment);
-long GridCell_XPlacement(void* ptr);
-void GridCell_SetXPlacement(void* ptr, long xPlacement);
-long GridCell_YPlacement(void* ptr);
-void GridCell_SetYPlacement(void* ptr, long yPlacement);
+void* C_GridCell_Alloc();
 
+void* C_NSGridCell_Init(void* ptr);
+void* C_NSGridCell_Column(void* ptr);
+void* C_NSGridCell_Row(void* ptr);
+void* C_NSGridCell_ContentView(void* ptr);
+void C_NSGridCell_SetContentView(void* ptr, void* value);
+void* C_NSGridCell_GridCell_EmptyContentView();
+Array C_NSGridCell_CustomPlacementConstraints(void* ptr);
+void C_NSGridCell_SetCustomPlacementConstraints(void* ptr, Array value);
+int C_NSGridCell_RowAlignment(void* ptr);
+void C_NSGridCell_SetRowAlignment(void* ptr, int value);
+int C_NSGridCell_XPlacement(void* ptr);
+void C_NSGridCell_SetXPlacement(void* ptr, int value);
+int C_NSGridCell_YPlacement(void* ptr);
+void C_NSGridCell_SetYPlacement(void* ptr, int value);

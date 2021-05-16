@@ -1,83 +1,101 @@
-#import <AppKit/AppKit.h>
-#import "_cgo_export.h"
+#import <Appkit/Appkit.h>
 #import "grid_row.h"
 
-long GridRow_NumberOfCells(void* ptr) {
-	NSGridRow* gridRow = (NSGridRow*)ptr;
-	return [gridRow numberOfCells];
+void* C_GridRow_Alloc() {
+    return [NSGridRow alloc];
 }
 
-bool GridRow_IsHidden(void* ptr) {
-	NSGridRow* gridRow = (NSGridRow*)ptr;
-	return [gridRow isHidden];
+void* C_NSGridRow_Init(void* ptr) {
+    NSGridRow* nSGridRow = (NSGridRow*)ptr;
+    NSGridRow* result = [nSGridRow init];
+    return result;
 }
 
-void GridRow_SetHidden(void* ptr, bool hidden) {
-	NSGridRow* gridRow = (NSGridRow*)ptr;
-	[gridRow setHidden:hidden];
+void* C_NSGridRow_CellAtIndex(void* ptr, int index) {
+    NSGridRow* nSGridRow = (NSGridRow*)ptr;
+    NSGridCell* result = [nSGridRow cellAtIndex:index];
+    return result;
 }
 
-double GridRow_TopPadding(void* ptr) {
-	NSGridRow* gridRow = (NSGridRow*)ptr;
-	return [gridRow topPadding];
+void C_NSGridRow_MergeCellsInRange(void* ptr, NSRange _range) {
+    NSGridRow* nSGridRow = (NSGridRow*)ptr;
+    [nSGridRow mergeCellsInRange:_range];
 }
 
-void GridRow_SetTopPadding(void* ptr, double topPadding) {
-	NSGridRow* gridRow = (NSGridRow*)ptr;
-	[gridRow setTopPadding:topPadding];
+int C_NSGridRow_NumberOfCells(void* ptr) {
+    NSGridRow* nSGridRow = (NSGridRow*)ptr;
+    NSInteger result = [nSGridRow numberOfCells];
+    return result;
 }
 
-double GridRow_BottomPadding(void* ptr) {
-	NSGridRow* gridRow = (NSGridRow*)ptr;
-	return [gridRow bottomPadding];
+bool C_NSGridRow_IsHidden(void* ptr) {
+    NSGridRow* nSGridRow = (NSGridRow*)ptr;
+    BOOL result = [nSGridRow isHidden];
+    return result;
 }
 
-void GridRow_SetBottomPadding(void* ptr, double bottomPadding) {
-	NSGridRow* gridRow = (NSGridRow*)ptr;
-	[gridRow setBottomPadding:bottomPadding];
+void C_NSGridRow_SetHidden(void* ptr, bool value) {
+    NSGridRow* nSGridRow = (NSGridRow*)ptr;
+    [nSGridRow setHidden:value];
 }
 
-double GridRow_Height(void* ptr) {
-	NSGridRow* gridRow = (NSGridRow*)ptr;
-	return [gridRow height];
+double C_NSGridRow_TopPadding(void* ptr) {
+    NSGridRow* nSGridRow = (NSGridRow*)ptr;
+    CGFloat result = [nSGridRow topPadding];
+    return result;
 }
 
-void GridRow_SetHeight(void* ptr, double height) {
-	NSGridRow* gridRow = (NSGridRow*)ptr;
-	[gridRow setHeight:height];
+void C_NSGridRow_SetTopPadding(void* ptr, double value) {
+    NSGridRow* nSGridRow = (NSGridRow*)ptr;
+    [nSGridRow setTopPadding:value];
 }
 
-long GridRow_RowAlignment(void* ptr) {
-	NSGridRow* gridRow = (NSGridRow*)ptr;
-	return [gridRow rowAlignment];
+double C_NSGridRow_BottomPadding(void* ptr) {
+    NSGridRow* nSGridRow = (NSGridRow*)ptr;
+    CGFloat result = [nSGridRow bottomPadding];
+    return result;
 }
 
-void GridRow_SetRowAlignment(void* ptr, long rowAlignment) {
-	NSGridRow* gridRow = (NSGridRow*)ptr;
-	[gridRow setRowAlignment:rowAlignment];
+void C_NSGridRow_SetBottomPadding(void* ptr, double value) {
+    NSGridRow* nSGridRow = (NSGridRow*)ptr;
+    [nSGridRow setBottomPadding:value];
 }
 
-long GridRow_YPlacement(void* ptr) {
-	NSGridRow* gridRow = (NSGridRow*)ptr;
-	return [gridRow yPlacement];
+double C_NSGridRow_Height(void* ptr) {
+    NSGridRow* nSGridRow = (NSGridRow*)ptr;
+    CGFloat result = [nSGridRow height];
+    return result;
 }
 
-void GridRow_SetYPlacement(void* ptr, long yPlacement) {
-	NSGridRow* gridRow = (NSGridRow*)ptr;
-	[gridRow setYPlacement:yPlacement];
+void C_NSGridRow_SetHeight(void* ptr, double value) {
+    NSGridRow* nSGridRow = (NSGridRow*)ptr;
+    [nSGridRow setHeight:value];
 }
 
-void* GridRow_GridView(void* ptr) {
-	NSGridRow* gridRow = (NSGridRow*)ptr;
-	return [gridRow gridView];
+int C_NSGridRow_RowAlignment(void* ptr) {
+    NSGridRow* nSGridRow = (NSGridRow*)ptr;
+    NSGridRowAlignment result = [nSGridRow rowAlignment];
+    return result;
 }
 
-void* GridRow_CellAtIndex(void* ptr, long index) {
-	NSGridRow* gridRow = (NSGridRow*)ptr;
-	return [gridRow cellAtIndex:index];
+void C_NSGridRow_SetRowAlignment(void* ptr, int value) {
+    NSGridRow* nSGridRow = (NSGridRow*)ptr;
+    [nSGridRow setRowAlignment:value];
 }
 
-void GridRow_MergeCellsInRange(void* ptr, NSRange r) {
-	NSGridRow* gridRow = (NSGridRow*)ptr;
-	[gridRow mergeCellsInRange:r];
+int C_NSGridRow_YPlacement(void* ptr) {
+    NSGridRow* nSGridRow = (NSGridRow*)ptr;
+    NSGridCellPlacement result = [nSGridRow yPlacement];
+    return result;
+}
+
+void C_NSGridRow_SetYPlacement(void* ptr, int value) {
+    NSGridRow* nSGridRow = (NSGridRow*)ptr;
+    [nSGridRow setYPlacement:value];
+}
+
+void* C_NSGridRow_GridView(void* ptr) {
+    NSGridRow* nSGridRow = (NSGridRow*)ptr;
+    NSGridView* result = [nSGridRow gridView];
+    return result;
 }

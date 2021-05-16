@@ -1,38 +1,43 @@
-#import <Foundation/NSGeometry.h>
 #import <stdbool.h>
 #import <stdlib.h>
 #import <utils.h>
+#import <Appkit/Appkit.h>
 
-bool ComboBox_HasVerticalScroller(void* ptr);
-void ComboBox_SetHasVerticalScroller(void* ptr, bool hasVerticalScroller);
-NSSize ComboBox_IntercellSpacing(void* ptr);
-void ComboBox_SetIntercellSpacing(void* ptr, NSSize intercellSpacing);
-bool ComboBox_IsButtonBordered(void* ptr);
-void ComboBox_SetButtonBordered(void* ptr, bool buttonBordered);
-double ComboBox_ItemHeight(void* ptr);
-void ComboBox_SetItemHeight(void* ptr, double itemHeight);
-long ComboBox_NumberOfVisibleItems(void* ptr);
-void ComboBox_SetNumberOfVisibleItems(void* ptr, long numberOfVisibleItems);
-bool ComboBox_UsesDataSource(void* ptr);
-void ComboBox_SetUsesDataSource(void* ptr, bool usesDataSource);
-bool ComboBox_Completes(void* ptr);
-void ComboBox_SetCompletes(void* ptr, bool completes);
-Array ComboBox_ObjectValues(void* ptr);
-long ComboBox_IndexOfSelectedItem(void* ptr);
+void* C_ComboBox_Alloc();
 
-void* ComboBox_NewComboBox(NSRect frame);
-void ComboBox_AddItemsWithObjectValues(void* ptr, Array objects);
-void ComboBox_AddItemWithObjectValue(void* ptr, void* object);
-void ComboBox_InsertItemWithObjectValue(void* ptr, void* object, long index);
-void ComboBox_RemoveAllItems(void* ptr);
-void ComboBox_RemoveItemAtIndex(void* ptr, long index);
-void ComboBox_RemoveItemWithObjectValue(void* ptr, void* object);
-long ComboBox_IndexOfItemWithObjectValue(void* ptr, void* object);
-void* ComboBox_ItemObjectValueAtIndex(void* ptr, long index);
-void ComboBox_NoteNumberOfItemsChanged(void* ptr);
-void ComboBox_ReloadData(void* ptr);
-void ComboBox_ScrollItemAtIndexToTop(void* ptr, long index);
-void ComboBox_ScrollItemAtIndexToVisible(void* ptr, long index);
-void ComboBox_DeselectItemAtIndex(void* ptr, long index);
-void ComboBox_SelectItemAtIndex(void* ptr, long index);
-void ComboBox_SelectItemWithObjectValue(void* ptr, void* object);
+void* C_NSComboBox_InitWithFrame(void* ptr, CGRect frameRect);
+void* C_NSComboBox_InitWithCoder(void* ptr, void* coder);
+void* C_NSComboBox_Init(void* ptr);
+void C_NSComboBox_AddItemsWithObjectValues(void* ptr, Array objects);
+void C_NSComboBox_AddItemWithObjectValue(void* ptr, void* object);
+void C_NSComboBox_InsertItemWithObjectValue_AtIndex(void* ptr, void* object, int index);
+void C_NSComboBox_RemoveAllItems(void* ptr);
+void C_NSComboBox_RemoveItemAtIndex(void* ptr, int index);
+void C_NSComboBox_RemoveItemWithObjectValue(void* ptr, void* object);
+int C_NSComboBox_IndexOfItemWithObjectValue(void* ptr, void* object);
+void* C_NSComboBox_ItemObjectValueAtIndex(void* ptr, int index);
+void C_NSComboBox_NoteNumberOfItemsChanged(void* ptr);
+void C_NSComboBox_ReloadData(void* ptr);
+void C_NSComboBox_ScrollItemAtIndexToTop(void* ptr, int index);
+void C_NSComboBox_ScrollItemAtIndexToVisible(void* ptr, int index);
+void C_NSComboBox_DeselectItemAtIndex(void* ptr, int index);
+void C_NSComboBox_SelectItemAtIndex(void* ptr, int index);
+void C_NSComboBox_SelectItemWithObjectValue(void* ptr, void* object);
+bool C_NSComboBox_HasVerticalScroller(void* ptr);
+void C_NSComboBox_SetHasVerticalScroller(void* ptr, bool value);
+CGSize C_NSComboBox_IntercellSpacing(void* ptr);
+void C_NSComboBox_SetIntercellSpacing(void* ptr, CGSize value);
+bool C_NSComboBox_IsButtonBordered(void* ptr);
+void C_NSComboBox_SetButtonBordered(void* ptr, bool value);
+double C_NSComboBox_ItemHeight(void* ptr);
+void C_NSComboBox_SetItemHeight(void* ptr, double value);
+int C_NSComboBox_NumberOfVisibleItems(void* ptr);
+void C_NSComboBox_SetNumberOfVisibleItems(void* ptr, int value);
+bool C_NSComboBox_UsesDataSource(void* ptr);
+void C_NSComboBox_SetUsesDataSource(void* ptr, bool value);
+Array C_NSComboBox_ObjectValues(void* ptr);
+int C_NSComboBox_NumberOfItems(void* ptr);
+int C_NSComboBox_IndexOfSelectedItem(void* ptr);
+void* C_NSComboBox_ObjectValueOfSelectedItem(void* ptr);
+bool C_NSComboBox_Completes(void* ptr);
+void C_NSComboBox_SetCompletes(void* ptr, bool value);

@@ -1,72 +1,99 @@
-#import <AppKit/AppKit.h>
-#import "_cgo_export.h"
+#import <Appkit/Appkit.h>
 #import "grid_cell.h"
 
-void* GridCell_Column(void* ptr) {
-	NSGridCell* gridCell = (NSGridCell*)ptr;
-	return [gridCell column];
+void* C_GridCell_Alloc() {
+    return [NSGridCell alloc];
 }
 
-void* GridCell_Row(void* ptr) {
-	NSGridCell* gridCell = (NSGridCell*)ptr;
-	return [gridCell row];
+void* C_NSGridCell_Init(void* ptr) {
+    NSGridCell* nSGridCell = (NSGridCell*)ptr;
+    NSGridCell* result = [nSGridCell init];
+    return result;
 }
 
-void* GridCell_ContentView(void* ptr) {
-	NSGridCell* gridCell = (NSGridCell*)ptr;
-	return [gridCell contentView];
+void* C_NSGridCell_Column(void* ptr) {
+    NSGridCell* nSGridCell = (NSGridCell*)ptr;
+    NSGridColumn* result = [nSGridCell column];
+    return result;
 }
 
-Array GridCell_CustomPlacementConstraints(void* ptr) {
-	NSGridCell* gridCell = (NSGridCell*)ptr;
-	NSArray* ns_array = [gridCell customPlacementConstraints];
-	int count = [ns_array count];
-	void** data = malloc(count * sizeof(void*));
-	for (int i = 0; i < count; i++) {
-		 data[i] = [ns_array objectAtIndex:i];
-	}
-	Array array;
-	array.data = data;
-	array.len = count;
-	return array;
+void* C_NSGridCell_Row(void* ptr) {
+    NSGridCell* nSGridCell = (NSGridCell*)ptr;
+    NSGridRow* result = [nSGridCell row];
+    return result;
 }
 
-void GridCell_SetCustomPlacementConstraints(void* ptr, Array customPlacementConstraints) {
-	NSGridCell* gridCell = (NSGridCell*)ptr;
-    NSMutableArray* objc_customPlacementConstraints = [[NSMutableArray alloc] init];
-    void** customPlacementConstraintsData = (void**)customPlacementConstraints.data;
-    for (int i = 0; i < customPlacementConstraints.len; i++) {
-    	[objc_customPlacementConstraints addObject:(NSLayoutConstraint*)customPlacementConstraintsData[i]];
+void* C_NSGridCell_ContentView(void* ptr) {
+    NSGridCell* nSGridCell = (NSGridCell*)ptr;
+    NSView* result = [nSGridCell contentView];
+    return result;
+}
+
+void C_NSGridCell_SetContentView(void* ptr, void* value) {
+    NSGridCell* nSGridCell = (NSGridCell*)ptr;
+    [nSGridCell setContentView:(NSView*)value];
+}
+
+void* C_NSGridCell_GridCell_EmptyContentView() {
+    NSView* result = [NSGridCell emptyContentView];
+    return result;
+}
+
+Array C_NSGridCell_CustomPlacementConstraints(void* ptr) {
+    NSGridCell* nSGridCell = (NSGridCell*)ptr;
+    NSArray* result = [nSGridCell customPlacementConstraints];
+    int resultcount = [result count];
+    void** resultData = malloc(resultcount * sizeof(void*));
+    for (int i = 0; i < resultcount; i++) {
+    	 void* p = [result objectAtIndex:i];
+    	 resultData[i] = p;
     }
-	[gridCell setCustomPlacementConstraints:objc_customPlacementConstraints];
+    Array resultArray;
+    resultArray.data = resultData;
+    resultArray.len = resultcount;
+    return resultArray;
 }
 
-long GridCell_RowAlignment(void* ptr) {
-	NSGridCell* gridCell = (NSGridCell*)ptr;
-	return [gridCell rowAlignment];
+void C_NSGridCell_SetCustomPlacementConstraints(void* ptr, Array value) {
+    NSGridCell* nSGridCell = (NSGridCell*)ptr;
+    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    void** valueData = (void**)value.data;
+    for (int i = 0; i < value.len; i++) {
+    	void* p = valueData[i];
+    	[objcValue addObject:(NSLayoutConstraint*)(NSLayoutConstraint*)p];
+    }
+    [nSGridCell setCustomPlacementConstraints:objcValue];
 }
 
-void GridCell_SetRowAlignment(void* ptr, long rowAlignment) {
-	NSGridCell* gridCell = (NSGridCell*)ptr;
-	[gridCell setRowAlignment:rowAlignment];
+int C_NSGridCell_RowAlignment(void* ptr) {
+    NSGridCell* nSGridCell = (NSGridCell*)ptr;
+    NSGridRowAlignment result = [nSGridCell rowAlignment];
+    return result;
 }
 
-long GridCell_XPlacement(void* ptr) {
-	NSGridCell* gridCell = (NSGridCell*)ptr;
-	return [gridCell xPlacement];
+void C_NSGridCell_SetRowAlignment(void* ptr, int value) {
+    NSGridCell* nSGridCell = (NSGridCell*)ptr;
+    [nSGridCell setRowAlignment:value];
 }
 
-void GridCell_SetXPlacement(void* ptr, long xPlacement) {
-	NSGridCell* gridCell = (NSGridCell*)ptr;
-	[gridCell setXPlacement:xPlacement];
+int C_NSGridCell_XPlacement(void* ptr) {
+    NSGridCell* nSGridCell = (NSGridCell*)ptr;
+    NSGridCellPlacement result = [nSGridCell xPlacement];
+    return result;
 }
 
-long GridCell_YPlacement(void* ptr) {
-	NSGridCell* gridCell = (NSGridCell*)ptr;
-	return [gridCell yPlacement];
+void C_NSGridCell_SetXPlacement(void* ptr, int value) {
+    NSGridCell* nSGridCell = (NSGridCell*)ptr;
+    [nSGridCell setXPlacement:value];
 }
 
-void GridCell_SetYPlacement(void* ptr, long yPlacement) {
-	NSGridCell* gridCell = (NSGridCell*)ptr;
-	[gridCell setYPlacement:yPlacement];
+int C_NSGridCell_YPlacement(void* ptr) {
+    NSGridCell* nSGridCell = (NSGridCell*)ptr;
+    NSGridCellPlacement result = [nSGridCell yPlacement];
+    return result;
+}
+
+void C_NSGridCell_SetYPlacement(void* ptr, int value) {
+    NSGridCell* nSGridCell = (NSGridCell*)ptr;
+    [nSGridCell setYPlacement:value];
 }

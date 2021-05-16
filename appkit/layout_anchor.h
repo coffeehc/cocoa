@@ -1,15 +1,18 @@
 #import <stdbool.h>
 #import <stdlib.h>
 #import <utils.h>
+#import <Appkit/Appkit.h>
 
-Array LayoutAnchor_ConstraintsAffectingLayout(void* ptr);
-bool LayoutAnchor_HasAmbiguousLayout(void* ptr);
-const char* LayoutAnchor_Name(void* ptr);
-void* LayoutAnchor_Item(void* ptr);
+void* C_LayoutAnchor_Alloc();
 
-void* LayoutAnchor_ConstraintEqualToAnchor(void* ptr, void* anchor);
-void* LayoutAnchor_ConstraintEqualToAnchor2(void* ptr, void* anchor, double constant);
-void* LayoutAnchor_ConstraintGreaterThanOrEqualToAnchor(void* ptr, void* anchor);
-void* LayoutAnchor_ConstraintGreaterThanOrEqualToAnchor2(void* ptr, void* anchor, double constant);
-void* LayoutAnchor_ConstraintLessThanOrEqualToAnchor(void* ptr, void* anchor);
-void* LayoutAnchor_ConstraintLessThanOrEqualToAnchor2(void* ptr, void* anchor, double constant);
+void* C_NSLayoutAnchor_Init(void* ptr);
+void* C_NSLayoutAnchor_ConstraintEqualToAnchor(void* ptr, void* anchor);
+void* C_NSLayoutAnchor_ConstraintEqualToAnchor_Constant(void* ptr, void* anchor, double c);
+void* C_NSLayoutAnchor_ConstraintGreaterThanOrEqualToAnchor(void* ptr, void* anchor);
+void* C_NSLayoutAnchor_ConstraintGreaterThanOrEqualToAnchor_Constant(void* ptr, void* anchor, double c);
+void* C_NSLayoutAnchor_ConstraintLessThanOrEqualToAnchor(void* ptr, void* anchor);
+void* C_NSLayoutAnchor_ConstraintLessThanOrEqualToAnchor_Constant(void* ptr, void* anchor, double c);
+Array C_NSLayoutAnchor_ConstraintsAffectingLayout(void* ptr);
+bool C_NSLayoutAnchor_HasAmbiguousLayout(void* ptr);
+void* C_NSLayoutAnchor_Name(void* ptr);
+void* C_NSLayoutAnchor_Item(void* ptr);

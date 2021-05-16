@@ -1,18 +1,32 @@
-#import <Foundation/NSGeometry.h>
 #import <stdbool.h>
 #import <stdlib.h>
 #import <utils.h>
+#import <Appkit/Appkit.h>
 
-bool SplitView_ArrangesAllSubviews(void* ptr);
-void SplitView_SetArrangesAllSubviews(void* ptr, bool arrangesAllSubviews);
-bool SplitView_IsVertical(void* ptr);
-void SplitView_SetVertical(void* ptr, bool vertical);
-void* SplitView_DividerColor(void* ptr);
-double SplitView_DividerThickness(void* ptr);
-long SplitView_DividerStyle(void* ptr);
-void SplitView_SetDividerStyle(void* ptr, long dividerStyle);
+void* C_SplitView_Alloc();
 
-void* SplitView_NewSplitView(NSRect frame);
-double SplitView_MinPossiblePositionOfDividerAtIndex(void* ptr, long dividerIndex);
-double SplitView_MaxPossiblePositionOfDividerAtIndex(void* ptr, long dividerIndex);
-void SplitView_SetPosition(void* ptr, double position, long dividerIndex);
+void* C_NSSplitView_InitWithFrame(void* ptr, CGRect frameRect);
+void* C_NSSplitView_InitWithCoder(void* ptr, void* coder);
+void* C_NSSplitView_Init(void* ptr);
+void C_NSSplitView_AddArrangedSubview(void* ptr, void* view);
+void C_NSSplitView_InsertArrangedSubview_AtIndex(void* ptr, void* view, int index);
+void C_NSSplitView_RemoveArrangedSubview(void* ptr, void* view);
+void C_NSSplitView_AdjustSubviews(void* ptr);
+bool C_NSSplitView_IsSubviewCollapsed(void* ptr, void* subview);
+float C_NSSplitView_HoldingPriorityForSubviewAtIndex(void* ptr, int subviewIndex);
+void C_NSSplitView_SetHoldingPriority_ForSubviewAtIndex(void* ptr, float priority, int subviewIndex);
+void C_NSSplitView_DrawDividerInRect(void* ptr, CGRect rect);
+double C_NSSplitView_MinPossiblePositionOfDividerAtIndex(void* ptr, int dividerIndex);
+double C_NSSplitView_MaxPossiblePositionOfDividerAtIndex(void* ptr, int dividerIndex);
+void C_NSSplitView_SetPosition_OfDividerAtIndex(void* ptr, double position, int dividerIndex);
+bool C_NSSplitView_ArrangesAllSubviews(void* ptr);
+void C_NSSplitView_SetArrangesAllSubviews(void* ptr, bool value);
+Array C_NSSplitView_ArrangedSubviews(void* ptr);
+bool C_NSSplitView_IsVertical(void* ptr);
+void C_NSSplitView_SetVertical(void* ptr, bool value);
+int C_NSSplitView_DividerStyle(void* ptr);
+void C_NSSplitView_SetDividerStyle(void* ptr, int value);
+void* C_NSSplitView_DividerColor(void* ptr);
+double C_NSSplitView_DividerThickness(void* ptr);
+void* C_NSSplitView_AutosaveName(void* ptr);
+void C_NSSplitView_SetAutosaveName(void* ptr, void* value);

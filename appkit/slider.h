@@ -1,34 +1,35 @@
-#import <Foundation/NSGeometry.h>
 #import <stdbool.h>
 #import <stdlib.h>
 #import <utils.h>
+#import <Appkit/Appkit.h>
 
-void Slider_SetDelegate(void *ptr, long goID);
-unsigned long Slider_SliderType(void* ptr);
-void Slider_SetSliderType(void* ptr, unsigned long sliderType);
-double Slider_AltIncrementValue(void* ptr);
-void Slider_SetAltIncrementValue(void* ptr, double altIncrementValue);
-double Slider_KnobThickness(void* ptr);
-bool Slider_IsVertical(void* ptr);
-void Slider_SetVertical(void* ptr, bool vertical);
-void* Slider_TrackFillColor(void* ptr);
-void Slider_SetTrackFillColor(void* ptr, void* trackFillColor);
-double Slider_MaxValue(void* ptr);
-void Slider_SetMaxValue(void* ptr, double maxValue);
-double Slider_MinValue(void* ptr);
-void Slider_SetMinValue(void* ptr, double minValue);
-bool Slider_AllowsTickMarkValuesOnly(void* ptr);
-void Slider_SetAllowsTickMarkValuesOnly(void* ptr, bool allowsTickMarkValuesOnly);
-long Slider_NumberOfTickMarks(void* ptr);
-void Slider_SetNumberOfTickMarks(void* ptr, long numberOfTickMarks);
-unsigned long Slider_TickMarkPosition(void* ptr);
-void Slider_SetTickMarkPosition(void* ptr, unsigned long tickMarkPosition);
+void* C_Slider_Alloc();
 
-void* Slider_NewSlider(NSRect frame);
-void* Slider_SliderWithTarget(void* target, void* action);
-void* Slider_SliderWithValue(double value, double minValue, double maxValue, void* target, void* action);
-bool Slider_AcceptsFirstMouse(void* ptr, void* event);
-double Slider_ClosestTickMarkValueToValue(void* ptr, double value);
-long Slider_IndexOfTickMarkAtPoint(void* ptr, NSPoint point);
-NSRect Slider_RectOfTickMarkAtIndex(void* ptr, long index);
-double Slider_TickMarkValueAtIndex(void* ptr, long index);
+void* C_NSSlider_InitWithFrame(void* ptr, CGRect frameRect);
+void* C_NSSlider_InitWithCoder(void* ptr, void* coder);
+void* C_NSSlider_Init(void* ptr);
+void* C_NSSlider_SliderWithTarget_Action(void* target, void* action);
+void* C_NSSlider_SliderWithValue_MinValue_MaxValue_Target_Action(double value, double minValue, double maxValue, void* target, void* action);
+double C_NSSlider_ClosestTickMarkValueToValue(void* ptr, double value);
+int C_NSSlider_IndexOfTickMarkAtPoint(void* ptr, CGPoint point);
+CGRect C_NSSlider_RectOfTickMarkAtIndex(void* ptr, int index);
+double C_NSSlider_TickMarkValueAtIndex(void* ptr, int index);
+unsigned int C_NSSlider_SliderType(void* ptr);
+void C_NSSlider_SetSliderType(void* ptr, unsigned int value);
+double C_NSSlider_AltIncrementValue(void* ptr);
+void C_NSSlider_SetAltIncrementValue(void* ptr, double value);
+double C_NSSlider_KnobThickness(void* ptr);
+bool C_NSSlider_IsVertical(void* ptr);
+void C_NSSlider_SetVertical(void* ptr, bool value);
+void* C_NSSlider_TrackFillColor(void* ptr);
+void C_NSSlider_SetTrackFillColor(void* ptr, void* value);
+double C_NSSlider_MaxValue(void* ptr);
+void C_NSSlider_SetMaxValue(void* ptr, double value);
+double C_NSSlider_MinValue(void* ptr);
+void C_NSSlider_SetMinValue(void* ptr, double value);
+bool C_NSSlider_AllowsTickMarkValuesOnly(void* ptr);
+void C_NSSlider_SetAllowsTickMarkValuesOnly(void* ptr, bool value);
+int C_NSSlider_NumberOfTickMarks(void* ptr);
+void C_NSSlider_SetNumberOfTickMarks(void* ptr, int value);
+unsigned int C_NSSlider_TickMarkPosition(void* ptr);
+void C_NSSlider_SetTickMarkPosition(void* ptr, unsigned int value);

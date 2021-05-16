@@ -1,10 +1,13 @@
 #import <stdbool.h>
 #import <stdlib.h>
 #import <utils.h>
+#import <Appkit/Appkit.h>
 
-bool StatusBar_IsVertical(void* ptr);
-double StatusBar_Thickness(void* ptr);
-void* StatusBar_SystemStatusBar();
+void* C_StatusBar_Alloc();
 
-void* StatusBar_StatusItemWithLength(void* ptr, double length);
-void StatusBar_RemoveStatusItem(void* ptr, void* item);
+void* C_NSStatusBar_Init(void* ptr);
+void* C_NSStatusBar_StatusItemWithLength(void* ptr, double length);
+void C_NSStatusBar_RemoveStatusItem(void* ptr, void* item);
+void* C_NSStatusBar_SystemStatusBar();
+bool C_NSStatusBar_IsVertical(void* ptr);
+double C_NSStatusBar_Thickness(void* ptr);

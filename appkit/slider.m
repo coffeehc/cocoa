@@ -1,152 +1,163 @@
-#import <AppKit/AppKit.h>
-#import "_cgo_export.h"
+#import <Appkit/Appkit.h>
 #import "slider.h"
-#import "slider_delegate.h"
 
-@implementation NSSliderHandler
-
-- (void)onAction:(id)sender {
-	return Slider_Target_Action([self goID], sender);
+void* C_Slider_Alloc() {
+    return [NSSlider alloc];
 }
 
-@end
-void Slider_SetDelegate(void *ptr, long goID) {
-	NSSlider* slider = (NSSlider*)ptr;
-	NSSliderHandler* handler = [[NSSliderHandler alloc] init];
-	[handler setGoID:goID];
-	[slider setTarget:handler];
-	[slider setAction:@selector(onAction:)];
+void* C_NSSlider_InitWithFrame(void* ptr, CGRect frameRect) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    NSSlider* result = [nSSlider initWithFrame:frameRect];
+    return result;
 }
 
-unsigned long Slider_SliderType(void* ptr) {
-	NSSlider* slider = (NSSlider*)ptr;
-	return [slider sliderType];
+void* C_NSSlider_InitWithCoder(void* ptr, void* coder) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    NSSlider* result = [nSSlider initWithCoder:(NSCoder*)coder];
+    return result;
 }
 
-void Slider_SetSliderType(void* ptr, unsigned long sliderType) {
-	NSSlider* slider = (NSSlider*)ptr;
-	[slider setSliderType:sliderType];
+void* C_NSSlider_Init(void* ptr) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    NSSlider* result = [nSSlider init];
+    return result;
 }
 
-double Slider_AltIncrementValue(void* ptr) {
-	NSSlider* slider = (NSSlider*)ptr;
-	return [slider altIncrementValue];
+void* C_NSSlider_SliderWithTarget_Action(void* target, void* action) {
+    NSSlider* result = [NSSlider sliderWithTarget:(id)target action:(SEL)action];
+    return result;
 }
 
-void Slider_SetAltIncrementValue(void* ptr, double altIncrementValue) {
-	NSSlider* slider = (NSSlider*)ptr;
-	[slider setAltIncrementValue:altIncrementValue];
+void* C_NSSlider_SliderWithValue_MinValue_MaxValue_Target_Action(double value, double minValue, double maxValue, void* target, void* action) {
+    NSSlider* result = [NSSlider sliderWithValue:value minValue:minValue maxValue:maxValue target:(id)target action:(SEL)action];
+    return result;
 }
 
-double Slider_KnobThickness(void* ptr) {
-	NSSlider* slider = (NSSlider*)ptr;
-	return [slider knobThickness];
+double C_NSSlider_ClosestTickMarkValueToValue(void* ptr, double value) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    double result = [nSSlider closestTickMarkValueToValue:value];
+    return result;
 }
 
-bool Slider_IsVertical(void* ptr) {
-	NSSlider* slider = (NSSlider*)ptr;
-	return [slider isVertical];
+int C_NSSlider_IndexOfTickMarkAtPoint(void* ptr, CGPoint point) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    NSInteger result = [nSSlider indexOfTickMarkAtPoint:point];
+    return result;
 }
 
-void Slider_SetVertical(void* ptr, bool vertical) {
-	NSSlider* slider = (NSSlider*)ptr;
-	[slider setVertical:vertical];
+CGRect C_NSSlider_RectOfTickMarkAtIndex(void* ptr, int index) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    NSRect result = [nSSlider rectOfTickMarkAtIndex:index];
+    return result;
 }
 
-void* Slider_TrackFillColor(void* ptr) {
-	NSSlider* slider = (NSSlider*)ptr;
-	return [slider trackFillColor];
+double C_NSSlider_TickMarkValueAtIndex(void* ptr, int index) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    double result = [nSSlider tickMarkValueAtIndex:index];
+    return result;
 }
 
-void Slider_SetTrackFillColor(void* ptr, void* trackFillColor) {
-	NSSlider* slider = (NSSlider*)ptr;
-	[slider setTrackFillColor:(NSColor*)trackFillColor];
+unsigned int C_NSSlider_SliderType(void* ptr) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    NSSliderType result = [nSSlider sliderType];
+    return result;
 }
 
-double Slider_MaxValue(void* ptr) {
-	NSSlider* slider = (NSSlider*)ptr;
-	return [slider maxValue];
+void C_NSSlider_SetSliderType(void* ptr, unsigned int value) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    [nSSlider setSliderType:value];
 }
 
-void Slider_SetMaxValue(void* ptr, double maxValue) {
-	NSSlider* slider = (NSSlider*)ptr;
-	[slider setMaxValue:maxValue];
+double C_NSSlider_AltIncrementValue(void* ptr) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    double result = [nSSlider altIncrementValue];
+    return result;
 }
 
-double Slider_MinValue(void* ptr) {
-	NSSlider* slider = (NSSlider*)ptr;
-	return [slider minValue];
+void C_NSSlider_SetAltIncrementValue(void* ptr, double value) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    [nSSlider setAltIncrementValue:value];
 }
 
-void Slider_SetMinValue(void* ptr, double minValue) {
-	NSSlider* slider = (NSSlider*)ptr;
-	[slider setMinValue:minValue];
+double C_NSSlider_KnobThickness(void* ptr) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    CGFloat result = [nSSlider knobThickness];
+    return result;
 }
 
-bool Slider_AllowsTickMarkValuesOnly(void* ptr) {
-	NSSlider* slider = (NSSlider*)ptr;
-	return [slider allowsTickMarkValuesOnly];
+bool C_NSSlider_IsVertical(void* ptr) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    BOOL result = [nSSlider isVertical];
+    return result;
 }
 
-void Slider_SetAllowsTickMarkValuesOnly(void* ptr, bool allowsTickMarkValuesOnly) {
-	NSSlider* slider = (NSSlider*)ptr;
-	[slider setAllowsTickMarkValuesOnly:allowsTickMarkValuesOnly];
+void C_NSSlider_SetVertical(void* ptr, bool value) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    [nSSlider setVertical:value];
 }
 
-long Slider_NumberOfTickMarks(void* ptr) {
-	NSSlider* slider = (NSSlider*)ptr;
-	return [slider numberOfTickMarks];
+void* C_NSSlider_TrackFillColor(void* ptr) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    NSColor* result = [nSSlider trackFillColor];
+    return result;
 }
 
-void Slider_SetNumberOfTickMarks(void* ptr, long numberOfTickMarks) {
-	NSSlider* slider = (NSSlider*)ptr;
-	[slider setNumberOfTickMarks:numberOfTickMarks];
+void C_NSSlider_SetTrackFillColor(void* ptr, void* value) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    [nSSlider setTrackFillColor:(NSColor*)value];
 }
 
-unsigned long Slider_TickMarkPosition(void* ptr) {
-	NSSlider* slider = (NSSlider*)ptr;
-	return [slider tickMarkPosition];
+double C_NSSlider_MaxValue(void* ptr) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    double result = [nSSlider maxValue];
+    return result;
 }
 
-void Slider_SetTickMarkPosition(void* ptr, unsigned long tickMarkPosition) {
-	NSSlider* slider = (NSSlider*)ptr;
-	[slider setTickMarkPosition:tickMarkPosition];
+void C_NSSlider_SetMaxValue(void* ptr, double value) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    [nSSlider setMaxValue:value];
 }
 
-void* Slider_NewSlider(NSRect frame) {
-	NSSlider* slider = [NSSlider alloc];
-	return [[slider initWithFrame:frame] autorelease];
+double C_NSSlider_MinValue(void* ptr) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    double result = [nSSlider minValue];
+    return result;
 }
 
-void* Slider_SliderWithTarget(void* target, void* action) {
-	return [NSSlider sliderWithTarget:(NSObject*)target action:(SEL)action];
+void C_NSSlider_SetMinValue(void* ptr, double value) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    [nSSlider setMinValue:value];
 }
 
-void* Slider_SliderWithValue(double value, double minValue, double maxValue, void* target, void* action) {
-	return [NSSlider sliderWithValue:value minValue:minValue maxValue:maxValue target:(NSObject*)target action:(SEL)action];
+bool C_NSSlider_AllowsTickMarkValuesOnly(void* ptr) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    BOOL result = [nSSlider allowsTickMarkValuesOnly];
+    return result;
 }
 
-bool Slider_AcceptsFirstMouse(void* ptr, void* event) {
-	NSSlider* slider = (NSSlider*)ptr;
-	return [slider acceptsFirstMouse:(NSEvent*)event];
+void C_NSSlider_SetAllowsTickMarkValuesOnly(void* ptr, bool value) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    [nSSlider setAllowsTickMarkValuesOnly:value];
 }
 
-double Slider_ClosestTickMarkValueToValue(void* ptr, double value) {
-	NSSlider* slider = (NSSlider*)ptr;
-	return [slider closestTickMarkValueToValue:value];
+int C_NSSlider_NumberOfTickMarks(void* ptr) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    NSInteger result = [nSSlider numberOfTickMarks];
+    return result;
 }
 
-long Slider_IndexOfTickMarkAtPoint(void* ptr, NSPoint point) {
-	NSSlider* slider = (NSSlider*)ptr;
-	return [slider indexOfTickMarkAtPoint:point];
+void C_NSSlider_SetNumberOfTickMarks(void* ptr, int value) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    [nSSlider setNumberOfTickMarks:value];
 }
 
-NSRect Slider_RectOfTickMarkAtIndex(void* ptr, long index) {
-	NSSlider* slider = (NSSlider*)ptr;
-	return [slider rectOfTickMarkAtIndex:index];
+unsigned int C_NSSlider_TickMarkPosition(void* ptr) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    NSTickMarkPosition result = [nSSlider tickMarkPosition];
+    return result;
 }
 
-double Slider_TickMarkValueAtIndex(void* ptr, long index) {
-	NSSlider* slider = (NSSlider*)ptr;
-	return [slider tickMarkValueAtIndex:index];
+void C_NSSlider_SetTickMarkPosition(void* ptr, unsigned int value) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    [nSSlider setTickMarkPosition:value];
 }

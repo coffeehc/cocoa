@@ -5,6 +5,7 @@ package appkit
 // #include "menu_item.h"
 import "C"
 import (
+	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
 	"unsafe"
 )
@@ -12,45 +13,59 @@ import (
 type MenuItem interface {
 	objc.Object
 	IsEnabled() bool
-	SetEnabled(enabled bool)
+	SetEnabled(value bool)
 	IsHidden() bool
-	SetHidden(hidden bool)
+	SetHidden(value bool)
+	IsHiddenOrHasHiddenAncestor() bool
+	Target() objc.Object
+	SetTarget(value objc.Object)
+	Action() *objc.Selector
+	SetAction(value *objc.Selector)
 	Title() string
-	SetTitle(title string)
+	SetTitle(value string)
+	AttributedTitle() foundation.AttributedString
+	SetAttributedTitle(value foundation.AttributedString)
+	Tag() int
+	SetTag(value int)
+	State() ControlStateValue
+	SetState(value ControlStateValue)
+	Image() Image
+	SetImage(value Image)
+	OnStateImage() Image
+	SetOnStateImage(value Image)
+	OffStateImage() Image
+	SetOffStateImage(value Image)
+	MixedStateImage() Image
+	SetMixedStateImage(value Image)
 	Submenu() Menu
-	SetSubmenu(submenu Menu)
+	SetSubmenu(value Menu)
 	HasSubmenu() bool
+	ParentItem() MenuItem
 	IsSeparatorItem() bool
 	Menu() Menu
-	SetMenu(menu Menu)
-	ToolTip() string
-	SetToolTip(toolTip string)
-	IsHighlighted() bool
+	SetMenu(value Menu)
 	KeyEquivalent() string
-	SetKeyEquivalent(keyEquivalent string)
+	SetKeyEquivalent(value string)
 	KeyEquivalentModifierMask() EventModifierFlags
-	SetKeyEquivalentModifierMask(keyEquivalentModifierMask EventModifierFlags)
+	SetKeyEquivalentModifierMask(value EventModifierFlags)
 	UserKeyEquivalent() string
 	IsAlternate() bool
-	SetAlternate(alternate bool)
+	SetAlternate(value bool)
 	IndentationLevel() int
-	SetIndentationLevel(indentationLevel int)
+	SetIndentationLevel(value int)
+	ToolTip() string
+	SetToolTip(value string)
+	RepresentedObject() objc.Object
+	SetRepresentedObject(value objc.Object)
 	View() View
-	SetView(view View)
+	SetView(value View)
+	IsHighlighted() bool
 	AllowsKeyEquivalentWhenHidden() bool
-	SetAllowsKeyEquivalentWhenHidden(allowsKeyEquivalentWhenHidden bool)
-	State() ControlStateValue
-	SetState(state ControlStateValue)
-	Tag() int
-	SetTag(tag int)
-	SetAction(handler ActionHandler)
+	SetAllowsKeyEquivalentWhenHidden(value bool)
 }
-
-var _ MenuItem = (*NSMenuItem)(nil)
 
 type NSMenuItem struct {
 	objc.NSObject
-	action ActionHandler
 }
 
 func MakeMenuItem(ptr unsafe.Pointer) *NSMenuItem {
@@ -61,173 +76,264 @@ func MakeMenuItem(ptr unsafe.Pointer) *NSMenuItem {
 		NSObject: *objc.MakeObject(ptr),
 	}
 }
-func (m *NSMenuItem) setDelegate() {
-	id := resources.Register(m)
-	C.MenuItem_SetDelegate(m.Ptr(), C.long(id))
+
+func AllocMenuItem() *NSMenuItem {
+	return MakeMenuItem(C.C_MenuItem_Alloc())
 }
 
-func (m *NSMenuItem) IsEnabled() bool {
-	return bool(C.MenuItem_IsEnabled(m.Ptr()))
+func (n *NSMenuItem) InitWithTitle_Action_KeyEquivalent(_string string, selector *objc.Selector, charCode string) MenuItem {
+	result := C.C_NSMenuItem_InitWithTitle_Action_KeyEquivalent(n.Ptr(), foundation.NewString(_string).Ptr(), objc.ExtractPtr(selector), foundation.NewString(charCode).Ptr())
+	return MakeMenuItem(result)
 }
 
-func (m *NSMenuItem) SetEnabled(enabled bool) {
-	C.MenuItem_SetEnabled(m.Ptr(), C.bool(enabled))
+func (n *NSMenuItem) InitWithCoder(coder foundation.Coder) MenuItem {
+	result := C.C_NSMenuItem_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeMenuItem(result)
 }
 
-func (m *NSMenuItem) IsHidden() bool {
-	return bool(C.MenuItem_IsHidden(m.Ptr()))
+func (n *NSMenuItem) Init() MenuItem {
+	result := C.C_NSMenuItem_Init(n.Ptr())
+	return MakeMenuItem(result)
 }
 
-func (m *NSMenuItem) SetHidden(hidden bool) {
-	C.MenuItem_SetHidden(m.Ptr(), C.bool(hidden))
+func MenuItem_SeparatorItem() MenuItem {
+	result := C.C_NSMenuItem_MenuItem_SeparatorItem()
+	return MakeMenuItem(result)
 }
 
-func (m *NSMenuItem) Title() string {
-	return C.GoString(C.MenuItem_Title(m.Ptr()))
+func (n *NSMenuItem) IsEnabled() bool {
+	result := C.C_NSMenuItem_IsEnabled(n.Ptr())
+	return bool(result)
 }
 
-func (m *NSMenuItem) SetTitle(title string) {
-	cTitle := C.CString(title)
-	defer C.free(unsafe.Pointer(cTitle))
-	C.MenuItem_SetTitle(m.Ptr(), cTitle)
+func (n *NSMenuItem) SetEnabled(value bool) {
+	C.C_NSMenuItem_SetEnabled(n.Ptr(), C.bool(value))
 }
 
-func (m *NSMenuItem) Submenu() Menu {
-	return MakeMenu(C.MenuItem_Submenu(m.Ptr()))
+func (n *NSMenuItem) IsHidden() bool {
+	result := C.C_NSMenuItem_IsHidden(n.Ptr())
+	return bool(result)
 }
 
-func (m *NSMenuItem) SetSubmenu(submenu Menu) {
-	C.MenuItem_SetSubmenu(m.Ptr(), toPointer(submenu))
+func (n *NSMenuItem) SetHidden(value bool) {
+	C.C_NSMenuItem_SetHidden(n.Ptr(), C.bool(value))
 }
 
-func (m *NSMenuItem) HasSubmenu() bool {
-	return bool(C.MenuItem_HasSubmenu(m.Ptr()))
+func (n *NSMenuItem) IsHiddenOrHasHiddenAncestor() bool {
+	result := C.C_NSMenuItem_IsHiddenOrHasHiddenAncestor(n.Ptr())
+	return bool(result)
 }
 
-func (m *NSMenuItem) IsSeparatorItem() bool {
-	return bool(C.MenuItem_IsSeparatorItem(m.Ptr()))
+func (n *NSMenuItem) Target() objc.Object {
+	result := C.C_NSMenuItem_Target(n.Ptr())
+	return objc.MakeObject(result)
 }
 
-func (m *NSMenuItem) Menu() Menu {
-	return MakeMenu(C.MenuItem_Menu(m.Ptr()))
+func (n *NSMenuItem) SetTarget(value objc.Object) {
+	C.C_NSMenuItem_SetTarget(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (m *NSMenuItem) SetMenu(menu Menu) {
-	C.MenuItem_SetMenu(m.Ptr(), toPointer(menu))
+func (n *NSMenuItem) Action() *objc.Selector {
+	result := C.C_NSMenuItem_Action(n.Ptr())
+	return objc.MakeSelector(result)
 }
 
-func (m *NSMenuItem) ToolTip() string {
-	return C.GoString(C.MenuItem_ToolTip(m.Ptr()))
+func (n *NSMenuItem) SetAction(value *objc.Selector) {
+	C.C_NSMenuItem_SetAction(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (m *NSMenuItem) SetToolTip(toolTip string) {
-	cToolTip := C.CString(toolTip)
-	defer C.free(unsafe.Pointer(cToolTip))
-	C.MenuItem_SetToolTip(m.Ptr(), cToolTip)
+func (n *NSMenuItem) Title() string {
+	result := C.C_NSMenuItem_Title(n.Ptr())
+	return foundation.MakeString(result).String()
 }
 
-func (m *NSMenuItem) IsHighlighted() bool {
-	return bool(C.MenuItem_IsHighlighted(m.Ptr()))
+func (n *NSMenuItem) SetTitle(value string) {
+	C.C_NSMenuItem_SetTitle(n.Ptr(), foundation.NewString(value).Ptr())
 }
 
-func (m *NSMenuItem) KeyEquivalent() string {
-	return C.GoString(C.MenuItem_KeyEquivalent(m.Ptr()))
+func (n *NSMenuItem) AttributedTitle() foundation.AttributedString {
+	result := C.C_NSMenuItem_AttributedTitle(n.Ptr())
+	return foundation.MakeAttributedString(result)
 }
 
-func (m *NSMenuItem) SetKeyEquivalent(keyEquivalent string) {
-	cKeyEquivalent := C.CString(keyEquivalent)
-	defer C.free(unsafe.Pointer(cKeyEquivalent))
-	C.MenuItem_SetKeyEquivalent(m.Ptr(), cKeyEquivalent)
+func (n *NSMenuItem) SetAttributedTitle(value foundation.AttributedString) {
+	C.C_NSMenuItem_SetAttributedTitle(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (m *NSMenuItem) KeyEquivalentModifierMask() EventModifierFlags {
-	return EventModifierFlags(C.MenuItem_KeyEquivalentModifierMask(m.Ptr()))
+func (n *NSMenuItem) Tag() int {
+	result := C.C_NSMenuItem_Tag(n.Ptr())
+	return int(result)
 }
 
-func (m *NSMenuItem) SetKeyEquivalentModifierMask(keyEquivalentModifierMask EventModifierFlags) {
-	C.MenuItem_SetKeyEquivalentModifierMask(m.Ptr(), C.ulong(keyEquivalentModifierMask))
+func (n *NSMenuItem) SetTag(value int) {
+	C.C_NSMenuItem_SetTag(n.Ptr(), C.int(value))
 }
 
-func (m *NSMenuItem) UserKeyEquivalent() string {
-	return C.GoString(C.MenuItem_UserKeyEquivalent(m.Ptr()))
+func (n *NSMenuItem) State() ControlStateValue {
+	result := C.C_NSMenuItem_State(n.Ptr())
+	return ControlStateValue(int(result))
 }
 
-func (m *NSMenuItem) IsAlternate() bool {
-	return bool(C.MenuItem_IsAlternate(m.Ptr()))
+func (n *NSMenuItem) SetState(value ControlStateValue) {
+	C.C_NSMenuItem_SetState(n.Ptr(), C.int(int(value)))
 }
 
-func (m *NSMenuItem) SetAlternate(alternate bool) {
-	C.MenuItem_SetAlternate(m.Ptr(), C.bool(alternate))
+func (n *NSMenuItem) Image() Image {
+	result := C.C_NSMenuItem_Image(n.Ptr())
+	return MakeImage(result)
 }
 
-func (m *NSMenuItem) IndentationLevel() int {
-	return int(C.MenuItem_IndentationLevel(m.Ptr()))
+func (n *NSMenuItem) SetImage(value Image) {
+	C.C_NSMenuItem_SetImage(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (m *NSMenuItem) SetIndentationLevel(indentationLevel int) {
-	C.MenuItem_SetIndentationLevel(m.Ptr(), C.long(indentationLevel))
+func (n *NSMenuItem) OnStateImage() Image {
+	result := C.C_NSMenuItem_OnStateImage(n.Ptr())
+	return MakeImage(result)
 }
 
-func (m *NSMenuItem) View() View {
-	return MakeView(C.MenuItem_View(m.Ptr()))
+func (n *NSMenuItem) SetOnStateImage(value Image) {
+	C.C_NSMenuItem_SetOnStateImage(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (m *NSMenuItem) SetView(view View) {
-	C.MenuItem_SetView(m.Ptr(), toPointer(view))
+func (n *NSMenuItem) OffStateImage() Image {
+	result := C.C_NSMenuItem_OffStateImage(n.Ptr())
+	return MakeImage(result)
 }
 
-func (m *NSMenuItem) AllowsKeyEquivalentWhenHidden() bool {
-	return bool(C.MenuItem_AllowsKeyEquivalentWhenHidden(m.Ptr()))
+func (n *NSMenuItem) SetOffStateImage(value Image) {
+	C.C_NSMenuItem_SetOffStateImage(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (m *NSMenuItem) SetAllowsKeyEquivalentWhenHidden(allowsKeyEquivalentWhenHidden bool) {
-	C.MenuItem_SetAllowsKeyEquivalentWhenHidden(m.Ptr(), C.bool(allowsKeyEquivalentWhenHidden))
+func (n *NSMenuItem) MixedStateImage() Image {
+	result := C.C_NSMenuItem_MixedStateImage(n.Ptr())
+	return MakeImage(result)
 }
 
-func UsesUserKeyEquivalents() bool {
-	return bool(C.MenuItem_UsesUserKeyEquivalents())
+func (n *NSMenuItem) SetMixedStateImage(value Image) {
+	C.C_NSMenuItem_SetMixedStateImage(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func SetUsesUserKeyEquivalents(usesUserKeyEquivalents bool) {
-	C.MenuItem_SetUsesUserKeyEquivalents(C.bool(usesUserKeyEquivalents))
+func (n *NSMenuItem) Submenu() Menu {
+	result := C.C_NSMenuItem_Submenu(n.Ptr())
+	return MakeMenu(result)
 }
 
-func (m *NSMenuItem) State() ControlStateValue {
-	return ControlStateValue(C.MenuItem_State(m.Ptr()))
+func (n *NSMenuItem) SetSubmenu(value Menu) {
+	C.C_NSMenuItem_SetSubmenu(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (m *NSMenuItem) SetState(state ControlStateValue) {
-	C.MenuItem_SetState(m.Ptr(), C.long(state))
+func (n *NSMenuItem) HasSubmenu() bool {
+	result := C.C_NSMenuItem_HasSubmenu(n.Ptr())
+	return bool(result)
 }
 
-func (m *NSMenuItem) Tag() int {
-	return int(C.MenuItem_Tag(m.Ptr()))
+func (n *NSMenuItem) ParentItem() MenuItem {
+	result := C.C_NSMenuItem_ParentItem(n.Ptr())
+	return MakeMenuItem(result)
 }
 
-func (m *NSMenuItem) SetTag(tag int) {
-	C.MenuItem_SetTag(m.Ptr(), C.long(tag))
+func (n *NSMenuItem) IsSeparatorItem() bool {
+	result := C.C_NSMenuItem_IsSeparatorItem(n.Ptr())
+	return bool(result)
 }
 
-func NewMenuItem(title string, selector *objc.Selector, charCode string) MenuItem {
-	cTitle := C.CString(title)
-	defer C.free(unsafe.Pointer(cTitle))
-	cCharCode := C.CString(charCode)
-	defer C.free(unsafe.Pointer(cCharCode))
-	return MakeMenuItem(C.MenuItem_NewMenuItem(cTitle, toPointer(selector), cCharCode))
+func (n *NSMenuItem) Menu() Menu {
+	result := C.C_NSMenuItem_Menu(n.Ptr())
+	return MakeMenu(result)
 }
 
-func NewSeparatorItem() MenuItem {
-	return MakeMenuItem(C.MenuItem_NewSeparatorItem())
+func (n *NSMenuItem) SetMenu(value Menu) {
+	C.C_NSMenuItem_SetMenu(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (m *NSMenuItem) SetAction(handler ActionHandler) {
-	m.action = handler
+func (n *NSMenuItem) KeyEquivalent() string {
+	result := C.C_NSMenuItem_KeyEquivalent(n.Ptr())
+	return foundation.MakeString(result).String()
 }
 
-//export MenuItem_Target_Action
-func MenuItem_Target_Action(id int64, sender unsafe.Pointer) {
-	menuItem := resources.Get(id).(*NSMenuItem)
-	if menuItem.action != nil {
-		menuItem.action(objc.MakeObject(sender))
-	}
+func (n *NSMenuItem) SetKeyEquivalent(value string) {
+	C.C_NSMenuItem_SetKeyEquivalent(n.Ptr(), foundation.NewString(value).Ptr())
+}
+
+func (n *NSMenuItem) KeyEquivalentModifierMask() EventModifierFlags {
+	result := C.C_NSMenuItem_KeyEquivalentModifierMask(n.Ptr())
+	return EventModifierFlags(uint(result))
+}
+
+func (n *NSMenuItem) SetKeyEquivalentModifierMask(value EventModifierFlags) {
+	C.C_NSMenuItem_SetKeyEquivalentModifierMask(n.Ptr(), C.uint(uint(value)))
+}
+
+func MenuItem_UsesUserKeyEquivalents() bool {
+	result := C.C_NSMenuItem_MenuItem_UsesUserKeyEquivalents()
+	return bool(result)
+}
+
+func MenuItem_SetUsesUserKeyEquivalents(value bool) {
+	C.C_NSMenuItem_MenuItem_SetUsesUserKeyEquivalents(C.bool(value))
+}
+
+func (n *NSMenuItem) UserKeyEquivalent() string {
+	result := C.C_NSMenuItem_UserKeyEquivalent(n.Ptr())
+	return foundation.MakeString(result).String()
+}
+
+func (n *NSMenuItem) IsAlternate() bool {
+	result := C.C_NSMenuItem_IsAlternate(n.Ptr())
+	return bool(result)
+}
+
+func (n *NSMenuItem) SetAlternate(value bool) {
+	C.C_NSMenuItem_SetAlternate(n.Ptr(), C.bool(value))
+}
+
+func (n *NSMenuItem) IndentationLevel() int {
+	result := C.C_NSMenuItem_IndentationLevel(n.Ptr())
+	return int(result)
+}
+
+func (n *NSMenuItem) SetIndentationLevel(value int) {
+	C.C_NSMenuItem_SetIndentationLevel(n.Ptr(), C.int(value))
+}
+
+func (n *NSMenuItem) ToolTip() string {
+	result := C.C_NSMenuItem_ToolTip(n.Ptr())
+	return foundation.MakeString(result).String()
+}
+
+func (n *NSMenuItem) SetToolTip(value string) {
+	C.C_NSMenuItem_SetToolTip(n.Ptr(), foundation.NewString(value).Ptr())
+}
+
+func (n *NSMenuItem) RepresentedObject() objc.Object {
+	result := C.C_NSMenuItem_RepresentedObject(n.Ptr())
+	return objc.MakeObject(result)
+}
+
+func (n *NSMenuItem) SetRepresentedObject(value objc.Object) {
+	C.C_NSMenuItem_SetRepresentedObject(n.Ptr(), objc.ExtractPtr(value))
+}
+
+func (n *NSMenuItem) View() View {
+	result := C.C_NSMenuItem_View(n.Ptr())
+	return MakeView(result)
+}
+
+func (n *NSMenuItem) SetView(value View) {
+	C.C_NSMenuItem_SetView(n.Ptr(), objc.ExtractPtr(value))
+}
+
+func (n *NSMenuItem) IsHighlighted() bool {
+	result := C.C_NSMenuItem_IsHighlighted(n.Ptr())
+	return bool(result)
+}
+
+func (n *NSMenuItem) AllowsKeyEquivalentWhenHidden() bool {
+	result := C.C_NSMenuItem_AllowsKeyEquivalentWhenHidden(n.Ptr())
+	return bool(result)
+}
+
+func (n *NSMenuItem) SetAllowsKeyEquivalentWhenHidden(value bool) {
+	C.C_NSMenuItem_SetAllowsKeyEquivalentWhenHidden(n.Ptr(), C.bool(value))
 }

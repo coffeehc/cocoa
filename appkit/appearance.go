@@ -1,30 +1,25 @@
 package appkit
 
 // #cgo CFLAGS: -x objective-c
-// #cgo LDFLAGS: -framework Cocoa
+// #cgo LDFLAGS: -framework AppKit
 // #include "appearance.h"
 import "C"
-
 import (
+	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
 	"unsafe"
 )
 
-// Appearance is an object that manages standard appearance attributes for UI elements in an app
 type Appearance interface {
 	objc.Object
-
-	// Name return the name of the appearance
 	Name() AppearanceName
+	AllowsVibrancy() bool
 }
-
-var _ Appearance = (*NSAppearance)(nil)
 
 type NSAppearance struct {
 	objc.NSObject
 }
 
-// MakeAppearance create a Appearance from native pointer
 func MakeAppearance(ptr unsafe.Pointer) *NSAppearance {
 	if ptr == nil {
 		return nil
@@ -34,23 +29,41 @@ func MakeAppearance(ptr unsafe.Pointer) *NSAppearance {
 	}
 }
 
-func (a *NSAppearance) Name() AppearanceName {
-	return AppearanceName(C.GoString(C.Appearance_Name(a.Ptr())))
+func AllocAppearance() *NSAppearance {
+	return MakeAppearance(C.C_Appearance_Alloc())
+}
+
+func (n *NSAppearance) InitWithAppearanceNamed_Bundle(name AppearanceName, bundle foundation.Bundle) Appearance {
+	result := C.C_NSAppearance_InitWithAppearanceNamed_Bundle(n.Ptr(), foundation.NewString(string(name)).Ptr(), objc.ExtractPtr(bundle))
+	return MakeAppearance(result)
+}
+
+func (n *NSAppearance) InitWithCoder(coder foundation.Coder) Appearance {
+	result := C.C_NSAppearance_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeAppearance(result)
+}
+
+func (n *NSAppearance) Init() Appearance {
+	result := C.C_NSAppearance_Init(n.Ptr())
+	return MakeAppearance(result)
 }
 
 func AppearanceNamed(name AppearanceName) Appearance {
-	cName := C.CString(string(name))
-	defer C.free(unsafe.Pointer(cName))
-	return MakeAppearance(C.Appearance_AppearanceNamed(cName))
+	result := C.C_NSAppearance_AppearanceNamed(foundation.NewString(string(name)).Ptr())
+	return MakeAppearance(result)
 }
 
-type AppearanceName string
+func (n *NSAppearance) Name() AppearanceName {
+	result := C.C_NSAppearance_Name(n.Ptr())
+	return AppearanceName(foundation.MakeString(result).String())
+}
 
-var AppearanceNameAqua AppearanceName
-var AppearanceNameDarkAqua AppearanceName
-var AppearanceNameVibrantLight AppearanceName
-var AppearanceNameVibrantDark AppearanceName
-var AppearanceNameAccessibilityHighContrastAqua AppearanceName
-var AppearanceNameAccessibilityHighContrastDarkAqua AppearanceName
-var AppearanceNameAccessibilityHighContrastVibrantLight AppearanceName
-var AppearanceNameAccessibilityHighContrastVibrantDark AppearanceName
+func CurrentDrawingAppearance() Appearance {
+	result := C.C_NSAppearance_CurrentDrawingAppearance()
+	return MakeAppearance(result)
+}
+
+func (n *NSAppearance) AllowsVibrancy() bool {
+	result := C.C_NSAppearance_AllowsVibrancy(n.Ptr())
+	return bool(result)
+}

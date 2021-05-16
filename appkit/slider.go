@@ -5,6 +5,7 @@ package appkit
 // #include "slider.h"
 import "C"
 import (
+	"github.com/hsiafan/cocoa/coregraphics"
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
 	"unsafe"
@@ -12,37 +13,33 @@ import (
 
 type Slider interface {
 	Control
-	SliderType() SliderType
-	SetSliderType(sliderType SliderType)
-	AltIncrementValue() float64
-	SetAltIncrementValue(altIncrementValue float64)
-	KnobThickness() float64
-	IsVertical() bool
-	SetVertical(vertical bool)
-	TrackFillColor() Color
-	SetTrackFillColor(trackFillColor Color)
-	MaxValue() float64
-	SetMaxValue(maxValue float64)
-	MinValue() float64
-	SetMinValue(minValue float64)
-	AllowsTickMarkValuesOnly() bool
-	SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool)
-	NumberOfTickMarks() int
-	SetNumberOfTickMarks(numberOfTickMarks int)
-	TickMarkPosition() TickMarkPosition
-	SetTickMarkPosition(tickMarkPosition TickMarkPosition)
 	ClosestTickMarkValueToValue(value float64) float64
 	IndexOfTickMarkAtPoint(point foundation.Point) int
 	RectOfTickMarkAtIndex(index int) foundation.Rect
 	TickMarkValueAtIndex(index int) float64
-	SetAction(handler ActionHandler)
+	SliderType() SliderType
+	SetSliderType(value SliderType)
+	AltIncrementValue() float64
+	SetAltIncrementValue(value float64)
+	KnobThickness() coregraphics.Float
+	IsVertical() bool
+	SetVertical(value bool)
+	TrackFillColor() Color
+	SetTrackFillColor(value Color)
+	MaxValue() float64
+	SetMaxValue(value float64)
+	MinValue() float64
+	SetMinValue(value float64)
+	AllowsTickMarkValuesOnly() bool
+	SetAllowsTickMarkValuesOnly(value bool)
+	NumberOfTickMarks() int
+	SetNumberOfTickMarks(value int)
+	TickMarkPosition() TickMarkPosition
+	SetTickMarkPosition(value TickMarkPosition)
 }
-
-var _ Slider = (*NSSlider)(nil)
 
 type NSSlider struct {
 	NSControl
-	action ActionHandler
 }
 
 func MakeSlider(ptr unsafe.Pointer) *NSSlider {
@@ -53,125 +50,138 @@ func MakeSlider(ptr unsafe.Pointer) *NSSlider {
 		NSControl: *MakeControl(ptr),
 	}
 }
-func (s *NSSlider) setDelegate() {
-	id := resources.Register(s)
-	C.Slider_SetDelegate(s.Ptr(), C.long(id))
+
+func AllocSlider() *NSSlider {
+	return MakeSlider(C.C_Slider_Alloc())
 }
 
-func (s *NSSlider) SliderType() SliderType {
-	return SliderType(C.Slider_SliderType(s.Ptr()))
+func (n *NSSlider) InitWithFrame(frameRect foundation.Rect) Slider {
+	result := C.C_NSSlider_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeSlider(result)
 }
 
-func (s *NSSlider) SetSliderType(sliderType SliderType) {
-	C.Slider_SetSliderType(s.Ptr(), C.ulong(sliderType))
+func (n *NSSlider) InitWithCoder(coder foundation.Coder) Slider {
+	result := C.C_NSSlider_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeSlider(result)
 }
 
-func (s *NSSlider) AltIncrementValue() float64 {
-	return float64(C.Slider_AltIncrementValue(s.Ptr()))
+func (n *NSSlider) Init() Slider {
+	result := C.C_NSSlider_Init(n.Ptr())
+	return MakeSlider(result)
 }
 
-func (s *NSSlider) SetAltIncrementValue(altIncrementValue float64) {
-	C.Slider_SetAltIncrementValue(s.Ptr(), C.double(altIncrementValue))
+func SliderWithTarget_Action(target objc.Object, action *objc.Selector) Slider {
+	result := C.C_NSSlider_SliderWithTarget_Action(objc.ExtractPtr(target), objc.ExtractPtr(action))
+	return MakeSlider(result)
 }
 
-func (s *NSSlider) KnobThickness() float64 {
-	return float64(C.Slider_KnobThickness(s.Ptr()))
+func SliderWithValue_MinValue_MaxValue_Target_Action(value float64, minValue float64, maxValue float64, target objc.Object, action *objc.Selector) Slider {
+	result := C.C_NSSlider_SliderWithValue_MinValue_MaxValue_Target_Action(C.double(value), C.double(minValue), C.double(maxValue), objc.ExtractPtr(target), objc.ExtractPtr(action))
+	return MakeSlider(result)
 }
 
-func (s *NSSlider) IsVertical() bool {
-	return bool(C.Slider_IsVertical(s.Ptr()))
+func (n *NSSlider) ClosestTickMarkValueToValue(value float64) float64 {
+	result := C.C_NSSlider_ClosestTickMarkValueToValue(n.Ptr(), C.double(value))
+	return float64(result)
 }
 
-func (s *NSSlider) SetVertical(vertical bool) {
-	C.Slider_SetVertical(s.Ptr(), C.bool(vertical))
+func (n *NSSlider) IndexOfTickMarkAtPoint(point foundation.Point) int {
+	result := C.C_NSSlider_IndexOfTickMarkAtPoint(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))))
+	return int(result)
 }
 
-func (s *NSSlider) TrackFillColor() Color {
-	return MakeColor(C.Slider_TrackFillColor(s.Ptr()))
+func (n *NSSlider) RectOfTickMarkAtIndex(index int) foundation.Rect {
+	result := C.C_NSSlider_RectOfTickMarkAtIndex(n.Ptr(), C.int(index))
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
 }
 
-func (s *NSSlider) SetTrackFillColor(trackFillColor Color) {
-	C.Slider_SetTrackFillColor(s.Ptr(), toPointer(trackFillColor))
+func (n *NSSlider) TickMarkValueAtIndex(index int) float64 {
+	result := C.C_NSSlider_TickMarkValueAtIndex(n.Ptr(), C.int(index))
+	return float64(result)
 }
 
-func (s *NSSlider) MaxValue() float64 {
-	return float64(C.Slider_MaxValue(s.Ptr()))
+func (n *NSSlider) SliderType() SliderType {
+	result := C.C_NSSlider_SliderType(n.Ptr())
+	return SliderType(uint(result))
 }
 
-func (s *NSSlider) SetMaxValue(maxValue float64) {
-	C.Slider_SetMaxValue(s.Ptr(), C.double(maxValue))
+func (n *NSSlider) SetSliderType(value SliderType) {
+	C.C_NSSlider_SetSliderType(n.Ptr(), C.uint(uint(value)))
 }
 
-func (s *NSSlider) MinValue() float64 {
-	return float64(C.Slider_MinValue(s.Ptr()))
+func (n *NSSlider) AltIncrementValue() float64 {
+	result := C.C_NSSlider_AltIncrementValue(n.Ptr())
+	return float64(result)
 }
 
-func (s *NSSlider) SetMinValue(minValue float64) {
-	C.Slider_SetMinValue(s.Ptr(), C.double(minValue))
+func (n *NSSlider) SetAltIncrementValue(value float64) {
+	C.C_NSSlider_SetAltIncrementValue(n.Ptr(), C.double(value))
 }
 
-func (s *NSSlider) AllowsTickMarkValuesOnly() bool {
-	return bool(C.Slider_AllowsTickMarkValuesOnly(s.Ptr()))
+func (n *NSSlider) KnobThickness() coregraphics.Float {
+	result := C.C_NSSlider_KnobThickness(n.Ptr())
+	return coregraphics.Float(float64(result))
 }
 
-func (s *NSSlider) SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) {
-	C.Slider_SetAllowsTickMarkValuesOnly(s.Ptr(), C.bool(allowsTickMarkValuesOnly))
+func (n *NSSlider) IsVertical() bool {
+	result := C.C_NSSlider_IsVertical(n.Ptr())
+	return bool(result)
 }
 
-func (s *NSSlider) NumberOfTickMarks() int {
-	return int(C.Slider_NumberOfTickMarks(s.Ptr()))
+func (n *NSSlider) SetVertical(value bool) {
+	C.C_NSSlider_SetVertical(n.Ptr(), C.bool(value))
 }
 
-func (s *NSSlider) SetNumberOfTickMarks(numberOfTickMarks int) {
-	C.Slider_SetNumberOfTickMarks(s.Ptr(), C.long(numberOfTickMarks))
+func (n *NSSlider) TrackFillColor() Color {
+	result := C.C_NSSlider_TrackFillColor(n.Ptr())
+	return MakeColor(result)
 }
 
-func (s *NSSlider) TickMarkPosition() TickMarkPosition {
-	return TickMarkPosition(C.Slider_TickMarkPosition(s.Ptr()))
+func (n *NSSlider) SetTrackFillColor(value Color) {
+	C.C_NSSlider_SetTrackFillColor(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (s *NSSlider) SetTickMarkPosition(tickMarkPosition TickMarkPosition) {
-	C.Slider_SetTickMarkPosition(s.Ptr(), C.ulong(tickMarkPosition))
+func (n *NSSlider) MaxValue() float64 {
+	result := C.C_NSSlider_MaxValue(n.Ptr())
+	return float64(result)
 }
 
-func NewSlider(frame foundation.Rect) Slider {
-	instance := MakeSlider(C.Slider_NewSlider(toNSRect(frame)))
-	instance.setDelegate()
-	return instance
+func (n *NSSlider) SetMaxValue(value float64) {
+	C.C_NSSlider_SetMaxValue(n.Ptr(), C.double(value))
 }
 
-func SliderWithTarget(target objc.Object, action *objc.Selector) Control {
-	return MakeControl(C.Slider_SliderWithTarget(toPointer(target), toPointer(action)))
+func (n *NSSlider) MinValue() float64 {
+	result := C.C_NSSlider_MinValue(n.Ptr())
+	return float64(result)
 }
 
-func SliderWithValue(value float64, minValue float64, maxValue float64, target objc.Object, action *objc.Selector) Control {
-	return MakeControl(C.Slider_SliderWithValue(C.double(value), C.double(minValue), C.double(maxValue), toPointer(target), toPointer(action)))
+func (n *NSSlider) SetMinValue(value float64) {
+	C.C_NSSlider_SetMinValue(n.Ptr(), C.double(value))
 }
 
-func (s *NSSlider) ClosestTickMarkValueToValue(value float64) float64 {
-	return float64(C.Slider_ClosestTickMarkValueToValue(s.Ptr(), C.double(value)))
+func (n *NSSlider) AllowsTickMarkValuesOnly() bool {
+	result := C.C_NSSlider_AllowsTickMarkValuesOnly(n.Ptr())
+	return bool(result)
 }
 
-func (s *NSSlider) IndexOfTickMarkAtPoint(point foundation.Point) int {
-	return int(C.Slider_IndexOfTickMarkAtPoint(s.Ptr(), toNSPoint(point)))
+func (n *NSSlider) SetAllowsTickMarkValuesOnly(value bool) {
+	C.C_NSSlider_SetAllowsTickMarkValuesOnly(n.Ptr(), C.bool(value))
 }
 
-func (s *NSSlider) RectOfTickMarkAtIndex(index int) foundation.Rect {
-	return toRect(C.Slider_RectOfTickMarkAtIndex(s.Ptr(), C.long(index)))
+func (n *NSSlider) NumberOfTickMarks() int {
+	result := C.C_NSSlider_NumberOfTickMarks(n.Ptr())
+	return int(result)
 }
 
-func (s *NSSlider) TickMarkValueAtIndex(index int) float64 {
-	return float64(C.Slider_TickMarkValueAtIndex(s.Ptr(), C.long(index)))
+func (n *NSSlider) SetNumberOfTickMarks(value int) {
+	C.C_NSSlider_SetNumberOfTickMarks(n.Ptr(), C.int(value))
 }
 
-func (s *NSSlider) SetAction(handler ActionHandler) {
-	s.action = handler
+func (n *NSSlider) TickMarkPosition() TickMarkPosition {
+	result := C.C_NSSlider_TickMarkPosition(n.Ptr())
+	return TickMarkPosition(uint(result))
 }
 
-//export Slider_Target_Action
-func Slider_Target_Action(id int64, sender unsafe.Pointer) {
-	slider := resources.Get(id).(*NSSlider)
-	if slider.action != nil {
-		slider.action(objc.MakeObject(sender))
-	}
+func (n *NSSlider) SetTickMarkPosition(value TickMarkPosition) {
+	C.C_NSSlider_SetTickMarkPosition(n.Ptr(), C.uint(uint(value)))
 }

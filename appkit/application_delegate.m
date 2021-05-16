@@ -6,155 +6,181 @@
 
 
 - (void)applicationWillFinishLaunching:(NSNotification*)notification {
-    ApplicationWillFinishLaunching([self goID], notification);
+    ApplicationDelegate_ApplicationWillFinishLaunching([self goID], notification);
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification*)notification {
-    ApplicationDidFinishLaunching([self goID], notification);
+    ApplicationDelegate_ApplicationDidFinishLaunching([self goID], notification);
 }
 
 - (void)applicationWillBecomeActive:(NSNotification*)notification {
-    ApplicationWillBecomeActive([self goID], notification);
+    ApplicationDelegate_ApplicationWillBecomeActive([self goID], notification);
 }
 
 - (void)applicationDidBecomeActive:(NSNotification*)notification {
-    ApplicationDidBecomeActive([self goID], notification);
+    ApplicationDelegate_ApplicationDidBecomeActive([self goID], notification);
 }
 
 - (void)applicationWillResignActive:(NSNotification*)notification {
-    ApplicationWillResignActive([self goID], notification);
+    ApplicationDelegate_ApplicationWillResignActive([self goID], notification);
 }
 
 - (void)applicationDidResignActive:(NSNotification*)notification {
-    ApplicationDidResignActive([self goID], notification);
+    ApplicationDelegate_ApplicationDidResignActive([self goID], notification);
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication*)sender {
-    unsigned int result = ApplicationShouldTerminate([self goID], sender);
-    return result;
+    unsigned int result_ = ApplicationDelegate_ApplicationShouldTerminate([self goID], sender);
+    return result_;
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication*)sender {
-    bool result = ApplicationShouldTerminateAfterLastWindowClosed([self goID], sender);
-    return result;
+    bool result_ = ApplicationDelegate_ApplicationShouldTerminateAfterLastWindowClosed([self goID], sender);
+    return result_;
 }
 
 - (void)applicationWillTerminate:(NSNotification*)notification {
-    ApplicationWillTerminate([self goID], notification);
+    ApplicationDelegate_ApplicationWillTerminate([self goID], notification);
 }
 
 - (void)applicationWillHide:(NSNotification*)notification {
-    ApplicationWillHide([self goID], notification);
+    ApplicationDelegate_ApplicationWillHide([self goID], notification);
 }
 
 - (void)applicationDidHide:(NSNotification*)notification {
-    ApplicationDidHide([self goID], notification);
+    ApplicationDelegate_ApplicationDidHide([self goID], notification);
 }
 
 - (void)applicationWillUnhide:(NSNotification*)notification {
-    ApplicationWillUnhide([self goID], notification);
+    ApplicationDelegate_ApplicationWillUnhide([self goID], notification);
 }
 
 - (void)applicationDidUnhide:(NSNotification*)notification {
-    ApplicationDidUnhide([self goID], notification);
+    ApplicationDelegate_ApplicationDidUnhide([self goID], notification);
 }
 
 - (void)applicationWillUpdate:(NSNotification*)notification {
-    ApplicationWillUpdate([self goID], notification);
+    ApplicationDelegate_ApplicationWillUpdate([self goID], notification);
 }
 
 - (void)applicationDidUpdate:(NSNotification*)notification {
-    ApplicationDidUpdate([self goID], notification);
+    ApplicationDelegate_ApplicationDidUpdate([self goID], notification);
 }
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication*)sender hasVisibleWindows:(BOOL)flag {
-    bool result = ApplicationShouldHandleReopen_HasVisibleWindows([self goID], sender, flag);
-    return result;
+    bool result_ = ApplicationDelegate_ApplicationShouldHandleReopen_HasVisibleWindows([self goID], sender, flag);
+    return result_;
 }
 
 - (NSMenu*)applicationDockMenu:(NSApplication*)sender {
-    void* result = ApplicationDockMenu([self goID], sender);
-    return (NSMenu*)result;
+    void* result_ = ApplicationDelegate_ApplicationDockMenu([self goID], sender);
+    return (NSMenu*)result_;
 }
 
 - (NSError*)application:(NSApplication*)application willPresentError:(NSError*)error {
-    void* result = Application_WillPresentError([self goID], application, error);
-    return (NSError*)result;
+    void* result_ = ApplicationDelegate_Application_WillPresentError([self goID], application, error);
+    return (NSError*)result_;
 }
 
 - (void)applicationDidChangeScreenParameters:(NSNotification*)notification {
-    ApplicationDidChangeScreenParameters([self goID], notification);
+    ApplicationDelegate_ApplicationDidChangeScreenParameters([self goID], notification);
 }
 
 - (BOOL)application:(NSApplication*)application willContinueUserActivityWithType:(NSString*)userActivityType {
-    bool result = Application_WillContinueUserActivityWithType([self goID], application, userActivityType);
-    return result;
+    bool result_ = ApplicationDelegate_Application_WillContinueUserActivityWithType([self goID], application, userActivityType);
+    return result_;
 }
 
 - (void)application:(NSApplication*)application didFailToContinueUserActivityWithType:(NSString*)userActivityType error:(NSError*)error {
-    Application_DidFailToContinueUserActivityWithType_Error([self goID], application, userActivityType, error);
+    ApplicationDelegate_Application_DidFailToContinueUserActivityWithType_Error([self goID], application, userActivityType, error);
 }
 
 - (void)application:(NSApplication*)application didUpdateUserActivity:(NSUserActivity*)userActivity {
-    Application_DidUpdateUserActivity([self goID], application, userActivity);
+    ApplicationDelegate_Application_DidUpdateUserActivity([self goID], application, userActivity);
 }
 
 - (void)application:(NSApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken {
     Array deviceTokenarray;
     deviceTokenarray.data = [deviceToken bytes];
     deviceTokenarray.len = deviceToken.length;
-    Application_DidRegisterForRemoteNotificationsWithDeviceToken([self goID], application, deviceTokenarray);
+    ApplicationDelegate_Application_DidRegisterForRemoteNotificationsWithDeviceToken([self goID], application, deviceTokenarray);
 }
 
 - (void)application:(NSApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error {
-    Application_DidFailToRegisterForRemoteNotificationsWithError([self goID], application, error);
+    ApplicationDelegate_Application_DidFailToRegisterForRemoteNotificationsWithError([self goID], application, error);
+}
+
+- (void)application:(NSApplication*)application openURLs:(NSArray*)urls {
+    int urlscount = [urls count];
+    void** urlsData = malloc(urlscount * sizeof(void*));
+    for (int i = 0; i < urlscount; i++) {
+    	 void* p = [urls objectAtIndex:i];
+    	 urlsData[i] = p;
+    }
+    Array urlsArray;
+    urlsArray.data = urlsData;
+    urlsArray.len = urlscount;
+    ApplicationDelegate_Application_OpenURLs([self goID], application, urlsArray);
 }
 
 - (BOOL)application:(NSApplication*)sender openFile:(NSString*)filename {
-    bool result = Application_OpenFile([self goID], sender, filename);
-    return result;
+    bool result_ = ApplicationDelegate_Application_OpenFile([self goID], sender, filename);
+    return result_;
 }
 
 - (BOOL)application:(id)sender openFileWithoutUI:(NSString*)filename {
-    bool result = Application_OpenFileWithoutUI([self goID], sender, filename);
-    return result;
+    bool result_ = ApplicationDelegate_Application_OpenFileWithoutUI([self goID], sender, filename);
+    return result_;
 }
 
 - (BOOL)application:(NSApplication*)sender openTempFile:(NSString*)filename {
-    bool result = Application_OpenTempFile([self goID], sender, filename);
-    return result;
+    bool result_ = ApplicationDelegate_Application_OpenTempFile([self goID], sender, filename);
+    return result_;
+}
+
+- (void)application:(NSApplication*)sender openFiles:(NSArray*)filenames {
+    int filenamescount = [filenames count];
+    void** filenamesData = malloc(filenamescount * sizeof(void*));
+    for (int i = 0; i < filenamescount; i++) {
+    	 void* p = [filenames objectAtIndex:i];
+    	 filenamesData[i] = p;
+    }
+    Array filenamesArray;
+    filenamesArray.data = filenamesData;
+    filenamesArray.len = filenamescount;
+    ApplicationDelegate_Application_OpenFiles([self goID], sender, filenamesArray);
 }
 
 - (BOOL)applicationOpenUntitledFile:(NSApplication*)sender {
-    bool result = ApplicationOpenUntitledFile([self goID], sender);
-    return result;
+    bool result_ = ApplicationDelegate_ApplicationOpenUntitledFile([self goID], sender);
+    return result_;
 }
 
 - (BOOL)applicationShouldOpenUntitledFile:(NSApplication*)sender {
-    bool result = ApplicationShouldOpenUntitledFile([self goID], sender);
-    return result;
+    bool result_ = ApplicationDelegate_ApplicationShouldOpenUntitledFile([self goID], sender);
+    return result_;
 }
 
 - (BOOL)application:(NSApplication*)sender printFile:(NSString*)filename {
-    bool result = Application_PrintFile([self goID], sender, filename);
-    return result;
+    bool result_ = ApplicationDelegate_Application_PrintFile([self goID], sender, filename);
+    return result_;
 }
 
 - (void)application:(NSApplication*)app didDecodeRestorableState:(NSCoder*)coder {
-    Application_DidDecodeRestorableState([self goID], app, coder);
+    ApplicationDelegate_Application_DidDecodeRestorableState([self goID], app, coder);
 }
 
 - (void)application:(NSApplication*)app willEncodeRestorableState:(NSCoder*)coder {
-    Application_WillEncodeRestorableState([self goID], app, coder);
+    ApplicationDelegate_Application_WillEncodeRestorableState([self goID], app, coder);
 }
 
 - (void)applicationDidChangeOcclusionState:(NSNotification*)notification {
-    ApplicationDidChangeOcclusionState([self goID], notification);
+    ApplicationDelegate_ApplicationDidChangeOcclusionState([self goID], notification);
 }
 
 - (BOOL)application:(NSApplication*)sender delegateHandlesKey:(NSString*)key {
-    bool result = Application_DelegateHandlesKey([self goID], sender, key);
-    return result;
+    bool result_ = ApplicationDelegate_Application_DelegateHandlesKey([self goID], sender, key);
+    return result_;
 }
 
 

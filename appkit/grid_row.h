@@ -1,22 +1,24 @@
-#import <Foundation/NSRange.h>
 #import <stdbool.h>
 #import <stdlib.h>
 #import <utils.h>
+#import <Appkit/Appkit.h>
 
-long GridRow_NumberOfCells(void* ptr);
-bool GridRow_IsHidden(void* ptr);
-void GridRow_SetHidden(void* ptr, bool hidden);
-double GridRow_TopPadding(void* ptr);
-void GridRow_SetTopPadding(void* ptr, double topPadding);
-double GridRow_BottomPadding(void* ptr);
-void GridRow_SetBottomPadding(void* ptr, double bottomPadding);
-double GridRow_Height(void* ptr);
-void GridRow_SetHeight(void* ptr, double height);
-long GridRow_RowAlignment(void* ptr);
-void GridRow_SetRowAlignment(void* ptr, long rowAlignment);
-long GridRow_YPlacement(void* ptr);
-void GridRow_SetYPlacement(void* ptr, long yPlacement);
-void* GridRow_GridView(void* ptr);
+void* C_GridRow_Alloc();
 
-void* GridRow_CellAtIndex(void* ptr, long index);
-void GridRow_MergeCellsInRange(void* ptr, NSRange r);
+void* C_NSGridRow_Init(void* ptr);
+void* C_NSGridRow_CellAtIndex(void* ptr, int index);
+void C_NSGridRow_MergeCellsInRange(void* ptr, NSRange _range);
+int C_NSGridRow_NumberOfCells(void* ptr);
+bool C_NSGridRow_IsHidden(void* ptr);
+void C_NSGridRow_SetHidden(void* ptr, bool value);
+double C_NSGridRow_TopPadding(void* ptr);
+void C_NSGridRow_SetTopPadding(void* ptr, double value);
+double C_NSGridRow_BottomPadding(void* ptr);
+void C_NSGridRow_SetBottomPadding(void* ptr, double value);
+double C_NSGridRow_Height(void* ptr);
+void C_NSGridRow_SetHeight(void* ptr, double value);
+int C_NSGridRow_RowAlignment(void* ptr);
+void C_NSGridRow_SetRowAlignment(void* ptr, int value);
+int C_NSGridRow_YPlacement(void* ptr);
+void C_NSGridRow_SetYPlacement(void* ptr, int value);
+void* C_NSGridRow_GridView(void* ptr);

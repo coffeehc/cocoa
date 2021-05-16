@@ -1,190 +1,233 @@
-#import <AppKit/AppKit.h>
-#import "_cgo_export.h"
+#import <Appkit/Appkit.h>
 #import "pop_up_button.h"
 
-bool PopUpButton_PullsDown(void* ptr) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	return [popUpButton pullsDown];
+void* C_PopUpButton_Alloc() {
+    return [NSPopUpButton alloc];
 }
 
-void PopUpButton_SetPullsDown(void* ptr, bool pullsDown) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	[popUpButton setPullsDown:pullsDown];
+void* C_NSPopUpButton_InitWithFrame_PullsDown(void* ptr, CGRect buttonFrame, bool flag) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    NSPopUpButton* result = [nSPopUpButton initWithFrame:buttonFrame pullsDown:flag];
+    return result;
 }
 
-bool PopUpButton_AutoenablesItems(void* ptr) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	return [popUpButton autoenablesItems];
+void* C_NSPopUpButton_InitWithCoder(void* ptr, void* coder) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    NSPopUpButton* result = [nSPopUpButton initWithCoder:(NSCoder*)coder];
+    return result;
 }
 
-void PopUpButton_SetAutoenablesItems(void* ptr, bool autoenablesItems) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	[popUpButton setAutoenablesItems:autoenablesItems];
+void* C_NSPopUpButton_Init(void* ptr) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    NSPopUpButton* result = [nSPopUpButton init];
+    return result;
 }
 
-void* PopUpButton_SelectedItem(void* ptr) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	return [popUpButton selectedItem];
+void C_NSPopUpButton_AddItemWithTitle(void* ptr, void* title) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    [nSPopUpButton addItemWithTitle:(NSString*)title];
 }
 
-const char* PopUpButton_TitleOfSelectedItem(void* ptr) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	return [[popUpButton titleOfSelectedItem] UTF8String];
-}
-
-long PopUpButton_SelectedTag(void* ptr) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	return [popUpButton selectedTag];
-}
-
-void* PopUpButton_Menu(void* ptr) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	return [popUpButton menu];
-}
-
-void PopUpButton_SetMenu(void* ptr, void* menu) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	[popUpButton setMenu:(NSMenu*)menu];
-}
-
-long PopUpButton_NumberOfItems(void* ptr) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	return [popUpButton numberOfItems];
-}
-
-Array PopUpButton_ItemArray(void* ptr) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	NSArray* ns_array = [popUpButton itemArray];
-	int count = [ns_array count];
-	void** data = malloc(count * sizeof(void*));
-	for (int i = 0; i < count; i++) {
-		 data[i] = [ns_array objectAtIndex:i];
-	}
-	Array array;
-	array.data = data;
-	array.len = count;
-	return array;
-}
-
-Array PopUpButton_ItemTitles(void* ptr) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	NSArray* ns_array = [popUpButton itemTitles];
-	int count = [ns_array count];
-	void** data = malloc(count * sizeof(void*));
-	for (int i = 0; i < count; i++) {
-		 data[i] = (void*)[[ns_array objectAtIndex:i] UTF8String];}
-	Array array;
-	array.data = data;
-	array.len = count;
-	return array;
-}
-
-void* PopUpButton_LastItem(void* ptr) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	return [popUpButton lastItem];
-}
-
-long PopUpButton_PreferredEdge(void* ptr) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	return [popUpButton preferredEdge];
-}
-
-void PopUpButton_SetPreferredEdge(void* ptr, long preferredEdge) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	[popUpButton setPreferredEdge:preferredEdge];
-}
-
-void* PopUpButton_NewPopUpButton(NSRect buttonFrame, bool flag) {
-	NSPopUpButton* popUpButton = [NSPopUpButton alloc];
-	return [[popUpButton initWithFrame:buttonFrame pullsDown:flag] autorelease];
-}
-
-void PopUpButton_AddItemWithTitle(void* ptr, const char* title) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	[popUpButton addItemWithTitle:[NSString stringWithUTF8String:title]];
-}
-
-void PopUpButton_AddItemsWithTitles(void* ptr, Array itemTitles) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-    NSMutableArray* objc_itemTitles = [[NSMutableArray alloc] init];
+void C_NSPopUpButton_AddItemsWithTitles(void* ptr, Array itemTitles) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    NSMutableArray* objcItemTitles = [[NSMutableArray alloc] init];
     void** itemTitlesData = (void**)itemTitles.data;
     for (int i = 0; i < itemTitles.len; i++) {
-    	[objc_itemTitles addObject:[NSString stringWithUTF8String:(const char*)itemTitlesData[i]]];
+    	void* p = itemTitlesData[i];
+    	[objcItemTitles addObject:(NSString*)(NSString*)p];
     }
-	[popUpButton addItemsWithTitles:objc_itemTitles];
+    [nSPopUpButton addItemsWithTitles:objcItemTitles];
 }
 
-void PopUpButton_InsertItemWithTitle(void* ptr, const char* title, long index) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	[popUpButton insertItemWithTitle:[NSString stringWithUTF8String:title] atIndex:index];
+void C_NSPopUpButton_InsertItemWithTitle_AtIndex(void* ptr, void* title, int index) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    [nSPopUpButton insertItemWithTitle:(NSString*)title atIndex:index];
 }
 
-void PopUpButton_RemoveAllItems(void* ptr) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	[popUpButton removeAllItems];
+void C_NSPopUpButton_RemoveAllItems(void* ptr) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    [nSPopUpButton removeAllItems];
 }
 
-void PopUpButton_RemoveItemWithTitle(void* ptr, const char* title) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	[popUpButton removeItemWithTitle:[NSString stringWithUTF8String:title]];
+void C_NSPopUpButton_RemoveItemWithTitle(void* ptr, void* title) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    [nSPopUpButton removeItemWithTitle:(NSString*)title];
 }
 
-void PopUpButton_RemoveItemAtIndex(void* ptr, long index) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	[popUpButton removeItemAtIndex:index];
+void C_NSPopUpButton_RemoveItemAtIndex(void* ptr, int index) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    [nSPopUpButton removeItemAtIndex:index];
 }
 
-void PopUpButton_SelectItem(void* ptr, void* item) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	[popUpButton selectItem:(NSMenuItem*)item];
+void C_NSPopUpButton_SelectItem(void* ptr, void* item) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    [nSPopUpButton selectItem:(NSMenuItem*)item];
 }
 
-void PopUpButton_SelectItemAtIndex(void* ptr, long index) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	[popUpButton selectItemAtIndex:index];
+void C_NSPopUpButton_SelectItemAtIndex(void* ptr, int index) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    [nSPopUpButton selectItemAtIndex:index];
 }
 
-bool PopUpButton_SelectItemWithTag(void* ptr, long tag) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	return [popUpButton selectItemWithTag:tag];
+bool C_NSPopUpButton_SelectItemWithTag(void* ptr, int tag) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    BOOL result = [nSPopUpButton selectItemWithTag:tag];
+    return result;
 }
 
-void PopUpButton_SelectItemWithTitle(void* ptr, const char* title) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	[popUpButton selectItemWithTitle:[NSString stringWithUTF8String:title]];
+void C_NSPopUpButton_SelectItemWithTitle(void* ptr, void* title) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    [nSPopUpButton selectItemWithTitle:(NSString*)title];
 }
 
-void* PopUpButton_ItemAtIndex(void* ptr, long index) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	return [popUpButton itemAtIndex:index];
+void* C_NSPopUpButton_ItemAtIndex(void* ptr, int index) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    NSMenuItem* result = [nSPopUpButton itemAtIndex:index];
+    return result;
 }
 
-const char* PopUpButton_ItemTitleAtIndex(void* ptr, long index) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	return [[popUpButton itemTitleAtIndex:index] UTF8String];
+void* C_NSPopUpButton_ItemTitleAtIndex(void* ptr, int index) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    NSString* result = [nSPopUpButton itemTitleAtIndex:index];
+    return result;
 }
 
-void* PopUpButton_ItemWithTitle(void* ptr, const char* title) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	return [popUpButton itemWithTitle:[NSString stringWithUTF8String:title]];
+void* C_NSPopUpButton_ItemWithTitle(void* ptr, void* title) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    NSMenuItem* result = [nSPopUpButton itemWithTitle:(NSString*)title];
+    return result;
 }
 
-long PopUpButton_IndexOfItem(void* ptr, void* item) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	return [popUpButton indexOfItem:(NSMenuItem*)item];
+int C_NSPopUpButton_IndexOfItem(void* ptr, void* item) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    NSInteger result = [nSPopUpButton indexOfItem:(NSMenuItem*)item];
+    return result;
 }
 
-long PopUpButton_IndexOfItemWithTag(void* ptr, long tag) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	return [popUpButton indexOfItemWithTag:tag];
+int C_NSPopUpButton_IndexOfItemWithTag(void* ptr, int tag) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    NSInteger result = [nSPopUpButton indexOfItemWithTag:tag];
+    return result;
 }
 
-long PopUpButton_IndexOfItemWithTitle(void* ptr, const char* title) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	return [popUpButton indexOfItemWithTitle:[NSString stringWithUTF8String:title]];
+int C_NSPopUpButton_IndexOfItemWithTitle(void* ptr, void* title) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    NSInteger result = [nSPopUpButton indexOfItemWithTitle:(NSString*)title];
+    return result;
 }
 
-void PopUpButton_SynchronizeTitleAndSelectedItem(void* ptr) {
-	NSPopUpButton* popUpButton = (NSPopUpButton*)ptr;
-	[popUpButton synchronizeTitleAndSelectedItem];
+int C_NSPopUpButton_IndexOfItemWithRepresentedObject(void* ptr, void* obj) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    NSInteger result = [nSPopUpButton indexOfItemWithRepresentedObject:(id)obj];
+    return result;
+}
+
+int C_NSPopUpButton_IndexOfItemWithTarget_AndAction(void* ptr, void* target, void* actionSelector) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    NSInteger result = [nSPopUpButton indexOfItemWithTarget:(id)target andAction:(SEL)actionSelector];
+    return result;
+}
+
+void C_NSPopUpButton_SynchronizeTitleAndSelectedItem(void* ptr) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    [nSPopUpButton synchronizeTitleAndSelectedItem];
+}
+
+bool C_NSPopUpButton_PullsDown(void* ptr) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    BOOL result = [nSPopUpButton pullsDown];
+    return result;
+}
+
+void C_NSPopUpButton_SetPullsDown(void* ptr, bool value) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    [nSPopUpButton setPullsDown:value];
+}
+
+bool C_NSPopUpButton_AutoenablesItems(void* ptr) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    BOOL result = [nSPopUpButton autoenablesItems];
+    return result;
+}
+
+void C_NSPopUpButton_SetAutoenablesItems(void* ptr, bool value) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    [nSPopUpButton setAutoenablesItems:value];
+}
+
+void* C_NSPopUpButton_SelectedItem(void* ptr) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    NSMenuItem* result = [nSPopUpButton selectedItem];
+    return result;
+}
+
+void* C_NSPopUpButton_TitleOfSelectedItem(void* ptr) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    NSString* result = [nSPopUpButton titleOfSelectedItem];
+    return result;
+}
+
+int C_NSPopUpButton_IndexOfSelectedItem(void* ptr) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    NSInteger result = [nSPopUpButton indexOfSelectedItem];
+    return result;
+}
+
+int C_NSPopUpButton_SelectedTag(void* ptr) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    NSInteger result = [nSPopUpButton selectedTag];
+    return result;
+}
+
+int C_NSPopUpButton_NumberOfItems(void* ptr) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    NSInteger result = [nSPopUpButton numberOfItems];
+    return result;
+}
+
+Array C_NSPopUpButton_ItemArray(void* ptr) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    NSArray* result = [nSPopUpButton itemArray];
+    int resultcount = [result count];
+    void** resultData = malloc(resultcount * sizeof(void*));
+    for (int i = 0; i < resultcount; i++) {
+    	 void* p = [result objectAtIndex:i];
+    	 resultData[i] = p;
+    }
+    Array resultArray;
+    resultArray.data = resultData;
+    resultArray.len = resultcount;
+    return resultArray;
+}
+
+Array C_NSPopUpButton_ItemTitles(void* ptr) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    NSArray* result = [nSPopUpButton itemTitles];
+    int resultcount = [result count];
+    void** resultData = malloc(resultcount * sizeof(void*));
+    for (int i = 0; i < resultcount; i++) {
+    	 void* p = [result objectAtIndex:i];
+    	 resultData[i] = p;
+    }
+    Array resultArray;
+    resultArray.data = resultData;
+    resultArray.len = resultcount;
+    return resultArray;
+}
+
+void* C_NSPopUpButton_LastItem(void* ptr) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    NSMenuItem* result = [nSPopUpButton lastItem];
+    return result;
+}
+
+unsigned int C_NSPopUpButton_PreferredEdge(void* ptr) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    NSRectEdge result = [nSPopUpButton preferredEdge];
+    return result;
+}
+
+void C_NSPopUpButton_SetPreferredEdge(void* ptr, unsigned int value) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    [nSPopUpButton setPreferredEdge:value];
 }

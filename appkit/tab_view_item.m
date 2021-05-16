@@ -1,78 +1,134 @@
-#import <AppKit/AppKit.h>
-#import "_cgo_export.h"
+#import <Appkit/Appkit.h>
 #import "tab_view_item.h"
 
-const char* TabViewItem_Label(void* ptr) {
-	NSTabViewItem* tabViewItem = (NSTabViewItem*)ptr;
-	return [[tabViewItem label] UTF8String];
+void* C_TabViewItem_Alloc() {
+    return [NSTabViewItem alloc];
 }
 
-void TabViewItem_SetLabel(void* ptr, const char* label) {
-	NSTabViewItem* tabViewItem = (NSTabViewItem*)ptr;
-	[tabViewItem setLabel:[NSString stringWithUTF8String:label]];
+void* C_NSTabViewItem_InitWithIdentifier(void* ptr, void* identifier) {
+    NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
+    NSTabViewItem* result = [nSTabViewItem initWithIdentifier:(id)identifier];
+    return result;
 }
 
-const char* TabViewItem_ToolTip(void* ptr) {
-	NSTabViewItem* tabViewItem = (NSTabViewItem*)ptr;
-	return [[tabViewItem toolTip] UTF8String];
+void* C_NSTabViewItem_Init(void* ptr) {
+    NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
+    NSTabViewItem* result = [nSTabViewItem init];
+    return result;
 }
 
-void TabViewItem_SetToolTip(void* ptr, const char* toolTip) {
-	NSTabViewItem* tabViewItem = (NSTabViewItem*)ptr;
-	[tabViewItem setToolTip:[NSString stringWithUTF8String:toolTip]];
+void C_NSTabViewItem_DrawLabel_InRect(void* ptr, bool shouldTruncateLabel, CGRect labelRect) {
+    NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
+    [nSTabViewItem drawLabel:shouldTruncateLabel inRect:labelRect];
 }
 
-unsigned long TabViewItem_TabState(void* ptr) {
-	NSTabViewItem* tabViewItem = (NSTabViewItem*)ptr;
-	return [tabViewItem tabState];
+CGSize C_NSTabViewItem_SizeOfLabel(void* ptr, bool computeMin) {
+    NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
+    NSSize result = [nSTabViewItem sizeOfLabel:computeMin];
+    return result;
 }
 
-void* TabViewItem_Identifier(void* ptr) {
-	NSTabViewItem* tabViewItem = (NSTabViewItem*)ptr;
-	return [tabViewItem identifier];
+void* C_NSTabViewItem_TabViewItemWithViewController(void* viewController) {
+    NSTabViewItem* result = [NSTabViewItem tabViewItemWithViewController:(NSViewController*)viewController];
+    return result;
 }
 
-void TabViewItem_SetIdentifier(void* ptr, void* identifier) {
-	NSTabViewItem* tabViewItem = (NSTabViewItem*)ptr;
-	[tabViewItem setIdentifier:(NSObject*)identifier];
+void* C_NSTabViewItem_Label(void* ptr) {
+    NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
+    NSString* result = [nSTabViewItem label];
+    return result;
 }
 
-void* TabViewItem_Color(void* ptr) {
-	NSTabViewItem* tabViewItem = (NSTabViewItem*)ptr;
-	return [tabViewItem color];
+void C_NSTabViewItem_SetLabel(void* ptr, void* value) {
+    NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
+    [nSTabViewItem setLabel:(NSString*)value];
 }
 
-void TabViewItem_SetColor(void* ptr, void* color) {
-	NSTabViewItem* tabViewItem = (NSTabViewItem*)ptr;
-	[tabViewItem setColor:(NSColor*)color];
+unsigned int C_NSTabViewItem_TabState(void* ptr) {
+    NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
+    NSTabState result = [nSTabViewItem tabState];
+    return result;
 }
 
-void* TabViewItem_View(void* ptr) {
-	NSTabViewItem* tabViewItem = (NSTabViewItem*)ptr;
-	return [tabViewItem view];
+void* C_NSTabViewItem_Identifier(void* ptr) {
+    NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
+    id result = [nSTabViewItem identifier];
+    return result;
 }
 
-void TabViewItem_SetView(void* ptr, void* view) {
-	NSTabViewItem* tabViewItem = (NSTabViewItem*)ptr;
-	[tabViewItem setView:(NSView*)view];
+void C_NSTabViewItem_SetIdentifier(void* ptr, void* value) {
+    NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
+    [nSTabViewItem setIdentifier:(id)value];
 }
 
-void* TabViewItem_InitialFirstResponder(void* ptr) {
-	NSTabViewItem* tabViewItem = (NSTabViewItem*)ptr;
-	return [tabViewItem initialFirstResponder];
+void* C_NSTabViewItem_Color(void* ptr) {
+    NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
+    NSColor* result = [nSTabViewItem color];
+    return result;
 }
 
-void TabViewItem_SetInitialFirstResponder(void* ptr, void* initialFirstResponder) {
-	NSTabViewItem* tabViewItem = (NSTabViewItem*)ptr;
-	[tabViewItem setInitialFirstResponder:(NSView*)initialFirstResponder];
+void C_NSTabViewItem_SetColor(void* ptr, void* value) {
+    NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
+    [nSTabViewItem setColor:(NSColor*)value];
 }
 
-void* TabViewItem_TabView(void* ptr) {
-	NSTabViewItem* tabViewItem = (NSTabViewItem*)ptr;
-	return [tabViewItem tabView];
+void* C_NSTabViewItem_View(void* ptr) {
+    NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
+    NSView* result = [nSTabViewItem view];
+    return result;
 }
 
-void* TabViewItem_NewTabViewItem(void* identifier) {
-	NSTabViewItem* tabViewItem = [NSTabViewItem alloc];
-	return [[tabViewItem initWithIdentifier:(NSObject*)identifier] autorelease];
+void C_NSTabViewItem_SetView(void* ptr, void* value) {
+    NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
+    [nSTabViewItem setView:(NSView*)value];
+}
+
+void* C_NSTabViewItem_InitialFirstResponder(void* ptr) {
+    NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
+    NSView* result = [nSTabViewItem initialFirstResponder];
+    return result;
+}
+
+void C_NSTabViewItem_SetInitialFirstResponder(void* ptr, void* value) {
+    NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
+    [nSTabViewItem setInitialFirstResponder:(NSView*)value];
+}
+
+void* C_NSTabViewItem_TabView(void* ptr) {
+    NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
+    NSTabView* result = [nSTabViewItem tabView];
+    return result;
+}
+
+void* C_NSTabViewItem_ToolTip(void* ptr) {
+    NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
+    NSString* result = [nSTabViewItem toolTip];
+    return result;
+}
+
+void C_NSTabViewItem_SetToolTip(void* ptr, void* value) {
+    NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
+    [nSTabViewItem setToolTip:(NSString*)value];
+}
+
+void* C_NSTabViewItem_Image(void* ptr) {
+    NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
+    NSImage* result = [nSTabViewItem image];
+    return result;
+}
+
+void C_NSTabViewItem_SetImage(void* ptr, void* value) {
+    NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
+    [nSTabViewItem setImage:(NSImage*)value];
+}
+
+void* C_NSTabViewItem_ViewController(void* ptr) {
+    NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
+    NSViewController* result = [nSTabViewItem viewController];
+    return result;
+}
+
+void C_NSTabViewItem_SetViewController(void* ptr, void* value) {
+    NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
+    [nSTabViewItem setViewController:(NSViewController*)value];
 }

@@ -1,88 +1,106 @@
-#import <AppKit/AppKit.h>
-#import "_cgo_export.h"
+#import <Appkit/Appkit.h>
 #import "popover.h"
 
-long Popover_Behavior(void* ptr) {
-	NSPopover* popover = (NSPopover*)ptr;
-	return [popover behavior];
+void* C_Popover_Alloc() {
+    return [NSPopover alloc];
 }
 
-void Popover_SetBehavior(void* ptr, long behavior) {
-	NSPopover* popover = (NSPopover*)ptr;
-	[popover setBehavior:behavior];
+void* C_NSPopover_Init(void* ptr) {
+    NSPopover* nSPopover = (NSPopover*)ptr;
+    NSPopover* result = [nSPopover init];
+    return result;
 }
 
-NSRect Popover_PositioningRect(void* ptr) {
-	NSPopover* popover = (NSPopover*)ptr;
-	return [popover positioningRect];
+void* C_NSPopover_InitWithCoder(void* ptr, void* coder) {
+    NSPopover* nSPopover = (NSPopover*)ptr;
+    NSPopover* result = [nSPopover initWithCoder:(NSCoder*)coder];
+    return result;
 }
 
-void Popover_SetPositioningRect(void* ptr, NSRect positioningRect) {
-	NSPopover* popover = (NSPopover*)ptr;
-	[popover setPositioningRect:positioningRect];
+void C_NSPopover_ShowRelativeToRect_OfView_PreferredEdge(void* ptr, CGRect positioningRect, void* positioningView, unsigned int preferredEdge) {
+    NSPopover* nSPopover = (NSPopover*)ptr;
+    [nSPopover showRelativeToRect:positioningRect ofView:(NSView*)positioningView preferredEdge:preferredEdge];
 }
 
-bool Popover_Animates(void* ptr) {
-	NSPopover* popover = (NSPopover*)ptr;
-	return [popover animates];
+void C_NSPopover_PerformClose(void* ptr, void* sender) {
+    NSPopover* nSPopover = (NSPopover*)ptr;
+    [nSPopover performClose:(id)sender];
 }
 
-void Popover_SetAnimates(void* ptr, bool animates) {
-	NSPopover* popover = (NSPopover*)ptr;
-	[popover setAnimates:animates];
+void C_NSPopover_Close(void* ptr) {
+    NSPopover* nSPopover = (NSPopover*)ptr;
+    [nSPopover close];
 }
 
-NSSize Popover_ContentSize(void* ptr) {
-	NSPopover* popover = (NSPopover*)ptr;
-	return [popover contentSize];
+int C_NSPopover_Behavior(void* ptr) {
+    NSPopover* nSPopover = (NSPopover*)ptr;
+    NSPopoverBehavior result = [nSPopover behavior];
+    return result;
 }
 
-void Popover_SetContentSize(void* ptr, NSSize contentSize) {
-	NSPopover* popover = (NSPopover*)ptr;
-	[popover setContentSize:contentSize];
+void C_NSPopover_SetBehavior(void* ptr, int value) {
+    NSPopover* nSPopover = (NSPopover*)ptr;
+    [nSPopover setBehavior:value];
 }
 
-bool Popover_IsShown(void* ptr) {
-	NSPopover* popover = (NSPopover*)ptr;
-	return [popover isShown];
+CGRect C_NSPopover_PositioningRect(void* ptr) {
+    NSPopover* nSPopover = (NSPopover*)ptr;
+    NSRect result = [nSPopover positioningRect];
+    return result;
 }
 
-bool Popover_IsDetached(void* ptr) {
-	NSPopover* popover = (NSPopover*)ptr;
-	return [popover isDetached];
+void C_NSPopover_SetPositioningRect(void* ptr, CGRect value) {
+    NSPopover* nSPopover = (NSPopover*)ptr;
+    [nSPopover setPositioningRect:value];
 }
 
-void* Popover_Appearance(void* ptr) {
-	NSPopover* popover = (NSPopover*)ptr;
-	return [popover appearance];
+void* C_NSPopover_Appearance(void* ptr) {
+    NSPopover* nSPopover = (NSPopover*)ptr;
+    NSAppearance* result = [nSPopover appearance];
+    return result;
 }
 
-void Popover_SetAppearance(void* ptr, void* appearance) {
-	NSPopover* popover = (NSPopover*)ptr;
-	[popover setAppearance:(NSAppearance*)appearance];
+void C_NSPopover_SetAppearance(void* ptr, void* value) {
+    NSPopover* nSPopover = (NSPopover*)ptr;
+    [nSPopover setAppearance:(NSAppearance*)value];
 }
 
-void* Popover_EffectiveAppearance(void* ptr) {
-	NSPopover* popover = (NSPopover*)ptr;
-	return [popover effectiveAppearance];
+void* C_NSPopover_EffectiveAppearance(void* ptr) {
+    NSPopover* nSPopover = (NSPopover*)ptr;
+    NSAppearance* result = [nSPopover effectiveAppearance];
+    return result;
 }
 
-void* Popover_NewPopover() {
-	NSPopover* popover = [NSPopover alloc];
-	return [[popover init] autorelease];
+bool C_NSPopover_Animates(void* ptr) {
+    NSPopover* nSPopover = (NSPopover*)ptr;
+    BOOL result = [nSPopover animates];
+    return result;
 }
 
-void Popover_PerformClose(void* ptr, void* sender) {
-	NSPopover* popover = (NSPopover*)ptr;
-	[popover performClose:(NSObject*)sender];
+void C_NSPopover_SetAnimates(void* ptr, bool value) {
+    NSPopover* nSPopover = (NSPopover*)ptr;
+    [nSPopover setAnimates:value];
 }
 
-void Popover_Close(void* ptr) {
-	NSPopover* popover = (NSPopover*)ptr;
-	[popover close];
+CGSize C_NSPopover_ContentSize(void* ptr) {
+    NSPopover* nSPopover = (NSPopover*)ptr;
+    NSSize result = [nSPopover contentSize];
+    return result;
 }
 
-void Popover_ShowRelativeTo(void* ptr, NSRect positioningRect, void* positioningView, long preferredEdge) {
-	NSPopover* popover = (NSPopover*)ptr;
-	[popover showRelativeToRect:positioningRect ofView:(NSView*)positioningView preferredEdge:preferredEdge];
+void C_NSPopover_SetContentSize(void* ptr, CGSize value) {
+    NSPopover* nSPopover = (NSPopover*)ptr;
+    [nSPopover setContentSize:value];
+}
+
+bool C_NSPopover_IsShown(void* ptr) {
+    NSPopover* nSPopover = (NSPopover*)ptr;
+    BOOL result = [nSPopover isShown];
+    return result;
+}
+
+bool C_NSPopover_IsDetached(void* ptr) {
+    NSPopover* nSPopover = (NSPopover*)ptr;
+    BOOL result = [nSPopover isDetached];
+    return result;
 }

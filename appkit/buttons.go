@@ -39,21 +39,21 @@ const (
 
 // NewPlainButton return a new common used Button
 func NewPlainButton(frame foundation.Rect) Button {
-	btn := NewButton(frame)
+	btn := AllocButton().InitWithFrame(frame)
 	btn.SetBezelStyle(BezelStyleRounded)
 	return btn
 }
 
 // NewCheckBox return a new common used switch Button
 func NewCheckBox(frame foundation.Rect) Button {
-	btn := NewButton(frame)
+	btn := AllocButton().InitWithFrame(frame)
 	btn.SetButtonType(ButtonTypeSwitch)
 	return btn
 }
 
 // NewRadioButton return a new common used radio Button
 func NewRadioButton(frame foundation.Rect) Button {
-	btn := NewButton(frame)
+	btn := AllocButton().InitWithFrame(frame)
 	btn.SetButtonType(ButtonTypeRadio)
 	return btn
 }

@@ -1,25 +1,29 @@
 #import <stdbool.h>
 #import <stdlib.h>
 #import <utils.h>
+#import <Appkit/Appkit.h>
 
-bool LayoutConstraint_IsActive(void* ptr);
-void LayoutConstraint_SetActive(void* ptr, bool active);
-void* LayoutConstraint_FirstItem(void* ptr);
-long LayoutConstraint_FirstAttribute(void* ptr);
-long LayoutConstraint_Relation(void* ptr);
-void* LayoutConstraint_SecondItem(void* ptr);
-long LayoutConstraint_SecondAttribute(void* ptr);
-double LayoutConstraint_Multiplier(void* ptr);
-double LayoutConstraint_Constant(void* ptr);
-void* LayoutConstraint_FirstAnchor(void* ptr);
-void* LayoutConstraint_SecondAnchor(void* ptr);
-float LayoutConstraint_Priority(void* ptr);
-void LayoutConstraint_SetPriority(void* ptr, float priority);
-const char* LayoutConstraint_Identifier(void* ptr);
-void LayoutConstraint_SetIdentifier(void* ptr, const char* identifier);
-bool LayoutConstraint_ShouldBeArchived(void* ptr);
-void LayoutConstraint_SetShouldBeArchived(void* ptr, bool shouldBeArchived);
+void* C_LayoutConstraint_Alloc();
 
-void LayoutConstraint_ConstraintWithItem(void* view1, long attr1, long relation, void* view2, long attr2, double multiplier, double c);
-void LayoutConstraint_ActivateConstraints(Array constraints);
-void LayoutConstraint_DeactivateConstraints(Array constraints);
+void* C_NSLayoutConstraint_Init(void* ptr);
+void* C_NSLayoutConstraint_LayoutConstraint_ConstraintWithItem_Attribute_RelatedBy_ToItem_Attribute_Multiplier_Constant(void* view1, int attr1, int relation, void* view2, int attr2, double multiplier, double c);
+void C_NSLayoutConstraint_LayoutConstraint_ActivateConstraints(Array constraints);
+void C_NSLayoutConstraint_LayoutConstraint_DeactivateConstraints(Array constraints);
+bool C_NSLayoutConstraint_IsActive(void* ptr);
+void C_NSLayoutConstraint_SetActive(void* ptr, bool value);
+void* C_NSLayoutConstraint_FirstItem(void* ptr);
+int C_NSLayoutConstraint_FirstAttribute(void* ptr);
+int C_NSLayoutConstraint_Relation(void* ptr);
+void* C_NSLayoutConstraint_SecondItem(void* ptr);
+int C_NSLayoutConstraint_SecondAttribute(void* ptr);
+double C_NSLayoutConstraint_Multiplier(void* ptr);
+double C_NSLayoutConstraint_Constant(void* ptr);
+void C_NSLayoutConstraint_SetConstant(void* ptr, double value);
+void* C_NSLayoutConstraint_FirstAnchor(void* ptr);
+void* C_NSLayoutConstraint_SecondAnchor(void* ptr);
+float C_NSLayoutConstraint_Priority(void* ptr);
+void C_NSLayoutConstraint_SetPriority(void* ptr, float value);
+void* C_NSLayoutConstraint_Identifier(void* ptr);
+void C_NSLayoutConstraint_SetIdentifier(void* ptr, void* value);
+bool C_NSLayoutConstraint_ShouldBeArchived(void* ptr);
+void C_NSLayoutConstraint_SetShouldBeArchived(void* ptr, bool value);

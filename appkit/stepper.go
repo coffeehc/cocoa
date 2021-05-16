@@ -5,25 +5,25 @@ package appkit
 // #include "stepper.h"
 import "C"
 import (
+	"github.com/hsiafan/cocoa/coregraphics"
 	"github.com/hsiafan/cocoa/foundation"
+	"github.com/hsiafan/cocoa/objc"
 	"unsafe"
 )
 
 type Stepper interface {
 	Control
 	MaxValue() float64
-	SetMaxValue(maxValue float64)
+	SetMaxValue(value float64)
 	MinValue() float64
-	SetMinValue(minValue float64)
+	SetMinValue(value float64)
 	Increment() float64
-	SetIncrement(increment float64)
+	SetIncrement(value float64)
 	Autorepeat() bool
-	SetAutorepeat(autorepeat bool)
+	SetAutorepeat(value bool)
 	ValueWraps() bool
-	SetValueWraps(valueWraps bool)
+	SetValueWraps(value bool)
 }
-
-var _ Stepper = (*NSStepper)(nil)
 
 type NSStepper struct {
 	NSControl
@@ -38,46 +38,66 @@ func MakeStepper(ptr unsafe.Pointer) *NSStepper {
 	}
 }
 
-func (s *NSStepper) MaxValue() float64 {
-	return float64(C.Stepper_MaxValue(s.Ptr()))
+func AllocStepper() *NSStepper {
+	return MakeStepper(C.C_Stepper_Alloc())
 }
 
-func (s *NSStepper) SetMaxValue(maxValue float64) {
-	C.Stepper_SetMaxValue(s.Ptr(), C.double(maxValue))
+func (n *NSStepper) InitWithFrame(frameRect foundation.Rect) Stepper {
+	result := C.C_NSStepper_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeStepper(result)
 }
 
-func (s *NSStepper) MinValue() float64 {
-	return float64(C.Stepper_MinValue(s.Ptr()))
+func (n *NSStepper) InitWithCoder(coder foundation.Coder) Stepper {
+	result := C.C_NSStepper_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeStepper(result)
 }
 
-func (s *NSStepper) SetMinValue(minValue float64) {
-	C.Stepper_SetMinValue(s.Ptr(), C.double(minValue))
+func (n *NSStepper) Init() Stepper {
+	result := C.C_NSStepper_Init(n.Ptr())
+	return MakeStepper(result)
 }
 
-func (s *NSStepper) Increment() float64 {
-	return float64(C.Stepper_Increment(s.Ptr()))
+func (n *NSStepper) MaxValue() float64 {
+	result := C.C_NSStepper_MaxValue(n.Ptr())
+	return float64(result)
 }
 
-func (s *NSStepper) SetIncrement(increment float64) {
-	C.Stepper_SetIncrement(s.Ptr(), C.double(increment))
+func (n *NSStepper) SetMaxValue(value float64) {
+	C.C_NSStepper_SetMaxValue(n.Ptr(), C.double(value))
 }
 
-func (s *NSStepper) Autorepeat() bool {
-	return bool(C.Stepper_Autorepeat(s.Ptr()))
+func (n *NSStepper) MinValue() float64 {
+	result := C.C_NSStepper_MinValue(n.Ptr())
+	return float64(result)
 }
 
-func (s *NSStepper) SetAutorepeat(autorepeat bool) {
-	C.Stepper_SetAutorepeat(s.Ptr(), C.bool(autorepeat))
+func (n *NSStepper) SetMinValue(value float64) {
+	C.C_NSStepper_SetMinValue(n.Ptr(), C.double(value))
 }
 
-func (s *NSStepper) ValueWraps() bool {
-	return bool(C.Stepper_ValueWraps(s.Ptr()))
+func (n *NSStepper) Increment() float64 {
+	result := C.C_NSStepper_Increment(n.Ptr())
+	return float64(result)
 }
 
-func (s *NSStepper) SetValueWraps(valueWraps bool) {
-	C.Stepper_SetValueWraps(s.Ptr(), C.bool(valueWraps))
+func (n *NSStepper) SetIncrement(value float64) {
+	C.C_NSStepper_SetIncrement(n.Ptr(), C.double(value))
 }
 
-func NewStepper(frame foundation.Rect) Stepper {
-	return MakeStepper(C.Stepper_NewStepper(toNSRect(frame)))
+func (n *NSStepper) Autorepeat() bool {
+	result := C.C_NSStepper_Autorepeat(n.Ptr())
+	return bool(result)
+}
+
+func (n *NSStepper) SetAutorepeat(value bool) {
+	C.C_NSStepper_SetAutorepeat(n.Ptr(), C.bool(value))
+}
+
+func (n *NSStepper) ValueWraps() bool {
+	result := C.C_NSStepper_ValueWraps(n.Ptr())
+	return bool(result)
+}
+
+func (n *NSStepper) SetValueWraps(value bool) {
+	C.C_NSStepper_SetValueWraps(n.Ptr(), C.bool(value))
 }

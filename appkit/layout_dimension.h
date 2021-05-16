@@ -1,10 +1,17 @@
+#import <stdbool.h>
 #import <stdlib.h>
 #import <utils.h>
+#import <Appkit/Appkit.h>
 
+void* C_LayoutDimension_Alloc();
 
-void* LayoutDimension_ConstraintEqualToConstant(void* ptr, double constant);
-void* LayoutDimension_ConstraintEqualToAnchor3(void* ptr, void* anchor, double multiplier, double constant);
-void* LayoutDimension_ConstraintGreaterThanOrEqualToConstant(void* ptr, double constant);
-void* LayoutDimension_ConstraintGreaterThanOrEqualToAnchor3(void* ptr, void* anchor, double multiplier, double constant);
-void* LayoutDimension_ConstraintLessThanOrEqualToConstant(void* ptr, double constant);
-void* LayoutDimension_ConstraintLessThanOrEqualToAnchor3(void* ptr, void* anchor, double multiplier, double constant);
+void* C_NSLayoutDimension_Init(void* ptr);
+void* C_NSLayoutDimension_ConstraintEqualToAnchor_Multiplier(void* ptr, void* anchor, double m);
+void* C_NSLayoutDimension_ConstraintEqualToAnchor_Multiplier_Constant(void* ptr, void* anchor, double m, double c);
+void* C_NSLayoutDimension_ConstraintEqualToConstant(void* ptr, double c);
+void* C_NSLayoutDimension_ConstraintGreaterThanOrEqualToAnchor_Multiplier(void* ptr, void* anchor, double m);
+void* C_NSLayoutDimension_ConstraintGreaterThanOrEqualToAnchor_Multiplier_Constant(void* ptr, void* anchor, double m, double c);
+void* C_NSLayoutDimension_ConstraintGreaterThanOrEqualToConstant(void* ptr, double c);
+void* C_NSLayoutDimension_ConstraintLessThanOrEqualToAnchor_Multiplier(void* ptr, void* anchor, double m);
+void* C_NSLayoutDimension_ConstraintLessThanOrEqualToAnchor_Multiplier_Constant(void* ptr, void* anchor, double m, double c);
+void* C_NSLayoutDimension_ConstraintLessThanOrEqualToConstant(void* ptr, double c);

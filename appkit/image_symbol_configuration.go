@@ -5,6 +5,8 @@ package appkit
 // #include "image_symbol_configuration.h"
 import "C"
 import (
+	"github.com/hsiafan/cocoa/coregraphics"
+	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
 	"unsafe"
 )
@@ -12,8 +14,6 @@ import (
 type ImageSymbolConfiguration interface {
 	objc.Object
 }
-
-var _ ImageSymbolConfiguration = (*NSImageSymbolConfiguration)(nil)
 
 type NSImageSymbolConfiguration struct {
 	objc.NSObject
@@ -28,26 +28,36 @@ func MakeImageSymbolConfiguration(ptr unsafe.Pointer) *NSImageSymbolConfiguratio
 	}
 }
 
-func ConfigurationWithScale(scale ImageSymbolScale) ImageSymbolConfiguration {
-	return MakeImageSymbolConfiguration(C.ImageSymbolConfiguration_ConfigurationWithScale(C.long(scale)))
+func AllocImageSymbolConfiguration() *NSImageSymbolConfiguration {
+	return MakeImageSymbolConfiguration(C.C_ImageSymbolConfiguration_Alloc())
 }
 
-func ConfigurationWithPointSize(pointSize float64, weight FontWeight) ImageSymbolConfiguration {
-	return MakeImageSymbolConfiguration(C.ImageSymbolConfiguration_ConfigurationWithPointSize(C.double(pointSize), C.double(weight)))
+func (n *NSImageSymbolConfiguration) Init() ImageSymbolConfiguration {
+	result := C.C_NSImageSymbolConfiguration_Init(n.Ptr())
+	return MakeImageSymbolConfiguration(result)
 }
 
-func ConfigurationWithPointSizeAndScale(pointSize float64, weight FontWeight, scale ImageSymbolScale) ImageSymbolConfiguration {
-	return MakeImageSymbolConfiguration(C.ImageSymbolConfiguration_ConfigurationWithPointSizeAndScale(C.double(pointSize), C.double(weight), C.long(scale)))
+func ImageSymbolConfiguration_ConfigurationWithPointSize_Weight(pointSize coregraphics.Float, weight FontWeight) ImageSymbolConfiguration {
+	result := C.C_NSImageSymbolConfiguration_ImageSymbolConfiguration_ConfigurationWithPointSize_Weight(C.double(float64(pointSize)), C.double(float64(coregraphics.Float(weight))))
+	return MakeImageSymbolConfiguration(result)
 }
 
-func ConfigurationWithTextStyle(style FontTextStyle) ImageSymbolConfiguration {
-	cStyle := C.CString(string(style))
-	defer C.free(unsafe.Pointer(cStyle))
-	return MakeImageSymbolConfiguration(C.ImageSymbolConfiguration_ConfigurationWithTextStyle(cStyle))
+func ImageSymbolConfiguration_ConfigurationWithPointSize_Weight_Scale(pointSize coregraphics.Float, weight FontWeight, scale ImageSymbolScale) ImageSymbolConfiguration {
+	result := C.C_NSImageSymbolConfiguration_ImageSymbolConfiguration_ConfigurationWithPointSize_Weight_Scale(C.double(float64(pointSize)), C.double(float64(coregraphics.Float(weight))), C.int(int(scale)))
+	return MakeImageSymbolConfiguration(result)
 }
 
-func configurationWithTextStyleAndScale(style FontTextStyle, scale ImageSymbolScale) ImageSymbolConfiguration {
-	cStyle := C.CString(string(style))
-	defer C.free(unsafe.Pointer(cStyle))
-	return MakeImageSymbolConfiguration(C.ImageSymbolConfiguration_configurationWithTextStyleAndScale(cStyle, C.long(scale)))
+func ImageSymbolConfiguration_ConfigurationWithTextStyle(style FontTextStyle) ImageSymbolConfiguration {
+	result := C.C_NSImageSymbolConfiguration_ImageSymbolConfiguration_ConfigurationWithTextStyle(foundation.NewString(string(style)).Ptr())
+	return MakeImageSymbolConfiguration(result)
+}
+
+func ImageSymbolConfiguration_ConfigurationWithTextStyle_Scale(style FontTextStyle, scale ImageSymbolScale) ImageSymbolConfiguration {
+	result := C.C_NSImageSymbolConfiguration_ImageSymbolConfiguration_ConfigurationWithTextStyle_Scale(foundation.NewString(string(style)).Ptr(), C.int(int(scale)))
+	return MakeImageSymbolConfiguration(result)
+}
+
+func ImageSymbolConfiguration_ConfigurationWithScale(scale ImageSymbolScale) ImageSymbolConfiguration {
+	result := C.C_NSImageSymbolConfiguration_ImageSymbolConfiguration_ConfigurationWithScale(C.int(int(scale)))
+	return MakeImageSymbolConfiguration(result)
 }

@@ -5,6 +5,7 @@ package appkit
 // #include "popover.h"
 import "C"
 import (
+	"github.com/hsiafan/cocoa/coregraphics"
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
 	"unsafe"
@@ -12,25 +13,23 @@ import (
 
 type Popover interface {
 	Responder
-	Behavior() PopoverBehavior
-	SetBehavior(behavior PopoverBehavior)
-	PositioningRect() foundation.Rect
-	SetPositioningRect(positioningRect foundation.Rect)
-	Animates() bool
-	SetAnimates(animates bool)
-	ContentSize() foundation.Size
-	SetContentSize(contentSize foundation.Size)
-	IsShown() bool
-	IsDetached() bool
-	Appearance() Appearance
-	SetAppearance(appearance Appearance)
-	EffectiveAppearance() Appearance
+	ShowRelativeToRect_OfView_PreferredEdge(positioningRect foundation.Rect, positioningView View, preferredEdge foundation.RectEdge)
 	PerformClose(sender objc.Object)
 	Close()
-	ShowRelativeTo(positioningRect foundation.Rect, positioningView View, preferredEdge foundation.RectEdge)
+	Behavior() PopoverBehavior
+	SetBehavior(value PopoverBehavior)
+	PositioningRect() foundation.Rect
+	SetPositioningRect(value foundation.Rect)
+	Appearance() Appearance
+	SetAppearance(value Appearance)
+	EffectiveAppearance() Appearance
+	Animates() bool
+	SetAnimates(value bool)
+	ContentSize() foundation.Size
+	SetContentSize(value foundation.Size)
+	IsShown() bool
+	IsDetached() bool
 }
-
-var _ Popover = (*NSPopover)(nil)
 
 type NSPopover struct {
 	NSResponder
@@ -45,70 +44,88 @@ func MakePopover(ptr unsafe.Pointer) *NSPopover {
 	}
 }
 
-func (p *NSPopover) Behavior() PopoverBehavior {
-	return PopoverBehavior(C.Popover_Behavior(p.Ptr()))
+func AllocPopover() *NSPopover {
+	return MakePopover(C.C_Popover_Alloc())
 }
 
-func (p *NSPopover) SetBehavior(behavior PopoverBehavior) {
-	C.Popover_SetBehavior(p.Ptr(), C.long(behavior))
+func (n *NSPopover) Init() Popover {
+	result := C.C_NSPopover_Init(n.Ptr())
+	return MakePopover(result)
 }
 
-func (p *NSPopover) PositioningRect() foundation.Rect {
-	return toRect(C.Popover_PositioningRect(p.Ptr()))
+func (n *NSPopover) InitWithCoder(coder foundation.Coder) Popover {
+	result := C.C_NSPopover_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakePopover(result)
 }
 
-func (p *NSPopover) SetPositioningRect(positioningRect foundation.Rect) {
-	C.Popover_SetPositioningRect(p.Ptr(), toNSRect(positioningRect))
+func (n *NSPopover) ShowRelativeToRect_OfView_PreferredEdge(positioningRect foundation.Rect, positioningView View, preferredEdge foundation.RectEdge) {
+	C.C_NSPopover_ShowRelativeToRect_OfView_PreferredEdge(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(positioningRect))), objc.ExtractPtr(positioningView), C.uint(uint(preferredEdge)))
 }
 
-func (p *NSPopover) Animates() bool {
-	return bool(C.Popover_Animates(p.Ptr()))
+func (n *NSPopover) PerformClose(sender objc.Object) {
+	C.C_NSPopover_PerformClose(n.Ptr(), objc.ExtractPtr(sender))
 }
 
-func (p *NSPopover) SetAnimates(animates bool) {
-	C.Popover_SetAnimates(p.Ptr(), C.bool(animates))
+func (n *NSPopover) Close() {
+	C.C_NSPopover_Close(n.Ptr())
 }
 
-func (p *NSPopover) ContentSize() foundation.Size {
-	return toSize(C.Popover_ContentSize(p.Ptr()))
+func (n *NSPopover) Behavior() PopoverBehavior {
+	result := C.C_NSPopover_Behavior(n.Ptr())
+	return PopoverBehavior(int(result))
 }
 
-func (p *NSPopover) SetContentSize(contentSize foundation.Size) {
-	C.Popover_SetContentSize(p.Ptr(), toNSSize(contentSize))
+func (n *NSPopover) SetBehavior(value PopoverBehavior) {
+	C.C_NSPopover_SetBehavior(n.Ptr(), C.int(int(value)))
 }
 
-func (p *NSPopover) IsShown() bool {
-	return bool(C.Popover_IsShown(p.Ptr()))
+func (n *NSPopover) PositioningRect() foundation.Rect {
+	result := C.C_NSPopover_PositioningRect(n.Ptr())
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
 }
 
-func (p *NSPopover) IsDetached() bool {
-	return bool(C.Popover_IsDetached(p.Ptr()))
+func (n *NSPopover) SetPositioningRect(value foundation.Rect) {
+	C.C_NSPopover_SetPositioningRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(value))))
 }
 
-func (p *NSPopover) Appearance() Appearance {
-	return MakeAppearance(C.Popover_Appearance(p.Ptr()))
+func (n *NSPopover) Appearance() Appearance {
+	result := C.C_NSPopover_Appearance(n.Ptr())
+	return MakeAppearance(result)
 }
 
-func (p *NSPopover) SetAppearance(appearance Appearance) {
-	C.Popover_SetAppearance(p.Ptr(), toPointer(appearance))
+func (n *NSPopover) SetAppearance(value Appearance) {
+	C.C_NSPopover_SetAppearance(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (p *NSPopover) EffectiveAppearance() Appearance {
-	return MakeAppearance(C.Popover_EffectiveAppearance(p.Ptr()))
+func (n *NSPopover) EffectiveAppearance() Appearance {
+	result := C.C_NSPopover_EffectiveAppearance(n.Ptr())
+	return MakeAppearance(result)
 }
 
-func NewPopover() Popover {
-	return MakePopover(C.Popover_NewPopover())
+func (n *NSPopover) Animates() bool {
+	result := C.C_NSPopover_Animates(n.Ptr())
+	return bool(result)
 }
 
-func (p *NSPopover) PerformClose(sender objc.Object) {
-	C.Popover_PerformClose(p.Ptr(), toPointer(sender))
+func (n *NSPopover) SetAnimates(value bool) {
+	C.C_NSPopover_SetAnimates(n.Ptr(), C.bool(value))
 }
 
-func (p *NSPopover) Close() {
-	C.Popover_Close(p.Ptr())
+func (n *NSPopover) ContentSize() foundation.Size {
+	result := C.C_NSPopover_ContentSize(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
 }
 
-func (p *NSPopover) ShowRelativeTo(positioningRect foundation.Rect, positioningView View, preferredEdge foundation.RectEdge) {
-	C.Popover_ShowRelativeTo(p.Ptr(), toNSRect(positioningRect), toPointer(positioningView), C.long(preferredEdge))
+func (n *NSPopover) SetContentSize(value foundation.Size) {
+	C.C_NSPopover_SetContentSize(n.Ptr(), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(value))))
+}
+
+func (n *NSPopover) IsShown() bool {
+	result := C.C_NSPopover_IsShown(n.Ptr())
+	return bool(result)
+}
+
+func (n *NSPopover) IsDetached() bool {
+	result := C.C_NSPopover_IsDetached(n.Ptr())
+	return bool(result)
 }

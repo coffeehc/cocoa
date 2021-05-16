@@ -5,30 +5,30 @@ package appkit
 // #include "open_panel.h"
 import "C"
 import (
+	"github.com/hsiafan/cocoa/coregraphics"
 	"github.com/hsiafan/cocoa/foundation"
+	"github.com/hsiafan/cocoa/objc"
 	"unsafe"
 )
 
 type OpenPanel interface {
 	SavePanel
 	CanChooseFiles() bool
-	SetCanChooseFiles(canChooseFiles bool)
+	SetCanChooseFiles(value bool)
 	CanChooseDirectories() bool
-	SetCanChooseDirectories(canChooseDirectories bool)
+	SetCanChooseDirectories(value bool)
 	ResolvesAliases() bool
-	SetResolvesAliases(resolvesAliases bool)
+	SetResolvesAliases(value bool)
 	AllowsMultipleSelection() bool
-	SetAllowsMultipleSelection(allowsMultipleSelection bool)
+	SetAllowsMultipleSelection(value bool)
 	IsAccessoryViewDisclosed() bool
-	SetAccessoryViewDisclosed(accessoryViewDisclosed bool)
+	SetAccessoryViewDisclosed(value bool)
 	URLs() []foundation.URL
 	CanDownloadUbiquitousContents() bool
-	SetCanDownloadUbiquitousContents(canDownloadUbiquitousContents bool)
+	SetCanDownloadUbiquitousContents(value bool)
 	CanResolveUbiquitousConflicts() bool
-	SetCanResolveUbiquitousConflicts(canResolveUbiquitousConflicts bool)
+	SetCanResolveUbiquitousConflicts(value bool)
 }
-
-var _ OpenPanel = (*NSOpenPanel)(nil)
 
 type NSOpenPanel struct {
 	NSSavePanel
@@ -43,73 +43,100 @@ func MakeOpenPanel(ptr unsafe.Pointer) *NSOpenPanel {
 	}
 }
 
-func (o *NSOpenPanel) CanChooseFiles() bool {
-	return bool(C.OpenPanel_CanChooseFiles(o.Ptr()))
+func AllocOpenPanel() *NSOpenPanel {
+	return MakeOpenPanel(C.C_OpenPanel_Alloc())
 }
 
-func (o *NSOpenPanel) SetCanChooseFiles(canChooseFiles bool) {
-	C.OpenPanel_SetCanChooseFiles(o.Ptr(), C.bool(canChooseFiles))
+func (n *NSOpenPanel) InitWithContentRect_StyleMask_Backing_Defer(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool) OpenPanel {
+	result := C.C_NSOpenPanel_InitWithContentRect_StyleMask_Backing_Defer(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag))
+	return MakeOpenPanel(result)
 }
 
-func (o *NSOpenPanel) CanChooseDirectories() bool {
-	return bool(C.OpenPanel_CanChooseDirectories(o.Ptr()))
+func (n *NSOpenPanel) InitWithContentRect_StyleMask_Backing_Defer_Screen(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool, screen Screen) OpenPanel {
+	result := C.C_NSOpenPanel_InitWithContentRect_StyleMask_Backing_Defer_Screen(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag), objc.ExtractPtr(screen))
+	return MakeOpenPanel(result)
 }
 
-func (o *NSOpenPanel) SetCanChooseDirectories(canChooseDirectories bool) {
-	C.OpenPanel_SetCanChooseDirectories(o.Ptr(), C.bool(canChooseDirectories))
+func (n *NSOpenPanel) Init() OpenPanel {
+	result := C.C_NSOpenPanel_Init(n.Ptr())
+	return MakeOpenPanel(result)
 }
 
-func (o *NSOpenPanel) ResolvesAliases() bool {
-	return bool(C.OpenPanel_ResolvesAliases(o.Ptr()))
+func OpenPanel_() OpenPanel {
+	result := C.C_NSOpenPanel_OpenPanel_()
+	return MakeOpenPanel(result)
 }
 
-func (o *NSOpenPanel) SetResolvesAliases(resolvesAliases bool) {
-	C.OpenPanel_SetResolvesAliases(o.Ptr(), C.bool(resolvesAliases))
+func (n *NSOpenPanel) CanChooseFiles() bool {
+	result := C.C_NSOpenPanel_CanChooseFiles(n.Ptr())
+	return bool(result)
 }
 
-func (o *NSOpenPanel) AllowsMultipleSelection() bool {
-	return bool(C.OpenPanel_AllowsMultipleSelection(o.Ptr()))
+func (n *NSOpenPanel) SetCanChooseFiles(value bool) {
+	C.C_NSOpenPanel_SetCanChooseFiles(n.Ptr(), C.bool(value))
 }
 
-func (o *NSOpenPanel) SetAllowsMultipleSelection(allowsMultipleSelection bool) {
-	C.OpenPanel_SetAllowsMultipleSelection(o.Ptr(), C.bool(allowsMultipleSelection))
+func (n *NSOpenPanel) CanChooseDirectories() bool {
+	result := C.C_NSOpenPanel_CanChooseDirectories(n.Ptr())
+	return bool(result)
 }
 
-func (o *NSOpenPanel) IsAccessoryViewDisclosed() bool {
-	return bool(C.OpenPanel_IsAccessoryViewDisclosed(o.Ptr()))
+func (n *NSOpenPanel) SetCanChooseDirectories(value bool) {
+	C.C_NSOpenPanel_SetCanChooseDirectories(n.Ptr(), C.bool(value))
 }
 
-func (o *NSOpenPanel) SetAccessoryViewDisclosed(accessoryViewDisclosed bool) {
-	C.OpenPanel_SetAccessoryViewDisclosed(o.Ptr(), C.bool(accessoryViewDisclosed))
+func (n *NSOpenPanel) ResolvesAliases() bool {
+	result := C.C_NSOpenPanel_ResolvesAliases(n.Ptr())
+	return bool(result)
 }
 
-func (o *NSOpenPanel) URLs() []foundation.URL {
-	var cArray C.Array = C.OpenPanel_URLs(o.Ptr())
-	defer C.free(cArray.data)
-	result := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(cArray.data))[:cArray.len:cArray.len]
-	var goArray = make([]foundation.URL, len(result))
-	for idx, r := range result {
-		goArray[idx] = foundation.MakeURL(r)
+func (n *NSOpenPanel) SetResolvesAliases(value bool) {
+	C.C_NSOpenPanel_SetResolvesAliases(n.Ptr(), C.bool(value))
+}
+
+func (n *NSOpenPanel) AllowsMultipleSelection() bool {
+	result := C.C_NSOpenPanel_AllowsMultipleSelection(n.Ptr())
+	return bool(result)
+}
+
+func (n *NSOpenPanel) SetAllowsMultipleSelection(value bool) {
+	C.C_NSOpenPanel_SetAllowsMultipleSelection(n.Ptr(), C.bool(value))
+}
+
+func (n *NSOpenPanel) IsAccessoryViewDisclosed() bool {
+	result := C.C_NSOpenPanel_IsAccessoryViewDisclosed(n.Ptr())
+	return bool(result)
+}
+
+func (n *NSOpenPanel) SetAccessoryViewDisclosed(value bool) {
+	C.C_NSOpenPanel_SetAccessoryViewDisclosed(n.Ptr(), C.bool(value))
+}
+
+func (n *NSOpenPanel) URLs() []foundation.URL {
+	result := C.C_NSOpenPanel_URLs(n.Ptr())
+	defer C.free(result.data)
+	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
+	var goResult = make([]foundation.URL, len(resultSlice))
+	for idx, r := range resultSlice {
+		goResult[idx] = foundation.MakeURL(r)
 	}
-	return goArray
+	return goResult
 }
 
-func (o *NSOpenPanel) CanDownloadUbiquitousContents() bool {
-	return bool(C.OpenPanel_CanDownloadUbiquitousContents(o.Ptr()))
+func (n *NSOpenPanel) CanDownloadUbiquitousContents() bool {
+	result := C.C_NSOpenPanel_CanDownloadUbiquitousContents(n.Ptr())
+	return bool(result)
 }
 
-func (o *NSOpenPanel) SetCanDownloadUbiquitousContents(canDownloadUbiquitousContents bool) {
-	C.OpenPanel_SetCanDownloadUbiquitousContents(o.Ptr(), C.bool(canDownloadUbiquitousContents))
+func (n *NSOpenPanel) SetCanDownloadUbiquitousContents(value bool) {
+	C.C_NSOpenPanel_SetCanDownloadUbiquitousContents(n.Ptr(), C.bool(value))
 }
 
-func (o *NSOpenPanel) CanResolveUbiquitousConflicts() bool {
-	return bool(C.OpenPanel_CanResolveUbiquitousConflicts(o.Ptr()))
+func (n *NSOpenPanel) CanResolveUbiquitousConflicts() bool {
+	result := C.C_NSOpenPanel_CanResolveUbiquitousConflicts(n.Ptr())
+	return bool(result)
 }
 
-func (o *NSOpenPanel) SetCanResolveUbiquitousConflicts(canResolveUbiquitousConflicts bool) {
-	C.OpenPanel_SetCanResolveUbiquitousConflicts(o.Ptr(), C.bool(canResolveUbiquitousConflicts))
-}
-
-func NewOpenPanel() OpenPanel {
-	return MakeOpenPanel(C.OpenPanel_NewOpenPanel())
+func (n *NSOpenPanel) SetCanResolveUbiquitousConflicts(value bool) {
+	C.C_NSOpenPanel_SetCanResolveUbiquitousConflicts(n.Ptr(), C.bool(value))
 }

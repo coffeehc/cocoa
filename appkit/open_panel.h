@@ -1,21 +1,26 @@
 #import <stdbool.h>
 #import <stdlib.h>
 #import <utils.h>
+#import <Appkit/Appkit.h>
 
-bool OpenPanel_CanChooseFiles(void* ptr);
-void OpenPanel_SetCanChooseFiles(void* ptr, bool canChooseFiles);
-bool OpenPanel_CanChooseDirectories(void* ptr);
-void OpenPanel_SetCanChooseDirectories(void* ptr, bool canChooseDirectories);
-bool OpenPanel_ResolvesAliases(void* ptr);
-void OpenPanel_SetResolvesAliases(void* ptr, bool resolvesAliases);
-bool OpenPanel_AllowsMultipleSelection(void* ptr);
-void OpenPanel_SetAllowsMultipleSelection(void* ptr, bool allowsMultipleSelection);
-bool OpenPanel_IsAccessoryViewDisclosed(void* ptr);
-void OpenPanel_SetAccessoryViewDisclosed(void* ptr, bool accessoryViewDisclosed);
-Array OpenPanel_URLs(void* ptr);
-bool OpenPanel_CanDownloadUbiquitousContents(void* ptr);
-void OpenPanel_SetCanDownloadUbiquitousContents(void* ptr, bool canDownloadUbiquitousContents);
-bool OpenPanel_CanResolveUbiquitousConflicts(void* ptr);
-void OpenPanel_SetCanResolveUbiquitousConflicts(void* ptr, bool canResolveUbiquitousConflicts);
+void* C_OpenPanel_Alloc();
 
-void* OpenPanel_NewOpenPanel();
+void* C_NSOpenPanel_InitWithContentRect_StyleMask_Backing_Defer(void* ptr, CGRect contentRect, unsigned int style, unsigned int backingStoreType, bool flag);
+void* C_NSOpenPanel_InitWithContentRect_StyleMask_Backing_Defer_Screen(void* ptr, CGRect contentRect, unsigned int style, unsigned int backingStoreType, bool flag, void* screen);
+void* C_NSOpenPanel_Init(void* ptr);
+void* C_NSOpenPanel_OpenPanel_();
+bool C_NSOpenPanel_CanChooseFiles(void* ptr);
+void C_NSOpenPanel_SetCanChooseFiles(void* ptr, bool value);
+bool C_NSOpenPanel_CanChooseDirectories(void* ptr);
+void C_NSOpenPanel_SetCanChooseDirectories(void* ptr, bool value);
+bool C_NSOpenPanel_ResolvesAliases(void* ptr);
+void C_NSOpenPanel_SetResolvesAliases(void* ptr, bool value);
+bool C_NSOpenPanel_AllowsMultipleSelection(void* ptr);
+void C_NSOpenPanel_SetAllowsMultipleSelection(void* ptr, bool value);
+bool C_NSOpenPanel_IsAccessoryViewDisclosed(void* ptr);
+void C_NSOpenPanel_SetAccessoryViewDisclosed(void* ptr, bool value);
+Array C_NSOpenPanel_URLs(void* ptr);
+bool C_NSOpenPanel_CanDownloadUbiquitousContents(void* ptr);
+void C_NSOpenPanel_SetCanDownloadUbiquitousContents(void* ptr, bool value);
+bool C_NSOpenPanel_CanResolveUbiquitousConflicts(void* ptr);
+void C_NSOpenPanel_SetCanResolveUbiquitousConflicts(void* ptr, bool value);

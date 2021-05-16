@@ -1,18 +1,35 @@
-#import <AppKit/AppKit.h>
-#import "_cgo_export.h"
+#import <Appkit/Appkit.h>
 #import "switch.h"
 
-long Switch_State(void* ptr) {
-	NSSwitch* switch_ = (NSSwitch*)ptr;
-	return [switch_ state];
+void* C_Switch_Alloc() {
+    return [NSSwitch alloc];
 }
 
-void Switch_SetState(void* ptr, long state) {
-	NSSwitch* switch_ = (NSSwitch*)ptr;
-	[switch_ setState:state];
+void* C_NSSwitch_InitWithFrame(void* ptr, CGRect frameRect) {
+    NSSwitch* nSSwitch = (NSSwitch*)ptr;
+    NSSwitch* result = [nSSwitch initWithFrame:frameRect];
+    return result;
 }
 
-void* Switch_NewSwitch(NSRect frame) {
-	NSSwitch* switch_ = [NSSwitch alloc];
-	return [[switch_ initWithFrame:frame] autorelease];
+void* C_NSSwitch_InitWithCoder(void* ptr, void* coder) {
+    NSSwitch* nSSwitch = (NSSwitch*)ptr;
+    NSSwitch* result = [nSSwitch initWithCoder:(NSCoder*)coder];
+    return result;
+}
+
+void* C_NSSwitch_Init(void* ptr) {
+    NSSwitch* nSSwitch = (NSSwitch*)ptr;
+    NSSwitch* result = [nSSwitch init];
+    return result;
+}
+
+int C_NSSwitch_State(void* ptr) {
+    NSSwitch* nSSwitch = (NSSwitch*)ptr;
+    NSControlStateValue result = [nSSwitch state];
+    return result;
+}
+
+void C_NSSwitch_SetState(void* ptr, int value) {
+    NSSwitch* nSSwitch = (NSSwitch*)ptr;
+    [nSSwitch setState:value];
 }

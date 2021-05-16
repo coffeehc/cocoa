@@ -1,6 +1,14 @@
+#import <stdbool.h>
 #import <stdlib.h>
 #import <utils.h>
+#import <Appkit/Appkit.h>
 
-const char* Appearance_Name(void* ptr);
+void* C_Appearance_Alloc();
 
-void* Appearance_AppearanceNamed(const char* name);
+void* C_NSAppearance_InitWithAppearanceNamed_Bundle(void* ptr, void* name, void* bundle);
+void* C_NSAppearance_InitWithCoder(void* ptr, void* coder);
+void* C_NSAppearance_Init(void* ptr);
+void* C_NSAppearance_AppearanceNamed(void* name);
+void* C_NSAppearance_Name(void* ptr);
+void* C_NSAppearance_CurrentDrawingAppearance();
+bool C_NSAppearance_AllowsVibrancy(void* ptr);

@@ -1,17 +1,20 @@
 #import <stdbool.h>
 #import <stdlib.h>
 #import <utils.h>
+#import <Appkit/Appkit.h>
 
-void* StatusItem_StatusBar(void* ptr);
-unsigned long StatusItem_Behavior(void* ptr);
-void StatusItem_SetBehavior(void* ptr, unsigned long behavior);
-void* StatusItem_Button(void* ptr);
-void* StatusItem_Menu(void* ptr);
-void StatusItem_SetMenu(void* ptr, void* menu);
-bool StatusItem_IsVisible(void* ptr);
-void StatusItem_SetVisible(void* ptr, bool visible);
-double StatusItem_Length(void* ptr);
-void StatusItem_SetLength(void* ptr, double length);
-const char* StatusItem_AutosaveName(void* ptr);
-void StatusItem_SetAutosaveName(void* ptr, const char* autosaveName);
+void* C_StatusItem_Alloc();
 
+void* C_NSStatusItem_Init(void* ptr);
+void* C_NSStatusItem_StatusBar(void* ptr);
+unsigned int C_NSStatusItem_Behavior(void* ptr);
+void C_NSStatusItem_SetBehavior(void* ptr, unsigned int value);
+void* C_NSStatusItem_Button(void* ptr);
+void* C_NSStatusItem_Menu(void* ptr);
+void C_NSStatusItem_SetMenu(void* ptr, void* value);
+bool C_NSStatusItem_IsVisible(void* ptr);
+void C_NSStatusItem_SetVisible(void* ptr, bool value);
+double C_NSStatusItem_Length(void* ptr);
+void C_NSStatusItem_SetLength(void* ptr, double value);
+void* C_NSStatusItem_AutosaveName(void* ptr);
+void C_NSStatusItem_SetAutosaveName(void* ptr, void* value);

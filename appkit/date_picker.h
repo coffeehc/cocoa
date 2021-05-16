@@ -1,29 +1,42 @@
-#import <Foundation/NSGeometry.h>
 #import <stdbool.h>
 #import <stdlib.h>
 #import <utils.h>
+#import <Appkit/Appkit.h>
 
-bool DatePicker_IsBezeled(void* ptr);
-void DatePicker_SetBezeled(void* ptr, bool bezeled);
-bool DatePicker_IsBordered(void* ptr);
-void DatePicker_SetBordered(void* ptr, bool bordered);
-void* DatePicker_BackgroundColor(void* ptr);
-void DatePicker_SetBackgroundColor(void* ptr, void* backgroundColor);
-bool DatePicker_DrawsBackground(void* ptr);
-void DatePicker_SetDrawsBackground(void* ptr, bool drawsBackground);
-void* DatePicker_TextColor(void* ptr);
-void DatePicker_SetTextColor(void* ptr, void* textColor);
-unsigned long DatePicker_DatePickerStyle(void* ptr);
-void DatePicker_SetDatePickerStyle(void* ptr, unsigned long datePickerStyle);
-bool DatePicker_PresentsCalendarOverlay(void* ptr);
-void DatePicker_SetPresentsCalendarOverlay(void* ptr, bool presentsCalendarOverlay);
-unsigned long DatePicker_DatePickerElements(void* ptr);
-void DatePicker_SetDatePickerElements(void* ptr, unsigned long datePickerElements);
-unsigned long DatePicker_DatePickerMode(void* ptr);
-void DatePicker_SetDatePickerMode(void* ptr, unsigned long datePickerMode);
-void* DatePicker_DateValue(void* ptr);
-void DatePicker_SetDateValue(void* ptr, void* dateValue);
-void* DatePicker_MaxDate(void* ptr);
-void DatePicker_SetMaxDate(void* ptr, void* maxDate);
+void* C_DatePicker_Alloc();
 
-void* DatePicker_NewDatePicker(NSRect frame);
+void* C_NSDatePicker_InitWithFrame(void* ptr, CGRect frameRect);
+void* C_NSDatePicker_InitWithCoder(void* ptr, void* coder);
+void* C_NSDatePicker_Init(void* ptr);
+bool C_NSDatePicker_IsBezeled(void* ptr);
+void C_NSDatePicker_SetBezeled(void* ptr, bool value);
+bool C_NSDatePicker_IsBordered(void* ptr);
+void C_NSDatePicker_SetBordered(void* ptr, bool value);
+void* C_NSDatePicker_BackgroundColor(void* ptr);
+void C_NSDatePicker_SetBackgroundColor(void* ptr, void* value);
+bool C_NSDatePicker_DrawsBackground(void* ptr);
+void C_NSDatePicker_SetDrawsBackground(void* ptr, bool value);
+void* C_NSDatePicker_TextColor(void* ptr);
+void C_NSDatePicker_SetTextColor(void* ptr, void* value);
+unsigned int C_NSDatePicker_DatePickerStyle(void* ptr);
+void C_NSDatePicker_SetDatePickerStyle(void* ptr, unsigned int value);
+bool C_NSDatePicker_PresentsCalendarOverlay(void* ptr);
+void C_NSDatePicker_SetPresentsCalendarOverlay(void* ptr, bool value);
+unsigned int C_NSDatePicker_DatePickerElements(void* ptr);
+void C_NSDatePicker_SetDatePickerElements(void* ptr, unsigned int value);
+void* C_NSDatePicker_Calendar(void* ptr);
+void C_NSDatePicker_SetCalendar(void* ptr, void* value);
+void* C_NSDatePicker_Locale(void* ptr);
+void C_NSDatePicker_SetLocale(void* ptr, void* value);
+unsigned int C_NSDatePicker_DatePickerMode(void* ptr);
+void C_NSDatePicker_SetDatePickerMode(void* ptr, unsigned int value);
+void* C_NSDatePicker_TimeZone(void* ptr);
+void C_NSDatePicker_SetTimeZone(void* ptr, void* value);
+void* C_NSDatePicker_DateValue(void* ptr);
+void C_NSDatePicker_SetDateValue(void* ptr, void* value);
+double C_NSDatePicker_TimeInterval(void* ptr);
+void C_NSDatePicker_SetTimeInterval(void* ptr, double value);
+void* C_NSDatePicker_MinDate(void* ptr);
+void C_NSDatePicker_SetMinDate(void* ptr, void* value);
+void* C_NSDatePicker_MaxDate(void* ptr);
+void C_NSDatePicker_SetMaxDate(void* ptr, void* value);

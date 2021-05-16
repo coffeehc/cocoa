@@ -1,33 +1,66 @@
-#import <AppKit/AppKit.h>
-#import "_cgo_export.h"
+#import <Appkit/Appkit.h>
 #import "layout_dimension.h"
 
-void* LayoutDimension_ConstraintEqualToConstant(void* ptr, double constant) {
-	NSLayoutDimension* layoutDimension = (NSLayoutDimension*)ptr;
-	return [layoutDimension constraintEqualToConstant:constant];
+void* C_LayoutDimension_Alloc() {
+    return [NSLayoutDimension alloc];
 }
 
-void* LayoutDimension_ConstraintEqualToAnchor3(void* ptr, void* anchor, double multiplier, double constant) {
-	NSLayoutDimension* layoutDimension = (NSLayoutDimension*)ptr;
-	return [layoutDimension constraintEqualToAnchor:(NSLayoutDimension*)anchor multiplier:multiplier constant:constant];
+void* C_NSLayoutDimension_Init(void* ptr) {
+    NSLayoutDimension* nSLayoutDimension = (NSLayoutDimension*)ptr;
+    NSLayoutDimension* result = [nSLayoutDimension init];
+    return result;
 }
 
-void* LayoutDimension_ConstraintGreaterThanOrEqualToConstant(void* ptr, double constant) {
-	NSLayoutDimension* layoutDimension = (NSLayoutDimension*)ptr;
-	return [layoutDimension constraintGreaterThanOrEqualToConstant:constant];
+void* C_NSLayoutDimension_ConstraintEqualToAnchor_Multiplier(void* ptr, void* anchor, double m) {
+    NSLayoutDimension* nSLayoutDimension = (NSLayoutDimension*)ptr;
+    NSLayoutConstraint* result = [nSLayoutDimension constraintEqualToAnchor:(NSLayoutDimension*)anchor multiplier:m];
+    return result;
 }
 
-void* LayoutDimension_ConstraintGreaterThanOrEqualToAnchor3(void* ptr, void* anchor, double multiplier, double constant) {
-	NSLayoutDimension* layoutDimension = (NSLayoutDimension*)ptr;
-	return [layoutDimension constraintGreaterThanOrEqualToAnchor:(NSLayoutDimension*)anchor multiplier:multiplier constant:constant];
+void* C_NSLayoutDimension_ConstraintEqualToAnchor_Multiplier_Constant(void* ptr, void* anchor, double m, double c) {
+    NSLayoutDimension* nSLayoutDimension = (NSLayoutDimension*)ptr;
+    NSLayoutConstraint* result = [nSLayoutDimension constraintEqualToAnchor:(NSLayoutDimension*)anchor multiplier:m constant:c];
+    return result;
 }
 
-void* LayoutDimension_ConstraintLessThanOrEqualToConstant(void* ptr, double constant) {
-	NSLayoutDimension* layoutDimension = (NSLayoutDimension*)ptr;
-	return [layoutDimension constraintLessThanOrEqualToConstant:constant];
+void* C_NSLayoutDimension_ConstraintEqualToConstant(void* ptr, double c) {
+    NSLayoutDimension* nSLayoutDimension = (NSLayoutDimension*)ptr;
+    NSLayoutConstraint* result = [nSLayoutDimension constraintEqualToConstant:c];
+    return result;
 }
 
-void* LayoutDimension_ConstraintLessThanOrEqualToAnchor3(void* ptr, void* anchor, double multiplier, double constant) {
-	NSLayoutDimension* layoutDimension = (NSLayoutDimension*)ptr;
-	return [layoutDimension constraintLessThanOrEqualToAnchor:(NSLayoutDimension*)anchor multiplier:multiplier constant:constant];
+void* C_NSLayoutDimension_ConstraintGreaterThanOrEqualToAnchor_Multiplier(void* ptr, void* anchor, double m) {
+    NSLayoutDimension* nSLayoutDimension = (NSLayoutDimension*)ptr;
+    NSLayoutConstraint* result = [nSLayoutDimension constraintGreaterThanOrEqualToAnchor:(NSLayoutDimension*)anchor multiplier:m];
+    return result;
+}
+
+void* C_NSLayoutDimension_ConstraintGreaterThanOrEqualToAnchor_Multiplier_Constant(void* ptr, void* anchor, double m, double c) {
+    NSLayoutDimension* nSLayoutDimension = (NSLayoutDimension*)ptr;
+    NSLayoutConstraint* result = [nSLayoutDimension constraintGreaterThanOrEqualToAnchor:(NSLayoutDimension*)anchor multiplier:m constant:c];
+    return result;
+}
+
+void* C_NSLayoutDimension_ConstraintGreaterThanOrEqualToConstant(void* ptr, double c) {
+    NSLayoutDimension* nSLayoutDimension = (NSLayoutDimension*)ptr;
+    NSLayoutConstraint* result = [nSLayoutDimension constraintGreaterThanOrEqualToConstant:c];
+    return result;
+}
+
+void* C_NSLayoutDimension_ConstraintLessThanOrEqualToAnchor_Multiplier(void* ptr, void* anchor, double m) {
+    NSLayoutDimension* nSLayoutDimension = (NSLayoutDimension*)ptr;
+    NSLayoutConstraint* result = [nSLayoutDimension constraintLessThanOrEqualToAnchor:(NSLayoutDimension*)anchor multiplier:m];
+    return result;
+}
+
+void* C_NSLayoutDimension_ConstraintLessThanOrEqualToAnchor_Multiplier_Constant(void* ptr, void* anchor, double m, double c) {
+    NSLayoutDimension* nSLayoutDimension = (NSLayoutDimension*)ptr;
+    NSLayoutConstraint* result = [nSLayoutDimension constraintLessThanOrEqualToAnchor:(NSLayoutDimension*)anchor multiplier:m constant:c];
+    return result;
+}
+
+void* C_NSLayoutDimension_ConstraintLessThanOrEqualToConstant(void* ptr, double c) {
+    NSLayoutDimension* nSLayoutDimension = (NSLayoutDimension*)ptr;
+    NSLayoutConstraint* result = [nSLayoutDimension constraintLessThanOrEqualToConstant:c];
+    return result;
 }

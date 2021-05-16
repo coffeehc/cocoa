@@ -1,23 +1,25 @@
-#import <Foundation/NSGeometry.h>
 #import <stdbool.h>
 #import <stdlib.h>
 #import <utils.h>
+#import <Appkit/Appkit.h>
 
-long Popover_Behavior(void* ptr);
-void Popover_SetBehavior(void* ptr, long behavior);
-NSRect Popover_PositioningRect(void* ptr);
-void Popover_SetPositioningRect(void* ptr, NSRect positioningRect);
-bool Popover_Animates(void* ptr);
-void Popover_SetAnimates(void* ptr, bool animates);
-NSSize Popover_ContentSize(void* ptr);
-void Popover_SetContentSize(void* ptr, NSSize contentSize);
-bool Popover_IsShown(void* ptr);
-bool Popover_IsDetached(void* ptr);
-void* Popover_Appearance(void* ptr);
-void Popover_SetAppearance(void* ptr, void* appearance);
-void* Popover_EffectiveAppearance(void* ptr);
+void* C_Popover_Alloc();
 
-void* Popover_NewPopover();
-void Popover_PerformClose(void* ptr, void* sender);
-void Popover_Close(void* ptr);
-void Popover_ShowRelativeTo(void* ptr, NSRect positioningRect, void* positioningView, long preferredEdge);
+void* C_NSPopover_Init(void* ptr);
+void* C_NSPopover_InitWithCoder(void* ptr, void* coder);
+void C_NSPopover_ShowRelativeToRect_OfView_PreferredEdge(void* ptr, CGRect positioningRect, void* positioningView, unsigned int preferredEdge);
+void C_NSPopover_PerformClose(void* ptr, void* sender);
+void C_NSPopover_Close(void* ptr);
+int C_NSPopover_Behavior(void* ptr);
+void C_NSPopover_SetBehavior(void* ptr, int value);
+CGRect C_NSPopover_PositioningRect(void* ptr);
+void C_NSPopover_SetPositioningRect(void* ptr, CGRect value);
+void* C_NSPopover_Appearance(void* ptr);
+void C_NSPopover_SetAppearance(void* ptr, void* value);
+void* C_NSPopover_EffectiveAppearance(void* ptr);
+bool C_NSPopover_Animates(void* ptr);
+void C_NSPopover_SetAnimates(void* ptr, bool value);
+CGSize C_NSPopover_ContentSize(void* ptr);
+void C_NSPopover_SetContentSize(void* ptr, CGSize value);
+bool C_NSPopover_IsShown(void* ptr);
+bool C_NSPopover_IsDetached(void* ptr);

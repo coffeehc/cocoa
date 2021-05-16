@@ -5,32 +5,33 @@ package appkit
 // #include "image_view.h"
 import "C"
 import (
+	"github.com/hsiafan/cocoa/coregraphics"
+	"github.com/hsiafan/cocoa/foundation"
+	"github.com/hsiafan/cocoa/objc"
 	"unsafe"
 )
 
 type ImageView interface {
 	Control
 	Image() Image
-	SetImage(image Image)
+	SetImage(value Image)
 	ImageFrameStyle() ImageFrameStyle
-	SetImageFrameStyle(imageFrameStyle ImageFrameStyle)
+	SetImageFrameStyle(value ImageFrameStyle)
 	ImageAlignment() ImageAlignment
-	SetImageAlignment(imageAlignment ImageAlignment)
+	SetImageAlignment(value ImageAlignment)
 	ImageScaling() ImageScaling
-	SetImageScaling(imageScaling ImageScaling)
+	SetImageScaling(value ImageScaling)
 	Animates() bool
-	SetAnimates(animates bool)
+	SetAnimates(value bool)
 	IsEditable() bool
-	SetEditable(editable bool)
+	SetEditable(value bool)
 	AllowsCutCopyPaste() bool
-	SetAllowsCutCopyPaste(allowsCutCopyPaste bool)
+	SetAllowsCutCopyPaste(value bool)
 	ContentTintColor() Color
-	SetContentTintColor(contentTintColor Color)
+	SetContentTintColor(value Color)
 	SymbolConfiguration() ImageSymbolConfiguration
-	SetSymbolConfiguration(symbolConfiguration ImageSymbolConfiguration)
+	SetSymbolConfiguration(value ImageSymbolConfiguration)
 }
-
-var _ ImageView = (*NSImageView)(nil)
 
 type NSImageView struct {
 	NSControl
@@ -45,78 +46,107 @@ func MakeImageView(ptr unsafe.Pointer) *NSImageView {
 	}
 }
 
-func (i *NSImageView) Image() Image {
-	return MakeImage(C.ImageView_Image(i.Ptr()))
+func AllocImageView() *NSImageView {
+	return MakeImageView(C.C_ImageView_Alloc())
 }
 
-func (i *NSImageView) SetImage(image Image) {
-	C.ImageView_SetImage(i.Ptr(), toPointer(image))
+func (n *NSImageView) InitWithFrame(frameRect foundation.Rect) ImageView {
+	result := C.C_NSImageView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeImageView(result)
 }
 
-func (i *NSImageView) ImageFrameStyle() ImageFrameStyle {
-	return ImageFrameStyle(C.ImageView_ImageFrameStyle(i.Ptr()))
+func (n *NSImageView) InitWithCoder(coder foundation.Coder) ImageView {
+	result := C.C_NSImageView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeImageView(result)
 }
 
-func (i *NSImageView) SetImageFrameStyle(imageFrameStyle ImageFrameStyle) {
-	C.ImageView_SetImageFrameStyle(i.Ptr(), C.ulong(imageFrameStyle))
+func (n *NSImageView) Init() ImageView {
+	result := C.C_NSImageView_Init(n.Ptr())
+	return MakeImageView(result)
 }
 
-func (i *NSImageView) ImageAlignment() ImageAlignment {
-	return ImageAlignment(C.ImageView_ImageAlignment(i.Ptr()))
+func ImageViewWithImage(image Image) ImageView {
+	result := C.C_NSImageView_ImageViewWithImage(objc.ExtractPtr(image))
+	return MakeImageView(result)
 }
 
-func (i *NSImageView) SetImageAlignment(imageAlignment ImageAlignment) {
-	C.ImageView_SetImageAlignment(i.Ptr(), C.ulong(imageAlignment))
+func (n *NSImageView) Image() Image {
+	result := C.C_NSImageView_Image(n.Ptr())
+	return MakeImage(result)
 }
 
-func (i *NSImageView) ImageScaling() ImageScaling {
-	return ImageScaling(C.ImageView_ImageScaling(i.Ptr()))
+func (n *NSImageView) SetImage(value Image) {
+	C.C_NSImageView_SetImage(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (i *NSImageView) SetImageScaling(imageScaling ImageScaling) {
-	C.ImageView_SetImageScaling(i.Ptr(), C.ulong(imageScaling))
+func (n *NSImageView) ImageFrameStyle() ImageFrameStyle {
+	result := C.C_NSImageView_ImageFrameStyle(n.Ptr())
+	return ImageFrameStyle(uint(result))
 }
 
-func (i *NSImageView) Animates() bool {
-	return bool(C.ImageView_Animates(i.Ptr()))
+func (n *NSImageView) SetImageFrameStyle(value ImageFrameStyle) {
+	C.C_NSImageView_SetImageFrameStyle(n.Ptr(), C.uint(uint(value)))
 }
 
-func (i *NSImageView) SetAnimates(animates bool) {
-	C.ImageView_SetAnimates(i.Ptr(), C.bool(animates))
+func (n *NSImageView) ImageAlignment() ImageAlignment {
+	result := C.C_NSImageView_ImageAlignment(n.Ptr())
+	return ImageAlignment(uint(result))
 }
 
-func (i *NSImageView) IsEditable() bool {
-	return bool(C.ImageView_IsEditable(i.Ptr()))
+func (n *NSImageView) SetImageAlignment(value ImageAlignment) {
+	C.C_NSImageView_SetImageAlignment(n.Ptr(), C.uint(uint(value)))
 }
 
-func (i *NSImageView) SetEditable(editable bool) {
-	C.ImageView_SetEditable(i.Ptr(), C.bool(editable))
+func (n *NSImageView) ImageScaling() ImageScaling {
+	result := C.C_NSImageView_ImageScaling(n.Ptr())
+	return ImageScaling(uint(result))
 }
 
-func (i *NSImageView) AllowsCutCopyPaste() bool {
-	return bool(C.ImageView_AllowsCutCopyPaste(i.Ptr()))
+func (n *NSImageView) SetImageScaling(value ImageScaling) {
+	C.C_NSImageView_SetImageScaling(n.Ptr(), C.uint(uint(value)))
 }
 
-func (i *NSImageView) SetAllowsCutCopyPaste(allowsCutCopyPaste bool) {
-	C.ImageView_SetAllowsCutCopyPaste(i.Ptr(), C.bool(allowsCutCopyPaste))
+func (n *NSImageView) Animates() bool {
+	result := C.C_NSImageView_Animates(n.Ptr())
+	return bool(result)
 }
 
-func (i *NSImageView) ContentTintColor() Color {
-	return MakeColor(C.ImageView_ContentTintColor(i.Ptr()))
+func (n *NSImageView) SetAnimates(value bool) {
+	C.C_NSImageView_SetAnimates(n.Ptr(), C.bool(value))
 }
 
-func (i *NSImageView) SetContentTintColor(contentTintColor Color) {
-	C.ImageView_SetContentTintColor(i.Ptr(), toPointer(contentTintColor))
+func (n *NSImageView) IsEditable() bool {
+	result := C.C_NSImageView_IsEditable(n.Ptr())
+	return bool(result)
 }
 
-func (i *NSImageView) SymbolConfiguration() ImageSymbolConfiguration {
-	return MakeImageSymbolConfiguration(C.ImageView_SymbolConfiguration(i.Ptr()))
+func (n *NSImageView) SetEditable(value bool) {
+	C.C_NSImageView_SetEditable(n.Ptr(), C.bool(value))
 }
 
-func (i *NSImageView) SetSymbolConfiguration(symbolConfiguration ImageSymbolConfiguration) {
-	C.ImageView_SetSymbolConfiguration(i.Ptr(), toPointer(symbolConfiguration))
+func (n *NSImageView) AllowsCutCopyPaste() bool {
+	result := C.C_NSImageView_AllowsCutCopyPaste(n.Ptr())
+	return bool(result)
 }
 
-func ImageViewWithImage(image Image) {
-	C.ImageView_ImageViewWithImage(toPointer(image))
+func (n *NSImageView) SetAllowsCutCopyPaste(value bool) {
+	C.C_NSImageView_SetAllowsCutCopyPaste(n.Ptr(), C.bool(value))
+}
+
+func (n *NSImageView) ContentTintColor() Color {
+	result := C.C_NSImageView_ContentTintColor(n.Ptr())
+	return MakeColor(result)
+}
+
+func (n *NSImageView) SetContentTintColor(value Color) {
+	C.C_NSImageView_SetContentTintColor(n.Ptr(), objc.ExtractPtr(value))
+}
+
+func (n *NSImageView) SymbolConfiguration() ImageSymbolConfiguration {
+	result := C.C_NSImageView_SymbolConfiguration(n.Ptr())
+	return MakeImageSymbolConfiguration(result)
+}
+
+func (n *NSImageView) SetSymbolConfiguration(value ImageSymbolConfiguration) {
+	C.C_NSImageView_SetSymbolConfiguration(n.Ptr(), objc.ExtractPtr(value))
 }

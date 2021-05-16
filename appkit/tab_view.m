@@ -1,165 +1,230 @@
-#import <AppKit/AppKit.h>
-#import "_cgo_export.h"
+#import <Appkit/Appkit.h>
 #import "tab_view.h"
-#import "tab_view_delegate.h"
 
-@implementation MyNSTabViewDelegate
-
-- (void)tabViewDidChangeNumberOfTabViewItems:(NSTabView*)view {
-	return TabView_Delegate_TabViewDidChangeNumberOfTabViewItems([self goID], view);
+void* C_TabView_Alloc() {
+    return [NSTabView alloc];
 }
 
-- (BOOL)tabView:(NSTabView*)view shouldSelectTabViewItem:(NSTabViewItem*)tabViewItem {
-	return TabView_Delegate_ShouldSelectTabViewItem([self goID], view, tabViewItem);
+void* C_NSTabView_InitWithFrame(void* ptr, CGRect frameRect) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    NSTabView* result = [nSTabView initWithFrame:frameRect];
+    return result;
 }
 
-- (void)tabView:(NSTabView*)view willSelectTabViewItem:(NSTabViewItem*)tabViewItem {
-	return TabView_Delegate_WillSelectTabViewItem([self goID], view, tabViewItem);
+void* C_NSTabView_InitWithCoder(void* ptr, void* coder) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    NSTabView* result = [nSTabView initWithCoder:(NSCoder*)coder];
+    return result;
 }
 
-- (void)tabView:(NSTabView*)view didSelectTabViewItem:(NSTabViewItem*)tabViewItem {
-	return TabView_Delegate_DidSelectTabViewItem([self goID], view, tabViewItem);
+void* C_NSTabView_Init(void* ptr) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    NSTabView* result = [nSTabView init];
+    return result;
 }
 
-@end
-void TabView_SetDelegate(void *ptr, long goID) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	MyNSTabViewDelegate* delegate = [[MyNSTabViewDelegate alloc] init];
-	[delegate setGoID:goID];
-	[tabView setDelegate:delegate];
+void C_NSTabView_AddTabViewItem(void* ptr, void* tabViewItem) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    [nSTabView addTabViewItem:(NSTabViewItem*)tabViewItem];
 }
 
-long TabView_NumberOfTabViewItems(void* ptr) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	return [tabView numberOfTabViewItems];
+void C_NSTabView_InsertTabViewItem_AtIndex(void* ptr, void* tabViewItem, int index) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    [nSTabView insertTabViewItem:(NSTabViewItem*)tabViewItem atIndex:index];
 }
 
-unsigned long TabView_TabViewType(void* ptr) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	return [tabView tabViewType];
+void C_NSTabView_RemoveTabViewItem(void* ptr, void* tabViewItem) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    [nSTabView removeTabViewItem:(NSTabViewItem*)tabViewItem];
 }
 
-void TabView_SetTabViewType(void* ptr, unsigned long tabViewType) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	[tabView setTabViewType:tabViewType];
+int C_NSTabView_IndexOfTabViewItem(void* ptr, void* tabViewItem) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    NSInteger result = [nSTabView indexOfTabViewItem:(NSTabViewItem*)tabViewItem];
+    return result;
 }
 
-unsigned long TabView_TabPosition(void* ptr) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	return [tabView tabPosition];
+int C_NSTabView_IndexOfTabViewItemWithIdentifier(void* ptr, void* identifier) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    NSInteger result = [nSTabView indexOfTabViewItemWithIdentifier:(id)identifier];
+    return result;
 }
 
-void TabView_SetTabPosition(void* ptr, unsigned long tabPosition) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	[tabView setTabPosition:tabPosition];
+void* C_NSTabView_TabViewItemAtIndex(void* ptr, int index) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    NSTabViewItem* result = [nSTabView tabViewItemAtIndex:index];
+    return result;
 }
 
-unsigned long TabView_TabViewBorderType(void* ptr) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	return [tabView tabViewBorderType];
+void C_NSTabView_SelectFirstTabViewItem(void* ptr, void* sender) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    [nSTabView selectFirstTabViewItem:(id)sender];
 }
 
-void TabView_SetTabViewBorderType(void* ptr, unsigned long tabViewBorderType) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	[tabView setTabViewBorderType:tabViewBorderType];
+void C_NSTabView_SelectLastTabViewItem(void* ptr, void* sender) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    [nSTabView selectLastTabViewItem:(id)sender];
 }
 
-bool TabView_AllowsTruncatedLabels(void* ptr) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	return [tabView allowsTruncatedLabels];
+void C_NSTabView_SelectNextTabViewItem(void* ptr, void* sender) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    [nSTabView selectNextTabViewItem:(id)sender];
 }
 
-void TabView_SetAllowsTruncatedLabels(void* ptr, bool allowsTruncatedLabels) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	[tabView setAllowsTruncatedLabels:allowsTruncatedLabels];
+void C_NSTabView_SelectPreviousTabViewItem(void* ptr, void* sender) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    [nSTabView selectPreviousTabViewItem:(id)sender];
 }
 
-void* TabView_SelectedTabViewItem(void* ptr) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	return [tabView selectedTabViewItem];
+void C_NSTabView_SelectTabViewItem(void* ptr, void* tabViewItem) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    [nSTabView selectTabViewItem:(NSTabViewItem*)tabViewItem];
 }
 
-void* TabView_Font(void* ptr) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	return [tabView font];
+void C_NSTabView_SelectTabViewItemAtIndex(void* ptr, int index) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    [nSTabView selectTabViewItemAtIndex:index];
 }
 
-void TabView_SetFont(void* ptr, void* font) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	[tabView setFont:(NSFont*)font];
+void C_NSTabView_SelectTabViewItemWithIdentifier(void* ptr, void* identifier) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    [nSTabView selectTabViewItemWithIdentifier:(id)identifier];
 }
 
-NSSize TabView_MinimumSize(void* ptr) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	return [tabView minimumSize];
+void C_NSTabView_TakeSelectedTabViewItemFromSender(void* ptr, void* sender) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    [nSTabView takeSelectedTabViewItemFromSender:(id)sender];
 }
 
-unsigned long TabView_ControlSize(void* ptr) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	return [tabView controlSize];
+void* C_NSTabView_TabViewItemAtPoint(void* ptr, CGPoint point) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    NSTabViewItem* result = [nSTabView tabViewItemAtPoint:point];
+    return result;
 }
 
-void TabView_SetControlSize(void* ptr, unsigned long controlSize) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	[tabView setControlSize:controlSize];
+int C_NSTabView_NumberOfTabViewItems(void* ptr) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    NSInteger result = [nSTabView numberOfTabViewItems];
+    return result;
 }
 
-void* TabView_NewTabView(NSRect frame) {
-	NSTabView* tabView = [NSTabView alloc];
-	return [[tabView initWithFrame:frame] autorelease];
+Array C_NSTabView_TabViewItems(void* ptr) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    NSArray* result = [nSTabView tabViewItems];
+    int resultcount = [result count];
+    void** resultData = malloc(resultcount * sizeof(void*));
+    for (int i = 0; i < resultcount; i++) {
+    	 void* p = [result objectAtIndex:i];
+    	 resultData[i] = p;
+    }
+    Array resultArray;
+    resultArray.data = resultData;
+    resultArray.len = resultcount;
+    return resultArray;
 }
 
-void TabView_AddTabViewItem(void* ptr, void* tabViewItem) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	[tabView addTabViewItem:(NSTabViewItem*)tabViewItem];
+void C_NSTabView_SetTabViewItems(void* ptr, Array value) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    void** valueData = (void**)value.data;
+    for (int i = 0; i < value.len; i++) {
+    	void* p = valueData[i];
+    	[objcValue addObject:(NSTabViewItem*)(NSTabViewItem*)p];
+    }
+    [nSTabView setTabViewItems:objcValue];
 }
 
-void TabView_InsertTabViewItem(void* ptr, void* tabViewItem, long index) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	[tabView insertTabViewItem:(NSTabViewItem*)tabViewItem atIndex:index];
+unsigned int C_NSTabView_TabViewType(void* ptr) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    NSTabViewType result = [nSTabView tabViewType];
+    return result;
 }
 
-void TabView_RemoveTabViewItem(void* ptr, void* tabViewItem) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	[tabView removeTabViewItem:(NSTabViewItem*)tabViewItem];
+void C_NSTabView_SetTabViewType(void* ptr, unsigned int value) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    [nSTabView setTabViewType:value];
 }
 
-long TabView_IndexOfTabViewItem(void* ptr, void* tabViewItem) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	return [tabView indexOfTabViewItem:(NSTabViewItem*)tabViewItem];
+unsigned int C_NSTabView_TabPosition(void* ptr) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    NSTabPosition result = [nSTabView tabPosition];
+    return result;
 }
 
-void* TabView_TabViewItemAtIndex(void* ptr, long index) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	return [tabView tabViewItemAtIndex:index];
+void C_NSTabView_SetTabPosition(void* ptr, unsigned int value) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    [nSTabView setTabPosition:value];
 }
 
-void TabView_SelectFirstTabViewItem(void* ptr, void* sender) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	[tabView selectFirstTabViewItem:(NSObject*)sender];
+unsigned int C_NSTabView_TabViewBorderType(void* ptr) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    NSTabViewBorderType result = [nSTabView tabViewBorderType];
+    return result;
 }
 
-void TabView_SelectLastTabViewItem(void* ptr, void* sender) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	[tabView selectLastTabViewItem:(NSObject*)sender];
+void C_NSTabView_SetTabViewBorderType(void* ptr, unsigned int value) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    [nSTabView setTabViewBorderType:value];
 }
 
-void TabView_SelectNextTabViewItem(void* ptr, void* sender) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	[tabView selectNextTabViewItem:(NSObject*)sender];
+void* C_NSTabView_SelectedTabViewItem(void* ptr) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    NSTabViewItem* result = [nSTabView selectedTabViewItem];
+    return result;
 }
 
-void TabView_SelectPreviousTabViewItem(void* ptr, void* sender) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	[tabView selectPreviousTabViewItem:(NSObject*)sender];
+void* C_NSTabView_Font(void* ptr) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    NSFont* result = [nSTabView font];
+    return result;
 }
 
-void TabView_SelectTabViewItem(void* ptr, void* tabViewItem) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	[tabView selectTabViewItem:(NSTabViewItem*)tabViewItem];
+void C_NSTabView_SetFont(void* ptr, void* value) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    [nSTabView setFont:(NSFont*)value];
 }
 
-void TabView_SelectTabViewItemAtIndex(void* ptr, long index) {
-	NSTabView* tabView = (NSTabView*)ptr;
-	[tabView selectTabViewItemAtIndex:index];
+bool C_NSTabView_DrawsBackground(void* ptr) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    BOOL result = [nSTabView drawsBackground];
+    return result;
+}
+
+void C_NSTabView_SetDrawsBackground(void* ptr, bool value) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    [nSTabView setDrawsBackground:value];
+}
+
+CGSize C_NSTabView_MinimumSize(void* ptr) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    NSSize result = [nSTabView minimumSize];
+    return result;
+}
+
+CGRect C_NSTabView_ContentRect(void* ptr) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    NSRect result = [nSTabView contentRect];
+    return result;
+}
+
+unsigned int C_NSTabView_ControlSize(void* ptr) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    NSControlSize result = [nSTabView controlSize];
+    return result;
+}
+
+void C_NSTabView_SetControlSize(void* ptr, unsigned int value) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    [nSTabView setControlSize:value];
+}
+
+bool C_NSTabView_AllowsTruncatedLabels(void* ptr) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    BOOL result = [nSTabView allowsTruncatedLabels];
+    return result;
+}
+
+void C_NSTabView_SetAllowsTruncatedLabels(void* ptr, bool value) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    [nSTabView setAllowsTruncatedLabels:value];
 }

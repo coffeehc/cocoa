@@ -1,17 +1,20 @@
-#import <Foundation/NSGeometry.h>
 #import <stdbool.h>
 #import <stdlib.h>
 #import <utils.h>
+#import <Appkit/Appkit.h>
 
-double Stepper_MaxValue(void* ptr);
-void Stepper_SetMaxValue(void* ptr, double maxValue);
-double Stepper_MinValue(void* ptr);
-void Stepper_SetMinValue(void* ptr, double minValue);
-double Stepper_Increment(void* ptr);
-void Stepper_SetIncrement(void* ptr, double increment);
-bool Stepper_Autorepeat(void* ptr);
-void Stepper_SetAutorepeat(void* ptr, bool autorepeat);
-bool Stepper_ValueWraps(void* ptr);
-void Stepper_SetValueWraps(void* ptr, bool valueWraps);
+void* C_Stepper_Alloc();
 
-void* Stepper_NewStepper(NSRect frame);
+void* C_NSStepper_InitWithFrame(void* ptr, CGRect frameRect);
+void* C_NSStepper_InitWithCoder(void* ptr, void* coder);
+void* C_NSStepper_Init(void* ptr);
+double C_NSStepper_MaxValue(void* ptr);
+void C_NSStepper_SetMaxValue(void* ptr, double value);
+double C_NSStepper_MinValue(void* ptr);
+void C_NSStepper_SetMinValue(void* ptr, double value);
+double C_NSStepper_Increment(void* ptr);
+void C_NSStepper_SetIncrement(void* ptr, double value);
+bool C_NSStepper_Autorepeat(void* ptr);
+void C_NSStepper_SetAutorepeat(void* ptr, bool value);
+bool C_NSStepper_ValueWraps(void* ptr);
+void C_NSStepper_SetValueWraps(void* ptr, bool value);

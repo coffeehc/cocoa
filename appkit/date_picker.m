@@ -1,118 +1,200 @@
-#import <AppKit/AppKit.h>
-#import "_cgo_export.h"
+#import <Appkit/Appkit.h>
 #import "date_picker.h"
 
-bool DatePicker_IsBezeled(void* ptr) {
-	NSDatePicker* datePicker = (NSDatePicker*)ptr;
-	return [datePicker isBezeled];
+void* C_DatePicker_Alloc() {
+    return [NSDatePicker alloc];
 }
 
-void DatePicker_SetBezeled(void* ptr, bool bezeled) {
-	NSDatePicker* datePicker = (NSDatePicker*)ptr;
-	[datePicker setBezeled:bezeled];
+void* C_NSDatePicker_InitWithFrame(void* ptr, CGRect frameRect) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    NSDatePicker* result = [nSDatePicker initWithFrame:frameRect];
+    return result;
 }
 
-bool DatePicker_IsBordered(void* ptr) {
-	NSDatePicker* datePicker = (NSDatePicker*)ptr;
-	return [datePicker isBordered];
+void* C_NSDatePicker_InitWithCoder(void* ptr, void* coder) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    NSDatePicker* result = [nSDatePicker initWithCoder:(NSCoder*)coder];
+    return result;
 }
 
-void DatePicker_SetBordered(void* ptr, bool bordered) {
-	NSDatePicker* datePicker = (NSDatePicker*)ptr;
-	[datePicker setBordered:bordered];
+void* C_NSDatePicker_Init(void* ptr) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    NSDatePicker* result = [nSDatePicker init];
+    return result;
 }
 
-void* DatePicker_BackgroundColor(void* ptr) {
-	NSDatePicker* datePicker = (NSDatePicker*)ptr;
-	return [datePicker backgroundColor];
+bool C_NSDatePicker_IsBezeled(void* ptr) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    BOOL result = [nSDatePicker isBezeled];
+    return result;
 }
 
-void DatePicker_SetBackgroundColor(void* ptr, void* backgroundColor) {
-	NSDatePicker* datePicker = (NSDatePicker*)ptr;
-	[datePicker setBackgroundColor:(NSColor*)backgroundColor];
+void C_NSDatePicker_SetBezeled(void* ptr, bool value) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    [nSDatePicker setBezeled:value];
 }
 
-bool DatePicker_DrawsBackground(void* ptr) {
-	NSDatePicker* datePicker = (NSDatePicker*)ptr;
-	return [datePicker drawsBackground];
+bool C_NSDatePicker_IsBordered(void* ptr) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    BOOL result = [nSDatePicker isBordered];
+    return result;
 }
 
-void DatePicker_SetDrawsBackground(void* ptr, bool drawsBackground) {
-	NSDatePicker* datePicker = (NSDatePicker*)ptr;
-	[datePicker setDrawsBackground:drawsBackground];
+void C_NSDatePicker_SetBordered(void* ptr, bool value) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    [nSDatePicker setBordered:value];
 }
 
-void* DatePicker_TextColor(void* ptr) {
-	NSDatePicker* datePicker = (NSDatePicker*)ptr;
-	return [datePicker textColor];
+void* C_NSDatePicker_BackgroundColor(void* ptr) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    NSColor* result = [nSDatePicker backgroundColor];
+    return result;
 }
 
-void DatePicker_SetTextColor(void* ptr, void* textColor) {
-	NSDatePicker* datePicker = (NSDatePicker*)ptr;
-	[datePicker setTextColor:(NSColor*)textColor];
+void C_NSDatePicker_SetBackgroundColor(void* ptr, void* value) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    [nSDatePicker setBackgroundColor:(NSColor*)value];
 }
 
-unsigned long DatePicker_DatePickerStyle(void* ptr) {
-	NSDatePicker* datePicker = (NSDatePicker*)ptr;
-	return [datePicker datePickerStyle];
+bool C_NSDatePicker_DrawsBackground(void* ptr) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    BOOL result = [nSDatePicker drawsBackground];
+    return result;
 }
 
-void DatePicker_SetDatePickerStyle(void* ptr, unsigned long datePickerStyle) {
-	NSDatePicker* datePicker = (NSDatePicker*)ptr;
-	[datePicker setDatePickerStyle:datePickerStyle];
+void C_NSDatePicker_SetDrawsBackground(void* ptr, bool value) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    [nSDatePicker setDrawsBackground:value];
 }
 
-bool DatePicker_PresentsCalendarOverlay(void* ptr) {
-	NSDatePicker* datePicker = (NSDatePicker*)ptr;
-	return [datePicker presentsCalendarOverlay];
+void* C_NSDatePicker_TextColor(void* ptr) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    NSColor* result = [nSDatePicker textColor];
+    return result;
 }
 
-void DatePicker_SetPresentsCalendarOverlay(void* ptr, bool presentsCalendarOverlay) {
-	NSDatePicker* datePicker = (NSDatePicker*)ptr;
-	[datePicker setPresentsCalendarOverlay:presentsCalendarOverlay];
+void C_NSDatePicker_SetTextColor(void* ptr, void* value) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    [nSDatePicker setTextColor:(NSColor*)value];
 }
 
-unsigned long DatePicker_DatePickerElements(void* ptr) {
-	NSDatePicker* datePicker = (NSDatePicker*)ptr;
-	return [datePicker datePickerElements];
+unsigned int C_NSDatePicker_DatePickerStyle(void* ptr) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    NSDatePickerStyle result = [nSDatePicker datePickerStyle];
+    return result;
 }
 
-void DatePicker_SetDatePickerElements(void* ptr, unsigned long datePickerElements) {
-	NSDatePicker* datePicker = (NSDatePicker*)ptr;
-	[datePicker setDatePickerElements:datePickerElements];
+void C_NSDatePicker_SetDatePickerStyle(void* ptr, unsigned int value) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    [nSDatePicker setDatePickerStyle:value];
 }
 
-unsigned long DatePicker_DatePickerMode(void* ptr) {
-	NSDatePicker* datePicker = (NSDatePicker*)ptr;
-	return [datePicker datePickerMode];
+bool C_NSDatePicker_PresentsCalendarOverlay(void* ptr) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    BOOL result = [nSDatePicker presentsCalendarOverlay];
+    return result;
 }
 
-void DatePicker_SetDatePickerMode(void* ptr, unsigned long datePickerMode) {
-	NSDatePicker* datePicker = (NSDatePicker*)ptr;
-	[datePicker setDatePickerMode:datePickerMode];
+void C_NSDatePicker_SetPresentsCalendarOverlay(void* ptr, bool value) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    [nSDatePicker setPresentsCalendarOverlay:value];
 }
 
-void* DatePicker_DateValue(void* ptr) {
-	NSDatePicker* datePicker = (NSDatePicker*)ptr;
-	return [datePicker dateValue];
+unsigned int C_NSDatePicker_DatePickerElements(void* ptr) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    NSDatePickerElementFlags result = [nSDatePicker datePickerElements];
+    return result;
 }
 
-void DatePicker_SetDateValue(void* ptr, void* dateValue) {
-	NSDatePicker* datePicker = (NSDatePicker*)ptr;
-	[datePicker setDateValue:(NSDate*)dateValue];
+void C_NSDatePicker_SetDatePickerElements(void* ptr, unsigned int value) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    [nSDatePicker setDatePickerElements:value];
 }
 
-void* DatePicker_MaxDate(void* ptr) {
-	NSDatePicker* datePicker = (NSDatePicker*)ptr;
-	return [datePicker maxDate];
+void* C_NSDatePicker_Calendar(void* ptr) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    NSCalendar* result = [nSDatePicker calendar];
+    return result;
 }
 
-void DatePicker_SetMaxDate(void* ptr, void* maxDate) {
-	NSDatePicker* datePicker = (NSDatePicker*)ptr;
-	[datePicker setMaxDate:(NSDate*)maxDate];
+void C_NSDatePicker_SetCalendar(void* ptr, void* value) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    [nSDatePicker setCalendar:(NSCalendar*)value];
 }
 
-void* DatePicker_NewDatePicker(NSRect frame) {
-	NSDatePicker* datePicker = [NSDatePicker alloc];
-	return [[datePicker initWithFrame:frame] autorelease];
+void* C_NSDatePicker_Locale(void* ptr) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    NSLocale* result = [nSDatePicker locale];
+    return result;
+}
+
+void C_NSDatePicker_SetLocale(void* ptr, void* value) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    [nSDatePicker setLocale:(NSLocale*)value];
+}
+
+unsigned int C_NSDatePicker_DatePickerMode(void* ptr) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    NSDatePickerMode result = [nSDatePicker datePickerMode];
+    return result;
+}
+
+void C_NSDatePicker_SetDatePickerMode(void* ptr, unsigned int value) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    [nSDatePicker setDatePickerMode:value];
+}
+
+void* C_NSDatePicker_TimeZone(void* ptr) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    NSTimeZone* result = [nSDatePicker timeZone];
+    return result;
+}
+
+void C_NSDatePicker_SetTimeZone(void* ptr, void* value) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    [nSDatePicker setTimeZone:(NSTimeZone*)value];
+}
+
+void* C_NSDatePicker_DateValue(void* ptr) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    NSDate* result = [nSDatePicker dateValue];
+    return result;
+}
+
+void C_NSDatePicker_SetDateValue(void* ptr, void* value) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    [nSDatePicker setDateValue:(NSDate*)value];
+}
+
+double C_NSDatePicker_TimeInterval(void* ptr) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    NSTimeInterval result = [nSDatePicker timeInterval];
+    return result;
+}
+
+void C_NSDatePicker_SetTimeInterval(void* ptr, double value) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    [nSDatePicker setTimeInterval:value];
+}
+
+void* C_NSDatePicker_MinDate(void* ptr) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    NSDate* result = [nSDatePicker minDate];
+    return result;
+}
+
+void C_NSDatePicker_SetMinDate(void* ptr, void* value) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    [nSDatePicker setMinDate:(NSDate*)value];
+}
+
+void* C_NSDatePicker_MaxDate(void* ptr) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    NSDate* result = [nSDatePicker maxDate];
+    return result;
+}
+
+void C_NSDatePicker_SetMaxDate(void* ptr, void* value) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    [nSDatePicker setMaxDate:(NSDate*)value];
 }

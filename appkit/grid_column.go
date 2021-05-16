@@ -5,6 +5,7 @@ package appkit
 // #include "grid_column.h"
 import "C"
 import (
+	"github.com/hsiafan/cocoa/coregraphics"
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
 	"unsafe"
@@ -12,23 +13,21 @@ import (
 
 type GridColumn interface {
 	objc.Object
-	NumberOfCells() int
-	IsHidden() bool
-	SetHidden(hidden bool)
-	LeadingPadding() float64
-	SetLeadingPadding(leadingPadding float64)
-	TrailingPadding() float64
-	SetTrailingPadding(trailingPadding float64)
-	Width() float64
-	SetWidth(width float64)
-	XPlacement() GridCellPlacement
-	SetXPlacement(xPlacement GridCellPlacement)
-	GridView() GridView
 	CellAtIndex(index int) GridCell
-	MergeCellsInRange(r foundation.Range)
+	MergeCellsInRange(_range foundation.Range)
+	GridView() GridView
+	IsHidden() bool
+	SetHidden(value bool)
+	LeadingPadding() coregraphics.Float
+	SetLeadingPadding(value coregraphics.Float)
+	NumberOfCells() int
+	TrailingPadding() coregraphics.Float
+	SetTrailingPadding(value coregraphics.Float)
+	Width() coregraphics.Float
+	SetWidth(value coregraphics.Float)
+	XPlacement() GridCellPlacement
+	SetXPlacement(value GridCellPlacement)
 }
-
-var _ GridColumn = (*NSGridColumn)(nil)
 
 type NSGridColumn struct {
 	objc.NSObject
@@ -43,58 +42,75 @@ func MakeGridColumn(ptr unsafe.Pointer) *NSGridColumn {
 	}
 }
 
-func (g *NSGridColumn) NumberOfCells() int {
-	return int(C.GridColumn_NumberOfCells(g.Ptr()))
+func AllocGridColumn() *NSGridColumn {
+	return MakeGridColumn(C.C_GridColumn_Alloc())
 }
 
-func (g *NSGridColumn) IsHidden() bool {
-	return bool(C.GridColumn_IsHidden(g.Ptr()))
+func (n *NSGridColumn) Init() GridColumn {
+	result := C.C_NSGridColumn_Init(n.Ptr())
+	return MakeGridColumn(result)
 }
 
-func (g *NSGridColumn) SetHidden(hidden bool) {
-	C.GridColumn_SetHidden(g.Ptr(), C.bool(hidden))
+func (n *NSGridColumn) CellAtIndex(index int) GridCell {
+	result := C.C_NSGridColumn_CellAtIndex(n.Ptr(), C.int(index))
+	return MakeGridCell(result)
 }
 
-func (g *NSGridColumn) LeadingPadding() float64 {
-	return float64(C.GridColumn_LeadingPadding(g.Ptr()))
+func (n *NSGridColumn) MergeCellsInRange(_range foundation.Range) {
+	C.C_NSGridColumn_MergeCellsInRange(n.Ptr(), *(*C.NSRange)(foundation.ToNSRangePointer(_range)))
 }
 
-func (g *NSGridColumn) SetLeadingPadding(leadingPadding float64) {
-	C.GridColumn_SetLeadingPadding(g.Ptr(), C.double(leadingPadding))
+func (n *NSGridColumn) GridView() GridView {
+	result := C.C_NSGridColumn_GridView(n.Ptr())
+	return MakeGridView(result)
 }
 
-func (g *NSGridColumn) TrailingPadding() float64 {
-	return float64(C.GridColumn_TrailingPadding(g.Ptr()))
+func (n *NSGridColumn) IsHidden() bool {
+	result := C.C_NSGridColumn_IsHidden(n.Ptr())
+	return bool(result)
 }
 
-func (g *NSGridColumn) SetTrailingPadding(trailingPadding float64) {
-	C.GridColumn_SetTrailingPadding(g.Ptr(), C.double(trailingPadding))
+func (n *NSGridColumn) SetHidden(value bool) {
+	C.C_NSGridColumn_SetHidden(n.Ptr(), C.bool(value))
 }
 
-func (g *NSGridColumn) Width() float64 {
-	return float64(C.GridColumn_Width(g.Ptr()))
+func (n *NSGridColumn) LeadingPadding() coregraphics.Float {
+	result := C.C_NSGridColumn_LeadingPadding(n.Ptr())
+	return coregraphics.Float(float64(result))
 }
 
-func (g *NSGridColumn) SetWidth(width float64) {
-	C.GridColumn_SetWidth(g.Ptr(), C.double(width))
+func (n *NSGridColumn) SetLeadingPadding(value coregraphics.Float) {
+	C.C_NSGridColumn_SetLeadingPadding(n.Ptr(), C.double(float64(value)))
 }
 
-func (g *NSGridColumn) XPlacement() GridCellPlacement {
-	return GridCellPlacement(C.GridColumn_XPlacement(g.Ptr()))
+func (n *NSGridColumn) NumberOfCells() int {
+	result := C.C_NSGridColumn_NumberOfCells(n.Ptr())
+	return int(result)
 }
 
-func (g *NSGridColumn) SetXPlacement(xPlacement GridCellPlacement) {
-	C.GridColumn_SetXPlacement(g.Ptr(), C.long(xPlacement))
+func (n *NSGridColumn) TrailingPadding() coregraphics.Float {
+	result := C.C_NSGridColumn_TrailingPadding(n.Ptr())
+	return coregraphics.Float(float64(result))
 }
 
-func (g *NSGridColumn) GridView() GridView {
-	return MakeGridView(C.GridColumn_GridView(g.Ptr()))
+func (n *NSGridColumn) SetTrailingPadding(value coregraphics.Float) {
+	C.C_NSGridColumn_SetTrailingPadding(n.Ptr(), C.double(float64(value)))
 }
 
-func (g *NSGridColumn) CellAtIndex(index int) GridCell {
-	return MakeGridCell(C.GridColumn_CellAtIndex(g.Ptr(), C.long(index)))
+func (n *NSGridColumn) Width() coregraphics.Float {
+	result := C.C_NSGridColumn_Width(n.Ptr())
+	return coregraphics.Float(float64(result))
 }
 
-func (g *NSGridColumn) MergeCellsInRange(r foundation.Range) {
-	C.GridColumn_MergeCellsInRange(g.Ptr(), *(*C.NSRange)(foundation.ToNSRangePointer(r)))
+func (n *NSGridColumn) SetWidth(value coregraphics.Float) {
+	C.C_NSGridColumn_SetWidth(n.Ptr(), C.double(float64(value)))
+}
+
+func (n *NSGridColumn) XPlacement() GridCellPlacement {
+	result := C.C_NSGridColumn_XPlacement(n.Ptr())
+	return GridCellPlacement(int(result))
+}
+
+func (n *NSGridColumn) SetXPlacement(value GridCellPlacement) {
+	C.C_NSGridColumn_SetXPlacement(n.Ptr(), C.int(int(value)))
 }

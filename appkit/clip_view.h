@@ -1,21 +1,28 @@
-#import <Foundation/NSGeometry.h>
 #import <stdbool.h>
 #import <stdlib.h>
 #import <utils.h>
+#import <Appkit/Appkit.h>
 
-NSEdgeInsets ClipView_ContentInsets(void* ptr);
-void ClipView_SetContentInsets(void* ptr, NSEdgeInsets contentInsets);
-void* ClipView_DocumentView(void* ptr);
-void ClipView_SetDocumentView(void* ptr, void* documentView);
-bool ClipView_AutomaticallyAdjustsContentInsets(void* ptr);
-void ClipView_SetAutomaticallyAdjustsContentInsets(void* ptr, bool automaticallyAdjustsContentInsets);
-NSRect ClipView_DocumentRect(void* ptr);
-NSRect ClipView_DocumentVisibleRect(void* ptr);
-bool ClipView_DrawsBackground(void* ptr);
-void ClipView_SetDrawsBackground(void* ptr, bool drawsBackground);
-void* ClipView_BackgroundColor(void* ptr);
-void ClipView_SetBackgroundColor(void* ptr, void* backgroundColor);
+void* C_ClipView_Alloc();
 
-void ClipView_ScrollToPoint(void* ptr, NSPoint newOrigin);
-void ClipView_Autoscroll(void* ptr, void* event);
-NSRect ClipView_ConstrainBoundsRect(void* ptr, NSRect proposedBounds);
+void* C_NSClipView_InitWithFrame(void* ptr, CGRect frameRect);
+void* C_NSClipView_InitWithCoder(void* ptr, void* coder);
+void* C_NSClipView_Init(void* ptr);
+void C_NSClipView_ScrollToPoint(void* ptr, CGPoint newOrigin);
+CGRect C_NSClipView_ConstrainBoundsRect(void* ptr, CGRect proposedBounds);
+void C_NSClipView_ViewBoundsChanged(void* ptr, void* notification);
+void C_NSClipView_ViewFrameChanged(void* ptr, void* notification);
+void* C_NSClipView_DocumentView(void* ptr);
+void C_NSClipView_SetDocumentView(void* ptr, void* value);
+NSEdgeInsets C_NSClipView_ContentInsets(void* ptr);
+void C_NSClipView_SetContentInsets(void* ptr, NSEdgeInsets value);
+bool C_NSClipView_AutomaticallyAdjustsContentInsets(void* ptr);
+void C_NSClipView_SetAutomaticallyAdjustsContentInsets(void* ptr, bool value);
+CGRect C_NSClipView_DocumentRect(void* ptr);
+CGRect C_NSClipView_DocumentVisibleRect(void* ptr);
+void* C_NSClipView_DocumentCursor(void* ptr);
+void C_NSClipView_SetDocumentCursor(void* ptr, void* value);
+bool C_NSClipView_DrawsBackground(void* ptr);
+void C_NSClipView_SetDrawsBackground(void* ptr, bool value);
+void* C_NSClipView_BackgroundColor(void* ptr);
+void C_NSClipView_SetBackgroundColor(void* ptr, void* value);

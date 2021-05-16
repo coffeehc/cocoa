@@ -5,19 +5,18 @@ package appkit
 // #include "status_bar.h"
 import "C"
 import (
+	"github.com/hsiafan/cocoa/coregraphics"
 	"github.com/hsiafan/cocoa/objc"
 	"unsafe"
 )
 
 type StatusBar interface {
 	objc.Object
-	IsVertical() bool
-	Thickness() float64
-	StatusItemWithLength(length float64) StatusItem
+	StatusItemWithLength(length coregraphics.Float) StatusItem
 	RemoveStatusItem(item StatusItem)
+	IsVertical() bool
+	Thickness() coregraphics.Float
 }
-
-var _ StatusBar = (*NSStatusBar)(nil)
 
 type NSStatusBar struct {
 	objc.NSObject
@@ -32,22 +31,35 @@ func MakeStatusBar(ptr unsafe.Pointer) *NSStatusBar {
 	}
 }
 
-func (s *NSStatusBar) IsVertical() bool {
-	return bool(C.StatusBar_IsVertical(s.Ptr()))
+func AllocStatusBar() *NSStatusBar {
+	return MakeStatusBar(C.C_StatusBar_Alloc())
 }
 
-func (s *NSStatusBar) Thickness() float64 {
-	return float64(C.StatusBar_Thickness(s.Ptr()))
+func (n *NSStatusBar) Init() StatusBar {
+	result := C.C_NSStatusBar_Init(n.Ptr())
+	return MakeStatusBar(result)
+}
+
+func (n *NSStatusBar) StatusItemWithLength(length coregraphics.Float) StatusItem {
+	result := C.C_NSStatusBar_StatusItemWithLength(n.Ptr(), C.double(float64(length)))
+	return MakeStatusItem(result)
+}
+
+func (n *NSStatusBar) RemoveStatusItem(item StatusItem) {
+	C.C_NSStatusBar_RemoveStatusItem(n.Ptr(), objc.ExtractPtr(item))
 }
 
 func SystemStatusBar() StatusBar {
-	return MakeStatusBar(C.StatusBar_SystemStatusBar())
+	result := C.C_NSStatusBar_SystemStatusBar()
+	return MakeStatusBar(result)
 }
 
-func (s *NSStatusBar) StatusItemWithLength(length float64) StatusItem {
-	return MakeStatusItem(C.StatusBar_StatusItemWithLength(s.Ptr(), C.double(length)))
+func (n *NSStatusBar) IsVertical() bool {
+	result := C.C_NSStatusBar_IsVertical(n.Ptr())
+	return bool(result)
 }
 
-func (s *NSStatusBar) RemoveStatusItem(item StatusItem) {
-	C.StatusBar_RemoveStatusItem(s.Ptr(), toPointer(item))
+func (n *NSStatusBar) Thickness() coregraphics.Float {
+	result := C.C_NSStatusBar_Thickness(n.Ptr())
+	return coregraphics.Float(float64(result))
 }

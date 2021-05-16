@@ -1,33 +1,35 @@
-#import <AppKit/AppKit.h>
-#import "_cgo_export.h"
+#import <Appkit/Appkit.h>
 #import "panel.h"
 
-bool Panel_IsFloatingPanel(void* ptr) {
-	NSPanel* panel = (NSPanel*)ptr;
-	return [panel isFloatingPanel];
+void* C_Panel_Alloc() {
+    return [NSPanel alloc];
 }
 
-void Panel_SetFloatingPanel(void* ptr, bool floatingPanel) {
-	NSPanel* panel = (NSPanel*)ptr;
-	[panel setFloatingPanel:floatingPanel];
+void* C_NSPanel_InitWithContentRect_StyleMask_Backing_Defer(void* ptr, CGRect contentRect, unsigned int style, unsigned int backingStoreType, bool flag) {
+    NSPanel* nSPanel = (NSPanel*)ptr;
+    NSPanel* result = [nSPanel initWithContentRect:contentRect styleMask:style backing:backingStoreType defer:flag];
+    return result;
 }
 
-bool Panel_BecomesKeyOnlyIfNeeded(void* ptr) {
-	NSPanel* panel = (NSPanel*)ptr;
-	return [panel becomesKeyOnlyIfNeeded];
+void* C_NSPanel_InitWithContentRect_StyleMask_Backing_Defer_Screen(void* ptr, CGRect contentRect, unsigned int style, unsigned int backingStoreType, bool flag, void* screen) {
+    NSPanel* nSPanel = (NSPanel*)ptr;
+    NSPanel* result = [nSPanel initWithContentRect:contentRect styleMask:style backing:backingStoreType defer:flag screen:(NSScreen*)screen];
+    return result;
 }
 
-void Panel_SetBecomesKeyOnlyIfNeeded(void* ptr, bool becomesKeyOnlyIfNeeded) {
-	NSPanel* panel = (NSPanel*)ptr;
-	[panel setBecomesKeyOnlyIfNeeded:becomesKeyOnlyIfNeeded];
+void* C_NSPanel_Init(void* ptr) {
+    NSPanel* nSPanel = (NSPanel*)ptr;
+    NSPanel* result = [nSPanel init];
+    return result;
 }
 
-bool Panel_WorksWhenModal(void* ptr) {
-	NSPanel* panel = (NSPanel*)ptr;
-	return [panel worksWhenModal];
+bool C_NSPanel_BecomesKeyOnlyIfNeeded(void* ptr) {
+    NSPanel* nSPanel = (NSPanel*)ptr;
+    BOOL result = [nSPanel becomesKeyOnlyIfNeeded];
+    return result;
 }
 
-void Panel_SetWorksWhenModal(void* ptr, bool worksWhenModal) {
-	NSPanel* panel = (NSPanel*)ptr;
-	[panel setWorksWhenModal:worksWhenModal];
+void C_NSPanel_SetBecomesKeyOnlyIfNeeded(void* ptr, bool value) {
+    NSPanel* nSPanel = (NSPanel*)ptr;
+    [nSPanel setBecomesKeyOnlyIfNeeded:value];
 }

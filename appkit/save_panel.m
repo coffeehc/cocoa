@@ -1,209 +1,257 @@
-#import <AppKit/AppKit.h>
-#import "_cgo_export.h"
+#import <Appkit/Appkit.h>
 #import "save_panel.h"
 
-void* SavePanel_URL(void* ptr) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	return [savePanel URL];
+void* C_SavePanel_Alloc() {
+    return [NSSavePanel alloc];
 }
 
-const char* SavePanel_Prompt(void* ptr) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	return [[savePanel prompt] UTF8String];
+void* C_NSSavePanel_InitWithContentRect_StyleMask_Backing_Defer(void* ptr, CGRect contentRect, unsigned int style, unsigned int backingStoreType, bool flag) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    NSSavePanel* result = [nSSavePanel initWithContentRect:contentRect styleMask:style backing:backingStoreType defer:flag];
+    return result;
 }
 
-void SavePanel_SetPrompt(void* ptr, const char* prompt) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	[savePanel setPrompt:[NSString stringWithUTF8String:prompt]];
+void* C_NSSavePanel_InitWithContentRect_StyleMask_Backing_Defer_Screen(void* ptr, CGRect contentRect, unsigned int style, unsigned int backingStoreType, bool flag, void* screen) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    NSSavePanel* result = [nSSavePanel initWithContentRect:contentRect styleMask:style backing:backingStoreType defer:flag screen:(NSScreen*)screen];
+    return result;
 }
 
-const char* SavePanel_Message(void* ptr) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	return [[savePanel message] UTF8String];
+void* C_NSSavePanel_Init(void* ptr) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    NSSavePanel* result = [nSSavePanel init];
+    return result;
 }
 
-void SavePanel_SetMessage(void* ptr, const char* message) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	[savePanel setMessage:[NSString stringWithUTF8String:message]];
+void* C_NSSavePanel_SavePanel_() {
+    NSSavePanel* result = [NSSavePanel savePanel];
+    return result;
 }
 
-const char* SavePanel_NameFieldLabel(void* ptr) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	return [[savePanel nameFieldLabel] UTF8String];
+int C_NSSavePanel_RunModal(void* ptr) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    NSModalResponse result = [nSSavePanel runModal];
+    return result;
 }
 
-void SavePanel_SetNameFieldLabel(void* ptr, const char* nameFieldLabel) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	[savePanel setNameFieldLabel:[NSString stringWithUTF8String:nameFieldLabel]];
+void C_NSSavePanel_ValidateVisibleColumns(void* ptr) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    [nSSavePanel validateVisibleColumns];
 }
 
-void* SavePanel_DirectoryURL(void* ptr) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	return [savePanel directoryURL];
+void C_NSSavePanel_Ok(void* ptr, void* sender) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    [nSSavePanel ok:(id)sender];
 }
 
-void SavePanel_SetDirectoryURL(void* ptr, void* directoryURL) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	[savePanel setDirectoryURL:(NSURL*)directoryURL];
+void C_NSSavePanel_Cancel(void* ptr, void* sender) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    [nSSavePanel cancel:(id)sender];
 }
 
-void* SavePanel_AccessoryView(void* ptr) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	return [savePanel accessoryView];
+void* C_NSSavePanel_URL(void* ptr) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    NSURL* result = [nSSavePanel URL];
+    return result;
 }
 
-void SavePanel_SetAccessoryView(void* ptr, void* accessoryView) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	[savePanel setAccessoryView:(NSView*)accessoryView];
+void* C_NSSavePanel_Prompt(void* ptr) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    NSString* result = [nSSavePanel prompt];
+    return result;
 }
 
-bool SavePanel_ShowsTagField(void* ptr) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	return [savePanel showsTagField];
+void C_NSSavePanel_SetPrompt(void* ptr, void* value) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    [nSSavePanel setPrompt:(NSString*)value];
 }
 
-void SavePanel_SetShowsTagField(void* ptr, bool showsTagField) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	[savePanel setShowsTagField:showsTagField];
+void* C_NSSavePanel_Message(void* ptr) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    NSString* result = [nSSavePanel message];
+    return result;
 }
 
-Array SavePanel_TagNames(void* ptr) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	NSArray* ns_array = [savePanel tagNames];
-	int count = [ns_array count];
-	void** data = malloc(count * sizeof(void*));
-	for (int i = 0; i < count; i++) {
-		 data[i] = (void*)[[ns_array objectAtIndex:i] UTF8String];}
-	Array array;
-	array.data = data;
-	array.len = count;
-	return array;
+void C_NSSavePanel_SetMessage(void* ptr, void* value) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    [nSSavePanel setMessage:(NSString*)value];
 }
 
-void SavePanel_SetTagNames(void* ptr, Array tagNames) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-    NSMutableArray* objc_tagNames = [[NSMutableArray alloc] init];
-    void** tagNamesData = (void**)tagNames.data;
-    for (int i = 0; i < tagNames.len; i++) {
-    	[objc_tagNames addObject:[NSString stringWithUTF8String:(const char*)tagNamesData[i]]];
+void* C_NSSavePanel_NameFieldLabel(void* ptr) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    NSString* result = [nSSavePanel nameFieldLabel];
+    return result;
+}
+
+void C_NSSavePanel_SetNameFieldLabel(void* ptr, void* value) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    [nSSavePanel setNameFieldLabel:(NSString*)value];
+}
+
+void* C_NSSavePanel_NameFieldStringValue(void* ptr) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    NSString* result = [nSSavePanel nameFieldStringValue];
+    return result;
+}
+
+void C_NSSavePanel_SetNameFieldStringValue(void* ptr, void* value) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    [nSSavePanel setNameFieldStringValue:(NSString*)value];
+}
+
+void* C_NSSavePanel_DirectoryURL(void* ptr) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    NSURL* result = [nSSavePanel directoryURL];
+    return result;
+}
+
+void C_NSSavePanel_SetDirectoryURL(void* ptr, void* value) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    [nSSavePanel setDirectoryURL:(NSURL*)value];
+}
+
+void* C_NSSavePanel_AccessoryView(void* ptr) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    NSView* result = [nSSavePanel accessoryView];
+    return result;
+}
+
+void C_NSSavePanel_SetAccessoryView(void* ptr, void* value) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    [nSSavePanel setAccessoryView:(NSView*)value];
+}
+
+bool C_NSSavePanel_ShowsTagField(void* ptr) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    BOOL result = [nSSavePanel showsTagField];
+    return result;
+}
+
+void C_NSSavePanel_SetShowsTagField(void* ptr, bool value) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    [nSSavePanel setShowsTagField:value];
+}
+
+Array C_NSSavePanel_TagNames(void* ptr) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    NSArray* result = [nSSavePanel tagNames];
+    int resultcount = [result count];
+    void** resultData = malloc(resultcount * sizeof(void*));
+    for (int i = 0; i < resultcount; i++) {
+    	 void* p = [result objectAtIndex:i];
+    	 resultData[i] = p;
     }
-	[savePanel setTagNames:objc_tagNames];
+    Array resultArray;
+    resultArray.data = resultData;
+    resultArray.len = resultcount;
+    return resultArray;
 }
 
-bool SavePanel_CanCreateDirectories(void* ptr) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	return [savePanel canCreateDirectories];
-}
-
-void SavePanel_SetCanCreateDirectories(void* ptr, bool canCreateDirectories) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	[savePanel setCanCreateDirectories:canCreateDirectories];
-}
-
-bool SavePanel_CanSelectHiddenExtension(void* ptr) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	return [savePanel canSelectHiddenExtension];
-}
-
-void SavePanel_SetCanSelectHiddenExtension(void* ptr, bool canSelectHiddenExtension) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	[savePanel setCanSelectHiddenExtension:canSelectHiddenExtension];
-}
-
-bool SavePanel_ShowsHiddenFiles(void* ptr) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	return [savePanel showsHiddenFiles];
-}
-
-void SavePanel_SetShowsHiddenFiles(void* ptr, bool showsHiddenFiles) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	[savePanel setShowsHiddenFiles:showsHiddenFiles];
-}
-
-bool SavePanel_IsExtensionHidden(void* ptr) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	return [savePanel isExtensionHidden];
-}
-
-void SavePanel_SetExtensionHidden(void* ptr, bool extensionHidden) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	[savePanel setExtensionHidden:extensionHidden];
-}
-
-bool SavePanel_IsExpanded(void* ptr) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	return [savePanel isExpanded];
-}
-
-Array SavePanel_AllowedContentTypes(void* ptr) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	NSArray* ns_array = [savePanel allowedContentTypes];
-	int count = [ns_array count];
-	void** data = malloc(count * sizeof(void*));
-	for (int i = 0; i < count; i++) {
-		 data[i] = [ns_array objectAtIndex:i];
-	}
-	Array array;
-	array.data = data;
-	array.len = count;
-	return array;
-}
-
-void SavePanel_SetAllowedContentTypes(void* ptr, Array allowedContentTypes) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-    NSMutableArray* objc_allowedContentTypes = [[NSMutableArray alloc] init];
-    void** allowedContentTypesData = (void**)allowedContentTypes.data;
-    for (int i = 0; i < allowedContentTypes.len; i++) {
-    	[objc_allowedContentTypes addObject:(UTType*)allowedContentTypesData[i]];
+void C_NSSavePanel_SetTagNames(void* ptr, Array value) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    void** valueData = (void**)value.data;
+    for (int i = 0; i < value.len; i++) {
+    	void* p = valueData[i];
+    	[objcValue addObject:(NSString*)(NSString*)p];
     }
-	[savePanel setAllowedContentTypes:objc_allowedContentTypes];
+    [nSSavePanel setTagNames:objcValue];
 }
 
-bool SavePanel_AllowsOtherFileTypes(void* ptr) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	return [savePanel allowsOtherFileTypes];
+bool C_NSSavePanel_CanCreateDirectories(void* ptr) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    BOOL result = [nSSavePanel canCreateDirectories];
+    return result;
 }
 
-void SavePanel_SetAllowsOtherFileTypes(void* ptr, bool allowsOtherFileTypes) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	[savePanel setAllowsOtherFileTypes:allowsOtherFileTypes];
+void C_NSSavePanel_SetCanCreateDirectories(void* ptr, bool value) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    [nSSavePanel setCanCreateDirectories:value];
 }
 
-bool SavePanel_TreatsFilePackagesAsDirectories(void* ptr) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	return [savePanel treatsFilePackagesAsDirectories];
+bool C_NSSavePanel_CanSelectHiddenExtension(void* ptr) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    BOOL result = [nSSavePanel canSelectHiddenExtension];
+    return result;
 }
 
-void SavePanel_SetTreatsFilePackagesAsDirectories(void* ptr, bool treatsFilePackagesAsDirectories) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	[savePanel setTreatsFilePackagesAsDirectories:treatsFilePackagesAsDirectories];
+void C_NSSavePanel_SetCanSelectHiddenExtension(void* ptr, bool value) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    [nSSavePanel setCanSelectHiddenExtension:value];
 }
 
-void* SavePanel_NewSavePanel() {
-	return [NSSavePanel savePanel];
+bool C_NSSavePanel_ShowsHiddenFiles(void* ptr) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    BOOL result = [nSSavePanel showsHiddenFiles];
+    return result;
 }
 
-unsigned long SavePanel_RunModal(void* ptr) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	return [savePanel runModal];
+void C_NSSavePanel_SetShowsHiddenFiles(void* ptr, bool value) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    [nSSavePanel setShowsHiddenFiles:value];
 }
 
-void SavePanel_ValidateVisibleColumns(void* ptr) {
-	NSSavePanel* savePanel = (NSSavePanel*)ptr;
-	[savePanel validateVisibleColumns];
+bool C_NSSavePanel_IsExtensionHidden(void* ptr) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    BOOL result = [nSSavePanel isExtensionHidden];
+    return result;
 }
 
-void SavePanel_BeginSheetModalForWindow(void* ptr, void* window, long handlerID) {
-    NSSavePanel* savePanel = (NSSavePanel*)ptr;
-    [savePanel beginSheetModalForWindow:(NSWindow*)window completionHandler:^(NSInteger result) {
-        SavePanel_CallCompletionHandler(handlerID, result);
-    }];
+void C_NSSavePanel_SetExtensionHidden(void* ptr, bool value) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    [nSSavePanel setExtensionHidden:value];
 }
 
-void SavePanel_BeginWithCompletionHandler(void* ptr, long handlerID) {
-    NSSavePanel* savePanel = (NSSavePanel*)ptr;
-    [savePanel beginWithCompletionHandler:^(NSInteger result) {
-        SavePanel_CallCompletionHandler(handlerID, result);
-    }];
+bool C_NSSavePanel_IsExpanded(void* ptr) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    BOOL result = [nSSavePanel isExpanded];
+    return result;
 }
 
+Array C_NSSavePanel_AllowedContentTypes(void* ptr) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    NSArray* result = [nSSavePanel allowedContentTypes];
+    int resultcount = [result count];
+    void** resultData = malloc(resultcount * sizeof(void*));
+    for (int i = 0; i < resultcount; i++) {
+    	 void* p = [result objectAtIndex:i];
+    	 resultData[i] = p;
+    }
+    Array resultArray;
+    resultArray.data = resultData;
+    resultArray.len = resultcount;
+    return resultArray;
+}
+
+void C_NSSavePanel_SetAllowedContentTypes(void* ptr, Array value) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    void** valueData = (void**)value.data;
+    for (int i = 0; i < value.len; i++) {
+    	void* p = valueData[i];
+    	[objcValue addObject:(UTType*)(UTType*)p];
+    }
+    [nSSavePanel setAllowedContentTypes:objcValue];
+}
+
+bool C_NSSavePanel_AllowsOtherFileTypes(void* ptr) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    BOOL result = [nSSavePanel allowsOtherFileTypes];
+    return result;
+}
+
+void C_NSSavePanel_SetAllowsOtherFileTypes(void* ptr, bool value) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    [nSSavePanel setAllowsOtherFileTypes:value];
+}
+
+bool C_NSSavePanel_TreatsFilePackagesAsDirectories(void* ptr) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    BOOL result = [nSSavePanel treatsFilePackagesAsDirectories];
+    return result;
+}
+
+void C_NSSavePanel_SetTreatsFilePackagesAsDirectories(void* ptr, bool value) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    [nSSavePanel setTreatsFilePackagesAsDirectories:value];
+}

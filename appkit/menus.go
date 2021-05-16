@@ -1,6 +1,7 @@
 package appkit
 
-// These constants are used as a bitmask for specifying a set of menu or menu item properties, and are contained by the propertiesToUpdate property.
+import "github.com/hsiafan/cocoa/uihelper"
+
 type MenuProperties uint
 
 const (
@@ -12,9 +13,8 @@ const (
 	MenuPropertyItemAccessibilityDescription MenuProperties = 1 << 5 // the menu item's accessibility description
 )
 
-func NewMenuItemWithHandler(title string, charCode string, handler ActionHandler) MenuItem {
-	item := NewMenuItem(title, nil, charCode)
-	item.(*NSMenuItem).setDelegate()
-	item.SetAction(handler)
+func NewMenuItem(title string, charCode string, handler uihelper.ActionHandler) MenuItem {
+	item := AllocMenuItem().InitWithTitle_Action_KeyEquivalent(title, nil, charCode)
+	uihelper.SetAction(item, handler)
 	return item
 }

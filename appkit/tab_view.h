@@ -1,34 +1,45 @@
-#import <Foundation/NSGeometry.h>
 #import <stdbool.h>
 #import <stdlib.h>
 #import <utils.h>
+#import <Appkit/Appkit.h>
 
-void TabView_SetDelegate(void *ptr, long goID);
-long TabView_NumberOfTabViewItems(void* ptr);
-unsigned long TabView_TabViewType(void* ptr);
-void TabView_SetTabViewType(void* ptr, unsigned long tabViewType);
-unsigned long TabView_TabPosition(void* ptr);
-void TabView_SetTabPosition(void* ptr, unsigned long tabPosition);
-unsigned long TabView_TabViewBorderType(void* ptr);
-void TabView_SetTabViewBorderType(void* ptr, unsigned long tabViewBorderType);
-bool TabView_AllowsTruncatedLabels(void* ptr);
-void TabView_SetAllowsTruncatedLabels(void* ptr, bool allowsTruncatedLabels);
-void* TabView_SelectedTabViewItem(void* ptr);
-void* TabView_Font(void* ptr);
-void TabView_SetFont(void* ptr, void* font);
-NSSize TabView_MinimumSize(void* ptr);
-unsigned long TabView_ControlSize(void* ptr);
-void TabView_SetControlSize(void* ptr, unsigned long controlSize);
+void* C_TabView_Alloc();
 
-void* TabView_NewTabView(NSRect frame);
-void TabView_AddTabViewItem(void* ptr, void* tabViewItem);
-void TabView_InsertTabViewItem(void* ptr, void* tabViewItem, long index);
-void TabView_RemoveTabViewItem(void* ptr, void* tabViewItem);
-long TabView_IndexOfTabViewItem(void* ptr, void* tabViewItem);
-void* TabView_TabViewItemAtIndex(void* ptr, long index);
-void TabView_SelectFirstTabViewItem(void* ptr, void* sender);
-void TabView_SelectLastTabViewItem(void* ptr, void* sender);
-void TabView_SelectNextTabViewItem(void* ptr, void* sender);
-void TabView_SelectPreviousTabViewItem(void* ptr, void* sender);
-void TabView_SelectTabViewItem(void* ptr, void* tabViewItem);
-void TabView_SelectTabViewItemAtIndex(void* ptr, long index);
+void* C_NSTabView_InitWithFrame(void* ptr, CGRect frameRect);
+void* C_NSTabView_InitWithCoder(void* ptr, void* coder);
+void* C_NSTabView_Init(void* ptr);
+void C_NSTabView_AddTabViewItem(void* ptr, void* tabViewItem);
+void C_NSTabView_InsertTabViewItem_AtIndex(void* ptr, void* tabViewItem, int index);
+void C_NSTabView_RemoveTabViewItem(void* ptr, void* tabViewItem);
+int C_NSTabView_IndexOfTabViewItem(void* ptr, void* tabViewItem);
+int C_NSTabView_IndexOfTabViewItemWithIdentifier(void* ptr, void* identifier);
+void* C_NSTabView_TabViewItemAtIndex(void* ptr, int index);
+void C_NSTabView_SelectFirstTabViewItem(void* ptr, void* sender);
+void C_NSTabView_SelectLastTabViewItem(void* ptr, void* sender);
+void C_NSTabView_SelectNextTabViewItem(void* ptr, void* sender);
+void C_NSTabView_SelectPreviousTabViewItem(void* ptr, void* sender);
+void C_NSTabView_SelectTabViewItem(void* ptr, void* tabViewItem);
+void C_NSTabView_SelectTabViewItemAtIndex(void* ptr, int index);
+void C_NSTabView_SelectTabViewItemWithIdentifier(void* ptr, void* identifier);
+void C_NSTabView_TakeSelectedTabViewItemFromSender(void* ptr, void* sender);
+void* C_NSTabView_TabViewItemAtPoint(void* ptr, CGPoint point);
+int C_NSTabView_NumberOfTabViewItems(void* ptr);
+Array C_NSTabView_TabViewItems(void* ptr);
+void C_NSTabView_SetTabViewItems(void* ptr, Array value);
+unsigned int C_NSTabView_TabViewType(void* ptr);
+void C_NSTabView_SetTabViewType(void* ptr, unsigned int value);
+unsigned int C_NSTabView_TabPosition(void* ptr);
+void C_NSTabView_SetTabPosition(void* ptr, unsigned int value);
+unsigned int C_NSTabView_TabViewBorderType(void* ptr);
+void C_NSTabView_SetTabViewBorderType(void* ptr, unsigned int value);
+void* C_NSTabView_SelectedTabViewItem(void* ptr);
+void* C_NSTabView_Font(void* ptr);
+void C_NSTabView_SetFont(void* ptr, void* value);
+bool C_NSTabView_DrawsBackground(void* ptr);
+void C_NSTabView_SetDrawsBackground(void* ptr, bool value);
+CGSize C_NSTabView_MinimumSize(void* ptr);
+CGRect C_NSTabView_ContentRect(void* ptr);
+unsigned int C_NSTabView_ControlSize(void* ptr);
+void C_NSTabView_SetControlSize(void* ptr, unsigned int value);
+bool C_NSTabView_AllowsTruncatedLabels(void* ptr);
+void C_NSTabView_SetAllowsTruncatedLabels(void* ptr, bool value);

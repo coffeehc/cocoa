@@ -1,78 +1,123 @@
-#import <AppKit/AppKit.h>
-#import "_cgo_export.h"
+#import <Appkit/Appkit.h>
 #import "clip_view.h"
 
-NSEdgeInsets ClipView_ContentInsets(void* ptr) {
-	NSClipView* clipView = (NSClipView*)ptr;
-	return [clipView contentInsets];
+void* C_ClipView_Alloc() {
+    return [NSClipView alloc];
 }
 
-void ClipView_SetContentInsets(void* ptr, NSEdgeInsets contentInsets) {
-	NSClipView* clipView = (NSClipView*)ptr;
-	[clipView setContentInsets:contentInsets];
+void* C_NSClipView_InitWithFrame(void* ptr, CGRect frameRect) {
+    NSClipView* nSClipView = (NSClipView*)ptr;
+    NSClipView* result = [nSClipView initWithFrame:frameRect];
+    return result;
 }
 
-void* ClipView_DocumentView(void* ptr) {
-	NSClipView* clipView = (NSClipView*)ptr;
-	return [clipView documentView];
+void* C_NSClipView_InitWithCoder(void* ptr, void* coder) {
+    NSClipView* nSClipView = (NSClipView*)ptr;
+    NSClipView* result = [nSClipView initWithCoder:(NSCoder*)coder];
+    return result;
 }
 
-void ClipView_SetDocumentView(void* ptr, void* documentView) {
-	NSClipView* clipView = (NSClipView*)ptr;
-	[clipView setDocumentView:(NSView*)documentView];
+void* C_NSClipView_Init(void* ptr) {
+    NSClipView* nSClipView = (NSClipView*)ptr;
+    NSClipView* result = [nSClipView init];
+    return result;
 }
 
-bool ClipView_AutomaticallyAdjustsContentInsets(void* ptr) {
-	NSClipView* clipView = (NSClipView*)ptr;
-	return [clipView automaticallyAdjustsContentInsets];
+void C_NSClipView_ScrollToPoint(void* ptr, CGPoint newOrigin) {
+    NSClipView* nSClipView = (NSClipView*)ptr;
+    [nSClipView scrollToPoint:newOrigin];
 }
 
-void ClipView_SetAutomaticallyAdjustsContentInsets(void* ptr, bool automaticallyAdjustsContentInsets) {
-	NSClipView* clipView = (NSClipView*)ptr;
-	[clipView setAutomaticallyAdjustsContentInsets:automaticallyAdjustsContentInsets];
+CGRect C_NSClipView_ConstrainBoundsRect(void* ptr, CGRect proposedBounds) {
+    NSClipView* nSClipView = (NSClipView*)ptr;
+    NSRect result = [nSClipView constrainBoundsRect:proposedBounds];
+    return result;
 }
 
-NSRect ClipView_DocumentRect(void* ptr) {
-	NSClipView* clipView = (NSClipView*)ptr;
-	return [clipView documentRect];
+void C_NSClipView_ViewBoundsChanged(void* ptr, void* notification) {
+    NSClipView* nSClipView = (NSClipView*)ptr;
+    [nSClipView viewBoundsChanged:(NSNotification*)notification];
 }
 
-NSRect ClipView_DocumentVisibleRect(void* ptr) {
-	NSClipView* clipView = (NSClipView*)ptr;
-	return [clipView documentVisibleRect];
+void C_NSClipView_ViewFrameChanged(void* ptr, void* notification) {
+    NSClipView* nSClipView = (NSClipView*)ptr;
+    [nSClipView viewFrameChanged:(NSNotification*)notification];
 }
 
-bool ClipView_DrawsBackground(void* ptr) {
-	NSClipView* clipView = (NSClipView*)ptr;
-	return [clipView drawsBackground];
+void* C_NSClipView_DocumentView(void* ptr) {
+    NSClipView* nSClipView = (NSClipView*)ptr;
+    NSView* result = [nSClipView documentView];
+    return result;
 }
 
-void ClipView_SetDrawsBackground(void* ptr, bool drawsBackground) {
-	NSClipView* clipView = (NSClipView*)ptr;
-	[clipView setDrawsBackground:drawsBackground];
+void C_NSClipView_SetDocumentView(void* ptr, void* value) {
+    NSClipView* nSClipView = (NSClipView*)ptr;
+    [nSClipView setDocumentView:(NSView*)value];
 }
 
-void* ClipView_BackgroundColor(void* ptr) {
-	NSClipView* clipView = (NSClipView*)ptr;
-	return [clipView backgroundColor];
+NSEdgeInsets C_NSClipView_ContentInsets(void* ptr) {
+    NSClipView* nSClipView = (NSClipView*)ptr;
+    NSEdgeInsets result = [nSClipView contentInsets];
+    return result;
 }
 
-void ClipView_SetBackgroundColor(void* ptr, void* backgroundColor) {
-	NSClipView* clipView = (NSClipView*)ptr;
-	[clipView setBackgroundColor:(NSColor*)backgroundColor];
+void C_NSClipView_SetContentInsets(void* ptr, NSEdgeInsets value) {
+    NSClipView* nSClipView = (NSClipView*)ptr;
+    [nSClipView setContentInsets:value];
 }
 
-void ClipView_ScrollToPoint(void* ptr, NSPoint newOrigin) {
-	NSClipView* clipView = (NSClipView*)ptr;
-	[clipView scrollToPoint:newOrigin];
+bool C_NSClipView_AutomaticallyAdjustsContentInsets(void* ptr) {
+    NSClipView* nSClipView = (NSClipView*)ptr;
+    BOOL result = [nSClipView automaticallyAdjustsContentInsets];
+    return result;
 }
 
-void ClipView_Autoscroll(void* ptr, void* event) {
-	NSClipView* clipView = (NSClipView*)ptr;
-	[clipView autoscroll:(NSEvent*)event];
+void C_NSClipView_SetAutomaticallyAdjustsContentInsets(void* ptr, bool value) {
+    NSClipView* nSClipView = (NSClipView*)ptr;
+    [nSClipView setAutomaticallyAdjustsContentInsets:value];
 }
 
-NSRect ClipView_ConstrainBoundsRect(void* ptr, NSRect proposedBounds) {
-	NSClipView* clipView = (NSClipView*)ptr;
-	return [clipView constrainBoundsRect:proposedBounds];
+CGRect C_NSClipView_DocumentRect(void* ptr) {
+    NSClipView* nSClipView = (NSClipView*)ptr;
+    NSRect result = [nSClipView documentRect];
+    return result;
+}
+
+CGRect C_NSClipView_DocumentVisibleRect(void* ptr) {
+    NSClipView* nSClipView = (NSClipView*)ptr;
+    NSRect result = [nSClipView documentVisibleRect];
+    return result;
+}
+
+void* C_NSClipView_DocumentCursor(void* ptr) {
+    NSClipView* nSClipView = (NSClipView*)ptr;
+    NSCursor* result = [nSClipView documentCursor];
+    return result;
+}
+
+void C_NSClipView_SetDocumentCursor(void* ptr, void* value) {
+    NSClipView* nSClipView = (NSClipView*)ptr;
+    [nSClipView setDocumentCursor:(NSCursor*)value];
+}
+
+bool C_NSClipView_DrawsBackground(void* ptr) {
+    NSClipView* nSClipView = (NSClipView*)ptr;
+    BOOL result = [nSClipView drawsBackground];
+    return result;
+}
+
+void C_NSClipView_SetDrawsBackground(void* ptr, bool value) {
+    NSClipView* nSClipView = (NSClipView*)ptr;
+    [nSClipView setDrawsBackground:value];
+}
+
+void* C_NSClipView_BackgroundColor(void* ptr) {
+    NSClipView* nSClipView = (NSClipView*)ptr;
+    NSColor* result = [nSClipView backgroundColor];
+    return result;
+}
+
+void C_NSClipView_SetBackgroundColor(void* ptr, void* value) {
+    NSClipView* nSClipView = (NSClipView*)ptr;
+    [nSClipView setBackgroundColor:(NSColor*)value];
 }

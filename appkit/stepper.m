@@ -1,58 +1,79 @@
-#import <AppKit/AppKit.h>
-#import "_cgo_export.h"
+#import <Appkit/Appkit.h>
 #import "stepper.h"
 
-double Stepper_MaxValue(void* ptr) {
-	NSStepper* stepper = (NSStepper*)ptr;
-	return [stepper maxValue];
+void* C_Stepper_Alloc() {
+    return [NSStepper alloc];
 }
 
-void Stepper_SetMaxValue(void* ptr, double maxValue) {
-	NSStepper* stepper = (NSStepper*)ptr;
-	[stepper setMaxValue:maxValue];
+void* C_NSStepper_InitWithFrame(void* ptr, CGRect frameRect) {
+    NSStepper* nSStepper = (NSStepper*)ptr;
+    NSStepper* result = [nSStepper initWithFrame:frameRect];
+    return result;
 }
 
-double Stepper_MinValue(void* ptr) {
-	NSStepper* stepper = (NSStepper*)ptr;
-	return [stepper minValue];
+void* C_NSStepper_InitWithCoder(void* ptr, void* coder) {
+    NSStepper* nSStepper = (NSStepper*)ptr;
+    NSStepper* result = [nSStepper initWithCoder:(NSCoder*)coder];
+    return result;
 }
 
-void Stepper_SetMinValue(void* ptr, double minValue) {
-	NSStepper* stepper = (NSStepper*)ptr;
-	[stepper setMinValue:minValue];
+void* C_NSStepper_Init(void* ptr) {
+    NSStepper* nSStepper = (NSStepper*)ptr;
+    NSStepper* result = [nSStepper init];
+    return result;
 }
 
-double Stepper_Increment(void* ptr) {
-	NSStepper* stepper = (NSStepper*)ptr;
-	return [stepper increment];
+double C_NSStepper_MaxValue(void* ptr) {
+    NSStepper* nSStepper = (NSStepper*)ptr;
+    double result = [nSStepper maxValue];
+    return result;
 }
 
-void Stepper_SetIncrement(void* ptr, double increment) {
-	NSStepper* stepper = (NSStepper*)ptr;
-	[stepper setIncrement:increment];
+void C_NSStepper_SetMaxValue(void* ptr, double value) {
+    NSStepper* nSStepper = (NSStepper*)ptr;
+    [nSStepper setMaxValue:value];
 }
 
-bool Stepper_Autorepeat(void* ptr) {
-	NSStepper* stepper = (NSStepper*)ptr;
-	return [stepper autorepeat];
+double C_NSStepper_MinValue(void* ptr) {
+    NSStepper* nSStepper = (NSStepper*)ptr;
+    double result = [nSStepper minValue];
+    return result;
 }
 
-void Stepper_SetAutorepeat(void* ptr, bool autorepeat) {
-	NSStepper* stepper = (NSStepper*)ptr;
-	[stepper setAutorepeat:autorepeat];
+void C_NSStepper_SetMinValue(void* ptr, double value) {
+    NSStepper* nSStepper = (NSStepper*)ptr;
+    [nSStepper setMinValue:value];
 }
 
-bool Stepper_ValueWraps(void* ptr) {
-	NSStepper* stepper = (NSStepper*)ptr;
-	return [stepper valueWraps];
+double C_NSStepper_Increment(void* ptr) {
+    NSStepper* nSStepper = (NSStepper*)ptr;
+    double result = [nSStepper increment];
+    return result;
 }
 
-void Stepper_SetValueWraps(void* ptr, bool valueWraps) {
-	NSStepper* stepper = (NSStepper*)ptr;
-	[stepper setValueWraps:valueWraps];
+void C_NSStepper_SetIncrement(void* ptr, double value) {
+    NSStepper* nSStepper = (NSStepper*)ptr;
+    [nSStepper setIncrement:value];
 }
 
-void* Stepper_NewStepper(NSRect frame) {
-	NSStepper* stepper = [NSStepper alloc];
-	return [[stepper initWithFrame:frame] autorelease];
+bool C_NSStepper_Autorepeat(void* ptr) {
+    NSStepper* nSStepper = (NSStepper*)ptr;
+    BOOL result = [nSStepper autorepeat];
+    return result;
+}
+
+void C_NSStepper_SetAutorepeat(void* ptr, bool value) {
+    NSStepper* nSStepper = (NSStepper*)ptr;
+    [nSStepper setAutorepeat:value];
+}
+
+bool C_NSStepper_ValueWraps(void* ptr) {
+    NSStepper* nSStepper = (NSStepper*)ptr;
+    BOOL result = [nSStepper valueWraps];
+    return result;
+}
+
+void C_NSStepper_SetValueWraps(void* ptr, bool value) {
+    NSStepper* nSStepper = (NSStepper*)ptr;
+    [nSStepper setValueWraps:value];
 }

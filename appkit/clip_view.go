@@ -5,29 +5,33 @@ package appkit
 // #include "clip_view.h"
 import "C"
 import (
+	"github.com/hsiafan/cocoa/coregraphics"
 	"github.com/hsiafan/cocoa/foundation"
+	"github.com/hsiafan/cocoa/objc"
 	"unsafe"
 )
 
 type ClipView interface {
 	View
-	ContentInsets() foundation.EdgeInsets
-	SetContentInsets(contentInsets foundation.EdgeInsets)
-	DocumentView() View
-	SetDocumentView(documentView View)
-	AutomaticallyAdjustsContentInsets() bool
-	SetAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets bool)
-	DocumentRect() foundation.Rect
-	DocumentVisibleRect() foundation.Rect
-	DrawsBackground() bool
-	SetDrawsBackground(drawsBackground bool)
-	BackgroundColor() Color
-	SetBackgroundColor(backgroundColor Color)
 	ScrollToPoint(newOrigin foundation.Point)
 	ConstrainBoundsRect(proposedBounds foundation.Rect) foundation.Rect
+	ViewBoundsChanged(notification foundation.Notification)
+	ViewFrameChanged(notification foundation.Notification)
+	DocumentView() View
+	SetDocumentView(value View)
+	ContentInsets() foundation.EdgeInsets
+	SetContentInsets(value foundation.EdgeInsets)
+	AutomaticallyAdjustsContentInsets() bool
+	SetAutomaticallyAdjustsContentInsets(value bool)
+	DocumentRect() foundation.Rect
+	DocumentVisibleRect() foundation.Rect
+	DocumentCursor() Cursor
+	SetDocumentCursor(value Cursor)
+	DrawsBackground() bool
+	SetDrawsBackground(value bool)
+	BackgroundColor() Color
+	SetBackgroundColor(value Color)
 }
-
-var _ ClipView = (*NSClipView)(nil)
 
 type NSClipView struct {
 	NSView
@@ -42,58 +46,102 @@ func MakeClipView(ptr unsafe.Pointer) *NSClipView {
 	}
 }
 
-func (c *NSClipView) ContentInsets() foundation.EdgeInsets {
-	return toEdgeInsets(C.ClipView_ContentInsets(c.Ptr()))
+func AllocClipView() *NSClipView {
+	return MakeClipView(C.C_ClipView_Alloc())
 }
 
-func (c *NSClipView) SetContentInsets(contentInsets foundation.EdgeInsets) {
-	C.ClipView_SetContentInsets(c.Ptr(), toNSEdgeInsets(contentInsets))
+func (n *NSClipView) InitWithFrame(frameRect foundation.Rect) ClipView {
+	result := C.C_NSClipView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeClipView(result)
 }
 
-func (c *NSClipView) DocumentView() View {
-	return MakeView(C.ClipView_DocumentView(c.Ptr()))
+func (n *NSClipView) InitWithCoder(coder foundation.Coder) ClipView {
+	result := C.C_NSClipView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeClipView(result)
 }
 
-func (c *NSClipView) SetDocumentView(documentView View) {
-	C.ClipView_SetDocumentView(c.Ptr(), toPointer(documentView))
+func (n *NSClipView) Init() ClipView {
+	result := C.C_NSClipView_Init(n.Ptr())
+	return MakeClipView(result)
 }
 
-func (c *NSClipView) AutomaticallyAdjustsContentInsets() bool {
-	return bool(C.ClipView_AutomaticallyAdjustsContentInsets(c.Ptr()))
+func (n *NSClipView) ScrollToPoint(newOrigin foundation.Point) {
+	C.C_NSClipView_ScrollToPoint(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(newOrigin))))
 }
 
-func (c *NSClipView) SetAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets bool) {
-	C.ClipView_SetAutomaticallyAdjustsContentInsets(c.Ptr(), C.bool(automaticallyAdjustsContentInsets))
+func (n *NSClipView) ConstrainBoundsRect(proposedBounds foundation.Rect) foundation.Rect {
+	result := C.C_NSClipView_ConstrainBoundsRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(proposedBounds))))
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
 }
 
-func (c *NSClipView) DocumentRect() foundation.Rect {
-	return toRect(C.ClipView_DocumentRect(c.Ptr()))
+func (n *NSClipView) ViewBoundsChanged(notification foundation.Notification) {
+	C.C_NSClipView_ViewBoundsChanged(n.Ptr(), objc.ExtractPtr(notification))
 }
 
-func (c *NSClipView) DocumentVisibleRect() foundation.Rect {
-	return toRect(C.ClipView_DocumentVisibleRect(c.Ptr()))
+func (n *NSClipView) ViewFrameChanged(notification foundation.Notification) {
+	C.C_NSClipView_ViewFrameChanged(n.Ptr(), objc.ExtractPtr(notification))
 }
 
-func (c *NSClipView) DrawsBackground() bool {
-	return bool(C.ClipView_DrawsBackground(c.Ptr()))
+func (n *NSClipView) DocumentView() View {
+	result := C.C_NSClipView_DocumentView(n.Ptr())
+	return MakeView(result)
 }
 
-func (c *NSClipView) SetDrawsBackground(drawsBackground bool) {
-	C.ClipView_SetDrawsBackground(c.Ptr(), C.bool(drawsBackground))
+func (n *NSClipView) SetDocumentView(value View) {
+	C.C_NSClipView_SetDocumentView(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (c *NSClipView) BackgroundColor() Color {
-	return MakeColor(C.ClipView_BackgroundColor(c.Ptr()))
+func (n *NSClipView) ContentInsets() foundation.EdgeInsets {
+	result := C.C_NSClipView_ContentInsets(n.Ptr())
+	return foundation.FromNSEdgeInsetsPointer(unsafe.Pointer(&result))
 }
 
-func (c *NSClipView) SetBackgroundColor(backgroundColor Color) {
-	C.ClipView_SetBackgroundColor(c.Ptr(), toPointer(backgroundColor))
+func (n *NSClipView) SetContentInsets(value foundation.EdgeInsets) {
+	C.C_NSClipView_SetContentInsets(n.Ptr(), *(*C.NSEdgeInsets)(foundation.ToNSEdgeInsetsPointer(value)))
 }
 
-func (c *NSClipView) ScrollToPoint(newOrigin foundation.Point) {
-	C.ClipView_ScrollToPoint(c.Ptr(), toNSPoint(newOrigin))
+func (n *NSClipView) AutomaticallyAdjustsContentInsets() bool {
+	result := C.C_NSClipView_AutomaticallyAdjustsContentInsets(n.Ptr())
+	return bool(result)
 }
 
-func (c *NSClipView) ConstrainBoundsRect(proposedBounds foundation.Rect) foundation.Rect {
-	return toRect(C.ClipView_ConstrainBoundsRect(c.Ptr(), toNSRect(proposedBounds)))
+func (n *NSClipView) SetAutomaticallyAdjustsContentInsets(value bool) {
+	C.C_NSClipView_SetAutomaticallyAdjustsContentInsets(n.Ptr(), C.bool(value))
+}
+
+func (n *NSClipView) DocumentRect() foundation.Rect {
+	result := C.C_NSClipView_DocumentRect(n.Ptr())
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+}
+
+func (n *NSClipView) DocumentVisibleRect() foundation.Rect {
+	result := C.C_NSClipView_DocumentVisibleRect(n.Ptr())
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+}
+
+func (n *NSClipView) DocumentCursor() Cursor {
+	result := C.C_NSClipView_DocumentCursor(n.Ptr())
+	return MakeCursor(result)
+}
+
+func (n *NSClipView) SetDocumentCursor(value Cursor) {
+	C.C_NSClipView_SetDocumentCursor(n.Ptr(), objc.ExtractPtr(value))
+}
+
+func (n *NSClipView) DrawsBackground() bool {
+	result := C.C_NSClipView_DrawsBackground(n.Ptr())
+	return bool(result)
+}
+
+func (n *NSClipView) SetDrawsBackground(value bool) {
+	C.C_NSClipView_SetDrawsBackground(n.Ptr(), C.bool(value))
+}
+
+func (n *NSClipView) BackgroundColor() Color {
+	result := C.C_NSClipView_BackgroundColor(n.Ptr())
+	return MakeColor(result)
+}
+
+func (n *NSClipView) SetBackgroundColor(value Color) {
+	C.C_NSClipView_SetBackgroundColor(n.Ptr(), objc.ExtractPtr(value))
 }

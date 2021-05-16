@@ -1,63 +1,79 @@
-#import <AppKit/AppKit.h>
-#import "_cgo_export.h"
+#import <Appkit/Appkit.h>
 #import "status_item.h"
 
-void* StatusItem_StatusBar(void* ptr) {
-	NSStatusItem* statusItem = (NSStatusItem*)ptr;
-	return [statusItem statusBar];
+void* C_StatusItem_Alloc() {
+    return [NSStatusItem alloc];
 }
 
-unsigned long StatusItem_Behavior(void* ptr) {
-	NSStatusItem* statusItem = (NSStatusItem*)ptr;
-	return [statusItem behavior];
+void* C_NSStatusItem_Init(void* ptr) {
+    NSStatusItem* nSStatusItem = (NSStatusItem*)ptr;
+    NSStatusItem* result = [nSStatusItem init];
+    return result;
 }
 
-void StatusItem_SetBehavior(void* ptr, unsigned long behavior) {
-	NSStatusItem* statusItem = (NSStatusItem*)ptr;
-	[statusItem setBehavior:behavior];
+void* C_NSStatusItem_StatusBar(void* ptr) {
+    NSStatusItem* nSStatusItem = (NSStatusItem*)ptr;
+    NSStatusBar* result = [nSStatusItem statusBar];
+    return result;
 }
 
-void* StatusItem_Button(void* ptr) {
-	NSStatusItem* statusItem = (NSStatusItem*)ptr;
-	return [statusItem button];
+unsigned int C_NSStatusItem_Behavior(void* ptr) {
+    NSStatusItem* nSStatusItem = (NSStatusItem*)ptr;
+    NSStatusItemBehavior result = [nSStatusItem behavior];
+    return result;
 }
 
-void* StatusItem_Menu(void* ptr) {
-	NSStatusItem* statusItem = (NSStatusItem*)ptr;
-	return [statusItem menu];
+void C_NSStatusItem_SetBehavior(void* ptr, unsigned int value) {
+    NSStatusItem* nSStatusItem = (NSStatusItem*)ptr;
+    [nSStatusItem setBehavior:value];
 }
 
-void StatusItem_SetMenu(void* ptr, void* menu) {
-	NSStatusItem* statusItem = (NSStatusItem*)ptr;
-	[statusItem setMenu:(NSMenu*)menu];
+void* C_NSStatusItem_Button(void* ptr) {
+    NSStatusItem* nSStatusItem = (NSStatusItem*)ptr;
+    NSStatusBarButton* result = [nSStatusItem button];
+    return result;
 }
 
-bool StatusItem_IsVisible(void* ptr) {
-	NSStatusItem* statusItem = (NSStatusItem*)ptr;
-	return [statusItem isVisible];
+void* C_NSStatusItem_Menu(void* ptr) {
+    NSStatusItem* nSStatusItem = (NSStatusItem*)ptr;
+    NSMenu* result = [nSStatusItem menu];
+    return result;
 }
 
-void StatusItem_SetVisible(void* ptr, bool visible) {
-	NSStatusItem* statusItem = (NSStatusItem*)ptr;
-	[statusItem setVisible:visible];
+void C_NSStatusItem_SetMenu(void* ptr, void* value) {
+    NSStatusItem* nSStatusItem = (NSStatusItem*)ptr;
+    [nSStatusItem setMenu:(NSMenu*)value];
 }
 
-double StatusItem_Length(void* ptr) {
-	NSStatusItem* statusItem = (NSStatusItem*)ptr;
-	return [statusItem length];
+bool C_NSStatusItem_IsVisible(void* ptr) {
+    NSStatusItem* nSStatusItem = (NSStatusItem*)ptr;
+    BOOL result = [nSStatusItem isVisible];
+    return result;
 }
 
-void StatusItem_SetLength(void* ptr, double length) {
-	NSStatusItem* statusItem = (NSStatusItem*)ptr;
-	[statusItem setLength:length];
+void C_NSStatusItem_SetVisible(void* ptr, bool value) {
+    NSStatusItem* nSStatusItem = (NSStatusItem*)ptr;
+    [nSStatusItem setVisible:value];
 }
 
-const char* StatusItem_AutosaveName(void* ptr) {
-	NSStatusItem* statusItem = (NSStatusItem*)ptr;
-	return [[statusItem autosaveName] UTF8String];
+double C_NSStatusItem_Length(void* ptr) {
+    NSStatusItem* nSStatusItem = (NSStatusItem*)ptr;
+    CGFloat result = [nSStatusItem length];
+    return result;
 }
 
-void StatusItem_SetAutosaveName(void* ptr, const char* autosaveName) {
-	NSStatusItem* statusItem = (NSStatusItem*)ptr;
-	[statusItem setAutosaveName:[NSString stringWithUTF8String:autosaveName]];
+void C_NSStatusItem_SetLength(void* ptr, double value) {
+    NSStatusItem* nSStatusItem = (NSStatusItem*)ptr;
+    [nSStatusItem setLength:value];
+}
+
+void* C_NSStatusItem_AutosaveName(void* ptr) {
+    NSStatusItem* nSStatusItem = (NSStatusItem*)ptr;
+    NSStatusItemAutosaveName result = [nSStatusItem autosaveName];
+    return result;
+}
+
+void C_NSStatusItem_SetAutosaveName(void* ptr, void* value) {
+    NSStatusItem* nSStatusItem = (NSStatusItem*)ptr;
+    [nSStatusItem setAutosaveName:(NSString*)value];
 }

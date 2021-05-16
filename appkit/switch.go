@@ -5,17 +5,17 @@ package appkit
 // #include "switch.h"
 import "C"
 import (
+	"github.com/hsiafan/cocoa/coregraphics"
 	"github.com/hsiafan/cocoa/foundation"
+	"github.com/hsiafan/cocoa/objc"
 	"unsafe"
 )
 
 type Switch interface {
 	Control
 	State() ControlStateValue
-	SetState(state ControlStateValue)
+	SetState(value ControlStateValue)
 }
-
-var _ Switch = (*NSSwitch)(nil)
 
 type NSSwitch struct {
 	NSControl
@@ -30,14 +30,30 @@ func MakeSwitch(ptr unsafe.Pointer) *NSSwitch {
 	}
 }
 
-func (s *NSSwitch) State() ControlStateValue {
-	return ControlStateValue(C.Switch_State(s.Ptr()))
+func AllocSwitch() *NSSwitch {
+	return MakeSwitch(C.C_Switch_Alloc())
 }
 
-func (s *NSSwitch) SetState(state ControlStateValue) {
-	C.Switch_SetState(s.Ptr(), C.long(state))
+func (n *NSSwitch) InitWithFrame(frameRect foundation.Rect) Switch {
+	result := C.C_NSSwitch_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeSwitch(result)
 }
 
-func NewSwitch(frame foundation.Rect) Switch {
-	return MakeSwitch(C.Switch_NewSwitch(toNSRect(frame)))
+func (n *NSSwitch) InitWithCoder(coder foundation.Coder) Switch {
+	result := C.C_NSSwitch_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeSwitch(result)
+}
+
+func (n *NSSwitch) Init() Switch {
+	result := C.C_NSSwitch_Init(n.Ptr())
+	return MakeSwitch(result)
+}
+
+func (n *NSSwitch) State() ControlStateValue {
+	result := C.C_NSSwitch_State(n.Ptr())
+	return ControlStateValue(int(result))
+}
+
+func (n *NSSwitch) SetState(value ControlStateValue) {
+	C.C_NSSwitch_SetState(n.Ptr(), C.int(int(value)))
 }

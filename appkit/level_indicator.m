@@ -1,108 +1,212 @@
-#import <AppKit/AppKit.h>
-#import "_cgo_export.h"
+#import <Appkit/Appkit.h>
 #import "level_indicator.h"
 
-double LevelIndicator_MinValue(void* ptr) {
-	NSLevelIndicator* levelIndicator = (NSLevelIndicator*)ptr;
-	return [levelIndicator minValue];
+void* C_LevelIndicator_Alloc() {
+    return [NSLevelIndicator alloc];
 }
 
-void LevelIndicator_SetMinValue(void* ptr, double minValue) {
-	NSLevelIndicator* levelIndicator = (NSLevelIndicator*)ptr;
-	[levelIndicator setMinValue:minValue];
+void* C_NSLevelIndicator_InitWithFrame(void* ptr, CGRect frameRect) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    NSLevelIndicator* result = [nSLevelIndicator initWithFrame:frameRect];
+    return result;
 }
 
-double LevelIndicator_MaxValue(void* ptr) {
-	NSLevelIndicator* levelIndicator = (NSLevelIndicator*)ptr;
-	return [levelIndicator maxValue];
+void* C_NSLevelIndicator_InitWithCoder(void* ptr, void* coder) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    NSLevelIndicator* result = [nSLevelIndicator initWithCoder:(NSCoder*)coder];
+    return result;
 }
 
-void LevelIndicator_SetMaxValue(void* ptr, double maxValue) {
-	NSLevelIndicator* levelIndicator = (NSLevelIndicator*)ptr;
-	[levelIndicator setMaxValue:maxValue];
+void* C_NSLevelIndicator_Init(void* ptr) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    NSLevelIndicator* result = [nSLevelIndicator init];
+    return result;
 }
 
-double LevelIndicator_WarningValue(void* ptr) {
-	NSLevelIndicator* levelIndicator = (NSLevelIndicator*)ptr;
-	return [levelIndicator warningValue];
+double C_NSLevelIndicator_TickMarkValueAtIndex(void* ptr, int index) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    double result = [nSLevelIndicator tickMarkValueAtIndex:index];
+    return result;
 }
 
-void LevelIndicator_SetWarningValue(void* ptr, double warningValue) {
-	NSLevelIndicator* levelIndicator = (NSLevelIndicator*)ptr;
-	[levelIndicator setWarningValue:warningValue];
+CGRect C_NSLevelIndicator_RectOfTickMarkAtIndex(void* ptr, int index) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    NSRect result = [nSLevelIndicator rectOfTickMarkAtIndex:index];
+    return result;
 }
 
-double LevelIndicator_CriticalValue(void* ptr) {
-	NSLevelIndicator* levelIndicator = (NSLevelIndicator*)ptr;
-	return [levelIndicator criticalValue];
+double C_NSLevelIndicator_MinValue(void* ptr) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    double result = [nSLevelIndicator minValue];
+    return result;
 }
 
-void LevelIndicator_SetCriticalValue(void* ptr, double criticalValue) {
-	NSLevelIndicator* levelIndicator = (NSLevelIndicator*)ptr;
-	[levelIndicator setCriticalValue:criticalValue];
+void C_NSLevelIndicator_SetMinValue(void* ptr, double value) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    [nSLevelIndicator setMinValue:value];
 }
 
-bool LevelIndicator_IsEditable(void* ptr) {
-	NSLevelIndicator* levelIndicator = (NSLevelIndicator*)ptr;
-	return [levelIndicator isEditable];
+double C_NSLevelIndicator_MaxValue(void* ptr) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    double result = [nSLevelIndicator maxValue];
+    return result;
 }
 
-void LevelIndicator_SetEditable(void* ptr, bool editable) {
-	NSLevelIndicator* levelIndicator = (NSLevelIndicator*)ptr;
-	[levelIndicator setEditable:editable];
+void C_NSLevelIndicator_SetMaxValue(void* ptr, double value) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    [nSLevelIndicator setMaxValue:value];
 }
 
-unsigned long LevelIndicator_TickMarkPosition(void* ptr) {
-	NSLevelIndicator* levelIndicator = (NSLevelIndicator*)ptr;
-	return [levelIndicator tickMarkPosition];
+double C_NSLevelIndicator_WarningValue(void* ptr) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    double result = [nSLevelIndicator warningValue];
+    return result;
 }
 
-void LevelIndicator_SetTickMarkPosition(void* ptr, unsigned long tickMarkPosition) {
-	NSLevelIndicator* levelIndicator = (NSLevelIndicator*)ptr;
-	[levelIndicator setTickMarkPosition:tickMarkPosition];
+void C_NSLevelIndicator_SetWarningValue(void* ptr, double value) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    [nSLevelIndicator setWarningValue:value];
 }
 
-long LevelIndicator_NumberOfTickMarks(void* ptr) {
-	NSLevelIndicator* levelIndicator = (NSLevelIndicator*)ptr;
-	return [levelIndicator numberOfTickMarks];
+double C_NSLevelIndicator_CriticalValue(void* ptr) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    double result = [nSLevelIndicator criticalValue];
+    return result;
 }
 
-void LevelIndicator_SetNumberOfTickMarks(void* ptr, long numberOfTickMarks) {
-	NSLevelIndicator* levelIndicator = (NSLevelIndicator*)ptr;
-	[levelIndicator setNumberOfTickMarks:numberOfTickMarks];
+void C_NSLevelIndicator_SetCriticalValue(void* ptr, double value) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    [nSLevelIndicator setCriticalValue:value];
 }
 
-long LevelIndicator_NumberOfMajorTickMarks(void* ptr) {
-	NSLevelIndicator* levelIndicator = (NSLevelIndicator*)ptr;
-	return [levelIndicator numberOfMajorTickMarks];
+unsigned int C_NSLevelIndicator_TickMarkPosition(void* ptr) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    NSTickMarkPosition result = [nSLevelIndicator tickMarkPosition];
+    return result;
 }
 
-void LevelIndicator_SetNumberOfMajorTickMarks(void* ptr, long numberOfMajorTickMarks) {
-	NSLevelIndicator* levelIndicator = (NSLevelIndicator*)ptr;
-	[levelIndicator setNumberOfMajorTickMarks:numberOfMajorTickMarks];
+void C_NSLevelIndicator_SetTickMarkPosition(void* ptr, unsigned int value) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    [nSLevelIndicator setTickMarkPosition:value];
 }
 
-unsigned long LevelIndicator_LevelIndicatorStyle(void* ptr) {
-	NSLevelIndicator* levelIndicator = (NSLevelIndicator*)ptr;
-	return [levelIndicator levelIndicatorStyle];
+int C_NSLevelIndicator_NumberOfTickMarks(void* ptr) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    NSInteger result = [nSLevelIndicator numberOfTickMarks];
+    return result;
 }
 
-void LevelIndicator_SetLevelIndicatorStyle(void* ptr, unsigned long levelIndicatorStyle) {
-	NSLevelIndicator* levelIndicator = (NSLevelIndicator*)ptr;
-	[levelIndicator setLevelIndicatorStyle:levelIndicatorStyle];
+void C_NSLevelIndicator_SetNumberOfTickMarks(void* ptr, int value) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    [nSLevelIndicator setNumberOfTickMarks:value];
 }
 
-void* LevelIndicator_NewLevelIndicator(NSRect frame) {
-	NSLevelIndicator* levelIndicator = [NSLevelIndicator alloc];
-	return [[levelIndicator initWithFrame:frame] autorelease];
+int C_NSLevelIndicator_NumberOfMajorTickMarks(void* ptr) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    NSInteger result = [nSLevelIndicator numberOfMajorTickMarks];
+    return result;
 }
 
-double LevelIndicator_TickMarkValueAtIndex(void* ptr, long index) {
-	NSLevelIndicator* levelIndicator = (NSLevelIndicator*)ptr;
-	return [levelIndicator tickMarkValueAtIndex:index];
+void C_NSLevelIndicator_SetNumberOfMajorTickMarks(void* ptr, int value) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    [nSLevelIndicator setNumberOfMajorTickMarks:value];
 }
 
-NSRect LevelIndicator_RectOfTickMarkAtIndex(void* ptr, long index) {
-	NSLevelIndicator* levelIndicator = (NSLevelIndicator*)ptr;
-	return [levelIndicator rectOfTickMarkAtIndex:index];
+unsigned int C_NSLevelIndicator_LevelIndicatorStyle(void* ptr) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    NSLevelIndicatorStyle result = [nSLevelIndicator levelIndicatorStyle];
+    return result;
+}
+
+void C_NSLevelIndicator_SetLevelIndicatorStyle(void* ptr, unsigned int value) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    [nSLevelIndicator setLevelIndicatorStyle:value];
+}
+
+void* C_NSLevelIndicator_RatingImage(void* ptr) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    NSImage* result = [nSLevelIndicator ratingImage];
+    return result;
+}
+
+void C_NSLevelIndicator_SetRatingImage(void* ptr, void* value) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    [nSLevelIndicator setRatingImage:(NSImage*)value];
+}
+
+bool C_NSLevelIndicator_DrawsTieredCapacityLevels(void* ptr) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    BOOL result = [nSLevelIndicator drawsTieredCapacityLevels];
+    return result;
+}
+
+void C_NSLevelIndicator_SetDrawsTieredCapacityLevels(void* ptr, bool value) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    [nSLevelIndicator setDrawsTieredCapacityLevels:value];
+}
+
+void* C_NSLevelIndicator_FillColor(void* ptr) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    NSColor* result = [nSLevelIndicator fillColor];
+    return result;
+}
+
+void C_NSLevelIndicator_SetFillColor(void* ptr, void* value) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    [nSLevelIndicator setFillColor:(NSColor*)value];
+}
+
+void* C_NSLevelIndicator_WarningFillColor(void* ptr) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    NSColor* result = [nSLevelIndicator warningFillColor];
+    return result;
+}
+
+void C_NSLevelIndicator_SetWarningFillColor(void* ptr, void* value) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    [nSLevelIndicator setWarningFillColor:(NSColor*)value];
+}
+
+void* C_NSLevelIndicator_CriticalFillColor(void* ptr) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    NSColor* result = [nSLevelIndicator criticalFillColor];
+    return result;
+}
+
+void C_NSLevelIndicator_SetCriticalFillColor(void* ptr, void* value) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    [nSLevelIndicator setCriticalFillColor:(NSColor*)value];
+}
+
+void* C_NSLevelIndicator_RatingPlaceholderImage(void* ptr) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    NSImage* result = [nSLevelIndicator ratingPlaceholderImage];
+    return result;
+}
+
+void C_NSLevelIndicator_SetRatingPlaceholderImage(void* ptr, void* value) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    [nSLevelIndicator setRatingPlaceholderImage:(NSImage*)value];
+}
+
+int C_NSLevelIndicator_PlaceholderVisibility(void* ptr) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    NSLevelIndicatorPlaceholderVisibility result = [nSLevelIndicator placeholderVisibility];
+    return result;
+}
+
+void C_NSLevelIndicator_SetPlaceholderVisibility(void* ptr, int value) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    [nSLevelIndicator setPlaceholderVisibility:value];
+}
+
+bool C_NSLevelIndicator_IsEditable(void* ptr) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    BOOL result = [nSLevelIndicator isEditable];
+    return result;
+}
+
+void C_NSLevelIndicator_SetEditable(void* ptr, bool value) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    [nSLevelIndicator setEditable:value];
 }

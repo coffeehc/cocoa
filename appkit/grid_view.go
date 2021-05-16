@@ -5,42 +5,42 @@ package appkit
 // #include "grid_view.h"
 import "C"
 import (
+	"github.com/hsiafan/cocoa/coregraphics"
 	"github.com/hsiafan/cocoa/foundation"
+	"github.com/hsiafan/cocoa/objc"
 	"unsafe"
 )
 
 type GridView interface {
 	View
+	IndexOfColumn(column GridColumn) int
+	RowAtIndex(index int) GridRow
+	ColumnAtIndex(index int) GridColumn
+	IndexOfRow(row GridRow) int
+	AddRowWithViews(views []View) GridRow
+	InsertRowAtIndex_WithViews(index int, views []View) GridRow
+	RemoveRowAtIndex(index int)
+	MoveRowAtIndex_ToIndex(fromIndex int, toIndex int)
+	AddColumnWithViews(views []View) GridColumn
+	InsertColumnAtIndex_WithViews(index int, views []View) GridColumn
+	RemoveColumnAtIndex(index int)
+	MoveColumnAtIndex_ToIndex(fromIndex int, toIndex int)
+	CellAtColumnIndex_RowIndex(columnIndex int, rowIndex int) GridCell
+	CellForView(view View) GridCell
+	MergeCellsInHorizontalRange_VerticalRange(hRange foundation.Range, vRange foundation.Range)
 	NumberOfRows() int
 	NumberOfColumns() int
-	ColumnSpacing() float64
-	SetColumnSpacing(columnSpacing float64)
-	RowSpacing() float64
-	SetRowSpacing(rowSpacing float64)
+	ColumnSpacing() coregraphics.Float
+	SetColumnSpacing(value coregraphics.Float)
+	RowSpacing() coregraphics.Float
+	SetRowSpacing(value coregraphics.Float)
 	RowAlignment() GridRowAlignment
-	SetRowAlignment(rowAlignment GridRowAlignment)
+	SetRowAlignment(value GridRowAlignment)
 	XPlacement() GridCellPlacement
-	SetXPlacement(xPlacement GridCellPlacement)
+	SetXPlacement(value GridCellPlacement)
 	YPlacement() GridCellPlacement
-	SetYPlacement(yPlacement GridCellPlacement)
-	IndexOfColumn(column GridColumn) int
-	IndexOfRow(row GridRow) int
-	ColumnAtIndex(index int) GridColumn
-	RowAtIndex(index int) GridRow
-	AddRowWithViews(views []View) GridRow
-	InsertRowAtIndex(index int, views []View) GridRow
-	RemoveRowAtIndex(index int)
-	MoveRowAtIndex(fromIndex int, toIndex int)
-	AddColumnWithViews(views []View) GridColumn
-	InsertColumnAtIndex(index int, views []View) GridColumn
-	RemoveColumnAtIndex(index int)
-	MoveColumnAtIndex(fromIndex int, toIndex int)
-	CellAt(columnIndex int, rowIndex int) GridCell
-	CellForView(view View) GridCell
-	MergeCellsInHorizontalRange(hRange foundation.Range, vRange foundation.Range)
+	SetYPlacement(value GridCellPlacement)
 }
-
-var _ GridView = (*NSGridView)(nil)
 
 type NSGridView struct {
 	NSView
@@ -55,138 +55,171 @@ func MakeGridView(ptr unsafe.Pointer) *NSGridView {
 	}
 }
 
-func (g *NSGridView) NumberOfRows() int {
-	return int(C.GridView_NumberOfRows(g.Ptr()))
+func AllocGridView() *NSGridView {
+	return MakeGridView(C.C_GridView_Alloc())
 }
 
-func (g *NSGridView) NumberOfColumns() int {
-	return int(C.GridView_NumberOfColumns(g.Ptr()))
+func (n *NSGridView) InitWithFrame(frameRect foundation.Rect) GridView {
+	result := C.C_NSGridView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeGridView(result)
 }
 
-func (g *NSGridView) ColumnSpacing() float64 {
-	return float64(C.GridView_ColumnSpacing(g.Ptr()))
+func (n *NSGridView) InitWithCoder(coder foundation.Coder) GridView {
+	result := C.C_NSGridView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeGridView(result)
 }
 
-func (g *NSGridView) SetColumnSpacing(columnSpacing float64) {
-	C.GridView_SetColumnSpacing(g.Ptr(), C.double(columnSpacing))
+func (n *NSGridView) Init() GridView {
+	result := C.C_NSGridView_Init(n.Ptr())
+	return MakeGridView(result)
 }
 
-func (g *NSGridView) RowSpacing() float64 {
-	return float64(C.GridView_RowSpacing(g.Ptr()))
+func GridViewWithNumberOfColumns_Rows(columnCount int, rowCount int) GridView {
+	result := C.C_NSGridView_GridViewWithNumberOfColumns_Rows(C.int(columnCount), C.int(rowCount))
+	return MakeGridView(result)
 }
 
-func (g *NSGridView) SetRowSpacing(rowSpacing float64) {
-	C.GridView_SetRowSpacing(g.Ptr(), C.double(rowSpacing))
+func (n *NSGridView) IndexOfColumn(column GridColumn) int {
+	result := C.C_NSGridView_IndexOfColumn(n.Ptr(), objc.ExtractPtr(column))
+	return int(result)
 }
 
-func (g *NSGridView) RowAlignment() GridRowAlignment {
-	return GridRowAlignment(C.GridView_RowAlignment(g.Ptr()))
+func (n *NSGridView) RowAtIndex(index int) GridRow {
+	result := C.C_NSGridView_RowAtIndex(n.Ptr(), C.int(index))
+	return MakeGridRow(result)
 }
 
-func (g *NSGridView) SetRowAlignment(rowAlignment GridRowAlignment) {
-	C.GridView_SetRowAlignment(g.Ptr(), C.long(rowAlignment))
+func (n *NSGridView) ColumnAtIndex(index int) GridColumn {
+	result := C.C_NSGridView_ColumnAtIndex(n.Ptr(), C.int(index))
+	return MakeGridColumn(result)
 }
 
-func (g *NSGridView) XPlacement() GridCellPlacement {
-	return GridCellPlacement(C.GridView_XPlacement(g.Ptr()))
+func (n *NSGridView) IndexOfRow(row GridRow) int {
+	result := C.C_NSGridView_IndexOfRow(n.Ptr(), objc.ExtractPtr(row))
+	return int(result)
 }
 
-func (g *NSGridView) SetXPlacement(xPlacement GridCellPlacement) {
-	C.GridView_SetXPlacement(g.Ptr(), C.long(xPlacement))
-}
-
-func (g *NSGridView) YPlacement() GridCellPlacement {
-	return GridCellPlacement(C.GridView_YPlacement(g.Ptr()))
-}
-
-func (g *NSGridView) SetYPlacement(yPlacement GridCellPlacement) {
-	C.GridView_SetYPlacement(g.Ptr(), C.long(yPlacement))
-}
-
-func NewGridView(frameRect foundation.Rect) GridView {
-	return MakeGridView(C.GridView_NewGridView(toNSRect(frameRect)))
-}
-
-func GridViewWithNumberOfColumns(columnCount int, rowCount int) GridView {
-	return MakeGridView(C.GridView_GridViewWithNumberOfColumns(C.long(columnCount), C.long(rowCount)))
-}
-
-func (g *NSGridView) IndexOfColumn(column GridColumn) int {
-	return int(C.GridView_IndexOfColumn(g.Ptr(), toPointer(column)))
-}
-
-func (g *NSGridView) IndexOfRow(row GridRow) int {
-	return int(C.GridView_IndexOfRow(g.Ptr(), toPointer(row)))
-}
-
-func (g *NSGridView) ColumnAtIndex(index int) GridColumn {
-	return MakeGridColumn(C.GridView_ColumnAtIndex(g.Ptr(), C.long(index)))
-}
-
-func (g *NSGridView) RowAtIndex(index int) GridRow {
-	return MakeGridRow(C.GridView_RowAtIndex(g.Ptr(), C.long(index)))
-}
-
-func (g *NSGridView) AddRowWithViews(views []View) GridRow {
-	c_viewsData := make([]unsafe.Pointer, len(views))
+func (n *NSGridView) AddRowWithViews(views []View) GridRow {
+	cViewsData := make([]unsafe.Pointer, len(views))
 	for idx, v := range views {
-		c_viewsData[idx] = v.Ptr()
+		cViewsData[idx] = objc.ExtractPtr(v)
 	}
-	c_views := C.Array{data: unsafe.Pointer(&c_viewsData[0]), len: C.int(len(views))}
-	return MakeGridRow(C.GridView_AddRowWithViews(g.Ptr(), c_views))
+	cViews := C.Array{data: unsafe.Pointer(&cViewsData[0]), len: C.int(len(views))}
+	result := C.C_NSGridView_AddRowWithViews(n.Ptr(), cViews)
+	return MakeGridRow(result)
 }
 
-func (g *NSGridView) InsertRowAtIndex(index int, views []View) GridRow {
-	c_viewsData := make([]unsafe.Pointer, len(views))
+func (n *NSGridView) InsertRowAtIndex_WithViews(index int, views []View) GridRow {
+	cViewsData := make([]unsafe.Pointer, len(views))
 	for idx, v := range views {
-		c_viewsData[idx] = v.Ptr()
+		cViewsData[idx] = objc.ExtractPtr(v)
 	}
-	c_views := C.Array{data: unsafe.Pointer(&c_viewsData[0]), len: C.int(len(views))}
-	return MakeGridRow(C.GridView_InsertRowAtIndex(g.Ptr(), C.long(index), c_views))
+	cViews := C.Array{data: unsafe.Pointer(&cViewsData[0]), len: C.int(len(views))}
+	result := C.C_NSGridView_InsertRowAtIndex_WithViews(n.Ptr(), C.int(index), cViews)
+	return MakeGridRow(result)
 }
 
-func (g *NSGridView) RemoveRowAtIndex(index int) {
-	C.GridView_RemoveRowAtIndex(g.Ptr(), C.long(index))
+func (n *NSGridView) RemoveRowAtIndex(index int) {
+	C.C_NSGridView_RemoveRowAtIndex(n.Ptr(), C.int(index))
 }
 
-func (g *NSGridView) MoveRowAtIndex(fromIndex int, toIndex int) {
-	C.GridView_MoveRowAtIndex(g.Ptr(), C.long(fromIndex), C.long(toIndex))
+func (n *NSGridView) MoveRowAtIndex_ToIndex(fromIndex int, toIndex int) {
+	C.C_NSGridView_MoveRowAtIndex_ToIndex(n.Ptr(), C.int(fromIndex), C.int(toIndex))
 }
 
-func (g *NSGridView) AddColumnWithViews(views []View) GridColumn {
-	c_viewsData := make([]unsafe.Pointer, len(views))
+func (n *NSGridView) AddColumnWithViews(views []View) GridColumn {
+	cViewsData := make([]unsafe.Pointer, len(views))
 	for idx, v := range views {
-		c_viewsData[idx] = v.Ptr()
+		cViewsData[idx] = objc.ExtractPtr(v)
 	}
-	c_views := C.Array{data: unsafe.Pointer(&c_viewsData[0]), len: C.int(len(views))}
-	return MakeGridColumn(C.GridView_AddColumnWithViews(g.Ptr(), c_views))
+	cViews := C.Array{data: unsafe.Pointer(&cViewsData[0]), len: C.int(len(views))}
+	result := C.C_NSGridView_AddColumnWithViews(n.Ptr(), cViews)
+	return MakeGridColumn(result)
 }
 
-func (g *NSGridView) InsertColumnAtIndex(index int, views []View) GridColumn {
-	c_viewsData := make([]unsafe.Pointer, len(views))
+func (n *NSGridView) InsertColumnAtIndex_WithViews(index int, views []View) GridColumn {
+	cViewsData := make([]unsafe.Pointer, len(views))
 	for idx, v := range views {
-		c_viewsData[idx] = v.Ptr()
+		cViewsData[idx] = objc.ExtractPtr(v)
 	}
-	c_views := C.Array{data: unsafe.Pointer(&c_viewsData[0]), len: C.int(len(views))}
-	return MakeGridColumn(C.GridView_InsertColumnAtIndex(g.Ptr(), C.long(index), c_views))
+	cViews := C.Array{data: unsafe.Pointer(&cViewsData[0]), len: C.int(len(views))}
+	result := C.C_NSGridView_InsertColumnAtIndex_WithViews(n.Ptr(), C.int(index), cViews)
+	return MakeGridColumn(result)
 }
 
-func (g *NSGridView) RemoveColumnAtIndex(index int) {
-	C.GridView_RemoveColumnAtIndex(g.Ptr(), C.long(index))
+func (n *NSGridView) RemoveColumnAtIndex(index int) {
+	C.C_NSGridView_RemoveColumnAtIndex(n.Ptr(), C.int(index))
 }
 
-func (g *NSGridView) MoveColumnAtIndex(fromIndex int, toIndex int) {
-	C.GridView_MoveColumnAtIndex(g.Ptr(), C.long(fromIndex), C.long(toIndex))
+func (n *NSGridView) MoveColumnAtIndex_ToIndex(fromIndex int, toIndex int) {
+	C.C_NSGridView_MoveColumnAtIndex_ToIndex(n.Ptr(), C.int(fromIndex), C.int(toIndex))
 }
 
-func (g *NSGridView) CellAt(columnIndex int, rowIndex int) GridCell {
-	return MakeGridCell(C.GridView_CellAt(g.Ptr(), C.long(columnIndex), C.long(rowIndex)))
+func (n *NSGridView) CellAtColumnIndex_RowIndex(columnIndex int, rowIndex int) GridCell {
+	result := C.C_NSGridView_CellAtColumnIndex_RowIndex(n.Ptr(), C.int(columnIndex), C.int(rowIndex))
+	return MakeGridCell(result)
 }
 
-func (g *NSGridView) CellForView(view View) GridCell {
-	return MakeGridCell(C.GridView_CellForView(g.Ptr(), toPointer(view)))
+func (n *NSGridView) CellForView(view View) GridCell {
+	result := C.C_NSGridView_CellForView(n.Ptr(), objc.ExtractPtr(view))
+	return MakeGridCell(result)
 }
 
-func (g *NSGridView) MergeCellsInHorizontalRange(hRange foundation.Range, vRange foundation.Range) {
-	C.GridView_MergeCellsInHorizontalRange(g.Ptr(), *(*C.NSRange)(foundation.ToNSRangePointer(hRange)), *(*C.NSRange)(foundation.ToNSRangePointer(vRange)))
+func (n *NSGridView) MergeCellsInHorizontalRange_VerticalRange(hRange foundation.Range, vRange foundation.Range) {
+	C.C_NSGridView_MergeCellsInHorizontalRange_VerticalRange(n.Ptr(), *(*C.NSRange)(foundation.ToNSRangePointer(hRange)), *(*C.NSRange)(foundation.ToNSRangePointer(vRange)))
+}
+
+func (n *NSGridView) NumberOfRows() int {
+	result := C.C_NSGridView_NumberOfRows(n.Ptr())
+	return int(result)
+}
+
+func (n *NSGridView) NumberOfColumns() int {
+	result := C.C_NSGridView_NumberOfColumns(n.Ptr())
+	return int(result)
+}
+
+func (n *NSGridView) ColumnSpacing() coregraphics.Float {
+	result := C.C_NSGridView_ColumnSpacing(n.Ptr())
+	return coregraphics.Float(float64(result))
+}
+
+func (n *NSGridView) SetColumnSpacing(value coregraphics.Float) {
+	C.C_NSGridView_SetColumnSpacing(n.Ptr(), C.double(float64(value)))
+}
+
+func (n *NSGridView) RowSpacing() coregraphics.Float {
+	result := C.C_NSGridView_RowSpacing(n.Ptr())
+	return coregraphics.Float(float64(result))
+}
+
+func (n *NSGridView) SetRowSpacing(value coregraphics.Float) {
+	C.C_NSGridView_SetRowSpacing(n.Ptr(), C.double(float64(value)))
+}
+
+func (n *NSGridView) RowAlignment() GridRowAlignment {
+	result := C.C_NSGridView_RowAlignment(n.Ptr())
+	return GridRowAlignment(int(result))
+}
+
+func (n *NSGridView) SetRowAlignment(value GridRowAlignment) {
+	C.C_NSGridView_SetRowAlignment(n.Ptr(), C.int(int(value)))
+}
+
+func (n *NSGridView) XPlacement() GridCellPlacement {
+	result := C.C_NSGridView_XPlacement(n.Ptr())
+	return GridCellPlacement(int(result))
+}
+
+func (n *NSGridView) SetXPlacement(value GridCellPlacement) {
+	C.C_NSGridView_SetXPlacement(n.Ptr(), C.int(int(value)))
+}
+
+func (n *NSGridView) YPlacement() GridCellPlacement {
+	result := C.C_NSGridView_YPlacement(n.Ptr())
+	return GridCellPlacement(int(result))
+}
+
+func (n *NSGridView) SetYPlacement(value GridCellPlacement) {
+	C.C_NSGridView_SetYPlacement(n.Ptr(), C.int(int(value)))
 }

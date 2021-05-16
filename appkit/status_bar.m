@@ -1,27 +1,40 @@
-#import <AppKit/AppKit.h>
-#import "_cgo_export.h"
+#import <Appkit/Appkit.h>
 #import "status_bar.h"
 
-bool StatusBar_IsVertical(void* ptr) {
-	NSStatusBar* statusBar = (NSStatusBar*)ptr;
-	return [statusBar isVertical];
+void* C_StatusBar_Alloc() {
+    return [NSStatusBar alloc];
 }
 
-double StatusBar_Thickness(void* ptr) {
-	NSStatusBar* statusBar = (NSStatusBar*)ptr;
-	return [statusBar thickness];
+void* C_NSStatusBar_Init(void* ptr) {
+    NSStatusBar* nSStatusBar = (NSStatusBar*)ptr;
+    NSStatusBar* result = [nSStatusBar init];
+    return result;
 }
 
-void* StatusBar_SystemStatusBar() {
-	return [NSStatusBar systemStatusBar];
+void* C_NSStatusBar_StatusItemWithLength(void* ptr, double length) {
+    NSStatusBar* nSStatusBar = (NSStatusBar*)ptr;
+    NSStatusItem* result = [nSStatusBar statusItemWithLength:length];
+    return result;
 }
 
-void* StatusBar_StatusItemWithLength(void* ptr, double length) {
-	NSStatusBar* statusBar = (NSStatusBar*)ptr;
-	return [statusBar statusItemWithLength:length];
+void C_NSStatusBar_RemoveStatusItem(void* ptr, void* item) {
+    NSStatusBar* nSStatusBar = (NSStatusBar*)ptr;
+    [nSStatusBar removeStatusItem:(NSStatusItem*)item];
 }
 
-void StatusBar_RemoveStatusItem(void* ptr, void* item) {
-	NSStatusBar* statusBar = (NSStatusBar*)ptr;
-	[statusBar removeStatusItem:(NSStatusItem*)item];
+void* C_NSStatusBar_SystemStatusBar() {
+    NSStatusBar* result = [NSStatusBar systemStatusBar];
+    return result;
+}
+
+bool C_NSStatusBar_IsVertical(void* ptr) {
+    NSStatusBar* nSStatusBar = (NSStatusBar*)ptr;
+    BOOL result = [nSStatusBar isVertical];
+    return result;
+}
+
+double C_NSStatusBar_Thickness(void* ptr) {
+    NSStatusBar* nSStatusBar = (NSStatusBar*)ptr;
+    CGFloat result = [nSStatusBar thickness];
+    return result;
 }

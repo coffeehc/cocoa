@@ -1,143 +1,173 @@
-#import <AppKit/AppKit.h>
-#import "_cgo_export.h"
+#import <Appkit/Appkit.h>
 #import "box.h"
 
-NSRect Box_BorderRect(void* ptr) {
-	NSBox* box = (NSBox*)ptr;
-	return [box borderRect];
+void* C_Box_Alloc() {
+    return [NSBox alloc];
 }
 
-unsigned long Box_BoxType(void* ptr) {
-	NSBox* box = (NSBox*)ptr;
-	return [box boxType];
+void* C_NSBox_InitWithFrame(void* ptr, CGRect frameRect) {
+    NSBox* nSBox = (NSBox*)ptr;
+    NSBox* result = [nSBox initWithFrame:frameRect];
+    return result;
 }
 
-void Box_SetBoxType(void* ptr, unsigned long boxType) {
-	NSBox* box = (NSBox*)ptr;
-	[box setBoxType:boxType];
+void* C_NSBox_InitWithCoder(void* ptr, void* coder) {
+    NSBox* nSBox = (NSBox*)ptr;
+    NSBox* result = [nSBox initWithCoder:(NSCoder*)coder];
+    return result;
 }
 
-bool Box_IsTransparent(void* ptr) {
-	NSBox* box = (NSBox*)ptr;
-	return [box isTransparent];
+void* C_NSBox_Init(void* ptr) {
+    NSBox* nSBox = (NSBox*)ptr;
+    NSBox* result = [nSBox init];
+    return result;
 }
 
-void Box_SetTransparent(void* ptr, bool transparent) {
-	NSBox* box = (NSBox*)ptr;
-	[box setTransparent:transparent];
+void C_NSBox_SetFrameFromContentFrame(void* ptr, CGRect contentFrame) {
+    NSBox* nSBox = (NSBox*)ptr;
+    [nSBox setFrameFromContentFrame:contentFrame];
 }
 
-const char* Box_Title(void* ptr) {
-	NSBox* box = (NSBox*)ptr;
-	return [[box title] UTF8String];
+void C_NSBox_SizeToFit(void* ptr) {
+    NSBox* nSBox = (NSBox*)ptr;
+    [nSBox sizeToFit];
 }
 
-void Box_SetTitle(void* ptr, const char* title) {
-	NSBox* box = (NSBox*)ptr;
-	[box setTitle:[NSString stringWithUTF8String:title]];
+CGRect C_NSBox_BorderRect(void* ptr) {
+    NSBox* nSBox = (NSBox*)ptr;
+    NSRect result = [nSBox borderRect];
+    return result;
 }
 
-void* Box_TitleFont(void* ptr) {
-	NSBox* box = (NSBox*)ptr;
-	return [box titleFont];
+unsigned int C_NSBox_BoxType(void* ptr) {
+    NSBox* nSBox = (NSBox*)ptr;
+    NSBoxType result = [nSBox boxType];
+    return result;
 }
 
-void Box_SetTitleFont(void* ptr, void* titleFont) {
-	NSBox* box = (NSBox*)ptr;
-	[box setTitleFont:(NSFont*)titleFont];
+void C_NSBox_SetBoxType(void* ptr, unsigned int value) {
+    NSBox* nSBox = (NSBox*)ptr;
+    [nSBox setBoxType:value];
 }
 
-unsigned long Box_TitlePosition(void* ptr) {
-	NSBox* box = (NSBox*)ptr;
-	return [box titlePosition];
+bool C_NSBox_IsTransparent(void* ptr) {
+    NSBox* nSBox = (NSBox*)ptr;
+    BOOL result = [nSBox isTransparent];
+    return result;
 }
 
-void Box_SetTitlePosition(void* ptr, unsigned long titlePosition) {
-	NSBox* box = (NSBox*)ptr;
-	[box setTitlePosition:titlePosition];
+void C_NSBox_SetTransparent(void* ptr, bool value) {
+    NSBox* nSBox = (NSBox*)ptr;
+    [nSBox setTransparent:value];
 }
 
-void* Box_TitleCell(void* ptr) {
-	NSBox* box = (NSBox*)ptr;
-	return [box titleCell];
+void* C_NSBox_Title(void* ptr) {
+    NSBox* nSBox = (NSBox*)ptr;
+    NSString* result = [nSBox title];
+    return result;
 }
 
-NSRect Box_TitleRect(void* ptr) {
-	NSBox* box = (NSBox*)ptr;
-	return [box titleRect];
+void C_NSBox_SetTitle(void* ptr, void* value) {
+    NSBox* nSBox = (NSBox*)ptr;
+    [nSBox setTitle:(NSString*)value];
 }
 
-void* Box_BorderColor(void* ptr) {
-	NSBox* box = (NSBox*)ptr;
-	return [box borderColor];
+void* C_NSBox_TitleFont(void* ptr) {
+    NSBox* nSBox = (NSBox*)ptr;
+    NSFont* result = [nSBox titleFont];
+    return result;
 }
 
-void Box_SetBorderColor(void* ptr, void* borderColor) {
-	NSBox* box = (NSBox*)ptr;
-	[box setBorderColor:(NSColor*)borderColor];
+void C_NSBox_SetTitleFont(void* ptr, void* value) {
+    NSBox* nSBox = (NSBox*)ptr;
+    [nSBox setTitleFont:(NSFont*)value];
 }
 
-double Box_BorderWidth(void* ptr) {
-	NSBox* box = (NSBox*)ptr;
-	return [box borderWidth];
+unsigned int C_NSBox_TitlePosition(void* ptr) {
+    NSBox* nSBox = (NSBox*)ptr;
+    NSTitlePosition result = [nSBox titlePosition];
+    return result;
 }
 
-void Box_SetBorderWidth(void* ptr, double borderWidth) {
-	NSBox* box = (NSBox*)ptr;
-	[box setBorderWidth:borderWidth];
+void C_NSBox_SetTitlePosition(void* ptr, unsigned int value) {
+    NSBox* nSBox = (NSBox*)ptr;
+    [nSBox setTitlePosition:value];
 }
 
-double Box_CornerRadius(void* ptr) {
-	NSBox* box = (NSBox*)ptr;
-	return [box cornerRadius];
+void* C_NSBox_TitleCell(void* ptr) {
+    NSBox* nSBox = (NSBox*)ptr;
+    id result = [nSBox titleCell];
+    return result;
 }
 
-void Box_SetCornerRadius(void* ptr, double cornerRadius) {
-	NSBox* box = (NSBox*)ptr;
-	[box setCornerRadius:cornerRadius];
+CGRect C_NSBox_TitleRect(void* ptr) {
+    NSBox* nSBox = (NSBox*)ptr;
+    NSRect result = [nSBox titleRect];
+    return result;
 }
 
-void* Box_FillColor(void* ptr) {
-	NSBox* box = (NSBox*)ptr;
-	return [box fillColor];
+void* C_NSBox_BorderColor(void* ptr) {
+    NSBox* nSBox = (NSBox*)ptr;
+    NSColor* result = [nSBox borderColor];
+    return result;
 }
 
-void Box_SetFillColor(void* ptr, void* fillColor) {
-	NSBox* box = (NSBox*)ptr;
-	[box setFillColor:(NSColor*)fillColor];
+void C_NSBox_SetBorderColor(void* ptr, void* value) {
+    NSBox* nSBox = (NSBox*)ptr;
+    [nSBox setBorderColor:(NSColor*)value];
 }
 
-void* Box_ContentView(void* ptr) {
-	NSBox* box = (NSBox*)ptr;
-	return [box contentView];
+double C_NSBox_BorderWidth(void* ptr) {
+    NSBox* nSBox = (NSBox*)ptr;
+    CGFloat result = [nSBox borderWidth];
+    return result;
 }
 
-void Box_SetContentView(void* ptr, void* contentView) {
-	NSBox* box = (NSBox*)ptr;
-	[box setContentView:(NSView*)contentView];
+void C_NSBox_SetBorderWidth(void* ptr, double value) {
+    NSBox* nSBox = (NSBox*)ptr;
+    [nSBox setBorderWidth:value];
 }
 
-NSSize Box_ContentViewMargins(void* ptr) {
-	NSBox* box = (NSBox*)ptr;
-	return [box contentViewMargins];
+double C_NSBox_CornerRadius(void* ptr) {
+    NSBox* nSBox = (NSBox*)ptr;
+    CGFloat result = [nSBox cornerRadius];
+    return result;
 }
 
-void Box_SetContentViewMargins(void* ptr, NSSize contentViewMargins) {
-	NSBox* box = (NSBox*)ptr;
-	[box setContentViewMargins:contentViewMargins];
+void C_NSBox_SetCornerRadius(void* ptr, double value) {
+    NSBox* nSBox = (NSBox*)ptr;
+    [nSBox setCornerRadius:value];
 }
 
-void* Box_NewBox(NSRect frame) {
-	NSBox* box = [NSBox alloc];
-	return [[box initWithFrame:frame] autorelease];
+void* C_NSBox_FillColor(void* ptr) {
+    NSBox* nSBox = (NSBox*)ptr;
+    NSColor* result = [nSBox fillColor];
+    return result;
 }
 
-void Box_SetFrameFromContentFrame(void* ptr, NSRect contentFrame) {
-	NSBox* box = (NSBox*)ptr;
-	[box setFrameFromContentFrame:contentFrame];
+void C_NSBox_SetFillColor(void* ptr, void* value) {
+    NSBox* nSBox = (NSBox*)ptr;
+    [nSBox setFillColor:(NSColor*)value];
 }
 
-void Box_SizeToFit(void* ptr) {
-	NSBox* box = (NSBox*)ptr;
-	[box sizeToFit];
+void* C_NSBox_ContentView(void* ptr) {
+    NSBox* nSBox = (NSBox*)ptr;
+    NSView* result = [nSBox contentView];
+    return result;
+}
+
+void C_NSBox_SetContentView(void* ptr, void* value) {
+    NSBox* nSBox = (NSBox*)ptr;
+    [nSBox setContentView:(NSView*)value];
+}
+
+CGSize C_NSBox_ContentViewMargins(void* ptr) {
+    NSBox* nSBox = (NSBox*)ptr;
+    NSSize result = [nSBox contentViewMargins];
+    return result;
+}
+
+void C_NSBox_SetContentViewMargins(void* ptr, CGSize value) {
+    NSBox* nSBox = (NSBox*)ptr;
+    [nSBox setContentViewMargins:value];
 }

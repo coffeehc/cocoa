@@ -37,3 +37,17 @@ func NewString(str string) *NSString {
 	ptr := C.String_New(cstr)
 	return MakeString(ptr)
 }
+
+type MutableString interface {
+	String
+}
+
+type NSMutableString struct {
+	NSString
+}
+
+func MakeMutableString(ptr unsafe.Pointer) *NSMutableString {
+	return &NSMutableString{
+		NSString: *MakeString(ptr),
+	}
+}

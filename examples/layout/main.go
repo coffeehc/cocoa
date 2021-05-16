@@ -28,7 +28,7 @@ func initAndRun() {
 	button2.SetStringValue("button2")
 	textView := appkit.ScrollableTextView()
 
-	gridView := appkit.NewGridView(foundation.ZeroRect)
+	gridView := appkit.AllocGridView().InitWithFrame(foundation.ZeroRect)
 	for i := 0; i < 3; i++ {
 		var views []appkit.View
 		for j := 0; j < 4; j++ {
@@ -46,10 +46,10 @@ func initAndRun() {
 	stackView.SetSpacing(10)
 
 	w.ContentView().AddSubview(stackView)
-	w.ContentView().LeadingAnchor().ConstraintEqualToAnchor2(stackView.LeadingAnchor(), -10).SetActive(true)
-	w.ContentView().TopAnchor().ConstraintEqualToAnchor2(stackView.TopAnchor(), -10).SetActive(true)
-	w.ContentView().TrailingAnchor().ConstraintEqualToAnchor2(stackView.TrailingAnchor(), 10).SetActive(true)
-	w.ContentView().BottomAnchor().ConstraintEqualToAnchor2(stackView.BottomAnchor(), 10).SetActive(true)
+	w.ContentView().LeadingAnchor().ConstraintEqualToAnchor_Constant(stackView.LeadingAnchor(), -10).SetActive(true)
+	w.ContentView().TopAnchor().ConstraintEqualToAnchor_Constant(stackView.TopAnchor(), -10).SetActive(true)
+	w.ContentView().TrailingAnchor().ConstraintEqualToAnchor_Constant(stackView.TrailingAnchor(), 10).SetActive(true)
+	w.ContentView().BottomAnchor().ConstraintEqualToAnchor_Constant(stackView.BottomAnchor(), 10).SetActive(true)
 
 	w.MakeKeyAndOrderFront(nil)
 	w.Center()

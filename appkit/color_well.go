@@ -5,6 +5,7 @@ package appkit
 // #include "color_well.h"
 import "C"
 import (
+	"github.com/hsiafan/cocoa/coregraphics"
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
 	"unsafe"
@@ -12,18 +13,16 @@ import (
 
 type ColorWell interface {
 	Control
-	Color() Color
-	SetColor(color Color)
-	IsActive() bool
-	IsBordered() bool
-	SetBordered(bordered bool)
 	TakeColorFrom(sender objc.Object)
 	Activate(exclusive bool)
 	Deactivate()
 	DrawWellInside(insideRect foundation.Rect)
+	Color() Color
+	SetColor(value Color)
+	IsActive() bool
+	IsBordered() bool
+	SetBordered(value bool)
 }
-
-var _ ColorWell = (*NSColorWell)(nil)
 
 type NSColorWell struct {
 	NSControl
@@ -38,42 +37,60 @@ func MakeColorWell(ptr unsafe.Pointer) *NSColorWell {
 	}
 }
 
-func (c *NSColorWell) Color() Color {
-	return MakeColor(C.ColorWell_Color(c.Ptr()))
+func AllocColorWell() *NSColorWell {
+	return MakeColorWell(C.C_ColorWell_Alloc())
 }
 
-func (c *NSColorWell) SetColor(color Color) {
-	C.ColorWell_SetColor(c.Ptr(), toPointer(color))
+func (n *NSColorWell) InitWithFrame(frameRect foundation.Rect) ColorWell {
+	result := C.C_NSColorWell_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeColorWell(result)
 }
 
-func (c *NSColorWell) IsActive() bool {
-	return bool(C.ColorWell_IsActive(c.Ptr()))
+func (n *NSColorWell) InitWithCoder(coder foundation.Coder) ColorWell {
+	result := C.C_NSColorWell_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeColorWell(result)
 }
 
-func (c *NSColorWell) IsBordered() bool {
-	return bool(C.ColorWell_IsBordered(c.Ptr()))
+func (n *NSColorWell) Init() ColorWell {
+	result := C.C_NSColorWell_Init(n.Ptr())
+	return MakeColorWell(result)
 }
 
-func (c *NSColorWell) SetBordered(bordered bool) {
-	C.ColorWell_SetBordered(c.Ptr(), C.bool(bordered))
+func (n *NSColorWell) TakeColorFrom(sender objc.Object) {
+	C.C_NSColorWell_TakeColorFrom(n.Ptr(), objc.ExtractPtr(sender))
 }
 
-func NewColorWell(frame foundation.Rect) ColorWell {
-	return MakeColorWell(C.ColorWell_NewColorWell(toNSRect(frame)))
+func (n *NSColorWell) Activate(exclusive bool) {
+	C.C_NSColorWell_Activate(n.Ptr(), C.bool(exclusive))
 }
 
-func (c *NSColorWell) TakeColorFrom(sender objc.Object) {
-	C.ColorWell_TakeColorFrom(c.Ptr(), toPointer(sender))
+func (n *NSColorWell) Deactivate() {
+	C.C_NSColorWell_Deactivate(n.Ptr())
 }
 
-func (c *NSColorWell) Activate(exclusive bool) {
-	C.ColorWell_Activate(c.Ptr(), C.bool(exclusive))
+func (n *NSColorWell) DrawWellInside(insideRect foundation.Rect) {
+	C.C_NSColorWell_DrawWellInside(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(insideRect))))
 }
 
-func (c *NSColorWell) Deactivate() {
-	C.ColorWell_Deactivate(c.Ptr())
+func (n *NSColorWell) Color() Color {
+	result := C.C_NSColorWell_Color(n.Ptr())
+	return MakeColor(result)
 }
 
-func (c *NSColorWell) DrawWellInside(insideRect foundation.Rect) {
-	C.ColorWell_DrawWellInside(c.Ptr(), toNSRect(insideRect))
+func (n *NSColorWell) SetColor(value Color) {
+	C.C_NSColorWell_SetColor(n.Ptr(), objc.ExtractPtr(value))
+}
+
+func (n *NSColorWell) IsActive() bool {
+	result := C.C_NSColorWell_IsActive(n.Ptr())
+	return bool(result)
+}
+
+func (n *NSColorWell) IsBordered() bool {
+	result := C.C_NSColorWell_IsBordered(n.Ptr())
+	return bool(result)
+}
+
+func (n *NSColorWell) SetBordered(value bool) {
+	C.C_NSColorWell_SetBordered(n.Ptr(), C.bool(value))
 }

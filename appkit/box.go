@@ -5,6 +5,7 @@ package appkit
 // #include "box.h"
 import "C"
 import (
+	"github.com/hsiafan/cocoa/coregraphics"
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
 	"unsafe"
@@ -12,36 +13,34 @@ import (
 
 type Box interface {
 	View
+	SetFrameFromContentFrame(contentFrame foundation.Rect)
+	SizeToFit()
 	BorderRect() foundation.Rect
 	BoxType() BoxType
-	SetBoxType(boxType BoxType)
+	SetBoxType(value BoxType)
 	IsTransparent() bool
-	SetTransparent(transparent bool)
+	SetTransparent(value bool)
 	Title() string
-	SetTitle(title string)
+	SetTitle(value string)
 	TitleFont() Font
-	SetTitleFont(titleFont Font)
+	SetTitleFont(value Font)
 	TitlePosition() TitlePosition
-	SetTitlePosition(titlePosition TitlePosition)
+	SetTitlePosition(value TitlePosition)
 	TitleCell() objc.Object
 	TitleRect() foundation.Rect
 	BorderColor() Color
-	SetBorderColor(borderColor Color)
-	BorderWidth() float64
-	SetBorderWidth(borderWidth float64)
-	CornerRadius() float64
-	SetCornerRadius(cornerRadius float64)
+	SetBorderColor(value Color)
+	BorderWidth() coregraphics.Float
+	SetBorderWidth(value coregraphics.Float)
+	CornerRadius() coregraphics.Float
+	SetCornerRadius(value coregraphics.Float)
 	FillColor() Color
-	SetFillColor(fillColor Color)
+	SetFillColor(value Color)
 	ContentView() View
-	SetContentView(contentView View)
+	SetContentView(value View)
 	ContentViewMargins() foundation.Size
-	SetContentViewMargins(contentViewMargins foundation.Size)
-	SetFrameFromContentFrame(contentFrame foundation.Rect)
-	SizeToFit()
+	SetContentViewMargins(value foundation.Size)
 }
-
-var _ Box = (*NSBox)(nil)
 
 type NSBox struct {
 	NSView
@@ -56,116 +55,143 @@ func MakeBox(ptr unsafe.Pointer) *NSBox {
 	}
 }
 
-func (b *NSBox) BorderRect() foundation.Rect {
-	return toRect(C.Box_BorderRect(b.Ptr()))
+func AllocBox() *NSBox {
+	return MakeBox(C.C_Box_Alloc())
 }
 
-func (b *NSBox) BoxType() BoxType {
-	return BoxType(C.Box_BoxType(b.Ptr()))
+func (n *NSBox) InitWithFrame(frameRect foundation.Rect) Box {
+	result := C.C_NSBox_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeBox(result)
 }
 
-func (b *NSBox) SetBoxType(boxType BoxType) {
-	C.Box_SetBoxType(b.Ptr(), C.ulong(boxType))
+func (n *NSBox) InitWithCoder(coder foundation.Coder) Box {
+	result := C.C_NSBox_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeBox(result)
 }
 
-func (b *NSBox) IsTransparent() bool {
-	return bool(C.Box_IsTransparent(b.Ptr()))
+func (n *NSBox) Init() Box {
+	result := C.C_NSBox_Init(n.Ptr())
+	return MakeBox(result)
 }
 
-func (b *NSBox) SetTransparent(transparent bool) {
-	C.Box_SetTransparent(b.Ptr(), C.bool(transparent))
+func (n *NSBox) SetFrameFromContentFrame(contentFrame foundation.Rect) {
+	C.C_NSBox_SetFrameFromContentFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentFrame))))
 }
 
-func (b *NSBox) Title() string {
-	return C.GoString(C.Box_Title(b.Ptr()))
+func (n *NSBox) SizeToFit() {
+	C.C_NSBox_SizeToFit(n.Ptr())
 }
 
-func (b *NSBox) SetTitle(title string) {
-	cTitle := C.CString(title)
-	defer C.free(unsafe.Pointer(cTitle))
-	C.Box_SetTitle(b.Ptr(), cTitle)
+func (n *NSBox) BorderRect() foundation.Rect {
+	result := C.C_NSBox_BorderRect(n.Ptr())
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
 }
 
-func (b *NSBox) TitleFont() Font {
-	return MakeFont(C.Box_TitleFont(b.Ptr()))
+func (n *NSBox) BoxType() BoxType {
+	result := C.C_NSBox_BoxType(n.Ptr())
+	return BoxType(uint(result))
 }
 
-func (b *NSBox) SetTitleFont(titleFont Font) {
-	C.Box_SetTitleFont(b.Ptr(), toPointer(titleFont))
+func (n *NSBox) SetBoxType(value BoxType) {
+	C.C_NSBox_SetBoxType(n.Ptr(), C.uint(uint(value)))
 }
 
-func (b *NSBox) TitlePosition() TitlePosition {
-	return TitlePosition(C.Box_TitlePosition(b.Ptr()))
+func (n *NSBox) IsTransparent() bool {
+	result := C.C_NSBox_IsTransparent(n.Ptr())
+	return bool(result)
 }
 
-func (b *NSBox) SetTitlePosition(titlePosition TitlePosition) {
-	C.Box_SetTitlePosition(b.Ptr(), C.ulong(titlePosition))
+func (n *NSBox) SetTransparent(value bool) {
+	C.C_NSBox_SetTransparent(n.Ptr(), C.bool(value))
 }
 
-func (b *NSBox) TitleCell() objc.Object {
-	return objc.MakeObject(C.Box_TitleCell(b.Ptr()))
+func (n *NSBox) Title() string {
+	result := C.C_NSBox_Title(n.Ptr())
+	return foundation.MakeString(result).String()
 }
 
-func (b *NSBox) TitleRect() foundation.Rect {
-	return toRect(C.Box_TitleRect(b.Ptr()))
+func (n *NSBox) SetTitle(value string) {
+	C.C_NSBox_SetTitle(n.Ptr(), foundation.NewString(value).Ptr())
 }
 
-func (b *NSBox) BorderColor() Color {
-	return MakeColor(C.Box_BorderColor(b.Ptr()))
+func (n *NSBox) TitleFont() Font {
+	result := C.C_NSBox_TitleFont(n.Ptr())
+	return MakeFont(result)
 }
 
-func (b *NSBox) SetBorderColor(borderColor Color) {
-	C.Box_SetBorderColor(b.Ptr(), toPointer(borderColor))
+func (n *NSBox) SetTitleFont(value Font) {
+	C.C_NSBox_SetTitleFont(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (b *NSBox) BorderWidth() float64 {
-	return float64(C.Box_BorderWidth(b.Ptr()))
+func (n *NSBox) TitlePosition() TitlePosition {
+	result := C.C_NSBox_TitlePosition(n.Ptr())
+	return TitlePosition(uint(result))
 }
 
-func (b *NSBox) SetBorderWidth(borderWidth float64) {
-	C.Box_SetBorderWidth(b.Ptr(), C.double(borderWidth))
+func (n *NSBox) SetTitlePosition(value TitlePosition) {
+	C.C_NSBox_SetTitlePosition(n.Ptr(), C.uint(uint(value)))
 }
 
-func (b *NSBox) CornerRadius() float64 {
-	return float64(C.Box_CornerRadius(b.Ptr()))
+func (n *NSBox) TitleCell() objc.Object {
+	result := C.C_NSBox_TitleCell(n.Ptr())
+	return objc.MakeObject(result)
 }
 
-func (b *NSBox) SetCornerRadius(cornerRadius float64) {
-	C.Box_SetCornerRadius(b.Ptr(), C.double(cornerRadius))
+func (n *NSBox) TitleRect() foundation.Rect {
+	result := C.C_NSBox_TitleRect(n.Ptr())
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
 }
 
-func (b *NSBox) FillColor() Color {
-	return MakeColor(C.Box_FillColor(b.Ptr()))
+func (n *NSBox) BorderColor() Color {
+	result := C.C_NSBox_BorderColor(n.Ptr())
+	return MakeColor(result)
 }
 
-func (b *NSBox) SetFillColor(fillColor Color) {
-	C.Box_SetFillColor(b.Ptr(), toPointer(fillColor))
+func (n *NSBox) SetBorderColor(value Color) {
+	C.C_NSBox_SetBorderColor(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (b *NSBox) ContentView() View {
-	return MakeView(C.Box_ContentView(b.Ptr()))
+func (n *NSBox) BorderWidth() coregraphics.Float {
+	result := C.C_NSBox_BorderWidth(n.Ptr())
+	return coregraphics.Float(float64(result))
 }
 
-func (b *NSBox) SetContentView(contentView View) {
-	C.Box_SetContentView(b.Ptr(), toPointer(contentView))
+func (n *NSBox) SetBorderWidth(value coregraphics.Float) {
+	C.C_NSBox_SetBorderWidth(n.Ptr(), C.double(float64(value)))
 }
 
-func (b *NSBox) ContentViewMargins() foundation.Size {
-	return toSize(C.Box_ContentViewMargins(b.Ptr()))
+func (n *NSBox) CornerRadius() coregraphics.Float {
+	result := C.C_NSBox_CornerRadius(n.Ptr())
+	return coregraphics.Float(float64(result))
 }
 
-func (b *NSBox) SetContentViewMargins(contentViewMargins foundation.Size) {
-	C.Box_SetContentViewMargins(b.Ptr(), toNSSize(contentViewMargins))
+func (n *NSBox) SetCornerRadius(value coregraphics.Float) {
+	C.C_NSBox_SetCornerRadius(n.Ptr(), C.double(float64(value)))
 }
 
-func NewBox(frame foundation.Rect) Box {
-	return MakeBox(C.Box_NewBox(*(*C.NSRect)(foundation.ToNSRectPointer(frame))))
+func (n *NSBox) FillColor() Color {
+	result := C.C_NSBox_FillColor(n.Ptr())
+	return MakeColor(result)
 }
 
-func (b *NSBox) SetFrameFromContentFrame(contentFrame foundation.Rect) {
-	C.Box_SetFrameFromContentFrame(b.Ptr(), toNSRect(contentFrame))
+func (n *NSBox) SetFillColor(value Color) {
+	C.C_NSBox_SetFillColor(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (b *NSBox) SizeToFit() {
-	C.Box_SizeToFit(b.Ptr())
+func (n *NSBox) ContentView() View {
+	result := C.C_NSBox_ContentView(n.Ptr())
+	return MakeView(result)
+}
+
+func (n *NSBox) SetContentView(value View) {
+	C.C_NSBox_SetContentView(n.Ptr(), objc.ExtractPtr(value))
+}
+
+func (n *NSBox) ContentViewMargins() foundation.Size {
+	result := C.C_NSBox_ContentViewMargins(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+}
+
+func (n *NSBox) SetContentViewMargins(value foundation.Size) {
+	C.C_NSBox_SetContentViewMargins(n.Ptr(), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(value))))
 }

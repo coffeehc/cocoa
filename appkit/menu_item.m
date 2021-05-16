@@ -1,196 +1,316 @@
-#import <AppKit/AppKit.h>
-#import "_cgo_export.h"
+#import <Appkit/Appkit.h>
 #import "menu_item.h"
-#import "menu_item_delegate.h"
 
-@implementation NSMenuItemHandler
-
-- (void)onAction:(id)sender {
-	return MenuItem_Target_Action([self goID], sender);
+void* C_MenuItem_Alloc() {
+    return [NSMenuItem alloc];
 }
 
-@end
-void MenuItem_SetDelegate(void *ptr, long goID) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	NSMenuItemHandler* handler = [[NSMenuItemHandler alloc] init];
-	[handler setGoID:goID];
-	[menuItem setTarget:handler];
-	[menuItem setAction:@selector(onAction:)];
+void* C_NSMenuItem_InitWithTitle_Action_KeyEquivalent(void* ptr, void* _string, void* selector, void* charCode) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    NSMenuItem* result = [nSMenuItem initWithTitle:(NSString*)_string action:(SEL)selector keyEquivalent:(NSString*)charCode];
+    return result;
 }
 
-bool MenuItem_IsEnabled(void* ptr) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	return [menuItem isEnabled];
+void* C_NSMenuItem_InitWithCoder(void* ptr, void* coder) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    NSMenuItem* result = [nSMenuItem initWithCoder:(NSCoder*)coder];
+    return result;
 }
 
-void MenuItem_SetEnabled(void* ptr, bool enabled) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	[menuItem setEnabled:enabled];
+void* C_NSMenuItem_Init(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    NSMenuItem* result = [nSMenuItem init];
+    return result;
 }
 
-bool MenuItem_IsHidden(void* ptr) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	return [menuItem isHidden];
+void* C_NSMenuItem_MenuItem_SeparatorItem() {
+    NSMenuItem* result = [NSMenuItem separatorItem];
+    return result;
 }
 
-void MenuItem_SetHidden(void* ptr, bool hidden) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	[menuItem setHidden:hidden];
+bool C_NSMenuItem_IsEnabled(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    BOOL result = [nSMenuItem isEnabled];
+    return result;
 }
 
-const char* MenuItem_Title(void* ptr) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	return [[menuItem title] UTF8String];
+void C_NSMenuItem_SetEnabled(void* ptr, bool value) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    [nSMenuItem setEnabled:value];
 }
 
-void MenuItem_SetTitle(void* ptr, const char* title) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	[menuItem setTitle:[NSString stringWithUTF8String:title]];
+bool C_NSMenuItem_IsHidden(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    BOOL result = [nSMenuItem isHidden];
+    return result;
 }
 
-void* MenuItem_Submenu(void* ptr) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	return [menuItem submenu];
+void C_NSMenuItem_SetHidden(void* ptr, bool value) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    [nSMenuItem setHidden:value];
 }
 
-void MenuItem_SetSubmenu(void* ptr, void* submenu) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	[menuItem setSubmenu:(NSMenu*)submenu];
+bool C_NSMenuItem_IsHiddenOrHasHiddenAncestor(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    BOOL result = [nSMenuItem isHiddenOrHasHiddenAncestor];
+    return result;
 }
 
-bool MenuItem_HasSubmenu(void* ptr) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	return [menuItem hasSubmenu];
+void* C_NSMenuItem_Target(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    id result = [nSMenuItem target];
+    return result;
 }
 
-bool MenuItem_IsSeparatorItem(void* ptr) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	return [menuItem isSeparatorItem];
+void C_NSMenuItem_SetTarget(void* ptr, void* value) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    [nSMenuItem setTarget:(id)value];
 }
 
-void* MenuItem_Menu(void* ptr) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	return [menuItem menu];
+void* C_NSMenuItem_Action(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    SEL result = [nSMenuItem action];
+    return result;
 }
 
-void MenuItem_SetMenu(void* ptr, void* menu) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	[menuItem setMenu:(NSMenu*)menu];
+void C_NSMenuItem_SetAction(void* ptr, void* value) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    [nSMenuItem setAction:(SEL)value];
 }
 
-const char* MenuItem_ToolTip(void* ptr) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	return [[menuItem toolTip] UTF8String];
+void* C_NSMenuItem_Title(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    NSString* result = [nSMenuItem title];
+    return result;
 }
 
-void MenuItem_SetToolTip(void* ptr, const char* toolTip) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	[menuItem setToolTip:[NSString stringWithUTF8String:toolTip]];
+void C_NSMenuItem_SetTitle(void* ptr, void* value) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    [nSMenuItem setTitle:(NSString*)value];
 }
 
-bool MenuItem_IsHighlighted(void* ptr) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	return [menuItem isHighlighted];
+void* C_NSMenuItem_AttributedTitle(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    NSAttributedString* result = [nSMenuItem attributedTitle];
+    return result;
 }
 
-const char* MenuItem_KeyEquivalent(void* ptr) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	return [[menuItem keyEquivalent] UTF8String];
+void C_NSMenuItem_SetAttributedTitle(void* ptr, void* value) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    [nSMenuItem setAttributedTitle:(NSAttributedString*)value];
 }
 
-void MenuItem_SetKeyEquivalent(void* ptr, const char* keyEquivalent) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	[menuItem setKeyEquivalent:[NSString stringWithUTF8String:keyEquivalent]];
+int C_NSMenuItem_Tag(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    NSInteger result = [nSMenuItem tag];
+    return result;
 }
 
-unsigned long MenuItem_KeyEquivalentModifierMask(void* ptr) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	return [menuItem keyEquivalentModifierMask];
+void C_NSMenuItem_SetTag(void* ptr, int value) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    [nSMenuItem setTag:value];
 }
 
-void MenuItem_SetKeyEquivalentModifierMask(void* ptr, unsigned long keyEquivalentModifierMask) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	[menuItem setKeyEquivalentModifierMask:keyEquivalentModifierMask];
+int C_NSMenuItem_State(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    NSControlStateValue result = [nSMenuItem state];
+    return result;
 }
 
-const char* MenuItem_UserKeyEquivalent(void* ptr) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	return [[menuItem userKeyEquivalent] UTF8String];
+void C_NSMenuItem_SetState(void* ptr, int value) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    [nSMenuItem setState:value];
 }
 
-bool MenuItem_IsAlternate(void* ptr) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	return [menuItem isAlternate];
+void* C_NSMenuItem_Image(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    NSImage* result = [nSMenuItem image];
+    return result;
 }
 
-void MenuItem_SetAlternate(void* ptr, bool alternate) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	[menuItem setAlternate:alternate];
+void C_NSMenuItem_SetImage(void* ptr, void* value) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    [nSMenuItem setImage:(NSImage*)value];
 }
 
-long MenuItem_IndentationLevel(void* ptr) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	return [menuItem indentationLevel];
+void* C_NSMenuItem_OnStateImage(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    NSImage* result = [nSMenuItem onStateImage];
+    return result;
 }
 
-void MenuItem_SetIndentationLevel(void* ptr, long indentationLevel) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	[menuItem setIndentationLevel:indentationLevel];
+void C_NSMenuItem_SetOnStateImage(void* ptr, void* value) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    [nSMenuItem setOnStateImage:(NSImage*)value];
 }
 
-void* MenuItem_View(void* ptr) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	return [menuItem view];
+void* C_NSMenuItem_OffStateImage(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    NSImage* result = [nSMenuItem offStateImage];
+    return result;
 }
 
-void MenuItem_SetView(void* ptr, void* view) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	[menuItem setView:(NSView*)view];
+void C_NSMenuItem_SetOffStateImage(void* ptr, void* value) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    [nSMenuItem setOffStateImage:(NSImage*)value];
 }
 
-bool MenuItem_AllowsKeyEquivalentWhenHidden(void* ptr) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	return [menuItem allowsKeyEquivalentWhenHidden];
+void* C_NSMenuItem_MixedStateImage(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    NSImage* result = [nSMenuItem mixedStateImage];
+    return result;
 }
 
-void MenuItem_SetAllowsKeyEquivalentWhenHidden(void* ptr, bool allowsKeyEquivalentWhenHidden) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	[menuItem setAllowsKeyEquivalentWhenHidden:allowsKeyEquivalentWhenHidden];
+void C_NSMenuItem_SetMixedStateImage(void* ptr, void* value) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    [nSMenuItem setMixedStateImage:(NSImage*)value];
 }
 
-bool MenuItem_UsesUserKeyEquivalents() {
-	return [NSMenuItem usesUserKeyEquivalents];
+void* C_NSMenuItem_Submenu(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    NSMenu* result = [nSMenuItem submenu];
+    return result;
 }
 
-void MenuItem_SetUsesUserKeyEquivalents(bool usesUserKeyEquivalents) {
-	[NSMenuItem setUsesUserKeyEquivalents:usesUserKeyEquivalents];
+void C_NSMenuItem_SetSubmenu(void* ptr, void* value) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    [nSMenuItem setSubmenu:(NSMenu*)value];
 }
 
-long MenuItem_State(void* ptr) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	return [menuItem state];
+bool C_NSMenuItem_HasSubmenu(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    BOOL result = [nSMenuItem hasSubmenu];
+    return result;
 }
 
-void MenuItem_SetState(void* ptr, long state) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	[menuItem setState:state];
+void* C_NSMenuItem_ParentItem(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    NSMenuItem* result = [nSMenuItem parentItem];
+    return result;
 }
 
-long MenuItem_Tag(void* ptr) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	return [menuItem tag];
+bool C_NSMenuItem_IsSeparatorItem(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    BOOL result = [nSMenuItem isSeparatorItem];
+    return result;
 }
 
-void MenuItem_SetTag(void* ptr, long tag) {
-	NSMenuItem* menuItem = (NSMenuItem*)ptr;
-	[menuItem setTag:tag];
+void* C_NSMenuItem_Menu(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    NSMenu* result = [nSMenuItem menu];
+    return result;
 }
 
-void* MenuItem_NewMenuItem(const char* title, void* selector, const char* charCode) {
-	NSMenuItem* menuItem = [NSMenuItem alloc];
-	return [[menuItem initWithTitle:[NSString stringWithUTF8String:title] action:(SEL)selector keyEquivalent:[NSString stringWithUTF8String:charCode]] autorelease];
+void C_NSMenuItem_SetMenu(void* ptr, void* value) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    [nSMenuItem setMenu:(NSMenu*)value];
 }
 
-void* MenuItem_NewSeparatorItem() {
-	return [NSMenuItem separatorItem];
+void* C_NSMenuItem_KeyEquivalent(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    NSString* result = [nSMenuItem keyEquivalent];
+    return result;
+}
+
+void C_NSMenuItem_SetKeyEquivalent(void* ptr, void* value) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    [nSMenuItem setKeyEquivalent:(NSString*)value];
+}
+
+unsigned int C_NSMenuItem_KeyEquivalentModifierMask(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    NSEventModifierFlags result = [nSMenuItem keyEquivalentModifierMask];
+    return result;
+}
+
+void C_NSMenuItem_SetKeyEquivalentModifierMask(void* ptr, unsigned int value) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    [nSMenuItem setKeyEquivalentModifierMask:value];
+}
+
+bool C_NSMenuItem_MenuItem_UsesUserKeyEquivalents() {
+    BOOL result = [NSMenuItem usesUserKeyEquivalents];
+    return result;
+}
+
+void C_NSMenuItem_MenuItem_SetUsesUserKeyEquivalents(bool value) {
+    [NSMenuItem setUsesUserKeyEquivalents:value];
+}
+
+void* C_NSMenuItem_UserKeyEquivalent(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    NSString* result = [nSMenuItem userKeyEquivalent];
+    return result;
+}
+
+bool C_NSMenuItem_IsAlternate(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    BOOL result = [nSMenuItem isAlternate];
+    return result;
+}
+
+void C_NSMenuItem_SetAlternate(void* ptr, bool value) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    [nSMenuItem setAlternate:value];
+}
+
+int C_NSMenuItem_IndentationLevel(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    NSInteger result = [nSMenuItem indentationLevel];
+    return result;
+}
+
+void C_NSMenuItem_SetIndentationLevel(void* ptr, int value) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    [nSMenuItem setIndentationLevel:value];
+}
+
+void* C_NSMenuItem_ToolTip(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    NSString* result = [nSMenuItem toolTip];
+    return result;
+}
+
+void C_NSMenuItem_SetToolTip(void* ptr, void* value) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    [nSMenuItem setToolTip:(NSString*)value];
+}
+
+void* C_NSMenuItem_RepresentedObject(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    id result = [nSMenuItem representedObject];
+    return result;
+}
+
+void C_NSMenuItem_SetRepresentedObject(void* ptr, void* value) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    [nSMenuItem setRepresentedObject:(id)value];
+}
+
+void* C_NSMenuItem_View(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    NSView* result = [nSMenuItem view];
+    return result;
+}
+
+void C_NSMenuItem_SetView(void* ptr, void* value) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    [nSMenuItem setView:(NSView*)value];
+}
+
+bool C_NSMenuItem_IsHighlighted(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    BOOL result = [nSMenuItem isHighlighted];
+    return result;
+}
+
+bool C_NSMenuItem_AllowsKeyEquivalentWhenHidden(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    BOOL result = [nSMenuItem allowsKeyEquivalentWhenHidden];
+    return result;
+}
+
+void C_NSMenuItem_SetAllowsKeyEquivalentWhenHidden(void* ptr, bool value) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    [nSMenuItem setAllowsKeyEquivalentWhenHidden:value];
 }

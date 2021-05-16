@@ -1,13 +1,30 @@
-#import <Foundation/NSGeometry.h>
 #import <stdbool.h>
 #import <stdlib.h>
 #import <utils.h>
+#import <Appkit/Appkit.h>
 
-NSSize TextContainer_Size(void* ptr);
-void TextContainer_SetSize(void* ptr, NSSize size);
-bool TextContainer_WidthTracksTextView(void* ptr);
-void TextContainer_SetWidthTracksTextView(void* ptr, bool widthTracksTextView);
-bool TextContainer_HeightTracksTextView(void* ptr);
-void TextContainer_SetHeightTracksTextView(void* ptr, bool heightTracksTextView);
+void* C_TextContainer_Alloc();
 
-void* TextContainer_NewTextContainer(NSSize size);
+void* C_NSTextContainer_InitWithSize(void* ptr, CGSize size);
+void* C_NSTextContainer_InitWithCoder(void* ptr, void* coder);
+void* C_NSTextContainer_Init(void* ptr);
+void C_NSTextContainer_ReplaceLayoutManager(void* ptr, void* newLayoutManager);
+void* C_NSTextContainer_LayoutManager(void* ptr);
+void C_NSTextContainer_SetLayoutManager(void* ptr, void* value);
+void* C_NSTextContainer_TextView(void* ptr);
+void C_NSTextContainer_SetTextView(void* ptr, void* value);
+CGSize C_NSTextContainer_Size(void* ptr);
+void C_NSTextContainer_SetSize(void* ptr, CGSize value);
+Array C_NSTextContainer_ExclusionPaths(void* ptr);
+void C_NSTextContainer_SetExclusionPaths(void* ptr, Array value);
+unsigned int C_NSTextContainer_LineBreakMode(void* ptr);
+void C_NSTextContainer_SetLineBreakMode(void* ptr, unsigned int value);
+bool C_NSTextContainer_WidthTracksTextView(void* ptr);
+void C_NSTextContainer_SetWidthTracksTextView(void* ptr, bool value);
+bool C_NSTextContainer_HeightTracksTextView(void* ptr);
+void C_NSTextContainer_SetHeightTracksTextView(void* ptr, bool value);
+unsigned int C_NSTextContainer_MaximumNumberOfLines(void* ptr);
+void C_NSTextContainer_SetMaximumNumberOfLines(void* ptr, unsigned int value);
+double C_NSTextContainer_LineFragmentPadding(void* ptr);
+void C_NSTextContainer_SetLineFragmentPadding(void* ptr, double value);
+bool C_NSTextContainer_IsSimpleRectangularTextContainer(void* ptr);

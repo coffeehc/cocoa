@@ -26,10 +26,10 @@ func initAndRun() {
 	tv.SetAllowsUndo(true)
 	tv.SetRichText(false)
 	w.ContentView().AddSubview(textView)
-	w.ContentView().LeadingAnchor().ConstraintEqualToAnchor2(textView.LeadingAnchor(), -10).SetActive(true)
-	w.ContentView().TopAnchor().ConstraintEqualToAnchor2(textView.TopAnchor(), -10).SetActive(true)
-	w.ContentView().TrailingAnchor().ConstraintEqualToAnchor2(textView.TrailingAnchor(), 10).SetActive(true)
-	w.ContentView().BottomAnchor().ConstraintEqualToAnchor2(textView.BottomAnchor(), 10).SetActive(true)
+	w.ContentView().LeadingAnchor().ConstraintEqualToAnchor_Constant(textView.LeadingAnchor(), -10).SetActive(true)
+	w.ContentView().TopAnchor().ConstraintEqualToAnchor_Constant(textView.TopAnchor(), -10).SetActive(true)
+	w.ContentView().TrailingAnchor().ConstraintEqualToAnchor_Constant(textView.TrailingAnchor(), 10).SetActive(true)
+	w.ContentView().BottomAnchor().ConstraintEqualToAnchor_Constant(textView.BottomAnchor(), 10).SetActive(true)
 
 	w.MakeKeyAndOrderFront(nil)
 	w.Center()
@@ -55,31 +55,31 @@ func initAndRun() {
 }
 
 func setMainMenu(app appkit.Application) {
-	menu := appkit.NewMenu("main")
+	menu := appkit.AllocMenu().InitWithTitle("main")
 	app.SetMainMenu(menu)
 
-	mainMenuItem := appkit.NewMenuItemWithHandler("", "", func(sender objc.Object) {
+	mainMenuItem := appkit.NewMenuItem("", "", func(sender objc.Object) {
 	})
-	mainMenuMenu := appkit.NewMenu("App")
-	mainMenuMenu.AddItem(appkit.NewMenuItemWithHandler("Hide", "h", func(sender objc.Object) {
+	mainMenuMenu := appkit.AllocMenu().InitWithTitle("App")
+	mainMenuMenu.AddItem(appkit.NewMenuItem("Hide", "h", func(sender objc.Object) {
 		app.Hide(nil)
 	}))
-	mainMenuMenu.AddItem(appkit.NewMenuItemWithHandler("Quit", "q", func(sender objc.Object) {
+	mainMenuMenu.AddItem(appkit.NewMenuItem("Quit", "q", func(sender objc.Object) {
 		app.Terminate(nil)
 	}))
 	mainMenuItem.SetSubmenu(mainMenuMenu)
 	menu.AddItem(mainMenuItem)
 
-	testMenuItem := appkit.NewMenuItemWithHandler("", "", func(sender objc.Object) {
+	testMenuItem := appkit.NewMenuItem("", "", func(sender objc.Object) {
 	})
-	testMenu := appkit.NewMenu("Test")
-	testMenu.AddItem(appkit.NewMenuItem("Select All", foundation.SelectorFromString("selectAll:"), "a"))
-	testMenu.AddItem(appkit.NewSeparatorItem())
-	testMenu.AddItem(appkit.NewMenuItem("Copy", foundation.SelectorFromString("copy:"), "c"))
-	testMenu.AddItem(appkit.NewMenuItem("Paste", foundation.SelectorFromString("paste:"), "v"))
-	testMenu.AddItem(appkit.NewMenuItem("Cut", foundation.SelectorFromString("cut:"), "x"))
-	testMenu.AddItem(appkit.NewMenuItem("Undo", foundation.SelectorFromString("undo:"), "z"))
-	testMenu.AddItem(appkit.NewMenuItem("Redo", foundation.SelectorFromString("redo:"), "Z"))
+	testMenu := appkit.AllocMenu().InitWithTitle("Test")
+	testMenu.AddItem(appkit.AllocMenuItem().InitWithTitle_Action_KeyEquivalent("Select All", foundation.SelectorFromString("selectAll:"), "a"))
+	testMenu.AddItem(appkit.MenuItem_SeparatorItem())
+	testMenu.AddItem(appkit.AllocMenuItem().InitWithTitle_Action_KeyEquivalent("Copy", foundation.SelectorFromString("copy:"), "c"))
+	testMenu.AddItem(appkit.AllocMenuItem().InitWithTitle_Action_KeyEquivalent("Paste", foundation.SelectorFromString("paste:"), "v"))
+	testMenu.AddItem(appkit.AllocMenuItem().InitWithTitle_Action_KeyEquivalent("Cut", foundation.SelectorFromString("cut:"), "x"))
+	testMenu.AddItem(appkit.AllocMenuItem().InitWithTitle_Action_KeyEquivalent("Undo", foundation.SelectorFromString("undo:"), "z"))
+	testMenu.AddItem(appkit.AllocMenuItem().InitWithTitle_Action_KeyEquivalent("Redo", foundation.SelectorFromString("redo:"), "Z"))
 	testMenuItem.SetSubmenu(testMenu)
 	menu.AddItem(testMenuItem)
 }
@@ -90,11 +90,11 @@ func setSystemBar(app appkit.Application) {
 	button := item.Button()
 	button.SetTitle("TestTray")
 
-	menu := appkit.NewMenu("main")
-	menu.AddItem(appkit.NewMenuItemWithHandler("Hide", "h", func(sender objc.Object) {
+	menu := appkit.AllocMenu().InitWithTitle("main")
+	menu.AddItem(appkit.NewMenuItem("Hide", "h", func(sender objc.Object) {
 		app.Hide(nil)
 	}))
-	menu.AddItem(appkit.NewMenuItemWithHandler("Quit", "q", func(sender objc.Object) {
+	menu.AddItem(appkit.NewMenuItem("Quit", "q", func(sender objc.Object) {
 		app.Terminate(nil)
 	}))
 	item.SetMenu(menu)
