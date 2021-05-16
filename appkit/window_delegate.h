@@ -1,7 +1,10 @@
-#import <AppKit/AppKit.h>
-#import "_cgo_export.h"
-#import "_cgo_export.h"
+#import <stdbool.h>
+#import <stdlib.h>
+#import <utils.h>
+#import <Appkit/Appkit.h>
 
-@interface MyNSWindowDelegate : NSObject <NSWindowDelegate>
+@interface NSWindowDelegateAdaptor : NSObject <NSWindowDelegate>
 @property (assign) long goID;
 @end
+
+void* WrapWindowDelegate(long goID);

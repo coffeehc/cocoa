@@ -1,3 +1,5 @@
 #import <stdlib.h>
 
-void* Selector_RegisterSelector(const char* name);
+void* Selector_SEL_RegisterName(const char* name);
+
+const char* Selector_SEL_GetName(void* ptr);

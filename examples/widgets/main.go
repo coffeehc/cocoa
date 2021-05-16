@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/hsiafan/cocoa/appkit"
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
@@ -149,9 +150,13 @@ func initAndRun() {
 	appkit.MakeTextView(sv2.DocumentView().Ptr()).SetAllowsUndo(true)
 	w.ContentView().AddSubview(sv2)
 
-	//w.WindowDidMove(func(notification foundation.Notification) {
-	//	label.SetStringValue("moved!")
-	//})
+	wd := &appkit.WindowDelegate{
+		WindowDidMove: func(notification foundation.Notification) {
+			fmt.Println("window move to ", w.Frame().Origin.X, w.Frame().Origin.Y)
+		},
+	}
+	wdo := appkit.WrapWindowDelegate(wd)
+	w.SetDelegate(wdo)
 	w.MakeKeyAndOrderFront(nil)
 	w.Center()
 

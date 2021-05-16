@@ -18,5 +18,5 @@ func SelectorFromString(name string) *objc.Selector {
 
 // StringFromSelector returns a string representation of a given selector
 func StringFromSelector(selector *objc.Selector) string {
-	return C.GoString(C.Selector_StringFromSelector(unsafe.Pointer(selector)))
+	return C.GoString(C.Selector_StringFromSelector(selector.Ptr()))
 }

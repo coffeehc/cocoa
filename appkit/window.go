@@ -67,6 +67,11 @@ type Window interface {
 	InsertTitlebarAccessoryViewController_AtIndex(childViewController TitlebarAccessoryViewController, index int)
 	RemoveTitlebarAccessoryViewControllerAtIndex(index int)
 	AddTabbedWindow_Ordered(window Window, ordered WindowOrderingMode)
+	SelectNextTab(sender objc.Object)
+	SelectPreviousTab(sender objc.Object)
+	MoveTabToNewWindow(sender objc.Object)
+	ToggleTabBar(sender objc.Object)
+	ToggleTabOverview(sender objc.Object)
 	PostEvent_AtStart(event Event, flag bool)
 	SendEvent(event Event)
 	MakeFirstResponder(responder Responder) bool
@@ -113,8 +118,11 @@ type Window interface {
 	ConvertPointToScreen(point foundation.Point) foundation.Point
 	ConvertPointFromBacking(point foundation.Point) foundation.Point
 	ConvertPointToBacking(point foundation.Point) foundation.Point
+	MergeAllWindows(sender objc.Object)
 	SetDynamicDepthLimit(flag bool)
 	SetFrameAutosaveName(name WindowFrameAutosaveName) bool
+	Delegate() objc.Object
+	SetDelegate(value objc.Object)
 	ContentViewController() ViewController
 	SetContentViewController(value ViewController)
 	ContentView() View
@@ -568,6 +576,26 @@ func (n *NSWindow) AddTabbedWindow_Ordered(window Window, ordered WindowOrdering
 	C.C_NSWindow_AddTabbedWindow_Ordered(n.Ptr(), objc.ExtractPtr(window), C.int(int(ordered)))
 }
 
+func (n *NSWindow) SelectNextTab(sender objc.Object) {
+	C.C_NSWindow_SelectNextTab(n.Ptr(), objc.ExtractPtr(sender))
+}
+
+func (n *NSWindow) SelectPreviousTab(sender objc.Object) {
+	C.C_NSWindow_SelectPreviousTab(n.Ptr(), objc.ExtractPtr(sender))
+}
+
+func (n *NSWindow) MoveTabToNewWindow(sender objc.Object) {
+	C.C_NSWindow_MoveTabToNewWindow(n.Ptr(), objc.ExtractPtr(sender))
+}
+
+func (n *NSWindow) ToggleTabBar(sender objc.Object) {
+	C.C_NSWindow_ToggleTabBar(n.Ptr(), objc.ExtractPtr(sender))
+}
+
+func (n *NSWindow) ToggleTabOverview(sender objc.Object) {
+	C.C_NSWindow_ToggleTabOverview(n.Ptr(), objc.ExtractPtr(sender))
+}
+
 func (n *NSWindow) PostEvent_AtStart(event Event, flag bool) {
 	C.C_NSWindow_PostEvent_AtStart(n.Ptr(), objc.ExtractPtr(event), C.bool(flag))
 }
@@ -781,6 +809,10 @@ func (n *NSWindow) ConvertPointToBacking(point foundation.Point) foundation.Poin
 	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result)))
 }
 
+func (n *NSWindow) MergeAllWindows(sender objc.Object) {
+	C.C_NSWindow_MergeAllWindows(n.Ptr(), objc.ExtractPtr(sender))
+}
+
 func (n *NSWindow) SetDynamicDepthLimit(flag bool) {
 	C.C_NSWindow_SetDynamicDepthLimit(n.Ptr(), C.bool(flag))
 }
@@ -788,6 +820,15 @@ func (n *NSWindow) SetDynamicDepthLimit(flag bool) {
 func (n *NSWindow) SetFrameAutosaveName(name WindowFrameAutosaveName) bool {
 	result := C.C_NSWindow_SetFrameAutosaveName(n.Ptr(), foundation.NewString(string(name)).Ptr())
 	return bool(result)
+}
+
+func (n *NSWindow) Delegate() objc.Object {
+	result := C.C_NSWindow_Delegate(n.Ptr())
+	return objc.MakeObject(result)
+}
+
+func (n *NSWindow) SetDelegate(value objc.Object) {
+	C.C_NSWindow_SetDelegate(n.Ptr(), objc.ExtractPtr(value))
 }
 
 func (n *NSWindow) ContentViewController() ViewController {

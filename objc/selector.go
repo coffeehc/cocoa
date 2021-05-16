@@ -22,11 +22,17 @@ func (s *Selector) Ptr() unsafe.Pointer {
 	return s.delegate
 }
 
-// RegisterSelector registers a method with the Objective-C runtime system, maps the method name to a selector, and returns the selector value
-func RegisterSelector(name string) *Selector {
+// SEL_RegisterName registers a method with the Objective-C runtime system, maps the method name to a selector, and returns the selector value
+func SEL_RegisterName(name string) *Selector {
 	cname := C.CString(name)
 	defer C.free(unsafe.Pointer(cname))
-	return MakeSelector(C.Selector_RegisterSelector(cname))
+	return MakeSelector(C.Selector_SEL_RegisterName(cname))
+}
+
+// Sel_GetName return selector name
+func Sel_GetName(s *Selector) string {
+	cstr := C.Selector_SEL_GetName(s.Ptr())
+	return C.GoString(cstr)
 }
 
 // An opaque type that represents an Objective-C class.

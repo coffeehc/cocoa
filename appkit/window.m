@@ -333,6 +333,31 @@ void C_NSWindow_AddTabbedWindow_Ordered(void* ptr, void* window, int ordered) {
 	[nSWindow addTabbedWindow:(NSWindow*)window ordered:ordered];
 }
 
+void C_NSWindow_SelectNextTab(void* ptr, void* sender) {
+	NSWindow* nSWindow = (NSWindow*)ptr;
+	[nSWindow selectNextTab:(id)sender];
+}
+
+void C_NSWindow_SelectPreviousTab(void* ptr, void* sender) {
+	NSWindow* nSWindow = (NSWindow*)ptr;
+	[nSWindow selectPreviousTab:(id)sender];
+}
+
+void C_NSWindow_MoveTabToNewWindow(void* ptr, void* sender) {
+	NSWindow* nSWindow = (NSWindow*)ptr;
+	[nSWindow moveTabToNewWindow:(id)sender];
+}
+
+void C_NSWindow_ToggleTabBar(void* ptr, void* sender) {
+	NSWindow* nSWindow = (NSWindow*)ptr;
+	[nSWindow toggleTabBar:(id)sender];
+}
+
+void C_NSWindow_ToggleTabOverview(void* ptr, void* sender) {
+	NSWindow* nSWindow = (NSWindow*)ptr;
+	[nSWindow toggleTabOverview:(id)sender];
+}
+
 void C_NSWindow_PostEvent_AtStart(void* ptr, void* event, bool flag) {
 	NSWindow* nSWindow = (NSWindow*)ptr;
 	[nSWindow postEvent:(NSEvent*)event atStart:flag];
@@ -590,6 +615,11 @@ CGPoint C_NSWindow_ConvertPointToBacking(void* ptr, CGPoint point) {
 	return result;
 }
 
+void C_NSWindow_MergeAllWindows(void* ptr, void* sender) {
+	NSWindow* nSWindow = (NSWindow*)ptr;
+	[nSWindow mergeAllWindows:(id)sender];
+}
+
 void C_NSWindow_SetDynamicDepthLimit(void* ptr, bool flag) {
 	NSWindow* nSWindow = (NSWindow*)ptr;
 	[nSWindow setDynamicDepthLimit:flag];
@@ -599,6 +629,17 @@ bool C_NSWindow_SetFrameAutosaveName(void* ptr, void* name) {
 	NSWindow* nSWindow = (NSWindow*)ptr;
 	bool result = [nSWindow setFrameAutosaveName:(NSString*)name];
 	return result;
+}
+
+void* C_NSWindow_Delegate(void* ptr) {
+	NSWindow* nSWindow = (NSWindow*)ptr;
+	id result = [nSWindow delegate];
+	return result;
+}
+
+void C_NSWindow_SetDelegate(void* ptr, void* value) {
+	NSWindow* nSWindow = (NSWindow*)ptr;
+	[nSWindow setDelegate:(id)value];
 }
 
 void* C_NSWindow_ContentViewController(void* ptr) {
