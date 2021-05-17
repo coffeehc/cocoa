@@ -28,6 +28,8 @@ type TabView interface {
 	SelectTabViewItemWithIdentifier(identifier objc.Object)
 	TakeSelectedTabViewItemFromSender(sender objc.Object)
 	TabViewItemAtPoint(point foundation.Point) TabViewItem
+	Delegate() objc.Object
+	SetDelegate(value objc.Object)
 	NumberOfTabViewItems() int
 	TabViewItems() []TabViewItem
 	SetTabViewItems(value []TabViewItem)
@@ -68,18 +70,18 @@ func AllocTabView() *NSTabView {
 }
 
 func (n *NSTabView) InitWithFrame(frameRect foundation.Rect) TabView {
-	result := C.C_NSTabView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
-	return MakeTabView(result)
+	result_ := C.C_NSTabView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeTabView(result_)
 }
 
 func (n *NSTabView) InitWithCoder(coder foundation.Coder) TabView {
-	result := C.C_NSTabView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeTabView(result)
+	result_ := C.C_NSTabView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeTabView(result_)
 }
 
 func (n *NSTabView) Init() TabView {
-	result := C.C_NSTabView_Init(n.Ptr())
-	return MakeTabView(result)
+	result_ := C.C_NSTabView_Init(n.Ptr())
+	return MakeTabView(result_)
 }
 
 func (n *NSTabView) AddTabViewItem(tabViewItem TabViewItem) {
@@ -95,18 +97,18 @@ func (n *NSTabView) RemoveTabViewItem(tabViewItem TabViewItem) {
 }
 
 func (n *NSTabView) IndexOfTabViewItem(tabViewItem TabViewItem) int {
-	result := C.C_NSTabView_IndexOfTabViewItem(n.Ptr(), objc.ExtractPtr(tabViewItem))
-	return int(result)
+	result_ := C.C_NSTabView_IndexOfTabViewItem(n.Ptr(), objc.ExtractPtr(tabViewItem))
+	return int(result_)
 }
 
 func (n *NSTabView) IndexOfTabViewItemWithIdentifier(identifier objc.Object) int {
-	result := C.C_NSTabView_IndexOfTabViewItemWithIdentifier(n.Ptr(), objc.ExtractPtr(identifier))
-	return int(result)
+	result_ := C.C_NSTabView_IndexOfTabViewItemWithIdentifier(n.Ptr(), objc.ExtractPtr(identifier))
+	return int(result_)
 }
 
 func (n *NSTabView) TabViewItemAtIndex(index int) TabViewItem {
-	result := C.C_NSTabView_TabViewItemAtIndex(n.Ptr(), C.int(index))
-	return MakeTabViewItem(result)
+	result_ := C.C_NSTabView_TabViewItemAtIndex(n.Ptr(), C.int(index))
+	return MakeTabViewItem(result_)
 }
 
 func (n *NSTabView) SelectFirstTabViewItem(sender objc.Object) {
@@ -142,24 +144,33 @@ func (n *NSTabView) TakeSelectedTabViewItemFromSender(sender objc.Object) {
 }
 
 func (n *NSTabView) TabViewItemAtPoint(point foundation.Point) TabViewItem {
-	result := C.C_NSTabView_TabViewItemAtPoint(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))))
-	return MakeTabViewItem(result)
+	result_ := C.C_NSTabView_TabViewItemAtPoint(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))))
+	return MakeTabViewItem(result_)
+}
+
+func (n *NSTabView) Delegate() objc.Object {
+	result_ := C.C_NSTabView_Delegate(n.Ptr())
+	return objc.MakeObject(result_)
+}
+
+func (n *NSTabView) SetDelegate(value objc.Object) {
+	C.C_NSTabView_SetDelegate(n.Ptr(), objc.ExtractPtr(value))
 }
 
 func (n *NSTabView) NumberOfTabViewItems() int {
-	result := C.C_NSTabView_NumberOfTabViewItems(n.Ptr())
-	return int(result)
+	result_ := C.C_NSTabView_NumberOfTabViewItems(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSTabView) TabViewItems() []TabViewItem {
-	result := C.C_NSTabView_TabViewItems(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]TabViewItem, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeTabViewItem(r)
+	result_ := C.C_NSTabView_TabViewItems(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]TabViewItem, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeTabViewItem(r)
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSTabView) SetTabViewItems(value []TabViewItem) {
@@ -172,8 +183,8 @@ func (n *NSTabView) SetTabViewItems(value []TabViewItem) {
 }
 
 func (n *NSTabView) TabViewType() TabViewType {
-	result := C.C_NSTabView_TabViewType(n.Ptr())
-	return TabViewType(uint(result))
+	result_ := C.C_NSTabView_TabViewType(n.Ptr())
+	return TabViewType(uint(result_))
 }
 
 func (n *NSTabView) SetTabViewType(value TabViewType) {
@@ -181,8 +192,8 @@ func (n *NSTabView) SetTabViewType(value TabViewType) {
 }
 
 func (n *NSTabView) TabPosition() TabPosition {
-	result := C.C_NSTabView_TabPosition(n.Ptr())
-	return TabPosition(uint(result))
+	result_ := C.C_NSTabView_TabPosition(n.Ptr())
+	return TabPosition(uint(result_))
 }
 
 func (n *NSTabView) SetTabPosition(value TabPosition) {
@@ -190,8 +201,8 @@ func (n *NSTabView) SetTabPosition(value TabPosition) {
 }
 
 func (n *NSTabView) TabViewBorderType() TabViewBorderType {
-	result := C.C_NSTabView_TabViewBorderType(n.Ptr())
-	return TabViewBorderType(uint(result))
+	result_ := C.C_NSTabView_TabViewBorderType(n.Ptr())
+	return TabViewBorderType(uint(result_))
 }
 
 func (n *NSTabView) SetTabViewBorderType(value TabViewBorderType) {
@@ -199,13 +210,13 @@ func (n *NSTabView) SetTabViewBorderType(value TabViewBorderType) {
 }
 
 func (n *NSTabView) SelectedTabViewItem() TabViewItem {
-	result := C.C_NSTabView_SelectedTabViewItem(n.Ptr())
-	return MakeTabViewItem(result)
+	result_ := C.C_NSTabView_SelectedTabViewItem(n.Ptr())
+	return MakeTabViewItem(result_)
 }
 
 func (n *NSTabView) Font() Font {
-	result := C.C_NSTabView_Font(n.Ptr())
-	return MakeFont(result)
+	result_ := C.C_NSTabView_Font(n.Ptr())
+	return MakeFont(result_)
 }
 
 func (n *NSTabView) SetFont(value Font) {
@@ -213,8 +224,8 @@ func (n *NSTabView) SetFont(value Font) {
 }
 
 func (n *NSTabView) DrawsBackground() bool {
-	result := C.C_NSTabView_DrawsBackground(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSTabView_DrawsBackground(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSTabView) SetDrawsBackground(value bool) {
@@ -222,18 +233,18 @@ func (n *NSTabView) SetDrawsBackground(value bool) {
 }
 
 func (n *NSTabView) MinimumSize() foundation.Size {
-	result := C.C_NSTabView_MinimumSize(n.Ptr())
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSTabView_MinimumSize(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSTabView) ContentRect() foundation.Rect {
-	result := C.C_NSTabView_ContentRect(n.Ptr())
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSTabView_ContentRect(n.Ptr())
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSTabView) ControlSize() ControlSize {
-	result := C.C_NSTabView_ControlSize(n.Ptr())
-	return ControlSize(uint(result))
+	result_ := C.C_NSTabView_ControlSize(n.Ptr())
+	return ControlSize(uint(result_))
 }
 
 func (n *NSTabView) SetControlSize(value ControlSize) {
@@ -241,8 +252,8 @@ func (n *NSTabView) SetControlSize(value ControlSize) {
 }
 
 func (n *NSTabView) AllowsTruncatedLabels() bool {
-	result := C.C_NSTabView_AllowsTruncatedLabels(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSTabView_AllowsTruncatedLabels(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSTabView) SetAllowsTruncatedLabels(value bool) {

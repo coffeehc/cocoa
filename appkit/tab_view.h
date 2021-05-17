@@ -23,6 +23,8 @@ void C_NSTabView_SelectTabViewItemAtIndex(void* ptr, int index);
 void C_NSTabView_SelectTabViewItemWithIdentifier(void* ptr, void* identifier);
 void C_NSTabView_TakeSelectedTabViewItemFromSender(void* ptr, void* sender);
 void* C_NSTabView_TabViewItemAtPoint(void* ptr, CGPoint point);
+void* C_NSTabView_Delegate(void* ptr);
+void C_NSTabView_SetDelegate(void* ptr, void* value);
 int C_NSTabView_NumberOfTabViewItems(void* ptr);
 Array C_NSTabView_TabViewItems(void* ptr);
 void C_NSTabView_SetTabViewItems(void* ptr, Array value);
