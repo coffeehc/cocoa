@@ -109,4 +109,24 @@ type WindingRule uint
 type LineCapStyle uint
 type LineJoinStyle uint
 
+type PaperOrientation int
+type PrintingPaginationMode uint
+
 type DragOperation uint
+
+type PrinterPaperName string
+
+type PrintJobDispositionValue string
+
+type PrintRenderingQuality int
+
+type PrintingPageOrder int
+
+type PDFPanelOptions int
+
+type PrintPanelJobStyleHint string
+
+type PrintPanelOptions uint
+type HelpAnchorName string
+
+type PrinterTypeName string

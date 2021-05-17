@@ -19,7 +19,7 @@ func initAndRun() {
 	w := appkit.NewPlainWindow(foundation.MakeRect(0, 0, 600, 400))
 	w.SetTitle("Test widgets")
 
-	webView := webkit.NewWKWebView(foundation.ZeroRect)
+	webView := webkit.AllocWebView().Init()
 	webView.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	webView.LoadRequest(foundation.AllocURLRequest().InitWithURL(foundation.URLWithString("https://www.baidu.com")))
 	//webView.LoadHTMLString("<h1>Test</h1>", "https://www.baidu.com")
