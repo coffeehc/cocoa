@@ -7,152 +7,152 @@ void* C_CharacterSet_Alloc() {
 
 void* C_NSCharacterSet_InitWithCoder(void* ptr, void* coder) {
     NSCharacterSet* nSCharacterSet = (NSCharacterSet*)ptr;
-    NSCharacterSet* result = [nSCharacterSet initWithCoder:(NSCoder*)coder];
-    return result;
+    NSCharacterSet* result_ = [nSCharacterSet initWithCoder:(NSCoder*)coder];
+    return result_;
 }
 
 void* C_NSCharacterSet_CharacterSetWithCharactersInString(void* aString) {
-    NSCharacterSet* result = [NSCharacterSet characterSetWithCharactersInString:(NSString*)aString];
-    return result;
+    NSCharacterSet* result_ = [NSCharacterSet characterSetWithCharactersInString:(NSString*)aString];
+    return result_;
 }
 
 void* C_NSCharacterSet_CharacterSetWithRange(NSRange aRange) {
-    NSCharacterSet* result = [NSCharacterSet characterSetWithRange:aRange];
-    return result;
+    NSCharacterSet* result_ = [NSCharacterSet characterSetWithRange:aRange];
+    return result_;
 }
 
 void* C_NSCharacterSet_CharacterSetWithBitmapRepresentation(Array data) {
-    NSCharacterSet* result = [NSCharacterSet characterSetWithBitmapRepresentation:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len]];
-    return result;
+    NSCharacterSet* result_ = [NSCharacterSet characterSetWithBitmapRepresentation:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len]];
+    return result_;
 }
 
 void* C_NSCharacterSet_CharacterSetWithContentsOfFile(void* fName) {
-    NSCharacterSet* result = [NSCharacterSet characterSetWithContentsOfFile:(NSString*)fName];
-    return result;
+    NSCharacterSet* result_ = [NSCharacterSet characterSetWithContentsOfFile:(NSString*)fName];
+    return result_;
 }
 
 bool C_NSCharacterSet_IsSupersetOfSet(void* ptr, void* theOtherSet) {
     NSCharacterSet* nSCharacterSet = (NSCharacterSet*)ptr;
-    BOOL result = [nSCharacterSet isSupersetOfSet:(NSCharacterSet*)theOtherSet];
-    return result;
+    BOOL result_ = [nSCharacterSet isSupersetOfSet:(NSCharacterSet*)theOtherSet];
+    return result_;
 }
 
 void* C_NSCharacterSet_AlphanumericCharacterSet() {
-    NSCharacterSet* result = [NSCharacterSet alphanumericCharacterSet];
-    return result;
+    NSCharacterSet* result_ = [NSCharacterSet alphanumericCharacterSet];
+    return result_;
 }
 
 void* C_NSCharacterSet_CapitalizedLetterCharacterSet() {
-    NSCharacterSet* result = [NSCharacterSet capitalizedLetterCharacterSet];
-    return result;
+    NSCharacterSet* result_ = [NSCharacterSet capitalizedLetterCharacterSet];
+    return result_;
 }
 
 void* C_NSCharacterSet_ControlCharacterSet() {
-    NSCharacterSet* result = [NSCharacterSet controlCharacterSet];
-    return result;
+    NSCharacterSet* result_ = [NSCharacterSet controlCharacterSet];
+    return result_;
 }
 
 void* C_NSCharacterSet_DecimalDigitCharacterSet() {
-    NSCharacterSet* result = [NSCharacterSet decimalDigitCharacterSet];
-    return result;
+    NSCharacterSet* result_ = [NSCharacterSet decimalDigitCharacterSet];
+    return result_;
 }
 
 void* C_NSCharacterSet_DecomposableCharacterSet() {
-    NSCharacterSet* result = [NSCharacterSet decomposableCharacterSet];
-    return result;
+    NSCharacterSet* result_ = [NSCharacterSet decomposableCharacterSet];
+    return result_;
 }
 
 void* C_NSCharacterSet_IllegalCharacterSet() {
-    NSCharacterSet* result = [NSCharacterSet illegalCharacterSet];
-    return result;
+    NSCharacterSet* result_ = [NSCharacterSet illegalCharacterSet];
+    return result_;
 }
 
 void* C_NSCharacterSet_LetterCharacterSet() {
-    NSCharacterSet* result = [NSCharacterSet letterCharacterSet];
-    return result;
+    NSCharacterSet* result_ = [NSCharacterSet letterCharacterSet];
+    return result_;
 }
 
 void* C_NSCharacterSet_LowercaseLetterCharacterSet() {
-    NSCharacterSet* result = [NSCharacterSet lowercaseLetterCharacterSet];
-    return result;
+    NSCharacterSet* result_ = [NSCharacterSet lowercaseLetterCharacterSet];
+    return result_;
 }
 
 void* C_NSCharacterSet_NewlineCharacterSet() {
-    NSCharacterSet* result = [NSCharacterSet newlineCharacterSet];
-    return result;
+    NSCharacterSet* result_ = [NSCharacterSet newlineCharacterSet];
+    return result_;
 }
 
 void* C_NSCharacterSet_NonBaseCharacterSet() {
-    NSCharacterSet* result = [NSCharacterSet nonBaseCharacterSet];
-    return result;
+    NSCharacterSet* result_ = [NSCharacterSet nonBaseCharacterSet];
+    return result_;
 }
 
 void* C_NSCharacterSet_PunctuationCharacterSet() {
-    NSCharacterSet* result = [NSCharacterSet punctuationCharacterSet];
-    return result;
+    NSCharacterSet* result_ = [NSCharacterSet punctuationCharacterSet];
+    return result_;
 }
 
 void* C_NSCharacterSet_SymbolCharacterSet() {
-    NSCharacterSet* result = [NSCharacterSet symbolCharacterSet];
-    return result;
+    NSCharacterSet* result_ = [NSCharacterSet symbolCharacterSet];
+    return result_;
 }
 
 void* C_NSCharacterSet_UppercaseLetterCharacterSet() {
-    NSCharacterSet* result = [NSCharacterSet uppercaseLetterCharacterSet];
-    return result;
+    NSCharacterSet* result_ = [NSCharacterSet uppercaseLetterCharacterSet];
+    return result_;
 }
 
 void* C_NSCharacterSet_WhitespaceAndNewlineCharacterSet() {
-    NSCharacterSet* result = [NSCharacterSet whitespaceAndNewlineCharacterSet];
-    return result;
+    NSCharacterSet* result_ = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    return result_;
 }
 
 void* C_NSCharacterSet_WhitespaceCharacterSet() {
-    NSCharacterSet* result = [NSCharacterSet whitespaceCharacterSet];
-    return result;
+    NSCharacterSet* result_ = [NSCharacterSet whitespaceCharacterSet];
+    return result_;
 }
 
 void* C_NSCharacterSet_URLFragmentAllowedCharacterSet() {
-    NSCharacterSet* result = [NSCharacterSet URLFragmentAllowedCharacterSet];
-    return result;
+    NSCharacterSet* result_ = [NSCharacterSet URLFragmentAllowedCharacterSet];
+    return result_;
 }
 
 void* C_NSCharacterSet_URLHostAllowedCharacterSet() {
-    NSCharacterSet* result = [NSCharacterSet URLHostAllowedCharacterSet];
-    return result;
+    NSCharacterSet* result_ = [NSCharacterSet URLHostAllowedCharacterSet];
+    return result_;
 }
 
 void* C_NSCharacterSet_URLPasswordAllowedCharacterSet() {
-    NSCharacterSet* result = [NSCharacterSet URLPasswordAllowedCharacterSet];
-    return result;
+    NSCharacterSet* result_ = [NSCharacterSet URLPasswordAllowedCharacterSet];
+    return result_;
 }
 
 void* C_NSCharacterSet_URLPathAllowedCharacterSet() {
-    NSCharacterSet* result = [NSCharacterSet URLPathAllowedCharacterSet];
-    return result;
+    NSCharacterSet* result_ = [NSCharacterSet URLPathAllowedCharacterSet];
+    return result_;
 }
 
 void* C_NSCharacterSet_URLQueryAllowedCharacterSet() {
-    NSCharacterSet* result = [NSCharacterSet URLQueryAllowedCharacterSet];
-    return result;
+    NSCharacterSet* result_ = [NSCharacterSet URLQueryAllowedCharacterSet];
+    return result_;
 }
 
 void* C_NSCharacterSet_URLUserAllowedCharacterSet() {
-    NSCharacterSet* result = [NSCharacterSet URLUserAllowedCharacterSet];
-    return result;
+    NSCharacterSet* result_ = [NSCharacterSet URLUserAllowedCharacterSet];
+    return result_;
 }
 
 Array C_NSCharacterSet_BitmapRepresentation(void* ptr) {
     NSCharacterSet* nSCharacterSet = (NSCharacterSet*)ptr;
-    NSData* result = [nSCharacterSet bitmapRepresentation];
-    Array resultarray;
-    resultarray.data = [result bytes];
-    resultarray.len = result.length;
-    return resultarray;
+    NSData* result_ = [nSCharacterSet bitmapRepresentation];
+    Array result_array;
+    result_array.data = [result_ bytes];
+    result_array.len = result_.length;
+    return result_array;
 }
 
 void* C_NSCharacterSet_InvertedSet(void* ptr) {
     NSCharacterSet* nSCharacterSet = (NSCharacterSet*)ptr;
-    NSCharacterSet* result = [nSCharacterSet invertedSet];
-    return result;
+    NSCharacterSet* result_ = [nSCharacterSet invertedSet];
+    return result_;
 }

@@ -5,6 +5,7 @@ package webkit
 // #include "website_data_store.h"
 import "C"
 import (
+	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
 	"unsafe"
 )
@@ -40,6 +41,11 @@ func WebsiteDataStore_DefaultDataStore() WebsiteDataStore {
 func WebsiteDataStore_NonPersistentDataStore() WebsiteDataStore {
 	result_ := C.C_WKWebsiteDataStore_WebsiteDataStore_NonPersistentDataStore()
 	return MakeWebsiteDataStore(result_)
+}
+
+func WebsiteDataStore_AllWebsiteDataTypes() foundation.Set {
+	result_ := C.C_WKWebsiteDataStore_WebsiteDataStore_AllWebsiteDataTypes()
+	return foundation.MakeSet(result_)
 }
 
 func (w *WKWebsiteDataStore) IsPersistent() bool {

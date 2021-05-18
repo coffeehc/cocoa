@@ -138,3 +138,54 @@ type PrintPanelOptions uint
 type HelpAnchorName string
 
 type PrinterTypeName string
+
+type ColorSpaceModel int
+
+type ImageInterpolation uint
+
+type ColorRenderingIntent int
+
+type ImageLayoutDirection int
+
+type PasteboardContentsOptions uint
+
+type ToolbarDisplayMode uint
+
+type ToolbarSizeMode uint
+
+type TrackingAreaOptions uint
+
+type ViewLayerContentsPlacement int
+
+type ViewLayerContentsRedrawPolicy int
+
+type FocusRingType uint
+
+type WindowNumberListOptions uint
+
+type WindowUserTabbingPreference int
+
+type ToolbarItemVisibilityPriority int
+
+type TouchBarItemPriority float32
+
+type DraggingFormation int
+
+type DraggingImageComponentKey string
+
+type CellAttribute uint
+
+type CellType uint
+
+type BackgroundStyle int
+
+type RulerOrientation uint
+
+type CellHitResult uint
+
+type BitmapFormat uint
+
+type GestureRecognizerState int
+
+type SaveOperationType uint
+type DocumentChangeType uint

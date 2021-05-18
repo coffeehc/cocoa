@@ -35,21 +35,21 @@ func AllocTextTab() *NSTextTab {
 }
 
 func (n *NSTextTab) Init() TextTab {
-	result := C.C_NSTextTab_Init(n.Ptr())
-	return MakeTextTab(result)
+	result_ := C.C_NSTextTab_Init(n.Ptr())
+	return MakeTextTab(result_)
 }
 
 func TextTab_ColumnTerminatorsForLocale(aLocale foundation.Locale) foundation.CharacterSet {
-	result := C.C_NSTextTab_TextTab_ColumnTerminatorsForLocale(objc.ExtractPtr(aLocale))
-	return foundation.MakeCharacterSet(result)
+	result_ := C.C_NSTextTab_TextTab_ColumnTerminatorsForLocale(objc.ExtractPtr(aLocale))
+	return foundation.MakeCharacterSet(result_)
 }
 
 func (n *NSTextTab) Location() coregraphics.Float {
-	result := C.C_NSTextTab_Location(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSTextTab_Location(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSTextTab) Alignment() TextAlignment {
-	result := C.C_NSTextTab_Alignment(n.Ptr())
-	return TextAlignment(int(result))
+	result_ := C.C_NSTextTab_Alignment(n.Ptr())
+	return TextAlignment(int(result_))
 }

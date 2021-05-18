@@ -57,18 +57,18 @@ func AllocProgressIndicator() *NSProgressIndicator {
 }
 
 func (n *NSProgressIndicator) InitWithFrame(frameRect foundation.Rect) ProgressIndicator {
-	result := C.C_NSProgressIndicator_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
-	return MakeProgressIndicator(result)
+	result_ := C.C_NSProgressIndicator_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeProgressIndicator(result_)
 }
 
 func (n *NSProgressIndicator) InitWithCoder(coder foundation.Coder) ProgressIndicator {
-	result := C.C_NSProgressIndicator_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeProgressIndicator(result)
+	result_ := C.C_NSProgressIndicator_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeProgressIndicator(result_)
 }
 
 func (n *NSProgressIndicator) Init() ProgressIndicator {
-	result := C.C_NSProgressIndicator_Init(n.Ptr())
-	return MakeProgressIndicator(result)
+	result_ := C.C_NSProgressIndicator_Init(n.Ptr())
+	return MakeProgressIndicator(result_)
 }
 
 func (n *NSProgressIndicator) StartAnimation(sender objc.Object) {
@@ -88,8 +88,8 @@ func (n *NSProgressIndicator) SizeToFit() {
 }
 
 func (n *NSProgressIndicator) UsesThreadedAnimation() bool {
-	result := C.C_NSProgressIndicator_UsesThreadedAnimation(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSProgressIndicator_UsesThreadedAnimation(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSProgressIndicator) SetUsesThreadedAnimation(value bool) {
@@ -97,8 +97,8 @@ func (n *NSProgressIndicator) SetUsesThreadedAnimation(value bool) {
 }
 
 func (n *NSProgressIndicator) DoubleValue() float64 {
-	result := C.C_NSProgressIndicator_DoubleValue(n.Ptr())
-	return float64(result)
+	result_ := C.C_NSProgressIndicator_DoubleValue(n.Ptr())
+	return float64(result_)
 }
 
 func (n *NSProgressIndicator) SetDoubleValue(value float64) {
@@ -106,8 +106,8 @@ func (n *NSProgressIndicator) SetDoubleValue(value float64) {
 }
 
 func (n *NSProgressIndicator) MinValue() float64 {
-	result := C.C_NSProgressIndicator_MinValue(n.Ptr())
-	return float64(result)
+	result_ := C.C_NSProgressIndicator_MinValue(n.Ptr())
+	return float64(result_)
 }
 
 func (n *NSProgressIndicator) SetMinValue(value float64) {
@@ -115,8 +115,8 @@ func (n *NSProgressIndicator) SetMinValue(value float64) {
 }
 
 func (n *NSProgressIndicator) MaxValue() float64 {
-	result := C.C_NSProgressIndicator_MaxValue(n.Ptr())
-	return float64(result)
+	result_ := C.C_NSProgressIndicator_MaxValue(n.Ptr())
+	return float64(result_)
 }
 
 func (n *NSProgressIndicator) SetMaxValue(value float64) {
@@ -124,8 +124,8 @@ func (n *NSProgressIndicator) SetMaxValue(value float64) {
 }
 
 func (n *NSProgressIndicator) ControlSize() ControlSize {
-	result := C.C_NSProgressIndicator_ControlSize(n.Ptr())
-	return ControlSize(uint(result))
+	result_ := C.C_NSProgressIndicator_ControlSize(n.Ptr())
+	return ControlSize(uint(result_))
 }
 
 func (n *NSProgressIndicator) SetControlSize(value ControlSize) {
@@ -133,8 +133,8 @@ func (n *NSProgressIndicator) SetControlSize(value ControlSize) {
 }
 
 func (n *NSProgressIndicator) ControlTint() ControlTint {
-	result := C.C_NSProgressIndicator_ControlTint(n.Ptr())
-	return ControlTint(uint(result))
+	result_ := C.C_NSProgressIndicator_ControlTint(n.Ptr())
+	return ControlTint(uint(result_))
 }
 
 func (n *NSProgressIndicator) SetControlTint(value ControlTint) {
@@ -142,8 +142,8 @@ func (n *NSProgressIndicator) SetControlTint(value ControlTint) {
 }
 
 func (n *NSProgressIndicator) IsBezeled() bool {
-	result := C.C_NSProgressIndicator_IsBezeled(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSProgressIndicator_IsBezeled(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSProgressIndicator) SetBezeled(value bool) {
@@ -151,8 +151,8 @@ func (n *NSProgressIndicator) SetBezeled(value bool) {
 }
 
 func (n *NSProgressIndicator) IsIndeterminate() bool {
-	result := C.C_NSProgressIndicator_IsIndeterminate(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSProgressIndicator_IsIndeterminate(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSProgressIndicator) SetIndeterminate(value bool) {
@@ -160,8 +160,8 @@ func (n *NSProgressIndicator) SetIndeterminate(value bool) {
 }
 
 func (n *NSProgressIndicator) Style() ProgressIndicatorStyle {
-	result := C.C_NSProgressIndicator_Style(n.Ptr())
-	return ProgressIndicatorStyle(uint(result))
+	result_ := C.C_NSProgressIndicator_Style(n.Ptr())
+	return ProgressIndicatorStyle(uint(result_))
 }
 
 func (n *NSProgressIndicator) SetStyle(value ProgressIndicatorStyle) {
@@ -169,8 +169,8 @@ func (n *NSProgressIndicator) SetStyle(value ProgressIndicatorStyle) {
 }
 
 func (n *NSProgressIndicator) IsDisplayedWhenStopped() bool {
-	result := C.C_NSProgressIndicator_IsDisplayedWhenStopped(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSProgressIndicator_IsDisplayedWhenStopped(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSProgressIndicator) SetDisplayedWhenStopped(value bool) {

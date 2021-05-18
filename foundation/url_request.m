@@ -2,97 +2,125 @@
 #import "url_request.h"
 
 void* C_URLRequest_Alloc() {
-	return [NSURLRequest alloc];
+    return [NSURLRequest alloc];
 }
 
 void* C_NSURLRequest_InitWithURL(void* ptr, void* URL) {
-	NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
-	NSURLRequest* result = [nSURLRequest initWithURL:(NSURL*)URL];
-	return result;
+    NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
+    NSURLRequest* result_ = [nSURLRequest initWithURL:(NSURL*)URL];
+    return result_;
+}
+
+void* C_NSURLRequest_InitWithURL_CachePolicy_TimeoutInterval(void* ptr, void* URL, unsigned int cachePolicy, double timeoutInterval) {
+    NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
+    NSURLRequest* result_ = [nSURLRequest initWithURL:(NSURL*)URL cachePolicy:cachePolicy timeoutInterval:timeoutInterval];
+    return result_;
 }
 
 void* C_NSURLRequest_Init(void* ptr) {
-	NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
-	NSURLRequest* result = [nSURLRequest init];
-	return result;
+    NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
+    NSURLRequest* result_ = [nSURLRequest init];
+    return result_;
 }
 
-void* C_NSURLRequest_URLRequestRequestWithURL(void* URL) {
-	NSURLRequest* result = [NSURLRequest requestWithURL:(NSURL*)URL];
-	return result;
+void* C_NSURLRequest_URLRequest_RequestWithURL(void* URL) {
+    NSURLRequest* result_ = [NSURLRequest requestWithURL:(NSURL*)URL];
+    return result_;
+}
+
+void* C_NSURLRequest_URLRequest_RequestWithURL_CachePolicy_TimeoutInterval(void* URL, unsigned int cachePolicy, double timeoutInterval) {
+    NSURLRequest* result_ = [NSURLRequest requestWithURL:(NSURL*)URL cachePolicy:cachePolicy timeoutInterval:timeoutInterval];
+    return result_;
 }
 
 void* C_NSURLRequest_ValueForHTTPHeaderField(void* ptr, void* field) {
-	NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
-	NSString* result = [nSURLRequest valueForHTTPHeaderField:(NSString*)field];
-	return result;
+    NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
+    NSString* result_ = [nSURLRequest valueForHTTPHeaderField:(NSString*)field];
+    return result_;
+}
+
+unsigned int C_NSURLRequest_CachePolicy(void* ptr) {
+    NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
+    NSURLRequestCachePolicy result_ = [nSURLRequest cachePolicy];
+    return result_;
 }
 
 void* C_NSURLRequest_HTTPMethod(void* ptr) {
-	NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
-	NSString* result = [nSURLRequest HTTPMethod];
-	return result;
+    NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
+    NSString* result_ = [nSURLRequest HTTPMethod];
+    return result_;
 }
 
 void* C_NSURLRequest_URL(void* ptr) {
-	NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
-	NSURL* result = [nSURLRequest URL];
-	return result;
+    NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
+    NSURL* result_ = [nSURLRequest URL];
+    return result_;
 }
 
 Array C_NSURLRequest_HTTPBody(void* ptr) {
-	NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
-	NSData* result = [nSURLRequest HTTPBody];
-	Array resultarray;
-	resultarray.data = [result bytes];
-	resultarray.len = result.length;
-	return resultarray;
+    NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
+    NSData* result_ = [nSURLRequest HTTPBody];
+    Array result_array;
+    result_array.data = [result_ bytes];
+    result_array.len = result_.length;
+    return result_array;
 }
 
 void* C_NSURLRequest_MainDocumentURL(void* ptr) {
-	NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
-	NSURL* result = [nSURLRequest mainDocumentURL];
-	return result;
+    NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
+    NSURL* result_ = [nSURLRequest mainDocumentURL];
+    return result_;
 }
 
 double C_NSURLRequest_TimeoutInterval(void* ptr) {
-	NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
-	double result = [nSURLRequest timeoutInterval];
-	return result;
+    NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
+    NSTimeInterval result_ = [nSURLRequest timeoutInterval];
+    return result_;
 }
 
 bool C_NSURLRequest_HTTPShouldHandleCookies(void* ptr) {
-	NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
-	bool result = [nSURLRequest HTTPShouldHandleCookies];
-	return result;
+    NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
+    BOOL result_ = [nSURLRequest HTTPShouldHandleCookies];
+    return result_;
 }
 
 bool C_NSURLRequest_HTTPShouldUsePipelining(void* ptr) {
-	NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
-	bool result = [nSURLRequest HTTPShouldUsePipelining];
-	return result;
+    NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
+    BOOL result_ = [nSURLRequest HTTPShouldUsePipelining];
+    return result_;
 }
 
 bool C_NSURLRequest_AllowsCellularAccess(void* ptr) {
-	NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
-	bool result = [nSURLRequest allowsCellularAccess];
-	return result;
+    NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
+    BOOL result_ = [nSURLRequest allowsCellularAccess];
+    return result_;
 }
 
 bool C_NSURLRequest_AllowsConstrainedNetworkAccess(void* ptr) {
-	NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
-	bool result = [nSURLRequest allowsConstrainedNetworkAccess];
-	return result;
+    NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
+    BOOL result_ = [nSURLRequest allowsConstrainedNetworkAccess];
+    return result_;
 }
 
 bool C_NSURLRequest_AllowsExpensiveNetworkAccess(void* ptr) {
-	NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
-	bool result = [nSURLRequest allowsExpensiveNetworkAccess];
-	return result;
+    NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
+    BOOL result_ = [nSURLRequest allowsExpensiveNetworkAccess];
+    return result_;
+}
+
+unsigned int C_NSURLRequest_NetworkServiceType(void* ptr) {
+    NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
+    NSURLRequestNetworkServiceType result_ = [nSURLRequest networkServiceType];
+    return result_;
+}
+
+bool C_NSURLRequest_URLRequest_SupportsSecureCoding() {
+    BOOL result_ = [NSURLRequest supportsSecureCoding];
+    return result_;
 }
 
 bool C_NSURLRequest_AssumesHTTP3Capable(void* ptr) {
-	NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
-	bool result = [nSURLRequest assumesHTTP3Capable];
-	return result;
+    NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
+    BOOL result_ = [nSURLRequest assumesHTTP3Capable];
+    return result_;
 }

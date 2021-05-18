@@ -7,26 +7,26 @@ void* C_TextAttachment_Alloc() {
 
 void* C_NSTextAttachment_InitWithFileWrapper(void* ptr, void* fileWrapper) {
     NSTextAttachment* nSTextAttachment = (NSTextAttachment*)ptr;
-    NSTextAttachment* result = [nSTextAttachment initWithFileWrapper:(NSFileWrapper*)fileWrapper];
-    return result;
+    NSTextAttachment* result_ = [nSTextAttachment initWithFileWrapper:(NSFileWrapper*)fileWrapper];
+    return result_;
 }
 
 void* C_NSTextAttachment_InitWithData_OfType(void* ptr, Array contentData, void* uti) {
     NSTextAttachment* nSTextAttachment = (NSTextAttachment*)ptr;
-    NSTextAttachment* result = [nSTextAttachment initWithData:[[NSData alloc] initWithBytes:(Byte *)contentData.data length:contentData.len] ofType:(NSString*)uti];
-    return result;
+    NSTextAttachment* result_ = [nSTextAttachment initWithData:[[NSData alloc] initWithBytes:(Byte *)contentData.data length:contentData.len] ofType:(NSString*)uti];
+    return result_;
 }
 
 void* C_NSTextAttachment_Init(void* ptr) {
     NSTextAttachment* nSTextAttachment = (NSTextAttachment*)ptr;
-    NSTextAttachment* result = [nSTextAttachment init];
-    return result;
+    NSTextAttachment* result_ = [nSTextAttachment init];
+    return result_;
 }
 
 CGRect C_NSTextAttachment_Bounds(void* ptr) {
     NSTextAttachment* nSTextAttachment = (NSTextAttachment*)ptr;
-    NSRect result = [nSTextAttachment bounds];
-    return result;
+    NSRect result_ = [nSTextAttachment bounds];
+    return result_;
 }
 
 void C_NSTextAttachment_SetBounds(void* ptr, CGRect value) {
@@ -36,11 +36,11 @@ void C_NSTextAttachment_SetBounds(void* ptr, CGRect value) {
 
 Array C_NSTextAttachment_Contents(void* ptr) {
     NSTextAttachment* nSTextAttachment = (NSTextAttachment*)ptr;
-    NSData* result = [nSTextAttachment contents];
-    Array resultarray;
-    resultarray.data = [result bytes];
-    resultarray.len = result.length;
-    return resultarray;
+    NSData* result_ = [nSTextAttachment contents];
+    Array result_array;
+    result_array.data = [result_ bytes];
+    result_array.len = result_.length;
+    return result_array;
 }
 
 void C_NSTextAttachment_SetContents(void* ptr, Array value) {
@@ -50,8 +50,8 @@ void C_NSTextAttachment_SetContents(void* ptr, Array value) {
 
 void* C_NSTextAttachment_FileType(void* ptr) {
     NSTextAttachment* nSTextAttachment = (NSTextAttachment*)ptr;
-    NSString* result = [nSTextAttachment fileType];
-    return result;
+    NSString* result_ = [nSTextAttachment fileType];
+    return result_;
 }
 
 void C_NSTextAttachment_SetFileType(void* ptr, void* value) {
@@ -61,8 +61,8 @@ void C_NSTextAttachment_SetFileType(void* ptr, void* value) {
 
 void* C_NSTextAttachment_Image(void* ptr) {
     NSTextAttachment* nSTextAttachment = (NSTextAttachment*)ptr;
-    NSImage* result = [nSTextAttachment image];
-    return result;
+    NSImage* result_ = [nSTextAttachment image];
+    return result_;
 }
 
 void C_NSTextAttachment_SetImage(void* ptr, void* value) {
@@ -72,11 +72,22 @@ void C_NSTextAttachment_SetImage(void* ptr, void* value) {
 
 void* C_NSTextAttachment_FileWrapper(void* ptr) {
     NSTextAttachment* nSTextAttachment = (NSTextAttachment*)ptr;
-    NSFileWrapper* result = [nSTextAttachment fileWrapper];
-    return result;
+    NSFileWrapper* result_ = [nSTextAttachment fileWrapper];
+    return result_;
 }
 
 void C_NSTextAttachment_SetFileWrapper(void* ptr, void* value) {
     NSTextAttachment* nSTextAttachment = (NSTextAttachment*)ptr;
     [nSTextAttachment setFileWrapper:(NSFileWrapper*)value];
+}
+
+void* C_NSTextAttachment_AttachmentCell(void* ptr) {
+    NSTextAttachment* nSTextAttachment = (NSTextAttachment*)ptr;
+    id result_ = [nSTextAttachment attachmentCell];
+    return result_;
+}
+
+void C_NSTextAttachment_SetAttachmentCell(void* ptr, void* value) {
+    NSTextAttachment* nSTextAttachment = (NSTextAttachment*)ptr;
+    [nSTextAttachment setAttachmentCell:(id)value];
 }

@@ -82,28 +82,28 @@ func AllocMenuItem() *NSMenuItem {
 }
 
 func (n *NSMenuItem) InitWithTitle_Action_KeyEquivalent(_string string, selector *objc.Selector, charCode string) MenuItem {
-	result := C.C_NSMenuItem_InitWithTitle_Action_KeyEquivalent(n.Ptr(), foundation.NewString(_string).Ptr(), objc.ExtractPtr(selector), foundation.NewString(charCode).Ptr())
-	return MakeMenuItem(result)
+	result_ := C.C_NSMenuItem_InitWithTitle_Action_KeyEquivalent(n.Ptr(), foundation.NewString(_string).Ptr(), objc.ExtractPtr(selector), foundation.NewString(charCode).Ptr())
+	return MakeMenuItem(result_)
 }
 
 func (n *NSMenuItem) InitWithCoder(coder foundation.Coder) MenuItem {
-	result := C.C_NSMenuItem_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeMenuItem(result)
+	result_ := C.C_NSMenuItem_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeMenuItem(result_)
 }
 
 func (n *NSMenuItem) Init() MenuItem {
-	result := C.C_NSMenuItem_Init(n.Ptr())
-	return MakeMenuItem(result)
+	result_ := C.C_NSMenuItem_Init(n.Ptr())
+	return MakeMenuItem(result_)
 }
 
 func MenuItem_SeparatorItem() MenuItem {
-	result := C.C_NSMenuItem_MenuItem_SeparatorItem()
-	return MakeMenuItem(result)
+	result_ := C.C_NSMenuItem_MenuItem_SeparatorItem()
+	return MakeMenuItem(result_)
 }
 
 func (n *NSMenuItem) IsEnabled() bool {
-	result := C.C_NSMenuItem_IsEnabled(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSMenuItem_IsEnabled(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSMenuItem) SetEnabled(value bool) {
@@ -111,8 +111,8 @@ func (n *NSMenuItem) SetEnabled(value bool) {
 }
 
 func (n *NSMenuItem) IsHidden() bool {
-	result := C.C_NSMenuItem_IsHidden(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSMenuItem_IsHidden(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSMenuItem) SetHidden(value bool) {
@@ -120,13 +120,13 @@ func (n *NSMenuItem) SetHidden(value bool) {
 }
 
 func (n *NSMenuItem) IsHiddenOrHasHiddenAncestor() bool {
-	result := C.C_NSMenuItem_IsHiddenOrHasHiddenAncestor(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSMenuItem_IsHiddenOrHasHiddenAncestor(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSMenuItem) Target() objc.Object {
-	result := C.C_NSMenuItem_Target(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSMenuItem_Target(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSMenuItem) SetTarget(value objc.Object) {
@@ -134,8 +134,8 @@ func (n *NSMenuItem) SetTarget(value objc.Object) {
 }
 
 func (n *NSMenuItem) Action() *objc.Selector {
-	result := C.C_NSMenuItem_Action(n.Ptr())
-	return objc.MakeSelector(result)
+	result_ := C.C_NSMenuItem_Action(n.Ptr())
+	return objc.MakeSelector(result_)
 }
 
 func (n *NSMenuItem) SetAction(value *objc.Selector) {
@@ -143,8 +143,8 @@ func (n *NSMenuItem) SetAction(value *objc.Selector) {
 }
 
 func (n *NSMenuItem) Title() string {
-	result := C.C_NSMenuItem_Title(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSMenuItem_Title(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSMenuItem) SetTitle(value string) {
@@ -152,8 +152,8 @@ func (n *NSMenuItem) SetTitle(value string) {
 }
 
 func (n *NSMenuItem) AttributedTitle() foundation.AttributedString {
-	result := C.C_NSMenuItem_AttributedTitle(n.Ptr())
-	return foundation.MakeAttributedString(result)
+	result_ := C.C_NSMenuItem_AttributedTitle(n.Ptr())
+	return foundation.MakeAttributedString(result_)
 }
 
 func (n *NSMenuItem) SetAttributedTitle(value foundation.AttributedString) {
@@ -161,8 +161,8 @@ func (n *NSMenuItem) SetAttributedTitle(value foundation.AttributedString) {
 }
 
 func (n *NSMenuItem) Tag() int {
-	result := C.C_NSMenuItem_Tag(n.Ptr())
-	return int(result)
+	result_ := C.C_NSMenuItem_Tag(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSMenuItem) SetTag(value int) {
@@ -170,8 +170,8 @@ func (n *NSMenuItem) SetTag(value int) {
 }
 
 func (n *NSMenuItem) State() ControlStateValue {
-	result := C.C_NSMenuItem_State(n.Ptr())
-	return ControlStateValue(int(result))
+	result_ := C.C_NSMenuItem_State(n.Ptr())
+	return ControlStateValue(int(result_))
 }
 
 func (n *NSMenuItem) SetState(value ControlStateValue) {
@@ -179,8 +179,8 @@ func (n *NSMenuItem) SetState(value ControlStateValue) {
 }
 
 func (n *NSMenuItem) Image() Image {
-	result := C.C_NSMenuItem_Image(n.Ptr())
-	return MakeImage(result)
+	result_ := C.C_NSMenuItem_Image(n.Ptr())
+	return MakeImage(result_)
 }
 
 func (n *NSMenuItem) SetImage(value Image) {
@@ -188,8 +188,8 @@ func (n *NSMenuItem) SetImage(value Image) {
 }
 
 func (n *NSMenuItem) OnStateImage() Image {
-	result := C.C_NSMenuItem_OnStateImage(n.Ptr())
-	return MakeImage(result)
+	result_ := C.C_NSMenuItem_OnStateImage(n.Ptr())
+	return MakeImage(result_)
 }
 
 func (n *NSMenuItem) SetOnStateImage(value Image) {
@@ -197,8 +197,8 @@ func (n *NSMenuItem) SetOnStateImage(value Image) {
 }
 
 func (n *NSMenuItem) OffStateImage() Image {
-	result := C.C_NSMenuItem_OffStateImage(n.Ptr())
-	return MakeImage(result)
+	result_ := C.C_NSMenuItem_OffStateImage(n.Ptr())
+	return MakeImage(result_)
 }
 
 func (n *NSMenuItem) SetOffStateImage(value Image) {
@@ -206,8 +206,8 @@ func (n *NSMenuItem) SetOffStateImage(value Image) {
 }
 
 func (n *NSMenuItem) MixedStateImage() Image {
-	result := C.C_NSMenuItem_MixedStateImage(n.Ptr())
-	return MakeImage(result)
+	result_ := C.C_NSMenuItem_MixedStateImage(n.Ptr())
+	return MakeImage(result_)
 }
 
 func (n *NSMenuItem) SetMixedStateImage(value Image) {
@@ -215,8 +215,8 @@ func (n *NSMenuItem) SetMixedStateImage(value Image) {
 }
 
 func (n *NSMenuItem) Submenu() Menu {
-	result := C.C_NSMenuItem_Submenu(n.Ptr())
-	return MakeMenu(result)
+	result_ := C.C_NSMenuItem_Submenu(n.Ptr())
+	return MakeMenu(result_)
 }
 
 func (n *NSMenuItem) SetSubmenu(value Menu) {
@@ -224,23 +224,23 @@ func (n *NSMenuItem) SetSubmenu(value Menu) {
 }
 
 func (n *NSMenuItem) HasSubmenu() bool {
-	result := C.C_NSMenuItem_HasSubmenu(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSMenuItem_HasSubmenu(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSMenuItem) ParentItem() MenuItem {
-	result := C.C_NSMenuItem_ParentItem(n.Ptr())
-	return MakeMenuItem(result)
+	result_ := C.C_NSMenuItem_ParentItem(n.Ptr())
+	return MakeMenuItem(result_)
 }
 
 func (n *NSMenuItem) IsSeparatorItem() bool {
-	result := C.C_NSMenuItem_IsSeparatorItem(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSMenuItem_IsSeparatorItem(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSMenuItem) Menu() Menu {
-	result := C.C_NSMenuItem_Menu(n.Ptr())
-	return MakeMenu(result)
+	result_ := C.C_NSMenuItem_Menu(n.Ptr())
+	return MakeMenu(result_)
 }
 
 func (n *NSMenuItem) SetMenu(value Menu) {
@@ -248,8 +248,8 @@ func (n *NSMenuItem) SetMenu(value Menu) {
 }
 
 func (n *NSMenuItem) KeyEquivalent() string {
-	result := C.C_NSMenuItem_KeyEquivalent(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSMenuItem_KeyEquivalent(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSMenuItem) SetKeyEquivalent(value string) {
@@ -257,8 +257,8 @@ func (n *NSMenuItem) SetKeyEquivalent(value string) {
 }
 
 func (n *NSMenuItem) KeyEquivalentModifierMask() EventModifierFlags {
-	result := C.C_NSMenuItem_KeyEquivalentModifierMask(n.Ptr())
-	return EventModifierFlags(uint(result))
+	result_ := C.C_NSMenuItem_KeyEquivalentModifierMask(n.Ptr())
+	return EventModifierFlags(uint(result_))
 }
 
 func (n *NSMenuItem) SetKeyEquivalentModifierMask(value EventModifierFlags) {
@@ -266,8 +266,8 @@ func (n *NSMenuItem) SetKeyEquivalentModifierMask(value EventModifierFlags) {
 }
 
 func MenuItem_UsesUserKeyEquivalents() bool {
-	result := C.C_NSMenuItem_MenuItem_UsesUserKeyEquivalents()
-	return bool(result)
+	result_ := C.C_NSMenuItem_MenuItem_UsesUserKeyEquivalents()
+	return bool(result_)
 }
 
 func MenuItem_SetUsesUserKeyEquivalents(value bool) {
@@ -275,13 +275,13 @@ func MenuItem_SetUsesUserKeyEquivalents(value bool) {
 }
 
 func (n *NSMenuItem) UserKeyEquivalent() string {
-	result := C.C_NSMenuItem_UserKeyEquivalent(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSMenuItem_UserKeyEquivalent(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSMenuItem) IsAlternate() bool {
-	result := C.C_NSMenuItem_IsAlternate(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSMenuItem_IsAlternate(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSMenuItem) SetAlternate(value bool) {
@@ -289,8 +289,8 @@ func (n *NSMenuItem) SetAlternate(value bool) {
 }
 
 func (n *NSMenuItem) IndentationLevel() int {
-	result := C.C_NSMenuItem_IndentationLevel(n.Ptr())
-	return int(result)
+	result_ := C.C_NSMenuItem_IndentationLevel(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSMenuItem) SetIndentationLevel(value int) {
@@ -298,8 +298,8 @@ func (n *NSMenuItem) SetIndentationLevel(value int) {
 }
 
 func (n *NSMenuItem) ToolTip() string {
-	result := C.C_NSMenuItem_ToolTip(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSMenuItem_ToolTip(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSMenuItem) SetToolTip(value string) {
@@ -307,8 +307,8 @@ func (n *NSMenuItem) SetToolTip(value string) {
 }
 
 func (n *NSMenuItem) RepresentedObject() objc.Object {
-	result := C.C_NSMenuItem_RepresentedObject(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSMenuItem_RepresentedObject(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSMenuItem) SetRepresentedObject(value objc.Object) {
@@ -316,8 +316,8 @@ func (n *NSMenuItem) SetRepresentedObject(value objc.Object) {
 }
 
 func (n *NSMenuItem) View() View {
-	result := C.C_NSMenuItem_View(n.Ptr())
-	return MakeView(result)
+	result_ := C.C_NSMenuItem_View(n.Ptr())
+	return MakeView(result_)
 }
 
 func (n *NSMenuItem) SetView(value View) {
@@ -325,13 +325,13 @@ func (n *NSMenuItem) SetView(value View) {
 }
 
 func (n *NSMenuItem) IsHighlighted() bool {
-	result := C.C_NSMenuItem_IsHighlighted(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSMenuItem_IsHighlighted(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSMenuItem) AllowsKeyEquivalentWhenHidden() bool {
-	result := C.C_NSMenuItem_AllowsKeyEquivalentWhenHidden(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSMenuItem_AllowsKeyEquivalentWhenHidden(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSMenuItem) SetAllowsKeyEquivalentWhenHidden(value bool) {

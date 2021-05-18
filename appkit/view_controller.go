@@ -16,6 +16,7 @@ type ViewController interface {
 	LoadView()
 	CommitEditing() bool
 	DiscardEditing()
+	DismissController(sender objc.Object)
 	ViewDidLoad()
 	ViewWillAppear()
 	ViewDidAppear()
@@ -29,7 +30,9 @@ type ViewController interface {
 	RemoveChildViewControllerAtIndex(index int)
 	RemoveFromParentViewController()
 	PreferredContentSizeDidChangeForViewController(viewController ViewController)
+	PresentViewController_Animator(viewController ViewController, animator objc.Object)
 	DismissViewController(viewController ViewController)
+	PresentViewController_AsPopoverRelativeToRect_OfView_PreferredEdge_Behavior(viewController ViewController, positioningRect foundation.Rect, positioningView View, preferredEdge foundation.RectEdge, behavior PopoverBehavior)
 	PresentViewControllerAsModalWindow(viewController ViewController)
 	PresentViewControllerAsSheet(viewController ViewController)
 	ViewWillTransitionToSize(newSize foundation.Size)
@@ -43,7 +46,10 @@ type ViewController interface {
 	IsViewLoaded() bool
 	PreferredContentSize() foundation.Size
 	SetPreferredContentSize(value foundation.Size)
+	ChildViewControllers() []ViewController
+	SetChildViewControllers(value []ViewController)
 	ParentViewController() ViewController
+	PresentedViewControllers() []ViewController
 	PresentingViewController() ViewController
 	ExtensionContext() foundation.ExtensionContext
 	PreferredScreenOrigin() foundation.Point
@@ -70,18 +76,18 @@ func AllocViewController() *NSViewController {
 }
 
 func (n *NSViewController) InitWithNibName_Bundle(nibNameOrNil NibName, nibBundleOrNil foundation.Bundle) ViewController {
-	result := C.C_NSViewController_InitWithNibName_Bundle(n.Ptr(), foundation.NewString(string(nibNameOrNil)).Ptr(), objc.ExtractPtr(nibBundleOrNil))
-	return MakeViewController(result)
+	result_ := C.C_NSViewController_InitWithNibName_Bundle(n.Ptr(), foundation.NewString(string(nibNameOrNil)).Ptr(), objc.ExtractPtr(nibBundleOrNil))
+	return MakeViewController(result_)
 }
 
 func (n *NSViewController) InitWithCoder(coder foundation.Coder) ViewController {
-	result := C.C_NSViewController_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeViewController(result)
+	result_ := C.C_NSViewController_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeViewController(result_)
 }
 
 func (n *NSViewController) Init() ViewController {
-	result := C.C_NSViewController_Init(n.Ptr())
-	return MakeViewController(result)
+	result_ := C.C_NSViewController_Init(n.Ptr())
+	return MakeViewController(result_)
 }
 
 func (n *NSViewController) LoadView() {
@@ -89,12 +95,16 @@ func (n *NSViewController) LoadView() {
 }
 
 func (n *NSViewController) CommitEditing() bool {
-	result := C.C_NSViewController_CommitEditing(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSViewController_CommitEditing(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSViewController) DiscardEditing() {
 	C.C_NSViewController_DiscardEditing(n.Ptr())
+}
+
+func (n *NSViewController) DismissController(sender objc.Object) {
+	C.C_NSViewController_DismissController(n.Ptr(), objc.ExtractPtr(sender))
 }
 
 func (n *NSViewController) ViewDidLoad() {
@@ -149,8 +159,16 @@ func (n *NSViewController) PreferredContentSizeDidChangeForViewController(viewCo
 	C.C_NSViewController_PreferredContentSizeDidChangeForViewController(n.Ptr(), objc.ExtractPtr(viewController))
 }
 
+func (n *NSViewController) PresentViewController_Animator(viewController ViewController, animator objc.Object) {
+	C.C_NSViewController_PresentViewController_Animator(n.Ptr(), objc.ExtractPtr(viewController), objc.ExtractPtr(animator))
+}
+
 func (n *NSViewController) DismissViewController(viewController ViewController) {
 	C.C_NSViewController_DismissViewController(n.Ptr(), objc.ExtractPtr(viewController))
+}
+
+func (n *NSViewController) PresentViewController_AsPopoverRelativeToRect_OfView_PreferredEdge_Behavior(viewController ViewController, positioningRect foundation.Rect, positioningView View, preferredEdge foundation.RectEdge, behavior PopoverBehavior) {
+	C.C_NSViewController_PresentViewController_AsPopoverRelativeToRect_OfView_PreferredEdge_Behavior(n.Ptr(), objc.ExtractPtr(viewController), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(positioningRect))), objc.ExtractPtr(positioningView), C.uint(uint(preferredEdge)), C.int(int(behavior)))
 }
 
 func (n *NSViewController) PresentViewControllerAsModalWindow(viewController ViewController) {
@@ -166,8 +184,8 @@ func (n *NSViewController) ViewWillTransitionToSize(newSize foundation.Size) {
 }
 
 func (n *NSViewController) RepresentedObject() objc.Object {
-	result := C.C_NSViewController_RepresentedObject(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSViewController_RepresentedObject(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSViewController) SetRepresentedObject(value objc.Object) {
@@ -175,18 +193,18 @@ func (n *NSViewController) SetRepresentedObject(value objc.Object) {
 }
 
 func (n *NSViewController) NibBundle() foundation.Bundle {
-	result := C.C_NSViewController_NibBundle(n.Ptr())
-	return foundation.MakeBundle(result)
+	result_ := C.C_NSViewController_NibBundle(n.Ptr())
+	return foundation.MakeBundle(result_)
 }
 
 func (n *NSViewController) NibName() NibName {
-	result := C.C_NSViewController_NibName(n.Ptr())
-	return NibName(foundation.MakeString(result).String())
+	result_ := C.C_NSViewController_NibName(n.Ptr())
+	return NibName(foundation.MakeString(result_).String())
 }
 
 func (n *NSViewController) Title() string {
-	result := C.C_NSViewController_Title(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSViewController_Title(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSViewController) SetTitle(value string) {
@@ -194,42 +212,73 @@ func (n *NSViewController) SetTitle(value string) {
 }
 
 func (n *NSViewController) Storyboard() Storyboard {
-	result := C.C_NSViewController_Storyboard(n.Ptr())
-	return MakeStoryboard(result)
+	result_ := C.C_NSViewController_Storyboard(n.Ptr())
+	return MakeStoryboard(result_)
 }
 
 func (n *NSViewController) IsViewLoaded() bool {
-	result := C.C_NSViewController_IsViewLoaded(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSViewController_IsViewLoaded(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSViewController) PreferredContentSize() foundation.Size {
-	result := C.C_NSViewController_PreferredContentSize(n.Ptr())
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSViewController_PreferredContentSize(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSViewController) SetPreferredContentSize(value foundation.Size) {
 	C.C_NSViewController_SetPreferredContentSize(n.Ptr(), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(value))))
 }
 
+func (n *NSViewController) ChildViewControllers() []ViewController {
+	result_ := C.C_NSViewController_ChildViewControllers(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]ViewController, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeViewController(r)
+	}
+	return goResult_
+}
+
+func (n *NSViewController) SetChildViewControllers(value []ViewController) {
+	cValueData := make([]unsafe.Pointer, len(value))
+	for idx, v := range value {
+		cValueData[idx] = objc.ExtractPtr(v)
+	}
+	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
+	C.C_NSViewController_SetChildViewControllers(n.Ptr(), cValue)
+}
+
 func (n *NSViewController) ParentViewController() ViewController {
-	result := C.C_NSViewController_ParentViewController(n.Ptr())
-	return MakeViewController(result)
+	result_ := C.C_NSViewController_ParentViewController(n.Ptr())
+	return MakeViewController(result_)
+}
+
+func (n *NSViewController) PresentedViewControllers() []ViewController {
+	result_ := C.C_NSViewController_PresentedViewControllers(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]ViewController, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeViewController(r)
+	}
+	return goResult_
 }
 
 func (n *NSViewController) PresentingViewController() ViewController {
-	result := C.C_NSViewController_PresentingViewController(n.Ptr())
-	return MakeViewController(result)
+	result_ := C.C_NSViewController_PresentingViewController(n.Ptr())
+	return MakeViewController(result_)
 }
 
 func (n *NSViewController) ExtensionContext() foundation.ExtensionContext {
-	result := C.C_NSViewController_ExtensionContext(n.Ptr())
-	return foundation.MakeExtensionContext(result)
+	result_ := C.C_NSViewController_ExtensionContext(n.Ptr())
+	return foundation.MakeExtensionContext(result_)
 }
 
 func (n *NSViewController) PreferredScreenOrigin() foundation.Point {
-	result := C.C_NSViewController_PreferredScreenOrigin(n.Ptr())
-	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSViewController_PreferredScreenOrigin(n.Ptr())
+	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSViewController) SetPreferredScreenOrigin(value foundation.Point) {
@@ -237,11 +286,11 @@ func (n *NSViewController) SetPreferredScreenOrigin(value foundation.Point) {
 }
 
 func (n *NSViewController) PreferredMaximumSize() foundation.Size {
-	result := C.C_NSViewController_PreferredMaximumSize(n.Ptr())
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSViewController_PreferredMaximumSize(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSViewController) PreferredMinimumSize() foundation.Size {
-	result := C.C_NSViewController_PreferredMinimumSize(n.Ptr())
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSViewController_PreferredMinimumSize(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }

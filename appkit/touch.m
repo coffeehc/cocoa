@@ -7,54 +7,60 @@ void* C_Touch_Alloc() {
 
 void* C_NSTouch_Init(void* ptr) {
     NSTouch* nSTouch = (NSTouch*)ptr;
-    NSTouch* result = [nSTouch init];
-    return result;
+    NSTouch* result_ = [nSTouch init];
+    return result_;
 }
 
 CGPoint C_NSTouch_LocationInView(void* ptr, void* view) {
     NSTouch* nSTouch = (NSTouch*)ptr;
-    NSPoint result = [nSTouch locationInView:(NSView*)view];
-    return result;
+    NSPoint result_ = [nSTouch locationInView:(NSView*)view];
+    return result_;
 }
 
 CGPoint C_NSTouch_PreviousLocationInView(void* ptr, void* view) {
     NSTouch* nSTouch = (NSTouch*)ptr;
-    NSPoint result = [nSTouch previousLocationInView:(NSView*)view];
-    return result;
+    NSPoint result_ = [nSTouch previousLocationInView:(NSView*)view];
+    return result_;
 }
 
 int C_NSTouch_Type(void* ptr) {
     NSTouch* nSTouch = (NSTouch*)ptr;
-    NSTouchType result = [nSTouch type];
-    return result;
+    NSTouchType result_ = [nSTouch type];
+    return result_;
+}
+
+void* C_NSTouch_Identity(void* ptr) {
+    NSTouch* nSTouch = (NSTouch*)ptr;
+    id result_ = [nSTouch identity];
+    return result_;
 }
 
 unsigned int C_NSTouch_Phase(void* ptr) {
     NSTouch* nSTouch = (NSTouch*)ptr;
-    NSTouchPhase result = [nSTouch phase];
-    return result;
+    NSTouchPhase result_ = [nSTouch phase];
+    return result_;
 }
 
 CGPoint C_NSTouch_NormalizedPosition(void* ptr) {
     NSTouch* nSTouch = (NSTouch*)ptr;
-    NSPoint result = [nSTouch normalizedPosition];
-    return result;
+    NSPoint result_ = [nSTouch normalizedPosition];
+    return result_;
 }
 
 bool C_NSTouch_IsResting(void* ptr) {
     NSTouch* nSTouch = (NSTouch*)ptr;
-    BOOL result = [nSTouch isResting];
-    return result;
+    BOOL result_ = [nSTouch isResting];
+    return result_;
 }
 
 void* C_NSTouch_Device(void* ptr) {
     NSTouch* nSTouch = (NSTouch*)ptr;
-    id result = [nSTouch device];
-    return result;
+    id result_ = [nSTouch device];
+    return result_;
 }
 
 CGSize C_NSTouch_DeviceSize(void* ptr) {
     NSTouch* nSTouch = (NSTouch*)ptr;
-    NSSize result = [nSTouch deviceSize];
-    return result;
+    NSSize result_ = [nSTouch deviceSize];
+    return result_;
 }

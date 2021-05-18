@@ -45,18 +45,18 @@ func AllocStatusItem() *NSStatusItem {
 }
 
 func (n *NSStatusItem) Init() StatusItem {
-	result := C.C_NSStatusItem_Init(n.Ptr())
-	return MakeStatusItem(result)
+	result_ := C.C_NSStatusItem_Init(n.Ptr())
+	return MakeStatusItem(result_)
 }
 
 func (n *NSStatusItem) StatusBar() StatusBar {
-	result := C.C_NSStatusItem_StatusBar(n.Ptr())
-	return MakeStatusBar(result)
+	result_ := C.C_NSStatusItem_StatusBar(n.Ptr())
+	return MakeStatusBar(result_)
 }
 
 func (n *NSStatusItem) Behavior() StatusItemBehavior {
-	result := C.C_NSStatusItem_Behavior(n.Ptr())
-	return StatusItemBehavior(uint(result))
+	result_ := C.C_NSStatusItem_Behavior(n.Ptr())
+	return StatusItemBehavior(uint(result_))
 }
 
 func (n *NSStatusItem) SetBehavior(value StatusItemBehavior) {
@@ -64,13 +64,13 @@ func (n *NSStatusItem) SetBehavior(value StatusItemBehavior) {
 }
 
 func (n *NSStatusItem) Button() StatusBarButton {
-	result := C.C_NSStatusItem_Button(n.Ptr())
-	return MakeStatusBarButton(result)
+	result_ := C.C_NSStatusItem_Button(n.Ptr())
+	return MakeStatusBarButton(result_)
 }
 
 func (n *NSStatusItem) Menu() Menu {
-	result := C.C_NSStatusItem_Menu(n.Ptr())
-	return MakeMenu(result)
+	result_ := C.C_NSStatusItem_Menu(n.Ptr())
+	return MakeMenu(result_)
 }
 
 func (n *NSStatusItem) SetMenu(value Menu) {
@@ -78,8 +78,8 @@ func (n *NSStatusItem) SetMenu(value Menu) {
 }
 
 func (n *NSStatusItem) IsVisible() bool {
-	result := C.C_NSStatusItem_IsVisible(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSStatusItem_IsVisible(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSStatusItem) SetVisible(value bool) {
@@ -87,8 +87,8 @@ func (n *NSStatusItem) SetVisible(value bool) {
 }
 
 func (n *NSStatusItem) Length() coregraphics.Float {
-	result := C.C_NSStatusItem_Length(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSStatusItem_Length(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSStatusItem) SetLength(value coregraphics.Float) {
@@ -96,8 +96,8 @@ func (n *NSStatusItem) SetLength(value coregraphics.Float) {
 }
 
 func (n *NSStatusItem) AutosaveName() StatusItemAutosaveName {
-	result := C.C_NSStatusItem_AutosaveName(n.Ptr())
-	return StatusItemAutosaveName(foundation.MakeString(result).String())
+	result_ := C.C_NSStatusItem_AutosaveName(n.Ptr())
+	return StatusItemAutosaveName(foundation.MakeString(result_).String())
 }
 
 func (n *NSStatusItem) SetAutosaveName(value StatusItemAutosaveName) {

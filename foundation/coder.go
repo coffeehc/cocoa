@@ -50,11 +50,15 @@ type Coder interface {
 	DecodeRectForKey(key string) Rect
 	DecodeSize() Size
 	DecodeSizeForKey(key string) Size
+	DecodeObjectOfClasses_ForKey(classes Set, key string) objc.Object
 	DecodePropertyListForKey(key string) objc.Object
 	FailWithError(error Error)
 	VersionForClassName(className string) int
+	DecodeArrayOfObjectsOfClasses_ForKey(classes Set, key string) []objc.Object
 	AllowsKeyedCoding() bool
+	DecodingFailurePolicy() DecodingFailurePolicy
 	RequiresSecureCoding() bool
+	AllowedClasses() Set
 	Error() Error
 }
 
@@ -76,13 +80,13 @@ func AllocCoder() *NSCoder {
 }
 
 func (n *NSCoder) Init() Coder {
-	result := C.C_NSCoder_Init(n.Ptr())
-	return MakeCoder(result)
+	result_ := C.C_NSCoder_Init(n.Ptr())
+	return MakeCoder(result_)
 }
 
 func (n *NSCoder) ContainsValueForKey(key string) bool {
-	result := C.C_NSCoder_ContainsValueForKey(n.Ptr(), NewString(key).Ptr())
-	return bool(result)
+	result_ := C.C_NSCoder_ContainsValueForKey(n.Ptr(), NewString(key).Ptr())
+	return bool(result_)
 }
 
 func (n *NSCoder) EncodeBool_ForKey(value bool, key string) {
@@ -170,92 +174,97 @@ func (n *NSCoder) EncodeSize_ForKey(size Size, key string) {
 }
 
 func (n *NSCoder) DecodeBoolForKey(key string) bool {
-	result := C.C_NSCoder_DecodeBoolForKey(n.Ptr(), NewString(key).Ptr())
-	return bool(result)
+	result_ := C.C_NSCoder_DecodeBoolForKey(n.Ptr(), NewString(key).Ptr())
+	return bool(result_)
 }
 
 func (n *NSCoder) DecodeDataObject() []byte {
-	result := C.C_NSCoder_DecodeDataObject(n.Ptr())
-	resultBuffer := (*[1 << 30]byte)(result.data)[:C.int(result.len)]
-	goResult := make([]byte, C.int(result.len))
-	copy(goResult, resultBuffer)
-	C.free(result.data)
-	return goResult
+	result_ := C.C_NSCoder_DecodeDataObject(n.Ptr())
+	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
+	goResult_ := make([]byte, C.int(result_.len))
+	copy(goResult_, result_Buffer)
+	C.free(result_.data)
+	return goResult_
 }
 
 func (n *NSCoder) DecodeDoubleForKey(key string) float64 {
-	result := C.C_NSCoder_DecodeDoubleForKey(n.Ptr(), NewString(key).Ptr())
-	return float64(result)
+	result_ := C.C_NSCoder_DecodeDoubleForKey(n.Ptr(), NewString(key).Ptr())
+	return float64(result_)
 }
 
 func (n *NSCoder) DecodeFloatForKey(key string) float32 {
-	result := C.C_NSCoder_DecodeFloatForKey(n.Ptr(), NewString(key).Ptr())
-	return float32(result)
+	result_ := C.C_NSCoder_DecodeFloatForKey(n.Ptr(), NewString(key).Ptr())
+	return float32(result_)
 }
 
 func (n *NSCoder) DecodeIntegerForKey(key string) int {
-	result := C.C_NSCoder_DecodeIntegerForKey(n.Ptr(), NewString(key).Ptr())
-	return int(result)
+	result_ := C.C_NSCoder_DecodeIntegerForKey(n.Ptr(), NewString(key).Ptr())
+	return int(result_)
 }
 
 func (n *NSCoder) DecodeInt32ForKey(key string) int32 {
-	result := C.C_NSCoder_DecodeInt32ForKey(n.Ptr(), NewString(key).Ptr())
-	return int32(result)
+	result_ := C.C_NSCoder_DecodeInt32ForKey(n.Ptr(), NewString(key).Ptr())
+	return int32(result_)
 }
 
 func (n *NSCoder) DecodeInt64ForKey(key string) int64 {
-	result := C.C_NSCoder_DecodeInt64ForKey(n.Ptr(), NewString(key).Ptr())
-	return int64(result)
+	result_ := C.C_NSCoder_DecodeInt64ForKey(n.Ptr(), NewString(key).Ptr())
+	return int64(result_)
 }
 
 func (n *NSCoder) DecodeObject() objc.Object {
-	result := C.C_NSCoder_DecodeObject(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSCoder_DecodeObject(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSCoder) DecodeObjectForKey(key string) objc.Object {
-	result := C.C_NSCoder_DecodeObjectForKey(n.Ptr(), NewString(key).Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSCoder_DecodeObjectForKey(n.Ptr(), NewString(key).Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSCoder) DecodePoint() Point {
-	result := C.C_NSCoder_DecodePoint(n.Ptr())
-	return Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSCoder_DecodePoint(n.Ptr())
+	return Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSCoder) DecodePointForKey(key string) Point {
-	result := C.C_NSCoder_DecodePointForKey(n.Ptr(), NewString(key).Ptr())
-	return Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSCoder_DecodePointForKey(n.Ptr(), NewString(key).Ptr())
+	return Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSCoder) DecodePropertyList() objc.Object {
-	result := C.C_NSCoder_DecodePropertyList(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSCoder_DecodePropertyList(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSCoder) DecodeRect() Rect {
-	result := C.C_NSCoder_DecodeRect(n.Ptr())
-	return Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSCoder_DecodeRect(n.Ptr())
+	return Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSCoder) DecodeRectForKey(key string) Rect {
-	result := C.C_NSCoder_DecodeRectForKey(n.Ptr(), NewString(key).Ptr())
-	return Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSCoder_DecodeRectForKey(n.Ptr(), NewString(key).Ptr())
+	return Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSCoder) DecodeSize() Size {
-	result := C.C_NSCoder_DecodeSize(n.Ptr())
-	return Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSCoder_DecodeSize(n.Ptr())
+	return Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSCoder) DecodeSizeForKey(key string) Size {
-	result := C.C_NSCoder_DecodeSizeForKey(n.Ptr(), NewString(key).Ptr())
-	return Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSCoder_DecodeSizeForKey(n.Ptr(), NewString(key).Ptr())
+	return Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
+}
+
+func (n *NSCoder) DecodeObjectOfClasses_ForKey(classes Set, key string) objc.Object {
+	result_ := C.C_NSCoder_DecodeObjectOfClasses_ForKey(n.Ptr(), objc.ExtractPtr(classes), NewString(key).Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSCoder) DecodePropertyListForKey(key string) objc.Object {
-	result := C.C_NSCoder_DecodePropertyListForKey(n.Ptr(), NewString(key).Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSCoder_DecodePropertyListForKey(n.Ptr(), NewString(key).Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSCoder) FailWithError(error Error) {
@@ -263,21 +272,42 @@ func (n *NSCoder) FailWithError(error Error) {
 }
 
 func (n *NSCoder) VersionForClassName(className string) int {
-	result := C.C_NSCoder_VersionForClassName(n.Ptr(), NewString(className).Ptr())
-	return int(result)
+	result_ := C.C_NSCoder_VersionForClassName(n.Ptr(), NewString(className).Ptr())
+	return int(result_)
+}
+
+func (n *NSCoder) DecodeArrayOfObjectsOfClasses_ForKey(classes Set, key string) []objc.Object {
+	result_ := C.C_NSCoder_DecodeArrayOfObjectsOfClasses_ForKey(n.Ptr(), objc.ExtractPtr(classes), NewString(key).Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]objc.Object, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = objc.MakeObject(r)
+	}
+	return goResult_
 }
 
 func (n *NSCoder) AllowsKeyedCoding() bool {
-	result := C.C_NSCoder_AllowsKeyedCoding(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSCoder_AllowsKeyedCoding(n.Ptr())
+	return bool(result_)
+}
+
+func (n *NSCoder) DecodingFailurePolicy() DecodingFailurePolicy {
+	result_ := C.C_NSCoder_DecodingFailurePolicy(n.Ptr())
+	return DecodingFailurePolicy(int(result_))
 }
 
 func (n *NSCoder) RequiresSecureCoding() bool {
-	result := C.C_NSCoder_RequiresSecureCoding(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSCoder_RequiresSecureCoding(n.Ptr())
+	return bool(result_)
+}
+
+func (n *NSCoder) AllowedClasses() Set {
+	result_ := C.C_NSCoder_AllowedClasses(n.Ptr())
+	return MakeSet(result_)
 }
 
 func (n *NSCoder) Error() Error {
-	result := C.C_NSCoder_Error(n.Ptr())
-	return MakeError(result)
+	result_ := C.C_NSCoder_Error(n.Ptr())
+	return MakeError(result_)
 }

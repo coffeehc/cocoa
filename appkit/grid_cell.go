@@ -43,23 +43,23 @@ func AllocGridCell() *NSGridCell {
 }
 
 func (n *NSGridCell) Init() GridCell {
-	result := C.C_NSGridCell_Init(n.Ptr())
-	return MakeGridCell(result)
+	result_ := C.C_NSGridCell_Init(n.Ptr())
+	return MakeGridCell(result_)
 }
 
 func (n *NSGridCell) Column() GridColumn {
-	result := C.C_NSGridCell_Column(n.Ptr())
-	return MakeGridColumn(result)
+	result_ := C.C_NSGridCell_Column(n.Ptr())
+	return MakeGridColumn(result_)
 }
 
 func (n *NSGridCell) Row() GridRow {
-	result := C.C_NSGridCell_Row(n.Ptr())
-	return MakeGridRow(result)
+	result_ := C.C_NSGridCell_Row(n.Ptr())
+	return MakeGridRow(result_)
 }
 
 func (n *NSGridCell) ContentView() View {
-	result := C.C_NSGridCell_ContentView(n.Ptr())
-	return MakeView(result)
+	result_ := C.C_NSGridCell_ContentView(n.Ptr())
+	return MakeView(result_)
 }
 
 func (n *NSGridCell) SetContentView(value View) {
@@ -67,19 +67,19 @@ func (n *NSGridCell) SetContentView(value View) {
 }
 
 func GridCell_EmptyContentView() View {
-	result := C.C_NSGridCell_GridCell_EmptyContentView()
-	return MakeView(result)
+	result_ := C.C_NSGridCell_GridCell_EmptyContentView()
+	return MakeView(result_)
 }
 
 func (n *NSGridCell) CustomPlacementConstraints() []LayoutConstraint {
-	result := C.C_NSGridCell_CustomPlacementConstraints(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]LayoutConstraint, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeLayoutConstraint(r)
+	result_ := C.C_NSGridCell_CustomPlacementConstraints(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]LayoutConstraint, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeLayoutConstraint(r)
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSGridCell) SetCustomPlacementConstraints(value []LayoutConstraint) {
@@ -92,8 +92,8 @@ func (n *NSGridCell) SetCustomPlacementConstraints(value []LayoutConstraint) {
 }
 
 func (n *NSGridCell) RowAlignment() GridRowAlignment {
-	result := C.C_NSGridCell_RowAlignment(n.Ptr())
-	return GridRowAlignment(int(result))
+	result_ := C.C_NSGridCell_RowAlignment(n.Ptr())
+	return GridRowAlignment(int(result_))
 }
 
 func (n *NSGridCell) SetRowAlignment(value GridRowAlignment) {
@@ -101,8 +101,8 @@ func (n *NSGridCell) SetRowAlignment(value GridRowAlignment) {
 }
 
 func (n *NSGridCell) XPlacement() GridCellPlacement {
-	result := C.C_NSGridCell_XPlacement(n.Ptr())
-	return GridCellPlacement(int(result))
+	result_ := C.C_NSGridCell_XPlacement(n.Ptr())
+	return GridCellPlacement(int(result_))
 }
 
 func (n *NSGridCell) SetXPlacement(value GridCellPlacement) {
@@ -110,8 +110,8 @@ func (n *NSGridCell) SetXPlacement(value GridCellPlacement) {
 }
 
 func (n *NSGridCell) YPlacement() GridCellPlacement {
-	result := C.C_NSGridCell_YPlacement(n.Ptr())
-	return GridCellPlacement(int(result))
+	result_ := C.C_NSGridCell_YPlacement(n.Ptr())
+	return GridCellPlacement(int(result_))
 }
 
 func (n *NSGridCell) SetYPlacement(value GridCellPlacement) {

@@ -32,21 +32,21 @@ func AllocMutableAttributedString() *NSMutableAttributedString {
 }
 
 func (n *NSMutableAttributedString) InitWithString(str string) MutableAttributedString {
-	result := C.C_NSMutableAttributedString_InitWithString(n.Ptr(), NewString(str).Ptr())
-	return MakeMutableAttributedString(result)
+	result_ := C.C_NSMutableAttributedString_InitWithString(n.Ptr(), NewString(str).Ptr())
+	return MakeMutableAttributedString(result_)
 }
 
 func (n *NSMutableAttributedString) InitWithAttributedString(attrStr AttributedString) MutableAttributedString {
-	result := C.C_NSMutableAttributedString_InitWithAttributedString(n.Ptr(), objc.ExtractPtr(attrStr))
-	return MakeMutableAttributedString(result)
+	result_ := C.C_NSMutableAttributedString_InitWithAttributedString(n.Ptr(), objc.ExtractPtr(attrStr))
+	return MakeMutableAttributedString(result_)
 }
 
 func (n *NSMutableAttributedString) Init() MutableAttributedString {
-	result := C.C_NSMutableAttributedString_Init(n.Ptr())
-	return MakeMutableAttributedString(result)
+	result_ := C.C_NSMutableAttributedString_Init(n.Ptr())
+	return MakeMutableAttributedString(result_)
 }
 
 func (n *NSMutableAttributedString) MutableString() MutableString {
-	result := C.C_NSMutableAttributedString_MutableString(n.Ptr())
-	return MakeMutableString(result)
+	result_ := C.C_NSMutableAttributedString_MutableString(n.Ptr())
+	return MakeMutableString(result_)
 }

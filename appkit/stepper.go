@@ -43,23 +43,23 @@ func AllocStepper() *NSStepper {
 }
 
 func (n *NSStepper) InitWithFrame(frameRect foundation.Rect) Stepper {
-	result := C.C_NSStepper_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
-	return MakeStepper(result)
+	result_ := C.C_NSStepper_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeStepper(result_)
 }
 
 func (n *NSStepper) InitWithCoder(coder foundation.Coder) Stepper {
-	result := C.C_NSStepper_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeStepper(result)
+	result_ := C.C_NSStepper_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeStepper(result_)
 }
 
 func (n *NSStepper) Init() Stepper {
-	result := C.C_NSStepper_Init(n.Ptr())
-	return MakeStepper(result)
+	result_ := C.C_NSStepper_Init(n.Ptr())
+	return MakeStepper(result_)
 }
 
 func (n *NSStepper) MaxValue() float64 {
-	result := C.C_NSStepper_MaxValue(n.Ptr())
-	return float64(result)
+	result_ := C.C_NSStepper_MaxValue(n.Ptr())
+	return float64(result_)
 }
 
 func (n *NSStepper) SetMaxValue(value float64) {
@@ -67,8 +67,8 @@ func (n *NSStepper) SetMaxValue(value float64) {
 }
 
 func (n *NSStepper) MinValue() float64 {
-	result := C.C_NSStepper_MinValue(n.Ptr())
-	return float64(result)
+	result_ := C.C_NSStepper_MinValue(n.Ptr())
+	return float64(result_)
 }
 
 func (n *NSStepper) SetMinValue(value float64) {
@@ -76,8 +76,8 @@ func (n *NSStepper) SetMinValue(value float64) {
 }
 
 func (n *NSStepper) Increment() float64 {
-	result := C.C_NSStepper_Increment(n.Ptr())
-	return float64(result)
+	result_ := C.C_NSStepper_Increment(n.Ptr())
+	return float64(result_)
 }
 
 func (n *NSStepper) SetIncrement(value float64) {
@@ -85,8 +85,8 @@ func (n *NSStepper) SetIncrement(value float64) {
 }
 
 func (n *NSStepper) Autorepeat() bool {
-	result := C.C_NSStepper_Autorepeat(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSStepper_Autorepeat(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSStepper) SetAutorepeat(value bool) {
@@ -94,8 +94,8 @@ func (n *NSStepper) SetAutorepeat(value bool) {
 }
 
 func (n *NSStepper) ValueWraps() bool {
-	result := C.C_NSStepper_ValueWraps(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSStepper_ValueWraps(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSStepper) SetValueWraps(value bool) {

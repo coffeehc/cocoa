@@ -12,12 +12,14 @@ void* C_NSWindowController_InitWithWindowNibPath_Owner(void* ptr, void* windowNi
 void* C_NSWindowController_InitWithCoder(void* ptr, void* coder);
 void* C_NSWindowController_Init(void* ptr);
 void C_NSWindowController_LoadWindow(void* ptr);
+void C_NSWindowController_ShowWindow(void* ptr, void* sender);
 void C_NSWindowController_WindowDidLoad(void* ptr);
 void C_NSWindowController_WindowWillLoad(void* ptr);
 void C_NSWindowController_SetDocumentEdited(void* ptr, bool dirtyFlag);
 void C_NSWindowController_Close(void* ptr);
 void C_NSWindowController_SynchronizeWindowTitleWithDocumentName(void* ptr);
 void* C_NSWindowController_WindowTitleForDocumentDisplayName(void* ptr, void* displayName);
+void C_NSWindowController_DismissController(void* ptr, void* sender);
 bool C_NSWindowController_IsWindowLoaded(void* ptr);
 void* C_NSWindowController_Window(void* ptr);
 void C_NSWindowController_SetWindow(void* ptr, void* value);

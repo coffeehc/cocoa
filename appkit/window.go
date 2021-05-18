@@ -88,6 +88,7 @@ type Window interface {
 	DisableScreenUpdatesUntilFlush()
 	Update()
 	DragImage_At_Offset_Event_Pasteboard_Source_SlideBack(image Image, baseLocation foundation.Point, initialOffset foundation.Size, event Event, pboard Pasteboard, sourceObj objc.Object, slideFlag bool)
+	RegisterForDraggedTypes(newTypes []PasteboardType)
 	UnregisterDraggedTypes()
 	ConvertRectFromBacking(rect foundation.Rect) foundation.Rect
 	ConvertRectToBacking(rect foundation.Rect) foundation.Rect
@@ -105,6 +106,7 @@ type Window interface {
 	DataWithPDFInsideRect(rect foundation.Rect) []byte
 	UpdateConstraintsIfNeeded()
 	LayoutIfNeeded()
+	VisualizeConstraints(constraints []LayoutConstraint)
 	AnchorAttributeForOrientation(orientation LayoutConstraintOrientation) LayoutAttribute
 	SetAnchorAttribute_ForOrientation(attr LayoutAttribute, orientation LayoutConstraintOrientation)
 	SetIsMiniaturized(flag bool)
@@ -162,6 +164,7 @@ type Window interface {
 	AttachedSheet() Window
 	IsSheet() bool
 	SheetParent() Window
+	Sheets() []Window
 	Frame() foundation.Rect
 	AspectRatio() foundation.Size
 	SetAspectRatio(value foundation.Size)
@@ -202,6 +205,7 @@ type Window interface {
 	CanBecomeMainWindow() bool
 	Toolbar() Toolbar
 	SetToolbar(value Toolbar)
+	ChildWindows() []Window
 	ParentWindow() Window
 	SetParentWindow(value Window)
 	DefaultButtonCell() ButtonCell
@@ -217,11 +221,14 @@ type Window interface {
 	SetToolbarStyle(value WindowToolbarStyle)
 	TitlebarSeparatorStyle() TitlebarSeparatorStyle
 	SetTitlebarSeparatorStyle(value TitlebarSeparatorStyle)
+	TitlebarAccessoryViewControllers() []TitlebarAccessoryViewController
+	SetTitlebarAccessoryViewControllers(value []TitlebarAccessoryViewController)
 	Tab() WindowTab
 	TabbingIdentifier() WindowTabbingIdentifier
 	SetTabbingIdentifier(value WindowTabbingIdentifier)
 	TabbingMode() WindowTabbingMode
 	SetTabbingMode(value WindowTabbingMode)
+	TabbedWindows() []Window
 	TabGroup() WindowTabGroup
 	AllowsToolTipsWhenApplicationIsInactive() bool
 	SetAllowsToolTipsWhenApplicationIsInactive(value bool)
@@ -278,6 +285,8 @@ type Window interface {
 	HasTitleBar() bool
 	OrderedIndex() int
 	SetOrderedIndex(value int)
+	AppearanceSource() objc.Object
+	SetAppearanceSource(value objc.Object)
 	IsFloatingPanel() bool
 	IsMiniaturizable() bool
 	IsModalPanel() bool
@@ -306,23 +315,23 @@ func AllocWindow() *NSWindow {
 }
 
 func (n *NSWindow) InitWithContentRect_StyleMask_Backing_Defer(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool) Window {
-	result := C.C_NSWindow_InitWithContentRect_StyleMask_Backing_Defer(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag))
-	return MakeWindow(result)
+	result_ := C.C_NSWindow_InitWithContentRect_StyleMask_Backing_Defer(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag))
+	return MakeWindow(result_)
 }
 
 func (n *NSWindow) InitWithContentRect_StyleMask_Backing_Defer_Screen(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool, screen Screen) Window {
-	result := C.C_NSWindow_InitWithContentRect_StyleMask_Backing_Defer_Screen(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag), objc.ExtractPtr(screen))
-	return MakeWindow(result)
+	result_ := C.C_NSWindow_InitWithContentRect_StyleMask_Backing_Defer_Screen(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag), objc.ExtractPtr(screen))
+	return MakeWindow(result_)
 }
 
 func (n *NSWindow) Init() Window {
-	result := C.C_NSWindow_Init(n.Ptr())
-	return MakeWindow(result)
+	result_ := C.C_NSWindow_Init(n.Ptr())
+	return MakeWindow(result_)
 }
 
 func WindowWithContentViewController(contentViewController ViewController) Window {
-	result := C.C_NSWindow_WindowWithContentViewController(objc.ExtractPtr(contentViewController))
-	return MakeWindow(result)
+	result_ := C.C_NSWindow_WindowWithContentViewController(objc.ExtractPtr(contentViewController))
+	return MakeWindow(result_)
 }
 
 func (n *NSWindow) ToggleFullScreen(sender objc.Object) {
@@ -334,8 +343,8 @@ func (n *NSWindow) InvalidateShadow() {
 }
 
 func (n *NSWindow) AutorecalculatesContentBorderThicknessForEdge(edge foundation.RectEdge) bool {
-	result := C.C_NSWindow_AutorecalculatesContentBorderThicknessForEdge(n.Ptr(), C.uint(uint(edge)))
-	return bool(result)
+	result_ := C.C_NSWindow_AutorecalculatesContentBorderThicknessForEdge(n.Ptr(), C.uint(uint(edge)))
+	return bool(result_)
 }
 
 func (n *NSWindow) SetAutorecalculatesContentBorderThickness_ForEdge(flag bool, edge foundation.RectEdge) {
@@ -343,37 +352,48 @@ func (n *NSWindow) SetAutorecalculatesContentBorderThickness_ForEdge(flag bool, 
 }
 
 func (n *NSWindow) ContentBorderThicknessForEdge(edge foundation.RectEdge) coregraphics.Float {
-	result := C.C_NSWindow_ContentBorderThicknessForEdge(n.Ptr(), C.uint(uint(edge)))
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSWindow_ContentBorderThicknessForEdge(n.Ptr(), C.uint(uint(edge)))
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSWindow) SetContentBorderThickness_ForEdge(thickness coregraphics.Float, edge foundation.RectEdge) {
 	C.C_NSWindow_SetContentBorderThickness_ForEdge(n.Ptr(), C.double(float64(thickness)), C.uint(uint(edge)))
 }
 
-func WindowContentRectForFrameRect_StyleMask(fRect foundation.Rect, style WindowStyleMask) foundation.Rect {
-	result := C.C_NSWindow_WindowContentRectForFrameRect_StyleMask(*(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(fRect))), C.uint(uint(style)))
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+func WindowNumbersWithOptions(options WindowNumberListOptions) []foundation.Number {
+	result_ := C.C_NSWindow_WindowNumbersWithOptions(C.uint(uint(options)))
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]foundation.Number, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = foundation.MakeNumber(r)
+	}
+	return goResult_
 }
 
-func WindowFrameRectForContentRect_StyleMask(cRect foundation.Rect, style WindowStyleMask) foundation.Rect {
-	result := C.C_NSWindow_WindowFrameRectForContentRect_StyleMask(*(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(cRect))), C.uint(uint(style)))
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+func Window_ContentRectForFrameRect_StyleMask(fRect foundation.Rect, style WindowStyleMask) foundation.Rect {
+	result_ := C.C_NSWindow_Window_ContentRectForFrameRect_StyleMask(*(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(fRect))), C.uint(uint(style)))
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
-func WindowMinFrameWidthWithTitle_StyleMask(title string, style WindowStyleMask) coregraphics.Float {
-	result := C.C_NSWindow_WindowMinFrameWidthWithTitle_StyleMask(foundation.NewString(title).Ptr(), C.uint(uint(style)))
-	return coregraphics.Float(float64(result))
+func Window_FrameRectForContentRect_StyleMask(cRect foundation.Rect, style WindowStyleMask) foundation.Rect {
+	result_ := C.C_NSWindow_Window_FrameRectForContentRect_StyleMask(*(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(cRect))), C.uint(uint(style)))
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
+}
+
+func Window_MinFrameWidthWithTitle_StyleMask(title string, style WindowStyleMask) coregraphics.Float {
+	result_ := C.C_NSWindow_Window_MinFrameWidthWithTitle_StyleMask(foundation.NewString(title).Ptr(), C.uint(uint(style)))
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSWindow) ContentRectForFrameRect(frameRect foundation.Rect) foundation.Rect {
-	result := C.C_NSWindow_ContentRectForFrameRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSWindow_ContentRectForFrameRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSWindow) FrameRectForContentRect(contentRect foundation.Rect) foundation.Rect {
-	result := C.C_NSWindow_FrameRectForContentRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))))
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSWindow_FrameRectForContentRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))))
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSWindow) EndSheet(sheetWindow Window) {
@@ -393,13 +413,13 @@ func (n *NSWindow) SetFrameTopLeftPoint(point foundation.Point) {
 }
 
 func (n *NSWindow) ConstrainFrameRect_ToScreen(frameRect foundation.Rect, screen Screen) foundation.Rect {
-	result := C.C_NSWindow_ConstrainFrameRect_ToScreen(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))), objc.ExtractPtr(screen))
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSWindow_ConstrainFrameRect_ToScreen(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))), objc.ExtractPtr(screen))
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSWindow) CascadeTopLeftFromPoint(topLeftPoint foundation.Point) foundation.Point {
-	result := C.C_NSWindow_CascadeTopLeftFromPoint(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(topLeftPoint))))
-	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSWindow_CascadeTopLeftFromPoint(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(topLeftPoint))))
+	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSWindow) SetFrame_Display(frameRect foundation.Rect, flag bool) {
@@ -411,8 +431,8 @@ func (n *NSWindow) SetFrame_Display_Animate(frameRect foundation.Rect, displayFl
 }
 
 func (n *NSWindow) AnimationResizeTime(newFrame foundation.Rect) foundation.TimeInterval {
-	result := C.C_NSWindow_AnimationResizeTime(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(newFrame))))
-	return foundation.TimeInterval(float64(result))
+	result_ := C.C_NSWindow_AnimationResizeTime(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(newFrame))))
+	return foundation.TimeInterval(float64(result_))
 }
 
 func (n *NSWindow) PerformZoom(sender objc.Object) {
@@ -447,18 +467,18 @@ func (n *NSWindow) OrderWindow_RelativeTo(place WindowOrderingMode, otherWin int
 	C.C_NSWindow_OrderWindow_RelativeTo(n.Ptr(), C.int(int(place)), C.int(otherWin))
 }
 
-func WindowRemoveFrameUsingName(name WindowFrameAutosaveName) {
-	C.C_NSWindow_WindowRemoveFrameUsingName(foundation.NewString(string(name)).Ptr())
+func Window_RemoveFrameUsingName(name WindowFrameAutosaveName) {
+	C.C_NSWindow_Window_RemoveFrameUsingName(foundation.NewString(string(name)).Ptr())
 }
 
 func (n *NSWindow) SetFrameUsingName(name WindowFrameAutosaveName) bool {
-	result := C.C_NSWindow_SetFrameUsingName(n.Ptr(), foundation.NewString(string(name)).Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_SetFrameUsingName(n.Ptr(), foundation.NewString(string(name)).Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) SetFrameUsingName_Force(name WindowFrameAutosaveName, force bool) bool {
-	result := C.C_NSWindow_SetFrameUsingName_Force(n.Ptr(), foundation.NewString(string(name)).Ptr(), C.bool(force))
-	return bool(result)
+	result_ := C.C_NSWindow_SetFrameUsingName_Force(n.Ptr(), foundation.NewString(string(name)).Ptr(), C.bool(force))
+	return bool(result_)
 }
 
 func (n *NSWindow) SaveFrameUsingName(name WindowFrameAutosaveName) {
@@ -522,8 +542,8 @@ func (n *NSWindow) DisableKeyEquivalentForDefaultButtonCell() {
 }
 
 func (n *NSWindow) FieldEditor_ForObject(createFlag bool, object objc.Object) Text {
-	result := C.C_NSWindow_FieldEditor_ForObject(n.Ptr(), C.bool(createFlag), objc.ExtractPtr(object))
-	return MakeText(result)
+	result_ := C.C_NSWindow_FieldEditor_ForObject(n.Ptr(), C.bool(createFlag), objc.ExtractPtr(object))
+	return MakeText(result_)
 }
 
 func (n *NSWindow) EndEditingFor(object objc.Object) {
@@ -550,14 +570,14 @@ func (n *NSWindow) ResetCursorRects() {
 	C.C_NSWindow_ResetCursorRects(n.Ptr())
 }
 
-func WindowStandardWindowButton_ForStyleMask(b WindowButton, styleMask WindowStyleMask) Button {
-	result := C.C_NSWindow_WindowStandardWindowButton_ForStyleMask(C.uint(uint(b)), C.uint(uint(styleMask)))
-	return MakeButton(result)
+func Window_StandardWindowButton_ForStyleMask(b WindowButton, styleMask WindowStyleMask) Button {
+	result_ := C.C_NSWindow_Window_StandardWindowButton_ForStyleMask(C.uint(uint(b)), C.uint(uint(styleMask)))
+	return MakeButton(result_)
 }
 
 func (n *NSWindow) StandardWindowButton(b WindowButton) Button {
-	result := C.C_NSWindow_StandardWindowButton(n.Ptr(), C.uint(uint(b)))
-	return MakeButton(result)
+	result_ := C.C_NSWindow_StandardWindowButton(n.Ptr(), C.uint(uint(b)))
+	return MakeButton(result_)
 }
 
 func (n *NSWindow) AddTitlebarAccessoryViewController(childViewController TitlebarAccessoryViewController) {
@@ -605,8 +625,8 @@ func (n *NSWindow) SendEvent(event Event) {
 }
 
 func (n *NSWindow) MakeFirstResponder(responder Responder) bool {
-	result := C.C_NSWindow_MakeFirstResponder(n.Ptr(), objc.ExtractPtr(responder))
-	return bool(result)
+	result_ := C.C_NSWindow_MakeFirstResponder(n.Ptr(), objc.ExtractPtr(responder))
+	return bool(result_)
 }
 
 func (n *NSWindow) SelectKeyViewPrecedingView(view View) {
@@ -630,8 +650,8 @@ func (n *NSWindow) RecalculateKeyViewLoop() {
 }
 
 func WindowNumberAtPoint_BelowWindowWithWindowNumber(point foundation.Point, windowNumber int) int {
-	result := C.C_NSWindow_WindowNumberAtPoint_BelowWindowWithWindowNumber(*(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))), C.int(windowNumber))
-	return int(result)
+	result_ := C.C_NSWindow_WindowNumberAtPoint_BelowWindowWithWindowNumber(*(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))), C.int(windowNumber))
+	return int(result_)
 }
 
 func (n *NSWindow) PerformWindowDragWithEvent(event Event) {
@@ -666,28 +686,37 @@ func (n *NSWindow) DragImage_At_Offset_Event_Pasteboard_Source_SlideBack(image I
 	C.C_NSWindow_DragImage_At_Offset_Event_Pasteboard_Source_SlideBack(n.Ptr(), objc.ExtractPtr(image), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(baseLocation))), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(initialOffset))), objc.ExtractPtr(event), objc.ExtractPtr(pboard), objc.ExtractPtr(sourceObj), C.bool(slideFlag))
 }
 
+func (n *NSWindow) RegisterForDraggedTypes(newTypes []PasteboardType) {
+	cNewTypesData := make([]unsafe.Pointer, len(newTypes))
+	for idx, v := range newTypes {
+		cNewTypesData[idx] = foundation.NewString(string(v)).Ptr()
+	}
+	cNewTypes := C.Array{data: unsafe.Pointer(&cNewTypesData[0]), len: C.int(len(newTypes))}
+	C.C_NSWindow_RegisterForDraggedTypes(n.Ptr(), cNewTypes)
+}
+
 func (n *NSWindow) UnregisterDraggedTypes() {
 	C.C_NSWindow_UnregisterDraggedTypes(n.Ptr())
 }
 
 func (n *NSWindow) ConvertRectFromBacking(rect foundation.Rect) foundation.Rect {
-	result := C.C_NSWindow_ConvertRectFromBacking(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSWindow_ConvertRectFromBacking(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSWindow) ConvertRectToBacking(rect foundation.Rect) foundation.Rect {
-	result := C.C_NSWindow_ConvertRectToBacking(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSWindow_ConvertRectToBacking(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSWindow) ConvertRectToScreen(rect foundation.Rect) foundation.Rect {
-	result := C.C_NSWindow_ConvertRectToScreen(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSWindow_ConvertRectToScreen(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSWindow) ConvertRectFromScreen(rect foundation.Rect) foundation.Rect {
-	result := C.C_NSWindow_ConvertRectFromScreen(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSWindow_ConvertRectFromScreen(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSWindow) SetTitleWithRepresentedFilename(filename string) {
@@ -723,21 +752,21 @@ func (n *NSWindow) Print(sender objc.Object) {
 }
 
 func (n *NSWindow) DataWithEPSInsideRect(rect foundation.Rect) []byte {
-	result := C.C_NSWindow_DataWithEPSInsideRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
-	resultBuffer := (*[1 << 30]byte)(result.data)[:C.int(result.len)]
-	goResult := make([]byte, C.int(result.len))
-	copy(goResult, resultBuffer)
-	C.free(result.data)
-	return goResult
+	result_ := C.C_NSWindow_DataWithEPSInsideRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
+	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
+	goResult_ := make([]byte, C.int(result_.len))
+	copy(goResult_, result_Buffer)
+	C.free(result_.data)
+	return goResult_
 }
 
 func (n *NSWindow) DataWithPDFInsideRect(rect foundation.Rect) []byte {
-	result := C.C_NSWindow_DataWithPDFInsideRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
-	resultBuffer := (*[1 << 30]byte)(result.data)[:C.int(result.len)]
-	goResult := make([]byte, C.int(result.len))
-	copy(goResult, resultBuffer)
-	C.free(result.data)
-	return goResult
+	result_ := C.C_NSWindow_DataWithPDFInsideRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
+	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
+	goResult_ := make([]byte, C.int(result_.len))
+	copy(goResult_, result_Buffer)
+	C.free(result_.data)
+	return goResult_
 }
 
 func (n *NSWindow) UpdateConstraintsIfNeeded() {
@@ -748,9 +777,18 @@ func (n *NSWindow) LayoutIfNeeded() {
 	C.C_NSWindow_LayoutIfNeeded(n.Ptr())
 }
 
+func (n *NSWindow) VisualizeConstraints(constraints []LayoutConstraint) {
+	cConstraintsData := make([]unsafe.Pointer, len(constraints))
+	for idx, v := range constraints {
+		cConstraintsData[idx] = objc.ExtractPtr(v)
+	}
+	cConstraints := C.Array{data: unsafe.Pointer(&cConstraintsData[0]), len: C.int(len(constraints))}
+	C.C_NSWindow_VisualizeConstraints(n.Ptr(), cConstraints)
+}
+
 func (n *NSWindow) AnchorAttributeForOrientation(orientation LayoutConstraintOrientation) LayoutAttribute {
-	result := C.C_NSWindow_AnchorAttributeForOrientation(n.Ptr(), C.int(int(orientation)))
-	return LayoutAttribute(int(result))
+	result_ := C.C_NSWindow_AnchorAttributeForOrientation(n.Ptr(), C.int(int(orientation)))
+	return LayoutAttribute(int(result_))
 }
 
 func (n *NSWindow) SetAnchorAttribute_ForOrientation(attr LayoutAttribute, orientation LayoutConstraintOrientation) {
@@ -770,43 +808,43 @@ func (n *NSWindow) SetIsZoomed(flag bool) {
 }
 
 func (n *NSWindow) HandleCloseScriptCommand(command foundation.CloseCommand) objc.Object {
-	result := C.C_NSWindow_HandleCloseScriptCommand(n.Ptr(), objc.ExtractPtr(command))
-	return objc.MakeObject(result)
+	result_ := C.C_NSWindow_HandleCloseScriptCommand(n.Ptr(), objc.ExtractPtr(command))
+	return objc.MakeObject(result_)
 }
 
 func (n *NSWindow) HandlePrintScriptCommand(command foundation.ScriptCommand) objc.Object {
-	result := C.C_NSWindow_HandlePrintScriptCommand(n.Ptr(), objc.ExtractPtr(command))
-	return objc.MakeObject(result)
+	result_ := C.C_NSWindow_HandlePrintScriptCommand(n.Ptr(), objc.ExtractPtr(command))
+	return objc.MakeObject(result_)
 }
 
 func (n *NSWindow) HandleSaveScriptCommand(command foundation.ScriptCommand) objc.Object {
-	result := C.C_NSWindow_HandleSaveScriptCommand(n.Ptr(), objc.ExtractPtr(command))
-	return objc.MakeObject(result)
+	result_ := C.C_NSWindow_HandleSaveScriptCommand(n.Ptr(), objc.ExtractPtr(command))
+	return objc.MakeObject(result_)
 }
 
 func (n *NSWindow) CanRepresentDisplayGamut(displayGamut DisplayGamut) bool {
-	result := C.C_NSWindow_CanRepresentDisplayGamut(n.Ptr(), C.int(int(displayGamut)))
-	return bool(result)
+	result_ := C.C_NSWindow_CanRepresentDisplayGamut(n.Ptr(), C.int(int(displayGamut)))
+	return bool(result_)
 }
 
 func (n *NSWindow) ConvertPointFromScreen(point foundation.Point) foundation.Point {
-	result := C.C_NSWindow_ConvertPointFromScreen(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))))
-	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSWindow_ConvertPointFromScreen(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))))
+	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSWindow) ConvertPointToScreen(point foundation.Point) foundation.Point {
-	result := C.C_NSWindow_ConvertPointToScreen(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))))
-	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSWindow_ConvertPointToScreen(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))))
+	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSWindow) ConvertPointFromBacking(point foundation.Point) foundation.Point {
-	result := C.C_NSWindow_ConvertPointFromBacking(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))))
-	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSWindow_ConvertPointFromBacking(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))))
+	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSWindow) ConvertPointToBacking(point foundation.Point) foundation.Point {
-	result := C.C_NSWindow_ConvertPointToBacking(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))))
-	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSWindow_ConvertPointToBacking(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))))
+	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSWindow) MergeAllWindows(sender objc.Object) {
@@ -818,13 +856,13 @@ func (n *NSWindow) SetDynamicDepthLimit(flag bool) {
 }
 
 func (n *NSWindow) SetFrameAutosaveName(name WindowFrameAutosaveName) bool {
-	result := C.C_NSWindow_SetFrameAutosaveName(n.Ptr(), foundation.NewString(string(name)).Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_SetFrameAutosaveName(n.Ptr(), foundation.NewString(string(name)).Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) Delegate() objc.Object {
-	result := C.C_NSWindow_Delegate(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSWindow_Delegate(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSWindow) SetDelegate(value objc.Object) {
@@ -832,8 +870,8 @@ func (n *NSWindow) SetDelegate(value objc.Object) {
 }
 
 func (n *NSWindow) ContentViewController() ViewController {
-	result := C.C_NSWindow_ContentViewController(n.Ptr())
-	return MakeViewController(result)
+	result_ := C.C_NSWindow_ContentViewController(n.Ptr())
+	return MakeViewController(result_)
 }
 
 func (n *NSWindow) SetContentViewController(value ViewController) {
@@ -841,8 +879,8 @@ func (n *NSWindow) SetContentViewController(value ViewController) {
 }
 
 func (n *NSWindow) ContentView() View {
-	result := C.C_NSWindow_ContentView(n.Ptr())
-	return MakeView(result)
+	result_ := C.C_NSWindow_ContentView(n.Ptr())
+	return MakeView(result_)
 }
 
 func (n *NSWindow) SetContentView(value View) {
@@ -850,13 +888,13 @@ func (n *NSWindow) SetContentView(value View) {
 }
 
 func (n *NSWindow) WorksWhenModal() bool {
-	result := C.C_NSWindow_WorksWhenModal(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_WorksWhenModal(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) AlphaValue() coregraphics.Float {
-	result := C.C_NSWindow_AlphaValue(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSWindow_AlphaValue(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSWindow) SetAlphaValue(value coregraphics.Float) {
@@ -864,8 +902,8 @@ func (n *NSWindow) SetAlphaValue(value coregraphics.Float) {
 }
 
 func (n *NSWindow) BackgroundColor() Color {
-	result := C.C_NSWindow_BackgroundColor(n.Ptr())
-	return MakeColor(result)
+	result_ := C.C_NSWindow_BackgroundColor(n.Ptr())
+	return MakeColor(result_)
 }
 
 func (n *NSWindow) SetBackgroundColor(value Color) {
@@ -873,8 +911,8 @@ func (n *NSWindow) SetBackgroundColor(value Color) {
 }
 
 func (n *NSWindow) ColorSpace() ColorSpace {
-	result := C.C_NSWindow_ColorSpace(n.Ptr())
-	return MakeColorSpace(result)
+	result_ := C.C_NSWindow_ColorSpace(n.Ptr())
+	return MakeColorSpace(result_)
 }
 
 func (n *NSWindow) SetColorSpace(value ColorSpace) {
@@ -882,8 +920,8 @@ func (n *NSWindow) SetColorSpace(value ColorSpace) {
 }
 
 func (n *NSWindow) CanHide() bool {
-	result := C.C_NSWindow_CanHide(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_CanHide(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) SetCanHide(value bool) {
@@ -891,13 +929,13 @@ func (n *NSWindow) SetCanHide(value bool) {
 }
 
 func (n *NSWindow) IsOnActiveSpace() bool {
-	result := C.C_NSWindow_IsOnActiveSpace(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_IsOnActiveSpace(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) HidesOnDeactivate() bool {
-	result := C.C_NSWindow_HidesOnDeactivate(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_HidesOnDeactivate(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) SetHidesOnDeactivate(value bool) {
@@ -905,8 +943,8 @@ func (n *NSWindow) SetHidesOnDeactivate(value bool) {
 }
 
 func (n *NSWindow) CollectionBehavior() WindowCollectionBehavior {
-	result := C.C_NSWindow_CollectionBehavior(n.Ptr())
-	return WindowCollectionBehavior(uint(result))
+	result_ := C.C_NSWindow_CollectionBehavior(n.Ptr())
+	return WindowCollectionBehavior(uint(result_))
 }
 
 func (n *NSWindow) SetCollectionBehavior(value WindowCollectionBehavior) {
@@ -914,8 +952,8 @@ func (n *NSWindow) SetCollectionBehavior(value WindowCollectionBehavior) {
 }
 
 func (n *NSWindow) IsOpaque() bool {
-	result := C.C_NSWindow_IsOpaque(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_IsOpaque(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) SetOpaque(value bool) {
@@ -923,8 +961,8 @@ func (n *NSWindow) SetOpaque(value bool) {
 }
 
 func (n *NSWindow) HasShadow() bool {
-	result := C.C_NSWindow_HasShadow(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_HasShadow(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) SetHasShadow(value bool) {
@@ -932,22 +970,27 @@ func (n *NSWindow) SetHasShadow(value bool) {
 }
 
 func (n *NSWindow) PreventsApplicationTerminationWhenModal() bool {
-	result := C.C_NSWindow_PreventsApplicationTerminationWhenModal(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_PreventsApplicationTerminationWhenModal(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) SetPreventsApplicationTerminationWhenModal(value bool) {
 	C.C_NSWindow_SetPreventsApplicationTerminationWhenModal(n.Ptr(), C.bool(value))
 }
 
+func Window_DefaultDepthLimit() WindowDepth {
+	result_ := C.C_NSWindow_Window_DefaultDepthLimit()
+	return WindowDepth(int32(result_))
+}
+
 func (n *NSWindow) WindowNumber() int {
-	result := C.C_NSWindow_WindowNumber(n.Ptr())
-	return int(result)
+	result_ := C.C_NSWindow_WindowNumber(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSWindow) CanBecomeVisibleWithoutLogin() bool {
-	result := C.C_NSWindow_CanBecomeVisibleWithoutLogin(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_CanBecomeVisibleWithoutLogin(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) SetCanBecomeVisibleWithoutLogin(value bool) {
@@ -955,8 +998,8 @@ func (n *NSWindow) SetCanBecomeVisibleWithoutLogin(value bool) {
 }
 
 func (n *NSWindow) SharingType() WindowSharingType {
-	result := C.C_NSWindow_SharingType(n.Ptr())
-	return WindowSharingType(uint(result))
+	result_ := C.C_NSWindow_SharingType(n.Ptr())
+	return WindowSharingType(uint(result_))
 }
 
 func (n *NSWindow) SetSharingType(value WindowSharingType) {
@@ -964,8 +1007,8 @@ func (n *NSWindow) SetSharingType(value WindowSharingType) {
 }
 
 func (n *NSWindow) BackingType() BackingStoreType {
-	result := C.C_NSWindow_BackingType(n.Ptr())
-	return BackingStoreType(uint(result))
+	result_ := C.C_NSWindow_BackingType(n.Ptr())
+	return BackingStoreType(uint(result_))
 }
 
 func (n *NSWindow) SetBackingType(value BackingStoreType) {
@@ -973,8 +1016,8 @@ func (n *NSWindow) SetBackingType(value BackingStoreType) {
 }
 
 func (n *NSWindow) DepthLimit() WindowDepth {
-	result := C.C_NSWindow_DepthLimit(n.Ptr())
-	return WindowDepth(int32(result))
+	result_ := C.C_NSWindow_DepthLimit(n.Ptr())
+	return WindowDepth(int32(result_))
 }
 
 func (n *NSWindow) SetDepthLimit(value WindowDepth) {
@@ -982,13 +1025,13 @@ func (n *NSWindow) SetDepthLimit(value WindowDepth) {
 }
 
 func (n *NSWindow) HasDynamicDepthLimit() bool {
-	result := C.C_NSWindow_HasDynamicDepthLimit(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_HasDynamicDepthLimit(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) WindowController() WindowController {
-	result := C.C_NSWindow_WindowController(n.Ptr())
-	return MakeWindowController(result)
+	result_ := C.C_NSWindow_WindowController(n.Ptr())
+	return MakeWindowController(result_)
 }
 
 func (n *NSWindow) SetWindowController(value WindowController) {
@@ -996,28 +1039,39 @@ func (n *NSWindow) SetWindowController(value WindowController) {
 }
 
 func (n *NSWindow) AttachedSheet() Window {
-	result := C.C_NSWindow_AttachedSheet(n.Ptr())
-	return MakeWindow(result)
+	result_ := C.C_NSWindow_AttachedSheet(n.Ptr())
+	return MakeWindow(result_)
 }
 
 func (n *NSWindow) IsSheet() bool {
-	result := C.C_NSWindow_IsSheet(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_IsSheet(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) SheetParent() Window {
-	result := C.C_NSWindow_SheetParent(n.Ptr())
-	return MakeWindow(result)
+	result_ := C.C_NSWindow_SheetParent(n.Ptr())
+	return MakeWindow(result_)
+}
+
+func (n *NSWindow) Sheets() []Window {
+	result_ := C.C_NSWindow_Sheets(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]Window, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeWindow(r)
+	}
+	return goResult_
 }
 
 func (n *NSWindow) Frame() foundation.Rect {
-	result := C.C_NSWindow_Frame(n.Ptr())
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSWindow_Frame(n.Ptr())
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSWindow) AspectRatio() foundation.Size {
-	result := C.C_NSWindow_AspectRatio(n.Ptr())
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSWindow_AspectRatio(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSWindow) SetAspectRatio(value foundation.Size) {
@@ -1025,8 +1079,8 @@ func (n *NSWindow) SetAspectRatio(value foundation.Size) {
 }
 
 func (n *NSWindow) MinSize() foundation.Size {
-	result := C.C_NSWindow_MinSize(n.Ptr())
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSWindow_MinSize(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSWindow) SetMinSize(value foundation.Size) {
@@ -1034,8 +1088,8 @@ func (n *NSWindow) SetMinSize(value foundation.Size) {
 }
 
 func (n *NSWindow) MaxSize() foundation.Size {
-	result := C.C_NSWindow_MaxSize(n.Ptr())
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSWindow_MaxSize(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSWindow) SetMaxSize(value foundation.Size) {
@@ -1043,18 +1097,18 @@ func (n *NSWindow) SetMaxSize(value foundation.Size) {
 }
 
 func (n *NSWindow) IsZoomed() bool {
-	result := C.C_NSWindow_IsZoomed(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_IsZoomed(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) ResizeFlags() EventModifierFlags {
-	result := C.C_NSWindow_ResizeFlags(n.Ptr())
-	return EventModifierFlags(uint(result))
+	result_ := C.C_NSWindow_ResizeFlags(n.Ptr())
+	return EventModifierFlags(uint(result_))
 }
 
 func (n *NSWindow) ResizeIncrements() foundation.Size {
-	result := C.C_NSWindow_ResizeIncrements(n.Ptr())
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSWindow_ResizeIncrements(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSWindow) SetResizeIncrements(value foundation.Size) {
@@ -1062,8 +1116,8 @@ func (n *NSWindow) SetResizeIncrements(value foundation.Size) {
 }
 
 func (n *NSWindow) PreservesContentDuringLiveResize() bool {
-	result := C.C_NSWindow_PreservesContentDuringLiveResize(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_PreservesContentDuringLiveResize(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) SetPreservesContentDuringLiveResize(value bool) {
@@ -1071,13 +1125,13 @@ func (n *NSWindow) SetPreservesContentDuringLiveResize(value bool) {
 }
 
 func (n *NSWindow) InLiveResize() bool {
-	result := C.C_NSWindow_InLiveResize(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_InLiveResize(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) ContentAspectRatio() foundation.Size {
-	result := C.C_NSWindow_ContentAspectRatio(n.Ptr())
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSWindow_ContentAspectRatio(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSWindow) SetContentAspectRatio(value foundation.Size) {
@@ -1085,8 +1139,8 @@ func (n *NSWindow) SetContentAspectRatio(value foundation.Size) {
 }
 
 func (n *NSWindow) ContentMinSize() foundation.Size {
-	result := C.C_NSWindow_ContentMinSize(n.Ptr())
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSWindow_ContentMinSize(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSWindow) SetContentMinSize(value foundation.Size) {
@@ -1094,8 +1148,8 @@ func (n *NSWindow) SetContentMinSize(value foundation.Size) {
 }
 
 func (n *NSWindow) ContentMaxSize() foundation.Size {
-	result := C.C_NSWindow_ContentMaxSize(n.Ptr())
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSWindow_ContentMaxSize(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSWindow) SetContentMaxSize(value foundation.Size) {
@@ -1103,8 +1157,8 @@ func (n *NSWindow) SetContentMaxSize(value foundation.Size) {
 }
 
 func (n *NSWindow) ContentResizeIncrements() foundation.Size {
-	result := C.C_NSWindow_ContentResizeIncrements(n.Ptr())
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSWindow_ContentResizeIncrements(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSWindow) SetContentResizeIncrements(value foundation.Size) {
@@ -1112,18 +1166,18 @@ func (n *NSWindow) SetContentResizeIncrements(value foundation.Size) {
 }
 
 func (n *NSWindow) ContentLayoutGuide() objc.Object {
-	result := C.C_NSWindow_ContentLayoutGuide(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSWindow_ContentLayoutGuide(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSWindow) ContentLayoutRect() foundation.Rect {
-	result := C.C_NSWindow_ContentLayoutRect(n.Ptr())
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSWindow_ContentLayoutRect(n.Ptr())
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSWindow) MaxFullScreenContentSize() foundation.Size {
-	result := C.C_NSWindow_MaxFullScreenContentSize(n.Ptr())
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSWindow_MaxFullScreenContentSize(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSWindow) SetMaxFullScreenContentSize(value foundation.Size) {
@@ -1131,8 +1185,8 @@ func (n *NSWindow) SetMaxFullScreenContentSize(value foundation.Size) {
 }
 
 func (n *NSWindow) MinFullScreenContentSize() foundation.Size {
-	result := C.C_NSWindow_MinFullScreenContentSize(n.Ptr())
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSWindow_MinFullScreenContentSize(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSWindow) SetMinFullScreenContentSize(value foundation.Size) {
@@ -1140,8 +1194,8 @@ func (n *NSWindow) SetMinFullScreenContentSize(value foundation.Size) {
 }
 
 func (n *NSWindow) Level() WindowLevel {
-	result := C.C_NSWindow_Level(n.Ptr())
-	return WindowLevel(int(result))
+	result_ := C.C_NSWindow_Level(n.Ptr())
+	return WindowLevel(int(result_))
 }
 
 func (n *NSWindow) SetLevel(value WindowLevel) {
@@ -1149,57 +1203,68 @@ func (n *NSWindow) SetLevel(value WindowLevel) {
 }
 
 func (n *NSWindow) IsVisible() bool {
-	result := C.C_NSWindow_IsVisible(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_IsVisible(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) OcclusionState() WindowOcclusionState {
-	result := C.C_NSWindow_OcclusionState(n.Ptr())
-	return WindowOcclusionState(uint(result))
+	result_ := C.C_NSWindow_OcclusionState(n.Ptr())
+	return WindowOcclusionState(uint(result_))
 }
 
 func (n *NSWindow) FrameAutosaveName() WindowFrameAutosaveName {
-	result := C.C_NSWindow_FrameAutosaveName(n.Ptr())
-	return WindowFrameAutosaveName(foundation.MakeString(result).String())
+	result_ := C.C_NSWindow_FrameAutosaveName(n.Ptr())
+	return WindowFrameAutosaveName(foundation.MakeString(result_).String())
 }
 
 func (n *NSWindow) StringWithSavedFrame() WindowPersistableFrameDescriptor {
-	result := C.C_NSWindow_StringWithSavedFrame(n.Ptr())
-	return WindowPersistableFrameDescriptor(foundation.MakeString(result).String())
+	result_ := C.C_NSWindow_StringWithSavedFrame(n.Ptr())
+	return WindowPersistableFrameDescriptor(foundation.MakeString(result_).String())
 }
 
 func (n *NSWindow) IsKeyWindow() bool {
-	result := C.C_NSWindow_IsKeyWindow(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_IsKeyWindow(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) CanBecomeKeyWindow() bool {
-	result := C.C_NSWindow_CanBecomeKeyWindow(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_CanBecomeKeyWindow(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) IsMainWindow() bool {
-	result := C.C_NSWindow_IsMainWindow(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_IsMainWindow(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) CanBecomeMainWindow() bool {
-	result := C.C_NSWindow_CanBecomeMainWindow(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_CanBecomeMainWindow(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) Toolbar() Toolbar {
-	result := C.C_NSWindow_Toolbar(n.Ptr())
-	return MakeToolbar(result)
+	result_ := C.C_NSWindow_Toolbar(n.Ptr())
+	return MakeToolbar(result_)
 }
 
 func (n *NSWindow) SetToolbar(value Toolbar) {
 	C.C_NSWindow_SetToolbar(n.Ptr(), objc.ExtractPtr(value))
 }
 
+func (n *NSWindow) ChildWindows() []Window {
+	result_ := C.C_NSWindow_ChildWindows(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]Window, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeWindow(r)
+	}
+	return goResult_
+}
+
 func (n *NSWindow) ParentWindow() Window {
-	result := C.C_NSWindow_ParentWindow(n.Ptr())
-	return MakeWindow(result)
+	result_ := C.C_NSWindow_ParentWindow(n.Ptr())
+	return MakeWindow(result_)
 }
 
 func (n *NSWindow) SetParentWindow(value Window) {
@@ -1207,8 +1272,8 @@ func (n *NSWindow) SetParentWindow(value Window) {
 }
 
 func (n *NSWindow) DefaultButtonCell() ButtonCell {
-	result := C.C_NSWindow_DefaultButtonCell(n.Ptr())
-	return MakeButtonCell(result)
+	result_ := C.C_NSWindow_DefaultButtonCell(n.Ptr())
+	return MakeButtonCell(result_)
 }
 
 func (n *NSWindow) SetDefaultButtonCell(value ButtonCell) {
@@ -1216,8 +1281,8 @@ func (n *NSWindow) SetDefaultButtonCell(value ButtonCell) {
 }
 
 func (n *NSWindow) IsExcludedFromWindowsMenu() bool {
-	result := C.C_NSWindow_IsExcludedFromWindowsMenu(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_IsExcludedFromWindowsMenu(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) SetExcludedFromWindowsMenu(value bool) {
@@ -1225,13 +1290,13 @@ func (n *NSWindow) SetExcludedFromWindowsMenu(value bool) {
 }
 
 func (n *NSWindow) AreCursorRectsEnabled() bool {
-	result := C.C_NSWindow_AreCursorRectsEnabled(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_AreCursorRectsEnabled(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) ShowsToolbarButton() bool {
-	result := C.C_NSWindow_ShowsToolbarButton(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_ShowsToolbarButton(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) SetShowsToolbarButton(value bool) {
@@ -1239,8 +1304,8 @@ func (n *NSWindow) SetShowsToolbarButton(value bool) {
 }
 
 func (n *NSWindow) TitlebarAppearsTransparent() bool {
-	result := C.C_NSWindow_TitlebarAppearsTransparent(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_TitlebarAppearsTransparent(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) SetTitlebarAppearsTransparent(value bool) {
@@ -1248,8 +1313,8 @@ func (n *NSWindow) SetTitlebarAppearsTransparent(value bool) {
 }
 
 func (n *NSWindow) ToolbarStyle() WindowToolbarStyle {
-	result := C.C_NSWindow_ToolbarStyle(n.Ptr())
-	return WindowToolbarStyle(int(result))
+	result_ := C.C_NSWindow_ToolbarStyle(n.Ptr())
+	return WindowToolbarStyle(int(result_))
 }
 
 func (n *NSWindow) SetToolbarStyle(value WindowToolbarStyle) {
@@ -1257,22 +1322,56 @@ func (n *NSWindow) SetToolbarStyle(value WindowToolbarStyle) {
 }
 
 func (n *NSWindow) TitlebarSeparatorStyle() TitlebarSeparatorStyle {
-	result := C.C_NSWindow_TitlebarSeparatorStyle(n.Ptr())
-	return TitlebarSeparatorStyle(int(result))
+	result_ := C.C_NSWindow_TitlebarSeparatorStyle(n.Ptr())
+	return TitlebarSeparatorStyle(int(result_))
 }
 
 func (n *NSWindow) SetTitlebarSeparatorStyle(value TitlebarSeparatorStyle) {
 	C.C_NSWindow_SetTitlebarSeparatorStyle(n.Ptr(), C.int(int(value)))
 }
 
+func (n *NSWindow) TitlebarAccessoryViewControllers() []TitlebarAccessoryViewController {
+	result_ := C.C_NSWindow_TitlebarAccessoryViewControllers(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]TitlebarAccessoryViewController, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeTitlebarAccessoryViewController(r)
+	}
+	return goResult_
+}
+
+func (n *NSWindow) SetTitlebarAccessoryViewControllers(value []TitlebarAccessoryViewController) {
+	cValueData := make([]unsafe.Pointer, len(value))
+	for idx, v := range value {
+		cValueData[idx] = objc.ExtractPtr(v)
+	}
+	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
+	C.C_NSWindow_SetTitlebarAccessoryViewControllers(n.Ptr(), cValue)
+}
+
+func Window_AllowsAutomaticWindowTabbing() bool {
+	result_ := C.C_NSWindow_Window_AllowsAutomaticWindowTabbing()
+	return bool(result_)
+}
+
+func Window_SetAllowsAutomaticWindowTabbing(value bool) {
+	C.C_NSWindow_Window_SetAllowsAutomaticWindowTabbing(C.bool(value))
+}
+
+func Window_UserTabbingPreference() WindowUserTabbingPreference {
+	result_ := C.C_NSWindow_Window_UserTabbingPreference()
+	return WindowUserTabbingPreference(int(result_))
+}
+
 func (n *NSWindow) Tab() WindowTab {
-	result := C.C_NSWindow_Tab(n.Ptr())
-	return MakeWindowTab(result)
+	result_ := C.C_NSWindow_Tab(n.Ptr())
+	return MakeWindowTab(result_)
 }
 
 func (n *NSWindow) TabbingIdentifier() WindowTabbingIdentifier {
-	result := C.C_NSWindow_TabbingIdentifier(n.Ptr())
-	return WindowTabbingIdentifier(foundation.MakeString(result).String())
+	result_ := C.C_NSWindow_TabbingIdentifier(n.Ptr())
+	return WindowTabbingIdentifier(foundation.MakeString(result_).String())
 }
 
 func (n *NSWindow) SetTabbingIdentifier(value WindowTabbingIdentifier) {
@@ -1280,22 +1379,33 @@ func (n *NSWindow) SetTabbingIdentifier(value WindowTabbingIdentifier) {
 }
 
 func (n *NSWindow) TabbingMode() WindowTabbingMode {
-	result := C.C_NSWindow_TabbingMode(n.Ptr())
-	return WindowTabbingMode(int(result))
+	result_ := C.C_NSWindow_TabbingMode(n.Ptr())
+	return WindowTabbingMode(int(result_))
 }
 
 func (n *NSWindow) SetTabbingMode(value WindowTabbingMode) {
 	C.C_NSWindow_SetTabbingMode(n.Ptr(), C.int(int(value)))
 }
 
+func (n *NSWindow) TabbedWindows() []Window {
+	result_ := C.C_NSWindow_TabbedWindows(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]Window, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeWindow(r)
+	}
+	return goResult_
+}
+
 func (n *NSWindow) TabGroup() WindowTabGroup {
-	result := C.C_NSWindow_TabGroup(n.Ptr())
-	return MakeWindowTabGroup(result)
+	result_ := C.C_NSWindow_TabGroup(n.Ptr())
+	return MakeWindowTabGroup(result_)
 }
 
 func (n *NSWindow) AllowsToolTipsWhenApplicationIsInactive() bool {
-	result := C.C_NSWindow_AllowsToolTipsWhenApplicationIsInactive(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_AllowsToolTipsWhenApplicationIsInactive(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) SetAllowsToolTipsWhenApplicationIsInactive(value bool) {
@@ -1303,13 +1413,13 @@ func (n *NSWindow) SetAllowsToolTipsWhenApplicationIsInactive(value bool) {
 }
 
 func (n *NSWindow) CurrentEvent() Event {
-	result := C.C_NSWindow_CurrentEvent(n.Ptr())
-	return MakeEvent(result)
+	result_ := C.C_NSWindow_CurrentEvent(n.Ptr())
+	return MakeEvent(result_)
 }
 
 func (n *NSWindow) InitialFirstResponder() View {
-	result := C.C_NSWindow_InitialFirstResponder(n.Ptr())
-	return MakeView(result)
+	result_ := C.C_NSWindow_InitialFirstResponder(n.Ptr())
+	return MakeView(result_)
 }
 
 func (n *NSWindow) SetInitialFirstResponder(value View) {
@@ -1317,18 +1427,18 @@ func (n *NSWindow) SetInitialFirstResponder(value View) {
 }
 
 func (n *NSWindow) FirstResponder() Responder {
-	result := C.C_NSWindow_FirstResponder(n.Ptr())
-	return MakeResponder(result)
+	result_ := C.C_NSWindow_FirstResponder(n.Ptr())
+	return MakeResponder(result_)
 }
 
 func (n *NSWindow) KeyViewSelectionDirection() SelectionDirection {
-	result := C.C_NSWindow_KeyViewSelectionDirection(n.Ptr())
-	return SelectionDirection(uint(result))
+	result_ := C.C_NSWindow_KeyViewSelectionDirection(n.Ptr())
+	return SelectionDirection(uint(result_))
 }
 
 func (n *NSWindow) AutorecalculatesKeyViewLoop() bool {
-	result := C.C_NSWindow_AutorecalculatesKeyViewLoop(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_AutorecalculatesKeyViewLoop(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) SetAutorecalculatesKeyViewLoop(value bool) {
@@ -1336,8 +1446,8 @@ func (n *NSWindow) SetAutorecalculatesKeyViewLoop(value bool) {
 }
 
 func (n *NSWindow) AcceptsMouseMovedEvents() bool {
-	result := C.C_NSWindow_AcceptsMouseMovedEvents(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_AcceptsMouseMovedEvents(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) SetAcceptsMouseMovedEvents(value bool) {
@@ -1345,8 +1455,8 @@ func (n *NSWindow) SetAcceptsMouseMovedEvents(value bool) {
 }
 
 func (n *NSWindow) IgnoresMouseEvents() bool {
-	result := C.C_NSWindow_IgnoresMouseEvents(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_IgnoresMouseEvents(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) SetIgnoresMouseEvents(value bool) {
@@ -1354,13 +1464,13 @@ func (n *NSWindow) SetIgnoresMouseEvents(value bool) {
 }
 
 func (n *NSWindow) MouseLocationOutsideOfEventStream() foundation.Point {
-	result := C.C_NSWindow_MouseLocationOutsideOfEventStream(n.Ptr())
-	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSWindow_MouseLocationOutsideOfEventStream(n.Ptr())
+	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSWindow) IsRestorable() bool {
-	result := C.C_NSWindow_IsRestorable(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_IsRestorable(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) SetRestorable(value bool) {
@@ -1368,8 +1478,8 @@ func (n *NSWindow) SetRestorable(value bool) {
 }
 
 func (n *NSWindow) ViewsNeedDisplay() bool {
-	result := C.C_NSWindow_ViewsNeedDisplay(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_ViewsNeedDisplay(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) SetViewsNeedDisplay(value bool) {
@@ -1377,8 +1487,8 @@ func (n *NSWindow) SetViewsNeedDisplay(value bool) {
 }
 
 func (n *NSWindow) AllowsConcurrentViewDrawing() bool {
-	result := C.C_NSWindow_AllowsConcurrentViewDrawing(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_AllowsConcurrentViewDrawing(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) SetAllowsConcurrentViewDrawing(value bool) {
@@ -1386,8 +1496,8 @@ func (n *NSWindow) SetAllowsConcurrentViewDrawing(value bool) {
 }
 
 func (n *NSWindow) AnimationBehavior() WindowAnimationBehavior {
-	result := C.C_NSWindow_AnimationBehavior(n.Ptr())
-	return WindowAnimationBehavior(int(result))
+	result_ := C.C_NSWindow_AnimationBehavior(n.Ptr())
+	return WindowAnimationBehavior(int(result_))
 }
 
 func (n *NSWindow) SetAnimationBehavior(value WindowAnimationBehavior) {
@@ -1395,8 +1505,8 @@ func (n *NSWindow) SetAnimationBehavior(value WindowAnimationBehavior) {
 }
 
 func (n *NSWindow) IsDocumentEdited() bool {
-	result := C.C_NSWindow_IsDocumentEdited(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_IsDocumentEdited(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) SetDocumentEdited(value bool) {
@@ -1404,13 +1514,13 @@ func (n *NSWindow) SetDocumentEdited(value bool) {
 }
 
 func (n *NSWindow) BackingScaleFactor() coregraphics.Float {
-	result := C.C_NSWindow_BackingScaleFactor(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSWindow_BackingScaleFactor(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSWindow) Title() string {
-	result := C.C_NSWindow_Title(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSWindow_Title(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSWindow) SetTitle(value string) {
@@ -1418,8 +1528,8 @@ func (n *NSWindow) SetTitle(value string) {
 }
 
 func (n *NSWindow) Subtitle() string {
-	result := C.C_NSWindow_Subtitle(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSWindow_Subtitle(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSWindow) SetSubtitle(value string) {
@@ -1427,8 +1537,8 @@ func (n *NSWindow) SetSubtitle(value string) {
 }
 
 func (n *NSWindow) TitleVisibility() WindowTitleVisibility {
-	result := C.C_NSWindow_TitleVisibility(n.Ptr())
-	return WindowTitleVisibility(int(result))
+	result_ := C.C_NSWindow_TitleVisibility(n.Ptr())
+	return WindowTitleVisibility(int(result_))
 }
 
 func (n *NSWindow) SetTitleVisibility(value WindowTitleVisibility) {
@@ -1436,8 +1546,8 @@ func (n *NSWindow) SetTitleVisibility(value WindowTitleVisibility) {
 }
 
 func (n *NSWindow) RepresentedFilename() string {
-	result := C.C_NSWindow_RepresentedFilename(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSWindow_RepresentedFilename(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSWindow) SetRepresentedFilename(value string) {
@@ -1445,8 +1555,8 @@ func (n *NSWindow) SetRepresentedFilename(value string) {
 }
 
 func (n *NSWindow) RepresentedURL() foundation.URL {
-	result := C.C_NSWindow_RepresentedURL(n.Ptr())
-	return foundation.MakeURL(result)
+	result_ := C.C_NSWindow_RepresentedURL(n.Ptr())
+	return foundation.MakeURL(result_)
 }
 
 func (n *NSWindow) SetRepresentedURL(value foundation.URL) {
@@ -1454,18 +1564,18 @@ func (n *NSWindow) SetRepresentedURL(value foundation.URL) {
 }
 
 func (n *NSWindow) Screen() Screen {
-	result := C.C_NSWindow_Screen(n.Ptr())
-	return MakeScreen(result)
+	result_ := C.C_NSWindow_Screen(n.Ptr())
+	return MakeScreen(result_)
 }
 
 func (n *NSWindow) DeepestScreen() Screen {
-	result := C.C_NSWindow_DeepestScreen(n.Ptr())
-	return MakeScreen(result)
+	result_ := C.C_NSWindow_DeepestScreen(n.Ptr())
+	return MakeScreen(result_)
 }
 
 func (n *NSWindow) DisplaysWhenScreenProfileChanges() bool {
-	result := C.C_NSWindow_DisplaysWhenScreenProfileChanges(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_DisplaysWhenScreenProfileChanges(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) SetDisplaysWhenScreenProfileChanges(value bool) {
@@ -1473,8 +1583,8 @@ func (n *NSWindow) SetDisplaysWhenScreenProfileChanges(value bool) {
 }
 
 func (n *NSWindow) IsMovableByWindowBackground() bool {
-	result := C.C_NSWindow_IsMovableByWindowBackground(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_IsMovableByWindowBackground(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) SetMovableByWindowBackground(value bool) {
@@ -1482,8 +1592,8 @@ func (n *NSWindow) SetMovableByWindowBackground(value bool) {
 }
 
 func (n *NSWindow) IsMovable() bool {
-	result := C.C_NSWindow_IsMovable(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_IsMovable(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) SetMovable(value bool) {
@@ -1491,8 +1601,8 @@ func (n *NSWindow) SetMovable(value bool) {
 }
 
 func (n *NSWindow) IsReleasedWhenClosed() bool {
-	result := C.C_NSWindow_IsReleasedWhenClosed(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_IsReleasedWhenClosed(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) SetReleasedWhenClosed(value bool) {
@@ -1500,13 +1610,13 @@ func (n *NSWindow) SetReleasedWhenClosed(value bool) {
 }
 
 func (n *NSWindow) IsMiniaturized() bool {
-	result := C.C_NSWindow_IsMiniaturized(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_IsMiniaturized(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) MiniwindowImage() Image {
-	result := C.C_NSWindow_MiniwindowImage(n.Ptr())
-	return MakeImage(result)
+	result_ := C.C_NSWindow_MiniwindowImage(n.Ptr())
+	return MakeImage(result_)
 }
 
 func (n *NSWindow) SetMiniwindowImage(value Image) {
@@ -1514,8 +1624,8 @@ func (n *NSWindow) SetMiniwindowImage(value Image) {
 }
 
 func (n *NSWindow) MiniwindowTitle() string {
-	result := C.C_NSWindow_MiniwindowTitle(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSWindow_MiniwindowTitle(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSWindow) SetMiniwindowTitle(value string) {
@@ -1523,52 +1633,61 @@ func (n *NSWindow) SetMiniwindowTitle(value string) {
 }
 
 func (n *NSWindow) DockTile() DockTile {
-	result := C.C_NSWindow_DockTile(n.Ptr())
-	return MakeDockTile(result)
+	result_ := C.C_NSWindow_DockTile(n.Ptr())
+	return MakeDockTile(result_)
 }
 
 func (n *NSWindow) HasCloseBox() bool {
-	result := C.C_NSWindow_HasCloseBox(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_HasCloseBox(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) HasTitleBar() bool {
-	result := C.C_NSWindow_HasTitleBar(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_HasTitleBar(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) OrderedIndex() int {
-	result := C.C_NSWindow_OrderedIndex(n.Ptr())
-	return int(result)
+	result_ := C.C_NSWindow_OrderedIndex(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSWindow) SetOrderedIndex(value int) {
 	C.C_NSWindow_SetOrderedIndex(n.Ptr(), C.int(value))
 }
 
+func (n *NSWindow) AppearanceSource() objc.Object {
+	result_ := C.C_NSWindow_AppearanceSource(n.Ptr())
+	return objc.MakeObject(result_)
+}
+
+func (n *NSWindow) SetAppearanceSource(value objc.Object) {
+	C.C_NSWindow_SetAppearanceSource(n.Ptr(), objc.ExtractPtr(value))
+}
+
 func (n *NSWindow) IsFloatingPanel() bool {
-	result := C.C_NSWindow_IsFloatingPanel(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_IsFloatingPanel(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) IsMiniaturizable() bool {
-	result := C.C_NSWindow_IsMiniaturizable(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_IsMiniaturizable(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) IsModalPanel() bool {
-	result := C.C_NSWindow_IsModalPanel(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_IsModalPanel(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) IsResizable() bool {
-	result := C.C_NSWindow_IsResizable(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_IsResizable(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindow) StyleMask() WindowStyleMask {
-	result := C.C_NSWindow_StyleMask(n.Ptr())
-	return WindowStyleMask(uint(result))
+	result_ := C.C_NSWindow_StyleMask(n.Ptr())
+	return WindowStyleMask(uint(result_))
 }
 
 func (n *NSWindow) SetStyleMask(value WindowStyleMask) {
@@ -1576,11 +1695,11 @@ func (n *NSWindow) SetStyleMask(value WindowStyleMask) {
 }
 
 func (n *NSWindow) WindowTitlebarLayoutDirection() UserInterfaceLayoutDirection {
-	result := C.C_NSWindow_WindowTitlebarLayoutDirection(n.Ptr())
-	return UserInterfaceLayoutDirection(int(result))
+	result_ := C.C_NSWindow_WindowTitlebarLayoutDirection(n.Ptr())
+	return UserInterfaceLayoutDirection(int(result_))
 }
 
 func (n *NSWindow) IsZoomable() bool {
-	result := C.C_NSWindow_IsZoomable(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindow_IsZoomable(n.Ptr())
+	return bool(result_)
 }

@@ -16,6 +16,7 @@ type Touch interface {
 	LocationInView(view View) foundation.Point
 	PreviousLocationInView(view View) foundation.Point
 	Type() TouchType
+	Identity() objc.Object
 	Phase() TouchPhase
 	NormalizedPosition() foundation.Point
 	IsResting() bool
@@ -41,46 +42,51 @@ func AllocTouch() *NSTouch {
 }
 
 func (n *NSTouch) Init() Touch {
-	result := C.C_NSTouch_Init(n.Ptr())
-	return MakeTouch(result)
+	result_ := C.C_NSTouch_Init(n.Ptr())
+	return MakeTouch(result_)
 }
 
 func (n *NSTouch) LocationInView(view View) foundation.Point {
-	result := C.C_NSTouch_LocationInView(n.Ptr(), objc.ExtractPtr(view))
-	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSTouch_LocationInView(n.Ptr(), objc.ExtractPtr(view))
+	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSTouch) PreviousLocationInView(view View) foundation.Point {
-	result := C.C_NSTouch_PreviousLocationInView(n.Ptr(), objc.ExtractPtr(view))
-	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSTouch_PreviousLocationInView(n.Ptr(), objc.ExtractPtr(view))
+	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSTouch) Type() TouchType {
-	result := C.C_NSTouch_Type(n.Ptr())
-	return TouchType(int(result))
+	result_ := C.C_NSTouch_Type(n.Ptr())
+	return TouchType(int(result_))
+}
+
+func (n *NSTouch) Identity() objc.Object {
+	result_ := C.C_NSTouch_Identity(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSTouch) Phase() TouchPhase {
-	result := C.C_NSTouch_Phase(n.Ptr())
-	return TouchPhase(uint(result))
+	result_ := C.C_NSTouch_Phase(n.Ptr())
+	return TouchPhase(uint(result_))
 }
 
 func (n *NSTouch) NormalizedPosition() foundation.Point {
-	result := C.C_NSTouch_NormalizedPosition(n.Ptr())
-	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSTouch_NormalizedPosition(n.Ptr())
+	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSTouch) IsResting() bool {
-	result := C.C_NSTouch_IsResting(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSTouch_IsResting(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSTouch) Device() objc.Object {
-	result := C.C_NSTouch_Device(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSTouch_Device(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSTouch) DeviceSize() foundation.Size {
-	result := C.C_NSTouch_DeviceSize(n.Ptr())
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSTouch_DeviceSize(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }

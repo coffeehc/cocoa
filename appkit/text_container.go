@@ -53,18 +53,18 @@ func AllocTextContainer() *NSTextContainer {
 }
 
 func (n *NSTextContainer) InitWithSize(size foundation.Size) TextContainer {
-	result := C.C_NSTextContainer_InitWithSize(n.Ptr(), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(size))))
-	return MakeTextContainer(result)
+	result_ := C.C_NSTextContainer_InitWithSize(n.Ptr(), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(size))))
+	return MakeTextContainer(result_)
 }
 
 func (n *NSTextContainer) InitWithCoder(coder foundation.Coder) TextContainer {
-	result := C.C_NSTextContainer_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeTextContainer(result)
+	result_ := C.C_NSTextContainer_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeTextContainer(result_)
 }
 
 func (n *NSTextContainer) Init() TextContainer {
-	result := C.C_NSTextContainer_Init(n.Ptr())
-	return MakeTextContainer(result)
+	result_ := C.C_NSTextContainer_Init(n.Ptr())
+	return MakeTextContainer(result_)
 }
 
 func (n *NSTextContainer) ReplaceLayoutManager(newLayoutManager LayoutManager) {
@@ -72,8 +72,8 @@ func (n *NSTextContainer) ReplaceLayoutManager(newLayoutManager LayoutManager) {
 }
 
 func (n *NSTextContainer) LayoutManager() LayoutManager {
-	result := C.C_NSTextContainer_LayoutManager(n.Ptr())
-	return MakeLayoutManager(result)
+	result_ := C.C_NSTextContainer_LayoutManager(n.Ptr())
+	return MakeLayoutManager(result_)
 }
 
 func (n *NSTextContainer) SetLayoutManager(value LayoutManager) {
@@ -81,8 +81,8 @@ func (n *NSTextContainer) SetLayoutManager(value LayoutManager) {
 }
 
 func (n *NSTextContainer) TextView() TextView {
-	result := C.C_NSTextContainer_TextView(n.Ptr())
-	return MakeTextView(result)
+	result_ := C.C_NSTextContainer_TextView(n.Ptr())
+	return MakeTextView(result_)
 }
 
 func (n *NSTextContainer) SetTextView(value TextView) {
@@ -90,8 +90,8 @@ func (n *NSTextContainer) SetTextView(value TextView) {
 }
 
 func (n *NSTextContainer) Size() foundation.Size {
-	result := C.C_NSTextContainer_Size(n.Ptr())
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSTextContainer_Size(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSTextContainer) SetSize(value foundation.Size) {
@@ -99,14 +99,14 @@ func (n *NSTextContainer) SetSize(value foundation.Size) {
 }
 
 func (n *NSTextContainer) ExclusionPaths() []BezierPath {
-	result := C.C_NSTextContainer_ExclusionPaths(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]BezierPath, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeBezierPath(r)
+	result_ := C.C_NSTextContainer_ExclusionPaths(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]BezierPath, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeBezierPath(r)
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSTextContainer) SetExclusionPaths(value []BezierPath) {
@@ -119,8 +119,8 @@ func (n *NSTextContainer) SetExclusionPaths(value []BezierPath) {
 }
 
 func (n *NSTextContainer) LineBreakMode() LineBreakMode {
-	result := C.C_NSTextContainer_LineBreakMode(n.Ptr())
-	return LineBreakMode(uint(result))
+	result_ := C.C_NSTextContainer_LineBreakMode(n.Ptr())
+	return LineBreakMode(uint(result_))
 }
 
 func (n *NSTextContainer) SetLineBreakMode(value LineBreakMode) {
@@ -128,8 +128,8 @@ func (n *NSTextContainer) SetLineBreakMode(value LineBreakMode) {
 }
 
 func (n *NSTextContainer) WidthTracksTextView() bool {
-	result := C.C_NSTextContainer_WidthTracksTextView(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSTextContainer_WidthTracksTextView(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSTextContainer) SetWidthTracksTextView(value bool) {
@@ -137,8 +137,8 @@ func (n *NSTextContainer) SetWidthTracksTextView(value bool) {
 }
 
 func (n *NSTextContainer) HeightTracksTextView() bool {
-	result := C.C_NSTextContainer_HeightTracksTextView(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSTextContainer_HeightTracksTextView(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSTextContainer) SetHeightTracksTextView(value bool) {
@@ -146,8 +146,8 @@ func (n *NSTextContainer) SetHeightTracksTextView(value bool) {
 }
 
 func (n *NSTextContainer) MaximumNumberOfLines() uint {
-	result := C.C_NSTextContainer_MaximumNumberOfLines(n.Ptr())
-	return uint(result)
+	result_ := C.C_NSTextContainer_MaximumNumberOfLines(n.Ptr())
+	return uint(result_)
 }
 
 func (n *NSTextContainer) SetMaximumNumberOfLines(value uint) {
@@ -155,8 +155,8 @@ func (n *NSTextContainer) SetMaximumNumberOfLines(value uint) {
 }
 
 func (n *NSTextContainer) LineFragmentPadding() coregraphics.Float {
-	result := C.C_NSTextContainer_LineFragmentPadding(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSTextContainer_LineFragmentPadding(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSTextContainer) SetLineFragmentPadding(value coregraphics.Float) {
@@ -164,6 +164,6 @@ func (n *NSTextContainer) SetLineFragmentPadding(value coregraphics.Float) {
 }
 
 func (n *NSTextContainer) IsSimpleRectangularTextContainer() bool {
-	result := C.C_NSTextContainer_IsSimpleRectangularTextContainer(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSTextContainer_IsSimpleRectangularTextContainer(n.Ptr())
+	return bool(result_)
 }

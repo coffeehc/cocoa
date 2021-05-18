@@ -7,20 +7,20 @@ void* C_ComboBox_Alloc() {
 
 void* C_NSComboBox_InitWithFrame(void* ptr, CGRect frameRect) {
     NSComboBox* nSComboBox = (NSComboBox*)ptr;
-    NSComboBox* result = [nSComboBox initWithFrame:frameRect];
-    return result;
+    NSComboBox* result_ = [nSComboBox initWithFrame:frameRect];
+    return result_;
 }
 
 void* C_NSComboBox_InitWithCoder(void* ptr, void* coder) {
     NSComboBox* nSComboBox = (NSComboBox*)ptr;
-    NSComboBox* result = [nSComboBox initWithCoder:(NSCoder*)coder];
-    return result;
+    NSComboBox* result_ = [nSComboBox initWithCoder:(NSCoder*)coder];
+    return result_;
 }
 
 void* C_NSComboBox_Init(void* ptr) {
     NSComboBox* nSComboBox = (NSComboBox*)ptr;
-    NSComboBox* result = [nSComboBox init];
-    return result;
+    NSComboBox* result_ = [nSComboBox init];
+    return result_;
 }
 
 void C_NSComboBox_AddItemsWithObjectValues(void* ptr, Array objects) {
@@ -61,14 +61,14 @@ void C_NSComboBox_RemoveItemWithObjectValue(void* ptr, void* object) {
 
 int C_NSComboBox_IndexOfItemWithObjectValue(void* ptr, void* object) {
     NSComboBox* nSComboBox = (NSComboBox*)ptr;
-    NSInteger result = [nSComboBox indexOfItemWithObjectValue:(id)object];
-    return result;
+    NSInteger result_ = [nSComboBox indexOfItemWithObjectValue:(id)object];
+    return result_;
 }
 
 void* C_NSComboBox_ItemObjectValueAtIndex(void* ptr, int index) {
     NSComboBox* nSComboBox = (NSComboBox*)ptr;
-    id result = [nSComboBox itemObjectValueAtIndex:index];
-    return result;
+    id result_ = [nSComboBox itemObjectValueAtIndex:index];
+    return result_;
 }
 
 void C_NSComboBox_NoteNumberOfItemsChanged(void* ptr) {
@@ -108,8 +108,8 @@ void C_NSComboBox_SelectItemWithObjectValue(void* ptr, void* object) {
 
 bool C_NSComboBox_HasVerticalScroller(void* ptr) {
     NSComboBox* nSComboBox = (NSComboBox*)ptr;
-    BOOL result = [nSComboBox hasVerticalScroller];
-    return result;
+    BOOL result_ = [nSComboBox hasVerticalScroller];
+    return result_;
 }
 
 void C_NSComboBox_SetHasVerticalScroller(void* ptr, bool value) {
@@ -119,8 +119,8 @@ void C_NSComboBox_SetHasVerticalScroller(void* ptr, bool value) {
 
 CGSize C_NSComboBox_IntercellSpacing(void* ptr) {
     NSComboBox* nSComboBox = (NSComboBox*)ptr;
-    NSSize result = [nSComboBox intercellSpacing];
-    return result;
+    NSSize result_ = [nSComboBox intercellSpacing];
+    return result_;
 }
 
 void C_NSComboBox_SetIntercellSpacing(void* ptr, CGSize value) {
@@ -130,8 +130,8 @@ void C_NSComboBox_SetIntercellSpacing(void* ptr, CGSize value) {
 
 bool C_NSComboBox_IsButtonBordered(void* ptr) {
     NSComboBox* nSComboBox = (NSComboBox*)ptr;
-    BOOL result = [nSComboBox isButtonBordered];
-    return result;
+    BOOL result_ = [nSComboBox isButtonBordered];
+    return result_;
 }
 
 void C_NSComboBox_SetButtonBordered(void* ptr, bool value) {
@@ -141,8 +141,8 @@ void C_NSComboBox_SetButtonBordered(void* ptr, bool value) {
 
 double C_NSComboBox_ItemHeight(void* ptr) {
     NSComboBox* nSComboBox = (NSComboBox*)ptr;
-    CGFloat result = [nSComboBox itemHeight];
-    return result;
+    CGFloat result_ = [nSComboBox itemHeight];
+    return result_;
 }
 
 void C_NSComboBox_SetItemHeight(void* ptr, double value) {
@@ -152,8 +152,8 @@ void C_NSComboBox_SetItemHeight(void* ptr, double value) {
 
 int C_NSComboBox_NumberOfVisibleItems(void* ptr) {
     NSComboBox* nSComboBox = (NSComboBox*)ptr;
-    NSInteger result = [nSComboBox numberOfVisibleItems];
-    return result;
+    NSInteger result_ = [nSComboBox numberOfVisibleItems];
+    return result_;
 }
 
 void C_NSComboBox_SetNumberOfVisibleItems(void* ptr, int value) {
@@ -161,10 +161,21 @@ void C_NSComboBox_SetNumberOfVisibleItems(void* ptr, int value) {
     [nSComboBox setNumberOfVisibleItems:value];
 }
 
+void* C_NSComboBox_DataSource(void* ptr) {
+    NSComboBox* nSComboBox = (NSComboBox*)ptr;
+    id result_ = [nSComboBox dataSource];
+    return result_;
+}
+
+void C_NSComboBox_SetDataSource(void* ptr, void* value) {
+    NSComboBox* nSComboBox = (NSComboBox*)ptr;
+    [nSComboBox setDataSource:(id)value];
+}
+
 bool C_NSComboBox_UsesDataSource(void* ptr) {
     NSComboBox* nSComboBox = (NSComboBox*)ptr;
-    BOOL result = [nSComboBox usesDataSource];
-    return result;
+    BOOL result_ = [nSComboBox usesDataSource];
+    return result_;
 }
 
 void C_NSComboBox_SetUsesDataSource(void* ptr, bool value) {
@@ -174,41 +185,41 @@ void C_NSComboBox_SetUsesDataSource(void* ptr, bool value) {
 
 Array C_NSComboBox_ObjectValues(void* ptr) {
     NSComboBox* nSComboBox = (NSComboBox*)ptr;
-    NSArray* result = [nSComboBox objectValues];
-    int resultcount = [result count];
-    void** resultData = malloc(resultcount * sizeof(void*));
-    for (int i = 0; i < resultcount; i++) {
-    	 void* p = [result objectAtIndex:i];
-    	 resultData[i] = p;
+    NSArray* result_ = [nSComboBox objectValues];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
     }
-    Array resultArray;
-    resultArray.data = resultData;
-    resultArray.len = resultcount;
-    return resultArray;
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
 }
 
 int C_NSComboBox_NumberOfItems(void* ptr) {
     NSComboBox* nSComboBox = (NSComboBox*)ptr;
-    NSInteger result = [nSComboBox numberOfItems];
-    return result;
+    NSInteger result_ = [nSComboBox numberOfItems];
+    return result_;
 }
 
 int C_NSComboBox_IndexOfSelectedItem(void* ptr) {
     NSComboBox* nSComboBox = (NSComboBox*)ptr;
-    NSInteger result = [nSComboBox indexOfSelectedItem];
-    return result;
+    NSInteger result_ = [nSComboBox indexOfSelectedItem];
+    return result_;
 }
 
 void* C_NSComboBox_ObjectValueOfSelectedItem(void* ptr) {
     NSComboBox* nSComboBox = (NSComboBox*)ptr;
-    id result = [nSComboBox objectValueOfSelectedItem];
-    return result;
+    id result_ = [nSComboBox objectValueOfSelectedItem];
+    return result_;
 }
 
 bool C_NSComboBox_Completes(void* ptr) {
     NSComboBox* nSComboBox = (NSComboBox*)ptr;
-    BOOL result = [nSComboBox completes];
-    return result;
+    BOOL result_ = [nSComboBox completes];
+    return result_;
 }
 
 void C_NSComboBox_SetCompletes(void* ptr, bool value) {

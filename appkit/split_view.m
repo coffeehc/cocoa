@@ -7,20 +7,20 @@ void* C_SplitView_Alloc() {
 
 void* C_NSSplitView_InitWithFrame(void* ptr, CGRect frameRect) {
     NSSplitView* nSSplitView = (NSSplitView*)ptr;
-    NSSplitView* result = [nSSplitView initWithFrame:frameRect];
-    return result;
+    NSSplitView* result_ = [nSSplitView initWithFrame:frameRect];
+    return result_;
 }
 
 void* C_NSSplitView_InitWithCoder(void* ptr, void* coder) {
     NSSplitView* nSSplitView = (NSSplitView*)ptr;
-    NSSplitView* result = [nSSplitView initWithCoder:(NSCoder*)coder];
-    return result;
+    NSSplitView* result_ = [nSSplitView initWithCoder:(NSCoder*)coder];
+    return result_;
 }
 
 void* C_NSSplitView_Init(void* ptr) {
     NSSplitView* nSSplitView = (NSSplitView*)ptr;
-    NSSplitView* result = [nSSplitView init];
-    return result;
+    NSSplitView* result_ = [nSSplitView init];
+    return result_;
 }
 
 void C_NSSplitView_AddArrangedSubview(void* ptr, void* view) {
@@ -45,14 +45,14 @@ void C_NSSplitView_AdjustSubviews(void* ptr) {
 
 bool C_NSSplitView_IsSubviewCollapsed(void* ptr, void* subview) {
     NSSplitView* nSSplitView = (NSSplitView*)ptr;
-    BOOL result = [nSSplitView isSubviewCollapsed:(NSView*)subview];
-    return result;
+    BOOL result_ = [nSSplitView isSubviewCollapsed:(NSView*)subview];
+    return result_;
 }
 
 float C_NSSplitView_HoldingPriorityForSubviewAtIndex(void* ptr, int subviewIndex) {
     NSSplitView* nSSplitView = (NSSplitView*)ptr;
-    NSLayoutPriority result = [nSSplitView holdingPriorityForSubviewAtIndex:subviewIndex];
-    return result;
+    NSLayoutPriority result_ = [nSSplitView holdingPriorityForSubviewAtIndex:subviewIndex];
+    return result_;
 }
 
 void C_NSSplitView_SetHoldingPriority_ForSubviewAtIndex(void* ptr, float priority, int subviewIndex) {
@@ -67,14 +67,14 @@ void C_NSSplitView_DrawDividerInRect(void* ptr, CGRect rect) {
 
 double C_NSSplitView_MinPossiblePositionOfDividerAtIndex(void* ptr, int dividerIndex) {
     NSSplitView* nSSplitView = (NSSplitView*)ptr;
-    CGFloat result = [nSSplitView minPossiblePositionOfDividerAtIndex:dividerIndex];
-    return result;
+    CGFloat result_ = [nSSplitView minPossiblePositionOfDividerAtIndex:dividerIndex];
+    return result_;
 }
 
 double C_NSSplitView_MaxPossiblePositionOfDividerAtIndex(void* ptr, int dividerIndex) {
     NSSplitView* nSSplitView = (NSSplitView*)ptr;
-    CGFloat result = [nSSplitView maxPossiblePositionOfDividerAtIndex:dividerIndex];
-    return result;
+    CGFloat result_ = [nSSplitView maxPossiblePositionOfDividerAtIndex:dividerIndex];
+    return result_;
 }
 
 void C_NSSplitView_SetPosition_OfDividerAtIndex(void* ptr, double position, int dividerIndex) {
@@ -82,10 +82,21 @@ void C_NSSplitView_SetPosition_OfDividerAtIndex(void* ptr, double position, int 
     [nSSplitView setPosition:position ofDividerAtIndex:dividerIndex];
 }
 
+void* C_NSSplitView_Delegate(void* ptr) {
+    NSSplitView* nSSplitView = (NSSplitView*)ptr;
+    id result_ = [nSSplitView delegate];
+    return result_;
+}
+
+void C_NSSplitView_SetDelegate(void* ptr, void* value) {
+    NSSplitView* nSSplitView = (NSSplitView*)ptr;
+    [nSSplitView setDelegate:(id)value];
+}
+
 bool C_NSSplitView_ArrangesAllSubviews(void* ptr) {
     NSSplitView* nSSplitView = (NSSplitView*)ptr;
-    BOOL result = [nSSplitView arrangesAllSubviews];
-    return result;
+    BOOL result_ = [nSSplitView arrangesAllSubviews];
+    return result_;
 }
 
 void C_NSSplitView_SetArrangesAllSubviews(void* ptr, bool value) {
@@ -95,23 +106,23 @@ void C_NSSplitView_SetArrangesAllSubviews(void* ptr, bool value) {
 
 Array C_NSSplitView_ArrangedSubviews(void* ptr) {
     NSSplitView* nSSplitView = (NSSplitView*)ptr;
-    NSArray* result = [nSSplitView arrangedSubviews];
-    int resultcount = [result count];
-    void** resultData = malloc(resultcount * sizeof(void*));
-    for (int i = 0; i < resultcount; i++) {
-    	 void* p = [result objectAtIndex:i];
-    	 resultData[i] = p;
+    NSArray* result_ = [nSSplitView arrangedSubviews];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
     }
-    Array resultArray;
-    resultArray.data = resultData;
-    resultArray.len = resultcount;
-    return resultArray;
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
 }
 
 bool C_NSSplitView_IsVertical(void* ptr) {
     NSSplitView* nSSplitView = (NSSplitView*)ptr;
-    BOOL result = [nSSplitView isVertical];
-    return result;
+    BOOL result_ = [nSSplitView isVertical];
+    return result_;
 }
 
 void C_NSSplitView_SetVertical(void* ptr, bool value) {
@@ -121,8 +132,8 @@ void C_NSSplitView_SetVertical(void* ptr, bool value) {
 
 int C_NSSplitView_DividerStyle(void* ptr) {
     NSSplitView* nSSplitView = (NSSplitView*)ptr;
-    NSSplitViewDividerStyle result = [nSSplitView dividerStyle];
-    return result;
+    NSSplitViewDividerStyle result_ = [nSSplitView dividerStyle];
+    return result_;
 }
 
 void C_NSSplitView_SetDividerStyle(void* ptr, int value) {
@@ -132,20 +143,20 @@ void C_NSSplitView_SetDividerStyle(void* ptr, int value) {
 
 void* C_NSSplitView_DividerColor(void* ptr) {
     NSSplitView* nSSplitView = (NSSplitView*)ptr;
-    NSColor* result = [nSSplitView dividerColor];
-    return result;
+    NSColor* result_ = [nSSplitView dividerColor];
+    return result_;
 }
 
 double C_NSSplitView_DividerThickness(void* ptr) {
     NSSplitView* nSSplitView = (NSSplitView*)ptr;
-    CGFloat result = [nSSplitView dividerThickness];
-    return result;
+    CGFloat result_ = [nSSplitView dividerThickness];
+    return result_;
 }
 
 void* C_NSSplitView_AutosaveName(void* ptr) {
     NSSplitView* nSSplitView = (NSSplitView*)ptr;
-    NSSplitViewAutosaveName result = [nSSplitView autosaveName];
-    return result;
+    NSSplitViewAutosaveName result_ = [nSSplitView autosaveName];
+    return result_;
 }
 
 void C_NSSplitView_SetAutosaveName(void* ptr, void* value) {

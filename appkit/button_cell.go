@@ -70,23 +70,23 @@ func AllocButtonCell() *NSButtonCell {
 }
 
 func (n *NSButtonCell) InitWithCoder(coder foundation.Coder) ButtonCell {
-	result := C.C_NSButtonCell_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeButtonCell(result)
+	result_ := C.C_NSButtonCell_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeButtonCell(result_)
 }
 
 func (n *NSButtonCell) InitImageCell(image Image) ButtonCell {
-	result := C.C_NSButtonCell_InitImageCell(n.Ptr(), objc.ExtractPtr(image))
-	return MakeButtonCell(result)
+	result_ := C.C_NSButtonCell_InitImageCell(n.Ptr(), objc.ExtractPtr(image))
+	return MakeButtonCell(result_)
 }
 
 func (n *NSButtonCell) InitTextCell(_string string) ButtonCell {
-	result := C.C_NSButtonCell_InitTextCell(n.Ptr(), foundation.NewString(_string).Ptr())
-	return MakeButtonCell(result)
+	result_ := C.C_NSButtonCell_InitTextCell(n.Ptr(), foundation.NewString(_string).Ptr())
+	return MakeButtonCell(result_)
 }
 
 func (n *NSButtonCell) Init() ButtonCell {
-	result := C.C_NSButtonCell_Init(n.Ptr())
-	return MakeButtonCell(result)
+	result_ := C.C_NSButtonCell_Init(n.Ptr())
+	return MakeButtonCell(result_)
 }
 
 func (n *NSButtonCell) SetPeriodicDelay_Interval(delay float32, interval float32) {
@@ -114,13 +114,13 @@ func (n *NSButtonCell) DrawImage_WithFrame_InView(image Image, frame foundation.
 }
 
 func (n *NSButtonCell) DrawTitle_WithFrame_InView(title foundation.AttributedString, frame foundation.Rect, controlView View) foundation.Rect {
-	result := C.C_NSButtonCell_DrawTitle_WithFrame_InView(n.Ptr(), objc.ExtractPtr(title), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frame))), objc.ExtractPtr(controlView))
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSButtonCell_DrawTitle_WithFrame_InView(n.Ptr(), objc.ExtractPtr(title), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frame))), objc.ExtractPtr(controlView))
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSButtonCell) AlternateTitle() string {
-	result := C.C_NSButtonCell_AlternateTitle(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSButtonCell_AlternateTitle(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSButtonCell) SetAlternateTitle(value string) {
@@ -128,8 +128,8 @@ func (n *NSButtonCell) SetAlternateTitle(value string) {
 }
 
 func (n *NSButtonCell) AttributedAlternateTitle() foundation.AttributedString {
-	result := C.C_NSButtonCell_AttributedAlternateTitle(n.Ptr())
-	return foundation.MakeAttributedString(result)
+	result_ := C.C_NSButtonCell_AttributedAlternateTitle(n.Ptr())
+	return foundation.MakeAttributedString(result_)
 }
 
 func (n *NSButtonCell) SetAttributedAlternateTitle(value foundation.AttributedString) {
@@ -137,8 +137,8 @@ func (n *NSButtonCell) SetAttributedAlternateTitle(value foundation.AttributedSt
 }
 
 func (n *NSButtonCell) AttributedTitle() foundation.AttributedString {
-	result := C.C_NSButtonCell_AttributedTitle(n.Ptr())
-	return foundation.MakeAttributedString(result)
+	result_ := C.C_NSButtonCell_AttributedTitle(n.Ptr())
+	return foundation.MakeAttributedString(result_)
 }
 
 func (n *NSButtonCell) SetAttributedTitle(value foundation.AttributedString) {
@@ -146,8 +146,8 @@ func (n *NSButtonCell) SetAttributedTitle(value foundation.AttributedString) {
 }
 
 func (n *NSButtonCell) AlternateImage() Image {
-	result := C.C_NSButtonCell_AlternateImage(n.Ptr())
-	return MakeImage(result)
+	result_ := C.C_NSButtonCell_AlternateImage(n.Ptr())
+	return MakeImage(result_)
 }
 
 func (n *NSButtonCell) SetAlternateImage(value Image) {
@@ -155,8 +155,8 @@ func (n *NSButtonCell) SetAlternateImage(value Image) {
 }
 
 func (n *NSButtonCell) ImagePosition() CellImagePosition {
-	result := C.C_NSButtonCell_ImagePosition(n.Ptr())
-	return CellImagePosition(uint(result))
+	result_ := C.C_NSButtonCell_ImagePosition(n.Ptr())
+	return CellImagePosition(uint(result_))
 }
 
 func (n *NSButtonCell) SetImagePosition(value CellImagePosition) {
@@ -164,8 +164,8 @@ func (n *NSButtonCell) SetImagePosition(value CellImagePosition) {
 }
 
 func (n *NSButtonCell) ImageScaling() ImageScaling {
-	result := C.C_NSButtonCell_ImageScaling(n.Ptr())
-	return ImageScaling(uint(result))
+	result_ := C.C_NSButtonCell_ImageScaling(n.Ptr())
+	return ImageScaling(uint(result_))
 }
 
 func (n *NSButtonCell) SetImageScaling(value ImageScaling) {
@@ -173,8 +173,8 @@ func (n *NSButtonCell) SetImageScaling(value ImageScaling) {
 }
 
 func (n *NSButtonCell) KeyEquivalentModifierMask() EventModifierFlags {
-	result := C.C_NSButtonCell_KeyEquivalentModifierMask(n.Ptr())
-	return EventModifierFlags(uint(result))
+	result_ := C.C_NSButtonCell_KeyEquivalentModifierMask(n.Ptr())
+	return EventModifierFlags(uint(result_))
 }
 
 func (n *NSButtonCell) SetKeyEquivalentModifierMask(value EventModifierFlags) {
@@ -182,8 +182,8 @@ func (n *NSButtonCell) SetKeyEquivalentModifierMask(value EventModifierFlags) {
 }
 
 func (n *NSButtonCell) BackgroundColor() Color {
-	result := C.C_NSButtonCell_BackgroundColor(n.Ptr())
-	return MakeColor(result)
+	result_ := C.C_NSButtonCell_BackgroundColor(n.Ptr())
+	return MakeColor(result_)
 }
 
 func (n *NSButtonCell) SetBackgroundColor(value Color) {
@@ -191,8 +191,8 @@ func (n *NSButtonCell) SetBackgroundColor(value Color) {
 }
 
 func (n *NSButtonCell) BezelStyle() BezelStyle {
-	result := C.C_NSButtonCell_BezelStyle(n.Ptr())
-	return BezelStyle(uint(result))
+	result_ := C.C_NSButtonCell_BezelStyle(n.Ptr())
+	return BezelStyle(uint(result_))
 }
 
 func (n *NSButtonCell) SetBezelStyle(value BezelStyle) {
@@ -200,8 +200,8 @@ func (n *NSButtonCell) SetBezelStyle(value BezelStyle) {
 }
 
 func (n *NSButtonCell) ImageDimsWhenDisabled() bool {
-	result := C.C_NSButtonCell_ImageDimsWhenDisabled(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSButtonCell_ImageDimsWhenDisabled(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSButtonCell) SetImageDimsWhenDisabled(value bool) {
@@ -209,8 +209,8 @@ func (n *NSButtonCell) SetImageDimsWhenDisabled(value bool) {
 }
 
 func (n *NSButtonCell) IsTransparent() bool {
-	result := C.C_NSButtonCell_IsTransparent(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSButtonCell_IsTransparent(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSButtonCell) SetTransparent(value bool) {
@@ -218,8 +218,8 @@ func (n *NSButtonCell) SetTransparent(value bool) {
 }
 
 func (n *NSButtonCell) ShowsBorderOnlyWhileMouseInside() bool {
-	result := C.C_NSButtonCell_ShowsBorderOnlyWhileMouseInside(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSButtonCell_ShowsBorderOnlyWhileMouseInside(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSButtonCell) SetShowsBorderOnlyWhileMouseInside(value bool) {
@@ -227,8 +227,8 @@ func (n *NSButtonCell) SetShowsBorderOnlyWhileMouseInside(value bool) {
 }
 
 func (n *NSButtonCell) HighlightsBy() CellStyleMask {
-	result := C.C_NSButtonCell_HighlightsBy(n.Ptr())
-	return CellStyleMask(uint(result))
+	result_ := C.C_NSButtonCell_HighlightsBy(n.Ptr())
+	return CellStyleMask(uint(result_))
 }
 
 func (n *NSButtonCell) SetHighlightsBy(value CellStyleMask) {
@@ -236,8 +236,8 @@ func (n *NSButtonCell) SetHighlightsBy(value CellStyleMask) {
 }
 
 func (n *NSButtonCell) ShowsStateBy() CellStyleMask {
-	result := C.C_NSButtonCell_ShowsStateBy(n.Ptr())
-	return CellStyleMask(uint(result))
+	result_ := C.C_NSButtonCell_ShowsStateBy(n.Ptr())
+	return CellStyleMask(uint(result_))
 }
 
 func (n *NSButtonCell) SetShowsStateBy(value CellStyleMask) {
@@ -245,8 +245,8 @@ func (n *NSButtonCell) SetShowsStateBy(value CellStyleMask) {
 }
 
 func (n *NSButtonCell) Sound() Sound {
-	result := C.C_NSButtonCell_Sound(n.Ptr())
-	return MakeSound(result)
+	result_ := C.C_NSButtonCell_Sound(n.Ptr())
+	return MakeSound(result_)
 }
 
 func (n *NSButtonCell) SetSound(value Sound) {

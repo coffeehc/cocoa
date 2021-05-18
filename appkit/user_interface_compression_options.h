@@ -6,6 +6,7 @@
 void* C_UserInterfaceCompressionOptions_Alloc();
 
 void* C_NSUserInterfaceCompressionOptions_Init(void* ptr);
+void* C_NSUserInterfaceCompressionOptions_InitWithCompressionOptions(void* ptr, void* options);
 void* C_NSUserInterfaceCompressionOptions_InitWithIdentifier(void* ptr, void* identifier);
 void* C_NSUserInterfaceCompressionOptions_InitWithCoder(void* ptr, void* coder);
 bool C_NSUserInterfaceCompressionOptions_ContainsOptions(void* ptr, void* options);

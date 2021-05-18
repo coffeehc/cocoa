@@ -41,23 +41,23 @@ func AllocTitlebarAccessoryViewController() *NSTitlebarAccessoryViewController {
 }
 
 func (n *NSTitlebarAccessoryViewController) InitWithNibName_Bundle(nibNameOrNil NibName, nibBundleOrNil foundation.Bundle) TitlebarAccessoryViewController {
-	result := C.C_NSTitlebarAccessoryViewController_InitWithNibName_Bundle(n.Ptr(), foundation.NewString(string(nibNameOrNil)).Ptr(), objc.ExtractPtr(nibBundleOrNil))
-	return MakeTitlebarAccessoryViewController(result)
+	result_ := C.C_NSTitlebarAccessoryViewController_InitWithNibName_Bundle(n.Ptr(), foundation.NewString(string(nibNameOrNil)).Ptr(), objc.ExtractPtr(nibBundleOrNil))
+	return MakeTitlebarAccessoryViewController(result_)
 }
 
 func (n *NSTitlebarAccessoryViewController) InitWithCoder(coder foundation.Coder) TitlebarAccessoryViewController {
-	result := C.C_NSTitlebarAccessoryViewController_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeTitlebarAccessoryViewController(result)
+	result_ := C.C_NSTitlebarAccessoryViewController_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeTitlebarAccessoryViewController(result_)
 }
 
 func (n *NSTitlebarAccessoryViewController) Init() TitlebarAccessoryViewController {
-	result := C.C_NSTitlebarAccessoryViewController_Init(n.Ptr())
-	return MakeTitlebarAccessoryViewController(result)
+	result_ := C.C_NSTitlebarAccessoryViewController_Init(n.Ptr())
+	return MakeTitlebarAccessoryViewController(result_)
 }
 
 func (n *NSTitlebarAccessoryViewController) FullScreenMinHeight() coregraphics.Float {
-	result := C.C_NSTitlebarAccessoryViewController_FullScreenMinHeight(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSTitlebarAccessoryViewController_FullScreenMinHeight(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSTitlebarAccessoryViewController) SetFullScreenMinHeight(value coregraphics.Float) {
@@ -65,8 +65,8 @@ func (n *NSTitlebarAccessoryViewController) SetFullScreenMinHeight(value coregra
 }
 
 func (n *NSTitlebarAccessoryViewController) LayoutAttribute() LayoutAttribute {
-	result := C.C_NSTitlebarAccessoryViewController_LayoutAttribute(n.Ptr())
-	return LayoutAttribute(int(result))
+	result_ := C.C_NSTitlebarAccessoryViewController_LayoutAttribute(n.Ptr())
+	return LayoutAttribute(int(result_))
 }
 
 func (n *NSTitlebarAccessoryViewController) SetLayoutAttribute(value LayoutAttribute) {
@@ -74,8 +74,8 @@ func (n *NSTitlebarAccessoryViewController) SetLayoutAttribute(value LayoutAttri
 }
 
 func (n *NSTitlebarAccessoryViewController) AutomaticallyAdjustsSize() bool {
-	result := C.C_NSTitlebarAccessoryViewController_AutomaticallyAdjustsSize(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSTitlebarAccessoryViewController_AutomaticallyAdjustsSize(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSTitlebarAccessoryViewController) SetAutomaticallyAdjustsSize(value bool) {
@@ -83,8 +83,8 @@ func (n *NSTitlebarAccessoryViewController) SetAutomaticallyAdjustsSize(value bo
 }
 
 func (n *NSTitlebarAccessoryViewController) IsHidden() bool {
-	result := C.C_NSTitlebarAccessoryViewController_IsHidden(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSTitlebarAccessoryViewController_IsHidden(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSTitlebarAccessoryViewController) SetHidden(value bool) {

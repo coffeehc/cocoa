@@ -67,6 +67,7 @@ type Application interface {
 	ChangeWindowsItem_Title_Filename(win Window, _string string, isFilename bool)
 	RemoveWindowsItem(win Window)
 	UpdateWindowsItem(win Window)
+	RegisterServicesMenuSendTypes_ReturnTypes(sendTypes []PasteboardType, returnTypes []PasteboardType)
 	EndModalSession(session ModalSession)
 	Delegate() objc.Object
 	SetDelegate(value objc.Object)
@@ -90,8 +91,11 @@ type Application interface {
 	ServicesProvider() objc.Object
 	SetServicesProvider(value objc.Object)
 	IsFullKeyboardAccessEnabled() bool
+	OrderedDocuments() []Document
+	OrderedWindows() []Window
 	KeyWindow() Window
 	MainWindow() Window
+	Windows() []Window
 	IsHidden() bool
 	OcclusionState() ApplicationOcclusionState
 	ModalWindow() Window
@@ -123,13 +127,13 @@ func AllocApplication() *NSApplication {
 }
 
 func (n *NSApplication) Init() Application {
-	result := C.C_NSApplication_Init(n.Ptr())
-	return MakeApplication(result)
+	result_ := C.C_NSApplication_Init(n.Ptr())
+	return MakeApplication(result_)
 }
 
 func (n *NSApplication) InitWithCoder(coder foundation.Coder) Application {
-	result := C.C_NSApplication_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeApplication(result)
+	result_ := C.C_NSApplication_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeApplication(result_)
 }
 
 func (n *NSApplication) Run() {
@@ -153,18 +157,18 @@ func (n *NSApplication) PostEvent_AtStart(event Event, flag bool) {
 }
 
 func (n *NSApplication) SendAction_To_From(action *objc.Selector, target objc.Object, sender objc.Object) bool {
-	result := C.C_NSApplication_SendAction_To_From(n.Ptr(), objc.ExtractPtr(action), objc.ExtractPtr(target), objc.ExtractPtr(sender))
-	return bool(result)
+	result_ := C.C_NSApplication_SendAction_To_From(n.Ptr(), objc.ExtractPtr(action), objc.ExtractPtr(target), objc.ExtractPtr(sender))
+	return bool(result_)
 }
 
 func (n *NSApplication) TargetForAction(action *objc.Selector) objc.Object {
-	result := C.C_NSApplication_TargetForAction(n.Ptr(), objc.ExtractPtr(action))
-	return objc.MakeObject(result)
+	result_ := C.C_NSApplication_TargetForAction(n.Ptr(), objc.ExtractPtr(action))
+	return objc.MakeObject(result_)
 }
 
 func (n *NSApplication) TargetForAction_To_From(action *objc.Selector, target objc.Object, sender objc.Object) objc.Object {
-	result := C.C_NSApplication_TargetForAction_To_From(n.Ptr(), objc.ExtractPtr(action), objc.ExtractPtr(target), objc.ExtractPtr(sender))
-	return objc.MakeObject(result)
+	result_ := C.C_NSApplication_TargetForAction_To_From(n.Ptr(), objc.ExtractPtr(action), objc.ExtractPtr(target), objc.ExtractPtr(sender))
+	return objc.MakeObject(result_)
 }
 
 func (n *NSApplication) Terminate(sender objc.Object) {
@@ -208,8 +212,8 @@ func (n *NSApplication) ToggleTouchBarCustomizationPalette(sender objc.Object) {
 }
 
 func (n *NSApplication) RequestUserAttention(requestType RequestUserAttentionType) int {
-	result := C.C_NSApplication_RequestUserAttention(n.Ptr(), C.uint(uint(requestType)))
-	return int(result)
+	result_ := C.C_NSApplication_RequestUserAttention(n.Ptr(), C.uint(uint(requestType)))
+	return int(result_)
 }
 
 func (n *NSApplication) CancelUserAttentionRequest(request int) {
@@ -253,18 +257,18 @@ func (n *NSApplication) ReportException(exception foundation.Exception) {
 }
 
 func (n *NSApplication) ActivationPolicy() ApplicationActivationPolicy {
-	result := C.C_NSApplication_ActivationPolicy(n.Ptr())
-	return ApplicationActivationPolicy(int(result))
+	result_ := C.C_NSApplication_ActivationPolicy(n.Ptr())
+	return ApplicationActivationPolicy(int(result_))
 }
 
 func (n *NSApplication) SetActivationPolicy(activationPolicy ApplicationActivationPolicy) bool {
-	result := C.C_NSApplication_SetActivationPolicy(n.Ptr(), C.int(int(activationPolicy)))
-	return bool(result)
+	result_ := C.C_NSApplication_SetActivationPolicy(n.Ptr(), C.int(int(activationPolicy)))
+	return bool(result_)
 }
 
 func (n *NSApplication) WindowWithWindowNumber(windowNum int) Window {
-	result := C.C_NSApplication_WindowWithWindowNumber(n.Ptr(), C.int(windowNum))
-	return MakeWindow(result)
+	result_ := C.C_NSApplication_WindowWithWindowNumber(n.Ptr(), C.int(windowNum))
+	return MakeWindow(result_)
 }
 
 func (n *NSApplication) MiniaturizeAll(sender objc.Object) {
@@ -308,8 +312,8 @@ func (n *NSApplication) CompleteStateRestoration() {
 }
 
 func (n *NSApplication) RunModalForWindow(window Window) ModalResponse {
-	result := C.C_NSApplication_RunModalForWindow(n.Ptr(), objc.ExtractPtr(window))
-	return ModalResponse(int(result))
+	result_ := C.C_NSApplication_RunModalForWindow(n.Ptr(), objc.ExtractPtr(window))
+	return ModalResponse(int(result_))
 }
 
 func (n *NSApplication) StopModal() {
@@ -325,13 +329,13 @@ func (n *NSApplication) AbortModal() {
 }
 
 func (n *NSApplication) BeginModalSessionForWindow(window Window) ModalSession {
-	result := C.C_NSApplication_BeginModalSessionForWindow(n.Ptr(), objc.ExtractPtr(window))
-	return FromNSModalSessionPointer(unsafe.Pointer(&result))
+	result_ := C.C_NSApplication_BeginModalSessionForWindow(n.Ptr(), objc.ExtractPtr(window))
+	return FromNSModalSessionPointer(unsafe.Pointer(&result_))
 }
 
 func (n *NSApplication) RunModalSession(session ModalSession) ModalResponse {
-	result := C.C_NSApplication_RunModalSession(n.Ptr(), *(*C.NSModalSession)(ToNSModalSessionPointer(session)))
-	return ModalResponse(int(result))
+	result_ := C.C_NSApplication_RunModalSession(n.Ptr(), *(*C.NSModalSession)(ToNSModalSessionPointer(session)))
+	return ModalResponse(int(result_))
 }
 
 func (n *NSApplication) OrderFrontColorPanel(sender objc.Object) {
@@ -366,18 +370,32 @@ func (n *NSApplication) UpdateWindowsItem(win Window) {
 	C.C_NSApplication_UpdateWindowsItem(n.Ptr(), objc.ExtractPtr(win))
 }
 
+func (n *NSApplication) RegisterServicesMenuSendTypes_ReturnTypes(sendTypes []PasteboardType, returnTypes []PasteboardType) {
+	cSendTypesData := make([]unsafe.Pointer, len(sendTypes))
+	for idx, v := range sendTypes {
+		cSendTypesData[idx] = foundation.NewString(string(v)).Ptr()
+	}
+	cSendTypes := C.Array{data: unsafe.Pointer(&cSendTypesData[0]), len: C.int(len(sendTypes))}
+	cReturnTypesData := make([]unsafe.Pointer, len(returnTypes))
+	for idx, v := range returnTypes {
+		cReturnTypesData[idx] = foundation.NewString(string(v)).Ptr()
+	}
+	cReturnTypes := C.Array{data: unsafe.Pointer(&cReturnTypesData[0]), len: C.int(len(returnTypes))}
+	C.C_NSApplication_RegisterServicesMenuSendTypes_ReturnTypes(n.Ptr(), cSendTypes, cReturnTypes)
+}
+
 func (n *NSApplication) EndModalSession(session ModalSession) {
 	C.C_NSApplication_EndModalSession(n.Ptr(), *(*C.NSModalSession)(ToNSModalSessionPointer(session)))
 }
 
 func SharedApplication() Application {
-	result := C.C_NSApplication_SharedApplication()
-	return MakeApplication(result)
+	result_ := C.C_NSApplication_SharedApplication()
+	return MakeApplication(result_)
 }
 
 func (n *NSApplication) Delegate() objc.Object {
-	result := C.C_NSApplication_Delegate(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSApplication_Delegate(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSApplication) SetDelegate(value objc.Object) {
@@ -385,33 +403,33 @@ func (n *NSApplication) SetDelegate(value objc.Object) {
 }
 
 func (n *NSApplication) CurrentEvent() Event {
-	result := C.C_NSApplication_CurrentEvent(n.Ptr())
-	return MakeEvent(result)
+	result_ := C.C_NSApplication_CurrentEvent(n.Ptr())
+	return MakeEvent(result_)
 }
 
 func (n *NSApplication) IsRunning() bool {
-	result := C.C_NSApplication_IsRunning(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSApplication_IsRunning(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSApplication) IsActive() bool {
-	result := C.C_NSApplication_IsActive(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSApplication_IsActive(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSApplication) EnabledRemoteNotificationTypes() RemoteNotificationType {
-	result := C.C_NSApplication_EnabledRemoteNotificationTypes(n.Ptr())
-	return RemoteNotificationType(uint(result))
+	result_ := C.C_NSApplication_EnabledRemoteNotificationTypes(n.Ptr())
+	return RemoteNotificationType(uint(result_))
 }
 
 func (n *NSApplication) IsRegisteredForRemoteNotifications() bool {
-	result := C.C_NSApplication_IsRegisteredForRemoteNotifications(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSApplication_IsRegisteredForRemoteNotifications(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSApplication) Appearance() Appearance {
-	result := C.C_NSApplication_Appearance(n.Ptr())
-	return MakeAppearance(result)
+	result_ := C.C_NSApplication_Appearance(n.Ptr())
+	return MakeAppearance(result_)
 }
 
 func (n *NSApplication) SetAppearance(value Appearance) {
@@ -419,18 +437,18 @@ func (n *NSApplication) SetAppearance(value Appearance) {
 }
 
 func (n *NSApplication) EffectiveAppearance() Appearance {
-	result := C.C_NSApplication_EffectiveAppearance(n.Ptr())
-	return MakeAppearance(result)
+	result_ := C.C_NSApplication_EffectiveAppearance(n.Ptr())
+	return MakeAppearance(result_)
 }
 
 func (n *NSApplication) CurrentSystemPresentationOptions() ApplicationPresentationOptions {
-	result := C.C_NSApplication_CurrentSystemPresentationOptions(n.Ptr())
-	return ApplicationPresentationOptions(uint(result))
+	result_ := C.C_NSApplication_CurrentSystemPresentationOptions(n.Ptr())
+	return ApplicationPresentationOptions(uint(result_))
 }
 
 func (n *NSApplication) PresentationOptions() ApplicationPresentationOptions {
-	result := C.C_NSApplication_PresentationOptions(n.Ptr())
-	return ApplicationPresentationOptions(uint(result))
+	result_ := C.C_NSApplication_PresentationOptions(n.Ptr())
+	return ApplicationPresentationOptions(uint(result_))
 }
 
 func (n *NSApplication) SetPresentationOptions(value ApplicationPresentationOptions) {
@@ -438,18 +456,18 @@ func (n *NSApplication) SetPresentationOptions(value ApplicationPresentationOpti
 }
 
 func (n *NSApplication) UserInterfaceLayoutDirection() UserInterfaceLayoutDirection {
-	result := C.C_NSApplication_UserInterfaceLayoutDirection(n.Ptr())
-	return UserInterfaceLayoutDirection(int(result))
+	result_ := C.C_NSApplication_UserInterfaceLayoutDirection(n.Ptr())
+	return UserInterfaceLayoutDirection(int(result_))
 }
 
 func (n *NSApplication) DockTile() DockTile {
-	result := C.C_NSApplication_DockTile(n.Ptr())
-	return MakeDockTile(result)
+	result_ := C.C_NSApplication_DockTile(n.Ptr())
+	return MakeDockTile(result_)
 }
 
 func (n *NSApplication) ApplicationIconImage() Image {
-	result := C.C_NSApplication_ApplicationIconImage(n.Ptr())
-	return MakeImage(result)
+	result_ := C.C_NSApplication_ApplicationIconImage(n.Ptr())
+	return MakeImage(result_)
 }
 
 func (n *NSApplication) SetApplicationIconImage(value Image) {
@@ -457,8 +475,8 @@ func (n *NSApplication) SetApplicationIconImage(value Image) {
 }
 
 func (n *NSApplication) HelpMenu() Menu {
-	result := C.C_NSApplication_HelpMenu(n.Ptr())
-	return MakeMenu(result)
+	result_ := C.C_NSApplication_HelpMenu(n.Ptr())
+	return MakeMenu(result_)
 }
 
 func (n *NSApplication) SetHelpMenu(value Menu) {
@@ -466,8 +484,8 @@ func (n *NSApplication) SetHelpMenu(value Menu) {
 }
 
 func (n *NSApplication) ServicesProvider() objc.Object {
-	result := C.C_NSApplication_ServicesProvider(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSApplication_ServicesProvider(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSApplication) SetServicesProvider(value objc.Object) {
@@ -475,38 +493,71 @@ func (n *NSApplication) SetServicesProvider(value objc.Object) {
 }
 
 func (n *NSApplication) IsFullKeyboardAccessEnabled() bool {
-	result := C.C_NSApplication_IsFullKeyboardAccessEnabled(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSApplication_IsFullKeyboardAccessEnabled(n.Ptr())
+	return bool(result_)
+}
+
+func (n *NSApplication) OrderedDocuments() []Document {
+	result_ := C.C_NSApplication_OrderedDocuments(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]Document, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeDocument(r)
+	}
+	return goResult_
+}
+
+func (n *NSApplication) OrderedWindows() []Window {
+	result_ := C.C_NSApplication_OrderedWindows(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]Window, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeWindow(r)
+	}
+	return goResult_
 }
 
 func (n *NSApplication) KeyWindow() Window {
-	result := C.C_NSApplication_KeyWindow(n.Ptr())
-	return MakeWindow(result)
+	result_ := C.C_NSApplication_KeyWindow(n.Ptr())
+	return MakeWindow(result_)
 }
 
 func (n *NSApplication) MainWindow() Window {
-	result := C.C_NSApplication_MainWindow(n.Ptr())
-	return MakeWindow(result)
+	result_ := C.C_NSApplication_MainWindow(n.Ptr())
+	return MakeWindow(result_)
+}
+
+func (n *NSApplication) Windows() []Window {
+	result_ := C.C_NSApplication_Windows(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]Window, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeWindow(r)
+	}
+	return goResult_
 }
 
 func (n *NSApplication) IsHidden() bool {
-	result := C.C_NSApplication_IsHidden(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSApplication_IsHidden(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSApplication) OcclusionState() ApplicationOcclusionState {
-	result := C.C_NSApplication_OcclusionState(n.Ptr())
-	return ApplicationOcclusionState(uint(result))
+	result_ := C.C_NSApplication_OcclusionState(n.Ptr())
+	return ApplicationOcclusionState(uint(result_))
 }
 
 func (n *NSApplication) ModalWindow() Window {
-	result := C.C_NSApplication_ModalWindow(n.Ptr())
-	return MakeWindow(result)
+	result_ := C.C_NSApplication_ModalWindow(n.Ptr())
+	return MakeWindow(result_)
 }
 
 func (n *NSApplication) MainMenu() Menu {
-	result := C.C_NSApplication_MainMenu(n.Ptr())
-	return MakeMenu(result)
+	result_ := C.C_NSApplication_MainMenu(n.Ptr())
+	return MakeMenu(result_)
 }
 
 func (n *NSApplication) SetMainMenu(value Menu) {
@@ -514,8 +565,8 @@ func (n *NSApplication) SetMainMenu(value Menu) {
 }
 
 func (n *NSApplication) IsAutomaticCustomizeTouchBarMenuItemEnabled() bool {
-	result := C.C_NSApplication_IsAutomaticCustomizeTouchBarMenuItemEnabled(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSApplication_IsAutomaticCustomizeTouchBarMenuItemEnabled(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSApplication) SetAutomaticCustomizeTouchBarMenuItemEnabled(value bool) {
@@ -523,8 +574,8 @@ func (n *NSApplication) SetAutomaticCustomizeTouchBarMenuItemEnabled(value bool)
 }
 
 func (n *NSApplication) WindowsMenu() Menu {
-	result := C.C_NSApplication_WindowsMenu(n.Ptr())
-	return MakeMenu(result)
+	result_ := C.C_NSApplication_WindowsMenu(n.Ptr())
+	return MakeMenu(result_)
 }
 
 func (n *NSApplication) SetWindowsMenu(value Menu) {
@@ -532,8 +583,8 @@ func (n *NSApplication) SetWindowsMenu(value Menu) {
 }
 
 func (n *NSApplication) ServicesMenu() Menu {
-	result := C.C_NSApplication_ServicesMenu(n.Ptr())
-	return MakeMenu(result)
+	result_ := C.C_NSApplication_ServicesMenu(n.Ptr())
+	return MakeMenu(result_)
 }
 
 func (n *NSApplication) SetServicesMenu(value Menu) {

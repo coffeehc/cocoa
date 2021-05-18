@@ -25,6 +25,8 @@ float C_NSStackView_VisibilityPriorityForView(void* ptr, void* view);
 void C_NSStackView_SetVisibilityPriority_ForView(void* ptr, float priority, void* view);
 void C_NSStackView_SetClippingResistancePriority_ForOrientation(void* ptr, float clippingResistancePriority, int orientation);
 void C_NSStackView_SetHuggingPriority_ForOrientation(void* ptr, float huggingPriority, int orientation);
+void* C_NSStackView_Delegate(void* ptr);
+void C_NSStackView_SetDelegate(void* ptr, void* value);
 Array C_NSStackView_ArrangedSubviews(void* ptr);
 Array C_NSStackView_Views(void* ptr);
 Array C_NSStackView_DetachedViews(void* ptr);

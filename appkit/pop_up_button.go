@@ -66,18 +66,18 @@ func AllocPopUpButton() *NSPopUpButton {
 }
 
 func (n *NSPopUpButton) InitWithFrame_PullsDown(buttonFrame foundation.Rect, flag bool) PopUpButton {
-	result := C.C_NSPopUpButton_InitWithFrame_PullsDown(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(buttonFrame))), C.bool(flag))
-	return MakePopUpButton(result)
+	result_ := C.C_NSPopUpButton_InitWithFrame_PullsDown(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(buttonFrame))), C.bool(flag))
+	return MakePopUpButton(result_)
 }
 
 func (n *NSPopUpButton) InitWithCoder(coder foundation.Coder) PopUpButton {
-	result := C.C_NSPopUpButton_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakePopUpButton(result)
+	result_ := C.C_NSPopUpButton_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakePopUpButton(result_)
 }
 
 func (n *NSPopUpButton) Init() PopUpButton {
-	result := C.C_NSPopUpButton_Init(n.Ptr())
-	return MakePopUpButton(result)
+	result_ := C.C_NSPopUpButton_Init(n.Ptr())
+	return MakePopUpButton(result_)
 }
 
 func (n *NSPopUpButton) AddItemWithTitle(title string) {
@@ -118,8 +118,8 @@ func (n *NSPopUpButton) SelectItemAtIndex(index int) {
 }
 
 func (n *NSPopUpButton) SelectItemWithTag(tag int) bool {
-	result := C.C_NSPopUpButton_SelectItemWithTag(n.Ptr(), C.int(tag))
-	return bool(result)
+	result_ := C.C_NSPopUpButton_SelectItemWithTag(n.Ptr(), C.int(tag))
+	return bool(result_)
 }
 
 func (n *NSPopUpButton) SelectItemWithTitle(title string) {
@@ -127,43 +127,43 @@ func (n *NSPopUpButton) SelectItemWithTitle(title string) {
 }
 
 func (n *NSPopUpButton) ItemAtIndex(index int) MenuItem {
-	result := C.C_NSPopUpButton_ItemAtIndex(n.Ptr(), C.int(index))
-	return MakeMenuItem(result)
+	result_ := C.C_NSPopUpButton_ItemAtIndex(n.Ptr(), C.int(index))
+	return MakeMenuItem(result_)
 }
 
 func (n *NSPopUpButton) ItemTitleAtIndex(index int) string {
-	result := C.C_NSPopUpButton_ItemTitleAtIndex(n.Ptr(), C.int(index))
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSPopUpButton_ItemTitleAtIndex(n.Ptr(), C.int(index))
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSPopUpButton) ItemWithTitle(title string) MenuItem {
-	result := C.C_NSPopUpButton_ItemWithTitle(n.Ptr(), foundation.NewString(title).Ptr())
-	return MakeMenuItem(result)
+	result_ := C.C_NSPopUpButton_ItemWithTitle(n.Ptr(), foundation.NewString(title).Ptr())
+	return MakeMenuItem(result_)
 }
 
 func (n *NSPopUpButton) IndexOfItem(item MenuItem) int {
-	result := C.C_NSPopUpButton_IndexOfItem(n.Ptr(), objc.ExtractPtr(item))
-	return int(result)
+	result_ := C.C_NSPopUpButton_IndexOfItem(n.Ptr(), objc.ExtractPtr(item))
+	return int(result_)
 }
 
 func (n *NSPopUpButton) IndexOfItemWithTag(tag int) int {
-	result := C.C_NSPopUpButton_IndexOfItemWithTag(n.Ptr(), C.int(tag))
-	return int(result)
+	result_ := C.C_NSPopUpButton_IndexOfItemWithTag(n.Ptr(), C.int(tag))
+	return int(result_)
 }
 
 func (n *NSPopUpButton) IndexOfItemWithTitle(title string) int {
-	result := C.C_NSPopUpButton_IndexOfItemWithTitle(n.Ptr(), foundation.NewString(title).Ptr())
-	return int(result)
+	result_ := C.C_NSPopUpButton_IndexOfItemWithTitle(n.Ptr(), foundation.NewString(title).Ptr())
+	return int(result_)
 }
 
 func (n *NSPopUpButton) IndexOfItemWithRepresentedObject(obj objc.Object) int {
-	result := C.C_NSPopUpButton_IndexOfItemWithRepresentedObject(n.Ptr(), objc.ExtractPtr(obj))
-	return int(result)
+	result_ := C.C_NSPopUpButton_IndexOfItemWithRepresentedObject(n.Ptr(), objc.ExtractPtr(obj))
+	return int(result_)
 }
 
 func (n *NSPopUpButton) IndexOfItemWithTarget_AndAction(target objc.Object, actionSelector *objc.Selector) int {
-	result := C.C_NSPopUpButton_IndexOfItemWithTarget_AndAction(n.Ptr(), objc.ExtractPtr(target), objc.ExtractPtr(actionSelector))
-	return int(result)
+	result_ := C.C_NSPopUpButton_IndexOfItemWithTarget_AndAction(n.Ptr(), objc.ExtractPtr(target), objc.ExtractPtr(actionSelector))
+	return int(result_)
 }
 
 func (n *NSPopUpButton) SynchronizeTitleAndSelectedItem() {
@@ -171,8 +171,8 @@ func (n *NSPopUpButton) SynchronizeTitleAndSelectedItem() {
 }
 
 func (n *NSPopUpButton) PullsDown() bool {
-	result := C.C_NSPopUpButton_PullsDown(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSPopUpButton_PullsDown(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSPopUpButton) SetPullsDown(value bool) {
@@ -180,8 +180,8 @@ func (n *NSPopUpButton) SetPullsDown(value bool) {
 }
 
 func (n *NSPopUpButton) AutoenablesItems() bool {
-	result := C.C_NSPopUpButton_AutoenablesItems(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSPopUpButton_AutoenablesItems(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSPopUpButton) SetAutoenablesItems(value bool) {
@@ -189,60 +189,60 @@ func (n *NSPopUpButton) SetAutoenablesItems(value bool) {
 }
 
 func (n *NSPopUpButton) SelectedItem() MenuItem {
-	result := C.C_NSPopUpButton_SelectedItem(n.Ptr())
-	return MakeMenuItem(result)
+	result_ := C.C_NSPopUpButton_SelectedItem(n.Ptr())
+	return MakeMenuItem(result_)
 }
 
 func (n *NSPopUpButton) TitleOfSelectedItem() string {
-	result := C.C_NSPopUpButton_TitleOfSelectedItem(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSPopUpButton_TitleOfSelectedItem(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSPopUpButton) IndexOfSelectedItem() int {
-	result := C.C_NSPopUpButton_IndexOfSelectedItem(n.Ptr())
-	return int(result)
+	result_ := C.C_NSPopUpButton_IndexOfSelectedItem(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSPopUpButton) SelectedTag() int {
-	result := C.C_NSPopUpButton_SelectedTag(n.Ptr())
-	return int(result)
+	result_ := C.C_NSPopUpButton_SelectedTag(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSPopUpButton) NumberOfItems() int {
-	result := C.C_NSPopUpButton_NumberOfItems(n.Ptr())
-	return int(result)
+	result_ := C.C_NSPopUpButton_NumberOfItems(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSPopUpButton) ItemArray() []MenuItem {
-	result := C.C_NSPopUpButton_ItemArray(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]MenuItem, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeMenuItem(r)
+	result_ := C.C_NSPopUpButton_ItemArray(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]MenuItem, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeMenuItem(r)
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSPopUpButton) ItemTitles() []string {
-	result := C.C_NSPopUpButton_ItemTitles(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]string, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = foundation.MakeString(r).String()
+	result_ := C.C_NSPopUpButton_ItemTitles(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = foundation.MakeString(r).String()
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSPopUpButton) LastItem() MenuItem {
-	result := C.C_NSPopUpButton_LastItem(n.Ptr())
-	return MakeMenuItem(result)
+	result_ := C.C_NSPopUpButton_LastItem(n.Ptr())
+	return MakeMenuItem(result_)
 }
 
 func (n *NSPopUpButton) PreferredEdge() foundation.RectEdge {
-	result := C.C_NSPopUpButton_PreferredEdge(n.Ptr())
-	return foundation.RectEdge(uint(result))
+	result_ := C.C_NSPopUpButton_PreferredEdge(n.Ptr())
+	return foundation.RectEdge(uint(result_))
 }
 
 func (n *NSPopUpButton) SetPreferredEdge(value foundation.RectEdge) {

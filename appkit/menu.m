@@ -7,25 +7,25 @@ void* C_Menu_Alloc() {
 
 void* C_NSMenu_InitWithTitle(void* ptr, void* title) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    NSMenu* result = [nSMenu initWithTitle:(NSString*)title];
-    return result;
+    NSMenu* result_ = [nSMenu initWithTitle:(NSString*)title];
+    return result_;
 }
 
 void* C_NSMenu_InitWithCoder(void* ptr, void* coder) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    NSMenu* result = [nSMenu initWithCoder:(NSCoder*)coder];
-    return result;
+    NSMenu* result_ = [nSMenu initWithCoder:(NSCoder*)coder];
+    return result_;
 }
 
 void* C_NSMenu_Init(void* ptr) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    NSMenu* result = [nSMenu init];
-    return result;
+    NSMenu* result_ = [nSMenu init];
+    return result_;
 }
 
 bool C_NSMenu_MenuBarVisible() {
-    BOOL result = [NSMenu menuBarVisible];
-    return result;
+    BOOL result_ = [NSMenu menuBarVisible];
+    return result_;
 }
 
 void C_NSMenu_Menu_SetMenuBarVisible(bool visible) {
@@ -39,8 +39,8 @@ void C_NSMenu_InsertItem_AtIndex(void* ptr, void* newItem, int index) {
 
 void* C_NSMenu_InsertItemWithTitle_Action_KeyEquivalent_AtIndex(void* ptr, void* _string, void* selector, void* charCode, int index) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    NSMenuItem* result = [nSMenu insertItemWithTitle:(NSString*)_string action:(SEL)selector keyEquivalent:(NSString*)charCode atIndex:index];
-    return result;
+    NSMenuItem* result_ = [nSMenu insertItemWithTitle:(NSString*)_string action:(SEL)selector keyEquivalent:(NSString*)charCode atIndex:index];
+    return result_;
 }
 
 void C_NSMenu_AddItem(void* ptr, void* newItem) {
@@ -50,8 +50,8 @@ void C_NSMenu_AddItem(void* ptr, void* newItem) {
 
 void* C_NSMenu_AddItemWithTitle_Action_KeyEquivalent(void* ptr, void* _string, void* selector, void* charCode) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    NSMenuItem* result = [nSMenu addItemWithTitle:(NSString*)_string action:(SEL)selector keyEquivalent:(NSString*)charCode];
-    return result;
+    NSMenuItem* result_ = [nSMenu addItemWithTitle:(NSString*)_string action:(SEL)selector keyEquivalent:(NSString*)charCode];
+    return result_;
 }
 
 void C_NSMenu_RemoveItem(void* ptr, void* item) {
@@ -76,56 +76,56 @@ void C_NSMenu_RemoveAllItems(void* ptr) {
 
 void* C_NSMenu_ItemWithTag(void* ptr, int tag) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    NSMenuItem* result = [nSMenu itemWithTag:tag];
-    return result;
+    NSMenuItem* result_ = [nSMenu itemWithTag:tag];
+    return result_;
 }
 
 void* C_NSMenu_ItemWithTitle(void* ptr, void* title) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    NSMenuItem* result = [nSMenu itemWithTitle:(NSString*)title];
-    return result;
+    NSMenuItem* result_ = [nSMenu itemWithTitle:(NSString*)title];
+    return result_;
 }
 
 void* C_NSMenu_ItemAtIndex(void* ptr, int index) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    NSMenuItem* result = [nSMenu itemAtIndex:index];
-    return result;
+    NSMenuItem* result_ = [nSMenu itemAtIndex:index];
+    return result_;
 }
 
 int C_NSMenu_IndexOfItem(void* ptr, void* item) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    NSInteger result = [nSMenu indexOfItem:(NSMenuItem*)item];
-    return result;
+    NSInteger result_ = [nSMenu indexOfItem:(NSMenuItem*)item];
+    return result_;
 }
 
 int C_NSMenu_IndexOfItemWithTitle(void* ptr, void* title) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    NSInteger result = [nSMenu indexOfItemWithTitle:(NSString*)title];
-    return result;
+    NSInteger result_ = [nSMenu indexOfItemWithTitle:(NSString*)title];
+    return result_;
 }
 
 int C_NSMenu_IndexOfItemWithTag(void* ptr, int tag) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    NSInteger result = [nSMenu indexOfItemWithTag:tag];
-    return result;
+    NSInteger result_ = [nSMenu indexOfItemWithTag:tag];
+    return result_;
 }
 
 int C_NSMenu_IndexOfItemWithTarget_AndAction(void* ptr, void* target, void* actionSelector) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    NSInteger result = [nSMenu indexOfItemWithTarget:(id)target andAction:(SEL)actionSelector];
-    return result;
+    NSInteger result_ = [nSMenu indexOfItemWithTarget:(id)target andAction:(SEL)actionSelector];
+    return result_;
 }
 
 int C_NSMenu_IndexOfItemWithRepresentedObject(void* ptr, void* object) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    NSInteger result = [nSMenu indexOfItemWithRepresentedObject:(id)object];
-    return result;
+    NSInteger result_ = [nSMenu indexOfItemWithRepresentedObject:(id)object];
+    return result_;
 }
 
 int C_NSMenu_IndexOfItemWithSubmenu(void* ptr, void* submenu) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    NSInteger result = [nSMenu indexOfItemWithSubmenu:(NSMenu*)submenu];
-    return result;
+    NSInteger result_ = [nSMenu indexOfItemWithSubmenu:(NSMenu*)submenu];
+    return result_;
 }
 
 void C_NSMenu_SetSubmenu_ForItem(void* ptr, void* menu, void* item) {
@@ -145,8 +145,8 @@ void C_NSMenu_Update(void* ptr) {
 
 bool C_NSMenu_PerformKeyEquivalent(void* ptr, void* event) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    BOOL result = [nSMenu performKeyEquivalent:(NSEvent*)event];
-    return result;
+    BOOL result_ = [nSMenu performKeyEquivalent:(NSEvent*)event];
+    return result_;
 }
 
 void C_NSMenu_PerformActionForItemAtIndex(void* ptr, int index) {
@@ -164,8 +164,8 @@ void C_NSMenu_PopUpContextMenu_WithEvent_ForView_WithFont(void* menu, void* even
 
 bool C_NSMenu_PopUpMenuPositioningItem_AtLocation_InView(void* ptr, void* item, CGPoint location, void* view) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    BOOL result = [nSMenu popUpMenuPositioningItem:(NSMenuItem*)item atLocation:location inView:(NSView*)view];
-    return result;
+    BOOL result_ = [nSMenu popUpMenuPositioningItem:(NSMenuItem*)item atLocation:location inView:(NSView*)view];
+    return result_;
 }
 
 void C_NSMenu_CancelTracking(void* ptr) {
@@ -180,29 +180,29 @@ void C_NSMenu_CancelTrackingWithoutAnimation(void* ptr) {
 
 double C_NSMenu_MenuBarHeight(void* ptr) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    CGFloat result = [nSMenu menuBarHeight];
-    return result;
+    CGFloat result_ = [nSMenu menuBarHeight];
+    return result_;
 }
 
 int C_NSMenu_NumberOfItems(void* ptr) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    NSInteger result = [nSMenu numberOfItems];
-    return result;
+    NSInteger result_ = [nSMenu numberOfItems];
+    return result_;
 }
 
 Array C_NSMenu_ItemArray(void* ptr) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    NSArray* result = [nSMenu itemArray];
-    int resultcount = [result count];
-    void** resultData = malloc(resultcount * sizeof(void*));
-    for (int i = 0; i < resultcount; i++) {
-    	 void* p = [result objectAtIndex:i];
-    	 resultData[i] = p;
+    NSArray* result_ = [nSMenu itemArray];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
     }
-    Array resultArray;
-    resultArray.data = resultData;
-    resultArray.len = resultcount;
-    return resultArray;
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
 }
 
 void C_NSMenu_SetItemArray(void* ptr, Array value) {
@@ -218,8 +218,8 @@ void C_NSMenu_SetItemArray(void* ptr, Array value) {
 
 void* C_NSMenu_Supermenu(void* ptr) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    NSMenu* result = [nSMenu supermenu];
-    return result;
+    NSMenu* result_ = [nSMenu supermenu];
+    return result_;
 }
 
 void C_NSMenu_SetSupermenu(void* ptr, void* value) {
@@ -229,8 +229,8 @@ void C_NSMenu_SetSupermenu(void* ptr, void* value) {
 
 bool C_NSMenu_AutoenablesItems(void* ptr) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    BOOL result = [nSMenu autoenablesItems];
-    return result;
+    BOOL result_ = [nSMenu autoenablesItems];
+    return result_;
 }
 
 void C_NSMenu_SetAutoenablesItems(void* ptr, bool value) {
@@ -240,8 +240,8 @@ void C_NSMenu_SetAutoenablesItems(void* ptr, bool value) {
 
 void* C_NSMenu_Font(void* ptr) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    NSFont* result = [nSMenu font];
-    return result;
+    NSFont* result_ = [nSMenu font];
+    return result_;
 }
 
 void C_NSMenu_SetFont(void* ptr, void* value) {
@@ -251,8 +251,8 @@ void C_NSMenu_SetFont(void* ptr, void* value) {
 
 void* C_NSMenu_Title(void* ptr) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    NSString* result = [nSMenu title];
-    return result;
+    NSString* result_ = [nSMenu title];
+    return result_;
 }
 
 void C_NSMenu_SetTitle(void* ptr, void* value) {
@@ -262,8 +262,8 @@ void C_NSMenu_SetTitle(void* ptr, void* value) {
 
 double C_NSMenu_MinimumWidth(void* ptr) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    CGFloat result = [nSMenu minimumWidth];
-    return result;
+    CGFloat result_ = [nSMenu minimumWidth];
+    return result_;
 }
 
 void C_NSMenu_SetMinimumWidth(void* ptr, double value) {
@@ -273,20 +273,20 @@ void C_NSMenu_SetMinimumWidth(void* ptr, double value) {
 
 CGSize C_NSMenu_Size(void* ptr) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    NSSize result = [nSMenu size];
-    return result;
+    NSSize result_ = [nSMenu size];
+    return result_;
 }
 
 unsigned int C_NSMenu_PropertiesToUpdate(void* ptr) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    NSMenuProperties result = [nSMenu propertiesToUpdate];
-    return result;
+    NSMenuProperties result_ = [nSMenu propertiesToUpdate];
+    return result_;
 }
 
 bool C_NSMenu_AllowsContextMenuPlugIns(void* ptr) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    BOOL result = [nSMenu allowsContextMenuPlugIns];
-    return result;
+    BOOL result_ = [nSMenu allowsContextMenuPlugIns];
+    return result_;
 }
 
 void C_NSMenu_SetAllowsContextMenuPlugIns(void* ptr, bool value) {
@@ -296,8 +296,8 @@ void C_NSMenu_SetAllowsContextMenuPlugIns(void* ptr, bool value) {
 
 bool C_NSMenu_ShowsStateColumn(void* ptr) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    BOOL result = [nSMenu showsStateColumn];
-    return result;
+    BOOL result_ = [nSMenu showsStateColumn];
+    return result_;
 }
 
 void C_NSMenu_SetShowsStateColumn(void* ptr, bool value) {
@@ -307,17 +307,28 @@ void C_NSMenu_SetShowsStateColumn(void* ptr, bool value) {
 
 void* C_NSMenu_HighlightedItem(void* ptr) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    NSMenuItem* result = [nSMenu highlightedItem];
-    return result;
+    NSMenuItem* result_ = [nSMenu highlightedItem];
+    return result_;
 }
 
 int C_NSMenu_UserInterfaceLayoutDirection(void* ptr) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    NSUserInterfaceLayoutDirection result = [nSMenu userInterfaceLayoutDirection];
-    return result;
+    NSUserInterfaceLayoutDirection result_ = [nSMenu userInterfaceLayoutDirection];
+    return result_;
 }
 
 void C_NSMenu_SetUserInterfaceLayoutDirection(void* ptr, int value) {
     NSMenu* nSMenu = (NSMenu*)ptr;
     [nSMenu setUserInterfaceLayoutDirection:value];
+}
+
+void* C_NSMenu_Delegate(void* ptr) {
+    NSMenu* nSMenu = (NSMenu*)ptr;
+    id result_ = [nSMenu delegate];
+    return result_;
+}
+
+void C_NSMenu_SetDelegate(void* ptr, void* value) {
+    NSMenu* nSMenu = (NSMenu*)ptr;
+    [nSMenu setDelegate:(id)value];
 }

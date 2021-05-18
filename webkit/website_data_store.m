@@ -15,6 +15,11 @@ void* C_WKWebsiteDataStore_WebsiteDataStore_NonPersistentDataStore() {
     return result_;
 }
 
+void* C_WKWebsiteDataStore_WebsiteDataStore_AllWebsiteDataTypes() {
+    NSSet* result_ = [WKWebsiteDataStore allWebsiteDataTypes];
+    return result_;
+}
+
 bool C_WKWebsiteDataStore_IsPersistent(void* ptr) {
     WKWebsiteDataStore* wKWebsiteDataStore = (WKWebsiteDataStore*)ptr;
     BOOL result_ = [wKWebsiteDataStore isPersistent];

@@ -16,6 +16,7 @@ type ExtensionContext interface {
 	MediaPlayingPaused()
 	DismissNotificationContentExtension()
 	PerformNotificationDefaultAction()
+	InputItems() []objc.Object
 }
 
 type NSExtensionContext struct {
@@ -36,8 +37,8 @@ func AllocExtensionContext() *NSExtensionContext {
 }
 
 func (n *NSExtensionContext) Init() ExtensionContext {
-	result := C.C_NSExtensionContext_Init(n.Ptr())
-	return MakeExtensionContext(result)
+	result_ := C.C_NSExtensionContext_Init(n.Ptr())
+	return MakeExtensionContext(result_)
 }
 
 func (n *NSExtensionContext) CancelRequestWithError(error Error) {
@@ -58,4 +59,15 @@ func (n *NSExtensionContext) DismissNotificationContentExtension() {
 
 func (n *NSExtensionContext) PerformNotificationDefaultAction() {
 	C.C_NSExtensionContext_PerformNotificationDefaultAction(n.Ptr())
+}
+
+func (n *NSExtensionContext) InputItems() []objc.Object {
+	result_ := C.C_NSExtensionContext_InputItems(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]objc.Object, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = objc.MakeObject(r)
+	}
+	return goResult_
 }

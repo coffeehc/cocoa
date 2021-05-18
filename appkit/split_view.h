@@ -19,6 +19,8 @@ void C_NSSplitView_DrawDividerInRect(void* ptr, CGRect rect);
 double C_NSSplitView_MinPossiblePositionOfDividerAtIndex(void* ptr, int dividerIndex);
 double C_NSSplitView_MaxPossiblePositionOfDividerAtIndex(void* ptr, int dividerIndex);
 void C_NSSplitView_SetPosition_OfDividerAtIndex(void* ptr, double position, int dividerIndex);
+void* C_NSSplitView_Delegate(void* ptr);
+void C_NSSplitView_SetDelegate(void* ptr, void* value);
 bool C_NSSplitView_ArrangesAllSubviews(void* ptr);
 void C_NSSplitView_SetArrangesAllSubviews(void* ptr, bool value);
 Array C_NSSplitView_ArrangedSubviews(void* ptr);

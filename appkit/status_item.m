@@ -7,20 +7,20 @@ void* C_StatusItem_Alloc() {
 
 void* C_NSStatusItem_Init(void* ptr) {
     NSStatusItem* nSStatusItem = (NSStatusItem*)ptr;
-    NSStatusItem* result = [nSStatusItem init];
-    return result;
+    NSStatusItem* result_ = [nSStatusItem init];
+    return result_;
 }
 
 void* C_NSStatusItem_StatusBar(void* ptr) {
     NSStatusItem* nSStatusItem = (NSStatusItem*)ptr;
-    NSStatusBar* result = [nSStatusItem statusBar];
-    return result;
+    NSStatusBar* result_ = [nSStatusItem statusBar];
+    return result_;
 }
 
 unsigned int C_NSStatusItem_Behavior(void* ptr) {
     NSStatusItem* nSStatusItem = (NSStatusItem*)ptr;
-    NSStatusItemBehavior result = [nSStatusItem behavior];
-    return result;
+    NSStatusItemBehavior result_ = [nSStatusItem behavior];
+    return result_;
 }
 
 void C_NSStatusItem_SetBehavior(void* ptr, unsigned int value) {
@@ -30,14 +30,14 @@ void C_NSStatusItem_SetBehavior(void* ptr, unsigned int value) {
 
 void* C_NSStatusItem_Button(void* ptr) {
     NSStatusItem* nSStatusItem = (NSStatusItem*)ptr;
-    NSStatusBarButton* result = [nSStatusItem button];
-    return result;
+    NSStatusBarButton* result_ = [nSStatusItem button];
+    return result_;
 }
 
 void* C_NSStatusItem_Menu(void* ptr) {
     NSStatusItem* nSStatusItem = (NSStatusItem*)ptr;
-    NSMenu* result = [nSStatusItem menu];
-    return result;
+    NSMenu* result_ = [nSStatusItem menu];
+    return result_;
 }
 
 void C_NSStatusItem_SetMenu(void* ptr, void* value) {
@@ -47,8 +47,8 @@ void C_NSStatusItem_SetMenu(void* ptr, void* value) {
 
 bool C_NSStatusItem_IsVisible(void* ptr) {
     NSStatusItem* nSStatusItem = (NSStatusItem*)ptr;
-    BOOL result = [nSStatusItem isVisible];
-    return result;
+    BOOL result_ = [nSStatusItem isVisible];
+    return result_;
 }
 
 void C_NSStatusItem_SetVisible(void* ptr, bool value) {
@@ -58,8 +58,8 @@ void C_NSStatusItem_SetVisible(void* ptr, bool value) {
 
 double C_NSStatusItem_Length(void* ptr) {
     NSStatusItem* nSStatusItem = (NSStatusItem*)ptr;
-    CGFloat result = [nSStatusItem length];
-    return result;
+    CGFloat result_ = [nSStatusItem length];
+    return result_;
 }
 
 void C_NSStatusItem_SetLength(void* ptr, double value) {
@@ -69,8 +69,8 @@ void C_NSStatusItem_SetLength(void* ptr, double value) {
 
 void* C_NSStatusItem_AutosaveName(void* ptr) {
     NSStatusItem* nSStatusItem = (NSStatusItem*)ptr;
-    NSStatusItemAutosaveName result = [nSStatusItem autosaveName];
-    return result;
+    NSStatusItemAutosaveName result_ = [nSStatusItem autosaveName];
+    return result_;
 }
 
 void C_NSStatusItem_SetAutosaveName(void* ptr, void* value) {

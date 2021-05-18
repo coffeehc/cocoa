@@ -89,173 +89,173 @@ func AllocCalendar() *NSCalendar {
 }
 
 func CalendarWithIdentifier(calendarIdentifierConstant CalendarIdentifier) Calendar {
-	result := C.C_NSCalendar_CalendarWithIdentifier(NewString(string(calendarIdentifierConstant)).Ptr())
-	return MakeCalendar(result)
+	result_ := C.C_NSCalendar_CalendarWithIdentifier(NewString(string(calendarIdentifierConstant)).Ptr())
+	return MakeCalendar(result_)
 }
 
 func (n *NSCalendar) InitWithCalendarIdentifier(ident CalendarIdentifier) objc.Object {
-	result := C.C_NSCalendar_InitWithCalendarIdentifier(n.Ptr(), NewString(string(ident)).Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSCalendar_InitWithCalendarIdentifier(n.Ptr(), NewString(string(ident)).Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSCalendar) Date_MatchesComponents(date Date, components DateComponents) bool {
-	result := C.C_NSCalendar_Date_MatchesComponents(n.Ptr(), objc.ExtractPtr(date), objc.ExtractPtr(components))
-	return bool(result)
+	result_ := C.C_NSCalendar_Date_MatchesComponents(n.Ptr(), objc.ExtractPtr(date), objc.ExtractPtr(components))
+	return bool(result_)
 }
 
 func (n *NSCalendar) Component_FromDate(unit CalendarUnit, date Date) int {
-	result := C.C_NSCalendar_Component_FromDate(n.Ptr(), C.uint(uint(unit)), objc.ExtractPtr(date))
-	return int(result)
+	result_ := C.C_NSCalendar_Component_FromDate(n.Ptr(), C.uint(uint(unit)), objc.ExtractPtr(date))
+	return int(result_)
 }
 
 func (n *NSCalendar) Components_FromDate(unitFlags CalendarUnit, date Date) DateComponents {
-	result := C.C_NSCalendar_Components_FromDate(n.Ptr(), C.uint(uint(unitFlags)), objc.ExtractPtr(date))
-	return MakeDateComponents(result)
+	result_ := C.C_NSCalendar_Components_FromDate(n.Ptr(), C.uint(uint(unitFlags)), objc.ExtractPtr(date))
+	return MakeDateComponents(result_)
 }
 
 func (n *NSCalendar) Components_FromDate_ToDate_Options(unitFlags CalendarUnit, startingDate Date, resultDate Date, opts CalendarOptions) DateComponents {
-	result := C.C_NSCalendar_Components_FromDate_ToDate_Options(n.Ptr(), C.uint(uint(unitFlags)), objc.ExtractPtr(startingDate), objc.ExtractPtr(resultDate), C.uint(uint(opts)))
-	return MakeDateComponents(result)
+	result_ := C.C_NSCalendar_Components_FromDate_ToDate_Options(n.Ptr(), C.uint(uint(unitFlags)), objc.ExtractPtr(startingDate), objc.ExtractPtr(resultDate), C.uint(uint(opts)))
+	return MakeDateComponents(result_)
 }
 
 func (n *NSCalendar) Components_FromDateComponents_ToDateComponents_Options(unitFlags CalendarUnit, startingDateComp DateComponents, resultDateComp DateComponents, options CalendarOptions) DateComponents {
-	result := C.C_NSCalendar_Components_FromDateComponents_ToDateComponents_Options(n.Ptr(), C.uint(uint(unitFlags)), objc.ExtractPtr(startingDateComp), objc.ExtractPtr(resultDateComp), C.uint(uint(options)))
-	return MakeDateComponents(result)
+	result_ := C.C_NSCalendar_Components_FromDateComponents_ToDateComponents_Options(n.Ptr(), C.uint(uint(unitFlags)), objc.ExtractPtr(startingDateComp), objc.ExtractPtr(resultDateComp), C.uint(uint(options)))
+	return MakeDateComponents(result_)
 }
 
 func (n *NSCalendar) ComponentsInTimeZone_FromDate(timezone TimeZone, date Date) DateComponents {
-	result := C.C_NSCalendar_ComponentsInTimeZone_FromDate(n.Ptr(), objc.ExtractPtr(timezone), objc.ExtractPtr(date))
-	return MakeDateComponents(result)
+	result_ := C.C_NSCalendar_ComponentsInTimeZone_FromDate(n.Ptr(), objc.ExtractPtr(timezone), objc.ExtractPtr(date))
+	return MakeDateComponents(result_)
 }
 
 func (n *NSCalendar) MaximumRangeOfUnit(unit CalendarUnit) Range {
-	result := C.C_NSCalendar_MaximumRangeOfUnit(n.Ptr(), C.uint(uint(unit)))
-	return FromNSRangePointer(unsafe.Pointer(&result))
+	result_ := C.C_NSCalendar_MaximumRangeOfUnit(n.Ptr(), C.uint(uint(unit)))
+	return FromNSRangePointer(unsafe.Pointer(&result_))
 }
 
 func (n *NSCalendar) MinimumRangeOfUnit(unit CalendarUnit) Range {
-	result := C.C_NSCalendar_MinimumRangeOfUnit(n.Ptr(), C.uint(uint(unit)))
-	return FromNSRangePointer(unsafe.Pointer(&result))
+	result_ := C.C_NSCalendar_MinimumRangeOfUnit(n.Ptr(), C.uint(uint(unit)))
+	return FromNSRangePointer(unsafe.Pointer(&result_))
 }
 
 func (n *NSCalendar) OrdinalityOfUnit_InUnit_ForDate(smaller CalendarUnit, larger CalendarUnit, date Date) uint {
-	result := C.C_NSCalendar_OrdinalityOfUnit_InUnit_ForDate(n.Ptr(), C.uint(uint(smaller)), C.uint(uint(larger)), objc.ExtractPtr(date))
-	return uint(result)
+	result_ := C.C_NSCalendar_OrdinalityOfUnit_InUnit_ForDate(n.Ptr(), C.uint(uint(smaller)), C.uint(uint(larger)), objc.ExtractPtr(date))
+	return uint(result_)
 }
 
 func (n *NSCalendar) RangeOfUnit_InUnit_ForDate(smaller CalendarUnit, larger CalendarUnit, date Date) Range {
-	result := C.C_NSCalendar_RangeOfUnit_InUnit_ForDate(n.Ptr(), C.uint(uint(smaller)), C.uint(uint(larger)), objc.ExtractPtr(date))
-	return FromNSRangePointer(unsafe.Pointer(&result))
+	result_ := C.C_NSCalendar_RangeOfUnit_InUnit_ForDate(n.Ptr(), C.uint(uint(smaller)), C.uint(uint(larger)), objc.ExtractPtr(date))
+	return FromNSRangePointer(unsafe.Pointer(&result_))
 }
 
 func (n *NSCalendar) StartOfDayForDate(date Date) Date {
-	result := C.C_NSCalendar_StartOfDayForDate(n.Ptr(), objc.ExtractPtr(date))
-	return MakeDate(result)
+	result_ := C.C_NSCalendar_StartOfDayForDate(n.Ptr(), objc.ExtractPtr(date))
+	return MakeDate(result_)
 }
 
 func (n *NSCalendar) NextDateAfterDate_MatchingComponents_Options(date Date, comps DateComponents, options CalendarOptions) Date {
-	result := C.C_NSCalendar_NextDateAfterDate_MatchingComponents_Options(n.Ptr(), objc.ExtractPtr(date), objc.ExtractPtr(comps), C.uint(uint(options)))
-	return MakeDate(result)
+	result_ := C.C_NSCalendar_NextDateAfterDate_MatchingComponents_Options(n.Ptr(), objc.ExtractPtr(date), objc.ExtractPtr(comps), C.uint(uint(options)))
+	return MakeDate(result_)
 }
 
 func (n *NSCalendar) NextDateAfterDate_MatchingHour_Minute_Second_Options(date Date, hourValue int, minuteValue int, secondValue int, options CalendarOptions) Date {
-	result := C.C_NSCalendar_NextDateAfterDate_MatchingHour_Minute_Second_Options(n.Ptr(), objc.ExtractPtr(date), C.int(hourValue), C.int(minuteValue), C.int(secondValue), C.uint(uint(options)))
-	return MakeDate(result)
+	result_ := C.C_NSCalendar_NextDateAfterDate_MatchingHour_Minute_Second_Options(n.Ptr(), objc.ExtractPtr(date), C.int(hourValue), C.int(minuteValue), C.int(secondValue), C.uint(uint(options)))
+	return MakeDate(result_)
 }
 
 func (n *NSCalendar) NextDateAfterDate_MatchingUnit_Value_Options(date Date, unit CalendarUnit, value int, options CalendarOptions) Date {
-	result := C.C_NSCalendar_NextDateAfterDate_MatchingUnit_Value_Options(n.Ptr(), objc.ExtractPtr(date), C.uint(uint(unit)), C.int(value), C.uint(uint(options)))
-	return MakeDate(result)
+	result_ := C.C_NSCalendar_NextDateAfterDate_MatchingUnit_Value_Options(n.Ptr(), objc.ExtractPtr(date), C.uint(uint(unit)), C.int(value), C.uint(uint(options)))
+	return MakeDate(result_)
 }
 
 func (n *NSCalendar) DateFromComponents(comps DateComponents) Date {
-	result := C.C_NSCalendar_DateFromComponents(n.Ptr(), objc.ExtractPtr(comps))
-	return MakeDate(result)
+	result_ := C.C_NSCalendar_DateFromComponents(n.Ptr(), objc.ExtractPtr(comps))
+	return MakeDate(result_)
 }
 
 func (n *NSCalendar) DateByAddingComponents_ToDate_Options(comps DateComponents, date Date, opts CalendarOptions) Date {
-	result := C.C_NSCalendar_DateByAddingComponents_ToDate_Options(n.Ptr(), objc.ExtractPtr(comps), objc.ExtractPtr(date), C.uint(uint(opts)))
-	return MakeDate(result)
+	result_ := C.C_NSCalendar_DateByAddingComponents_ToDate_Options(n.Ptr(), objc.ExtractPtr(comps), objc.ExtractPtr(date), C.uint(uint(opts)))
+	return MakeDate(result_)
 }
 
 func (n *NSCalendar) DateByAddingUnit_Value_ToDate_Options(unit CalendarUnit, value int, date Date, options CalendarOptions) Date {
-	result := C.C_NSCalendar_DateByAddingUnit_Value_ToDate_Options(n.Ptr(), C.uint(uint(unit)), C.int(value), objc.ExtractPtr(date), C.uint(uint(options)))
-	return MakeDate(result)
+	result_ := C.C_NSCalendar_DateByAddingUnit_Value_ToDate_Options(n.Ptr(), C.uint(uint(unit)), C.int(value), objc.ExtractPtr(date), C.uint(uint(options)))
+	return MakeDate(result_)
 }
 
 func (n *NSCalendar) DateBySettingHour_Minute_Second_OfDate_Options(h int, m int, s int, date Date, opts CalendarOptions) Date {
-	result := C.C_NSCalendar_DateBySettingHour_Minute_Second_OfDate_Options(n.Ptr(), C.int(h), C.int(m), C.int(s), objc.ExtractPtr(date), C.uint(uint(opts)))
-	return MakeDate(result)
+	result_ := C.C_NSCalendar_DateBySettingHour_Minute_Second_OfDate_Options(n.Ptr(), C.int(h), C.int(m), C.int(s), objc.ExtractPtr(date), C.uint(uint(opts)))
+	return MakeDate(result_)
 }
 
 func (n *NSCalendar) DateBySettingUnit_Value_OfDate_Options(unit CalendarUnit, v int, date Date, opts CalendarOptions) Date {
-	result := C.C_NSCalendar_DateBySettingUnit_Value_OfDate_Options(n.Ptr(), C.uint(uint(unit)), C.int(v), objc.ExtractPtr(date), C.uint(uint(opts)))
-	return MakeDate(result)
+	result_ := C.C_NSCalendar_DateBySettingUnit_Value_OfDate_Options(n.Ptr(), C.uint(uint(unit)), C.int(v), objc.ExtractPtr(date), C.uint(uint(opts)))
+	return MakeDate(result_)
 }
 
 func (n *NSCalendar) DateWithEra_Year_Month_Day_Hour_Minute_Second_Nanosecond(eraValue int, yearValue int, monthValue int, dayValue int, hourValue int, minuteValue int, secondValue int, nanosecondValue int) Date {
-	result := C.C_NSCalendar_DateWithEra_Year_Month_Day_Hour_Minute_Second_Nanosecond(n.Ptr(), C.int(eraValue), C.int(yearValue), C.int(monthValue), C.int(dayValue), C.int(hourValue), C.int(minuteValue), C.int(secondValue), C.int(nanosecondValue))
-	return MakeDate(result)
+	result_ := C.C_NSCalendar_DateWithEra_Year_Month_Day_Hour_Minute_Second_Nanosecond(n.Ptr(), C.int(eraValue), C.int(yearValue), C.int(monthValue), C.int(dayValue), C.int(hourValue), C.int(minuteValue), C.int(secondValue), C.int(nanosecondValue))
+	return MakeDate(result_)
 }
 
 func (n *NSCalendar) DateWithEra_YearForWeekOfYear_WeekOfYear_Weekday_Hour_Minute_Second_Nanosecond(eraValue int, yearValue int, weekValue int, weekdayValue int, hourValue int, minuteValue int, secondValue int, nanosecondValue int) Date {
-	result := C.C_NSCalendar_DateWithEra_YearForWeekOfYear_WeekOfYear_Weekday_Hour_Minute_Second_Nanosecond(n.Ptr(), C.int(eraValue), C.int(yearValue), C.int(weekValue), C.int(weekdayValue), C.int(hourValue), C.int(minuteValue), C.int(secondValue), C.int(nanosecondValue))
-	return MakeDate(result)
+	result_ := C.C_NSCalendar_DateWithEra_YearForWeekOfYear_WeekOfYear_Weekday_Hour_Minute_Second_Nanosecond(n.Ptr(), C.int(eraValue), C.int(yearValue), C.int(weekValue), C.int(weekdayValue), C.int(hourValue), C.int(minuteValue), C.int(secondValue), C.int(nanosecondValue))
+	return MakeDate(result_)
 }
 
 func (n *NSCalendar) CompareDate_ToDate_ToUnitGranularity(date1 Date, date2 Date, unit CalendarUnit) ComparisonResult {
-	result := C.C_NSCalendar_CompareDate_ToDate_ToUnitGranularity(n.Ptr(), objc.ExtractPtr(date1), objc.ExtractPtr(date2), C.uint(uint(unit)))
-	return ComparisonResult(int(result))
+	result_ := C.C_NSCalendar_CompareDate_ToDate_ToUnitGranularity(n.Ptr(), objc.ExtractPtr(date1), objc.ExtractPtr(date2), C.uint(uint(unit)))
+	return ComparisonResult(int(result_))
 }
 
 func (n *NSCalendar) IsDate_EqualToDate_ToUnitGranularity(date1 Date, date2 Date, unit CalendarUnit) bool {
-	result := C.C_NSCalendar_IsDate_EqualToDate_ToUnitGranularity(n.Ptr(), objc.ExtractPtr(date1), objc.ExtractPtr(date2), C.uint(uint(unit)))
-	return bool(result)
+	result_ := C.C_NSCalendar_IsDate_EqualToDate_ToUnitGranularity(n.Ptr(), objc.ExtractPtr(date1), objc.ExtractPtr(date2), C.uint(uint(unit)))
+	return bool(result_)
 }
 
 func (n *NSCalendar) IsDate_InSameDayAsDate(date1 Date, date2 Date) bool {
-	result := C.C_NSCalendar_IsDate_InSameDayAsDate(n.Ptr(), objc.ExtractPtr(date1), objc.ExtractPtr(date2))
-	return bool(result)
+	result_ := C.C_NSCalendar_IsDate_InSameDayAsDate(n.Ptr(), objc.ExtractPtr(date1), objc.ExtractPtr(date2))
+	return bool(result_)
 }
 
 func (n *NSCalendar) IsDateInToday(date Date) bool {
-	result := C.C_NSCalendar_IsDateInToday(n.Ptr(), objc.ExtractPtr(date))
-	return bool(result)
+	result_ := C.C_NSCalendar_IsDateInToday(n.Ptr(), objc.ExtractPtr(date))
+	return bool(result_)
 }
 
 func (n *NSCalendar) IsDateInTomorrow(date Date) bool {
-	result := C.C_NSCalendar_IsDateInTomorrow(n.Ptr(), objc.ExtractPtr(date))
-	return bool(result)
+	result_ := C.C_NSCalendar_IsDateInTomorrow(n.Ptr(), objc.ExtractPtr(date))
+	return bool(result_)
 }
 
 func (n *NSCalendar) IsDateInWeekend(date Date) bool {
-	result := C.C_NSCalendar_IsDateInWeekend(n.Ptr(), objc.ExtractPtr(date))
-	return bool(result)
+	result_ := C.C_NSCalendar_IsDateInWeekend(n.Ptr(), objc.ExtractPtr(date))
+	return bool(result_)
 }
 
 func (n *NSCalendar) IsDateInYesterday(date Date) bool {
-	result := C.C_NSCalendar_IsDateInYesterday(n.Ptr(), objc.ExtractPtr(date))
-	return bool(result)
+	result_ := C.C_NSCalendar_IsDateInYesterday(n.Ptr(), objc.ExtractPtr(date))
+	return bool(result_)
 }
 
 func CurrentCalendar() Calendar {
-	result := C.C_NSCalendar_CurrentCalendar()
-	return MakeCalendar(result)
+	result_ := C.C_NSCalendar_CurrentCalendar()
+	return MakeCalendar(result_)
 }
 
 func AutoupdatingCurrentCalendar() Calendar {
-	result := C.C_NSCalendar_AutoupdatingCurrentCalendar()
-	return MakeCalendar(result)
+	result_ := C.C_NSCalendar_AutoupdatingCurrentCalendar()
+	return MakeCalendar(result_)
 }
 
 func (n *NSCalendar) CalendarIdentifier() CalendarIdentifier {
-	result := C.C_NSCalendar_CalendarIdentifier(n.Ptr())
-	return CalendarIdentifier(MakeString(result).String())
+	result_ := C.C_NSCalendar_CalendarIdentifier(n.Ptr())
+	return CalendarIdentifier(MakeString(result_).String())
 }
 
 func (n *NSCalendar) FirstWeekday() uint {
-	result := C.C_NSCalendar_FirstWeekday(n.Ptr())
-	return uint(result)
+	result_ := C.C_NSCalendar_FirstWeekday(n.Ptr())
+	return uint(result_)
 }
 
 func (n *NSCalendar) SetFirstWeekday(value uint) {
@@ -263,8 +263,8 @@ func (n *NSCalendar) SetFirstWeekday(value uint) {
 }
 
 func (n *NSCalendar) Locale() Locale {
-	result := C.C_NSCalendar_Locale(n.Ptr())
-	return MakeLocale(result)
+	result_ := C.C_NSCalendar_Locale(n.Ptr())
+	return MakeLocale(result_)
 }
 
 func (n *NSCalendar) SetLocale(value Locale) {
@@ -272,8 +272,8 @@ func (n *NSCalendar) SetLocale(value Locale) {
 }
 
 func (n *NSCalendar) TimeZone() TimeZone {
-	result := C.C_NSCalendar_TimeZone(n.Ptr())
-	return MakeTimeZone(result)
+	result_ := C.C_NSCalendar_TimeZone(n.Ptr())
+	return MakeTimeZone(result_)
 }
 
 func (n *NSCalendar) SetTimeZone(value TimeZone) {
@@ -281,8 +281,8 @@ func (n *NSCalendar) SetTimeZone(value TimeZone) {
 }
 
 func (n *NSCalendar) MinimumDaysInFirstWeek() uint {
-	result := C.C_NSCalendar_MinimumDaysInFirstWeek(n.Ptr())
-	return uint(result)
+	result_ := C.C_NSCalendar_MinimumDaysInFirstWeek(n.Ptr())
+	return uint(result_)
 }
 
 func (n *NSCalendar) SetMinimumDaysInFirstWeek(value uint) {
@@ -290,209 +290,209 @@ func (n *NSCalendar) SetMinimumDaysInFirstWeek(value uint) {
 }
 
 func (n *NSCalendar) AMSymbol() string {
-	result := C.C_NSCalendar_AMSymbol(n.Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSCalendar_AMSymbol(n.Ptr())
+	return MakeString(result_).String()
 }
 
 func (n *NSCalendar) PMSymbol() string {
-	result := C.C_NSCalendar_PMSymbol(n.Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSCalendar_PMSymbol(n.Ptr())
+	return MakeString(result_).String()
 }
 
 func (n *NSCalendar) WeekdaySymbols() []string {
-	result := C.C_NSCalendar_WeekdaySymbols(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]string, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeString(r).String()
+	result_ := C.C_NSCalendar_WeekdaySymbols(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeString(r).String()
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSCalendar) ShortWeekdaySymbols() []string {
-	result := C.C_NSCalendar_ShortWeekdaySymbols(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]string, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeString(r).String()
+	result_ := C.C_NSCalendar_ShortWeekdaySymbols(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeString(r).String()
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSCalendar) VeryShortWeekdaySymbols() []string {
-	result := C.C_NSCalendar_VeryShortWeekdaySymbols(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]string, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeString(r).String()
+	result_ := C.C_NSCalendar_VeryShortWeekdaySymbols(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeString(r).String()
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSCalendar) StandaloneWeekdaySymbols() []string {
-	result := C.C_NSCalendar_StandaloneWeekdaySymbols(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]string, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeString(r).String()
+	result_ := C.C_NSCalendar_StandaloneWeekdaySymbols(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeString(r).String()
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSCalendar) ShortStandaloneWeekdaySymbols() []string {
-	result := C.C_NSCalendar_ShortStandaloneWeekdaySymbols(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]string, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeString(r).String()
+	result_ := C.C_NSCalendar_ShortStandaloneWeekdaySymbols(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeString(r).String()
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSCalendar) VeryShortStandaloneWeekdaySymbols() []string {
-	result := C.C_NSCalendar_VeryShortStandaloneWeekdaySymbols(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]string, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeString(r).String()
+	result_ := C.C_NSCalendar_VeryShortStandaloneWeekdaySymbols(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeString(r).String()
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSCalendar) MonthSymbols() []string {
-	result := C.C_NSCalendar_MonthSymbols(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]string, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeString(r).String()
+	result_ := C.C_NSCalendar_MonthSymbols(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeString(r).String()
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSCalendar) ShortMonthSymbols() []string {
-	result := C.C_NSCalendar_ShortMonthSymbols(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]string, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeString(r).String()
+	result_ := C.C_NSCalendar_ShortMonthSymbols(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeString(r).String()
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSCalendar) VeryShortMonthSymbols() []string {
-	result := C.C_NSCalendar_VeryShortMonthSymbols(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]string, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeString(r).String()
+	result_ := C.C_NSCalendar_VeryShortMonthSymbols(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeString(r).String()
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSCalendar) StandaloneMonthSymbols() []string {
-	result := C.C_NSCalendar_StandaloneMonthSymbols(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]string, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeString(r).String()
+	result_ := C.C_NSCalendar_StandaloneMonthSymbols(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeString(r).String()
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSCalendar) ShortStandaloneMonthSymbols() []string {
-	result := C.C_NSCalendar_ShortStandaloneMonthSymbols(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]string, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeString(r).String()
+	result_ := C.C_NSCalendar_ShortStandaloneMonthSymbols(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeString(r).String()
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSCalendar) VeryShortStandaloneMonthSymbols() []string {
-	result := C.C_NSCalendar_VeryShortStandaloneMonthSymbols(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]string, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeString(r).String()
+	result_ := C.C_NSCalendar_VeryShortStandaloneMonthSymbols(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeString(r).String()
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSCalendar) QuarterSymbols() []string {
-	result := C.C_NSCalendar_QuarterSymbols(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]string, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeString(r).String()
+	result_ := C.C_NSCalendar_QuarterSymbols(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeString(r).String()
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSCalendar) ShortQuarterSymbols() []string {
-	result := C.C_NSCalendar_ShortQuarterSymbols(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]string, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeString(r).String()
+	result_ := C.C_NSCalendar_ShortQuarterSymbols(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeString(r).String()
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSCalendar) StandaloneQuarterSymbols() []string {
-	result := C.C_NSCalendar_StandaloneQuarterSymbols(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]string, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeString(r).String()
+	result_ := C.C_NSCalendar_StandaloneQuarterSymbols(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeString(r).String()
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSCalendar) ShortStandaloneQuarterSymbols() []string {
-	result := C.C_NSCalendar_ShortStandaloneQuarterSymbols(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]string, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeString(r).String()
+	result_ := C.C_NSCalendar_ShortStandaloneQuarterSymbols(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeString(r).String()
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSCalendar) EraSymbols() []string {
-	result := C.C_NSCalendar_EraSymbols(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]string, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeString(r).String()
+	result_ := C.C_NSCalendar_EraSymbols(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeString(r).String()
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSCalendar) LongEraSymbols() []string {
-	result := C.C_NSCalendar_LongEraSymbols(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]string, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeString(r).String()
+	result_ := C.C_NSCalendar_LongEraSymbols(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeString(r).String()
 	}
-	return goResult
+	return goResult_
 }

@@ -7,26 +7,26 @@ void* C_Panel_Alloc() {
 
 void* C_NSPanel_InitWithContentRect_StyleMask_Backing_Defer(void* ptr, CGRect contentRect, unsigned int style, unsigned int backingStoreType, bool flag) {
     NSPanel* nSPanel = (NSPanel*)ptr;
-    NSPanel* result = [nSPanel initWithContentRect:contentRect styleMask:style backing:backingStoreType defer:flag];
-    return result;
+    NSPanel* result_ = [nSPanel initWithContentRect:contentRect styleMask:style backing:backingStoreType defer:flag];
+    return result_;
 }
 
 void* C_NSPanel_InitWithContentRect_StyleMask_Backing_Defer_Screen(void* ptr, CGRect contentRect, unsigned int style, unsigned int backingStoreType, bool flag, void* screen) {
     NSPanel* nSPanel = (NSPanel*)ptr;
-    NSPanel* result = [nSPanel initWithContentRect:contentRect styleMask:style backing:backingStoreType defer:flag screen:(NSScreen*)screen];
-    return result;
+    NSPanel* result_ = [nSPanel initWithContentRect:contentRect styleMask:style backing:backingStoreType defer:flag screen:(NSScreen*)screen];
+    return result_;
 }
 
 void* C_NSPanel_Init(void* ptr) {
     NSPanel* nSPanel = (NSPanel*)ptr;
-    NSPanel* result = [nSPanel init];
-    return result;
+    NSPanel* result_ = [nSPanel init];
+    return result_;
 }
 
 bool C_NSPanel_BecomesKeyOnlyIfNeeded(void* ptr) {
     NSPanel* nSPanel = (NSPanel*)ptr;
-    BOOL result = [nSPanel becomesKeyOnlyIfNeeded];
-    return result;
+    BOOL result_ = [nSPanel becomesKeyOnlyIfNeeded];
+    return result_;
 }
 
 void C_NSPanel_SetBecomesKeyOnlyIfNeeded(void* ptr, bool value) {

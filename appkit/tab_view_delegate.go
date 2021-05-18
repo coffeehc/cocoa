@@ -1,19 +1,19 @@
 package appkit
+
 // #cgo CFLAGS: -x objective-c
 // #cgo LDFLAGS: -framework AppKit
 // #include "tab_view_delegate.h"
 import "C"
 import (
-	"unsafe"
 	"github.com/hsiafan/cocoa/objc"
+	"unsafe"
 )
 
 type TabViewDelegate struct {
-	
-	TabViewDidChangeNumberOfTabViewItems func (tabView TabView) 
-	TabView_ShouldSelectTabViewItem func (tabView TabView, tabViewItem TabViewItem) bool
-	TabView_WillSelectTabViewItem func (tabView TabView, tabViewItem TabViewItem) 
-	TabView_DidSelectTabViewItem func (tabView TabView, tabViewItem TabViewItem) 
+	TabViewDidChangeNumberOfTabViewItems func(tabView TabView)
+	TabView_ShouldSelectTabViewItem      func(tabView TabView, tabViewItem TabViewItem) bool
+	TabView_WillSelectTabViewItem        func(tabView TabView, tabViewItem TabViewItem)
+	TabView_DidSelectTabViewItem         func(tabView TabView, tabViewItem TabViewItem)
 }
 
 func WrapTabViewDelegate(delegate *TabViewDelegate) objc.Object {
@@ -23,7 +23,6 @@ func WrapTabViewDelegate(delegate *TabViewDelegate) objc.Object {
 	return objc.MakeObject(ptr)
 }
 
-
 //export TabViewDelegate_TabViewDidChangeNumberOfTabViewItems
 func TabViewDelegate_TabViewDidChangeNumberOfTabViewItems(id int64, tabView unsafe.Pointer) {
 	delegate := resources.Get(id).(*TabViewDelegate)
@@ -31,7 +30,7 @@ func TabViewDelegate_TabViewDidChangeNumberOfTabViewItems(id int64, tabView unsa
 }
 
 //export TabViewDelegate_TabView_ShouldSelectTabViewItem
-func TabViewDelegate_TabView_ShouldSelectTabViewItem(id int64, tabView unsafe.Pointer, tabViewItem unsafe.Pointer) C.bool{
+func TabViewDelegate_TabView_ShouldSelectTabViewItem(id int64, tabView unsafe.Pointer, tabViewItem unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*TabViewDelegate)
 	result := delegate.TabView_ShouldSelectTabViewItem(MakeTabView(tabView), MakeTabViewItem(tabViewItem))
 	return C.bool(result)

@@ -51,18 +51,18 @@ func AllocClipView() *NSClipView {
 }
 
 func (n *NSClipView) InitWithFrame(frameRect foundation.Rect) ClipView {
-	result := C.C_NSClipView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
-	return MakeClipView(result)
+	result_ := C.C_NSClipView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeClipView(result_)
 }
 
 func (n *NSClipView) InitWithCoder(coder foundation.Coder) ClipView {
-	result := C.C_NSClipView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeClipView(result)
+	result_ := C.C_NSClipView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeClipView(result_)
 }
 
 func (n *NSClipView) Init() ClipView {
-	result := C.C_NSClipView_Init(n.Ptr())
-	return MakeClipView(result)
+	result_ := C.C_NSClipView_Init(n.Ptr())
+	return MakeClipView(result_)
 }
 
 func (n *NSClipView) ScrollToPoint(newOrigin foundation.Point) {
@@ -70,8 +70,8 @@ func (n *NSClipView) ScrollToPoint(newOrigin foundation.Point) {
 }
 
 func (n *NSClipView) ConstrainBoundsRect(proposedBounds foundation.Rect) foundation.Rect {
-	result := C.C_NSClipView_ConstrainBoundsRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(proposedBounds))))
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSClipView_ConstrainBoundsRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(proposedBounds))))
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSClipView) ViewBoundsChanged(notification foundation.Notification) {
@@ -83,8 +83,8 @@ func (n *NSClipView) ViewFrameChanged(notification foundation.Notification) {
 }
 
 func (n *NSClipView) DocumentView() View {
-	result := C.C_NSClipView_DocumentView(n.Ptr())
-	return MakeView(result)
+	result_ := C.C_NSClipView_DocumentView(n.Ptr())
+	return MakeView(result_)
 }
 
 func (n *NSClipView) SetDocumentView(value View) {
@@ -92,8 +92,8 @@ func (n *NSClipView) SetDocumentView(value View) {
 }
 
 func (n *NSClipView) ContentInsets() foundation.EdgeInsets {
-	result := C.C_NSClipView_ContentInsets(n.Ptr())
-	return foundation.FromNSEdgeInsetsPointer(unsafe.Pointer(&result))
+	result_ := C.C_NSClipView_ContentInsets(n.Ptr())
+	return foundation.FromNSEdgeInsetsPointer(unsafe.Pointer(&result_))
 }
 
 func (n *NSClipView) SetContentInsets(value foundation.EdgeInsets) {
@@ -101,8 +101,8 @@ func (n *NSClipView) SetContentInsets(value foundation.EdgeInsets) {
 }
 
 func (n *NSClipView) AutomaticallyAdjustsContentInsets() bool {
-	result := C.C_NSClipView_AutomaticallyAdjustsContentInsets(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSClipView_AutomaticallyAdjustsContentInsets(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSClipView) SetAutomaticallyAdjustsContentInsets(value bool) {
@@ -110,18 +110,18 @@ func (n *NSClipView) SetAutomaticallyAdjustsContentInsets(value bool) {
 }
 
 func (n *NSClipView) DocumentRect() foundation.Rect {
-	result := C.C_NSClipView_DocumentRect(n.Ptr())
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSClipView_DocumentRect(n.Ptr())
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSClipView) DocumentVisibleRect() foundation.Rect {
-	result := C.C_NSClipView_DocumentVisibleRect(n.Ptr())
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSClipView_DocumentVisibleRect(n.Ptr())
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSClipView) DocumentCursor() Cursor {
-	result := C.C_NSClipView_DocumentCursor(n.Ptr())
-	return MakeCursor(result)
+	result_ := C.C_NSClipView_DocumentCursor(n.Ptr())
+	return MakeCursor(result_)
 }
 
 func (n *NSClipView) SetDocumentCursor(value Cursor) {
@@ -129,8 +129,8 @@ func (n *NSClipView) SetDocumentCursor(value Cursor) {
 }
 
 func (n *NSClipView) DrawsBackground() bool {
-	result := C.C_NSClipView_DrawsBackground(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSClipView_DrawsBackground(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSClipView) SetDrawsBackground(value bool) {
@@ -138,8 +138,8 @@ func (n *NSClipView) SetDrawsBackground(value bool) {
 }
 
 func (n *NSClipView) BackgroundColor() Color {
-	result := C.C_NSClipView_BackgroundColor(n.Ptr())
-	return MakeColor(result)
+	result_ := C.C_NSClipView_BackgroundColor(n.Ptr())
+	return MakeColor(result_)
 }
 
 func (n *NSClipView) SetBackgroundColor(value Color) {

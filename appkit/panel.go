@@ -35,23 +35,23 @@ func AllocPanel() *NSPanel {
 }
 
 func (n *NSPanel) InitWithContentRect_StyleMask_Backing_Defer(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool) Panel {
-	result := C.C_NSPanel_InitWithContentRect_StyleMask_Backing_Defer(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag))
-	return MakePanel(result)
+	result_ := C.C_NSPanel_InitWithContentRect_StyleMask_Backing_Defer(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag))
+	return MakePanel(result_)
 }
 
 func (n *NSPanel) InitWithContentRect_StyleMask_Backing_Defer_Screen(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool, screen Screen) Panel {
-	result := C.C_NSPanel_InitWithContentRect_StyleMask_Backing_Defer_Screen(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag), objc.ExtractPtr(screen))
-	return MakePanel(result)
+	result_ := C.C_NSPanel_InitWithContentRect_StyleMask_Backing_Defer_Screen(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag), objc.ExtractPtr(screen))
+	return MakePanel(result_)
 }
 
 func (n *NSPanel) Init() Panel {
-	result := C.C_NSPanel_Init(n.Ptr())
-	return MakePanel(result)
+	result_ := C.C_NSPanel_Init(n.Ptr())
+	return MakePanel(result_)
 }
 
 func (n *NSPanel) BecomesKeyOnlyIfNeeded() bool {
-	result := C.C_NSPanel_BecomesKeyOnlyIfNeeded(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSPanel_BecomesKeyOnlyIfNeeded(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSPanel) SetBecomesKeyOnlyIfNeeded(value bool) {

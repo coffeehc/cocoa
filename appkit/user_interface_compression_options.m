@@ -7,73 +7,79 @@ void* C_UserInterfaceCompressionOptions_Alloc() {
 
 void* C_NSUserInterfaceCompressionOptions_Init(void* ptr) {
     NSUserInterfaceCompressionOptions* nSUserInterfaceCompressionOptions = (NSUserInterfaceCompressionOptions*)ptr;
-    NSUserInterfaceCompressionOptions* result = [nSUserInterfaceCompressionOptions init];
-    return result;
+    NSUserInterfaceCompressionOptions* result_ = [nSUserInterfaceCompressionOptions init];
+    return result_;
+}
+
+void* C_NSUserInterfaceCompressionOptions_InitWithCompressionOptions(void* ptr, void* options) {
+    NSUserInterfaceCompressionOptions* nSUserInterfaceCompressionOptions = (NSUserInterfaceCompressionOptions*)ptr;
+    NSUserInterfaceCompressionOptions* result_ = [nSUserInterfaceCompressionOptions initWithCompressionOptions:(NSSet*)options];
+    return result_;
 }
 
 void* C_NSUserInterfaceCompressionOptions_InitWithIdentifier(void* ptr, void* identifier) {
     NSUserInterfaceCompressionOptions* nSUserInterfaceCompressionOptions = (NSUserInterfaceCompressionOptions*)ptr;
-    NSUserInterfaceCompressionOptions* result = [nSUserInterfaceCompressionOptions initWithIdentifier:(NSString*)identifier];
-    return result;
+    NSUserInterfaceCompressionOptions* result_ = [nSUserInterfaceCompressionOptions initWithIdentifier:(NSString*)identifier];
+    return result_;
 }
 
 void* C_NSUserInterfaceCompressionOptions_InitWithCoder(void* ptr, void* coder) {
     NSUserInterfaceCompressionOptions* nSUserInterfaceCompressionOptions = (NSUserInterfaceCompressionOptions*)ptr;
-    NSUserInterfaceCompressionOptions* result = [nSUserInterfaceCompressionOptions initWithCoder:(NSCoder*)coder];
-    return result;
+    NSUserInterfaceCompressionOptions* result_ = [nSUserInterfaceCompressionOptions initWithCoder:(NSCoder*)coder];
+    return result_;
 }
 
 bool C_NSUserInterfaceCompressionOptions_ContainsOptions(void* ptr, void* options) {
     NSUserInterfaceCompressionOptions* nSUserInterfaceCompressionOptions = (NSUserInterfaceCompressionOptions*)ptr;
-    BOOL result = [nSUserInterfaceCompressionOptions containsOptions:(NSUserInterfaceCompressionOptions*)options];
-    return result;
+    BOOL result_ = [nSUserInterfaceCompressionOptions containsOptions:(NSUserInterfaceCompressionOptions*)options];
+    return result_;
 }
 
 bool C_NSUserInterfaceCompressionOptions_IntersectsOptions(void* ptr, void* options) {
     NSUserInterfaceCompressionOptions* nSUserInterfaceCompressionOptions = (NSUserInterfaceCompressionOptions*)ptr;
-    BOOL result = [nSUserInterfaceCompressionOptions intersectsOptions:(NSUserInterfaceCompressionOptions*)options];
-    return result;
+    BOOL result_ = [nSUserInterfaceCompressionOptions intersectsOptions:(NSUserInterfaceCompressionOptions*)options];
+    return result_;
 }
 
 void* C_NSUserInterfaceCompressionOptions_OptionsByAddingOptions(void* ptr, void* options) {
     NSUserInterfaceCompressionOptions* nSUserInterfaceCompressionOptions = (NSUserInterfaceCompressionOptions*)ptr;
-    NSUserInterfaceCompressionOptions* result = [nSUserInterfaceCompressionOptions optionsByAddingOptions:(NSUserInterfaceCompressionOptions*)options];
-    return result;
+    NSUserInterfaceCompressionOptions* result_ = [nSUserInterfaceCompressionOptions optionsByAddingOptions:(NSUserInterfaceCompressionOptions*)options];
+    return result_;
 }
 
 void* C_NSUserInterfaceCompressionOptions_OptionsByRemovingOptions(void* ptr, void* options) {
     NSUserInterfaceCompressionOptions* nSUserInterfaceCompressionOptions = (NSUserInterfaceCompressionOptions*)ptr;
-    NSUserInterfaceCompressionOptions* result = [nSUserInterfaceCompressionOptions optionsByRemovingOptions:(NSUserInterfaceCompressionOptions*)options];
-    return result;
+    NSUserInterfaceCompressionOptions* result_ = [nSUserInterfaceCompressionOptions optionsByRemovingOptions:(NSUserInterfaceCompressionOptions*)options];
+    return result_;
 }
 
 void* C_NSUserInterfaceCompressionOptions_UserInterfaceCompressionOptions_HideImagesOption() {
-    NSUserInterfaceCompressionOptions* result = [NSUserInterfaceCompressionOptions hideImagesOption];
-    return result;
+    NSUserInterfaceCompressionOptions* result_ = [NSUserInterfaceCompressionOptions hideImagesOption];
+    return result_;
 }
 
 void* C_NSUserInterfaceCompressionOptions_UserInterfaceCompressionOptions_HideTextOption() {
-    NSUserInterfaceCompressionOptions* result = [NSUserInterfaceCompressionOptions hideTextOption];
-    return result;
+    NSUserInterfaceCompressionOptions* result_ = [NSUserInterfaceCompressionOptions hideTextOption];
+    return result_;
 }
 
 void* C_NSUserInterfaceCompressionOptions_UserInterfaceCompressionOptions_ReduceMetricsOption() {
-    NSUserInterfaceCompressionOptions* result = [NSUserInterfaceCompressionOptions reduceMetricsOption];
-    return result;
+    NSUserInterfaceCompressionOptions* result_ = [NSUserInterfaceCompressionOptions reduceMetricsOption];
+    return result_;
 }
 
 void* C_NSUserInterfaceCompressionOptions_UserInterfaceCompressionOptions_BreakEqualWidthsOption() {
-    NSUserInterfaceCompressionOptions* result = [NSUserInterfaceCompressionOptions breakEqualWidthsOption];
-    return result;
+    NSUserInterfaceCompressionOptions* result_ = [NSUserInterfaceCompressionOptions breakEqualWidthsOption];
+    return result_;
 }
 
 void* C_NSUserInterfaceCompressionOptions_UserInterfaceCompressionOptions_StandardOptions() {
-    NSUserInterfaceCompressionOptions* result = [NSUserInterfaceCompressionOptions standardOptions];
-    return result;
+    NSUserInterfaceCompressionOptions* result_ = [NSUserInterfaceCompressionOptions standardOptions];
+    return result_;
 }
 
 bool C_NSUserInterfaceCompressionOptions_IsEmpty(void* ptr) {
     NSUserInterfaceCompressionOptions* nSUserInterfaceCompressionOptions = (NSUserInterfaceCompressionOptions*)ptr;
-    BOOL result = [nSUserInterfaceCompressionOptions isEmpty];
-    return result;
+    BOOL result_ = [nSUserInterfaceCompressionOptions isEmpty];
+    return result_;
 }

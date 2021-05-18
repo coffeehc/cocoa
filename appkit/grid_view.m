@@ -7,49 +7,49 @@ void* C_GridView_Alloc() {
 
 void* C_NSGridView_InitWithFrame(void* ptr, CGRect frameRect) {
     NSGridView* nSGridView = (NSGridView*)ptr;
-    NSGridView* result = [nSGridView initWithFrame:frameRect];
-    return result;
+    NSGridView* result_ = [nSGridView initWithFrame:frameRect];
+    return result_;
 }
 
 void* C_NSGridView_InitWithCoder(void* ptr, void* coder) {
     NSGridView* nSGridView = (NSGridView*)ptr;
-    NSGridView* result = [nSGridView initWithCoder:(NSCoder*)coder];
-    return result;
+    NSGridView* result_ = [nSGridView initWithCoder:(NSCoder*)coder];
+    return result_;
 }
 
 void* C_NSGridView_Init(void* ptr) {
     NSGridView* nSGridView = (NSGridView*)ptr;
-    NSGridView* result = [nSGridView init];
-    return result;
+    NSGridView* result_ = [nSGridView init];
+    return result_;
 }
 
 void* C_NSGridView_GridViewWithNumberOfColumns_Rows(int columnCount, int rowCount) {
-    NSGridView* result = [NSGridView gridViewWithNumberOfColumns:columnCount rows:rowCount];
-    return result;
+    NSGridView* result_ = [NSGridView gridViewWithNumberOfColumns:columnCount rows:rowCount];
+    return result_;
 }
 
 int C_NSGridView_IndexOfColumn(void* ptr, void* column) {
     NSGridView* nSGridView = (NSGridView*)ptr;
-    NSInteger result = [nSGridView indexOfColumn:(NSGridColumn*)column];
-    return result;
+    NSInteger result_ = [nSGridView indexOfColumn:(NSGridColumn*)column];
+    return result_;
 }
 
 void* C_NSGridView_RowAtIndex(void* ptr, int index) {
     NSGridView* nSGridView = (NSGridView*)ptr;
-    NSGridRow* result = [nSGridView rowAtIndex:index];
-    return result;
+    NSGridRow* result_ = [nSGridView rowAtIndex:index];
+    return result_;
 }
 
 void* C_NSGridView_ColumnAtIndex(void* ptr, int index) {
     NSGridView* nSGridView = (NSGridView*)ptr;
-    NSGridColumn* result = [nSGridView columnAtIndex:index];
-    return result;
+    NSGridColumn* result_ = [nSGridView columnAtIndex:index];
+    return result_;
 }
 
 int C_NSGridView_IndexOfRow(void* ptr, void* row) {
     NSGridView* nSGridView = (NSGridView*)ptr;
-    NSInteger result = [nSGridView indexOfRow:(NSGridRow*)row];
-    return result;
+    NSInteger result_ = [nSGridView indexOfRow:(NSGridRow*)row];
+    return result_;
 }
 
 void* C_NSGridView_AddRowWithViews(void* ptr, Array views) {
@@ -60,8 +60,8 @@ void* C_NSGridView_AddRowWithViews(void* ptr, Array views) {
     	void* p = viewsData[i];
     	[objcViews addObject:(NSView*)(NSView*)p];
     }
-    NSGridRow* result = [nSGridView addRowWithViews:objcViews];
-    return result;
+    NSGridRow* result_ = [nSGridView addRowWithViews:objcViews];
+    return result_;
 }
 
 void* C_NSGridView_InsertRowAtIndex_WithViews(void* ptr, int index, Array views) {
@@ -72,8 +72,8 @@ void* C_NSGridView_InsertRowAtIndex_WithViews(void* ptr, int index, Array views)
     	void* p = viewsData[i];
     	[objcViews addObject:(NSView*)(NSView*)p];
     }
-    NSGridRow* result = [nSGridView insertRowAtIndex:index withViews:objcViews];
-    return result;
+    NSGridRow* result_ = [nSGridView insertRowAtIndex:index withViews:objcViews];
+    return result_;
 }
 
 void C_NSGridView_RemoveRowAtIndex(void* ptr, int index) {
@@ -94,8 +94,8 @@ void* C_NSGridView_AddColumnWithViews(void* ptr, Array views) {
     	void* p = viewsData[i];
     	[objcViews addObject:(NSView*)(NSView*)p];
     }
-    NSGridColumn* result = [nSGridView addColumnWithViews:objcViews];
-    return result;
+    NSGridColumn* result_ = [nSGridView addColumnWithViews:objcViews];
+    return result_;
 }
 
 void* C_NSGridView_InsertColumnAtIndex_WithViews(void* ptr, int index, Array views) {
@@ -106,8 +106,8 @@ void* C_NSGridView_InsertColumnAtIndex_WithViews(void* ptr, int index, Array vie
     	void* p = viewsData[i];
     	[objcViews addObject:(NSView*)(NSView*)p];
     }
-    NSGridColumn* result = [nSGridView insertColumnAtIndex:index withViews:objcViews];
-    return result;
+    NSGridColumn* result_ = [nSGridView insertColumnAtIndex:index withViews:objcViews];
+    return result_;
 }
 
 void C_NSGridView_RemoveColumnAtIndex(void* ptr, int index) {
@@ -122,14 +122,14 @@ void C_NSGridView_MoveColumnAtIndex_ToIndex(void* ptr, int fromIndex, int toInde
 
 void* C_NSGridView_CellAtColumnIndex_RowIndex(void* ptr, int columnIndex, int rowIndex) {
     NSGridView* nSGridView = (NSGridView*)ptr;
-    NSGridCell* result = [nSGridView cellAtColumnIndex:columnIndex rowIndex:rowIndex];
-    return result;
+    NSGridCell* result_ = [nSGridView cellAtColumnIndex:columnIndex rowIndex:rowIndex];
+    return result_;
 }
 
 void* C_NSGridView_CellForView(void* ptr, void* view) {
     NSGridView* nSGridView = (NSGridView*)ptr;
-    NSGridCell* result = [nSGridView cellForView:(NSView*)view];
-    return result;
+    NSGridCell* result_ = [nSGridView cellForView:(NSView*)view];
+    return result_;
 }
 
 void C_NSGridView_MergeCellsInHorizontalRange_VerticalRange(void* ptr, NSRange hRange, NSRange vRange) {
@@ -139,20 +139,20 @@ void C_NSGridView_MergeCellsInHorizontalRange_VerticalRange(void* ptr, NSRange h
 
 int C_NSGridView_NumberOfRows(void* ptr) {
     NSGridView* nSGridView = (NSGridView*)ptr;
-    NSInteger result = [nSGridView numberOfRows];
-    return result;
+    NSInteger result_ = [nSGridView numberOfRows];
+    return result_;
 }
 
 int C_NSGridView_NumberOfColumns(void* ptr) {
     NSGridView* nSGridView = (NSGridView*)ptr;
-    NSInteger result = [nSGridView numberOfColumns];
-    return result;
+    NSInteger result_ = [nSGridView numberOfColumns];
+    return result_;
 }
 
 double C_NSGridView_ColumnSpacing(void* ptr) {
     NSGridView* nSGridView = (NSGridView*)ptr;
-    CGFloat result = [nSGridView columnSpacing];
-    return result;
+    CGFloat result_ = [nSGridView columnSpacing];
+    return result_;
 }
 
 void C_NSGridView_SetColumnSpacing(void* ptr, double value) {
@@ -162,8 +162,8 @@ void C_NSGridView_SetColumnSpacing(void* ptr, double value) {
 
 double C_NSGridView_RowSpacing(void* ptr) {
     NSGridView* nSGridView = (NSGridView*)ptr;
-    CGFloat result = [nSGridView rowSpacing];
-    return result;
+    CGFloat result_ = [nSGridView rowSpacing];
+    return result_;
 }
 
 void C_NSGridView_SetRowSpacing(void* ptr, double value) {
@@ -173,8 +173,8 @@ void C_NSGridView_SetRowSpacing(void* ptr, double value) {
 
 int C_NSGridView_RowAlignment(void* ptr) {
     NSGridView* nSGridView = (NSGridView*)ptr;
-    NSGridRowAlignment result = [nSGridView rowAlignment];
-    return result;
+    NSGridRowAlignment result_ = [nSGridView rowAlignment];
+    return result_;
 }
 
 void C_NSGridView_SetRowAlignment(void* ptr, int value) {
@@ -184,8 +184,8 @@ void C_NSGridView_SetRowAlignment(void* ptr, int value) {
 
 int C_NSGridView_XPlacement(void* ptr) {
     NSGridView* nSGridView = (NSGridView*)ptr;
-    NSGridCellPlacement result = [nSGridView xPlacement];
-    return result;
+    NSGridCellPlacement result_ = [nSGridView xPlacement];
+    return result_;
 }
 
 void C_NSGridView_SetXPlacement(void* ptr, int value) {
@@ -195,8 +195,8 @@ void C_NSGridView_SetXPlacement(void* ptr, int value) {
 
 int C_NSGridView_YPlacement(void* ptr) {
     NSGridView* nSGridView = (NSGridView*)ptr;
-    NSGridCellPlacement result = [nSGridView yPlacement];
-    return result;
+    NSGridCellPlacement result_ = [nSGridView yPlacement];
+    return result_;
 }
 
 void C_NSGridView_SetYPlacement(void* ptr, int value) {

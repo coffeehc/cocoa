@@ -7,20 +7,20 @@ void* C_ProgressIndicator_Alloc() {
 
 void* C_NSProgressIndicator_InitWithFrame(void* ptr, CGRect frameRect) {
     NSProgressIndicator* nSProgressIndicator = (NSProgressIndicator*)ptr;
-    NSProgressIndicator* result = [nSProgressIndicator initWithFrame:frameRect];
-    return result;
+    NSProgressIndicator* result_ = [nSProgressIndicator initWithFrame:frameRect];
+    return result_;
 }
 
 void* C_NSProgressIndicator_InitWithCoder(void* ptr, void* coder) {
     NSProgressIndicator* nSProgressIndicator = (NSProgressIndicator*)ptr;
-    NSProgressIndicator* result = [nSProgressIndicator initWithCoder:(NSCoder*)coder];
-    return result;
+    NSProgressIndicator* result_ = [nSProgressIndicator initWithCoder:(NSCoder*)coder];
+    return result_;
 }
 
 void* C_NSProgressIndicator_Init(void* ptr) {
     NSProgressIndicator* nSProgressIndicator = (NSProgressIndicator*)ptr;
-    NSProgressIndicator* result = [nSProgressIndicator init];
-    return result;
+    NSProgressIndicator* result_ = [nSProgressIndicator init];
+    return result_;
 }
 
 void C_NSProgressIndicator_StartAnimation(void* ptr, void* sender) {
@@ -45,8 +45,8 @@ void C_NSProgressIndicator_SizeToFit(void* ptr) {
 
 bool C_NSProgressIndicator_UsesThreadedAnimation(void* ptr) {
     NSProgressIndicator* nSProgressIndicator = (NSProgressIndicator*)ptr;
-    BOOL result = [nSProgressIndicator usesThreadedAnimation];
-    return result;
+    BOOL result_ = [nSProgressIndicator usesThreadedAnimation];
+    return result_;
 }
 
 void C_NSProgressIndicator_SetUsesThreadedAnimation(void* ptr, bool value) {
@@ -56,8 +56,8 @@ void C_NSProgressIndicator_SetUsesThreadedAnimation(void* ptr, bool value) {
 
 double C_NSProgressIndicator_DoubleValue(void* ptr) {
     NSProgressIndicator* nSProgressIndicator = (NSProgressIndicator*)ptr;
-    double result = [nSProgressIndicator doubleValue];
-    return result;
+    double result_ = [nSProgressIndicator doubleValue];
+    return result_;
 }
 
 void C_NSProgressIndicator_SetDoubleValue(void* ptr, double value) {
@@ -67,8 +67,8 @@ void C_NSProgressIndicator_SetDoubleValue(void* ptr, double value) {
 
 double C_NSProgressIndicator_MinValue(void* ptr) {
     NSProgressIndicator* nSProgressIndicator = (NSProgressIndicator*)ptr;
-    double result = [nSProgressIndicator minValue];
-    return result;
+    double result_ = [nSProgressIndicator minValue];
+    return result_;
 }
 
 void C_NSProgressIndicator_SetMinValue(void* ptr, double value) {
@@ -78,8 +78,8 @@ void C_NSProgressIndicator_SetMinValue(void* ptr, double value) {
 
 double C_NSProgressIndicator_MaxValue(void* ptr) {
     NSProgressIndicator* nSProgressIndicator = (NSProgressIndicator*)ptr;
-    double result = [nSProgressIndicator maxValue];
-    return result;
+    double result_ = [nSProgressIndicator maxValue];
+    return result_;
 }
 
 void C_NSProgressIndicator_SetMaxValue(void* ptr, double value) {
@@ -89,8 +89,8 @@ void C_NSProgressIndicator_SetMaxValue(void* ptr, double value) {
 
 unsigned int C_NSProgressIndicator_ControlSize(void* ptr) {
     NSProgressIndicator* nSProgressIndicator = (NSProgressIndicator*)ptr;
-    NSControlSize result = [nSProgressIndicator controlSize];
-    return result;
+    NSControlSize result_ = [nSProgressIndicator controlSize];
+    return result_;
 }
 
 void C_NSProgressIndicator_SetControlSize(void* ptr, unsigned int value) {
@@ -100,8 +100,8 @@ void C_NSProgressIndicator_SetControlSize(void* ptr, unsigned int value) {
 
 unsigned int C_NSProgressIndicator_ControlTint(void* ptr) {
     NSProgressIndicator* nSProgressIndicator = (NSProgressIndicator*)ptr;
-    NSControlTint result = [nSProgressIndicator controlTint];
-    return result;
+    NSControlTint result_ = [nSProgressIndicator controlTint];
+    return result_;
 }
 
 void C_NSProgressIndicator_SetControlTint(void* ptr, unsigned int value) {
@@ -111,8 +111,8 @@ void C_NSProgressIndicator_SetControlTint(void* ptr, unsigned int value) {
 
 bool C_NSProgressIndicator_IsBezeled(void* ptr) {
     NSProgressIndicator* nSProgressIndicator = (NSProgressIndicator*)ptr;
-    BOOL result = [nSProgressIndicator isBezeled];
-    return result;
+    BOOL result_ = [nSProgressIndicator isBezeled];
+    return result_;
 }
 
 void C_NSProgressIndicator_SetBezeled(void* ptr, bool value) {
@@ -122,8 +122,8 @@ void C_NSProgressIndicator_SetBezeled(void* ptr, bool value) {
 
 bool C_NSProgressIndicator_IsIndeterminate(void* ptr) {
     NSProgressIndicator* nSProgressIndicator = (NSProgressIndicator*)ptr;
-    BOOL result = [nSProgressIndicator isIndeterminate];
-    return result;
+    BOOL result_ = [nSProgressIndicator isIndeterminate];
+    return result_;
 }
 
 void C_NSProgressIndicator_SetIndeterminate(void* ptr, bool value) {
@@ -133,8 +133,8 @@ void C_NSProgressIndicator_SetIndeterminate(void* ptr, bool value) {
 
 unsigned int C_NSProgressIndicator_Style(void* ptr) {
     NSProgressIndicator* nSProgressIndicator = (NSProgressIndicator*)ptr;
-    NSProgressIndicatorStyle result = [nSProgressIndicator style];
-    return result;
+    NSProgressIndicatorStyle result_ = [nSProgressIndicator style];
+    return result_;
 }
 
 void C_NSProgressIndicator_SetStyle(void* ptr, unsigned int value) {
@@ -144,8 +144,8 @@ void C_NSProgressIndicator_SetStyle(void* ptr, unsigned int value) {
 
 bool C_NSProgressIndicator_IsDisplayedWhenStopped(void* ptr) {
     NSProgressIndicator* nSProgressIndicator = (NSProgressIndicator*)ptr;
-    BOOL result = [nSProgressIndicator isDisplayedWhenStopped];
-    return result;
+    BOOL result_ = [nSProgressIndicator isDisplayedWhenStopped];
+    return result_;
 }
 
 void C_NSProgressIndicator_SetDisplayedWhenStopped(void* ptr, bool value) {

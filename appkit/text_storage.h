@@ -14,6 +14,8 @@ void C_NSTextStorage_Edited_Range_ChangeInLength(void* ptr, unsigned int editedM
 void C_NSTextStorage_ProcessEditing(void* ptr);
 void C_NSTextStorage_InvalidateAttributesInRange(void* ptr, NSRange _range);
 void C_NSTextStorage_EnsureAttributesAreFixedInRange(void* ptr, NSRange _range);
+void* C_NSTextStorage_Delegate(void* ptr);
+void C_NSTextStorage_SetDelegate(void* ptr, void* value);
 Array C_NSTextStorage_LayoutManagers(void* ptr);
 bool C_NSTextStorage_FixesAttributesLazily(void* ptr);
 unsigned int C_NSTextStorage_EditedMask(void* ptr);

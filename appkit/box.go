@@ -60,18 +60,18 @@ func AllocBox() *NSBox {
 }
 
 func (n *NSBox) InitWithFrame(frameRect foundation.Rect) Box {
-	result := C.C_NSBox_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
-	return MakeBox(result)
+	result_ := C.C_NSBox_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeBox(result_)
 }
 
 func (n *NSBox) InitWithCoder(coder foundation.Coder) Box {
-	result := C.C_NSBox_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeBox(result)
+	result_ := C.C_NSBox_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeBox(result_)
 }
 
 func (n *NSBox) Init() Box {
-	result := C.C_NSBox_Init(n.Ptr())
-	return MakeBox(result)
+	result_ := C.C_NSBox_Init(n.Ptr())
+	return MakeBox(result_)
 }
 
 func (n *NSBox) SetFrameFromContentFrame(contentFrame foundation.Rect) {
@@ -83,13 +83,13 @@ func (n *NSBox) SizeToFit() {
 }
 
 func (n *NSBox) BorderRect() foundation.Rect {
-	result := C.C_NSBox_BorderRect(n.Ptr())
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSBox_BorderRect(n.Ptr())
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSBox) BoxType() BoxType {
-	result := C.C_NSBox_BoxType(n.Ptr())
-	return BoxType(uint(result))
+	result_ := C.C_NSBox_BoxType(n.Ptr())
+	return BoxType(uint(result_))
 }
 
 func (n *NSBox) SetBoxType(value BoxType) {
@@ -97,8 +97,8 @@ func (n *NSBox) SetBoxType(value BoxType) {
 }
 
 func (n *NSBox) IsTransparent() bool {
-	result := C.C_NSBox_IsTransparent(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSBox_IsTransparent(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSBox) SetTransparent(value bool) {
@@ -106,8 +106,8 @@ func (n *NSBox) SetTransparent(value bool) {
 }
 
 func (n *NSBox) Title() string {
-	result := C.C_NSBox_Title(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSBox_Title(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSBox) SetTitle(value string) {
@@ -115,8 +115,8 @@ func (n *NSBox) SetTitle(value string) {
 }
 
 func (n *NSBox) TitleFont() Font {
-	result := C.C_NSBox_TitleFont(n.Ptr())
-	return MakeFont(result)
+	result_ := C.C_NSBox_TitleFont(n.Ptr())
+	return MakeFont(result_)
 }
 
 func (n *NSBox) SetTitleFont(value Font) {
@@ -124,8 +124,8 @@ func (n *NSBox) SetTitleFont(value Font) {
 }
 
 func (n *NSBox) TitlePosition() TitlePosition {
-	result := C.C_NSBox_TitlePosition(n.Ptr())
-	return TitlePosition(uint(result))
+	result_ := C.C_NSBox_TitlePosition(n.Ptr())
+	return TitlePosition(uint(result_))
 }
 
 func (n *NSBox) SetTitlePosition(value TitlePosition) {
@@ -133,18 +133,18 @@ func (n *NSBox) SetTitlePosition(value TitlePosition) {
 }
 
 func (n *NSBox) TitleCell() objc.Object {
-	result := C.C_NSBox_TitleCell(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSBox_TitleCell(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSBox) TitleRect() foundation.Rect {
-	result := C.C_NSBox_TitleRect(n.Ptr())
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSBox_TitleRect(n.Ptr())
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSBox) BorderColor() Color {
-	result := C.C_NSBox_BorderColor(n.Ptr())
-	return MakeColor(result)
+	result_ := C.C_NSBox_BorderColor(n.Ptr())
+	return MakeColor(result_)
 }
 
 func (n *NSBox) SetBorderColor(value Color) {
@@ -152,8 +152,8 @@ func (n *NSBox) SetBorderColor(value Color) {
 }
 
 func (n *NSBox) BorderWidth() coregraphics.Float {
-	result := C.C_NSBox_BorderWidth(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSBox_BorderWidth(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSBox) SetBorderWidth(value coregraphics.Float) {
@@ -161,8 +161,8 @@ func (n *NSBox) SetBorderWidth(value coregraphics.Float) {
 }
 
 func (n *NSBox) CornerRadius() coregraphics.Float {
-	result := C.C_NSBox_CornerRadius(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSBox_CornerRadius(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSBox) SetCornerRadius(value coregraphics.Float) {
@@ -170,8 +170,8 @@ func (n *NSBox) SetCornerRadius(value coregraphics.Float) {
 }
 
 func (n *NSBox) FillColor() Color {
-	result := C.C_NSBox_FillColor(n.Ptr())
-	return MakeColor(result)
+	result_ := C.C_NSBox_FillColor(n.Ptr())
+	return MakeColor(result_)
 }
 
 func (n *NSBox) SetFillColor(value Color) {
@@ -179,8 +179,8 @@ func (n *NSBox) SetFillColor(value Color) {
 }
 
 func (n *NSBox) ContentView() View {
-	result := C.C_NSBox_ContentView(n.Ptr())
-	return MakeView(result)
+	result_ := C.C_NSBox_ContentView(n.Ptr())
+	return MakeView(result_)
 }
 
 func (n *NSBox) SetContentView(value View) {
@@ -188,8 +188,8 @@ func (n *NSBox) SetContentView(value View) {
 }
 
 func (n *NSBox) ContentViewMargins() foundation.Size {
-	result := C.C_NSBox_ContentViewMargins(n.Ptr())
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSBox_ContentViewMargins(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSBox) SetContentViewMargins(value foundation.Size) {

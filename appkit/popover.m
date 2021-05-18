@@ -7,14 +7,14 @@ void* C_Popover_Alloc() {
 
 void* C_NSPopover_Init(void* ptr) {
     NSPopover* nSPopover = (NSPopover*)ptr;
-    NSPopover* result = [nSPopover init];
-    return result;
+    NSPopover* result_ = [nSPopover init];
+    return result_;
 }
 
 void* C_NSPopover_InitWithCoder(void* ptr, void* coder) {
     NSPopover* nSPopover = (NSPopover*)ptr;
-    NSPopover* result = [nSPopover initWithCoder:(NSCoder*)coder];
-    return result;
+    NSPopover* result_ = [nSPopover initWithCoder:(NSCoder*)coder];
+    return result_;
 }
 
 void C_NSPopover_ShowRelativeToRect_OfView_PreferredEdge(void* ptr, CGRect positioningRect, void* positioningView, unsigned int preferredEdge) {
@@ -34,8 +34,8 @@ void C_NSPopover_Close(void* ptr) {
 
 int C_NSPopover_Behavior(void* ptr) {
     NSPopover* nSPopover = (NSPopover*)ptr;
-    NSPopoverBehavior result = [nSPopover behavior];
-    return result;
+    NSPopoverBehavior result_ = [nSPopover behavior];
+    return result_;
 }
 
 void C_NSPopover_SetBehavior(void* ptr, int value) {
@@ -45,8 +45,8 @@ void C_NSPopover_SetBehavior(void* ptr, int value) {
 
 CGRect C_NSPopover_PositioningRect(void* ptr) {
     NSPopover* nSPopover = (NSPopover*)ptr;
-    NSRect result = [nSPopover positioningRect];
-    return result;
+    NSRect result_ = [nSPopover positioningRect];
+    return result_;
 }
 
 void C_NSPopover_SetPositioningRect(void* ptr, CGRect value) {
@@ -56,8 +56,8 @@ void C_NSPopover_SetPositioningRect(void* ptr, CGRect value) {
 
 void* C_NSPopover_Appearance(void* ptr) {
     NSPopover* nSPopover = (NSPopover*)ptr;
-    NSAppearance* result = [nSPopover appearance];
-    return result;
+    NSAppearance* result_ = [nSPopover appearance];
+    return result_;
 }
 
 void C_NSPopover_SetAppearance(void* ptr, void* value) {
@@ -67,14 +67,14 @@ void C_NSPopover_SetAppearance(void* ptr, void* value) {
 
 void* C_NSPopover_EffectiveAppearance(void* ptr) {
     NSPopover* nSPopover = (NSPopover*)ptr;
-    NSAppearance* result = [nSPopover effectiveAppearance];
-    return result;
+    NSAppearance* result_ = [nSPopover effectiveAppearance];
+    return result_;
 }
 
 bool C_NSPopover_Animates(void* ptr) {
     NSPopover* nSPopover = (NSPopover*)ptr;
-    BOOL result = [nSPopover animates];
-    return result;
+    BOOL result_ = [nSPopover animates];
+    return result_;
 }
 
 void C_NSPopover_SetAnimates(void* ptr, bool value) {
@@ -84,8 +84,8 @@ void C_NSPopover_SetAnimates(void* ptr, bool value) {
 
 CGSize C_NSPopover_ContentSize(void* ptr) {
     NSPopover* nSPopover = (NSPopover*)ptr;
-    NSSize result = [nSPopover contentSize];
-    return result;
+    NSSize result_ = [nSPopover contentSize];
+    return result_;
 }
 
 void C_NSPopover_SetContentSize(void* ptr, CGSize value) {
@@ -95,12 +95,12 @@ void C_NSPopover_SetContentSize(void* ptr, CGSize value) {
 
 bool C_NSPopover_IsShown(void* ptr) {
     NSPopover* nSPopover = (NSPopover*)ptr;
-    BOOL result = [nSPopover isShown];
-    return result;
+    BOOL result_ = [nSPopover isShown];
+    return result_;
 }
 
 bool C_NSPopover_IsDetached(void* ptr) {
     NSPopover* nSPopover = (NSPopover*)ptr;
-    BOOL result = [nSPopover isDetached];
-    return result;
+    BOOL result_ = [nSPopover isDetached];
+    return result_;
 }

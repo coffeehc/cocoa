@@ -46,13 +46,13 @@ func AllocAffineTransform() *NSAffineTransform {
 }
 
 func (n *NSAffineTransform) InitWithTransform(transform AffineTransform) AffineTransform {
-	result := C.C_NSAffineTransform_InitWithTransform(n.Ptr(), objc.ExtractPtr(transform))
-	return MakeAffineTransform(result)
+	result_ := C.C_NSAffineTransform_InitWithTransform(n.Ptr(), objc.ExtractPtr(transform))
+	return MakeAffineTransform(result_)
 }
 
 func AffineTransform_Transform() AffineTransform {
-	result := C.C_NSAffineTransform_AffineTransform_Transform()
-	return MakeAffineTransform(result)
+	result_ := C.C_NSAffineTransform_AffineTransform_Transform()
+	return MakeAffineTransform(result_)
 }
 
 func (n *NSAffineTransform) RotateByDegrees(angle coregraphics.Float) {
@@ -88,13 +88,13 @@ func (n *NSAffineTransform) Invert() {
 }
 
 func (n *NSAffineTransform) TransformPoint(aPoint Point) Point {
-	result := C.C_NSAffineTransform_TransformPoint(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(aPoint))))
-	return Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSAffineTransform_TransformPoint(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(aPoint))))
+	return Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSAffineTransform) TransformSize(aSize Size) Size {
-	result := C.C_NSAffineTransform_TransformSize(n.Ptr(), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(aSize))))
-	return Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSAffineTransform_TransformSize(n.Ptr(), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(aSize))))
+	return Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSAffineTransform) Set() {
@@ -106,8 +106,8 @@ func (n *NSAffineTransform) Concat() {
 }
 
 func (n *NSAffineTransform) TransformStruct() AffineTransformStruct {
-	result := C.C_NSAffineTransform_TransformStruct(n.Ptr())
-	return FromNSAffineTransformStructPointer(unsafe.Pointer(&result))
+	result_ := C.C_NSAffineTransform_TransformStruct(n.Ptr())
+	return FromNSAffineTransformStructPointer(unsafe.Pointer(&result_))
 }
 
 func (n *NSAffineTransform) SetTransformStruct(value AffineTransformStruct) {

@@ -13,6 +13,7 @@ import (
 
 type TrackingArea interface {
 	objc.Object
+	Options() TrackingAreaOptions
 	Owner() objc.Object
 	Rect() foundation.Rect
 }
@@ -35,16 +36,21 @@ func AllocTrackingArea() *NSTrackingArea {
 }
 
 func (n *NSTrackingArea) Init() TrackingArea {
-	result := C.C_NSTrackingArea_Init(n.Ptr())
-	return MakeTrackingArea(result)
+	result_ := C.C_NSTrackingArea_Init(n.Ptr())
+	return MakeTrackingArea(result_)
+}
+
+func (n *NSTrackingArea) Options() TrackingAreaOptions {
+	result_ := C.C_NSTrackingArea_Options(n.Ptr())
+	return TrackingAreaOptions(uint(result_))
 }
 
 func (n *NSTrackingArea) Owner() objc.Object {
-	result := C.C_NSTrackingArea_Owner(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSTrackingArea_Owner(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSTrackingArea) Rect() foundation.Rect {
-	result := C.C_NSTrackingArea_Rect(n.Ptr())
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSTrackingArea_Rect(n.Ptr())
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }

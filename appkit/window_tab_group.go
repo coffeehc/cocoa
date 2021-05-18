@@ -19,6 +19,7 @@ type WindowTabGroup interface {
 	IsOverviewVisible() bool
 	SetOverviewVisible(value bool)
 	IsTabBarVisible() bool
+	Windows() []Window
 	SelectedWindow() Window
 	SetSelectedWindow(value Window)
 }
@@ -41,8 +42,8 @@ func AllocWindowTabGroup() *NSWindowTabGroup {
 }
 
 func (n *NSWindowTabGroup) Init() WindowTabGroup {
-	result := C.C_NSWindowTabGroup_Init(n.Ptr())
-	return MakeWindowTabGroup(result)
+	result_ := C.C_NSWindowTabGroup_Init(n.Ptr())
+	return MakeWindowTabGroup(result_)
 }
 
 func (n *NSWindowTabGroup) AddWindow(window Window) {
@@ -58,13 +59,13 @@ func (n *NSWindowTabGroup) RemoveWindow(window Window) {
 }
 
 func (n *NSWindowTabGroup) Identifier() WindowTabbingIdentifier {
-	result := C.C_NSWindowTabGroup_Identifier(n.Ptr())
-	return WindowTabbingIdentifier(foundation.MakeString(result).String())
+	result_ := C.C_NSWindowTabGroup_Identifier(n.Ptr())
+	return WindowTabbingIdentifier(foundation.MakeString(result_).String())
 }
 
 func (n *NSWindowTabGroup) IsOverviewVisible() bool {
-	result := C.C_NSWindowTabGroup_IsOverviewVisible(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindowTabGroup_IsOverviewVisible(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindowTabGroup) SetOverviewVisible(value bool) {
@@ -72,13 +73,24 @@ func (n *NSWindowTabGroup) SetOverviewVisible(value bool) {
 }
 
 func (n *NSWindowTabGroup) IsTabBarVisible() bool {
-	result := C.C_NSWindowTabGroup_IsTabBarVisible(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindowTabGroup_IsTabBarVisible(n.Ptr())
+	return bool(result_)
+}
+
+func (n *NSWindowTabGroup) Windows() []Window {
+	result_ := C.C_NSWindowTabGroup_Windows(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]Window, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeWindow(r)
+	}
+	return goResult_
 }
 
 func (n *NSWindowTabGroup) SelectedWindow() Window {
-	result := C.C_NSWindowTabGroup_SelectedWindow(n.Ptr())
-	return MakeWindow(result)
+	result_ := C.C_NSWindowTabGroup_SelectedWindow(n.Ptr())
+	return MakeWindow(result_)
 }
 
 func (n *NSWindowTabGroup) SetSelectedWindow(value Window) {

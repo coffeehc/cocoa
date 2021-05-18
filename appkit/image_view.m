@@ -7,31 +7,31 @@ void* C_ImageView_Alloc() {
 
 void* C_NSImageView_InitWithFrame(void* ptr, CGRect frameRect) {
     NSImageView* nSImageView = (NSImageView*)ptr;
-    NSImageView* result = [nSImageView initWithFrame:frameRect];
-    return result;
+    NSImageView* result_ = [nSImageView initWithFrame:frameRect];
+    return result_;
 }
 
 void* C_NSImageView_InitWithCoder(void* ptr, void* coder) {
     NSImageView* nSImageView = (NSImageView*)ptr;
-    NSImageView* result = [nSImageView initWithCoder:(NSCoder*)coder];
-    return result;
+    NSImageView* result_ = [nSImageView initWithCoder:(NSCoder*)coder];
+    return result_;
 }
 
 void* C_NSImageView_Init(void* ptr) {
     NSImageView* nSImageView = (NSImageView*)ptr;
-    NSImageView* result = [nSImageView init];
-    return result;
+    NSImageView* result_ = [nSImageView init];
+    return result_;
 }
 
 void* C_NSImageView_ImageViewWithImage(void* image) {
-    NSImageView* result = [NSImageView imageViewWithImage:(NSImage*)image];
-    return result;
+    NSImageView* result_ = [NSImageView imageViewWithImage:(NSImage*)image];
+    return result_;
 }
 
 void* C_NSImageView_Image(void* ptr) {
     NSImageView* nSImageView = (NSImageView*)ptr;
-    NSImage* result = [nSImageView image];
-    return result;
+    NSImage* result_ = [nSImageView image];
+    return result_;
 }
 
 void C_NSImageView_SetImage(void* ptr, void* value) {
@@ -41,8 +41,8 @@ void C_NSImageView_SetImage(void* ptr, void* value) {
 
 unsigned int C_NSImageView_ImageFrameStyle(void* ptr) {
     NSImageView* nSImageView = (NSImageView*)ptr;
-    NSImageFrameStyle result = [nSImageView imageFrameStyle];
-    return result;
+    NSImageFrameStyle result_ = [nSImageView imageFrameStyle];
+    return result_;
 }
 
 void C_NSImageView_SetImageFrameStyle(void* ptr, unsigned int value) {
@@ -52,8 +52,8 @@ void C_NSImageView_SetImageFrameStyle(void* ptr, unsigned int value) {
 
 unsigned int C_NSImageView_ImageAlignment(void* ptr) {
     NSImageView* nSImageView = (NSImageView*)ptr;
-    NSImageAlignment result = [nSImageView imageAlignment];
-    return result;
+    NSImageAlignment result_ = [nSImageView imageAlignment];
+    return result_;
 }
 
 void C_NSImageView_SetImageAlignment(void* ptr, unsigned int value) {
@@ -63,8 +63,8 @@ void C_NSImageView_SetImageAlignment(void* ptr, unsigned int value) {
 
 unsigned int C_NSImageView_ImageScaling(void* ptr) {
     NSImageView* nSImageView = (NSImageView*)ptr;
-    NSImageScaling result = [nSImageView imageScaling];
-    return result;
+    NSImageScaling result_ = [nSImageView imageScaling];
+    return result_;
 }
 
 void C_NSImageView_SetImageScaling(void* ptr, unsigned int value) {
@@ -74,8 +74,8 @@ void C_NSImageView_SetImageScaling(void* ptr, unsigned int value) {
 
 bool C_NSImageView_Animates(void* ptr) {
     NSImageView* nSImageView = (NSImageView*)ptr;
-    BOOL result = [nSImageView animates];
-    return result;
+    BOOL result_ = [nSImageView animates];
+    return result_;
 }
 
 void C_NSImageView_SetAnimates(void* ptr, bool value) {
@@ -85,8 +85,8 @@ void C_NSImageView_SetAnimates(void* ptr, bool value) {
 
 bool C_NSImageView_IsEditable(void* ptr) {
     NSImageView* nSImageView = (NSImageView*)ptr;
-    BOOL result = [nSImageView isEditable];
-    return result;
+    BOOL result_ = [nSImageView isEditable];
+    return result_;
 }
 
 void C_NSImageView_SetEditable(void* ptr, bool value) {
@@ -96,8 +96,8 @@ void C_NSImageView_SetEditable(void* ptr, bool value) {
 
 bool C_NSImageView_AllowsCutCopyPaste(void* ptr) {
     NSImageView* nSImageView = (NSImageView*)ptr;
-    BOOL result = [nSImageView allowsCutCopyPaste];
-    return result;
+    BOOL result_ = [nSImageView allowsCutCopyPaste];
+    return result_;
 }
 
 void C_NSImageView_SetAllowsCutCopyPaste(void* ptr, bool value) {
@@ -107,8 +107,8 @@ void C_NSImageView_SetAllowsCutCopyPaste(void* ptr, bool value) {
 
 void* C_NSImageView_ContentTintColor(void* ptr) {
     NSImageView* nSImageView = (NSImageView*)ptr;
-    NSColor* result = [nSImageView contentTintColor];
-    return result;
+    NSColor* result_ = [nSImageView contentTintColor];
+    return result_;
 }
 
 void C_NSImageView_SetContentTintColor(void* ptr, void* value) {
@@ -118,8 +118,8 @@ void C_NSImageView_SetContentTintColor(void* ptr, void* value) {
 
 void* C_NSImageView_SymbolConfiguration(void* ptr) {
     NSImageView* nSImageView = (NSImageView*)ptr;
-    NSImageSymbolConfiguration* result = [nSImageView symbolConfiguration];
-    return result;
+    NSImageSymbolConfiguration* result_ = [nSImageView symbolConfiguration];
+    return result_;
 }
 
 void C_NSImageView_SetSymbolConfiguration(void* ptr, void* value) {

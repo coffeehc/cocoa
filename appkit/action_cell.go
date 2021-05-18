@@ -32,21 +32,21 @@ func AllocActionCell() *NSActionCell {
 }
 
 func (n *NSActionCell) InitImageCell(image Image) ActionCell {
-	result := C.C_NSActionCell_InitImageCell(n.Ptr(), objc.ExtractPtr(image))
-	return MakeActionCell(result)
+	result_ := C.C_NSActionCell_InitImageCell(n.Ptr(), objc.ExtractPtr(image))
+	return MakeActionCell(result_)
 }
 
 func (n *NSActionCell) InitTextCell(_string string) ActionCell {
-	result := C.C_NSActionCell_InitTextCell(n.Ptr(), foundation.NewString(_string).Ptr())
-	return MakeActionCell(result)
+	result_ := C.C_NSActionCell_InitTextCell(n.Ptr(), foundation.NewString(_string).Ptr())
+	return MakeActionCell(result_)
 }
 
 func (n *NSActionCell) Init() ActionCell {
-	result := C.C_NSActionCell_Init(n.Ptr())
-	return MakeActionCell(result)
+	result_ := C.C_NSActionCell_Init(n.Ptr())
+	return MakeActionCell(result_)
 }
 
 func (n *NSActionCell) InitWithCoder(coder foundation.Coder) ActionCell {
-	result := C.C_NSActionCell_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeActionCell(result)
+	result_ := C.C_NSActionCell_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeActionCell(result_)
 }

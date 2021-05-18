@@ -12,8 +12,11 @@ import (
 type OperationQueue interface {
 	objc.Object
 	AddOperation(op Operation)
+	AddOperations_WaitUntilFinished(ops []Operation, wait bool)
 	CancelAllOperations()
 	WaitUntilAllOperationsAreFinished()
+	QualityOfService() QualityOfService
+	SetQualityOfService(value QualityOfService)
 	MaxConcurrentOperationCount() int
 	SetMaxConcurrentOperationCount(value int)
 	IsSuspended() bool
@@ -41,12 +44,21 @@ func AllocOperationQueue() *NSOperationQueue {
 }
 
 func (n *NSOperationQueue) Init() OperationQueue {
-	result := C.C_NSOperationQueue_Init(n.Ptr())
-	return MakeOperationQueue(result)
+	result_ := C.C_NSOperationQueue_Init(n.Ptr())
+	return MakeOperationQueue(result_)
 }
 
 func (n *NSOperationQueue) AddOperation(op Operation) {
 	C.C_NSOperationQueue_AddOperation(n.Ptr(), objc.ExtractPtr(op))
+}
+
+func (n *NSOperationQueue) AddOperations_WaitUntilFinished(ops []Operation, wait bool) {
+	cOpsData := make([]unsafe.Pointer, len(ops))
+	for idx, v := range ops {
+		cOpsData[idx] = objc.ExtractPtr(v)
+	}
+	cOps := C.Array{data: unsafe.Pointer(&cOpsData[0]), len: C.int(len(ops))}
+	C.C_NSOperationQueue_AddOperations_WaitUntilFinished(n.Ptr(), cOps, C.bool(wait))
 }
 
 func (n *NSOperationQueue) CancelAllOperations() {
@@ -57,9 +69,28 @@ func (n *NSOperationQueue) WaitUntilAllOperationsAreFinished() {
 	C.C_NSOperationQueue_WaitUntilAllOperationsAreFinished(n.Ptr())
 }
 
+func OperationQueue_MainQueue() OperationQueue {
+	result_ := C.C_NSOperationQueue_OperationQueue_MainQueue()
+	return MakeOperationQueue(result_)
+}
+
+func OperationQueue_CurrentQueue() OperationQueue {
+	result_ := C.C_NSOperationQueue_OperationQueue_CurrentQueue()
+	return MakeOperationQueue(result_)
+}
+
+func (n *NSOperationQueue) QualityOfService() QualityOfService {
+	result_ := C.C_NSOperationQueue_QualityOfService(n.Ptr())
+	return QualityOfService(int(result_))
+}
+
+func (n *NSOperationQueue) SetQualityOfService(value QualityOfService) {
+	C.C_NSOperationQueue_SetQualityOfService(n.Ptr(), C.int(int(value)))
+}
+
 func (n *NSOperationQueue) MaxConcurrentOperationCount() int {
-	result := C.C_NSOperationQueue_MaxConcurrentOperationCount(n.Ptr())
-	return int(result)
+	result_ := C.C_NSOperationQueue_MaxConcurrentOperationCount(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSOperationQueue) SetMaxConcurrentOperationCount(value int) {
@@ -67,8 +98,8 @@ func (n *NSOperationQueue) SetMaxConcurrentOperationCount(value int) {
 }
 
 func (n *NSOperationQueue) IsSuspended() bool {
-	result := C.C_NSOperationQueue_IsSuspended(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSOperationQueue_IsSuspended(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSOperationQueue) SetSuspended(value bool) {
@@ -76,8 +107,8 @@ func (n *NSOperationQueue) SetSuspended(value bool) {
 }
 
 func (n *NSOperationQueue) Name() string {
-	result := C.C_NSOperationQueue_Name(n.Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSOperationQueue_Name(n.Ptr())
+	return MakeString(result_).String()
 }
 
 func (n *NSOperationQueue) SetName(value string) {
@@ -85,6 +116,6 @@ func (n *NSOperationQueue) SetName(value string) {
 }
 
 func (n *NSOperationQueue) Progress() Progress {
-	result := C.C_NSOperationQueue_Progress(n.Ptr())
-	return MakeProgress(result)
+	result_ := C.C_NSOperationQueue_Progress(n.Ptr())
+	return MakeProgress(result_)
 }

@@ -7,20 +7,20 @@ void* C_TextContainer_Alloc() {
 
 void* C_NSTextContainer_InitWithSize(void* ptr, CGSize size) {
     NSTextContainer* nSTextContainer = (NSTextContainer*)ptr;
-    NSTextContainer* result = [nSTextContainer initWithSize:size];
-    return result;
+    NSTextContainer* result_ = [nSTextContainer initWithSize:size];
+    return result_;
 }
 
 void* C_NSTextContainer_InitWithCoder(void* ptr, void* coder) {
     NSTextContainer* nSTextContainer = (NSTextContainer*)ptr;
-    NSTextContainer* result = [nSTextContainer initWithCoder:(NSCoder*)coder];
-    return result;
+    NSTextContainer* result_ = [nSTextContainer initWithCoder:(NSCoder*)coder];
+    return result_;
 }
 
 void* C_NSTextContainer_Init(void* ptr) {
     NSTextContainer* nSTextContainer = (NSTextContainer*)ptr;
-    NSTextContainer* result = [nSTextContainer init];
-    return result;
+    NSTextContainer* result_ = [nSTextContainer init];
+    return result_;
 }
 
 void C_NSTextContainer_ReplaceLayoutManager(void* ptr, void* newLayoutManager) {
@@ -30,8 +30,8 @@ void C_NSTextContainer_ReplaceLayoutManager(void* ptr, void* newLayoutManager) {
 
 void* C_NSTextContainer_LayoutManager(void* ptr) {
     NSTextContainer* nSTextContainer = (NSTextContainer*)ptr;
-    NSLayoutManager* result = [nSTextContainer layoutManager];
-    return result;
+    NSLayoutManager* result_ = [nSTextContainer layoutManager];
+    return result_;
 }
 
 void C_NSTextContainer_SetLayoutManager(void* ptr, void* value) {
@@ -41,8 +41,8 @@ void C_NSTextContainer_SetLayoutManager(void* ptr, void* value) {
 
 void* C_NSTextContainer_TextView(void* ptr) {
     NSTextContainer* nSTextContainer = (NSTextContainer*)ptr;
-    NSTextView* result = [nSTextContainer textView];
-    return result;
+    NSTextView* result_ = [nSTextContainer textView];
+    return result_;
 }
 
 void C_NSTextContainer_SetTextView(void* ptr, void* value) {
@@ -52,8 +52,8 @@ void C_NSTextContainer_SetTextView(void* ptr, void* value) {
 
 CGSize C_NSTextContainer_Size(void* ptr) {
     NSTextContainer* nSTextContainer = (NSTextContainer*)ptr;
-    NSSize result = [nSTextContainer size];
-    return result;
+    NSSize result_ = [nSTextContainer size];
+    return result_;
 }
 
 void C_NSTextContainer_SetSize(void* ptr, CGSize value) {
@@ -63,17 +63,17 @@ void C_NSTextContainer_SetSize(void* ptr, CGSize value) {
 
 Array C_NSTextContainer_ExclusionPaths(void* ptr) {
     NSTextContainer* nSTextContainer = (NSTextContainer*)ptr;
-    NSArray* result = [nSTextContainer exclusionPaths];
-    int resultcount = [result count];
-    void** resultData = malloc(resultcount * sizeof(void*));
-    for (int i = 0; i < resultcount; i++) {
-    	 void* p = [result objectAtIndex:i];
-    	 resultData[i] = p;
+    NSArray* result_ = [nSTextContainer exclusionPaths];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
     }
-    Array resultArray;
-    resultArray.data = resultData;
-    resultArray.len = resultcount;
-    return resultArray;
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
 }
 
 void C_NSTextContainer_SetExclusionPaths(void* ptr, Array value) {
@@ -89,8 +89,8 @@ void C_NSTextContainer_SetExclusionPaths(void* ptr, Array value) {
 
 unsigned int C_NSTextContainer_LineBreakMode(void* ptr) {
     NSTextContainer* nSTextContainer = (NSTextContainer*)ptr;
-    NSLineBreakMode result = [nSTextContainer lineBreakMode];
-    return result;
+    NSLineBreakMode result_ = [nSTextContainer lineBreakMode];
+    return result_;
 }
 
 void C_NSTextContainer_SetLineBreakMode(void* ptr, unsigned int value) {
@@ -100,8 +100,8 @@ void C_NSTextContainer_SetLineBreakMode(void* ptr, unsigned int value) {
 
 bool C_NSTextContainer_WidthTracksTextView(void* ptr) {
     NSTextContainer* nSTextContainer = (NSTextContainer*)ptr;
-    BOOL result = [nSTextContainer widthTracksTextView];
-    return result;
+    BOOL result_ = [nSTextContainer widthTracksTextView];
+    return result_;
 }
 
 void C_NSTextContainer_SetWidthTracksTextView(void* ptr, bool value) {
@@ -111,8 +111,8 @@ void C_NSTextContainer_SetWidthTracksTextView(void* ptr, bool value) {
 
 bool C_NSTextContainer_HeightTracksTextView(void* ptr) {
     NSTextContainer* nSTextContainer = (NSTextContainer*)ptr;
-    BOOL result = [nSTextContainer heightTracksTextView];
-    return result;
+    BOOL result_ = [nSTextContainer heightTracksTextView];
+    return result_;
 }
 
 void C_NSTextContainer_SetHeightTracksTextView(void* ptr, bool value) {
@@ -122,8 +122,8 @@ void C_NSTextContainer_SetHeightTracksTextView(void* ptr, bool value) {
 
 unsigned int C_NSTextContainer_MaximumNumberOfLines(void* ptr) {
     NSTextContainer* nSTextContainer = (NSTextContainer*)ptr;
-    NSUInteger result = [nSTextContainer maximumNumberOfLines];
-    return result;
+    NSUInteger result_ = [nSTextContainer maximumNumberOfLines];
+    return result_;
 }
 
 void C_NSTextContainer_SetMaximumNumberOfLines(void* ptr, unsigned int value) {
@@ -133,8 +133,8 @@ void C_NSTextContainer_SetMaximumNumberOfLines(void* ptr, unsigned int value) {
 
 double C_NSTextContainer_LineFragmentPadding(void* ptr) {
     NSTextContainer* nSTextContainer = (NSTextContainer*)ptr;
-    CGFloat result = [nSTextContainer lineFragmentPadding];
-    return result;
+    CGFloat result_ = [nSTextContainer lineFragmentPadding];
+    return result_;
 }
 
 void C_NSTextContainer_SetLineFragmentPadding(void* ptr, double value) {
@@ -144,6 +144,6 @@ void C_NSTextContainer_SetLineFragmentPadding(void* ptr, double value) {
 
 bool C_NSTextContainer_IsSimpleRectangularTextContainer(void* ptr) {
     NSTextContainer* nSTextContainer = (NSTextContainer*)ptr;
-    BOOL result = [nSTextContainer isSimpleRectangularTextContainer];
-    return result;
+    BOOL result_ = [nSTextContainer isSimpleRectangularTextContainer];
+    return result_;
 }

@@ -7,31 +7,31 @@ void* C_Typesetter_Alloc() {
 
 void* C_NSTypesetter_Init(void* ptr) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    NSTypesetter* result = [nSTypesetter init];
-    return result;
+    NSTypesetter* result_ = [nSTypesetter init];
+    return result_;
 }
 
 void* C_NSTypesetter_Typesetter_SharedSystemTypesetterForBehavior(int behavior) {
-    id result = [NSTypesetter sharedSystemTypesetterForBehavior:behavior];
-    return result;
+    id result_ = [NSTypesetter sharedSystemTypesetterForBehavior:behavior];
+    return result_;
 }
 
 double C_NSTypesetter_BaselineOffsetInLayoutManager_GlyphIndex(void* ptr, void* layoutMgr, unsigned int glyphIndex) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    CGFloat result = [nSTypesetter baselineOffsetInLayoutManager:(NSLayoutManager*)layoutMgr glyphIndex:glyphIndex];
-    return result;
+    CGFloat result_ = [nSTypesetter baselineOffsetInLayoutManager:(NSLayoutManager*)layoutMgr glyphIndex:glyphIndex];
+    return result_;
 }
 
 void* C_NSTypesetter_SubstituteFontForFont(void* ptr, void* originalFont) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    NSFont* result = [nSTypesetter substituteFontForFont:(NSFont*)originalFont];
-    return result;
+    NSFont* result_ = [nSTypesetter substituteFontForFont:(NSFont*)originalFont];
+    return result_;
 }
 
 void* C_NSTypesetter_TextTabForGlyphLocation_WritingDirection_MaxLocation(void* ptr, double glyphLocation, int direction, double maxLocation) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    NSTextTab* result = [nSTypesetter textTabForGlyphLocation:glyphLocation writingDirection:direction maxLocation:maxLocation];
-    return result;
+    NSTextTab* result_ = [nSTypesetter textTabForGlyphLocation:glyphLocation writingDirection:direction maxLocation:maxLocation];
+    return result_;
 }
 
 void C_NSTypesetter_SetParagraphGlyphRange_SeparatorGlyphRange(void* ptr, NSRange paragraphRange, NSRange paragraphSeparatorRange) {
@@ -41,20 +41,20 @@ void C_NSTypesetter_SetParagraphGlyphRange_SeparatorGlyphRange(void* ptr, NSRang
 
 double C_NSTypesetter_LineSpacingAfterGlyphAtIndex_WithProposedLineFragmentRect(void* ptr, unsigned int glyphIndex, CGRect rect) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    CGFloat result = [nSTypesetter lineSpacingAfterGlyphAtIndex:glyphIndex withProposedLineFragmentRect:rect];
-    return result;
+    CGFloat result_ = [nSTypesetter lineSpacingAfterGlyphAtIndex:glyphIndex withProposedLineFragmentRect:rect];
+    return result_;
 }
 
 double C_NSTypesetter_ParagraphSpacingAfterGlyphAtIndex_WithProposedLineFragmentRect(void* ptr, unsigned int glyphIndex, CGRect rect) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    CGFloat result = [nSTypesetter paragraphSpacingAfterGlyphAtIndex:glyphIndex withProposedLineFragmentRect:rect];
-    return result;
+    CGFloat result_ = [nSTypesetter paragraphSpacingAfterGlyphAtIndex:glyphIndex withProposedLineFragmentRect:rect];
+    return result_;
 }
 
 double C_NSTypesetter_ParagraphSpacingBeforeGlyphAtIndex_WithProposedLineFragmentRect(void* ptr, unsigned int glyphIndex, CGRect rect) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    CGFloat result = [nSTypesetter paragraphSpacingBeforeGlyphAtIndex:glyphIndex withProposedLineFragmentRect:rect];
-    return result;
+    CGFloat result_ = [nSTypesetter paragraphSpacingBeforeGlyphAtIndex:glyphIndex withProposedLineFragmentRect:rect];
+    return result_;
 }
 
 void C_NSTypesetter_BeginParagraph(void* ptr) {
@@ -79,32 +79,32 @@ void C_NSTypesetter_EndLineWithGlyphRange(void* ptr, NSRange lineGlyphRange) {
 
 NSRange C_NSTypesetter_LayoutCharactersInRange_ForLayoutManager_MaximumNumberOfLineFragments(void* ptr, NSRange characterRange, void* layoutManager, unsigned int maxNumLines) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    NSRange result = [nSTypesetter layoutCharactersInRange:characterRange forLayoutManager:(NSLayoutManager*)layoutManager maximumNumberOfLineFragments:maxNumLines];
-    return result;
+    NSRange result_ = [nSTypesetter layoutCharactersInRange:characterRange forLayoutManager:(NSLayoutManager*)layoutManager maximumNumberOfLineFragments:maxNumLines];
+    return result_;
 }
 
 CGRect C_NSTypesetter_BoundingBoxForControlGlyphAtIndex_ForTextContainer_ProposedLineFragment_GlyphPosition_CharacterIndex(void* ptr, unsigned int glyphIndex, void* textContainer, CGRect proposedRect, CGPoint glyphPosition, unsigned int charIndex) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    NSRect result = [nSTypesetter boundingBoxForControlGlyphAtIndex:glyphIndex forTextContainer:(NSTextContainer*)textContainer proposedLineFragment:proposedRect glyphPosition:glyphPosition characterIndex:charIndex];
-    return result;
+    NSRect result_ = [nSTypesetter boundingBoxForControlGlyphAtIndex:glyphIndex forTextContainer:(NSTextContainer*)textContainer proposedLineFragment:proposedRect glyphPosition:glyphPosition characterIndex:charIndex];
+    return result_;
 }
 
 float C_NSTypesetter_HyphenationFactorForGlyphAtIndex(void* ptr, unsigned int glyphIndex) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    float result = [nSTypesetter hyphenationFactorForGlyphAtIndex:glyphIndex];
-    return result;
+    float result_ = [nSTypesetter hyphenationFactorForGlyphAtIndex:glyphIndex];
+    return result_;
 }
 
 bool C_NSTypesetter_ShouldBreakLineByHyphenatingBeforeCharacterAtIndex(void* ptr, unsigned int charIndex) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    BOOL result = [nSTypesetter shouldBreakLineByHyphenatingBeforeCharacterAtIndex:charIndex];
-    return result;
+    BOOL result_ = [nSTypesetter shouldBreakLineByHyphenatingBeforeCharacterAtIndex:charIndex];
+    return result_;
 }
 
 bool C_NSTypesetter_ShouldBreakLineByWordBeforeCharacterAtIndex(void* ptr, unsigned int charIndex) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    BOOL result = [nSTypesetter shouldBreakLineByWordBeforeCharacterAtIndex:charIndex];
-    return result;
+    BOOL result_ = [nSTypesetter shouldBreakLineByWordBeforeCharacterAtIndex:charIndex];
+    return result_;
 }
 
 void C_NSTypesetter_SetHardInvalidation_ForGlyphRange(void* ptr, bool flag, NSRange glyphRange) {
@@ -133,25 +133,25 @@ void C_NSTypesetter_SetNotShownAttribute_ForGlyphRange(void* ptr, bool flag, NSR
 }
 
 void* C_NSTypesetter_SharedSystemTypesetter() {
-    NSTypesetter* result = [NSTypesetter sharedSystemTypesetter];
-    return result;
+    NSTypesetter* result_ = [NSTypesetter sharedSystemTypesetter];
+    return result_;
 }
 
 int C_NSTypesetter_Typesetter_DefaultTypesetterBehavior() {
-    NSTypesetterBehavior result = [NSTypesetter defaultTypesetterBehavior];
-    return result;
+    NSTypesetterBehavior result_ = [NSTypesetter defaultTypesetterBehavior];
+    return result_;
 }
 
 void* C_NSTypesetter_LayoutManager(void* ptr) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    NSLayoutManager* result = [nSTypesetter layoutManager];
-    return result;
+    NSLayoutManager* result_ = [nSTypesetter layoutManager];
+    return result_;
 }
 
 bool C_NSTypesetter_UsesFontLeading(void* ptr) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    BOOL result = [nSTypesetter usesFontLeading];
-    return result;
+    BOOL result_ = [nSTypesetter usesFontLeading];
+    return result_;
 }
 
 void C_NSTypesetter_SetUsesFontLeading(void* ptr, bool value) {
@@ -161,8 +161,8 @@ void C_NSTypesetter_SetUsesFontLeading(void* ptr, bool value) {
 
 int C_NSTypesetter_TypesetterBehavior(void* ptr) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    NSTypesetterBehavior result = [nSTypesetter typesetterBehavior];
-    return result;
+    NSTypesetterBehavior result_ = [nSTypesetter typesetterBehavior];
+    return result_;
 }
 
 void C_NSTypesetter_SetTypesetterBehavior(void* ptr, int value) {
@@ -172,8 +172,8 @@ void C_NSTypesetter_SetTypesetterBehavior(void* ptr, int value) {
 
 float C_NSTypesetter_HyphenationFactor(void* ptr) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    float result = [nSTypesetter hyphenationFactor];
-    return result;
+    float result_ = [nSTypesetter hyphenationFactor];
+    return result_;
 }
 
 void C_NSTypesetter_SetHyphenationFactor(void* ptr, float value) {
@@ -183,29 +183,29 @@ void C_NSTypesetter_SetHyphenationFactor(void* ptr, float value) {
 
 void* C_NSTypesetter_CurrentTextContainer(void* ptr) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    NSTextContainer* result = [nSTypesetter currentTextContainer];
-    return result;
+    NSTextContainer* result_ = [nSTypesetter currentTextContainer];
+    return result_;
 }
 
 Array C_NSTypesetter_TextContainers(void* ptr) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    NSArray* result = [nSTypesetter textContainers];
-    int resultcount = [result count];
-    void** resultData = malloc(resultcount * sizeof(void*));
-    for (int i = 0; i < resultcount; i++) {
-    	 void* p = [result objectAtIndex:i];
-    	 resultData[i] = p;
+    NSArray* result_ = [nSTypesetter textContainers];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
     }
-    Array resultArray;
-    resultArray.data = resultData;
-    resultArray.len = resultcount;
-    return resultArray;
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
 }
 
 double C_NSTypesetter_LineFragmentPadding(void* ptr) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    CGFloat result = [nSTypesetter lineFragmentPadding];
-    return result;
+    CGFloat result_ = [nSTypesetter lineFragmentPadding];
+    return result_;
 }
 
 void C_NSTypesetter_SetLineFragmentPadding(void* ptr, double value) {
@@ -215,8 +215,8 @@ void C_NSTypesetter_SetLineFragmentPadding(void* ptr, double value) {
 
 bool C_NSTypesetter_BidiProcessingEnabled(void* ptr) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    BOOL result = [nSTypesetter bidiProcessingEnabled];
-    return result;
+    BOOL result_ = [nSTypesetter bidiProcessingEnabled];
+    return result_;
 }
 
 void C_NSTypesetter_SetBidiProcessingEnabled(void* ptr, bool value) {
@@ -226,14 +226,14 @@ void C_NSTypesetter_SetBidiProcessingEnabled(void* ptr, bool value) {
 
 void* C_NSTypesetter_CurrentParagraphStyle(void* ptr) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    NSParagraphStyle* result = [nSTypesetter currentParagraphStyle];
-    return result;
+    NSParagraphStyle* result_ = [nSTypesetter currentParagraphStyle];
+    return result_;
 }
 
 void* C_NSTypesetter_AttributedString(void* ptr) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    NSAttributedString* result = [nSTypesetter attributedString];
-    return result;
+    NSAttributedString* result_ = [nSTypesetter attributedString];
+    return result_;
 }
 
 void C_NSTypesetter_SetAttributedString(void* ptr, void* value) {
@@ -243,24 +243,24 @@ void C_NSTypesetter_SetAttributedString(void* ptr, void* value) {
 
 NSRange C_NSTypesetter_ParagraphGlyphRange(void* ptr) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    NSRange result = [nSTypesetter paragraphGlyphRange];
-    return result;
+    NSRange result_ = [nSTypesetter paragraphGlyphRange];
+    return result_;
 }
 
 NSRange C_NSTypesetter_ParagraphSeparatorGlyphRange(void* ptr) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    NSRange result = [nSTypesetter paragraphSeparatorGlyphRange];
-    return result;
+    NSRange result_ = [nSTypesetter paragraphSeparatorGlyphRange];
+    return result_;
 }
 
 NSRange C_NSTypesetter_ParagraphCharacterRange(void* ptr) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    NSRange result = [nSTypesetter paragraphCharacterRange];
-    return result;
+    NSRange result_ = [nSTypesetter paragraphCharacterRange];
+    return result_;
 }
 
 NSRange C_NSTypesetter_ParagraphSeparatorCharacterRange(void* ptr) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
-    NSRange result = [nSTypesetter paragraphSeparatorCharacterRange];
-    return result;
+    NSRange result_ = [nSTypesetter paragraphSeparatorCharacterRange];
+    return result_;
 }

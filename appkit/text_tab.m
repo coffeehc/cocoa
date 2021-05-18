@@ -7,23 +7,23 @@ void* C_TextTab_Alloc() {
 
 void* C_NSTextTab_Init(void* ptr) {
     NSTextTab* nSTextTab = (NSTextTab*)ptr;
-    NSTextTab* result = [nSTextTab init];
-    return result;
+    NSTextTab* result_ = [nSTextTab init];
+    return result_;
 }
 
 void* C_NSTextTab_TextTab_ColumnTerminatorsForLocale(void* aLocale) {
-    NSCharacterSet* result = [NSTextTab columnTerminatorsForLocale:(NSLocale*)aLocale];
-    return result;
+    NSCharacterSet* result_ = [NSTextTab columnTerminatorsForLocale:(NSLocale*)aLocale];
+    return result_;
 }
 
 double C_NSTextTab_Location(void* ptr) {
     NSTextTab* nSTextTab = (NSTextTab*)ptr;
-    CGFloat result = [nSTextTab location];
-    return result;
+    CGFloat result_ = [nSTextTab location];
+    return result_;
 }
 
 int C_NSTextTab_Alignment(void* ptr) {
     NSTextTab* nSTextTab = (NSTextTab*)ptr;
-    NSTextAlignment result = [nSTextTab alignment];
-    return result;
+    NSTextAlignment result_ = [nSTextTab alignment];
+    return result_;
 }

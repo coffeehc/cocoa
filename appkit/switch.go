@@ -35,23 +35,23 @@ func AllocSwitch() *NSSwitch {
 }
 
 func (n *NSSwitch) InitWithFrame(frameRect foundation.Rect) Switch {
-	result := C.C_NSSwitch_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
-	return MakeSwitch(result)
+	result_ := C.C_NSSwitch_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeSwitch(result_)
 }
 
 func (n *NSSwitch) InitWithCoder(coder foundation.Coder) Switch {
-	result := C.C_NSSwitch_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeSwitch(result)
+	result_ := C.C_NSSwitch_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeSwitch(result_)
 }
 
 func (n *NSSwitch) Init() Switch {
-	result := C.C_NSSwitch_Init(n.Ptr())
-	return MakeSwitch(result)
+	result_ := C.C_NSSwitch_Init(n.Ptr())
+	return MakeSwitch(result_)
 }
 
 func (n *NSSwitch) State() ControlStateValue {
-	result := C.C_NSSwitch_State(n.Ptr())
-	return ControlStateValue(int(result))
+	result_ := C.C_NSSwitch_State(n.Ptr())
+	return ControlStateValue(int(result_))
 }
 
 func (n *NSSwitch) SetState(value ControlStateValue) {

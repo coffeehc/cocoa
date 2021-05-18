@@ -42,8 +42,8 @@ func AllocDockTile() *NSDockTile {
 }
 
 func (n *NSDockTile) Init() DockTile {
-	result := C.C_NSDockTile_Init(n.Ptr())
-	return MakeDockTile(result)
+	result_ := C.C_NSDockTile_Init(n.Ptr())
+	return MakeDockTile(result_)
 }
 
 func (n *NSDockTile) Display() {
@@ -51,8 +51,8 @@ func (n *NSDockTile) Display() {
 }
 
 func (n *NSDockTile) ContentView() View {
-	result := C.C_NSDockTile_ContentView(n.Ptr())
-	return MakeView(result)
+	result_ := C.C_NSDockTile_ContentView(n.Ptr())
+	return MakeView(result_)
 }
 
 func (n *NSDockTile) SetContentView(value View) {
@@ -60,18 +60,18 @@ func (n *NSDockTile) SetContentView(value View) {
 }
 
 func (n *NSDockTile) Size() foundation.Size {
-	result := C.C_NSDockTile_Size(n.Ptr())
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSDockTile_Size(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSDockTile) Owner() objc.Object {
-	result := C.C_NSDockTile_Owner(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSDockTile_Owner(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSDockTile) ShowsApplicationBadge() bool {
-	result := C.C_NSDockTile_ShowsApplicationBadge(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSDockTile_ShowsApplicationBadge(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSDockTile) SetShowsApplicationBadge(value bool) {
@@ -79,8 +79,8 @@ func (n *NSDockTile) SetShowsApplicationBadge(value bool) {
 }
 
 func (n *NSDockTile) BadgeLabel() string {
-	result := C.C_NSDockTile_BadgeLabel(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSDockTile_BadgeLabel(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSDockTile) SetBadgeLabel(value string) {

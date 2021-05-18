@@ -41,43 +41,43 @@ func AllocAppleEventDescriptor() *NSAppleEventDescriptor {
 }
 
 func (n *NSAppleEventDescriptor) InitListDescriptor() AppleEventDescriptor {
-	result := C.C_NSAppleEventDescriptor_InitListDescriptor(n.Ptr())
-	return MakeAppleEventDescriptor(result)
+	result_ := C.C_NSAppleEventDescriptor_InitListDescriptor(n.Ptr())
+	return MakeAppleEventDescriptor(result_)
 }
 
 func (n *NSAppleEventDescriptor) InitRecordDescriptor() AppleEventDescriptor {
-	result := C.C_NSAppleEventDescriptor_InitRecordDescriptor(n.Ptr())
-	return MakeAppleEventDescriptor(result)
+	result_ := C.C_NSAppleEventDescriptor_InitRecordDescriptor(n.Ptr())
+	return MakeAppleEventDescriptor(result_)
 }
 
 func (n *NSAppleEventDescriptor) Init() AppleEventDescriptor {
-	result := C.C_NSAppleEventDescriptor_Init(n.Ptr())
-	return MakeAppleEventDescriptor(result)
+	result_ := C.C_NSAppleEventDescriptor_Init(n.Ptr())
+	return MakeAppleEventDescriptor(result_)
 }
 
-func AppleEventDescriptorDescriptorWithString(_string string) AppleEventDescriptor {
-	result := C.C_NSAppleEventDescriptor_AppleEventDescriptorDescriptorWithString(NewString(_string).Ptr())
-	return MakeAppleEventDescriptor(result)
+func AppleEventDescriptor_DescriptorWithString(_string string) AppleEventDescriptor {
+	result_ := C.C_NSAppleEventDescriptor_AppleEventDescriptor_DescriptorWithString(NewString(_string).Ptr())
+	return MakeAppleEventDescriptor(result_)
 }
 
-func AppleEventDescriptorListDescriptor() AppleEventDescriptor {
-	result := C.C_NSAppleEventDescriptor_AppleEventDescriptorListDescriptor()
-	return MakeAppleEventDescriptor(result)
+func AppleEventDescriptor_ListDescriptor() AppleEventDescriptor {
+	result_ := C.C_NSAppleEventDescriptor_AppleEventDescriptor_ListDescriptor()
+	return MakeAppleEventDescriptor(result_)
 }
 
-func AppleEventDescriptorNullDescriptor() AppleEventDescriptor {
-	result := C.C_NSAppleEventDescriptor_AppleEventDescriptorNullDescriptor()
-	return MakeAppleEventDescriptor(result)
+func AppleEventDescriptor_NullDescriptor() AppleEventDescriptor {
+	result_ := C.C_NSAppleEventDescriptor_AppleEventDescriptor_NullDescriptor()
+	return MakeAppleEventDescriptor(result_)
 }
 
-func AppleEventDescriptorRecordDescriptor() AppleEventDescriptor {
-	result := C.C_NSAppleEventDescriptor_AppleEventDescriptorRecordDescriptor()
-	return MakeAppleEventDescriptor(result)
+func AppleEventDescriptor_RecordDescriptor() AppleEventDescriptor {
+	result_ := C.C_NSAppleEventDescriptor_AppleEventDescriptor_RecordDescriptor()
+	return MakeAppleEventDescriptor(result_)
 }
 
 func (n *NSAppleEventDescriptor) DescriptorAtIndex(index int) AppleEventDescriptor {
-	result := C.C_NSAppleEventDescriptor_DescriptorAtIndex(n.Ptr(), C.int(index))
-	return MakeAppleEventDescriptor(result)
+	result_ := C.C_NSAppleEventDescriptor_DescriptorAtIndex(n.Ptr(), C.int(index))
+	return MakeAppleEventDescriptor(result_)
 }
 
 func (n *NSAppleEventDescriptor) InsertDescriptor_AtIndex(descriptor AppleEventDescriptor, index int) {
@@ -88,71 +88,71 @@ func (n *NSAppleEventDescriptor) RemoveDescriptorAtIndex(index int) {
 	C.C_NSAppleEventDescriptor_RemoveDescriptorAtIndex(n.Ptr(), C.int(index))
 }
 
-func AppleEventDescriptorDescriptorWithApplicationURL(applicationURL URL) AppleEventDescriptor {
-	result := C.C_NSAppleEventDescriptor_AppleEventDescriptorDescriptorWithApplicationURL(objc.ExtractPtr(applicationURL))
-	return MakeAppleEventDescriptor(result)
+func AppleEventDescriptor_DescriptorWithApplicationURL(applicationURL URL) AppleEventDescriptor {
+	result_ := C.C_NSAppleEventDescriptor_AppleEventDescriptor_DescriptorWithApplicationURL(objc.ExtractPtr(applicationURL))
+	return MakeAppleEventDescriptor(result_)
 }
 
-func AppleEventDescriptorDescriptorWithBundleIdentifier(bundleIdentifier string) AppleEventDescriptor {
-	result := C.C_NSAppleEventDescriptor_AppleEventDescriptorDescriptorWithBundleIdentifier(NewString(bundleIdentifier).Ptr())
-	return MakeAppleEventDescriptor(result)
+func AppleEventDescriptor_DescriptorWithBundleIdentifier(bundleIdentifier string) AppleEventDescriptor {
+	result_ := C.C_NSAppleEventDescriptor_AppleEventDescriptor_DescriptorWithBundleIdentifier(NewString(bundleIdentifier).Ptr())
+	return MakeAppleEventDescriptor(result_)
 }
 
-func AppleEventDescriptorDescriptorWithDate(date Date) AppleEventDescriptor {
-	result := C.C_NSAppleEventDescriptor_AppleEventDescriptorDescriptorWithDate(objc.ExtractPtr(date))
-	return MakeAppleEventDescriptor(result)
+func AppleEventDescriptor_DescriptorWithDate(date Date) AppleEventDescriptor {
+	result_ := C.C_NSAppleEventDescriptor_AppleEventDescriptor_DescriptorWithDate(objc.ExtractPtr(date))
+	return MakeAppleEventDescriptor(result_)
 }
 
-func AppleEventDescriptorDescriptorWithDouble(doubleValue float64) AppleEventDescriptor {
-	result := C.C_NSAppleEventDescriptor_AppleEventDescriptorDescriptorWithDouble(C.double(doubleValue))
-	return MakeAppleEventDescriptor(result)
+func AppleEventDescriptor_DescriptorWithDouble(doubleValue float64) AppleEventDescriptor {
+	result_ := C.C_NSAppleEventDescriptor_AppleEventDescriptor_DescriptorWithDouble(C.double(doubleValue))
+	return MakeAppleEventDescriptor(result_)
 }
 
-func AppleEventDescriptorDescriptorWithFileURL(fileURL URL) AppleEventDescriptor {
-	result := C.C_NSAppleEventDescriptor_AppleEventDescriptorDescriptorWithFileURL(objc.ExtractPtr(fileURL))
-	return MakeAppleEventDescriptor(result)
+func AppleEventDescriptor_DescriptorWithFileURL(fileURL URL) AppleEventDescriptor {
+	result_ := C.C_NSAppleEventDescriptor_AppleEventDescriptor_DescriptorWithFileURL(objc.ExtractPtr(fileURL))
+	return MakeAppleEventDescriptor(result_)
 }
 
-func AppleEventDescriptorCurrentProcessDescriptor() AppleEventDescriptor {
-	result := C.C_NSAppleEventDescriptor_AppleEventDescriptorCurrentProcessDescriptor()
-	return MakeAppleEventDescriptor(result)
+func AppleEventDescriptor_CurrentProcessDescriptor() AppleEventDescriptor {
+	result_ := C.C_NSAppleEventDescriptor_AppleEventDescriptor_CurrentProcessDescriptor()
+	return MakeAppleEventDescriptor(result_)
 }
 
 func (n *NSAppleEventDescriptor) Data() []byte {
-	result := C.C_NSAppleEventDescriptor_Data(n.Ptr())
-	resultBuffer := (*[1 << 30]byte)(result.data)[:C.int(result.len)]
-	goResult := make([]byte, C.int(result.len))
-	copy(goResult, resultBuffer)
-	C.free(result.data)
-	return goResult
+	result_ := C.C_NSAppleEventDescriptor_Data(n.Ptr())
+	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
+	goResult_ := make([]byte, C.int(result_.len))
+	copy(goResult_, result_Buffer)
+	C.free(result_.data)
+	return goResult_
 }
 
 func (n *NSAppleEventDescriptor) NumberOfItems() int {
-	result := C.C_NSAppleEventDescriptor_NumberOfItems(n.Ptr())
-	return int(result)
+	result_ := C.C_NSAppleEventDescriptor_NumberOfItems(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSAppleEventDescriptor) StringValue() string {
-	result := C.C_NSAppleEventDescriptor_StringValue(n.Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSAppleEventDescriptor_StringValue(n.Ptr())
+	return MakeString(result_).String()
 }
 
 func (n *NSAppleEventDescriptor) DateValue() Date {
-	result := C.C_NSAppleEventDescriptor_DateValue(n.Ptr())
-	return MakeDate(result)
+	result_ := C.C_NSAppleEventDescriptor_DateValue(n.Ptr())
+	return MakeDate(result_)
 }
 
 func (n *NSAppleEventDescriptor) DoubleValue() float64 {
-	result := C.C_NSAppleEventDescriptor_DoubleValue(n.Ptr())
-	return float64(result)
+	result_ := C.C_NSAppleEventDescriptor_DoubleValue(n.Ptr())
+	return float64(result_)
 }
 
 func (n *NSAppleEventDescriptor) FileURLValue() URL {
-	result := C.C_NSAppleEventDescriptor_FileURLValue(n.Ptr())
-	return MakeURL(result)
+	result_ := C.C_NSAppleEventDescriptor_FileURLValue(n.Ptr())
+	return MakeURL(result_)
 }
 
 func (n *NSAppleEventDescriptor) IsRecordDescriptor() bool {
-	result := C.C_NSAppleEventDescriptor_IsRecordDescriptor(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSAppleEventDescriptor_IsRecordDescriptor(n.Ptr())
+	return bool(result_)
 }

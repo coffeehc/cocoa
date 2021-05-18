@@ -7,26 +7,26 @@ void* C_Switch_Alloc() {
 
 void* C_NSSwitch_InitWithFrame(void* ptr, CGRect frameRect) {
     NSSwitch* nSSwitch = (NSSwitch*)ptr;
-    NSSwitch* result = [nSSwitch initWithFrame:frameRect];
-    return result;
+    NSSwitch* result_ = [nSSwitch initWithFrame:frameRect];
+    return result_;
 }
 
 void* C_NSSwitch_InitWithCoder(void* ptr, void* coder) {
     NSSwitch* nSSwitch = (NSSwitch*)ptr;
-    NSSwitch* result = [nSSwitch initWithCoder:(NSCoder*)coder];
-    return result;
+    NSSwitch* result_ = [nSSwitch initWithCoder:(NSCoder*)coder];
+    return result_;
 }
 
 void* C_NSSwitch_Init(void* ptr) {
     NSSwitch* nSSwitch = (NSSwitch*)ptr;
-    NSSwitch* result = [nSSwitch init];
-    return result;
+    NSSwitch* result_ = [nSSwitch init];
+    return result_;
 }
 
 int C_NSSwitch_State(void* ptr) {
     NSSwitch* nSSwitch = (NSSwitch*)ptr;
-    NSControlStateValue result = [nSSwitch state];
-    return result;
+    NSControlStateValue result_ = [nSSwitch state];
+    return result_;
 }
 
 void C_NSSwitch_SetState(void* ptr, int value) {

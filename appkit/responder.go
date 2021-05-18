@@ -29,6 +29,7 @@ type Responder interface {
 	OtherMouseUp(event Event)
 	KeyDown(event Event)
 	KeyUp(event Event)
+	InterpretKeyEvents(eventArray []Event)
 	PerformKeyEquivalent(event Event) bool
 	FlushBufferedKeyEvents()
 	PressureChangeWithEvent(event Event)
@@ -60,10 +61,14 @@ type Responder interface {
 	TouchesMovedWithEvent(event Event)
 	TouchesCancelledWithEvent(event Event)
 	TouchesEndedWithEvent(event Event)
+	WantsForwardedScrollEventsForAxis(axis EventGestureAxis) bool
 	SmartMagnifyWithEvent(event Event)
+	WantsScrollEventsForSwipeTrackingOnAxis(axis EventGestureAxis) bool
 	PerformTextFinderAction(sender objc.Object)
 	EncodeRestorableStateWithCoder_BackgroundQueue(coder foundation.Coder, queue foundation.OperationQueue)
 	MakeTouchBar() TouchBar
+	NewWindowForTab(sender objc.Object)
+	ShowContextHelp(sender objc.Object)
 	AcceptsFirstResponder() bool
 	NextResponder() Responder
 	SetNextResponder(value Responder)
@@ -94,28 +99,28 @@ func AllocResponder() *NSResponder {
 }
 
 func (n *NSResponder) Init() Responder {
-	result := C.C_NSResponder_Init(n.Ptr())
-	return MakeResponder(result)
+	result_ := C.C_NSResponder_Init(n.Ptr())
+	return MakeResponder(result_)
 }
 
 func (n *NSResponder) InitWithCoder(coder foundation.Coder) Responder {
-	result := C.C_NSResponder_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeResponder(result)
+	result_ := C.C_NSResponder_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeResponder(result_)
 }
 
 func (n *NSResponder) BecomeFirstResponder() bool {
-	result := C.C_NSResponder_BecomeFirstResponder(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSResponder_BecomeFirstResponder(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSResponder) ResignFirstResponder() bool {
-	result := C.C_NSResponder_ResignFirstResponder(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSResponder_ResignFirstResponder(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSResponder) ValidateProposedFirstResponder_ForEvent(responder Responder, event Event) bool {
-	result := C.C_NSResponder_ValidateProposedFirstResponder_ForEvent(n.Ptr(), objc.ExtractPtr(responder), objc.ExtractPtr(event))
-	return bool(result)
+	result_ := C.C_NSResponder_ValidateProposedFirstResponder_ForEvent(n.Ptr(), objc.ExtractPtr(responder), objc.ExtractPtr(event))
+	return bool(result_)
 }
 
 func (n *NSResponder) MouseDown(event Event) {
@@ -174,9 +179,18 @@ func (n *NSResponder) KeyUp(event Event) {
 	C.C_NSResponder_KeyUp(n.Ptr(), objc.ExtractPtr(event))
 }
 
+func (n *NSResponder) InterpretKeyEvents(eventArray []Event) {
+	cEventArrayData := make([]unsafe.Pointer, len(eventArray))
+	for idx, v := range eventArray {
+		cEventArrayData[idx] = objc.ExtractPtr(v)
+	}
+	cEventArray := C.Array{data: unsafe.Pointer(&cEventArrayData[0]), len: C.int(len(eventArray))}
+	C.C_NSResponder_InterpretKeyEvents(n.Ptr(), cEventArray)
+}
+
 func (n *NSResponder) PerformKeyEquivalent(event Event) bool {
-	result := C.C_NSResponder_PerformKeyEquivalent(n.Ptr(), objc.ExtractPtr(event))
-	return bool(result)
+	result_ := C.C_NSResponder_PerformKeyEquivalent(n.Ptr(), objc.ExtractPtr(event))
+	return bool(result_)
 }
 
 func (n *NSResponder) FlushBufferedKeyEvents() {
@@ -220,8 +234,8 @@ func (n *NSResponder) ChangeModeWithEvent(event Event) {
 }
 
 func (n *NSResponder) SupplementalTargetForAction_Sender(action *objc.Selector, sender objc.Object) objc.Object {
-	result := C.C_NSResponder_SupplementalTargetForAction_Sender(n.Ptr(), objc.ExtractPtr(action), objc.ExtractPtr(sender))
-	return objc.MakeObject(result)
+	result_ := C.C_NSResponder_SupplementalTargetForAction_Sender(n.Ptr(), objc.ExtractPtr(action), objc.ExtractPtr(sender))
+	return objc.MakeObject(result_)
 }
 
 func (n *NSResponder) EncodeRestorableStateWithCoder(coder foundation.Coder) {
@@ -241,28 +255,28 @@ func (n *NSResponder) UpdateUserActivityState(userActivity foundation.UserActivi
 }
 
 func (n *NSResponder) PresentError(error foundation.Error) bool {
-	result := C.C_NSResponder_PresentError(n.Ptr(), objc.ExtractPtr(error))
-	return bool(result)
+	result_ := C.C_NSResponder_PresentError(n.Ptr(), objc.ExtractPtr(error))
+	return bool(result_)
 }
 
 func (n *NSResponder) WillPresentError(error foundation.Error) foundation.Error {
-	result := C.C_NSResponder_WillPresentError(n.Ptr(), objc.ExtractPtr(error))
-	return foundation.MakeError(result)
+	result_ := C.C_NSResponder_WillPresentError(n.Ptr(), objc.ExtractPtr(error))
+	return foundation.MakeError(result_)
 }
 
 func (n *NSResponder) TryToPerform_With(action *objc.Selector, object objc.Object) bool {
-	result := C.C_NSResponder_TryToPerform_With(n.Ptr(), objc.ExtractPtr(action), objc.ExtractPtr(object))
-	return bool(result)
+	result_ := C.C_NSResponder_TryToPerform_With(n.Ptr(), objc.ExtractPtr(action), objc.ExtractPtr(object))
+	return bool(result_)
 }
 
 func (n *NSResponder) ValidRequestorForSendType_ReturnType(sendType PasteboardType, returnType PasteboardType) objc.Object {
-	result := C.C_NSResponder_ValidRequestorForSendType_ReturnType(n.Ptr(), foundation.NewString(string(sendType)).Ptr(), foundation.NewString(string(returnType)).Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSResponder_ValidRequestorForSendType_ReturnType(n.Ptr(), foundation.NewString(string(sendType)).Ptr(), foundation.NewString(string(returnType)).Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSResponder) ShouldBeTreatedAsInkEvent(event Event) bool {
-	result := C.C_NSResponder_ShouldBeTreatedAsInkEvent(n.Ptr(), objc.ExtractPtr(event))
-	return bool(result)
+	result_ := C.C_NSResponder_ShouldBeTreatedAsInkEvent(n.Ptr(), objc.ExtractPtr(event))
+	return bool(result_)
 }
 
 func (n *NSResponder) NoResponderFor(eventSelector *objc.Selector) {
@@ -305,8 +319,18 @@ func (n *NSResponder) TouchesEndedWithEvent(event Event) {
 	C.C_NSResponder_TouchesEndedWithEvent(n.Ptr(), objc.ExtractPtr(event))
 }
 
+func (n *NSResponder) WantsForwardedScrollEventsForAxis(axis EventGestureAxis) bool {
+	result_ := C.C_NSResponder_WantsForwardedScrollEventsForAxis(n.Ptr(), C.int(int(axis)))
+	return bool(result_)
+}
+
 func (n *NSResponder) SmartMagnifyWithEvent(event Event) {
 	C.C_NSResponder_SmartMagnifyWithEvent(n.Ptr(), objc.ExtractPtr(event))
+}
+
+func (n *NSResponder) WantsScrollEventsForSwipeTrackingOnAxis(axis EventGestureAxis) bool {
+	result_ := C.C_NSResponder_WantsScrollEventsForSwipeTrackingOnAxis(n.Ptr(), C.int(int(axis)))
+	return bool(result_)
 }
 
 func (n *NSResponder) PerformTextFinderAction(sender objc.Object) {
@@ -318,27 +342,46 @@ func (n *NSResponder) EncodeRestorableStateWithCoder_BackgroundQueue(coder found
 }
 
 func (n *NSResponder) MakeTouchBar() TouchBar {
-	result := C.C_NSResponder_MakeTouchBar(n.Ptr())
-	return MakeTouchBar(result)
+	result_ := C.C_NSResponder_MakeTouchBar(n.Ptr())
+	return MakeTouchBar(result_)
+}
+
+func (n *NSResponder) NewWindowForTab(sender objc.Object) {
+	C.C_NSResponder_NewWindowForTab(n.Ptr(), objc.ExtractPtr(sender))
+}
+
+func (n *NSResponder) ShowContextHelp(sender objc.Object) {
+	C.C_NSResponder_ShowContextHelp(n.Ptr(), objc.ExtractPtr(sender))
 }
 
 func (n *NSResponder) AcceptsFirstResponder() bool {
-	result := C.C_NSResponder_AcceptsFirstResponder(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSResponder_AcceptsFirstResponder(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSResponder) NextResponder() Responder {
-	result := C.C_NSResponder_NextResponder(n.Ptr())
-	return MakeResponder(result)
+	result_ := C.C_NSResponder_NextResponder(n.Ptr())
+	return MakeResponder(result_)
 }
 
 func (n *NSResponder) SetNextResponder(value Responder) {
 	C.C_NSResponder_SetNextResponder(n.Ptr(), objc.ExtractPtr(value))
 }
 
+func Responder_RestorableStateKeyPaths() []string {
+	result_ := C.C_NSResponder_Responder_RestorableStateKeyPaths()
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = foundation.MakeString(r).String()
+	}
+	return goResult_
+}
+
 func (n *NSResponder) UserActivity() foundation.UserActivity {
-	result := C.C_NSResponder_UserActivity(n.Ptr())
-	return foundation.MakeUserActivity(result)
+	result_ := C.C_NSResponder_UserActivity(n.Ptr())
+	return foundation.MakeUserActivity(result_)
 }
 
 func (n *NSResponder) SetUserActivity(value foundation.UserActivity) {
@@ -346,8 +389,8 @@ func (n *NSResponder) SetUserActivity(value foundation.UserActivity) {
 }
 
 func (n *NSResponder) Menu() Menu {
-	result := C.C_NSResponder_Menu(n.Ptr())
-	return MakeMenu(result)
+	result_ := C.C_NSResponder_Menu(n.Ptr())
+	return MakeMenu(result_)
 }
 
 func (n *NSResponder) SetMenu(value Menu) {
@@ -355,13 +398,13 @@ func (n *NSResponder) SetMenu(value Menu) {
 }
 
 func (n *NSResponder) UndoManager() foundation.UndoManager {
-	result := C.C_NSResponder_UndoManager(n.Ptr())
-	return foundation.MakeUndoManager(result)
+	result_ := C.C_NSResponder_UndoManager(n.Ptr())
+	return foundation.MakeUndoManager(result_)
 }
 
 func (n *NSResponder) TouchBar() TouchBar {
-	result := C.C_NSResponder_TouchBar(n.Ptr())
-	return MakeTouchBar(result)
+	result_ := C.C_NSResponder_TouchBar(n.Ptr())
+	return MakeTouchBar(result_)
 }
 
 func (n *NSResponder) SetTouchBar(value TouchBar) {

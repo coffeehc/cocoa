@@ -7,20 +7,20 @@ void* C_TextStorage_Alloc() {
 
 void* C_NSTextStorage_InitWithString(void* ptr, void* str) {
     NSTextStorage* nSTextStorage = (NSTextStorage*)ptr;
-    NSTextStorage* result = [nSTextStorage initWithString:(NSString*)str];
-    return result;
+    NSTextStorage* result_ = [nSTextStorage initWithString:(NSString*)str];
+    return result_;
 }
 
 void* C_NSTextStorage_InitWithAttributedString(void* ptr, void* attrStr) {
     NSTextStorage* nSTextStorage = (NSTextStorage*)ptr;
-    NSTextStorage* result = [nSTextStorage initWithAttributedString:(NSAttributedString*)attrStr];
-    return result;
+    NSTextStorage* result_ = [nSTextStorage initWithAttributedString:(NSAttributedString*)attrStr];
+    return result_;
 }
 
 void* C_NSTextStorage_Init(void* ptr) {
     NSTextStorage* nSTextStorage = (NSTextStorage*)ptr;
-    NSTextStorage* result = [nSTextStorage init];
-    return result;
+    NSTextStorage* result_ = [nSTextStorage init];
+    return result_;
 }
 
 void C_NSTextStorage_AddLayoutManager(void* ptr, void* aLayoutManager) {
@@ -53,58 +53,69 @@ void C_NSTextStorage_EnsureAttributesAreFixedInRange(void* ptr, NSRange _range) 
     [nSTextStorage ensureAttributesAreFixedInRange:_range];
 }
 
+void* C_NSTextStorage_Delegate(void* ptr) {
+    NSTextStorage* nSTextStorage = (NSTextStorage*)ptr;
+    id result_ = [nSTextStorage delegate];
+    return result_;
+}
+
+void C_NSTextStorage_SetDelegate(void* ptr, void* value) {
+    NSTextStorage* nSTextStorage = (NSTextStorage*)ptr;
+    [nSTextStorage setDelegate:(id)value];
+}
+
 Array C_NSTextStorage_LayoutManagers(void* ptr) {
     NSTextStorage* nSTextStorage = (NSTextStorage*)ptr;
-    NSArray* result = [nSTextStorage layoutManagers];
-    int resultcount = [result count];
-    void** resultData = malloc(resultcount * sizeof(void*));
-    for (int i = 0; i < resultcount; i++) {
-    	 void* p = [result objectAtIndex:i];
-    	 resultData[i] = p;
+    NSArray* result_ = [nSTextStorage layoutManagers];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
     }
-    Array resultArray;
-    resultArray.data = resultData;
-    resultArray.len = resultcount;
-    return resultArray;
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
 }
 
 bool C_NSTextStorage_FixesAttributesLazily(void* ptr) {
     NSTextStorage* nSTextStorage = (NSTextStorage*)ptr;
-    BOOL result = [nSTextStorage fixesAttributesLazily];
-    return result;
+    BOOL result_ = [nSTextStorage fixesAttributesLazily];
+    return result_;
 }
 
 unsigned int C_NSTextStorage_EditedMask(void* ptr) {
     NSTextStorage* nSTextStorage = (NSTextStorage*)ptr;
-    NSTextStorageEditActions result = [nSTextStorage editedMask];
-    return result;
+    NSTextStorageEditActions result_ = [nSTextStorage editedMask];
+    return result_;
 }
 
 NSRange C_NSTextStorage_EditedRange(void* ptr) {
     NSTextStorage* nSTextStorage = (NSTextStorage*)ptr;
-    NSRange result = [nSTextStorage editedRange];
-    return result;
+    NSRange result_ = [nSTextStorage editedRange];
+    return result_;
 }
 
 int C_NSTextStorage_ChangeInLength(void* ptr) {
     NSTextStorage* nSTextStorage = (NSTextStorage*)ptr;
-    NSInteger result = [nSTextStorage changeInLength];
-    return result;
+    NSInteger result_ = [nSTextStorage changeInLength];
+    return result_;
 }
 
 Array C_NSTextStorage_AttributeRuns(void* ptr) {
     NSTextStorage* nSTextStorage = (NSTextStorage*)ptr;
-    NSArray* result = [nSTextStorage attributeRuns];
-    int resultcount = [result count];
-    void** resultData = malloc(resultcount * sizeof(void*));
-    for (int i = 0; i < resultcount; i++) {
-    	 void* p = [result objectAtIndex:i];
-    	 resultData[i] = p;
+    NSArray* result_ = [nSTextStorage attributeRuns];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
     }
-    Array resultArray;
-    resultArray.data = resultData;
-    resultArray.len = resultcount;
-    return resultArray;
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
 }
 
 void C_NSTextStorage_SetAttributeRuns(void* ptr, Array value) {
@@ -120,17 +131,17 @@ void C_NSTextStorage_SetAttributeRuns(void* ptr, Array value) {
 
 Array C_NSTextStorage_Paragraphs(void* ptr) {
     NSTextStorage* nSTextStorage = (NSTextStorage*)ptr;
-    NSArray* result = [nSTextStorage paragraphs];
-    int resultcount = [result count];
-    void** resultData = malloc(resultcount * sizeof(void*));
-    for (int i = 0; i < resultcount; i++) {
-    	 void* p = [result objectAtIndex:i];
-    	 resultData[i] = p;
+    NSArray* result_ = [nSTextStorage paragraphs];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
     }
-    Array resultArray;
-    resultArray.data = resultData;
-    resultArray.len = resultcount;
-    return resultArray;
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
 }
 
 void C_NSTextStorage_SetParagraphs(void* ptr, Array value) {
@@ -146,17 +157,17 @@ void C_NSTextStorage_SetParagraphs(void* ptr, Array value) {
 
 Array C_NSTextStorage_Words(void* ptr) {
     NSTextStorage* nSTextStorage = (NSTextStorage*)ptr;
-    NSArray* result = [nSTextStorage words];
-    int resultcount = [result count];
-    void** resultData = malloc(resultcount * sizeof(void*));
-    for (int i = 0; i < resultcount; i++) {
-    	 void* p = [result objectAtIndex:i];
-    	 resultData[i] = p;
+    NSArray* result_ = [nSTextStorage words];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
     }
-    Array resultArray;
-    resultArray.data = resultData;
-    resultArray.len = resultcount;
-    return resultArray;
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
 }
 
 void C_NSTextStorage_SetWords(void* ptr, Array value) {
@@ -172,17 +183,17 @@ void C_NSTextStorage_SetWords(void* ptr, Array value) {
 
 Array C_NSTextStorage_Characters(void* ptr) {
     NSTextStorage* nSTextStorage = (NSTextStorage*)ptr;
-    NSArray* result = [nSTextStorage characters];
-    int resultcount = [result count];
-    void** resultData = malloc(resultcount * sizeof(void*));
-    for (int i = 0; i < resultcount; i++) {
-    	 void* p = [result objectAtIndex:i];
-    	 resultData[i] = p;
+    NSArray* result_ = [nSTextStorage characters];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
     }
-    Array resultArray;
-    resultArray.data = resultData;
-    resultArray.len = resultcount;
-    return resultArray;
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
 }
 
 void C_NSTextStorage_SetCharacters(void* ptr, Array value) {
@@ -198,8 +209,8 @@ void C_NSTextStorage_SetCharacters(void* ptr, Array value) {
 
 void* C_NSTextStorage_Font(void* ptr) {
     NSTextStorage* nSTextStorage = (NSTextStorage*)ptr;
-    NSFont* result = [nSTextStorage font];
-    return result;
+    NSFont* result_ = [nSTextStorage font];
+    return result_;
 }
 
 void C_NSTextStorage_SetFont(void* ptr, void* value) {
@@ -209,8 +220,8 @@ void C_NSTextStorage_SetFont(void* ptr, void* value) {
 
 void* C_NSTextStorage_ForegroundColor(void* ptr) {
     NSTextStorage* nSTextStorage = (NSTextStorage*)ptr;
-    NSColor* result = [nSTextStorage foregroundColor];
-    return result;
+    NSColor* result_ = [nSTextStorage foregroundColor];
+    return result_;
 }
 
 void C_NSTextStorage_SetForegroundColor(void* ptr, void* value) {

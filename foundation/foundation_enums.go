@@ -23,3 +23,13 @@ type KeyValueSetMutationKind uint
 type MatchingOptions uint
 
 type RegularExpressionOptions uint
+
+type DecodingFailurePolicy int
+
+type QualityOfService int
+
+type OperationQueuePriority int
+
+type RunLoopMode string
+
+type URLRequestNetworkServiceType uint

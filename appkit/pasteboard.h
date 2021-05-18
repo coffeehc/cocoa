@@ -19,9 +19,18 @@ unsigned int C_NSPasteboard_IndexOfPasteboardItem(void* ptr, void* pasteboardIte
 Array C_NSPasteboard_DataForType(void* ptr, void* dataType);
 void* C_NSPasteboard_PropertyListForType(void* ptr, void* dataType);
 void* C_NSPasteboard_StringForType(void* ptr, void* dataType);
+void* C_NSPasteboard_AvailableTypeFromArray(void* ptr, Array types);
+bool C_NSPasteboard_CanReadItemWithDataConformingToTypes(void* ptr, Array types);
+Array C_NSPasteboard_Pasteboard_TypesFilterableTo(void* _type);
+int C_NSPasteboard_PrepareForNewContentsWithOptions(void* ptr, unsigned int options);
+int C_NSPasteboard_DeclareTypes_Owner(void* ptr, Array newTypes, void* newOwner);
+int C_NSPasteboard_AddTypes_Owner(void* ptr, Array newTypes, void* newOwner);
 bool C_NSPasteboard_WriteFileContents(void* ptr, void* filename);
 bool C_NSPasteboard_WriteFileWrapper(void* ptr, void* wrapper);
 void* C_NSPasteboard_ReadFileContentsType_ToFile(void* ptr, void* _type, void* filename);
 void* C_NSPasteboard_ReadFileWrapper(void* ptr);
+void* C_NSPasteboard_GeneralPasteboard();
+Array C_NSPasteboard_PasteboardItems(void* ptr);
+Array C_NSPasteboard_Types(void* ptr);
 void* C_NSPasteboard_Name(void* ptr);
 int C_NSPasteboard_ChangeCount(void* ptr);

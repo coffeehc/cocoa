@@ -7,14 +7,14 @@ void* C_TimeZone_Alloc() {
 
 void* C_NSTimeZone_InitWithName(void* ptr, void* tzName) {
     NSTimeZone* nSTimeZone = (NSTimeZone*)ptr;
-    NSTimeZone* result = [nSTimeZone initWithName:(NSString*)tzName];
-    return result;
+    NSTimeZone* result_ = [nSTimeZone initWithName:(NSString*)tzName];
+    return result_;
 }
 
 void* C_NSTimeZone_InitWithName_Data(void* ptr, void* tzName, Array aData) {
     NSTimeZone* nSTimeZone = (NSTimeZone*)ptr;
-    NSTimeZone* result = [nSTimeZone initWithName:(NSString*)tzName data:[[NSData alloc] initWithBytes:(Byte *)aData.data length:aData.len]];
-    return result;
+    NSTimeZone* result_ = [nSTimeZone initWithName:(NSString*)tzName data:[[NSData alloc] initWithBytes:(Byte *)aData.data length:aData.len]];
+    return result_;
 }
 
 void C_NSTimeZone_ResetSystemTimeZone() {
@@ -22,80 +22,80 @@ void C_NSTimeZone_ResetSystemTimeZone() {
 }
 
 void* C_NSTimeZone_TimeZoneWithName(void* tzName) {
-    NSTimeZone* result = [NSTimeZone timeZoneWithName:(NSString*)tzName];
-    return result;
+    NSTimeZone* result_ = [NSTimeZone timeZoneWithName:(NSString*)tzName];
+    return result_;
 }
 
 void* C_NSTimeZone_TimeZoneWithName_Data(void* tzName, Array aData) {
-    NSTimeZone* result = [NSTimeZone timeZoneWithName:(NSString*)tzName data:[[NSData alloc] initWithBytes:(Byte *)aData.data length:aData.len]];
-    return result;
+    NSTimeZone* result_ = [NSTimeZone timeZoneWithName:(NSString*)tzName data:[[NSData alloc] initWithBytes:(Byte *)aData.data length:aData.len]];
+    return result_;
 }
 
 void* C_NSTimeZone_TimeZoneWithAbbreviation(void* abbreviation) {
-    NSTimeZone* result = [NSTimeZone timeZoneWithAbbreviation:(NSString*)abbreviation];
-    return result;
+    NSTimeZone* result_ = [NSTimeZone timeZoneWithAbbreviation:(NSString*)abbreviation];
+    return result_;
 }
 
 void* C_NSTimeZone_TimeZoneForSecondsFromGMT(int seconds) {
-    NSTimeZone* result = [NSTimeZone timeZoneForSecondsFromGMT:seconds];
-    return result;
+    NSTimeZone* result_ = [NSTimeZone timeZoneForSecondsFromGMT:seconds];
+    return result_;
 }
 
 void* C_NSTimeZone_AbbreviationForDate(void* ptr, void* aDate) {
     NSTimeZone* nSTimeZone = (NSTimeZone*)ptr;
-    NSString* result = [nSTimeZone abbreviationForDate:(NSDate*)aDate];
-    return result;
+    NSString* result_ = [nSTimeZone abbreviationForDate:(NSDate*)aDate];
+    return result_;
 }
 
 int C_NSTimeZone_SecondsFromGMTForDate(void* ptr, void* aDate) {
     NSTimeZone* nSTimeZone = (NSTimeZone*)ptr;
-    NSInteger result = [nSTimeZone secondsFromGMTForDate:(NSDate*)aDate];
-    return result;
+    NSInteger result_ = [nSTimeZone secondsFromGMTForDate:(NSDate*)aDate];
+    return result_;
 }
 
 bool C_NSTimeZone_IsDaylightSavingTimeForDate(void* ptr, void* aDate) {
     NSTimeZone* nSTimeZone = (NSTimeZone*)ptr;
-    BOOL result = [nSTimeZone isDaylightSavingTimeForDate:(NSDate*)aDate];
-    return result;
+    BOOL result_ = [nSTimeZone isDaylightSavingTimeForDate:(NSDate*)aDate];
+    return result_;
 }
 
 double C_NSTimeZone_DaylightSavingTimeOffsetForDate(void* ptr, void* aDate) {
     NSTimeZone* nSTimeZone = (NSTimeZone*)ptr;
-    NSTimeInterval result = [nSTimeZone daylightSavingTimeOffsetForDate:(NSDate*)aDate];
-    return result;
+    NSTimeInterval result_ = [nSTimeZone daylightSavingTimeOffsetForDate:(NSDate*)aDate];
+    return result_;
 }
 
 void* C_NSTimeZone_NextDaylightSavingTimeTransitionAfterDate(void* ptr, void* aDate) {
     NSTimeZone* nSTimeZone = (NSTimeZone*)ptr;
-    NSDate* result = [nSTimeZone nextDaylightSavingTimeTransitionAfterDate:(NSDate*)aDate];
-    return result;
+    NSDate* result_ = [nSTimeZone nextDaylightSavingTimeTransitionAfterDate:(NSDate*)aDate];
+    return result_;
 }
 
 bool C_NSTimeZone_IsEqualToTimeZone(void* ptr, void* aTimeZone) {
     NSTimeZone* nSTimeZone = (NSTimeZone*)ptr;
-    BOOL result = [nSTimeZone isEqualToTimeZone:(NSTimeZone*)aTimeZone];
-    return result;
+    BOOL result_ = [nSTimeZone isEqualToTimeZone:(NSTimeZone*)aTimeZone];
+    return result_;
 }
 
 void* C_NSTimeZone_LocalizedName_Locale(void* ptr, int style, void* locale) {
     NSTimeZone* nSTimeZone = (NSTimeZone*)ptr;
-    NSString* result = [nSTimeZone localizedName:style locale:(NSLocale*)locale];
-    return result;
+    NSString* result_ = [nSTimeZone localizedName:style locale:(NSLocale*)locale];
+    return result_;
 }
 
 void* C_NSTimeZone_LocalTimeZone() {
-    NSTimeZone* result = [NSTimeZone localTimeZone];
-    return result;
+    NSTimeZone* result_ = [NSTimeZone localTimeZone];
+    return result_;
 }
 
 void* C_NSTimeZone_SystemTimeZone() {
-    NSTimeZone* result = [NSTimeZone systemTimeZone];
-    return result;
+    NSTimeZone* result_ = [NSTimeZone systemTimeZone];
+    return result_;
 }
 
 void* C_NSTimeZone_DefaultTimeZone() {
-    NSTimeZone* result = [NSTimeZone defaultTimeZone];
-    return result;
+    NSTimeZone* result_ = [NSTimeZone defaultTimeZone];
+    return result_;
 }
 
 void C_NSTimeZone_SetDefaultTimeZone(void* value) {
@@ -103,71 +103,71 @@ void C_NSTimeZone_SetDefaultTimeZone(void* value) {
 }
 
 Array C_NSTimeZone_TimeZone_KnownTimeZoneNames() {
-    NSArray* result = [NSTimeZone knownTimeZoneNames];
-    int resultcount = [result count];
-    void** resultData = malloc(resultcount * sizeof(void*));
-    for (int i = 0; i < resultcount; i++) {
-    	 void* p = [result objectAtIndex:i];
-    	 resultData[i] = p;
+    NSArray* result_ = [NSTimeZone knownTimeZoneNames];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
     }
-    Array resultArray;
-    resultArray.data = resultData;
-    resultArray.len = resultcount;
-    return resultArray;
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
 }
 
 void* C_NSTimeZone_Name(void* ptr) {
     NSTimeZone* nSTimeZone = (NSTimeZone*)ptr;
-    NSString* result = [nSTimeZone name];
-    return result;
+    NSString* result_ = [nSTimeZone name];
+    return result_;
 }
 
 void* C_NSTimeZone_Abbreviation(void* ptr) {
     NSTimeZone* nSTimeZone = (NSTimeZone*)ptr;
-    NSString* result = [nSTimeZone abbreviation];
-    return result;
+    NSString* result_ = [nSTimeZone abbreviation];
+    return result_;
 }
 
 int C_NSTimeZone_SecondsFromGMT(void* ptr) {
     NSTimeZone* nSTimeZone = (NSTimeZone*)ptr;
-    NSInteger result = [nSTimeZone secondsFromGMT];
-    return result;
+    NSInteger result_ = [nSTimeZone secondsFromGMT];
+    return result_;
 }
 
 Array C_NSTimeZone_Data(void* ptr) {
     NSTimeZone* nSTimeZone = (NSTimeZone*)ptr;
-    NSData* result = [nSTimeZone data];
-    Array resultarray;
-    resultarray.data = [result bytes];
-    resultarray.len = result.length;
-    return resultarray;
+    NSData* result_ = [nSTimeZone data];
+    Array result_array;
+    result_array.data = [result_ bytes];
+    result_array.len = result_.length;
+    return result_array;
 }
 
 void* C_NSTimeZone_TimeZoneDataVersion() {
-    NSString* result = [NSTimeZone timeZoneDataVersion];
-    return result;
+    NSString* result_ = [NSTimeZone timeZoneDataVersion];
+    return result_;
 }
 
 bool C_NSTimeZone_IsDaylightSavingTime(void* ptr) {
     NSTimeZone* nSTimeZone = (NSTimeZone*)ptr;
-    BOOL result = [nSTimeZone isDaylightSavingTime];
-    return result;
+    BOOL result_ = [nSTimeZone isDaylightSavingTime];
+    return result_;
 }
 
 double C_NSTimeZone_DaylightSavingTimeOffset(void* ptr) {
     NSTimeZone* nSTimeZone = (NSTimeZone*)ptr;
-    NSTimeInterval result = [nSTimeZone daylightSavingTimeOffset];
-    return result;
+    NSTimeInterval result_ = [nSTimeZone daylightSavingTimeOffset];
+    return result_;
 }
 
 void* C_NSTimeZone_NextDaylightSavingTimeTransition(void* ptr) {
     NSTimeZone* nSTimeZone = (NSTimeZone*)ptr;
-    NSDate* result = [nSTimeZone nextDaylightSavingTimeTransition];
-    return result;
+    NSDate* result_ = [nSTimeZone nextDaylightSavingTimeTransition];
+    return result_;
 }
 
 void* C_NSTimeZone_Description(void* ptr) {
     NSTimeZone* nSTimeZone = (NSTimeZone*)ptr;
-    NSString* result = [nSTimeZone description];
-    return result;
+    NSString* result_ = [nSTimeZone description];
+    return result_;
 }

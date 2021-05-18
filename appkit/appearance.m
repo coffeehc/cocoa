@@ -7,40 +7,52 @@ void* C_Appearance_Alloc() {
 
 void* C_NSAppearance_InitWithAppearanceNamed_Bundle(void* ptr, void* name, void* bundle) {
     NSAppearance* nSAppearance = (NSAppearance*)ptr;
-    NSAppearance* result = [nSAppearance initWithAppearanceNamed:(NSString*)name bundle:(NSBundle*)bundle];
-    return result;
+    NSAppearance* result_ = [nSAppearance initWithAppearanceNamed:(NSString*)name bundle:(NSBundle*)bundle];
+    return result_;
 }
 
 void* C_NSAppearance_InitWithCoder(void* ptr, void* coder) {
     NSAppearance* nSAppearance = (NSAppearance*)ptr;
-    NSAppearance* result = [nSAppearance initWithCoder:(NSCoder*)coder];
-    return result;
+    NSAppearance* result_ = [nSAppearance initWithCoder:(NSCoder*)coder];
+    return result_;
 }
 
 void* C_NSAppearance_Init(void* ptr) {
     NSAppearance* nSAppearance = (NSAppearance*)ptr;
-    NSAppearance* result = [nSAppearance init];
-    return result;
+    NSAppearance* result_ = [nSAppearance init];
+    return result_;
 }
 
 void* C_NSAppearance_AppearanceNamed(void* name) {
-    NSAppearance* result = [NSAppearance appearanceNamed:(NSString*)name];
-    return result;
+    NSAppearance* result_ = [NSAppearance appearanceNamed:(NSString*)name];
+    return result_;
+}
+
+void* C_NSAppearance_BestMatchFromAppearancesWithNames(void* ptr, Array appearances) {
+    NSAppearance* nSAppearance = (NSAppearance*)ptr;
+    NSMutableArray* objcAppearances = [[NSMutableArray alloc] init];
+    void** appearancesData = (void**)appearances.data;
+    for (int i = 0; i < appearances.len; i++) {
+    	void* p = appearancesData[i];
+    	[objcAppearances addObject:(NSAppearanceName)(NSString*)p];
+    }
+    NSAppearanceName result_ = [nSAppearance bestMatchFromAppearancesWithNames:objcAppearances];
+    return result_;
 }
 
 void* C_NSAppearance_Name(void* ptr) {
     NSAppearance* nSAppearance = (NSAppearance*)ptr;
-    NSAppearanceName result = [nSAppearance name];
-    return result;
+    NSAppearanceName result_ = [nSAppearance name];
+    return result_;
 }
 
 void* C_NSAppearance_CurrentDrawingAppearance() {
-    NSAppearance* result = [NSAppearance currentDrawingAppearance];
-    return result;
+    NSAppearance* result_ = [NSAppearance currentDrawingAppearance];
+    return result_;
 }
 
 bool C_NSAppearance_AllowsVibrancy(void* ptr) {
     NSAppearance* nSAppearance = (NSAppearance*)ptr;
-    BOOL result = [nSAppearance allowsVibrancy];
-    return result;
+    BOOL result_ = [nSAppearance allowsVibrancy];
+    return result_;
 }

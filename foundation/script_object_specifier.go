@@ -50,43 +50,43 @@ func AllocScriptObjectSpecifier() *NSScriptObjectSpecifier {
 }
 
 func (n *NSScriptObjectSpecifier) InitWithContainerClassDescription_ContainerSpecifier_Key(classDesc ScriptClassDescription, container ScriptObjectSpecifier, property string) ScriptObjectSpecifier {
-	result := C.C_NSScriptObjectSpecifier_InitWithContainerClassDescription_ContainerSpecifier_Key(n.Ptr(), objc.ExtractPtr(classDesc), objc.ExtractPtr(container), NewString(property).Ptr())
-	return MakeScriptObjectSpecifier(result)
+	result_ := C.C_NSScriptObjectSpecifier_InitWithContainerClassDescription_ContainerSpecifier_Key(n.Ptr(), objc.ExtractPtr(classDesc), objc.ExtractPtr(container), NewString(property).Ptr())
+	return MakeScriptObjectSpecifier(result_)
 }
 
 func (n *NSScriptObjectSpecifier) InitWithContainerSpecifier_Key(container ScriptObjectSpecifier, property string) ScriptObjectSpecifier {
-	result := C.C_NSScriptObjectSpecifier_InitWithContainerSpecifier_Key(n.Ptr(), objc.ExtractPtr(container), NewString(property).Ptr())
-	return MakeScriptObjectSpecifier(result)
+	result_ := C.C_NSScriptObjectSpecifier_InitWithContainerSpecifier_Key(n.Ptr(), objc.ExtractPtr(container), NewString(property).Ptr())
+	return MakeScriptObjectSpecifier(result_)
 }
 
 func (n *NSScriptObjectSpecifier) InitWithCoder(inCoder Coder) ScriptObjectSpecifier {
-	result := C.C_NSScriptObjectSpecifier_InitWithCoder(n.Ptr(), objc.ExtractPtr(inCoder))
-	return MakeScriptObjectSpecifier(result)
+	result_ := C.C_NSScriptObjectSpecifier_InitWithCoder(n.Ptr(), objc.ExtractPtr(inCoder))
+	return MakeScriptObjectSpecifier(result_)
 }
 
 func (n *NSScriptObjectSpecifier) Init() ScriptObjectSpecifier {
-	result := C.C_NSScriptObjectSpecifier_Init(n.Ptr())
-	return MakeScriptObjectSpecifier(result)
+	result_ := C.C_NSScriptObjectSpecifier_Init(n.Ptr())
+	return MakeScriptObjectSpecifier(result_)
 }
 
-func ScriptObjectSpecifierObjectSpecifierWithDescriptor(descriptor AppleEventDescriptor) ScriptObjectSpecifier {
-	result := C.C_NSScriptObjectSpecifier_ScriptObjectSpecifierObjectSpecifierWithDescriptor(objc.ExtractPtr(descriptor))
-	return MakeScriptObjectSpecifier(result)
+func ScriptObjectSpecifier_ObjectSpecifierWithDescriptor(descriptor AppleEventDescriptor) ScriptObjectSpecifier {
+	result_ := C.C_NSScriptObjectSpecifier_ScriptObjectSpecifier_ObjectSpecifierWithDescriptor(objc.ExtractPtr(descriptor))
+	return MakeScriptObjectSpecifier(result_)
 }
 
 func (n *NSScriptObjectSpecifier) ObjectsByEvaluatingWithContainers(containers objc.Object) objc.Object {
-	result := C.C_NSScriptObjectSpecifier_ObjectsByEvaluatingWithContainers(n.Ptr(), objc.ExtractPtr(containers))
-	return objc.MakeObject(result)
+	result_ := C.C_NSScriptObjectSpecifier_ObjectsByEvaluatingWithContainers(n.Ptr(), objc.ExtractPtr(containers))
+	return objc.MakeObject(result_)
 }
 
 func (n *NSScriptObjectSpecifier) ObjectsByEvaluatingSpecifier() objc.Object {
-	result := C.C_NSScriptObjectSpecifier_ObjectsByEvaluatingSpecifier(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSScriptObjectSpecifier_ObjectsByEvaluatingSpecifier(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSScriptObjectSpecifier) ContainerClassDescription() ScriptClassDescription {
-	result := C.C_NSScriptObjectSpecifier_ContainerClassDescription(n.Ptr())
-	return MakeScriptClassDescription(result)
+	result_ := C.C_NSScriptObjectSpecifier_ContainerClassDescription(n.Ptr())
+	return MakeScriptClassDescription(result_)
 }
 
 func (n *NSScriptObjectSpecifier) SetContainerClassDescription(value ScriptClassDescription) {
@@ -94,8 +94,8 @@ func (n *NSScriptObjectSpecifier) SetContainerClassDescription(value ScriptClass
 }
 
 func (n *NSScriptObjectSpecifier) ContainerIsObjectBeingTested() bool {
-	result := C.C_NSScriptObjectSpecifier_ContainerIsObjectBeingTested(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSScriptObjectSpecifier_ContainerIsObjectBeingTested(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSScriptObjectSpecifier) SetContainerIsObjectBeingTested(value bool) {
@@ -103,8 +103,8 @@ func (n *NSScriptObjectSpecifier) SetContainerIsObjectBeingTested(value bool) {
 }
 
 func (n *NSScriptObjectSpecifier) ContainerIsRangeContainerObject() bool {
-	result := C.C_NSScriptObjectSpecifier_ContainerIsRangeContainerObject(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSScriptObjectSpecifier_ContainerIsRangeContainerObject(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSScriptObjectSpecifier) SetContainerIsRangeContainerObject(value bool) {
@@ -112,8 +112,8 @@ func (n *NSScriptObjectSpecifier) SetContainerIsRangeContainerObject(value bool)
 }
 
 func (n *NSScriptObjectSpecifier) ContainerSpecifier() ScriptObjectSpecifier {
-	result := C.C_NSScriptObjectSpecifier_ContainerSpecifier(n.Ptr())
-	return MakeScriptObjectSpecifier(result)
+	result_ := C.C_NSScriptObjectSpecifier_ContainerSpecifier(n.Ptr())
+	return MakeScriptObjectSpecifier(result_)
 }
 
 func (n *NSScriptObjectSpecifier) SetContainerSpecifier(value ScriptObjectSpecifier) {
@@ -121,8 +121,8 @@ func (n *NSScriptObjectSpecifier) SetContainerSpecifier(value ScriptObjectSpecif
 }
 
 func (n *NSScriptObjectSpecifier) ChildSpecifier() ScriptObjectSpecifier {
-	result := C.C_NSScriptObjectSpecifier_ChildSpecifier(n.Ptr())
-	return MakeScriptObjectSpecifier(result)
+	result_ := C.C_NSScriptObjectSpecifier_ChildSpecifier(n.Ptr())
+	return MakeScriptObjectSpecifier(result_)
 }
 
 func (n *NSScriptObjectSpecifier) SetChildSpecifier(value ScriptObjectSpecifier) {
@@ -130,8 +130,8 @@ func (n *NSScriptObjectSpecifier) SetChildSpecifier(value ScriptObjectSpecifier)
 }
 
 func (n *NSScriptObjectSpecifier) Key() string {
-	result := C.C_NSScriptObjectSpecifier_Key(n.Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSScriptObjectSpecifier_Key(n.Ptr())
+	return MakeString(result_).String()
 }
 
 func (n *NSScriptObjectSpecifier) SetKey(value string) {
@@ -139,18 +139,18 @@ func (n *NSScriptObjectSpecifier) SetKey(value string) {
 }
 
 func (n *NSScriptObjectSpecifier) KeyClassDescription() ScriptClassDescription {
-	result := C.C_NSScriptObjectSpecifier_KeyClassDescription(n.Ptr())
-	return MakeScriptClassDescription(result)
+	result_ := C.C_NSScriptObjectSpecifier_KeyClassDescription(n.Ptr())
+	return MakeScriptClassDescription(result_)
 }
 
 func (n *NSScriptObjectSpecifier) EvaluationErrorSpecifier() ScriptObjectSpecifier {
-	result := C.C_NSScriptObjectSpecifier_EvaluationErrorSpecifier(n.Ptr())
-	return MakeScriptObjectSpecifier(result)
+	result_ := C.C_NSScriptObjectSpecifier_EvaluationErrorSpecifier(n.Ptr())
+	return MakeScriptObjectSpecifier(result_)
 }
 
 func (n *NSScriptObjectSpecifier) EvaluationErrorNumber() int {
-	result := C.C_NSScriptObjectSpecifier_EvaluationErrorNumber(n.Ptr())
-	return int(result)
+	result_ := C.C_NSScriptObjectSpecifier_EvaluationErrorNumber(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSScriptObjectSpecifier) SetEvaluationErrorNumber(value int) {
@@ -158,6 +158,6 @@ func (n *NSScriptObjectSpecifier) SetEvaluationErrorNumber(value int) {
 }
 
 func (n *NSScriptObjectSpecifier) Descriptor() AppleEventDescriptor {
-	result := C.C_NSScriptObjectSpecifier_Descriptor(n.Ptr())
-	return MakeAppleEventDescriptor(result)
+	result_ := C.C_NSScriptObjectSpecifier_Descriptor(n.Ptr())
+	return MakeAppleEventDescriptor(result_)
 }

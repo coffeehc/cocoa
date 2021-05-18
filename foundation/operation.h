@@ -20,3 +20,8 @@ bool C_NSOperation_IsAsynchronous(void* ptr);
 bool C_NSOperation_IsReady(void* ptr);
 void* C_NSOperation_Name(void* ptr);
 void C_NSOperation_SetName(void* ptr, void* value);
+Array C_NSOperation_Dependencies(void* ptr);
+int C_NSOperation_QualityOfService(void* ptr);
+void C_NSOperation_SetQualityOfService(void* ptr, int value);
+int C_NSOperation_QueuePriority(void* ptr);
+void C_NSOperation_SetQueuePriority(void* ptr, int value);

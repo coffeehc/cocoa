@@ -13,5 +13,6 @@ void* C_NSWindowTabGroup_Identifier(void* ptr);
 bool C_NSWindowTabGroup_IsOverviewVisible(void* ptr);
 void C_NSWindowTabGroup_SetOverviewVisible(void* ptr, bool value);
 bool C_NSWindowTabGroup_IsTabBarVisible(void* ptr);
+Array C_NSWindowTabGroup_Windows(void* ptr);
 void* C_NSWindowTabGroup_SelectedWindow(void* ptr);
 void C_NSWindowTabGroup_SetSelectedWindow(void* ptr, void* value);

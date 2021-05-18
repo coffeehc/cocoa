@@ -49,13 +49,13 @@ func AllocGridRow() *NSGridRow {
 }
 
 func (n *NSGridRow) Init() GridRow {
-	result := C.C_NSGridRow_Init(n.Ptr())
-	return MakeGridRow(result)
+	result_ := C.C_NSGridRow_Init(n.Ptr())
+	return MakeGridRow(result_)
 }
 
 func (n *NSGridRow) CellAtIndex(index int) GridCell {
-	result := C.C_NSGridRow_CellAtIndex(n.Ptr(), C.int(index))
-	return MakeGridCell(result)
+	result_ := C.C_NSGridRow_CellAtIndex(n.Ptr(), C.int(index))
+	return MakeGridCell(result_)
 }
 
 func (n *NSGridRow) MergeCellsInRange(_range foundation.Range) {
@@ -63,13 +63,13 @@ func (n *NSGridRow) MergeCellsInRange(_range foundation.Range) {
 }
 
 func (n *NSGridRow) NumberOfCells() int {
-	result := C.C_NSGridRow_NumberOfCells(n.Ptr())
-	return int(result)
+	result_ := C.C_NSGridRow_NumberOfCells(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSGridRow) IsHidden() bool {
-	result := C.C_NSGridRow_IsHidden(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSGridRow_IsHidden(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSGridRow) SetHidden(value bool) {
@@ -77,8 +77,8 @@ func (n *NSGridRow) SetHidden(value bool) {
 }
 
 func (n *NSGridRow) TopPadding() coregraphics.Float {
-	result := C.C_NSGridRow_TopPadding(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSGridRow_TopPadding(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSGridRow) SetTopPadding(value coregraphics.Float) {
@@ -86,8 +86,8 @@ func (n *NSGridRow) SetTopPadding(value coregraphics.Float) {
 }
 
 func (n *NSGridRow) BottomPadding() coregraphics.Float {
-	result := C.C_NSGridRow_BottomPadding(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSGridRow_BottomPadding(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSGridRow) SetBottomPadding(value coregraphics.Float) {
@@ -95,8 +95,8 @@ func (n *NSGridRow) SetBottomPadding(value coregraphics.Float) {
 }
 
 func (n *NSGridRow) Height() coregraphics.Float {
-	result := C.C_NSGridRow_Height(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSGridRow_Height(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSGridRow) SetHeight(value coregraphics.Float) {
@@ -104,8 +104,8 @@ func (n *NSGridRow) SetHeight(value coregraphics.Float) {
 }
 
 func (n *NSGridRow) RowAlignment() GridRowAlignment {
-	result := C.C_NSGridRow_RowAlignment(n.Ptr())
-	return GridRowAlignment(int(result))
+	result_ := C.C_NSGridRow_RowAlignment(n.Ptr())
+	return GridRowAlignment(int(result_))
 }
 
 func (n *NSGridRow) SetRowAlignment(value GridRowAlignment) {
@@ -113,8 +113,8 @@ func (n *NSGridRow) SetRowAlignment(value GridRowAlignment) {
 }
 
 func (n *NSGridRow) YPlacement() GridCellPlacement {
-	result := C.C_NSGridRow_YPlacement(n.Ptr())
-	return GridCellPlacement(int(result))
+	result_ := C.C_NSGridRow_YPlacement(n.Ptr())
+	return GridCellPlacement(int(result_))
 }
 
 func (n *NSGridRow) SetYPlacement(value GridCellPlacement) {
@@ -122,6 +122,6 @@ func (n *NSGridRow) SetYPlacement(value GridCellPlacement) {
 }
 
 func (n *NSGridRow) GridView() GridView {
-	result := C.C_NSGridRow_GridView(n.Ptr())
-	return MakeGridView(result)
+	result_ := C.C_NSGridRow_GridView(n.Ptr())
+	return MakeGridView(result_)
 }

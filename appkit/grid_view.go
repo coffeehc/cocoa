@@ -60,43 +60,43 @@ func AllocGridView() *NSGridView {
 }
 
 func (n *NSGridView) InitWithFrame(frameRect foundation.Rect) GridView {
-	result := C.C_NSGridView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
-	return MakeGridView(result)
+	result_ := C.C_NSGridView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeGridView(result_)
 }
 
 func (n *NSGridView) InitWithCoder(coder foundation.Coder) GridView {
-	result := C.C_NSGridView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeGridView(result)
+	result_ := C.C_NSGridView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeGridView(result_)
 }
 
 func (n *NSGridView) Init() GridView {
-	result := C.C_NSGridView_Init(n.Ptr())
-	return MakeGridView(result)
+	result_ := C.C_NSGridView_Init(n.Ptr())
+	return MakeGridView(result_)
 }
 
 func GridViewWithNumberOfColumns_Rows(columnCount int, rowCount int) GridView {
-	result := C.C_NSGridView_GridViewWithNumberOfColumns_Rows(C.int(columnCount), C.int(rowCount))
-	return MakeGridView(result)
+	result_ := C.C_NSGridView_GridViewWithNumberOfColumns_Rows(C.int(columnCount), C.int(rowCount))
+	return MakeGridView(result_)
 }
 
 func (n *NSGridView) IndexOfColumn(column GridColumn) int {
-	result := C.C_NSGridView_IndexOfColumn(n.Ptr(), objc.ExtractPtr(column))
-	return int(result)
+	result_ := C.C_NSGridView_IndexOfColumn(n.Ptr(), objc.ExtractPtr(column))
+	return int(result_)
 }
 
 func (n *NSGridView) RowAtIndex(index int) GridRow {
-	result := C.C_NSGridView_RowAtIndex(n.Ptr(), C.int(index))
-	return MakeGridRow(result)
+	result_ := C.C_NSGridView_RowAtIndex(n.Ptr(), C.int(index))
+	return MakeGridRow(result_)
 }
 
 func (n *NSGridView) ColumnAtIndex(index int) GridColumn {
-	result := C.C_NSGridView_ColumnAtIndex(n.Ptr(), C.int(index))
-	return MakeGridColumn(result)
+	result_ := C.C_NSGridView_ColumnAtIndex(n.Ptr(), C.int(index))
+	return MakeGridColumn(result_)
 }
 
 func (n *NSGridView) IndexOfRow(row GridRow) int {
-	result := C.C_NSGridView_IndexOfRow(n.Ptr(), objc.ExtractPtr(row))
-	return int(result)
+	result_ := C.C_NSGridView_IndexOfRow(n.Ptr(), objc.ExtractPtr(row))
+	return int(result_)
 }
 
 func (n *NSGridView) AddRowWithViews(views []View) GridRow {
@@ -105,8 +105,8 @@ func (n *NSGridView) AddRowWithViews(views []View) GridRow {
 		cViewsData[idx] = objc.ExtractPtr(v)
 	}
 	cViews := C.Array{data: unsafe.Pointer(&cViewsData[0]), len: C.int(len(views))}
-	result := C.C_NSGridView_AddRowWithViews(n.Ptr(), cViews)
-	return MakeGridRow(result)
+	result_ := C.C_NSGridView_AddRowWithViews(n.Ptr(), cViews)
+	return MakeGridRow(result_)
 }
 
 func (n *NSGridView) InsertRowAtIndex_WithViews(index int, views []View) GridRow {
@@ -115,8 +115,8 @@ func (n *NSGridView) InsertRowAtIndex_WithViews(index int, views []View) GridRow
 		cViewsData[idx] = objc.ExtractPtr(v)
 	}
 	cViews := C.Array{data: unsafe.Pointer(&cViewsData[0]), len: C.int(len(views))}
-	result := C.C_NSGridView_InsertRowAtIndex_WithViews(n.Ptr(), C.int(index), cViews)
-	return MakeGridRow(result)
+	result_ := C.C_NSGridView_InsertRowAtIndex_WithViews(n.Ptr(), C.int(index), cViews)
+	return MakeGridRow(result_)
 }
 
 func (n *NSGridView) RemoveRowAtIndex(index int) {
@@ -133,8 +133,8 @@ func (n *NSGridView) AddColumnWithViews(views []View) GridColumn {
 		cViewsData[idx] = objc.ExtractPtr(v)
 	}
 	cViews := C.Array{data: unsafe.Pointer(&cViewsData[0]), len: C.int(len(views))}
-	result := C.C_NSGridView_AddColumnWithViews(n.Ptr(), cViews)
-	return MakeGridColumn(result)
+	result_ := C.C_NSGridView_AddColumnWithViews(n.Ptr(), cViews)
+	return MakeGridColumn(result_)
 }
 
 func (n *NSGridView) InsertColumnAtIndex_WithViews(index int, views []View) GridColumn {
@@ -143,8 +143,8 @@ func (n *NSGridView) InsertColumnAtIndex_WithViews(index int, views []View) Grid
 		cViewsData[idx] = objc.ExtractPtr(v)
 	}
 	cViews := C.Array{data: unsafe.Pointer(&cViewsData[0]), len: C.int(len(views))}
-	result := C.C_NSGridView_InsertColumnAtIndex_WithViews(n.Ptr(), C.int(index), cViews)
-	return MakeGridColumn(result)
+	result_ := C.C_NSGridView_InsertColumnAtIndex_WithViews(n.Ptr(), C.int(index), cViews)
+	return MakeGridColumn(result_)
 }
 
 func (n *NSGridView) RemoveColumnAtIndex(index int) {
@@ -156,13 +156,13 @@ func (n *NSGridView) MoveColumnAtIndex_ToIndex(fromIndex int, toIndex int) {
 }
 
 func (n *NSGridView) CellAtColumnIndex_RowIndex(columnIndex int, rowIndex int) GridCell {
-	result := C.C_NSGridView_CellAtColumnIndex_RowIndex(n.Ptr(), C.int(columnIndex), C.int(rowIndex))
-	return MakeGridCell(result)
+	result_ := C.C_NSGridView_CellAtColumnIndex_RowIndex(n.Ptr(), C.int(columnIndex), C.int(rowIndex))
+	return MakeGridCell(result_)
 }
 
 func (n *NSGridView) CellForView(view View) GridCell {
-	result := C.C_NSGridView_CellForView(n.Ptr(), objc.ExtractPtr(view))
-	return MakeGridCell(result)
+	result_ := C.C_NSGridView_CellForView(n.Ptr(), objc.ExtractPtr(view))
+	return MakeGridCell(result_)
 }
 
 func (n *NSGridView) MergeCellsInHorizontalRange_VerticalRange(hRange foundation.Range, vRange foundation.Range) {
@@ -170,18 +170,18 @@ func (n *NSGridView) MergeCellsInHorizontalRange_VerticalRange(hRange foundation
 }
 
 func (n *NSGridView) NumberOfRows() int {
-	result := C.C_NSGridView_NumberOfRows(n.Ptr())
-	return int(result)
+	result_ := C.C_NSGridView_NumberOfRows(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSGridView) NumberOfColumns() int {
-	result := C.C_NSGridView_NumberOfColumns(n.Ptr())
-	return int(result)
+	result_ := C.C_NSGridView_NumberOfColumns(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSGridView) ColumnSpacing() coregraphics.Float {
-	result := C.C_NSGridView_ColumnSpacing(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSGridView_ColumnSpacing(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSGridView) SetColumnSpacing(value coregraphics.Float) {
@@ -189,8 +189,8 @@ func (n *NSGridView) SetColumnSpacing(value coregraphics.Float) {
 }
 
 func (n *NSGridView) RowSpacing() coregraphics.Float {
-	result := C.C_NSGridView_RowSpacing(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSGridView_RowSpacing(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSGridView) SetRowSpacing(value coregraphics.Float) {
@@ -198,8 +198,8 @@ func (n *NSGridView) SetRowSpacing(value coregraphics.Float) {
 }
 
 func (n *NSGridView) RowAlignment() GridRowAlignment {
-	result := C.C_NSGridView_RowAlignment(n.Ptr())
-	return GridRowAlignment(int(result))
+	result_ := C.C_NSGridView_RowAlignment(n.Ptr())
+	return GridRowAlignment(int(result_))
 }
 
 func (n *NSGridView) SetRowAlignment(value GridRowAlignment) {
@@ -207,8 +207,8 @@ func (n *NSGridView) SetRowAlignment(value GridRowAlignment) {
 }
 
 func (n *NSGridView) XPlacement() GridCellPlacement {
-	result := C.C_NSGridView_XPlacement(n.Ptr())
-	return GridCellPlacement(int(result))
+	result_ := C.C_NSGridView_XPlacement(n.Ptr())
+	return GridCellPlacement(int(result_))
 }
 
 func (n *NSGridView) SetXPlacement(value GridCellPlacement) {
@@ -216,8 +216,8 @@ func (n *NSGridView) SetXPlacement(value GridCellPlacement) {
 }
 
 func (n *NSGridView) YPlacement() GridCellPlacement {
-	result := C.C_NSGridView_YPlacement(n.Ptr())
-	return GridCellPlacement(int(result))
+	result_ := C.C_NSGridView_YPlacement(n.Ptr())
+	return GridCellPlacement(int(result_))
 }
 
 func (n *NSGridView) SetYPlacement(value GridCellPlacement) {

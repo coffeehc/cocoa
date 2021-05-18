@@ -7,8 +7,13 @@ void* C_OperationQueue_Alloc();
 
 void* C_NSOperationQueue_Init(void* ptr);
 void C_NSOperationQueue_AddOperation(void* ptr, void* op);
+void C_NSOperationQueue_AddOperations_WaitUntilFinished(void* ptr, Array ops, bool wait);
 void C_NSOperationQueue_CancelAllOperations(void* ptr);
 void C_NSOperationQueue_WaitUntilAllOperationsAreFinished(void* ptr);
+void* C_NSOperationQueue_OperationQueue_MainQueue();
+void* C_NSOperationQueue_OperationQueue_CurrentQueue();
+int C_NSOperationQueue_QualityOfService(void* ptr);
+void C_NSOperationQueue_SetQualityOfService(void* ptr, int value);
 int C_NSOperationQueue_MaxConcurrentOperationCount(void* ptr);
 void C_NSOperationQueue_SetMaxConcurrentOperationCount(void* ptr, int value);
 bool C_NSOperationQueue_IsSuspended(void* ptr);

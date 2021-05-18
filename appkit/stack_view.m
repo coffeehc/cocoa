@@ -7,20 +7,20 @@ void* C_StackView_Alloc() {
 
 void* C_NSStackView_InitWithFrame(void* ptr, CGRect frameRect) {
     NSStackView* nSStackView = (NSStackView*)ptr;
-    NSStackView* result = [nSStackView initWithFrame:frameRect];
-    return result;
+    NSStackView* result_ = [nSStackView initWithFrame:frameRect];
+    return result_;
 }
 
 void* C_NSStackView_InitWithCoder(void* ptr, void* coder) {
     NSStackView* nSStackView = (NSStackView*)ptr;
-    NSStackView* result = [nSStackView initWithCoder:(NSCoder*)coder];
-    return result;
+    NSStackView* result_ = [nSStackView initWithCoder:(NSCoder*)coder];
+    return result_;
 }
 
 void* C_NSStackView_Init(void* ptr) {
     NSStackView* nSStackView = (NSStackView*)ptr;
-    NSStackView* result = [nSStackView init];
-    return result;
+    NSStackView* result_ = [nSStackView init];
+    return result_;
 }
 
 void* C_NSStackView_StackViewWithViews(Array views) {
@@ -30,8 +30,8 @@ void* C_NSStackView_StackViewWithViews(Array views) {
     	void* p = viewsData[i];
     	[objcViews addObject:(NSView*)(NSView*)p];
     }
-    NSStackView* result = [NSStackView stackViewWithViews:objcViews];
-    return result;
+    NSStackView* result_ = [NSStackView stackViewWithViews:objcViews];
+    return result_;
 }
 
 void C_NSStackView_AddView_InGravity(void* ptr, void* view, int gravity) {
@@ -77,35 +77,35 @@ void C_NSStackView_RemoveArrangedSubview(void* ptr, void* view) {
 
 Array C_NSStackView_ViewsInGravity(void* ptr, int gravity) {
     NSStackView* nSStackView = (NSStackView*)ptr;
-    NSArray* result = [nSStackView viewsInGravity:gravity];
-    int resultcount = [result count];
-    void** resultData = malloc(resultcount * sizeof(void*));
-    for (int i = 0; i < resultcount; i++) {
-    	 void* p = [result objectAtIndex:i];
-    	 resultData[i] = p;
+    NSArray* result_ = [nSStackView viewsInGravity:gravity];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
     }
-    Array resultArray;
-    resultArray.data = resultData;
-    resultArray.len = resultcount;
-    return resultArray;
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
 }
 
 float C_NSStackView_ClippingResistancePriorityForOrientation(void* ptr, int orientation) {
     NSStackView* nSStackView = (NSStackView*)ptr;
-    NSLayoutPriority result = [nSStackView clippingResistancePriorityForOrientation:orientation];
-    return result;
+    NSLayoutPriority result_ = [nSStackView clippingResistancePriorityForOrientation:orientation];
+    return result_;
 }
 
 float C_NSStackView_HuggingPriorityForOrientation(void* ptr, int orientation) {
     NSStackView* nSStackView = (NSStackView*)ptr;
-    NSLayoutPriority result = [nSStackView huggingPriorityForOrientation:orientation];
-    return result;
+    NSLayoutPriority result_ = [nSStackView huggingPriorityForOrientation:orientation];
+    return result_;
 }
 
 double C_NSStackView_CustomSpacingAfterView(void* ptr, void* view) {
     NSStackView* nSStackView = (NSStackView*)ptr;
-    CGFloat result = [nSStackView customSpacingAfterView:(NSView*)view];
-    return result;
+    CGFloat result_ = [nSStackView customSpacingAfterView:(NSView*)view];
+    return result_;
 }
 
 void C_NSStackView_SetCustomSpacing_AfterView(void* ptr, double spacing, void* view) {
@@ -115,8 +115,8 @@ void C_NSStackView_SetCustomSpacing_AfterView(void* ptr, double spacing, void* v
 
 float C_NSStackView_VisibilityPriorityForView(void* ptr, void* view) {
     NSStackView* nSStackView = (NSStackView*)ptr;
-    NSStackViewVisibilityPriority result = [nSStackView visibilityPriorityForView:(NSView*)view];
-    return result;
+    NSStackViewVisibilityPriority result_ = [nSStackView visibilityPriorityForView:(NSView*)view];
+    return result_;
 }
 
 void C_NSStackView_SetVisibilityPriority_ForView(void* ptr, float priority, void* view) {
@@ -134,55 +134,66 @@ void C_NSStackView_SetHuggingPriority_ForOrientation(void* ptr, float huggingPri
     [nSStackView setHuggingPriority:huggingPriority forOrientation:orientation];
 }
 
+void* C_NSStackView_Delegate(void* ptr) {
+    NSStackView* nSStackView = (NSStackView*)ptr;
+    id result_ = [nSStackView delegate];
+    return result_;
+}
+
+void C_NSStackView_SetDelegate(void* ptr, void* value) {
+    NSStackView* nSStackView = (NSStackView*)ptr;
+    [nSStackView setDelegate:(id)value];
+}
+
 Array C_NSStackView_ArrangedSubviews(void* ptr) {
     NSStackView* nSStackView = (NSStackView*)ptr;
-    NSArray* result = [nSStackView arrangedSubviews];
-    int resultcount = [result count];
-    void** resultData = malloc(resultcount * sizeof(void*));
-    for (int i = 0; i < resultcount; i++) {
-    	 void* p = [result objectAtIndex:i];
-    	 resultData[i] = p;
+    NSArray* result_ = [nSStackView arrangedSubviews];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
     }
-    Array resultArray;
-    resultArray.data = resultData;
-    resultArray.len = resultcount;
-    return resultArray;
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
 }
 
 Array C_NSStackView_Views(void* ptr) {
     NSStackView* nSStackView = (NSStackView*)ptr;
-    NSArray* result = [nSStackView views];
-    int resultcount = [result count];
-    void** resultData = malloc(resultcount * sizeof(void*));
-    for (int i = 0; i < resultcount; i++) {
-    	 void* p = [result objectAtIndex:i];
-    	 resultData[i] = p;
+    NSArray* result_ = [nSStackView views];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
     }
-    Array resultArray;
-    resultArray.data = resultData;
-    resultArray.len = resultcount;
-    return resultArray;
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
 }
 
 Array C_NSStackView_DetachedViews(void* ptr) {
     NSStackView* nSStackView = (NSStackView*)ptr;
-    NSArray* result = [nSStackView detachedViews];
-    int resultcount = [result count];
-    void** resultData = malloc(resultcount * sizeof(void*));
-    for (int i = 0; i < resultcount; i++) {
-    	 void* p = [result objectAtIndex:i];
-    	 resultData[i] = p;
+    NSArray* result_ = [nSStackView detachedViews];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
     }
-    Array resultArray;
-    resultArray.data = resultData;
-    resultArray.len = resultcount;
-    return resultArray;
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
 }
 
 int C_NSStackView_Orientation(void* ptr) {
     NSStackView* nSStackView = (NSStackView*)ptr;
-    NSUserInterfaceLayoutOrientation result = [nSStackView orientation];
-    return result;
+    NSUserInterfaceLayoutOrientation result_ = [nSStackView orientation];
+    return result_;
 }
 
 void C_NSStackView_SetOrientation(void* ptr, int value) {
@@ -192,8 +203,8 @@ void C_NSStackView_SetOrientation(void* ptr, int value) {
 
 int C_NSStackView_Alignment(void* ptr) {
     NSStackView* nSStackView = (NSStackView*)ptr;
-    NSLayoutAttribute result = [nSStackView alignment];
-    return result;
+    NSLayoutAttribute result_ = [nSStackView alignment];
+    return result_;
 }
 
 void C_NSStackView_SetAlignment(void* ptr, int value) {
@@ -203,8 +214,8 @@ void C_NSStackView_SetAlignment(void* ptr, int value) {
 
 double C_NSStackView_Spacing(void* ptr) {
     NSStackView* nSStackView = (NSStackView*)ptr;
-    CGFloat result = [nSStackView spacing];
-    return result;
+    CGFloat result_ = [nSStackView spacing];
+    return result_;
 }
 
 void C_NSStackView_SetSpacing(void* ptr, double value) {
@@ -214,8 +225,8 @@ void C_NSStackView_SetSpacing(void* ptr, double value) {
 
 NSEdgeInsets C_NSStackView_EdgeInsets(void* ptr) {
     NSStackView* nSStackView = (NSStackView*)ptr;
-    NSEdgeInsets result = [nSStackView edgeInsets];
-    return result;
+    NSEdgeInsets result_ = [nSStackView edgeInsets];
+    return result_;
 }
 
 void C_NSStackView_SetEdgeInsets(void* ptr, NSEdgeInsets value) {
@@ -225,8 +236,8 @@ void C_NSStackView_SetEdgeInsets(void* ptr, NSEdgeInsets value) {
 
 int C_NSStackView_Distribution(void* ptr) {
     NSStackView* nSStackView = (NSStackView*)ptr;
-    NSStackViewDistribution result = [nSStackView distribution];
-    return result;
+    NSStackViewDistribution result_ = [nSStackView distribution];
+    return result_;
 }
 
 void C_NSStackView_SetDistribution(void* ptr, int value) {
@@ -236,8 +247,8 @@ void C_NSStackView_SetDistribution(void* ptr, int value) {
 
 bool C_NSStackView_DetachesHiddenViews(void* ptr) {
     NSStackView* nSStackView = (NSStackView*)ptr;
-    BOOL result = [nSStackView detachesHiddenViews];
-    return result;
+    BOOL result_ = [nSStackView detachesHiddenViews];
+    return result_;
 }
 
 void C_NSStackView_SetDetachesHiddenViews(void* ptr, bool value) {

@@ -112,18 +112,18 @@ func AllocScrollView() *NSScrollView {
 }
 
 func (n *NSScrollView) InitWithCoder(coder foundation.Coder) ScrollView {
-	result := C.C_NSScrollView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeScrollView(result)
+	result_ := C.C_NSScrollView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeScrollView(result_)
 }
 
 func (n *NSScrollView) InitWithFrame(frameRect foundation.Rect) ScrollView {
-	result := C.C_NSScrollView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
-	return MakeScrollView(result)
+	result_ := C.C_NSScrollView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeScrollView(result_)
 }
 
 func (n *NSScrollView) Init() ScrollView {
-	result := C.C_NSScrollView_Init(n.Ptr())
-	return MakeScrollView(result)
+	result_ := C.C_NSScrollView_Init(n.Ptr())
+	return MakeScrollView(result_)
 }
 
 func (n *NSScrollView) AddFloatingSubview_ForAxis(view View, axis EventGestureAxis) {
@@ -147,18 +147,18 @@ func (n *NSScrollView) SetMagnification_CenteredAtPoint(magnification coregraphi
 }
 
 func (n *NSScrollView) ContentSize() foundation.Size {
-	result := C.C_NSScrollView_ContentSize(n.Ptr())
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSScrollView_ContentSize(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSScrollView) DocumentVisibleRect() foundation.Rect {
-	result := C.C_NSScrollView_DocumentVisibleRect(n.Ptr())
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSScrollView_DocumentVisibleRect(n.Ptr())
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSScrollView) BackgroundColor() Color {
-	result := C.C_NSScrollView_BackgroundColor(n.Ptr())
-	return MakeColor(result)
+	result_ := C.C_NSScrollView_BackgroundColor(n.Ptr())
+	return MakeColor(result_)
 }
 
 func (n *NSScrollView) SetBackgroundColor(value Color) {
@@ -166,8 +166,8 @@ func (n *NSScrollView) SetBackgroundColor(value Color) {
 }
 
 func (n *NSScrollView) DrawsBackground() bool {
-	result := C.C_NSScrollView_DrawsBackground(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSScrollView_DrawsBackground(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSScrollView) SetDrawsBackground(value bool) {
@@ -175,8 +175,8 @@ func (n *NSScrollView) SetDrawsBackground(value bool) {
 }
 
 func (n *NSScrollView) BorderType() BorderType {
-	result := C.C_NSScrollView_BorderType(n.Ptr())
-	return BorderType(uint(result))
+	result_ := C.C_NSScrollView_BorderType(n.Ptr())
+	return BorderType(uint(result_))
 }
 
 func (n *NSScrollView) SetBorderType(value BorderType) {
@@ -184,8 +184,8 @@ func (n *NSScrollView) SetBorderType(value BorderType) {
 }
 
 func (n *NSScrollView) DocumentCursor() Cursor {
-	result := C.C_NSScrollView_DocumentCursor(n.Ptr())
-	return MakeCursor(result)
+	result_ := C.C_NSScrollView_DocumentCursor(n.Ptr())
+	return MakeCursor(result_)
 }
 
 func (n *NSScrollView) SetDocumentCursor(value Cursor) {
@@ -193,8 +193,8 @@ func (n *NSScrollView) SetDocumentCursor(value Cursor) {
 }
 
 func (n *NSScrollView) ContentView() ClipView {
-	result := C.C_NSScrollView_ContentView(n.Ptr())
-	return MakeClipView(result)
+	result_ := C.C_NSScrollView_ContentView(n.Ptr())
+	return MakeClipView(result_)
 }
 
 func (n *NSScrollView) SetContentView(value ClipView) {
@@ -202,8 +202,8 @@ func (n *NSScrollView) SetContentView(value ClipView) {
 }
 
 func (n *NSScrollView) DocumentView() View {
-	result := C.C_NSScrollView_DocumentView(n.Ptr())
-	return MakeView(result)
+	result_ := C.C_NSScrollView_DocumentView(n.Ptr())
+	return MakeView(result_)
 }
 
 func (n *NSScrollView) SetDocumentView(value View) {
@@ -211,8 +211,8 @@ func (n *NSScrollView) SetDocumentView(value View) {
 }
 
 func (n *NSScrollView) HorizontalScroller() Scroller {
-	result := C.C_NSScrollView_HorizontalScroller(n.Ptr())
-	return MakeScroller(result)
+	result_ := C.C_NSScrollView_HorizontalScroller(n.Ptr())
+	return MakeScroller(result_)
 }
 
 func (n *NSScrollView) SetHorizontalScroller(value Scroller) {
@@ -220,8 +220,8 @@ func (n *NSScrollView) SetHorizontalScroller(value Scroller) {
 }
 
 func (n *NSScrollView) HasHorizontalScroller() bool {
-	result := C.C_NSScrollView_HasHorizontalScroller(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSScrollView_HasHorizontalScroller(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSScrollView) SetHasHorizontalScroller(value bool) {
@@ -229,8 +229,8 @@ func (n *NSScrollView) SetHasHorizontalScroller(value bool) {
 }
 
 func (n *NSScrollView) VerticalScroller() Scroller {
-	result := C.C_NSScrollView_VerticalScroller(n.Ptr())
-	return MakeScroller(result)
+	result_ := C.C_NSScrollView_VerticalScroller(n.Ptr())
+	return MakeScroller(result_)
 }
 
 func (n *NSScrollView) SetVerticalScroller(value Scroller) {
@@ -238,8 +238,8 @@ func (n *NSScrollView) SetVerticalScroller(value Scroller) {
 }
 
 func (n *NSScrollView) HasVerticalScroller() bool {
-	result := C.C_NSScrollView_HasVerticalScroller(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSScrollView_HasVerticalScroller(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSScrollView) SetHasVerticalScroller(value bool) {
@@ -247,8 +247,8 @@ func (n *NSScrollView) SetHasVerticalScroller(value bool) {
 }
 
 func (n *NSScrollView) AutohidesScrollers() bool {
-	result := C.C_NSScrollView_AutohidesScrollers(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSScrollView_AutohidesScrollers(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSScrollView) SetAutohidesScrollers(value bool) {
@@ -256,8 +256,8 @@ func (n *NSScrollView) SetAutohidesScrollers(value bool) {
 }
 
 func (n *NSScrollView) HasHorizontalRuler() bool {
-	result := C.C_NSScrollView_HasHorizontalRuler(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSScrollView_HasHorizontalRuler(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSScrollView) SetHasHorizontalRuler(value bool) {
@@ -265,8 +265,8 @@ func (n *NSScrollView) SetHasHorizontalRuler(value bool) {
 }
 
 func (n *NSScrollView) HorizontalRulerView() RulerView {
-	result := C.C_NSScrollView_HorizontalRulerView(n.Ptr())
-	return MakeRulerView(result)
+	result_ := C.C_NSScrollView_HorizontalRulerView(n.Ptr())
+	return MakeRulerView(result_)
 }
 
 func (n *NSScrollView) SetHorizontalRulerView(value RulerView) {
@@ -274,8 +274,8 @@ func (n *NSScrollView) SetHorizontalRulerView(value RulerView) {
 }
 
 func (n *NSScrollView) HasVerticalRuler() bool {
-	result := C.C_NSScrollView_HasVerticalRuler(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSScrollView_HasVerticalRuler(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSScrollView) SetHasVerticalRuler(value bool) {
@@ -283,8 +283,8 @@ func (n *NSScrollView) SetHasVerticalRuler(value bool) {
 }
 
 func (n *NSScrollView) VerticalRulerView() RulerView {
-	result := C.C_NSScrollView_VerticalRulerView(n.Ptr())
-	return MakeRulerView(result)
+	result_ := C.C_NSScrollView_VerticalRulerView(n.Ptr())
+	return MakeRulerView(result_)
 }
 
 func (n *NSScrollView) SetVerticalRulerView(value RulerView) {
@@ -292,8 +292,8 @@ func (n *NSScrollView) SetVerticalRulerView(value RulerView) {
 }
 
 func (n *NSScrollView) RulersVisible() bool {
-	result := C.C_NSScrollView_RulersVisible(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSScrollView_RulersVisible(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSScrollView) SetRulersVisible(value bool) {
@@ -301,8 +301,8 @@ func (n *NSScrollView) SetRulersVisible(value bool) {
 }
 
 func (n *NSScrollView) AutomaticallyAdjustsContentInsets() bool {
-	result := C.C_NSScrollView_AutomaticallyAdjustsContentInsets(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSScrollView_AutomaticallyAdjustsContentInsets(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSScrollView) SetAutomaticallyAdjustsContentInsets(value bool) {
@@ -310,8 +310,8 @@ func (n *NSScrollView) SetAutomaticallyAdjustsContentInsets(value bool) {
 }
 
 func (n *NSScrollView) ContentInsets() foundation.EdgeInsets {
-	result := C.C_NSScrollView_ContentInsets(n.Ptr())
-	return foundation.FromNSEdgeInsetsPointer(unsafe.Pointer(&result))
+	result_ := C.C_NSScrollView_ContentInsets(n.Ptr())
+	return foundation.FromNSEdgeInsetsPointer(unsafe.Pointer(&result_))
 }
 
 func (n *NSScrollView) SetContentInsets(value foundation.EdgeInsets) {
@@ -319,8 +319,8 @@ func (n *NSScrollView) SetContentInsets(value foundation.EdgeInsets) {
 }
 
 func (n *NSScrollView) ScrollerInsets() foundation.EdgeInsets {
-	result := C.C_NSScrollView_ScrollerInsets(n.Ptr())
-	return foundation.FromNSEdgeInsetsPointer(unsafe.Pointer(&result))
+	result_ := C.C_NSScrollView_ScrollerInsets(n.Ptr())
+	return foundation.FromNSEdgeInsetsPointer(unsafe.Pointer(&result_))
 }
 
 func (n *NSScrollView) SetScrollerInsets(value foundation.EdgeInsets) {
@@ -328,8 +328,8 @@ func (n *NSScrollView) SetScrollerInsets(value foundation.EdgeInsets) {
 }
 
 func (n *NSScrollView) ScrollerKnobStyle() ScrollerKnobStyle {
-	result := C.C_NSScrollView_ScrollerKnobStyle(n.Ptr())
-	return ScrollerKnobStyle(int(result))
+	result_ := C.C_NSScrollView_ScrollerKnobStyle(n.Ptr())
+	return ScrollerKnobStyle(int(result_))
 }
 
 func (n *NSScrollView) SetScrollerKnobStyle(value ScrollerKnobStyle) {
@@ -337,8 +337,8 @@ func (n *NSScrollView) SetScrollerKnobStyle(value ScrollerKnobStyle) {
 }
 
 func (n *NSScrollView) ScrollerStyle() ScrollerStyle {
-	result := C.C_NSScrollView_ScrollerStyle(n.Ptr())
-	return ScrollerStyle(int(result))
+	result_ := C.C_NSScrollView_ScrollerStyle(n.Ptr())
+	return ScrollerStyle(int(result_))
 }
 
 func (n *NSScrollView) SetScrollerStyle(value ScrollerStyle) {
@@ -346,8 +346,8 @@ func (n *NSScrollView) SetScrollerStyle(value ScrollerStyle) {
 }
 
 func (n *NSScrollView) LineScroll() coregraphics.Float {
-	result := C.C_NSScrollView_LineScroll(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSScrollView_LineScroll(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSScrollView) SetLineScroll(value coregraphics.Float) {
@@ -355,8 +355,8 @@ func (n *NSScrollView) SetLineScroll(value coregraphics.Float) {
 }
 
 func (n *NSScrollView) HorizontalLineScroll() coregraphics.Float {
-	result := C.C_NSScrollView_HorizontalLineScroll(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSScrollView_HorizontalLineScroll(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSScrollView) SetHorizontalLineScroll(value coregraphics.Float) {
@@ -364,8 +364,8 @@ func (n *NSScrollView) SetHorizontalLineScroll(value coregraphics.Float) {
 }
 
 func (n *NSScrollView) VerticalLineScroll() coregraphics.Float {
-	result := C.C_NSScrollView_VerticalLineScroll(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSScrollView_VerticalLineScroll(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSScrollView) SetVerticalLineScroll(value coregraphics.Float) {
@@ -373,8 +373,8 @@ func (n *NSScrollView) SetVerticalLineScroll(value coregraphics.Float) {
 }
 
 func (n *NSScrollView) PageScroll() coregraphics.Float {
-	result := C.C_NSScrollView_PageScroll(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSScrollView_PageScroll(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSScrollView) SetPageScroll(value coregraphics.Float) {
@@ -382,8 +382,8 @@ func (n *NSScrollView) SetPageScroll(value coregraphics.Float) {
 }
 
 func (n *NSScrollView) HorizontalPageScroll() coregraphics.Float {
-	result := C.C_NSScrollView_HorizontalPageScroll(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSScrollView_HorizontalPageScroll(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSScrollView) SetHorizontalPageScroll(value coregraphics.Float) {
@@ -391,8 +391,8 @@ func (n *NSScrollView) SetHorizontalPageScroll(value coregraphics.Float) {
 }
 
 func (n *NSScrollView) VerticalPageScroll() coregraphics.Float {
-	result := C.C_NSScrollView_VerticalPageScroll(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSScrollView_VerticalPageScroll(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSScrollView) SetVerticalPageScroll(value coregraphics.Float) {
@@ -400,8 +400,8 @@ func (n *NSScrollView) SetVerticalPageScroll(value coregraphics.Float) {
 }
 
 func (n *NSScrollView) ScrollsDynamically() bool {
-	result := C.C_NSScrollView_ScrollsDynamically(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSScrollView_ScrollsDynamically(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSScrollView) SetScrollsDynamically(value bool) {
@@ -409,8 +409,8 @@ func (n *NSScrollView) SetScrollsDynamically(value bool) {
 }
 
 func (n *NSScrollView) FindBarPosition() ScrollViewFindBarPosition {
-	result := C.C_NSScrollView_FindBarPosition(n.Ptr())
-	return ScrollViewFindBarPosition(int(result))
+	result_ := C.C_NSScrollView_FindBarPosition(n.Ptr())
+	return ScrollViewFindBarPosition(int(result_))
 }
 
 func (n *NSScrollView) SetFindBarPosition(value ScrollViewFindBarPosition) {
@@ -418,8 +418,8 @@ func (n *NSScrollView) SetFindBarPosition(value ScrollViewFindBarPosition) {
 }
 
 func (n *NSScrollView) UsesPredominantAxisScrolling() bool {
-	result := C.C_NSScrollView_UsesPredominantAxisScrolling(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSScrollView_UsesPredominantAxisScrolling(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSScrollView) SetUsesPredominantAxisScrolling(value bool) {
@@ -427,8 +427,8 @@ func (n *NSScrollView) SetUsesPredominantAxisScrolling(value bool) {
 }
 
 func (n *NSScrollView) HorizontalScrollElasticity() ScrollElasticity {
-	result := C.C_NSScrollView_HorizontalScrollElasticity(n.Ptr())
-	return ScrollElasticity(int(result))
+	result_ := C.C_NSScrollView_HorizontalScrollElasticity(n.Ptr())
+	return ScrollElasticity(int(result_))
 }
 
 func (n *NSScrollView) SetHorizontalScrollElasticity(value ScrollElasticity) {
@@ -436,8 +436,8 @@ func (n *NSScrollView) SetHorizontalScrollElasticity(value ScrollElasticity) {
 }
 
 func (n *NSScrollView) VerticalScrollElasticity() ScrollElasticity {
-	result := C.C_NSScrollView_VerticalScrollElasticity(n.Ptr())
-	return ScrollElasticity(int(result))
+	result_ := C.C_NSScrollView_VerticalScrollElasticity(n.Ptr())
+	return ScrollElasticity(int(result_))
 }
 
 func (n *NSScrollView) SetVerticalScrollElasticity(value ScrollElasticity) {
@@ -445,8 +445,8 @@ func (n *NSScrollView) SetVerticalScrollElasticity(value ScrollElasticity) {
 }
 
 func (n *NSScrollView) AllowsMagnification() bool {
-	result := C.C_NSScrollView_AllowsMagnification(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSScrollView_AllowsMagnification(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSScrollView) SetAllowsMagnification(value bool) {
@@ -454,8 +454,8 @@ func (n *NSScrollView) SetAllowsMagnification(value bool) {
 }
 
 func (n *NSScrollView) Magnification() coregraphics.Float {
-	result := C.C_NSScrollView_Magnification(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSScrollView_Magnification(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSScrollView) SetMagnification(value coregraphics.Float) {
@@ -463,8 +463,8 @@ func (n *NSScrollView) SetMagnification(value coregraphics.Float) {
 }
 
 func (n *NSScrollView) MaxMagnification() coregraphics.Float {
-	result := C.C_NSScrollView_MaxMagnification(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSScrollView_MaxMagnification(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSScrollView) SetMaxMagnification(value coregraphics.Float) {
@@ -472,8 +472,8 @@ func (n *NSScrollView) SetMaxMagnification(value coregraphics.Float) {
 }
 
 func (n *NSScrollView) MinMagnification() coregraphics.Float {
-	result := C.C_NSScrollView_MinMagnification(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSScrollView_MinMagnification(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSScrollView) SetMinMagnification(value coregraphics.Float) {

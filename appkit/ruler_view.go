@@ -28,8 +28,12 @@ type RulerView interface {
 	SetAccessoryView(value View)
 	OriginOffset() coregraphics.Float
 	SetOriginOffset(value coregraphics.Float)
+	Markers() []RulerMarker
+	SetMarkers(value []RulerMarker)
 	ScrollView() ScrollView
 	SetScrollView(value ScrollView)
+	Orientation() RulerOrientation
+	SetOrientation(value RulerOrientation)
 	ReservedThicknessForAccessoryView() coregraphics.Float
 	SetReservedThicknessForAccessoryView(value coregraphics.Float)
 	ReservedThicknessForMarkers() coregraphics.Float
@@ -57,19 +61,38 @@ func AllocRulerView() *NSRulerView {
 	return MakeRulerView(C.C_RulerView_Alloc())
 }
 
+func (n *NSRulerView) InitWithScrollView_Orientation(scrollView ScrollView, orientation RulerOrientation) RulerView {
+	result_ := C.C_NSRulerView_InitWithScrollView_Orientation(n.Ptr(), objc.ExtractPtr(scrollView), C.uint(uint(orientation)))
+	return MakeRulerView(result_)
+}
+
 func (n *NSRulerView) InitWithCoder(coder foundation.Coder) RulerView {
-	result := C.C_NSRulerView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeRulerView(result)
+	result_ := C.C_NSRulerView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeRulerView(result_)
 }
 
 func (n *NSRulerView) InitWithFrame(frameRect foundation.Rect) RulerView {
-	result := C.C_NSRulerView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
-	return MakeRulerView(result)
+	result_ := C.C_NSRulerView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeRulerView(result_)
 }
 
 func (n *NSRulerView) Init() RulerView {
-	result := C.C_NSRulerView_Init(n.Ptr())
-	return MakeRulerView(result)
+	result_ := C.C_NSRulerView_Init(n.Ptr())
+	return MakeRulerView(result_)
+}
+
+func RulerView_RegisterUnitWithName_Abbreviation_UnitToPointsConversionFactor_StepUpCycle_StepDownCycle(unitName RulerViewUnitName, abbreviation string, conversionFactor coregraphics.Float, stepUpCycle []foundation.Number, stepDownCycle []foundation.Number) {
+	cStepUpCycleData := make([]unsafe.Pointer, len(stepUpCycle))
+	for idx, v := range stepUpCycle {
+		cStepUpCycleData[idx] = objc.ExtractPtr(v)
+	}
+	cStepUpCycle := C.Array{data: unsafe.Pointer(&cStepUpCycleData[0]), len: C.int(len(stepUpCycle))}
+	cStepDownCycleData := make([]unsafe.Pointer, len(stepDownCycle))
+	for idx, v := range stepDownCycle {
+		cStepDownCycleData[idx] = objc.ExtractPtr(v)
+	}
+	cStepDownCycle := C.Array{data: unsafe.Pointer(&cStepDownCycleData[0]), len: C.int(len(stepDownCycle))}
+	C.C_NSRulerView_RulerView_RegisterUnitWithName_Abbreviation_UnitToPointsConversionFactor_StepUpCycle_StepDownCycle(foundation.NewString(string(unitName)).Ptr(), foundation.NewString(abbreviation).Ptr(), C.double(float64(conversionFactor)), cStepUpCycle, cStepDownCycle)
 }
 
 func (n *NSRulerView) AddMarker(marker RulerMarker) {
@@ -81,8 +104,8 @@ func (n *NSRulerView) RemoveMarker(marker RulerMarker) {
 }
 
 func (n *NSRulerView) TrackMarker_WithMouseEvent(marker RulerMarker, event Event) bool {
-	result := C.C_NSRulerView_TrackMarker_WithMouseEvent(n.Ptr(), objc.ExtractPtr(marker), objc.ExtractPtr(event))
-	return bool(result)
+	result_ := C.C_NSRulerView_TrackMarker_WithMouseEvent(n.Ptr(), objc.ExtractPtr(marker), objc.ExtractPtr(event))
+	return bool(result_)
 }
 
 func (n *NSRulerView) MoveRulerlineFromLocation_ToLocation(oldLocation coregraphics.Float, newLocation coregraphics.Float) {
@@ -102,8 +125,8 @@ func (n *NSRulerView) InvalidateHashMarks() {
 }
 
 func (n *NSRulerView) MeasurementUnits() RulerViewUnitName {
-	result := C.C_NSRulerView_MeasurementUnits(n.Ptr())
-	return RulerViewUnitName(foundation.MakeString(result).String())
+	result_ := C.C_NSRulerView_MeasurementUnits(n.Ptr())
+	return RulerViewUnitName(foundation.MakeString(result_).String())
 }
 
 func (n *NSRulerView) SetMeasurementUnits(value RulerViewUnitName) {
@@ -111,8 +134,8 @@ func (n *NSRulerView) SetMeasurementUnits(value RulerViewUnitName) {
 }
 
 func (n *NSRulerView) ClientView() View {
-	result := C.C_NSRulerView_ClientView(n.Ptr())
-	return MakeView(result)
+	result_ := C.C_NSRulerView_ClientView(n.Ptr())
+	return MakeView(result_)
 }
 
 func (n *NSRulerView) SetClientView(value View) {
@@ -120,8 +143,8 @@ func (n *NSRulerView) SetClientView(value View) {
 }
 
 func (n *NSRulerView) AccessoryView() View {
-	result := C.C_NSRulerView_AccessoryView(n.Ptr())
-	return MakeView(result)
+	result_ := C.C_NSRulerView_AccessoryView(n.Ptr())
+	return MakeView(result_)
 }
 
 func (n *NSRulerView) SetAccessoryView(value View) {
@@ -129,26 +152,55 @@ func (n *NSRulerView) SetAccessoryView(value View) {
 }
 
 func (n *NSRulerView) OriginOffset() coregraphics.Float {
-	result := C.C_NSRulerView_OriginOffset(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSRulerView_OriginOffset(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSRulerView) SetOriginOffset(value coregraphics.Float) {
 	C.C_NSRulerView_SetOriginOffset(n.Ptr(), C.double(float64(value)))
 }
 
+func (n *NSRulerView) Markers() []RulerMarker {
+	result_ := C.C_NSRulerView_Markers(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]RulerMarker, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeRulerMarker(r)
+	}
+	return goResult_
+}
+
+func (n *NSRulerView) SetMarkers(value []RulerMarker) {
+	cValueData := make([]unsafe.Pointer, len(value))
+	for idx, v := range value {
+		cValueData[idx] = objc.ExtractPtr(v)
+	}
+	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
+	C.C_NSRulerView_SetMarkers(n.Ptr(), cValue)
+}
+
 func (n *NSRulerView) ScrollView() ScrollView {
-	result := C.C_NSRulerView_ScrollView(n.Ptr())
-	return MakeScrollView(result)
+	result_ := C.C_NSRulerView_ScrollView(n.Ptr())
+	return MakeScrollView(result_)
 }
 
 func (n *NSRulerView) SetScrollView(value ScrollView) {
 	C.C_NSRulerView_SetScrollView(n.Ptr(), objc.ExtractPtr(value))
 }
 
+func (n *NSRulerView) Orientation() RulerOrientation {
+	result_ := C.C_NSRulerView_Orientation(n.Ptr())
+	return RulerOrientation(uint(result_))
+}
+
+func (n *NSRulerView) SetOrientation(value RulerOrientation) {
+	C.C_NSRulerView_SetOrientation(n.Ptr(), C.uint(uint(value)))
+}
+
 func (n *NSRulerView) ReservedThicknessForAccessoryView() coregraphics.Float {
-	result := C.C_NSRulerView_ReservedThicknessForAccessoryView(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSRulerView_ReservedThicknessForAccessoryView(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSRulerView) SetReservedThicknessForAccessoryView(value coregraphics.Float) {
@@ -156,8 +208,8 @@ func (n *NSRulerView) SetReservedThicknessForAccessoryView(value coregraphics.Fl
 }
 
 func (n *NSRulerView) ReservedThicknessForMarkers() coregraphics.Float {
-	result := C.C_NSRulerView_ReservedThicknessForMarkers(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSRulerView_ReservedThicknessForMarkers(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSRulerView) SetReservedThicknessForMarkers(value coregraphics.Float) {
@@ -165,8 +217,8 @@ func (n *NSRulerView) SetReservedThicknessForMarkers(value coregraphics.Float) {
 }
 
 func (n *NSRulerView) RuleThickness() coregraphics.Float {
-	result := C.C_NSRulerView_RuleThickness(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSRulerView_RuleThickness(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSRulerView) SetRuleThickness(value coregraphics.Float) {
@@ -174,11 +226,11 @@ func (n *NSRulerView) SetRuleThickness(value coregraphics.Float) {
 }
 
 func (n *NSRulerView) RequiredThickness() coregraphics.Float {
-	result := C.C_NSRulerView_RequiredThickness(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSRulerView_RequiredThickness(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSRulerView) BaselineLocation() coregraphics.Float {
-	result := C.C_NSRulerView_BaselineLocation(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSRulerView_BaselineLocation(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }

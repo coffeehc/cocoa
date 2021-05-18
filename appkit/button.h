@@ -15,6 +15,8 @@ void* C_NSButton_ButtonWithTitle_Image_Target_Action(void* title, void* image, v
 void* C_NSButton_ButtonWithTitle_Target_Action(void* title, void* target, void* action);
 void C_NSButton_SetButtonType(void* ptr, unsigned int _type);
 void C_NSButton_SetPeriodicDelay_Interval(void* ptr, float delay, float interval);
+void C_NSButton_CompressWithPrioritizedCompressionOptions(void* ptr, Array prioritizedOptions);
+CGSize C_NSButton_MinimumSizeWithPrioritizedCompressionOptions(void* ptr, Array prioritizedOptions);
 void C_NSButton_SetNextState(void* ptr);
 void C_NSButton_Highlight(void* ptr, bool flag);
 void* C_NSButton_ContentTintColor(void* ptr);

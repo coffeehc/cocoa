@@ -46,13 +46,13 @@ func AllocTimeZone() *NSTimeZone {
 }
 
 func (n *NSTimeZone) InitWithName(tzName string) TimeZone {
-	result := C.C_NSTimeZone_InitWithName(n.Ptr(), NewString(tzName).Ptr())
-	return MakeTimeZone(result)
+	result_ := C.C_NSTimeZone_InitWithName(n.Ptr(), NewString(tzName).Ptr())
+	return MakeTimeZone(result_)
 }
 
 func (n *NSTimeZone) InitWithName_Data(tzName string, aData []byte) TimeZone {
-	result := C.C_NSTimeZone_InitWithName_Data(n.Ptr(), NewString(tzName).Ptr(), C.Array{data: unsafe.Pointer(&aData[0]), len: C.int(len(aData))})
-	return MakeTimeZone(result)
+	result_ := C.C_NSTimeZone_InitWithName_Data(n.Ptr(), NewString(tzName).Ptr(), C.Array{data: unsafe.Pointer(&aData[0]), len: C.int(len(aData))})
+	return MakeTimeZone(result_)
 }
 
 func ResetSystemTimeZone() {
@@ -60,73 +60,73 @@ func ResetSystemTimeZone() {
 }
 
 func TimeZoneWithName(tzName string) TimeZone {
-	result := C.C_NSTimeZone_TimeZoneWithName(NewString(tzName).Ptr())
-	return MakeTimeZone(result)
+	result_ := C.C_NSTimeZone_TimeZoneWithName(NewString(tzName).Ptr())
+	return MakeTimeZone(result_)
 }
 
 func TimeZoneWithName_Data(tzName string, aData []byte) TimeZone {
-	result := C.C_NSTimeZone_TimeZoneWithName_Data(NewString(tzName).Ptr(), C.Array{data: unsafe.Pointer(&aData[0]), len: C.int(len(aData))})
-	return MakeTimeZone(result)
+	result_ := C.C_NSTimeZone_TimeZoneWithName_Data(NewString(tzName).Ptr(), C.Array{data: unsafe.Pointer(&aData[0]), len: C.int(len(aData))})
+	return MakeTimeZone(result_)
 }
 
 func TimeZoneWithAbbreviation(abbreviation string) TimeZone {
-	result := C.C_NSTimeZone_TimeZoneWithAbbreviation(NewString(abbreviation).Ptr())
-	return MakeTimeZone(result)
+	result_ := C.C_NSTimeZone_TimeZoneWithAbbreviation(NewString(abbreviation).Ptr())
+	return MakeTimeZone(result_)
 }
 
 func TimeZoneForSecondsFromGMT(seconds int) TimeZone {
-	result := C.C_NSTimeZone_TimeZoneForSecondsFromGMT(C.int(seconds))
-	return MakeTimeZone(result)
+	result_ := C.C_NSTimeZone_TimeZoneForSecondsFromGMT(C.int(seconds))
+	return MakeTimeZone(result_)
 }
 
 func (n *NSTimeZone) AbbreviationForDate(aDate Date) string {
-	result := C.C_NSTimeZone_AbbreviationForDate(n.Ptr(), objc.ExtractPtr(aDate))
-	return MakeString(result).String()
+	result_ := C.C_NSTimeZone_AbbreviationForDate(n.Ptr(), objc.ExtractPtr(aDate))
+	return MakeString(result_).String()
 }
 
 func (n *NSTimeZone) SecondsFromGMTForDate(aDate Date) int {
-	result := C.C_NSTimeZone_SecondsFromGMTForDate(n.Ptr(), objc.ExtractPtr(aDate))
-	return int(result)
+	result_ := C.C_NSTimeZone_SecondsFromGMTForDate(n.Ptr(), objc.ExtractPtr(aDate))
+	return int(result_)
 }
 
 func (n *NSTimeZone) IsDaylightSavingTimeForDate(aDate Date) bool {
-	result := C.C_NSTimeZone_IsDaylightSavingTimeForDate(n.Ptr(), objc.ExtractPtr(aDate))
-	return bool(result)
+	result_ := C.C_NSTimeZone_IsDaylightSavingTimeForDate(n.Ptr(), objc.ExtractPtr(aDate))
+	return bool(result_)
 }
 
 func (n *NSTimeZone) DaylightSavingTimeOffsetForDate(aDate Date) TimeInterval {
-	result := C.C_NSTimeZone_DaylightSavingTimeOffsetForDate(n.Ptr(), objc.ExtractPtr(aDate))
-	return TimeInterval(float64(result))
+	result_ := C.C_NSTimeZone_DaylightSavingTimeOffsetForDate(n.Ptr(), objc.ExtractPtr(aDate))
+	return TimeInterval(float64(result_))
 }
 
 func (n *NSTimeZone) NextDaylightSavingTimeTransitionAfterDate(aDate Date) Date {
-	result := C.C_NSTimeZone_NextDaylightSavingTimeTransitionAfterDate(n.Ptr(), objc.ExtractPtr(aDate))
-	return MakeDate(result)
+	result_ := C.C_NSTimeZone_NextDaylightSavingTimeTransitionAfterDate(n.Ptr(), objc.ExtractPtr(aDate))
+	return MakeDate(result_)
 }
 
 func (n *NSTimeZone) IsEqualToTimeZone(aTimeZone TimeZone) bool {
-	result := C.C_NSTimeZone_IsEqualToTimeZone(n.Ptr(), objc.ExtractPtr(aTimeZone))
-	return bool(result)
+	result_ := C.C_NSTimeZone_IsEqualToTimeZone(n.Ptr(), objc.ExtractPtr(aTimeZone))
+	return bool(result_)
 }
 
 func (n *NSTimeZone) LocalizedName_Locale(style TimeZoneNameStyle, locale Locale) string {
-	result := C.C_NSTimeZone_LocalizedName_Locale(n.Ptr(), C.int(int(style)), objc.ExtractPtr(locale))
-	return MakeString(result).String()
+	result_ := C.C_NSTimeZone_LocalizedName_Locale(n.Ptr(), C.int(int(style)), objc.ExtractPtr(locale))
+	return MakeString(result_).String()
 }
 
 func LocalTimeZone() TimeZone {
-	result := C.C_NSTimeZone_LocalTimeZone()
-	return MakeTimeZone(result)
+	result_ := C.C_NSTimeZone_LocalTimeZone()
+	return MakeTimeZone(result_)
 }
 
 func SystemTimeZone() TimeZone {
-	result := C.C_NSTimeZone_SystemTimeZone()
-	return MakeTimeZone(result)
+	result_ := C.C_NSTimeZone_SystemTimeZone()
+	return MakeTimeZone(result_)
 }
 
 func DefaultTimeZone() TimeZone {
-	result := C.C_NSTimeZone_DefaultTimeZone()
-	return MakeTimeZone(result)
+	result_ := C.C_NSTimeZone_DefaultTimeZone()
+	return MakeTimeZone(result_)
 }
 
 func SetDefaultTimeZone(value TimeZone) {
@@ -134,61 +134,61 @@ func SetDefaultTimeZone(value TimeZone) {
 }
 
 func TimeZone_KnownTimeZoneNames() []string {
-	result := C.C_NSTimeZone_TimeZone_KnownTimeZoneNames()
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]string, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeString(r).String()
+	result_ := C.C_NSTimeZone_TimeZone_KnownTimeZoneNames()
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeString(r).String()
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSTimeZone) Name() string {
-	result := C.C_NSTimeZone_Name(n.Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSTimeZone_Name(n.Ptr())
+	return MakeString(result_).String()
 }
 
 func (n *NSTimeZone) Abbreviation() string {
-	result := C.C_NSTimeZone_Abbreviation(n.Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSTimeZone_Abbreviation(n.Ptr())
+	return MakeString(result_).String()
 }
 
 func (n *NSTimeZone) SecondsFromGMT() int {
-	result := C.C_NSTimeZone_SecondsFromGMT(n.Ptr())
-	return int(result)
+	result_ := C.C_NSTimeZone_SecondsFromGMT(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSTimeZone) Data() []byte {
-	result := C.C_NSTimeZone_Data(n.Ptr())
-	resultBuffer := (*[1 << 30]byte)(result.data)[:C.int(result.len)]
-	goResult := make([]byte, C.int(result.len))
-	copy(goResult, resultBuffer)
-	C.free(result.data)
-	return goResult
+	result_ := C.C_NSTimeZone_Data(n.Ptr())
+	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
+	goResult_ := make([]byte, C.int(result_.len))
+	copy(goResult_, result_Buffer)
+	C.free(result_.data)
+	return goResult_
 }
 
 func TimeZoneDataVersion() string {
-	result := C.C_NSTimeZone_TimeZoneDataVersion()
-	return MakeString(result).String()
+	result_ := C.C_NSTimeZone_TimeZoneDataVersion()
+	return MakeString(result_).String()
 }
 
 func (n *NSTimeZone) IsDaylightSavingTime() bool {
-	result := C.C_NSTimeZone_IsDaylightSavingTime(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSTimeZone_IsDaylightSavingTime(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSTimeZone) DaylightSavingTimeOffset() TimeInterval {
-	result := C.C_NSTimeZone_DaylightSavingTimeOffset(n.Ptr())
-	return TimeInterval(float64(result))
+	result_ := C.C_NSTimeZone_DaylightSavingTimeOffset(n.Ptr())
+	return TimeInterval(float64(result_))
 }
 
 func (n *NSTimeZone) NextDaylightSavingTimeTransition() Date {
-	result := C.C_NSTimeZone_NextDaylightSavingTimeTransition(n.Ptr())
-	return MakeDate(result)
+	result_ := C.C_NSTimeZone_NextDaylightSavingTimeTransition(n.Ptr())
+	return MakeDate(result_)
 }
 
 func (n *NSTimeZone) Description() string {
-	result := C.C_NSTimeZone_Description(n.Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSTimeZone_Description(n.Ptr())
+	return MakeString(result_).String()
 }

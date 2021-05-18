@@ -9,6 +9,7 @@ void* C_NSAppearance_InitWithAppearanceNamed_Bundle(void* ptr, void* name, void*
 void* C_NSAppearance_InitWithCoder(void* ptr, void* coder);
 void* C_NSAppearance_Init(void* ptr);
 void* C_NSAppearance_AppearanceNamed(void* name);
+void* C_NSAppearance_BestMatchFromAppearancesWithNames(void* ptr, Array appearances);
 void* C_NSAppearance_Name(void* ptr);
 void* C_NSAppearance_CurrentDrawingAppearance();
 bool C_NSAppearance_AllowsVibrancy(void* ptr);

@@ -31,11 +31,11 @@ func AllocGlyphGenerator() *NSGlyphGenerator {
 }
 
 func (n *NSGlyphGenerator) Init() GlyphGenerator {
-	result := C.C_NSGlyphGenerator_Init(n.Ptr())
-	return MakeGlyphGenerator(result)
+	result_ := C.C_NSGlyphGenerator_Init(n.Ptr())
+	return MakeGlyphGenerator(result_)
 }
 
 func SharedGlyphGenerator() GlyphGenerator {
-	result := C.C_NSGlyphGenerator_SharedGlyphGenerator()
-	return MakeGlyphGenerator(result)
+	result_ := C.C_NSGlyphGenerator_SharedGlyphGenerator()
+	return MakeGlyphGenerator(result_)
 }

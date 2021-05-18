@@ -7,13 +7,13 @@ void* C_AffineTransform_Alloc() {
 
 void* C_NSAffineTransform_InitWithTransform(void* ptr, void* transform) {
     NSAffineTransform* nSAffineTransform = (NSAffineTransform*)ptr;
-    NSAffineTransform* result = [nSAffineTransform initWithTransform:(NSAffineTransform*)transform];
-    return result;
+    NSAffineTransform* result_ = [nSAffineTransform initWithTransform:(NSAffineTransform*)transform];
+    return result_;
 }
 
 void* C_NSAffineTransform_AffineTransform_Transform() {
-    NSAffineTransform* result = [NSAffineTransform transform];
-    return result;
+    NSAffineTransform* result_ = [NSAffineTransform transform];
+    return result_;
 }
 
 void C_NSAffineTransform_RotateByDegrees(void* ptr, double angle) {
@@ -58,14 +58,14 @@ void C_NSAffineTransform_Invert(void* ptr) {
 
 CGPoint C_NSAffineTransform_TransformPoint(void* ptr, CGPoint aPoint) {
     NSAffineTransform* nSAffineTransform = (NSAffineTransform*)ptr;
-    NSPoint result = [nSAffineTransform transformPoint:aPoint];
-    return result;
+    NSPoint result_ = [nSAffineTransform transformPoint:aPoint];
+    return result_;
 }
 
 CGSize C_NSAffineTransform_TransformSize(void* ptr, CGSize aSize) {
     NSAffineTransform* nSAffineTransform = (NSAffineTransform*)ptr;
-    NSSize result = [nSAffineTransform transformSize:aSize];
-    return result;
+    NSSize result_ = [nSAffineTransform transformSize:aSize];
+    return result_;
 }
 
 void C_NSAffineTransform_Set(void* ptr) {
@@ -80,8 +80,8 @@ void C_NSAffineTransform_Concat(void* ptr) {
 
 NSAffineTransformStruct C_NSAffineTransform_TransformStruct(void* ptr) {
     NSAffineTransform* nSAffineTransform = (NSAffineTransform*)ptr;
-    NSAffineTransformStruct result = [nSAffineTransform transformStruct];
-    return result;
+    NSAffineTransformStruct result_ = [nSAffineTransform transformStruct];
+    return result_;
 }
 
 void C_NSAffineTransform_SetTransformStruct(void* ptr, NSAffineTransformStruct value) {

@@ -5,3 +5,5 @@
 
 void* C_CandidateListTouchBarItem_Alloc();
 
+void* C_NSCandidateListTouchBarItem_InitWithIdentifier(void* ptr, void* identifier);
+void* C_NSCandidateListTouchBarItem_InitWithCoder(void* ptr, void* coder);

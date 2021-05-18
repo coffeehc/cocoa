@@ -35,23 +35,23 @@ func AllocStatusBarButton() *NSStatusBarButton {
 }
 
 func (n *NSStatusBarButton) InitWithFrame(frameRect foundation.Rect) StatusBarButton {
-	result := C.C_NSStatusBarButton_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
-	return MakeStatusBarButton(result)
+	result_ := C.C_NSStatusBarButton_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeStatusBarButton(result_)
 }
 
 func (n *NSStatusBarButton) InitWithCoder(coder foundation.Coder) StatusBarButton {
-	result := C.C_NSStatusBarButton_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeStatusBarButton(result)
+	result_ := C.C_NSStatusBarButton_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeStatusBarButton(result_)
 }
 
 func (n *NSStatusBarButton) Init() StatusBarButton {
-	result := C.C_NSStatusBarButton_Init(n.Ptr())
-	return MakeStatusBarButton(result)
+	result_ := C.C_NSStatusBarButton_Init(n.Ptr())
+	return MakeStatusBarButton(result_)
 }
 
 func (n *NSStatusBarButton) AppearsDisabled() bool {
-	result := C.C_NSStatusBarButton_AppearsDisabled(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSStatusBarButton_AppearsDisabled(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSStatusBarButton) SetAppearsDisabled(value bool) {

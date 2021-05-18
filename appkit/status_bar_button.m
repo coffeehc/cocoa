@@ -7,26 +7,26 @@ void* C_StatusBarButton_Alloc() {
 
 void* C_NSStatusBarButton_InitWithFrame(void* ptr, CGRect frameRect) {
     NSStatusBarButton* nSStatusBarButton = (NSStatusBarButton*)ptr;
-    NSStatusBarButton* result = [nSStatusBarButton initWithFrame:frameRect];
-    return result;
+    NSStatusBarButton* result_ = [nSStatusBarButton initWithFrame:frameRect];
+    return result_;
 }
 
 void* C_NSStatusBarButton_InitWithCoder(void* ptr, void* coder) {
     NSStatusBarButton* nSStatusBarButton = (NSStatusBarButton*)ptr;
-    NSStatusBarButton* result = [nSStatusBarButton initWithCoder:(NSCoder*)coder];
-    return result;
+    NSStatusBarButton* result_ = [nSStatusBarButton initWithCoder:(NSCoder*)coder];
+    return result_;
 }
 
 void* C_NSStatusBarButton_Init(void* ptr) {
     NSStatusBarButton* nSStatusBarButton = (NSStatusBarButton*)ptr;
-    NSStatusBarButton* result = [nSStatusBarButton init];
-    return result;
+    NSStatusBarButton* result_ = [nSStatusBarButton init];
+    return result_;
 }
 
 bool C_NSStatusBarButton_AppearsDisabled(void* ptr) {
     NSStatusBarButton* nSStatusBarButton = (NSStatusBarButton*)ptr;
-    BOOL result = [nSStatusBarButton appearsDisabled];
-    return result;
+    BOOL result_ = [nSStatusBarButton appearsDisabled];
+    return result_;
 }
 
 void C_NSStatusBarButton_SetAppearsDisabled(void* ptr, bool value) {

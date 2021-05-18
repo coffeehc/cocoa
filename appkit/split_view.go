@@ -24,6 +24,8 @@ type SplitView interface {
 	MinPossiblePositionOfDividerAtIndex(dividerIndex int) coregraphics.Float
 	MaxPossiblePositionOfDividerAtIndex(dividerIndex int) coregraphics.Float
 	SetPosition_OfDividerAtIndex(position coregraphics.Float, dividerIndex int)
+	Delegate() objc.Object
+	SetDelegate(value objc.Object)
 	ArrangesAllSubviews() bool
 	SetArrangesAllSubviews(value bool)
 	ArrangedSubviews() []View
@@ -55,18 +57,18 @@ func AllocSplitView() *NSSplitView {
 }
 
 func (n *NSSplitView) InitWithFrame(frameRect foundation.Rect) SplitView {
-	result := C.C_NSSplitView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
-	return MakeSplitView(result)
+	result_ := C.C_NSSplitView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeSplitView(result_)
 }
 
 func (n *NSSplitView) InitWithCoder(coder foundation.Coder) SplitView {
-	result := C.C_NSSplitView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeSplitView(result)
+	result_ := C.C_NSSplitView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeSplitView(result_)
 }
 
 func (n *NSSplitView) Init() SplitView {
-	result := C.C_NSSplitView_Init(n.Ptr())
-	return MakeSplitView(result)
+	result_ := C.C_NSSplitView_Init(n.Ptr())
+	return MakeSplitView(result_)
 }
 
 func (n *NSSplitView) AddArrangedSubview(view View) {
@@ -86,13 +88,13 @@ func (n *NSSplitView) AdjustSubviews() {
 }
 
 func (n *NSSplitView) IsSubviewCollapsed(subview View) bool {
-	result := C.C_NSSplitView_IsSubviewCollapsed(n.Ptr(), objc.ExtractPtr(subview))
-	return bool(result)
+	result_ := C.C_NSSplitView_IsSubviewCollapsed(n.Ptr(), objc.ExtractPtr(subview))
+	return bool(result_)
 }
 
 func (n *NSSplitView) HoldingPriorityForSubviewAtIndex(subviewIndex int) LayoutPriority {
-	result := C.C_NSSplitView_HoldingPriorityForSubviewAtIndex(n.Ptr(), C.int(subviewIndex))
-	return LayoutPriority(float32(result))
+	result_ := C.C_NSSplitView_HoldingPriorityForSubviewAtIndex(n.Ptr(), C.int(subviewIndex))
+	return LayoutPriority(float32(result_))
 }
 
 func (n *NSSplitView) SetHoldingPriority_ForSubviewAtIndex(priority LayoutPriority, subviewIndex int) {
@@ -104,22 +106,31 @@ func (n *NSSplitView) DrawDividerInRect(rect foundation.Rect) {
 }
 
 func (n *NSSplitView) MinPossiblePositionOfDividerAtIndex(dividerIndex int) coregraphics.Float {
-	result := C.C_NSSplitView_MinPossiblePositionOfDividerAtIndex(n.Ptr(), C.int(dividerIndex))
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSSplitView_MinPossiblePositionOfDividerAtIndex(n.Ptr(), C.int(dividerIndex))
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSSplitView) MaxPossiblePositionOfDividerAtIndex(dividerIndex int) coregraphics.Float {
-	result := C.C_NSSplitView_MaxPossiblePositionOfDividerAtIndex(n.Ptr(), C.int(dividerIndex))
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSSplitView_MaxPossiblePositionOfDividerAtIndex(n.Ptr(), C.int(dividerIndex))
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSSplitView) SetPosition_OfDividerAtIndex(position coregraphics.Float, dividerIndex int) {
 	C.C_NSSplitView_SetPosition_OfDividerAtIndex(n.Ptr(), C.double(float64(position)), C.int(dividerIndex))
 }
 
+func (n *NSSplitView) Delegate() objc.Object {
+	result_ := C.C_NSSplitView_Delegate(n.Ptr())
+	return objc.MakeObject(result_)
+}
+
+func (n *NSSplitView) SetDelegate(value objc.Object) {
+	C.C_NSSplitView_SetDelegate(n.Ptr(), objc.ExtractPtr(value))
+}
+
 func (n *NSSplitView) ArrangesAllSubviews() bool {
-	result := C.C_NSSplitView_ArrangesAllSubviews(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSSplitView_ArrangesAllSubviews(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSSplitView) SetArrangesAllSubviews(value bool) {
@@ -127,19 +138,19 @@ func (n *NSSplitView) SetArrangesAllSubviews(value bool) {
 }
 
 func (n *NSSplitView) ArrangedSubviews() []View {
-	result := C.C_NSSplitView_ArrangedSubviews(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]View, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeView(r)
+	result_ := C.C_NSSplitView_ArrangedSubviews(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]View, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeView(r)
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSSplitView) IsVertical() bool {
-	result := C.C_NSSplitView_IsVertical(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSSplitView_IsVertical(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSSplitView) SetVertical(value bool) {
@@ -147,8 +158,8 @@ func (n *NSSplitView) SetVertical(value bool) {
 }
 
 func (n *NSSplitView) DividerStyle() SplitViewDividerStyle {
-	result := C.C_NSSplitView_DividerStyle(n.Ptr())
-	return SplitViewDividerStyle(int(result))
+	result_ := C.C_NSSplitView_DividerStyle(n.Ptr())
+	return SplitViewDividerStyle(int(result_))
 }
 
 func (n *NSSplitView) SetDividerStyle(value SplitViewDividerStyle) {
@@ -156,18 +167,18 @@ func (n *NSSplitView) SetDividerStyle(value SplitViewDividerStyle) {
 }
 
 func (n *NSSplitView) DividerColor() Color {
-	result := C.C_NSSplitView_DividerColor(n.Ptr())
-	return MakeColor(result)
+	result_ := C.C_NSSplitView_DividerColor(n.Ptr())
+	return MakeColor(result_)
 }
 
 func (n *NSSplitView) DividerThickness() coregraphics.Float {
-	result := C.C_NSSplitView_DividerThickness(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSSplitView_DividerThickness(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSSplitView) AutosaveName() SplitViewAutosaveName {
-	result := C.C_NSSplitView_AutosaveName(n.Ptr())
-	return SplitViewAutosaveName(foundation.MakeString(result).String())
+	result_ := C.C_NSSplitView_AutosaveName(n.Ptr())
+	return SplitViewAutosaveName(foundation.MakeString(result_).String())
 }
 
 func (n *NSSplitView) SetAutosaveName(value SplitViewAutosaveName) {

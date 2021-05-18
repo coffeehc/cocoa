@@ -22,6 +22,8 @@ unsigned int C_NSDatePicker_DatePickerStyle(void* ptr);
 void C_NSDatePicker_SetDatePickerStyle(void* ptr, unsigned int value);
 bool C_NSDatePicker_PresentsCalendarOverlay(void* ptr);
 void C_NSDatePicker_SetPresentsCalendarOverlay(void* ptr, bool value);
+void* C_NSDatePicker_Delegate(void* ptr);
+void C_NSDatePicker_SetDelegate(void* ptr, void* value);
 unsigned int C_NSDatePicker_DatePickerElements(void* ptr);
 void C_NSDatePicker_SetDatePickerElements(void* ptr, unsigned int value);
 void* C_NSDatePicker_Calendar(void* ptr);

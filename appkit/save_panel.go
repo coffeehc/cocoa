@@ -70,28 +70,28 @@ func AllocSavePanel() *NSSavePanel {
 }
 
 func (n *NSSavePanel) InitWithContentRect_StyleMask_Backing_Defer(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool) SavePanel {
-	result := C.C_NSSavePanel_InitWithContentRect_StyleMask_Backing_Defer(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag))
-	return MakeSavePanel(result)
+	result_ := C.C_NSSavePanel_InitWithContentRect_StyleMask_Backing_Defer(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag))
+	return MakeSavePanel(result_)
 }
 
 func (n *NSSavePanel) InitWithContentRect_StyleMask_Backing_Defer_Screen(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool, screen Screen) SavePanel {
-	result := C.C_NSSavePanel_InitWithContentRect_StyleMask_Backing_Defer_Screen(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag), objc.ExtractPtr(screen))
-	return MakeSavePanel(result)
+	result_ := C.C_NSSavePanel_InitWithContentRect_StyleMask_Backing_Defer_Screen(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag), objc.ExtractPtr(screen))
+	return MakeSavePanel(result_)
 }
 
 func (n *NSSavePanel) Init() SavePanel {
-	result := C.C_NSSavePanel_Init(n.Ptr())
-	return MakeSavePanel(result)
+	result_ := C.C_NSSavePanel_Init(n.Ptr())
+	return MakeSavePanel(result_)
 }
 
 func SavePanel_() SavePanel {
-	result := C.C_NSSavePanel_SavePanel_()
-	return MakeSavePanel(result)
+	result_ := C.C_NSSavePanel_SavePanel_()
+	return MakeSavePanel(result_)
 }
 
 func (n *NSSavePanel) RunModal() ModalResponse {
-	result := C.C_NSSavePanel_RunModal(n.Ptr())
-	return ModalResponse(int(result))
+	result_ := C.C_NSSavePanel_RunModal(n.Ptr())
+	return ModalResponse(int(result_))
 }
 
 func (n *NSSavePanel) ValidateVisibleColumns() {
@@ -107,13 +107,13 @@ func (n *NSSavePanel) Cancel(sender objc.Object) {
 }
 
 func (n *NSSavePanel) URL() foundation.URL {
-	result := C.C_NSSavePanel_URL(n.Ptr())
-	return foundation.MakeURL(result)
+	result_ := C.C_NSSavePanel_URL(n.Ptr())
+	return foundation.MakeURL(result_)
 }
 
 func (n *NSSavePanel) Prompt() string {
-	result := C.C_NSSavePanel_Prompt(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSSavePanel_Prompt(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSSavePanel) SetPrompt(value string) {
@@ -121,8 +121,8 @@ func (n *NSSavePanel) SetPrompt(value string) {
 }
 
 func (n *NSSavePanel) Message() string {
-	result := C.C_NSSavePanel_Message(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSSavePanel_Message(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSSavePanel) SetMessage(value string) {
@@ -130,8 +130,8 @@ func (n *NSSavePanel) SetMessage(value string) {
 }
 
 func (n *NSSavePanel) NameFieldLabel() string {
-	result := C.C_NSSavePanel_NameFieldLabel(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSSavePanel_NameFieldLabel(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSSavePanel) SetNameFieldLabel(value string) {
@@ -139,8 +139,8 @@ func (n *NSSavePanel) SetNameFieldLabel(value string) {
 }
 
 func (n *NSSavePanel) NameFieldStringValue() string {
-	result := C.C_NSSavePanel_NameFieldStringValue(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSSavePanel_NameFieldStringValue(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSSavePanel) SetNameFieldStringValue(value string) {
@@ -148,8 +148,8 @@ func (n *NSSavePanel) SetNameFieldStringValue(value string) {
 }
 
 func (n *NSSavePanel) DirectoryURL() foundation.URL {
-	result := C.C_NSSavePanel_DirectoryURL(n.Ptr())
-	return foundation.MakeURL(result)
+	result_ := C.C_NSSavePanel_DirectoryURL(n.Ptr())
+	return foundation.MakeURL(result_)
 }
 
 func (n *NSSavePanel) SetDirectoryURL(value foundation.URL) {
@@ -157,8 +157,8 @@ func (n *NSSavePanel) SetDirectoryURL(value foundation.URL) {
 }
 
 func (n *NSSavePanel) AccessoryView() View {
-	result := C.C_NSSavePanel_AccessoryView(n.Ptr())
-	return MakeView(result)
+	result_ := C.C_NSSavePanel_AccessoryView(n.Ptr())
+	return MakeView(result_)
 }
 
 func (n *NSSavePanel) SetAccessoryView(value View) {
@@ -166,8 +166,8 @@ func (n *NSSavePanel) SetAccessoryView(value View) {
 }
 
 func (n *NSSavePanel) ShowsTagField() bool {
-	result := C.C_NSSavePanel_ShowsTagField(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSSavePanel_ShowsTagField(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSSavePanel) SetShowsTagField(value bool) {
@@ -175,14 +175,14 @@ func (n *NSSavePanel) SetShowsTagField(value bool) {
 }
 
 func (n *NSSavePanel) TagNames() []string {
-	result := C.C_NSSavePanel_TagNames(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]string, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = foundation.MakeString(r).String()
+	result_ := C.C_NSSavePanel_TagNames(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = foundation.MakeString(r).String()
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSSavePanel) SetTagNames(value []string) {
@@ -195,8 +195,8 @@ func (n *NSSavePanel) SetTagNames(value []string) {
 }
 
 func (n *NSSavePanel) CanCreateDirectories() bool {
-	result := C.C_NSSavePanel_CanCreateDirectories(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSSavePanel_CanCreateDirectories(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSSavePanel) SetCanCreateDirectories(value bool) {
@@ -204,8 +204,8 @@ func (n *NSSavePanel) SetCanCreateDirectories(value bool) {
 }
 
 func (n *NSSavePanel) CanSelectHiddenExtension() bool {
-	result := C.C_NSSavePanel_CanSelectHiddenExtension(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSSavePanel_CanSelectHiddenExtension(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSSavePanel) SetCanSelectHiddenExtension(value bool) {
@@ -213,8 +213,8 @@ func (n *NSSavePanel) SetCanSelectHiddenExtension(value bool) {
 }
 
 func (n *NSSavePanel) ShowsHiddenFiles() bool {
-	result := C.C_NSSavePanel_ShowsHiddenFiles(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSSavePanel_ShowsHiddenFiles(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSSavePanel) SetShowsHiddenFiles(value bool) {
@@ -222,8 +222,8 @@ func (n *NSSavePanel) SetShowsHiddenFiles(value bool) {
 }
 
 func (n *NSSavePanel) IsExtensionHidden() bool {
-	result := C.C_NSSavePanel_IsExtensionHidden(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSSavePanel_IsExtensionHidden(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSSavePanel) SetExtensionHidden(value bool) {
@@ -231,19 +231,19 @@ func (n *NSSavePanel) SetExtensionHidden(value bool) {
 }
 
 func (n *NSSavePanel) IsExpanded() bool {
-	result := C.C_NSSavePanel_IsExpanded(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSSavePanel_IsExpanded(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSSavePanel) AllowedContentTypes() []uti.UTType {
-	result := C.C_NSSavePanel_AllowedContentTypes(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]uti.UTType, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = uti.MakeUTType(r)
+	result_ := C.C_NSSavePanel_AllowedContentTypes(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]uti.UTType, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = uti.MakeUTType(r)
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSSavePanel) SetAllowedContentTypes(value []uti.UTType) {
@@ -256,8 +256,8 @@ func (n *NSSavePanel) SetAllowedContentTypes(value []uti.UTType) {
 }
 
 func (n *NSSavePanel) AllowsOtherFileTypes() bool {
-	result := C.C_NSSavePanel_AllowsOtherFileTypes(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSSavePanel_AllowsOtherFileTypes(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSSavePanel) SetAllowsOtherFileTypes(value bool) {
@@ -265,8 +265,8 @@ func (n *NSSavePanel) SetAllowsOtherFileTypes(value bool) {
 }
 
 func (n *NSSavePanel) TreatsFilePackagesAsDirectories() bool {
-	result := C.C_NSSavePanel_TreatsFilePackagesAsDirectories(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSSavePanel_TreatsFilePackagesAsDirectories(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSSavePanel) SetTreatsFilePackagesAsDirectories(value bool) {

@@ -7,14 +7,14 @@ void* C_GridColumn_Alloc() {
 
 void* C_NSGridColumn_Init(void* ptr) {
     NSGridColumn* nSGridColumn = (NSGridColumn*)ptr;
-    NSGridColumn* result = [nSGridColumn init];
-    return result;
+    NSGridColumn* result_ = [nSGridColumn init];
+    return result_;
 }
 
 void* C_NSGridColumn_CellAtIndex(void* ptr, int index) {
     NSGridColumn* nSGridColumn = (NSGridColumn*)ptr;
-    NSGridCell* result = [nSGridColumn cellAtIndex:index];
-    return result;
+    NSGridCell* result_ = [nSGridColumn cellAtIndex:index];
+    return result_;
 }
 
 void C_NSGridColumn_MergeCellsInRange(void* ptr, NSRange _range) {
@@ -24,14 +24,14 @@ void C_NSGridColumn_MergeCellsInRange(void* ptr, NSRange _range) {
 
 void* C_NSGridColumn_GridView(void* ptr) {
     NSGridColumn* nSGridColumn = (NSGridColumn*)ptr;
-    NSGridView* result = [nSGridColumn gridView];
-    return result;
+    NSGridView* result_ = [nSGridColumn gridView];
+    return result_;
 }
 
 bool C_NSGridColumn_IsHidden(void* ptr) {
     NSGridColumn* nSGridColumn = (NSGridColumn*)ptr;
-    BOOL result = [nSGridColumn isHidden];
-    return result;
+    BOOL result_ = [nSGridColumn isHidden];
+    return result_;
 }
 
 void C_NSGridColumn_SetHidden(void* ptr, bool value) {
@@ -41,8 +41,8 @@ void C_NSGridColumn_SetHidden(void* ptr, bool value) {
 
 double C_NSGridColumn_LeadingPadding(void* ptr) {
     NSGridColumn* nSGridColumn = (NSGridColumn*)ptr;
-    CGFloat result = [nSGridColumn leadingPadding];
-    return result;
+    CGFloat result_ = [nSGridColumn leadingPadding];
+    return result_;
 }
 
 void C_NSGridColumn_SetLeadingPadding(void* ptr, double value) {
@@ -52,14 +52,14 @@ void C_NSGridColumn_SetLeadingPadding(void* ptr, double value) {
 
 int C_NSGridColumn_NumberOfCells(void* ptr) {
     NSGridColumn* nSGridColumn = (NSGridColumn*)ptr;
-    NSInteger result = [nSGridColumn numberOfCells];
-    return result;
+    NSInteger result_ = [nSGridColumn numberOfCells];
+    return result_;
 }
 
 double C_NSGridColumn_TrailingPadding(void* ptr) {
     NSGridColumn* nSGridColumn = (NSGridColumn*)ptr;
-    CGFloat result = [nSGridColumn trailingPadding];
-    return result;
+    CGFloat result_ = [nSGridColumn trailingPadding];
+    return result_;
 }
 
 void C_NSGridColumn_SetTrailingPadding(void* ptr, double value) {
@@ -69,8 +69,8 @@ void C_NSGridColumn_SetTrailingPadding(void* ptr, double value) {
 
 double C_NSGridColumn_Width(void* ptr) {
     NSGridColumn* nSGridColumn = (NSGridColumn*)ptr;
-    CGFloat result = [nSGridColumn width];
-    return result;
+    CGFloat result_ = [nSGridColumn width];
+    return result_;
 }
 
 void C_NSGridColumn_SetWidth(void* ptr, double value) {
@@ -80,8 +80,8 @@ void C_NSGridColumn_SetWidth(void* ptr, double value) {
 
 int C_NSGridColumn_XPlacement(void* ptr) {
     NSGridColumn* nSGridColumn = (NSGridColumn*)ptr;
-    NSGridCellPlacement result = [nSGridColumn xPlacement];
-    return result;
+    NSGridCellPlacement result_ = [nSGridColumn xPlacement];
+    return result_;
 }
 
 void C_NSGridColumn_SetXPlacement(void* ptr, int value) {

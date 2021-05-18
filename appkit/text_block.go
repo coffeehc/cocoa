@@ -53,8 +53,8 @@ func AllocTextBlock() *NSTextBlock {
 }
 
 func (n *NSTextBlock) Init() TextBlock {
-	result := C.C_NSTextBlock_Init(n.Ptr())
-	return MakeTextBlock(result)
+	result_ := C.C_NSTextBlock_Init(n.Ptr())
+	return MakeTextBlock(result_)
 }
 
 func (n *NSTextBlock) SetValue_Type_ForDimension(val coregraphics.Float, _type TextBlockValueType, dimension TextBlockDimension) {
@@ -62,13 +62,13 @@ func (n *NSTextBlock) SetValue_Type_ForDimension(val coregraphics.Float, _type T
 }
 
 func (n *NSTextBlock) ValueForDimension(dimension TextBlockDimension) coregraphics.Float {
-	result := C.C_NSTextBlock_ValueForDimension(n.Ptr(), C.uint(uint(dimension)))
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSTextBlock_ValueForDimension(n.Ptr(), C.uint(uint(dimension)))
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSTextBlock) ValueTypeForDimension(dimension TextBlockDimension) TextBlockValueType {
-	result := C.C_NSTextBlock_ValueTypeForDimension(n.Ptr(), C.uint(uint(dimension)))
-	return TextBlockValueType(uint(result))
+	result_ := C.C_NSTextBlock_ValueTypeForDimension(n.Ptr(), C.uint(uint(dimension)))
+	return TextBlockValueType(uint(result_))
 }
 
 func (n *NSTextBlock) SetContentWidth_Type(val coregraphics.Float, _type TextBlockValueType) {
@@ -84,13 +84,13 @@ func (n *NSTextBlock) SetWidth_Type_ForLayer(val coregraphics.Float, _type TextB
 }
 
 func (n *NSTextBlock) WidthForLayer_Edge(layer TextBlockLayer, edge foundation.RectEdge) coregraphics.Float {
-	result := C.C_NSTextBlock_WidthForLayer_Edge(n.Ptr(), C.int(int(layer)), C.uint(uint(edge)))
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSTextBlock_WidthForLayer_Edge(n.Ptr(), C.int(int(layer)), C.uint(uint(edge)))
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSTextBlock) WidthValueTypeForLayer_Edge(layer TextBlockLayer, edge foundation.RectEdge) TextBlockValueType {
-	result := C.C_NSTextBlock_WidthValueTypeForLayer_Edge(n.Ptr(), C.int(int(layer)), C.uint(uint(edge)))
-	return TextBlockValueType(uint(result))
+	result_ := C.C_NSTextBlock_WidthValueTypeForLayer_Edge(n.Ptr(), C.int(int(layer)), C.uint(uint(edge)))
+	return TextBlockValueType(uint(result_))
 }
 
 func (n *NSTextBlock) SetBorderColor_ForEdge(color Color, edge foundation.RectEdge) {
@@ -102,18 +102,18 @@ func (n *NSTextBlock) SetBorderColor(color Color) {
 }
 
 func (n *NSTextBlock) BorderColorForEdge(edge foundation.RectEdge) Color {
-	result := C.C_NSTextBlock_BorderColorForEdge(n.Ptr(), C.uint(uint(edge)))
-	return MakeColor(result)
+	result_ := C.C_NSTextBlock_BorderColorForEdge(n.Ptr(), C.uint(uint(edge)))
+	return MakeColor(result_)
 }
 
 func (n *NSTextBlock) RectForLayoutAtPoint_InRect_TextContainer_CharacterRange(startingPoint foundation.Point, rect foundation.Rect, textContainer TextContainer, charRange foundation.Range) foundation.Rect {
-	result := C.C_NSTextBlock_RectForLayoutAtPoint_InRect_TextContainer_CharacterRange(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(startingPoint))), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))), objc.ExtractPtr(textContainer), *(*C.NSRange)(foundation.ToNSRangePointer(charRange)))
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSTextBlock_RectForLayoutAtPoint_InRect_TextContainer_CharacterRange(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(startingPoint))), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))), objc.ExtractPtr(textContainer), *(*C.NSRange)(foundation.ToNSRangePointer(charRange)))
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSTextBlock) BoundsRectForContentRect_InRect_TextContainer_CharacterRange(contentRect foundation.Rect, rect foundation.Rect, textContainer TextContainer, charRange foundation.Range) foundation.Rect {
-	result := C.C_NSTextBlock_BoundsRectForContentRect_InRect_TextContainer_CharacterRange(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))), objc.ExtractPtr(textContainer), *(*C.NSRange)(foundation.ToNSRangePointer(charRange)))
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSTextBlock_BoundsRectForContentRect_InRect_TextContainer_CharacterRange(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))), objc.ExtractPtr(textContainer), *(*C.NSRange)(foundation.ToNSRangePointer(charRange)))
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSTextBlock) DrawBackgroundWithFrame_InView_CharacterRange_LayoutManager(frameRect foundation.Rect, controlView View, charRange foundation.Range, layoutManager LayoutManager) {
@@ -121,18 +121,18 @@ func (n *NSTextBlock) DrawBackgroundWithFrame_InView_CharacterRange_LayoutManage
 }
 
 func (n *NSTextBlock) ContentWidth() coregraphics.Float {
-	result := C.C_NSTextBlock_ContentWidth(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSTextBlock_ContentWidth(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSTextBlock) ContentWidthValueType() TextBlockValueType {
-	result := C.C_NSTextBlock_ContentWidthValueType(n.Ptr())
-	return TextBlockValueType(uint(result))
+	result_ := C.C_NSTextBlock_ContentWidthValueType(n.Ptr())
+	return TextBlockValueType(uint(result_))
 }
 
 func (n *NSTextBlock) VerticalAlignment() TextBlockVerticalAlignment {
-	result := C.C_NSTextBlock_VerticalAlignment(n.Ptr())
-	return TextBlockVerticalAlignment(uint(result))
+	result_ := C.C_NSTextBlock_VerticalAlignment(n.Ptr())
+	return TextBlockVerticalAlignment(uint(result_))
 }
 
 func (n *NSTextBlock) SetVerticalAlignment(value TextBlockVerticalAlignment) {
@@ -140,8 +140,8 @@ func (n *NSTextBlock) SetVerticalAlignment(value TextBlockVerticalAlignment) {
 }
 
 func (n *NSTextBlock) BackgroundColor() Color {
-	result := C.C_NSTextBlock_BackgroundColor(n.Ptr())
-	return MakeColor(result)
+	result_ := C.C_NSTextBlock_BackgroundColor(n.Ptr())
+	return MakeColor(result_)
 }
 
 func (n *NSTextBlock) SetBackgroundColor(value Color) {

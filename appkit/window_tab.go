@@ -40,13 +40,13 @@ func AllocWindowTab() *NSWindowTab {
 }
 
 func (n *NSWindowTab) Init() WindowTab {
-	result := C.C_NSWindowTab_Init(n.Ptr())
-	return MakeWindowTab(result)
+	result_ := C.C_NSWindowTab_Init(n.Ptr())
+	return MakeWindowTab(result_)
 }
 
 func (n *NSWindowTab) Title() string {
-	result := C.C_NSWindowTab_Title(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSWindowTab_Title(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSWindowTab) SetTitle(value string) {
@@ -54,8 +54,8 @@ func (n *NSWindowTab) SetTitle(value string) {
 }
 
 func (n *NSWindowTab) AttributedTitle() foundation.AttributedString {
-	result := C.C_NSWindowTab_AttributedTitle(n.Ptr())
-	return foundation.MakeAttributedString(result)
+	result_ := C.C_NSWindowTab_AttributedTitle(n.Ptr())
+	return foundation.MakeAttributedString(result_)
 }
 
 func (n *NSWindowTab) SetAttributedTitle(value foundation.AttributedString) {
@@ -63,8 +63,8 @@ func (n *NSWindowTab) SetAttributedTitle(value foundation.AttributedString) {
 }
 
 func (n *NSWindowTab) ToolTip() string {
-	result := C.C_NSWindowTab_ToolTip(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSWindowTab_ToolTip(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSWindowTab) SetToolTip(value string) {
@@ -72,8 +72,8 @@ func (n *NSWindowTab) SetToolTip(value string) {
 }
 
 func (n *NSWindowTab) AccessoryView() View {
-	result := C.C_NSWindowTab_AccessoryView(n.Ptr())
-	return MakeView(result)
+	result_ := C.C_NSWindowTab_AccessoryView(n.Ptr())
+	return MakeView(result_)
 }
 
 func (n *NSWindowTab) SetAccessoryView(value View) {

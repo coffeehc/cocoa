@@ -37,33 +37,33 @@ func AllocTextList() *NSTextList {
 }
 
 func (n *NSTextList) InitWithMarkerFormat_Options(format TextListMarkerFormat, mask uint) TextList {
-	result := C.C_NSTextList_InitWithMarkerFormat_Options(n.Ptr(), foundation.NewString(string(format)).Ptr(), C.uint(mask))
-	return MakeTextList(result)
+	result_ := C.C_NSTextList_InitWithMarkerFormat_Options(n.Ptr(), foundation.NewString(string(format)).Ptr(), C.uint(mask))
+	return MakeTextList(result_)
 }
 
 func (n *NSTextList) Init() TextList {
-	result := C.C_NSTextList_Init(n.Ptr())
-	return MakeTextList(result)
+	result_ := C.C_NSTextList_Init(n.Ptr())
+	return MakeTextList(result_)
 }
 
 func (n *NSTextList) MarkerForItemNumber(itemNum int) string {
-	result := C.C_NSTextList_MarkerForItemNumber(n.Ptr(), C.int(itemNum))
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSTextList_MarkerForItemNumber(n.Ptr(), C.int(itemNum))
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSTextList) MarkerFormat() TextListMarkerFormat {
-	result := C.C_NSTextList_MarkerFormat(n.Ptr())
-	return TextListMarkerFormat(foundation.MakeString(result).String())
+	result_ := C.C_NSTextList_MarkerFormat(n.Ptr())
+	return TextListMarkerFormat(foundation.MakeString(result_).String())
 }
 
 func (n *NSTextList) ListOptions() TextListOptions {
-	result := C.C_NSTextList_ListOptions(n.Ptr())
-	return TextListOptions(uint(result))
+	result_ := C.C_NSTextList_ListOptions(n.Ptr())
+	return TextListOptions(uint(result_))
 }
 
 func (n *NSTextList) StartingItemNumber() int {
-	result := C.C_NSTextList_StartingItemNumber(n.Ptr())
-	return int(result)
+	result_ := C.C_NSTextList_StartingItemNumber(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSTextList) SetStartingItemNumber(value int) {

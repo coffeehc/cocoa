@@ -66,6 +66,8 @@ double C_NSLayoutManager_DefaultLineHeightForFont(void* ptr, void* theFont);
 double C_NSLayoutManager_DefaultBaselineOffsetForFont(void* ptr, void* theFont);
 void C_NSLayoutManager_AddTemporaryAttribute_Value_ForCharacterRange(void* ptr, void* attrName, void* value, NSRange charRange);
 void C_NSLayoutManager_RemoveTemporaryAttribute_ForCharacterRange(void* ptr, void* attrName, NSRange charRange);
+void* C_NSLayoutManager_Delegate(void* ptr);
+void C_NSLayoutManager_SetDelegate(void* ptr, void* value);
 void* C_NSLayoutManager_TextStorage(void* ptr);
 void C_NSLayoutManager_SetTextStorage(void* ptr, void* value);
 bool C_NSLayoutManager_AllowsNonContiguousLayout(void* ptr);

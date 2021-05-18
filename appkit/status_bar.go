@@ -36,13 +36,13 @@ func AllocStatusBar() *NSStatusBar {
 }
 
 func (n *NSStatusBar) Init() StatusBar {
-	result := C.C_NSStatusBar_Init(n.Ptr())
-	return MakeStatusBar(result)
+	result_ := C.C_NSStatusBar_Init(n.Ptr())
+	return MakeStatusBar(result_)
 }
 
 func (n *NSStatusBar) StatusItemWithLength(length coregraphics.Float) StatusItem {
-	result := C.C_NSStatusBar_StatusItemWithLength(n.Ptr(), C.double(float64(length)))
-	return MakeStatusItem(result)
+	result_ := C.C_NSStatusBar_StatusItemWithLength(n.Ptr(), C.double(float64(length)))
+	return MakeStatusItem(result_)
 }
 
 func (n *NSStatusBar) RemoveStatusItem(item StatusItem) {
@@ -50,16 +50,16 @@ func (n *NSStatusBar) RemoveStatusItem(item StatusItem) {
 }
 
 func SystemStatusBar() StatusBar {
-	result := C.C_NSStatusBar_SystemStatusBar()
-	return MakeStatusBar(result)
+	result_ := C.C_NSStatusBar_SystemStatusBar()
+	return MakeStatusBar(result_)
 }
 
 func (n *NSStatusBar) IsVertical() bool {
-	result := C.C_NSStatusBar_IsVertical(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSStatusBar_IsVertical(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSStatusBar) Thickness() coregraphics.Float {
-	result := C.C_NSStatusBar_Thickness(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSStatusBar_Thickness(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }

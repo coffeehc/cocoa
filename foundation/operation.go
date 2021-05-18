@@ -25,6 +25,11 @@ type Operation interface {
 	IsReady() bool
 	Name() string
 	SetName(value string)
+	Dependencies() []Operation
+	QualityOfService() QualityOfService
+	SetQualityOfService(value QualityOfService)
+	QueuePriority() OperationQueuePriority
+	SetQueuePriority(value OperationQueuePriority)
 }
 
 type NSOperation struct {
@@ -45,8 +50,8 @@ func AllocOperation() *NSOperation {
 }
 
 func (n *NSOperation) Init() Operation {
-	result := C.C_NSOperation_Init(n.Ptr())
-	return MakeOperation(result)
+	result_ := C.C_NSOperation_Init(n.Ptr())
+	return MakeOperation(result_)
 }
 
 func (n *NSOperation) Start() {
@@ -74,40 +79,69 @@ func (n *NSOperation) WaitUntilFinished() {
 }
 
 func (n *NSOperation) IsCancelled() bool {
-	result := C.C_NSOperation_IsCancelled(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSOperation_IsCancelled(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSOperation) IsExecuting() bool {
-	result := C.C_NSOperation_IsExecuting(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSOperation_IsExecuting(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSOperation) IsFinished() bool {
-	result := C.C_NSOperation_IsFinished(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSOperation_IsFinished(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSOperation) IsConcurrent() bool {
-	result := C.C_NSOperation_IsConcurrent(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSOperation_IsConcurrent(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSOperation) IsAsynchronous() bool {
-	result := C.C_NSOperation_IsAsynchronous(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSOperation_IsAsynchronous(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSOperation) IsReady() bool {
-	result := C.C_NSOperation_IsReady(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSOperation_IsReady(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSOperation) Name() string {
-	result := C.C_NSOperation_Name(n.Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSOperation_Name(n.Ptr())
+	return MakeString(result_).String()
 }
 
 func (n *NSOperation) SetName(value string) {
 	C.C_NSOperation_SetName(n.Ptr(), NewString(value).Ptr())
+}
+
+func (n *NSOperation) Dependencies() []Operation {
+	result_ := C.C_NSOperation_Dependencies(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]Operation, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeOperation(r)
+	}
+	return goResult_
+}
+
+func (n *NSOperation) QualityOfService() QualityOfService {
+	result_ := C.C_NSOperation_QualityOfService(n.Ptr())
+	return QualityOfService(int(result_))
+}
+
+func (n *NSOperation) SetQualityOfService(value QualityOfService) {
+	C.C_NSOperation_SetQualityOfService(n.Ptr(), C.int(int(value)))
+}
+
+func (n *NSOperation) QueuePriority() OperationQueuePriority {
+	result_ := C.C_NSOperation_QueuePriority(n.Ptr())
+	return OperationQueuePriority(int(result_))
+}
+
+func (n *NSOperation) SetQueuePriority(value OperationQueuePriority) {
+	C.C_NSOperation_SetQueuePriority(n.Ptr(), C.int(int(value)))
 }

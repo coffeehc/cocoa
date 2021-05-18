@@ -2,50 +2,89 @@
 #import "pasteboard_item.h"
 
 void* C_PasteboardItem_Alloc() {
-	return [NSPasteboardItem alloc];
+    return [NSPasteboardItem alloc];
 }
 
 void* C_NSPasteboardItem_Init(void* ptr) {
-	NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
-	NSPasteboardItem* result = [nSPasteboardItem init];
-	return result;
+    NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
+    NSPasteboardItem* result_ = [nSPasteboardItem init];
+    return result_;
+}
+
+void* C_NSPasteboardItem_AvailableTypeFromArray(void* ptr, Array types) {
+    NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
+    NSMutableArray* objcTypes = [[NSMutableArray alloc] init];
+    void** typesData = (void**)types.data;
+    for (int i = 0; i < types.len; i++) {
+    	void* p = typesData[i];
+    	[objcTypes addObject:(NSPasteboardType)(NSString*)p];
+    }
+    NSPasteboardType result_ = [nSPasteboardItem availableTypeFromArray:objcTypes];
+    return result_;
+}
+
+bool C_NSPasteboardItem_SetDataProvider_ForTypes(void* ptr, void* dataProvider, Array types) {
+    NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
+    NSMutableArray* objcTypes = [[NSMutableArray alloc] init];
+    void** typesData = (void**)types.data;
+    for (int i = 0; i < types.len; i++) {
+    	void* p = typesData[i];
+    	[objcTypes addObject:(NSPasteboardType)(NSString*)p];
+    }
+    BOOL result_ = [nSPasteboardItem setDataProvider:(id)dataProvider forTypes:objcTypes];
+    return result_;
 }
 
 bool C_NSPasteboardItem_SetData_ForType(void* ptr, Array data, void* _type) {
-	NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
-	bool result = [nSPasteboardItem setData:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len] forType:(NSString*)_type];
-	return result;
+    NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
+    BOOL result_ = [nSPasteboardItem setData:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len] forType:(NSString*)_type];
+    return result_;
 }
 
 bool C_NSPasteboardItem_SetString_ForType(void* ptr, void* _string, void* _type) {
-	NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
-	bool result = [nSPasteboardItem setString:(NSString*)_string forType:(NSString*)_type];
-	return result;
+    NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
+    BOOL result_ = [nSPasteboardItem setString:(NSString*)_string forType:(NSString*)_type];
+    return result_;
 }
 
 bool C_NSPasteboardItem_SetPropertyList_ForType(void* ptr, void* propertyList, void* _type) {
-	NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
-	bool result = [nSPasteboardItem setPropertyList:(id)propertyList forType:(NSString*)_type];
-	return result;
+    NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
+    BOOL result_ = [nSPasteboardItem setPropertyList:(id)propertyList forType:(NSString*)_type];
+    return result_;
 }
 
 Array C_NSPasteboardItem_DataForType(void* ptr, void* _type) {
-	NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
-	NSData* result = [nSPasteboardItem dataForType:(NSString*)_type];
-	Array resultarray;
-	resultarray.data = [result bytes];
-	resultarray.len = result.length;
-	return resultarray;
+    NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
+    NSData* result_ = [nSPasteboardItem dataForType:(NSString*)_type];
+    Array result_array;
+    result_array.data = [result_ bytes];
+    result_array.len = result_.length;
+    return result_array;
 }
 
 void* C_NSPasteboardItem_StringForType(void* ptr, void* _type) {
-	NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
-	NSString* result = [nSPasteboardItem stringForType:(NSString*)_type];
-	return result;
+    NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
+    NSString* result_ = [nSPasteboardItem stringForType:(NSString*)_type];
+    return result_;
 }
 
 void* C_NSPasteboardItem_PropertyListForType(void* ptr, void* _type) {
-	NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
-	id result = [nSPasteboardItem propertyListForType:(NSString*)_type];
-	return result;
+    NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
+    id result_ = [nSPasteboardItem propertyListForType:(NSString*)_type];
+    return result_;
+}
+
+Array C_NSPasteboardItem_Types(void* ptr) {
+    NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
+    NSArray* result_ = [nSPasteboardItem types];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
+    }
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
 }

@@ -7,8 +7,8 @@ void* C_TextBlock_Alloc() {
 
 void* C_NSTextBlock_Init(void* ptr) {
     NSTextBlock* nSTextBlock = (NSTextBlock*)ptr;
-    NSTextBlock* result = [nSTextBlock init];
-    return result;
+    NSTextBlock* result_ = [nSTextBlock init];
+    return result_;
 }
 
 void C_NSTextBlock_SetValue_Type_ForDimension(void* ptr, double val, unsigned int _type, unsigned int dimension) {
@@ -18,14 +18,14 @@ void C_NSTextBlock_SetValue_Type_ForDimension(void* ptr, double val, unsigned in
 
 double C_NSTextBlock_ValueForDimension(void* ptr, unsigned int dimension) {
     NSTextBlock* nSTextBlock = (NSTextBlock*)ptr;
-    CGFloat result = [nSTextBlock valueForDimension:dimension];
-    return result;
+    CGFloat result_ = [nSTextBlock valueForDimension:dimension];
+    return result_;
 }
 
 unsigned int C_NSTextBlock_ValueTypeForDimension(void* ptr, unsigned int dimension) {
     NSTextBlock* nSTextBlock = (NSTextBlock*)ptr;
-    NSTextBlockValueType result = [nSTextBlock valueTypeForDimension:dimension];
-    return result;
+    NSTextBlockValueType result_ = [nSTextBlock valueTypeForDimension:dimension];
+    return result_;
 }
 
 void C_NSTextBlock_SetContentWidth_Type(void* ptr, double val, unsigned int _type) {
@@ -45,14 +45,14 @@ void C_NSTextBlock_SetWidth_Type_ForLayer(void* ptr, double val, unsigned int _t
 
 double C_NSTextBlock_WidthForLayer_Edge(void* ptr, int layer, unsigned int edge) {
     NSTextBlock* nSTextBlock = (NSTextBlock*)ptr;
-    CGFloat result = [nSTextBlock widthForLayer:layer edge:edge];
-    return result;
+    CGFloat result_ = [nSTextBlock widthForLayer:layer edge:edge];
+    return result_;
 }
 
 unsigned int C_NSTextBlock_WidthValueTypeForLayer_Edge(void* ptr, int layer, unsigned int edge) {
     NSTextBlock* nSTextBlock = (NSTextBlock*)ptr;
-    NSTextBlockValueType result = [nSTextBlock widthValueTypeForLayer:layer edge:edge];
-    return result;
+    NSTextBlockValueType result_ = [nSTextBlock widthValueTypeForLayer:layer edge:edge];
+    return result_;
 }
 
 void C_NSTextBlock_SetBorderColor_ForEdge(void* ptr, void* color, unsigned int edge) {
@@ -67,20 +67,20 @@ void C_NSTextBlock_SetBorderColor(void* ptr, void* color) {
 
 void* C_NSTextBlock_BorderColorForEdge(void* ptr, unsigned int edge) {
     NSTextBlock* nSTextBlock = (NSTextBlock*)ptr;
-    NSColor* result = [nSTextBlock borderColorForEdge:edge];
-    return result;
+    NSColor* result_ = [nSTextBlock borderColorForEdge:edge];
+    return result_;
 }
 
 CGRect C_NSTextBlock_RectForLayoutAtPoint_InRect_TextContainer_CharacterRange(void* ptr, CGPoint startingPoint, CGRect rect, void* textContainer, NSRange charRange) {
     NSTextBlock* nSTextBlock = (NSTextBlock*)ptr;
-    NSRect result = [nSTextBlock rectForLayoutAtPoint:startingPoint inRect:rect textContainer:(NSTextContainer*)textContainer characterRange:charRange];
-    return result;
+    NSRect result_ = [nSTextBlock rectForLayoutAtPoint:startingPoint inRect:rect textContainer:(NSTextContainer*)textContainer characterRange:charRange];
+    return result_;
 }
 
 CGRect C_NSTextBlock_BoundsRectForContentRect_InRect_TextContainer_CharacterRange(void* ptr, CGRect contentRect, CGRect rect, void* textContainer, NSRange charRange) {
     NSTextBlock* nSTextBlock = (NSTextBlock*)ptr;
-    NSRect result = [nSTextBlock boundsRectForContentRect:contentRect inRect:rect textContainer:(NSTextContainer*)textContainer characterRange:charRange];
-    return result;
+    NSRect result_ = [nSTextBlock boundsRectForContentRect:contentRect inRect:rect textContainer:(NSTextContainer*)textContainer characterRange:charRange];
+    return result_;
 }
 
 void C_NSTextBlock_DrawBackgroundWithFrame_InView_CharacterRange_LayoutManager(void* ptr, CGRect frameRect, void* controlView, NSRange charRange, void* layoutManager) {
@@ -90,20 +90,20 @@ void C_NSTextBlock_DrawBackgroundWithFrame_InView_CharacterRange_LayoutManager(v
 
 double C_NSTextBlock_ContentWidth(void* ptr) {
     NSTextBlock* nSTextBlock = (NSTextBlock*)ptr;
-    CGFloat result = [nSTextBlock contentWidth];
-    return result;
+    CGFloat result_ = [nSTextBlock contentWidth];
+    return result_;
 }
 
 unsigned int C_NSTextBlock_ContentWidthValueType(void* ptr) {
     NSTextBlock* nSTextBlock = (NSTextBlock*)ptr;
-    NSTextBlockValueType result = [nSTextBlock contentWidthValueType];
-    return result;
+    NSTextBlockValueType result_ = [nSTextBlock contentWidthValueType];
+    return result_;
 }
 
 unsigned int C_NSTextBlock_VerticalAlignment(void* ptr) {
     NSTextBlock* nSTextBlock = (NSTextBlock*)ptr;
-    NSTextBlockVerticalAlignment result = [nSTextBlock verticalAlignment];
-    return result;
+    NSTextBlockVerticalAlignment result_ = [nSTextBlock verticalAlignment];
+    return result_;
 }
 
 void C_NSTextBlock_SetVerticalAlignment(void* ptr, unsigned int value) {
@@ -113,8 +113,8 @@ void C_NSTextBlock_SetVerticalAlignment(void* ptr, unsigned int value) {
 
 void* C_NSTextBlock_BackgroundColor(void* ptr) {
     NSTextBlock* nSTextBlock = (NSTextBlock*)ptr;
-    NSColor* result = [nSTextBlock backgroundColor];
-    return result;
+    NSColor* result_ = [nSTextBlock backgroundColor];
+    return result_;
 }
 
 void C_NSTextBlock_SetBackgroundColor(void* ptr, void* value) {

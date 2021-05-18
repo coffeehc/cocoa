@@ -13,9 +13,12 @@ import (
 
 type Cell interface {
 	objc.Object
+	SetCellAttribute_To(parameter CellAttribute, value int)
+	CellAttribute(parameter CellAttribute) int
 	SetNextState()
 	SetUpFieldEditorAttributes(textObj Text) Text
 	MenuForEvent_InRect_OfView(event Event, cellFrame foundation.Rect, view View) Menu
+	Compare(otherCell objc.Object) foundation.ComparisonResult
 	PerformClick(sender objc.Object)
 	TakeObjectValueFrom(sender objc.Object)
 	TakeIntegerValueFrom(sender objc.Object)
@@ -27,7 +30,9 @@ type Cell interface {
 	StartTrackingAt_InView(startPoint foundation.Point, controlView View) bool
 	ContinueTracking_At_InView(lastPoint foundation.Point, currentPoint foundation.Point, controlView View) bool
 	StopTracking_At_InView_MouseIsUp(lastPoint foundation.Point, stopPoint foundation.Point, controlView View, flag bool)
+	HitTestForEvent_InRect_OfView(event Event, cellFrame foundation.Rect, controlView View) CellHitResult
 	ResetCursorRect_InView(cellFrame foundation.Rect, controlView View)
+	DraggingImageComponentsWithFrame_InView(frame foundation.Rect, view View) []DraggingImageComponent
 	DrawFocusRingMaskWithFrame_InView(cellFrame foundation.Rect, controlView View)
 	FocusRingMaskBoundsForFrame_InView(cellFrame foundation.Rect, controlView View) foundation.Rect
 	CalcDrawInfo(rect foundation.Rect)
@@ -56,6 +61,8 @@ type Cell interface {
 	SetDoubleValue(value float64)
 	FloatValue() float32
 	SetFloatValue(value float32)
+	Type() CellType
+	SetType(value CellType)
 	IsEnabled() bool
 	SetEnabled(value bool)
 	AllowsUndo() bool
@@ -65,6 +72,9 @@ type Cell interface {
 	IsBordered() bool
 	SetBordered(value bool)
 	IsOpaque() bool
+	BackgroundStyle() BackgroundStyle
+	SetBackgroundStyle(value BackgroundStyle)
+	InteriorBackgroundStyle() BackgroundStyle
 	AllowsMixedState() bool
 	SetAllowsMixedState(value bool)
 	NextState() int
@@ -76,12 +86,18 @@ type Cell interface {
 	SetSelectable(value bool)
 	IsScrollable() bool
 	SetScrollable(value bool)
+	Alignment() TextAlignment
+	SetAlignment(value TextAlignment)
 	Font() Font
 	SetFont(value Font)
+	LineBreakMode() LineBreakMode
+	SetLineBreakMode(value LineBreakMode)
 	TruncatesLastVisibleLine() bool
 	SetTruncatesLastVisibleLine(value bool)
 	Wraps() bool
 	SetWraps(value bool)
+	BaseWritingDirection() WritingDirection
+	SetBaseWritingDirection(value WritingDirection)
 	AttributedStringValue() foundation.AttributedString
 	SetAttributedStringValue(value foundation.AttributedString)
 	AllowsEditingTextAttributes() bool
@@ -100,6 +116,8 @@ type Cell interface {
 	SetImage(value Image)
 	Tag() int
 	SetTag(value int)
+	Formatter() foundation.Formatter
+	SetFormatter(value foundation.Formatter)
 	Menu() Menu
 	SetMenu(value Menu)
 	AcceptsFirstResponder() bool
@@ -111,7 +129,11 @@ type Cell interface {
 	SetRepresentedObject(value objc.Object)
 	MouseDownFlags() int
 	KeyEquivalent() string
+	FocusRingType() FocusRingType
+	SetFocusRingType(value FocusRingType)
 	CellSize() foundation.Size
+	ControlSize() ControlSize
+	SetControlSize(value ControlSize)
 	ControlView() View
 	SetControlView(value View)
 	IsHighlighted() bool
@@ -121,6 +143,8 @@ type Cell interface {
 	WantsNotificationForMarkedText() bool
 	UsesSingleLineMode() bool
 	SetUsesSingleLineMode(value bool)
+	UserInterfaceLayoutDirection() UserInterfaceLayoutDirection
+	SetUserInterfaceLayoutDirection(value UserInterfaceLayoutDirection)
 }
 
 type NSCell struct {
@@ -141,23 +165,32 @@ func AllocCell() *NSCell {
 }
 
 func (n *NSCell) InitImageCell(image Image) Cell {
-	result := C.C_NSCell_InitImageCell(n.Ptr(), objc.ExtractPtr(image))
-	return MakeCell(result)
+	result_ := C.C_NSCell_InitImageCell(n.Ptr(), objc.ExtractPtr(image))
+	return MakeCell(result_)
 }
 
 func (n *NSCell) InitTextCell(_string string) Cell {
-	result := C.C_NSCell_InitTextCell(n.Ptr(), foundation.NewString(_string).Ptr())
-	return MakeCell(result)
+	result_ := C.C_NSCell_InitTextCell(n.Ptr(), foundation.NewString(_string).Ptr())
+	return MakeCell(result_)
 }
 
 func (n *NSCell) Init() Cell {
-	result := C.C_NSCell_Init(n.Ptr())
-	return MakeCell(result)
+	result_ := C.C_NSCell_Init(n.Ptr())
+	return MakeCell(result_)
 }
 
 func (n *NSCell) InitWithCoder(coder foundation.Coder) Cell {
-	result := C.C_NSCell_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeCell(result)
+	result_ := C.C_NSCell_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeCell(result_)
+}
+
+func (n *NSCell) SetCellAttribute_To(parameter CellAttribute, value int) {
+	C.C_NSCell_SetCellAttribute_To(n.Ptr(), C.uint(uint(parameter)), C.int(value))
+}
+
+func (n *NSCell) CellAttribute(parameter CellAttribute) int {
+	result_ := C.C_NSCell_CellAttribute(n.Ptr(), C.uint(uint(parameter)))
+	return int(result_)
 }
 
 func (n *NSCell) SetNextState() {
@@ -165,13 +198,18 @@ func (n *NSCell) SetNextState() {
 }
 
 func (n *NSCell) SetUpFieldEditorAttributes(textObj Text) Text {
-	result := C.C_NSCell_SetUpFieldEditorAttributes(n.Ptr(), objc.ExtractPtr(textObj))
-	return MakeText(result)
+	result_ := C.C_NSCell_SetUpFieldEditorAttributes(n.Ptr(), objc.ExtractPtr(textObj))
+	return MakeText(result_)
 }
 
 func (n *NSCell) MenuForEvent_InRect_OfView(event Event, cellFrame foundation.Rect, view View) Menu {
-	result := C.C_NSCell_MenuForEvent_InRect_OfView(n.Ptr(), objc.ExtractPtr(event), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(cellFrame))), objc.ExtractPtr(view))
-	return MakeMenu(result)
+	result_ := C.C_NSCell_MenuForEvent_InRect_OfView(n.Ptr(), objc.ExtractPtr(event), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(cellFrame))), objc.ExtractPtr(view))
+	return MakeMenu(result_)
+}
+
+func (n *NSCell) Compare(otherCell objc.Object) foundation.ComparisonResult {
+	result_ := C.C_NSCell_Compare(n.Ptr(), objc.ExtractPtr(otherCell))
+	return foundation.ComparisonResult(int(result_))
 }
 
 func (n *NSCell) PerformClick(sender objc.Object) {
@@ -203,26 +241,42 @@ func (n *NSCell) TakeFloatValueFrom(sender objc.Object) {
 }
 
 func (n *NSCell) TrackMouse_InRect_OfView_UntilMouseUp(event Event, cellFrame foundation.Rect, controlView View, flag bool) bool {
-	result := C.C_NSCell_TrackMouse_InRect_OfView_UntilMouseUp(n.Ptr(), objc.ExtractPtr(event), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(cellFrame))), objc.ExtractPtr(controlView), C.bool(flag))
-	return bool(result)
+	result_ := C.C_NSCell_TrackMouse_InRect_OfView_UntilMouseUp(n.Ptr(), objc.ExtractPtr(event), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(cellFrame))), objc.ExtractPtr(controlView), C.bool(flag))
+	return bool(result_)
 }
 
 func (n *NSCell) StartTrackingAt_InView(startPoint foundation.Point, controlView View) bool {
-	result := C.C_NSCell_StartTrackingAt_InView(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(startPoint))), objc.ExtractPtr(controlView))
-	return bool(result)
+	result_ := C.C_NSCell_StartTrackingAt_InView(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(startPoint))), objc.ExtractPtr(controlView))
+	return bool(result_)
 }
 
 func (n *NSCell) ContinueTracking_At_InView(lastPoint foundation.Point, currentPoint foundation.Point, controlView View) bool {
-	result := C.C_NSCell_ContinueTracking_At_InView(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(lastPoint))), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(currentPoint))), objc.ExtractPtr(controlView))
-	return bool(result)
+	result_ := C.C_NSCell_ContinueTracking_At_InView(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(lastPoint))), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(currentPoint))), objc.ExtractPtr(controlView))
+	return bool(result_)
 }
 
 func (n *NSCell) StopTracking_At_InView_MouseIsUp(lastPoint foundation.Point, stopPoint foundation.Point, controlView View, flag bool) {
 	C.C_NSCell_StopTracking_At_InView_MouseIsUp(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(lastPoint))), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(stopPoint))), objc.ExtractPtr(controlView), C.bool(flag))
 }
 
+func (n *NSCell) HitTestForEvent_InRect_OfView(event Event, cellFrame foundation.Rect, controlView View) CellHitResult {
+	result_ := C.C_NSCell_HitTestForEvent_InRect_OfView(n.Ptr(), objc.ExtractPtr(event), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(cellFrame))), objc.ExtractPtr(controlView))
+	return CellHitResult(uint(result_))
+}
+
 func (n *NSCell) ResetCursorRect_InView(cellFrame foundation.Rect, controlView View) {
 	C.C_NSCell_ResetCursorRect_InView(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(cellFrame))), objc.ExtractPtr(controlView))
+}
+
+func (n *NSCell) DraggingImageComponentsWithFrame_InView(frame foundation.Rect, view View) []DraggingImageComponent {
+	result_ := C.C_NSCell_DraggingImageComponentsWithFrame_InView(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frame))), objc.ExtractPtr(view))
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]DraggingImageComponent, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeDraggingImageComponent(r)
+	}
+	return goResult_
 }
 
 func (n *NSCell) DrawFocusRingMaskWithFrame_InView(cellFrame foundation.Rect, controlView View) {
@@ -230,8 +284,8 @@ func (n *NSCell) DrawFocusRingMaskWithFrame_InView(cellFrame foundation.Rect, co
 }
 
 func (n *NSCell) FocusRingMaskBoundsForFrame_InView(cellFrame foundation.Rect, controlView View) foundation.Rect {
-	result := C.C_NSCell_FocusRingMaskBoundsForFrame_InView(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(cellFrame))), objc.ExtractPtr(controlView))
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSCell_FocusRingMaskBoundsForFrame_InView(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(cellFrame))), objc.ExtractPtr(controlView))
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSCell) CalcDrawInfo(rect foundation.Rect) {
@@ -239,23 +293,23 @@ func (n *NSCell) CalcDrawInfo(rect foundation.Rect) {
 }
 
 func (n *NSCell) CellSizeForBounds(rect foundation.Rect) foundation.Size {
-	result := C.C_NSCell_CellSizeForBounds(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSCell_CellSizeForBounds(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSCell) DrawingRectForBounds(rect foundation.Rect) foundation.Rect {
-	result := C.C_NSCell_DrawingRectForBounds(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSCell_DrawingRectForBounds(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSCell) ImageRectForBounds(rect foundation.Rect) foundation.Rect {
-	result := C.C_NSCell_ImageRectForBounds(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSCell_ImageRectForBounds(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSCell) TitleRectForBounds(rect foundation.Rect) foundation.Rect {
-	result := C.C_NSCell_TitleRectForBounds(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSCell_TitleRectForBounds(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSCell) DrawWithFrame_InView(cellFrame foundation.Rect, controlView View) {
@@ -263,8 +317,8 @@ func (n *NSCell) DrawWithFrame_InView(cellFrame foundation.Rect, controlView Vie
 }
 
 func (n *NSCell) HighlightColorWithFrame_InView(cellFrame foundation.Rect, controlView View) Color {
-	result := C.C_NSCell_HighlightColorWithFrame_InView(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(cellFrame))), objc.ExtractPtr(controlView))
-	return MakeColor(result)
+	result_ := C.C_NSCell_HighlightColorWithFrame_InView(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(cellFrame))), objc.ExtractPtr(controlView))
+	return MakeColor(result_)
 }
 
 func (n *NSCell) DrawInteriorWithFrame_InView(cellFrame foundation.Rect, controlView View) {
@@ -288,13 +342,13 @@ func (n *NSCell) EndEditing(textObj Text) {
 }
 
 func (n *NSCell) FieldEditorForView(controlView View) TextView {
-	result := C.C_NSCell_FieldEditorForView(n.Ptr(), objc.ExtractPtr(controlView))
-	return MakeTextView(result)
+	result_ := C.C_NSCell_FieldEditorForView(n.Ptr(), objc.ExtractPtr(controlView))
+	return MakeTextView(result_)
 }
 
 func (n *NSCell) ExpansionFrameWithFrame_InView(cellFrame foundation.Rect, view View) foundation.Rect {
-	result := C.C_NSCell_ExpansionFrameWithFrame_InView(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(cellFrame))), objc.ExtractPtr(view))
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSCell_ExpansionFrameWithFrame_InView(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(cellFrame))), objc.ExtractPtr(view))
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSCell) DrawWithExpansionFrame_InView(cellFrame foundation.Rect, view View) {
@@ -302,8 +356,8 @@ func (n *NSCell) DrawWithExpansionFrame_InView(cellFrame foundation.Rect, view V
 }
 
 func (n *NSCell) ObjectValue() objc.Object {
-	result := C.C_NSCell_ObjectValue(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSCell_ObjectValue(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSCell) SetObjectValue(value objc.Object) {
@@ -311,13 +365,13 @@ func (n *NSCell) SetObjectValue(value objc.Object) {
 }
 
 func (n *NSCell) HasValidObjectValue() bool {
-	result := C.C_NSCell_HasValidObjectValue(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSCell_HasValidObjectValue(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSCell) IntegerValue() int {
-	result := C.C_NSCell_IntegerValue(n.Ptr())
-	return int(result)
+	result_ := C.C_NSCell_IntegerValue(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSCell) SetIntegerValue(value int) {
@@ -325,8 +379,8 @@ func (n *NSCell) SetIntegerValue(value int) {
 }
 
 func (n *NSCell) StringValue() string {
-	result := C.C_NSCell_StringValue(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSCell_StringValue(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSCell) SetStringValue(value string) {
@@ -334,8 +388,8 @@ func (n *NSCell) SetStringValue(value string) {
 }
 
 func (n *NSCell) DoubleValue() float64 {
-	result := C.C_NSCell_DoubleValue(n.Ptr())
-	return float64(result)
+	result_ := C.C_NSCell_DoubleValue(n.Ptr())
+	return float64(result_)
 }
 
 func (n *NSCell) SetDoubleValue(value float64) {
@@ -343,17 +397,26 @@ func (n *NSCell) SetDoubleValue(value float64) {
 }
 
 func (n *NSCell) FloatValue() float32 {
-	result := C.C_NSCell_FloatValue(n.Ptr())
-	return float32(result)
+	result_ := C.C_NSCell_FloatValue(n.Ptr())
+	return float32(result_)
 }
 
 func (n *NSCell) SetFloatValue(value float32) {
 	C.C_NSCell_SetFloatValue(n.Ptr(), C.float(value))
 }
 
+func (n *NSCell) Type() CellType {
+	result_ := C.C_NSCell_Type(n.Ptr())
+	return CellType(uint(result_))
+}
+
+func (n *NSCell) SetType(value CellType) {
+	C.C_NSCell_SetType(n.Ptr(), C.uint(uint(value)))
+}
+
 func (n *NSCell) IsEnabled() bool {
-	result := C.C_NSCell_IsEnabled(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSCell_IsEnabled(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSCell) SetEnabled(value bool) {
@@ -361,8 +424,8 @@ func (n *NSCell) SetEnabled(value bool) {
 }
 
 func (n *NSCell) AllowsUndo() bool {
-	result := C.C_NSCell_AllowsUndo(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSCell_AllowsUndo(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSCell) SetAllowsUndo(value bool) {
@@ -370,8 +433,8 @@ func (n *NSCell) SetAllowsUndo(value bool) {
 }
 
 func (n *NSCell) IsBezeled() bool {
-	result := C.C_NSCell_IsBezeled(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSCell_IsBezeled(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSCell) SetBezeled(value bool) {
@@ -379,8 +442,8 @@ func (n *NSCell) SetBezeled(value bool) {
 }
 
 func (n *NSCell) IsBordered() bool {
-	result := C.C_NSCell_IsBordered(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSCell_IsBordered(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSCell) SetBordered(value bool) {
@@ -388,13 +451,27 @@ func (n *NSCell) SetBordered(value bool) {
 }
 
 func (n *NSCell) IsOpaque() bool {
-	result := C.C_NSCell_IsOpaque(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSCell_IsOpaque(n.Ptr())
+	return bool(result_)
+}
+
+func (n *NSCell) BackgroundStyle() BackgroundStyle {
+	result_ := C.C_NSCell_BackgroundStyle(n.Ptr())
+	return BackgroundStyle(int(result_))
+}
+
+func (n *NSCell) SetBackgroundStyle(value BackgroundStyle) {
+	C.C_NSCell_SetBackgroundStyle(n.Ptr(), C.int(int(value)))
+}
+
+func (n *NSCell) InteriorBackgroundStyle() BackgroundStyle {
+	result_ := C.C_NSCell_InteriorBackgroundStyle(n.Ptr())
+	return BackgroundStyle(int(result_))
 }
 
 func (n *NSCell) AllowsMixedState() bool {
-	result := C.C_NSCell_AllowsMixedState(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSCell_AllowsMixedState(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSCell) SetAllowsMixedState(value bool) {
@@ -402,13 +479,13 @@ func (n *NSCell) SetAllowsMixedState(value bool) {
 }
 
 func (n *NSCell) NextState() int {
-	result := C.C_NSCell_NextState(n.Ptr())
-	return int(result)
+	result_ := C.C_NSCell_NextState(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSCell) State() ControlStateValue {
-	result := C.C_NSCell_State(n.Ptr())
-	return ControlStateValue(int(result))
+	result_ := C.C_NSCell_State(n.Ptr())
+	return ControlStateValue(int(result_))
 }
 
 func (n *NSCell) SetState(value ControlStateValue) {
@@ -416,8 +493,8 @@ func (n *NSCell) SetState(value ControlStateValue) {
 }
 
 func (n *NSCell) IsEditable() bool {
-	result := C.C_NSCell_IsEditable(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSCell_IsEditable(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSCell) SetEditable(value bool) {
@@ -425,8 +502,8 @@ func (n *NSCell) SetEditable(value bool) {
 }
 
 func (n *NSCell) IsSelectable() bool {
-	result := C.C_NSCell_IsSelectable(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSCell_IsSelectable(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSCell) SetSelectable(value bool) {
@@ -434,26 +511,44 @@ func (n *NSCell) SetSelectable(value bool) {
 }
 
 func (n *NSCell) IsScrollable() bool {
-	result := C.C_NSCell_IsScrollable(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSCell_IsScrollable(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSCell) SetScrollable(value bool) {
 	C.C_NSCell_SetScrollable(n.Ptr(), C.bool(value))
 }
 
+func (n *NSCell) Alignment() TextAlignment {
+	result_ := C.C_NSCell_Alignment(n.Ptr())
+	return TextAlignment(int(result_))
+}
+
+func (n *NSCell) SetAlignment(value TextAlignment) {
+	C.C_NSCell_SetAlignment(n.Ptr(), C.int(int(value)))
+}
+
 func (n *NSCell) Font() Font {
-	result := C.C_NSCell_Font(n.Ptr())
-	return MakeFont(result)
+	result_ := C.C_NSCell_Font(n.Ptr())
+	return MakeFont(result_)
 }
 
 func (n *NSCell) SetFont(value Font) {
 	C.C_NSCell_SetFont(n.Ptr(), objc.ExtractPtr(value))
 }
 
+func (n *NSCell) LineBreakMode() LineBreakMode {
+	result_ := C.C_NSCell_LineBreakMode(n.Ptr())
+	return LineBreakMode(uint(result_))
+}
+
+func (n *NSCell) SetLineBreakMode(value LineBreakMode) {
+	C.C_NSCell_SetLineBreakMode(n.Ptr(), C.uint(uint(value)))
+}
+
 func (n *NSCell) TruncatesLastVisibleLine() bool {
-	result := C.C_NSCell_TruncatesLastVisibleLine(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSCell_TruncatesLastVisibleLine(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSCell) SetTruncatesLastVisibleLine(value bool) {
@@ -461,17 +556,26 @@ func (n *NSCell) SetTruncatesLastVisibleLine(value bool) {
 }
 
 func (n *NSCell) Wraps() bool {
-	result := C.C_NSCell_Wraps(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSCell_Wraps(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSCell) SetWraps(value bool) {
 	C.C_NSCell_SetWraps(n.Ptr(), C.bool(value))
 }
 
+func (n *NSCell) BaseWritingDirection() WritingDirection {
+	result_ := C.C_NSCell_BaseWritingDirection(n.Ptr())
+	return WritingDirection(int(result_))
+}
+
+func (n *NSCell) SetBaseWritingDirection(value WritingDirection) {
+	C.C_NSCell_SetBaseWritingDirection(n.Ptr(), C.int(int(value)))
+}
+
 func (n *NSCell) AttributedStringValue() foundation.AttributedString {
-	result := C.C_NSCell_AttributedStringValue(n.Ptr())
-	return foundation.MakeAttributedString(result)
+	result_ := C.C_NSCell_AttributedStringValue(n.Ptr())
+	return foundation.MakeAttributedString(result_)
 }
 
 func (n *NSCell) SetAttributedStringValue(value foundation.AttributedString) {
@@ -479,8 +583,8 @@ func (n *NSCell) SetAttributedStringValue(value foundation.AttributedString) {
 }
 
 func (n *NSCell) AllowsEditingTextAttributes() bool {
-	result := C.C_NSCell_AllowsEditingTextAttributes(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSCell_AllowsEditingTextAttributes(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSCell) SetAllowsEditingTextAttributes(value bool) {
@@ -488,8 +592,8 @@ func (n *NSCell) SetAllowsEditingTextAttributes(value bool) {
 }
 
 func (n *NSCell) ImportsGraphics() bool {
-	result := C.C_NSCell_ImportsGraphics(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSCell_ImportsGraphics(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSCell) SetImportsGraphics(value bool) {
@@ -497,8 +601,8 @@ func (n *NSCell) SetImportsGraphics(value bool) {
 }
 
 func (n *NSCell) Title() string {
-	result := C.C_NSCell_Title(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSCell_Title(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSCell) SetTitle(value string) {
@@ -506,8 +610,8 @@ func (n *NSCell) SetTitle(value string) {
 }
 
 func (n *NSCell) Action() *objc.Selector {
-	result := C.C_NSCell_Action(n.Ptr())
-	return objc.MakeSelector(result)
+	result_ := C.C_NSCell_Action(n.Ptr())
+	return objc.MakeSelector(result_)
 }
 
 func (n *NSCell) SetAction(value *objc.Selector) {
@@ -515,8 +619,8 @@ func (n *NSCell) SetAction(value *objc.Selector) {
 }
 
 func (n *NSCell) Target() objc.Object {
-	result := C.C_NSCell_Target(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSCell_Target(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSCell) SetTarget(value objc.Object) {
@@ -524,8 +628,8 @@ func (n *NSCell) SetTarget(value objc.Object) {
 }
 
 func (n *NSCell) IsContinuous() bool {
-	result := C.C_NSCell_IsContinuous(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSCell_IsContinuous(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSCell) SetContinuous(value bool) {
@@ -533,8 +637,8 @@ func (n *NSCell) SetContinuous(value bool) {
 }
 
 func (n *NSCell) Image() Image {
-	result := C.C_NSCell_Image(n.Ptr())
-	return MakeImage(result)
+	result_ := C.C_NSCell_Image(n.Ptr())
+	return MakeImage(result_)
 }
 
 func (n *NSCell) SetImage(value Image) {
@@ -542,17 +646,31 @@ func (n *NSCell) SetImage(value Image) {
 }
 
 func (n *NSCell) Tag() int {
-	result := C.C_NSCell_Tag(n.Ptr())
-	return int(result)
+	result_ := C.C_NSCell_Tag(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSCell) SetTag(value int) {
 	C.C_NSCell_SetTag(n.Ptr(), C.int(value))
 }
 
+func (n *NSCell) Formatter() foundation.Formatter {
+	result_ := C.C_NSCell_Formatter(n.Ptr())
+	return foundation.MakeFormatter(result_)
+}
+
+func (n *NSCell) SetFormatter(value foundation.Formatter) {
+	C.C_NSCell_SetFormatter(n.Ptr(), objc.ExtractPtr(value))
+}
+
+func Cell_DefaultMenu() Menu {
+	result_ := C.C_NSCell_Cell_DefaultMenu()
+	return MakeMenu(result_)
+}
+
 func (n *NSCell) Menu() Menu {
-	result := C.C_NSCell_Menu(n.Ptr())
-	return MakeMenu(result)
+	result_ := C.C_NSCell_Menu(n.Ptr())
+	return MakeMenu(result_)
 }
 
 func (n *NSCell) SetMenu(value Menu) {
@@ -560,13 +678,13 @@ func (n *NSCell) SetMenu(value Menu) {
 }
 
 func (n *NSCell) AcceptsFirstResponder() bool {
-	result := C.C_NSCell_AcceptsFirstResponder(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSCell_AcceptsFirstResponder(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSCell) ShowsFirstResponder() bool {
-	result := C.C_NSCell_ShowsFirstResponder(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSCell_ShowsFirstResponder(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSCell) SetShowsFirstResponder(value bool) {
@@ -574,8 +692,8 @@ func (n *NSCell) SetShowsFirstResponder(value bool) {
 }
 
 func (n *NSCell) RefusesFirstResponder() bool {
-	result := C.C_NSCell_RefusesFirstResponder(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSCell_RefusesFirstResponder(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSCell) SetRefusesFirstResponder(value bool) {
@@ -583,8 +701,8 @@ func (n *NSCell) SetRefusesFirstResponder(value bool) {
 }
 
 func (n *NSCell) RepresentedObject() objc.Object {
-	result := C.C_NSCell_RepresentedObject(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSCell_RepresentedObject(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSCell) SetRepresentedObject(value objc.Object) {
@@ -592,23 +710,51 @@ func (n *NSCell) SetRepresentedObject(value objc.Object) {
 }
 
 func (n *NSCell) MouseDownFlags() int {
-	result := C.C_NSCell_MouseDownFlags(n.Ptr())
-	return int(result)
+	result_ := C.C_NSCell_MouseDownFlags(n.Ptr())
+	return int(result_)
+}
+
+func Cell_PrefersTrackingUntilMouseUp() bool {
+	result_ := C.C_NSCell_Cell_PrefersTrackingUntilMouseUp()
+	return bool(result_)
 }
 
 func (n *NSCell) KeyEquivalent() string {
-	result := C.C_NSCell_KeyEquivalent(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSCell_KeyEquivalent(n.Ptr())
+	return foundation.MakeString(result_).String()
+}
+
+func Cell_DefaultFocusRingType() FocusRingType {
+	result_ := C.C_NSCell_Cell_DefaultFocusRingType()
+	return FocusRingType(uint(result_))
+}
+
+func (n *NSCell) FocusRingType() FocusRingType {
+	result_ := C.C_NSCell_FocusRingType(n.Ptr())
+	return FocusRingType(uint(result_))
+}
+
+func (n *NSCell) SetFocusRingType(value FocusRingType) {
+	C.C_NSCell_SetFocusRingType(n.Ptr(), C.uint(uint(value)))
 }
 
 func (n *NSCell) CellSize() foundation.Size {
-	result := C.C_NSCell_CellSize(n.Ptr())
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSCell_CellSize(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
+}
+
+func (n *NSCell) ControlSize() ControlSize {
+	result_ := C.C_NSCell_ControlSize(n.Ptr())
+	return ControlSize(uint(result_))
+}
+
+func (n *NSCell) SetControlSize(value ControlSize) {
+	C.C_NSCell_SetControlSize(n.Ptr(), C.uint(uint(value)))
 }
 
 func (n *NSCell) ControlView() View {
-	result := C.C_NSCell_ControlView(n.Ptr())
-	return MakeView(result)
+	result_ := C.C_NSCell_ControlView(n.Ptr())
+	return MakeView(result_)
 }
 
 func (n *NSCell) SetControlView(value View) {
@@ -616,8 +762,8 @@ func (n *NSCell) SetControlView(value View) {
 }
 
 func (n *NSCell) IsHighlighted() bool {
-	result := C.C_NSCell_IsHighlighted(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSCell_IsHighlighted(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSCell) SetHighlighted(value bool) {
@@ -625,8 +771,8 @@ func (n *NSCell) SetHighlighted(value bool) {
 }
 
 func (n *NSCell) SendsActionOnEndEditing() bool {
-	result := C.C_NSCell_SendsActionOnEndEditing(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSCell_SendsActionOnEndEditing(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSCell) SetSendsActionOnEndEditing(value bool) {
@@ -634,15 +780,24 @@ func (n *NSCell) SetSendsActionOnEndEditing(value bool) {
 }
 
 func (n *NSCell) WantsNotificationForMarkedText() bool {
-	result := C.C_NSCell_WantsNotificationForMarkedText(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSCell_WantsNotificationForMarkedText(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSCell) UsesSingleLineMode() bool {
-	result := C.C_NSCell_UsesSingleLineMode(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSCell_UsesSingleLineMode(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSCell) SetUsesSingleLineMode(value bool) {
 	C.C_NSCell_SetUsesSingleLineMode(n.Ptr(), C.bool(value))
+}
+
+func (n *NSCell) UserInterfaceLayoutDirection() UserInterfaceLayoutDirection {
+	result_ := C.C_NSCell_UserInterfaceLayoutDirection(n.Ptr())
+	return UserInterfaceLayoutDirection(int(result_))
+}
+
+func (n *NSCell) SetUserInterfaceLayoutDirection(value UserInterfaceLayoutDirection) {
+	C.C_NSCell_SetUserInterfaceLayoutDirection(n.Ptr(), C.int(int(value)))
 }

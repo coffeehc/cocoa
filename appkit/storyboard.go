@@ -33,16 +33,21 @@ func AllocStoryboard() *NSStoryboard {
 }
 
 func (n *NSStoryboard) Init() Storyboard {
-	result := C.C_NSStoryboard_Init(n.Ptr())
-	return MakeStoryboard(result)
+	result_ := C.C_NSStoryboard_Init(n.Ptr())
+	return MakeStoryboard(result_)
 }
 
 func StoryboardWithName_Bundle(name StoryboardName, storyboardBundleOrNil foundation.Bundle) Storyboard {
-	result := C.C_NSStoryboard_StoryboardWithName_Bundle(foundation.NewString(string(name)).Ptr(), objc.ExtractPtr(storyboardBundleOrNil))
-	return MakeStoryboard(result)
+	result_ := C.C_NSStoryboard_StoryboardWithName_Bundle(foundation.NewString(string(name)).Ptr(), objc.ExtractPtr(storyboardBundleOrNil))
+	return MakeStoryboard(result_)
 }
 
 func (n *NSStoryboard) InstantiateInitialController() objc.Object {
-	result := C.C_NSStoryboard_InstantiateInitialController(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSStoryboard_InstantiateInitialController(n.Ptr())
+	return objc.MakeObject(result_)
+}
+
+func MainStoryboard() Storyboard {
+	result_ := C.C_NSStoryboard_MainStoryboard()
+	return MakeStoryboard(result_)
 }

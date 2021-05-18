@@ -7,14 +7,14 @@ void* C_Application_Alloc() {
 
 void* C_NSApplication_Init(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSApplication* result = [nSApplication init];
-    return result;
+    NSApplication* result_ = [nSApplication init];
+    return result_;
 }
 
 void* C_NSApplication_InitWithCoder(void* ptr, void* coder) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSApplication* result = [nSApplication initWithCoder:(NSCoder*)coder];
-    return result;
+    NSApplication* result_ = [nSApplication initWithCoder:(NSCoder*)coder];
+    return result_;
 }
 
 void C_NSApplication_Run(void* ptr) {
@@ -44,20 +44,20 @@ void C_NSApplication_PostEvent_AtStart(void* ptr, void* event, bool flag) {
 
 bool C_NSApplication_SendAction_To_From(void* ptr, void* action, void* target, void* sender) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    BOOL result = [nSApplication sendAction:(SEL)action to:(id)target from:(id)sender];
-    return result;
+    BOOL result_ = [nSApplication sendAction:(SEL)action to:(id)target from:(id)sender];
+    return result_;
 }
 
 void* C_NSApplication_TargetForAction(void* ptr, void* action) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    id result = [nSApplication targetForAction:(SEL)action];
-    return result;
+    id result_ = [nSApplication targetForAction:(SEL)action];
+    return result_;
 }
 
 void* C_NSApplication_TargetForAction_To_From(void* ptr, void* action, void* target, void* sender) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    id result = [nSApplication targetForAction:(SEL)action to:(id)target from:(id)sender];
-    return result;
+    id result_ = [nSApplication targetForAction:(SEL)action to:(id)target from:(id)sender];
+    return result_;
 }
 
 void C_NSApplication_Terminate(void* ptr, void* sender) {
@@ -112,8 +112,8 @@ void C_NSApplication_ToggleTouchBarCustomizationPalette(void* ptr, void* sender)
 
 int C_NSApplication_RequestUserAttention(void* ptr, unsigned int requestType) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSInteger result = [nSApplication requestUserAttention:requestType];
-    return result;
+    NSInteger result_ = [nSApplication requestUserAttention:requestType];
+    return result_;
 }
 
 void C_NSApplication_CancelUserAttentionRequest(void* ptr, int request) {
@@ -167,20 +167,20 @@ void C_NSApplication_ReportException(void* ptr, void* exception) {
 
 int C_NSApplication_ActivationPolicy(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSApplicationActivationPolicy result = [nSApplication activationPolicy];
-    return result;
+    NSApplicationActivationPolicy result_ = [nSApplication activationPolicy];
+    return result_;
 }
 
 bool C_NSApplication_SetActivationPolicy(void* ptr, int activationPolicy) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    BOOL result = [nSApplication setActivationPolicy:activationPolicy];
-    return result;
+    BOOL result_ = [nSApplication setActivationPolicy:activationPolicy];
+    return result_;
 }
 
 void* C_NSApplication_WindowWithWindowNumber(void* ptr, int windowNum) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSWindow* result = [nSApplication windowWithWindowNumber:windowNum];
-    return result;
+    NSWindow* result_ = [nSApplication windowWithWindowNumber:windowNum];
+    return result_;
 }
 
 void C_NSApplication_MiniaturizeAll(void* ptr, void* sender) {
@@ -235,8 +235,8 @@ void C_NSApplication_CompleteStateRestoration(void* ptr) {
 
 int C_NSApplication_RunModalForWindow(void* ptr, void* window) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSModalResponse result = [nSApplication runModalForWindow:(NSWindow*)window];
-    return result;
+    NSModalResponse result_ = [nSApplication runModalForWindow:(NSWindow*)window];
+    return result_;
 }
 
 void C_NSApplication_StopModal(void* ptr) {
@@ -256,14 +256,14 @@ void C_NSApplication_AbortModal(void* ptr) {
 
 NSModalSession C_NSApplication_BeginModalSessionForWindow(void* ptr, void* window) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSModalSession result = [nSApplication beginModalSessionForWindow:(NSWindow*)window];
-    return result;
+    NSModalSession result_ = [nSApplication beginModalSessionForWindow:(NSWindow*)window];
+    return result_;
 }
 
 int C_NSApplication_RunModalSession(void* ptr, NSModalSession session) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSModalResponse result = [nSApplication runModalSession:session];
-    return result;
+    NSModalResponse result_ = [nSApplication runModalSession:session];
+    return result_;
 }
 
 void C_NSApplication_OrderFrontColorPanel(void* ptr, void* sender) {
@@ -306,20 +306,37 @@ void C_NSApplication_UpdateWindowsItem(void* ptr, void* win) {
     [nSApplication updateWindowsItem:(NSWindow*)win];
 }
 
+void C_NSApplication_RegisterServicesMenuSendTypes_ReturnTypes(void* ptr, Array sendTypes, Array returnTypes) {
+    NSApplication* nSApplication = (NSApplication*)ptr;
+    NSMutableArray* objcSendTypes = [[NSMutableArray alloc] init];
+    void** sendTypesData = (void**)sendTypes.data;
+    for (int i = 0; i < sendTypes.len; i++) {
+    	void* p = sendTypesData[i];
+    	[objcSendTypes addObject:(NSPasteboardType)(NSString*)p];
+    }
+    NSMutableArray* objcReturnTypes = [[NSMutableArray alloc] init];
+    void** returnTypesData = (void**)returnTypes.data;
+    for (int i = 0; i < returnTypes.len; i++) {
+    	void* p = returnTypesData[i];
+    	[objcReturnTypes addObject:(NSPasteboardType)(NSString*)p];
+    }
+    [nSApplication registerServicesMenuSendTypes:objcSendTypes returnTypes:objcReturnTypes];
+}
+
 void C_NSApplication_EndModalSession(void* ptr, NSModalSession session) {
     NSApplication* nSApplication = (NSApplication*)ptr;
     [nSApplication endModalSession:session];
 }
 
 void* C_NSApplication_SharedApplication() {
-    NSApplication* result = [NSApplication sharedApplication];
-    return result;
+    NSApplication* result_ = [NSApplication sharedApplication];
+    return result_;
 }
 
 void* C_NSApplication_Delegate(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    id result = [nSApplication delegate];
-    return result;
+    id result_ = [nSApplication delegate];
+    return result_;
 }
 
 void C_NSApplication_SetDelegate(void* ptr, void* value) {
@@ -329,38 +346,38 @@ void C_NSApplication_SetDelegate(void* ptr, void* value) {
 
 void* C_NSApplication_CurrentEvent(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSEvent* result = [nSApplication currentEvent];
-    return result;
+    NSEvent* result_ = [nSApplication currentEvent];
+    return result_;
 }
 
 bool C_NSApplication_IsRunning(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    BOOL result = [nSApplication isRunning];
-    return result;
+    BOOL result_ = [nSApplication isRunning];
+    return result_;
 }
 
 bool C_NSApplication_IsActive(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    BOOL result = [nSApplication isActive];
-    return result;
+    BOOL result_ = [nSApplication isActive];
+    return result_;
 }
 
 unsigned int C_NSApplication_EnabledRemoteNotificationTypes(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSRemoteNotificationType result = [nSApplication enabledRemoteNotificationTypes];
-    return result;
+    NSRemoteNotificationType result_ = [nSApplication enabledRemoteNotificationTypes];
+    return result_;
 }
 
 bool C_NSApplication_IsRegisteredForRemoteNotifications(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    BOOL result = [nSApplication isRegisteredForRemoteNotifications];
-    return result;
+    BOOL result_ = [nSApplication isRegisteredForRemoteNotifications];
+    return result_;
 }
 
 void* C_NSApplication_Appearance(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSAppearance* result = [nSApplication appearance];
-    return result;
+    NSAppearance* result_ = [nSApplication appearance];
+    return result_;
 }
 
 void C_NSApplication_SetAppearance(void* ptr, void* value) {
@@ -370,20 +387,20 @@ void C_NSApplication_SetAppearance(void* ptr, void* value) {
 
 void* C_NSApplication_EffectiveAppearance(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSAppearance* result = [nSApplication effectiveAppearance];
-    return result;
+    NSAppearance* result_ = [nSApplication effectiveAppearance];
+    return result_;
 }
 
 unsigned int C_NSApplication_CurrentSystemPresentationOptions(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSApplicationPresentationOptions result = [nSApplication currentSystemPresentationOptions];
-    return result;
+    NSApplicationPresentationOptions result_ = [nSApplication currentSystemPresentationOptions];
+    return result_;
 }
 
 unsigned int C_NSApplication_PresentationOptions(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSApplicationPresentationOptions result = [nSApplication presentationOptions];
-    return result;
+    NSApplicationPresentationOptions result_ = [nSApplication presentationOptions];
+    return result_;
 }
 
 void C_NSApplication_SetPresentationOptions(void* ptr, unsigned int value) {
@@ -393,20 +410,20 @@ void C_NSApplication_SetPresentationOptions(void* ptr, unsigned int value) {
 
 int C_NSApplication_UserInterfaceLayoutDirection(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSUserInterfaceLayoutDirection result = [nSApplication userInterfaceLayoutDirection];
-    return result;
+    NSUserInterfaceLayoutDirection result_ = [nSApplication userInterfaceLayoutDirection];
+    return result_;
 }
 
 void* C_NSApplication_DockTile(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSDockTile* result = [nSApplication dockTile];
-    return result;
+    NSDockTile* result_ = [nSApplication dockTile];
+    return result_;
 }
 
 void* C_NSApplication_ApplicationIconImage(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSImage* result = [nSApplication applicationIconImage];
-    return result;
+    NSImage* result_ = [nSApplication applicationIconImage];
+    return result_;
 }
 
 void C_NSApplication_SetApplicationIconImage(void* ptr, void* value) {
@@ -416,8 +433,8 @@ void C_NSApplication_SetApplicationIconImage(void* ptr, void* value) {
 
 void* C_NSApplication_HelpMenu(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSMenu* result = [nSApplication helpMenu];
-    return result;
+    NSMenu* result_ = [nSApplication helpMenu];
+    return result_;
 }
 
 void C_NSApplication_SetHelpMenu(void* ptr, void* value) {
@@ -427,8 +444,8 @@ void C_NSApplication_SetHelpMenu(void* ptr, void* value) {
 
 void* C_NSApplication_ServicesProvider(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    id result = [nSApplication servicesProvider];
-    return result;
+    id result_ = [nSApplication servicesProvider];
+    return result_;
 }
 
 void C_NSApplication_SetServicesProvider(void* ptr, void* value) {
@@ -438,44 +455,89 @@ void C_NSApplication_SetServicesProvider(void* ptr, void* value) {
 
 bool C_NSApplication_IsFullKeyboardAccessEnabled(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    BOOL result = [nSApplication isFullKeyboardAccessEnabled];
-    return result;
+    BOOL result_ = [nSApplication isFullKeyboardAccessEnabled];
+    return result_;
+}
+
+Array C_NSApplication_OrderedDocuments(void* ptr) {
+    NSApplication* nSApplication = (NSApplication*)ptr;
+    NSArray* result_ = [nSApplication orderedDocuments];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
+    }
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
+}
+
+Array C_NSApplication_OrderedWindows(void* ptr) {
+    NSApplication* nSApplication = (NSApplication*)ptr;
+    NSArray* result_ = [nSApplication orderedWindows];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
+    }
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
 }
 
 void* C_NSApplication_KeyWindow(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSWindow* result = [nSApplication keyWindow];
-    return result;
+    NSWindow* result_ = [nSApplication keyWindow];
+    return result_;
 }
 
 void* C_NSApplication_MainWindow(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSWindow* result = [nSApplication mainWindow];
-    return result;
+    NSWindow* result_ = [nSApplication mainWindow];
+    return result_;
+}
+
+Array C_NSApplication_Windows(void* ptr) {
+    NSApplication* nSApplication = (NSApplication*)ptr;
+    NSArray* result_ = [nSApplication windows];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
+    }
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
 }
 
 bool C_NSApplication_IsHidden(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    BOOL result = [nSApplication isHidden];
-    return result;
+    BOOL result_ = [nSApplication isHidden];
+    return result_;
 }
 
 unsigned int C_NSApplication_OcclusionState(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSApplicationOcclusionState result = [nSApplication occlusionState];
-    return result;
+    NSApplicationOcclusionState result_ = [nSApplication occlusionState];
+    return result_;
 }
 
 void* C_NSApplication_ModalWindow(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSWindow* result = [nSApplication modalWindow];
-    return result;
+    NSWindow* result_ = [nSApplication modalWindow];
+    return result_;
 }
 
 void* C_NSApplication_MainMenu(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSMenu* result = [nSApplication mainMenu];
-    return result;
+    NSMenu* result_ = [nSApplication mainMenu];
+    return result_;
 }
 
 void C_NSApplication_SetMainMenu(void* ptr, void* value) {
@@ -485,8 +547,8 @@ void C_NSApplication_SetMainMenu(void* ptr, void* value) {
 
 bool C_NSApplication_IsAutomaticCustomizeTouchBarMenuItemEnabled(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    BOOL result = [nSApplication isAutomaticCustomizeTouchBarMenuItemEnabled];
-    return result;
+    BOOL result_ = [nSApplication isAutomaticCustomizeTouchBarMenuItemEnabled];
+    return result_;
 }
 
 void C_NSApplication_SetAutomaticCustomizeTouchBarMenuItemEnabled(void* ptr, bool value) {
@@ -496,8 +558,8 @@ void C_NSApplication_SetAutomaticCustomizeTouchBarMenuItemEnabled(void* ptr, boo
 
 void* C_NSApplication_WindowsMenu(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSMenu* result = [nSApplication windowsMenu];
-    return result;
+    NSMenu* result_ = [nSApplication windowsMenu];
+    return result_;
 }
 
 void C_NSApplication_SetWindowsMenu(void* ptr, void* value) {
@@ -507,8 +569,8 @@ void C_NSApplication_SetWindowsMenu(void* ptr, void* value) {
 
 void* C_NSApplication_ServicesMenu(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSMenu* result = [nSApplication servicesMenu];
-    return result;
+    NSMenu* result_ = [nSApplication servicesMenu];
+    return result_;
 }
 
 void C_NSApplication_SetServicesMenu(void* ptr, void* value) {

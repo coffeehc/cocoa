@@ -16,13 +16,21 @@ type Toolbar interface {
 	RemoveItemAtIndex(index int)
 	RunCustomizationPalette(sender objc.Object)
 	ValidateVisibleItems()
+	Delegate() objc.Object
+	SetDelegate(value objc.Object)
 	Identifier() ToolbarIdentifier
+	DisplayMode() ToolbarDisplayMode
+	SetDisplayMode(value ToolbarDisplayMode)
 	ShowsBaselineSeparator() bool
 	SetShowsBaselineSeparator(value bool)
 	AllowsUserCustomization() bool
 	SetAllowsUserCustomization(value bool)
 	AllowsExtensionItems() bool
 	SetAllowsExtensionItems(value bool)
+	Items() []ToolbarItem
+	VisibleItems() []ToolbarItem
+	SizeMode() ToolbarSizeMode
+	SetSizeMode(value ToolbarSizeMode)
 	SelectedItemIdentifier() ToolbarItemIdentifier
 	SetSelectedItemIdentifier(value ToolbarItemIdentifier)
 	CenteredItemIdentifier() ToolbarItemIdentifier
@@ -52,13 +60,13 @@ func AllocToolbar() *NSToolbar {
 }
 
 func (n *NSToolbar) InitWithIdentifier(identifier ToolbarIdentifier) Toolbar {
-	result := C.C_NSToolbar_InitWithIdentifier(n.Ptr(), foundation.NewString(string(identifier)).Ptr())
-	return MakeToolbar(result)
+	result_ := C.C_NSToolbar_InitWithIdentifier(n.Ptr(), foundation.NewString(string(identifier)).Ptr())
+	return MakeToolbar(result_)
 }
 
 func (n *NSToolbar) Init() Toolbar {
-	result := C.C_NSToolbar_Init(n.Ptr())
-	return MakeToolbar(result)
+	result_ := C.C_NSToolbar_Init(n.Ptr())
+	return MakeToolbar(result_)
 }
 
 func (n *NSToolbar) InsertItemWithItemIdentifier_AtIndex(itemIdentifier ToolbarItemIdentifier, index int) {
@@ -77,14 +85,32 @@ func (n *NSToolbar) ValidateVisibleItems() {
 	C.C_NSToolbar_ValidateVisibleItems(n.Ptr())
 }
 
+func (n *NSToolbar) Delegate() objc.Object {
+	result_ := C.C_NSToolbar_Delegate(n.Ptr())
+	return objc.MakeObject(result_)
+}
+
+func (n *NSToolbar) SetDelegate(value objc.Object) {
+	C.C_NSToolbar_SetDelegate(n.Ptr(), objc.ExtractPtr(value))
+}
+
 func (n *NSToolbar) Identifier() ToolbarIdentifier {
-	result := C.C_NSToolbar_Identifier(n.Ptr())
-	return ToolbarIdentifier(foundation.MakeString(result).String())
+	result_ := C.C_NSToolbar_Identifier(n.Ptr())
+	return ToolbarIdentifier(foundation.MakeString(result_).String())
+}
+
+func (n *NSToolbar) DisplayMode() ToolbarDisplayMode {
+	result_ := C.C_NSToolbar_DisplayMode(n.Ptr())
+	return ToolbarDisplayMode(uint(result_))
+}
+
+func (n *NSToolbar) SetDisplayMode(value ToolbarDisplayMode) {
+	C.C_NSToolbar_SetDisplayMode(n.Ptr(), C.uint(uint(value)))
 }
 
 func (n *NSToolbar) ShowsBaselineSeparator() bool {
-	result := C.C_NSToolbar_ShowsBaselineSeparator(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSToolbar_ShowsBaselineSeparator(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSToolbar) SetShowsBaselineSeparator(value bool) {
@@ -92,8 +118,8 @@ func (n *NSToolbar) SetShowsBaselineSeparator(value bool) {
 }
 
 func (n *NSToolbar) AllowsUserCustomization() bool {
-	result := C.C_NSToolbar_AllowsUserCustomization(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSToolbar_AllowsUserCustomization(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSToolbar) SetAllowsUserCustomization(value bool) {
@@ -101,17 +127,48 @@ func (n *NSToolbar) SetAllowsUserCustomization(value bool) {
 }
 
 func (n *NSToolbar) AllowsExtensionItems() bool {
-	result := C.C_NSToolbar_AllowsExtensionItems(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSToolbar_AllowsExtensionItems(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSToolbar) SetAllowsExtensionItems(value bool) {
 	C.C_NSToolbar_SetAllowsExtensionItems(n.Ptr(), C.bool(value))
 }
 
+func (n *NSToolbar) Items() []ToolbarItem {
+	result_ := C.C_NSToolbar_Items(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]ToolbarItem, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeToolbarItem(r)
+	}
+	return goResult_
+}
+
+func (n *NSToolbar) VisibleItems() []ToolbarItem {
+	result_ := C.C_NSToolbar_VisibleItems(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]ToolbarItem, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeToolbarItem(r)
+	}
+	return goResult_
+}
+
+func (n *NSToolbar) SizeMode() ToolbarSizeMode {
+	result_ := C.C_NSToolbar_SizeMode(n.Ptr())
+	return ToolbarSizeMode(uint(result_))
+}
+
+func (n *NSToolbar) SetSizeMode(value ToolbarSizeMode) {
+	C.C_NSToolbar_SetSizeMode(n.Ptr(), C.uint(uint(value)))
+}
+
 func (n *NSToolbar) SelectedItemIdentifier() ToolbarItemIdentifier {
-	result := C.C_NSToolbar_SelectedItemIdentifier(n.Ptr())
-	return ToolbarItemIdentifier(foundation.MakeString(result).String())
+	result_ := C.C_NSToolbar_SelectedItemIdentifier(n.Ptr())
+	return ToolbarItemIdentifier(foundation.MakeString(result_).String())
 }
 
 func (n *NSToolbar) SetSelectedItemIdentifier(value ToolbarItemIdentifier) {
@@ -119,8 +176,8 @@ func (n *NSToolbar) SetSelectedItemIdentifier(value ToolbarItemIdentifier) {
 }
 
 func (n *NSToolbar) CenteredItemIdentifier() ToolbarItemIdentifier {
-	result := C.C_NSToolbar_CenteredItemIdentifier(n.Ptr())
-	return ToolbarItemIdentifier(foundation.MakeString(result).String())
+	result_ := C.C_NSToolbar_CenteredItemIdentifier(n.Ptr())
+	return ToolbarItemIdentifier(foundation.MakeString(result_).String())
 }
 
 func (n *NSToolbar) SetCenteredItemIdentifier(value ToolbarItemIdentifier) {
@@ -128,8 +185,8 @@ func (n *NSToolbar) SetCenteredItemIdentifier(value ToolbarItemIdentifier) {
 }
 
 func (n *NSToolbar) IsVisible() bool {
-	result := C.C_NSToolbar_IsVisible(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSToolbar_IsVisible(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSToolbar) SetVisible(value bool) {
@@ -137,13 +194,13 @@ func (n *NSToolbar) SetVisible(value bool) {
 }
 
 func (n *NSToolbar) CustomizationPaletteIsRunning() bool {
-	result := C.C_NSToolbar_CustomizationPaletteIsRunning(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSToolbar_CustomizationPaletteIsRunning(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSToolbar) AutosavesConfiguration() bool {
-	result := C.C_NSToolbar_AutosavesConfiguration(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSToolbar_AutosavesConfiguration(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSToolbar) SetAutosavesConfiguration(value bool) {

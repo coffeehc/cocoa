@@ -56,53 +56,53 @@ func AllocSlider() *NSSlider {
 }
 
 func (n *NSSlider) InitWithFrame(frameRect foundation.Rect) Slider {
-	result := C.C_NSSlider_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
-	return MakeSlider(result)
+	result_ := C.C_NSSlider_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeSlider(result_)
 }
 
 func (n *NSSlider) InitWithCoder(coder foundation.Coder) Slider {
-	result := C.C_NSSlider_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeSlider(result)
+	result_ := C.C_NSSlider_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeSlider(result_)
 }
 
 func (n *NSSlider) Init() Slider {
-	result := C.C_NSSlider_Init(n.Ptr())
-	return MakeSlider(result)
+	result_ := C.C_NSSlider_Init(n.Ptr())
+	return MakeSlider(result_)
 }
 
 func SliderWithTarget_Action(target objc.Object, action *objc.Selector) Slider {
-	result := C.C_NSSlider_SliderWithTarget_Action(objc.ExtractPtr(target), objc.ExtractPtr(action))
-	return MakeSlider(result)
+	result_ := C.C_NSSlider_SliderWithTarget_Action(objc.ExtractPtr(target), objc.ExtractPtr(action))
+	return MakeSlider(result_)
 }
 
 func SliderWithValue_MinValue_MaxValue_Target_Action(value float64, minValue float64, maxValue float64, target objc.Object, action *objc.Selector) Slider {
-	result := C.C_NSSlider_SliderWithValue_MinValue_MaxValue_Target_Action(C.double(value), C.double(minValue), C.double(maxValue), objc.ExtractPtr(target), objc.ExtractPtr(action))
-	return MakeSlider(result)
+	result_ := C.C_NSSlider_SliderWithValue_MinValue_MaxValue_Target_Action(C.double(value), C.double(minValue), C.double(maxValue), objc.ExtractPtr(target), objc.ExtractPtr(action))
+	return MakeSlider(result_)
 }
 
 func (n *NSSlider) ClosestTickMarkValueToValue(value float64) float64 {
-	result := C.C_NSSlider_ClosestTickMarkValueToValue(n.Ptr(), C.double(value))
-	return float64(result)
+	result_ := C.C_NSSlider_ClosestTickMarkValueToValue(n.Ptr(), C.double(value))
+	return float64(result_)
 }
 
 func (n *NSSlider) IndexOfTickMarkAtPoint(point foundation.Point) int {
-	result := C.C_NSSlider_IndexOfTickMarkAtPoint(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))))
-	return int(result)
+	result_ := C.C_NSSlider_IndexOfTickMarkAtPoint(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))))
+	return int(result_)
 }
 
 func (n *NSSlider) RectOfTickMarkAtIndex(index int) foundation.Rect {
-	result := C.C_NSSlider_RectOfTickMarkAtIndex(n.Ptr(), C.int(index))
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSSlider_RectOfTickMarkAtIndex(n.Ptr(), C.int(index))
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSSlider) TickMarkValueAtIndex(index int) float64 {
-	result := C.C_NSSlider_TickMarkValueAtIndex(n.Ptr(), C.int(index))
-	return float64(result)
+	result_ := C.C_NSSlider_TickMarkValueAtIndex(n.Ptr(), C.int(index))
+	return float64(result_)
 }
 
 func (n *NSSlider) SliderType() SliderType {
-	result := C.C_NSSlider_SliderType(n.Ptr())
-	return SliderType(uint(result))
+	result_ := C.C_NSSlider_SliderType(n.Ptr())
+	return SliderType(uint(result_))
 }
 
 func (n *NSSlider) SetSliderType(value SliderType) {
@@ -110,8 +110,8 @@ func (n *NSSlider) SetSliderType(value SliderType) {
 }
 
 func (n *NSSlider) AltIncrementValue() float64 {
-	result := C.C_NSSlider_AltIncrementValue(n.Ptr())
-	return float64(result)
+	result_ := C.C_NSSlider_AltIncrementValue(n.Ptr())
+	return float64(result_)
 }
 
 func (n *NSSlider) SetAltIncrementValue(value float64) {
@@ -119,13 +119,13 @@ func (n *NSSlider) SetAltIncrementValue(value float64) {
 }
 
 func (n *NSSlider) KnobThickness() coregraphics.Float {
-	result := C.C_NSSlider_KnobThickness(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSSlider_KnobThickness(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSSlider) IsVertical() bool {
-	result := C.C_NSSlider_IsVertical(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSSlider_IsVertical(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSSlider) SetVertical(value bool) {
@@ -133,8 +133,8 @@ func (n *NSSlider) SetVertical(value bool) {
 }
 
 func (n *NSSlider) TrackFillColor() Color {
-	result := C.C_NSSlider_TrackFillColor(n.Ptr())
-	return MakeColor(result)
+	result_ := C.C_NSSlider_TrackFillColor(n.Ptr())
+	return MakeColor(result_)
 }
 
 func (n *NSSlider) SetTrackFillColor(value Color) {
@@ -142,8 +142,8 @@ func (n *NSSlider) SetTrackFillColor(value Color) {
 }
 
 func (n *NSSlider) MaxValue() float64 {
-	result := C.C_NSSlider_MaxValue(n.Ptr())
-	return float64(result)
+	result_ := C.C_NSSlider_MaxValue(n.Ptr())
+	return float64(result_)
 }
 
 func (n *NSSlider) SetMaxValue(value float64) {
@@ -151,8 +151,8 @@ func (n *NSSlider) SetMaxValue(value float64) {
 }
 
 func (n *NSSlider) MinValue() float64 {
-	result := C.C_NSSlider_MinValue(n.Ptr())
-	return float64(result)
+	result_ := C.C_NSSlider_MinValue(n.Ptr())
+	return float64(result_)
 }
 
 func (n *NSSlider) SetMinValue(value float64) {
@@ -160,8 +160,8 @@ func (n *NSSlider) SetMinValue(value float64) {
 }
 
 func (n *NSSlider) AllowsTickMarkValuesOnly() bool {
-	result := C.C_NSSlider_AllowsTickMarkValuesOnly(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSSlider_AllowsTickMarkValuesOnly(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSSlider) SetAllowsTickMarkValuesOnly(value bool) {
@@ -169,8 +169,8 @@ func (n *NSSlider) SetAllowsTickMarkValuesOnly(value bool) {
 }
 
 func (n *NSSlider) NumberOfTickMarks() int {
-	result := C.C_NSSlider_NumberOfTickMarks(n.Ptr())
-	return int(result)
+	result_ := C.C_NSSlider_NumberOfTickMarks(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSSlider) SetNumberOfTickMarks(value int) {
@@ -178,8 +178,8 @@ func (n *NSSlider) SetNumberOfTickMarks(value int) {
 }
 
 func (n *NSSlider) TickMarkPosition() TickMarkPosition {
-	result := C.C_NSSlider_TickMarkPosition(n.Ptr())
-	return TickMarkPosition(uint(result))
+	result_ := C.C_NSSlider_TickMarkPosition(n.Ptr())
+	return TickMarkPosition(uint(result_))
 }
 
 func (n *NSSlider) SetTickMarkPosition(value TickMarkPosition) {

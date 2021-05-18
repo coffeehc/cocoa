@@ -23,6 +23,8 @@ type TextAttachment interface {
 	SetImage(value Image)
 	FileWrapper() foundation.FileWrapper
 	SetFileWrapper(value foundation.FileWrapper)
+	AttachmentCell() objc.Object
+	SetAttachmentCell(value objc.Object)
 }
 
 type NSTextAttachment struct {
@@ -104,4 +106,13 @@ func (n *NSTextAttachment) FileWrapper() foundation.FileWrapper {
 
 func (n *NSTextAttachment) SetFileWrapper(value foundation.FileWrapper) {
 	C.C_NSTextAttachment_SetFileWrapper(n.Ptr(), objc.ExtractPtr(value))
+}
+
+func (n *NSTextAttachment) AttachmentCell() objc.Object {
+	result_ := C.C_NSTextAttachment_AttachmentCell(n.Ptr())
+	return objc.MakeObject(result_)
+}
+
+func (n *NSTextAttachment) SetAttachmentCell(value objc.Object) {
+	C.C_NSTextAttachment_SetAttachmentCell(n.Ptr(), objc.ExtractPtr(value))
 }

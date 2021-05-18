@@ -18,6 +18,7 @@ void* C_NSNumber_InitWithFloat(void* ptr, float value);
 void* C_NSNumber_InitWithInteger(void* ptr, int value);
 void* C_NSNumber_InitWithUnsignedInteger(void* ptr, unsigned int value);
 void* C_NSNumber_DescriptionWithLocale(void* ptr, void* locale);
+int C_NSNumber_Compare(void* ptr, void* otherNumber);
 bool C_NSNumber_IsEqualToNumber(void* ptr, void* number);
 bool C_NSNumber_BoolValue(void* ptr);
 NSDecimal C_NSNumber_DecimalValue(void* ptr);

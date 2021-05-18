@@ -7,7 +7,7 @@ void* C_ScriptCommand_Alloc();
 
 void* C_NSScriptCommand_InitWithCommandDescription(void* ptr, void* commandDef);
 void* C_NSScriptCommand_InitWithCoder(void* ptr, void* inCoder);
-void* C_NSScriptCommand_ScriptCommandCurrentCommand();
+void* C_NSScriptCommand_ScriptCommand_CurrentCommand();
 void* C_NSScriptCommand_ExecuteCommand(void* ptr);
 void* C_NSScriptCommand_PerformDefaultImplementation(void* ptr);
 void C_NSScriptCommand_SuspendExecution(void* ptr);

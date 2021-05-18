@@ -7,20 +7,20 @@ void* C_ColorWell_Alloc() {
 
 void* C_NSColorWell_InitWithFrame(void* ptr, CGRect frameRect) {
     NSColorWell* nSColorWell = (NSColorWell*)ptr;
-    NSColorWell* result = [nSColorWell initWithFrame:frameRect];
-    return result;
+    NSColorWell* result_ = [nSColorWell initWithFrame:frameRect];
+    return result_;
 }
 
 void* C_NSColorWell_InitWithCoder(void* ptr, void* coder) {
     NSColorWell* nSColorWell = (NSColorWell*)ptr;
-    NSColorWell* result = [nSColorWell initWithCoder:(NSCoder*)coder];
-    return result;
+    NSColorWell* result_ = [nSColorWell initWithCoder:(NSCoder*)coder];
+    return result_;
 }
 
 void* C_NSColorWell_Init(void* ptr) {
     NSColorWell* nSColorWell = (NSColorWell*)ptr;
-    NSColorWell* result = [nSColorWell init];
-    return result;
+    NSColorWell* result_ = [nSColorWell init];
+    return result_;
 }
 
 void C_NSColorWell_TakeColorFrom(void* ptr, void* sender) {
@@ -45,8 +45,8 @@ void C_NSColorWell_DrawWellInside(void* ptr, CGRect insideRect) {
 
 void* C_NSColorWell_Color(void* ptr) {
     NSColorWell* nSColorWell = (NSColorWell*)ptr;
-    NSColor* result = [nSColorWell color];
-    return result;
+    NSColor* result_ = [nSColorWell color];
+    return result_;
 }
 
 void C_NSColorWell_SetColor(void* ptr, void* value) {
@@ -56,14 +56,14 @@ void C_NSColorWell_SetColor(void* ptr, void* value) {
 
 bool C_NSColorWell_IsActive(void* ptr) {
     NSColorWell* nSColorWell = (NSColorWell*)ptr;
-    BOOL result = [nSColorWell isActive];
-    return result;
+    BOOL result_ = [nSColorWell isActive];
+    return result_;
 }
 
 bool C_NSColorWell_IsBordered(void* ptr) {
     NSColorWell* nSColorWell = (NSColorWell*)ptr;
-    BOOL result = [nSColorWell isBordered];
-    return result;
+    BOOL result_ = [nSColorWell isBordered];
+    return result_;
 }
 
 void C_NSColorWell_SetBordered(void* ptr, bool value) {

@@ -30,6 +30,8 @@ type ImageRep interface {
 	SetPixelsHigh(value int)
 	PixelsWide() int
 	SetPixelsWide(value int)
+	LayoutDirection() ImageLayoutDirection
+	SetLayoutDirection(value ImageLayoutDirection)
 }
 
 type NSImageRep struct {
@@ -50,58 +52,113 @@ func AllocImageRep() *NSImageRep {
 }
 
 func (n *NSImageRep) Init() ImageRep {
-	result := C.C_NSImageRep_Init(n.Ptr())
-	return MakeImageRep(result)
+	result_ := C.C_NSImageRep_Init(n.Ptr())
+	return MakeImageRep(result_)
 }
 
 func (n *NSImageRep) InitWithCoder(coder foundation.Coder) ImageRep {
-	result := C.C_NSImageRep_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeImageRep(result)
+	result_ := C.C_NSImageRep_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeImageRep(result_)
+}
+
+func ImageRepsWithContentsOfFile(filename string) []ImageRep {
+	result_ := C.C_NSImageRep_ImageRepsWithContentsOfFile(foundation.NewString(filename).Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]ImageRep, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeImageRep(r)
+	}
+	return goResult_
+}
+
+func ImageRepsWithPasteboard(pasteboard Pasteboard) []ImageRep {
+	result_ := C.C_NSImageRep_ImageRepsWithPasteboard(objc.ExtractPtr(pasteboard))
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]ImageRep, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeImageRep(r)
+	}
+	return goResult_
+}
+
+func ImageRepsWithContentsOfURL(url foundation.URL) []ImageRep {
+	result_ := C.C_NSImageRep_ImageRepsWithContentsOfURL(objc.ExtractPtr(url))
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]ImageRep, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeImageRep(r)
+	}
+	return goResult_
 }
 
 func ImageRepWithContentsOfFile(filename string) ImageRep {
-	result := C.C_NSImageRep_ImageRepWithContentsOfFile(foundation.NewString(filename).Ptr())
-	return MakeImageRep(result)
+	result_ := C.C_NSImageRep_ImageRepWithContentsOfFile(foundation.NewString(filename).Ptr())
+	return MakeImageRep(result_)
 }
 
 func ImageRepWithPasteboard(pasteboard Pasteboard) ImageRep {
-	result := C.C_NSImageRep_ImageRepWithPasteboard(objc.ExtractPtr(pasteboard))
-	return MakeImageRep(result)
+	result_ := C.C_NSImageRep_ImageRepWithPasteboard(objc.ExtractPtr(pasteboard))
+	return MakeImageRep(result_)
 }
 
 func ImageRepWithContentsOfURL(url foundation.URL) ImageRep {
-	result := C.C_NSImageRep_ImageRepWithContentsOfURL(objc.ExtractPtr(url))
-	return MakeImageRep(result)
+	result_ := C.C_NSImageRep_ImageRepWithContentsOfURL(objc.ExtractPtr(url))
+	return MakeImageRep(result_)
 }
 
-func ImageRepCanInitWithData(data []byte) bool {
-	result := C.C_NSImageRep_ImageRepCanInitWithData(C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))})
-	return bool(result)
+func ImageRep_CanInitWithData(data []byte) bool {
+	result_ := C.C_NSImageRep_ImageRep_CanInitWithData(C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))})
+	return bool(result_)
 }
 
-func ImageRepCanInitWithPasteboard(pasteboard Pasteboard) bool {
-	result := C.C_NSImageRep_ImageRepCanInitWithPasteboard(objc.ExtractPtr(pasteboard))
-	return bool(result)
+func ImageRep_CanInitWithPasteboard(pasteboard Pasteboard) bool {
+	result_ := C.C_NSImageRep_ImageRep_CanInitWithPasteboard(objc.ExtractPtr(pasteboard))
+	return bool(result_)
 }
 
 func (n *NSImageRep) Draw() bool {
-	result := C.C_NSImageRep_Draw(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSImageRep_Draw(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSImageRep) DrawAtPoint(point foundation.Point) bool {
-	result := C.C_NSImageRep_DrawAtPoint(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))))
-	return bool(result)
+	result_ := C.C_NSImageRep_DrawAtPoint(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))))
+	return bool(result_)
 }
 
 func (n *NSImageRep) DrawInRect(rect foundation.Rect) bool {
-	result := C.C_NSImageRep_DrawInRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
-	return bool(result)
+	result_ := C.C_NSImageRep_DrawInRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
+	return bool(result_)
+}
+
+func ImageRep_ImageTypes() []string {
+	result_ := C.C_NSImageRep_ImageRep_ImageTypes()
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = foundation.MakeString(r).String()
+	}
+	return goResult_
+}
+
+func ImageRep_ImageUnfilteredTypes() []string {
+	result_ := C.C_NSImageRep_ImageRep_ImageUnfilteredTypes()
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = foundation.MakeString(r).String()
+	}
+	return goResult_
 }
 
 func (n *NSImageRep) Size() foundation.Size {
-	result := C.C_NSImageRep_Size(n.Ptr())
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSImageRep_Size(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSImageRep) SetSize(value foundation.Size) {
@@ -109,8 +166,8 @@ func (n *NSImageRep) SetSize(value foundation.Size) {
 }
 
 func (n *NSImageRep) BitsPerSample() int {
-	result := C.C_NSImageRep_BitsPerSample(n.Ptr())
-	return int(result)
+	result_ := C.C_NSImageRep_BitsPerSample(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSImageRep) SetBitsPerSample(value int) {
@@ -118,8 +175,8 @@ func (n *NSImageRep) SetBitsPerSample(value int) {
 }
 
 func (n *NSImageRep) ColorSpaceName() ColorSpaceName {
-	result := C.C_NSImageRep_ColorSpaceName(n.Ptr())
-	return ColorSpaceName(foundation.MakeString(result).String())
+	result_ := C.C_NSImageRep_ColorSpaceName(n.Ptr())
+	return ColorSpaceName(foundation.MakeString(result_).String())
 }
 
 func (n *NSImageRep) SetColorSpaceName(value ColorSpaceName) {
@@ -127,8 +184,8 @@ func (n *NSImageRep) SetColorSpaceName(value ColorSpaceName) {
 }
 
 func (n *NSImageRep) HasAlpha() bool {
-	result := C.C_NSImageRep_HasAlpha(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSImageRep_HasAlpha(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSImageRep) SetAlpha(value bool) {
@@ -136,8 +193,8 @@ func (n *NSImageRep) SetAlpha(value bool) {
 }
 
 func (n *NSImageRep) IsOpaque() bool {
-	result := C.C_NSImageRep_IsOpaque(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSImageRep_IsOpaque(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSImageRep) SetOpaque(value bool) {
@@ -145,8 +202,8 @@ func (n *NSImageRep) SetOpaque(value bool) {
 }
 
 func (n *NSImageRep) PixelsHigh() int {
-	result := C.C_NSImageRep_PixelsHigh(n.Ptr())
-	return int(result)
+	result_ := C.C_NSImageRep_PixelsHigh(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSImageRep) SetPixelsHigh(value int) {
@@ -154,10 +211,19 @@ func (n *NSImageRep) SetPixelsHigh(value int) {
 }
 
 func (n *NSImageRep) PixelsWide() int {
-	result := C.C_NSImageRep_PixelsWide(n.Ptr())
-	return int(result)
+	result_ := C.C_NSImageRep_PixelsWide(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSImageRep) SetPixelsWide(value int) {
 	C.C_NSImageRep_SetPixelsWide(n.Ptr(), C.int(value))
+}
+
+func (n *NSImageRep) LayoutDirection() ImageLayoutDirection {
+	result_ := C.C_NSImageRep_LayoutDirection(n.Ptr())
+	return ImageLayoutDirection(int(result_))
+}
+
+func (n *NSImageRep) SetLayoutDirection(value ImageLayoutDirection) {
+	C.C_NSImageRep_SetLayoutDirection(n.Ptr(), C.int(int(value)))
 }

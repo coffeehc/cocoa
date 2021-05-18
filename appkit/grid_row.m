@@ -7,14 +7,14 @@ void* C_GridRow_Alloc() {
 
 void* C_NSGridRow_Init(void* ptr) {
     NSGridRow* nSGridRow = (NSGridRow*)ptr;
-    NSGridRow* result = [nSGridRow init];
-    return result;
+    NSGridRow* result_ = [nSGridRow init];
+    return result_;
 }
 
 void* C_NSGridRow_CellAtIndex(void* ptr, int index) {
     NSGridRow* nSGridRow = (NSGridRow*)ptr;
-    NSGridCell* result = [nSGridRow cellAtIndex:index];
-    return result;
+    NSGridCell* result_ = [nSGridRow cellAtIndex:index];
+    return result_;
 }
 
 void C_NSGridRow_MergeCellsInRange(void* ptr, NSRange _range) {
@@ -24,14 +24,14 @@ void C_NSGridRow_MergeCellsInRange(void* ptr, NSRange _range) {
 
 int C_NSGridRow_NumberOfCells(void* ptr) {
     NSGridRow* nSGridRow = (NSGridRow*)ptr;
-    NSInteger result = [nSGridRow numberOfCells];
-    return result;
+    NSInteger result_ = [nSGridRow numberOfCells];
+    return result_;
 }
 
 bool C_NSGridRow_IsHidden(void* ptr) {
     NSGridRow* nSGridRow = (NSGridRow*)ptr;
-    BOOL result = [nSGridRow isHidden];
-    return result;
+    BOOL result_ = [nSGridRow isHidden];
+    return result_;
 }
 
 void C_NSGridRow_SetHidden(void* ptr, bool value) {
@@ -41,8 +41,8 @@ void C_NSGridRow_SetHidden(void* ptr, bool value) {
 
 double C_NSGridRow_TopPadding(void* ptr) {
     NSGridRow* nSGridRow = (NSGridRow*)ptr;
-    CGFloat result = [nSGridRow topPadding];
-    return result;
+    CGFloat result_ = [nSGridRow topPadding];
+    return result_;
 }
 
 void C_NSGridRow_SetTopPadding(void* ptr, double value) {
@@ -52,8 +52,8 @@ void C_NSGridRow_SetTopPadding(void* ptr, double value) {
 
 double C_NSGridRow_BottomPadding(void* ptr) {
     NSGridRow* nSGridRow = (NSGridRow*)ptr;
-    CGFloat result = [nSGridRow bottomPadding];
-    return result;
+    CGFloat result_ = [nSGridRow bottomPadding];
+    return result_;
 }
 
 void C_NSGridRow_SetBottomPadding(void* ptr, double value) {
@@ -63,8 +63,8 @@ void C_NSGridRow_SetBottomPadding(void* ptr, double value) {
 
 double C_NSGridRow_Height(void* ptr) {
     NSGridRow* nSGridRow = (NSGridRow*)ptr;
-    CGFloat result = [nSGridRow height];
-    return result;
+    CGFloat result_ = [nSGridRow height];
+    return result_;
 }
 
 void C_NSGridRow_SetHeight(void* ptr, double value) {
@@ -74,8 +74,8 @@ void C_NSGridRow_SetHeight(void* ptr, double value) {
 
 int C_NSGridRow_RowAlignment(void* ptr) {
     NSGridRow* nSGridRow = (NSGridRow*)ptr;
-    NSGridRowAlignment result = [nSGridRow rowAlignment];
-    return result;
+    NSGridRowAlignment result_ = [nSGridRow rowAlignment];
+    return result_;
 }
 
 void C_NSGridRow_SetRowAlignment(void* ptr, int value) {
@@ -85,8 +85,8 @@ void C_NSGridRow_SetRowAlignment(void* ptr, int value) {
 
 int C_NSGridRow_YPlacement(void* ptr) {
     NSGridRow* nSGridRow = (NSGridRow*)ptr;
-    NSGridCellPlacement result = [nSGridRow yPlacement];
-    return result;
+    NSGridCellPlacement result_ = [nSGridRow yPlacement];
+    return result_;
 }
 
 void C_NSGridRow_SetYPlacement(void* ptr, int value) {
@@ -96,6 +96,6 @@ void C_NSGridRow_SetYPlacement(void* ptr, int value) {
 
 void* C_NSGridRow_GridView(void* ptr) {
     NSGridRow* nSGridRow = (NSGridRow*)ptr;
-    NSGridView* result = [nSGridRow gridView];
-    return result;
+    NSGridView* result_ = [nSGridRow gridView];
+    return result_;
 }

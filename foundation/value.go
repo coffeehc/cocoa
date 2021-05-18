@@ -39,76 +39,76 @@ func AllocValue() *NSValue {
 }
 
 func (n *NSValue) InitWithCoder(coder Coder) Value {
-	result := C.C_NSValue_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeValue(result)
+	result_ := C.C_NSValue_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeValue(result_)
 }
 
 func (n *NSValue) Init() Value {
-	result := C.C_NSValue_Init(n.Ptr())
-	return MakeValue(result)
+	result_ := C.C_NSValue_Init(n.Ptr())
+	return MakeValue(result_)
 }
 
 func ValueWithNonretainedObject(anObject objc.Object) Value {
-	result := C.C_NSValue_ValueWithNonretainedObject(objc.ExtractPtr(anObject))
-	return MakeValue(result)
+	result_ := C.C_NSValue_ValueWithNonretainedObject(objc.ExtractPtr(anObject))
+	return MakeValue(result_)
 }
 
 func ValueWithRange(_range Range) Value {
-	result := C.C_NSValue_ValueWithRange(*(*C.NSRange)(ToNSRangePointer(_range)))
-	return MakeValue(result)
+	result_ := C.C_NSValue_ValueWithRange(*(*C.NSRange)(ToNSRangePointer(_range)))
+	return MakeValue(result_)
 }
 
 func ValueWithPoint(point Point) Value {
-	result := C.C_NSValue_ValueWithPoint(*(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))))
-	return MakeValue(result)
+	result_ := C.C_NSValue_ValueWithPoint(*(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))))
+	return MakeValue(result_)
 }
 
 func ValueWithSize(size Size) Value {
-	result := C.C_NSValue_ValueWithSize(*(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(size))))
-	return MakeValue(result)
+	result_ := C.C_NSValue_ValueWithSize(*(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(size))))
+	return MakeValue(result_)
 }
 
 func ValueWithRect(rect Rect) Value {
-	result := C.C_NSValue_ValueWithRect(*(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
-	return MakeValue(result)
+	result_ := C.C_NSValue_ValueWithRect(*(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
+	return MakeValue(result_)
 }
 
 func (n *NSValue) IsEqualToValue(value Value) bool {
-	result := C.C_NSValue_IsEqualToValue(n.Ptr(), objc.ExtractPtr(value))
-	return bool(result)
+	result_ := C.C_NSValue_IsEqualToValue(n.Ptr(), objc.ExtractPtr(value))
+	return bool(result_)
 }
 
 func ValueWithEdgeInsets(insets EdgeInsets) Value {
-	result := C.C_NSValue_ValueWithEdgeInsets(*(*C.NSEdgeInsets)(ToNSEdgeInsetsPointer(insets)))
-	return MakeValue(result)
+	result_ := C.C_NSValue_ValueWithEdgeInsets(*(*C.NSEdgeInsets)(ToNSEdgeInsetsPointer(insets)))
+	return MakeValue(result_)
 }
 
 func (n *NSValue) NonretainedObjectValue() objc.Object {
-	result := C.C_NSValue_NonretainedObjectValue(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSValue_NonretainedObjectValue(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSValue) RangeValue() Range {
-	result := C.C_NSValue_RangeValue(n.Ptr())
-	return FromNSRangePointer(unsafe.Pointer(&result))
+	result_ := C.C_NSValue_RangeValue(n.Ptr())
+	return FromNSRangePointer(unsafe.Pointer(&result_))
 }
 
 func (n *NSValue) PointValue() Point {
-	result := C.C_NSValue_PointValue(n.Ptr())
-	return Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSValue_PointValue(n.Ptr())
+	return Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSValue) SizeValue() Size {
-	result := C.C_NSValue_SizeValue(n.Ptr())
-	return Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSValue_SizeValue(n.Ptr())
+	return Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSValue) RectValue() Rect {
-	result := C.C_NSValue_RectValue(n.Ptr())
-	return Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSValue_RectValue(n.Ptr())
+	return Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSValue) EdgeInsetsValue() EdgeInsets {
-	result := C.C_NSValue_EdgeInsetsValue(n.Ptr())
-	return FromNSEdgeInsetsPointer(unsafe.Pointer(&result))
+	result_ := C.C_NSValue_EdgeInsetsValue(n.Ptr())
+	return FromNSEdgeInsetsPointer(unsafe.Pointer(&result_))
 }

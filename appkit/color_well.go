@@ -42,18 +42,18 @@ func AllocColorWell() *NSColorWell {
 }
 
 func (n *NSColorWell) InitWithFrame(frameRect foundation.Rect) ColorWell {
-	result := C.C_NSColorWell_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
-	return MakeColorWell(result)
+	result_ := C.C_NSColorWell_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeColorWell(result_)
 }
 
 func (n *NSColorWell) InitWithCoder(coder foundation.Coder) ColorWell {
-	result := C.C_NSColorWell_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeColorWell(result)
+	result_ := C.C_NSColorWell_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeColorWell(result_)
 }
 
 func (n *NSColorWell) Init() ColorWell {
-	result := C.C_NSColorWell_Init(n.Ptr())
-	return MakeColorWell(result)
+	result_ := C.C_NSColorWell_Init(n.Ptr())
+	return MakeColorWell(result_)
 }
 
 func (n *NSColorWell) TakeColorFrom(sender objc.Object) {
@@ -73,8 +73,8 @@ func (n *NSColorWell) DrawWellInside(insideRect foundation.Rect) {
 }
 
 func (n *NSColorWell) Color() Color {
-	result := C.C_NSColorWell_Color(n.Ptr())
-	return MakeColor(result)
+	result_ := C.C_NSColorWell_Color(n.Ptr())
+	return MakeColor(result_)
 }
 
 func (n *NSColorWell) SetColor(value Color) {
@@ -82,13 +82,13 @@ func (n *NSColorWell) SetColor(value Color) {
 }
 
 func (n *NSColorWell) IsActive() bool {
-	result := C.C_NSColorWell_IsActive(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSColorWell_IsActive(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSColorWell) IsBordered() bool {
-	result := C.C_NSColorWell_IsBordered(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSColorWell_IsBordered(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSColorWell) SetBordered(value bool) {

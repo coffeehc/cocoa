@@ -61,6 +61,8 @@ type Menu interface {
 	HighlightedItem() MenuItem
 	UserInterfaceLayoutDirection() UserInterfaceLayoutDirection
 	SetUserInterfaceLayoutDirection(value UserInterfaceLayoutDirection)
+	Delegate() objc.Object
+	SetDelegate(value objc.Object)
 }
 
 type NSMenu struct {
@@ -81,23 +83,23 @@ func AllocMenu() *NSMenu {
 }
 
 func (n *NSMenu) InitWithTitle(title string) Menu {
-	result := C.C_NSMenu_InitWithTitle(n.Ptr(), foundation.NewString(title).Ptr())
-	return MakeMenu(result)
+	result_ := C.C_NSMenu_InitWithTitle(n.Ptr(), foundation.NewString(title).Ptr())
+	return MakeMenu(result_)
 }
 
 func (n *NSMenu) InitWithCoder(coder foundation.Coder) Menu {
-	result := C.C_NSMenu_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeMenu(result)
+	result_ := C.C_NSMenu_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeMenu(result_)
 }
 
 func (n *NSMenu) Init() Menu {
-	result := C.C_NSMenu_Init(n.Ptr())
-	return MakeMenu(result)
+	result_ := C.C_NSMenu_Init(n.Ptr())
+	return MakeMenu(result_)
 }
 
 func MenuBarVisible() bool {
-	result := C.C_NSMenu_MenuBarVisible()
-	return bool(result)
+	result_ := C.C_NSMenu_MenuBarVisible()
+	return bool(result_)
 }
 
 func Menu_SetMenuBarVisible(visible bool) {
@@ -109,8 +111,8 @@ func (n *NSMenu) InsertItem_AtIndex(newItem MenuItem, index int) {
 }
 
 func (n *NSMenu) InsertItemWithTitle_Action_KeyEquivalent_AtIndex(_string string, selector *objc.Selector, charCode string, index int) MenuItem {
-	result := C.C_NSMenu_InsertItemWithTitle_Action_KeyEquivalent_AtIndex(n.Ptr(), foundation.NewString(_string).Ptr(), objc.ExtractPtr(selector), foundation.NewString(charCode).Ptr(), C.int(index))
-	return MakeMenuItem(result)
+	result_ := C.C_NSMenu_InsertItemWithTitle_Action_KeyEquivalent_AtIndex(n.Ptr(), foundation.NewString(_string).Ptr(), objc.ExtractPtr(selector), foundation.NewString(charCode).Ptr(), C.int(index))
+	return MakeMenuItem(result_)
 }
 
 func (n *NSMenu) AddItem(newItem MenuItem) {
@@ -118,8 +120,8 @@ func (n *NSMenu) AddItem(newItem MenuItem) {
 }
 
 func (n *NSMenu) AddItemWithTitle_Action_KeyEquivalent(_string string, selector *objc.Selector, charCode string) MenuItem {
-	result := C.C_NSMenu_AddItemWithTitle_Action_KeyEquivalent(n.Ptr(), foundation.NewString(_string).Ptr(), objc.ExtractPtr(selector), foundation.NewString(charCode).Ptr())
-	return MakeMenuItem(result)
+	result_ := C.C_NSMenu_AddItemWithTitle_Action_KeyEquivalent(n.Ptr(), foundation.NewString(_string).Ptr(), objc.ExtractPtr(selector), foundation.NewString(charCode).Ptr())
+	return MakeMenuItem(result_)
 }
 
 func (n *NSMenu) RemoveItem(item MenuItem) {
@@ -139,48 +141,48 @@ func (n *NSMenu) RemoveAllItems() {
 }
 
 func (n *NSMenu) ItemWithTag(tag int) MenuItem {
-	result := C.C_NSMenu_ItemWithTag(n.Ptr(), C.int(tag))
-	return MakeMenuItem(result)
+	result_ := C.C_NSMenu_ItemWithTag(n.Ptr(), C.int(tag))
+	return MakeMenuItem(result_)
 }
 
 func (n *NSMenu) ItemWithTitle(title string) MenuItem {
-	result := C.C_NSMenu_ItemWithTitle(n.Ptr(), foundation.NewString(title).Ptr())
-	return MakeMenuItem(result)
+	result_ := C.C_NSMenu_ItemWithTitle(n.Ptr(), foundation.NewString(title).Ptr())
+	return MakeMenuItem(result_)
 }
 
 func (n *NSMenu) ItemAtIndex(index int) MenuItem {
-	result := C.C_NSMenu_ItemAtIndex(n.Ptr(), C.int(index))
-	return MakeMenuItem(result)
+	result_ := C.C_NSMenu_ItemAtIndex(n.Ptr(), C.int(index))
+	return MakeMenuItem(result_)
 }
 
 func (n *NSMenu) IndexOfItem(item MenuItem) int {
-	result := C.C_NSMenu_IndexOfItem(n.Ptr(), objc.ExtractPtr(item))
-	return int(result)
+	result_ := C.C_NSMenu_IndexOfItem(n.Ptr(), objc.ExtractPtr(item))
+	return int(result_)
 }
 
 func (n *NSMenu) IndexOfItemWithTitle(title string) int {
-	result := C.C_NSMenu_IndexOfItemWithTitle(n.Ptr(), foundation.NewString(title).Ptr())
-	return int(result)
+	result_ := C.C_NSMenu_IndexOfItemWithTitle(n.Ptr(), foundation.NewString(title).Ptr())
+	return int(result_)
 }
 
 func (n *NSMenu) IndexOfItemWithTag(tag int) int {
-	result := C.C_NSMenu_IndexOfItemWithTag(n.Ptr(), C.int(tag))
-	return int(result)
+	result_ := C.C_NSMenu_IndexOfItemWithTag(n.Ptr(), C.int(tag))
+	return int(result_)
 }
 
 func (n *NSMenu) IndexOfItemWithTarget_AndAction(target objc.Object, actionSelector *objc.Selector) int {
-	result := C.C_NSMenu_IndexOfItemWithTarget_AndAction(n.Ptr(), objc.ExtractPtr(target), objc.ExtractPtr(actionSelector))
-	return int(result)
+	result_ := C.C_NSMenu_IndexOfItemWithTarget_AndAction(n.Ptr(), objc.ExtractPtr(target), objc.ExtractPtr(actionSelector))
+	return int(result_)
 }
 
 func (n *NSMenu) IndexOfItemWithRepresentedObject(object objc.Object) int {
-	result := C.C_NSMenu_IndexOfItemWithRepresentedObject(n.Ptr(), objc.ExtractPtr(object))
-	return int(result)
+	result_ := C.C_NSMenu_IndexOfItemWithRepresentedObject(n.Ptr(), objc.ExtractPtr(object))
+	return int(result_)
 }
 
 func (n *NSMenu) IndexOfItemWithSubmenu(submenu Menu) int {
-	result := C.C_NSMenu_IndexOfItemWithSubmenu(n.Ptr(), objc.ExtractPtr(submenu))
-	return int(result)
+	result_ := C.C_NSMenu_IndexOfItemWithSubmenu(n.Ptr(), objc.ExtractPtr(submenu))
+	return int(result_)
 }
 
 func (n *NSMenu) SetSubmenu_ForItem(menu Menu, item MenuItem) {
@@ -196,8 +198,8 @@ func (n *NSMenu) Update() {
 }
 
 func (n *NSMenu) PerformKeyEquivalent(event Event) bool {
-	result := C.C_NSMenu_PerformKeyEquivalent(n.Ptr(), objc.ExtractPtr(event))
-	return bool(result)
+	result_ := C.C_NSMenu_PerformKeyEquivalent(n.Ptr(), objc.ExtractPtr(event))
+	return bool(result_)
 }
 
 func (n *NSMenu) PerformActionForItemAtIndex(index int) {
@@ -213,8 +215,8 @@ func PopUpContextMenu_WithEvent_ForView_WithFont(menu Menu, event Event, view Vi
 }
 
 func (n *NSMenu) PopUpMenuPositioningItem_AtLocation_InView(item MenuItem, location foundation.Point, view View) bool {
-	result := C.C_NSMenu_PopUpMenuPositioningItem_AtLocation_InView(n.Ptr(), objc.ExtractPtr(item), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(location))), objc.ExtractPtr(view))
-	return bool(result)
+	result_ := C.C_NSMenu_PopUpMenuPositioningItem_AtLocation_InView(n.Ptr(), objc.ExtractPtr(item), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(location))), objc.ExtractPtr(view))
+	return bool(result_)
 }
 
 func (n *NSMenu) CancelTracking() {
@@ -226,24 +228,24 @@ func (n *NSMenu) CancelTrackingWithoutAnimation() {
 }
 
 func (n *NSMenu) MenuBarHeight() coregraphics.Float {
-	result := C.C_NSMenu_MenuBarHeight(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSMenu_MenuBarHeight(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSMenu) NumberOfItems() int {
-	result := C.C_NSMenu_NumberOfItems(n.Ptr())
-	return int(result)
+	result_ := C.C_NSMenu_NumberOfItems(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSMenu) ItemArray() []MenuItem {
-	result := C.C_NSMenu_ItemArray(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]MenuItem, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeMenuItem(r)
+	result_ := C.C_NSMenu_ItemArray(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]MenuItem, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeMenuItem(r)
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSMenu) SetItemArray(value []MenuItem) {
@@ -256,8 +258,8 @@ func (n *NSMenu) SetItemArray(value []MenuItem) {
 }
 
 func (n *NSMenu) Supermenu() Menu {
-	result := C.C_NSMenu_Supermenu(n.Ptr())
-	return MakeMenu(result)
+	result_ := C.C_NSMenu_Supermenu(n.Ptr())
+	return MakeMenu(result_)
 }
 
 func (n *NSMenu) SetSupermenu(value Menu) {
@@ -265,8 +267,8 @@ func (n *NSMenu) SetSupermenu(value Menu) {
 }
 
 func (n *NSMenu) AutoenablesItems() bool {
-	result := C.C_NSMenu_AutoenablesItems(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSMenu_AutoenablesItems(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSMenu) SetAutoenablesItems(value bool) {
@@ -274,8 +276,8 @@ func (n *NSMenu) SetAutoenablesItems(value bool) {
 }
 
 func (n *NSMenu) Font() Font {
-	result := C.C_NSMenu_Font(n.Ptr())
-	return MakeFont(result)
+	result_ := C.C_NSMenu_Font(n.Ptr())
+	return MakeFont(result_)
 }
 
 func (n *NSMenu) SetFont(value Font) {
@@ -283,8 +285,8 @@ func (n *NSMenu) SetFont(value Font) {
 }
 
 func (n *NSMenu) Title() string {
-	result := C.C_NSMenu_Title(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSMenu_Title(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSMenu) SetTitle(value string) {
@@ -292,8 +294,8 @@ func (n *NSMenu) SetTitle(value string) {
 }
 
 func (n *NSMenu) MinimumWidth() coregraphics.Float {
-	result := C.C_NSMenu_MinimumWidth(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSMenu_MinimumWidth(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSMenu) SetMinimumWidth(value coregraphics.Float) {
@@ -301,18 +303,18 @@ func (n *NSMenu) SetMinimumWidth(value coregraphics.Float) {
 }
 
 func (n *NSMenu) Size() foundation.Size {
-	result := C.C_NSMenu_Size(n.Ptr())
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSMenu_Size(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSMenu) PropertiesToUpdate() MenuProperties {
-	result := C.C_NSMenu_PropertiesToUpdate(n.Ptr())
-	return MenuProperties(uint(result))
+	result_ := C.C_NSMenu_PropertiesToUpdate(n.Ptr())
+	return MenuProperties(uint(result_))
 }
 
 func (n *NSMenu) AllowsContextMenuPlugIns() bool {
-	result := C.C_NSMenu_AllowsContextMenuPlugIns(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSMenu_AllowsContextMenuPlugIns(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSMenu) SetAllowsContextMenuPlugIns(value bool) {
@@ -320,8 +322,8 @@ func (n *NSMenu) SetAllowsContextMenuPlugIns(value bool) {
 }
 
 func (n *NSMenu) ShowsStateColumn() bool {
-	result := C.C_NSMenu_ShowsStateColumn(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSMenu_ShowsStateColumn(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSMenu) SetShowsStateColumn(value bool) {
@@ -329,15 +331,24 @@ func (n *NSMenu) SetShowsStateColumn(value bool) {
 }
 
 func (n *NSMenu) HighlightedItem() MenuItem {
-	result := C.C_NSMenu_HighlightedItem(n.Ptr())
-	return MakeMenuItem(result)
+	result_ := C.C_NSMenu_HighlightedItem(n.Ptr())
+	return MakeMenuItem(result_)
 }
 
 func (n *NSMenu) UserInterfaceLayoutDirection() UserInterfaceLayoutDirection {
-	result := C.C_NSMenu_UserInterfaceLayoutDirection(n.Ptr())
-	return UserInterfaceLayoutDirection(int(result))
+	result_ := C.C_NSMenu_UserInterfaceLayoutDirection(n.Ptr())
+	return UserInterfaceLayoutDirection(int(result_))
 }
 
 func (n *NSMenu) SetUserInterfaceLayoutDirection(value UserInterfaceLayoutDirection) {
 	C.C_NSMenu_SetUserInterfaceLayoutDirection(n.Ptr(), C.int(int(value)))
+}
+
+func (n *NSMenu) Delegate() objc.Object {
+	result_ := C.C_NSMenu_Delegate(n.Ptr())
+	return objc.MakeObject(result_)
+}
+
+func (n *NSMenu) SetDelegate(value objc.Object) {
+	C.C_NSMenu_SetDelegate(n.Ptr(), objc.ExtractPtr(value))
 }

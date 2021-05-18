@@ -37,66 +37,71 @@ func AllocUserInterfaceCompressionOptions() *NSUserInterfaceCompressionOptions {
 }
 
 func (n *NSUserInterfaceCompressionOptions) Init() UserInterfaceCompressionOptions {
-	result := C.C_NSUserInterfaceCompressionOptions_Init(n.Ptr())
-	return MakeUserInterfaceCompressionOptions(result)
+	result_ := C.C_NSUserInterfaceCompressionOptions_Init(n.Ptr())
+	return MakeUserInterfaceCompressionOptions(result_)
+}
+
+func (n *NSUserInterfaceCompressionOptions) InitWithCompressionOptions(options foundation.Set) UserInterfaceCompressionOptions {
+	result_ := C.C_NSUserInterfaceCompressionOptions_InitWithCompressionOptions(n.Ptr(), objc.ExtractPtr(options))
+	return MakeUserInterfaceCompressionOptions(result_)
 }
 
 func (n *NSUserInterfaceCompressionOptions) InitWithIdentifier(identifier string) UserInterfaceCompressionOptions {
-	result := C.C_NSUserInterfaceCompressionOptions_InitWithIdentifier(n.Ptr(), foundation.NewString(identifier).Ptr())
-	return MakeUserInterfaceCompressionOptions(result)
+	result_ := C.C_NSUserInterfaceCompressionOptions_InitWithIdentifier(n.Ptr(), foundation.NewString(identifier).Ptr())
+	return MakeUserInterfaceCompressionOptions(result_)
 }
 
 func (n *NSUserInterfaceCompressionOptions) InitWithCoder(coder foundation.Coder) UserInterfaceCompressionOptions {
-	result := C.C_NSUserInterfaceCompressionOptions_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeUserInterfaceCompressionOptions(result)
+	result_ := C.C_NSUserInterfaceCompressionOptions_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeUserInterfaceCompressionOptions(result_)
 }
 
 func (n *NSUserInterfaceCompressionOptions) ContainsOptions(options UserInterfaceCompressionOptions) bool {
-	result := C.C_NSUserInterfaceCompressionOptions_ContainsOptions(n.Ptr(), objc.ExtractPtr(options))
-	return bool(result)
+	result_ := C.C_NSUserInterfaceCompressionOptions_ContainsOptions(n.Ptr(), objc.ExtractPtr(options))
+	return bool(result_)
 }
 
 func (n *NSUserInterfaceCompressionOptions) IntersectsOptions(options UserInterfaceCompressionOptions) bool {
-	result := C.C_NSUserInterfaceCompressionOptions_IntersectsOptions(n.Ptr(), objc.ExtractPtr(options))
-	return bool(result)
+	result_ := C.C_NSUserInterfaceCompressionOptions_IntersectsOptions(n.Ptr(), objc.ExtractPtr(options))
+	return bool(result_)
 }
 
 func (n *NSUserInterfaceCompressionOptions) OptionsByAddingOptions(options UserInterfaceCompressionOptions) UserInterfaceCompressionOptions {
-	result := C.C_NSUserInterfaceCompressionOptions_OptionsByAddingOptions(n.Ptr(), objc.ExtractPtr(options))
-	return MakeUserInterfaceCompressionOptions(result)
+	result_ := C.C_NSUserInterfaceCompressionOptions_OptionsByAddingOptions(n.Ptr(), objc.ExtractPtr(options))
+	return MakeUserInterfaceCompressionOptions(result_)
 }
 
 func (n *NSUserInterfaceCompressionOptions) OptionsByRemovingOptions(options UserInterfaceCompressionOptions) UserInterfaceCompressionOptions {
-	result := C.C_NSUserInterfaceCompressionOptions_OptionsByRemovingOptions(n.Ptr(), objc.ExtractPtr(options))
-	return MakeUserInterfaceCompressionOptions(result)
+	result_ := C.C_NSUserInterfaceCompressionOptions_OptionsByRemovingOptions(n.Ptr(), objc.ExtractPtr(options))
+	return MakeUserInterfaceCompressionOptions(result_)
 }
 
 func UserInterfaceCompressionOptions_HideImagesOption() UserInterfaceCompressionOptions {
-	result := C.C_NSUserInterfaceCompressionOptions_UserInterfaceCompressionOptions_HideImagesOption()
-	return MakeUserInterfaceCompressionOptions(result)
+	result_ := C.C_NSUserInterfaceCompressionOptions_UserInterfaceCompressionOptions_HideImagesOption()
+	return MakeUserInterfaceCompressionOptions(result_)
 }
 
 func UserInterfaceCompressionOptions_HideTextOption() UserInterfaceCompressionOptions {
-	result := C.C_NSUserInterfaceCompressionOptions_UserInterfaceCompressionOptions_HideTextOption()
-	return MakeUserInterfaceCompressionOptions(result)
+	result_ := C.C_NSUserInterfaceCompressionOptions_UserInterfaceCompressionOptions_HideTextOption()
+	return MakeUserInterfaceCompressionOptions(result_)
 }
 
 func UserInterfaceCompressionOptions_ReduceMetricsOption() UserInterfaceCompressionOptions {
-	result := C.C_NSUserInterfaceCompressionOptions_UserInterfaceCompressionOptions_ReduceMetricsOption()
-	return MakeUserInterfaceCompressionOptions(result)
+	result_ := C.C_NSUserInterfaceCompressionOptions_UserInterfaceCompressionOptions_ReduceMetricsOption()
+	return MakeUserInterfaceCompressionOptions(result_)
 }
 
 func UserInterfaceCompressionOptions_BreakEqualWidthsOption() UserInterfaceCompressionOptions {
-	result := C.C_NSUserInterfaceCompressionOptions_UserInterfaceCompressionOptions_BreakEqualWidthsOption()
-	return MakeUserInterfaceCompressionOptions(result)
+	result_ := C.C_NSUserInterfaceCompressionOptions_UserInterfaceCompressionOptions_BreakEqualWidthsOption()
+	return MakeUserInterfaceCompressionOptions(result_)
 }
 
 func UserInterfaceCompressionOptions_StandardOptions() UserInterfaceCompressionOptions {
-	result := C.C_NSUserInterfaceCompressionOptions_UserInterfaceCompressionOptions_StandardOptions()
-	return MakeUserInterfaceCompressionOptions(result)
+	result_ := C.C_NSUserInterfaceCompressionOptions_UserInterfaceCompressionOptions_StandardOptions()
+	return MakeUserInterfaceCompressionOptions(result_)
 }
 
 func (n *NSUserInterfaceCompressionOptions) IsEmpty() bool {
-	result := C.C_NSUserInterfaceCompressionOptions_IsEmpty(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSUserInterfaceCompressionOptions_IsEmpty(n.Ptr())
+	return bool(result_)
 }

@@ -51,28 +51,28 @@ func AllocImageView() *NSImageView {
 }
 
 func (n *NSImageView) InitWithFrame(frameRect foundation.Rect) ImageView {
-	result := C.C_NSImageView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
-	return MakeImageView(result)
+	result_ := C.C_NSImageView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeImageView(result_)
 }
 
 func (n *NSImageView) InitWithCoder(coder foundation.Coder) ImageView {
-	result := C.C_NSImageView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeImageView(result)
+	result_ := C.C_NSImageView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeImageView(result_)
 }
 
 func (n *NSImageView) Init() ImageView {
-	result := C.C_NSImageView_Init(n.Ptr())
-	return MakeImageView(result)
+	result_ := C.C_NSImageView_Init(n.Ptr())
+	return MakeImageView(result_)
 }
 
 func ImageViewWithImage(image Image) ImageView {
-	result := C.C_NSImageView_ImageViewWithImage(objc.ExtractPtr(image))
-	return MakeImageView(result)
+	result_ := C.C_NSImageView_ImageViewWithImage(objc.ExtractPtr(image))
+	return MakeImageView(result_)
 }
 
 func (n *NSImageView) Image() Image {
-	result := C.C_NSImageView_Image(n.Ptr())
-	return MakeImage(result)
+	result_ := C.C_NSImageView_Image(n.Ptr())
+	return MakeImage(result_)
 }
 
 func (n *NSImageView) SetImage(value Image) {
@@ -80,8 +80,8 @@ func (n *NSImageView) SetImage(value Image) {
 }
 
 func (n *NSImageView) ImageFrameStyle() ImageFrameStyle {
-	result := C.C_NSImageView_ImageFrameStyle(n.Ptr())
-	return ImageFrameStyle(uint(result))
+	result_ := C.C_NSImageView_ImageFrameStyle(n.Ptr())
+	return ImageFrameStyle(uint(result_))
 }
 
 func (n *NSImageView) SetImageFrameStyle(value ImageFrameStyle) {
@@ -89,8 +89,8 @@ func (n *NSImageView) SetImageFrameStyle(value ImageFrameStyle) {
 }
 
 func (n *NSImageView) ImageAlignment() ImageAlignment {
-	result := C.C_NSImageView_ImageAlignment(n.Ptr())
-	return ImageAlignment(uint(result))
+	result_ := C.C_NSImageView_ImageAlignment(n.Ptr())
+	return ImageAlignment(uint(result_))
 }
 
 func (n *NSImageView) SetImageAlignment(value ImageAlignment) {
@@ -98,8 +98,8 @@ func (n *NSImageView) SetImageAlignment(value ImageAlignment) {
 }
 
 func (n *NSImageView) ImageScaling() ImageScaling {
-	result := C.C_NSImageView_ImageScaling(n.Ptr())
-	return ImageScaling(uint(result))
+	result_ := C.C_NSImageView_ImageScaling(n.Ptr())
+	return ImageScaling(uint(result_))
 }
 
 func (n *NSImageView) SetImageScaling(value ImageScaling) {
@@ -107,8 +107,8 @@ func (n *NSImageView) SetImageScaling(value ImageScaling) {
 }
 
 func (n *NSImageView) Animates() bool {
-	result := C.C_NSImageView_Animates(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSImageView_Animates(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSImageView) SetAnimates(value bool) {
@@ -116,8 +116,8 @@ func (n *NSImageView) SetAnimates(value bool) {
 }
 
 func (n *NSImageView) IsEditable() bool {
-	result := C.C_NSImageView_IsEditable(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSImageView_IsEditable(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSImageView) SetEditable(value bool) {
@@ -125,8 +125,8 @@ func (n *NSImageView) SetEditable(value bool) {
 }
 
 func (n *NSImageView) AllowsCutCopyPaste() bool {
-	result := C.C_NSImageView_AllowsCutCopyPaste(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSImageView_AllowsCutCopyPaste(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSImageView) SetAllowsCutCopyPaste(value bool) {
@@ -134,8 +134,8 @@ func (n *NSImageView) SetAllowsCutCopyPaste(value bool) {
 }
 
 func (n *NSImageView) ContentTintColor() Color {
-	result := C.C_NSImageView_ContentTintColor(n.Ptr())
-	return MakeColor(result)
+	result_ := C.C_NSImageView_ContentTintColor(n.Ptr())
+	return MakeColor(result_)
 }
 
 func (n *NSImageView) SetContentTintColor(value Color) {
@@ -143,8 +143,8 @@ func (n *NSImageView) SetContentTintColor(value Color) {
 }
 
 func (n *NSImageView) SymbolConfiguration() ImageSymbolConfiguration {
-	result := C.C_NSImageView_SymbolConfiguration(n.Ptr())
-	return MakeImageSymbolConfiguration(result)
+	result_ := C.C_NSImageView_SymbolConfiguration(n.Ptr())
+	return MakeImageSymbolConfiguration(result_)
 }
 
 func (n *NSImageView) SetSymbolConfiguration(value ImageSymbolConfiguration) {

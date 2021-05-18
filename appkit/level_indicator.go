@@ -67,33 +67,33 @@ func AllocLevelIndicator() *NSLevelIndicator {
 }
 
 func (n *NSLevelIndicator) InitWithFrame(frameRect foundation.Rect) LevelIndicator {
-	result := C.C_NSLevelIndicator_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
-	return MakeLevelIndicator(result)
+	result_ := C.C_NSLevelIndicator_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeLevelIndicator(result_)
 }
 
 func (n *NSLevelIndicator) InitWithCoder(coder foundation.Coder) LevelIndicator {
-	result := C.C_NSLevelIndicator_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeLevelIndicator(result)
+	result_ := C.C_NSLevelIndicator_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeLevelIndicator(result_)
 }
 
 func (n *NSLevelIndicator) Init() LevelIndicator {
-	result := C.C_NSLevelIndicator_Init(n.Ptr())
-	return MakeLevelIndicator(result)
+	result_ := C.C_NSLevelIndicator_Init(n.Ptr())
+	return MakeLevelIndicator(result_)
 }
 
 func (n *NSLevelIndicator) TickMarkValueAtIndex(index int) float64 {
-	result := C.C_NSLevelIndicator_TickMarkValueAtIndex(n.Ptr(), C.int(index))
-	return float64(result)
+	result_ := C.C_NSLevelIndicator_TickMarkValueAtIndex(n.Ptr(), C.int(index))
+	return float64(result_)
 }
 
 func (n *NSLevelIndicator) RectOfTickMarkAtIndex(index int) foundation.Rect {
-	result := C.C_NSLevelIndicator_RectOfTickMarkAtIndex(n.Ptr(), C.int(index))
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSLevelIndicator_RectOfTickMarkAtIndex(n.Ptr(), C.int(index))
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSLevelIndicator) MinValue() float64 {
-	result := C.C_NSLevelIndicator_MinValue(n.Ptr())
-	return float64(result)
+	result_ := C.C_NSLevelIndicator_MinValue(n.Ptr())
+	return float64(result_)
 }
 
 func (n *NSLevelIndicator) SetMinValue(value float64) {
@@ -101,8 +101,8 @@ func (n *NSLevelIndicator) SetMinValue(value float64) {
 }
 
 func (n *NSLevelIndicator) MaxValue() float64 {
-	result := C.C_NSLevelIndicator_MaxValue(n.Ptr())
-	return float64(result)
+	result_ := C.C_NSLevelIndicator_MaxValue(n.Ptr())
+	return float64(result_)
 }
 
 func (n *NSLevelIndicator) SetMaxValue(value float64) {
@@ -110,8 +110,8 @@ func (n *NSLevelIndicator) SetMaxValue(value float64) {
 }
 
 func (n *NSLevelIndicator) WarningValue() float64 {
-	result := C.C_NSLevelIndicator_WarningValue(n.Ptr())
-	return float64(result)
+	result_ := C.C_NSLevelIndicator_WarningValue(n.Ptr())
+	return float64(result_)
 }
 
 func (n *NSLevelIndicator) SetWarningValue(value float64) {
@@ -119,8 +119,8 @@ func (n *NSLevelIndicator) SetWarningValue(value float64) {
 }
 
 func (n *NSLevelIndicator) CriticalValue() float64 {
-	result := C.C_NSLevelIndicator_CriticalValue(n.Ptr())
-	return float64(result)
+	result_ := C.C_NSLevelIndicator_CriticalValue(n.Ptr())
+	return float64(result_)
 }
 
 func (n *NSLevelIndicator) SetCriticalValue(value float64) {
@@ -128,8 +128,8 @@ func (n *NSLevelIndicator) SetCriticalValue(value float64) {
 }
 
 func (n *NSLevelIndicator) TickMarkPosition() TickMarkPosition {
-	result := C.C_NSLevelIndicator_TickMarkPosition(n.Ptr())
-	return TickMarkPosition(uint(result))
+	result_ := C.C_NSLevelIndicator_TickMarkPosition(n.Ptr())
+	return TickMarkPosition(uint(result_))
 }
 
 func (n *NSLevelIndicator) SetTickMarkPosition(value TickMarkPosition) {
@@ -137,8 +137,8 @@ func (n *NSLevelIndicator) SetTickMarkPosition(value TickMarkPosition) {
 }
 
 func (n *NSLevelIndicator) NumberOfTickMarks() int {
-	result := C.C_NSLevelIndicator_NumberOfTickMarks(n.Ptr())
-	return int(result)
+	result_ := C.C_NSLevelIndicator_NumberOfTickMarks(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSLevelIndicator) SetNumberOfTickMarks(value int) {
@@ -146,8 +146,8 @@ func (n *NSLevelIndicator) SetNumberOfTickMarks(value int) {
 }
 
 func (n *NSLevelIndicator) NumberOfMajorTickMarks() int {
-	result := C.C_NSLevelIndicator_NumberOfMajorTickMarks(n.Ptr())
-	return int(result)
+	result_ := C.C_NSLevelIndicator_NumberOfMajorTickMarks(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSLevelIndicator) SetNumberOfMajorTickMarks(value int) {
@@ -155,8 +155,8 @@ func (n *NSLevelIndicator) SetNumberOfMajorTickMarks(value int) {
 }
 
 func (n *NSLevelIndicator) LevelIndicatorStyle() LevelIndicatorStyle {
-	result := C.C_NSLevelIndicator_LevelIndicatorStyle(n.Ptr())
-	return LevelIndicatorStyle(uint(result))
+	result_ := C.C_NSLevelIndicator_LevelIndicatorStyle(n.Ptr())
+	return LevelIndicatorStyle(uint(result_))
 }
 
 func (n *NSLevelIndicator) SetLevelIndicatorStyle(value LevelIndicatorStyle) {
@@ -164,8 +164,8 @@ func (n *NSLevelIndicator) SetLevelIndicatorStyle(value LevelIndicatorStyle) {
 }
 
 func (n *NSLevelIndicator) RatingImage() Image {
-	result := C.C_NSLevelIndicator_RatingImage(n.Ptr())
-	return MakeImage(result)
+	result_ := C.C_NSLevelIndicator_RatingImage(n.Ptr())
+	return MakeImage(result_)
 }
 
 func (n *NSLevelIndicator) SetRatingImage(value Image) {
@@ -173,8 +173,8 @@ func (n *NSLevelIndicator) SetRatingImage(value Image) {
 }
 
 func (n *NSLevelIndicator) DrawsTieredCapacityLevels() bool {
-	result := C.C_NSLevelIndicator_DrawsTieredCapacityLevels(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSLevelIndicator_DrawsTieredCapacityLevels(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSLevelIndicator) SetDrawsTieredCapacityLevels(value bool) {
@@ -182,8 +182,8 @@ func (n *NSLevelIndicator) SetDrawsTieredCapacityLevels(value bool) {
 }
 
 func (n *NSLevelIndicator) FillColor() Color {
-	result := C.C_NSLevelIndicator_FillColor(n.Ptr())
-	return MakeColor(result)
+	result_ := C.C_NSLevelIndicator_FillColor(n.Ptr())
+	return MakeColor(result_)
 }
 
 func (n *NSLevelIndicator) SetFillColor(value Color) {
@@ -191,8 +191,8 @@ func (n *NSLevelIndicator) SetFillColor(value Color) {
 }
 
 func (n *NSLevelIndicator) WarningFillColor() Color {
-	result := C.C_NSLevelIndicator_WarningFillColor(n.Ptr())
-	return MakeColor(result)
+	result_ := C.C_NSLevelIndicator_WarningFillColor(n.Ptr())
+	return MakeColor(result_)
 }
 
 func (n *NSLevelIndicator) SetWarningFillColor(value Color) {
@@ -200,8 +200,8 @@ func (n *NSLevelIndicator) SetWarningFillColor(value Color) {
 }
 
 func (n *NSLevelIndicator) CriticalFillColor() Color {
-	result := C.C_NSLevelIndicator_CriticalFillColor(n.Ptr())
-	return MakeColor(result)
+	result_ := C.C_NSLevelIndicator_CriticalFillColor(n.Ptr())
+	return MakeColor(result_)
 }
 
 func (n *NSLevelIndicator) SetCriticalFillColor(value Color) {
@@ -209,8 +209,8 @@ func (n *NSLevelIndicator) SetCriticalFillColor(value Color) {
 }
 
 func (n *NSLevelIndicator) RatingPlaceholderImage() Image {
-	result := C.C_NSLevelIndicator_RatingPlaceholderImage(n.Ptr())
-	return MakeImage(result)
+	result_ := C.C_NSLevelIndicator_RatingPlaceholderImage(n.Ptr())
+	return MakeImage(result_)
 }
 
 func (n *NSLevelIndicator) SetRatingPlaceholderImage(value Image) {
@@ -218,8 +218,8 @@ func (n *NSLevelIndicator) SetRatingPlaceholderImage(value Image) {
 }
 
 func (n *NSLevelIndicator) PlaceholderVisibility() LevelIndicatorPlaceholderVisibility {
-	result := C.C_NSLevelIndicator_PlaceholderVisibility(n.Ptr())
-	return LevelIndicatorPlaceholderVisibility(int(result))
+	result_ := C.C_NSLevelIndicator_PlaceholderVisibility(n.Ptr())
+	return LevelIndicatorPlaceholderVisibility(int(result_))
 }
 
 func (n *NSLevelIndicator) SetPlaceholderVisibility(value LevelIndicatorPlaceholderVisibility) {
@@ -227,8 +227,8 @@ func (n *NSLevelIndicator) SetPlaceholderVisibility(value LevelIndicatorPlacehol
 }
 
 func (n *NSLevelIndicator) IsEditable() bool {
-	result := C.C_NSLevelIndicator_IsEditable(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSLevelIndicator_IsEditable(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSLevelIndicator) SetEditable(value bool) {

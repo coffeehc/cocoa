@@ -60,3 +60,5 @@ void C_NSMenu_SetShowsStateColumn(void* ptr, bool value);
 void* C_NSMenu_HighlightedItem(void* ptr);
 int C_NSMenu_UserInterfaceLayoutDirection(void* ptr);
 void C_NSMenu_SetUserInterfaceLayoutDirection(void* ptr, int value);
+void* C_NSMenu_Delegate(void* ptr);
+void C_NSMenu_SetDelegate(void* ptr, void* value);

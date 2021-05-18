@@ -45,76 +45,76 @@ func AllocScriptClassDescription() *NSScriptClassDescription {
 }
 
 func (n *NSScriptClassDescription) Init() ScriptClassDescription {
-	result := C.C_NSScriptClassDescription_Init(n.Ptr())
-	return MakeScriptClassDescription(result)
+	result_ := C.C_NSScriptClassDescription_Init(n.Ptr())
+	return MakeScriptClassDescription(result_)
 }
 
 func (n *NSScriptClassDescription) ClassDescriptionForKey(key string) ScriptClassDescription {
-	result := C.C_NSScriptClassDescription_ClassDescriptionForKey(n.Ptr(), NewString(key).Ptr())
-	return MakeScriptClassDescription(result)
+	result_ := C.C_NSScriptClassDescription_ClassDescriptionForKey(n.Ptr(), NewString(key).Ptr())
+	return MakeScriptClassDescription(result_)
 }
 
 func (n *NSScriptClassDescription) IsLocationRequiredToCreateForKey(toManyRelationshipKey string) bool {
-	result := C.C_NSScriptClassDescription_IsLocationRequiredToCreateForKey(n.Ptr(), NewString(toManyRelationshipKey).Ptr())
-	return bool(result)
+	result_ := C.C_NSScriptClassDescription_IsLocationRequiredToCreateForKey(n.Ptr(), NewString(toManyRelationshipKey).Ptr())
+	return bool(result_)
 }
 
 func (n *NSScriptClassDescription) HasOrderedToManyRelationshipForKey(key string) bool {
-	result := C.C_NSScriptClassDescription_HasOrderedToManyRelationshipForKey(n.Ptr(), NewString(key).Ptr())
-	return bool(result)
+	result_ := C.C_NSScriptClassDescription_HasOrderedToManyRelationshipForKey(n.Ptr(), NewString(key).Ptr())
+	return bool(result_)
 }
 
 func (n *NSScriptClassDescription) HasPropertyForKey(key string) bool {
-	result := C.C_NSScriptClassDescription_HasPropertyForKey(n.Ptr(), NewString(key).Ptr())
-	return bool(result)
+	result_ := C.C_NSScriptClassDescription_HasPropertyForKey(n.Ptr(), NewString(key).Ptr())
+	return bool(result_)
 }
 
 func (n *NSScriptClassDescription) HasReadablePropertyForKey(key string) bool {
-	result := C.C_NSScriptClassDescription_HasReadablePropertyForKey(n.Ptr(), NewString(key).Ptr())
-	return bool(result)
+	result_ := C.C_NSScriptClassDescription_HasReadablePropertyForKey(n.Ptr(), NewString(key).Ptr())
+	return bool(result_)
 }
 
 func (n *NSScriptClassDescription) HasWritablePropertyForKey(key string) bool {
-	result := C.C_NSScriptClassDescription_HasWritablePropertyForKey(n.Ptr(), NewString(key).Ptr())
-	return bool(result)
+	result_ := C.C_NSScriptClassDescription_HasWritablePropertyForKey(n.Ptr(), NewString(key).Ptr())
+	return bool(result_)
 }
 
 func (n *NSScriptClassDescription) TypeForKey(key string) string {
-	result := C.C_NSScriptClassDescription_TypeForKey(n.Ptr(), NewString(key).Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSScriptClassDescription_TypeForKey(n.Ptr(), NewString(key).Ptr())
+	return MakeString(result_).String()
 }
 
 func (n *NSScriptClassDescription) SelectorForCommand(commandDescription ScriptCommandDescription) *objc.Selector {
-	result := C.C_NSScriptClassDescription_SelectorForCommand(n.Ptr(), objc.ExtractPtr(commandDescription))
-	return objc.MakeSelector(result)
+	result_ := C.C_NSScriptClassDescription_SelectorForCommand(n.Ptr(), objc.ExtractPtr(commandDescription))
+	return objc.MakeSelector(result_)
 }
 
 func (n *NSScriptClassDescription) SupportsCommand(commandDescription ScriptCommandDescription) bool {
-	result := C.C_NSScriptClassDescription_SupportsCommand(n.Ptr(), objc.ExtractPtr(commandDescription))
-	return bool(result)
+	result_ := C.C_NSScriptClassDescription_SupportsCommand(n.Ptr(), objc.ExtractPtr(commandDescription))
+	return bool(result_)
 }
 
 func (n *NSScriptClassDescription) SuperclassDescription() ScriptClassDescription {
-	result := C.C_NSScriptClassDescription_SuperclassDescription(n.Ptr())
-	return MakeScriptClassDescription(result)
+	result_ := C.C_NSScriptClassDescription_SuperclassDescription(n.Ptr())
+	return MakeScriptClassDescription(result_)
 }
 
 func (n *NSScriptClassDescription) ClassName() string {
-	result := C.C_NSScriptClassDescription_ClassName(n.Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSScriptClassDescription_ClassName(n.Ptr())
+	return MakeString(result_).String()
 }
 
 func (n *NSScriptClassDescription) DefaultSubcontainerAttributeKey() string {
-	result := C.C_NSScriptClassDescription_DefaultSubcontainerAttributeKey(n.Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSScriptClassDescription_DefaultSubcontainerAttributeKey(n.Ptr())
+	return MakeString(result_).String()
 }
 
 func (n *NSScriptClassDescription) ImplementationClassName() string {
-	result := C.C_NSScriptClassDescription_ImplementationClassName(n.Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSScriptClassDescription_ImplementationClassName(n.Ptr())
+	return MakeString(result_).String()
 }
 
 func (n *NSScriptClassDescription) SuiteName() string {
-	result := C.C_NSScriptClassDescription_SuiteName(n.Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSScriptClassDescription_SuiteName(n.Ptr())
+	return MakeString(result_).String()
 }

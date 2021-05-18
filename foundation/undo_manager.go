@@ -40,6 +40,8 @@ type UndoManager interface {
 	RedoActionName() string
 	UndoMenuItemTitle() string
 	RedoMenuItemTitle() string
+	RunLoopModes() []RunLoopMode
+	SetRunLoopModes(value []RunLoopMode)
 	UndoActionIsDiscardable() bool
 	RedoActionIsDiscardable() bool
 }
@@ -62,8 +64,8 @@ func AllocUndoManager() *NSUndoManager {
 }
 
 func (n *NSUndoManager) Init() UndoManager {
-	result := C.C_NSUndoManager_Init(n.Ptr())
-	return MakeUndoManager(result)
+	result_ := C.C_NSUndoManager_Init(n.Ptr())
+	return MakeUndoManager(result_)
 }
 
 func (n *NSUndoManager) RegisterUndoWithTarget_Selector_Object(target objc.Object, selector *objc.Selector, anObject objc.Object) {
@@ -71,8 +73,8 @@ func (n *NSUndoManager) RegisterUndoWithTarget_Selector_Object(target objc.Objec
 }
 
 func (n *NSUndoManager) PrepareWithInvocationTarget(target objc.Object) objc.Object {
-	result := C.C_NSUndoManager_PrepareWithInvocationTarget(n.Ptr(), objc.ExtractPtr(target))
-	return objc.MakeObject(result)
+	result_ := C.C_NSUndoManager_PrepareWithInvocationTarget(n.Ptr(), objc.ExtractPtr(target))
+	return objc.MakeObject(result_)
 }
 
 func (n *NSUndoManager) Undo() {
@@ -116,13 +118,13 @@ func (n *NSUndoManager) SetActionName(actionName string) {
 }
 
 func (n *NSUndoManager) UndoMenuTitleForUndoActionName(actionName string) string {
-	result := C.C_NSUndoManager_UndoMenuTitleForUndoActionName(n.Ptr(), NewString(actionName).Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSUndoManager_UndoMenuTitleForUndoActionName(n.Ptr(), NewString(actionName).Ptr())
+	return MakeString(result_).String()
 }
 
 func (n *NSUndoManager) RedoMenuTitleForUndoActionName(actionName string) string {
-	result := C.C_NSUndoManager_RedoMenuTitleForUndoActionName(n.Ptr(), NewString(actionName).Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSUndoManager_RedoMenuTitleForUndoActionName(n.Ptr(), NewString(actionName).Ptr())
+	return MakeString(result_).String()
 }
 
 func (n *NSUndoManager) SetActionIsDiscardable(discardable bool) {
@@ -130,18 +132,18 @@ func (n *NSUndoManager) SetActionIsDiscardable(discardable bool) {
 }
 
 func (n *NSUndoManager) CanUndo() bool {
-	result := C.C_NSUndoManager_CanUndo(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSUndoManager_CanUndo(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSUndoManager) CanRedo() bool {
-	result := C.C_NSUndoManager_CanRedo(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSUndoManager_CanRedo(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSUndoManager) LevelsOfUndo() uint {
-	result := C.C_NSUndoManager_LevelsOfUndo(n.Ptr())
-	return uint(result)
+	result_ := C.C_NSUndoManager_LevelsOfUndo(n.Ptr())
+	return uint(result_)
 }
 
 func (n *NSUndoManager) SetLevelsOfUndo(value uint) {
@@ -149,8 +151,8 @@ func (n *NSUndoManager) SetLevelsOfUndo(value uint) {
 }
 
 func (n *NSUndoManager) GroupsByEvent() bool {
-	result := C.C_NSUndoManager_GroupsByEvent(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSUndoManager_GroupsByEvent(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSUndoManager) SetGroupsByEvent(value bool) {
@@ -158,51 +160,71 @@ func (n *NSUndoManager) SetGroupsByEvent(value bool) {
 }
 
 func (n *NSUndoManager) GroupingLevel() int {
-	result := C.C_NSUndoManager_GroupingLevel(n.Ptr())
-	return int(result)
+	result_ := C.C_NSUndoManager_GroupingLevel(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSUndoManager) IsUndoRegistrationEnabled() bool {
-	result := C.C_NSUndoManager_IsUndoRegistrationEnabled(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSUndoManager_IsUndoRegistrationEnabled(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSUndoManager) IsUndoing() bool {
-	result := C.C_NSUndoManager_IsUndoing(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSUndoManager_IsUndoing(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSUndoManager) IsRedoing() bool {
-	result := C.C_NSUndoManager_IsRedoing(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSUndoManager_IsRedoing(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSUndoManager) UndoActionName() string {
-	result := C.C_NSUndoManager_UndoActionName(n.Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSUndoManager_UndoActionName(n.Ptr())
+	return MakeString(result_).String()
 }
 
 func (n *NSUndoManager) RedoActionName() string {
-	result := C.C_NSUndoManager_RedoActionName(n.Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSUndoManager_RedoActionName(n.Ptr())
+	return MakeString(result_).String()
 }
 
 func (n *NSUndoManager) UndoMenuItemTitle() string {
-	result := C.C_NSUndoManager_UndoMenuItemTitle(n.Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSUndoManager_UndoMenuItemTitle(n.Ptr())
+	return MakeString(result_).String()
 }
 
 func (n *NSUndoManager) RedoMenuItemTitle() string {
-	result := C.C_NSUndoManager_RedoMenuItemTitle(n.Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSUndoManager_RedoMenuItemTitle(n.Ptr())
+	return MakeString(result_).String()
+}
+
+func (n *NSUndoManager) RunLoopModes() []RunLoopMode {
+	result_ := C.C_NSUndoManager_RunLoopModes(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]RunLoopMode, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = RunLoopMode(MakeString(r).String())
+	}
+	return goResult_
+}
+
+func (n *NSUndoManager) SetRunLoopModes(value []RunLoopMode) {
+	cValueData := make([]unsafe.Pointer, len(value))
+	for idx, v := range value {
+		cValueData[idx] = NewString(string(v)).Ptr()
+	}
+	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
+	C.C_NSUndoManager_SetRunLoopModes(n.Ptr(), cValue)
 }
 
 func (n *NSUndoManager) UndoActionIsDiscardable() bool {
-	result := C.C_NSUndoManager_UndoActionIsDiscardable(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSUndoManager_UndoActionIsDiscardable(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSUndoManager) RedoActionIsDiscardable() bool {
-	result := C.C_NSUndoManager_RedoActionIsDiscardable(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSUndoManager_RedoActionIsDiscardable(n.Ptr())
+	return bool(result_)
 }

@@ -7,14 +7,14 @@ void* C_LayoutManager_Alloc() {
 
 void* C_NSLayoutManager_Init(void* ptr) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSLayoutManager* result = [nSLayoutManager init];
-    return result;
+    NSLayoutManager* result_ = [nSLayoutManager init];
+    return result_;
 }
 
 void* C_NSLayoutManager_InitWithCoder(void* ptr, void* coder) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSLayoutManager* result = [nSLayoutManager initWithCoder:(NSCoder*)coder];
-    return result;
+    NSLayoutManager* result_ = [nSLayoutManager initWithCoder:(NSCoder*)coder];
+    return result_;
 }
 
 void C_NSLayoutManager_ReplaceTextStorage(void* ptr, void* newTextStorage) {
@@ -54,8 +54,8 @@ void C_NSLayoutManager_TextContainerChangedTextView(void* ptr, void* container) 
 
 CGRect C_NSLayoutManager_UsedRectForTextContainer(void* ptr, void* container) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    CGRect result = [nSLayoutManager usedRectForTextContainer:(NSTextContainer*)container];
-    return result;
+    NSRect result_ = [nSLayoutManager usedRectForTextContainer:(NSTextContainer*)container];
+    return result_;
 }
 
 void C_NSLayoutManager_InvalidateDisplayForCharacterRange(void* ptr, NSRange charRange) {
@@ -105,26 +105,26 @@ void C_NSLayoutManager_EnsureLayoutForTextContainer(void* ptr, void* container) 
 
 unsigned int C_NSLayoutManager_CharacterIndexForGlyphAtIndex(void* ptr, unsigned int glyphIndex) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSUInteger result = [nSLayoutManager characterIndexForGlyphAtIndex:glyphIndex];
-    return result;
+    NSUInteger result_ = [nSLayoutManager characterIndexForGlyphAtIndex:glyphIndex];
+    return result_;
 }
 
 unsigned int C_NSLayoutManager_GlyphIndexForCharacterAtIndex(void* ptr, unsigned int charIndex) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSUInteger result = [nSLayoutManager glyphIndexForCharacterAtIndex:charIndex];
-    return result;
+    NSUInteger result_ = [nSLayoutManager glyphIndexForCharacterAtIndex:charIndex];
+    return result_;
 }
 
 bool C_NSLayoutManager_IsValidGlyphIndex(void* ptr, unsigned int glyphIndex) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    BOOL result = [nSLayoutManager isValidGlyphIndex:glyphIndex];
-    return result;
+    BOOL result_ = [nSLayoutManager isValidGlyphIndex:glyphIndex];
+    return result_;
 }
 
 int C_NSLayoutManager_PropertyForGlyphAtIndex(void* ptr, unsigned int glyphIndex) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSGlyphProperty result = [nSLayoutManager propertyForGlyphAtIndex:glyphIndex];
-    return result;
+    NSGlyphProperty result_ = [nSLayoutManager propertyForGlyphAtIndex:glyphIndex];
+    return result_;
 }
 
 void C_NSLayoutManager_SetAttachmentSize_ForGlyphRange(void* ptr, CGSize attachmentSize, NSRange glyphRange) {
@@ -159,86 +159,86 @@ void C_NSLayoutManager_SetNotShownAttribute_ForGlyphAtIndex(void* ptr, bool flag
 
 CGSize C_NSLayoutManager_AttachmentSizeForGlyphAtIndex(void* ptr, unsigned int glyphIndex) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    CGSize result = [nSLayoutManager attachmentSizeForGlyphAtIndex:glyphIndex];
-    return result;
+    NSSize result_ = [nSLayoutManager attachmentSizeForGlyphAtIndex:glyphIndex];
+    return result_;
 }
 
 bool C_NSLayoutManager_DrawsOutsideLineFragmentForGlyphAtIndex(void* ptr, unsigned int glyphIndex) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    BOOL result = [nSLayoutManager drawsOutsideLineFragmentForGlyphAtIndex:glyphIndex];
-    return result;
+    BOOL result_ = [nSLayoutManager drawsOutsideLineFragmentForGlyphAtIndex:glyphIndex];
+    return result_;
 }
 
 unsigned int C_NSLayoutManager_FirstUnlaidCharacterIndex(void* ptr) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSUInteger result = [nSLayoutManager firstUnlaidCharacterIndex];
-    return result;
+    NSUInteger result_ = [nSLayoutManager firstUnlaidCharacterIndex];
+    return result_;
 }
 
 unsigned int C_NSLayoutManager_FirstUnlaidGlyphIndex(void* ptr) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSUInteger result = [nSLayoutManager firstUnlaidGlyphIndex];
-    return result;
+    NSUInteger result_ = [nSLayoutManager firstUnlaidGlyphIndex];
+    return result_;
 }
 
 CGPoint C_NSLayoutManager_LocationForGlyphAtIndex(void* ptr, unsigned int glyphIndex) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    CGPoint result = [nSLayoutManager locationForGlyphAtIndex:glyphIndex];
-    return result;
+    NSPoint result_ = [nSLayoutManager locationForGlyphAtIndex:glyphIndex];
+    return result_;
 }
 
 bool C_NSLayoutManager_NotShownAttributeForGlyphAtIndex(void* ptr, unsigned int glyphIndex) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    BOOL result = [nSLayoutManager notShownAttributeForGlyphAtIndex:glyphIndex];
-    return result;
+    BOOL result_ = [nSLayoutManager notShownAttributeForGlyphAtIndex:glyphIndex];
+    return result_;
 }
 
 NSRange C_NSLayoutManager_TruncatedGlyphRangeInLineFragmentForGlyphAtIndex(void* ptr, unsigned int glyphIndex) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSRange result = [nSLayoutManager truncatedGlyphRangeInLineFragmentForGlyphAtIndex:glyphIndex];
-    return result;
+    NSRange result_ = [nSLayoutManager truncatedGlyphRangeInLineFragmentForGlyphAtIndex:glyphIndex];
+    return result_;
 }
 
 CGRect C_NSLayoutManager_BoundingRectForGlyphRange_InTextContainer(void* ptr, NSRange glyphRange, void* container) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    CGRect result = [nSLayoutManager boundingRectForGlyphRange:glyphRange inTextContainer:(NSTextContainer*)container];
-    return result;
+    NSRect result_ = [nSLayoutManager boundingRectForGlyphRange:glyphRange inTextContainer:(NSTextContainer*)container];
+    return result_;
 }
 
 double C_NSLayoutManager_FractionOfDistanceThroughGlyphForPoint_InTextContainer(void* ptr, CGPoint point, void* container) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    CGFloat result = [nSLayoutManager fractionOfDistanceThroughGlyphForPoint:point inTextContainer:(NSTextContainer*)container];
-    return result;
+    CGFloat result_ = [nSLayoutManager fractionOfDistanceThroughGlyphForPoint:point inTextContainer:(NSTextContainer*)container];
+    return result_;
 }
 
 unsigned int C_NSLayoutManager_GlyphIndexForPoint_InTextContainer(void* ptr, CGPoint point, void* container) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSUInteger result = [nSLayoutManager glyphIndexForPoint:point inTextContainer:(NSTextContainer*)container];
-    return result;
+    NSUInteger result_ = [nSLayoutManager glyphIndexForPoint:point inTextContainer:(NSTextContainer*)container];
+    return result_;
 }
 
 NSRange C_NSLayoutManager_GlyphRangeForBoundingRect_InTextContainer(void* ptr, CGRect bounds, void* container) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSRange result = [nSLayoutManager glyphRangeForBoundingRect:bounds inTextContainer:(NSTextContainer*)container];
-    return result;
+    NSRange result_ = [nSLayoutManager glyphRangeForBoundingRect:bounds inTextContainer:(NSTextContainer*)container];
+    return result_;
 }
 
 NSRange C_NSLayoutManager_GlyphRangeForBoundingRectWithoutAdditionalLayout_InTextContainer(void* ptr, CGRect bounds, void* container) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSRange result = [nSLayoutManager glyphRangeForBoundingRectWithoutAdditionalLayout:bounds inTextContainer:(NSTextContainer*)container];
-    return result;
+    NSRange result_ = [nSLayoutManager glyphRangeForBoundingRectWithoutAdditionalLayout:bounds inTextContainer:(NSTextContainer*)container];
+    return result_;
 }
 
 NSRange C_NSLayoutManager_GlyphRangeForTextContainer(void* ptr, void* container) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSRange result = [nSLayoutManager glyphRangeForTextContainer:(NSTextContainer*)container];
-    return result;
+    NSRange result_ = [nSLayoutManager glyphRangeForTextContainer:(NSTextContainer*)container];
+    return result_;
 }
 
 NSRange C_NSLayoutManager_RangeOfNominallySpacedGlyphsContainingIndex(void* ptr, unsigned int glyphIndex) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSRange result = [nSLayoutManager rangeOfNominallySpacedGlyphsContainingIndex:glyphIndex];
-    return result;
+    NSRange result_ = [nSLayoutManager rangeOfNominallySpacedGlyphsContainingIndex:glyphIndex];
+    return result_;
 }
 
 void C_NSLayoutManager_DrawBackgroundForGlyphRange_AtPoint(void* ptr, NSRange glyphsToShow, CGPoint origin) {
@@ -278,8 +278,8 @@ void C_NSLayoutManager_SetLayoutRect_ForTextBlock_GlyphRange(void* ptr, CGRect r
 
 CGRect C_NSLayoutManager_LayoutRectForTextBlock_GlyphRange(void* ptr, void* block, NSRange glyphRange) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSRect result = [nSLayoutManager layoutRectForTextBlock:(NSTextBlock*)block glyphRange:glyphRange];
-    return result;
+    NSRect result_ = [nSLayoutManager layoutRectForTextBlock:(NSTextBlock*)block glyphRange:glyphRange];
+    return result_;
 }
 
 void C_NSLayoutManager_SetBoundsRect_ForTextBlock_GlyphRange(void* ptr, CGRect rect, void* block, NSRange glyphRange) {
@@ -289,8 +289,8 @@ void C_NSLayoutManager_SetBoundsRect_ForTextBlock_GlyphRange(void* ptr, CGRect r
 
 CGRect C_NSLayoutManager_BoundsRectForTextBlock_GlyphRange(void* ptr, void* block, NSRange glyphRange) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSRect result = [nSLayoutManager boundsRectForTextBlock:(NSTextBlock*)block glyphRange:glyphRange];
-    return result;
+    NSRect result_ = [nSLayoutManager boundsRectForTextBlock:(NSTextBlock*)block glyphRange:glyphRange];
+    return result_;
 }
 
 void C_NSLayoutManager_ShowAttachmentCell_InRect_CharacterIndex(void* ptr, void* cell, CGRect rect, unsigned int attachmentIndex) {
@@ -300,41 +300,41 @@ void C_NSLayoutManager_ShowAttachmentCell_InRect_CharacterIndex(void* ptr, void*
 
 void* C_NSLayoutManager_RulerAccessoryViewForTextView_ParagraphStyle_Ruler_Enabled(void* ptr, void* view, void* style, void* ruler, bool isEnabled) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSView* result = [nSLayoutManager rulerAccessoryViewForTextView:(NSTextView*)view paragraphStyle:(NSParagraphStyle*)style ruler:(NSRulerView*)ruler enabled:isEnabled];
-    return result;
+    NSView* result_ = [nSLayoutManager rulerAccessoryViewForTextView:(NSTextView*)view paragraphStyle:(NSParagraphStyle*)style ruler:(NSRulerView*)ruler enabled:isEnabled];
+    return result_;
 }
 
 Array C_NSLayoutManager_RulerMarkersForTextView_ParagraphStyle_Ruler(void* ptr, void* view, void* style, void* ruler) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSArray* result = [nSLayoutManager rulerMarkersForTextView:(NSTextView*)view paragraphStyle:(NSParagraphStyle*)style ruler:(NSRulerView*)ruler];
-    int resultcount = [result count];
-    void** resultData = malloc(resultcount * sizeof(void*));
-    for (int i = 0; i < resultcount; i++) {
-    	 void* p = [result objectAtIndex:i];
-    	 resultData[i] = p;
+    NSArray* result_ = [nSLayoutManager rulerMarkersForTextView:(NSTextView*)view paragraphStyle:(NSParagraphStyle*)style ruler:(NSRulerView*)ruler];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
     }
-    Array resultArray;
-    resultArray.data = resultData;
-    resultArray.len = resultcount;
-    return resultArray;
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
 }
 
 bool C_NSLayoutManager_LayoutManagerOwnsFirstResponderInWindow(void* ptr, void* window) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    BOOL result = [nSLayoutManager layoutManagerOwnsFirstResponderInWindow:(NSWindow*)window];
-    return result;
+    BOOL result_ = [nSLayoutManager layoutManagerOwnsFirstResponderInWindow:(NSWindow*)window];
+    return result_;
 }
 
 double C_NSLayoutManager_DefaultLineHeightForFont(void* ptr, void* theFont) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    CGFloat result = [nSLayoutManager defaultLineHeightForFont:(NSFont*)theFont];
-    return result;
+    CGFloat result_ = [nSLayoutManager defaultLineHeightForFont:(NSFont*)theFont];
+    return result_;
 }
 
 double C_NSLayoutManager_DefaultBaselineOffsetForFont(void* ptr, void* theFont) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    CGFloat result = [nSLayoutManager defaultBaselineOffsetForFont:(NSFont*)theFont];
-    return result;
+    CGFloat result_ = [nSLayoutManager defaultBaselineOffsetForFont:(NSFont*)theFont];
+    return result_;
 }
 
 void C_NSLayoutManager_AddTemporaryAttribute_Value_ForCharacterRange(void* ptr, void* attrName, void* value, NSRange charRange) {
@@ -347,10 +347,21 @@ void C_NSLayoutManager_RemoveTemporaryAttribute_ForCharacterRange(void* ptr, voi
     [nSLayoutManager removeTemporaryAttribute:(NSString*)attrName forCharacterRange:charRange];
 }
 
+void* C_NSLayoutManager_Delegate(void* ptr) {
+    NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
+    id result_ = [nSLayoutManager delegate];
+    return result_;
+}
+
+void C_NSLayoutManager_SetDelegate(void* ptr, void* value) {
+    NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
+    [nSLayoutManager setDelegate:(id)value];
+}
+
 void* C_NSLayoutManager_TextStorage(void* ptr) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSTextStorage* result = [nSLayoutManager textStorage];
-    return result;
+    NSTextStorage* result_ = [nSLayoutManager textStorage];
+    return result_;
 }
 
 void C_NSLayoutManager_SetTextStorage(void* ptr, void* value) {
@@ -360,8 +371,8 @@ void C_NSLayoutManager_SetTextStorage(void* ptr, void* value) {
 
 bool C_NSLayoutManager_AllowsNonContiguousLayout(void* ptr) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    BOOL result = [nSLayoutManager allowsNonContiguousLayout];
-    return result;
+    BOOL result_ = [nSLayoutManager allowsNonContiguousLayout];
+    return result_;
 }
 
 void C_NSLayoutManager_SetAllowsNonContiguousLayout(void* ptr, bool value) {
@@ -371,14 +382,14 @@ void C_NSLayoutManager_SetAllowsNonContiguousLayout(void* ptr, bool value) {
 
 bool C_NSLayoutManager_HasNonContiguousLayout(void* ptr) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    BOOL result = [nSLayoutManager hasNonContiguousLayout];
-    return result;
+    BOOL result_ = [nSLayoutManager hasNonContiguousLayout];
+    return result_;
 }
 
 bool C_NSLayoutManager_ShowsInvisibleCharacters(void* ptr) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    BOOL result = [nSLayoutManager showsInvisibleCharacters];
-    return result;
+    BOOL result_ = [nSLayoutManager showsInvisibleCharacters];
+    return result_;
 }
 
 void C_NSLayoutManager_SetShowsInvisibleCharacters(void* ptr, bool value) {
@@ -388,8 +399,8 @@ void C_NSLayoutManager_SetShowsInvisibleCharacters(void* ptr, bool value) {
 
 bool C_NSLayoutManager_ShowsControlCharacters(void* ptr) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    BOOL result = [nSLayoutManager showsControlCharacters];
-    return result;
+    BOOL result_ = [nSLayoutManager showsControlCharacters];
+    return result_;
 }
 
 void C_NSLayoutManager_SetShowsControlCharacters(void* ptr, bool value) {
@@ -399,8 +410,8 @@ void C_NSLayoutManager_SetShowsControlCharacters(void* ptr, bool value) {
 
 bool C_NSLayoutManager_UsesFontLeading(void* ptr) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    BOOL result = [nSLayoutManager usesFontLeading];
-    return result;
+    BOOL result_ = [nSLayoutManager usesFontLeading];
+    return result_;
 }
 
 void C_NSLayoutManager_SetUsesFontLeading(void* ptr, bool value) {
@@ -410,8 +421,8 @@ void C_NSLayoutManager_SetUsesFontLeading(void* ptr, bool value) {
 
 bool C_NSLayoutManager_BackgroundLayoutEnabled(void* ptr) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    BOOL result = [nSLayoutManager backgroundLayoutEnabled];
-    return result;
+    BOOL result_ = [nSLayoutManager backgroundLayoutEnabled];
+    return result_;
 }
 
 void C_NSLayoutManager_SetBackgroundLayoutEnabled(void* ptr, bool value) {
@@ -421,8 +432,8 @@ void C_NSLayoutManager_SetBackgroundLayoutEnabled(void* ptr, bool value) {
 
 bool C_NSLayoutManager_LimitsLayoutForSuspiciousContents(void* ptr) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    BOOL result = [nSLayoutManager limitsLayoutForSuspiciousContents];
-    return result;
+    BOOL result_ = [nSLayoutManager limitsLayoutForSuspiciousContents];
+    return result_;
 }
 
 void C_NSLayoutManager_SetLimitsLayoutForSuspiciousContents(void* ptr, bool value) {
@@ -432,8 +443,8 @@ void C_NSLayoutManager_SetLimitsLayoutForSuspiciousContents(void* ptr, bool valu
 
 bool C_NSLayoutManager_UsesDefaultHyphenation(void* ptr) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    BOOL result = [nSLayoutManager usesDefaultHyphenation];
-    return result;
+    BOOL result_ = [nSLayoutManager usesDefaultHyphenation];
+    return result_;
 }
 
 void C_NSLayoutManager_SetUsesDefaultHyphenation(void* ptr, bool value) {
@@ -443,23 +454,23 @@ void C_NSLayoutManager_SetUsesDefaultHyphenation(void* ptr, bool value) {
 
 Array C_NSLayoutManager_TextContainers(void* ptr) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSArray* result = [nSLayoutManager textContainers];
-    int resultcount = [result count];
-    void** resultData = malloc(resultcount * sizeof(void*));
-    for (int i = 0; i < resultcount; i++) {
-    	 void* p = [result objectAtIndex:i];
-    	 resultData[i] = p;
+    NSArray* result_ = [nSLayoutManager textContainers];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
     }
-    Array resultArray;
-    resultArray.data = resultData;
-    resultArray.len = resultcount;
-    return resultArray;
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
 }
 
 void* C_NSLayoutManager_GlyphGenerator(void* ptr) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSGlyphGenerator* result = [nSLayoutManager glyphGenerator];
-    return result;
+    NSGlyphGenerator* result_ = [nSLayoutManager glyphGenerator];
+    return result_;
 }
 
 void C_NSLayoutManager_SetGlyphGenerator(void* ptr, void* value) {
@@ -469,32 +480,32 @@ void C_NSLayoutManager_SetGlyphGenerator(void* ptr, void* value) {
 
 unsigned int C_NSLayoutManager_NumberOfGlyphs(void* ptr) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSUInteger result = [nSLayoutManager numberOfGlyphs];
-    return result;
+    NSUInteger result_ = [nSLayoutManager numberOfGlyphs];
+    return result_;
 }
 
 CGRect C_NSLayoutManager_ExtraLineFragmentRect(void* ptr) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    CGRect result = [nSLayoutManager extraLineFragmentRect];
-    return result;
+    NSRect result_ = [nSLayoutManager extraLineFragmentRect];
+    return result_;
 }
 
 void* C_NSLayoutManager_ExtraLineFragmentTextContainer(void* ptr) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSTextContainer* result = [nSLayoutManager extraLineFragmentTextContainer];
-    return result;
+    NSTextContainer* result_ = [nSLayoutManager extraLineFragmentTextContainer];
+    return result_;
 }
 
 CGRect C_NSLayoutManager_ExtraLineFragmentUsedRect(void* ptr) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    CGRect result = [nSLayoutManager extraLineFragmentUsedRect];
-    return result;
+    NSRect result_ = [nSLayoutManager extraLineFragmentUsedRect];
+    return result_;
 }
 
 unsigned int C_NSLayoutManager_DefaultAttachmentScaling(void* ptr) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSImageScaling result = [nSLayoutManager defaultAttachmentScaling];
-    return result;
+    NSImageScaling result_ = [nSLayoutManager defaultAttachmentScaling];
+    return result_;
 }
 
 void C_NSLayoutManager_SetDefaultAttachmentScaling(void* ptr, unsigned int value) {
@@ -504,20 +515,20 @@ void C_NSLayoutManager_SetDefaultAttachmentScaling(void* ptr, unsigned int value
 
 void* C_NSLayoutManager_FirstTextView(void* ptr) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSTextView* result = [nSLayoutManager firstTextView];
-    return result;
+    NSTextView* result_ = [nSLayoutManager firstTextView];
+    return result_;
 }
 
 void* C_NSLayoutManager_TextViewForBeginningOfSelection(void* ptr) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSTextView* result = [nSLayoutManager textViewForBeginningOfSelection];
-    return result;
+    NSTextView* result_ = [nSLayoutManager textViewForBeginningOfSelection];
+    return result_;
 }
 
 void* C_NSLayoutManager_Typesetter(void* ptr) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSTypesetter* result = [nSLayoutManager typesetter];
-    return result;
+    NSTypesetter* result_ = [nSLayoutManager typesetter];
+    return result_;
 }
 
 void C_NSLayoutManager_SetTypesetter(void* ptr, void* value) {
@@ -527,8 +538,8 @@ void C_NSLayoutManager_SetTypesetter(void* ptr, void* value) {
 
 int C_NSLayoutManager_TypesetterBehavior(void* ptr) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSTypesetterBehavior result = [nSLayoutManager typesetterBehavior];
-    return result;
+    NSTypesetterBehavior result_ = [nSLayoutManager typesetterBehavior];
+    return result_;
 }
 
 void C_NSLayoutManager_SetTypesetterBehavior(void* ptr, int value) {

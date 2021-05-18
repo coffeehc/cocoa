@@ -22,7 +22,7 @@ Array C_NSParagraphStyle_TabStops(void* ptr);
 double C_NSParagraphStyle_DefaultTabInterval(void* ptr);
 Array C_NSParagraphStyle_TextBlocks(void* ptr);
 Array C_NSParagraphStyle_TextLists(void* ptr);
-int C_NSParagraphStyle_LineBreakMode(void* ptr);
+unsigned int C_NSParagraphStyle_LineBreakMode(void* ptr);
 unsigned int C_NSParagraphStyle_LineBreakStrategy(void* ptr);
 float C_NSParagraphStyle_HyphenationFactor(void* ptr);
 float C_NSParagraphStyle_TighteningFactorForTruncation(void* ptr);

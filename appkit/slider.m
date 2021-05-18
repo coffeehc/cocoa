@@ -7,60 +7,60 @@ void* C_Slider_Alloc() {
 
 void* C_NSSlider_InitWithFrame(void* ptr, CGRect frameRect) {
     NSSlider* nSSlider = (NSSlider*)ptr;
-    NSSlider* result = [nSSlider initWithFrame:frameRect];
-    return result;
+    NSSlider* result_ = [nSSlider initWithFrame:frameRect];
+    return result_;
 }
 
 void* C_NSSlider_InitWithCoder(void* ptr, void* coder) {
     NSSlider* nSSlider = (NSSlider*)ptr;
-    NSSlider* result = [nSSlider initWithCoder:(NSCoder*)coder];
-    return result;
+    NSSlider* result_ = [nSSlider initWithCoder:(NSCoder*)coder];
+    return result_;
 }
 
 void* C_NSSlider_Init(void* ptr) {
     NSSlider* nSSlider = (NSSlider*)ptr;
-    NSSlider* result = [nSSlider init];
-    return result;
+    NSSlider* result_ = [nSSlider init];
+    return result_;
 }
 
 void* C_NSSlider_SliderWithTarget_Action(void* target, void* action) {
-    NSSlider* result = [NSSlider sliderWithTarget:(id)target action:(SEL)action];
-    return result;
+    NSSlider* result_ = [NSSlider sliderWithTarget:(id)target action:(SEL)action];
+    return result_;
 }
 
 void* C_NSSlider_SliderWithValue_MinValue_MaxValue_Target_Action(double value, double minValue, double maxValue, void* target, void* action) {
-    NSSlider* result = [NSSlider sliderWithValue:value minValue:minValue maxValue:maxValue target:(id)target action:(SEL)action];
-    return result;
+    NSSlider* result_ = [NSSlider sliderWithValue:value minValue:minValue maxValue:maxValue target:(id)target action:(SEL)action];
+    return result_;
 }
 
 double C_NSSlider_ClosestTickMarkValueToValue(void* ptr, double value) {
     NSSlider* nSSlider = (NSSlider*)ptr;
-    double result = [nSSlider closestTickMarkValueToValue:value];
-    return result;
+    double result_ = [nSSlider closestTickMarkValueToValue:value];
+    return result_;
 }
 
 int C_NSSlider_IndexOfTickMarkAtPoint(void* ptr, CGPoint point) {
     NSSlider* nSSlider = (NSSlider*)ptr;
-    NSInteger result = [nSSlider indexOfTickMarkAtPoint:point];
-    return result;
+    NSInteger result_ = [nSSlider indexOfTickMarkAtPoint:point];
+    return result_;
 }
 
 CGRect C_NSSlider_RectOfTickMarkAtIndex(void* ptr, int index) {
     NSSlider* nSSlider = (NSSlider*)ptr;
-    NSRect result = [nSSlider rectOfTickMarkAtIndex:index];
-    return result;
+    NSRect result_ = [nSSlider rectOfTickMarkAtIndex:index];
+    return result_;
 }
 
 double C_NSSlider_TickMarkValueAtIndex(void* ptr, int index) {
     NSSlider* nSSlider = (NSSlider*)ptr;
-    double result = [nSSlider tickMarkValueAtIndex:index];
-    return result;
+    double result_ = [nSSlider tickMarkValueAtIndex:index];
+    return result_;
 }
 
 unsigned int C_NSSlider_SliderType(void* ptr) {
     NSSlider* nSSlider = (NSSlider*)ptr;
-    NSSliderType result = [nSSlider sliderType];
-    return result;
+    NSSliderType result_ = [nSSlider sliderType];
+    return result_;
 }
 
 void C_NSSlider_SetSliderType(void* ptr, unsigned int value) {
@@ -70,8 +70,8 @@ void C_NSSlider_SetSliderType(void* ptr, unsigned int value) {
 
 double C_NSSlider_AltIncrementValue(void* ptr) {
     NSSlider* nSSlider = (NSSlider*)ptr;
-    double result = [nSSlider altIncrementValue];
-    return result;
+    double result_ = [nSSlider altIncrementValue];
+    return result_;
 }
 
 void C_NSSlider_SetAltIncrementValue(void* ptr, double value) {
@@ -81,14 +81,14 @@ void C_NSSlider_SetAltIncrementValue(void* ptr, double value) {
 
 double C_NSSlider_KnobThickness(void* ptr) {
     NSSlider* nSSlider = (NSSlider*)ptr;
-    CGFloat result = [nSSlider knobThickness];
-    return result;
+    CGFloat result_ = [nSSlider knobThickness];
+    return result_;
 }
 
 bool C_NSSlider_IsVertical(void* ptr) {
     NSSlider* nSSlider = (NSSlider*)ptr;
-    BOOL result = [nSSlider isVertical];
-    return result;
+    BOOL result_ = [nSSlider isVertical];
+    return result_;
 }
 
 void C_NSSlider_SetVertical(void* ptr, bool value) {
@@ -98,8 +98,8 @@ void C_NSSlider_SetVertical(void* ptr, bool value) {
 
 void* C_NSSlider_TrackFillColor(void* ptr) {
     NSSlider* nSSlider = (NSSlider*)ptr;
-    NSColor* result = [nSSlider trackFillColor];
-    return result;
+    NSColor* result_ = [nSSlider trackFillColor];
+    return result_;
 }
 
 void C_NSSlider_SetTrackFillColor(void* ptr, void* value) {
@@ -109,8 +109,8 @@ void C_NSSlider_SetTrackFillColor(void* ptr, void* value) {
 
 double C_NSSlider_MaxValue(void* ptr) {
     NSSlider* nSSlider = (NSSlider*)ptr;
-    double result = [nSSlider maxValue];
-    return result;
+    double result_ = [nSSlider maxValue];
+    return result_;
 }
 
 void C_NSSlider_SetMaxValue(void* ptr, double value) {
@@ -120,8 +120,8 @@ void C_NSSlider_SetMaxValue(void* ptr, double value) {
 
 double C_NSSlider_MinValue(void* ptr) {
     NSSlider* nSSlider = (NSSlider*)ptr;
-    double result = [nSSlider minValue];
-    return result;
+    double result_ = [nSSlider minValue];
+    return result_;
 }
 
 void C_NSSlider_SetMinValue(void* ptr, double value) {
@@ -131,8 +131,8 @@ void C_NSSlider_SetMinValue(void* ptr, double value) {
 
 bool C_NSSlider_AllowsTickMarkValuesOnly(void* ptr) {
     NSSlider* nSSlider = (NSSlider*)ptr;
-    BOOL result = [nSSlider allowsTickMarkValuesOnly];
-    return result;
+    BOOL result_ = [nSSlider allowsTickMarkValuesOnly];
+    return result_;
 }
 
 void C_NSSlider_SetAllowsTickMarkValuesOnly(void* ptr, bool value) {
@@ -142,8 +142,8 @@ void C_NSSlider_SetAllowsTickMarkValuesOnly(void* ptr, bool value) {
 
 int C_NSSlider_NumberOfTickMarks(void* ptr) {
     NSSlider* nSSlider = (NSSlider*)ptr;
-    NSInteger result = [nSSlider numberOfTickMarks];
-    return result;
+    NSInteger result_ = [nSSlider numberOfTickMarks];
+    return result_;
 }
 
 void C_NSSlider_SetNumberOfTickMarks(void* ptr, int value) {
@@ -153,8 +153,8 @@ void C_NSSlider_SetNumberOfTickMarks(void* ptr, int value) {
 
 unsigned int C_NSSlider_TickMarkPosition(void* ptr) {
     NSSlider* nSSlider = (NSSlider*)ptr;
-    NSTickMarkPosition result = [nSSlider tickMarkPosition];
-    return result;
+    NSTickMarkPosition result_ = [nSSlider tickMarkPosition];
+    return result_;
 }
 
 void C_NSSlider_SetTickMarkPosition(void* ptr, unsigned int value) {

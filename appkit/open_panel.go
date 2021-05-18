@@ -48,28 +48,28 @@ func AllocOpenPanel() *NSOpenPanel {
 }
 
 func (n *NSOpenPanel) InitWithContentRect_StyleMask_Backing_Defer(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool) OpenPanel {
-	result := C.C_NSOpenPanel_InitWithContentRect_StyleMask_Backing_Defer(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag))
-	return MakeOpenPanel(result)
+	result_ := C.C_NSOpenPanel_InitWithContentRect_StyleMask_Backing_Defer(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag))
+	return MakeOpenPanel(result_)
 }
 
 func (n *NSOpenPanel) InitWithContentRect_StyleMask_Backing_Defer_Screen(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool, screen Screen) OpenPanel {
-	result := C.C_NSOpenPanel_InitWithContentRect_StyleMask_Backing_Defer_Screen(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag), objc.ExtractPtr(screen))
-	return MakeOpenPanel(result)
+	result_ := C.C_NSOpenPanel_InitWithContentRect_StyleMask_Backing_Defer_Screen(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag), objc.ExtractPtr(screen))
+	return MakeOpenPanel(result_)
 }
 
 func (n *NSOpenPanel) Init() OpenPanel {
-	result := C.C_NSOpenPanel_Init(n.Ptr())
-	return MakeOpenPanel(result)
+	result_ := C.C_NSOpenPanel_Init(n.Ptr())
+	return MakeOpenPanel(result_)
 }
 
 func OpenPanel_() OpenPanel {
-	result := C.C_NSOpenPanel_OpenPanel_()
-	return MakeOpenPanel(result)
+	result_ := C.C_NSOpenPanel_OpenPanel_()
+	return MakeOpenPanel(result_)
 }
 
 func (n *NSOpenPanel) CanChooseFiles() bool {
-	result := C.C_NSOpenPanel_CanChooseFiles(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSOpenPanel_CanChooseFiles(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSOpenPanel) SetCanChooseFiles(value bool) {
@@ -77,8 +77,8 @@ func (n *NSOpenPanel) SetCanChooseFiles(value bool) {
 }
 
 func (n *NSOpenPanel) CanChooseDirectories() bool {
-	result := C.C_NSOpenPanel_CanChooseDirectories(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSOpenPanel_CanChooseDirectories(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSOpenPanel) SetCanChooseDirectories(value bool) {
@@ -86,8 +86,8 @@ func (n *NSOpenPanel) SetCanChooseDirectories(value bool) {
 }
 
 func (n *NSOpenPanel) ResolvesAliases() bool {
-	result := C.C_NSOpenPanel_ResolvesAliases(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSOpenPanel_ResolvesAliases(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSOpenPanel) SetResolvesAliases(value bool) {
@@ -95,8 +95,8 @@ func (n *NSOpenPanel) SetResolvesAliases(value bool) {
 }
 
 func (n *NSOpenPanel) AllowsMultipleSelection() bool {
-	result := C.C_NSOpenPanel_AllowsMultipleSelection(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSOpenPanel_AllowsMultipleSelection(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSOpenPanel) SetAllowsMultipleSelection(value bool) {
@@ -104,8 +104,8 @@ func (n *NSOpenPanel) SetAllowsMultipleSelection(value bool) {
 }
 
 func (n *NSOpenPanel) IsAccessoryViewDisclosed() bool {
-	result := C.C_NSOpenPanel_IsAccessoryViewDisclosed(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSOpenPanel_IsAccessoryViewDisclosed(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSOpenPanel) SetAccessoryViewDisclosed(value bool) {
@@ -113,19 +113,19 @@ func (n *NSOpenPanel) SetAccessoryViewDisclosed(value bool) {
 }
 
 func (n *NSOpenPanel) URLs() []foundation.URL {
-	result := C.C_NSOpenPanel_URLs(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]foundation.URL, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = foundation.MakeURL(r)
+	result_ := C.C_NSOpenPanel_URLs(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]foundation.URL, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = foundation.MakeURL(r)
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSOpenPanel) CanDownloadUbiquitousContents() bool {
-	result := C.C_NSOpenPanel_CanDownloadUbiquitousContents(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSOpenPanel_CanDownloadUbiquitousContents(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSOpenPanel) SetCanDownloadUbiquitousContents(value bool) {
@@ -133,8 +133,8 @@ func (n *NSOpenPanel) SetCanDownloadUbiquitousContents(value bool) {
 }
 
 func (n *NSOpenPanel) CanResolveUbiquitousConflicts() bool {
-	result := C.C_NSOpenPanel_CanResolveUbiquitousConflicts(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSOpenPanel_CanResolveUbiquitousConflicts(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSOpenPanel) SetCanResolveUbiquitousConflicts(value bool) {

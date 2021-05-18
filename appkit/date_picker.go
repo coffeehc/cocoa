@@ -27,6 +27,8 @@ type DatePicker interface {
 	SetDatePickerStyle(value DatePickerStyle)
 	PresentsCalendarOverlay() bool
 	SetPresentsCalendarOverlay(value bool)
+	Delegate() objc.Object
+	SetDelegate(value objc.Object)
 	DatePickerElements() DatePickerElementFlags
 	SetDatePickerElements(value DatePickerElementFlags)
 	Calendar() foundation.Calendar
@@ -65,23 +67,23 @@ func AllocDatePicker() *NSDatePicker {
 }
 
 func (n *NSDatePicker) InitWithFrame(frameRect foundation.Rect) DatePicker {
-	result := C.C_NSDatePicker_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
-	return MakeDatePicker(result)
+	result_ := C.C_NSDatePicker_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeDatePicker(result_)
 }
 
 func (n *NSDatePicker) InitWithCoder(coder foundation.Coder) DatePicker {
-	result := C.C_NSDatePicker_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeDatePicker(result)
+	result_ := C.C_NSDatePicker_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeDatePicker(result_)
 }
 
 func (n *NSDatePicker) Init() DatePicker {
-	result := C.C_NSDatePicker_Init(n.Ptr())
-	return MakeDatePicker(result)
+	result_ := C.C_NSDatePicker_Init(n.Ptr())
+	return MakeDatePicker(result_)
 }
 
 func (n *NSDatePicker) IsBezeled() bool {
-	result := C.C_NSDatePicker_IsBezeled(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSDatePicker_IsBezeled(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSDatePicker) SetBezeled(value bool) {
@@ -89,8 +91,8 @@ func (n *NSDatePicker) SetBezeled(value bool) {
 }
 
 func (n *NSDatePicker) IsBordered() bool {
-	result := C.C_NSDatePicker_IsBordered(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSDatePicker_IsBordered(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSDatePicker) SetBordered(value bool) {
@@ -98,8 +100,8 @@ func (n *NSDatePicker) SetBordered(value bool) {
 }
 
 func (n *NSDatePicker) BackgroundColor() Color {
-	result := C.C_NSDatePicker_BackgroundColor(n.Ptr())
-	return MakeColor(result)
+	result_ := C.C_NSDatePicker_BackgroundColor(n.Ptr())
+	return MakeColor(result_)
 }
 
 func (n *NSDatePicker) SetBackgroundColor(value Color) {
@@ -107,8 +109,8 @@ func (n *NSDatePicker) SetBackgroundColor(value Color) {
 }
 
 func (n *NSDatePicker) DrawsBackground() bool {
-	result := C.C_NSDatePicker_DrawsBackground(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSDatePicker_DrawsBackground(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSDatePicker) SetDrawsBackground(value bool) {
@@ -116,8 +118,8 @@ func (n *NSDatePicker) SetDrawsBackground(value bool) {
 }
 
 func (n *NSDatePicker) TextColor() Color {
-	result := C.C_NSDatePicker_TextColor(n.Ptr())
-	return MakeColor(result)
+	result_ := C.C_NSDatePicker_TextColor(n.Ptr())
+	return MakeColor(result_)
 }
 
 func (n *NSDatePicker) SetTextColor(value Color) {
@@ -125,8 +127,8 @@ func (n *NSDatePicker) SetTextColor(value Color) {
 }
 
 func (n *NSDatePicker) DatePickerStyle() DatePickerStyle {
-	result := C.C_NSDatePicker_DatePickerStyle(n.Ptr())
-	return DatePickerStyle(uint(result))
+	result_ := C.C_NSDatePicker_DatePickerStyle(n.Ptr())
+	return DatePickerStyle(uint(result_))
 }
 
 func (n *NSDatePicker) SetDatePickerStyle(value DatePickerStyle) {
@@ -134,17 +136,26 @@ func (n *NSDatePicker) SetDatePickerStyle(value DatePickerStyle) {
 }
 
 func (n *NSDatePicker) PresentsCalendarOverlay() bool {
-	result := C.C_NSDatePicker_PresentsCalendarOverlay(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSDatePicker_PresentsCalendarOverlay(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSDatePicker) SetPresentsCalendarOverlay(value bool) {
 	C.C_NSDatePicker_SetPresentsCalendarOverlay(n.Ptr(), C.bool(value))
 }
 
+func (n *NSDatePicker) Delegate() objc.Object {
+	result_ := C.C_NSDatePicker_Delegate(n.Ptr())
+	return objc.MakeObject(result_)
+}
+
+func (n *NSDatePicker) SetDelegate(value objc.Object) {
+	C.C_NSDatePicker_SetDelegate(n.Ptr(), objc.ExtractPtr(value))
+}
+
 func (n *NSDatePicker) DatePickerElements() DatePickerElementFlags {
-	result := C.C_NSDatePicker_DatePickerElements(n.Ptr())
-	return DatePickerElementFlags(uint(result))
+	result_ := C.C_NSDatePicker_DatePickerElements(n.Ptr())
+	return DatePickerElementFlags(uint(result_))
 }
 
 func (n *NSDatePicker) SetDatePickerElements(value DatePickerElementFlags) {
@@ -152,8 +163,8 @@ func (n *NSDatePicker) SetDatePickerElements(value DatePickerElementFlags) {
 }
 
 func (n *NSDatePicker) Calendar() foundation.Calendar {
-	result := C.C_NSDatePicker_Calendar(n.Ptr())
-	return foundation.MakeCalendar(result)
+	result_ := C.C_NSDatePicker_Calendar(n.Ptr())
+	return foundation.MakeCalendar(result_)
 }
 
 func (n *NSDatePicker) SetCalendar(value foundation.Calendar) {
@@ -161,8 +172,8 @@ func (n *NSDatePicker) SetCalendar(value foundation.Calendar) {
 }
 
 func (n *NSDatePicker) Locale() foundation.Locale {
-	result := C.C_NSDatePicker_Locale(n.Ptr())
-	return foundation.MakeLocale(result)
+	result_ := C.C_NSDatePicker_Locale(n.Ptr())
+	return foundation.MakeLocale(result_)
 }
 
 func (n *NSDatePicker) SetLocale(value foundation.Locale) {
@@ -170,8 +181,8 @@ func (n *NSDatePicker) SetLocale(value foundation.Locale) {
 }
 
 func (n *NSDatePicker) DatePickerMode() DatePickerMode {
-	result := C.C_NSDatePicker_DatePickerMode(n.Ptr())
-	return DatePickerMode(uint(result))
+	result_ := C.C_NSDatePicker_DatePickerMode(n.Ptr())
+	return DatePickerMode(uint(result_))
 }
 
 func (n *NSDatePicker) SetDatePickerMode(value DatePickerMode) {
@@ -179,8 +190,8 @@ func (n *NSDatePicker) SetDatePickerMode(value DatePickerMode) {
 }
 
 func (n *NSDatePicker) TimeZone() foundation.TimeZone {
-	result := C.C_NSDatePicker_TimeZone(n.Ptr())
-	return foundation.MakeTimeZone(result)
+	result_ := C.C_NSDatePicker_TimeZone(n.Ptr())
+	return foundation.MakeTimeZone(result_)
 }
 
 func (n *NSDatePicker) SetTimeZone(value foundation.TimeZone) {
@@ -188,8 +199,8 @@ func (n *NSDatePicker) SetTimeZone(value foundation.TimeZone) {
 }
 
 func (n *NSDatePicker) DateValue() foundation.Date {
-	result := C.C_NSDatePicker_DateValue(n.Ptr())
-	return foundation.MakeDate(result)
+	result_ := C.C_NSDatePicker_DateValue(n.Ptr())
+	return foundation.MakeDate(result_)
 }
 
 func (n *NSDatePicker) SetDateValue(value foundation.Date) {
@@ -197,8 +208,8 @@ func (n *NSDatePicker) SetDateValue(value foundation.Date) {
 }
 
 func (n *NSDatePicker) TimeInterval() foundation.TimeInterval {
-	result := C.C_NSDatePicker_TimeInterval(n.Ptr())
-	return foundation.TimeInterval(float64(result))
+	result_ := C.C_NSDatePicker_TimeInterval(n.Ptr())
+	return foundation.TimeInterval(float64(result_))
 }
 
 func (n *NSDatePicker) SetTimeInterval(value foundation.TimeInterval) {
@@ -206,8 +217,8 @@ func (n *NSDatePicker) SetTimeInterval(value foundation.TimeInterval) {
 }
 
 func (n *NSDatePicker) MinDate() foundation.Date {
-	result := C.C_NSDatePicker_MinDate(n.Ptr())
-	return foundation.MakeDate(result)
+	result_ := C.C_NSDatePicker_MinDate(n.Ptr())
+	return foundation.MakeDate(result_)
 }
 
 func (n *NSDatePicker) SetMinDate(value foundation.Date) {
@@ -215,8 +226,8 @@ func (n *NSDatePicker) SetMinDate(value foundation.Date) {
 }
 
 func (n *NSDatePicker) MaxDate() foundation.Date {
-	result := C.C_NSDatePicker_MaxDate(n.Ptr())
-	return foundation.MakeDate(result)
+	result_ := C.C_NSDatePicker_MaxDate(n.Ptr())
+	return foundation.MakeDate(result_)
 }
 
 func (n *NSDatePicker) SetMaxDate(value foundation.Date) {

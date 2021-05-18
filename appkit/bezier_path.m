@@ -7,28 +7,28 @@ void* C_BezierPath_Alloc() {
 
 void* C_NSBezierPath_Init(void* ptr) {
     NSBezierPath* nSBezierPath = (NSBezierPath*)ptr;
-    NSBezierPath* result = [nSBezierPath init];
-    return result;
+    NSBezierPath* result_ = [nSBezierPath init];
+    return result_;
 }
 
 void* C_NSBezierPath_BezierPath_() {
-    NSBezierPath* result = [NSBezierPath bezierPath];
-    return result;
+    NSBezierPath* result_ = [NSBezierPath bezierPath];
+    return result_;
 }
 
 void* C_NSBezierPath_BezierPathWithOvalInRect(CGRect rect) {
-    NSBezierPath* result = [NSBezierPath bezierPathWithOvalInRect:rect];
-    return result;
+    NSBezierPath* result_ = [NSBezierPath bezierPathWithOvalInRect:rect];
+    return result_;
 }
 
 void* C_NSBezierPath_BezierPathWithRect(CGRect rect) {
-    NSBezierPath* result = [NSBezierPath bezierPathWithRect:rect];
-    return result;
+    NSBezierPath* result_ = [NSBezierPath bezierPathWithRect:rect];
+    return result_;
 }
 
 void* C_NSBezierPath_BezierPathWithRoundedRect_XRadius_YRadius(CGRect rect, double xRadius, double yRadius) {
-    NSBezierPath* result = [NSBezierPath bezierPathWithRoundedRect:rect xRadius:xRadius yRadius:yRadius];
-    return result;
+    NSBezierPath* result_ = [NSBezierPath bezierPathWithRoundedRect:rect xRadius:xRadius yRadius:yRadius];
+    return result_;
 }
 
 void C_NSBezierPath_MoveToPoint(void* ptr, CGPoint point) {
@@ -139,8 +139,8 @@ void C_NSBezierPath_BezierPath_ClipRect(CGRect rect) {
 
 bool C_NSBezierPath_ContainsPoint(void* ptr, CGPoint point) {
     NSBezierPath* nSBezierPath = (NSBezierPath*)ptr;
-    BOOL result = [nSBezierPath containsPoint:point];
-    return result;
+    BOOL result_ = [nSBezierPath containsPoint:point];
+    return result_;
 }
 
 void C_NSBezierPath_TransformUsingAffineTransform(void* ptr, void* transform) {
@@ -150,8 +150,8 @@ void C_NSBezierPath_TransformUsingAffineTransform(void* ptr, void* transform) {
 
 unsigned int C_NSBezierPath_ElementAtIndex(void* ptr, int index) {
     NSBezierPath* nSBezierPath = (NSBezierPath*)ptr;
-    NSBezierPathElement result = [nSBezierPath elementAtIndex:index];
-    return result;
+    NSBezierPathElement result_ = [nSBezierPath elementAtIndex:index];
+    return result_;
 }
 
 void C_NSBezierPath_RemoveAllPoints(void* ptr) {
@@ -161,20 +161,20 @@ void C_NSBezierPath_RemoveAllPoints(void* ptr) {
 
 void* C_NSBezierPath_BezierPathByFlatteningPath(void* ptr) {
     NSBezierPath* nSBezierPath = (NSBezierPath*)ptr;
-    NSBezierPath* result = [nSBezierPath bezierPathByFlatteningPath];
-    return result;
+    NSBezierPath* result_ = [nSBezierPath bezierPathByFlatteningPath];
+    return result_;
 }
 
 void* C_NSBezierPath_BezierPathByReversingPath(void* ptr) {
     NSBezierPath* nSBezierPath = (NSBezierPath*)ptr;
-    NSBezierPath* result = [nSBezierPath bezierPathByReversingPath];
-    return result;
+    NSBezierPath* result_ = [nSBezierPath bezierPathByReversingPath];
+    return result_;
 }
 
 unsigned int C_NSBezierPath_WindingRule(void* ptr) {
     NSBezierPath* nSBezierPath = (NSBezierPath*)ptr;
-    NSWindingRule result = [nSBezierPath windingRule];
-    return result;
+    NSWindingRule result_ = [nSBezierPath windingRule];
+    return result_;
 }
 
 void C_NSBezierPath_SetWindingRule(void* ptr, unsigned int value) {
@@ -184,8 +184,8 @@ void C_NSBezierPath_SetWindingRule(void* ptr, unsigned int value) {
 
 unsigned int C_NSBezierPath_LineCapStyle(void* ptr) {
     NSBezierPath* nSBezierPath = (NSBezierPath*)ptr;
-    NSLineCapStyle result = [nSBezierPath lineCapStyle];
-    return result;
+    NSLineCapStyle result_ = [nSBezierPath lineCapStyle];
+    return result_;
 }
 
 void C_NSBezierPath_SetLineCapStyle(void* ptr, unsigned int value) {
@@ -195,8 +195,8 @@ void C_NSBezierPath_SetLineCapStyle(void* ptr, unsigned int value) {
 
 unsigned int C_NSBezierPath_LineJoinStyle(void* ptr) {
     NSBezierPath* nSBezierPath = (NSBezierPath*)ptr;
-    NSLineJoinStyle result = [nSBezierPath lineJoinStyle];
-    return result;
+    NSLineJoinStyle result_ = [nSBezierPath lineJoinStyle];
+    return result_;
 }
 
 void C_NSBezierPath_SetLineJoinStyle(void* ptr, unsigned int value) {
@@ -206,8 +206,8 @@ void C_NSBezierPath_SetLineJoinStyle(void* ptr, unsigned int value) {
 
 double C_NSBezierPath_LineWidth(void* ptr) {
     NSBezierPath* nSBezierPath = (NSBezierPath*)ptr;
-    CGFloat result = [nSBezierPath lineWidth];
-    return result;
+    CGFloat result_ = [nSBezierPath lineWidth];
+    return result_;
 }
 
 void C_NSBezierPath_SetLineWidth(void* ptr, double value) {
@@ -217,8 +217,8 @@ void C_NSBezierPath_SetLineWidth(void* ptr, double value) {
 
 double C_NSBezierPath_MiterLimit(void* ptr) {
     NSBezierPath* nSBezierPath = (NSBezierPath*)ptr;
-    CGFloat result = [nSBezierPath miterLimit];
-    return result;
+    CGFloat result_ = [nSBezierPath miterLimit];
+    return result_;
 }
 
 void C_NSBezierPath_SetMiterLimit(void* ptr, double value) {
@@ -228,8 +228,8 @@ void C_NSBezierPath_SetMiterLimit(void* ptr, double value) {
 
 double C_NSBezierPath_Flatness(void* ptr) {
     NSBezierPath* nSBezierPath = (NSBezierPath*)ptr;
-    CGFloat result = [nSBezierPath flatness];
-    return result;
+    CGFloat result_ = [nSBezierPath flatness];
+    return result_;
 }
 
 void C_NSBezierPath_SetFlatness(void* ptr, double value) {
@@ -238,8 +238,8 @@ void C_NSBezierPath_SetFlatness(void* ptr, double value) {
 }
 
 unsigned int C_NSBezierPath_BezierPath_DefaultWindingRule() {
-    NSWindingRule result = [NSBezierPath defaultWindingRule];
-    return result;
+    NSWindingRule result_ = [NSBezierPath defaultWindingRule];
+    return result_;
 }
 
 void C_NSBezierPath_BezierPath_SetDefaultWindingRule(unsigned int value) {
@@ -247,8 +247,8 @@ void C_NSBezierPath_BezierPath_SetDefaultWindingRule(unsigned int value) {
 }
 
 unsigned int C_NSBezierPath_BezierPath_DefaultLineCapStyle() {
-    NSLineCapStyle result = [NSBezierPath defaultLineCapStyle];
-    return result;
+    NSLineCapStyle result_ = [NSBezierPath defaultLineCapStyle];
+    return result_;
 }
 
 void C_NSBezierPath_BezierPath_SetDefaultLineCapStyle(unsigned int value) {
@@ -256,8 +256,8 @@ void C_NSBezierPath_BezierPath_SetDefaultLineCapStyle(unsigned int value) {
 }
 
 unsigned int C_NSBezierPath_BezierPath_DefaultLineJoinStyle() {
-    NSLineJoinStyle result = [NSBezierPath defaultLineJoinStyle];
-    return result;
+    NSLineJoinStyle result_ = [NSBezierPath defaultLineJoinStyle];
+    return result_;
 }
 
 void C_NSBezierPath_BezierPath_SetDefaultLineJoinStyle(unsigned int value) {
@@ -265,8 +265,8 @@ void C_NSBezierPath_BezierPath_SetDefaultLineJoinStyle(unsigned int value) {
 }
 
 double C_NSBezierPath_BezierPath_DefaultLineWidth() {
-    CGFloat result = [NSBezierPath defaultLineWidth];
-    return result;
+    CGFloat result_ = [NSBezierPath defaultLineWidth];
+    return result_;
 }
 
 void C_NSBezierPath_BezierPath_SetDefaultLineWidth(double value) {
@@ -274,8 +274,8 @@ void C_NSBezierPath_BezierPath_SetDefaultLineWidth(double value) {
 }
 
 double C_NSBezierPath_BezierPath_DefaultMiterLimit() {
-    CGFloat result = [NSBezierPath defaultMiterLimit];
-    return result;
+    CGFloat result_ = [NSBezierPath defaultMiterLimit];
+    return result_;
 }
 
 void C_NSBezierPath_BezierPath_SetDefaultMiterLimit(double value) {
@@ -283,8 +283,8 @@ void C_NSBezierPath_BezierPath_SetDefaultMiterLimit(double value) {
 }
 
 double C_NSBezierPath_BezierPath_DefaultFlatness() {
-    CGFloat result = [NSBezierPath defaultFlatness];
-    return result;
+    CGFloat result_ = [NSBezierPath defaultFlatness];
+    return result_;
 }
 
 void C_NSBezierPath_BezierPath_SetDefaultFlatness(double value) {
@@ -293,30 +293,30 @@ void C_NSBezierPath_BezierPath_SetDefaultFlatness(double value) {
 
 CGRect C_NSBezierPath_Bounds(void* ptr) {
     NSBezierPath* nSBezierPath = (NSBezierPath*)ptr;
-    NSRect result = [nSBezierPath bounds];
-    return result;
+    NSRect result_ = [nSBezierPath bounds];
+    return result_;
 }
 
 CGRect C_NSBezierPath_ControlPointBounds(void* ptr) {
     NSBezierPath* nSBezierPath = (NSBezierPath*)ptr;
-    NSRect result = [nSBezierPath controlPointBounds];
-    return result;
+    NSRect result_ = [nSBezierPath controlPointBounds];
+    return result_;
 }
 
 CGPoint C_NSBezierPath_CurrentPoint(void* ptr) {
     NSBezierPath* nSBezierPath = (NSBezierPath*)ptr;
-    NSPoint result = [nSBezierPath currentPoint];
-    return result;
+    NSPoint result_ = [nSBezierPath currentPoint];
+    return result_;
 }
 
 bool C_NSBezierPath_IsEmpty(void* ptr) {
     NSBezierPath* nSBezierPath = (NSBezierPath*)ptr;
-    BOOL result = [nSBezierPath isEmpty];
-    return result;
+    BOOL result_ = [nSBezierPath isEmpty];
+    return result_;
 }
 
 int C_NSBezierPath_ElementCount(void* ptr) {
     NSBezierPath* nSBezierPath = (NSBezierPath*)ptr;
-    NSInteger result = [nSBezierPath elementCount];
-    return result;
+    NSInteger result_ = [nSBezierPath elementCount];
+    return result_;
 }

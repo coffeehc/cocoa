@@ -36,26 +36,26 @@ func AllocLayoutYAxisAnchor() *NSLayoutYAxisAnchor {
 }
 
 func (n *NSLayoutYAxisAnchor) Init() LayoutYAxisAnchor {
-	result := C.C_NSLayoutYAxisAnchor_Init(n.Ptr())
-	return MakeLayoutYAxisAnchor(result)
+	result_ := C.C_NSLayoutYAxisAnchor_Init(n.Ptr())
+	return MakeLayoutYAxisAnchor(result_)
 }
 
 func (n *NSLayoutYAxisAnchor) ConstraintEqualToSystemSpacingBelowAnchor_Multiplier(anchor LayoutYAxisAnchor, multiplier coregraphics.Float) LayoutConstraint {
-	result := C.C_NSLayoutYAxisAnchor_ConstraintEqualToSystemSpacingBelowAnchor_Multiplier(n.Ptr(), objc.ExtractPtr(anchor), C.double(float64(multiplier)))
-	return MakeLayoutConstraint(result)
+	result_ := C.C_NSLayoutYAxisAnchor_ConstraintEqualToSystemSpacingBelowAnchor_Multiplier(n.Ptr(), objc.ExtractPtr(anchor), C.double(float64(multiplier)))
+	return MakeLayoutConstraint(result_)
 }
 
 func (n *NSLayoutYAxisAnchor) ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchor_Multiplier(anchor LayoutYAxisAnchor, multiplier coregraphics.Float) LayoutConstraint {
-	result := C.C_NSLayoutYAxisAnchor_ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchor_Multiplier(n.Ptr(), objc.ExtractPtr(anchor), C.double(float64(multiplier)))
-	return MakeLayoutConstraint(result)
+	result_ := C.C_NSLayoutYAxisAnchor_ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchor_Multiplier(n.Ptr(), objc.ExtractPtr(anchor), C.double(float64(multiplier)))
+	return MakeLayoutConstraint(result_)
 }
 
 func (n *NSLayoutYAxisAnchor) ConstraintLessThanOrEqualToSystemSpacingBelowAnchor_Multiplier(anchor LayoutYAxisAnchor, multiplier coregraphics.Float) LayoutConstraint {
-	result := C.C_NSLayoutYAxisAnchor_ConstraintLessThanOrEqualToSystemSpacingBelowAnchor_Multiplier(n.Ptr(), objc.ExtractPtr(anchor), C.double(float64(multiplier)))
-	return MakeLayoutConstraint(result)
+	result_ := C.C_NSLayoutYAxisAnchor_ConstraintLessThanOrEqualToSystemSpacingBelowAnchor_Multiplier(n.Ptr(), objc.ExtractPtr(anchor), C.double(float64(multiplier)))
+	return MakeLayoutConstraint(result_)
 }
 
 func (n *NSLayoutYAxisAnchor) AnchorWithOffsetToAnchor(otherAnchor LayoutYAxisAnchor) LayoutDimension {
-	result := C.C_NSLayoutYAxisAnchor_AnchorWithOffsetToAnchor(n.Ptr(), objc.ExtractPtr(otherAnchor))
-	return MakeLayoutDimension(result)
+	result_ := C.C_NSLayoutYAxisAnchor_AnchorWithOffsetToAnchor(n.Ptr(), objc.ExtractPtr(otherAnchor))
+	return MakeLayoutDimension(result_)
 }

@@ -7,29 +7,29 @@ void* C_LayoutGuide_Alloc() {
 
 void* C_NSLayoutGuide_Init(void* ptr) {
     NSLayoutGuide* nSLayoutGuide = (NSLayoutGuide*)ptr;
-    NSLayoutGuide* result = [nSLayoutGuide init];
-    return result;
+    NSLayoutGuide* result_ = [nSLayoutGuide init];
+    return result_;
 }
 
 Array C_NSLayoutGuide_ConstraintsAffectingLayoutForOrientation(void* ptr, int orientation) {
     NSLayoutGuide* nSLayoutGuide = (NSLayoutGuide*)ptr;
-    NSArray* result = [nSLayoutGuide constraintsAffectingLayoutForOrientation:orientation];
-    int resultcount = [result count];
-    void** resultData = malloc(resultcount * sizeof(void*));
-    for (int i = 0; i < resultcount; i++) {
-    	 void* p = [result objectAtIndex:i];
-    	 resultData[i] = p;
+    NSArray* result_ = [nSLayoutGuide constraintsAffectingLayoutForOrientation:orientation];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
     }
-    Array resultArray;
-    resultArray.data = resultData;
-    resultArray.len = resultcount;
-    return resultArray;
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
 }
 
 void* C_NSLayoutGuide_Identifier(void* ptr) {
     NSLayoutGuide* nSLayoutGuide = (NSLayoutGuide*)ptr;
-    NSUserInterfaceItemIdentifier result = [nSLayoutGuide identifier];
-    return result;
+    NSUserInterfaceItemIdentifier result_ = [nSLayoutGuide identifier];
+    return result_;
 }
 
 void C_NSLayoutGuide_SetIdentifier(void* ptr, void* value) {
@@ -39,14 +39,14 @@ void C_NSLayoutGuide_SetIdentifier(void* ptr, void* value) {
 
 CGRect C_NSLayoutGuide_Frame(void* ptr) {
     NSLayoutGuide* nSLayoutGuide = (NSLayoutGuide*)ptr;
-    NSRect result = [nSLayoutGuide frame];
-    return result;
+    NSRect result_ = [nSLayoutGuide frame];
+    return result_;
 }
 
 void* C_NSLayoutGuide_OwningView(void* ptr) {
     NSLayoutGuide* nSLayoutGuide = (NSLayoutGuide*)ptr;
-    NSView* result = [nSLayoutGuide owningView];
-    return result;
+    NSView* result_ = [nSLayoutGuide owningView];
+    return result_;
 }
 
 void C_NSLayoutGuide_SetOwningView(void* ptr, void* value) {
@@ -56,66 +56,66 @@ void C_NSLayoutGuide_SetOwningView(void* ptr, void* value) {
 
 void* C_NSLayoutGuide_BottomAnchor(void* ptr) {
     NSLayoutGuide* nSLayoutGuide = (NSLayoutGuide*)ptr;
-    NSLayoutYAxisAnchor* result = [nSLayoutGuide bottomAnchor];
-    return result;
+    NSLayoutYAxisAnchor* result_ = [nSLayoutGuide bottomAnchor];
+    return result_;
 }
 
 void* C_NSLayoutGuide_CenterXAnchor(void* ptr) {
     NSLayoutGuide* nSLayoutGuide = (NSLayoutGuide*)ptr;
-    NSLayoutXAxisAnchor* result = [nSLayoutGuide centerXAnchor];
-    return result;
+    NSLayoutXAxisAnchor* result_ = [nSLayoutGuide centerXAnchor];
+    return result_;
 }
 
 void* C_NSLayoutGuide_CenterYAnchor(void* ptr) {
     NSLayoutGuide* nSLayoutGuide = (NSLayoutGuide*)ptr;
-    NSLayoutYAxisAnchor* result = [nSLayoutGuide centerYAnchor];
-    return result;
+    NSLayoutYAxisAnchor* result_ = [nSLayoutGuide centerYAnchor];
+    return result_;
 }
 
 void* C_NSLayoutGuide_HeightAnchor(void* ptr) {
     NSLayoutGuide* nSLayoutGuide = (NSLayoutGuide*)ptr;
-    NSLayoutDimension* result = [nSLayoutGuide heightAnchor];
-    return result;
+    NSLayoutDimension* result_ = [nSLayoutGuide heightAnchor];
+    return result_;
 }
 
 void* C_NSLayoutGuide_LeadingAnchor(void* ptr) {
     NSLayoutGuide* nSLayoutGuide = (NSLayoutGuide*)ptr;
-    NSLayoutXAxisAnchor* result = [nSLayoutGuide leadingAnchor];
-    return result;
+    NSLayoutXAxisAnchor* result_ = [nSLayoutGuide leadingAnchor];
+    return result_;
 }
 
 void* C_NSLayoutGuide_LeftAnchor(void* ptr) {
     NSLayoutGuide* nSLayoutGuide = (NSLayoutGuide*)ptr;
-    NSLayoutXAxisAnchor* result = [nSLayoutGuide leftAnchor];
-    return result;
+    NSLayoutXAxisAnchor* result_ = [nSLayoutGuide leftAnchor];
+    return result_;
 }
 
 void* C_NSLayoutGuide_RightAnchor(void* ptr) {
     NSLayoutGuide* nSLayoutGuide = (NSLayoutGuide*)ptr;
-    NSLayoutXAxisAnchor* result = [nSLayoutGuide rightAnchor];
-    return result;
+    NSLayoutXAxisAnchor* result_ = [nSLayoutGuide rightAnchor];
+    return result_;
 }
 
 void* C_NSLayoutGuide_TopAnchor(void* ptr) {
     NSLayoutGuide* nSLayoutGuide = (NSLayoutGuide*)ptr;
-    NSLayoutYAxisAnchor* result = [nSLayoutGuide topAnchor];
-    return result;
+    NSLayoutYAxisAnchor* result_ = [nSLayoutGuide topAnchor];
+    return result_;
 }
 
 void* C_NSLayoutGuide_TrailingAnchor(void* ptr) {
     NSLayoutGuide* nSLayoutGuide = (NSLayoutGuide*)ptr;
-    NSLayoutXAxisAnchor* result = [nSLayoutGuide trailingAnchor];
-    return result;
+    NSLayoutXAxisAnchor* result_ = [nSLayoutGuide trailingAnchor];
+    return result_;
 }
 
 void* C_NSLayoutGuide_WidthAnchor(void* ptr) {
     NSLayoutGuide* nSLayoutGuide = (NSLayoutGuide*)ptr;
-    NSLayoutDimension* result = [nSLayoutGuide widthAnchor];
-    return result;
+    NSLayoutDimension* result_ = [nSLayoutGuide widthAnchor];
+    return result_;
 }
 
 bool C_NSLayoutGuide_HasAmbiguousLayout(void* ptr) {
     NSLayoutGuide* nSLayoutGuide = (NSLayoutGuide*)ptr;
-    BOOL result = [nSLayoutGuide hasAmbiguousLayout];
-    return result;
+    BOOL result_ = [nSLayoutGuide hasAmbiguousLayout];
+    return result_;
 }

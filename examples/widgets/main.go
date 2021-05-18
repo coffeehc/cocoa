@@ -17,7 +17,7 @@ func init() {
 
 func initAndRun() {
 	app := appkit.SharedApplication()
-	w := appkit.NewPlainWindow(foundation.MakeRect(150, 150, 600, 400))
+	w := appkit.NewWindow(foundation.MakeRect(150, 150, 600, 400))
 	w.SetTitle("Test widgets")
 
 	filePathField := appkit.AllocTextField().InitWithFrame(foundation.MakeRect(10, 330, 200, 20))
@@ -27,7 +27,8 @@ func initAndRun() {
 	filePathField.SetEditable(false)
 	w.ContentView().AddSubview(filePathField)
 
-	saveButton := appkit.NewPlainButton(foundation.MakeRect(250, 330, 80, 20))
+	saveButton := appkit.NewPlainButton()
+	saveButton.SetFrame(foundation.MakeRect(250, 330, 80, 20))
 	saveButton.SetTitle("Save...")
 	uihelper.SetAction(saveButton, func(sender objc.Object) {
 		savePanel := appkit.AllocSavePanel().Init()
@@ -66,11 +67,13 @@ func initAndRun() {
 	w.ContentView().AddSubview(datePicker)
 
 	// buttons
-	cb := appkit.NewCheckBox(foundation.MakeRect(10, 250, 80, 25))
+	cb := appkit.NewCheckBox()
+	cb.SetFrame(foundation.MakeRect(10, 250, 80, 25))
 	cb.SetTitle("check box")
 	w.ContentView().AddSubview(cb)
 
-	rb := appkit.NewRadioButton(foundation.MakeRect(150, 250, 120, 25))
+	rb := appkit.NewRadioButton()
+	rb.SetFrame(foundation.MakeRect(150, 250, 120, 25))
 	rb.SetTitle("radio button")
 	w.ContentView().AddSubview(rb)
 
@@ -82,11 +85,13 @@ func initAndRun() {
 	li.SetDoubleValue(3)
 	w.ContentView().AddSubview(li)
 
-	btn := appkit.NewPlainButton(foundation.MakeRect(10, 160, 120, 25))
+	btn := appkit.NewPlainButton()
+	btn.SetFrame(foundation.MakeRect(10, 160, 120, 25))
 	btn.SetTitle("change color")
 	w.ContentView().AddSubview(btn)
 
-	quitBtn := appkit.NewPlainButton(foundation.MakeRect(10, 130, 80, 25))
+	quitBtn := appkit.NewPlainButton()
+	quitBtn.SetFrame(foundation.MakeRect(10, 130, 80, 25))
 	quitBtn.SetTitle("Quit")
 	uihelper.SetAction(quitBtn, func(sender objc.Object) {
 		app.Terminate(nil)
@@ -94,11 +99,13 @@ func initAndRun() {
 	w.ContentView().AddSubview(quitBtn)
 
 	// text field
-	tf := appkit.NewTextField(foundation.MakeRect(10, 100, 150, 25))
+	tf := appkit.NewTextField()
 	w.ContentView().AddSubview(tf)
+	tf.SetFrame(foundation.MakeRect(10, 100, 150, 25))
 
 	// label
-	label := appkit.NewLabel(foundation.MakeRect(170, 100, 150, 25))
+	label := appkit.NewLabel()
+	label.SetFrame(foundation.MakeRect(170, 100, 150, 25))
 	w.ContentView().AddSubview(label)
 	tf.SetDelegate(appkit.WrapTextFieldDelegate(&appkit.TextFieldDelegate{
 		ControlTextDidChange: func(obj foundation.Notification) {
@@ -112,7 +119,8 @@ func initAndRun() {
 	})
 
 	// password
-	stf := appkit.NewSecureTextField(foundation.MakeRect(340, 100, 150, 25))
+	stf := appkit.NewSecureTextField()
+	stf.SetFrame(foundation.MakeRect(340, 100, 150, 25))
 	stf.SetDelegate(appkit.WrapTextFieldDelegate(&appkit.TextFieldDelegate{
 		ControlTextDidChange: func(obj foundation.Notification) {
 			objc.DispatchAsyncToMainQueue(func() {

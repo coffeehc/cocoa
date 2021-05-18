@@ -7,37 +7,37 @@ void* C_Scroller_Alloc() {
 
 void* C_NSScroller_InitWithFrame(void* ptr, CGRect frameRect) {
     NSScroller* nSScroller = (NSScroller*)ptr;
-    NSScroller* result = [nSScroller initWithFrame:frameRect];
-    return result;
+    NSScroller* result_ = [nSScroller initWithFrame:frameRect];
+    return result_;
 }
 
 void* C_NSScroller_InitWithCoder(void* ptr, void* coder) {
     NSScroller* nSScroller = (NSScroller*)ptr;
-    NSScroller* result = [nSScroller initWithCoder:(NSCoder*)coder];
-    return result;
+    NSScroller* result_ = [nSScroller initWithCoder:(NSCoder*)coder];
+    return result_;
 }
 
 void* C_NSScroller_Init(void* ptr) {
     NSScroller* nSScroller = (NSScroller*)ptr;
-    NSScroller* result = [nSScroller init];
-    return result;
+    NSScroller* result_ = [nSScroller init];
+    return result_;
 }
 
 double C_NSScroller_ScrollerWidthForControlSize_ScrollerStyle(unsigned int controlSize, int scrollerStyle) {
-    CGFloat result = [NSScroller scrollerWidthForControlSize:controlSize scrollerStyle:scrollerStyle];
-    return result;
+    CGFloat result_ = [NSScroller scrollerWidthForControlSize:controlSize scrollerStyle:scrollerStyle];
+    return result_;
 }
 
 CGRect C_NSScroller_RectForPart(void* ptr, unsigned int partCode) {
     NSScroller* nSScroller = (NSScroller*)ptr;
-    NSRect result = [nSScroller rectForPart:partCode];
-    return result;
+    NSRect result_ = [nSScroller rectForPart:partCode];
+    return result_;
 }
 
 unsigned int C_NSScroller_TestPart(void* ptr, CGPoint point) {
     NSScroller* nSScroller = (NSScroller*)ptr;
-    NSScrollerPart result = [nSScroller testPart:point];
-    return result;
+    NSScrollerPart result_ = [nSScroller testPart:point];
+    return result_;
 }
 
 void C_NSScroller_CheckSpaceForParts(void* ptr) {
@@ -62,25 +62,25 @@ void C_NSScroller_TrackKnob(void* ptr, void* event) {
 
 unsigned int C_NSScroller_UsableParts(void* ptr) {
     NSScroller* nSScroller = (NSScroller*)ptr;
-    NSUsableScrollerParts result = [nSScroller usableParts];
-    return result;
+    NSUsableScrollerParts result_ = [nSScroller usableParts];
+    return result_;
 }
 
 unsigned int C_NSScroller_HitPart(void* ptr) {
     NSScroller* nSScroller = (NSScroller*)ptr;
-    NSScrollerPart result = [nSScroller hitPart];
-    return result;
+    NSScrollerPart result_ = [nSScroller hitPart];
+    return result_;
 }
 
 int C_NSScroller_Scroller_PreferredScrollerStyle() {
-    NSScrollerStyle result = [NSScroller preferredScrollerStyle];
-    return result;
+    NSScrollerStyle result_ = [NSScroller preferredScrollerStyle];
+    return result_;
 }
 
 int C_NSScroller_ScrollerStyle(void* ptr) {
     NSScroller* nSScroller = (NSScroller*)ptr;
-    NSScrollerStyle result = [nSScroller scrollerStyle];
-    return result;
+    NSScrollerStyle result_ = [nSScroller scrollerStyle];
+    return result_;
 }
 
 void C_NSScroller_SetScrollerStyle(void* ptr, int value) {
@@ -90,8 +90,8 @@ void C_NSScroller_SetScrollerStyle(void* ptr, int value) {
 
 int C_NSScroller_KnobStyle(void* ptr) {
     NSScroller* nSScroller = (NSScroller*)ptr;
-    NSScrollerKnobStyle result = [nSScroller knobStyle];
-    return result;
+    NSScrollerKnobStyle result_ = [nSScroller knobStyle];
+    return result_;
 }
 
 void C_NSScroller_SetKnobStyle(void* ptr, int value) {
@@ -101,8 +101,8 @@ void C_NSScroller_SetKnobStyle(void* ptr, int value) {
 
 double C_NSScroller_KnobProportion(void* ptr) {
     NSScroller* nSScroller = (NSScroller*)ptr;
-    CGFloat result = [nSScroller knobProportion];
-    return result;
+    CGFloat result_ = [nSScroller knobProportion];
+    return result_;
 }
 
 void C_NSScroller_SetKnobProportion(void* ptr, double value) {
@@ -111,6 +111,6 @@ void C_NSScroller_SetKnobProportion(void* ptr, double value) {
 }
 
 bool C_NSScroller_Scroller_CompatibleWithOverlayScrollers() {
-    BOOL result = [NSScroller compatibleWithOverlayScrollers];
-    return result;
+    BOOL result_ = [NSScroller compatibleWithOverlayScrollers];
+    return result_;
 }

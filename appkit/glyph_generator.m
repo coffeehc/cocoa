@@ -7,11 +7,11 @@ void* C_GlyphGenerator_Alloc() {
 
 void* C_NSGlyphGenerator_Init(void* ptr) {
     NSGlyphGenerator* nSGlyphGenerator = (NSGlyphGenerator*)ptr;
-    NSGlyphGenerator* result = [nSGlyphGenerator init];
-    return result;
+    NSGlyphGenerator* result_ = [nSGlyphGenerator init];
+    return result_;
 }
 
 void* C_NSGlyphGenerator_SharedGlyphGenerator() {
-    NSGlyphGenerator* result = [NSGlyphGenerator sharedGlyphGenerator];
-    return result;
+    NSGlyphGenerator* result_ = [NSGlyphGenerator sharedGlyphGenerator];
+    return result_;
 }

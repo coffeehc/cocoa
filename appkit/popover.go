@@ -49,13 +49,13 @@ func AllocPopover() *NSPopover {
 }
 
 func (n *NSPopover) Init() Popover {
-	result := C.C_NSPopover_Init(n.Ptr())
-	return MakePopover(result)
+	result_ := C.C_NSPopover_Init(n.Ptr())
+	return MakePopover(result_)
 }
 
 func (n *NSPopover) InitWithCoder(coder foundation.Coder) Popover {
-	result := C.C_NSPopover_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakePopover(result)
+	result_ := C.C_NSPopover_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakePopover(result_)
 }
 
 func (n *NSPopover) ShowRelativeToRect_OfView_PreferredEdge(positioningRect foundation.Rect, positioningView View, preferredEdge foundation.RectEdge) {
@@ -71,8 +71,8 @@ func (n *NSPopover) Close() {
 }
 
 func (n *NSPopover) Behavior() PopoverBehavior {
-	result := C.C_NSPopover_Behavior(n.Ptr())
-	return PopoverBehavior(int(result))
+	result_ := C.C_NSPopover_Behavior(n.Ptr())
+	return PopoverBehavior(int(result_))
 }
 
 func (n *NSPopover) SetBehavior(value PopoverBehavior) {
@@ -80,8 +80,8 @@ func (n *NSPopover) SetBehavior(value PopoverBehavior) {
 }
 
 func (n *NSPopover) PositioningRect() foundation.Rect {
-	result := C.C_NSPopover_PositioningRect(n.Ptr())
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSPopover_PositioningRect(n.Ptr())
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSPopover) SetPositioningRect(value foundation.Rect) {
@@ -89,8 +89,8 @@ func (n *NSPopover) SetPositioningRect(value foundation.Rect) {
 }
 
 func (n *NSPopover) Appearance() Appearance {
-	result := C.C_NSPopover_Appearance(n.Ptr())
-	return MakeAppearance(result)
+	result_ := C.C_NSPopover_Appearance(n.Ptr())
+	return MakeAppearance(result_)
 }
 
 func (n *NSPopover) SetAppearance(value Appearance) {
@@ -98,13 +98,13 @@ func (n *NSPopover) SetAppearance(value Appearance) {
 }
 
 func (n *NSPopover) EffectiveAppearance() Appearance {
-	result := C.C_NSPopover_EffectiveAppearance(n.Ptr())
-	return MakeAppearance(result)
+	result_ := C.C_NSPopover_EffectiveAppearance(n.Ptr())
+	return MakeAppearance(result_)
 }
 
 func (n *NSPopover) Animates() bool {
-	result := C.C_NSPopover_Animates(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSPopover_Animates(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSPopover) SetAnimates(value bool) {
@@ -112,8 +112,8 @@ func (n *NSPopover) SetAnimates(value bool) {
 }
 
 func (n *NSPopover) ContentSize() foundation.Size {
-	result := C.C_NSPopover_ContentSize(n.Ptr())
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSPopover_ContentSize(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSPopover) SetContentSize(value foundation.Size) {
@@ -121,11 +121,11 @@ func (n *NSPopover) SetContentSize(value foundation.Size) {
 }
 
 func (n *NSPopover) IsShown() bool {
-	result := C.C_NSPopover_IsShown(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSPopover_IsShown(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSPopover) IsDetached() bool {
-	result := C.C_NSPopover_IsDetached(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSPopover_IsDetached(n.Ptr())
+	return bool(result_)
 }

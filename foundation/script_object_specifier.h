@@ -9,7 +9,7 @@ void* C_NSScriptObjectSpecifier_InitWithContainerClassDescription_ContainerSpeci
 void* C_NSScriptObjectSpecifier_InitWithContainerSpecifier_Key(void* ptr, void* container, void* property);
 void* C_NSScriptObjectSpecifier_InitWithCoder(void* ptr, void* inCoder);
 void* C_NSScriptObjectSpecifier_Init(void* ptr);
-void* C_NSScriptObjectSpecifier_ScriptObjectSpecifierObjectSpecifierWithDescriptor(void* descriptor);
+void* C_NSScriptObjectSpecifier_ScriptObjectSpecifier_ObjectSpecifierWithDescriptor(void* descriptor);
 void* C_NSScriptObjectSpecifier_ObjectsByEvaluatingWithContainers(void* ptr, void* containers);
 void* C_NSScriptObjectSpecifier_ObjectsByEvaluatingSpecifier(void* ptr);
 void* C_NSScriptObjectSpecifier_ContainerClassDescription(void* ptr);

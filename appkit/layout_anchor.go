@@ -43,62 +43,62 @@ func AllocLayoutAnchor() *NSLayoutAnchor {
 }
 
 func (n *NSLayoutAnchor) Init() LayoutAnchor {
-	result := C.C_NSLayoutAnchor_Init(n.Ptr())
-	return MakeLayoutAnchor(result)
+	result_ := C.C_NSLayoutAnchor_Init(n.Ptr())
+	return MakeLayoutAnchor(result_)
 }
 
 func (n *NSLayoutAnchor) ConstraintEqualToAnchor(anchor LayoutAnchor) LayoutConstraint {
-	result := C.C_NSLayoutAnchor_ConstraintEqualToAnchor(n.Ptr(), objc.ExtractPtr(anchor))
-	return MakeLayoutConstraint(result)
+	result_ := C.C_NSLayoutAnchor_ConstraintEqualToAnchor(n.Ptr(), objc.ExtractPtr(anchor))
+	return MakeLayoutConstraint(result_)
 }
 
 func (n *NSLayoutAnchor) ConstraintEqualToAnchor_Constant(anchor LayoutAnchor, c coregraphics.Float) LayoutConstraint {
-	result := C.C_NSLayoutAnchor_ConstraintEqualToAnchor_Constant(n.Ptr(), objc.ExtractPtr(anchor), C.double(float64(c)))
-	return MakeLayoutConstraint(result)
+	result_ := C.C_NSLayoutAnchor_ConstraintEqualToAnchor_Constant(n.Ptr(), objc.ExtractPtr(anchor), C.double(float64(c)))
+	return MakeLayoutConstraint(result_)
 }
 
 func (n *NSLayoutAnchor) ConstraintGreaterThanOrEqualToAnchor(anchor LayoutAnchor) LayoutConstraint {
-	result := C.C_NSLayoutAnchor_ConstraintGreaterThanOrEqualToAnchor(n.Ptr(), objc.ExtractPtr(anchor))
-	return MakeLayoutConstraint(result)
+	result_ := C.C_NSLayoutAnchor_ConstraintGreaterThanOrEqualToAnchor(n.Ptr(), objc.ExtractPtr(anchor))
+	return MakeLayoutConstraint(result_)
 }
 
 func (n *NSLayoutAnchor) ConstraintGreaterThanOrEqualToAnchor_Constant(anchor LayoutAnchor, c coregraphics.Float) LayoutConstraint {
-	result := C.C_NSLayoutAnchor_ConstraintGreaterThanOrEqualToAnchor_Constant(n.Ptr(), objc.ExtractPtr(anchor), C.double(float64(c)))
-	return MakeLayoutConstraint(result)
+	result_ := C.C_NSLayoutAnchor_ConstraintGreaterThanOrEqualToAnchor_Constant(n.Ptr(), objc.ExtractPtr(anchor), C.double(float64(c)))
+	return MakeLayoutConstraint(result_)
 }
 
 func (n *NSLayoutAnchor) ConstraintLessThanOrEqualToAnchor(anchor LayoutAnchor) LayoutConstraint {
-	result := C.C_NSLayoutAnchor_ConstraintLessThanOrEqualToAnchor(n.Ptr(), objc.ExtractPtr(anchor))
-	return MakeLayoutConstraint(result)
+	result_ := C.C_NSLayoutAnchor_ConstraintLessThanOrEqualToAnchor(n.Ptr(), objc.ExtractPtr(anchor))
+	return MakeLayoutConstraint(result_)
 }
 
 func (n *NSLayoutAnchor) ConstraintLessThanOrEqualToAnchor_Constant(anchor LayoutAnchor, c coregraphics.Float) LayoutConstraint {
-	result := C.C_NSLayoutAnchor_ConstraintLessThanOrEqualToAnchor_Constant(n.Ptr(), objc.ExtractPtr(anchor), C.double(float64(c)))
-	return MakeLayoutConstraint(result)
+	result_ := C.C_NSLayoutAnchor_ConstraintLessThanOrEqualToAnchor_Constant(n.Ptr(), objc.ExtractPtr(anchor), C.double(float64(c)))
+	return MakeLayoutConstraint(result_)
 }
 
 func (n *NSLayoutAnchor) ConstraintsAffectingLayout() []LayoutConstraint {
-	result := C.C_NSLayoutAnchor_ConstraintsAffectingLayout(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]LayoutConstraint, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeLayoutConstraint(r)
+	result_ := C.C_NSLayoutAnchor_ConstraintsAffectingLayout(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]LayoutConstraint, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeLayoutConstraint(r)
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSLayoutAnchor) HasAmbiguousLayout() bool {
-	result := C.C_NSLayoutAnchor_HasAmbiguousLayout(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSLayoutAnchor_HasAmbiguousLayout(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSLayoutAnchor) Name() string {
-	result := C.C_NSLayoutAnchor_Name(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSLayoutAnchor_Name(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSLayoutAnchor) Item() objc.Object {
-	result := C.C_NSLayoutAnchor_Item(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSLayoutAnchor_Item(n.Ptr())
+	return objc.MakeObject(result_)
 }

@@ -33,6 +33,8 @@ double C_NSComboBox_ItemHeight(void* ptr);
 void C_NSComboBox_SetItemHeight(void* ptr, double value);
 int C_NSComboBox_NumberOfVisibleItems(void* ptr);
 void C_NSComboBox_SetNumberOfVisibleItems(void* ptr, int value);
+void* C_NSComboBox_DataSource(void* ptr);
+void C_NSComboBox_SetDataSource(void* ptr, void* value);
 bool C_NSComboBox_UsesDataSource(void* ptr);
 void C_NSComboBox_SetUsesDataSource(void* ptr, bool value);
 Array C_NSComboBox_ObjectValues(void* ptr);

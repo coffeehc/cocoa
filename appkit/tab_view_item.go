@@ -53,13 +53,13 @@ func AllocTabViewItem() *NSTabViewItem {
 }
 
 func (n *NSTabViewItem) InitWithIdentifier(identifier objc.Object) TabViewItem {
-	result := C.C_NSTabViewItem_InitWithIdentifier(n.Ptr(), objc.ExtractPtr(identifier))
-	return MakeTabViewItem(result)
+	result_ := C.C_NSTabViewItem_InitWithIdentifier(n.Ptr(), objc.ExtractPtr(identifier))
+	return MakeTabViewItem(result_)
 }
 
 func (n *NSTabViewItem) Init() TabViewItem {
-	result := C.C_NSTabViewItem_Init(n.Ptr())
-	return MakeTabViewItem(result)
+	result_ := C.C_NSTabViewItem_Init(n.Ptr())
+	return MakeTabViewItem(result_)
 }
 
 func (n *NSTabViewItem) DrawLabel_InRect(shouldTruncateLabel bool, labelRect foundation.Rect) {
@@ -67,18 +67,18 @@ func (n *NSTabViewItem) DrawLabel_InRect(shouldTruncateLabel bool, labelRect fou
 }
 
 func (n *NSTabViewItem) SizeOfLabel(computeMin bool) foundation.Size {
-	result := C.C_NSTabViewItem_SizeOfLabel(n.Ptr(), C.bool(computeMin))
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSTabViewItem_SizeOfLabel(n.Ptr(), C.bool(computeMin))
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func TabViewItemWithViewController(viewController ViewController) TabViewItem {
-	result := C.C_NSTabViewItem_TabViewItemWithViewController(objc.ExtractPtr(viewController))
-	return MakeTabViewItem(result)
+	result_ := C.C_NSTabViewItem_TabViewItemWithViewController(objc.ExtractPtr(viewController))
+	return MakeTabViewItem(result_)
 }
 
 func (n *NSTabViewItem) Label() string {
-	result := C.C_NSTabViewItem_Label(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSTabViewItem_Label(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSTabViewItem) SetLabel(value string) {
@@ -86,13 +86,13 @@ func (n *NSTabViewItem) SetLabel(value string) {
 }
 
 func (n *NSTabViewItem) TabState() TabState {
-	result := C.C_NSTabViewItem_TabState(n.Ptr())
-	return TabState(uint(result))
+	result_ := C.C_NSTabViewItem_TabState(n.Ptr())
+	return TabState(uint(result_))
 }
 
 func (n *NSTabViewItem) Identifier() objc.Object {
-	result := C.C_NSTabViewItem_Identifier(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSTabViewItem_Identifier(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSTabViewItem) SetIdentifier(value objc.Object) {
@@ -100,8 +100,8 @@ func (n *NSTabViewItem) SetIdentifier(value objc.Object) {
 }
 
 func (n *NSTabViewItem) Color() Color {
-	result := C.C_NSTabViewItem_Color(n.Ptr())
-	return MakeColor(result)
+	result_ := C.C_NSTabViewItem_Color(n.Ptr())
+	return MakeColor(result_)
 }
 
 func (n *NSTabViewItem) SetColor(value Color) {
@@ -109,8 +109,8 @@ func (n *NSTabViewItem) SetColor(value Color) {
 }
 
 func (n *NSTabViewItem) View() View {
-	result := C.C_NSTabViewItem_View(n.Ptr())
-	return MakeView(result)
+	result_ := C.C_NSTabViewItem_View(n.Ptr())
+	return MakeView(result_)
 }
 
 func (n *NSTabViewItem) SetView(value View) {
@@ -118,8 +118,8 @@ func (n *NSTabViewItem) SetView(value View) {
 }
 
 func (n *NSTabViewItem) InitialFirstResponder() View {
-	result := C.C_NSTabViewItem_InitialFirstResponder(n.Ptr())
-	return MakeView(result)
+	result_ := C.C_NSTabViewItem_InitialFirstResponder(n.Ptr())
+	return MakeView(result_)
 }
 
 func (n *NSTabViewItem) SetInitialFirstResponder(value View) {
@@ -127,13 +127,13 @@ func (n *NSTabViewItem) SetInitialFirstResponder(value View) {
 }
 
 func (n *NSTabViewItem) TabView() TabView {
-	result := C.C_NSTabViewItem_TabView(n.Ptr())
-	return MakeTabView(result)
+	result_ := C.C_NSTabViewItem_TabView(n.Ptr())
+	return MakeTabView(result_)
 }
 
 func (n *NSTabViewItem) ToolTip() string {
-	result := C.C_NSTabViewItem_ToolTip(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSTabViewItem_ToolTip(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSTabViewItem) SetToolTip(value string) {
@@ -141,8 +141,8 @@ func (n *NSTabViewItem) SetToolTip(value string) {
 }
 
 func (n *NSTabViewItem) Image() Image {
-	result := C.C_NSTabViewItem_Image(n.Ptr())
-	return MakeImage(result)
+	result_ := C.C_NSTabViewItem_Image(n.Ptr())
+	return MakeImage(result_)
 }
 
 func (n *NSTabViewItem) SetImage(value Image) {
@@ -150,8 +150,8 @@ func (n *NSTabViewItem) SetImage(value Image) {
 }
 
 func (n *NSTabViewItem) ViewController() ViewController {
-	result := C.C_NSTabViewItem_ViewController(n.Ptr())
-	return MakeViewController(result)
+	result_ := C.C_NSTabViewItem_ViewController(n.Ptr())
+	return MakeViewController(result_)
 }
 
 func (n *NSTabViewItem) SetViewController(value ViewController) {

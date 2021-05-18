@@ -33,31 +33,31 @@ func AllocImageSymbolConfiguration() *NSImageSymbolConfiguration {
 }
 
 func (n *NSImageSymbolConfiguration) Init() ImageSymbolConfiguration {
-	result := C.C_NSImageSymbolConfiguration_Init(n.Ptr())
-	return MakeImageSymbolConfiguration(result)
+	result_ := C.C_NSImageSymbolConfiguration_Init(n.Ptr())
+	return MakeImageSymbolConfiguration(result_)
 }
 
 func ImageSymbolConfiguration_ConfigurationWithPointSize_Weight(pointSize coregraphics.Float, weight FontWeight) ImageSymbolConfiguration {
-	result := C.C_NSImageSymbolConfiguration_ImageSymbolConfiguration_ConfigurationWithPointSize_Weight(C.double(float64(pointSize)), C.double(float64(coregraphics.Float(weight))))
-	return MakeImageSymbolConfiguration(result)
+	result_ := C.C_NSImageSymbolConfiguration_ImageSymbolConfiguration_ConfigurationWithPointSize_Weight(C.double(float64(pointSize)), C.double(float64(coregraphics.Float(weight))))
+	return MakeImageSymbolConfiguration(result_)
 }
 
 func ImageSymbolConfiguration_ConfigurationWithPointSize_Weight_Scale(pointSize coregraphics.Float, weight FontWeight, scale ImageSymbolScale) ImageSymbolConfiguration {
-	result := C.C_NSImageSymbolConfiguration_ImageSymbolConfiguration_ConfigurationWithPointSize_Weight_Scale(C.double(float64(pointSize)), C.double(float64(coregraphics.Float(weight))), C.int(int(scale)))
-	return MakeImageSymbolConfiguration(result)
+	result_ := C.C_NSImageSymbolConfiguration_ImageSymbolConfiguration_ConfigurationWithPointSize_Weight_Scale(C.double(float64(pointSize)), C.double(float64(coregraphics.Float(weight))), C.int(int(scale)))
+	return MakeImageSymbolConfiguration(result_)
 }
 
 func ImageSymbolConfiguration_ConfigurationWithTextStyle(style FontTextStyle) ImageSymbolConfiguration {
-	result := C.C_NSImageSymbolConfiguration_ImageSymbolConfiguration_ConfigurationWithTextStyle(foundation.NewString(string(style)).Ptr())
-	return MakeImageSymbolConfiguration(result)
+	result_ := C.C_NSImageSymbolConfiguration_ImageSymbolConfiguration_ConfigurationWithTextStyle(foundation.NewString(string(style)).Ptr())
+	return MakeImageSymbolConfiguration(result_)
 }
 
 func ImageSymbolConfiguration_ConfigurationWithTextStyle_Scale(style FontTextStyle, scale ImageSymbolScale) ImageSymbolConfiguration {
-	result := C.C_NSImageSymbolConfiguration_ImageSymbolConfiguration_ConfigurationWithTextStyle_Scale(foundation.NewString(string(style)).Ptr(), C.int(int(scale)))
-	return MakeImageSymbolConfiguration(result)
+	result_ := C.C_NSImageSymbolConfiguration_ImageSymbolConfiguration_ConfigurationWithTextStyle_Scale(foundation.NewString(string(style)).Ptr(), C.int(int(scale)))
+	return MakeImageSymbolConfiguration(result_)
 }
 
 func ImageSymbolConfiguration_ConfigurationWithScale(scale ImageSymbolScale) ImageSymbolConfiguration {
-	result := C.C_NSImageSymbolConfiguration_ImageSymbolConfiguration_ConfigurationWithScale(C.int(int(scale)))
-	return MakeImageSymbolConfiguration(result)
+	result_ := C.C_NSImageSymbolConfiguration_ImageSymbolConfiguration_ConfigurationWithScale(C.int(int(scale)))
+	return MakeImageSymbolConfiguration(result_)
 }

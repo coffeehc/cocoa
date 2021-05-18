@@ -7,88 +7,109 @@ void* C_FontDescriptor_Alloc() {
 
 void* C_NSFontDescriptor_FontDescriptorWithDesign(void* ptr, void* design) {
     NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
-    NSFontDescriptor* result = [nSFontDescriptor fontDescriptorWithDesign:(NSString*)design];
-    return result;
+    NSFontDescriptor* result_ = [nSFontDescriptor fontDescriptorWithDesign:(NSString*)design];
+    return result_;
 }
 
 void* C_NSFontDescriptor_Init(void* ptr) {
     NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
-    NSFontDescriptor* result = [nSFontDescriptor init];
-    return result;
+    NSFontDescriptor* result_ = [nSFontDescriptor init];
+    return result_;
 }
 
 void* C_NSFontDescriptor_FontDescriptorWithName_Matrix(void* fontName, void* matrix) {
-    NSFontDescriptor* result = [NSFontDescriptor fontDescriptorWithName:(NSString*)fontName matrix:(NSAffineTransform*)matrix];
-    return result;
+    NSFontDescriptor* result_ = [NSFontDescriptor fontDescriptorWithName:(NSString*)fontName matrix:(NSAffineTransform*)matrix];
+    return result_;
 }
 
 void* C_NSFontDescriptor_FontDescriptorWithName_Size(void* fontName, double size) {
-    NSFontDescriptor* result = [NSFontDescriptor fontDescriptorWithName:(NSString*)fontName size:size];
-    return result;
+    NSFontDescriptor* result_ = [NSFontDescriptor fontDescriptorWithName:(NSString*)fontName size:size];
+    return result_;
 }
 
 void* C_NSFontDescriptor_FontDescriptorWithFace(void* ptr, void* newFace) {
     NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
-    NSFontDescriptor* result = [nSFontDescriptor fontDescriptorWithFace:(NSString*)newFace];
-    return result;
+    NSFontDescriptor* result_ = [nSFontDescriptor fontDescriptorWithFace:(NSString*)newFace];
+    return result_;
 }
 
 void* C_NSFontDescriptor_FontDescriptorWithFamily(void* ptr, void* newFamily) {
     NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
-    NSFontDescriptor* result = [nSFontDescriptor fontDescriptorWithFamily:(NSString*)newFamily];
-    return result;
+    NSFontDescriptor* result_ = [nSFontDescriptor fontDescriptorWithFamily:(NSString*)newFamily];
+    return result_;
 }
 
 void* C_NSFontDescriptor_FontDescriptorWithMatrix(void* ptr, void* matrix) {
     NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
-    NSFontDescriptor* result = [nSFontDescriptor fontDescriptorWithMatrix:(NSAffineTransform*)matrix];
-    return result;
+    NSFontDescriptor* result_ = [nSFontDescriptor fontDescriptorWithMatrix:(NSAffineTransform*)matrix];
+    return result_;
 }
 
 void* C_NSFontDescriptor_FontDescriptorWithSize(void* ptr, double newPointSize) {
     NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
-    NSFontDescriptor* result = [nSFontDescriptor fontDescriptorWithSize:newPointSize];
-    return result;
+    NSFontDescriptor* result_ = [nSFontDescriptor fontDescriptorWithSize:newPointSize];
+    return result_;
 }
 
 void* C_NSFontDescriptor_FontDescriptorWithSymbolicTraits(void* ptr, uint32_t symbolicTraits) {
     NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
-    NSFontDescriptor* result = [nSFontDescriptor fontDescriptorWithSymbolicTraits:symbolicTraits];
-    return result;
+    NSFontDescriptor* result_ = [nSFontDescriptor fontDescriptorWithSymbolicTraits:symbolicTraits];
+    return result_;
+}
+
+Array C_NSFontDescriptor_MatchingFontDescriptorsWithMandatoryKeys(void* ptr, void* mandatoryKeys) {
+    NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
+    NSArray* result_ = [nSFontDescriptor matchingFontDescriptorsWithMandatoryKeys:(NSSet*)mandatoryKeys];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
+    }
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
+}
+
+void* C_NSFontDescriptor_MatchingFontDescriptorWithMandatoryKeys(void* ptr, void* mandatoryKeys) {
+    NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
+    NSFontDescriptor* result_ = [nSFontDescriptor matchingFontDescriptorWithMandatoryKeys:(NSSet*)mandatoryKeys];
+    return result_;
 }
 
 void* C_NSFontDescriptor_ObjectForKey(void* ptr, void* attribute) {
     NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
-    id result = [nSFontDescriptor objectForKey:(NSString*)attribute];
-    return result;
+    id result_ = [nSFontDescriptor objectForKey:(NSString*)attribute];
+    return result_;
 }
 
 void* C_NSFontDescriptor_Matrix(void* ptr) {
     NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
-    NSAffineTransform* result = [nSFontDescriptor matrix];
-    return result;
+    NSAffineTransform* result_ = [nSFontDescriptor matrix];
+    return result_;
 }
 
 double C_NSFontDescriptor_PointSize(void* ptr) {
     NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
-    CGFloat result = [nSFontDescriptor pointSize];
-    return result;
+    CGFloat result_ = [nSFontDescriptor pointSize];
+    return result_;
 }
 
 void* C_NSFontDescriptor_PostscriptName(void* ptr) {
     NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
-    NSString* result = [nSFontDescriptor postscriptName];
-    return result;
+    NSString* result_ = [nSFontDescriptor postscriptName];
+    return result_;
 }
 
 uint32_t C_NSFontDescriptor_SymbolicTraits(void* ptr) {
     NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
-    NSFontDescriptorSymbolicTraits result = [nSFontDescriptor symbolicTraits];
-    return result;
+    NSFontDescriptorSymbolicTraits result_ = [nSFontDescriptor symbolicTraits];
+    return result_;
 }
 
 bool C_NSFontDescriptor_RequiresFontAssetRequest(void* ptr) {
     NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
-    BOOL result = [nSFontDescriptor requiresFontAssetRequest];
-    return result;
+    BOOL result_ = [nSFontDescriptor requiresFontAssetRequest];
+    return result_;
 }

@@ -9,6 +9,7 @@ void* C_NSTouch_Init(void* ptr);
 CGPoint C_NSTouch_LocationInView(void* ptr, void* view);
 CGPoint C_NSTouch_PreviousLocationInView(void* ptr, void* view);
 int C_NSTouch_Type(void* ptr);
+void* C_NSTouch_Identity(void* ptr);
 unsigned int C_NSTouch_Phase(void* ptr);
 CGPoint C_NSTouch_NormalizedPosition(void* ptr);
 bool C_NSTouch_IsResting(void* ptr);

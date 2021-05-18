@@ -72,28 +72,28 @@ func AllocProgress() *NSProgress {
 }
 
 func (n *NSProgress) Init() Progress {
-	result := C.C_NSProgress_Init(n.Ptr())
-	return MakeProgress(result)
+	result_ := C.C_NSProgress_Init(n.Ptr())
+	return MakeProgress(result_)
 }
 
-func ProgressDiscreteProgressWithTotalUnitCount(unitCount int64) Progress {
-	result := C.C_NSProgress_ProgressDiscreteProgressWithTotalUnitCount(C.long(unitCount))
-	return MakeProgress(result)
+func Progress_DiscreteProgressWithTotalUnitCount(unitCount int64) Progress {
+	result_ := C.C_NSProgress_Progress_DiscreteProgressWithTotalUnitCount(C.long(unitCount))
+	return MakeProgress(result_)
 }
 
 func ProgressWithTotalUnitCount(unitCount int64) Progress {
-	result := C.C_NSProgress_ProgressWithTotalUnitCount(C.long(unitCount))
-	return MakeProgress(result)
+	result_ := C.C_NSProgress_ProgressWithTotalUnitCount(C.long(unitCount))
+	return MakeProgress(result_)
 }
 
 func ProgressWithTotalUnitCount_Parent_PendingUnitCount(unitCount int64, parent Progress, portionOfParentTotalUnitCount int64) Progress {
-	result := C.C_NSProgress_ProgressWithTotalUnitCount_Parent_PendingUnitCount(C.long(unitCount), objc.ExtractPtr(parent), C.long(portionOfParentTotalUnitCount))
-	return MakeProgress(result)
+	result_ := C.C_NSProgress_ProgressWithTotalUnitCount_Parent_PendingUnitCount(C.long(unitCount), objc.ExtractPtr(parent), C.long(portionOfParentTotalUnitCount))
+	return MakeProgress(result_)
 }
 
-func ProgressCurrentProgress() Progress {
-	result := C.C_NSProgress_ProgressCurrentProgress()
-	return MakeProgress(result)
+func CurrentProgress() Progress {
+	result_ := C.C_NSProgress_CurrentProgress()
+	return MakeProgress(result_)
 }
 
 func (n *NSProgress) BecomeCurrentWithPendingUnitCount(unitCount int64) {
@@ -132,13 +132,13 @@ func (n *NSProgress) Unpublish() {
 	C.C_NSProgress_Unpublish(n.Ptr())
 }
 
-func ProgressRemoveSubscriber(subscriber objc.Object) {
-	C.C_NSProgress_ProgressRemoveSubscriber(objc.ExtractPtr(subscriber))
+func Progress_RemoveSubscriber(subscriber objc.Object) {
+	C.C_NSProgress_Progress_RemoveSubscriber(objc.ExtractPtr(subscriber))
 }
 
 func (n *NSProgress) TotalUnitCount() int64 {
-	result := C.C_NSProgress_TotalUnitCount(n.Ptr())
-	return int64(result)
+	result_ := C.C_NSProgress_TotalUnitCount(n.Ptr())
+	return int64(result_)
 }
 
 func (n *NSProgress) SetTotalUnitCount(value int64) {
@@ -146,8 +146,8 @@ func (n *NSProgress) SetTotalUnitCount(value int64) {
 }
 
 func (n *NSProgress) CompletedUnitCount() int64 {
-	result := C.C_NSProgress_CompletedUnitCount(n.Ptr())
-	return int64(result)
+	result_ := C.C_NSProgress_CompletedUnitCount(n.Ptr())
+	return int64(result_)
 }
 
 func (n *NSProgress) SetCompletedUnitCount(value int64) {
@@ -155,8 +155,8 @@ func (n *NSProgress) SetCompletedUnitCount(value int64) {
 }
 
 func (n *NSProgress) LocalizedDescription() string {
-	result := C.C_NSProgress_LocalizedDescription(n.Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSProgress_LocalizedDescription(n.Ptr())
+	return MakeString(result_).String()
 }
 
 func (n *NSProgress) SetLocalizedDescription(value string) {
@@ -164,8 +164,8 @@ func (n *NSProgress) SetLocalizedDescription(value string) {
 }
 
 func (n *NSProgress) LocalizedAdditionalDescription() string {
-	result := C.C_NSProgress_LocalizedAdditionalDescription(n.Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSProgress_LocalizedAdditionalDescription(n.Ptr())
+	return MakeString(result_).String()
 }
 
 func (n *NSProgress) SetLocalizedAdditionalDescription(value string) {
@@ -173,13 +173,13 @@ func (n *NSProgress) SetLocalizedAdditionalDescription(value string) {
 }
 
 func (n *NSProgress) FractionCompleted() float64 {
-	result := C.C_NSProgress_FractionCompleted(n.Ptr())
-	return float64(result)
+	result_ := C.C_NSProgress_FractionCompleted(n.Ptr())
+	return float64(result_)
 }
 
 func (n *NSProgress) IsCancellable() bool {
-	result := C.C_NSProgress_IsCancellable(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSProgress_IsCancellable(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSProgress) SetCancellable(value bool) {
@@ -187,13 +187,13 @@ func (n *NSProgress) SetCancellable(value bool) {
 }
 
 func (n *NSProgress) IsCancelled() bool {
-	result := C.C_NSProgress_IsCancelled(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSProgress_IsCancelled(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSProgress) IsPausable() bool {
-	result := C.C_NSProgress_IsPausable(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSProgress_IsPausable(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSProgress) SetPausable(value bool) {
@@ -201,18 +201,18 @@ func (n *NSProgress) SetPausable(value bool) {
 }
 
 func (n *NSProgress) IsPaused() bool {
-	result := C.C_NSProgress_IsPaused(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSProgress_IsPaused(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSProgress) IsIndeterminate() bool {
-	result := C.C_NSProgress_IsIndeterminate(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSProgress_IsIndeterminate(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSProgress) Kind() ProgressKind {
-	result := C.C_NSProgress_Kind(n.Ptr())
-	return ProgressKind(MakeString(result).String())
+	result_ := C.C_NSProgress_Kind(n.Ptr())
+	return ProgressKind(MakeString(result_).String())
 }
 
 func (n *NSProgress) SetKind(value ProgressKind) {
@@ -220,8 +220,8 @@ func (n *NSProgress) SetKind(value ProgressKind) {
 }
 
 func (n *NSProgress) FileOperationKind() ProgressFileOperationKind {
-	result := C.C_NSProgress_FileOperationKind(n.Ptr())
-	return ProgressFileOperationKind(MakeString(result).String())
+	result_ := C.C_NSProgress_FileOperationKind(n.Ptr())
+	return ProgressFileOperationKind(MakeString(result_).String())
 }
 
 func (n *NSProgress) SetFileOperationKind(value ProgressFileOperationKind) {
@@ -229,8 +229,8 @@ func (n *NSProgress) SetFileOperationKind(value ProgressFileOperationKind) {
 }
 
 func (n *NSProgress) FileURL() URL {
-	result := C.C_NSProgress_FileURL(n.Ptr())
-	return MakeURL(result)
+	result_ := C.C_NSProgress_FileURL(n.Ptr())
+	return MakeURL(result_)
 }
 
 func (n *NSProgress) SetFileURL(value URL) {
@@ -238,18 +238,18 @@ func (n *NSProgress) SetFileURL(value URL) {
 }
 
 func (n *NSProgress) IsFinished() bool {
-	result := C.C_NSProgress_IsFinished(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSProgress_IsFinished(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSProgress) IsOld() bool {
-	result := C.C_NSProgress_IsOld(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSProgress_IsOld(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSProgress) EstimatedTimeRemaining() Number {
-	result := C.C_NSProgress_EstimatedTimeRemaining(n.Ptr())
-	return MakeNumber(result)
+	result_ := C.C_NSProgress_EstimatedTimeRemaining(n.Ptr())
+	return MakeNumber(result_)
 }
 
 func (n *NSProgress) SetEstimatedTimeRemaining(value Number) {
@@ -257,8 +257,8 @@ func (n *NSProgress) SetEstimatedTimeRemaining(value Number) {
 }
 
 func (n *NSProgress) FileCompletedCount() Number {
-	result := C.C_NSProgress_FileCompletedCount(n.Ptr())
-	return MakeNumber(result)
+	result_ := C.C_NSProgress_FileCompletedCount(n.Ptr())
+	return MakeNumber(result_)
 }
 
 func (n *NSProgress) SetFileCompletedCount(value Number) {
@@ -266,8 +266,8 @@ func (n *NSProgress) SetFileCompletedCount(value Number) {
 }
 
 func (n *NSProgress) FileTotalCount() Number {
-	result := C.C_NSProgress_FileTotalCount(n.Ptr())
-	return MakeNumber(result)
+	result_ := C.C_NSProgress_FileTotalCount(n.Ptr())
+	return MakeNumber(result_)
 }
 
 func (n *NSProgress) SetFileTotalCount(value Number) {
@@ -275,8 +275,8 @@ func (n *NSProgress) SetFileTotalCount(value Number) {
 }
 
 func (n *NSProgress) Throughput() Number {
-	result := C.C_NSProgress_Throughput(n.Ptr())
-	return MakeNumber(result)
+	result_ := C.C_NSProgress_Throughput(n.Ptr())
+	return MakeNumber(result_)
 }
 
 func (n *NSProgress) SetThroughput(value Number) {

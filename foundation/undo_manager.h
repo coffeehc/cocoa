@@ -35,5 +35,7 @@ void* C_NSUndoManager_UndoActionName(void* ptr);
 void* C_NSUndoManager_RedoActionName(void* ptr);
 void* C_NSUndoManager_UndoMenuItemTitle(void* ptr);
 void* C_NSUndoManager_RedoMenuItemTitle(void* ptr);
+Array C_NSUndoManager_RunLoopModes(void* ptr);
+void C_NSUndoManager_SetRunLoopModes(void* ptr, Array value);
 bool C_NSUndoManager_UndoActionIsDiscardable(void* ptr);
 bool C_NSUndoManager_RedoActionIsDiscardable(void* ptr);

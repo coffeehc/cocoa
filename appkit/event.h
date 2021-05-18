@@ -10,6 +10,9 @@ void* C_NSEvent_Event_MouseEventWithType_Location_ModifierFlags_Timestamp_Window
 void* C_NSEvent_EventWithCGEvent(CGEventRef cgEvent);
 void C_NSEvent_Event_StartPeriodicEventsAfterDelay_WithPeriod(double delay, double period);
 void C_NSEvent_Event_StopPeriodicEvents();
+void* C_NSEvent_TouchesMatchingPhase_InView(void* ptr, unsigned int phase, void* view);
+void* C_NSEvent_AllTouches(void* ptr);
+void* C_NSEvent_TouchesForView(void* ptr, void* view);
 Array C_NSEvent_CoalescedTouchesForTouch(void* ptr, void* touch);
 void C_NSEvent_Event_RemoveMonitor(void* eventMonitor);
 void* C_NSEvent_CharactersByApplyingModifiers(void* ptr, unsigned int modifiers);

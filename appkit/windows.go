@@ -33,8 +33,8 @@ const (
 	BackingStoreBuffered    BackingStoreType = 2
 )
 
-// NewPlainWindow create a common window with close/minimize buttons
-func NewPlainWindow(rect foundation.Rect) Window {
+// NewWindow create a common window with close/minimize buttons
+func NewWindow(rect foundation.Rect) Window {
 	return AllocWindow().InitWithContentRect_StyleMask_Backing_Defer(
 		rect,
 		WindowStyleMaskTitled|WindowStyleMaskClosable|WindowStyleMaskResizable|WindowStyleMaskMiniaturizable,

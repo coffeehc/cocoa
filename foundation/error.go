@@ -11,13 +11,16 @@ import (
 
 type Error interface {
 	objc.Object
+	AttemptRecoveryFromError_OptionIndex(error Error, recoveryOptionIndex uint) bool
 	Code() int
 	Domain() ErrorDomain
 	LocalizedDescription() string
+	LocalizedRecoveryOptions() []string
 	LocalizedRecoverySuggestion() string
 	LocalizedFailureReason() string
 	RecoveryAttempter() objc.Object
 	HelpAnchor() string
+	UnderlyingErrors() []Error
 }
 
 type NSError struct {
@@ -38,41 +41,68 @@ func AllocError() *NSError {
 }
 
 func (n *NSError) Init() Error {
-	result := C.C_NSError_Init(n.Ptr())
-	return MakeError(result)
+	result_ := C.C_NSError_Init(n.Ptr())
+	return MakeError(result_)
+}
+
+func (n *NSError) AttemptRecoveryFromError_OptionIndex(error Error, recoveryOptionIndex uint) bool {
+	result_ := C.C_NSError_AttemptRecoveryFromError_OptionIndex(n.Ptr(), objc.ExtractPtr(error), C.uint(recoveryOptionIndex))
+	return bool(result_)
 }
 
 func (n *NSError) Code() int {
-	result := C.C_NSError_Code(n.Ptr())
-	return int(result)
+	result_ := C.C_NSError_Code(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSError) Domain() ErrorDomain {
-	result := C.C_NSError_Domain(n.Ptr())
-	return ErrorDomain(MakeString(result).String())
+	result_ := C.C_NSError_Domain(n.Ptr())
+	return ErrorDomain(MakeString(result_).String())
 }
 
 func (n *NSError) LocalizedDescription() string {
-	result := C.C_NSError_LocalizedDescription(n.Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSError_LocalizedDescription(n.Ptr())
+	return MakeString(result_).String()
+}
+
+func (n *NSError) LocalizedRecoveryOptions() []string {
+	result_ := C.C_NSError_LocalizedRecoveryOptions(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeString(r).String()
+	}
+	return goResult_
 }
 
 func (n *NSError) LocalizedRecoverySuggestion() string {
-	result := C.C_NSError_LocalizedRecoverySuggestion(n.Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSError_LocalizedRecoverySuggestion(n.Ptr())
+	return MakeString(result_).String()
 }
 
 func (n *NSError) LocalizedFailureReason() string {
-	result := C.C_NSError_LocalizedFailureReason(n.Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSError_LocalizedFailureReason(n.Ptr())
+	return MakeString(result_).String()
 }
 
 func (n *NSError) RecoveryAttempter() objc.Object {
-	result := C.C_NSError_RecoveryAttempter(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSError_RecoveryAttempter(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSError) HelpAnchor() string {
-	result := C.C_NSError_HelpAnchor(n.Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSError_HelpAnchor(n.Ptr())
+	return MakeString(result_).String()
+}
+
+func (n *NSError) UnderlyingErrors() []Error {
+	result_ := C.C_NSError_UnderlyingErrors(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]Error, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeError(r)
+	}
+	return goResult_
 }

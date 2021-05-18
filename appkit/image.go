@@ -31,6 +31,8 @@ type Image interface {
 	CancelIncrementalLoad()
 	LayerContentsForContentsScale(layerContentsScale coregraphics.Float) objc.Object
 	RecommendedLayerContentsScale(preferredContentsScale coregraphics.Float) coregraphics.Float
+	Delegate() objc.Object
+	SetDelegate(value objc.Object)
 	Size() foundation.Size
 	SetSize(value foundation.Size)
 	IsTemplate() bool
@@ -78,88 +80,88 @@ func AllocImage() *NSImage {
 }
 
 func (n *NSImage) InitByReferencingFile(fileName string) Image {
-	result := C.C_NSImage_InitByReferencingFile(n.Ptr(), foundation.NewString(fileName).Ptr())
-	return MakeImage(result)
+	result_ := C.C_NSImage_InitByReferencingFile(n.Ptr(), foundation.NewString(fileName).Ptr())
+	return MakeImage(result_)
 }
 
 func (n *NSImage) InitByReferencingURL(url foundation.URL) Image {
-	result := C.C_NSImage_InitByReferencingURL(n.Ptr(), objc.ExtractPtr(url))
-	return MakeImage(result)
+	result_ := C.C_NSImage_InitByReferencingURL(n.Ptr(), objc.ExtractPtr(url))
+	return MakeImage(result_)
 }
 
 func (n *NSImage) InitWithContentsOfFile(fileName string) Image {
-	result := C.C_NSImage_InitWithContentsOfFile(n.Ptr(), foundation.NewString(fileName).Ptr())
-	return MakeImage(result)
+	result_ := C.C_NSImage_InitWithContentsOfFile(n.Ptr(), foundation.NewString(fileName).Ptr())
+	return MakeImage(result_)
 }
 
 func (n *NSImage) InitWithContentsOfURL(url foundation.URL) Image {
-	result := C.C_NSImage_InitWithContentsOfURL(n.Ptr(), objc.ExtractPtr(url))
-	return MakeImage(result)
+	result_ := C.C_NSImage_InitWithContentsOfURL(n.Ptr(), objc.ExtractPtr(url))
+	return MakeImage(result_)
 }
 
 func (n *NSImage) InitWithData(data []byte) Image {
-	result := C.C_NSImage_InitWithData(n.Ptr(), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))})
-	return MakeImage(result)
+	result_ := C.C_NSImage_InitWithData(n.Ptr(), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))})
+	return MakeImage(result_)
 }
 
 func (n *NSImage) InitWithDataIgnoringOrientation(data []byte) Image {
-	result := C.C_NSImage_InitWithDataIgnoringOrientation(n.Ptr(), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))})
-	return MakeImage(result)
+	result_ := C.C_NSImage_InitWithDataIgnoringOrientation(n.Ptr(), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))})
+	return MakeImage(result_)
 }
 
 func (n *NSImage) InitWithCGImage_Size(cgImage coregraphics.ImageRef, size foundation.Size) Image {
-	result := C.C_NSImage_InitWithCGImage_Size(n.Ptr(), *(*C.CGImageRef)(coregraphics.ToCGImageRefPointer(cgImage)), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(size))))
-	return MakeImage(result)
+	result_ := C.C_NSImage_InitWithCGImage_Size(n.Ptr(), *(*C.CGImageRef)(coregraphics.ToCGImageRefPointer(cgImage)), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(size))))
+	return MakeImage(result_)
 }
 
 func (n *NSImage) InitWithPasteboard(pasteboard Pasteboard) Image {
-	result := C.C_NSImage_InitWithPasteboard(n.Ptr(), objc.ExtractPtr(pasteboard))
-	return MakeImage(result)
+	result_ := C.C_NSImage_InitWithPasteboard(n.Ptr(), objc.ExtractPtr(pasteboard))
+	return MakeImage(result_)
 }
 
 func (n *NSImage) InitWithCoder(coder foundation.Coder) Image {
-	result := C.C_NSImage_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeImage(result)
+	result_ := C.C_NSImage_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeImage(result_)
 }
 
 func (n *NSImage) InitWithSize(size foundation.Size) Image {
-	result := C.C_NSImage_InitWithSize(n.Ptr(), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(size))))
-	return MakeImage(result)
+	result_ := C.C_NSImage_InitWithSize(n.Ptr(), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(size))))
+	return MakeImage(result_)
 }
 
 func (n *NSImage) Init() Image {
-	result := C.C_NSImage_Init(n.Ptr())
-	return MakeImage(result)
+	result_ := C.C_NSImage_Init(n.Ptr())
+	return MakeImage(result_)
 }
 
 func ImageNamed(name ImageName) Image {
-	result := C.C_NSImage_ImageNamed(foundation.NewString(string(name)).Ptr())
-	return MakeImage(result)
+	result_ := C.C_NSImage_ImageNamed(foundation.NewString(string(name)).Ptr())
+	return MakeImage(result_)
 }
 
 func (n *NSImage) SetName(_string ImageName) bool {
-	result := C.C_NSImage_SetName(n.Ptr(), foundation.NewString(string(_string)).Ptr())
-	return bool(result)
+	result_ := C.C_NSImage_SetName(n.Ptr(), foundation.NewString(string(_string)).Ptr())
+	return bool(result_)
 }
 
 func (n *NSImage) Name() ImageName {
-	result := C.C_NSImage_Name(n.Ptr())
-	return ImageName(foundation.MakeString(result).String())
+	result_ := C.C_NSImage_Name(n.Ptr())
+	return ImageName(foundation.MakeString(result_).String())
 }
 
 func ImageWithSystemSymbolName_AccessibilityDescription(symbolName string, description string) Image {
-	result := C.C_NSImage_ImageWithSystemSymbolName_AccessibilityDescription(foundation.NewString(symbolName).Ptr(), foundation.NewString(description).Ptr())
-	return MakeImage(result)
+	result_ := C.C_NSImage_ImageWithSystemSymbolName_AccessibilityDescription(foundation.NewString(symbolName).Ptr(), foundation.NewString(description).Ptr())
+	return MakeImage(result_)
 }
 
 func (n *NSImage) ImageWithSymbolConfiguration(configuration ImageSymbolConfiguration) Image {
-	result := C.C_NSImage_ImageWithSymbolConfiguration(n.Ptr(), objc.ExtractPtr(configuration))
-	return MakeImage(result)
+	result_ := C.C_NSImage_ImageWithSymbolConfiguration(n.Ptr(), objc.ExtractPtr(configuration))
+	return MakeImage(result_)
 }
 
 func Image_CanInitWithPasteboard(pasteboard Pasteboard) bool {
-	result := C.C_NSImage_Image_CanInitWithPasteboard(objc.ExtractPtr(pasteboard))
-	return bool(result)
+	result_ := C.C_NSImage_Image_CanInitWithPasteboard(objc.ExtractPtr(pasteboard))
+	return bool(result_)
 }
 
 func (n *NSImage) AddRepresentation(imageRep ImageRep) {
@@ -192,8 +194,8 @@ func (n *NSImage) DrawInRect_FromRect_Operation_Fraction(rect foundation.Rect, f
 }
 
 func (n *NSImage) DrawRepresentation_InRect(imageRep ImageRep, rect foundation.Rect) bool {
-	result := C.C_NSImage_DrawRepresentation_InRect(n.Ptr(), objc.ExtractPtr(imageRep), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
-	return bool(result)
+	result_ := C.C_NSImage_DrawRepresentation_InRect(n.Ptr(), objc.ExtractPtr(imageRep), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
+	return bool(result_)
 }
 
 func (n *NSImage) LockFocus() {
@@ -213,12 +215,12 @@ func (n *NSImage) Recache() {
 }
 
 func (n *NSImage) TIFFRepresentationUsingCompression_Factor(comp TIFFCompression, factor float32) []byte {
-	result := C.C_NSImage_TIFFRepresentationUsingCompression_Factor(n.Ptr(), C.uint(uint(comp)), C.float(factor))
-	resultBuffer := (*[1 << 30]byte)(result.data)[:C.int(result.len)]
-	goResult := make([]byte, C.int(result.len))
-	copy(goResult, resultBuffer)
-	C.free(result.data)
-	return goResult
+	result_ := C.C_NSImage_TIFFRepresentationUsingCompression_Factor(n.Ptr(), C.uint(uint(comp)), C.float(factor))
+	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
+	goResult_ := make([]byte, C.int(result_.len))
+	copy(goResult_, result_Buffer)
+	C.free(result_.data)
+	return goResult_
 }
 
 func (n *NSImage) CancelIncrementalLoad() {
@@ -226,18 +228,27 @@ func (n *NSImage) CancelIncrementalLoad() {
 }
 
 func (n *NSImage) LayerContentsForContentsScale(layerContentsScale coregraphics.Float) objc.Object {
-	result := C.C_NSImage_LayerContentsForContentsScale(n.Ptr(), C.double(float64(layerContentsScale)))
-	return objc.MakeObject(result)
+	result_ := C.C_NSImage_LayerContentsForContentsScale(n.Ptr(), C.double(float64(layerContentsScale)))
+	return objc.MakeObject(result_)
 }
 
 func (n *NSImage) RecommendedLayerContentsScale(preferredContentsScale coregraphics.Float) coregraphics.Float {
-	result := C.C_NSImage_RecommendedLayerContentsScale(n.Ptr(), C.double(float64(preferredContentsScale)))
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSImage_RecommendedLayerContentsScale(n.Ptr(), C.double(float64(preferredContentsScale)))
+	return coregraphics.Float(float64(result_))
+}
+
+func (n *NSImage) Delegate() objc.Object {
+	result_ := C.C_NSImage_Delegate(n.Ptr())
+	return objc.MakeObject(result_)
+}
+
+func (n *NSImage) SetDelegate(value objc.Object) {
+	C.C_NSImage_SetDelegate(n.Ptr(), objc.ExtractPtr(value))
 }
 
 func (n *NSImage) Size() foundation.Size {
-	result := C.C_NSImage_Size(n.Ptr())
-	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSImage_Size(n.Ptr())
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSImage) SetSize(value foundation.Size) {
@@ -245,8 +256,8 @@ func (n *NSImage) SetSize(value foundation.Size) {
 }
 
 func (n *NSImage) IsTemplate() bool {
-	result := C.C_NSImage_IsTemplate(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSImage_IsTemplate(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSImage) SetTemplate(value bool) {
@@ -254,41 +265,41 @@ func (n *NSImage) SetTemplate(value bool) {
 }
 
 func ImageTypes() []string {
-	result := C.C_NSImage_ImageTypes()
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]string, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = foundation.MakeString(r).String()
+	result_ := C.C_NSImage_ImageTypes()
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = foundation.MakeString(r).String()
 	}
-	return goResult
+	return goResult_
 }
 
 func ImageUnfilteredTypes() []string {
-	result := C.C_NSImage_ImageUnfilteredTypes()
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]string, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = foundation.MakeString(r).String()
+	result_ := C.C_NSImage_ImageUnfilteredTypes()
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]string, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = foundation.MakeString(r).String()
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSImage) Representations() []ImageRep {
-	result := C.C_NSImage_Representations(n.Ptr())
-	defer C.free(result.data)
-	resultSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result.data))[:result.len:result.len]
-	var goResult = make([]ImageRep, len(resultSlice))
-	for idx, r := range resultSlice {
-		goResult[idx] = MakeImageRep(r)
+	result_ := C.C_NSImage_Representations(n.Ptr())
+	defer C.free(result_.data)
+	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	var goResult_ = make([]ImageRep, len(result_Slice))
+	for idx, r := range result_Slice {
+		goResult_[idx] = MakeImageRep(r)
 	}
-	return goResult
+	return goResult_
 }
 
 func (n *NSImage) PrefersColorMatch() bool {
-	result := C.C_NSImage_PrefersColorMatch(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSImage_PrefersColorMatch(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSImage) SetPrefersColorMatch(value bool) {
@@ -296,8 +307,8 @@ func (n *NSImage) SetPrefersColorMatch(value bool) {
 }
 
 func (n *NSImage) UsesEPSOnResolutionMismatch() bool {
-	result := C.C_NSImage_UsesEPSOnResolutionMismatch(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSImage_UsesEPSOnResolutionMismatch(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSImage) SetUsesEPSOnResolutionMismatch(value bool) {
@@ -305,8 +316,8 @@ func (n *NSImage) SetUsesEPSOnResolutionMismatch(value bool) {
 }
 
 func (n *NSImage) MatchesOnMultipleResolution() bool {
-	result := C.C_NSImage_MatchesOnMultipleResolution(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSImage_MatchesOnMultipleResolution(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSImage) SetMatchesOnMultipleResolution(value bool) {
@@ -314,13 +325,13 @@ func (n *NSImage) SetMatchesOnMultipleResolution(value bool) {
 }
 
 func (n *NSImage) IsValid() bool {
-	result := C.C_NSImage_IsValid(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSImage_IsValid(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSImage) BackgroundColor() Color {
-	result := C.C_NSImage_BackgroundColor(n.Ptr())
-	return MakeColor(result)
+	result_ := C.C_NSImage_BackgroundColor(n.Ptr())
+	return MakeColor(result_)
 }
 
 func (n *NSImage) SetBackgroundColor(value Color) {
@@ -328,8 +339,8 @@ func (n *NSImage) SetBackgroundColor(value Color) {
 }
 
 func (n *NSImage) CapInsets() foundation.EdgeInsets {
-	result := C.C_NSImage_CapInsets(n.Ptr())
-	return foundation.FromNSEdgeInsetsPointer(unsafe.Pointer(&result))
+	result_ := C.C_NSImage_CapInsets(n.Ptr())
+	return foundation.FromNSEdgeInsetsPointer(unsafe.Pointer(&result_))
 }
 
 func (n *NSImage) SetCapInsets(value foundation.EdgeInsets) {
@@ -337,8 +348,8 @@ func (n *NSImage) SetCapInsets(value foundation.EdgeInsets) {
 }
 
 func (n *NSImage) ResizingMode() ImageResizingMode {
-	result := C.C_NSImage_ResizingMode(n.Ptr())
-	return ImageResizingMode(int(result))
+	result_ := C.C_NSImage_ResizingMode(n.Ptr())
+	return ImageResizingMode(int(result_))
 }
 
 func (n *NSImage) SetResizingMode(value ImageResizingMode) {
@@ -346,8 +357,8 @@ func (n *NSImage) SetResizingMode(value ImageResizingMode) {
 }
 
 func (n *NSImage) AlignmentRect() foundation.Rect {
-	result := C.C_NSImage_AlignmentRect(n.Ptr())
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSImage_AlignmentRect(n.Ptr())
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSImage) SetAlignmentRect(value foundation.Rect) {
@@ -355,8 +366,8 @@ func (n *NSImage) SetAlignmentRect(value foundation.Rect) {
 }
 
 func (n *NSImage) CacheMode() ImageCacheMode {
-	result := C.C_NSImage_CacheMode(n.Ptr())
-	return ImageCacheMode(uint(result))
+	result_ := C.C_NSImage_CacheMode(n.Ptr())
+	return ImageCacheMode(uint(result_))
 }
 
 func (n *NSImage) SetCacheMode(value ImageCacheMode) {
@@ -364,17 +375,17 @@ func (n *NSImage) SetCacheMode(value ImageCacheMode) {
 }
 
 func (n *NSImage) TIFFRepresentation() []byte {
-	result := C.C_NSImage_TIFFRepresentation(n.Ptr())
-	resultBuffer := (*[1 << 30]byte)(result.data)[:C.int(result.len)]
-	goResult := make([]byte, C.int(result.len))
-	copy(goResult, resultBuffer)
-	C.free(result.data)
-	return goResult
+	result_ := C.C_NSImage_TIFFRepresentation(n.Ptr())
+	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
+	goResult_ := make([]byte, C.int(result_.len))
+	copy(goResult_, result_Buffer)
+	C.free(result_.data)
+	return goResult_
 }
 
 func (n *NSImage) AccessibilityDescription() string {
-	result := C.C_NSImage_AccessibilityDescription(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSImage_AccessibilityDescription(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSImage) SetAccessibilityDescription(value string) {
@@ -382,8 +393,8 @@ func (n *NSImage) SetAccessibilityDescription(value string) {
 }
 
 func (n *NSImage) MatchesOnlyOnBestFittingAxis() bool {
-	result := C.C_NSImage_MatchesOnlyOnBestFittingAxis(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSImage_MatchesOnlyOnBestFittingAxis(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSImage) SetMatchesOnlyOnBestFittingAxis(value bool) {

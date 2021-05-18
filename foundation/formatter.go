@@ -33,16 +33,16 @@ func AllocFormatter() *NSFormatter {
 }
 
 func (n *NSFormatter) Init() Formatter {
-	result := C.C_NSFormatter_Init(n.Ptr())
-	return MakeFormatter(result)
+	result_ := C.C_NSFormatter_Init(n.Ptr())
+	return MakeFormatter(result_)
 }
 
 func (n *NSFormatter) StringForObjectValue(obj objc.Object) string {
-	result := C.C_NSFormatter_StringForObjectValue(n.Ptr(), objc.ExtractPtr(obj))
-	return MakeString(result).String()
+	result_ := C.C_NSFormatter_StringForObjectValue(n.Ptr(), objc.ExtractPtr(obj))
+	return MakeString(result_).String()
 }
 
 func (n *NSFormatter) EditingStringForObjectValue(obj objc.Object) string {
-	result := C.C_NSFormatter_EditingStringForObjectValue(n.Ptr(), objc.ExtractPtr(obj))
-	return MakeString(result).String()
+	result_ := C.C_NSFormatter_EditingStringForObjectValue(n.Ptr(), objc.ExtractPtr(obj))
+	return MakeString(result_).String()
 }

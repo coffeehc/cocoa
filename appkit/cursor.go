@@ -13,7 +13,6 @@ import (
 
 type Cursor interface {
 	objc.Object
-	Pop()
 	Push()
 	Set()
 	Image() Image
@@ -38,38 +37,34 @@ func AllocCursor() *NSCursor {
 }
 
 func (n *NSCursor) InitWithImage_HotSpot(newImage Image, point foundation.Point) Cursor {
-	result := C.C_NSCursor_InitWithImage_HotSpot(n.Ptr(), objc.ExtractPtr(newImage), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))))
-	return MakeCursor(result)
+	result_ := C.C_NSCursor_InitWithImage_HotSpot(n.Ptr(), objc.ExtractPtr(newImage), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))))
+	return MakeCursor(result_)
 }
 
 func (n *NSCursor) InitWithCoder(coder foundation.Coder) Cursor {
-	result := C.C_NSCursor_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeCursor(result)
+	result_ := C.C_NSCursor_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeCursor(result_)
 }
 
 func (n *NSCursor) Init() Cursor {
-	result := C.C_NSCursor_Init(n.Ptr())
-	return MakeCursor(result)
+	result_ := C.C_NSCursor_Init(n.Ptr())
+	return MakeCursor(result_)
 }
 
-func CursorHide() {
-	C.C_NSCursor_CursorHide()
+func Cursor_Hide() {
+	C.C_NSCursor_Cursor_Hide()
 }
 
-func CursorUnhide() {
-	C.C_NSCursor_CursorUnhide()
+func Cursor_Unhide() {
+	C.C_NSCursor_Cursor_Unhide()
 }
 
-func CursorSetHiddenUntilMouseMoves(flag bool) {
-	C.C_NSCursor_CursorSetHiddenUntilMouseMoves(C.bool(flag))
+func Cursor_SetHiddenUntilMouseMoves(flag bool) {
+	C.C_NSCursor_Cursor_SetHiddenUntilMouseMoves(C.bool(flag))
 }
 
-func CursorPop() {
-	C.C_NSCursor_CursorPop()
-}
-
-func (n *NSCursor) Pop() {
-	C.C_NSCursor_Pop(n.Ptr())
+func Cursor_Pop() {
+	C.C_NSCursor_Cursor_Pop()
 }
 
 func (n *NSCursor) Push() {
@@ -81,11 +76,111 @@ func (n *NSCursor) Set() {
 }
 
 func (n *NSCursor) Image() Image {
-	result := C.C_NSCursor_Image(n.Ptr())
-	return MakeImage(result)
+	result_ := C.C_NSCursor_Image(n.Ptr())
+	return MakeImage(result_)
 }
 
 func (n *NSCursor) HotSpot() foundation.Point {
-	result := C.C_NSCursor_HotSpot(n.Ptr())
-	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSCursor_HotSpot(n.Ptr())
+	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
+}
+
+func CurrentCursor() Cursor {
+	result_ := C.C_NSCursor_CurrentCursor()
+	return MakeCursor(result_)
+}
+
+func CurrentSystemCursor() Cursor {
+	result_ := C.C_NSCursor_CurrentSystemCursor()
+	return MakeCursor(result_)
+}
+
+func ArrowCursor() Cursor {
+	result_ := C.C_NSCursor_ArrowCursor()
+	return MakeCursor(result_)
+}
+
+func ContextualMenuCursor() Cursor {
+	result_ := C.C_NSCursor_ContextualMenuCursor()
+	return MakeCursor(result_)
+}
+
+func ClosedHandCursor() Cursor {
+	result_ := C.C_NSCursor_ClosedHandCursor()
+	return MakeCursor(result_)
+}
+
+func CrosshairCursor() Cursor {
+	result_ := C.C_NSCursor_CrosshairCursor()
+	return MakeCursor(result_)
+}
+
+func DisappearingItemCursor() Cursor {
+	result_ := C.C_NSCursor_DisappearingItemCursor()
+	return MakeCursor(result_)
+}
+
+func DragCopyCursor() Cursor {
+	result_ := C.C_NSCursor_DragCopyCursor()
+	return MakeCursor(result_)
+}
+
+func DragLinkCursor() Cursor {
+	result_ := C.C_NSCursor_DragLinkCursor()
+	return MakeCursor(result_)
+}
+
+func IBeamCursor() Cursor {
+	result_ := C.C_NSCursor_IBeamCursor()
+	return MakeCursor(result_)
+}
+
+func OpenHandCursor() Cursor {
+	result_ := C.C_NSCursor_OpenHandCursor()
+	return MakeCursor(result_)
+}
+
+func OperationNotAllowedCursor() Cursor {
+	result_ := C.C_NSCursor_OperationNotAllowedCursor()
+	return MakeCursor(result_)
+}
+
+func PointingHandCursor() Cursor {
+	result_ := C.C_NSCursor_PointingHandCursor()
+	return MakeCursor(result_)
+}
+
+func ResizeDownCursor() Cursor {
+	result_ := C.C_NSCursor_ResizeDownCursor()
+	return MakeCursor(result_)
+}
+
+func ResizeLeftCursor() Cursor {
+	result_ := C.C_NSCursor_ResizeLeftCursor()
+	return MakeCursor(result_)
+}
+
+func ResizeLeftRightCursor() Cursor {
+	result_ := C.C_NSCursor_ResizeLeftRightCursor()
+	return MakeCursor(result_)
+}
+
+func ResizeRightCursor() Cursor {
+	result_ := C.C_NSCursor_ResizeRightCursor()
+	return MakeCursor(result_)
+}
+
+func ResizeUpCursor() Cursor {
+	result_ := C.C_NSCursor_ResizeUpCursor()
+	return MakeCursor(result_)
+}
+
+func ResizeUpDownCursor() Cursor {
+	result_ := C.C_NSCursor_ResizeUpDownCursor()
+	return MakeCursor(result_)
+}
+
+func Cursor_IBeamCursorForVerticalLayout() Cursor {
+	result_ := C.C_NSCursor_Cursor_IBeamCursorForVerticalLayout()
+	return MakeCursor(result_)
 }

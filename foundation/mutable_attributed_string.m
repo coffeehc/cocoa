@@ -7,24 +7,24 @@ void* C_MutableAttributedString_Alloc() {
 
 void* C_NSMutableAttributedString_InitWithString(void* ptr, void* str) {
     NSMutableAttributedString* nSMutableAttributedString = (NSMutableAttributedString*)ptr;
-    NSMutableAttributedString* result = [nSMutableAttributedString initWithString:(NSString*)str];
-    return result;
+    NSMutableAttributedString* result_ = [nSMutableAttributedString initWithString:(NSString*)str];
+    return result_;
 }
 
 void* C_NSMutableAttributedString_InitWithAttributedString(void* ptr, void* attrStr) {
     NSMutableAttributedString* nSMutableAttributedString = (NSMutableAttributedString*)ptr;
-    NSMutableAttributedString* result = [nSMutableAttributedString initWithAttributedString:(NSAttributedString*)attrStr];
-    return result;
+    NSMutableAttributedString* result_ = [nSMutableAttributedString initWithAttributedString:(NSAttributedString*)attrStr];
+    return result_;
 }
 
 void* C_NSMutableAttributedString_Init(void* ptr) {
     NSMutableAttributedString* nSMutableAttributedString = (NSMutableAttributedString*)ptr;
-    NSMutableAttributedString* result = [nSMutableAttributedString init];
-    return result;
+    NSMutableAttributedString* result_ = [nSMutableAttributedString init];
+    return result_;
 }
 
 void* C_NSMutableAttributedString_MutableString(void* ptr) {
     NSMutableAttributedString* nSMutableAttributedString = (NSMutableAttributedString*)ptr;
-    NSMutableString* result = [nSMutableAttributedString mutableString];
-    return result;
+    NSMutableString* result_ = [nSMutableAttributedString mutableString];
+    return result_;
 }

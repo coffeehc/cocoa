@@ -74,28 +74,28 @@ func AllocBezierPath() *NSBezierPath {
 }
 
 func (n *NSBezierPath) Init() BezierPath {
-	result := C.C_NSBezierPath_Init(n.Ptr())
-	return MakeBezierPath(result)
+	result_ := C.C_NSBezierPath_Init(n.Ptr())
+	return MakeBezierPath(result_)
 }
 
 func BezierPath_() BezierPath {
-	result := C.C_NSBezierPath_BezierPath_()
-	return MakeBezierPath(result)
+	result_ := C.C_NSBezierPath_BezierPath_()
+	return MakeBezierPath(result_)
 }
 
 func BezierPathWithOvalInRect(rect foundation.Rect) BezierPath {
-	result := C.C_NSBezierPath_BezierPathWithOvalInRect(*(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
-	return MakeBezierPath(result)
+	result_ := C.C_NSBezierPath_BezierPathWithOvalInRect(*(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
+	return MakeBezierPath(result_)
 }
 
 func BezierPathWithRect(rect foundation.Rect) BezierPath {
-	result := C.C_NSBezierPath_BezierPathWithRect(*(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
-	return MakeBezierPath(result)
+	result_ := C.C_NSBezierPath_BezierPathWithRect(*(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
+	return MakeBezierPath(result_)
 }
 
 func BezierPathWithRoundedRect_XRadius_YRadius(rect foundation.Rect, xRadius coregraphics.Float, yRadius coregraphics.Float) BezierPath {
-	result := C.C_NSBezierPath_BezierPathWithRoundedRect_XRadius_YRadius(*(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))), C.double(float64(xRadius)), C.double(float64(yRadius)))
-	return MakeBezierPath(result)
+	result_ := C.C_NSBezierPath_BezierPathWithRoundedRect_XRadius_YRadius(*(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))), C.double(float64(xRadius)), C.double(float64(yRadius)))
+	return MakeBezierPath(result_)
 }
 
 func (n *NSBezierPath) MoveToPoint(point foundation.Point) {
@@ -187,8 +187,8 @@ func BezierPath_ClipRect(rect foundation.Rect) {
 }
 
 func (n *NSBezierPath) ContainsPoint(point foundation.Point) bool {
-	result := C.C_NSBezierPath_ContainsPoint(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))))
-	return bool(result)
+	result_ := C.C_NSBezierPath_ContainsPoint(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))))
+	return bool(result_)
 }
 
 func (n *NSBezierPath) TransformUsingAffineTransform(transform foundation.AffineTransform) {
@@ -196,8 +196,8 @@ func (n *NSBezierPath) TransformUsingAffineTransform(transform foundation.Affine
 }
 
 func (n *NSBezierPath) ElementAtIndex(index int) BezierPathElement {
-	result := C.C_NSBezierPath_ElementAtIndex(n.Ptr(), C.int(index))
-	return BezierPathElement(uint(result))
+	result_ := C.C_NSBezierPath_ElementAtIndex(n.Ptr(), C.int(index))
+	return BezierPathElement(uint(result_))
 }
 
 func (n *NSBezierPath) RemoveAllPoints() {
@@ -205,18 +205,18 @@ func (n *NSBezierPath) RemoveAllPoints() {
 }
 
 func (n *NSBezierPath) BezierPathByFlatteningPath() BezierPath {
-	result := C.C_NSBezierPath_BezierPathByFlatteningPath(n.Ptr())
-	return MakeBezierPath(result)
+	result_ := C.C_NSBezierPath_BezierPathByFlatteningPath(n.Ptr())
+	return MakeBezierPath(result_)
 }
 
 func (n *NSBezierPath) BezierPathByReversingPath() BezierPath {
-	result := C.C_NSBezierPath_BezierPathByReversingPath(n.Ptr())
-	return MakeBezierPath(result)
+	result_ := C.C_NSBezierPath_BezierPathByReversingPath(n.Ptr())
+	return MakeBezierPath(result_)
 }
 
 func (n *NSBezierPath) WindingRule() WindingRule {
-	result := C.C_NSBezierPath_WindingRule(n.Ptr())
-	return WindingRule(uint(result))
+	result_ := C.C_NSBezierPath_WindingRule(n.Ptr())
+	return WindingRule(uint(result_))
 }
 
 func (n *NSBezierPath) SetWindingRule(value WindingRule) {
@@ -224,8 +224,8 @@ func (n *NSBezierPath) SetWindingRule(value WindingRule) {
 }
 
 func (n *NSBezierPath) LineCapStyle() LineCapStyle {
-	result := C.C_NSBezierPath_LineCapStyle(n.Ptr())
-	return LineCapStyle(uint(result))
+	result_ := C.C_NSBezierPath_LineCapStyle(n.Ptr())
+	return LineCapStyle(uint(result_))
 }
 
 func (n *NSBezierPath) SetLineCapStyle(value LineCapStyle) {
@@ -233,8 +233,8 @@ func (n *NSBezierPath) SetLineCapStyle(value LineCapStyle) {
 }
 
 func (n *NSBezierPath) LineJoinStyle() LineJoinStyle {
-	result := C.C_NSBezierPath_LineJoinStyle(n.Ptr())
-	return LineJoinStyle(uint(result))
+	result_ := C.C_NSBezierPath_LineJoinStyle(n.Ptr())
+	return LineJoinStyle(uint(result_))
 }
 
 func (n *NSBezierPath) SetLineJoinStyle(value LineJoinStyle) {
@@ -242,8 +242,8 @@ func (n *NSBezierPath) SetLineJoinStyle(value LineJoinStyle) {
 }
 
 func (n *NSBezierPath) LineWidth() coregraphics.Float {
-	result := C.C_NSBezierPath_LineWidth(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSBezierPath_LineWidth(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSBezierPath) SetLineWidth(value coregraphics.Float) {
@@ -251,8 +251,8 @@ func (n *NSBezierPath) SetLineWidth(value coregraphics.Float) {
 }
 
 func (n *NSBezierPath) MiterLimit() coregraphics.Float {
-	result := C.C_NSBezierPath_MiterLimit(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSBezierPath_MiterLimit(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSBezierPath) SetMiterLimit(value coregraphics.Float) {
@@ -260,8 +260,8 @@ func (n *NSBezierPath) SetMiterLimit(value coregraphics.Float) {
 }
 
 func (n *NSBezierPath) Flatness() coregraphics.Float {
-	result := C.C_NSBezierPath_Flatness(n.Ptr())
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSBezierPath_Flatness(n.Ptr())
+	return coregraphics.Float(float64(result_))
 }
 
 func (n *NSBezierPath) SetFlatness(value coregraphics.Float) {
@@ -269,8 +269,8 @@ func (n *NSBezierPath) SetFlatness(value coregraphics.Float) {
 }
 
 func BezierPath_DefaultWindingRule() WindingRule {
-	result := C.C_NSBezierPath_BezierPath_DefaultWindingRule()
-	return WindingRule(uint(result))
+	result_ := C.C_NSBezierPath_BezierPath_DefaultWindingRule()
+	return WindingRule(uint(result_))
 }
 
 func BezierPath_SetDefaultWindingRule(value WindingRule) {
@@ -278,8 +278,8 @@ func BezierPath_SetDefaultWindingRule(value WindingRule) {
 }
 
 func BezierPath_DefaultLineCapStyle() LineCapStyle {
-	result := C.C_NSBezierPath_BezierPath_DefaultLineCapStyle()
-	return LineCapStyle(uint(result))
+	result_ := C.C_NSBezierPath_BezierPath_DefaultLineCapStyle()
+	return LineCapStyle(uint(result_))
 }
 
 func BezierPath_SetDefaultLineCapStyle(value LineCapStyle) {
@@ -287,8 +287,8 @@ func BezierPath_SetDefaultLineCapStyle(value LineCapStyle) {
 }
 
 func BezierPath_DefaultLineJoinStyle() LineJoinStyle {
-	result := C.C_NSBezierPath_BezierPath_DefaultLineJoinStyle()
-	return LineJoinStyle(uint(result))
+	result_ := C.C_NSBezierPath_BezierPath_DefaultLineJoinStyle()
+	return LineJoinStyle(uint(result_))
 }
 
 func BezierPath_SetDefaultLineJoinStyle(value LineJoinStyle) {
@@ -296,8 +296,8 @@ func BezierPath_SetDefaultLineJoinStyle(value LineJoinStyle) {
 }
 
 func BezierPath_DefaultLineWidth() coregraphics.Float {
-	result := C.C_NSBezierPath_BezierPath_DefaultLineWidth()
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSBezierPath_BezierPath_DefaultLineWidth()
+	return coregraphics.Float(float64(result_))
 }
 
 func BezierPath_SetDefaultLineWidth(value coregraphics.Float) {
@@ -305,8 +305,8 @@ func BezierPath_SetDefaultLineWidth(value coregraphics.Float) {
 }
 
 func BezierPath_DefaultMiterLimit() coregraphics.Float {
-	result := C.C_NSBezierPath_BezierPath_DefaultMiterLimit()
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSBezierPath_BezierPath_DefaultMiterLimit()
+	return coregraphics.Float(float64(result_))
 }
 
 func BezierPath_SetDefaultMiterLimit(value coregraphics.Float) {
@@ -314,8 +314,8 @@ func BezierPath_SetDefaultMiterLimit(value coregraphics.Float) {
 }
 
 func BezierPath_DefaultFlatness() coregraphics.Float {
-	result := C.C_NSBezierPath_BezierPath_DefaultFlatness()
-	return coregraphics.Float(float64(result))
+	result_ := C.C_NSBezierPath_BezierPath_DefaultFlatness()
+	return coregraphics.Float(float64(result_))
 }
 
 func BezierPath_SetDefaultFlatness(value coregraphics.Float) {
@@ -323,26 +323,26 @@ func BezierPath_SetDefaultFlatness(value coregraphics.Float) {
 }
 
 func (n *NSBezierPath) Bounds() foundation.Rect {
-	result := C.C_NSBezierPath_Bounds(n.Ptr())
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSBezierPath_Bounds(n.Ptr())
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSBezierPath) ControlPointBounds() foundation.Rect {
-	result := C.C_NSBezierPath_ControlPointBounds(n.Ptr())
-	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSBezierPath_ControlPointBounds(n.Ptr())
+	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSBezierPath) CurrentPoint() foundation.Point {
-	result := C.C_NSBezierPath_CurrentPoint(n.Ptr())
-	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result)))
+	result_ := C.C_NSBezierPath_CurrentPoint(n.Ptr())
+	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSBezierPath) IsEmpty() bool {
-	result := C.C_NSBezierPath_IsEmpty(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSBezierPath_IsEmpty(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSBezierPath) ElementCount() int {
-	result := C.C_NSBezierPath_ElementCount(n.Ptr())
-	return int(result)
+	result_ := C.C_NSBezierPath_ElementCount(n.Ptr())
+	return int(result_)
 }

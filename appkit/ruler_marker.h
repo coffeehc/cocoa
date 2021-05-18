@@ -22,4 +22,6 @@ bool C_NSRulerMarker_IsRemovable(void* ptr);
 void C_NSRulerMarker_SetRemovable(void* ptr, bool value);
 double C_NSRulerMarker_MarkerLocation(void* ptr);
 void C_NSRulerMarker_SetMarkerLocation(void* ptr, double value);
+void* C_NSRulerMarker_RepresentedObject(void* ptr);
+void C_NSRulerMarker_SetRepresentedObject(void* ptr, void* value);
 bool C_NSRulerMarker_IsDragging(void* ptr);

@@ -7,13 +7,13 @@ void* C_LayoutConstraint_Alloc() {
 
 void* C_NSLayoutConstraint_Init(void* ptr) {
     NSLayoutConstraint* nSLayoutConstraint = (NSLayoutConstraint*)ptr;
-    NSLayoutConstraint* result = [nSLayoutConstraint init];
-    return result;
+    NSLayoutConstraint* result_ = [nSLayoutConstraint init];
+    return result_;
 }
 
 void* C_NSLayoutConstraint_LayoutConstraint_ConstraintWithItem_Attribute_RelatedBy_ToItem_Attribute_Multiplier_Constant(void* view1, int attr1, int relation, void* view2, int attr2, double multiplier, double c) {
-    NSLayoutConstraint* result = [NSLayoutConstraint constraintWithItem:(id)view1 attribute:attr1 relatedBy:relation toItem:(id)view2 attribute:attr2 multiplier:multiplier constant:c];
-    return result;
+    NSLayoutConstraint* result_ = [NSLayoutConstraint constraintWithItem:(id)view1 attribute:attr1 relatedBy:relation toItem:(id)view2 attribute:attr2 multiplier:multiplier constant:c];
+    return result_;
 }
 
 void C_NSLayoutConstraint_LayoutConstraint_ActivateConstraints(Array constraints) {
@@ -38,8 +38,8 @@ void C_NSLayoutConstraint_LayoutConstraint_DeactivateConstraints(Array constrain
 
 bool C_NSLayoutConstraint_IsActive(void* ptr) {
     NSLayoutConstraint* nSLayoutConstraint = (NSLayoutConstraint*)ptr;
-    BOOL result = [nSLayoutConstraint isActive];
-    return result;
+    BOOL result_ = [nSLayoutConstraint isActive];
+    return result_;
 }
 
 void C_NSLayoutConstraint_SetActive(void* ptr, bool value) {
@@ -49,44 +49,44 @@ void C_NSLayoutConstraint_SetActive(void* ptr, bool value) {
 
 void* C_NSLayoutConstraint_FirstItem(void* ptr) {
     NSLayoutConstraint* nSLayoutConstraint = (NSLayoutConstraint*)ptr;
-    id result = [nSLayoutConstraint firstItem];
-    return result;
+    id result_ = [nSLayoutConstraint firstItem];
+    return result_;
 }
 
 int C_NSLayoutConstraint_FirstAttribute(void* ptr) {
     NSLayoutConstraint* nSLayoutConstraint = (NSLayoutConstraint*)ptr;
-    NSLayoutAttribute result = [nSLayoutConstraint firstAttribute];
-    return result;
+    NSLayoutAttribute result_ = [nSLayoutConstraint firstAttribute];
+    return result_;
 }
 
 int C_NSLayoutConstraint_Relation(void* ptr) {
     NSLayoutConstraint* nSLayoutConstraint = (NSLayoutConstraint*)ptr;
-    NSLayoutRelation result = [nSLayoutConstraint relation];
-    return result;
+    NSLayoutRelation result_ = [nSLayoutConstraint relation];
+    return result_;
 }
 
 void* C_NSLayoutConstraint_SecondItem(void* ptr) {
     NSLayoutConstraint* nSLayoutConstraint = (NSLayoutConstraint*)ptr;
-    id result = [nSLayoutConstraint secondItem];
-    return result;
+    id result_ = [nSLayoutConstraint secondItem];
+    return result_;
 }
 
 int C_NSLayoutConstraint_SecondAttribute(void* ptr) {
     NSLayoutConstraint* nSLayoutConstraint = (NSLayoutConstraint*)ptr;
-    NSLayoutAttribute result = [nSLayoutConstraint secondAttribute];
-    return result;
+    NSLayoutAttribute result_ = [nSLayoutConstraint secondAttribute];
+    return result_;
 }
 
 double C_NSLayoutConstraint_Multiplier(void* ptr) {
     NSLayoutConstraint* nSLayoutConstraint = (NSLayoutConstraint*)ptr;
-    CGFloat result = [nSLayoutConstraint multiplier];
-    return result;
+    CGFloat result_ = [nSLayoutConstraint multiplier];
+    return result_;
 }
 
 double C_NSLayoutConstraint_Constant(void* ptr) {
     NSLayoutConstraint* nSLayoutConstraint = (NSLayoutConstraint*)ptr;
-    CGFloat result = [nSLayoutConstraint constant];
-    return result;
+    CGFloat result_ = [nSLayoutConstraint constant];
+    return result_;
 }
 
 void C_NSLayoutConstraint_SetConstant(void* ptr, double value) {
@@ -96,20 +96,20 @@ void C_NSLayoutConstraint_SetConstant(void* ptr, double value) {
 
 void* C_NSLayoutConstraint_FirstAnchor(void* ptr) {
     NSLayoutConstraint* nSLayoutConstraint = (NSLayoutConstraint*)ptr;
-    NSLayoutAnchor* result = [nSLayoutConstraint firstAnchor];
-    return result;
+    NSLayoutAnchor* result_ = [nSLayoutConstraint firstAnchor];
+    return result_;
 }
 
 void* C_NSLayoutConstraint_SecondAnchor(void* ptr) {
     NSLayoutConstraint* nSLayoutConstraint = (NSLayoutConstraint*)ptr;
-    NSLayoutAnchor* result = [nSLayoutConstraint secondAnchor];
-    return result;
+    NSLayoutAnchor* result_ = [nSLayoutConstraint secondAnchor];
+    return result_;
 }
 
 float C_NSLayoutConstraint_Priority(void* ptr) {
     NSLayoutConstraint* nSLayoutConstraint = (NSLayoutConstraint*)ptr;
-    NSLayoutPriority result = [nSLayoutConstraint priority];
-    return result;
+    NSLayoutPriority result_ = [nSLayoutConstraint priority];
+    return result_;
 }
 
 void C_NSLayoutConstraint_SetPriority(void* ptr, float value) {
@@ -119,8 +119,8 @@ void C_NSLayoutConstraint_SetPriority(void* ptr, float value) {
 
 void* C_NSLayoutConstraint_Identifier(void* ptr) {
     NSLayoutConstraint* nSLayoutConstraint = (NSLayoutConstraint*)ptr;
-    NSString* result = [nSLayoutConstraint identifier];
-    return result;
+    NSString* result_ = [nSLayoutConstraint identifier];
+    return result_;
 }
 
 void C_NSLayoutConstraint_SetIdentifier(void* ptr, void* value) {
@@ -130,8 +130,8 @@ void C_NSLayoutConstraint_SetIdentifier(void* ptr, void* value) {
 
 bool C_NSLayoutConstraint_ShouldBeArchived(void* ptr) {
     NSLayoutConstraint* nSLayoutConstraint = (NSLayoutConstraint*)ptr;
-    BOOL result = [nSLayoutConstraint shouldBeArchived];
-    return result;
+    BOOL result_ = [nSLayoutConstraint shouldBeArchived];
+    return result_;
 }
 
 void C_NSLayoutConstraint_SetShouldBeArchived(void* ptr, bool value) {

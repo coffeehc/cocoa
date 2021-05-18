@@ -37,6 +37,8 @@ Array C_NSImage_TIFFRepresentationUsingCompression_Factor(void* ptr, unsigned in
 void C_NSImage_CancelIncrementalLoad(void* ptr);
 void* C_NSImage_LayerContentsForContentsScale(void* ptr, double layerContentsScale);
 double C_NSImage_RecommendedLayerContentsScale(void* ptr, double preferredContentsScale);
+void* C_NSImage_Delegate(void* ptr);
+void C_NSImage_SetDelegate(void* ptr, void* value);
 CGSize C_NSImage_Size(void* ptr);
 void C_NSImage_SetSize(void* ptr, CGSize value);
 bool C_NSImage_IsTemplate(void* ptr);

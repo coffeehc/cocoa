@@ -51,28 +51,28 @@ func AllocScriptCommand() *NSScriptCommand {
 }
 
 func (n *NSScriptCommand) InitWithCommandDescription(commandDef ScriptCommandDescription) ScriptCommand {
-	result := C.C_NSScriptCommand_InitWithCommandDescription(n.Ptr(), objc.ExtractPtr(commandDef))
-	return MakeScriptCommand(result)
+	result_ := C.C_NSScriptCommand_InitWithCommandDescription(n.Ptr(), objc.ExtractPtr(commandDef))
+	return MakeScriptCommand(result_)
 }
 
 func (n *NSScriptCommand) InitWithCoder(inCoder Coder) ScriptCommand {
-	result := C.C_NSScriptCommand_InitWithCoder(n.Ptr(), objc.ExtractPtr(inCoder))
-	return MakeScriptCommand(result)
+	result_ := C.C_NSScriptCommand_InitWithCoder(n.Ptr(), objc.ExtractPtr(inCoder))
+	return MakeScriptCommand(result_)
 }
 
-func ScriptCommandCurrentCommand() ScriptCommand {
-	result := C.C_NSScriptCommand_ScriptCommandCurrentCommand()
-	return MakeScriptCommand(result)
+func ScriptCommand_CurrentCommand() ScriptCommand {
+	result_ := C.C_NSScriptCommand_ScriptCommand_CurrentCommand()
+	return MakeScriptCommand(result_)
 }
 
 func (n *NSScriptCommand) ExecuteCommand() objc.Object {
-	result := C.C_NSScriptCommand_ExecuteCommand(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSScriptCommand_ExecuteCommand(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSScriptCommand) PerformDefaultImplementation() objc.Object {
-	result := C.C_NSScriptCommand_PerformDefaultImplementation(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSScriptCommand_PerformDefaultImplementation(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSScriptCommand) SuspendExecution() {
@@ -84,18 +84,18 @@ func (n *NSScriptCommand) ResumeExecutionWithResult(result objc.Object) {
 }
 
 func (n *NSScriptCommand) AppleEvent() AppleEventDescriptor {
-	result := C.C_NSScriptCommand_AppleEvent(n.Ptr())
-	return MakeAppleEventDescriptor(result)
+	result_ := C.C_NSScriptCommand_AppleEvent(n.Ptr())
+	return MakeAppleEventDescriptor(result_)
 }
 
 func (n *NSScriptCommand) EvaluatedReceivers() objc.Object {
-	result := C.C_NSScriptCommand_EvaluatedReceivers(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSScriptCommand_EvaluatedReceivers(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSScriptCommand) ReceiversSpecifier() ScriptObjectSpecifier {
-	result := C.C_NSScriptCommand_ReceiversSpecifier(n.Ptr())
-	return MakeScriptObjectSpecifier(result)
+	result_ := C.C_NSScriptCommand_ReceiversSpecifier(n.Ptr())
+	return MakeScriptObjectSpecifier(result_)
 }
 
 func (n *NSScriptCommand) SetReceiversSpecifier(value ScriptObjectSpecifier) {
@@ -103,8 +103,8 @@ func (n *NSScriptCommand) SetReceiversSpecifier(value ScriptObjectSpecifier) {
 }
 
 func (n *NSScriptCommand) DirectParameter() objc.Object {
-	result := C.C_NSScriptCommand_DirectParameter(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSScriptCommand_DirectParameter(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSScriptCommand) SetDirectParameter(value objc.Object) {
@@ -112,13 +112,13 @@ func (n *NSScriptCommand) SetDirectParameter(value objc.Object) {
 }
 
 func (n *NSScriptCommand) CommandDescription() ScriptCommandDescription {
-	result := C.C_NSScriptCommand_CommandDescription(n.Ptr())
-	return MakeScriptCommandDescription(result)
+	result_ := C.C_NSScriptCommand_CommandDescription(n.Ptr())
+	return MakeScriptCommandDescription(result_)
 }
 
 func (n *NSScriptCommand) ScriptErrorExpectedTypeDescriptor() AppleEventDescriptor {
-	result := C.C_NSScriptCommand_ScriptErrorExpectedTypeDescriptor(n.Ptr())
-	return MakeAppleEventDescriptor(result)
+	result_ := C.C_NSScriptCommand_ScriptErrorExpectedTypeDescriptor(n.Ptr())
+	return MakeAppleEventDescriptor(result_)
 }
 
 func (n *NSScriptCommand) SetScriptErrorExpectedTypeDescriptor(value AppleEventDescriptor) {
@@ -126,8 +126,8 @@ func (n *NSScriptCommand) SetScriptErrorExpectedTypeDescriptor(value AppleEventD
 }
 
 func (n *NSScriptCommand) ScriptErrorNumber() int {
-	result := C.C_NSScriptCommand_ScriptErrorNumber(n.Ptr())
-	return int(result)
+	result_ := C.C_NSScriptCommand_ScriptErrorNumber(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSScriptCommand) SetScriptErrorNumber(value int) {
@@ -135,8 +135,8 @@ func (n *NSScriptCommand) SetScriptErrorNumber(value int) {
 }
 
 func (n *NSScriptCommand) ScriptErrorOffendingObjectDescriptor() AppleEventDescriptor {
-	result := C.C_NSScriptCommand_ScriptErrorOffendingObjectDescriptor(n.Ptr())
-	return MakeAppleEventDescriptor(result)
+	result_ := C.C_NSScriptCommand_ScriptErrorOffendingObjectDescriptor(n.Ptr())
+	return MakeAppleEventDescriptor(result_)
 }
 
 func (n *NSScriptCommand) SetScriptErrorOffendingObjectDescriptor(value AppleEventDescriptor) {
@@ -144,8 +144,8 @@ func (n *NSScriptCommand) SetScriptErrorOffendingObjectDescriptor(value AppleEve
 }
 
 func (n *NSScriptCommand) ScriptErrorString() string {
-	result := C.C_NSScriptCommand_ScriptErrorString(n.Ptr())
-	return MakeString(result).String()
+	result_ := C.C_NSScriptCommand_ScriptErrorString(n.Ptr())
+	return MakeString(result_).String()
 }
 
 func (n *NSScriptCommand) SetScriptErrorString(value string) {
@@ -153,6 +153,6 @@ func (n *NSScriptCommand) SetScriptErrorString(value string) {
 }
 
 func (n *NSScriptCommand) IsWellFormed() bool {
-	result := C.C_NSScriptCommand_IsWellFormed(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSScriptCommand_IsWellFormed(n.Ptr())
+	return bool(result_)
 }

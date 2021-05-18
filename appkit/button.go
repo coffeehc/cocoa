@@ -15,6 +15,8 @@ type Button interface {
 	Control
 	SetButtonType(_type ButtonType)
 	SetPeriodicDelay_Interval(delay float32, interval float32)
+	CompressWithPrioritizedCompressionOptions(prioritizedOptions []UserInterfaceCompressionOptions)
+	MinimumSizeWithPrioritizedCompressionOptions(prioritizedOptions []UserInterfaceCompressionOptions) foundation.Size
 	SetNextState()
 	Highlight(flag bool)
 	ContentTintColor() Color
@@ -86,43 +88,43 @@ func AllocButton() *NSButton {
 }
 
 func (n *NSButton) InitWithFrame(frameRect foundation.Rect) Button {
-	result := C.C_NSButton_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
-	return MakeButton(result)
+	result_ := C.C_NSButton_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeButton(result_)
 }
 
 func (n *NSButton) InitWithCoder(coder foundation.Coder) Button {
-	result := C.C_NSButton_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeButton(result)
+	result_ := C.C_NSButton_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeButton(result_)
 }
 
 func (n *NSButton) Init() Button {
-	result := C.C_NSButton_Init(n.Ptr())
-	return MakeButton(result)
+	result_ := C.C_NSButton_Init(n.Ptr())
+	return MakeButton(result_)
 }
 
 func Button_CheckboxWithTitle_Target_Action(title string, target objc.Object, action *objc.Selector) Button {
-	result := C.C_NSButton_Button_CheckboxWithTitle_Target_Action(foundation.NewString(title).Ptr(), objc.ExtractPtr(target), objc.ExtractPtr(action))
-	return MakeButton(result)
+	result_ := C.C_NSButton_Button_CheckboxWithTitle_Target_Action(foundation.NewString(title).Ptr(), objc.ExtractPtr(target), objc.ExtractPtr(action))
+	return MakeButton(result_)
 }
 
 func ButtonWithImage_Target_Action(image Image, target objc.Object, action *objc.Selector) Button {
-	result := C.C_NSButton_ButtonWithImage_Target_Action(objc.ExtractPtr(image), objc.ExtractPtr(target), objc.ExtractPtr(action))
-	return MakeButton(result)
+	result_ := C.C_NSButton_ButtonWithImage_Target_Action(objc.ExtractPtr(image), objc.ExtractPtr(target), objc.ExtractPtr(action))
+	return MakeButton(result_)
 }
 
 func Button_RadioButtonWithTitle_Target_Action(title string, target objc.Object, action *objc.Selector) Button {
-	result := C.C_NSButton_Button_RadioButtonWithTitle_Target_Action(foundation.NewString(title).Ptr(), objc.ExtractPtr(target), objc.ExtractPtr(action))
-	return MakeButton(result)
+	result_ := C.C_NSButton_Button_RadioButtonWithTitle_Target_Action(foundation.NewString(title).Ptr(), objc.ExtractPtr(target), objc.ExtractPtr(action))
+	return MakeButton(result_)
 }
 
 func ButtonWithTitle_Image_Target_Action(title string, image Image, target objc.Object, action *objc.Selector) Button {
-	result := C.C_NSButton_ButtonWithTitle_Image_Target_Action(foundation.NewString(title).Ptr(), objc.ExtractPtr(image), objc.ExtractPtr(target), objc.ExtractPtr(action))
-	return MakeButton(result)
+	result_ := C.C_NSButton_ButtonWithTitle_Image_Target_Action(foundation.NewString(title).Ptr(), objc.ExtractPtr(image), objc.ExtractPtr(target), objc.ExtractPtr(action))
+	return MakeButton(result_)
 }
 
 func ButtonWithTitle_Target_Action(title string, target objc.Object, action *objc.Selector) Button {
-	result := C.C_NSButton_ButtonWithTitle_Target_Action(foundation.NewString(title).Ptr(), objc.ExtractPtr(target), objc.ExtractPtr(action))
-	return MakeButton(result)
+	result_ := C.C_NSButton_ButtonWithTitle_Target_Action(foundation.NewString(title).Ptr(), objc.ExtractPtr(target), objc.ExtractPtr(action))
+	return MakeButton(result_)
 }
 
 func (n *NSButton) SetButtonType(_type ButtonType) {
@@ -131,6 +133,25 @@ func (n *NSButton) SetButtonType(_type ButtonType) {
 
 func (n *NSButton) SetPeriodicDelay_Interval(delay float32, interval float32) {
 	C.C_NSButton_SetPeriodicDelay_Interval(n.Ptr(), C.float(delay), C.float(interval))
+}
+
+func (n *NSButton) CompressWithPrioritizedCompressionOptions(prioritizedOptions []UserInterfaceCompressionOptions) {
+	cPrioritizedOptionsData := make([]unsafe.Pointer, len(prioritizedOptions))
+	for idx, v := range prioritizedOptions {
+		cPrioritizedOptionsData[idx] = objc.ExtractPtr(v)
+	}
+	cPrioritizedOptions := C.Array{data: unsafe.Pointer(&cPrioritizedOptionsData[0]), len: C.int(len(prioritizedOptions))}
+	C.C_NSButton_CompressWithPrioritizedCompressionOptions(n.Ptr(), cPrioritizedOptions)
+}
+
+func (n *NSButton) MinimumSizeWithPrioritizedCompressionOptions(prioritizedOptions []UserInterfaceCompressionOptions) foundation.Size {
+	cPrioritizedOptionsData := make([]unsafe.Pointer, len(prioritizedOptions))
+	for idx, v := range prioritizedOptions {
+		cPrioritizedOptionsData[idx] = objc.ExtractPtr(v)
+	}
+	cPrioritizedOptions := C.Array{data: unsafe.Pointer(&cPrioritizedOptionsData[0]), len: C.int(len(prioritizedOptions))}
+	result_ := C.C_NSButton_MinimumSizeWithPrioritizedCompressionOptions(n.Ptr(), cPrioritizedOptions)
+	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
 func (n *NSButton) SetNextState() {
@@ -142,8 +163,8 @@ func (n *NSButton) Highlight(flag bool) {
 }
 
 func (n *NSButton) ContentTintColor() Color {
-	result := C.C_NSButton_ContentTintColor(n.Ptr())
-	return MakeColor(result)
+	result_ := C.C_NSButton_ContentTintColor(n.Ptr())
+	return MakeColor(result_)
 }
 
 func (n *NSButton) SetContentTintColor(value Color) {
@@ -151,8 +172,8 @@ func (n *NSButton) SetContentTintColor(value Color) {
 }
 
 func (n *NSButton) HasDestructiveAction() bool {
-	result := C.C_NSButton_HasDestructiveAction(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSButton_HasDestructiveAction(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSButton) SetHasDestructiveAction(value bool) {
@@ -160,8 +181,8 @@ func (n *NSButton) SetHasDestructiveAction(value bool) {
 }
 
 func (n *NSButton) AlternateTitle() string {
-	result := C.C_NSButton_AlternateTitle(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSButton_AlternateTitle(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSButton) SetAlternateTitle(value string) {
@@ -169,8 +190,8 @@ func (n *NSButton) SetAlternateTitle(value string) {
 }
 
 func (n *NSButton) AttributedTitle() foundation.AttributedString {
-	result := C.C_NSButton_AttributedTitle(n.Ptr())
-	return foundation.MakeAttributedString(result)
+	result_ := C.C_NSButton_AttributedTitle(n.Ptr())
+	return foundation.MakeAttributedString(result_)
 }
 
 func (n *NSButton) SetAttributedTitle(value foundation.AttributedString) {
@@ -178,8 +199,8 @@ func (n *NSButton) SetAttributedTitle(value foundation.AttributedString) {
 }
 
 func (n *NSButton) AttributedAlternateTitle() foundation.AttributedString {
-	result := C.C_NSButton_AttributedAlternateTitle(n.Ptr())
-	return foundation.MakeAttributedString(result)
+	result_ := C.C_NSButton_AttributedAlternateTitle(n.Ptr())
+	return foundation.MakeAttributedString(result_)
 }
 
 func (n *NSButton) SetAttributedAlternateTitle(value foundation.AttributedString) {
@@ -187,8 +208,8 @@ func (n *NSButton) SetAttributedAlternateTitle(value foundation.AttributedString
 }
 
 func (n *NSButton) Title() string {
-	result := C.C_NSButton_Title(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSButton_Title(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSButton) SetTitle(value string) {
@@ -196,8 +217,8 @@ func (n *NSButton) SetTitle(value string) {
 }
 
 func (n *NSButton) Sound() Sound {
-	result := C.C_NSButton_Sound(n.Ptr())
-	return MakeSound(result)
+	result_ := C.C_NSButton_Sound(n.Ptr())
+	return MakeSound(result_)
 }
 
 func (n *NSButton) SetSound(value Sound) {
@@ -205,8 +226,8 @@ func (n *NSButton) SetSound(value Sound) {
 }
 
 func (n *NSButton) IsSpringLoaded() bool {
-	result := C.C_NSButton_IsSpringLoaded(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSButton_IsSpringLoaded(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSButton) SetSpringLoaded(value bool) {
@@ -214,8 +235,8 @@ func (n *NSButton) SetSpringLoaded(value bool) {
 }
 
 func (n *NSButton) MaxAcceleratorLevel() int {
-	result := C.C_NSButton_MaxAcceleratorLevel(n.Ptr())
-	return int(result)
+	result_ := C.C_NSButton_MaxAcceleratorLevel(n.Ptr())
+	return int(result_)
 }
 
 func (n *NSButton) SetMaxAcceleratorLevel(value int) {
@@ -223,8 +244,8 @@ func (n *NSButton) SetMaxAcceleratorLevel(value int) {
 }
 
 func (n *NSButton) Image() Image {
-	result := C.C_NSButton_Image(n.Ptr())
-	return MakeImage(result)
+	result_ := C.C_NSButton_Image(n.Ptr())
+	return MakeImage(result_)
 }
 
 func (n *NSButton) SetImage(value Image) {
@@ -232,8 +253,8 @@ func (n *NSButton) SetImage(value Image) {
 }
 
 func (n *NSButton) AlternateImage() Image {
-	result := C.C_NSButton_AlternateImage(n.Ptr())
-	return MakeImage(result)
+	result_ := C.C_NSButton_AlternateImage(n.Ptr())
+	return MakeImage(result_)
 }
 
 func (n *NSButton) SetAlternateImage(value Image) {
@@ -241,8 +262,8 @@ func (n *NSButton) SetAlternateImage(value Image) {
 }
 
 func (n *NSButton) ImagePosition() CellImagePosition {
-	result := C.C_NSButton_ImagePosition(n.Ptr())
-	return CellImagePosition(uint(result))
+	result_ := C.C_NSButton_ImagePosition(n.Ptr())
+	return CellImagePosition(uint(result_))
 }
 
 func (n *NSButton) SetImagePosition(value CellImagePosition) {
@@ -250,8 +271,8 @@ func (n *NSButton) SetImagePosition(value CellImagePosition) {
 }
 
 func (n *NSButton) IsBordered() bool {
-	result := C.C_NSButton_IsBordered(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSButton_IsBordered(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSButton) SetBordered(value bool) {
@@ -259,8 +280,8 @@ func (n *NSButton) SetBordered(value bool) {
 }
 
 func (n *NSButton) IsTransparent() bool {
-	result := C.C_NSButton_IsTransparent(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSButton_IsTransparent(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSButton) SetTransparent(value bool) {
@@ -268,8 +289,8 @@ func (n *NSButton) SetTransparent(value bool) {
 }
 
 func (n *NSButton) BezelStyle() BezelStyle {
-	result := C.C_NSButton_BezelStyle(n.Ptr())
-	return BezelStyle(uint(result))
+	result_ := C.C_NSButton_BezelStyle(n.Ptr())
+	return BezelStyle(uint(result_))
 }
 
 func (n *NSButton) SetBezelStyle(value BezelStyle) {
@@ -277,8 +298,8 @@ func (n *NSButton) SetBezelStyle(value BezelStyle) {
 }
 
 func (n *NSButton) BezelColor() Color {
-	result := C.C_NSButton_BezelColor(n.Ptr())
-	return MakeColor(result)
+	result_ := C.C_NSButton_BezelColor(n.Ptr())
+	return MakeColor(result_)
 }
 
 func (n *NSButton) SetBezelColor(value Color) {
@@ -286,8 +307,8 @@ func (n *NSButton) SetBezelColor(value Color) {
 }
 
 func (n *NSButton) ShowsBorderOnlyWhileMouseInside() bool {
-	result := C.C_NSButton_ShowsBorderOnlyWhileMouseInside(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSButton_ShowsBorderOnlyWhileMouseInside(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSButton) SetShowsBorderOnlyWhileMouseInside(value bool) {
@@ -295,8 +316,8 @@ func (n *NSButton) SetShowsBorderOnlyWhileMouseInside(value bool) {
 }
 
 func (n *NSButton) ImageHugsTitle() bool {
-	result := C.C_NSButton_ImageHugsTitle(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSButton_ImageHugsTitle(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSButton) SetImageHugsTitle(value bool) {
@@ -304,8 +325,8 @@ func (n *NSButton) SetImageHugsTitle(value bool) {
 }
 
 func (n *NSButton) ImageScaling() ImageScaling {
-	result := C.C_NSButton_ImageScaling(n.Ptr())
-	return ImageScaling(uint(result))
+	result_ := C.C_NSButton_ImageScaling(n.Ptr())
+	return ImageScaling(uint(result_))
 }
 
 func (n *NSButton) SetImageScaling(value ImageScaling) {
@@ -313,13 +334,13 @@ func (n *NSButton) SetImageScaling(value ImageScaling) {
 }
 
 func (n *NSButton) ActiveCompressionOptions() UserInterfaceCompressionOptions {
-	result := C.C_NSButton_ActiveCompressionOptions(n.Ptr())
-	return MakeUserInterfaceCompressionOptions(result)
+	result_ := C.C_NSButton_ActiveCompressionOptions(n.Ptr())
+	return MakeUserInterfaceCompressionOptions(result_)
 }
 
 func (n *NSButton) AllowsMixedState() bool {
-	result := C.C_NSButton_AllowsMixedState(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSButton_AllowsMixedState(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSButton) SetAllowsMixedState(value bool) {
@@ -327,8 +348,8 @@ func (n *NSButton) SetAllowsMixedState(value bool) {
 }
 
 func (n *NSButton) State() ControlStateValue {
-	result := C.C_NSButton_State(n.Ptr())
-	return ControlStateValue(int(result))
+	result_ := C.C_NSButton_State(n.Ptr())
+	return ControlStateValue(int(result_))
 }
 
 func (n *NSButton) SetState(value ControlStateValue) {
@@ -336,8 +357,8 @@ func (n *NSButton) SetState(value ControlStateValue) {
 }
 
 func (n *NSButton) KeyEquivalent() string {
-	result := C.C_NSButton_KeyEquivalent(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSButton_KeyEquivalent(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSButton) SetKeyEquivalent(value string) {
@@ -345,8 +366,8 @@ func (n *NSButton) SetKeyEquivalent(value string) {
 }
 
 func (n *NSButton) KeyEquivalentModifierMask() EventModifierFlags {
-	result := C.C_NSButton_KeyEquivalentModifierMask(n.Ptr())
-	return EventModifierFlags(uint(result))
+	result_ := C.C_NSButton_KeyEquivalentModifierMask(n.Ptr())
+	return EventModifierFlags(uint(result_))
 }
 
 func (n *NSButton) SetKeyEquivalentModifierMask(value EventModifierFlags) {
@@ -354,8 +375,8 @@ func (n *NSButton) SetKeyEquivalentModifierMask(value EventModifierFlags) {
 }
 
 func (n *NSButton) SymbolConfiguration() ImageSymbolConfiguration {
-	result := C.C_NSButton_SymbolConfiguration(n.Ptr())
-	return MakeImageSymbolConfiguration(result)
+	result_ := C.C_NSButton_SymbolConfiguration(n.Ptr())
+	return MakeImageSymbolConfiguration(result_)
 }
 
 func (n *NSButton) SetSymbolConfiguration(value ImageSymbolConfiguration) {

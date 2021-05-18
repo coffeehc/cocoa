@@ -7,101 +7,101 @@ void* C_Image_Alloc() {
 
 void* C_NSImage_InitByReferencingFile(void* ptr, void* fileName) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSImage* result = [nSImage initByReferencingFile:(NSString*)fileName];
-    return result;
+    NSImage* result_ = [nSImage initByReferencingFile:(NSString*)fileName];
+    return result_;
 }
 
 void* C_NSImage_InitByReferencingURL(void* ptr, void* url) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSImage* result = [nSImage initByReferencingURL:(NSURL*)url];
-    return result;
+    NSImage* result_ = [nSImage initByReferencingURL:(NSURL*)url];
+    return result_;
 }
 
 void* C_NSImage_InitWithContentsOfFile(void* ptr, void* fileName) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSImage* result = [nSImage initWithContentsOfFile:(NSString*)fileName];
-    return result;
+    NSImage* result_ = [nSImage initWithContentsOfFile:(NSString*)fileName];
+    return result_;
 }
 
 void* C_NSImage_InitWithContentsOfURL(void* ptr, void* url) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSImage* result = [nSImage initWithContentsOfURL:(NSURL*)url];
-    return result;
+    NSImage* result_ = [nSImage initWithContentsOfURL:(NSURL*)url];
+    return result_;
 }
 
 void* C_NSImage_InitWithData(void* ptr, Array data) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSImage* result = [nSImage initWithData:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len]];
-    return result;
+    NSImage* result_ = [nSImage initWithData:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len]];
+    return result_;
 }
 
 void* C_NSImage_InitWithDataIgnoringOrientation(void* ptr, Array data) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSImage* result = [nSImage initWithDataIgnoringOrientation:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len]];
-    return result;
+    NSImage* result_ = [nSImage initWithDataIgnoringOrientation:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len]];
+    return result_;
 }
 
 void* C_NSImage_InitWithCGImage_Size(void* ptr, CGImageRef cgImage, CGSize size) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSImage* result = [nSImage initWithCGImage:cgImage size:size];
-    return result;
+    NSImage* result_ = [nSImage initWithCGImage:cgImage size:size];
+    return result_;
 }
 
 void* C_NSImage_InitWithPasteboard(void* ptr, void* pasteboard) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSImage* result = [nSImage initWithPasteboard:(NSPasteboard*)pasteboard];
-    return result;
+    NSImage* result_ = [nSImage initWithPasteboard:(NSPasteboard*)pasteboard];
+    return result_;
 }
 
 void* C_NSImage_InitWithCoder(void* ptr, void* coder) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSImage* result = [nSImage initWithCoder:(NSCoder*)coder];
-    return result;
+    NSImage* result_ = [nSImage initWithCoder:(NSCoder*)coder];
+    return result_;
 }
 
 void* C_NSImage_InitWithSize(void* ptr, CGSize size) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSImage* result = [nSImage initWithSize:size];
-    return result;
+    NSImage* result_ = [nSImage initWithSize:size];
+    return result_;
 }
 
 void* C_NSImage_Init(void* ptr) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSImage* result = [nSImage init];
-    return result;
+    NSImage* result_ = [nSImage init];
+    return result_;
 }
 
 void* C_NSImage_ImageNamed(void* name) {
-    NSImage* result = [NSImage imageNamed:(NSString*)name];
-    return result;
+    NSImage* result_ = [NSImage imageNamed:(NSString*)name];
+    return result_;
 }
 
 bool C_NSImage_SetName(void* ptr, void* _string) {
     NSImage* nSImage = (NSImage*)ptr;
-    BOOL result = [nSImage setName:(NSString*)_string];
-    return result;
+    BOOL result_ = [nSImage setName:(NSString*)_string];
+    return result_;
 }
 
 void* C_NSImage_Name(void* ptr) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSImageName result = [nSImage name];
-    return result;
+    NSImageName result_ = [nSImage name];
+    return result_;
 }
 
 void* C_NSImage_ImageWithSystemSymbolName_AccessibilityDescription(void* symbolName, void* description) {
-    NSImage* result = [NSImage imageWithSystemSymbolName:(NSString*)symbolName accessibilityDescription:(NSString*)description];
-    return result;
+    NSImage* result_ = [NSImage imageWithSystemSymbolName:(NSString*)symbolName accessibilityDescription:(NSString*)description];
+    return result_;
 }
 
 void* C_NSImage_ImageWithSymbolConfiguration(void* ptr, void* configuration) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSImage* result = [nSImage imageWithSymbolConfiguration:(NSImageSymbolConfiguration*)configuration];
-    return result;
+    NSImage* result_ = [nSImage imageWithSymbolConfiguration:(NSImageSymbolConfiguration*)configuration];
+    return result_;
 }
 
 bool C_NSImage_Image_CanInitWithPasteboard(void* pasteboard) {
-    BOOL result = [NSImage canInitWithPasteboard:(NSPasteboard*)pasteboard];
-    return result;
+    BOOL result_ = [NSImage canInitWithPasteboard:(NSPasteboard*)pasteboard];
+    return result_;
 }
 
 void C_NSImage_AddRepresentation(void* ptr, void* imageRep) {
@@ -142,8 +142,8 @@ void C_NSImage_DrawInRect_FromRect_Operation_Fraction(void* ptr, CGRect rect, CG
 
 bool C_NSImage_DrawRepresentation_InRect(void* ptr, void* imageRep, CGRect rect) {
     NSImage* nSImage = (NSImage*)ptr;
-    BOOL result = [nSImage drawRepresentation:(NSImageRep*)imageRep inRect:rect];
-    return result;
+    BOOL result_ = [nSImage drawRepresentation:(NSImageRep*)imageRep inRect:rect];
+    return result_;
 }
 
 void C_NSImage_LockFocus(void* ptr) {
@@ -168,11 +168,11 @@ void C_NSImage_Recache(void* ptr) {
 
 Array C_NSImage_TIFFRepresentationUsingCompression_Factor(void* ptr, unsigned int comp, float factor) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSData* result = [nSImage TIFFRepresentationUsingCompression:comp factor:factor];
-    Array resultarray;
-    resultarray.data = [result bytes];
-    resultarray.len = result.length;
-    return resultarray;
+    NSData* result_ = [nSImage TIFFRepresentationUsingCompression:comp factor:factor];
+    Array result_array;
+    result_array.data = [result_ bytes];
+    result_array.len = result_.length;
+    return result_array;
 }
 
 void C_NSImage_CancelIncrementalLoad(void* ptr) {
@@ -182,20 +182,31 @@ void C_NSImage_CancelIncrementalLoad(void* ptr) {
 
 void* C_NSImage_LayerContentsForContentsScale(void* ptr, double layerContentsScale) {
     NSImage* nSImage = (NSImage*)ptr;
-    id result = [nSImage layerContentsForContentsScale:layerContentsScale];
-    return result;
+    id result_ = [nSImage layerContentsForContentsScale:layerContentsScale];
+    return result_;
 }
 
 double C_NSImage_RecommendedLayerContentsScale(void* ptr, double preferredContentsScale) {
     NSImage* nSImage = (NSImage*)ptr;
-    CGFloat result = [nSImage recommendedLayerContentsScale:preferredContentsScale];
-    return result;
+    CGFloat result_ = [nSImage recommendedLayerContentsScale:preferredContentsScale];
+    return result_;
+}
+
+void* C_NSImage_Delegate(void* ptr) {
+    NSImage* nSImage = (NSImage*)ptr;
+    id result_ = [nSImage delegate];
+    return result_;
+}
+
+void C_NSImage_SetDelegate(void* ptr, void* value) {
+    NSImage* nSImage = (NSImage*)ptr;
+    [nSImage setDelegate:(id)value];
 }
 
 CGSize C_NSImage_Size(void* ptr) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSSize result = [nSImage size];
-    return result;
+    NSSize result_ = [nSImage size];
+    return result_;
 }
 
 void C_NSImage_SetSize(void* ptr, CGSize value) {
@@ -205,8 +216,8 @@ void C_NSImage_SetSize(void* ptr, CGSize value) {
 
 bool C_NSImage_IsTemplate(void* ptr) {
     NSImage* nSImage = (NSImage*)ptr;
-    BOOL result = [nSImage isTemplate];
-    return result;
+    BOOL result_ = [nSImage isTemplate];
+    return result_;
 }
 
 void C_NSImage_SetTemplate(void* ptr, bool value) {
@@ -215,52 +226,52 @@ void C_NSImage_SetTemplate(void* ptr, bool value) {
 }
 
 Array C_NSImage_ImageTypes() {
-    NSArray* result = [NSImage imageTypes];
-    int resultcount = [result count];
-    void** resultData = malloc(resultcount * sizeof(void*));
-    for (int i = 0; i < resultcount; i++) {
-    	 void* p = [result objectAtIndex:i];
-    	 resultData[i] = p;
+    NSArray* result_ = [NSImage imageTypes];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
     }
-    Array resultArray;
-    resultArray.data = resultData;
-    resultArray.len = resultcount;
-    return resultArray;
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
 }
 
 Array C_NSImage_ImageUnfilteredTypes() {
-    NSArray* result = [NSImage imageUnfilteredTypes];
-    int resultcount = [result count];
-    void** resultData = malloc(resultcount * sizeof(void*));
-    for (int i = 0; i < resultcount; i++) {
-    	 void* p = [result objectAtIndex:i];
-    	 resultData[i] = p;
+    NSArray* result_ = [NSImage imageUnfilteredTypes];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
     }
-    Array resultArray;
-    resultArray.data = resultData;
-    resultArray.len = resultcount;
-    return resultArray;
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
 }
 
 Array C_NSImage_Representations(void* ptr) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSArray* result = [nSImage representations];
-    int resultcount = [result count];
-    void** resultData = malloc(resultcount * sizeof(void*));
-    for (int i = 0; i < resultcount; i++) {
-    	 void* p = [result objectAtIndex:i];
-    	 resultData[i] = p;
+    NSArray* result_ = [nSImage representations];
+    int result_count = [result_ count];
+    void** result_Data = malloc(result_count * sizeof(void*));
+    for (int i = 0; i < result_count; i++) {
+    	 void* p = [result_ objectAtIndex:i];
+    	 result_Data[i] = p;
     }
-    Array resultArray;
-    resultArray.data = resultData;
-    resultArray.len = resultcount;
-    return resultArray;
+    Array result_Array;
+    result_Array.data = result_Data;
+    result_Array.len = result_count;
+    return result_Array;
 }
 
 bool C_NSImage_PrefersColorMatch(void* ptr) {
     NSImage* nSImage = (NSImage*)ptr;
-    BOOL result = [nSImage prefersColorMatch];
-    return result;
+    BOOL result_ = [nSImage prefersColorMatch];
+    return result_;
 }
 
 void C_NSImage_SetPrefersColorMatch(void* ptr, bool value) {
@@ -270,8 +281,8 @@ void C_NSImage_SetPrefersColorMatch(void* ptr, bool value) {
 
 bool C_NSImage_UsesEPSOnResolutionMismatch(void* ptr) {
     NSImage* nSImage = (NSImage*)ptr;
-    BOOL result = [nSImage usesEPSOnResolutionMismatch];
-    return result;
+    BOOL result_ = [nSImage usesEPSOnResolutionMismatch];
+    return result_;
 }
 
 void C_NSImage_SetUsesEPSOnResolutionMismatch(void* ptr, bool value) {
@@ -281,8 +292,8 @@ void C_NSImage_SetUsesEPSOnResolutionMismatch(void* ptr, bool value) {
 
 bool C_NSImage_MatchesOnMultipleResolution(void* ptr) {
     NSImage* nSImage = (NSImage*)ptr;
-    BOOL result = [nSImage matchesOnMultipleResolution];
-    return result;
+    BOOL result_ = [nSImage matchesOnMultipleResolution];
+    return result_;
 }
 
 void C_NSImage_SetMatchesOnMultipleResolution(void* ptr, bool value) {
@@ -292,14 +303,14 @@ void C_NSImage_SetMatchesOnMultipleResolution(void* ptr, bool value) {
 
 bool C_NSImage_IsValid(void* ptr) {
     NSImage* nSImage = (NSImage*)ptr;
-    BOOL result = [nSImage isValid];
-    return result;
+    BOOL result_ = [nSImage isValid];
+    return result_;
 }
 
 void* C_NSImage_BackgroundColor(void* ptr) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSColor* result = [nSImage backgroundColor];
-    return result;
+    NSColor* result_ = [nSImage backgroundColor];
+    return result_;
 }
 
 void C_NSImage_SetBackgroundColor(void* ptr, void* value) {
@@ -309,8 +320,8 @@ void C_NSImage_SetBackgroundColor(void* ptr, void* value) {
 
 NSEdgeInsets C_NSImage_CapInsets(void* ptr) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSEdgeInsets result = [nSImage capInsets];
-    return result;
+    NSEdgeInsets result_ = [nSImage capInsets];
+    return result_;
 }
 
 void C_NSImage_SetCapInsets(void* ptr, NSEdgeInsets value) {
@@ -320,8 +331,8 @@ void C_NSImage_SetCapInsets(void* ptr, NSEdgeInsets value) {
 
 int C_NSImage_ResizingMode(void* ptr) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSImageResizingMode result = [nSImage resizingMode];
-    return result;
+    NSImageResizingMode result_ = [nSImage resizingMode];
+    return result_;
 }
 
 void C_NSImage_SetResizingMode(void* ptr, int value) {
@@ -331,8 +342,8 @@ void C_NSImage_SetResizingMode(void* ptr, int value) {
 
 CGRect C_NSImage_AlignmentRect(void* ptr) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSRect result = [nSImage alignmentRect];
-    return result;
+    NSRect result_ = [nSImage alignmentRect];
+    return result_;
 }
 
 void C_NSImage_SetAlignmentRect(void* ptr, CGRect value) {
@@ -342,8 +353,8 @@ void C_NSImage_SetAlignmentRect(void* ptr, CGRect value) {
 
 unsigned int C_NSImage_CacheMode(void* ptr) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSImageCacheMode result = [nSImage cacheMode];
-    return result;
+    NSImageCacheMode result_ = [nSImage cacheMode];
+    return result_;
 }
 
 void C_NSImage_SetCacheMode(void* ptr, unsigned int value) {
@@ -353,17 +364,17 @@ void C_NSImage_SetCacheMode(void* ptr, unsigned int value) {
 
 Array C_NSImage_TIFFRepresentation(void* ptr) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSData* result = [nSImage TIFFRepresentation];
-    Array resultarray;
-    resultarray.data = [result bytes];
-    resultarray.len = result.length;
-    return resultarray;
+    NSData* result_ = [nSImage TIFFRepresentation];
+    Array result_array;
+    result_array.data = [result_ bytes];
+    result_array.len = result_.length;
+    return result_array;
 }
 
 void* C_NSImage_AccessibilityDescription(void* ptr) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSString* result = [nSImage accessibilityDescription];
-    return result;
+    NSString* result_ = [nSImage accessibilityDescription];
+    return result_;
 }
 
 void C_NSImage_SetAccessibilityDescription(void* ptr, void* value) {
@@ -373,8 +384,8 @@ void C_NSImage_SetAccessibilityDescription(void* ptr, void* value) {
 
 bool C_NSImage_MatchesOnlyOnBestFittingAxis(void* ptr) {
     NSImage* nSImage = (NSImage*)ptr;
-    BOOL result = [nSImage matchesOnlyOnBestFittingAxis];
-    return result;
+    BOOL result_ = [nSImage matchesOnlyOnBestFittingAxis];
+    return result_;
 }
 
 void C_NSImage_SetMatchesOnlyOnBestFittingAxis(void* ptr, bool value) {

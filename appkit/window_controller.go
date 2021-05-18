@@ -13,12 +13,14 @@ import (
 type WindowController interface {
 	Responder
 	LoadWindow()
+	ShowWindow(sender objc.Object)
 	WindowDidLoad()
 	WindowWillLoad()
 	SetDocumentEdited(dirtyFlag bool)
 	Close()
 	SynchronizeWindowTitleWithDocumentName()
 	WindowTitleForDocumentDisplayName(displayName string) string
+	DismissController(sender objc.Object)
 	IsWindowLoaded() bool
 	Window() Window
 	SetWindow(value Window)
@@ -56,37 +58,41 @@ func AllocWindowController() *NSWindowController {
 }
 
 func (n *NSWindowController) InitWithWindow(window Window) WindowController {
-	result := C.C_NSWindowController_InitWithWindow(n.Ptr(), objc.ExtractPtr(window))
-	return MakeWindowController(result)
+	result_ := C.C_NSWindowController_InitWithWindow(n.Ptr(), objc.ExtractPtr(window))
+	return MakeWindowController(result_)
 }
 
 func (n *NSWindowController) InitWithWindowNibName(windowNibName NibName) WindowController {
-	result := C.C_NSWindowController_InitWithWindowNibName(n.Ptr(), foundation.NewString(string(windowNibName)).Ptr())
-	return MakeWindowController(result)
+	result_ := C.C_NSWindowController_InitWithWindowNibName(n.Ptr(), foundation.NewString(string(windowNibName)).Ptr())
+	return MakeWindowController(result_)
 }
 
 func (n *NSWindowController) InitWithWindowNibName_Owner(windowNibName NibName, owner objc.Object) WindowController {
-	result := C.C_NSWindowController_InitWithWindowNibName_Owner(n.Ptr(), foundation.NewString(string(windowNibName)).Ptr(), objc.ExtractPtr(owner))
-	return MakeWindowController(result)
+	result_ := C.C_NSWindowController_InitWithWindowNibName_Owner(n.Ptr(), foundation.NewString(string(windowNibName)).Ptr(), objc.ExtractPtr(owner))
+	return MakeWindowController(result_)
 }
 
 func (n *NSWindowController) InitWithWindowNibPath_Owner(windowNibPath string, owner objc.Object) WindowController {
-	result := C.C_NSWindowController_InitWithWindowNibPath_Owner(n.Ptr(), foundation.NewString(windowNibPath).Ptr(), objc.ExtractPtr(owner))
-	return MakeWindowController(result)
+	result_ := C.C_NSWindowController_InitWithWindowNibPath_Owner(n.Ptr(), foundation.NewString(windowNibPath).Ptr(), objc.ExtractPtr(owner))
+	return MakeWindowController(result_)
 }
 
 func (n *NSWindowController) InitWithCoder(coder foundation.Coder) WindowController {
-	result := C.C_NSWindowController_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeWindowController(result)
+	result_ := C.C_NSWindowController_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeWindowController(result_)
 }
 
 func (n *NSWindowController) Init() WindowController {
-	result := C.C_NSWindowController_Init(n.Ptr())
-	return MakeWindowController(result)
+	result_ := C.C_NSWindowController_Init(n.Ptr())
+	return MakeWindowController(result_)
 }
 
 func (n *NSWindowController) LoadWindow() {
 	C.C_NSWindowController_LoadWindow(n.Ptr())
+}
+
+func (n *NSWindowController) ShowWindow(sender objc.Object) {
+	C.C_NSWindowController_ShowWindow(n.Ptr(), objc.ExtractPtr(sender))
 }
 
 func (n *NSWindowController) WindowDidLoad() {
@@ -110,18 +116,22 @@ func (n *NSWindowController) SynchronizeWindowTitleWithDocumentName() {
 }
 
 func (n *NSWindowController) WindowTitleForDocumentDisplayName(displayName string) string {
-	result := C.C_NSWindowController_WindowTitleForDocumentDisplayName(n.Ptr(), foundation.NewString(displayName).Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSWindowController_WindowTitleForDocumentDisplayName(n.Ptr(), foundation.NewString(displayName).Ptr())
+	return foundation.MakeString(result_).String()
+}
+
+func (n *NSWindowController) DismissController(sender objc.Object) {
+	C.C_NSWindowController_DismissController(n.Ptr(), objc.ExtractPtr(sender))
 }
 
 func (n *NSWindowController) IsWindowLoaded() bool {
-	result := C.C_NSWindowController_IsWindowLoaded(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindowController_IsWindowLoaded(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindowController) Window() Window {
-	result := C.C_NSWindowController_Window(n.Ptr())
-	return MakeWindow(result)
+	result_ := C.C_NSWindowController_Window(n.Ptr())
+	return MakeWindow(result_)
 }
 
 func (n *NSWindowController) SetWindow(value Window) {
@@ -129,8 +139,8 @@ func (n *NSWindowController) SetWindow(value Window) {
 }
 
 func (n *NSWindowController) Document() objc.Object {
-	result := C.C_NSWindowController_Document(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSWindowController_Document(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSWindowController) SetDocument(value objc.Object) {
@@ -138,8 +148,8 @@ func (n *NSWindowController) SetDocument(value objc.Object) {
 }
 
 func (n *NSWindowController) ShouldCloseDocument() bool {
-	result := C.C_NSWindowController_ShouldCloseDocument(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindowController_ShouldCloseDocument(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindowController) SetShouldCloseDocument(value bool) {
@@ -147,28 +157,28 @@ func (n *NSWindowController) SetShouldCloseDocument(value bool) {
 }
 
 func (n *NSWindowController) Owner() objc.Object {
-	result := C.C_NSWindowController_Owner(n.Ptr())
-	return objc.MakeObject(result)
+	result_ := C.C_NSWindowController_Owner(n.Ptr())
+	return objc.MakeObject(result_)
 }
 
 func (n *NSWindowController) Storyboard() Storyboard {
-	result := C.C_NSWindowController_Storyboard(n.Ptr())
-	return MakeStoryboard(result)
+	result_ := C.C_NSWindowController_Storyboard(n.Ptr())
+	return MakeStoryboard(result_)
 }
 
 func (n *NSWindowController) WindowNibName() NibName {
-	result := C.C_NSWindowController_WindowNibName(n.Ptr())
-	return NibName(foundation.MakeString(result).String())
+	result_ := C.C_NSWindowController_WindowNibName(n.Ptr())
+	return NibName(foundation.MakeString(result_).String())
 }
 
 func (n *NSWindowController) WindowNibPath() string {
-	result := C.C_NSWindowController_WindowNibPath(n.Ptr())
-	return foundation.MakeString(result).String()
+	result_ := C.C_NSWindowController_WindowNibPath(n.Ptr())
+	return foundation.MakeString(result_).String()
 }
 
 func (n *NSWindowController) ShouldCascadeWindows() bool {
-	result := C.C_NSWindowController_ShouldCascadeWindows(n.Ptr())
-	return bool(result)
+	result_ := C.C_NSWindowController_ShouldCascadeWindows(n.Ptr())
+	return bool(result_)
 }
 
 func (n *NSWindowController) SetShouldCascadeWindows(value bool) {
@@ -176,8 +186,8 @@ func (n *NSWindowController) SetShouldCascadeWindows(value bool) {
 }
 
 func (n *NSWindowController) WindowFrameAutosaveName() WindowFrameAutosaveName {
-	result := C.C_NSWindowController_WindowFrameAutosaveName(n.Ptr())
-	return WindowFrameAutosaveName(foundation.MakeString(result).String())
+	result_ := C.C_NSWindowController_WindowFrameAutosaveName(n.Ptr())
+	return WindowFrameAutosaveName(foundation.MakeString(result_).String())
 }
 
 func (n *NSWindowController) SetWindowFrameAutosaveName(value WindowFrameAutosaveName) {
@@ -185,8 +195,8 @@ func (n *NSWindowController) SetWindowFrameAutosaveName(value WindowFrameAutosav
 }
 
 func (n *NSWindowController) ContentViewController() ViewController {
-	result := C.C_NSWindowController_ContentViewController(n.Ptr())
-	return MakeViewController(result)
+	result_ := C.C_NSWindowController_ContentViewController(n.Ptr())
+	return MakeViewController(result_)
 }
 
 func (n *NSWindowController) SetContentViewController(value ViewController) {

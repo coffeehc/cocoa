@@ -6,10 +6,10 @@
 void* C_Progress_Alloc();
 
 void* C_NSProgress_Init(void* ptr);
-void* C_NSProgress_ProgressDiscreteProgressWithTotalUnitCount(long unitCount);
+void* C_NSProgress_Progress_DiscreteProgressWithTotalUnitCount(long unitCount);
 void* C_NSProgress_ProgressWithTotalUnitCount(long unitCount);
 void* C_NSProgress_ProgressWithTotalUnitCount_Parent_PendingUnitCount(long unitCount, void* parent, long portionOfParentTotalUnitCount);
-void* C_NSProgress_ProgressCurrentProgress();
+void* C_NSProgress_CurrentProgress();
 void C_NSProgress_BecomeCurrentWithPendingUnitCount(void* ptr, long unitCount);
 void C_NSProgress_AddChild_WithPendingUnitCount(void* ptr, void* child, long inUnitCount);
 void C_NSProgress_ResignCurrent(void* ptr);
@@ -19,7 +19,7 @@ void C_NSProgress_Resume(void* ptr);
 void C_NSProgress_SetUserInfoObject_ForKey(void* ptr, void* objectOrNil, void* key);
 void C_NSProgress_Publish(void* ptr);
 void C_NSProgress_Unpublish(void* ptr);
-void C_NSProgress_ProgressRemoveSubscriber(void* subscriber);
+void C_NSProgress_Progress_RemoveSubscriber(void* subscriber);
 long C_NSProgress_TotalUnitCount(void* ptr);
 void C_NSProgress_SetTotalUnitCount(void* ptr, long value);
 long C_NSProgress_CompletedUnitCount(void* ptr);

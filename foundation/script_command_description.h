@@ -12,4 +12,5 @@ void* C_NSScriptCommandDescription_CreateCommandInstance(void* ptr);
 void* C_NSScriptCommandDescription_CommandClassName(void* ptr);
 void* C_NSScriptCommandDescription_CommandName(void* ptr);
 void* C_NSScriptCommandDescription_SuiteName(void* ptr);
+Array C_NSScriptCommandDescription_ArgumentNames(void* ptr);
 void* C_NSScriptCommandDescription_ReturnType(void* ptr);

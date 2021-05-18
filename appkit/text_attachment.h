@@ -18,3 +18,5 @@ void* C_NSTextAttachment_Image(void* ptr);
 void C_NSTextAttachment_SetImage(void* ptr, void* value);
 void* C_NSTextAttachment_FileWrapper(void* ptr);
 void C_NSTextAttachment_SetFileWrapper(void* ptr, void* value);
+void* C_NSTextAttachment_AttachmentCell(void* ptr);
+void C_NSTextAttachment_SetAttachmentCell(void* ptr, void* value);
