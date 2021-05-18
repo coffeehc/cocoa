@@ -20,19 +20,19 @@ func initAndRun() {
 	w := appkit.NewPlainWindow(foundation.MakeRect(0, 0, 600, 400))
 	w.SetTitle("Test Layout")
 
-	label := appkit.NewLabel(foundation.ZeroRect)
+	label := appkit.NewLabel()
 	label.SetStringValue("label")
-	button := appkit.NewPlainButton(foundation.ZeroRect)
+	button := appkit.NewPlainButton()
 	button.SetStringValue("button")
-	button2 := appkit.NewPlainButton(foundation.ZeroRect)
+	button2 := appkit.NewPlainButton()
 	button2.SetStringValue("button2")
 	textView := appkit.ScrollableTextView()
 
-	gridView := appkit.AllocGridView().InitWithFrame(foundation.ZeroRect)
+	gridView := appkit.AllocGridView().Init()
 	for i := 0; i < 3; i++ {
 		var views []appkit.View
 		for j := 0; j < 4; j++ {
-			label := appkit.NewLabel(foundation.ZeroRect)
+			label := appkit.NewLabel()
 			label.SetStringValue(fmt.Sprintf("label-%v-%v", i, j))
 			views = append(views, label)
 		}

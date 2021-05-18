@@ -9,58 +9,34 @@ import (
 	"unsafe"
 )
 
-// ZeroRect for convenient
-var ZeroRect Rect
-
-type Point coregraphics.Point
+type Point = coregraphics.Point
 
 func ToNSPointPointer(p Point) unsafe.Pointer {
-	return unsafe.Pointer(&C.NSPoint{C.double(p.X), C.double(p.Y)})
+	return coregraphics.ToCGPointPointer(p)
 }
 
 func FromNSPointerPointer(p unsafe.Pointer) Point {
-	nsPoint := *(*C.NSPoint)(p)
-	return Point{
-		X: float64(nsPoint.x),
-		Y: float64(nsPoint.y),
-	}
+	return coregraphics.FromCGPointPointer(p)
 }
 
-type Size coregraphics.Size
+type Size = coregraphics.Size
 
 func ToNSSizePointer(s Size) unsafe.Pointer {
-	return unsafe.Pointer(&C.NSSize{C.double(s.Width), C.double(s.Height)})
+	return coregraphics.ToCGSizePointer(s)
 }
 
 func FromNSSizePointer(p unsafe.Pointer) Size {
-	ns := *(*C.NSSize)(p)
-	return Size{
-		Width:  float64(ns.width),
-		Height: float64(ns.height),
-	}
+	return coregraphics.FromCGSizePointer(p)
 }
 
-type Rect coregraphics.Rect
+type Rect = coregraphics.Rect
 
 func ToNSRectPointer(r Rect) unsafe.Pointer {
-	return unsafe.Pointer(&C.NSRect{
-		C.NSPoint{C.double(r.Origin.X), C.double(r.Origin.Y)},
-		C.NSSize{C.double(r.Size.Width), C.double(r.Size.Height)},
-	})
+	return coregraphics.ToCGRectPointer(r)
 }
 
 func FromNSRectPointer(p unsafe.Pointer) Rect {
-	ns := *(*C.NSRect)(p)
-	return Rect{
-		Origin: coregraphics.Point{
-			X: float64(ns.origin.x),
-			Y: float64(ns.origin.y),
-		},
-		Size: coregraphics.Size{
-			Width:  float64(ns.size.width),
-			Height: float64(ns.size.height),
-		},
-	}
+	return coregraphics.FromCGRectPointer(p)
 }
 
 // MakeRect create a Rect struct

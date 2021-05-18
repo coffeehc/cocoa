@@ -1,10 +1,8 @@
 package appkit
 
-import "github.com/hsiafan/cocoa/foundation"
-
 // NewLabel create a text field, which looks like a Label
-func NewLabel(frame foundation.Rect) TextField {
-	tf := AllocTextField().InitWithFrame(frame)
+func NewLabel() TextField {
+	tf := AllocTextField().Init()
 	tf.SetBezeled(false)
 	tf.SetDrawsBackground(false)
 	tf.SetEditable(false)
@@ -13,8 +11,8 @@ func NewLabel(frame foundation.Rect) TextField {
 }
 
 // NewTextField return a plain TextField
-func NewTextField(frame foundation.Rect) TextField {
-	field := AllocTextField().InitWithFrame(frame)
+func NewTextField() TextField {
+	field := AllocTextField().Init()
 	cell := field.Cell()
 	cell.SetScrollable(true)
 	cell.SetWraps(false)
@@ -22,8 +20,8 @@ func NewTextField(frame foundation.Rect) TextField {
 }
 
 // NewSecureTextField return a plain SecureTextField
-func NewSecureTextField(frame foundation.Rect) SecureTextField {
-	field := AllocSecureTextField().InitWithFrame(frame)
+func NewSecureTextField() SecureTextField {
+	field := AllocSecureTextField().Init()
 	cell := field.Cell()
 	cell.SetScrollable(true)
 	cell.SetWraps(false)

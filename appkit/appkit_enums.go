@@ -17,6 +17,14 @@ type ApplicationOcclusionState uint
 type AppearanceName string
 
 type TextAlignment int
+
+const (
+	TextAlignmentRight     TextAlignment = 1
+	TextAlignmentCenter    TextAlignment = 2
+	TextAlignmentJustified TextAlignment = 3
+	TextAlignmentNatural   TextAlignment = 4
+)
+
 type LineBreakMode int
 type WritingDirection int
 

@@ -1,7 +1,5 @@
 package appkit
 
-import "github.com/hsiafan/cocoa/foundation"
-
 // BezelStyle used by the bezelStyle property.
 type BezelStyle uint
 
@@ -38,22 +36,22 @@ const (
 )
 
 // NewPlainButton return a new common used Button
-func NewPlainButton(frame foundation.Rect) Button {
-	btn := AllocButton().InitWithFrame(frame)
+func NewPlainButton() Button {
+	btn := AllocButton().Init()
 	btn.SetBezelStyle(BezelStyleRounded)
 	return btn
 }
 
 // NewCheckBox return a new common used switch Button
-func NewCheckBox(frame foundation.Rect) Button {
-	btn := AllocButton().InitWithFrame(frame)
+func NewCheckBox() Button {
+	btn := AllocButton().Init()
 	btn.SetButtonType(ButtonTypeSwitch)
 	return btn
 }
 
 // NewRadioButton return a new common used radio Button
-func NewRadioButton(frame foundation.Rect) Button {
-	btn := AllocButton().InitWithFrame(frame)
+func NewRadioButton() Button {
+	btn := AllocButton().Init()
 	btn.SetButtonType(ButtonTypeRadio)
 	return btn
 }
