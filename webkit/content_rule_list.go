@@ -1,7 +1,5 @@
 package webkit
 
-// #cgo CFLAGS: -x objective-c
-// #cgo LDFLAGS: -framework WebKit
 // #include "content_rule_list.h"
 import "C"
 import (

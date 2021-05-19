@@ -1,7 +1,5 @@
 package appkit
 
-// #cgo CFLAGS: -x objective-c
-// #cgo LDFLAGS: -framework AppKit
 // #include "window_controller.h"
 import "C"
 import (

@@ -1,7 +1,5 @@
 package appkit
 
-// #cgo CFLAGS: -x objective-c
-// #cgo LDFLAGS: -framework AppKit
 // #include "popover.h"
 import "C"
 import (

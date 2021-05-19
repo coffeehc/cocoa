@@ -1,7 +1,5 @@
 package foundation
 
-// #cgo CFLAGS: -x objective-c
-// #cgo LDFLAGS: -framework Foundation
 // #include "script_class_description.h"
 import "C"
 import (

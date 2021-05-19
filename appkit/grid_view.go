@@ -1,7 +1,5 @@
 package appkit
 
-// #cgo CFLAGS: -x objective-c
-// #cgo LDFLAGS: -framework AppKit
 // #include "grid_view.h"
 import "C"
 import (

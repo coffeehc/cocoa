@@ -1,7 +1,5 @@
 package webkit
 
-// #cgo CFLAGS: -x objective-c
-// #cgo LDFLAGS: -framework WebKit
 // #include "preferences.h"
 import "C"
 import (

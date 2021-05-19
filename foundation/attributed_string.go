@@ -1,7 +1,5 @@
 package foundation
 
-// #cgo CFLAGS: -x objective-c
-// #cgo LDFLAGS: -framework Foundation
 // #include "attributed_string.h"
 import "C"
 import (

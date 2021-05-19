@@ -1,7 +1,5 @@
 package uti
 
-// #cgo CFLAGS: -x objective-c
-// #cgo LDFLAGS: -framework Cocoa
 // #include "ut_types.h"
 import "C"
 

@@ -1,7 +1,5 @@
 package webkit
 
-// #cgo CFLAGS: -x objective-c
-// #cgo LDFLAGS: -framework WebKit
 // #include "back_forward_list_item.h"
 import "C"
 import (
