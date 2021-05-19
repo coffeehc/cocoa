@@ -3,7 +3,6 @@ package appkit
 // #include "color_space.h"
 import "C"
 import (
-	"github.com/hsiafan/cocoa/coregraphics"
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
 	"unsafe"
@@ -11,7 +10,6 @@ import (
 
 type ColorSpace interface {
 	objc.Object
-	CGColorSpace() coregraphics.ColorSpaceRef
 	ColorSpaceModel() ColorSpaceModel
 	ICCProfileData() []byte
 	LocalizedName() string
@@ -33,11 +31,6 @@ func MakeColorSpace(ptr unsafe.Pointer) *NSColorSpace {
 
 func AllocColorSpace() *NSColorSpace {
 	return MakeColorSpace(C.C_ColorSpace_Alloc())
-}
-
-func (n *NSColorSpace) InitWithCGColorSpace(cgColorSpace coregraphics.ColorSpaceRef) ColorSpace {
-	result_ := C.C_NSColorSpace_InitWithCGColorSpace(n.Ptr(), *(*C.CGColorSpaceRef)(coregraphics.ToCGColorSpaceRefPointer(cgColorSpace)))
-	return MakeColorSpace(result_)
 }
 
 func (n *NSColorSpace) InitWithICCProfileData(iccData []byte) ColorSpace {
@@ -119,11 +112,6 @@ func ExtendedGenericGamma22GrayColorSpace() ColorSpace {
 func AdobeRGB1998ColorSpace() ColorSpace {
 	result_ := C.C_NSColorSpace_AdobeRGB1998ColorSpace()
 	return MakeColorSpace(result_)
-}
-
-func (n *NSColorSpace) CGColorSpace() coregraphics.ColorSpaceRef {
-	result_ := C.C_NSColorSpace_CGColorSpace(n.Ptr())
-	return coregraphics.FromCGColorSpaceRefPointer(unsafe.Pointer(&result_))
 }
 
 func (n *NSColorSpace) ColorSpaceModel() ColorSpaceModel {

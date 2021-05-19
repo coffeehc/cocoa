@@ -16,11 +16,6 @@ void* C_NSGraphicsContext_GraphicsContextWithBitmapImageRep(void* bitmapRep) {
     return result_;
 }
 
-void* C_NSGraphicsContext_GraphicsContextWithCGContext_Flipped(CGContextRef graphicsPort, bool initialFlippedState) {
-    NSGraphicsContext* result_ = [NSGraphicsContext graphicsContextWithCGContext:graphicsPort flipped:initialFlippedState];
-    return result_;
-}
-
 void* C_NSGraphicsContext_GraphicsContextWithWindow(void* window) {
     NSGraphicsContext* result_ = [NSGraphicsContext graphicsContextWithWindow:(NSWindow*)window];
     return result_;
@@ -51,12 +46,6 @@ void* C_NSGraphicsContext_GraphicsContext_CurrentContext() {
 
 void C_NSGraphicsContext_GraphicsContext_SetCurrentContext(void* value) {
     [NSGraphicsContext setCurrentContext:(NSGraphicsContext*)value];
-}
-
-CGContextRef C_NSGraphicsContext_CGContext(void* ptr) {
-    NSGraphicsContext* nSGraphicsContext = (NSGraphicsContext*)ptr;
-    CGContextRef result_ = [nSGraphicsContext CGContext];
-    return result_;
 }
 
 bool C_NSGraphicsContext_IsDrawingToScreen(void* ptr) {

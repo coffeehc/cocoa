@@ -11,7 +11,6 @@ void* C_NSImage_InitWithContentsOfFile(void* ptr, void* fileName);
 void* C_NSImage_InitWithContentsOfURL(void* ptr, void* url);
 void* C_NSImage_InitWithData(void* ptr, Array data);
 void* C_NSImage_InitWithDataIgnoringOrientation(void* ptr, Array data);
-void* C_NSImage_InitWithCGImage_Size(void* ptr, CGImageRef cgImage, CGSize size);
 void* C_NSImage_InitWithPasteboard(void* ptr, void* pasteboard);
 void* C_NSImage_InitWithCoder(void* ptr, void* coder);
 void* C_NSImage_InitWithSize(void* ptr, CGSize size);

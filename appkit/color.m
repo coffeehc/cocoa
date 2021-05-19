@@ -179,11 +179,6 @@ void* C_NSColor_ColorWithPatternImage(void* image) {
     return result_;
 }
 
-void* C_NSColor_ColorWithCGColor(CGColorRef cgColor) {
-    NSColor* result_ = [NSColor colorWithCGColor:cgColor];
-    return result_;
-}
-
 bool C_NSColor_Color_IgnoresAlpha() {
     BOOL result_ = [NSColor ignoresAlpha];
     return result_;
@@ -304,12 +299,6 @@ int C_NSColor_Type(void* ptr) {
 void* C_NSColor_ColorSpace(void* ptr) {
     NSColor* nSColor = (NSColor*)ptr;
     NSColorSpace* result_ = [nSColor colorSpace];
-    return result_;
-}
-
-CGColorRef C_NSColor_CGColor(void* ptr) {
-    NSColor* nSColor = (NSColor*)ptr;
-    CGColorRef result_ = [nSColor CGColor];
     return result_;
 }
 

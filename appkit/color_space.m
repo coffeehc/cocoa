@@ -5,12 +5,6 @@ void* C_ColorSpace_Alloc() {
     return [NSColorSpace alloc];
 }
 
-void* C_NSColorSpace_InitWithCGColorSpace(void* ptr, CGColorSpaceRef cgColorSpace) {
-    NSColorSpace* nSColorSpace = (NSColorSpace*)ptr;
-    NSColorSpace* result_ = [nSColorSpace initWithCGColorSpace:cgColorSpace];
-    return result_;
-}
-
 void* C_NSColorSpace_InitWithICCProfileData(void* ptr, Array iccData) {
     NSColorSpace* nSColorSpace = (NSColorSpace*)ptr;
     NSColorSpace* result_ = [nSColorSpace initWithICCProfileData:[[NSData alloc] initWithBytes:(Byte *)iccData.data length:iccData.len]];
@@ -94,12 +88,6 @@ void* C_NSColorSpace_ExtendedGenericGamma22GrayColorSpace() {
 
 void* C_NSColorSpace_AdobeRGB1998ColorSpace() {
     NSColorSpace* result_ = [NSColorSpace adobeRGB1998ColorSpace];
-    return result_;
-}
-
-CGColorSpaceRef C_NSColorSpace_CGColorSpace(void* ptr) {
-    NSColorSpace* nSColorSpace = (NSColorSpace*)ptr;
-    CGColorSpaceRef result_ = [nSColorSpace CGColorSpace];
     return result_;
 }
 

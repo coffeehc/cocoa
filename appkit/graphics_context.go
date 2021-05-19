@@ -12,7 +12,6 @@ import (
 type GraphicsContext interface {
 	objc.Object
 	FlushGraphics()
-	CGContext() coregraphics.ContextRef
 	IsDrawingToScreen() bool
 	IsFlipped() bool
 	CompositingOperation() CompositingOperation
@@ -54,11 +53,6 @@ func GraphicsContextWithBitmapImageRep(bitmapRep BitmapImageRep) GraphicsContext
 	return MakeGraphicsContext(result_)
 }
 
-func GraphicsContextWithCGContext_Flipped(graphicsPort coregraphics.ContextRef, initialFlippedState bool) GraphicsContext {
-	result_ := C.C_NSGraphicsContext_GraphicsContextWithCGContext_Flipped(*(*C.CGContextRef)(coregraphics.ToCGContextRefPointer(graphicsPort)), C.bool(initialFlippedState))
-	return MakeGraphicsContext(result_)
-}
-
 func GraphicsContextWithWindow(window Window) GraphicsContext {
 	result_ := C.C_NSGraphicsContext_GraphicsContextWithWindow(objc.ExtractPtr(window))
 	return MakeGraphicsContext(result_)
@@ -88,11 +82,6 @@ func GraphicsContext_CurrentContext() GraphicsContext {
 
 func GraphicsContext_SetCurrentContext(value GraphicsContext) {
 	C.C_NSGraphicsContext_GraphicsContext_SetCurrentContext(objc.ExtractPtr(value))
-}
-
-func (n *NSGraphicsContext) CGContext() coregraphics.ContextRef {
-	result_ := C.C_NSGraphicsContext_CGContext(n.Ptr())
-	return coregraphics.FromCGContextRefPointer(unsafe.Pointer(&result_))
 }
 
 func (n *NSGraphicsContext) IsDrawingToScreen() bool {

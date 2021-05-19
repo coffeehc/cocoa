@@ -22,7 +22,6 @@ type Event interface {
 	Timestamp() foundation.TimeInterval
 	Window() Window
 	WindowNumber() int
-	CGEvent() coregraphics.EventRef
 	Characters() string
 	CharactersIgnoringModifiers() string
 	IsARepeat() bool
@@ -91,11 +90,6 @@ func (n *NSEvent) Init() Event {
 
 func Event_MouseEventWithType_Location_ModifierFlags_Timestamp_WindowNumber_Context_EventNumber_ClickCount_Pressure(_type EventType, location foundation.Point, flags EventModifierFlags, time foundation.TimeInterval, wNum int, unusedPassNil GraphicsContext, eNum int, cNum int, pressure float32) Event {
 	result_ := C.C_NSEvent_Event_MouseEventWithType_Location_ModifierFlags_Timestamp_WindowNumber_Context_EventNumber_ClickCount_Pressure(C.uint(uint(_type)), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(location))), C.uint(uint(flags)), C.double(float64(time)), C.int(wNum), objc.ExtractPtr(unusedPassNil), C.int(eNum), C.int(cNum), C.float(pressure))
-	return MakeEvent(result_)
-}
-
-func EventWithCGEvent(cgEvent coregraphics.EventRef) Event {
-	result_ := C.C_NSEvent_EventWithCGEvent(*(*C.CGEventRef)(coregraphics.ToCGEventRefPointer(cgEvent)))
 	return MakeEvent(result_)
 }
 
@@ -170,11 +164,6 @@ func (n *NSEvent) Window() Window {
 func (n *NSEvent) WindowNumber() int {
 	result_ := C.C_NSEvent_WindowNumber(n.Ptr())
 	return int(result_)
-}
-
-func (n *NSEvent) CGEvent() coregraphics.EventRef {
-	result_ := C.C_NSEvent_CGEvent(n.Ptr())
-	return coregraphics.FromCGEventRefPointer(unsafe.Pointer(&result_))
 }
 
 func Event_KeyRepeatDelay() foundation.TimeInterval {

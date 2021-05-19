@@ -41,12 +41,6 @@ void* C_NSImage_InitWithDataIgnoringOrientation(void* ptr, Array data) {
     return result_;
 }
 
-void* C_NSImage_InitWithCGImage_Size(void* ptr, CGImageRef cgImage, CGSize size) {
-    NSImage* nSImage = (NSImage*)ptr;
-    NSImage* result_ = [nSImage initWithCGImage:cgImage size:size];
-    return result_;
-}
-
 void* C_NSImage_InitWithPasteboard(void* ptr, void* pasteboard) {
     NSImage* nSImage = (NSImage*)ptr;
     NSImage* result_ = [nSImage initWithPasteboard:(NSPasteboard*)pasteboard];

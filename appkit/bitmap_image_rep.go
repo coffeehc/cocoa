@@ -30,7 +30,6 @@ type BitmapImageRep interface {
 	NumberOfPlanes() int
 	SamplesPerPixel() int
 	TIFFRepresentation() []byte
-	CGImage() coregraphics.ImageRef
 	ColorSpace() ColorSpace
 }
 
@@ -49,11 +48,6 @@ func MakeBitmapImageRep(ptr unsafe.Pointer) *NSBitmapImageRep {
 
 func AllocBitmapImageRep() *NSBitmapImageRep {
 	return MakeBitmapImageRep(C.C_BitmapImageRep_Alloc())
-}
-
-func (n *NSBitmapImageRep) InitWithCGImage(cgImage coregraphics.ImageRef) BitmapImageRep {
-	result_ := C.C_NSBitmapImageRep_InitWithCGImage(n.Ptr(), *(*C.CGImageRef)(coregraphics.ToCGImageRefPointer(cgImage)))
-	return MakeBitmapImageRep(result_)
 }
 
 func (n *NSBitmapImageRep) InitWithData(data []byte) BitmapImageRep {
@@ -222,11 +216,6 @@ func (n *NSBitmapImageRep) TIFFRepresentation() []byte {
 	copy(goResult_, result_Buffer)
 	C.free(result_.data)
 	return goResult_
-}
-
-func (n *NSBitmapImageRep) CGImage() coregraphics.ImageRef {
-	result_ := C.C_NSBitmapImageRep_CGImage(n.Ptr())
-	return coregraphics.FromCGImageRefPointer(unsafe.Pointer(&result_))
 }
 
 func (n *NSBitmapImageRep) ColorSpace() ColorSpace {

@@ -107,11 +107,6 @@ func (n *NSImage) InitWithDataIgnoringOrientation(data []byte) Image {
 	return MakeImage(result_)
 }
 
-func (n *NSImage) InitWithCGImage_Size(cgImage coregraphics.ImageRef, size foundation.Size) Image {
-	result_ := C.C_NSImage_InitWithCGImage_Size(n.Ptr(), *(*C.CGImageRef)(coregraphics.ToCGImageRefPointer(cgImage)), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(size))))
-	return MakeImage(result_)
-}
-
 func (n *NSImage) InitWithPasteboard(pasteboard Pasteboard) Image {
 	result_ := C.C_NSImage_InitWithPasteboard(n.Ptr(), objc.ExtractPtr(pasteboard))
 	return MakeImage(result_)

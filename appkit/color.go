@@ -42,7 +42,6 @@ type Color interface {
 	LocalizedColorNameComponent() string
 	Type() ColorType
 	ColorSpace() ColorSpace
-	CGColor() coregraphics.ColorRef
 	PatternImage() Image
 }
 
@@ -223,11 +222,6 @@ func ColorWithPatternImage(image Image) Color {
 	return MakeColor(result_)
 }
 
-func ColorWithCGColor(cgColor coregraphics.ColorRef) Color {
-	result_ := C.C_NSColor_ColorWithCGColor(*(*C.CGColorRef)(coregraphics.ToCGColorRefPointer(cgColor)))
-	return MakeColor(result_)
-}
-
 func Color_IgnoresAlpha() bool {
 	result_ := C.C_NSColor_Color_IgnoresAlpha()
 	return bool(result_)
@@ -330,11 +324,6 @@ func (n *NSColor) Type() ColorType {
 func (n *NSColor) ColorSpace() ColorSpace {
 	result_ := C.C_NSColor_ColorSpace(n.Ptr())
 	return MakeColorSpace(result_)
-}
-
-func (n *NSColor) CGColor() coregraphics.ColorRef {
-	result_ := C.C_NSColor_CGColor(n.Ptr())
-	return coregraphics.FromCGColorRefPointer(unsafe.Pointer(&result_))
 }
 
 func LabelColor() Color {

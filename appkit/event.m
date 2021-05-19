@@ -16,11 +16,6 @@ void* C_NSEvent_Event_MouseEventWithType_Location_ModifierFlags_Timestamp_Window
     return result_;
 }
 
-void* C_NSEvent_EventWithCGEvent(CGEventRef cgEvent) {
-    NSEvent* result_ = [NSEvent eventWithCGEvent:cgEvent];
-    return result_;
-}
-
 void C_NSEvent_Event_StartPeriodicEventsAfterDelay_WithPeriod(double delay, double period) {
     [NSEvent startPeriodicEventsAfterDelay:delay withPeriod:period];
 }
@@ -105,12 +100,6 @@ void* C_NSEvent_Window(void* ptr) {
 int C_NSEvent_WindowNumber(void* ptr) {
     NSEvent* nSEvent = (NSEvent*)ptr;
     NSInteger result_ = [nSEvent windowNumber];
-    return result_;
-}
-
-CGEventRef C_NSEvent_CGEvent(void* ptr) {
-    NSEvent* nSEvent = (NSEvent*)ptr;
-    CGEventRef result_ = [nSEvent CGEvent];
     return result_;
 }
 

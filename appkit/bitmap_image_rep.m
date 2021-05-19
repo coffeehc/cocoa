@@ -5,12 +5,6 @@ void* C_BitmapImageRep_Alloc() {
     return [NSBitmapImageRep alloc];
 }
 
-void* C_NSBitmapImageRep_InitWithCGImage(void* ptr, CGImageRef cgImage) {
-    NSBitmapImageRep* nSBitmapImageRep = (NSBitmapImageRep*)ptr;
-    NSBitmapImageRep* result_ = [nSBitmapImageRep initWithCGImage:cgImage];
-    return result_;
-}
-
 void* C_NSBitmapImageRep_InitWithData(void* ptr, Array data) {
     NSBitmapImageRep* nSBitmapImageRep = (NSBitmapImageRep*)ptr;
     NSBitmapImageRep* result_ = [nSBitmapImageRep initWithData:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len]];
@@ -201,12 +195,6 @@ Array C_NSBitmapImageRep_TIFFRepresentation(void* ptr) {
     result_array.data = [result_ bytes];
     result_array.len = result_.length;
     return result_array;
-}
-
-CGImageRef C_NSBitmapImageRep_CGImage(void* ptr) {
-    NSBitmapImageRep* nSBitmapImageRep = (NSBitmapImageRep*)ptr;
-    CGImageRef result_ = [nSBitmapImageRep CGImage];
-    return result_;
 }
 
 void* C_NSBitmapImageRep_ColorSpace(void* ptr) {
