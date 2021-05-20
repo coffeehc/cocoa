@@ -189,3 +189,40 @@ type GestureRecognizerState int
 
 type SaveOperationType uint
 type DocumentChangeType uint
+
+type TableViewAnimationOptions uint
+type TableViewStyle int
+type TableViewSelectionHighlightStyle int
+type TableViewGridLineStyle uint
+type TableViewRowSizeStyle int
+type KeyValueChange uint
+type KeyValueSetMutationKind uint
+type CollectionViewScrollDirection int
+type TableViewDraggingDestinationFeedbackStyle int
+type TableViewDropOperation uint
+
+type BrowserColumnsAutosaveName string
+type BrowserColumnResizingType uint
+type BrowserDropOperation uint
+type CollectionViewSupplementaryElementKind string
+type CollectionViewScrollPosition uint
+type CollectionViewItemHighlightState int
+type CollectionViewDropOperation int
+type CollectionViewDecorationElementKind string
+type CollectionElementCategory int
+type CollectionViewTransitionLayoutAnimatedKey string
+type CollectionUpdateAction int
+type PathStyle int
+type SearchFieldRecentsAutosaveName string
+type TableViewColumnAutoresizingStyle uint
+type TableViewAutosaveName string
+type TableColumnResizingOptions uint
+type CollectionLayoutSectionOrthogonalScrollingBehavior int
+type RectAlignment int
+type DirectionalRectEdge uint
+
+type MatrixMode uint
+
+type TableRowActionEdge int
+
+type TableViewRowActionStyle int
