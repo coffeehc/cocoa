@@ -24,29 +24,29 @@ func WrapComboBoxDataSource(delegate *ComboBoxDataSource) objc.Object {
 	return objc.MakeObject(ptr)
 }
 
-//export ComboBoxDataSource_ComboBox_CompletedString
-func ComboBoxDataSource_ComboBox_CompletedString(id int64, comboBox unsafe.Pointer, _string unsafe.Pointer) unsafe.Pointer {
+//export comboBoxDataSource_ComboBox_CompletedString
+func comboBoxDataSource_ComboBox_CompletedString(id int64, comboBox unsafe.Pointer, _string unsafe.Pointer) unsafe.Pointer {
 	delegate := resources.Get(id).(*ComboBoxDataSource)
 	result := delegate.ComboBox_CompletedString(MakeComboBox(comboBox), foundation.MakeString(_string).String())
 	return foundation.NewString(result).Ptr()
 }
 
-//export ComboBoxDataSource_ComboBox_IndexOfItemWithStringValue
-func ComboBoxDataSource_ComboBox_IndexOfItemWithStringValue(id int64, comboBox unsafe.Pointer, _string unsafe.Pointer) C.uint {
+//export comboBoxDataSource_ComboBox_IndexOfItemWithStringValue
+func comboBoxDataSource_ComboBox_IndexOfItemWithStringValue(id int64, comboBox unsafe.Pointer, _string unsafe.Pointer) C.uint {
 	delegate := resources.Get(id).(*ComboBoxDataSource)
 	result := delegate.ComboBox_IndexOfItemWithStringValue(MakeComboBox(comboBox), foundation.MakeString(_string).String())
 	return C.uint(result)
 }
 
-//export ComboBoxDataSource_ComboBox_ObjectValueForItemAtIndex
-func ComboBoxDataSource_ComboBox_ObjectValueForItemAtIndex(id int64, comboBox unsafe.Pointer, index C.int) unsafe.Pointer {
+//export comboBoxDataSource_ComboBox_ObjectValueForItemAtIndex
+func comboBoxDataSource_ComboBox_ObjectValueForItemAtIndex(id int64, comboBox unsafe.Pointer, index C.int) unsafe.Pointer {
 	delegate := resources.Get(id).(*ComboBoxDataSource)
 	result := delegate.ComboBox_ObjectValueForItemAtIndex(MakeComboBox(comboBox), int(index))
 	return objc.ExtractPtr(result)
 }
 
-//export ComboBoxDataSource_NumberOfItemsInComboBox
-func ComboBoxDataSource_NumberOfItemsInComboBox(id int64, comboBox unsafe.Pointer) C.int {
+//export comboBoxDataSource_NumberOfItemsInComboBox
+func comboBoxDataSource_NumberOfItemsInComboBox(id int64, comboBox unsafe.Pointer) C.int {
 	delegate := resources.Get(id).(*ComboBoxDataSource)
 	result := delegate.NumberOfItemsInComboBox(MakeComboBox(comboBox))
 	return C.int(result)

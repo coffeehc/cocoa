@@ -6,30 +6,30 @@
 
 
 - (BOOL)pathControl:(NSPathControl*)pathControl shouldDragPathComponentCell:(NSPathComponentCell*)pathComponentCell withPasteboard:(NSPasteboard*)pasteboard {
-    bool result_ = PathControlDelegate_PathControl_ShouldDragPathComponentCell_WithPasteboard([self goID], pathControl, pathComponentCell, pasteboard);
+    bool result_ = pathControlDelegate_PathControl_ShouldDragPathComponentCell_WithPasteboard([self goID], pathControl, pathComponentCell, pasteboard);
     return result_;
 }
 
 - (NSDragOperation)pathControl:(NSPathControl*)pathControl validateDrop:(id)info {
-    unsigned int result_ = PathControlDelegate_PathControl_ValidateDrop([self goID], pathControl, info);
+    unsigned int result_ = pathControlDelegate_PathControl_ValidateDrop([self goID], pathControl, info);
     return result_;
 }
 
 - (BOOL)pathControl:(NSPathControl*)pathControl acceptDrop:(id)info {
-    bool result_ = PathControlDelegate_PathControl_AcceptDrop([self goID], pathControl, info);
+    bool result_ = pathControlDelegate_PathControl_AcceptDrop([self goID], pathControl, info);
     return result_;
 }
 
 - (void)pathControl:(NSPathControl*)pathControl willDisplayOpenPanel:(NSOpenPanel*)openPanel {
-    PathControlDelegate_PathControl_WillDisplayOpenPanel([self goID], pathControl, openPanel);
+    pathControlDelegate_PathControl_WillDisplayOpenPanel([self goID], pathControl, openPanel);
 }
 
 - (void)pathControl:(NSPathControl*)pathControl willPopUpMenu:(NSMenu*)menu {
-    PathControlDelegate_PathControl_WillPopUpMenu([self goID], pathControl, menu);
+    pathControlDelegate_PathControl_WillPopUpMenu([self goID], pathControl, menu);
 }
 
 - (BOOL)pathControl:(NSPathControl*)pathControl shouldDragItem:(NSPathControlItem*)pathItem withPasteboard:(NSPasteboard*)pasteboard {
-    bool result_ = PathControlDelegate_PathControl_ShouldDragItem_WithPasteboard([self goID], pathControl, pathItem, pasteboard);
+    bool result_ = pathControlDelegate_PathControl_ShouldDragItem_WithPasteboard([self goID], pathControl, pathItem, pasteboard);
     return result_;
 }
 

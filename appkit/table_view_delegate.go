@@ -58,187 +58,187 @@ func WrapTableViewDelegate(delegate *TableViewDelegate) objc.Object {
 	return objc.MakeObject(ptr)
 }
 
-//export TableViewDelegate_TableView_ViewForTableColumn_Row
-func TableViewDelegate_TableView_ViewForTableColumn_Row(id int64, tableView unsafe.Pointer, tableColumn unsafe.Pointer, row C.int) unsafe.Pointer {
+//export tableViewDelegate_TableView_ViewForTableColumn_Row
+func tableViewDelegate_TableView_ViewForTableColumn_Row(id int64, tableView unsafe.Pointer, tableColumn unsafe.Pointer, row C.int) unsafe.Pointer {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	result := delegate.TableView_ViewForTableColumn_Row(MakeTableView(tableView), MakeTableColumn(tableColumn), int(row))
 	return objc.ExtractPtr(result)
 }
 
-//export TableViewDelegate_TableView_RowViewForRow
-func TableViewDelegate_TableView_RowViewForRow(id int64, tableView unsafe.Pointer, row C.int) unsafe.Pointer {
+//export tableViewDelegate_TableView_RowViewForRow
+func tableViewDelegate_TableView_RowViewForRow(id int64, tableView unsafe.Pointer, row C.int) unsafe.Pointer {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	result := delegate.TableView_RowViewForRow(MakeTableView(tableView), int(row))
 	return objc.ExtractPtr(result)
 }
 
-//export TableViewDelegate_TableView_DidAddRowView_ForRow
-func TableViewDelegate_TableView_DidAddRowView_ForRow(id int64, tableView unsafe.Pointer, rowView unsafe.Pointer, row C.int) {
+//export tableViewDelegate_TableView_DidAddRowView_ForRow
+func tableViewDelegate_TableView_DidAddRowView_ForRow(id int64, tableView unsafe.Pointer, rowView unsafe.Pointer, row C.int) {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	delegate.TableView_DidAddRowView_ForRow(MakeTableView(tableView), MakeTableRowView(rowView), int(row))
 }
 
-//export TableViewDelegate_TableView_DidRemoveRowView_ForRow
-func TableViewDelegate_TableView_DidRemoveRowView_ForRow(id int64, tableView unsafe.Pointer, rowView unsafe.Pointer, row C.int) {
+//export tableViewDelegate_TableView_DidRemoveRowView_ForRow
+func tableViewDelegate_TableView_DidRemoveRowView_ForRow(id int64, tableView unsafe.Pointer, rowView unsafe.Pointer, row C.int) {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	delegate.TableView_DidRemoveRowView_ForRow(MakeTableView(tableView), MakeTableRowView(rowView), int(row))
 }
 
-//export TableViewDelegate_TableView_IsGroupRow
-func TableViewDelegate_TableView_IsGroupRow(id int64, tableView unsafe.Pointer, row C.int) C.bool {
+//export tableViewDelegate_TableView_IsGroupRow
+func tableViewDelegate_TableView_IsGroupRow(id int64, tableView unsafe.Pointer, row C.int) C.bool {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	result := delegate.TableView_IsGroupRow(MakeTableView(tableView), int(row))
 	return C.bool(result)
 }
 
-//export TableViewDelegate_TableView_WillDisplayCell_ForTableColumn_Row
-func TableViewDelegate_TableView_WillDisplayCell_ForTableColumn_Row(id int64, tableView unsafe.Pointer, cell unsafe.Pointer, tableColumn unsafe.Pointer, row C.int) {
+//export tableViewDelegate_TableView_WillDisplayCell_ForTableColumn_Row
+func tableViewDelegate_TableView_WillDisplayCell_ForTableColumn_Row(id int64, tableView unsafe.Pointer, cell unsafe.Pointer, tableColumn unsafe.Pointer, row C.int) {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	delegate.TableView_WillDisplayCell_ForTableColumn_Row(MakeTableView(tableView), objc.MakeObject(cell), MakeTableColumn(tableColumn), int(row))
 }
 
-//export TableViewDelegate_TableView_DataCellForTableColumn_Row
-func TableViewDelegate_TableView_DataCellForTableColumn_Row(id int64, tableView unsafe.Pointer, tableColumn unsafe.Pointer, row C.int) unsafe.Pointer {
+//export tableViewDelegate_TableView_DataCellForTableColumn_Row
+func tableViewDelegate_TableView_DataCellForTableColumn_Row(id int64, tableView unsafe.Pointer, tableColumn unsafe.Pointer, row C.int) unsafe.Pointer {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	result := delegate.TableView_DataCellForTableColumn_Row(MakeTableView(tableView), MakeTableColumn(tableColumn), int(row))
 	return objc.ExtractPtr(result)
 }
 
-//export TableViewDelegate_TableView_ShouldShowCellExpansionForTableColumn_Row
-func TableViewDelegate_TableView_ShouldShowCellExpansionForTableColumn_Row(id int64, tableView unsafe.Pointer, tableColumn unsafe.Pointer, row C.int) C.bool {
+//export tableViewDelegate_TableView_ShouldShowCellExpansionForTableColumn_Row
+func tableViewDelegate_TableView_ShouldShowCellExpansionForTableColumn_Row(id int64, tableView unsafe.Pointer, tableColumn unsafe.Pointer, row C.int) C.bool {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	result := delegate.TableView_ShouldShowCellExpansionForTableColumn_Row(MakeTableView(tableView), MakeTableColumn(tableColumn), int(row))
 	return C.bool(result)
 }
 
-//export TableViewDelegate_TableView_ShouldEditTableColumn_Row
-func TableViewDelegate_TableView_ShouldEditTableColumn_Row(id int64, tableView unsafe.Pointer, tableColumn unsafe.Pointer, row C.int) C.bool {
+//export tableViewDelegate_TableView_ShouldEditTableColumn_Row
+func tableViewDelegate_TableView_ShouldEditTableColumn_Row(id int64, tableView unsafe.Pointer, tableColumn unsafe.Pointer, row C.int) C.bool {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	result := delegate.TableView_ShouldEditTableColumn_Row(MakeTableView(tableView), MakeTableColumn(tableColumn), int(row))
 	return C.bool(result)
 }
 
-//export TableViewDelegate_TableView_HeightOfRow
-func TableViewDelegate_TableView_HeightOfRow(id int64, tableView unsafe.Pointer, row C.int) C.double {
+//export tableViewDelegate_TableView_HeightOfRow
+func tableViewDelegate_TableView_HeightOfRow(id int64, tableView unsafe.Pointer, row C.int) C.double {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	result := delegate.TableView_HeightOfRow(MakeTableView(tableView), int(row))
 	return C.double(float64(result))
 }
 
-//export TableViewDelegate_TableView_SizeToFitWidthOfColumn
-func TableViewDelegate_TableView_SizeToFitWidthOfColumn(id int64, tableView unsafe.Pointer, column C.int) C.double {
+//export tableViewDelegate_TableView_SizeToFitWidthOfColumn
+func tableViewDelegate_TableView_SizeToFitWidthOfColumn(id int64, tableView unsafe.Pointer, column C.int) C.double {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	result := delegate.TableView_SizeToFitWidthOfColumn(MakeTableView(tableView), int(column))
 	return C.double(float64(result))
 }
 
-//export TableViewDelegate_SelectionShouldChangeInTableView
-func TableViewDelegate_SelectionShouldChangeInTableView(id int64, tableView unsafe.Pointer) C.bool {
+//export tableViewDelegate_SelectionShouldChangeInTableView
+func tableViewDelegate_SelectionShouldChangeInTableView(id int64, tableView unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	result := delegate.SelectionShouldChangeInTableView(MakeTableView(tableView))
 	return C.bool(result)
 }
 
-//export TableViewDelegate_TableView_ShouldSelectRow
-func TableViewDelegate_TableView_ShouldSelectRow(id int64, tableView unsafe.Pointer, row C.int) C.bool {
+//export tableViewDelegate_TableView_ShouldSelectRow
+func tableViewDelegate_TableView_ShouldSelectRow(id int64, tableView unsafe.Pointer, row C.int) C.bool {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	result := delegate.TableView_ShouldSelectRow(MakeTableView(tableView), int(row))
 	return C.bool(result)
 }
 
-//export TableViewDelegate_TableView_SelectionIndexesForProposedSelection
-func TableViewDelegate_TableView_SelectionIndexesForProposedSelection(id int64, tableView unsafe.Pointer, proposedSelectionIndexes unsafe.Pointer) unsafe.Pointer {
+//export tableViewDelegate_TableView_SelectionIndexesForProposedSelection
+func tableViewDelegate_TableView_SelectionIndexesForProposedSelection(id int64, tableView unsafe.Pointer, proposedSelectionIndexes unsafe.Pointer) unsafe.Pointer {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	result := delegate.TableView_SelectionIndexesForProposedSelection(MakeTableView(tableView), foundation.MakeIndexSet(proposedSelectionIndexes))
 	return objc.ExtractPtr(result)
 }
 
-//export TableViewDelegate_TableView_ShouldSelectTableColumn
-func TableViewDelegate_TableView_ShouldSelectTableColumn(id int64, tableView unsafe.Pointer, tableColumn unsafe.Pointer) C.bool {
+//export tableViewDelegate_TableView_ShouldSelectTableColumn
+func tableViewDelegate_TableView_ShouldSelectTableColumn(id int64, tableView unsafe.Pointer, tableColumn unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	result := delegate.TableView_ShouldSelectTableColumn(MakeTableView(tableView), MakeTableColumn(tableColumn))
 	return C.bool(result)
 }
 
-//export TableViewDelegate_TableViewSelectionIsChanging
-func TableViewDelegate_TableViewSelectionIsChanging(id int64, notification unsafe.Pointer) {
+//export tableViewDelegate_TableViewSelectionIsChanging
+func tableViewDelegate_TableViewSelectionIsChanging(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	delegate.TableViewSelectionIsChanging(foundation.MakeNotification(notification))
 }
 
-//export TableViewDelegate_TableViewSelectionDidChange
-func TableViewDelegate_TableViewSelectionDidChange(id int64, notification unsafe.Pointer) {
+//export tableViewDelegate_TableViewSelectionDidChange
+func tableViewDelegate_TableViewSelectionDidChange(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	delegate.TableViewSelectionDidChange(foundation.MakeNotification(notification))
 }
 
-//export TableViewDelegate_TableView_ShouldTypeSelectForEvent_WithCurrentSearchString
-func TableViewDelegate_TableView_ShouldTypeSelectForEvent_WithCurrentSearchString(id int64, tableView unsafe.Pointer, event unsafe.Pointer, searchString unsafe.Pointer) C.bool {
+//export tableViewDelegate_TableView_ShouldTypeSelectForEvent_WithCurrentSearchString
+func tableViewDelegate_TableView_ShouldTypeSelectForEvent_WithCurrentSearchString(id int64, tableView unsafe.Pointer, event unsafe.Pointer, searchString unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	result := delegate.TableView_ShouldTypeSelectForEvent_WithCurrentSearchString(MakeTableView(tableView), MakeEvent(event), foundation.MakeString(searchString).String())
 	return C.bool(result)
 }
 
-//export TableViewDelegate_TableView_TypeSelectStringForTableColumn_Row
-func TableViewDelegate_TableView_TypeSelectStringForTableColumn_Row(id int64, tableView unsafe.Pointer, tableColumn unsafe.Pointer, row C.int) unsafe.Pointer {
+//export tableViewDelegate_TableView_TypeSelectStringForTableColumn_Row
+func tableViewDelegate_TableView_TypeSelectStringForTableColumn_Row(id int64, tableView unsafe.Pointer, tableColumn unsafe.Pointer, row C.int) unsafe.Pointer {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	result := delegate.TableView_TypeSelectStringForTableColumn_Row(MakeTableView(tableView), MakeTableColumn(tableColumn), int(row))
 	return foundation.NewString(result).Ptr()
 }
 
-//export TableViewDelegate_TableView_NextTypeSelectMatchFromRow_ToRow_ForString
-func TableViewDelegate_TableView_NextTypeSelectMatchFromRow_ToRow_ForString(id int64, tableView unsafe.Pointer, startRow C.int, endRow C.int, searchString unsafe.Pointer) C.int {
+//export tableViewDelegate_TableView_NextTypeSelectMatchFromRow_ToRow_ForString
+func tableViewDelegate_TableView_NextTypeSelectMatchFromRow_ToRow_ForString(id int64, tableView unsafe.Pointer, startRow C.int, endRow C.int, searchString unsafe.Pointer) C.int {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	result := delegate.TableView_NextTypeSelectMatchFromRow_ToRow_ForString(MakeTableView(tableView), int(startRow), int(endRow), foundation.MakeString(searchString).String())
 	return C.int(result)
 }
 
-//export TableViewDelegate_TableView_ShouldReorderColumn_ToColumn
-func TableViewDelegate_TableView_ShouldReorderColumn_ToColumn(id int64, tableView unsafe.Pointer, columnIndex C.int, newColumnIndex C.int) C.bool {
+//export tableViewDelegate_TableView_ShouldReorderColumn_ToColumn
+func tableViewDelegate_TableView_ShouldReorderColumn_ToColumn(id int64, tableView unsafe.Pointer, columnIndex C.int, newColumnIndex C.int) C.bool {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	result := delegate.TableView_ShouldReorderColumn_ToColumn(MakeTableView(tableView), int(columnIndex), int(newColumnIndex))
 	return C.bool(result)
 }
 
-//export TableViewDelegate_TableView_DidDragTableColumn
-func TableViewDelegate_TableView_DidDragTableColumn(id int64, tableView unsafe.Pointer, tableColumn unsafe.Pointer) {
+//export tableViewDelegate_TableView_DidDragTableColumn
+func tableViewDelegate_TableView_DidDragTableColumn(id int64, tableView unsafe.Pointer, tableColumn unsafe.Pointer) {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	delegate.TableView_DidDragTableColumn(MakeTableView(tableView), MakeTableColumn(tableColumn))
 }
 
-//export TableViewDelegate_TableViewColumnDidMove
-func TableViewDelegate_TableViewColumnDidMove(id int64, notification unsafe.Pointer) {
+//export tableViewDelegate_TableViewColumnDidMove
+func tableViewDelegate_TableViewColumnDidMove(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	delegate.TableViewColumnDidMove(foundation.MakeNotification(notification))
 }
 
-//export TableViewDelegate_TableViewColumnDidResize
-func TableViewDelegate_TableViewColumnDidResize(id int64, notification unsafe.Pointer) {
+//export tableViewDelegate_TableViewColumnDidResize
+func tableViewDelegate_TableViewColumnDidResize(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	delegate.TableViewColumnDidResize(foundation.MakeNotification(notification))
 }
 
-//export TableViewDelegate_TableView_DidClickTableColumn
-func TableViewDelegate_TableView_DidClickTableColumn(id int64, tableView unsafe.Pointer, tableColumn unsafe.Pointer) {
+//export tableViewDelegate_TableView_DidClickTableColumn
+func tableViewDelegate_TableView_DidClickTableColumn(id int64, tableView unsafe.Pointer, tableColumn unsafe.Pointer) {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	delegate.TableView_DidClickTableColumn(MakeTableView(tableView), MakeTableColumn(tableColumn))
 }
 
-//export TableViewDelegate_TableView_MouseDownInHeaderOfTableColumn
-func TableViewDelegate_TableView_MouseDownInHeaderOfTableColumn(id int64, tableView unsafe.Pointer, tableColumn unsafe.Pointer) {
+//export tableViewDelegate_TableView_MouseDownInHeaderOfTableColumn
+func tableViewDelegate_TableView_MouseDownInHeaderOfTableColumn(id int64, tableView unsafe.Pointer, tableColumn unsafe.Pointer) {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	delegate.TableView_MouseDownInHeaderOfTableColumn(MakeTableView(tableView), MakeTableColumn(tableColumn))
 }
 
-//export TableViewDelegate_TableView_ShouldTrackCell_ForTableColumn_Row
-func TableViewDelegate_TableView_ShouldTrackCell_ForTableColumn_Row(id int64, tableView unsafe.Pointer, cell unsafe.Pointer, tableColumn unsafe.Pointer, row C.int) C.bool {
+//export tableViewDelegate_TableView_ShouldTrackCell_ForTableColumn_Row
+func tableViewDelegate_TableView_ShouldTrackCell_ForTableColumn_Row(id int64, tableView unsafe.Pointer, cell unsafe.Pointer, tableColumn unsafe.Pointer, row C.int) C.bool {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	result := delegate.TableView_ShouldTrackCell_ForTableColumn_Row(MakeTableView(tableView), MakeCell(cell), MakeTableColumn(tableColumn), int(row))
 	return C.bool(result)
 }
 
-//export TableViewDelegate_TableView_RowActionsForRow_Edge
-func TableViewDelegate_TableView_RowActionsForRow_Edge(id int64, tableView unsafe.Pointer, row C.int, edge C.int) C.Array {
+//export tableViewDelegate_TableView_RowActionsForRow_Edge
+func tableViewDelegate_TableView_RowActionsForRow_Edge(id int64, tableView unsafe.Pointer, row C.int, edge C.int) C.Array {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	result := delegate.TableView_RowActionsForRow_Edge(MakeTableView(tableView), int(row), TableRowActionEdge(int(edge)))
 	cResultData := make([]unsafe.Pointer, len(result))
@@ -249,61 +249,61 @@ func TableViewDelegate_TableView_RowActionsForRow_Edge(id int64, tableView unsaf
 	return cResult
 }
 
-//export TableViewDelegate_Control_IsValidObject
-func TableViewDelegate_Control_IsValidObject(id int64, control unsafe.Pointer, obj unsafe.Pointer) C.bool {
+//export tableViewDelegate_Control_IsValidObject
+func tableViewDelegate_Control_IsValidObject(id int64, control unsafe.Pointer, obj unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	result := delegate.Control_IsValidObject(MakeControl(control), objc.MakeObject(obj))
 	return C.bool(result)
 }
 
-//export TableViewDelegate_Control_DidFailToValidatePartialString_ErrorDescription
-func TableViewDelegate_Control_DidFailToValidatePartialString_ErrorDescription(id int64, control unsafe.Pointer, _string unsafe.Pointer, error unsafe.Pointer) {
+//export tableViewDelegate_Control_DidFailToValidatePartialString_ErrorDescription
+func tableViewDelegate_Control_DidFailToValidatePartialString_ErrorDescription(id int64, control unsafe.Pointer, _string unsafe.Pointer, error unsafe.Pointer) {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	delegate.Control_DidFailToValidatePartialString_ErrorDescription(MakeControl(control), foundation.MakeString(_string).String(), foundation.MakeString(error).String())
 }
 
-//export TableViewDelegate_Control_DidFailToFormatString_ErrorDescription
-func TableViewDelegate_Control_DidFailToFormatString_ErrorDescription(id int64, control unsafe.Pointer, _string unsafe.Pointer, error unsafe.Pointer) C.bool {
+//export tableViewDelegate_Control_DidFailToFormatString_ErrorDescription
+func tableViewDelegate_Control_DidFailToFormatString_ErrorDescription(id int64, control unsafe.Pointer, _string unsafe.Pointer, error unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	result := delegate.Control_DidFailToFormatString_ErrorDescription(MakeControl(control), foundation.MakeString(_string).String(), foundation.MakeString(error).String())
 	return C.bool(result)
 }
 
-//export TableViewDelegate_Control_TextShouldBeginEditing
-func TableViewDelegate_Control_TextShouldBeginEditing(id int64, control unsafe.Pointer, fieldEditor unsafe.Pointer) C.bool {
+//export tableViewDelegate_Control_TextShouldBeginEditing
+func tableViewDelegate_Control_TextShouldBeginEditing(id int64, control unsafe.Pointer, fieldEditor unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	result := delegate.Control_TextShouldBeginEditing(MakeControl(control), MakeText(fieldEditor))
 	return C.bool(result)
 }
 
-//export TableViewDelegate_Control_TextShouldEndEditing
-func TableViewDelegate_Control_TextShouldEndEditing(id int64, control unsafe.Pointer, fieldEditor unsafe.Pointer) C.bool {
+//export tableViewDelegate_Control_TextShouldEndEditing
+func tableViewDelegate_Control_TextShouldEndEditing(id int64, control unsafe.Pointer, fieldEditor unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	result := delegate.Control_TextShouldEndEditing(MakeControl(control), MakeText(fieldEditor))
 	return C.bool(result)
 }
 
-//export TableViewDelegate_Control_TextView_DoCommandBySelector
-func TableViewDelegate_Control_TextView_DoCommandBySelector(id int64, control unsafe.Pointer, textView unsafe.Pointer, commandSelector unsafe.Pointer) C.bool {
+//export tableViewDelegate_Control_TextView_DoCommandBySelector
+func tableViewDelegate_Control_TextView_DoCommandBySelector(id int64, control unsafe.Pointer, textView unsafe.Pointer, commandSelector unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	result := delegate.Control_TextView_DoCommandBySelector(MakeControl(control), MakeTextView(textView), objc.MakeSelector(commandSelector))
 	return C.bool(result)
 }
 
-//export TableViewDelegate_ControlTextDidBeginEditing
-func TableViewDelegate_ControlTextDidBeginEditing(id int64, obj unsafe.Pointer) {
+//export tableViewDelegate_ControlTextDidBeginEditing
+func tableViewDelegate_ControlTextDidBeginEditing(id int64, obj unsafe.Pointer) {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	delegate.ControlTextDidBeginEditing(foundation.MakeNotification(obj))
 }
 
-//export TableViewDelegate_ControlTextDidChange
-func TableViewDelegate_ControlTextDidChange(id int64, obj unsafe.Pointer) {
+//export tableViewDelegate_ControlTextDidChange
+func tableViewDelegate_ControlTextDidChange(id int64, obj unsafe.Pointer) {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	delegate.ControlTextDidChange(foundation.MakeNotification(obj))
 }
 
-//export TableViewDelegate_ControlTextDidEndEditing
-func TableViewDelegate_ControlTextDidEndEditing(id int64, obj unsafe.Pointer) {
+//export tableViewDelegate_ControlTextDidEndEditing
+func tableViewDelegate_ControlTextDidEndEditing(id int64, obj unsafe.Pointer) {
 	delegate := resources.Get(id).(*TableViewDelegate)
 	delegate.ControlTextDidEndEditing(foundation.MakeNotification(obj))
 }

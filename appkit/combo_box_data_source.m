@@ -6,22 +6,22 @@
 
 
 - (NSString*)comboBox:(NSComboBox*)comboBox completedString:(NSString*)_string {
-    void* result_ = ComboBoxDataSource_ComboBox_CompletedString([self goID], comboBox, _string);
+    void* result_ = comboBoxDataSource_ComboBox_CompletedString([self goID], comboBox, _string);
     return (NSString*)result_;
 }
 
 - (NSUInteger)comboBox:(NSComboBox*)comboBox indexOfItemWithStringValue:(NSString*)_string {
-    unsigned int result_ = ComboBoxDataSource_ComboBox_IndexOfItemWithStringValue([self goID], comboBox, _string);
+    unsigned int result_ = comboBoxDataSource_ComboBox_IndexOfItemWithStringValue([self goID], comboBox, _string);
     return result_;
 }
 
 - (id)comboBox:(NSComboBox*)comboBox objectValueForItemAtIndex:(NSInteger)index {
-    void* result_ = ComboBoxDataSource_ComboBox_ObjectValueForItemAtIndex([self goID], comboBox, index);
+    void* result_ = comboBoxDataSource_ComboBox_ObjectValueForItemAtIndex([self goID], comboBox, index);
     return (id)result_;
 }
 
 - (NSInteger)numberOfItemsInComboBox:(NSComboBox*)comboBox {
-    int result_ = ComboBoxDataSource_NumberOfItemsInComboBox([self goID], comboBox);
+    int result_ = comboBoxDataSource_NumberOfItemsInComboBox([self goID], comboBox);
     return result_;
 }
 

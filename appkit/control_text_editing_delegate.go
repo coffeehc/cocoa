@@ -29,61 +29,61 @@ func WrapControlTextEditingDelegate(delegate *ControlTextEditingDelegate) objc.O
 	return objc.MakeObject(ptr)
 }
 
-//export ControlTextEditingDelegate_Control_IsValidObject
-func ControlTextEditingDelegate_Control_IsValidObject(id int64, control unsafe.Pointer, obj unsafe.Pointer) C.bool {
+//export controlTextEditingDelegate_Control_IsValidObject
+func controlTextEditingDelegate_Control_IsValidObject(id int64, control unsafe.Pointer, obj unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*ControlTextEditingDelegate)
 	result := delegate.Control_IsValidObject(MakeControl(control), objc.MakeObject(obj))
 	return C.bool(result)
 }
 
-//export ControlTextEditingDelegate_Control_DidFailToValidatePartialString_ErrorDescription
-func ControlTextEditingDelegate_Control_DidFailToValidatePartialString_ErrorDescription(id int64, control unsafe.Pointer, _string unsafe.Pointer, error unsafe.Pointer) {
+//export controlTextEditingDelegate_Control_DidFailToValidatePartialString_ErrorDescription
+func controlTextEditingDelegate_Control_DidFailToValidatePartialString_ErrorDescription(id int64, control unsafe.Pointer, _string unsafe.Pointer, error unsafe.Pointer) {
 	delegate := resources.Get(id).(*ControlTextEditingDelegate)
 	delegate.Control_DidFailToValidatePartialString_ErrorDescription(MakeControl(control), foundation.MakeString(_string).String(), foundation.MakeString(error).String())
 }
 
-//export ControlTextEditingDelegate_Control_DidFailToFormatString_ErrorDescription
-func ControlTextEditingDelegate_Control_DidFailToFormatString_ErrorDescription(id int64, control unsafe.Pointer, _string unsafe.Pointer, error unsafe.Pointer) C.bool {
+//export controlTextEditingDelegate_Control_DidFailToFormatString_ErrorDescription
+func controlTextEditingDelegate_Control_DidFailToFormatString_ErrorDescription(id int64, control unsafe.Pointer, _string unsafe.Pointer, error unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*ControlTextEditingDelegate)
 	result := delegate.Control_DidFailToFormatString_ErrorDescription(MakeControl(control), foundation.MakeString(_string).String(), foundation.MakeString(error).String())
 	return C.bool(result)
 }
 
-//export ControlTextEditingDelegate_Control_TextShouldBeginEditing
-func ControlTextEditingDelegate_Control_TextShouldBeginEditing(id int64, control unsafe.Pointer, fieldEditor unsafe.Pointer) C.bool {
+//export controlTextEditingDelegate_Control_TextShouldBeginEditing
+func controlTextEditingDelegate_Control_TextShouldBeginEditing(id int64, control unsafe.Pointer, fieldEditor unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*ControlTextEditingDelegate)
 	result := delegate.Control_TextShouldBeginEditing(MakeControl(control), MakeText(fieldEditor))
 	return C.bool(result)
 }
 
-//export ControlTextEditingDelegate_Control_TextShouldEndEditing
-func ControlTextEditingDelegate_Control_TextShouldEndEditing(id int64, control unsafe.Pointer, fieldEditor unsafe.Pointer) C.bool {
+//export controlTextEditingDelegate_Control_TextShouldEndEditing
+func controlTextEditingDelegate_Control_TextShouldEndEditing(id int64, control unsafe.Pointer, fieldEditor unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*ControlTextEditingDelegate)
 	result := delegate.Control_TextShouldEndEditing(MakeControl(control), MakeText(fieldEditor))
 	return C.bool(result)
 }
 
-//export ControlTextEditingDelegate_Control_TextView_DoCommandBySelector
-func ControlTextEditingDelegate_Control_TextView_DoCommandBySelector(id int64, control unsafe.Pointer, textView unsafe.Pointer, commandSelector unsafe.Pointer) C.bool {
+//export controlTextEditingDelegate_Control_TextView_DoCommandBySelector
+func controlTextEditingDelegate_Control_TextView_DoCommandBySelector(id int64, control unsafe.Pointer, textView unsafe.Pointer, commandSelector unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*ControlTextEditingDelegate)
 	result := delegate.Control_TextView_DoCommandBySelector(MakeControl(control), MakeTextView(textView), objc.MakeSelector(commandSelector))
 	return C.bool(result)
 }
 
-//export ControlTextEditingDelegate_ControlTextDidBeginEditing
-func ControlTextEditingDelegate_ControlTextDidBeginEditing(id int64, obj unsafe.Pointer) {
+//export controlTextEditingDelegate_ControlTextDidBeginEditing
+func controlTextEditingDelegate_ControlTextDidBeginEditing(id int64, obj unsafe.Pointer) {
 	delegate := resources.Get(id).(*ControlTextEditingDelegate)
 	delegate.ControlTextDidBeginEditing(foundation.MakeNotification(obj))
 }
 
-//export ControlTextEditingDelegate_ControlTextDidChange
-func ControlTextEditingDelegate_ControlTextDidChange(id int64, obj unsafe.Pointer) {
+//export controlTextEditingDelegate_ControlTextDidChange
+func controlTextEditingDelegate_ControlTextDidChange(id int64, obj unsafe.Pointer) {
 	delegate := resources.Get(id).(*ControlTextEditingDelegate)
 	delegate.ControlTextDidChange(foundation.MakeNotification(obj))
 }
 
-//export ControlTextEditingDelegate_ControlTextDidEndEditing
-func ControlTextEditingDelegate_ControlTextDidEndEditing(id int64, obj unsafe.Pointer) {
+//export controlTextEditingDelegate_ControlTextDidEndEditing
+func controlTextEditingDelegate_ControlTextDidEndEditing(id int64, obj unsafe.Pointer) {
 	delegate := resources.Get(id).(*ControlTextEditingDelegate)
 	delegate.ControlTextDidEndEditing(foundation.MakeNotification(obj))
 }

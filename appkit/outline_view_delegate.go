@@ -66,298 +66,298 @@ func WrapOutlineViewDelegate(delegate *OutlineViewDelegate) objc.Object {
 	return objc.MakeObject(ptr)
 }
 
-//export OutlineViewDelegate_OutlineView_ShouldExpandItem
-func OutlineViewDelegate_OutlineView_ShouldExpandItem(id int64, outlineView unsafe.Pointer, item unsafe.Pointer) C.bool {
+//export outlineViewDelegate_OutlineView_ShouldExpandItem
+func outlineViewDelegate_OutlineView_ShouldExpandItem(id int64, outlineView unsafe.Pointer, item unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.OutlineView_ShouldExpandItem(MakeOutlineView(outlineView), objc.MakeObject(item))
 	return C.bool(result)
 }
 
-//export OutlineViewDelegate_OutlineView_ShouldCollapseItem
-func OutlineViewDelegate_OutlineView_ShouldCollapseItem(id int64, outlineView unsafe.Pointer, item unsafe.Pointer) C.bool {
+//export outlineViewDelegate_OutlineView_ShouldCollapseItem
+func outlineViewDelegate_OutlineView_ShouldCollapseItem(id int64, outlineView unsafe.Pointer, item unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.OutlineView_ShouldCollapseItem(MakeOutlineView(outlineView), objc.MakeObject(item))
 	return C.bool(result)
 }
 
-//export OutlineViewDelegate_OutlineView_TypeSelectStringForTableColumn_Item
-func OutlineViewDelegate_OutlineView_TypeSelectStringForTableColumn_Item(id int64, outlineView unsafe.Pointer, tableColumn unsafe.Pointer, item unsafe.Pointer) unsafe.Pointer {
+//export outlineViewDelegate_OutlineView_TypeSelectStringForTableColumn_Item
+func outlineViewDelegate_OutlineView_TypeSelectStringForTableColumn_Item(id int64, outlineView unsafe.Pointer, tableColumn unsafe.Pointer, item unsafe.Pointer) unsafe.Pointer {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.OutlineView_TypeSelectStringForTableColumn_Item(MakeOutlineView(outlineView), MakeTableColumn(tableColumn), objc.MakeObject(item))
 	return foundation.NewString(result).Ptr()
 }
 
-//export OutlineViewDelegate_OutlineView_NextTypeSelectMatchFromItem_ToItem_ForString
-func OutlineViewDelegate_OutlineView_NextTypeSelectMatchFromItem_ToItem_ForString(id int64, outlineView unsafe.Pointer, startItem unsafe.Pointer, endItem unsafe.Pointer, searchString unsafe.Pointer) unsafe.Pointer {
+//export outlineViewDelegate_OutlineView_NextTypeSelectMatchFromItem_ToItem_ForString
+func outlineViewDelegate_OutlineView_NextTypeSelectMatchFromItem_ToItem_ForString(id int64, outlineView unsafe.Pointer, startItem unsafe.Pointer, endItem unsafe.Pointer, searchString unsafe.Pointer) unsafe.Pointer {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.OutlineView_NextTypeSelectMatchFromItem_ToItem_ForString(MakeOutlineView(outlineView), objc.MakeObject(startItem), objc.MakeObject(endItem), foundation.MakeString(searchString).String())
 	return objc.ExtractPtr(result)
 }
 
-//export OutlineViewDelegate_OutlineView_ShouldTypeSelectForEvent_WithCurrentSearchString
-func OutlineViewDelegate_OutlineView_ShouldTypeSelectForEvent_WithCurrentSearchString(id int64, outlineView unsafe.Pointer, event unsafe.Pointer, searchString unsafe.Pointer) C.bool {
+//export outlineViewDelegate_OutlineView_ShouldTypeSelectForEvent_WithCurrentSearchString
+func outlineViewDelegate_OutlineView_ShouldTypeSelectForEvent_WithCurrentSearchString(id int64, outlineView unsafe.Pointer, event unsafe.Pointer, searchString unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.OutlineView_ShouldTypeSelectForEvent_WithCurrentSearchString(MakeOutlineView(outlineView), MakeEvent(event), foundation.MakeString(searchString).String())
 	return C.bool(result)
 }
 
-//export OutlineViewDelegate_OutlineView_ShouldSelectTableColumn
-func OutlineViewDelegate_OutlineView_ShouldSelectTableColumn(id int64, outlineView unsafe.Pointer, tableColumn unsafe.Pointer) C.bool {
+//export outlineViewDelegate_OutlineView_ShouldSelectTableColumn
+func outlineViewDelegate_OutlineView_ShouldSelectTableColumn(id int64, outlineView unsafe.Pointer, tableColumn unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.OutlineView_ShouldSelectTableColumn(MakeOutlineView(outlineView), MakeTableColumn(tableColumn))
 	return C.bool(result)
 }
 
-//export OutlineViewDelegate_OutlineView_ShouldSelectItem
-func OutlineViewDelegate_OutlineView_ShouldSelectItem(id int64, outlineView unsafe.Pointer, item unsafe.Pointer) C.bool {
+//export outlineViewDelegate_OutlineView_ShouldSelectItem
+func outlineViewDelegate_OutlineView_ShouldSelectItem(id int64, outlineView unsafe.Pointer, item unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.OutlineView_ShouldSelectItem(MakeOutlineView(outlineView), objc.MakeObject(item))
 	return C.bool(result)
 }
 
-//export OutlineViewDelegate_OutlineView_SelectionIndexesForProposedSelection
-func OutlineViewDelegate_OutlineView_SelectionIndexesForProposedSelection(id int64, outlineView unsafe.Pointer, proposedSelectionIndexes unsafe.Pointer) unsafe.Pointer {
+//export outlineViewDelegate_OutlineView_SelectionIndexesForProposedSelection
+func outlineViewDelegate_OutlineView_SelectionIndexesForProposedSelection(id int64, outlineView unsafe.Pointer, proposedSelectionIndexes unsafe.Pointer) unsafe.Pointer {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.OutlineView_SelectionIndexesForProposedSelection(MakeOutlineView(outlineView), foundation.MakeIndexSet(proposedSelectionIndexes))
 	return objc.ExtractPtr(result)
 }
 
-//export OutlineViewDelegate_SelectionShouldChangeInOutlineView
-func OutlineViewDelegate_SelectionShouldChangeInOutlineView(id int64, outlineView unsafe.Pointer) C.bool {
+//export outlineViewDelegate_SelectionShouldChangeInOutlineView
+func outlineViewDelegate_SelectionShouldChangeInOutlineView(id int64, outlineView unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.SelectionShouldChangeInOutlineView(MakeOutlineView(outlineView))
 	return C.bool(result)
 }
 
-//export OutlineViewDelegate_OutlineViewSelectionIsChanging
-func OutlineViewDelegate_OutlineViewSelectionIsChanging(id int64, notification unsafe.Pointer) {
+//export outlineViewDelegate_OutlineViewSelectionIsChanging
+func outlineViewDelegate_OutlineViewSelectionIsChanging(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	delegate.OutlineViewSelectionIsChanging(foundation.MakeNotification(notification))
 }
 
-//export OutlineViewDelegate_OutlineViewSelectionDidChange
-func OutlineViewDelegate_OutlineViewSelectionDidChange(id int64, notification unsafe.Pointer) {
+//export outlineViewDelegate_OutlineViewSelectionDidChange
+func outlineViewDelegate_OutlineViewSelectionDidChange(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	delegate.OutlineViewSelectionDidChange(foundation.MakeNotification(notification))
 }
 
-//export OutlineViewDelegate_OutlineView_WillDisplayCell_ForTableColumn_Item
-func OutlineViewDelegate_OutlineView_WillDisplayCell_ForTableColumn_Item(id int64, outlineView unsafe.Pointer, cell unsafe.Pointer, tableColumn unsafe.Pointer, item unsafe.Pointer) {
+//export outlineViewDelegate_OutlineView_WillDisplayCell_ForTableColumn_Item
+func outlineViewDelegate_OutlineView_WillDisplayCell_ForTableColumn_Item(id int64, outlineView unsafe.Pointer, cell unsafe.Pointer, tableColumn unsafe.Pointer, item unsafe.Pointer) {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	delegate.OutlineView_WillDisplayCell_ForTableColumn_Item(MakeOutlineView(outlineView), objc.MakeObject(cell), MakeTableColumn(tableColumn), objc.MakeObject(item))
 }
 
-//export OutlineViewDelegate_OutlineView_WillDisplayOutlineCell_ForTableColumn_Item
-func OutlineViewDelegate_OutlineView_WillDisplayOutlineCell_ForTableColumn_Item(id int64, outlineView unsafe.Pointer, cell unsafe.Pointer, tableColumn unsafe.Pointer, item unsafe.Pointer) {
+//export outlineViewDelegate_OutlineView_WillDisplayOutlineCell_ForTableColumn_Item
+func outlineViewDelegate_OutlineView_WillDisplayOutlineCell_ForTableColumn_Item(id int64, outlineView unsafe.Pointer, cell unsafe.Pointer, tableColumn unsafe.Pointer, item unsafe.Pointer) {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	delegate.OutlineView_WillDisplayOutlineCell_ForTableColumn_Item(MakeOutlineView(outlineView), objc.MakeObject(cell), MakeTableColumn(tableColumn), objc.MakeObject(item))
 }
 
-//export OutlineViewDelegate_OutlineView_DataCellForTableColumn_Item
-func OutlineViewDelegate_OutlineView_DataCellForTableColumn_Item(id int64, outlineView unsafe.Pointer, tableColumn unsafe.Pointer, item unsafe.Pointer) unsafe.Pointer {
+//export outlineViewDelegate_OutlineView_DataCellForTableColumn_Item
+func outlineViewDelegate_OutlineView_DataCellForTableColumn_Item(id int64, outlineView unsafe.Pointer, tableColumn unsafe.Pointer, item unsafe.Pointer) unsafe.Pointer {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.OutlineView_DataCellForTableColumn_Item(MakeOutlineView(outlineView), MakeTableColumn(tableColumn), objc.MakeObject(item))
 	return objc.ExtractPtr(result)
 }
 
-//export OutlineViewDelegate_OutlineView_ShouldShowOutlineCellForItem
-func OutlineViewDelegate_OutlineView_ShouldShowOutlineCellForItem(id int64, outlineView unsafe.Pointer, item unsafe.Pointer) C.bool {
+//export outlineViewDelegate_OutlineView_ShouldShowOutlineCellForItem
+func outlineViewDelegate_OutlineView_ShouldShowOutlineCellForItem(id int64, outlineView unsafe.Pointer, item unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.OutlineView_ShouldShowOutlineCellForItem(MakeOutlineView(outlineView), objc.MakeObject(item))
 	return C.bool(result)
 }
 
-//export OutlineViewDelegate_OutlineView_ShouldShowCellExpansionForTableColumn_Item
-func OutlineViewDelegate_OutlineView_ShouldShowCellExpansionForTableColumn_Item(id int64, outlineView unsafe.Pointer, tableColumn unsafe.Pointer, item unsafe.Pointer) C.bool {
+//export outlineViewDelegate_OutlineView_ShouldShowCellExpansionForTableColumn_Item
+func outlineViewDelegate_OutlineView_ShouldShowCellExpansionForTableColumn_Item(id int64, outlineView unsafe.Pointer, tableColumn unsafe.Pointer, item unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.OutlineView_ShouldShowCellExpansionForTableColumn_Item(MakeOutlineView(outlineView), MakeTableColumn(tableColumn), objc.MakeObject(item))
 	return C.bool(result)
 }
 
-//export OutlineViewDelegate_OutlineView_ShouldReorderColumn_ToColumn
-func OutlineViewDelegate_OutlineView_ShouldReorderColumn_ToColumn(id int64, outlineView unsafe.Pointer, columnIndex C.int, newColumnIndex C.int) C.bool {
+//export outlineViewDelegate_OutlineView_ShouldReorderColumn_ToColumn
+func outlineViewDelegate_OutlineView_ShouldReorderColumn_ToColumn(id int64, outlineView unsafe.Pointer, columnIndex C.int, newColumnIndex C.int) C.bool {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.OutlineView_ShouldReorderColumn_ToColumn(MakeOutlineView(outlineView), int(columnIndex), int(newColumnIndex))
 	return C.bool(result)
 }
 
-//export OutlineViewDelegate_OutlineViewColumnDidMove
-func OutlineViewDelegate_OutlineViewColumnDidMove(id int64, notification unsafe.Pointer) {
+//export outlineViewDelegate_OutlineViewColumnDidMove
+func outlineViewDelegate_OutlineViewColumnDidMove(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	delegate.OutlineViewColumnDidMove(foundation.MakeNotification(notification))
 }
 
-//export OutlineViewDelegate_OutlineViewColumnDidResize
-func OutlineViewDelegate_OutlineViewColumnDidResize(id int64, notification unsafe.Pointer) {
+//export outlineViewDelegate_OutlineViewColumnDidResize
+func outlineViewDelegate_OutlineViewColumnDidResize(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	delegate.OutlineViewColumnDidResize(foundation.MakeNotification(notification))
 }
 
-//export OutlineViewDelegate_OutlineViewItemWillExpand
-func OutlineViewDelegate_OutlineViewItemWillExpand(id int64, notification unsafe.Pointer) {
+//export outlineViewDelegate_OutlineViewItemWillExpand
+func outlineViewDelegate_OutlineViewItemWillExpand(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	delegate.OutlineViewItemWillExpand(foundation.MakeNotification(notification))
 }
 
-//export OutlineViewDelegate_OutlineViewItemDidExpand
-func OutlineViewDelegate_OutlineViewItemDidExpand(id int64, notification unsafe.Pointer) {
+//export outlineViewDelegate_OutlineViewItemDidExpand
+func outlineViewDelegate_OutlineViewItemDidExpand(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	delegate.OutlineViewItemDidExpand(foundation.MakeNotification(notification))
 }
 
-//export OutlineViewDelegate_OutlineViewItemWillCollapse
-func OutlineViewDelegate_OutlineViewItemWillCollapse(id int64, notification unsafe.Pointer) {
+//export outlineViewDelegate_OutlineViewItemWillCollapse
+func outlineViewDelegate_OutlineViewItemWillCollapse(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	delegate.OutlineViewItemWillCollapse(foundation.MakeNotification(notification))
 }
 
-//export OutlineViewDelegate_OutlineViewItemDidCollapse
-func OutlineViewDelegate_OutlineViewItemDidCollapse(id int64, notification unsafe.Pointer) {
+//export outlineViewDelegate_OutlineViewItemDidCollapse
+func outlineViewDelegate_OutlineViewItemDidCollapse(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	delegate.OutlineViewItemDidCollapse(foundation.MakeNotification(notification))
 }
 
-//export OutlineViewDelegate_OutlineView_ShouldEditTableColumn_Item
-func OutlineViewDelegate_OutlineView_ShouldEditTableColumn_Item(id int64, outlineView unsafe.Pointer, tableColumn unsafe.Pointer, item unsafe.Pointer) C.bool {
+//export outlineViewDelegate_OutlineView_ShouldEditTableColumn_Item
+func outlineViewDelegate_OutlineView_ShouldEditTableColumn_Item(id int64, outlineView unsafe.Pointer, tableColumn unsafe.Pointer, item unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.OutlineView_ShouldEditTableColumn_Item(MakeOutlineView(outlineView), MakeTableColumn(tableColumn), objc.MakeObject(item))
 	return C.bool(result)
 }
 
-//export OutlineViewDelegate_OutlineView_MouseDownInHeaderOfTableColumn
-func OutlineViewDelegate_OutlineView_MouseDownInHeaderOfTableColumn(id int64, outlineView unsafe.Pointer, tableColumn unsafe.Pointer) {
+//export outlineViewDelegate_OutlineView_MouseDownInHeaderOfTableColumn
+func outlineViewDelegate_OutlineView_MouseDownInHeaderOfTableColumn(id int64, outlineView unsafe.Pointer, tableColumn unsafe.Pointer) {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	delegate.OutlineView_MouseDownInHeaderOfTableColumn(MakeOutlineView(outlineView), MakeTableColumn(tableColumn))
 }
 
-//export OutlineViewDelegate_OutlineView_DidClickTableColumn
-func OutlineViewDelegate_OutlineView_DidClickTableColumn(id int64, outlineView unsafe.Pointer, tableColumn unsafe.Pointer) {
+//export outlineViewDelegate_OutlineView_DidClickTableColumn
+func outlineViewDelegate_OutlineView_DidClickTableColumn(id int64, outlineView unsafe.Pointer, tableColumn unsafe.Pointer) {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	delegate.OutlineView_DidClickTableColumn(MakeOutlineView(outlineView), MakeTableColumn(tableColumn))
 }
 
-//export OutlineViewDelegate_OutlineView_DidDragTableColumn
-func OutlineViewDelegate_OutlineView_DidDragTableColumn(id int64, outlineView unsafe.Pointer, tableColumn unsafe.Pointer) {
+//export outlineViewDelegate_OutlineView_DidDragTableColumn
+func outlineViewDelegate_OutlineView_DidDragTableColumn(id int64, outlineView unsafe.Pointer, tableColumn unsafe.Pointer) {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	delegate.OutlineView_DidDragTableColumn(MakeOutlineView(outlineView), MakeTableColumn(tableColumn))
 }
 
-//export OutlineViewDelegate_OutlineView_HeightOfRowByItem
-func OutlineViewDelegate_OutlineView_HeightOfRowByItem(id int64, outlineView unsafe.Pointer, item unsafe.Pointer) C.double {
+//export outlineViewDelegate_OutlineView_HeightOfRowByItem
+func outlineViewDelegate_OutlineView_HeightOfRowByItem(id int64, outlineView unsafe.Pointer, item unsafe.Pointer) C.double {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.OutlineView_HeightOfRowByItem(MakeOutlineView(outlineView), objc.MakeObject(item))
 	return C.double(float64(result))
 }
 
-//export OutlineViewDelegate_OutlineView_SizeToFitWidthOfColumn
-func OutlineViewDelegate_OutlineView_SizeToFitWidthOfColumn(id int64, outlineView unsafe.Pointer, column C.int) C.double {
+//export outlineViewDelegate_OutlineView_SizeToFitWidthOfColumn
+func outlineViewDelegate_OutlineView_SizeToFitWidthOfColumn(id int64, outlineView unsafe.Pointer, column C.int) C.double {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.OutlineView_SizeToFitWidthOfColumn(MakeOutlineView(outlineView), int(column))
 	return C.double(float64(result))
 }
 
-//export OutlineViewDelegate_OutlineView_TintConfigurationForItem
-func OutlineViewDelegate_OutlineView_TintConfigurationForItem(id int64, outlineView unsafe.Pointer, item unsafe.Pointer) unsafe.Pointer {
+//export outlineViewDelegate_OutlineView_TintConfigurationForItem
+func outlineViewDelegate_OutlineView_TintConfigurationForItem(id int64, outlineView unsafe.Pointer, item unsafe.Pointer) unsafe.Pointer {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.OutlineView_TintConfigurationForItem(MakeOutlineView(outlineView), objc.MakeObject(item))
 	return objc.ExtractPtr(result)
 }
 
-//export OutlineViewDelegate_OutlineView_ShouldTrackCell_ForTableColumn_Item
-func OutlineViewDelegate_OutlineView_ShouldTrackCell_ForTableColumn_Item(id int64, outlineView unsafe.Pointer, cell unsafe.Pointer, tableColumn unsafe.Pointer, item unsafe.Pointer) C.bool {
+//export outlineViewDelegate_OutlineView_ShouldTrackCell_ForTableColumn_Item
+func outlineViewDelegate_OutlineView_ShouldTrackCell_ForTableColumn_Item(id int64, outlineView unsafe.Pointer, cell unsafe.Pointer, tableColumn unsafe.Pointer, item unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.OutlineView_ShouldTrackCell_ForTableColumn_Item(MakeOutlineView(outlineView), MakeCell(cell), MakeTableColumn(tableColumn), objc.MakeObject(item))
 	return C.bool(result)
 }
 
-//export OutlineViewDelegate_OutlineView_IsGroupItem
-func OutlineViewDelegate_OutlineView_IsGroupItem(id int64, outlineView unsafe.Pointer, item unsafe.Pointer) C.bool {
+//export outlineViewDelegate_OutlineView_IsGroupItem
+func outlineViewDelegate_OutlineView_IsGroupItem(id int64, outlineView unsafe.Pointer, item unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.OutlineView_IsGroupItem(MakeOutlineView(outlineView), objc.MakeObject(item))
 	return C.bool(result)
 }
 
-//export OutlineViewDelegate_OutlineView_DidAddRowView_ForRow
-func OutlineViewDelegate_OutlineView_DidAddRowView_ForRow(id int64, outlineView unsafe.Pointer, rowView unsafe.Pointer, row C.int) {
+//export outlineViewDelegate_OutlineView_DidAddRowView_ForRow
+func outlineViewDelegate_OutlineView_DidAddRowView_ForRow(id int64, outlineView unsafe.Pointer, rowView unsafe.Pointer, row C.int) {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	delegate.OutlineView_DidAddRowView_ForRow(MakeOutlineView(outlineView), MakeTableRowView(rowView), int(row))
 }
 
-//export OutlineViewDelegate_OutlineView_DidRemoveRowView_ForRow
-func OutlineViewDelegate_OutlineView_DidRemoveRowView_ForRow(id int64, outlineView unsafe.Pointer, rowView unsafe.Pointer, row C.int) {
+//export outlineViewDelegate_OutlineView_DidRemoveRowView_ForRow
+func outlineViewDelegate_OutlineView_DidRemoveRowView_ForRow(id int64, outlineView unsafe.Pointer, rowView unsafe.Pointer, row C.int) {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	delegate.OutlineView_DidRemoveRowView_ForRow(MakeOutlineView(outlineView), MakeTableRowView(rowView), int(row))
 }
 
-//export OutlineViewDelegate_OutlineView_RowViewForItem
-func OutlineViewDelegate_OutlineView_RowViewForItem(id int64, outlineView unsafe.Pointer, item unsafe.Pointer) unsafe.Pointer {
+//export outlineViewDelegate_OutlineView_RowViewForItem
+func outlineViewDelegate_OutlineView_RowViewForItem(id int64, outlineView unsafe.Pointer, item unsafe.Pointer) unsafe.Pointer {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.OutlineView_RowViewForItem(MakeOutlineView(outlineView), objc.MakeObject(item))
 	return objc.ExtractPtr(result)
 }
 
-//export OutlineViewDelegate_OutlineView_ViewForTableColumn_Item
-func OutlineViewDelegate_OutlineView_ViewForTableColumn_Item(id int64, outlineView unsafe.Pointer, tableColumn unsafe.Pointer, item unsafe.Pointer) unsafe.Pointer {
+//export outlineViewDelegate_OutlineView_ViewForTableColumn_Item
+func outlineViewDelegate_OutlineView_ViewForTableColumn_Item(id int64, outlineView unsafe.Pointer, tableColumn unsafe.Pointer, item unsafe.Pointer) unsafe.Pointer {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.OutlineView_ViewForTableColumn_Item(MakeOutlineView(outlineView), MakeTableColumn(tableColumn), objc.MakeObject(item))
 	return objc.ExtractPtr(result)
 }
 
-//export OutlineViewDelegate_Control_IsValidObject
-func OutlineViewDelegate_Control_IsValidObject(id int64, control unsafe.Pointer, obj unsafe.Pointer) C.bool {
+//export outlineViewDelegate_Control_IsValidObject
+func outlineViewDelegate_Control_IsValidObject(id int64, control unsafe.Pointer, obj unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.Control_IsValidObject(MakeControl(control), objc.MakeObject(obj))
 	return C.bool(result)
 }
 
-//export OutlineViewDelegate_Control_DidFailToValidatePartialString_ErrorDescription
-func OutlineViewDelegate_Control_DidFailToValidatePartialString_ErrorDescription(id int64, control unsafe.Pointer, _string unsafe.Pointer, error unsafe.Pointer) {
+//export outlineViewDelegate_Control_DidFailToValidatePartialString_ErrorDescription
+func outlineViewDelegate_Control_DidFailToValidatePartialString_ErrorDescription(id int64, control unsafe.Pointer, _string unsafe.Pointer, error unsafe.Pointer) {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	delegate.Control_DidFailToValidatePartialString_ErrorDescription(MakeControl(control), foundation.MakeString(_string).String(), foundation.MakeString(error).String())
 }
 
-//export OutlineViewDelegate_Control_DidFailToFormatString_ErrorDescription
-func OutlineViewDelegate_Control_DidFailToFormatString_ErrorDescription(id int64, control unsafe.Pointer, _string unsafe.Pointer, error unsafe.Pointer) C.bool {
+//export outlineViewDelegate_Control_DidFailToFormatString_ErrorDescription
+func outlineViewDelegate_Control_DidFailToFormatString_ErrorDescription(id int64, control unsafe.Pointer, _string unsafe.Pointer, error unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.Control_DidFailToFormatString_ErrorDescription(MakeControl(control), foundation.MakeString(_string).String(), foundation.MakeString(error).String())
 	return C.bool(result)
 }
 
-//export OutlineViewDelegate_Control_TextShouldBeginEditing
-func OutlineViewDelegate_Control_TextShouldBeginEditing(id int64, control unsafe.Pointer, fieldEditor unsafe.Pointer) C.bool {
+//export outlineViewDelegate_Control_TextShouldBeginEditing
+func outlineViewDelegate_Control_TextShouldBeginEditing(id int64, control unsafe.Pointer, fieldEditor unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.Control_TextShouldBeginEditing(MakeControl(control), MakeText(fieldEditor))
 	return C.bool(result)
 }
 
-//export OutlineViewDelegate_Control_TextShouldEndEditing
-func OutlineViewDelegate_Control_TextShouldEndEditing(id int64, control unsafe.Pointer, fieldEditor unsafe.Pointer) C.bool {
+//export outlineViewDelegate_Control_TextShouldEndEditing
+func outlineViewDelegate_Control_TextShouldEndEditing(id int64, control unsafe.Pointer, fieldEditor unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.Control_TextShouldEndEditing(MakeControl(control), MakeText(fieldEditor))
 	return C.bool(result)
 }
 
-//export OutlineViewDelegate_Control_TextView_DoCommandBySelector
-func OutlineViewDelegate_Control_TextView_DoCommandBySelector(id int64, control unsafe.Pointer, textView unsafe.Pointer, commandSelector unsafe.Pointer) C.bool {
+//export outlineViewDelegate_Control_TextView_DoCommandBySelector
+func outlineViewDelegate_Control_TextView_DoCommandBySelector(id int64, control unsafe.Pointer, textView unsafe.Pointer, commandSelector unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	result := delegate.Control_TextView_DoCommandBySelector(MakeControl(control), MakeTextView(textView), objc.MakeSelector(commandSelector))
 	return C.bool(result)
 }
 
-//export OutlineViewDelegate_ControlTextDidBeginEditing
-func OutlineViewDelegate_ControlTextDidBeginEditing(id int64, obj unsafe.Pointer) {
+//export outlineViewDelegate_ControlTextDidBeginEditing
+func outlineViewDelegate_ControlTextDidBeginEditing(id int64, obj unsafe.Pointer) {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	delegate.ControlTextDidBeginEditing(foundation.MakeNotification(obj))
 }
 
-//export OutlineViewDelegate_ControlTextDidChange
-func OutlineViewDelegate_ControlTextDidChange(id int64, obj unsafe.Pointer) {
+//export outlineViewDelegate_ControlTextDidChange
+func outlineViewDelegate_ControlTextDidChange(id int64, obj unsafe.Pointer) {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	delegate.ControlTextDidChange(foundation.MakeNotification(obj))
 }
 
-//export OutlineViewDelegate_ControlTextDidEndEditing
-func OutlineViewDelegate_ControlTextDidEndEditing(id int64, obj unsafe.Pointer) {
+//export outlineViewDelegate_ControlTextDidEndEditing
+func outlineViewDelegate_ControlTextDidEndEditing(id int64, obj unsafe.Pointer) {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	delegate.ControlTextDidEndEditing(foundation.MakeNotification(obj))
 }

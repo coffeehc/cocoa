@@ -21,8 +21,8 @@ func WrapTouchBarDelegate(delegate *TouchBarDelegate) objc.Object {
 	return objc.MakeObject(ptr)
 }
 
-//export TouchBarDelegate_TouchBar_MakeItemForIdentifier
-func TouchBarDelegate_TouchBar_MakeItemForIdentifier(id int64, touchBar unsafe.Pointer, identifier unsafe.Pointer) unsafe.Pointer {
+//export touchBarDelegate_TouchBar_MakeItemForIdentifier
+func touchBarDelegate_TouchBar_MakeItemForIdentifier(id int64, touchBar unsafe.Pointer, identifier unsafe.Pointer) unsafe.Pointer {
 	delegate := resources.Get(id).(*TouchBarDelegate)
 	result := delegate.TouchBar_MakeItemForIdentifier(MakeTouchBar(touchBar), TouchBarItemIdentifier(foundation.MakeString(identifier).String()))
 	return objc.ExtractPtr(result)

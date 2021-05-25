@@ -6,34 +6,34 @@
 
 
 - (BOOL)menu:(NSMenu*)menu updateItem:(NSMenuItem*)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel {
-    bool result_ = MenuDelegate_Menu_UpdateItem_AtIndex_ShouldCancel([self goID], menu, item, index, shouldCancel);
+    bool result_ = menuDelegate_Menu_UpdateItem_AtIndex_ShouldCancel([self goID], menu, item, index, shouldCancel);
     return result_;
 }
 
 - (NSRect)confinementRectForMenu:(NSMenu*)menu onScreen:(NSScreen*)screen {
-    CGRect result_ = MenuDelegate_ConfinementRectForMenu_OnScreen([self goID], menu, screen);
+    CGRect result_ = menuDelegate_ConfinementRectForMenu_OnScreen([self goID], menu, screen);
     return result_;
 }
 
 - (void)menu:(NSMenu*)menu willHighlightItem:(NSMenuItem*)item {
-    MenuDelegate_Menu_WillHighlightItem([self goID], menu, item);
+    menuDelegate_Menu_WillHighlightItem([self goID], menu, item);
 }
 
 - (void)menuWillOpen:(NSMenu*)menu {
-    MenuDelegate_MenuWillOpen([self goID], menu);
+    menuDelegate_MenuWillOpen([self goID], menu);
 }
 
 - (void)menuDidClose:(NSMenu*)menu {
-    MenuDelegate_MenuDidClose([self goID], menu);
+    menuDelegate_MenuDidClose([self goID], menu);
 }
 
 - (NSInteger)numberOfItemsInMenu:(NSMenu*)menu {
-    int result_ = MenuDelegate_NumberOfItemsInMenu([self goID], menu);
+    int result_ = menuDelegate_NumberOfItemsInMenu([self goID], menu);
     return result_;
 }
 
 - (void)menuNeedsUpdate:(NSMenu*)menu {
-    MenuDelegate_MenuNeedsUpdate([self goID], menu);
+    menuDelegate_MenuNeedsUpdate([self goID], menu);
 }
 
 

@@ -23,27 +23,27 @@ func WrapTabViewDelegate(delegate *TabViewDelegate) objc.Object {
 	return objc.MakeObject(ptr)
 }
 
-//export TabViewDelegate_TabViewDidChangeNumberOfTabViewItems
-func TabViewDelegate_TabViewDidChangeNumberOfTabViewItems(id int64, tabView unsafe.Pointer) {
+//export tabViewDelegate_TabViewDidChangeNumberOfTabViewItems
+func tabViewDelegate_TabViewDidChangeNumberOfTabViewItems(id int64, tabView unsafe.Pointer) {
 	delegate := resources.Get(id).(*TabViewDelegate)
 	delegate.TabViewDidChangeNumberOfTabViewItems(MakeTabView(tabView))
 }
 
-//export TabViewDelegate_TabView_ShouldSelectTabViewItem
-func TabViewDelegate_TabView_ShouldSelectTabViewItem(id int64, tabView unsafe.Pointer, tabViewItem unsafe.Pointer) C.bool {
+//export tabViewDelegate_TabView_ShouldSelectTabViewItem
+func tabViewDelegate_TabView_ShouldSelectTabViewItem(id int64, tabView unsafe.Pointer, tabViewItem unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*TabViewDelegate)
 	result := delegate.TabView_ShouldSelectTabViewItem(MakeTabView(tabView), MakeTabViewItem(tabViewItem))
 	return C.bool(result)
 }
 
-//export TabViewDelegate_TabView_WillSelectTabViewItem
-func TabViewDelegate_TabView_WillSelectTabViewItem(id int64, tabView unsafe.Pointer, tabViewItem unsafe.Pointer) {
+//export tabViewDelegate_TabView_WillSelectTabViewItem
+func tabViewDelegate_TabView_WillSelectTabViewItem(id int64, tabView unsafe.Pointer, tabViewItem unsafe.Pointer) {
 	delegate := resources.Get(id).(*TabViewDelegate)
 	delegate.TabView_WillSelectTabViewItem(MakeTabView(tabView), MakeTabViewItem(tabViewItem))
 }
 
-//export TabViewDelegate_TabView_DidSelectTabViewItem
-func TabViewDelegate_TabView_DidSelectTabViewItem(id int64, tabView unsafe.Pointer, tabViewItem unsafe.Pointer) {
+//export tabViewDelegate_TabView_DidSelectTabViewItem
+func tabViewDelegate_TabView_DidSelectTabViewItem(id int64, tabView unsafe.Pointer, tabViewItem unsafe.Pointer) {
 	delegate := resources.Get(id).(*TabViewDelegate)
 	delegate.TabView_DidSelectTabViewItem(MakeTabView(tabView), MakeTabViewItem(tabViewItem))
 }

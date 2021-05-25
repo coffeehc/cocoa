@@ -31,67 +31,67 @@ func WrapTableViewDataSource(delegate *TableViewDataSource) objc.Object {
 	return objc.MakeObject(ptr)
 }
 
-//export TableViewDataSource_NumberOfRowsInTableView
-func TableViewDataSource_NumberOfRowsInTableView(id int64, tableView unsafe.Pointer) C.int {
+//export tableViewDataSource_NumberOfRowsInTableView
+func tableViewDataSource_NumberOfRowsInTableView(id int64, tableView unsafe.Pointer) C.int {
 	delegate := resources.Get(id).(*TableViewDataSource)
 	result := delegate.NumberOfRowsInTableView(MakeTableView(tableView))
 	return C.int(result)
 }
 
-//export TableViewDataSource_TableView_ObjectValueForTableColumn_Row
-func TableViewDataSource_TableView_ObjectValueForTableColumn_Row(id int64, tableView unsafe.Pointer, tableColumn unsafe.Pointer, row C.int) unsafe.Pointer {
+//export tableViewDataSource_TableView_ObjectValueForTableColumn_Row
+func tableViewDataSource_TableView_ObjectValueForTableColumn_Row(id int64, tableView unsafe.Pointer, tableColumn unsafe.Pointer, row C.int) unsafe.Pointer {
 	delegate := resources.Get(id).(*TableViewDataSource)
 	result := delegate.TableView_ObjectValueForTableColumn_Row(MakeTableView(tableView), MakeTableColumn(tableColumn), int(row))
 	return objc.ExtractPtr(result)
 }
 
-//export TableViewDataSource_TableView_SetObjectValue_ForTableColumn_Row
-func TableViewDataSource_TableView_SetObjectValue_ForTableColumn_Row(id int64, tableView unsafe.Pointer, object unsafe.Pointer, tableColumn unsafe.Pointer, row C.int) {
+//export tableViewDataSource_TableView_SetObjectValue_ForTableColumn_Row
+func tableViewDataSource_TableView_SetObjectValue_ForTableColumn_Row(id int64, tableView unsafe.Pointer, object unsafe.Pointer, tableColumn unsafe.Pointer, row C.int) {
 	delegate := resources.Get(id).(*TableViewDataSource)
 	delegate.TableView_SetObjectValue_ForTableColumn_Row(MakeTableView(tableView), objc.MakeObject(object), MakeTableColumn(tableColumn), int(row))
 }
 
-//export TableViewDataSource_TableView_PasteboardWriterForRow
-func TableViewDataSource_TableView_PasteboardWriterForRow(id int64, tableView unsafe.Pointer, row C.int) unsafe.Pointer {
+//export tableViewDataSource_TableView_PasteboardWriterForRow
+func tableViewDataSource_TableView_PasteboardWriterForRow(id int64, tableView unsafe.Pointer, row C.int) unsafe.Pointer {
 	delegate := resources.Get(id).(*TableViewDataSource)
 	result := delegate.TableView_PasteboardWriterForRow(MakeTableView(tableView), int(row))
 	return objc.ExtractPtr(result)
 }
 
-//export TableViewDataSource_TableView_AcceptDrop_Row_DropOperation
-func TableViewDataSource_TableView_AcceptDrop_Row_DropOperation(id int64, tableView unsafe.Pointer, info unsafe.Pointer, row C.int, dropOperation C.uint) C.bool {
+//export tableViewDataSource_TableView_AcceptDrop_Row_DropOperation
+func tableViewDataSource_TableView_AcceptDrop_Row_DropOperation(id int64, tableView unsafe.Pointer, info unsafe.Pointer, row C.int, dropOperation C.uint) C.bool {
 	delegate := resources.Get(id).(*TableViewDataSource)
 	result := delegate.TableView_AcceptDrop_Row_DropOperation(MakeTableView(tableView), objc.MakeObject(info), int(row), TableViewDropOperation(uint(dropOperation)))
 	return C.bool(result)
 }
 
-//export TableViewDataSource_TableView_ValidateDrop_ProposedRow_ProposedDropOperation
-func TableViewDataSource_TableView_ValidateDrop_ProposedRow_ProposedDropOperation(id int64, tableView unsafe.Pointer, info unsafe.Pointer, row C.int, dropOperation C.uint) C.uint {
+//export tableViewDataSource_TableView_ValidateDrop_ProposedRow_ProposedDropOperation
+func tableViewDataSource_TableView_ValidateDrop_ProposedRow_ProposedDropOperation(id int64, tableView unsafe.Pointer, info unsafe.Pointer, row C.int, dropOperation C.uint) C.uint {
 	delegate := resources.Get(id).(*TableViewDataSource)
 	result := delegate.TableView_ValidateDrop_ProposedRow_ProposedDropOperation(MakeTableView(tableView), objc.MakeObject(info), int(row), TableViewDropOperation(uint(dropOperation)))
 	return C.uint(uint(result))
 }
 
-//export TableViewDataSource_TableView_DraggingSession_WillBeginAtPoint_ForRowIndexes
-func TableViewDataSource_TableView_DraggingSession_WillBeginAtPoint_ForRowIndexes(id int64, tableView unsafe.Pointer, session unsafe.Pointer, screenPoint C.CGPoint, rowIndexes unsafe.Pointer) {
+//export tableViewDataSource_TableView_DraggingSession_WillBeginAtPoint_ForRowIndexes
+func tableViewDataSource_TableView_DraggingSession_WillBeginAtPoint_ForRowIndexes(id int64, tableView unsafe.Pointer, session unsafe.Pointer, screenPoint C.CGPoint, rowIndexes unsafe.Pointer) {
 	delegate := resources.Get(id).(*TableViewDataSource)
 	delegate.TableView_DraggingSession_WillBeginAtPoint_ForRowIndexes(MakeTableView(tableView), MakeDraggingSession(session), foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&screenPoint))), foundation.MakeIndexSet(rowIndexes))
 }
 
-//export TableViewDataSource_TableView_UpdateDraggingItemsForDrag
-func TableViewDataSource_TableView_UpdateDraggingItemsForDrag(id int64, tableView unsafe.Pointer, draggingInfo unsafe.Pointer) {
+//export tableViewDataSource_TableView_UpdateDraggingItemsForDrag
+func tableViewDataSource_TableView_UpdateDraggingItemsForDrag(id int64, tableView unsafe.Pointer, draggingInfo unsafe.Pointer) {
 	delegate := resources.Get(id).(*TableViewDataSource)
 	delegate.TableView_UpdateDraggingItemsForDrag(MakeTableView(tableView), objc.MakeObject(draggingInfo))
 }
 
-//export TableViewDataSource_TableView_DraggingSession_EndedAtPoint_Operation
-func TableViewDataSource_TableView_DraggingSession_EndedAtPoint_Operation(id int64, tableView unsafe.Pointer, session unsafe.Pointer, screenPoint C.CGPoint, operation C.uint) {
+//export tableViewDataSource_TableView_DraggingSession_EndedAtPoint_Operation
+func tableViewDataSource_TableView_DraggingSession_EndedAtPoint_Operation(id int64, tableView unsafe.Pointer, session unsafe.Pointer, screenPoint C.CGPoint, operation C.uint) {
 	delegate := resources.Get(id).(*TableViewDataSource)
 	delegate.TableView_DraggingSession_EndedAtPoint_Operation(MakeTableView(tableView), MakeDraggingSession(session), foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&screenPoint))), DragOperation(uint(operation)))
 }
 
-//export TableViewDataSource_TableView_SortDescriptorsDidChange
-func TableViewDataSource_TableView_SortDescriptorsDidChange(id int64, tableView unsafe.Pointer, oldDescriptors C.Array) {
+//export tableViewDataSource_TableView_SortDescriptorsDidChange
+func tableViewDataSource_TableView_SortDescriptorsDidChange(id int64, tableView unsafe.Pointer, oldDescriptors C.Array) {
 	delegate := resources.Get(id).(*TableViewDataSource)
 	defer C.free(oldDescriptors.data)
 	oldDescriptorsSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(oldDescriptors.data))[:oldDescriptors.len:oldDescriptors.len]

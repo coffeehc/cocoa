@@ -32,8 +32,8 @@ func WrapTextFieldDelegate(delegate *TextFieldDelegate) objc.Object {
 	return objc.MakeObject(ptr)
 }
 
-//export TextFieldDelegate_TextField_TextView_Candidates_ForSelectedRange
-func TextFieldDelegate_TextField_TextView_Candidates_ForSelectedRange(id int64, textField unsafe.Pointer, textView unsafe.Pointer, candidates C.Array, selectedRange C.NSRange) C.Array {
+//export textFieldDelegate_TextField_TextView_Candidates_ForSelectedRange
+func textFieldDelegate_TextField_TextView_Candidates_ForSelectedRange(id int64, textField unsafe.Pointer, textView unsafe.Pointer, candidates C.Array, selectedRange C.NSRange) C.Array {
 	delegate := resources.Get(id).(*TextFieldDelegate)
 	defer C.free(candidates.data)
 	candidatesSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(candidates.data))[:candidates.len:candidates.len]
@@ -50,8 +50,8 @@ func TextFieldDelegate_TextField_TextView_Candidates_ForSelectedRange(id int64, 
 	return cResult
 }
 
-//export TextFieldDelegate_TextField_TextView_CandidatesForSelectedRange
-func TextFieldDelegate_TextField_TextView_CandidatesForSelectedRange(id int64, textField unsafe.Pointer, textView unsafe.Pointer, selectedRange C.NSRange) C.Array {
+//export textFieldDelegate_TextField_TextView_CandidatesForSelectedRange
+func textFieldDelegate_TextField_TextView_CandidatesForSelectedRange(id int64, textField unsafe.Pointer, textView unsafe.Pointer, selectedRange C.NSRange) C.Array {
 	delegate := resources.Get(id).(*TextFieldDelegate)
 	result := delegate.TextField_TextView_CandidatesForSelectedRange(MakeTextField(textField), MakeTextView(textView), foundation.FromNSRangePointer(unsafe.Pointer(&selectedRange)))
 	cResultData := make([]unsafe.Pointer, len(result))
@@ -62,68 +62,68 @@ func TextFieldDelegate_TextField_TextView_CandidatesForSelectedRange(id int64, t
 	return cResult
 }
 
-//export TextFieldDelegate_TextField_TextView_ShouldSelectCandidateAtIndex
-func TextFieldDelegate_TextField_TextView_ShouldSelectCandidateAtIndex(id int64, textField unsafe.Pointer, textView unsafe.Pointer, index C.uint) C.bool {
+//export textFieldDelegate_TextField_TextView_ShouldSelectCandidateAtIndex
+func textFieldDelegate_TextField_TextView_ShouldSelectCandidateAtIndex(id int64, textField unsafe.Pointer, textView unsafe.Pointer, index C.uint) C.bool {
 	delegate := resources.Get(id).(*TextFieldDelegate)
 	result := delegate.TextField_TextView_ShouldSelectCandidateAtIndex(MakeTextField(textField), MakeTextView(textView), uint(index))
 	return C.bool(result)
 }
 
-//export TextFieldDelegate_Control_IsValidObject
-func TextFieldDelegate_Control_IsValidObject(id int64, control unsafe.Pointer, obj unsafe.Pointer) C.bool {
+//export textFieldDelegate_Control_IsValidObject
+func textFieldDelegate_Control_IsValidObject(id int64, control unsafe.Pointer, obj unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*TextFieldDelegate)
 	result := delegate.Control_IsValidObject(MakeControl(control), objc.MakeObject(obj))
 	return C.bool(result)
 }
 
-//export TextFieldDelegate_Control_DidFailToValidatePartialString_ErrorDescription
-func TextFieldDelegate_Control_DidFailToValidatePartialString_ErrorDescription(id int64, control unsafe.Pointer, _string unsafe.Pointer, error unsafe.Pointer) {
+//export textFieldDelegate_Control_DidFailToValidatePartialString_ErrorDescription
+func textFieldDelegate_Control_DidFailToValidatePartialString_ErrorDescription(id int64, control unsafe.Pointer, _string unsafe.Pointer, error unsafe.Pointer) {
 	delegate := resources.Get(id).(*TextFieldDelegate)
 	delegate.Control_DidFailToValidatePartialString_ErrorDescription(MakeControl(control), foundation.MakeString(_string).String(), foundation.MakeString(error).String())
 }
 
-//export TextFieldDelegate_Control_DidFailToFormatString_ErrorDescription
-func TextFieldDelegate_Control_DidFailToFormatString_ErrorDescription(id int64, control unsafe.Pointer, _string unsafe.Pointer, error unsafe.Pointer) C.bool {
+//export textFieldDelegate_Control_DidFailToFormatString_ErrorDescription
+func textFieldDelegate_Control_DidFailToFormatString_ErrorDescription(id int64, control unsafe.Pointer, _string unsafe.Pointer, error unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*TextFieldDelegate)
 	result := delegate.Control_DidFailToFormatString_ErrorDescription(MakeControl(control), foundation.MakeString(_string).String(), foundation.MakeString(error).String())
 	return C.bool(result)
 }
 
-//export TextFieldDelegate_Control_TextShouldBeginEditing
-func TextFieldDelegate_Control_TextShouldBeginEditing(id int64, control unsafe.Pointer, fieldEditor unsafe.Pointer) C.bool {
+//export textFieldDelegate_Control_TextShouldBeginEditing
+func textFieldDelegate_Control_TextShouldBeginEditing(id int64, control unsafe.Pointer, fieldEditor unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*TextFieldDelegate)
 	result := delegate.Control_TextShouldBeginEditing(MakeControl(control), MakeText(fieldEditor))
 	return C.bool(result)
 }
 
-//export TextFieldDelegate_Control_TextShouldEndEditing
-func TextFieldDelegate_Control_TextShouldEndEditing(id int64, control unsafe.Pointer, fieldEditor unsafe.Pointer) C.bool {
+//export textFieldDelegate_Control_TextShouldEndEditing
+func textFieldDelegate_Control_TextShouldEndEditing(id int64, control unsafe.Pointer, fieldEditor unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*TextFieldDelegate)
 	result := delegate.Control_TextShouldEndEditing(MakeControl(control), MakeText(fieldEditor))
 	return C.bool(result)
 }
 
-//export TextFieldDelegate_Control_TextView_DoCommandBySelector
-func TextFieldDelegate_Control_TextView_DoCommandBySelector(id int64, control unsafe.Pointer, textView unsafe.Pointer, commandSelector unsafe.Pointer) C.bool {
+//export textFieldDelegate_Control_TextView_DoCommandBySelector
+func textFieldDelegate_Control_TextView_DoCommandBySelector(id int64, control unsafe.Pointer, textView unsafe.Pointer, commandSelector unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*TextFieldDelegate)
 	result := delegate.Control_TextView_DoCommandBySelector(MakeControl(control), MakeTextView(textView), objc.MakeSelector(commandSelector))
 	return C.bool(result)
 }
 
-//export TextFieldDelegate_ControlTextDidBeginEditing
-func TextFieldDelegate_ControlTextDidBeginEditing(id int64, obj unsafe.Pointer) {
+//export textFieldDelegate_ControlTextDidBeginEditing
+func textFieldDelegate_ControlTextDidBeginEditing(id int64, obj unsafe.Pointer) {
 	delegate := resources.Get(id).(*TextFieldDelegate)
 	delegate.ControlTextDidBeginEditing(foundation.MakeNotification(obj))
 }
 
-//export TextFieldDelegate_ControlTextDidChange
-func TextFieldDelegate_ControlTextDidChange(id int64, obj unsafe.Pointer) {
+//export textFieldDelegate_ControlTextDidChange
+func textFieldDelegate_ControlTextDidChange(id int64, obj unsafe.Pointer) {
 	delegate := resources.Get(id).(*TextFieldDelegate)
 	delegate.ControlTextDidChange(foundation.MakeNotification(obj))
 }
 
-//export TextFieldDelegate_ControlTextDidEndEditing
-func TextFieldDelegate_ControlTextDidEndEditing(id int64, obj unsafe.Pointer) {
+//export textFieldDelegate_ControlTextDidEndEditing
+func textFieldDelegate_ControlTextDidEndEditing(id int64, obj unsafe.Pointer) {
 	delegate := resources.Get(id).(*TextFieldDelegate)
 	delegate.ControlTextDidEndEditing(foundation.MakeNotification(obj))
 }

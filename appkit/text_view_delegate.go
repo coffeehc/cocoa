@@ -49,36 +49,36 @@ func WrapTextViewDelegate(delegate *TextViewDelegate) objc.Object {
 	return objc.MakeObject(ptr)
 }
 
-//export TextViewDelegate_UndoManagerForTextView
-func TextViewDelegate_UndoManagerForTextView(id int64, view unsafe.Pointer) unsafe.Pointer {
+//export textViewDelegate_UndoManagerForTextView
+func textViewDelegate_UndoManagerForTextView(id int64, view unsafe.Pointer) unsafe.Pointer {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	result := delegate.UndoManagerForTextView(MakeTextView(view))
 	return objc.ExtractPtr(result)
 }
 
-//export TextViewDelegate_TextView_WillDisplayToolTip_ForCharacterAtIndex
-func TextViewDelegate_TextView_WillDisplayToolTip_ForCharacterAtIndex(id int64, textView unsafe.Pointer, tooltip unsafe.Pointer, characterIndex C.uint) unsafe.Pointer {
+//export textViewDelegate_TextView_WillDisplayToolTip_ForCharacterAtIndex
+func textViewDelegate_TextView_WillDisplayToolTip_ForCharacterAtIndex(id int64, textView unsafe.Pointer, tooltip unsafe.Pointer, characterIndex C.uint) unsafe.Pointer {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	result := delegate.TextView_WillDisplayToolTip_ForCharacterAtIndex(MakeTextView(textView), foundation.MakeString(tooltip).String(), uint(characterIndex))
 	return foundation.NewString(result).Ptr()
 }
 
-//export TextViewDelegate_TextView_URLForContentsOfTextAttachment_AtIndex
-func TextViewDelegate_TextView_URLForContentsOfTextAttachment_AtIndex(id int64, textView unsafe.Pointer, textAttachment unsafe.Pointer, charIndex C.uint) unsafe.Pointer {
+//export textViewDelegate_TextView_URLForContentsOfTextAttachment_AtIndex
+func textViewDelegate_TextView_URLForContentsOfTextAttachment_AtIndex(id int64, textView unsafe.Pointer, textAttachment unsafe.Pointer, charIndex C.uint) unsafe.Pointer {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	result := delegate.TextView_URLForContentsOfTextAttachment_AtIndex(MakeTextView(textView), MakeTextAttachment(textAttachment), uint(charIndex))
 	return objc.ExtractPtr(result)
 }
 
-//export TextViewDelegate_TextView_WillChangeSelectionFromCharacterRange_ToCharacterRange
-func TextViewDelegate_TextView_WillChangeSelectionFromCharacterRange_ToCharacterRange(id int64, textView unsafe.Pointer, oldSelectedCharRange C.NSRange, newSelectedCharRange C.NSRange) C.NSRange {
+//export textViewDelegate_TextView_WillChangeSelectionFromCharacterRange_ToCharacterRange
+func textViewDelegate_TextView_WillChangeSelectionFromCharacterRange_ToCharacterRange(id int64, textView unsafe.Pointer, oldSelectedCharRange C.NSRange, newSelectedCharRange C.NSRange) C.NSRange {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	result := delegate.TextView_WillChangeSelectionFromCharacterRange_ToCharacterRange(MakeTextView(textView), foundation.FromNSRangePointer(unsafe.Pointer(&oldSelectedCharRange)), foundation.FromNSRangePointer(unsafe.Pointer(&newSelectedCharRange)))
 	return *(*C.NSRange)(foundation.ToNSRangePointer(result))
 }
 
-//export TextViewDelegate_TextView_WillChangeSelectionFromCharacterRanges_ToCharacterRanges
-func TextViewDelegate_TextView_WillChangeSelectionFromCharacterRanges_ToCharacterRanges(id int64, textView unsafe.Pointer, oldSelectedCharRanges C.Array, newSelectedCharRanges C.Array) C.Array {
+//export textViewDelegate_TextView_WillChangeSelectionFromCharacterRanges_ToCharacterRanges
+func textViewDelegate_TextView_WillChangeSelectionFromCharacterRanges_ToCharacterRanges(id int64, textView unsafe.Pointer, oldSelectedCharRanges C.Array, newSelectedCharRanges C.Array) C.Array {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	defer C.free(oldSelectedCharRanges.data)
 	oldSelectedCharRangesSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(oldSelectedCharRanges.data))[:oldSelectedCharRanges.len:oldSelectedCharRanges.len]
@@ -101,14 +101,14 @@ func TextViewDelegate_TextView_WillChangeSelectionFromCharacterRanges_ToCharacte
 	return cResult
 }
 
-//export TextViewDelegate_TextViewDidChangeSelection
-func TextViewDelegate_TextViewDidChangeSelection(id int64, notification unsafe.Pointer) {
+//export textViewDelegate_TextViewDidChangeSelection
+func textViewDelegate_TextViewDidChangeSelection(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	delegate.TextViewDidChangeSelection(foundation.MakeNotification(notification))
 }
 
-//export TextViewDelegate_TextView_WritablePasteboardTypesForCell_AtIndex
-func TextViewDelegate_TextView_WritablePasteboardTypesForCell_AtIndex(id int64, view unsafe.Pointer, cell unsafe.Pointer, charIndex C.uint) C.Array {
+//export textViewDelegate_TextView_WritablePasteboardTypesForCell_AtIndex
+func textViewDelegate_TextView_WritablePasteboardTypesForCell_AtIndex(id int64, view unsafe.Pointer, cell unsafe.Pointer, charIndex C.uint) C.Array {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	result := delegate.TextView_WritablePasteboardTypesForCell_AtIndex(MakeTextView(view), objc.MakeObject(cell), uint(charIndex))
 	cResultData := make([]unsafe.Pointer, len(result))
@@ -119,22 +119,22 @@ func TextViewDelegate_TextView_WritablePasteboardTypesForCell_AtIndex(id int64, 
 	return cResult
 }
 
-//export TextViewDelegate_TextView_WriteCell_AtIndex_ToPasteboard_Type
-func TextViewDelegate_TextView_WriteCell_AtIndex_ToPasteboard_Type(id int64, view unsafe.Pointer, cell unsafe.Pointer, charIndex C.uint, pboard unsafe.Pointer, _type unsafe.Pointer) C.bool {
+//export textViewDelegate_TextView_WriteCell_AtIndex_ToPasteboard_Type
+func textViewDelegate_TextView_WriteCell_AtIndex_ToPasteboard_Type(id int64, view unsafe.Pointer, cell unsafe.Pointer, charIndex C.uint, pboard unsafe.Pointer, _type unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	result := delegate.TextView_WriteCell_AtIndex_ToPasteboard_Type(MakeTextView(view), objc.MakeObject(cell), uint(charIndex), MakePasteboard(pboard), PasteboardType(foundation.MakeString(_type).String()))
 	return C.bool(result)
 }
 
-//export TextViewDelegate_TextView_ShouldChangeTextInRange_ReplacementString
-func TextViewDelegate_TextView_ShouldChangeTextInRange_ReplacementString(id int64, textView unsafe.Pointer, affectedCharRange C.NSRange, replacementString unsafe.Pointer) C.bool {
+//export textViewDelegate_TextView_ShouldChangeTextInRange_ReplacementString
+func textViewDelegate_TextView_ShouldChangeTextInRange_ReplacementString(id int64, textView unsafe.Pointer, affectedCharRange C.NSRange, replacementString unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	result := delegate.TextView_ShouldChangeTextInRange_ReplacementString(MakeTextView(textView), foundation.FromNSRangePointer(unsafe.Pointer(&affectedCharRange)), foundation.MakeString(replacementString).String())
 	return C.bool(result)
 }
 
-//export TextViewDelegate_TextView_ShouldChangeTextInRanges_ReplacementStrings
-func TextViewDelegate_TextView_ShouldChangeTextInRanges_ReplacementStrings(id int64, textView unsafe.Pointer, affectedRanges C.Array, replacementStrings C.Array) C.bool {
+//export textViewDelegate_TextView_ShouldChangeTextInRanges_ReplacementStrings
+func textViewDelegate_TextView_ShouldChangeTextInRanges_ReplacementStrings(id int64, textView unsafe.Pointer, affectedRanges C.Array, replacementStrings C.Array) C.bool {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	defer C.free(affectedRanges.data)
 	affectedRangesSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(affectedRanges.data))[:affectedRanges.len:affectedRanges.len]
@@ -152,46 +152,46 @@ func TextViewDelegate_TextView_ShouldChangeTextInRanges_ReplacementStrings(id in
 	return C.bool(result)
 }
 
-//export TextViewDelegate_TextViewDidChangeTypingAttributes
-func TextViewDelegate_TextViewDidChangeTypingAttributes(id int64, notification unsafe.Pointer) {
+//export textViewDelegate_TextViewDidChangeTypingAttributes
+func textViewDelegate_TextViewDidChangeTypingAttributes(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	delegate.TextViewDidChangeTypingAttributes(foundation.MakeNotification(notification))
 }
 
-//export TextViewDelegate_TextView_ClickedOnCell_InRect_AtIndex
-func TextViewDelegate_TextView_ClickedOnCell_InRect_AtIndex(id int64, textView unsafe.Pointer, cell unsafe.Pointer, cellFrame C.CGRect, charIndex C.uint) {
+//export textViewDelegate_TextView_ClickedOnCell_InRect_AtIndex
+func textViewDelegate_TextView_ClickedOnCell_InRect_AtIndex(id int64, textView unsafe.Pointer, cell unsafe.Pointer, cellFrame C.CGRect, charIndex C.uint) {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	delegate.TextView_ClickedOnCell_InRect_AtIndex(MakeTextView(textView), objc.MakeObject(cell), foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&cellFrame))), uint(charIndex))
 }
 
-//export TextViewDelegate_TextView_DoubleClickedOnCell_InRect_AtIndex
-func TextViewDelegate_TextView_DoubleClickedOnCell_InRect_AtIndex(id int64, textView unsafe.Pointer, cell unsafe.Pointer, cellFrame C.CGRect, charIndex C.uint) {
+//export textViewDelegate_TextView_DoubleClickedOnCell_InRect_AtIndex
+func textViewDelegate_TextView_DoubleClickedOnCell_InRect_AtIndex(id int64, textView unsafe.Pointer, cell unsafe.Pointer, cellFrame C.CGRect, charIndex C.uint) {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	delegate.TextView_DoubleClickedOnCell_InRect_AtIndex(MakeTextView(textView), objc.MakeObject(cell), foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&cellFrame))), uint(charIndex))
 }
 
-//export TextViewDelegate_TextView_ClickedOnLink_AtIndex
-func TextViewDelegate_TextView_ClickedOnLink_AtIndex(id int64, textView unsafe.Pointer, link unsafe.Pointer, charIndex C.uint) C.bool {
+//export textViewDelegate_TextView_ClickedOnLink_AtIndex
+func textViewDelegate_TextView_ClickedOnLink_AtIndex(id int64, textView unsafe.Pointer, link unsafe.Pointer, charIndex C.uint) C.bool {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	result := delegate.TextView_ClickedOnLink_AtIndex(MakeTextView(textView), objc.MakeObject(link), uint(charIndex))
 	return C.bool(result)
 }
 
-//export TextViewDelegate_TextView_ShouldSetSpellingState_Range
-func TextViewDelegate_TextView_ShouldSetSpellingState_Range(id int64, textView unsafe.Pointer, value C.int, affectedCharRange C.NSRange) C.int {
+//export textViewDelegate_TextView_ShouldSetSpellingState_Range
+func textViewDelegate_TextView_ShouldSetSpellingState_Range(id int64, textView unsafe.Pointer, value C.int, affectedCharRange C.NSRange) C.int {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	result := delegate.TextView_ShouldSetSpellingState_Range(MakeTextView(textView), int(value), foundation.FromNSRangePointer(unsafe.Pointer(&affectedCharRange)))
 	return C.int(result)
 }
 
-//export TextViewDelegate_TextView_DraggedCell_InRect_Event_AtIndex
-func TextViewDelegate_TextView_DraggedCell_InRect_Event_AtIndex(id int64, view unsafe.Pointer, cell unsafe.Pointer, rect C.CGRect, event unsafe.Pointer, charIndex C.uint) {
+//export textViewDelegate_TextView_DraggedCell_InRect_Event_AtIndex
+func textViewDelegate_TextView_DraggedCell_InRect_Event_AtIndex(id int64, view unsafe.Pointer, cell unsafe.Pointer, rect C.CGRect, event unsafe.Pointer, charIndex C.uint) {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	delegate.TextView_DraggedCell_InRect_Event_AtIndex(MakeTextView(view), objc.MakeObject(cell), foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&rect))), MakeEvent(event), uint(charIndex))
 }
 
-//export TextViewDelegate_TextView_WillShowSharingServicePicker_ForItems
-func TextViewDelegate_TextView_WillShowSharingServicePicker_ForItems(id int64, textView unsafe.Pointer, servicePicker unsafe.Pointer, items C.Array) unsafe.Pointer {
+//export textViewDelegate_TextView_WillShowSharingServicePicker_ForItems
+func textViewDelegate_TextView_WillShowSharingServicePicker_ForItems(id int64, textView unsafe.Pointer, servicePicker unsafe.Pointer, items C.Array) unsafe.Pointer {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	defer C.free(items.data)
 	itemsSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(items.data))[:items.len:items.len]
@@ -203,22 +203,22 @@ func TextViewDelegate_TextView_WillShowSharingServicePicker_ForItems(id int64, t
 	return objc.ExtractPtr(result)
 }
 
-//export TextViewDelegate_TextView_DoCommandBySelector
-func TextViewDelegate_TextView_DoCommandBySelector(id int64, textView unsafe.Pointer, commandSelector unsafe.Pointer) C.bool {
+//export textViewDelegate_TextView_DoCommandBySelector
+func textViewDelegate_TextView_DoCommandBySelector(id int64, textView unsafe.Pointer, commandSelector unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	result := delegate.TextView_DoCommandBySelector(MakeTextView(textView), objc.MakeSelector(commandSelector))
 	return C.bool(result)
 }
 
-//export TextViewDelegate_TextView_Menu_ForEvent_AtIndex
-func TextViewDelegate_TextView_Menu_ForEvent_AtIndex(id int64, view unsafe.Pointer, menu unsafe.Pointer, event unsafe.Pointer, charIndex C.uint) unsafe.Pointer {
+//export textViewDelegate_TextView_Menu_ForEvent_AtIndex
+func textViewDelegate_TextView_Menu_ForEvent_AtIndex(id int64, view unsafe.Pointer, menu unsafe.Pointer, event unsafe.Pointer, charIndex C.uint) unsafe.Pointer {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	result := delegate.TextView_Menu_ForEvent_AtIndex(MakeTextView(view), MakeMenu(menu), MakeEvent(event), uint(charIndex))
 	return objc.ExtractPtr(result)
 }
 
-//export TextViewDelegate_TextView_Candidates_ForSelectedRange
-func TextViewDelegate_TextView_Candidates_ForSelectedRange(id int64, textView unsafe.Pointer, candidates C.Array, selectedRange C.NSRange) C.Array {
+//export textViewDelegate_TextView_Candidates_ForSelectedRange
+func textViewDelegate_TextView_Candidates_ForSelectedRange(id int64, textView unsafe.Pointer, candidates C.Array, selectedRange C.NSRange) C.Array {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	defer C.free(candidates.data)
 	candidatesSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(candidates.data))[:candidates.len:candidates.len]
@@ -235,8 +235,8 @@ func TextViewDelegate_TextView_Candidates_ForSelectedRange(id int64, textView un
 	return cResult
 }
 
-//export TextViewDelegate_TextView_CandidatesForSelectedRange
-func TextViewDelegate_TextView_CandidatesForSelectedRange(id int64, textView unsafe.Pointer, selectedRange C.NSRange) C.Array {
+//export textViewDelegate_TextView_CandidatesForSelectedRange
+func textViewDelegate_TextView_CandidatesForSelectedRange(id int64, textView unsafe.Pointer, selectedRange C.NSRange) C.Array {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	result := delegate.TextView_CandidatesForSelectedRange(MakeTextView(textView), foundation.FromNSRangePointer(unsafe.Pointer(&selectedRange)))
 	cResultData := make([]unsafe.Pointer, len(result))
@@ -247,15 +247,15 @@ func TextViewDelegate_TextView_CandidatesForSelectedRange(id int64, textView uns
 	return cResult
 }
 
-//export TextViewDelegate_TextView_ShouldSelectCandidateAtIndex
-func TextViewDelegate_TextView_ShouldSelectCandidateAtIndex(id int64, textView unsafe.Pointer, index C.uint) C.bool {
+//export textViewDelegate_TextView_ShouldSelectCandidateAtIndex
+func textViewDelegate_TextView_ShouldSelectCandidateAtIndex(id int64, textView unsafe.Pointer, index C.uint) C.bool {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	result := delegate.TextView_ShouldSelectCandidateAtIndex(MakeTextView(textView), uint(index))
 	return C.bool(result)
 }
 
-//export TextViewDelegate_TextView_ShouldUpdateTouchBarItemIdentifiers
-func TextViewDelegate_TextView_ShouldUpdateTouchBarItemIdentifiers(id int64, textView unsafe.Pointer, identifiers C.Array) C.Array {
+//export textViewDelegate_TextView_ShouldUpdateTouchBarItemIdentifiers
+func textViewDelegate_TextView_ShouldUpdateTouchBarItemIdentifiers(id int64, textView unsafe.Pointer, identifiers C.Array) C.Array {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	defer C.free(identifiers.data)
 	identifiersSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(identifiers.data))[:identifiers.len:identifiers.len]
@@ -272,34 +272,34 @@ func TextViewDelegate_TextView_ShouldUpdateTouchBarItemIdentifiers(id int64, tex
 	return cResult
 }
 
-//export TextViewDelegate_TextDidChange
-func TextViewDelegate_TextDidChange(id int64, notification unsafe.Pointer) {
+//export textViewDelegate_TextDidChange
+func textViewDelegate_TextDidChange(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	delegate.TextDidChange(foundation.MakeNotification(notification))
 }
 
-//export TextViewDelegate_TextShouldBeginEditing
-func TextViewDelegate_TextShouldBeginEditing(id int64, textObject unsafe.Pointer) C.bool {
+//export textViewDelegate_TextShouldBeginEditing
+func textViewDelegate_TextShouldBeginEditing(id int64, textObject unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	result := delegate.TextShouldBeginEditing(MakeText(textObject))
 	return C.bool(result)
 }
 
-//export TextViewDelegate_TextDidBeginEditing
-func TextViewDelegate_TextDidBeginEditing(id int64, notification unsafe.Pointer) {
+//export textViewDelegate_TextDidBeginEditing
+func textViewDelegate_TextDidBeginEditing(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	delegate.TextDidBeginEditing(foundation.MakeNotification(notification))
 }
 
-//export TextViewDelegate_TextShouldEndEditing
-func TextViewDelegate_TextShouldEndEditing(id int64, textObject unsafe.Pointer) C.bool {
+//export textViewDelegate_TextShouldEndEditing
+func textViewDelegate_TextShouldEndEditing(id int64, textObject unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	result := delegate.TextShouldEndEditing(MakeText(textObject))
 	return C.bool(result)
 }
 
-//export TextViewDelegate_TextDidEndEditing
-func TextViewDelegate_TextDidEndEditing(id int64, notification unsafe.Pointer) {
+//export textViewDelegate_TextDidEndEditing
+func textViewDelegate_TextDidEndEditing(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*TextViewDelegate)
 	delegate.TextDidEndEditing(foundation.MakeNotification(notification))
 }

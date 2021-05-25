@@ -25,34 +25,34 @@ func WrapTextDelegate(delegate *TextDelegate) objc.Object {
 	return objc.MakeObject(ptr)
 }
 
-//export TextDelegate_TextDidChange
-func TextDelegate_TextDidChange(id int64, notification unsafe.Pointer) {
+//export textDelegate_TextDidChange
+func textDelegate_TextDidChange(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*TextDelegate)
 	delegate.TextDidChange(foundation.MakeNotification(notification))
 }
 
-//export TextDelegate_TextShouldBeginEditing
-func TextDelegate_TextShouldBeginEditing(id int64, textObject unsafe.Pointer) C.bool {
+//export textDelegate_TextShouldBeginEditing
+func textDelegate_TextShouldBeginEditing(id int64, textObject unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*TextDelegate)
 	result := delegate.TextShouldBeginEditing(MakeText(textObject))
 	return C.bool(result)
 }
 
-//export TextDelegate_TextDidBeginEditing
-func TextDelegate_TextDidBeginEditing(id int64, notification unsafe.Pointer) {
+//export textDelegate_TextDidBeginEditing
+func textDelegate_TextDidBeginEditing(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*TextDelegate)
 	delegate.TextDidBeginEditing(foundation.MakeNotification(notification))
 }
 
-//export TextDelegate_TextShouldEndEditing
-func TextDelegate_TextShouldEndEditing(id int64, textObject unsafe.Pointer) C.bool {
+//export textDelegate_TextShouldEndEditing
+func textDelegate_TextShouldEndEditing(id int64, textObject unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*TextDelegate)
 	result := delegate.TextShouldEndEditing(MakeText(textObject))
 	return C.bool(result)
 }
 
-//export TextDelegate_TextDidEndEditing
-func TextDelegate_TextDidEndEditing(id int64, notification unsafe.Pointer) {
+//export textDelegate_TextDidEndEditing
+func textDelegate_TextDidEndEditing(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*TextDelegate)
 	delegate.TextDidEndEditing(foundation.MakeNotification(notification))
 }

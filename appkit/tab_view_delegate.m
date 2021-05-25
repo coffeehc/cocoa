@@ -6,20 +6,20 @@
 
 
 - (void)tabViewDidChangeNumberOfTabViewItems:(NSTabView*)tabView {
-    TabViewDelegate_TabViewDidChangeNumberOfTabViewItems([self goID], tabView);
+    tabViewDelegate_TabViewDidChangeNumberOfTabViewItems([self goID], tabView);
 }
 
 - (BOOL)tabView:(NSTabView*)tabView shouldSelectTabViewItem:(NSTabViewItem*)tabViewItem {
-    bool result_ = TabViewDelegate_TabView_ShouldSelectTabViewItem([self goID], tabView, tabViewItem);
+    bool result_ = tabViewDelegate_TabView_ShouldSelectTabViewItem([self goID], tabView, tabViewItem);
     return result_;
 }
 
 - (void)tabView:(NSTabView*)tabView willSelectTabViewItem:(NSTabViewItem*)tabViewItem {
-    TabViewDelegate_TabView_WillSelectTabViewItem([self goID], tabView, tabViewItem);
+    tabViewDelegate_TabView_WillSelectTabViewItem([self goID], tabView, tabViewItem);
 }
 
 - (void)tabView:(NSTabView*)tabView didSelectTabViewItem:(NSTabViewItem*)tabViewItem {
-    TabViewDelegate_TabView_DidSelectTabViewItem([self goID], tabView, tabViewItem);
+    tabViewDelegate_TabView_DidSelectTabViewItem([self goID], tabView, tabViewItem);
 }
 
 

@@ -21,14 +21,14 @@ func WrapPathCellDelegate(delegate *PathCellDelegate) objc.Object {
 	return objc.MakeObject(ptr)
 }
 
-//export PathCellDelegate_PathCell_WillDisplayOpenPanel
-func PathCellDelegate_PathCell_WillDisplayOpenPanel(id int64, pathCell unsafe.Pointer, openPanel unsafe.Pointer) {
+//export pathCellDelegate_PathCell_WillDisplayOpenPanel
+func pathCellDelegate_PathCell_WillDisplayOpenPanel(id int64, pathCell unsafe.Pointer, openPanel unsafe.Pointer) {
 	delegate := resources.Get(id).(*PathCellDelegate)
 	delegate.PathCell_WillDisplayOpenPanel(MakePathCell(pathCell), MakeOpenPanel(openPanel))
 }
 
-//export PathCellDelegate_PathCell_WillPopUpMenu
-func PathCellDelegate_PathCell_WillPopUpMenu(id int64, pathCell unsafe.Pointer, menu unsafe.Pointer) {
+//export pathCellDelegate_PathCell_WillPopUpMenu
+func pathCellDelegate_PathCell_WillPopUpMenu(id int64, pathCell unsafe.Pointer, menu unsafe.Pointer) {
 	delegate := resources.Get(id).(*PathCellDelegate)
 	delegate.PathCell_WillPopUpMenu(MakePathCell(pathCell), MakeMenu(menu))
 }

@@ -6,7 +6,7 @@
 
 
 - (NSTouchBarItem*)touchBar:(NSTouchBar*)touchBar makeItemForIdentifier:(NSTouchBarItemIdentifier)identifier {
-    void* result_ = TouchBarDelegate_TouchBar_MakeItemForIdentifier([self goID], touchBar, identifier);
+    void* result_ = touchBarDelegate_TouchBar_MakeItemForIdentifier([self goID], touchBar, identifier);
     return (NSTouchBarItem*)result_;
 }
 

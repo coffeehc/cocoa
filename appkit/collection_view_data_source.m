@@ -6,22 +6,22 @@
 
 
 - (NSInteger)numberOfSectionsInCollectionView:(NSCollectionView*)collectionView {
-    int result_ = CollectionViewDataSource_NumberOfSectionsInCollectionView([self goID], collectionView);
+    int result_ = collectionViewDataSource_NumberOfSectionsInCollectionView([self goID], collectionView);
     return result_;
 }
 
 - (NSInteger)collectionView:(NSCollectionView*)collectionView numberOfItemsInSection:(NSInteger)section {
-    int result_ = CollectionViewDataSource_CollectionView_NumberOfItemsInSection([self goID], collectionView, section);
+    int result_ = collectionViewDataSource_CollectionView_NumberOfItemsInSection([self goID], collectionView, section);
     return result_;
 }
 
 - (NSCollectionViewItem*)collectionView:(NSCollectionView*)collectionView itemForRepresentedObjectAtIndexPath:(NSIndexPath*)indexPath {
-    void* result_ = CollectionViewDataSource_CollectionView_ItemForRepresentedObjectAtIndexPath([self goID], collectionView, indexPath);
+    void* result_ = collectionViewDataSource_CollectionView_ItemForRepresentedObjectAtIndexPath([self goID], collectionView, indexPath);
     return (NSCollectionViewItem*)result_;
 }
 
 - (NSView*)collectionView:(NSCollectionView*)collectionView viewForSupplementaryElementOfKind:(NSCollectionViewSupplementaryElementKind)kind atIndexPath:(NSIndexPath*)indexPath {
-    void* result_ = CollectionViewDataSource_CollectionView_ViewForSupplementaryElementOfKind_AtIndexPath([self goID], collectionView, kind, indexPath);
+    void* result_ = collectionViewDataSource_CollectionView_ViewForSupplementaryElementOfKind_AtIndexPath([self goID], collectionView, kind, indexPath);
     return (NSView*)result_;
 }
 

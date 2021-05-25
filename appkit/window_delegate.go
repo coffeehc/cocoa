@@ -72,122 +72,122 @@ func WrapWindowDelegate(delegate *WindowDelegate) objc.Object {
 	return objc.MakeObject(ptr)
 }
 
-//export WindowDelegate_Window_WillPositionSheet_UsingRect
-func WindowDelegate_Window_WillPositionSheet_UsingRect(id int64, window unsafe.Pointer, sheet unsafe.Pointer, rect C.CGRect) C.CGRect {
+//export windowDelegate_Window_WillPositionSheet_UsingRect
+func windowDelegate_Window_WillPositionSheet_UsingRect(id int64, window unsafe.Pointer, sheet unsafe.Pointer, rect C.CGRect) C.CGRect {
 	delegate := resources.Get(id).(*WindowDelegate)
 	result := delegate.Window_WillPositionSheet_UsingRect(MakeWindow(window), MakeWindow(sheet), foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&rect))))
 	return *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(result)))
 }
 
-//export WindowDelegate_WindowWillBeginSheet
-func WindowDelegate_WindowWillBeginSheet(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowWillBeginSheet
+func windowDelegate_WindowWillBeginSheet(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowWillBeginSheet(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowDidEndSheet
-func WindowDelegate_WindowDidEndSheet(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowDidEndSheet
+func windowDelegate_WindowDidEndSheet(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowDidEndSheet(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowWillResize_ToSize
-func WindowDelegate_WindowWillResize_ToSize(id int64, sender unsafe.Pointer, frameSize C.CGSize) C.CGSize {
+//export windowDelegate_WindowWillResize_ToSize
+func windowDelegate_WindowWillResize_ToSize(id int64, sender unsafe.Pointer, frameSize C.CGSize) C.CGSize {
 	delegate := resources.Get(id).(*WindowDelegate)
 	result := delegate.WindowWillResize_ToSize(MakeWindow(sender), foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&frameSize))))
 	return *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(result)))
 }
 
-//export WindowDelegate_WindowDidResize
-func WindowDelegate_WindowDidResize(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowDidResize
+func windowDelegate_WindowDidResize(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowDidResize(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowWillStartLiveResize
-func WindowDelegate_WindowWillStartLiveResize(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowWillStartLiveResize
+func windowDelegate_WindowWillStartLiveResize(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowWillStartLiveResize(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowDidEndLiveResize
-func WindowDelegate_WindowDidEndLiveResize(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowDidEndLiveResize
+func windowDelegate_WindowDidEndLiveResize(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowDidEndLiveResize(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowWillMiniaturize
-func WindowDelegate_WindowWillMiniaturize(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowWillMiniaturize
+func windowDelegate_WindowWillMiniaturize(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowWillMiniaturize(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowDidMiniaturize
-func WindowDelegate_WindowDidMiniaturize(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowDidMiniaturize
+func windowDelegate_WindowDidMiniaturize(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowDidMiniaturize(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowDidDeminiaturize
-func WindowDelegate_WindowDidDeminiaturize(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowDidDeminiaturize
+func windowDelegate_WindowDidDeminiaturize(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowDidDeminiaturize(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowWillUseStandardFrame_DefaultFrame
-func WindowDelegate_WindowWillUseStandardFrame_DefaultFrame(id int64, window unsafe.Pointer, newFrame C.CGRect) C.CGRect {
+//export windowDelegate_WindowWillUseStandardFrame_DefaultFrame
+func windowDelegate_WindowWillUseStandardFrame_DefaultFrame(id int64, window unsafe.Pointer, newFrame C.CGRect) C.CGRect {
 	delegate := resources.Get(id).(*WindowDelegate)
 	result := delegate.WindowWillUseStandardFrame_DefaultFrame(MakeWindow(window), foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&newFrame))))
 	return *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(result)))
 }
 
-//export WindowDelegate_WindowShouldZoom_ToFrame
-func WindowDelegate_WindowShouldZoom_ToFrame(id int64, window unsafe.Pointer, newFrame C.CGRect) C.bool {
+//export windowDelegate_WindowShouldZoom_ToFrame
+func windowDelegate_WindowShouldZoom_ToFrame(id int64, window unsafe.Pointer, newFrame C.CGRect) C.bool {
 	delegate := resources.Get(id).(*WindowDelegate)
 	result := delegate.WindowShouldZoom_ToFrame(MakeWindow(window), foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&newFrame))))
 	return C.bool(result)
 }
 
-//export WindowDelegate_Window_WillUseFullScreenContentSize
-func WindowDelegate_Window_WillUseFullScreenContentSize(id int64, window unsafe.Pointer, proposedSize C.CGSize) C.CGSize {
+//export windowDelegate_Window_WillUseFullScreenContentSize
+func windowDelegate_Window_WillUseFullScreenContentSize(id int64, window unsafe.Pointer, proposedSize C.CGSize) C.CGSize {
 	delegate := resources.Get(id).(*WindowDelegate)
 	result := delegate.Window_WillUseFullScreenContentSize(MakeWindow(window), foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&proposedSize))))
 	return *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(result)))
 }
 
-//export WindowDelegate_Window_WillUseFullScreenPresentationOptions
-func WindowDelegate_Window_WillUseFullScreenPresentationOptions(id int64, window unsafe.Pointer, proposedOptions C.uint) C.uint {
+//export windowDelegate_Window_WillUseFullScreenPresentationOptions
+func windowDelegate_Window_WillUseFullScreenPresentationOptions(id int64, window unsafe.Pointer, proposedOptions C.uint) C.uint {
 	delegate := resources.Get(id).(*WindowDelegate)
 	result := delegate.Window_WillUseFullScreenPresentationOptions(MakeWindow(window), ApplicationPresentationOptions(uint(proposedOptions)))
 	return C.uint(uint(result))
 }
 
-//export WindowDelegate_WindowWillEnterFullScreen
-func WindowDelegate_WindowWillEnterFullScreen(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowWillEnterFullScreen
+func windowDelegate_WindowWillEnterFullScreen(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowWillEnterFullScreen(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowDidEnterFullScreen
-func WindowDelegate_WindowDidEnterFullScreen(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowDidEnterFullScreen
+func windowDelegate_WindowDidEnterFullScreen(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowDidEnterFullScreen(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowWillExitFullScreen
-func WindowDelegate_WindowWillExitFullScreen(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowWillExitFullScreen
+func windowDelegate_WindowWillExitFullScreen(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowWillExitFullScreen(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowDidExitFullScreen
-func WindowDelegate_WindowDidExitFullScreen(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowDidExitFullScreen
+func windowDelegate_WindowDidExitFullScreen(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowDidExitFullScreen(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_CustomWindowsToEnterFullScreenForWindow
-func WindowDelegate_CustomWindowsToEnterFullScreenForWindow(id int64, window unsafe.Pointer) C.Array {
+//export windowDelegate_CustomWindowsToEnterFullScreenForWindow
+func windowDelegate_CustomWindowsToEnterFullScreenForWindow(id int64, window unsafe.Pointer) C.Array {
 	delegate := resources.Get(id).(*WindowDelegate)
 	result := delegate.CustomWindowsToEnterFullScreenForWindow(MakeWindow(window))
 	cResultData := make([]unsafe.Pointer, len(result))
@@ -198,8 +198,8 @@ func WindowDelegate_CustomWindowsToEnterFullScreenForWindow(id int64, window uns
 	return cResult
 }
 
-//export WindowDelegate_CustomWindowsToEnterFullScreenForWindow_OnScreen
-func WindowDelegate_CustomWindowsToEnterFullScreenForWindow_OnScreen(id int64, window unsafe.Pointer, screen unsafe.Pointer) C.Array {
+//export windowDelegate_CustomWindowsToEnterFullScreenForWindow_OnScreen
+func windowDelegate_CustomWindowsToEnterFullScreenForWindow_OnScreen(id int64, window unsafe.Pointer, screen unsafe.Pointer) C.Array {
 	delegate := resources.Get(id).(*WindowDelegate)
 	result := delegate.CustomWindowsToEnterFullScreenForWindow_OnScreen(MakeWindow(window), MakeScreen(screen))
 	cResultData := make([]unsafe.Pointer, len(result))
@@ -210,26 +210,26 @@ func WindowDelegate_CustomWindowsToEnterFullScreenForWindow_OnScreen(id int64, w
 	return cResult
 }
 
-//export WindowDelegate_Window_StartCustomAnimationToEnterFullScreenWithDuration
-func WindowDelegate_Window_StartCustomAnimationToEnterFullScreenWithDuration(id int64, window unsafe.Pointer, duration C.double) {
+//export windowDelegate_Window_StartCustomAnimationToEnterFullScreenWithDuration
+func windowDelegate_Window_StartCustomAnimationToEnterFullScreenWithDuration(id int64, window unsafe.Pointer, duration C.double) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.Window_StartCustomAnimationToEnterFullScreenWithDuration(MakeWindow(window), foundation.TimeInterval(float64(duration)))
 }
 
-//export WindowDelegate_Window_StartCustomAnimationToEnterFullScreenOnScreen_WithDuration
-func WindowDelegate_Window_StartCustomAnimationToEnterFullScreenOnScreen_WithDuration(id int64, window unsafe.Pointer, screen unsafe.Pointer, duration C.double) {
+//export windowDelegate_Window_StartCustomAnimationToEnterFullScreenOnScreen_WithDuration
+func windowDelegate_Window_StartCustomAnimationToEnterFullScreenOnScreen_WithDuration(id int64, window unsafe.Pointer, screen unsafe.Pointer, duration C.double) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.Window_StartCustomAnimationToEnterFullScreenOnScreen_WithDuration(MakeWindow(window), MakeScreen(screen), foundation.TimeInterval(float64(duration)))
 }
 
-//export WindowDelegate_WindowDidFailToEnterFullScreen
-func WindowDelegate_WindowDidFailToEnterFullScreen(id int64, window unsafe.Pointer) {
+//export windowDelegate_WindowDidFailToEnterFullScreen
+func windowDelegate_WindowDidFailToEnterFullScreen(id int64, window unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowDidFailToEnterFullScreen(MakeWindow(window))
 }
 
-//export WindowDelegate_CustomWindowsToExitFullScreenForWindow
-func WindowDelegate_CustomWindowsToExitFullScreenForWindow(id int64, window unsafe.Pointer) C.Array {
+//export windowDelegate_CustomWindowsToExitFullScreenForWindow
+func windowDelegate_CustomWindowsToExitFullScreenForWindow(id int64, window unsafe.Pointer) C.Array {
 	delegate := resources.Get(id).(*WindowDelegate)
 	result := delegate.CustomWindowsToExitFullScreenForWindow(MakeWindow(window))
 	cResultData := make([]unsafe.Pointer, len(result))
@@ -240,170 +240,170 @@ func WindowDelegate_CustomWindowsToExitFullScreenForWindow(id int64, window unsa
 	return cResult
 }
 
-//export WindowDelegate_Window_StartCustomAnimationToExitFullScreenWithDuration
-func WindowDelegate_Window_StartCustomAnimationToExitFullScreenWithDuration(id int64, window unsafe.Pointer, duration C.double) {
+//export windowDelegate_Window_StartCustomAnimationToExitFullScreenWithDuration
+func windowDelegate_Window_StartCustomAnimationToExitFullScreenWithDuration(id int64, window unsafe.Pointer, duration C.double) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.Window_StartCustomAnimationToExitFullScreenWithDuration(MakeWindow(window), foundation.TimeInterval(float64(duration)))
 }
 
-//export WindowDelegate_WindowDidFailToExitFullScreen
-func WindowDelegate_WindowDidFailToExitFullScreen(id int64, window unsafe.Pointer) {
+//export windowDelegate_WindowDidFailToExitFullScreen
+func windowDelegate_WindowDidFailToExitFullScreen(id int64, window unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowDidFailToExitFullScreen(MakeWindow(window))
 }
 
-//export WindowDelegate_WindowWillMove
-func WindowDelegate_WindowWillMove(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowWillMove
+func windowDelegate_WindowWillMove(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowWillMove(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowDidMove
-func WindowDelegate_WindowDidMove(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowDidMove
+func windowDelegate_WindowDidMove(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowDidMove(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowDidChangeScreen
-func WindowDelegate_WindowDidChangeScreen(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowDidChangeScreen
+func windowDelegate_WindowDidChangeScreen(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowDidChangeScreen(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowDidChangeScreenProfile
-func WindowDelegate_WindowDidChangeScreenProfile(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowDidChangeScreenProfile
+func windowDelegate_WindowDidChangeScreenProfile(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowDidChangeScreenProfile(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowDidChangeBackingProperties
-func WindowDelegate_WindowDidChangeBackingProperties(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowDidChangeBackingProperties
+func windowDelegate_WindowDidChangeBackingProperties(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowDidChangeBackingProperties(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowShouldClose
-func WindowDelegate_WindowShouldClose(id int64, sender unsafe.Pointer) C.bool {
+//export windowDelegate_WindowShouldClose
+func windowDelegate_WindowShouldClose(id int64, sender unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*WindowDelegate)
 	result := delegate.WindowShouldClose(MakeWindow(sender))
 	return C.bool(result)
 }
 
-//export WindowDelegate_WindowWillClose
-func WindowDelegate_WindowWillClose(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowWillClose
+func windowDelegate_WindowWillClose(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowWillClose(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowDidBecomeKey
-func WindowDelegate_WindowDidBecomeKey(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowDidBecomeKey
+func windowDelegate_WindowDidBecomeKey(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowDidBecomeKey(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowDidResignKey
-func WindowDelegate_WindowDidResignKey(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowDidResignKey
+func windowDelegate_WindowDidResignKey(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowDidResignKey(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowDidBecomeMain
-func WindowDelegate_WindowDidBecomeMain(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowDidBecomeMain
+func windowDelegate_WindowDidBecomeMain(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowDidBecomeMain(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowDidResignMain
-func WindowDelegate_WindowDidResignMain(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowDidResignMain
+func windowDelegate_WindowDidResignMain(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowDidResignMain(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowWillReturnFieldEditor_ToObject
-func WindowDelegate_WindowWillReturnFieldEditor_ToObject(id int64, sender unsafe.Pointer, client unsafe.Pointer) unsafe.Pointer {
+//export windowDelegate_WindowWillReturnFieldEditor_ToObject
+func windowDelegate_WindowWillReturnFieldEditor_ToObject(id int64, sender unsafe.Pointer, client unsafe.Pointer) unsafe.Pointer {
 	delegate := resources.Get(id).(*WindowDelegate)
 	result := delegate.WindowWillReturnFieldEditor_ToObject(MakeWindow(sender), objc.MakeObject(client))
 	return objc.ExtractPtr(result)
 }
 
-//export WindowDelegate_WindowDidUpdate
-func WindowDelegate_WindowDidUpdate(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowDidUpdate
+func windowDelegate_WindowDidUpdate(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowDidUpdate(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowDidExpose
-func WindowDelegate_WindowDidExpose(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowDidExpose
+func windowDelegate_WindowDidExpose(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowDidExpose(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowDidChangeOcclusionState
-func WindowDelegate_WindowDidChangeOcclusionState(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowDidChangeOcclusionState
+func windowDelegate_WindowDidChangeOcclusionState(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowDidChangeOcclusionState(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_Window_ShouldDragDocumentWithEvent_From_WithPasteboard
-func WindowDelegate_Window_ShouldDragDocumentWithEvent_From_WithPasteboard(id int64, window unsafe.Pointer, event unsafe.Pointer, dragImageLocation C.CGPoint, pasteboard unsafe.Pointer) C.bool {
+//export windowDelegate_Window_ShouldDragDocumentWithEvent_From_WithPasteboard
+func windowDelegate_Window_ShouldDragDocumentWithEvent_From_WithPasteboard(id int64, window unsafe.Pointer, event unsafe.Pointer, dragImageLocation C.CGPoint, pasteboard unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*WindowDelegate)
 	result := delegate.Window_ShouldDragDocumentWithEvent_From_WithPasteboard(MakeWindow(window), MakeEvent(event), foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&dragImageLocation))), MakePasteboard(pasteboard))
 	return C.bool(result)
 }
 
-//export WindowDelegate_WindowWillReturnUndoManager
-func WindowDelegate_WindowWillReturnUndoManager(id int64, window unsafe.Pointer) unsafe.Pointer {
+//export windowDelegate_WindowWillReturnUndoManager
+func windowDelegate_WindowWillReturnUndoManager(id int64, window unsafe.Pointer) unsafe.Pointer {
 	delegate := resources.Get(id).(*WindowDelegate)
 	result := delegate.WindowWillReturnUndoManager(MakeWindow(window))
 	return objc.ExtractPtr(result)
 }
 
-//export WindowDelegate_Window_ShouldPopUpDocumentPathMenu
-func WindowDelegate_Window_ShouldPopUpDocumentPathMenu(id int64, window unsafe.Pointer, menu unsafe.Pointer) C.bool {
+//export windowDelegate_Window_ShouldPopUpDocumentPathMenu
+func windowDelegate_Window_ShouldPopUpDocumentPathMenu(id int64, window unsafe.Pointer, menu unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*WindowDelegate)
 	result := delegate.Window_ShouldPopUpDocumentPathMenu(MakeWindow(window), MakeMenu(menu))
 	return C.bool(result)
 }
 
-//export WindowDelegate_Window_WillEncodeRestorableState
-func WindowDelegate_Window_WillEncodeRestorableState(id int64, window unsafe.Pointer, state unsafe.Pointer) {
+//export windowDelegate_Window_WillEncodeRestorableState
+func windowDelegate_Window_WillEncodeRestorableState(id int64, window unsafe.Pointer, state unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.Window_WillEncodeRestorableState(MakeWindow(window), foundation.MakeCoder(state))
 }
 
-//export WindowDelegate_Window_DidDecodeRestorableState
-func WindowDelegate_Window_DidDecodeRestorableState(id int64, window unsafe.Pointer, state unsafe.Pointer) {
+//export windowDelegate_Window_DidDecodeRestorableState
+func windowDelegate_Window_DidDecodeRestorableState(id int64, window unsafe.Pointer, state unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.Window_DidDecodeRestorableState(MakeWindow(window), foundation.MakeCoder(state))
 }
 
-//export WindowDelegate_Window_WillResizeForVersionBrowserWithMaxPreferredSize_MaxAllowedSize
-func WindowDelegate_Window_WillResizeForVersionBrowserWithMaxPreferredSize_MaxAllowedSize(id int64, window unsafe.Pointer, maxPreferredFrameSize C.CGSize, maxAllowedFrameSize C.CGSize) C.CGSize {
+//export windowDelegate_Window_WillResizeForVersionBrowserWithMaxPreferredSize_MaxAllowedSize
+func windowDelegate_Window_WillResizeForVersionBrowserWithMaxPreferredSize_MaxAllowedSize(id int64, window unsafe.Pointer, maxPreferredFrameSize C.CGSize, maxAllowedFrameSize C.CGSize) C.CGSize {
 	delegate := resources.Get(id).(*WindowDelegate)
 	result := delegate.Window_WillResizeForVersionBrowserWithMaxPreferredSize_MaxAllowedSize(MakeWindow(window), foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&maxPreferredFrameSize))), foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&maxAllowedFrameSize))))
 	return *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(result)))
 }
 
-//export WindowDelegate_WindowWillEnterVersionBrowser
-func WindowDelegate_WindowWillEnterVersionBrowser(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowWillEnterVersionBrowser
+func windowDelegate_WindowWillEnterVersionBrowser(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowWillEnterVersionBrowser(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowDidEnterVersionBrowser
-func WindowDelegate_WindowDidEnterVersionBrowser(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowDidEnterVersionBrowser
+func windowDelegate_WindowDidEnterVersionBrowser(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowDidEnterVersionBrowser(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowWillExitVersionBrowser
-func WindowDelegate_WindowWillExitVersionBrowser(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowWillExitVersionBrowser
+func windowDelegate_WindowWillExitVersionBrowser(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowWillExitVersionBrowser(foundation.MakeNotification(notification))
 }
 
-//export WindowDelegate_WindowDidExitVersionBrowser
-func WindowDelegate_WindowDidExitVersionBrowser(id int64, notification unsafe.Pointer) {
+//export windowDelegate_WindowDidExitVersionBrowser
+func windowDelegate_WindowDidExitVersionBrowser(id int64, notification unsafe.Pointer) {
 	delegate := resources.Get(id).(*WindowDelegate)
 	delegate.WindowDidExitVersionBrowser(foundation.MakeNotification(notification))
 }

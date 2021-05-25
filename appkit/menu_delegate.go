@@ -28,47 +28,47 @@ func WrapMenuDelegate(delegate *MenuDelegate) objc.Object {
 	return objc.MakeObject(ptr)
 }
 
-//export MenuDelegate_Menu_UpdateItem_AtIndex_ShouldCancel
-func MenuDelegate_Menu_UpdateItem_AtIndex_ShouldCancel(id int64, menu unsafe.Pointer, item unsafe.Pointer, index C.int, shouldCancel C.bool) C.bool {
+//export menuDelegate_Menu_UpdateItem_AtIndex_ShouldCancel
+func menuDelegate_Menu_UpdateItem_AtIndex_ShouldCancel(id int64, menu unsafe.Pointer, item unsafe.Pointer, index C.int, shouldCancel C.bool) C.bool {
 	delegate := resources.Get(id).(*MenuDelegate)
 	result := delegate.Menu_UpdateItem_AtIndex_ShouldCancel(MakeMenu(menu), MakeMenuItem(item), int(index), bool(shouldCancel))
 	return C.bool(result)
 }
 
-//export MenuDelegate_ConfinementRectForMenu_OnScreen
-func MenuDelegate_ConfinementRectForMenu_OnScreen(id int64, menu unsafe.Pointer, screen unsafe.Pointer) C.CGRect {
+//export menuDelegate_ConfinementRectForMenu_OnScreen
+func menuDelegate_ConfinementRectForMenu_OnScreen(id int64, menu unsafe.Pointer, screen unsafe.Pointer) C.CGRect {
 	delegate := resources.Get(id).(*MenuDelegate)
 	result := delegate.ConfinementRectForMenu_OnScreen(MakeMenu(menu), MakeScreen(screen))
 	return *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(result)))
 }
 
-//export MenuDelegate_Menu_WillHighlightItem
-func MenuDelegate_Menu_WillHighlightItem(id int64, menu unsafe.Pointer, item unsafe.Pointer) {
+//export menuDelegate_Menu_WillHighlightItem
+func menuDelegate_Menu_WillHighlightItem(id int64, menu unsafe.Pointer, item unsafe.Pointer) {
 	delegate := resources.Get(id).(*MenuDelegate)
 	delegate.Menu_WillHighlightItem(MakeMenu(menu), MakeMenuItem(item))
 }
 
-//export MenuDelegate_MenuWillOpen
-func MenuDelegate_MenuWillOpen(id int64, menu unsafe.Pointer) {
+//export menuDelegate_MenuWillOpen
+func menuDelegate_MenuWillOpen(id int64, menu unsafe.Pointer) {
 	delegate := resources.Get(id).(*MenuDelegate)
 	delegate.MenuWillOpen(MakeMenu(menu))
 }
 
-//export MenuDelegate_MenuDidClose
-func MenuDelegate_MenuDidClose(id int64, menu unsafe.Pointer) {
+//export menuDelegate_MenuDidClose
+func menuDelegate_MenuDidClose(id int64, menu unsafe.Pointer) {
 	delegate := resources.Get(id).(*MenuDelegate)
 	delegate.MenuDidClose(MakeMenu(menu))
 }
 
-//export MenuDelegate_NumberOfItemsInMenu
-func MenuDelegate_NumberOfItemsInMenu(id int64, menu unsafe.Pointer) C.int {
+//export menuDelegate_NumberOfItemsInMenu
+func menuDelegate_NumberOfItemsInMenu(id int64, menu unsafe.Pointer) C.int {
 	delegate := resources.Get(id).(*MenuDelegate)
 	result := delegate.NumberOfItemsInMenu(MakeMenu(menu))
 	return C.int(result)
 }
 
-//export MenuDelegate_MenuNeedsUpdate
-func MenuDelegate_MenuNeedsUpdate(id int64, menu unsafe.Pointer) {
+//export menuDelegate_MenuNeedsUpdate
+func menuDelegate_MenuNeedsUpdate(id int64, menu unsafe.Pointer) {
 	delegate := resources.Get(id).(*MenuDelegate)
 	delegate.MenuNeedsUpdate(MakeMenu(menu))
 }

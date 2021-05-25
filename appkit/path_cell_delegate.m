@@ -6,11 +6,11 @@
 
 
 - (void)pathCell:(NSPathCell*)pathCell willDisplayOpenPanel:(NSOpenPanel*)openPanel {
-    PathCellDelegate_PathCell_WillDisplayOpenPanel([self goID], pathCell, openPanel);
+    pathCellDelegate_PathCell_WillDisplayOpenPanel([self goID], pathCell, openPanel);
 }
 
 - (void)pathCell:(NSPathCell*)pathCell willPopUpMenu:(NSMenu*)menu {
-    PathCellDelegate_PathCell_WillPopUpMenu([self goID], pathCell, menu);
+    pathCellDelegate_PathCell_WillPopUpMenu([self goID], pathCell, menu);
 }
 
 

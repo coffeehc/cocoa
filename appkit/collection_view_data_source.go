@@ -24,29 +24,29 @@ func WrapCollectionViewDataSource(delegate *CollectionViewDataSource) objc.Objec
 	return objc.MakeObject(ptr)
 }
 
-//export CollectionViewDataSource_NumberOfSectionsInCollectionView
-func CollectionViewDataSource_NumberOfSectionsInCollectionView(id int64, collectionView unsafe.Pointer) C.int {
+//export collectionViewDataSource_NumberOfSectionsInCollectionView
+func collectionViewDataSource_NumberOfSectionsInCollectionView(id int64, collectionView unsafe.Pointer) C.int {
 	delegate := resources.Get(id).(*CollectionViewDataSource)
 	result := delegate.NumberOfSectionsInCollectionView(MakeCollectionView(collectionView))
 	return C.int(result)
 }
 
-//export CollectionViewDataSource_CollectionView_NumberOfItemsInSection
-func CollectionViewDataSource_CollectionView_NumberOfItemsInSection(id int64, collectionView unsafe.Pointer, section C.int) C.int {
+//export collectionViewDataSource_CollectionView_NumberOfItemsInSection
+func collectionViewDataSource_CollectionView_NumberOfItemsInSection(id int64, collectionView unsafe.Pointer, section C.int) C.int {
 	delegate := resources.Get(id).(*CollectionViewDataSource)
 	result := delegate.CollectionView_NumberOfItemsInSection(MakeCollectionView(collectionView), int(section))
 	return C.int(result)
 }
 
-//export CollectionViewDataSource_CollectionView_ItemForRepresentedObjectAtIndexPath
-func CollectionViewDataSource_CollectionView_ItemForRepresentedObjectAtIndexPath(id int64, collectionView unsafe.Pointer, indexPath unsafe.Pointer) unsafe.Pointer {
+//export collectionViewDataSource_CollectionView_ItemForRepresentedObjectAtIndexPath
+func collectionViewDataSource_CollectionView_ItemForRepresentedObjectAtIndexPath(id int64, collectionView unsafe.Pointer, indexPath unsafe.Pointer) unsafe.Pointer {
 	delegate := resources.Get(id).(*CollectionViewDataSource)
 	result := delegate.CollectionView_ItemForRepresentedObjectAtIndexPath(MakeCollectionView(collectionView), foundation.MakeIndexPath(indexPath))
 	return objc.ExtractPtr(result)
 }
 
-//export CollectionViewDataSource_CollectionView_ViewForSupplementaryElementOfKind_AtIndexPath
-func CollectionViewDataSource_CollectionView_ViewForSupplementaryElementOfKind_AtIndexPath(id int64, collectionView unsafe.Pointer, kind unsafe.Pointer, indexPath unsafe.Pointer) unsafe.Pointer {
+//export collectionViewDataSource_CollectionView_ViewForSupplementaryElementOfKind_AtIndexPath
+func collectionViewDataSource_CollectionView_ViewForSupplementaryElementOfKind_AtIndexPath(id int64, collectionView unsafe.Pointer, kind unsafe.Pointer, indexPath unsafe.Pointer) unsafe.Pointer {
 	delegate := resources.Get(id).(*CollectionViewDataSource)
 	result := delegate.CollectionView_ViewForSupplementaryElementOfKind_AtIndexPath(MakeCollectionView(collectionView), CollectionViewSupplementaryElementKind(foundation.MakeString(kind).String()), foundation.MakeIndexPath(indexPath))
 	return objc.ExtractPtr(result)
