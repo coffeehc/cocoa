@@ -8,8 +8,8 @@ import (
 )
 
 type ViewControllerPresentationAnimator struct {
-	AnimatePresentationOfViewController_FromViewController func(viewController ViewController, fromViewController ViewController)
-	AnimateDismissalOfViewController_FromViewController    func(viewController ViewController, fromViewController ViewController)
+	AnimatePresentationOfViewController_FromViewController func(viewController ViewController, fromViewController ViewController) // required
+	AnimateDismissalOfViewController_FromViewController    func(viewController ViewController, fromViewController ViewController) // required
 }
 
 func WrapViewControllerPresentationAnimator(delegate *ViewControllerPresentationAnimator) objc.Object {

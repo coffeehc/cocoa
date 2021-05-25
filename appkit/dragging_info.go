@@ -10,8 +10,8 @@ import (
 )
 
 type DraggingInfo struct {
-	SlideDraggedImageTo func(screenPoint foundation.Point)
-	ResetSpringLoading  func()
+	SlideDraggedImageTo func(screenPoint foundation.Point) // required
+	ResetSpringLoading  func()                             // required
 }
 
 func WrapDraggingInfo(delegate *DraggingInfo) objc.Object {

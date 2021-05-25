@@ -9,8 +9,8 @@ import (
 )
 
 type AnimatablePropertyContainer struct {
-	Animator        func() objc.Object
-	AnimationForKey func(key AnimatablePropertyKey) objc.Object
+	Animator        func() objc.Object                          // required
+	AnimationForKey func(key AnimatablePropertyKey) objc.Object // required
 }
 
 func WrapAnimatablePropertyContainer(delegate *AnimatablePropertyContainer) objc.Object {

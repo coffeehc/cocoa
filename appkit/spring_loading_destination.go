@@ -8,8 +8,8 @@ import (
 )
 
 type SpringLoadingDestination struct {
-	SpringLoadingActivated_DraggingInfo func(activated bool, draggingInfo objc.Object)
-	SpringLoadingHighlightChanged       func(draggingInfo objc.Object)
+	SpringLoadingActivated_DraggingInfo func(activated bool, draggingInfo objc.Object) // required
+	SpringLoadingHighlightChanged       func(draggingInfo objc.Object)                 // required
 	SpringLoadingEntered                func(draggingInfo objc.Object) SpringLoadingOptions
 	SpringLoadingUpdated                func(draggingInfo objc.Object) SpringLoadingOptions
 	SpringLoadingExited                 func(draggingInfo objc.Object)

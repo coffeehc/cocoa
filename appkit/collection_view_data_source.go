@@ -10,8 +10,8 @@ import (
 
 type CollectionViewDataSource struct {
 	NumberOfSectionsInCollectionView                             func(collectionView CollectionView) int
-	CollectionView_NumberOfItemsInSection                        func(collectionView CollectionView, section int) int
-	CollectionView_ItemForRepresentedObjectAtIndexPath           func(collectionView CollectionView, indexPath foundation.IndexPath) CollectionViewItem
+	CollectionView_NumberOfItemsInSection                        func(collectionView CollectionView, section int) int                                   // required
+	CollectionView_ItemForRepresentedObjectAtIndexPath           func(collectionView CollectionView, indexPath foundation.IndexPath) CollectionViewItem // required
 	CollectionView_ViewForSupplementaryElementOfKind_AtIndexPath func(collectionView CollectionView, kind CollectionViewSupplementaryElementKind, indexPath foundation.IndexPath) View
 }
 

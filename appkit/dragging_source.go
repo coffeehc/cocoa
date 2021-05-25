@@ -10,7 +10,7 @@ import (
 )
 
 type DraggingSource struct {
-	DraggingSession_SourceOperationMaskForDraggingContext func(session DraggingSession, context DraggingContext) DragOperation
+	DraggingSession_SourceOperationMaskForDraggingContext func(session DraggingSession, context DraggingContext) DragOperation // required
 	DraggingSession_EndedAtPoint_Operation                func(session DraggingSession, screenPoint foundation.Point, operation DragOperation)
 	DraggingSession_MovedToPoint                          func(session DraggingSession, screenPoint foundation.Point)
 	DraggingSession_WillBeginAtPoint                      func(session DraggingSession, screenPoint foundation.Point)
