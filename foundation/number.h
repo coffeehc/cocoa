@@ -21,7 +21,6 @@ void* C_NSNumber_DescriptionWithLocale(void* ptr, void* locale);
 int C_NSNumber_Compare(void* ptr, void* otherNumber);
 bool C_NSNumber_IsEqualToNumber(void* ptr, void* number);
 bool C_NSNumber_BoolValue(void* ptr);
-NSDecimal C_NSNumber_DecimalValue(void* ptr);
 double C_NSNumber_DoubleValue(void* ptr);
 float C_NSNumber_FloatValue(void* ptr);
 int C_NSNumber_IntegerValue(void* ptr);

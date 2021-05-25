@@ -18,7 +18,6 @@ type Number interface {
 	Compare(otherNumber Number) ComparisonResult
 	IsEqualToNumber(number Number) bool
 	BoolValue() bool
-	DecimalValue() Decimal
 	DoubleValue() float64
 	FloatValue() float32
 	IntegerValue() int
@@ -121,11 +120,6 @@ func (n *NSNumber) IsEqualToNumber(number Number) bool {
 func (n *NSNumber) BoolValue() bool {
 	result_ := C.C_NSNumber_BoolValue(n.Ptr())
 	return bool(result_)
-}
-
-func (n *NSNumber) DecimalValue() Decimal {
-	result_ := C.C_NSNumber_DecimalValue(n.Ptr())
-	return FromNSDecimalPointer(unsafe.Pointer(&result_))
 }
 
 func (n *NSNumber) DoubleValue() float64 {
