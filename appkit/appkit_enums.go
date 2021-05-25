@@ -226,3 +226,15 @@ type MatrixMode uint
 type TableRowActionEdge int
 
 type TableViewRowActionStyle int
+
+type AnimatablePropertyKey string
+
+type AnimationProgress float32
+
+type AnimationBlockingMode uint
+
+type AnimationCurve uint
+
+type DraggingContext int
+
+type SpringLoadingOptions uint
