@@ -238,3 +238,10 @@ type AnimationCurve uint
 type DraggingContext int
 
 type SpringLoadingOptions uint
+
+type AlertStyle uint
+
+type ColorPanelMode int
+type ColorPanelOptions uint
+type FontPanelModeMask uint
+type FontAction uint
