@@ -73,7 +73,6 @@ type Document interface {
 	WindowNibName() NibName
 	WindowForSheet() Window
 	DisplayName() string
-	SetDisplayName(value string)
 	AutosavedContentsFileURL() foundation.URL
 	SetAutosavedContentsFileURL(value foundation.URL)
 	AutosavingFileType() string
@@ -442,10 +441,6 @@ func (n *NSDocument) WindowForSheet() Window {
 func (n *NSDocument) DisplayName() string {
 	result_ := C.C_NSDocument_DisplayName(n.Ptr())
 	return foundation.MakeString(result_).String()
-}
-
-func (n *NSDocument) SetDisplayName(value string) {
-	C.C_NSDocument_SetDisplayName(n.Ptr(), foundation.NewString(value).Ptr())
 }
 
 func Document_AutosavesInPlace() bool {

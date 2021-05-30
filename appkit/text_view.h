@@ -120,6 +120,7 @@ bool C_NSTextView_DisplaysLinkToolTips(void* ptr);
 void C_NSTextView_SetDisplaysLinkToolTips(void* ptr, bool value);
 bool C_NSTextView_UsesRuler(void* ptr);
 void C_NSTextView_SetUsesRuler(void* ptr, bool value);
+void C_NSTextView_SetRulerVisible(void* ptr, bool value);
 bool C_NSTextView_UsesInspectorBar(void* ptr);
 void C_NSTextView_SetUsesInspectorBar(void* ptr, bool value);
 Array C_NSTextView_SelectedRanges(void* ptr);

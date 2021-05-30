@@ -28,6 +28,7 @@ unsigned int C_NSButtonCell_ImagePosition(void* ptr);
 void C_NSButtonCell_SetImagePosition(void* ptr, unsigned int value);
 unsigned int C_NSButtonCell_ImageScaling(void* ptr);
 void C_NSButtonCell_SetImageScaling(void* ptr, unsigned int value);
+void C_NSButtonCell_SetKeyEquivalent(void* ptr, void* value);
 unsigned int C_NSButtonCell_KeyEquivalentModifierMask(void* ptr);
 void C_NSButtonCell_SetKeyEquivalentModifierMask(void* ptr, unsigned int value);
 void* C_NSButtonCell_BackgroundColor(void* ptr);

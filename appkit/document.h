@@ -73,7 +73,6 @@ Array C_NSDocument_WindowControllers(void* ptr);
 void* C_NSDocument_WindowNibName(void* ptr);
 void* C_NSDocument_WindowForSheet(void* ptr);
 void* C_NSDocument_DisplayName(void* ptr);
-void C_NSDocument_SetDisplayName(void* ptr, void* value);
 bool C_NSDocument_Document_AutosavesInPlace();
 bool C_NSDocument_Document_AutosavesDrafts();
 bool C_NSDocument_Document_PreservesVersions();

@@ -24,7 +24,6 @@ type Scroller interface {
 	KnobStyle() ScrollerKnobStyle
 	SetKnobStyle(value ScrollerKnobStyle)
 	KnobProportion() coregraphics.Float
-	SetKnobProportion(value coregraphics.Float)
 }
 
 type NSScroller struct {
@@ -126,10 +125,6 @@ func (n *NSScroller) SetKnobStyle(value ScrollerKnobStyle) {
 func (n *NSScroller) KnobProportion() coregraphics.Float {
 	result_ := C.C_NSScroller_KnobProportion(n.Ptr())
 	return coregraphics.Float(float64(result_))
-}
-
-func (n *NSScroller) SetKnobProportion(value coregraphics.Float) {
-	C.C_NSScroller_SetKnobProportion(n.Ptr(), C.double(float64(value)))
 }
 
 func Scroller_CompatibleWithOverlayScrollers() bool {

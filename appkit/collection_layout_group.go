@@ -12,6 +12,7 @@ type CollectionLayoutGroup interface {
 	CollectionLayoutItem
 	VisualDescription() string
 	Subitems() []CollectionLayoutItem
+	SetSupplementaryItems(value []CollectionLayoutSupplementaryItem)
 	InterItemSpacing() CollectionLayoutSpacing
 	SetInterItemSpacing(value CollectionLayoutSpacing)
 }
@@ -77,6 +78,15 @@ func (n *NSCollectionLayoutGroup) Subitems() []CollectionLayoutItem {
 		goResult_[idx] = MakeCollectionLayoutItem(r)
 	}
 	return goResult_
+}
+
+func (n *NSCollectionLayoutGroup) SetSupplementaryItems(value []CollectionLayoutSupplementaryItem) {
+	cValueData := make([]unsafe.Pointer, len(value))
+	for idx, v := range value {
+		cValueData[idx] = objc.ExtractPtr(v)
+	}
+	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
+	C.C_NSCollectionLayoutGroup_SetSupplementaryItems(n.Ptr(), cValue)
 }
 
 func (n *NSCollectionLayoutGroup) InterItemSpacing() CollectionLayoutSpacing {

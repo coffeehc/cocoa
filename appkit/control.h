@@ -65,6 +65,7 @@ void* C_NSControl_Target(void* ptr);
 void C_NSControl_SetTarget(void* ptr, void* value);
 bool C_NSControl_IsContinuous(void* ptr);
 void C_NSControl_SetContinuous(void* ptr, bool value);
+void C_NSControl_SetTag(void* ptr, int value);
 bool C_NSControl_RefusesFirstResponder(void* ptr);
 void C_NSControl_SetRefusesFirstResponder(void* ptr, bool value);
 bool C_NSControl_IgnoresMultiClick(void* ptr);

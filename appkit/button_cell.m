@@ -131,6 +131,11 @@ void C_NSButtonCell_SetImageScaling(void* ptr, unsigned int value) {
     [nSButtonCell setImageScaling:value];
 }
 
+void C_NSButtonCell_SetKeyEquivalent(void* ptr, void* value) {
+    NSButtonCell* nSButtonCell = (NSButtonCell*)ptr;
+    [nSButtonCell setKeyEquivalent:(NSString*)value];
+}
+
 unsigned int C_NSButtonCell_KeyEquivalentModifierMask(void* ptr) {
     NSButtonCell* nSButtonCell = (NSButtonCell*)ptr;
     NSEventModifierFlags result_ = [nSButtonCell keyEquivalentModifierMask];

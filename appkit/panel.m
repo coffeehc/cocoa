@@ -23,6 +23,11 @@ void* C_NSPanel_Init(void* ptr) {
     return result_;
 }
 
+void C_NSPanel_SetFloatingPanel(void* ptr, bool value) {
+    NSPanel* nSPanel = (NSPanel*)ptr;
+    [nSPanel setFloatingPanel:value];
+}
+
 bool C_NSPanel_BecomesKeyOnlyIfNeeded(void* ptr) {
     NSPanel* nSPanel = (NSPanel*)ptr;
     BOOL result_ = [nSPanel becomesKeyOnlyIfNeeded];
@@ -32,4 +37,9 @@ bool C_NSPanel_BecomesKeyOnlyIfNeeded(void* ptr) {
 void C_NSPanel_SetBecomesKeyOnlyIfNeeded(void* ptr, bool value) {
     NSPanel* nSPanel = (NSPanel*)ptr;
     [nSPanel setBecomesKeyOnlyIfNeeded:value];
+}
+
+void C_NSPanel_SetWorksWhenModal(void* ptr, bool value) {
+    NSPanel* nSPanel = (NSPanel*)ptr;
+    [nSPanel setWorksWhenModal:value];
 }

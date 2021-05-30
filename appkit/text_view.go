@@ -117,6 +117,7 @@ type TextView interface {
 	SetDisplaysLinkToolTips(value bool)
 	UsesRuler() bool
 	SetUsesRuler(value bool)
+	SetRulerVisible(value bool)
 	UsesInspectorBar() bool
 	SetUsesInspectorBar(value bool)
 	SelectedRanges() []foundation.Value
@@ -724,6 +725,10 @@ func (n *NSTextView) UsesRuler() bool {
 
 func (n *NSTextView) SetUsesRuler(value bool) {
 	C.C_NSTextView_SetUsesRuler(n.Ptr(), C.bool(value))
+}
+
+func (n *NSTextView) SetRulerVisible(value bool) {
+	C.C_NSTextView_SetRulerVisible(n.Ptr(), C.bool(value))
 }
 
 func (n *NSTextView) UsesInspectorBar() bool {

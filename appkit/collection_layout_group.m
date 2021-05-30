@@ -58,6 +58,17 @@ Array C_NSCollectionLayoutGroup_Subitems(void* ptr) {
     return result_Array;
 }
 
+void C_NSCollectionLayoutGroup_SetSupplementaryItems(void* ptr, Array value) {
+    NSCollectionLayoutGroup* nSCollectionLayoutGroup = (NSCollectionLayoutGroup*)ptr;
+    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    void** valueData = (void**)value.data;
+    for (int i = 0; i < value.len; i++) {
+    	void* p = valueData[i];
+    	[objcValue addObject:(NSCollectionLayoutSupplementaryItem*)(NSCollectionLayoutSupplementaryItem*)p];
+    }
+    [nSCollectionLayoutGroup setSupplementaryItems:objcValue];
+}
+
 void* C_NSCollectionLayoutGroup_InterItemSpacing(void* ptr) {
     NSCollectionLayoutGroup* nSCollectionLayoutGroup = (NSCollectionLayoutGroup*)ptr;
     NSCollectionLayoutSpacing* result_ = [nSCollectionLayoutGroup interItemSpacing];

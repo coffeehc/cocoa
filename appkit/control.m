@@ -332,6 +332,11 @@ void C_NSControl_SetContinuous(void* ptr, bool value) {
     [nSControl setContinuous:value];
 }
 
+void C_NSControl_SetTag(void* ptr, int value) {
+    NSControl* nSControl = (NSControl*)ptr;
+    [nSControl setTag:value];
+}
+
 bool C_NSControl_RefusesFirstResponder(void* ptr) {
     NSControl* nSControl = (NSControl*)ptr;
     BOOL result_ = [nSControl refusesFirstResponder];

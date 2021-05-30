@@ -30,6 +30,7 @@ type ButtonCell interface {
 	SetImagePosition(value CellImagePosition)
 	ImageScaling() ImageScaling
 	SetImageScaling(value ImageScaling)
+	SetKeyEquivalent(value string)
 	KeyEquivalentModifierMask() EventModifierFlags
 	SetKeyEquivalentModifierMask(value EventModifierFlags)
 	BackgroundColor() Color
@@ -168,6 +169,10 @@ func (n *NSButtonCell) ImageScaling() ImageScaling {
 
 func (n *NSButtonCell) SetImageScaling(value ImageScaling) {
 	C.C_NSButtonCell_SetImageScaling(n.Ptr(), C.uint(uint(value)))
+}
+
+func (n *NSButtonCell) SetKeyEquivalent(value string) {
+	C.C_NSButtonCell_SetKeyEquivalent(n.Ptr(), foundation.NewString(value).Ptr())
 }
 
 func (n *NSButtonCell) KeyEquivalentModifierMask() EventModifierFlags {

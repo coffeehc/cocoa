@@ -68,6 +68,7 @@ type Control interface {
 	SetTarget(value objc.Object)
 	IsContinuous() bool
 	SetContinuous(value bool)
+	SetTag(value int)
 	RefusesFirstResponder() bool
 	SetRefusesFirstResponder(value bool)
 	IgnoresMultiClick() bool
@@ -358,6 +359,10 @@ func (n *NSControl) IsContinuous() bool {
 
 func (n *NSControl) SetContinuous(value bool) {
 	C.C_NSControl_SetContinuous(n.Ptr(), C.bool(value))
+}
+
+func (n *NSControl) SetTag(value int) {
+	C.C_NSControl_SetTag(n.Ptr(), C.int(value))
 }
 
 func (n *NSControl) RefusesFirstResponder() bool {

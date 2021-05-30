@@ -105,11 +105,6 @@ double C_NSScroller_KnobProportion(void* ptr) {
     return result_;
 }
 
-void C_NSScroller_SetKnobProportion(void* ptr, double value) {
-    NSScroller* nSScroller = (NSScroller*)ptr;
-    [nSScroller setKnobProportion:value];
-}
-
 bool C_NSScroller_Scroller_CompatibleWithOverlayScrollers() {
     BOOL result_ = [NSScroller compatibleWithOverlayScrollers];
     return result_;

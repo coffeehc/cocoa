@@ -664,6 +664,11 @@ void C_NSTextView_SetUsesRuler(void* ptr, bool value) {
     [nSTextView setUsesRuler:value];
 }
 
+void C_NSTextView_SetRulerVisible(void* ptr, bool value) {
+    NSTextView* nSTextView = (NSTextView*)ptr;
+    [nSTextView setRulerVisible:value];
+}
+
 bool C_NSTextView_UsesInspectorBar(void* ptr) {
     NSTextView* nSTextView = (NSTextView*)ptr;
     BOOL result_ = [nSTextView usesInspectorBar];

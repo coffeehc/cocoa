@@ -408,11 +408,6 @@ void* C_NSDocument_DisplayName(void* ptr) {
     return result_;
 }
 
-void C_NSDocument_SetDisplayName(void* ptr, void* value) {
-    NSDocument* nSDocument = (NSDocument*)ptr;
-    [nSDocument setDisplayName:(NSString*)value];
-}
-
 bool C_NSDocument_Document_AutosavesInPlace() {
     BOOL result_ = [NSDocument autosavesInPlace];
     return result_;
