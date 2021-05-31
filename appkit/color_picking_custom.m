@@ -10,7 +10,7 @@
 }
 
 - (NSColorPanelMode)currentMode {
-    int result_ = colorPickingCustom_CurrentMode([self goID], );
+    int result_ = colorPickingCustom_CurrentMode([self goID]);
     return result_;
 }
 
@@ -38,17 +38,17 @@
 }
 
 - (NSImage*)provideNewButtonImage {
-    void* result_ = colorPickingCustom_ProvideNewButtonImage([self goID], );
+    void* result_ = colorPickingCustom_ProvideNewButtonImage([self goID]);
     return (NSImage*)result_;
 }
 
 - (NSSize)minContentSize {
-    CGSize result_ = colorPickingCustom_MinContentSize([self goID], );
+    CGSize result_ = colorPickingCustom_MinContentSize([self goID]);
     return result_;
 }
 
 - (NSString*)buttonToolTip {
-    void* result_ = colorPickingCustom_ButtonToolTip([self goID], );
+    void* result_ = colorPickingCustom_ButtonToolTip([self goID]);
     return (NSString*)result_;
 }
 

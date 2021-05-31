@@ -52,11 +52,6 @@ func (n *NSFontPanel) Init() FontPanel {
 	return MakeFontPanel(result_)
 }
 
-func (n *NSFontPanel) InitWithCoder(coder foundation.Coder) FontPanel {
-	result_ := C.C_NSFontPanel_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeFontPanel(result_)
-}
-
 func (n *NSFontPanel) ReloadDefaultFontFamilies() {
 	C.C_NSFontPanel_ReloadDefaultFontFamilies(n.Ptr())
 }

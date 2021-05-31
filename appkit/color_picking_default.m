@@ -19,17 +19,17 @@
 }
 
 - (NSImage*)provideNewButtonImage {
-    void* result_ = colorPickingDefault_ProvideNewButtonImage([self goID], );
+    void* result_ = colorPickingDefault_ProvideNewButtonImage([self goID]);
     return (NSImage*)result_;
 }
 
 - (NSSize)minContentSize {
-    CGSize result_ = colorPickingDefault_MinContentSize([self goID], );
+    CGSize result_ = colorPickingDefault_MinContentSize([self goID]);
     return result_;
 }
 
 - (NSString*)buttonToolTip {
-    void* result_ = colorPickingDefault_ButtonToolTip([self goID], );
+    void* result_ = colorPickingDefault_ButtonToolTip([self goID]);
     return (NSString*)result_;
 }
 

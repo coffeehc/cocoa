@@ -23,12 +23,6 @@ void* C_NSFontPanel_Init(void* ptr) {
     return result_;
 }
 
-void* C_NSFontPanel_InitWithCoder(void* ptr, void* coder) {
-    NSFontPanel* nSFontPanel = (NSFontPanel*)ptr;
-    NSFontPanel* result_ = [nSFontPanel initWithCoder:(NSCoder*)coder];
-    return result_;
-}
-
 void C_NSFontPanel_ReloadDefaultFontFamilies(void* ptr) {
     NSFontPanel* nSFontPanel = (NSFontPanel*)ptr;
     [nSFontPanel reloadDefaultFontFamilies];

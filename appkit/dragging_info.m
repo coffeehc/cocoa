@@ -10,7 +10,7 @@
 }
 
 - (void)resetSpringLoading {
-    draggingInfo_ResetSpringLoading([self goID], );
+    draggingInfo_ResetSpringLoading([self goID]);
 }
 
 

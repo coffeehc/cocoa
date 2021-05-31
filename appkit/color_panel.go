@@ -60,11 +60,6 @@ func (n *NSColorPanel) Init() ColorPanel {
 	return MakeColorPanel(result_)
 }
 
-func (n *NSColorPanel) InitWithCoder(coder foundation.Coder) ColorPanel {
-	result_ := C.C_NSColorPanel_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeColorPanel(result_)
-}
-
 func ColorPanel_SetPickerMode(mode ColorPanelMode) {
 	C.C_NSColorPanel_ColorPanel_SetPickerMode(C.int(int(mode)))
 }

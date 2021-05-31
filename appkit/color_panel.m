@@ -23,12 +23,6 @@ void* C_NSColorPanel_Init(void* ptr) {
     return result_;
 }
 
-void* C_NSColorPanel_InitWithCoder(void* ptr, void* coder) {
-    NSColorPanel* nSColorPanel = (NSColorPanel*)ptr;
-    NSColorPanel* result_ = [nSColorPanel initWithCoder:(NSCoder*)coder];
-    return result_;
-}
-
 void C_NSColorPanel_ColorPanel_SetPickerMode(int mode) {
     [NSColorPanel setPickerMode:mode];
 }

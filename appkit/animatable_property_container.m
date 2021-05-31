@@ -6,7 +6,7 @@
 
 
 - (NSObject*)animator {
-    void* result_ = animatablePropertyContainer_Animator([self goID], );
+    void* result_ = animatablePropertyContainer_Animator([self goID]);
     return (NSObject*)result_;
 }
 

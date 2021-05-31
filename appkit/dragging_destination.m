@@ -11,7 +11,7 @@
 }
 
 - (BOOL)wantsPeriodicDraggingUpdates {
-    bool result_ = draggingDestination_WantsPeriodicDraggingUpdates([self goID], );
+    bool result_ = draggingDestination_WantsPeriodicDraggingUpdates([self goID]);
     return result_;
 }
 
