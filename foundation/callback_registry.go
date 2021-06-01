@@ -60,14 +60,14 @@ func (r *ResourceRegistry) Store(id int64, obj interface{}) {
 
 }
 
-// Store get resource by id
+// Get get resource by id
 func (r *ResourceRegistry) Get(id int64) interface{} {
 	r.lock.RLock()
 	defer r.lock.RUnlock()
 	return r.resources[id]
 }
 
-// Store delete resource by id
+// Delete delete resource by id
 func (r *ResourceRegistry) Delete(id int64) interface{} {
 	r.lock.Lock()
 	defer r.lock.Unlock()
