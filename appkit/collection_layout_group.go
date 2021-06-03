@@ -21,16 +21,13 @@ type NSCollectionLayoutGroup struct {
 	NSCollectionLayoutItem
 }
 
-func MakeCollectionLayoutGroup(ptr unsafe.Pointer) *NSCollectionLayoutGroup {
-	if ptr == nil {
-		return nil
-	}
-	return &NSCollectionLayoutGroup{
-		NSCollectionLayoutItem: *MakeCollectionLayoutItem(ptr),
+func MakeCollectionLayoutGroup(ptr unsafe.Pointer) NSCollectionLayoutGroup {
+	return NSCollectionLayoutGroup{
+		NSCollectionLayoutItem: MakeCollectionLayoutItem(ptr),
 	}
 }
 
-func AllocCollectionLayoutGroup() *NSCollectionLayoutGroup {
+func AllocCollectionLayoutGroup() NSCollectionLayoutGroup {
 	return MakeCollectionLayoutGroup(C.C_CollectionLayoutGroup_Alloc())
 }
 
@@ -64,12 +61,12 @@ func CollectionLayoutGroup_VerticalGroupWithLayoutSize_Subitem_Count(layoutSize 
 	return MakeCollectionLayoutGroup(result_)
 }
 
-func (n *NSCollectionLayoutGroup) VisualDescription() string {
+func (n NSCollectionLayoutGroup) VisualDescription() string {
 	result_ := C.C_NSCollectionLayoutGroup_VisualDescription(n.Ptr())
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSCollectionLayoutGroup) Subitems() []CollectionLayoutItem {
+func (n NSCollectionLayoutGroup) Subitems() []CollectionLayoutItem {
 	result_ := C.C_NSCollectionLayoutGroup_Subitems(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -80,7 +77,7 @@ func (n *NSCollectionLayoutGroup) Subitems() []CollectionLayoutItem {
 	return goResult_
 }
 
-func (n *NSCollectionLayoutGroup) SetSupplementaryItems(value []CollectionLayoutSupplementaryItem) {
+func (n NSCollectionLayoutGroup) SetSupplementaryItems(value []CollectionLayoutSupplementaryItem) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = objc.ExtractPtr(v)
@@ -89,11 +86,11 @@ func (n *NSCollectionLayoutGroup) SetSupplementaryItems(value []CollectionLayout
 	C.C_NSCollectionLayoutGroup_SetSupplementaryItems(n.Ptr(), cValue)
 }
 
-func (n *NSCollectionLayoutGroup) InterItemSpacing() CollectionLayoutSpacing {
+func (n NSCollectionLayoutGroup) InterItemSpacing() CollectionLayoutSpacing {
 	result_ := C.C_NSCollectionLayoutGroup_InterItemSpacing(n.Ptr())
 	return MakeCollectionLayoutSpacing(result_)
 }
 
-func (n *NSCollectionLayoutGroup) SetInterItemSpacing(value CollectionLayoutSpacing) {
+func (n NSCollectionLayoutGroup) SetInterItemSpacing(value CollectionLayoutSpacing) {
 	C.C_NSCollectionLayoutGroup_SetInterItemSpacing(n.Ptr(), objc.ExtractPtr(value))
 }

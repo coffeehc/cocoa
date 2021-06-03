@@ -21,20 +21,17 @@ type NSPrinter struct {
 	objc.NSObject
 }
 
-func MakePrinter(ptr unsafe.Pointer) *NSPrinter {
-	if ptr == nil {
-		return nil
-	}
-	return &NSPrinter{
-		NSObject: *objc.MakeObject(ptr),
+func MakePrinter(ptr unsafe.Pointer) NSPrinter {
+	return NSPrinter{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocPrinter() *NSPrinter {
+func AllocPrinter() NSPrinter {
 	return MakePrinter(C.C_Printer_Alloc())
 }
 
-func (n *NSPrinter) Init() Printer {
+func (n NSPrinter) Init() Printer {
 	result_ := C.C_NSPrinter_Init(n.Ptr())
 	return MakePrinter(result_)
 }
@@ -49,7 +46,7 @@ func PrinterWithType(_type PrinterTypeName) Printer {
 	return MakePrinter(result_)
 }
 
-func (n *NSPrinter) PageSizeForPaper(paperName PrinterPaperName) foundation.Size {
+func (n NSPrinter) PageSizeForPaper(paperName PrinterPaperName) foundation.Size {
 	result_ := C.C_NSPrinter_PageSizeForPaper(n.Ptr(), foundation.NewString(string(paperName)).Ptr())
 	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
@@ -76,17 +73,17 @@ func PrinterTypes() []PrinterTypeName {
 	return goResult_
 }
 
-func (n *NSPrinter) Name() string {
+func (n NSPrinter) Name() string {
 	result_ := C.C_NSPrinter_Name(n.Ptr())
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSPrinter) Type() PrinterTypeName {
+func (n NSPrinter) Type() PrinterTypeName {
 	result_ := C.C_NSPrinter_Type(n.Ptr())
 	return PrinterTypeName(foundation.MakeString(result_).String())
 }
 
-func (n *NSPrinter) LanguageLevel() int {
+func (n NSPrinter) LanguageLevel() int {
 	result_ := C.C_NSPrinter_LanguageLevel(n.Ptr())
 	return int(result_)
 }

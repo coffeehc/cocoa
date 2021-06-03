@@ -126,7 +126,7 @@ func colorPickingCustom_DetachColorList(id int64, colorList unsafe.Pointer) {
 
 //export ColorPickingCustom_RespondsTo
 func ColorPickingCustom_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
-	sel := objc.MakeSelector(selectorPtr)
+	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
 	delegate := resources.Get(id).(*ColorPickingCustom)
 	switch selName {

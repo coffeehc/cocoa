@@ -36,7 +36,7 @@ func animatablePropertyContainer_AnimationForKey(id int64, key unsafe.Pointer) u
 
 //export AnimatablePropertyContainer_RespondsTo
 func AnimatablePropertyContainer_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
-	sel := objc.MakeSelector(selectorPtr)
+	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
 	delegate := resources.Get(id).(*AnimatablePropertyContainer)
 	switch selName {

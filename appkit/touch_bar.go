@@ -35,53 +35,50 @@ type NSTouchBar struct {
 	objc.NSObject
 }
 
-func MakeTouchBar(ptr unsafe.Pointer) *NSTouchBar {
-	if ptr == nil {
-		return nil
-	}
-	return &NSTouchBar{
-		NSObject: *objc.MakeObject(ptr),
+func MakeTouchBar(ptr unsafe.Pointer) NSTouchBar {
+	return NSTouchBar{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocTouchBar() *NSTouchBar {
+func AllocTouchBar() NSTouchBar {
 	return MakeTouchBar(C.C_TouchBar_Alloc())
 }
 
-func (n *NSTouchBar) Init() TouchBar {
+func (n NSTouchBar) Init() TouchBar {
 	result_ := C.C_NSTouchBar_Init(n.Ptr())
 	return MakeTouchBar(result_)
 }
 
-func (n *NSTouchBar) InitWithCoder(coder foundation.Coder) TouchBar {
+func (n NSTouchBar) InitWithCoder(coder foundation.Coder) TouchBar {
 	result_ := C.C_NSTouchBar_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeTouchBar(result_)
 }
 
-func (n *NSTouchBar) ItemForIdentifier(identifier TouchBarItemIdentifier) TouchBarItem {
+func (n NSTouchBar) ItemForIdentifier(identifier TouchBarItemIdentifier) TouchBarItem {
 	result_ := C.C_NSTouchBar_ItemForIdentifier(n.Ptr(), foundation.NewString(string(identifier)).Ptr())
 	return MakeTouchBarItem(result_)
 }
 
-func (n *NSTouchBar) Delegate() objc.Object {
+func (n NSTouchBar) Delegate() objc.Object {
 	result_ := C.C_NSTouchBar_Delegate(n.Ptr())
 	return objc.MakeObject(result_)
 }
 
-func (n *NSTouchBar) SetDelegate(value objc.Object) {
+func (n NSTouchBar) SetDelegate(value objc.Object) {
 	C.C_NSTouchBar_SetDelegate(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (n *NSTouchBar) TemplateItems() foundation.Set {
+func (n NSTouchBar) TemplateItems() foundation.Set {
 	result_ := C.C_NSTouchBar_TemplateItems(n.Ptr())
 	return foundation.MakeSet(result_)
 }
 
-func (n *NSTouchBar) SetTemplateItems(value foundation.Set) {
+func (n NSTouchBar) SetTemplateItems(value foundation.Set) {
 	C.C_NSTouchBar_SetTemplateItems(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (n *NSTouchBar) DefaultItemIdentifiers() []TouchBarItemIdentifier {
+func (n NSTouchBar) DefaultItemIdentifiers() []TouchBarItemIdentifier {
 	result_ := C.C_NSTouchBar_DefaultItemIdentifiers(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -92,7 +89,7 @@ func (n *NSTouchBar) DefaultItemIdentifiers() []TouchBarItemIdentifier {
 	return goResult_
 }
 
-func (n *NSTouchBar) SetDefaultItemIdentifiers(value []TouchBarItemIdentifier) {
+func (n NSTouchBar) SetDefaultItemIdentifiers(value []TouchBarItemIdentifier) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = foundation.NewString(string(v)).Ptr()
@@ -101,30 +98,30 @@ func (n *NSTouchBar) SetDefaultItemIdentifiers(value []TouchBarItemIdentifier) {
 	C.C_NSTouchBar_SetDefaultItemIdentifiers(n.Ptr(), cValue)
 }
 
-func (n *NSTouchBar) PrincipalItemIdentifier() TouchBarItemIdentifier {
+func (n NSTouchBar) PrincipalItemIdentifier() TouchBarItemIdentifier {
 	result_ := C.C_NSTouchBar_PrincipalItemIdentifier(n.Ptr())
 	return TouchBarItemIdentifier(foundation.MakeString(result_).String())
 }
 
-func (n *NSTouchBar) SetPrincipalItemIdentifier(value TouchBarItemIdentifier) {
+func (n NSTouchBar) SetPrincipalItemIdentifier(value TouchBarItemIdentifier) {
 	C.C_NSTouchBar_SetPrincipalItemIdentifier(n.Ptr(), foundation.NewString(string(value)).Ptr())
 }
 
-func (n *NSTouchBar) EscapeKeyReplacementItemIdentifier() TouchBarItemIdentifier {
+func (n NSTouchBar) EscapeKeyReplacementItemIdentifier() TouchBarItemIdentifier {
 	result_ := C.C_NSTouchBar_EscapeKeyReplacementItemIdentifier(n.Ptr())
 	return TouchBarItemIdentifier(foundation.MakeString(result_).String())
 }
 
-func (n *NSTouchBar) SetEscapeKeyReplacementItemIdentifier(value TouchBarItemIdentifier) {
+func (n NSTouchBar) SetEscapeKeyReplacementItemIdentifier(value TouchBarItemIdentifier) {
 	C.C_NSTouchBar_SetEscapeKeyReplacementItemIdentifier(n.Ptr(), foundation.NewString(string(value)).Ptr())
 }
 
-func (n *NSTouchBar) IsVisible() bool {
+func (n NSTouchBar) IsVisible() bool {
 	result_ := C.C_NSTouchBar_IsVisible(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTouchBar) ItemIdentifiers() []TouchBarItemIdentifier {
+func (n NSTouchBar) ItemIdentifiers() []TouchBarItemIdentifier {
 	result_ := C.C_NSTouchBar_ItemIdentifiers(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -135,16 +132,16 @@ func (n *NSTouchBar) ItemIdentifiers() []TouchBarItemIdentifier {
 	return goResult_
 }
 
-func (n *NSTouchBar) CustomizationIdentifier() TouchBarCustomizationIdentifier {
+func (n NSTouchBar) CustomizationIdentifier() TouchBarCustomizationIdentifier {
 	result_ := C.C_NSTouchBar_CustomizationIdentifier(n.Ptr())
 	return TouchBarCustomizationIdentifier(foundation.MakeString(result_).String())
 }
 
-func (n *NSTouchBar) SetCustomizationIdentifier(value TouchBarCustomizationIdentifier) {
+func (n NSTouchBar) SetCustomizationIdentifier(value TouchBarCustomizationIdentifier) {
 	C.C_NSTouchBar_SetCustomizationIdentifier(n.Ptr(), foundation.NewString(string(value)).Ptr())
 }
 
-func (n *NSTouchBar) CustomizationAllowedItemIdentifiers() []TouchBarItemIdentifier {
+func (n NSTouchBar) CustomizationAllowedItemIdentifiers() []TouchBarItemIdentifier {
 	result_ := C.C_NSTouchBar_CustomizationAllowedItemIdentifiers(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -155,7 +152,7 @@ func (n *NSTouchBar) CustomizationAllowedItemIdentifiers() []TouchBarItemIdentif
 	return goResult_
 }
 
-func (n *NSTouchBar) SetCustomizationAllowedItemIdentifiers(value []TouchBarItemIdentifier) {
+func (n NSTouchBar) SetCustomizationAllowedItemIdentifiers(value []TouchBarItemIdentifier) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = foundation.NewString(string(v)).Ptr()
@@ -164,7 +161,7 @@ func (n *NSTouchBar) SetCustomizationAllowedItemIdentifiers(value []TouchBarItem
 	C.C_NSTouchBar_SetCustomizationAllowedItemIdentifiers(n.Ptr(), cValue)
 }
 
-func (n *NSTouchBar) CustomizationRequiredItemIdentifiers() []TouchBarItemIdentifier {
+func (n NSTouchBar) CustomizationRequiredItemIdentifiers() []TouchBarItemIdentifier {
 	result_ := C.C_NSTouchBar_CustomizationRequiredItemIdentifiers(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -175,7 +172,7 @@ func (n *NSTouchBar) CustomizationRequiredItemIdentifiers() []TouchBarItemIdenti
 	return goResult_
 }
 
-func (n *NSTouchBar) SetCustomizationRequiredItemIdentifiers(value []TouchBarItemIdentifier) {
+func (n NSTouchBar) SetCustomizationRequiredItemIdentifiers(value []TouchBarItemIdentifier) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = foundation.NewString(string(v)).Ptr()

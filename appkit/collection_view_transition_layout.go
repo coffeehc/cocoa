@@ -23,53 +23,50 @@ type NSCollectionViewTransitionLayout struct {
 	NSCollectionViewLayout
 }
 
-func MakeCollectionViewTransitionLayout(ptr unsafe.Pointer) *NSCollectionViewTransitionLayout {
-	if ptr == nil {
-		return nil
-	}
-	return &NSCollectionViewTransitionLayout{
-		NSCollectionViewLayout: *MakeCollectionViewLayout(ptr),
+func MakeCollectionViewTransitionLayout(ptr unsafe.Pointer) NSCollectionViewTransitionLayout {
+	return NSCollectionViewTransitionLayout{
+		NSCollectionViewLayout: MakeCollectionViewLayout(ptr),
 	}
 }
 
-func AllocCollectionViewTransitionLayout() *NSCollectionViewTransitionLayout {
+func AllocCollectionViewTransitionLayout() NSCollectionViewTransitionLayout {
 	return MakeCollectionViewTransitionLayout(C.C_CollectionViewTransitionLayout_Alloc())
 }
 
-func (n *NSCollectionViewTransitionLayout) InitWithCurrentLayout_NextLayout(currentLayout CollectionViewLayout, newLayout CollectionViewLayout) CollectionViewTransitionLayout {
+func (n NSCollectionViewTransitionLayout) InitWithCurrentLayout_NextLayout(currentLayout CollectionViewLayout, newLayout CollectionViewLayout) CollectionViewTransitionLayout {
 	result_ := C.C_NSCollectionViewTransitionLayout_InitWithCurrentLayout_NextLayout(n.Ptr(), objc.ExtractPtr(currentLayout), objc.ExtractPtr(newLayout))
 	return MakeCollectionViewTransitionLayout(result_)
 }
 
-func (n *NSCollectionViewTransitionLayout) Init() CollectionViewTransitionLayout {
+func (n NSCollectionViewTransitionLayout) Init() CollectionViewTransitionLayout {
 	result_ := C.C_NSCollectionViewTransitionLayout_Init(n.Ptr())
 	return MakeCollectionViewTransitionLayout(result_)
 }
 
-func (n *NSCollectionViewTransitionLayout) UpdateValue_ForAnimatedKey(value coregraphics.Float, key CollectionViewTransitionLayoutAnimatedKey) {
+func (n NSCollectionViewTransitionLayout) UpdateValue_ForAnimatedKey(value coregraphics.Float, key CollectionViewTransitionLayoutAnimatedKey) {
 	C.C_NSCollectionViewTransitionLayout_UpdateValue_ForAnimatedKey(n.Ptr(), C.double(float64(value)), foundation.NewString(string(key)).Ptr())
 }
 
-func (n *NSCollectionViewTransitionLayout) ValueForAnimatedKey(key CollectionViewTransitionLayoutAnimatedKey) coregraphics.Float {
+func (n NSCollectionViewTransitionLayout) ValueForAnimatedKey(key CollectionViewTransitionLayoutAnimatedKey) coregraphics.Float {
 	result_ := C.C_NSCollectionViewTransitionLayout_ValueForAnimatedKey(n.Ptr(), foundation.NewString(string(key)).Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSCollectionViewTransitionLayout) TransitionProgress() coregraphics.Float {
+func (n NSCollectionViewTransitionLayout) TransitionProgress() coregraphics.Float {
 	result_ := C.C_NSCollectionViewTransitionLayout_TransitionProgress(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSCollectionViewTransitionLayout) SetTransitionProgress(value coregraphics.Float) {
+func (n NSCollectionViewTransitionLayout) SetTransitionProgress(value coregraphics.Float) {
 	C.C_NSCollectionViewTransitionLayout_SetTransitionProgress(n.Ptr(), C.double(float64(value)))
 }
 
-func (n *NSCollectionViewTransitionLayout) CurrentLayout() CollectionViewLayout {
+func (n NSCollectionViewTransitionLayout) CurrentLayout() CollectionViewLayout {
 	result_ := C.C_NSCollectionViewTransitionLayout_CurrentLayout(n.Ptr())
 	return MakeCollectionViewLayout(result_)
 }
 
-func (n *NSCollectionViewTransitionLayout) NextLayout() CollectionViewLayout {
+func (n NSCollectionViewTransitionLayout) NextLayout() CollectionViewLayout {
 	result_ := C.C_NSCollectionViewTransitionLayout_NextLayout(n.Ptr())
 	return MakeCollectionViewLayout(result_)
 }

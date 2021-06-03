@@ -44,25 +44,22 @@ type NSLocale struct {
 	objc.NSObject
 }
 
-func MakeLocale(ptr unsafe.Pointer) *NSLocale {
-	if ptr == nil {
-		return nil
-	}
-	return &NSLocale{
-		NSObject: *objc.MakeObject(ptr),
+func MakeLocale(ptr unsafe.Pointer) NSLocale {
+	return NSLocale{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocLocale() *NSLocale {
+func AllocLocale() NSLocale {
 	return MakeLocale(C.C_Locale_Alloc())
 }
 
-func (n *NSLocale) InitWithLocaleIdentifier(_string string) Locale {
+func (n NSLocale) InitWithLocaleIdentifier(_string string) Locale {
 	result_ := C.C_NSLocale_InitWithLocaleIdentifier(n.Ptr(), NewString(_string).Ptr())
 	return MakeLocale(result_)
 }
 
-func (n *NSLocale) InitWithCoder(coder Coder) Locale {
+func (n NSLocale) InitWithCoder(coder Coder) Locale {
 	result_ := C.C_NSLocale_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeLocale(result_)
 }
@@ -92,57 +89,57 @@ func Locale_WindowsLocaleCodeFromLocaleIdentifier(localeIdentifier string) uint3
 	return uint32(result_)
 }
 
-func (n *NSLocale) LocalizedStringForLocaleIdentifier(localeIdentifier string) string {
+func (n NSLocale) LocalizedStringForLocaleIdentifier(localeIdentifier string) string {
 	result_ := C.C_NSLocale_LocalizedStringForLocaleIdentifier(n.Ptr(), NewString(localeIdentifier).Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSLocale) LocalizedStringForCountryCode(countryCode string) string {
+func (n NSLocale) LocalizedStringForCountryCode(countryCode string) string {
 	result_ := C.C_NSLocale_LocalizedStringForCountryCode(n.Ptr(), NewString(countryCode).Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSLocale) LocalizedStringForLanguageCode(languageCode string) string {
+func (n NSLocale) LocalizedStringForLanguageCode(languageCode string) string {
 	result_ := C.C_NSLocale_LocalizedStringForLanguageCode(n.Ptr(), NewString(languageCode).Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSLocale) LocalizedStringForScriptCode(scriptCode string) string {
+func (n NSLocale) LocalizedStringForScriptCode(scriptCode string) string {
 	result_ := C.C_NSLocale_LocalizedStringForScriptCode(n.Ptr(), NewString(scriptCode).Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSLocale) LocalizedStringForVariantCode(variantCode string) string {
+func (n NSLocale) LocalizedStringForVariantCode(variantCode string) string {
 	result_ := C.C_NSLocale_LocalizedStringForVariantCode(n.Ptr(), NewString(variantCode).Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSLocale) LocalizedStringForCollationIdentifier(collationIdentifier string) string {
+func (n NSLocale) LocalizedStringForCollationIdentifier(collationIdentifier string) string {
 	result_ := C.C_NSLocale_LocalizedStringForCollationIdentifier(n.Ptr(), NewString(collationIdentifier).Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSLocale) LocalizedStringForCollatorIdentifier(collatorIdentifier string) string {
+func (n NSLocale) LocalizedStringForCollatorIdentifier(collatorIdentifier string) string {
 	result_ := C.C_NSLocale_LocalizedStringForCollatorIdentifier(n.Ptr(), NewString(collatorIdentifier).Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSLocale) LocalizedStringForCurrencyCode(currencyCode string) string {
+func (n NSLocale) LocalizedStringForCurrencyCode(currencyCode string) string {
 	result_ := C.C_NSLocale_LocalizedStringForCurrencyCode(n.Ptr(), NewString(currencyCode).Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSLocale) LocalizedStringForCalendarIdentifier(calendarIdentifier string) string {
+func (n NSLocale) LocalizedStringForCalendarIdentifier(calendarIdentifier string) string {
 	result_ := C.C_NSLocale_LocalizedStringForCalendarIdentifier(n.Ptr(), NewString(calendarIdentifier).Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSLocale) ObjectForKey(key LocaleKey) objc.Object {
+func (n NSLocale) ObjectForKey(key LocaleKey) objc.Object {
 	result_ := C.C_NSLocale_ObjectForKey(n.Ptr(), NewString(string(key)).Ptr())
 	return objc.MakeObject(result_)
 }
 
-func (n *NSLocale) DisplayNameForKey_Value(key LocaleKey, value objc.Object) string {
+func (n NSLocale) DisplayNameForKey_Value(key LocaleKey, value objc.Object) string {
 	result_ := C.C_NSLocale_DisplayNameForKey_Value(n.Ptr(), NewString(string(key)).Ptr(), objc.ExtractPtr(value))
 	return MakeString(result_).String()
 }
@@ -227,92 +224,92 @@ func Locale_CommonISOCurrencyCodes() []string {
 	return goResult_
 }
 
-func (n *NSLocale) LocaleIdentifier() string {
+func (n NSLocale) LocaleIdentifier() string {
 	result_ := C.C_NSLocale_LocaleIdentifier(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSLocale) CountryCode() string {
+func (n NSLocale) CountryCode() string {
 	result_ := C.C_NSLocale_CountryCode(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSLocale) LanguageCode() string {
+func (n NSLocale) LanguageCode() string {
 	result_ := C.C_NSLocale_LanguageCode(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSLocale) ScriptCode() string {
+func (n NSLocale) ScriptCode() string {
 	result_ := C.C_NSLocale_ScriptCode(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSLocale) VariantCode() string {
+func (n NSLocale) VariantCode() string {
 	result_ := C.C_NSLocale_VariantCode(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSLocale) ExemplarCharacterSet() CharacterSet {
+func (n NSLocale) ExemplarCharacterSet() CharacterSet {
 	result_ := C.C_NSLocale_ExemplarCharacterSet(n.Ptr())
 	return MakeCharacterSet(result_)
 }
 
-func (n *NSLocale) CollationIdentifier() string {
+func (n NSLocale) CollationIdentifier() string {
 	result_ := C.C_NSLocale_CollationIdentifier(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSLocale) CollatorIdentifier() string {
+func (n NSLocale) CollatorIdentifier() string {
 	result_ := C.C_NSLocale_CollatorIdentifier(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSLocale) UsesMetricSystem() bool {
+func (n NSLocale) UsesMetricSystem() bool {
 	result_ := C.C_NSLocale_UsesMetricSystem(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSLocale) DecimalSeparator() string {
+func (n NSLocale) DecimalSeparator() string {
 	result_ := C.C_NSLocale_DecimalSeparator(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSLocale) GroupingSeparator() string {
+func (n NSLocale) GroupingSeparator() string {
 	result_ := C.C_NSLocale_GroupingSeparator(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSLocale) CurrencyCode() string {
+func (n NSLocale) CurrencyCode() string {
 	result_ := C.C_NSLocale_CurrencyCode(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSLocale) CurrencySymbol() string {
+func (n NSLocale) CurrencySymbol() string {
 	result_ := C.C_NSLocale_CurrencySymbol(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSLocale) CalendarIdentifier() string {
+func (n NSLocale) CalendarIdentifier() string {
 	result_ := C.C_NSLocale_CalendarIdentifier(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSLocale) QuotationBeginDelimiter() string {
+func (n NSLocale) QuotationBeginDelimiter() string {
 	result_ := C.C_NSLocale_QuotationBeginDelimiter(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSLocale) QuotationEndDelimiter() string {
+func (n NSLocale) QuotationEndDelimiter() string {
 	result_ := C.C_NSLocale_QuotationEndDelimiter(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSLocale) AlternateQuotationBeginDelimiter() string {
+func (n NSLocale) AlternateQuotationBeginDelimiter() string {
 	result_ := C.C_NSLocale_AlternateQuotationBeginDelimiter(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSLocale) AlternateQuotationEndDelimiter() string {
+func (n NSLocale) AlternateQuotationEndDelimiter() string {
 	result_ := C.C_NSLocale_AlternateQuotationEndDelimiter(n.Ptr())
 	return MakeString(result_).String()
 }

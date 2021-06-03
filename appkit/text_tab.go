@@ -19,20 +19,17 @@ type NSTextTab struct {
 	objc.NSObject
 }
 
-func MakeTextTab(ptr unsafe.Pointer) *NSTextTab {
-	if ptr == nil {
-		return nil
-	}
-	return &NSTextTab{
-		NSObject: *objc.MakeObject(ptr),
+func MakeTextTab(ptr unsafe.Pointer) NSTextTab {
+	return NSTextTab{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocTextTab() *NSTextTab {
+func AllocTextTab() NSTextTab {
 	return MakeTextTab(C.C_TextTab_Alloc())
 }
 
-func (n *NSTextTab) Init() TextTab {
+func (n NSTextTab) Init() TextTab {
 	result_ := C.C_NSTextTab_Init(n.Ptr())
 	return MakeTextTab(result_)
 }
@@ -42,12 +39,12 @@ func TextTab_ColumnTerminatorsForLocale(aLocale foundation.Locale) foundation.Ch
 	return foundation.MakeCharacterSet(result_)
 }
 
-func (n *NSTextTab) Location() coregraphics.Float {
+func (n NSTextTab) Location() coregraphics.Float {
 	result_ := C.C_NSTextTab_Location(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSTextTab) Alignment() TextAlignment {
+func (n NSTextTab) Alignment() TextAlignment {
 	result_ := C.C_NSTextTab_Alignment(n.Ptr())
 	return TextAlignment(int(result_))
 }

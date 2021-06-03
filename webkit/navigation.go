@@ -16,25 +16,22 @@ type WKNavigation struct {
 	objc.NSObject
 }
 
-func MakeNavigation(ptr unsafe.Pointer) *WKNavigation {
-	if ptr == nil {
-		return nil
-	}
-	return &WKNavigation{
-		NSObject: *objc.MakeObject(ptr),
+func MakeNavigation(ptr unsafe.Pointer) WKNavigation {
+	return WKNavigation{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocNavigation() *WKNavigation {
+func AllocNavigation() WKNavigation {
 	return MakeNavigation(C.C_Navigation_Alloc())
 }
 
-func (w *WKNavigation) Init() Navigation {
+func (w WKNavigation) Init() Navigation {
 	result_ := C.C_WKNavigation_Init(w.Ptr())
 	return MakeNavigation(result_)
 }
 
-func (w *WKNavigation) EffectiveContentMode() ContentMode {
+func (w WKNavigation) EffectiveContentMode() ContentMode {
 	result_ := C.C_WKNavigation_EffectiveContentMode(w.Ptr())
 	return ContentMode(int(result_))
 }

@@ -18,16 +18,13 @@ type NSCollectionLayoutDecorationItem struct {
 	NSCollectionLayoutItem
 }
 
-func MakeCollectionLayoutDecorationItem(ptr unsafe.Pointer) *NSCollectionLayoutDecorationItem {
-	if ptr == nil {
-		return nil
-	}
-	return &NSCollectionLayoutDecorationItem{
-		NSCollectionLayoutItem: *MakeCollectionLayoutItem(ptr),
+func MakeCollectionLayoutDecorationItem(ptr unsafe.Pointer) NSCollectionLayoutDecorationItem {
+	return NSCollectionLayoutDecorationItem{
+		NSCollectionLayoutItem: MakeCollectionLayoutItem(ptr),
 	}
 }
 
-func AllocCollectionLayoutDecorationItem() *NSCollectionLayoutDecorationItem {
+func AllocCollectionLayoutDecorationItem() NSCollectionLayoutDecorationItem {
 	return MakeCollectionLayoutDecorationItem(C.C_CollectionLayoutDecorationItem_Alloc())
 }
 
@@ -36,16 +33,16 @@ func CollectionLayoutDecorationItem_BackgroundDecorationItemWithElementKind(elem
 	return MakeCollectionLayoutDecorationItem(result_)
 }
 
-func (n *NSCollectionLayoutDecorationItem) ElementKind() string {
+func (n NSCollectionLayoutDecorationItem) ElementKind() string {
 	result_ := C.C_NSCollectionLayoutDecorationItem_ElementKind(n.Ptr())
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSCollectionLayoutDecorationItem) ZIndex() int {
+func (n NSCollectionLayoutDecorationItem) ZIndex() int {
 	result_ := C.C_NSCollectionLayoutDecorationItem_ZIndex(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSCollectionLayoutDecorationItem) SetZIndex(value int) {
+func (n NSCollectionLayoutDecorationItem) SetZIndex(value int) {
 	C.C_NSCollectionLayoutDecorationItem_SetZIndex(n.Ptr(), C.int(value))
 }

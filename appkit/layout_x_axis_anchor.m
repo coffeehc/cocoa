@@ -1,23 +1,36 @@
-#import <AppKit/AppKit.h>
-#import "_cgo_export.h"
+#import <Appkit/Appkit.h>
 #import "layout_x_axis_anchor.h"
 
-void* LayoutXAxisAnchor_ConstraintEqualToSystemSpacingAfterAnchor(void* ptr, void* anchor, double multiplier) {
-	NSLayoutXAxisAnchor* layoutXAxisAnchor = (NSLayoutXAxisAnchor*)ptr;
-	return [layoutXAxisAnchor constraintEqualToSystemSpacingAfterAnchor:(NSLayoutXAxisAnchor*)anchor multiplier:multiplier];
+void* C_LayoutXAxisAnchor_Alloc() {
+    return [NSLayoutXAxisAnchor alloc];
 }
 
-void* LayoutXAxisAnchor_ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchor(void* ptr, void* anchor, double multiplier) {
-	NSLayoutXAxisAnchor* layoutXAxisAnchor = (NSLayoutXAxisAnchor*)ptr;
-	return [layoutXAxisAnchor constraintGreaterThanOrEqualToSystemSpacingAfterAnchor:(NSLayoutXAxisAnchor*)anchor multiplier:multiplier];
+void* C_NSLayoutXAxisAnchor_Init(void* ptr) {
+    NSLayoutXAxisAnchor* nSLayoutXAxisAnchor = (NSLayoutXAxisAnchor*)ptr;
+    NSLayoutXAxisAnchor* result_ = [nSLayoutXAxisAnchor init];
+    return result_;
 }
 
-void* LayoutXAxisAnchor_ConstraintLessThanOrEqualToSystemSpacingAfterAnchor(void* ptr, void* anchor, double multiplier) {
-	NSLayoutXAxisAnchor* layoutXAxisAnchor = (NSLayoutXAxisAnchor*)ptr;
-	return [layoutXAxisAnchor constraintLessThanOrEqualToSystemSpacingAfterAnchor:(NSLayoutXAxisAnchor*)anchor multiplier:multiplier];
+void* C_NSLayoutXAxisAnchor_ConstraintEqualToSystemSpacingAfterAnchor_Multiplier(void* ptr, void* anchor, double multiplier) {
+    NSLayoutXAxisAnchor* nSLayoutXAxisAnchor = (NSLayoutXAxisAnchor*)ptr;
+    NSLayoutConstraint* result_ = [nSLayoutXAxisAnchor constraintEqualToSystemSpacingAfterAnchor:(NSLayoutXAxisAnchor*)anchor multiplier:multiplier];
+    return result_;
 }
 
-void* LayoutXAxisAnchor_AnchorWithOffsetToAnchor(void* ptr, void* otherAnchor) {
-	NSLayoutXAxisAnchor* layoutXAxisAnchor = (NSLayoutXAxisAnchor*)ptr;
-	return [layoutXAxisAnchor anchorWithOffsetToAnchor:(NSLayoutXAxisAnchor*)otherAnchor];
+void* C_NSLayoutXAxisAnchor_ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchor_Multiplier(void* ptr, void* anchor, double multiplier) {
+    NSLayoutXAxisAnchor* nSLayoutXAxisAnchor = (NSLayoutXAxisAnchor*)ptr;
+    NSLayoutConstraint* result_ = [nSLayoutXAxisAnchor constraintGreaterThanOrEqualToSystemSpacingAfterAnchor:(NSLayoutXAxisAnchor*)anchor multiplier:multiplier];
+    return result_;
+}
+
+void* C_NSLayoutXAxisAnchor_ConstraintLessThanOrEqualToSystemSpacingAfterAnchor_Multiplier(void* ptr, void* anchor, double multiplier) {
+    NSLayoutXAxisAnchor* nSLayoutXAxisAnchor = (NSLayoutXAxisAnchor*)ptr;
+    NSLayoutConstraint* result_ = [nSLayoutXAxisAnchor constraintLessThanOrEqualToSystemSpacingAfterAnchor:(NSLayoutXAxisAnchor*)anchor multiplier:multiplier];
+    return result_;
+}
+
+void* C_NSLayoutXAxisAnchor_AnchorWithOffsetToAnchor(void* ptr, void* otherAnchor) {
+    NSLayoutXAxisAnchor* nSLayoutXAxisAnchor = (NSLayoutXAxisAnchor*)ptr;
+    NSLayoutDimension* result_ = [nSLayoutXAxisAnchor anchorWithOffsetToAnchor:(NSLayoutXAxisAnchor*)otherAnchor];
+    return result_;
 }

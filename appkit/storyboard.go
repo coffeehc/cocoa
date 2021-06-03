@@ -17,20 +17,17 @@ type NSStoryboard struct {
 	objc.NSObject
 }
 
-func MakeStoryboard(ptr unsafe.Pointer) *NSStoryboard {
-	if ptr == nil {
-		return nil
-	}
-	return &NSStoryboard{
-		NSObject: *objc.MakeObject(ptr),
+func MakeStoryboard(ptr unsafe.Pointer) NSStoryboard {
+	return NSStoryboard{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocStoryboard() *NSStoryboard {
+func AllocStoryboard() NSStoryboard {
 	return MakeStoryboard(C.C_Storyboard_Alloc())
 }
 
-func (n *NSStoryboard) Init() Storyboard {
+func (n NSStoryboard) Init() Storyboard {
 	result_ := C.C_NSStoryboard_Init(n.Ptr())
 	return MakeStoryboard(result_)
 }
@@ -40,7 +37,7 @@ func StoryboardWithName_Bundle(name StoryboardName, storyboardBundleOrNil founda
 	return MakeStoryboard(result_)
 }
 
-func (n *NSStoryboard) InstantiateInitialController() objc.Object {
+func (n NSStoryboard) InstantiateInitialController() objc.Object {
 	result_ := C.C_NSStoryboard_InstantiateInitialController(n.Ptr())
 	return objc.MakeObject(result_)
 }

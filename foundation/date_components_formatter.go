@@ -40,35 +40,32 @@ type NSDateComponentsFormatter struct {
 	NSFormatter
 }
 
-func MakeDateComponentsFormatter(ptr unsafe.Pointer) *NSDateComponentsFormatter {
-	if ptr == nil {
-		return nil
-	}
-	return &NSDateComponentsFormatter{
-		NSFormatter: *MakeFormatter(ptr),
+func MakeDateComponentsFormatter(ptr unsafe.Pointer) NSDateComponentsFormatter {
+	return NSDateComponentsFormatter{
+		NSFormatter: MakeFormatter(ptr),
 	}
 }
 
-func AllocDateComponentsFormatter() *NSDateComponentsFormatter {
+func AllocDateComponentsFormatter() NSDateComponentsFormatter {
 	return MakeDateComponentsFormatter(C.C_DateComponentsFormatter_Alloc())
 }
 
-func (n *NSDateComponentsFormatter) Init() DateComponentsFormatter {
+func (n NSDateComponentsFormatter) Init() DateComponentsFormatter {
 	result_ := C.C_NSDateComponentsFormatter_Init(n.Ptr())
 	return MakeDateComponentsFormatter(result_)
 }
 
-func (n *NSDateComponentsFormatter) StringFromDateComponents(components DateComponents) string {
+func (n NSDateComponentsFormatter) StringFromDateComponents(components DateComponents) string {
 	result_ := C.C_NSDateComponentsFormatter_StringFromDateComponents(n.Ptr(), objc.ExtractPtr(components))
 	return MakeString(result_).String()
 }
 
-func (n *NSDateComponentsFormatter) StringFromDate_ToDate(startDate Date, endDate Date) string {
+func (n NSDateComponentsFormatter) StringFromDate_ToDate(startDate Date, endDate Date) string {
 	result_ := C.C_NSDateComponentsFormatter_StringFromDate_ToDate(n.Ptr(), objc.ExtractPtr(startDate), objc.ExtractPtr(endDate))
 	return MakeString(result_).String()
 }
 
-func (n *NSDateComponentsFormatter) StringFromTimeInterval(ti TimeInterval) string {
+func (n NSDateComponentsFormatter) StringFromTimeInterval(ti TimeInterval) string {
 	result_ := C.C_NSDateComponentsFormatter_StringFromTimeInterval(n.Ptr(), C.double(float64(ti)))
 	return MakeString(result_).String()
 }
@@ -78,101 +75,101 @@ func DateComponentsFormatter_LocalizedStringFromDateComponents_UnitsStyle(compon
 	return MakeString(result_).String()
 }
 
-func (n *NSDateComponentsFormatter) AllowedUnits() CalendarUnit {
+func (n NSDateComponentsFormatter) AllowedUnits() CalendarUnit {
 	result_ := C.C_NSDateComponentsFormatter_AllowedUnits(n.Ptr())
 	return CalendarUnit(uint(result_))
 }
 
-func (n *NSDateComponentsFormatter) SetAllowedUnits(value CalendarUnit) {
+func (n NSDateComponentsFormatter) SetAllowedUnits(value CalendarUnit) {
 	C.C_NSDateComponentsFormatter_SetAllowedUnits(n.Ptr(), C.uint(uint(value)))
 }
 
-func (n *NSDateComponentsFormatter) AllowsFractionalUnits() bool {
+func (n NSDateComponentsFormatter) AllowsFractionalUnits() bool {
 	result_ := C.C_NSDateComponentsFormatter_AllowsFractionalUnits(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSDateComponentsFormatter) SetAllowsFractionalUnits(value bool) {
+func (n NSDateComponentsFormatter) SetAllowsFractionalUnits(value bool) {
 	C.C_NSDateComponentsFormatter_SetAllowsFractionalUnits(n.Ptr(), C.bool(value))
 }
 
-func (n *NSDateComponentsFormatter) Calendar() Calendar {
+func (n NSDateComponentsFormatter) Calendar() Calendar {
 	result_ := C.C_NSDateComponentsFormatter_Calendar(n.Ptr())
 	return MakeCalendar(result_)
 }
 
-func (n *NSDateComponentsFormatter) SetCalendar(value Calendar) {
+func (n NSDateComponentsFormatter) SetCalendar(value Calendar) {
 	C.C_NSDateComponentsFormatter_SetCalendar(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (n *NSDateComponentsFormatter) CollapsesLargestUnit() bool {
+func (n NSDateComponentsFormatter) CollapsesLargestUnit() bool {
 	result_ := C.C_NSDateComponentsFormatter_CollapsesLargestUnit(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSDateComponentsFormatter) SetCollapsesLargestUnit(value bool) {
+func (n NSDateComponentsFormatter) SetCollapsesLargestUnit(value bool) {
 	C.C_NSDateComponentsFormatter_SetCollapsesLargestUnit(n.Ptr(), C.bool(value))
 }
 
-func (n *NSDateComponentsFormatter) IncludesApproximationPhrase() bool {
+func (n NSDateComponentsFormatter) IncludesApproximationPhrase() bool {
 	result_ := C.C_NSDateComponentsFormatter_IncludesApproximationPhrase(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSDateComponentsFormatter) SetIncludesApproximationPhrase(value bool) {
+func (n NSDateComponentsFormatter) SetIncludesApproximationPhrase(value bool) {
 	C.C_NSDateComponentsFormatter_SetIncludesApproximationPhrase(n.Ptr(), C.bool(value))
 }
 
-func (n *NSDateComponentsFormatter) IncludesTimeRemainingPhrase() bool {
+func (n NSDateComponentsFormatter) IncludesTimeRemainingPhrase() bool {
 	result_ := C.C_NSDateComponentsFormatter_IncludesTimeRemainingPhrase(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSDateComponentsFormatter) SetIncludesTimeRemainingPhrase(value bool) {
+func (n NSDateComponentsFormatter) SetIncludesTimeRemainingPhrase(value bool) {
 	C.C_NSDateComponentsFormatter_SetIncludesTimeRemainingPhrase(n.Ptr(), C.bool(value))
 }
 
-func (n *NSDateComponentsFormatter) MaximumUnitCount() int {
+func (n NSDateComponentsFormatter) MaximumUnitCount() int {
 	result_ := C.C_NSDateComponentsFormatter_MaximumUnitCount(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSDateComponentsFormatter) SetMaximumUnitCount(value int) {
+func (n NSDateComponentsFormatter) SetMaximumUnitCount(value int) {
 	C.C_NSDateComponentsFormatter_SetMaximumUnitCount(n.Ptr(), C.int(value))
 }
 
-func (n *NSDateComponentsFormatter) UnitsStyle() DateComponentsFormatterUnitsStyle {
+func (n NSDateComponentsFormatter) UnitsStyle() DateComponentsFormatterUnitsStyle {
 	result_ := C.C_NSDateComponentsFormatter_UnitsStyle(n.Ptr())
 	return DateComponentsFormatterUnitsStyle(int(result_))
 }
 
-func (n *NSDateComponentsFormatter) SetUnitsStyle(value DateComponentsFormatterUnitsStyle) {
+func (n NSDateComponentsFormatter) SetUnitsStyle(value DateComponentsFormatterUnitsStyle) {
 	C.C_NSDateComponentsFormatter_SetUnitsStyle(n.Ptr(), C.int(int(value)))
 }
 
-func (n *NSDateComponentsFormatter) ZeroFormattingBehavior() DateComponentsFormatterZeroFormattingBehavior {
+func (n NSDateComponentsFormatter) ZeroFormattingBehavior() DateComponentsFormatterZeroFormattingBehavior {
 	result_ := C.C_NSDateComponentsFormatter_ZeroFormattingBehavior(n.Ptr())
 	return DateComponentsFormatterZeroFormattingBehavior(uint(result_))
 }
 
-func (n *NSDateComponentsFormatter) SetZeroFormattingBehavior(value DateComponentsFormatterZeroFormattingBehavior) {
+func (n NSDateComponentsFormatter) SetZeroFormattingBehavior(value DateComponentsFormatterZeroFormattingBehavior) {
 	C.C_NSDateComponentsFormatter_SetZeroFormattingBehavior(n.Ptr(), C.uint(uint(value)))
 }
 
-func (n *NSDateComponentsFormatter) FormattingContext() FormattingContext {
+func (n NSDateComponentsFormatter) FormattingContext() FormattingContext {
 	result_ := C.C_NSDateComponentsFormatter_FormattingContext(n.Ptr())
 	return FormattingContext(int(result_))
 }
 
-func (n *NSDateComponentsFormatter) SetFormattingContext(value FormattingContext) {
+func (n NSDateComponentsFormatter) SetFormattingContext(value FormattingContext) {
 	C.C_NSDateComponentsFormatter_SetFormattingContext(n.Ptr(), C.int(int(value)))
 }
 
-func (n *NSDateComponentsFormatter) ReferenceDate() Date {
+func (n NSDateComponentsFormatter) ReferenceDate() Date {
 	result_ := C.C_NSDateComponentsFormatter_ReferenceDate(n.Ptr())
 	return MakeDate(result_)
 }
 
-func (n *NSDateComponentsFormatter) SetReferenceDate(value Date) {
+func (n NSDateComponentsFormatter) SetReferenceDate(value Date) {
 	C.C_NSDateComponentsFormatter_SetReferenceDate(n.Ptr(), objc.ExtractPtr(value))
 }

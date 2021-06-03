@@ -17,16 +17,13 @@ type WKContentWorld struct {
 	objc.NSObject
 }
 
-func MakeContentWorld(ptr unsafe.Pointer) *WKContentWorld {
-	if ptr == nil {
-		return nil
-	}
-	return &WKContentWorld{
-		NSObject: *objc.MakeObject(ptr),
+func MakeContentWorld(ptr unsafe.Pointer) WKContentWorld {
+	return WKContentWorld{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocContentWorld() *WKContentWorld {
+func AllocContentWorld() WKContentWorld {
 	return MakeContentWorld(C.C_ContentWorld_Alloc())
 }
 
@@ -45,7 +42,7 @@ func ContentWorld_PageWorld() ContentWorld {
 	return MakeContentWorld(result_)
 }
 
-func (w *WKContentWorld) Name() string {
+func (w WKContentWorld) Name() string {
 	result_ := C.C_WKContentWorld_Name(w.Ptr())
 	return foundation.MakeString(result_).String()
 }

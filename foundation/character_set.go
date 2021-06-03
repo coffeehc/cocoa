@@ -18,20 +18,17 @@ type NSCharacterSet struct {
 	objc.NSObject
 }
 
-func MakeCharacterSet(ptr unsafe.Pointer) *NSCharacterSet {
-	if ptr == nil {
-		return nil
-	}
-	return &NSCharacterSet{
-		NSObject: *objc.MakeObject(ptr),
+func MakeCharacterSet(ptr unsafe.Pointer) NSCharacterSet {
+	return NSCharacterSet{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocCharacterSet() *NSCharacterSet {
+func AllocCharacterSet() NSCharacterSet {
 	return MakeCharacterSet(C.C_CharacterSet_Alloc())
 }
 
-func (n *NSCharacterSet) InitWithCoder(coder Coder) CharacterSet {
+func (n NSCharacterSet) InitWithCoder(coder Coder) CharacterSet {
 	result_ := C.C_NSCharacterSet_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeCharacterSet(result_)
 }
@@ -56,7 +53,7 @@ func CharacterSetWithContentsOfFile(fName string) CharacterSet {
 	return MakeCharacterSet(result_)
 }
 
-func (n *NSCharacterSet) IsSupersetOfSet(theOtherSet CharacterSet) bool {
+func (n NSCharacterSet) IsSupersetOfSet(theOtherSet CharacterSet) bool {
 	result_ := C.C_NSCharacterSet_IsSupersetOfSet(n.Ptr(), objc.ExtractPtr(theOtherSet))
 	return bool(result_)
 }
@@ -166,7 +163,7 @@ func URLUserAllowedCharacterSet() CharacterSet {
 	return MakeCharacterSet(result_)
 }
 
-func (n *NSCharacterSet) BitmapRepresentation() []byte {
+func (n NSCharacterSet) BitmapRepresentation() []byte {
 	result_ := C.C_NSCharacterSet_BitmapRepresentation(n.Ptr())
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
@@ -175,7 +172,7 @@ func (n *NSCharacterSet) BitmapRepresentation() []byte {
 	return goResult_
 }
 
-func (n *NSCharacterSet) InvertedSet() CharacterSet {
+func (n NSCharacterSet) InvertedSet() CharacterSet {
 	result_ := C.C_NSCharacterSet_InvertedSet(n.Ptr())
 	return MakeCharacterSet(result_)
 }

@@ -19,16 +19,13 @@ type NSCollectionLayoutSpacing struct {
 	objc.NSObject
 }
 
-func MakeCollectionLayoutSpacing(ptr unsafe.Pointer) *NSCollectionLayoutSpacing {
-	if ptr == nil {
-		return nil
-	}
-	return &NSCollectionLayoutSpacing{
-		NSObject: *objc.MakeObject(ptr),
+func MakeCollectionLayoutSpacing(ptr unsafe.Pointer) NSCollectionLayoutSpacing {
+	return NSCollectionLayoutSpacing{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocCollectionLayoutSpacing() *NSCollectionLayoutSpacing {
+func AllocCollectionLayoutSpacing() NSCollectionLayoutSpacing {
 	return MakeCollectionLayoutSpacing(C.C_CollectionLayoutSpacing_Alloc())
 }
 
@@ -42,17 +39,17 @@ func CollectionLayoutSpacing_FlexibleSpacing(flexibleSpacing coregraphics.Float)
 	return MakeCollectionLayoutSpacing(result_)
 }
 
-func (n *NSCollectionLayoutSpacing) Spacing() coregraphics.Float {
+func (n NSCollectionLayoutSpacing) Spacing() coregraphics.Float {
 	result_ := C.C_NSCollectionLayoutSpacing_Spacing(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSCollectionLayoutSpacing) IsFixedSpacing() bool {
+func (n NSCollectionLayoutSpacing) IsFixedSpacing() bool {
 	result_ := C.C_NSCollectionLayoutSpacing_IsFixedSpacing(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSCollectionLayoutSpacing) IsFlexibleSpacing() bool {
+func (n NSCollectionLayoutSpacing) IsFlexibleSpacing() bool {
 	result_ := C.C_NSCollectionLayoutSpacing_IsFlexibleSpacing(n.Ptr())
 	return bool(result_)
 }

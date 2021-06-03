@@ -31,93 +31,90 @@ type NSTextFieldCell struct {
 	NSActionCell
 }
 
-func MakeTextFieldCell(ptr unsafe.Pointer) *NSTextFieldCell {
-	if ptr == nil {
-		return nil
-	}
-	return &NSTextFieldCell{
-		NSActionCell: *MakeActionCell(ptr),
+func MakeTextFieldCell(ptr unsafe.Pointer) NSTextFieldCell {
+	return NSTextFieldCell{
+		NSActionCell: MakeActionCell(ptr),
 	}
 }
 
-func AllocTextFieldCell() *NSTextFieldCell {
+func AllocTextFieldCell() NSTextFieldCell {
 	return MakeTextFieldCell(C.C_TextFieldCell_Alloc())
 }
 
-func (n *NSTextFieldCell) InitTextCell(_string string) TextFieldCell {
+func (n NSTextFieldCell) InitTextCell(_string string) TextFieldCell {
 	result_ := C.C_NSTextFieldCell_InitTextCell(n.Ptr(), foundation.NewString(_string).Ptr())
 	return MakeTextFieldCell(result_)
 }
 
-func (n *NSTextFieldCell) InitWithCoder(coder foundation.Coder) TextFieldCell {
+func (n NSTextFieldCell) InitWithCoder(coder foundation.Coder) TextFieldCell {
 	result_ := C.C_NSTextFieldCell_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeTextFieldCell(result_)
 }
 
-func (n *NSTextFieldCell) Init() TextFieldCell {
+func (n NSTextFieldCell) Init() TextFieldCell {
 	result_ := C.C_NSTextFieldCell_Init(n.Ptr())
 	return MakeTextFieldCell(result_)
 }
 
-func (n *NSTextFieldCell) SetWantsNotificationForMarkedText(flag bool) {
+func (n NSTextFieldCell) SetWantsNotificationForMarkedText(flag bool) {
 	C.C_NSTextFieldCell_SetWantsNotificationForMarkedText(n.Ptr(), C.bool(flag))
 }
 
-func (n *NSTextFieldCell) TextColor() Color {
+func (n NSTextFieldCell) TextColor() Color {
 	result_ := C.C_NSTextFieldCell_TextColor(n.Ptr())
 	return MakeColor(result_)
 }
 
-func (n *NSTextFieldCell) SetTextColor(value Color) {
+func (n NSTextFieldCell) SetTextColor(value Color) {
 	C.C_NSTextFieldCell_SetTextColor(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (n *NSTextFieldCell) BezelStyle() TextFieldBezelStyle {
+func (n NSTextFieldCell) BezelStyle() TextFieldBezelStyle {
 	result_ := C.C_NSTextFieldCell_BezelStyle(n.Ptr())
 	return TextFieldBezelStyle(uint(result_))
 }
 
-func (n *NSTextFieldCell) SetBezelStyle(value TextFieldBezelStyle) {
+func (n NSTextFieldCell) SetBezelStyle(value TextFieldBezelStyle) {
 	C.C_NSTextFieldCell_SetBezelStyle(n.Ptr(), C.uint(uint(value)))
 }
 
-func (n *NSTextFieldCell) BackgroundColor() Color {
+func (n NSTextFieldCell) BackgroundColor() Color {
 	result_ := C.C_NSTextFieldCell_BackgroundColor(n.Ptr())
 	return MakeColor(result_)
 }
 
-func (n *NSTextFieldCell) SetBackgroundColor(value Color) {
+func (n NSTextFieldCell) SetBackgroundColor(value Color) {
 	C.C_NSTextFieldCell_SetBackgroundColor(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (n *NSTextFieldCell) DrawsBackground() bool {
+func (n NSTextFieldCell) DrawsBackground() bool {
 	result_ := C.C_NSTextFieldCell_DrawsBackground(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTextFieldCell) SetDrawsBackground(value bool) {
+func (n NSTextFieldCell) SetDrawsBackground(value bool) {
 	C.C_NSTextFieldCell_SetDrawsBackground(n.Ptr(), C.bool(value))
 }
 
-func (n *NSTextFieldCell) PlaceholderString() string {
+func (n NSTextFieldCell) PlaceholderString() string {
 	result_ := C.C_NSTextFieldCell_PlaceholderString(n.Ptr())
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSTextFieldCell) SetPlaceholderString(value string) {
+func (n NSTextFieldCell) SetPlaceholderString(value string) {
 	C.C_NSTextFieldCell_SetPlaceholderString(n.Ptr(), foundation.NewString(value).Ptr())
 }
 
-func (n *NSTextFieldCell) PlaceholderAttributedString() foundation.AttributedString {
+func (n NSTextFieldCell) PlaceholderAttributedString() foundation.AttributedString {
 	result_ := C.C_NSTextFieldCell_PlaceholderAttributedString(n.Ptr())
 	return foundation.MakeAttributedString(result_)
 }
 
-func (n *NSTextFieldCell) SetPlaceholderAttributedString(value foundation.AttributedString) {
+func (n NSTextFieldCell) SetPlaceholderAttributedString(value foundation.AttributedString) {
 	C.C_NSTextFieldCell_SetPlaceholderAttributedString(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (n *NSTextFieldCell) AllowedInputSourceLocales() []string {
+func (n NSTextFieldCell) AllowedInputSourceLocales() []string {
 	result_ := C.C_NSTextFieldCell_AllowedInputSourceLocales(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -128,7 +125,7 @@ func (n *NSTextFieldCell) AllowedInputSourceLocales() []string {
 	return goResult_
 }
 
-func (n *NSTextFieldCell) SetAllowedInputSourceLocales(value []string) {
+func (n NSTextFieldCell) SetAllowedInputSourceLocales(value []string) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = foundation.NewString(v).Ptr()

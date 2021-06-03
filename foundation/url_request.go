@@ -29,30 +29,27 @@ type NSURLRequest struct {
 	objc.NSObject
 }
 
-func MakeURLRequest(ptr unsafe.Pointer) *NSURLRequest {
-	if ptr == nil {
-		return nil
-	}
-	return &NSURLRequest{
-		NSObject: *objc.MakeObject(ptr),
+func MakeURLRequest(ptr unsafe.Pointer) NSURLRequest {
+	return NSURLRequest{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocURLRequest() *NSURLRequest {
+func AllocURLRequest() NSURLRequest {
 	return MakeURLRequest(C.C_URLRequest_Alloc())
 }
 
-func (n *NSURLRequest) InitWithURL(URL URL) URLRequest {
+func (n NSURLRequest) InitWithURL(URL URL) URLRequest {
 	result_ := C.C_NSURLRequest_InitWithURL(n.Ptr(), objc.ExtractPtr(URL))
 	return MakeURLRequest(result_)
 }
 
-func (n *NSURLRequest) InitWithURL_CachePolicy_TimeoutInterval(URL URL, cachePolicy URLRequestCachePolicy, timeoutInterval TimeInterval) URLRequest {
+func (n NSURLRequest) InitWithURL_CachePolicy_TimeoutInterval(URL URL, cachePolicy URLRequestCachePolicy, timeoutInterval TimeInterval) URLRequest {
 	result_ := C.C_NSURLRequest_InitWithURL_CachePolicy_TimeoutInterval(n.Ptr(), objc.ExtractPtr(URL), C.uint(uint(cachePolicy)), C.double(float64(timeoutInterval)))
 	return MakeURLRequest(result_)
 }
 
-func (n *NSURLRequest) Init() URLRequest {
+func (n NSURLRequest) Init() URLRequest {
 	result_ := C.C_NSURLRequest_Init(n.Ptr())
 	return MakeURLRequest(result_)
 }
@@ -67,27 +64,27 @@ func URLRequest_RequestWithURL_CachePolicy_TimeoutInterval(URL URL, cachePolicy 
 	return MakeURLRequest(result_)
 }
 
-func (n *NSURLRequest) ValueForHTTPHeaderField(field string) string {
+func (n NSURLRequest) ValueForHTTPHeaderField(field string) string {
 	result_ := C.C_NSURLRequest_ValueForHTTPHeaderField(n.Ptr(), NewString(field).Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSURLRequest) CachePolicy() URLRequestCachePolicy {
+func (n NSURLRequest) CachePolicy() URLRequestCachePolicy {
 	result_ := C.C_NSURLRequest_CachePolicy(n.Ptr())
 	return URLRequestCachePolicy(uint(result_))
 }
 
-func (n *NSURLRequest) HTTPMethod() string {
+func (n NSURLRequest) HTTPMethod() string {
 	result_ := C.C_NSURLRequest_HTTPMethod(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSURLRequest) URL() URL {
+func (n NSURLRequest) URL() URL {
 	result_ := C.C_NSURLRequest_URL(n.Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSURLRequest) HTTPBody() []byte {
+func (n NSURLRequest) HTTPBody() []byte {
 	result_ := C.C_NSURLRequest_HTTPBody(n.Ptr())
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
@@ -96,42 +93,42 @@ func (n *NSURLRequest) HTTPBody() []byte {
 	return goResult_
 }
 
-func (n *NSURLRequest) MainDocumentURL() URL {
+func (n NSURLRequest) MainDocumentURL() URL {
 	result_ := C.C_NSURLRequest_MainDocumentURL(n.Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSURLRequest) TimeoutInterval() TimeInterval {
+func (n NSURLRequest) TimeoutInterval() TimeInterval {
 	result_ := C.C_NSURLRequest_TimeoutInterval(n.Ptr())
 	return TimeInterval(float64(result_))
 }
 
-func (n *NSURLRequest) HTTPShouldHandleCookies() bool {
+func (n NSURLRequest) HTTPShouldHandleCookies() bool {
 	result_ := C.C_NSURLRequest_HTTPShouldHandleCookies(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSURLRequest) HTTPShouldUsePipelining() bool {
+func (n NSURLRequest) HTTPShouldUsePipelining() bool {
 	result_ := C.C_NSURLRequest_HTTPShouldUsePipelining(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSURLRequest) AllowsCellularAccess() bool {
+func (n NSURLRequest) AllowsCellularAccess() bool {
 	result_ := C.C_NSURLRequest_AllowsCellularAccess(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSURLRequest) AllowsConstrainedNetworkAccess() bool {
+func (n NSURLRequest) AllowsConstrainedNetworkAccess() bool {
 	result_ := C.C_NSURLRequest_AllowsConstrainedNetworkAccess(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSURLRequest) AllowsExpensiveNetworkAccess() bool {
+func (n NSURLRequest) AllowsExpensiveNetworkAccess() bool {
 	result_ := C.C_NSURLRequest_AllowsExpensiveNetworkAccess(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSURLRequest) NetworkServiceType() URLRequestNetworkServiceType {
+func (n NSURLRequest) NetworkServiceType() URLRequestNetworkServiceType {
 	result_ := C.C_NSURLRequest_NetworkServiceType(n.Ptr())
 	return URLRequestNetworkServiceType(uint(result_))
 }
@@ -141,7 +138,7 @@ func URLRequest_SupportsSecureCoding() bool {
 	return bool(result_)
 }
 
-func (n *NSURLRequest) AssumesHTTP3Capable() bool {
+func (n NSURLRequest) AssumesHTTP3Capable() bool {
 	result_ := C.C_NSURLRequest_AssumesHTTP3Capable(n.Ptr())
 	return bool(result_)
 }

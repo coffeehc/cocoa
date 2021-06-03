@@ -22,20 +22,17 @@ type NSPDFPanel struct {
 	objc.NSObject
 }
 
-func MakePDFPanel(ptr unsafe.Pointer) *NSPDFPanel {
-	if ptr == nil {
-		return nil
-	}
-	return &NSPDFPanel{
-		NSObject: *objc.MakeObject(ptr),
+func MakePDFPanel(ptr unsafe.Pointer) NSPDFPanel {
+	return NSPDFPanel{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocPDFPanel() *NSPDFPanel {
+func AllocPDFPanel() NSPDFPanel {
 	return MakePDFPanel(C.C_PDFPanel_Alloc())
 }
 
-func (n *NSPDFPanel) Init() PDFPanel {
+func (n NSPDFPanel) Init() PDFPanel {
 	result_ := C.C_NSPDFPanel_Init(n.Ptr())
 	return MakePDFPanel(result_)
 }
@@ -45,29 +42,29 @@ func PDFPanel_Panel() PDFPanel {
 	return MakePDFPanel(result_)
 }
 
-func (n *NSPDFPanel) AccessoryController() ViewController {
+func (n NSPDFPanel) AccessoryController() ViewController {
 	result_ := C.C_NSPDFPanel_AccessoryController(n.Ptr())
 	return MakeViewController(result_)
 }
 
-func (n *NSPDFPanel) SetAccessoryController(value ViewController) {
+func (n NSPDFPanel) SetAccessoryController(value ViewController) {
 	C.C_NSPDFPanel_SetAccessoryController(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (n *NSPDFPanel) Options() PDFPanelOptions {
+func (n NSPDFPanel) Options() PDFPanelOptions {
 	result_ := C.C_NSPDFPanel_Options(n.Ptr())
 	return PDFPanelOptions(int(result_))
 }
 
-func (n *NSPDFPanel) SetOptions(value PDFPanelOptions) {
+func (n NSPDFPanel) SetOptions(value PDFPanelOptions) {
 	C.C_NSPDFPanel_SetOptions(n.Ptr(), C.int(int(value)))
 }
 
-func (n *NSPDFPanel) DefaultFileName() string {
+func (n NSPDFPanel) DefaultFileName() string {
 	result_ := C.C_NSPDFPanel_DefaultFileName(n.Ptr())
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSPDFPanel) SetDefaultFileName(value string) {
+func (n NSPDFPanel) SetDefaultFileName(value string) {
 	C.C_NSPDFPanel_SetDefaultFileName(n.Ptr(), foundation.NewString(value).Ptr())
 }

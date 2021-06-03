@@ -17,25 +17,22 @@ type NSNotification struct {
 	objc.NSObject
 }
 
-func MakeNotification(ptr unsafe.Pointer) *NSNotification {
-	if ptr == nil {
-		return nil
-	}
-	return &NSNotification{
-		NSObject: *objc.MakeObject(ptr),
+func MakeNotification(ptr unsafe.Pointer) NSNotification {
+	return NSNotification{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocNotification() *NSNotification {
+func AllocNotification() NSNotification {
 	return MakeNotification(C.C_Notification_Alloc())
 }
 
-func (n *NSNotification) Init() Notification {
+func (n NSNotification) Init() Notification {
 	result_ := C.C_NSNotification_Init(n.Ptr())
 	return MakeNotification(result_)
 }
 
-func (n *NSNotification) InitWithCoder(coder Coder) Notification {
+func (n NSNotification) InitWithCoder(coder Coder) Notification {
 	result_ := C.C_NSNotification_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeNotification(result_)
 }
@@ -45,12 +42,12 @@ func NotificationWithName_Object(aName NotificationName, anObject objc.Object) N
 	return MakeNotification(result_)
 }
 
-func (n *NSNotification) Name() NotificationName {
+func (n NSNotification) Name() NotificationName {
 	result_ := C.C_NSNotification_Name(n.Ptr())
 	return NotificationName(MakeString(result_).String())
 }
 
-func (n *NSNotification) Object() objc.Object {
+func (n NSNotification) Object() objc.Object {
 	result_ := C.C_NSNotification_Object(n.Ptr())
 	return objc.MakeObject(result_)
 }

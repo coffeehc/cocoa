@@ -17,24 +17,21 @@ type NSCollectionViewDiffableDataSource struct {
 	objc.NSObject
 }
 
-func MakeCollectionViewDiffableDataSource(ptr unsafe.Pointer) *NSCollectionViewDiffableDataSource {
-	if ptr == nil {
-		return nil
-	}
-	return &NSCollectionViewDiffableDataSource{
-		NSObject: *objc.MakeObject(ptr),
+func MakeCollectionViewDiffableDataSource(ptr unsafe.Pointer) NSCollectionViewDiffableDataSource {
+	return NSCollectionViewDiffableDataSource{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocCollectionViewDiffableDataSource() *NSCollectionViewDiffableDataSource {
+func AllocCollectionViewDiffableDataSource() NSCollectionViewDiffableDataSource {
 	return MakeCollectionViewDiffableDataSource(C.C_CollectionViewDiffableDataSource_Alloc())
 }
 
-func (n *NSCollectionViewDiffableDataSource) Snapshot() DiffableDataSourceSnapshot {
+func (n NSCollectionViewDiffableDataSource) Snapshot() DiffableDataSourceSnapshot {
 	result_ := C.C_NSCollectionViewDiffableDataSource_Snapshot(n.Ptr())
 	return MakeDiffableDataSourceSnapshot(result_)
 }
 
-func (n *NSCollectionViewDiffableDataSource) ApplySnapshot_AnimatingDifferences(snapshot DiffableDataSourceSnapshot, animatingDifferences bool) {
+func (n NSCollectionViewDiffableDataSource) ApplySnapshot_AnimatingDifferences(snapshot DiffableDataSourceSnapshot, animatingDifferences bool) {
 	C.C_NSCollectionViewDiffableDataSource_ApplySnapshot_AnimatingDifferences(n.Ptr(), objc.ExtractPtr(snapshot), C.bool(animatingDifferences))
 }

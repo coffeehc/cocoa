@@ -25,65 +25,62 @@ type NSLayoutDimension struct {
 	NSLayoutAnchor
 }
 
-func MakeLayoutDimension(ptr unsafe.Pointer) *NSLayoutDimension {
-	if ptr == nil {
-		return nil
-	}
-	return &NSLayoutDimension{
-		NSLayoutAnchor: *MakeLayoutAnchor(ptr),
+func MakeLayoutDimension(ptr unsafe.Pointer) NSLayoutDimension {
+	return NSLayoutDimension{
+		NSLayoutAnchor: MakeLayoutAnchor(ptr),
 	}
 }
 
-func AllocLayoutDimension() *NSLayoutDimension {
+func AllocLayoutDimension() NSLayoutDimension {
 	return MakeLayoutDimension(C.C_LayoutDimension_Alloc())
 }
 
-func (n *NSLayoutDimension) Init() LayoutDimension {
+func (n NSLayoutDimension) Init() LayoutDimension {
 	result_ := C.C_NSLayoutDimension_Init(n.Ptr())
 	return MakeLayoutDimension(result_)
 }
 
-func (n *NSLayoutDimension) ConstraintEqualToAnchor_Multiplier(anchor LayoutDimension, m coregraphics.Float) LayoutConstraint {
+func (n NSLayoutDimension) ConstraintEqualToAnchor_Multiplier(anchor LayoutDimension, m coregraphics.Float) LayoutConstraint {
 	result_ := C.C_NSLayoutDimension_ConstraintEqualToAnchor_Multiplier(n.Ptr(), objc.ExtractPtr(anchor), C.double(float64(m)))
 	return MakeLayoutConstraint(result_)
 }
 
-func (n *NSLayoutDimension) ConstraintEqualToAnchor_Multiplier_Constant(anchor LayoutDimension, m coregraphics.Float, c coregraphics.Float) LayoutConstraint {
+func (n NSLayoutDimension) ConstraintEqualToAnchor_Multiplier_Constant(anchor LayoutDimension, m coregraphics.Float, c coregraphics.Float) LayoutConstraint {
 	result_ := C.C_NSLayoutDimension_ConstraintEqualToAnchor_Multiplier_Constant(n.Ptr(), objc.ExtractPtr(anchor), C.double(float64(m)), C.double(float64(c)))
 	return MakeLayoutConstraint(result_)
 }
 
-func (n *NSLayoutDimension) ConstraintEqualToConstant(c coregraphics.Float) LayoutConstraint {
+func (n NSLayoutDimension) ConstraintEqualToConstant(c coregraphics.Float) LayoutConstraint {
 	result_ := C.C_NSLayoutDimension_ConstraintEqualToConstant(n.Ptr(), C.double(float64(c)))
 	return MakeLayoutConstraint(result_)
 }
 
-func (n *NSLayoutDimension) ConstraintGreaterThanOrEqualToAnchor_Multiplier(anchor LayoutDimension, m coregraphics.Float) LayoutConstraint {
+func (n NSLayoutDimension) ConstraintGreaterThanOrEqualToAnchor_Multiplier(anchor LayoutDimension, m coregraphics.Float) LayoutConstraint {
 	result_ := C.C_NSLayoutDimension_ConstraintGreaterThanOrEqualToAnchor_Multiplier(n.Ptr(), objc.ExtractPtr(anchor), C.double(float64(m)))
 	return MakeLayoutConstraint(result_)
 }
 
-func (n *NSLayoutDimension) ConstraintGreaterThanOrEqualToAnchor_Multiplier_Constant(anchor LayoutDimension, m coregraphics.Float, c coregraphics.Float) LayoutConstraint {
+func (n NSLayoutDimension) ConstraintGreaterThanOrEqualToAnchor_Multiplier_Constant(anchor LayoutDimension, m coregraphics.Float, c coregraphics.Float) LayoutConstraint {
 	result_ := C.C_NSLayoutDimension_ConstraintGreaterThanOrEqualToAnchor_Multiplier_Constant(n.Ptr(), objc.ExtractPtr(anchor), C.double(float64(m)), C.double(float64(c)))
 	return MakeLayoutConstraint(result_)
 }
 
-func (n *NSLayoutDimension) ConstraintGreaterThanOrEqualToConstant(c coregraphics.Float) LayoutConstraint {
+func (n NSLayoutDimension) ConstraintGreaterThanOrEqualToConstant(c coregraphics.Float) LayoutConstraint {
 	result_ := C.C_NSLayoutDimension_ConstraintGreaterThanOrEqualToConstant(n.Ptr(), C.double(float64(c)))
 	return MakeLayoutConstraint(result_)
 }
 
-func (n *NSLayoutDimension) ConstraintLessThanOrEqualToAnchor_Multiplier(anchor LayoutDimension, m coregraphics.Float) LayoutConstraint {
+func (n NSLayoutDimension) ConstraintLessThanOrEqualToAnchor_Multiplier(anchor LayoutDimension, m coregraphics.Float) LayoutConstraint {
 	result_ := C.C_NSLayoutDimension_ConstraintLessThanOrEqualToAnchor_Multiplier(n.Ptr(), objc.ExtractPtr(anchor), C.double(float64(m)))
 	return MakeLayoutConstraint(result_)
 }
 
-func (n *NSLayoutDimension) ConstraintLessThanOrEqualToAnchor_Multiplier_Constant(anchor LayoutDimension, m coregraphics.Float, c coregraphics.Float) LayoutConstraint {
+func (n NSLayoutDimension) ConstraintLessThanOrEqualToAnchor_Multiplier_Constant(anchor LayoutDimension, m coregraphics.Float, c coregraphics.Float) LayoutConstraint {
 	result_ := C.C_NSLayoutDimension_ConstraintLessThanOrEqualToAnchor_Multiplier_Constant(n.Ptr(), objc.ExtractPtr(anchor), C.double(float64(m)), C.double(float64(c)))
 	return MakeLayoutConstraint(result_)
 }
 
-func (n *NSLayoutDimension) ConstraintLessThanOrEqualToConstant(c coregraphics.Float) LayoutConstraint {
+func (n NSLayoutDimension) ConstraintLessThanOrEqualToConstant(c coregraphics.Float) LayoutConstraint {
 	result_ := C.C_NSLayoutDimension_ConstraintLessThanOrEqualToConstant(n.Ptr(), C.double(float64(c)))
 	return MakeLayoutConstraint(result_)
 }

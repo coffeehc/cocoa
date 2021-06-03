@@ -17,23 +17,20 @@ type WKHTTPCookieStore struct {
 	objc.NSObject
 }
 
-func MakeHTTPCookieStore(ptr unsafe.Pointer) *WKHTTPCookieStore {
-	if ptr == nil {
-		return nil
-	}
-	return &WKHTTPCookieStore{
-		NSObject: *objc.MakeObject(ptr),
+func MakeHTTPCookieStore(ptr unsafe.Pointer) WKHTTPCookieStore {
+	return WKHTTPCookieStore{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocHTTPCookieStore() *WKHTTPCookieStore {
+func AllocHTTPCookieStore() WKHTTPCookieStore {
 	return MakeHTTPCookieStore(C.C_HTTPCookieStore_Alloc())
 }
 
-func (w *WKHTTPCookieStore) AddObserver(observer objc.Object) {
+func (w WKHTTPCookieStore) AddObserver(observer objc.Object) {
 	C.C_WKHTTPCookieStore_AddObserver(w.Ptr(), objc.ExtractPtr(observer))
 }
 
-func (w *WKHTTPCookieStore) RemoveObserver(observer objc.Object) {
+func (w WKHTTPCookieStore) RemoveObserver(observer objc.Object) {
 	C.C_WKHTTPCookieStore_RemoveObserver(w.Ptr(), objc.ExtractPtr(observer))
 }

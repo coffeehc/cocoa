@@ -37,35 +37,32 @@ type NSBitmapImageRep struct {
 	NSImageRep
 }
 
-func MakeBitmapImageRep(ptr unsafe.Pointer) *NSBitmapImageRep {
-	if ptr == nil {
-		return nil
-	}
-	return &NSBitmapImageRep{
-		NSImageRep: *MakeImageRep(ptr),
+func MakeBitmapImageRep(ptr unsafe.Pointer) NSBitmapImageRep {
+	return NSBitmapImageRep{
+		NSImageRep: MakeImageRep(ptr),
 	}
 }
 
-func AllocBitmapImageRep() *NSBitmapImageRep {
+func AllocBitmapImageRep() NSBitmapImageRep {
 	return MakeBitmapImageRep(C.C_BitmapImageRep_Alloc())
 }
 
-func (n *NSBitmapImageRep) InitWithData(data []byte) BitmapImageRep {
+func (n NSBitmapImageRep) InitWithData(data []byte) BitmapImageRep {
 	result_ := C.C_NSBitmapImageRep_InitWithData(n.Ptr(), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))})
 	return MakeBitmapImageRep(result_)
 }
 
-func (n *NSBitmapImageRep) InitForIncrementalLoad() BitmapImageRep {
+func (n NSBitmapImageRep) InitForIncrementalLoad() BitmapImageRep {
 	result_ := C.C_NSBitmapImageRep_InitForIncrementalLoad(n.Ptr())
 	return MakeBitmapImageRep(result_)
 }
 
-func (n *NSBitmapImageRep) Init() BitmapImageRep {
+func (n NSBitmapImageRep) Init() BitmapImageRep {
 	result_ := C.C_NSBitmapImageRep_Init(n.Ptr())
 	return MakeBitmapImageRep(result_)
 }
 
-func (n *NSBitmapImageRep) InitWithCoder(coder foundation.Coder) BitmapImageRep {
+func (n NSBitmapImageRep) InitWithCoder(coder foundation.Coder) BitmapImageRep {
 	result_ := C.C_NSBitmapImageRep_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeBitmapImageRep(result_)
 }
@@ -86,7 +83,7 @@ func BitmapImageRep_ImageRepsWithData(data []byte) []ImageRep {
 	return goResult_
 }
 
-func (n *NSBitmapImageRep) ColorizeByMappingGray_ToColor_BlackMapping_WhiteMapping(midPoint coregraphics.Float, midPointColor Color, shadowColor Color, lightColor Color) {
+func (n NSBitmapImageRep) ColorizeByMappingGray_ToColor_BlackMapping_WhiteMapping(midPoint coregraphics.Float, midPointColor Color, shadowColor Color, lightColor Color) {
 	C.C_NSBitmapImageRep_ColorizeByMappingGray_ToColor_BlackMapping_WhiteMapping(n.Ptr(), C.double(float64(midPoint)), objc.ExtractPtr(midPointColor), objc.ExtractPtr(shadowColor), objc.ExtractPtr(lightColor))
 }
 
@@ -118,7 +115,7 @@ func BitmapImageRep_TIFFRepresentationOfImageRepsInArray_UsingCompression_Factor
 	return goResult_
 }
 
-func (n *NSBitmapImageRep) TIFFRepresentationUsingCompression_Factor(comp TIFFCompression, factor float32) []byte {
+func (n NSBitmapImageRep) TIFFRepresentationUsingCompression_Factor(comp TIFFCompression, factor float32) []byte {
 	result_ := C.C_NSBitmapImageRep_TIFFRepresentationUsingCompression_Factor(n.Ptr(), C.uint(uint(comp)), C.float(factor))
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
@@ -132,84 +129,84 @@ func BitmapImageRep_LocalizedNameForTIFFCompressionType(compression TIFFCompress
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSBitmapImageRep) CanBeCompressedUsing(compression TIFFCompression) bool {
+func (n NSBitmapImageRep) CanBeCompressedUsing(compression TIFFCompression) bool {
 	result_ := C.C_NSBitmapImageRep_CanBeCompressedUsing(n.Ptr(), C.uint(uint(compression)))
 	return bool(result_)
 }
 
-func (n *NSBitmapImageRep) SetCompression_Factor(compression TIFFCompression, factor float32) {
+func (n NSBitmapImageRep) SetCompression_Factor(compression TIFFCompression, factor float32) {
 	C.C_NSBitmapImageRep_SetCompression_Factor(n.Ptr(), C.uint(uint(compression)), C.float(factor))
 }
 
-func (n *NSBitmapImageRep) SetProperty_WithValue(property BitmapImageRepPropertyKey, value objc.Object) {
+func (n NSBitmapImageRep) SetProperty_WithValue(property BitmapImageRepPropertyKey, value objc.Object) {
 	C.C_NSBitmapImageRep_SetProperty_WithValue(n.Ptr(), foundation.NewString(string(property)).Ptr(), objc.ExtractPtr(value))
 }
 
-func (n *NSBitmapImageRep) ValueForProperty(property BitmapImageRepPropertyKey) objc.Object {
+func (n NSBitmapImageRep) ValueForProperty(property BitmapImageRepPropertyKey) objc.Object {
 	result_ := C.C_NSBitmapImageRep_ValueForProperty(n.Ptr(), foundation.NewString(string(property)).Ptr())
 	return objc.MakeObject(result_)
 }
 
-func (n *NSBitmapImageRep) IncrementalLoadFromData_Complete(data []byte, complete bool) int {
+func (n NSBitmapImageRep) IncrementalLoadFromData_Complete(data []byte, complete bool) int {
 	result_ := C.C_NSBitmapImageRep_IncrementalLoadFromData_Complete(n.Ptr(), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, C.bool(complete))
 	return int(result_)
 }
 
-func (n *NSBitmapImageRep) SetColor_AtX_Y(color Color, x int, y int) {
+func (n NSBitmapImageRep) SetColor_AtX_Y(color Color, x int, y int) {
 	C.C_NSBitmapImageRep_SetColor_AtX_Y(n.Ptr(), objc.ExtractPtr(color), C.int(x), C.int(y))
 }
 
-func (n *NSBitmapImageRep) ColorAtX_Y(x int, y int) Color {
+func (n NSBitmapImageRep) ColorAtX_Y(x int, y int) Color {
 	result_ := C.C_NSBitmapImageRep_ColorAtX_Y(n.Ptr(), C.int(x), C.int(y))
 	return MakeColor(result_)
 }
 
-func (n *NSBitmapImageRep) BitmapImageRepByConvertingToColorSpace_RenderingIntent(targetSpace ColorSpace, renderingIntent ColorRenderingIntent) BitmapImageRep {
+func (n NSBitmapImageRep) BitmapImageRepByConvertingToColorSpace_RenderingIntent(targetSpace ColorSpace, renderingIntent ColorRenderingIntent) BitmapImageRep {
 	result_ := C.C_NSBitmapImageRep_BitmapImageRepByConvertingToColorSpace_RenderingIntent(n.Ptr(), objc.ExtractPtr(targetSpace), C.int(int(renderingIntent)))
 	return MakeBitmapImageRep(result_)
 }
 
-func (n *NSBitmapImageRep) BitmapImageRepByRetaggingWithColorSpace(newSpace ColorSpace) BitmapImageRep {
+func (n NSBitmapImageRep) BitmapImageRepByRetaggingWithColorSpace(newSpace ColorSpace) BitmapImageRep {
 	result_ := C.C_NSBitmapImageRep_BitmapImageRepByRetaggingWithColorSpace(n.Ptr(), objc.ExtractPtr(newSpace))
 	return MakeBitmapImageRep(result_)
 }
 
-func (n *NSBitmapImageRep) BitmapFormat() BitmapFormat {
+func (n NSBitmapImageRep) BitmapFormat() BitmapFormat {
 	result_ := C.C_NSBitmapImageRep_BitmapFormat(n.Ptr())
 	return BitmapFormat(uint(result_))
 }
 
-func (n *NSBitmapImageRep) BitsPerPixel() int {
+func (n NSBitmapImageRep) BitsPerPixel() int {
 	result_ := C.C_NSBitmapImageRep_BitsPerPixel(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSBitmapImageRep) BytesPerPlane() int {
+func (n NSBitmapImageRep) BytesPerPlane() int {
 	result_ := C.C_NSBitmapImageRep_BytesPerPlane(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSBitmapImageRep) BytesPerRow() int {
+func (n NSBitmapImageRep) BytesPerRow() int {
 	result_ := C.C_NSBitmapImageRep_BytesPerRow(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSBitmapImageRep) IsPlanar() bool {
+func (n NSBitmapImageRep) IsPlanar() bool {
 	result_ := C.C_NSBitmapImageRep_IsPlanar(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSBitmapImageRep) NumberOfPlanes() int {
+func (n NSBitmapImageRep) NumberOfPlanes() int {
 	result_ := C.C_NSBitmapImageRep_NumberOfPlanes(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSBitmapImageRep) SamplesPerPixel() int {
+func (n NSBitmapImageRep) SamplesPerPixel() int {
 	result_ := C.C_NSBitmapImageRep_SamplesPerPixel(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSBitmapImageRep) TIFFRepresentation() []byte {
+func (n NSBitmapImageRep) TIFFRepresentation() []byte {
 	result_ := C.C_NSBitmapImageRep_TIFFRepresentation(n.Ptr())
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
@@ -218,7 +215,7 @@ func (n *NSBitmapImageRep) TIFFRepresentation() []byte {
 	return goResult_
 }
 
-func (n *NSBitmapImageRep) ColorSpace() ColorSpace {
+func (n NSBitmapImageRep) ColorSpace() ColorSpace {
 	result_ := C.C_NSBitmapImageRep_ColorSpace(n.Ptr())
 	return MakeColorSpace(result_)
 }

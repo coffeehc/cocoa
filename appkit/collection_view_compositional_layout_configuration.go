@@ -22,43 +22,40 @@ type NSCollectionViewCompositionalLayoutConfiguration struct {
 	objc.NSObject
 }
 
-func MakeCollectionViewCompositionalLayoutConfiguration(ptr unsafe.Pointer) *NSCollectionViewCompositionalLayoutConfiguration {
-	if ptr == nil {
-		return nil
-	}
-	return &NSCollectionViewCompositionalLayoutConfiguration{
-		NSObject: *objc.MakeObject(ptr),
+func MakeCollectionViewCompositionalLayoutConfiguration(ptr unsafe.Pointer) NSCollectionViewCompositionalLayoutConfiguration {
+	return NSCollectionViewCompositionalLayoutConfiguration{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocCollectionViewCompositionalLayoutConfiguration() *NSCollectionViewCompositionalLayoutConfiguration {
+func AllocCollectionViewCompositionalLayoutConfiguration() NSCollectionViewCompositionalLayoutConfiguration {
 	return MakeCollectionViewCompositionalLayoutConfiguration(C.C_CollectionViewCompositionalLayoutConfiguration_Alloc())
 }
 
-func (n *NSCollectionViewCompositionalLayoutConfiguration) Init() CollectionViewCompositionalLayoutConfiguration {
+func (n NSCollectionViewCompositionalLayoutConfiguration) Init() CollectionViewCompositionalLayoutConfiguration {
 	result_ := C.C_NSCollectionViewCompositionalLayoutConfiguration_Init(n.Ptr())
 	return MakeCollectionViewCompositionalLayoutConfiguration(result_)
 }
 
-func (n *NSCollectionViewCompositionalLayoutConfiguration) ScrollDirection() CollectionViewScrollDirection {
+func (n NSCollectionViewCompositionalLayoutConfiguration) ScrollDirection() CollectionViewScrollDirection {
 	result_ := C.C_NSCollectionViewCompositionalLayoutConfiguration_ScrollDirection(n.Ptr())
 	return CollectionViewScrollDirection(int(result_))
 }
 
-func (n *NSCollectionViewCompositionalLayoutConfiguration) SetScrollDirection(value CollectionViewScrollDirection) {
+func (n NSCollectionViewCompositionalLayoutConfiguration) SetScrollDirection(value CollectionViewScrollDirection) {
 	C.C_NSCollectionViewCompositionalLayoutConfiguration_SetScrollDirection(n.Ptr(), C.int(int(value)))
 }
 
-func (n *NSCollectionViewCompositionalLayoutConfiguration) InterSectionSpacing() coregraphics.Float {
+func (n NSCollectionViewCompositionalLayoutConfiguration) InterSectionSpacing() coregraphics.Float {
 	result_ := C.C_NSCollectionViewCompositionalLayoutConfiguration_InterSectionSpacing(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSCollectionViewCompositionalLayoutConfiguration) SetInterSectionSpacing(value coregraphics.Float) {
+func (n NSCollectionViewCompositionalLayoutConfiguration) SetInterSectionSpacing(value coregraphics.Float) {
 	C.C_NSCollectionViewCompositionalLayoutConfiguration_SetInterSectionSpacing(n.Ptr(), C.double(float64(value)))
 }
 
-func (n *NSCollectionViewCompositionalLayoutConfiguration) BoundarySupplementaryItems() []CollectionLayoutBoundarySupplementaryItem {
+func (n NSCollectionViewCompositionalLayoutConfiguration) BoundarySupplementaryItems() []CollectionLayoutBoundarySupplementaryItem {
 	result_ := C.C_NSCollectionViewCompositionalLayoutConfiguration_BoundarySupplementaryItems(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -69,7 +66,7 @@ func (n *NSCollectionViewCompositionalLayoutConfiguration) BoundarySupplementary
 	return goResult_
 }
 
-func (n *NSCollectionViewCompositionalLayoutConfiguration) SetBoundarySupplementaryItems(value []CollectionLayoutBoundarySupplementaryItem) {
+func (n NSCollectionViewCompositionalLayoutConfiguration) SetBoundarySupplementaryItems(value []CollectionLayoutBoundarySupplementaryItem) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = objc.ExtractPtr(v)

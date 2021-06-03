@@ -22,20 +22,17 @@ type NSPersonNameComponentsFormatter struct {
 	NSFormatter
 }
 
-func MakePersonNameComponentsFormatter(ptr unsafe.Pointer) *NSPersonNameComponentsFormatter {
-	if ptr == nil {
-		return nil
-	}
-	return &NSPersonNameComponentsFormatter{
-		NSFormatter: *MakeFormatter(ptr),
+func MakePersonNameComponentsFormatter(ptr unsafe.Pointer) NSPersonNameComponentsFormatter {
+	return NSPersonNameComponentsFormatter{
+		NSFormatter: MakeFormatter(ptr),
 	}
 }
 
-func AllocPersonNameComponentsFormatter() *NSPersonNameComponentsFormatter {
+func AllocPersonNameComponentsFormatter() NSPersonNameComponentsFormatter {
 	return MakePersonNameComponentsFormatter(C.C_PersonNameComponentsFormatter_Alloc())
 }
 
-func (n *NSPersonNameComponentsFormatter) Init() PersonNameComponentsFormatter {
+func (n NSPersonNameComponentsFormatter) Init() PersonNameComponentsFormatter {
 	result_ := C.C_NSPersonNameComponentsFormatter_Init(n.Ptr())
 	return MakePersonNameComponentsFormatter(result_)
 }
@@ -45,35 +42,35 @@ func PersonNameComponentsFormatter_LocalizedStringFromPersonNameComponents_Style
 	return MakeString(result_).String()
 }
 
-func (n *NSPersonNameComponentsFormatter) StringFromPersonNameComponents(components PersonNameComponents) string {
+func (n NSPersonNameComponentsFormatter) StringFromPersonNameComponents(components PersonNameComponents) string {
 	result_ := C.C_NSPersonNameComponentsFormatter_StringFromPersonNameComponents(n.Ptr(), objc.ExtractPtr(components))
 	return MakeString(result_).String()
 }
 
-func (n *NSPersonNameComponentsFormatter) AnnotatedStringFromPersonNameComponents(components PersonNameComponents) AttributedString {
+func (n NSPersonNameComponentsFormatter) AnnotatedStringFromPersonNameComponents(components PersonNameComponents) AttributedString {
 	result_ := C.C_NSPersonNameComponentsFormatter_AnnotatedStringFromPersonNameComponents(n.Ptr(), objc.ExtractPtr(components))
 	return MakeAttributedString(result_)
 }
 
-func (n *NSPersonNameComponentsFormatter) PersonNameComponentsFromString(_string string) PersonNameComponents {
+func (n NSPersonNameComponentsFormatter) PersonNameComponentsFromString(_string string) PersonNameComponents {
 	result_ := C.C_NSPersonNameComponentsFormatter_PersonNameComponentsFromString(n.Ptr(), NewString(_string).Ptr())
 	return MakePersonNameComponents(result_)
 }
 
-func (n *NSPersonNameComponentsFormatter) Style() PersonNameComponentsFormatterStyle {
+func (n NSPersonNameComponentsFormatter) Style() PersonNameComponentsFormatterStyle {
 	result_ := C.C_NSPersonNameComponentsFormatter_Style(n.Ptr())
 	return PersonNameComponentsFormatterStyle(int(result_))
 }
 
-func (n *NSPersonNameComponentsFormatter) SetStyle(value PersonNameComponentsFormatterStyle) {
+func (n NSPersonNameComponentsFormatter) SetStyle(value PersonNameComponentsFormatterStyle) {
 	C.C_NSPersonNameComponentsFormatter_SetStyle(n.Ptr(), C.int(int(value)))
 }
 
-func (n *NSPersonNameComponentsFormatter) IsPhonetic() bool {
+func (n NSPersonNameComponentsFormatter) IsPhonetic() bool {
 	result_ := C.C_NSPersonNameComponentsFormatter_IsPhonetic(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSPersonNameComponentsFormatter) SetPhonetic(value bool) {
+func (n NSPersonNameComponentsFormatter) SetPhonetic(value bool) {
 	C.C_NSPersonNameComponentsFormatter_SetPhonetic(n.Ptr(), C.bool(value))
 }

@@ -19,25 +19,22 @@ type NSDiffableDataSourceSnapshot struct {
 	objc.NSObject
 }
 
-func MakeDiffableDataSourceSnapshot(ptr unsafe.Pointer) *NSDiffableDataSourceSnapshot {
-	if ptr == nil {
-		return nil
-	}
-	return &NSDiffableDataSourceSnapshot{
-		NSObject: *objc.MakeObject(ptr),
+func MakeDiffableDataSourceSnapshot(ptr unsafe.Pointer) NSDiffableDataSourceSnapshot {
+	return NSDiffableDataSourceSnapshot{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocDiffableDataSourceSnapshot() *NSDiffableDataSourceSnapshot {
+func AllocDiffableDataSourceSnapshot() NSDiffableDataSourceSnapshot {
 	return MakeDiffableDataSourceSnapshot(C.C_DiffableDataSourceSnapshot_Alloc())
 }
 
-func (n *NSDiffableDataSourceSnapshot) Init() DiffableDataSourceSnapshot {
+func (n NSDiffableDataSourceSnapshot) Init() DiffableDataSourceSnapshot {
 	result_ := C.C_NSDiffableDataSourceSnapshot_Init(n.Ptr())
 	return MakeDiffableDataSourceSnapshot(result_)
 }
 
-func (n *NSDiffableDataSourceSnapshot) AppendSectionsWithIdentifiers(sectionIdentifiers []objc.Object) {
+func (n NSDiffableDataSourceSnapshot) AppendSectionsWithIdentifiers(sectionIdentifiers []objc.Object) {
 	cSectionIdentifiersData := make([]unsafe.Pointer, len(sectionIdentifiers))
 	for idx, v := range sectionIdentifiers {
 		cSectionIdentifiersData[idx] = objc.ExtractPtr(v)
@@ -46,16 +43,16 @@ func (n *NSDiffableDataSourceSnapshot) AppendSectionsWithIdentifiers(sectionIden
 	C.C_NSDiffableDataSourceSnapshot_AppendSectionsWithIdentifiers(n.Ptr(), cSectionIdentifiers)
 }
 
-func (n *NSDiffableDataSourceSnapshot) DeleteAllItems() {
+func (n NSDiffableDataSourceSnapshot) DeleteAllItems() {
 	C.C_NSDiffableDataSourceSnapshot_DeleteAllItems(n.Ptr())
 }
 
-func (n *NSDiffableDataSourceSnapshot) NumberOfItems() int {
+func (n NSDiffableDataSourceSnapshot) NumberOfItems() int {
 	result_ := C.C_NSDiffableDataSourceSnapshot_NumberOfItems(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSDiffableDataSourceSnapshot) NumberOfSections() int {
+func (n NSDiffableDataSourceSnapshot) NumberOfSections() int {
 	result_ := C.C_NSDiffableDataSourceSnapshot_NumberOfSections(n.Ptr())
 	return int(result_)
 }

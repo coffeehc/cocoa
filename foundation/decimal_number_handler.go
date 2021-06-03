@@ -15,20 +15,17 @@ type NSDecimalNumberHandler struct {
 	objc.NSObject
 }
 
-func MakeDecimalNumberHandler(ptr unsafe.Pointer) *NSDecimalNumberHandler {
-	if ptr == nil {
-		return nil
-	}
-	return &NSDecimalNumberHandler{
-		NSObject: *objc.MakeObject(ptr),
+func MakeDecimalNumberHandler(ptr unsafe.Pointer) NSDecimalNumberHandler {
+	return NSDecimalNumberHandler{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocDecimalNumberHandler() *NSDecimalNumberHandler {
+func AllocDecimalNumberHandler() NSDecimalNumberHandler {
 	return MakeDecimalNumberHandler(C.C_DecimalNumberHandler_Alloc())
 }
 
-func (n *NSDecimalNumberHandler) Init() DecimalNumberHandler {
+func (n NSDecimalNumberHandler) Init() DecimalNumberHandler {
 	result_ := C.C_NSDecimalNumberHandler_Init(n.Ptr())
 	return MakeDecimalNumberHandler(result_)
 }

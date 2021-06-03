@@ -17,30 +17,27 @@ type NSSecureTextField struct {
 	NSTextField
 }
 
-func MakeSecureTextField(ptr unsafe.Pointer) *NSSecureTextField {
-	if ptr == nil {
-		return nil
-	}
-	return &NSSecureTextField{
-		NSTextField: *MakeTextField(ptr),
+func MakeSecureTextField(ptr unsafe.Pointer) NSSecureTextField {
+	return NSSecureTextField{
+		NSTextField: MakeTextField(ptr),
 	}
 }
 
-func AllocSecureTextField() *NSSecureTextField {
+func AllocSecureTextField() NSSecureTextField {
 	return MakeSecureTextField(C.C_SecureTextField_Alloc())
 }
 
-func (n *NSSecureTextField) InitWithFrame(frameRect foundation.Rect) SecureTextField {
+func (n NSSecureTextField) InitWithFrame(frameRect foundation.Rect) SecureTextField {
 	result_ := C.C_NSSecureTextField_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeSecureTextField(result_)
 }
 
-func (n *NSSecureTextField) InitWithCoder(coder foundation.Coder) SecureTextField {
+func (n NSSecureTextField) InitWithCoder(coder foundation.Coder) SecureTextField {
 	result_ := C.C_NSSecureTextField_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeSecureTextField(result_)
 }
 
-func (n *NSSecureTextField) Init() SecureTextField {
+func (n NSSecureTextField) Init() SecureTextField {
 	result_ := C.C_NSSecureTextField_Init(n.Ptr())
 	return MakeSecureTextField(result_)
 }

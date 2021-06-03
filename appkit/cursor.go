@@ -21,30 +21,27 @@ type NSCursor struct {
 	objc.NSObject
 }
 
-func MakeCursor(ptr unsafe.Pointer) *NSCursor {
-	if ptr == nil {
-		return nil
-	}
-	return &NSCursor{
-		NSObject: *objc.MakeObject(ptr),
+func MakeCursor(ptr unsafe.Pointer) NSCursor {
+	return NSCursor{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocCursor() *NSCursor {
+func AllocCursor() NSCursor {
 	return MakeCursor(C.C_Cursor_Alloc())
 }
 
-func (n *NSCursor) InitWithImage_HotSpot(newImage Image, point foundation.Point) Cursor {
+func (n NSCursor) InitWithImage_HotSpot(newImage Image, point foundation.Point) Cursor {
 	result_ := C.C_NSCursor_InitWithImage_HotSpot(n.Ptr(), objc.ExtractPtr(newImage), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))))
 	return MakeCursor(result_)
 }
 
-func (n *NSCursor) InitWithCoder(coder foundation.Coder) Cursor {
+func (n NSCursor) InitWithCoder(coder foundation.Coder) Cursor {
 	result_ := C.C_NSCursor_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeCursor(result_)
 }
 
-func (n *NSCursor) Init() Cursor {
+func (n NSCursor) Init() Cursor {
 	result_ := C.C_NSCursor_Init(n.Ptr())
 	return MakeCursor(result_)
 }
@@ -65,20 +62,20 @@ func Cursor_Pop() {
 	C.C_NSCursor_Cursor_Pop()
 }
 
-func (n *NSCursor) Push() {
+func (n NSCursor) Push() {
 	C.C_NSCursor_Push(n.Ptr())
 }
 
-func (n *NSCursor) Set() {
+func (n NSCursor) Set() {
 	C.C_NSCursor_Set(n.Ptr())
 }
 
-func (n *NSCursor) Image() Image {
+func (n NSCursor) Image() Image {
 	result_ := C.C_NSCursor_Image(n.Ptr())
 	return MakeImage(result_)
 }
 
-func (n *NSCursor) HotSpot() foundation.Point {
+func (n NSCursor) HotSpot() foundation.Point {
 	result_ := C.C_NSCursor_HotSpot(n.Ptr())
 	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
 }

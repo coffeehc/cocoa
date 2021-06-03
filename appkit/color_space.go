@@ -20,25 +20,22 @@ type NSColorSpace struct {
 	objc.NSObject
 }
 
-func MakeColorSpace(ptr unsafe.Pointer) *NSColorSpace {
-	if ptr == nil {
-		return nil
-	}
-	return &NSColorSpace{
-		NSObject: *objc.MakeObject(ptr),
+func MakeColorSpace(ptr unsafe.Pointer) NSColorSpace {
+	return NSColorSpace{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocColorSpace() *NSColorSpace {
+func AllocColorSpace() NSColorSpace {
 	return MakeColorSpace(C.C_ColorSpace_Alloc())
 }
 
-func (n *NSColorSpace) InitWithICCProfileData(iccData []byte) ColorSpace {
+func (n NSColorSpace) InitWithICCProfileData(iccData []byte) ColorSpace {
 	result_ := C.C_NSColorSpace_InitWithICCProfileData(n.Ptr(), C.Array{data: unsafe.Pointer(&iccData[0]), len: C.int(len(iccData))})
 	return MakeColorSpace(result_)
 }
 
-func (n *NSColorSpace) Init() ColorSpace {
+func (n NSColorSpace) Init() ColorSpace {
 	result_ := C.C_NSColorSpace_Init(n.Ptr())
 	return MakeColorSpace(result_)
 }
@@ -114,12 +111,12 @@ func AdobeRGB1998ColorSpace() ColorSpace {
 	return MakeColorSpace(result_)
 }
 
-func (n *NSColorSpace) ColorSpaceModel() ColorSpaceModel {
+func (n NSColorSpace) ColorSpaceModel() ColorSpaceModel {
 	result_ := C.C_NSColorSpace_ColorSpaceModel(n.Ptr())
 	return ColorSpaceModel(int(result_))
 }
 
-func (n *NSColorSpace) ICCProfileData() []byte {
+func (n NSColorSpace) ICCProfileData() []byte {
 	result_ := C.C_NSColorSpace_ICCProfileData(n.Ptr())
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
@@ -128,12 +125,12 @@ func (n *NSColorSpace) ICCProfileData() []byte {
 	return goResult_
 }
 
-func (n *NSColorSpace) LocalizedName() string {
+func (n NSColorSpace) LocalizedName() string {
 	result_ := C.C_NSColorSpace_LocalizedName(n.Ptr())
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSColorSpace) NumberOfColorComponents() int {
+func (n NSColorSpace) NumberOfColorComponents() int {
 	result_ := C.C_NSColorSpace_NumberOfColorComponents(n.Ptr())
 	return int(result_)
 }

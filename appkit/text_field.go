@@ -61,30 +61,27 @@ type NSTextField struct {
 	NSControl
 }
 
-func MakeTextField(ptr unsafe.Pointer) *NSTextField {
-	if ptr == nil {
-		return nil
-	}
-	return &NSTextField{
-		NSControl: *MakeControl(ptr),
+func MakeTextField(ptr unsafe.Pointer) NSTextField {
+	return NSTextField{
+		NSControl: MakeControl(ptr),
 	}
 }
 
-func AllocTextField() *NSTextField {
+func AllocTextField() NSTextField {
 	return MakeTextField(C.C_TextField_Alloc())
 }
 
-func (n *NSTextField) InitWithFrame(frameRect foundation.Rect) TextField {
+func (n NSTextField) InitWithFrame(frameRect foundation.Rect) TextField {
 	result_ := C.C_NSTextField_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeTextField(result_)
 }
 
-func (n *NSTextField) InitWithCoder(coder foundation.Coder) TextField {
+func (n NSTextField) InitWithCoder(coder foundation.Coder) TextField {
 	result_ := C.C_NSTextField_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeTextField(result_)
 }
 
-func (n *NSTextField) Init() TextField {
+func (n NSTextField) Init() TextField {
 	result_ := C.C_NSTextField_Init(n.Ptr())
 	return MakeTextField(result_)
 }
@@ -109,199 +106,199 @@ func TextField_WrappingLabelWithString(stringValue string) TextField {
 	return MakeTextField(result_)
 }
 
-func (n *NSTextField) SelectText(sender objc.Object) {
+func (n NSTextField) SelectText(sender objc.Object) {
 	C.C_NSTextField_SelectText(n.Ptr(), objc.ExtractPtr(sender))
 }
 
-func (n *NSTextField) TextShouldBeginEditing(textObject Text) bool {
+func (n NSTextField) TextShouldBeginEditing(textObject Text) bool {
 	result_ := C.C_NSTextField_TextShouldBeginEditing(n.Ptr(), objc.ExtractPtr(textObject))
 	return bool(result_)
 }
 
-func (n *NSTextField) TextDidBeginEditing(notification foundation.Notification) {
+func (n NSTextField) TextDidBeginEditing(notification foundation.Notification) {
 	C.C_NSTextField_TextDidBeginEditing(n.Ptr(), objc.ExtractPtr(notification))
 }
 
-func (n *NSTextField) TextDidChange(notification foundation.Notification) {
+func (n NSTextField) TextDidChange(notification foundation.Notification) {
 	C.C_NSTextField_TextDidChange(n.Ptr(), objc.ExtractPtr(notification))
 }
 
-func (n *NSTextField) TextShouldEndEditing(textObject Text) bool {
+func (n NSTextField) TextShouldEndEditing(textObject Text) bool {
 	result_ := C.C_NSTextField_TextShouldEndEditing(n.Ptr(), objc.ExtractPtr(textObject))
 	return bool(result_)
 }
 
-func (n *NSTextField) TextDidEndEditing(notification foundation.Notification) {
+func (n NSTextField) TextDidEndEditing(notification foundation.Notification) {
 	C.C_NSTextField_TextDidEndEditing(n.Ptr(), objc.ExtractPtr(notification))
 }
 
-func (n *NSTextField) IsSelectable() bool {
+func (n NSTextField) IsSelectable() bool {
 	result_ := C.C_NSTextField_IsSelectable(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTextField) SetSelectable(value bool) {
+func (n NSTextField) SetSelectable(value bool) {
 	C.C_NSTextField_SetSelectable(n.Ptr(), C.bool(value))
 }
 
-func (n *NSTextField) IsEditable() bool {
+func (n NSTextField) IsEditable() bool {
 	result_ := C.C_NSTextField_IsEditable(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTextField) SetEditable(value bool) {
+func (n NSTextField) SetEditable(value bool) {
 	C.C_NSTextField_SetEditable(n.Ptr(), C.bool(value))
 }
 
-func (n *NSTextField) AllowsEditingTextAttributes() bool {
+func (n NSTextField) AllowsEditingTextAttributes() bool {
 	result_ := C.C_NSTextField_AllowsEditingTextAttributes(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTextField) SetAllowsEditingTextAttributes(value bool) {
+func (n NSTextField) SetAllowsEditingTextAttributes(value bool) {
 	C.C_NSTextField_SetAllowsEditingTextAttributes(n.Ptr(), C.bool(value))
 }
 
-func (n *NSTextField) ImportsGraphics() bool {
+func (n NSTextField) ImportsGraphics() bool {
 	result_ := C.C_NSTextField_ImportsGraphics(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTextField) SetImportsGraphics(value bool) {
+func (n NSTextField) SetImportsGraphics(value bool) {
 	C.C_NSTextField_SetImportsGraphics(n.Ptr(), C.bool(value))
 }
 
-func (n *NSTextField) PlaceholderString() string {
+func (n NSTextField) PlaceholderString() string {
 	result_ := C.C_NSTextField_PlaceholderString(n.Ptr())
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSTextField) SetPlaceholderString(value string) {
+func (n NSTextField) SetPlaceholderString(value string) {
 	C.C_NSTextField_SetPlaceholderString(n.Ptr(), foundation.NewString(value).Ptr())
 }
 
-func (n *NSTextField) PlaceholderAttributedString() foundation.AttributedString {
+func (n NSTextField) PlaceholderAttributedString() foundation.AttributedString {
 	result_ := C.C_NSTextField_PlaceholderAttributedString(n.Ptr())
 	return foundation.MakeAttributedString(result_)
 }
 
-func (n *NSTextField) SetPlaceholderAttributedString(value foundation.AttributedString) {
+func (n NSTextField) SetPlaceholderAttributedString(value foundation.AttributedString) {
 	C.C_NSTextField_SetPlaceholderAttributedString(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (n *NSTextField) AllowsDefaultTighteningForTruncation() bool {
+func (n NSTextField) AllowsDefaultTighteningForTruncation() bool {
 	result_ := C.C_NSTextField_AllowsDefaultTighteningForTruncation(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTextField) SetAllowsDefaultTighteningForTruncation(value bool) {
+func (n NSTextField) SetAllowsDefaultTighteningForTruncation(value bool) {
 	C.C_NSTextField_SetAllowsDefaultTighteningForTruncation(n.Ptr(), C.bool(value))
 }
 
-func (n *NSTextField) MaximumNumberOfLines() int {
+func (n NSTextField) MaximumNumberOfLines() int {
 	result_ := C.C_NSTextField_MaximumNumberOfLines(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSTextField) SetMaximumNumberOfLines(value int) {
+func (n NSTextField) SetMaximumNumberOfLines(value int) {
 	C.C_NSTextField_SetMaximumNumberOfLines(n.Ptr(), C.int(value))
 }
 
-func (n *NSTextField) PreferredMaxLayoutWidth() coregraphics.Float {
+func (n NSTextField) PreferredMaxLayoutWidth() coregraphics.Float {
 	result_ := C.C_NSTextField_PreferredMaxLayoutWidth(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSTextField) SetPreferredMaxLayoutWidth(value coregraphics.Float) {
+func (n NSTextField) SetPreferredMaxLayoutWidth(value coregraphics.Float) {
 	C.C_NSTextField_SetPreferredMaxLayoutWidth(n.Ptr(), C.double(float64(value)))
 }
 
-func (n *NSTextField) TextColor() Color {
+func (n NSTextField) TextColor() Color {
 	result_ := C.C_NSTextField_TextColor(n.Ptr())
 	return MakeColor(result_)
 }
 
-func (n *NSTextField) SetTextColor(value Color) {
+func (n NSTextField) SetTextColor(value Color) {
 	C.C_NSTextField_SetTextColor(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (n *NSTextField) BackgroundColor() Color {
+func (n NSTextField) BackgroundColor() Color {
 	result_ := C.C_NSTextField_BackgroundColor(n.Ptr())
 	return MakeColor(result_)
 }
 
-func (n *NSTextField) SetBackgroundColor(value Color) {
+func (n NSTextField) SetBackgroundColor(value Color) {
 	C.C_NSTextField_SetBackgroundColor(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (n *NSTextField) DrawsBackground() bool {
+func (n NSTextField) DrawsBackground() bool {
 	result_ := C.C_NSTextField_DrawsBackground(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTextField) SetDrawsBackground(value bool) {
+func (n NSTextField) SetDrawsBackground(value bool) {
 	C.C_NSTextField_SetDrawsBackground(n.Ptr(), C.bool(value))
 }
 
-func (n *NSTextField) IsBezeled() bool {
+func (n NSTextField) IsBezeled() bool {
 	result_ := C.C_NSTextField_IsBezeled(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTextField) SetBezeled(value bool) {
+func (n NSTextField) SetBezeled(value bool) {
 	C.C_NSTextField_SetBezeled(n.Ptr(), C.bool(value))
 }
 
-func (n *NSTextField) BezelStyle() TextFieldBezelStyle {
+func (n NSTextField) BezelStyle() TextFieldBezelStyle {
 	result_ := C.C_NSTextField_BezelStyle(n.Ptr())
 	return TextFieldBezelStyle(uint(result_))
 }
 
-func (n *NSTextField) SetBezelStyle(value TextFieldBezelStyle) {
+func (n NSTextField) SetBezelStyle(value TextFieldBezelStyle) {
 	C.C_NSTextField_SetBezelStyle(n.Ptr(), C.uint(uint(value)))
 }
 
-func (n *NSTextField) IsBordered() bool {
+func (n NSTextField) IsBordered() bool {
 	result_ := C.C_NSTextField_IsBordered(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTextField) SetBordered(value bool) {
+func (n NSTextField) SetBordered(value bool) {
 	C.C_NSTextField_SetBordered(n.Ptr(), C.bool(value))
 }
 
-func (n *NSTextField) AllowsCharacterPickerTouchBarItem() bool {
+func (n NSTextField) AllowsCharacterPickerTouchBarItem() bool {
 	result_ := C.C_NSTextField_AllowsCharacterPickerTouchBarItem(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTextField) SetAllowsCharacterPickerTouchBarItem(value bool) {
+func (n NSTextField) SetAllowsCharacterPickerTouchBarItem(value bool) {
 	C.C_NSTextField_SetAllowsCharacterPickerTouchBarItem(n.Ptr(), C.bool(value))
 }
 
-func (n *NSTextField) IsAutomaticTextCompletionEnabled() bool {
+func (n NSTextField) IsAutomaticTextCompletionEnabled() bool {
 	result_ := C.C_NSTextField_IsAutomaticTextCompletionEnabled(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTextField) SetAutomaticTextCompletionEnabled(value bool) {
+func (n NSTextField) SetAutomaticTextCompletionEnabled(value bool) {
 	C.C_NSTextField_SetAutomaticTextCompletionEnabled(n.Ptr(), C.bool(value))
 }
 
-func (n *NSTextField) Delegate() objc.Object {
+func (n NSTextField) Delegate() objc.Object {
 	result_ := C.C_NSTextField_Delegate(n.Ptr())
 	return objc.MakeObject(result_)
 }
 
-func (n *NSTextField) SetDelegate(value objc.Object) {
+func (n NSTextField) SetDelegate(value objc.Object) {
 	C.C_NSTextField_SetDelegate(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (n *NSTextField) LineBreakStrategy() LineBreakStrategy {
+func (n NSTextField) LineBreakStrategy() LineBreakStrategy {
 	result_ := C.C_NSTextField_LineBreakStrategy(n.Ptr())
 	return LineBreakStrategy(uint(result_))
 }
 
-func (n *NSTextField) SetLineBreakStrategy(value LineBreakStrategy) {
+func (n NSTextField) SetLineBreakStrategy(value LineBreakStrategy) {
 	C.C_NSTextField_SetLineBreakStrategy(n.Ptr(), C.uint(uint(value)))
 }

@@ -35,20 +35,17 @@ type NSLayoutConstraint struct {
 	objc.NSObject
 }
 
-func MakeLayoutConstraint(ptr unsafe.Pointer) *NSLayoutConstraint {
-	if ptr == nil {
-		return nil
-	}
-	return &NSLayoutConstraint{
-		NSObject: *objc.MakeObject(ptr),
+func MakeLayoutConstraint(ptr unsafe.Pointer) NSLayoutConstraint {
+	return NSLayoutConstraint{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocLayoutConstraint() *NSLayoutConstraint {
+func AllocLayoutConstraint() NSLayoutConstraint {
 	return MakeLayoutConstraint(C.C_LayoutConstraint_Alloc())
 }
 
-func (n *NSLayoutConstraint) Init() LayoutConstraint {
+func (n NSLayoutConstraint) Init() LayoutConstraint {
 	result_ := C.C_NSLayoutConstraint_Init(n.Ptr())
 	return MakeLayoutConstraint(result_)
 }
@@ -76,87 +73,87 @@ func LayoutConstraint_DeactivateConstraints(constraints []LayoutConstraint) {
 	C.C_NSLayoutConstraint_LayoutConstraint_DeactivateConstraints(cConstraints)
 }
 
-func (n *NSLayoutConstraint) IsActive() bool {
+func (n NSLayoutConstraint) IsActive() bool {
 	result_ := C.C_NSLayoutConstraint_IsActive(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSLayoutConstraint) SetActive(value bool) {
+func (n NSLayoutConstraint) SetActive(value bool) {
 	C.C_NSLayoutConstraint_SetActive(n.Ptr(), C.bool(value))
 }
 
-func (n *NSLayoutConstraint) FirstItem() objc.Object {
+func (n NSLayoutConstraint) FirstItem() objc.Object {
 	result_ := C.C_NSLayoutConstraint_FirstItem(n.Ptr())
 	return objc.MakeObject(result_)
 }
 
-func (n *NSLayoutConstraint) FirstAttribute() LayoutAttribute {
+func (n NSLayoutConstraint) FirstAttribute() LayoutAttribute {
 	result_ := C.C_NSLayoutConstraint_FirstAttribute(n.Ptr())
 	return LayoutAttribute(int(result_))
 }
 
-func (n *NSLayoutConstraint) Relation() LayoutRelation {
+func (n NSLayoutConstraint) Relation() LayoutRelation {
 	result_ := C.C_NSLayoutConstraint_Relation(n.Ptr())
 	return LayoutRelation(int(result_))
 }
 
-func (n *NSLayoutConstraint) SecondItem() objc.Object {
+func (n NSLayoutConstraint) SecondItem() objc.Object {
 	result_ := C.C_NSLayoutConstraint_SecondItem(n.Ptr())
 	return objc.MakeObject(result_)
 }
 
-func (n *NSLayoutConstraint) SecondAttribute() LayoutAttribute {
+func (n NSLayoutConstraint) SecondAttribute() LayoutAttribute {
 	result_ := C.C_NSLayoutConstraint_SecondAttribute(n.Ptr())
 	return LayoutAttribute(int(result_))
 }
 
-func (n *NSLayoutConstraint) Multiplier() coregraphics.Float {
+func (n NSLayoutConstraint) Multiplier() coregraphics.Float {
 	result_ := C.C_NSLayoutConstraint_Multiplier(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSLayoutConstraint) Constant() coregraphics.Float {
+func (n NSLayoutConstraint) Constant() coregraphics.Float {
 	result_ := C.C_NSLayoutConstraint_Constant(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSLayoutConstraint) SetConstant(value coregraphics.Float) {
+func (n NSLayoutConstraint) SetConstant(value coregraphics.Float) {
 	C.C_NSLayoutConstraint_SetConstant(n.Ptr(), C.double(float64(value)))
 }
 
-func (n *NSLayoutConstraint) FirstAnchor() LayoutAnchor {
+func (n NSLayoutConstraint) FirstAnchor() LayoutAnchor {
 	result_ := C.C_NSLayoutConstraint_FirstAnchor(n.Ptr())
 	return MakeLayoutAnchor(result_)
 }
 
-func (n *NSLayoutConstraint) SecondAnchor() LayoutAnchor {
+func (n NSLayoutConstraint) SecondAnchor() LayoutAnchor {
 	result_ := C.C_NSLayoutConstraint_SecondAnchor(n.Ptr())
 	return MakeLayoutAnchor(result_)
 }
 
-func (n *NSLayoutConstraint) Priority() LayoutPriority {
+func (n NSLayoutConstraint) Priority() LayoutPriority {
 	result_ := C.C_NSLayoutConstraint_Priority(n.Ptr())
 	return LayoutPriority(float32(result_))
 }
 
-func (n *NSLayoutConstraint) SetPriority(value LayoutPriority) {
+func (n NSLayoutConstraint) SetPriority(value LayoutPriority) {
 	C.C_NSLayoutConstraint_SetPriority(n.Ptr(), C.float(float32(value)))
 }
 
-func (n *NSLayoutConstraint) Identifier() string {
+func (n NSLayoutConstraint) Identifier() string {
 	result_ := C.C_NSLayoutConstraint_Identifier(n.Ptr())
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSLayoutConstraint) SetIdentifier(value string) {
+func (n NSLayoutConstraint) SetIdentifier(value string) {
 	C.C_NSLayoutConstraint_SetIdentifier(n.Ptr(), foundation.NewString(value).Ptr())
 }
 
-func (n *NSLayoutConstraint) ShouldBeArchived() bool {
+func (n NSLayoutConstraint) ShouldBeArchived() bool {
 	result_ := C.C_NSLayoutConstraint_ShouldBeArchived(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSLayoutConstraint) SetShouldBeArchived(value bool) {
+func (n NSLayoutConstraint) SetShouldBeArchived(value bool) {
 	C.C_NSLayoutConstraint_SetShouldBeArchived(n.Ptr(), C.bool(value))
 }

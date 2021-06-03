@@ -33,7 +33,7 @@ func pathCellDelegate_PathCell_WillPopUpMenu(id int64, pathCell unsafe.Pointer, 
 
 //export PathCellDelegate_RespondsTo
 func PathCellDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
-	sel := objc.MakeSelector(selectorPtr)
+	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
 	delegate := resources.Get(id).(*PathCellDelegate)
 	switch selName {

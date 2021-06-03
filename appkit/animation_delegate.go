@@ -56,7 +56,7 @@ func animationDelegate_Animation_DidReachProgressMark(id int64, animation unsafe
 
 //export AnimationDelegate_RespondsTo
 func AnimationDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
-	sel := objc.MakeSelector(selectorPtr)
+	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
 	delegate := resources.Get(id).(*AnimationDelegate)
 	switch selName {

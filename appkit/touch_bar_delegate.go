@@ -28,7 +28,7 @@ func touchBarDelegate_TouchBar_MakeItemForIdentifier(id int64, touchBar unsafe.P
 
 //export TouchBarDelegate_RespondsTo
 func TouchBarDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
-	sel := objc.MakeSelector(selectorPtr)
+	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
 	delegate := resources.Get(id).(*TouchBarDelegate)
 	switch selName {

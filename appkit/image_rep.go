@@ -36,25 +36,22 @@ type NSImageRep struct {
 	objc.NSObject
 }
 
-func MakeImageRep(ptr unsafe.Pointer) *NSImageRep {
-	if ptr == nil {
-		return nil
-	}
-	return &NSImageRep{
-		NSObject: *objc.MakeObject(ptr),
+func MakeImageRep(ptr unsafe.Pointer) NSImageRep {
+	return NSImageRep{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocImageRep() *NSImageRep {
+func AllocImageRep() NSImageRep {
 	return MakeImageRep(C.C_ImageRep_Alloc())
 }
 
-func (n *NSImageRep) Init() ImageRep {
+func (n NSImageRep) Init() ImageRep {
 	result_ := C.C_NSImageRep_Init(n.Ptr())
 	return MakeImageRep(result_)
 }
 
-func (n *NSImageRep) InitWithCoder(coder foundation.Coder) ImageRep {
+func (n NSImageRep) InitWithCoder(coder foundation.Coder) ImageRep {
 	result_ := C.C_NSImageRep_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeImageRep(result_)
 }
@@ -117,17 +114,17 @@ func ImageRep_CanInitWithPasteboard(pasteboard Pasteboard) bool {
 	return bool(result_)
 }
 
-func (n *NSImageRep) Draw() bool {
+func (n NSImageRep) Draw() bool {
 	result_ := C.C_NSImageRep_Draw(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSImageRep) DrawAtPoint(point foundation.Point) bool {
+func (n NSImageRep) DrawAtPoint(point foundation.Point) bool {
 	result_ := C.C_NSImageRep_DrawAtPoint(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))))
 	return bool(result_)
 }
 
-func (n *NSImageRep) DrawInRect(rect foundation.Rect) bool {
+func (n NSImageRep) DrawInRect(rect foundation.Rect) bool {
 	result_ := C.C_NSImageRep_DrawInRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
 	return bool(result_)
 }
@@ -154,74 +151,74 @@ func ImageRep_ImageUnfilteredTypes() []string {
 	return goResult_
 }
 
-func (n *NSImageRep) Size() foundation.Size {
+func (n NSImageRep) Size() foundation.Size {
 	result_ := C.C_NSImageRep_Size(n.Ptr())
 	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
-func (n *NSImageRep) SetSize(value foundation.Size) {
+func (n NSImageRep) SetSize(value foundation.Size) {
 	C.C_NSImageRep_SetSize(n.Ptr(), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(value))))
 }
 
-func (n *NSImageRep) BitsPerSample() int {
+func (n NSImageRep) BitsPerSample() int {
 	result_ := C.C_NSImageRep_BitsPerSample(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSImageRep) SetBitsPerSample(value int) {
+func (n NSImageRep) SetBitsPerSample(value int) {
 	C.C_NSImageRep_SetBitsPerSample(n.Ptr(), C.int(value))
 }
 
-func (n *NSImageRep) ColorSpaceName() ColorSpaceName {
+func (n NSImageRep) ColorSpaceName() ColorSpaceName {
 	result_ := C.C_NSImageRep_ColorSpaceName(n.Ptr())
 	return ColorSpaceName(foundation.MakeString(result_).String())
 }
 
-func (n *NSImageRep) SetColorSpaceName(value ColorSpaceName) {
+func (n NSImageRep) SetColorSpaceName(value ColorSpaceName) {
 	C.C_NSImageRep_SetColorSpaceName(n.Ptr(), foundation.NewString(string(value)).Ptr())
 }
 
-func (n *NSImageRep) HasAlpha() bool {
+func (n NSImageRep) HasAlpha() bool {
 	result_ := C.C_NSImageRep_HasAlpha(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSImageRep) SetAlpha(value bool) {
+func (n NSImageRep) SetAlpha(value bool) {
 	C.C_NSImageRep_SetAlpha(n.Ptr(), C.bool(value))
 }
 
-func (n *NSImageRep) IsOpaque() bool {
+func (n NSImageRep) IsOpaque() bool {
 	result_ := C.C_NSImageRep_IsOpaque(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSImageRep) SetOpaque(value bool) {
+func (n NSImageRep) SetOpaque(value bool) {
 	C.C_NSImageRep_SetOpaque(n.Ptr(), C.bool(value))
 }
 
-func (n *NSImageRep) PixelsHigh() int {
+func (n NSImageRep) PixelsHigh() int {
 	result_ := C.C_NSImageRep_PixelsHigh(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSImageRep) SetPixelsHigh(value int) {
+func (n NSImageRep) SetPixelsHigh(value int) {
 	C.C_NSImageRep_SetPixelsHigh(n.Ptr(), C.int(value))
 }
 
-func (n *NSImageRep) PixelsWide() int {
+func (n NSImageRep) PixelsWide() int {
 	result_ := C.C_NSImageRep_PixelsWide(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSImageRep) SetPixelsWide(value int) {
+func (n NSImageRep) SetPixelsWide(value int) {
 	C.C_NSImageRep_SetPixelsWide(n.Ptr(), C.int(value))
 }
 
-func (n *NSImageRep) LayoutDirection() ImageLayoutDirection {
+func (n NSImageRep) LayoutDirection() ImageLayoutDirection {
 	result_ := C.C_NSImageRep_LayoutDirection(n.Ptr())
 	return ImageLayoutDirection(int(result_))
 }
 
-func (n *NSImageRep) SetLayoutDirection(value ImageLayoutDirection) {
+func (n NSImageRep) SetLayoutDirection(value ImageLayoutDirection) {
 	C.C_NSImageRep_SetLayoutDirection(n.Ptr(), C.int(int(value)))
 }

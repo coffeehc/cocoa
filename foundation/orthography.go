@@ -21,25 +21,22 @@ type NSOrthography struct {
 	objc.NSObject
 }
 
-func MakeOrthography(ptr unsafe.Pointer) *NSOrthography {
-	if ptr == nil {
-		return nil
-	}
-	return &NSOrthography{
-		NSObject: *objc.MakeObject(ptr),
+func MakeOrthography(ptr unsafe.Pointer) NSOrthography {
+	return NSOrthography{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocOrthography() *NSOrthography {
+func AllocOrthography() NSOrthography {
 	return MakeOrthography(C.C_Orthography_Alloc())
 }
 
-func (n *NSOrthography) InitWithCoder(coder Coder) Orthography {
+func (n NSOrthography) InitWithCoder(coder Coder) Orthography {
 	result_ := C.C_NSOrthography_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeOrthography(result_)
 }
 
-func (n *NSOrthography) Init() Orthography {
+func (n NSOrthography) Init() Orthography {
 	result_ := C.C_NSOrthography_Init(n.Ptr())
 	return MakeOrthography(result_)
 }
@@ -49,12 +46,12 @@ func Orthography_DefaultOrthographyForLanguage(language string) Orthography {
 	return MakeOrthography(result_)
 }
 
-func (n *NSOrthography) DominantLanguageForScript(script string) string {
+func (n NSOrthography) DominantLanguageForScript(script string) string {
 	result_ := C.C_NSOrthography_DominantLanguageForScript(n.Ptr(), NewString(script).Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSOrthography) LanguagesForScript(script string) []string {
+func (n NSOrthography) LanguagesForScript(script string) []string {
 	result_ := C.C_NSOrthography_LanguagesForScript(n.Ptr(), NewString(script).Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -65,17 +62,17 @@ func (n *NSOrthography) LanguagesForScript(script string) []string {
 	return goResult_
 }
 
-func (n *NSOrthography) DominantLanguage() string {
+func (n NSOrthography) DominantLanguage() string {
 	result_ := C.C_NSOrthography_DominantLanguage(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSOrthography) DominantScript() string {
+func (n NSOrthography) DominantScript() string {
 	result_ := C.C_NSOrthography_DominantScript(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSOrthography) AllScripts() []string {
+func (n NSOrthography) AllScripts() []string {
 	result_ := C.C_NSOrthography_AllScripts(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -86,7 +83,7 @@ func (n *NSOrthography) AllScripts() []string {
 	return goResult_
 }
 
-func (n *NSOrthography) AllLanguages() []string {
+func (n NSOrthography) AllLanguages() []string {
 	result_ := C.C_NSOrthography_AllLanguages(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]

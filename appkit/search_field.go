@@ -32,62 +32,59 @@ type NSSearchField struct {
 	NSTextField
 }
 
-func MakeSearchField(ptr unsafe.Pointer) *NSSearchField {
-	if ptr == nil {
-		return nil
-	}
-	return &NSSearchField{
-		NSTextField: *MakeTextField(ptr),
+func MakeSearchField(ptr unsafe.Pointer) NSSearchField {
+	return NSSearchField{
+		NSTextField: MakeTextField(ptr),
 	}
 }
 
-func AllocSearchField() *NSSearchField {
+func AllocSearchField() NSSearchField {
 	return MakeSearchField(C.C_SearchField_Alloc())
 }
 
-func (n *NSSearchField) InitWithFrame(frameRect foundation.Rect) SearchField {
+func (n NSSearchField) InitWithFrame(frameRect foundation.Rect) SearchField {
 	result_ := C.C_NSSearchField_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeSearchField(result_)
 }
 
-func (n *NSSearchField) InitWithCoder(coder foundation.Coder) SearchField {
+func (n NSSearchField) InitWithCoder(coder foundation.Coder) SearchField {
 	result_ := C.C_NSSearchField_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeSearchField(result_)
 }
 
-func (n *NSSearchField) Init() SearchField {
+func (n NSSearchField) Init() SearchField {
 	result_ := C.C_NSSearchField_Init(n.Ptr())
 	return MakeSearchField(result_)
 }
 
-func (n *NSSearchField) SearchMenuTemplate() Menu {
+func (n NSSearchField) SearchMenuTemplate() Menu {
 	result_ := C.C_NSSearchField_SearchMenuTemplate(n.Ptr())
 	return MakeMenu(result_)
 }
 
-func (n *NSSearchField) SetSearchMenuTemplate(value Menu) {
+func (n NSSearchField) SetSearchMenuTemplate(value Menu) {
 	C.C_NSSearchField_SetSearchMenuTemplate(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (n *NSSearchField) SendsSearchStringImmediately() bool {
+func (n NSSearchField) SendsSearchStringImmediately() bool {
 	result_ := C.C_NSSearchField_SendsSearchStringImmediately(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSSearchField) SetSendsSearchStringImmediately(value bool) {
+func (n NSSearchField) SetSendsSearchStringImmediately(value bool) {
 	C.C_NSSearchField_SetSendsSearchStringImmediately(n.Ptr(), C.bool(value))
 }
 
-func (n *NSSearchField) SendsWholeSearchString() bool {
+func (n NSSearchField) SendsWholeSearchString() bool {
 	result_ := C.C_NSSearchField_SendsWholeSearchString(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSSearchField) SetSendsWholeSearchString(value bool) {
+func (n NSSearchField) SetSendsWholeSearchString(value bool) {
 	C.C_NSSearchField_SetSendsWholeSearchString(n.Ptr(), C.bool(value))
 }
 
-func (n *NSSearchField) RecentSearches() []string {
+func (n NSSearchField) RecentSearches() []string {
 	result_ := C.C_NSSearchField_RecentSearches(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -98,7 +95,7 @@ func (n *NSSearchField) RecentSearches() []string {
 	return goResult_
 }
 
-func (n *NSSearchField) SetRecentSearches(value []string) {
+func (n NSSearchField) SetRecentSearches(value []string) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = foundation.NewString(v).Ptr()
@@ -107,35 +104,35 @@ func (n *NSSearchField) SetRecentSearches(value []string) {
 	C.C_NSSearchField_SetRecentSearches(n.Ptr(), cValue)
 }
 
-func (n *NSSearchField) MaximumRecents() int {
+func (n NSSearchField) MaximumRecents() int {
 	result_ := C.C_NSSearchField_MaximumRecents(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSSearchField) SetMaximumRecents(value int) {
+func (n NSSearchField) SetMaximumRecents(value int) {
 	C.C_NSSearchField_SetMaximumRecents(n.Ptr(), C.int(value))
 }
 
-func (n *NSSearchField) RecentsAutosaveName() SearchFieldRecentsAutosaveName {
+func (n NSSearchField) RecentsAutosaveName() SearchFieldRecentsAutosaveName {
 	result_ := C.C_NSSearchField_RecentsAutosaveName(n.Ptr())
 	return SearchFieldRecentsAutosaveName(foundation.MakeString(result_).String())
 }
 
-func (n *NSSearchField) SetRecentsAutosaveName(value SearchFieldRecentsAutosaveName) {
+func (n NSSearchField) SetRecentsAutosaveName(value SearchFieldRecentsAutosaveName) {
 	C.C_NSSearchField_SetRecentsAutosaveName(n.Ptr(), foundation.NewString(string(value)).Ptr())
 }
 
-func (n *NSSearchField) CancelButtonBounds() foundation.Rect {
+func (n NSSearchField) CancelButtonBounds() foundation.Rect {
 	result_ := C.C_NSSearchField_CancelButtonBounds(n.Ptr())
 	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
-func (n *NSSearchField) SearchButtonBounds() foundation.Rect {
+func (n NSSearchField) SearchButtonBounds() foundation.Rect {
 	result_ := C.C_NSSearchField_SearchButtonBounds(n.Ptr())
 	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
-func (n *NSSearchField) SearchTextBounds() foundation.Rect {
+func (n NSSearchField) SearchTextBounds() foundation.Rect {
 	result_ := C.C_NSSearchField_SearchTextBounds(n.Ptr())
 	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }

@@ -15,20 +15,17 @@ type WKProcessPool struct {
 	objc.NSObject
 }
 
-func MakeProcessPool(ptr unsafe.Pointer) *WKProcessPool {
-	if ptr == nil {
-		return nil
-	}
-	return &WKProcessPool{
-		NSObject: *objc.MakeObject(ptr),
+func MakeProcessPool(ptr unsafe.Pointer) WKProcessPool {
+	return WKProcessPool{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocProcessPool() *WKProcessPool {
+func AllocProcessPool() WKProcessPool {
 	return MakeProcessPool(C.C_ProcessPool_Alloc())
 }
 
-func (w *WKProcessPool) Init() ProcessPool {
+func (w WKProcessPool) Init() ProcessPool {
 	result_ := C.C_WKProcessPool_Init(w.Ptr())
 	return MakeProcessPool(result_)
 }

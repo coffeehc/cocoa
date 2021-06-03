@@ -52,7 +52,7 @@ func comboBoxDataSource_NumberOfItemsInComboBox(id int64, comboBox unsafe.Pointe
 
 //export ComboBoxDataSource_RespondsTo
 func ComboBoxDataSource_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
-	sel := objc.MakeSelector(selectorPtr)
+	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
 	delegate := resources.Get(id).(*ComboBoxDataSource)
 	switch selName {

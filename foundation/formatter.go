@@ -17,30 +17,27 @@ type NSFormatter struct {
 	objc.NSObject
 }
 
-func MakeFormatter(ptr unsafe.Pointer) *NSFormatter {
-	if ptr == nil {
-		return nil
-	}
-	return &NSFormatter{
-		NSObject: *objc.MakeObject(ptr),
+func MakeFormatter(ptr unsafe.Pointer) NSFormatter {
+	return NSFormatter{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocFormatter() *NSFormatter {
+func AllocFormatter() NSFormatter {
 	return MakeFormatter(C.C_Formatter_Alloc())
 }
 
-func (n *NSFormatter) Init() Formatter {
+func (n NSFormatter) Init() Formatter {
 	result_ := C.C_NSFormatter_Init(n.Ptr())
 	return MakeFormatter(result_)
 }
 
-func (n *NSFormatter) StringForObjectValue(obj objc.Object) string {
+func (n NSFormatter) StringForObjectValue(obj objc.Object) string {
 	result_ := C.C_NSFormatter_StringForObjectValue(n.Ptr(), objc.ExtractPtr(obj))
 	return MakeString(result_).String()
 }
 
-func (n *NSFormatter) EditingStringForObjectValue(obj objc.Object) string {
+func (n NSFormatter) EditingStringForObjectValue(obj objc.Object) string {
 	result_ := C.C_NSFormatter_EditingStringForObjectValue(n.Ptr(), objc.ExtractPtr(obj))
 	return MakeString(result_).String()
 }

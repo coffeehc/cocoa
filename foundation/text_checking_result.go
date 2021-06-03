@@ -29,25 +29,22 @@ type NSTextCheckingResult struct {
 	objc.NSObject
 }
 
-func MakeTextCheckingResult(ptr unsafe.Pointer) *NSTextCheckingResult {
-	if ptr == nil {
-		return nil
-	}
-	return &NSTextCheckingResult{
-		NSObject: *objc.MakeObject(ptr),
+func MakeTextCheckingResult(ptr unsafe.Pointer) NSTextCheckingResult {
+	return NSTextCheckingResult{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocTextCheckingResult() *NSTextCheckingResult {
+func AllocTextCheckingResult() NSTextCheckingResult {
 	return MakeTextCheckingResult(C.C_TextCheckingResult_Alloc())
 }
 
-func (n *NSTextCheckingResult) Init() TextCheckingResult {
+func (n NSTextCheckingResult) Init() TextCheckingResult {
 	result_ := C.C_NSTextCheckingResult_Init(n.Ptr())
 	return MakeTextCheckingResult(result_)
 }
 
-func (n *NSTextCheckingResult) RangeAtIndex(idx uint) Range {
+func (n NSTextCheckingResult) RangeAtIndex(idx uint) Range {
 	result_ := C.C_NSTextCheckingResult_RangeAtIndex(n.Ptr(), C.uint(idx))
 	return FromNSRangePointer(unsafe.Pointer(&result_))
 }
@@ -102,12 +99,12 @@ func TextCheckingResult_OrthographyCheckingResultWithRange_Orthography(_range Ra
 	return MakeTextCheckingResult(result_)
 }
 
-func (n *NSTextCheckingResult) ResultByAdjustingRangesWithOffset(offset int) TextCheckingResult {
+func (n NSTextCheckingResult) ResultByAdjustingRangesWithOffset(offset int) TextCheckingResult {
 	result_ := C.C_NSTextCheckingResult_ResultByAdjustingRangesWithOffset(n.Ptr(), C.int(offset))
 	return MakeTextCheckingResult(result_)
 }
 
-func (n *NSTextCheckingResult) RangeWithName(name string) Range {
+func (n NSTextCheckingResult) RangeWithName(name string) Range {
 	result_ := C.C_NSTextCheckingResult_RangeWithName(n.Ptr(), NewString(name).Ptr())
 	return FromNSRangePointer(unsafe.Pointer(&result_))
 }
@@ -122,57 +119,57 @@ func TextCheckingResult_CorrectionCheckingResultWithRange_ReplacementString_Alte
 	return MakeTextCheckingResult(result_)
 }
 
-func (n *NSTextCheckingResult) Range() Range {
+func (n NSTextCheckingResult) Range() Range {
 	result_ := C.C_NSTextCheckingResult_Range(n.Ptr())
 	return FromNSRangePointer(unsafe.Pointer(&result_))
 }
 
-func (n *NSTextCheckingResult) NumberOfRanges() uint {
+func (n NSTextCheckingResult) NumberOfRanges() uint {
 	result_ := C.C_NSTextCheckingResult_NumberOfRanges(n.Ptr())
 	return uint(result_)
 }
 
-func (n *NSTextCheckingResult) ReplacementString() string {
+func (n NSTextCheckingResult) ReplacementString() string {
 	result_ := C.C_NSTextCheckingResult_ReplacementString(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSTextCheckingResult) RegularExpression() RegularExpression {
+func (n NSTextCheckingResult) RegularExpression() RegularExpression {
 	result_ := C.C_NSTextCheckingResult_RegularExpression(n.Ptr())
 	return MakeRegularExpression(result_)
 }
 
-func (n *NSTextCheckingResult) URL() URL {
+func (n NSTextCheckingResult) URL() URL {
 	result_ := C.C_NSTextCheckingResult_URL(n.Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSTextCheckingResult) PhoneNumber() string {
+func (n NSTextCheckingResult) PhoneNumber() string {
 	result_ := C.C_NSTextCheckingResult_PhoneNumber(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSTextCheckingResult) Date() Date {
+func (n NSTextCheckingResult) Date() Date {
 	result_ := C.C_NSTextCheckingResult_Date(n.Ptr())
 	return MakeDate(result_)
 }
 
-func (n *NSTextCheckingResult) Duration() TimeInterval {
+func (n NSTextCheckingResult) Duration() TimeInterval {
 	result_ := C.C_NSTextCheckingResult_Duration(n.Ptr())
 	return TimeInterval(float64(result_))
 }
 
-func (n *NSTextCheckingResult) TimeZone() TimeZone {
+func (n NSTextCheckingResult) TimeZone() TimeZone {
 	result_ := C.C_NSTextCheckingResult_TimeZone(n.Ptr())
 	return MakeTimeZone(result_)
 }
 
-func (n *NSTextCheckingResult) Orthography() Orthography {
+func (n NSTextCheckingResult) Orthography() Orthography {
 	result_ := C.C_NSTextCheckingResult_Orthography(n.Ptr())
 	return MakeOrthography(result_)
 }
 
-func (n *NSTextCheckingResult) AlternativeStrings() []string {
+func (n NSTextCheckingResult) AlternativeStrings() []string {
 	result_ := C.C_NSTextCheckingResult_AlternativeStrings(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]

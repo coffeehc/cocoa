@@ -31,20 +31,17 @@ type NSCollectionViewLayoutAttributes struct {
 	objc.NSObject
 }
 
-func MakeCollectionViewLayoutAttributes(ptr unsafe.Pointer) *NSCollectionViewLayoutAttributes {
-	if ptr == nil {
-		return nil
-	}
-	return &NSCollectionViewLayoutAttributes{
-		NSObject: *objc.MakeObject(ptr),
+func MakeCollectionViewLayoutAttributes(ptr unsafe.Pointer) NSCollectionViewLayoutAttributes {
+	return NSCollectionViewLayoutAttributes{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocCollectionViewLayoutAttributes() *NSCollectionViewLayoutAttributes {
+func AllocCollectionViewLayoutAttributes() NSCollectionViewLayoutAttributes {
 	return MakeCollectionViewLayoutAttributes(C.C_CollectionViewLayoutAttributes_Alloc())
 }
 
-func (n *NSCollectionViewLayoutAttributes) Init() CollectionViewLayoutAttributes {
+func (n NSCollectionViewLayoutAttributes) Init() CollectionViewLayoutAttributes {
 	result_ := C.C_NSCollectionViewLayoutAttributes_Init(n.Ptr())
 	return MakeCollectionViewLayoutAttributes(result_)
 }
@@ -69,66 +66,66 @@ func CollectionViewLayoutAttributes_LayoutAttributesForInterItemGapBeforeIndexPa
 	return MakeCollectionViewLayoutAttributes(result_)
 }
 
-func (n *NSCollectionViewLayoutAttributes) RepresentedElementCategory() CollectionElementCategory {
+func (n NSCollectionViewLayoutAttributes) RepresentedElementCategory() CollectionElementCategory {
 	result_ := C.C_NSCollectionViewLayoutAttributes_RepresentedElementCategory(n.Ptr())
 	return CollectionElementCategory(int(result_))
 }
 
-func (n *NSCollectionViewLayoutAttributes) IndexPath() foundation.IndexPath {
+func (n NSCollectionViewLayoutAttributes) IndexPath() foundation.IndexPath {
 	result_ := C.C_NSCollectionViewLayoutAttributes_IndexPath(n.Ptr())
 	return foundation.MakeIndexPath(result_)
 }
 
-func (n *NSCollectionViewLayoutAttributes) SetIndexPath(value foundation.IndexPath) {
+func (n NSCollectionViewLayoutAttributes) SetIndexPath(value foundation.IndexPath) {
 	C.C_NSCollectionViewLayoutAttributes_SetIndexPath(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (n *NSCollectionViewLayoutAttributes) RepresentedElementKind() string {
+func (n NSCollectionViewLayoutAttributes) RepresentedElementKind() string {
 	result_ := C.C_NSCollectionViewLayoutAttributes_RepresentedElementKind(n.Ptr())
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSCollectionViewLayoutAttributes) Frame() foundation.Rect {
+func (n NSCollectionViewLayoutAttributes) Frame() foundation.Rect {
 	result_ := C.C_NSCollectionViewLayoutAttributes_Frame(n.Ptr())
 	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
-func (n *NSCollectionViewLayoutAttributes) SetFrame(value foundation.Rect) {
+func (n NSCollectionViewLayoutAttributes) SetFrame(value foundation.Rect) {
 	C.C_NSCollectionViewLayoutAttributes_SetFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(value))))
 }
 
-func (n *NSCollectionViewLayoutAttributes) Size() foundation.Size {
+func (n NSCollectionViewLayoutAttributes) Size() foundation.Size {
 	result_ := C.C_NSCollectionViewLayoutAttributes_Size(n.Ptr())
 	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
-func (n *NSCollectionViewLayoutAttributes) SetSize(value foundation.Size) {
+func (n NSCollectionViewLayoutAttributes) SetSize(value foundation.Size) {
 	C.C_NSCollectionViewLayoutAttributes_SetSize(n.Ptr(), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(value))))
 }
 
-func (n *NSCollectionViewLayoutAttributes) Alpha() coregraphics.Float {
+func (n NSCollectionViewLayoutAttributes) Alpha() coregraphics.Float {
 	result_ := C.C_NSCollectionViewLayoutAttributes_Alpha(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSCollectionViewLayoutAttributes) SetAlpha(value coregraphics.Float) {
+func (n NSCollectionViewLayoutAttributes) SetAlpha(value coregraphics.Float) {
 	C.C_NSCollectionViewLayoutAttributes_SetAlpha(n.Ptr(), C.double(float64(value)))
 }
 
-func (n *NSCollectionViewLayoutAttributes) IsHidden() bool {
+func (n NSCollectionViewLayoutAttributes) IsHidden() bool {
 	result_ := C.C_NSCollectionViewLayoutAttributes_IsHidden(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSCollectionViewLayoutAttributes) SetHidden(value bool) {
+func (n NSCollectionViewLayoutAttributes) SetHidden(value bool) {
 	C.C_NSCollectionViewLayoutAttributes_SetHidden(n.Ptr(), C.bool(value))
 }
 
-func (n *NSCollectionViewLayoutAttributes) ZIndex() int {
+func (n NSCollectionViewLayoutAttributes) ZIndex() int {
 	result_ := C.C_NSCollectionViewLayoutAttributes_ZIndex(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSCollectionViewLayoutAttributes) SetZIndex(value int) {
+func (n NSCollectionViewLayoutAttributes) SetZIndex(value int) {
 	C.C_NSCollectionViewLayoutAttributes_SetZIndex(n.Ptr(), C.int(value))
 }

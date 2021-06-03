@@ -57,7 +57,7 @@ func textDelegate_TextDidEndEditing(id int64, notification unsafe.Pointer) {
 
 //export TextDelegate_RespondsTo
 func TextDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
-	sel := objc.MakeSelector(selectorPtr)
+	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
 	delegate := resources.Get(id).(*TextDelegate)
 	switch selName {

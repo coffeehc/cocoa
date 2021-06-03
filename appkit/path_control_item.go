@@ -23,52 +23,49 @@ type NSPathControlItem struct {
 	objc.NSObject
 }
 
-func MakePathControlItem(ptr unsafe.Pointer) *NSPathControlItem {
-	if ptr == nil {
-		return nil
-	}
-	return &NSPathControlItem{
-		NSObject: *objc.MakeObject(ptr),
+func MakePathControlItem(ptr unsafe.Pointer) NSPathControlItem {
+	return NSPathControlItem{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocPathControlItem() *NSPathControlItem {
+func AllocPathControlItem() NSPathControlItem {
 	return MakePathControlItem(C.C_PathControlItem_Alloc())
 }
 
-func (n *NSPathControlItem) Init() PathControlItem {
+func (n NSPathControlItem) Init() PathControlItem {
 	result_ := C.C_NSPathControlItem_Init(n.Ptr())
 	return MakePathControlItem(result_)
 }
 
-func (n *NSPathControlItem) URL() foundation.URL {
+func (n NSPathControlItem) URL() foundation.URL {
 	result_ := C.C_NSPathControlItem_URL(n.Ptr())
 	return foundation.MakeURL(result_)
 }
 
-func (n *NSPathControlItem) AttributedTitle() foundation.AttributedString {
+func (n NSPathControlItem) AttributedTitle() foundation.AttributedString {
 	result_ := C.C_NSPathControlItem_AttributedTitle(n.Ptr())
 	return foundation.MakeAttributedString(result_)
 }
 
-func (n *NSPathControlItem) SetAttributedTitle(value foundation.AttributedString) {
+func (n NSPathControlItem) SetAttributedTitle(value foundation.AttributedString) {
 	C.C_NSPathControlItem_SetAttributedTitle(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (n *NSPathControlItem) Image() Image {
+func (n NSPathControlItem) Image() Image {
 	result_ := C.C_NSPathControlItem_Image(n.Ptr())
 	return MakeImage(result_)
 }
 
-func (n *NSPathControlItem) SetImage(value Image) {
+func (n NSPathControlItem) SetImage(value Image) {
 	C.C_NSPathControlItem_SetImage(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (n *NSPathControlItem) Title() string {
+func (n NSPathControlItem) Title() string {
 	result_ := C.C_NSPathControlItem_Title(n.Ptr())
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSPathControlItem) SetTitle(value string) {
+func (n NSPathControlItem) SetTitle(value string) {
 	C.C_NSPathControlItem_SetTitle(n.Ptr(), foundation.NewString(value).Ptr())
 }

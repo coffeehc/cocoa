@@ -48,7 +48,7 @@ func tabViewDelegate_TabView_DidSelectTabViewItem(id int64, tabView unsafe.Point
 
 //export TabViewDelegate_RespondsTo
 func TabViewDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
-	sel := objc.MakeSelector(selectorPtr)
+	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
 	delegate := resources.Get(id).(*TabViewDelegate)
 	switch selName {

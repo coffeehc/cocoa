@@ -33,88 +33,85 @@ type NSCollectionViewGridLayout struct {
 	NSCollectionViewLayout
 }
 
-func MakeCollectionViewGridLayout(ptr unsafe.Pointer) *NSCollectionViewGridLayout {
-	if ptr == nil {
-		return nil
-	}
-	return &NSCollectionViewGridLayout{
-		NSCollectionViewLayout: *MakeCollectionViewLayout(ptr),
+func MakeCollectionViewGridLayout(ptr unsafe.Pointer) NSCollectionViewGridLayout {
+	return NSCollectionViewGridLayout{
+		NSCollectionViewLayout: MakeCollectionViewLayout(ptr),
 	}
 }
 
-func AllocCollectionViewGridLayout() *NSCollectionViewGridLayout {
+func AllocCollectionViewGridLayout() NSCollectionViewGridLayout {
 	return MakeCollectionViewGridLayout(C.C_CollectionViewGridLayout_Alloc())
 }
 
-func (n *NSCollectionViewGridLayout) Init() CollectionViewGridLayout {
+func (n NSCollectionViewGridLayout) Init() CollectionViewGridLayout {
 	result_ := C.C_NSCollectionViewGridLayout_Init(n.Ptr())
 	return MakeCollectionViewGridLayout(result_)
 }
 
-func (n *NSCollectionViewGridLayout) MaximumNumberOfRows() uint {
+func (n NSCollectionViewGridLayout) MaximumNumberOfRows() uint {
 	result_ := C.C_NSCollectionViewGridLayout_MaximumNumberOfRows(n.Ptr())
 	return uint(result_)
 }
 
-func (n *NSCollectionViewGridLayout) SetMaximumNumberOfRows(value uint) {
+func (n NSCollectionViewGridLayout) SetMaximumNumberOfRows(value uint) {
 	C.C_NSCollectionViewGridLayout_SetMaximumNumberOfRows(n.Ptr(), C.uint(value))
 }
 
-func (n *NSCollectionViewGridLayout) MaximumNumberOfColumns() uint {
+func (n NSCollectionViewGridLayout) MaximumNumberOfColumns() uint {
 	result_ := C.C_NSCollectionViewGridLayout_MaximumNumberOfColumns(n.Ptr())
 	return uint(result_)
 }
 
-func (n *NSCollectionViewGridLayout) SetMaximumNumberOfColumns(value uint) {
+func (n NSCollectionViewGridLayout) SetMaximumNumberOfColumns(value uint) {
 	C.C_NSCollectionViewGridLayout_SetMaximumNumberOfColumns(n.Ptr(), C.uint(value))
 }
 
-func (n *NSCollectionViewGridLayout) MinimumItemSize() foundation.Size {
+func (n NSCollectionViewGridLayout) MinimumItemSize() foundation.Size {
 	result_ := C.C_NSCollectionViewGridLayout_MinimumItemSize(n.Ptr())
 	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
-func (n *NSCollectionViewGridLayout) SetMinimumItemSize(value foundation.Size) {
+func (n NSCollectionViewGridLayout) SetMinimumItemSize(value foundation.Size) {
 	C.C_NSCollectionViewGridLayout_SetMinimumItemSize(n.Ptr(), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(value))))
 }
 
-func (n *NSCollectionViewGridLayout) MaximumItemSize() foundation.Size {
+func (n NSCollectionViewGridLayout) MaximumItemSize() foundation.Size {
 	result_ := C.C_NSCollectionViewGridLayout_MaximumItemSize(n.Ptr())
 	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
-func (n *NSCollectionViewGridLayout) SetMaximumItemSize(value foundation.Size) {
+func (n NSCollectionViewGridLayout) SetMaximumItemSize(value foundation.Size) {
 	C.C_NSCollectionViewGridLayout_SetMaximumItemSize(n.Ptr(), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(value))))
 }
 
-func (n *NSCollectionViewGridLayout) MinimumInteritemSpacing() coregraphics.Float {
+func (n NSCollectionViewGridLayout) MinimumInteritemSpacing() coregraphics.Float {
 	result_ := C.C_NSCollectionViewGridLayout_MinimumInteritemSpacing(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSCollectionViewGridLayout) SetMinimumInteritemSpacing(value coregraphics.Float) {
+func (n NSCollectionViewGridLayout) SetMinimumInteritemSpacing(value coregraphics.Float) {
 	C.C_NSCollectionViewGridLayout_SetMinimumInteritemSpacing(n.Ptr(), C.double(float64(value)))
 }
 
-func (n *NSCollectionViewGridLayout) MinimumLineSpacing() coregraphics.Float {
+func (n NSCollectionViewGridLayout) MinimumLineSpacing() coregraphics.Float {
 	result_ := C.C_NSCollectionViewGridLayout_MinimumLineSpacing(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSCollectionViewGridLayout) SetMinimumLineSpacing(value coregraphics.Float) {
+func (n NSCollectionViewGridLayout) SetMinimumLineSpacing(value coregraphics.Float) {
 	C.C_NSCollectionViewGridLayout_SetMinimumLineSpacing(n.Ptr(), C.double(float64(value)))
 }
 
-func (n *NSCollectionViewGridLayout) Margins() foundation.EdgeInsets {
+func (n NSCollectionViewGridLayout) Margins() foundation.EdgeInsets {
 	result_ := C.C_NSCollectionViewGridLayout_Margins(n.Ptr())
 	return foundation.FromNSEdgeInsetsPointer(unsafe.Pointer(&result_))
 }
 
-func (n *NSCollectionViewGridLayout) SetMargins(value foundation.EdgeInsets) {
+func (n NSCollectionViewGridLayout) SetMargins(value foundation.EdgeInsets) {
 	C.C_NSCollectionViewGridLayout_SetMargins(n.Ptr(), *(*C.NSEdgeInsets)(foundation.ToNSEdgeInsetsPointer(value)))
 }
 
-func (n *NSCollectionViewGridLayout) BackgroundColors() []Color {
+func (n NSCollectionViewGridLayout) BackgroundColors() []Color {
 	result_ := C.C_NSCollectionViewGridLayout_BackgroundColors(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -125,7 +122,7 @@ func (n *NSCollectionViewGridLayout) BackgroundColors() []Color {
 	return goResult_
 }
 
-func (n *NSCollectionViewGridLayout) SetBackgroundColors(value []Color) {
+func (n NSCollectionViewGridLayout) SetBackgroundColors(value []Color) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = objc.ExtractPtr(v)

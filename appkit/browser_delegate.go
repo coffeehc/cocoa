@@ -262,7 +262,7 @@ func browserDelegate_Browser_ShouldShowCellExpansionForRow_Column(id int64, brow
 
 //export BrowserDelegate_RespondsTo
 func BrowserDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
-	sel := objc.MakeSelector(selectorPtr)
+	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
 	delegate := resources.Get(id).(*BrowserDelegate)
 	switch selName {

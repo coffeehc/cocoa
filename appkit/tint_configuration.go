@@ -18,20 +18,17 @@ type NSTintConfiguration struct {
 	objc.NSObject
 }
 
-func MakeTintConfiguration(ptr unsafe.Pointer) *NSTintConfiguration {
-	if ptr == nil {
-		return nil
-	}
-	return &NSTintConfiguration{
-		NSObject: *objc.MakeObject(ptr),
+func MakeTintConfiguration(ptr unsafe.Pointer) NSTintConfiguration {
+	return NSTintConfiguration{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocTintConfiguration() *NSTintConfiguration {
+func AllocTintConfiguration() NSTintConfiguration {
 	return MakeTintConfiguration(C.C_TintConfiguration_Alloc())
 }
 
-func (n *NSTintConfiguration) Init() TintConfiguration {
+func (n NSTintConfiguration) Init() TintConfiguration {
 	result_ := C.C_NSTintConfiguration_Init(n.Ptr())
 	return MakeTintConfiguration(result_)
 }
@@ -46,7 +43,7 @@ func TintConfigurationWithPreferredColor(color Color) TintConfiguration {
 	return MakeTintConfiguration(result_)
 }
 
-func (n *NSTintConfiguration) AdaptsToUserAccentColor() bool {
+func (n NSTintConfiguration) AdaptsToUserAccentColor() bool {
 	result_ := C.C_NSTintConfiguration_AdaptsToUserAccentColor(n.Ptr())
 	return bool(result_)
 }
@@ -61,12 +58,12 @@ func MonochromeTintConfiguration() TintConfiguration {
 	return MakeTintConfiguration(result_)
 }
 
-func (n *NSTintConfiguration) BaseTintColor() Color {
+func (n NSTintConfiguration) BaseTintColor() Color {
 	result_ := C.C_NSTintConfiguration_BaseTintColor(n.Ptr())
 	return MakeColor(result_)
 }
 
-func (n *NSTintConfiguration) EquivalentContentTintColor() Color {
+func (n NSTintConfiguration) EquivalentContentTintColor() Color {
 	result_ := C.C_NSTintConfiguration_EquivalentContentTintColor(n.Ptr())
 	return MakeColor(result_)
 }

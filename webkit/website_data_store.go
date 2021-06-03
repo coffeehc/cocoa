@@ -18,16 +18,13 @@ type WKWebsiteDataStore struct {
 	objc.NSObject
 }
 
-func MakeWebsiteDataStore(ptr unsafe.Pointer) *WKWebsiteDataStore {
-	if ptr == nil {
-		return nil
-	}
-	return &WKWebsiteDataStore{
-		NSObject: *objc.MakeObject(ptr),
+func MakeWebsiteDataStore(ptr unsafe.Pointer) WKWebsiteDataStore {
+	return WKWebsiteDataStore{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocWebsiteDataStore() *WKWebsiteDataStore {
+func AllocWebsiteDataStore() WKWebsiteDataStore {
 	return MakeWebsiteDataStore(C.C_WebsiteDataStore_Alloc())
 }
 
@@ -46,12 +43,12 @@ func WebsiteDataStore_AllWebsiteDataTypes() foundation.Set {
 	return foundation.MakeSet(result_)
 }
 
-func (w *WKWebsiteDataStore) IsPersistent() bool {
+func (w WKWebsiteDataStore) IsPersistent() bool {
 	result_ := C.C_WKWebsiteDataStore_IsPersistent(w.Ptr())
 	return bool(result_)
 }
 
-func (w *WKWebsiteDataStore) HttpCookieStore() HTTPCookieStore {
+func (w WKWebsiteDataStore) HttpCookieStore() HTTPCookieStore {
 	result_ := C.C_WKWebsiteDataStore_HttpCookieStore(w.Ptr())
 	return MakeHTTPCookieStore(result_)
 }

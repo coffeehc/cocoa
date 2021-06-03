@@ -51,65 +51,62 @@ type NSURL struct {
 	objc.NSObject
 }
 
-func MakeURL(ptr unsafe.Pointer) *NSURL {
-	if ptr == nil {
-		return nil
-	}
-	return &NSURL{
-		NSObject: *objc.MakeObject(ptr),
+func MakeURL(ptr unsafe.Pointer) NSURL {
+	return NSURL{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocURL() *NSURL {
+func AllocURL() NSURL {
 	return MakeURL(C.C_URL_Alloc())
 }
 
-func (n *NSURL) InitWithString(URLString string) URL {
+func (n NSURL) InitWithString(URLString string) URL {
 	result_ := C.C_NSURL_InitWithString(n.Ptr(), NewString(URLString).Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSURL) InitWithString_RelativeToURL(URLString string, baseURL URL) URL {
+func (n NSURL) InitWithString_RelativeToURL(URLString string, baseURL URL) URL {
 	result_ := C.C_NSURL_InitWithString_RelativeToURL(n.Ptr(), NewString(URLString).Ptr(), objc.ExtractPtr(baseURL))
 	return MakeURL(result_)
 }
 
-func (n *NSURL) InitFileURLWithPath_IsDirectory(path string, isDir bool) URL {
+func (n NSURL) InitFileURLWithPath_IsDirectory(path string, isDir bool) URL {
 	result_ := C.C_NSURL_InitFileURLWithPath_IsDirectory(n.Ptr(), NewString(path).Ptr(), C.bool(isDir))
 	return MakeURL(result_)
 }
 
-func (n *NSURL) InitFileURLWithPath_RelativeToURL(path string, baseURL URL) URL {
+func (n NSURL) InitFileURLWithPath_RelativeToURL(path string, baseURL URL) URL {
 	result_ := C.C_NSURL_InitFileURLWithPath_RelativeToURL(n.Ptr(), NewString(path).Ptr(), objc.ExtractPtr(baseURL))
 	return MakeURL(result_)
 }
 
-func (n *NSURL) InitFileURLWithPath_IsDirectory_RelativeToURL(path string, isDir bool, baseURL URL) URL {
+func (n NSURL) InitFileURLWithPath_IsDirectory_RelativeToURL(path string, isDir bool, baseURL URL) URL {
 	result_ := C.C_NSURL_InitFileURLWithPath_IsDirectory_RelativeToURL(n.Ptr(), NewString(path).Ptr(), C.bool(isDir), objc.ExtractPtr(baseURL))
 	return MakeURL(result_)
 }
 
-func (n *NSURL) InitFileURLWithPath(path string) URL {
+func (n NSURL) InitFileURLWithPath(path string) URL {
 	result_ := C.C_NSURL_InitFileURLWithPath(n.Ptr(), NewString(path).Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSURL) InitAbsoluteURLWithDataRepresentation_RelativeToURL(data []byte, baseURL URL) URL {
+func (n NSURL) InitAbsoluteURLWithDataRepresentation_RelativeToURL(data []byte, baseURL URL) URL {
 	result_ := C.C_NSURL_InitAbsoluteURLWithDataRepresentation_RelativeToURL(n.Ptr(), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, objc.ExtractPtr(baseURL))
 	return MakeURL(result_)
 }
 
-func (n *NSURL) InitWithDataRepresentation_RelativeToURL(data []byte, baseURL URL) URL {
+func (n NSURL) InitWithDataRepresentation_RelativeToURL(data []byte, baseURL URL) URL {
 	result_ := C.C_NSURL_InitWithDataRepresentation_RelativeToURL(n.Ptr(), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, objc.ExtractPtr(baseURL))
 	return MakeURL(result_)
 }
 
-func (n *NSURL) InitWithScheme_Host_Path(scheme string, host string, path string) URL {
+func (n NSURL) InitWithScheme_Host_Path(scheme string, host string, path string) URL {
 	result_ := C.C_NSURL_InitWithScheme_Host_Path(n.Ptr(), NewString(scheme).Ptr(), NewString(host).Ptr(), NewString(path).Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSURL) Init() URL {
+func (n NSURL) Init() URL {
 	result_ := C.C_NSURL_Init(n.Ptr())
 	return MakeURL(result_)
 }
@@ -164,53 +161,53 @@ func URLWithDataRepresentation_RelativeToURL(data []byte, baseURL URL) URL {
 	return MakeURL(result_)
 }
 
-func (n *NSURL) IsFileReferenceURL() bool {
+func (n NSURL) IsFileReferenceURL() bool {
 	result_ := C.C_NSURL_IsFileReferenceURL(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSURL) RemoveAllCachedResourceValues() {
+func (n NSURL) RemoveAllCachedResourceValues() {
 	C.C_NSURL_RemoveAllCachedResourceValues(n.Ptr())
 }
 
-func (n *NSURL) RemoveCachedResourceValueForKey(key URLResourceKey) {
+func (n NSURL) RemoveCachedResourceValueForKey(key URLResourceKey) {
 	C.C_NSURL_RemoveCachedResourceValueForKey(n.Ptr(), NewString(string(key)).Ptr())
 }
 
-func (n *NSURL) SetTemporaryResourceValue_ForKey(value objc.Object, key URLResourceKey) {
+func (n NSURL) SetTemporaryResourceValue_ForKey(value objc.Object, key URLResourceKey) {
 	C.C_NSURL_SetTemporaryResourceValue_ForKey(n.Ptr(), objc.ExtractPtr(value), NewString(string(key)).Ptr())
 }
 
-func (n *NSURL) FileReferenceURL() URL {
+func (n NSURL) FileReferenceURL() URL {
 	result_ := C.C_NSURL_FileReferenceURL(n.Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSURL) URLByAppendingPathComponent(pathComponent string) URL {
+func (n NSURL) URLByAppendingPathComponent(pathComponent string) URL {
 	result_ := C.C_NSURL_URLByAppendingPathComponent(n.Ptr(), NewString(pathComponent).Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSURL) URLByAppendingPathComponent_IsDirectory(pathComponent string, isDirectory bool) URL {
+func (n NSURL) URLByAppendingPathComponent_IsDirectory(pathComponent string, isDirectory bool) URL {
 	result_ := C.C_NSURL_URLByAppendingPathComponent_IsDirectory(n.Ptr(), NewString(pathComponent).Ptr(), C.bool(isDirectory))
 	return MakeURL(result_)
 }
 
-func (n *NSURL) URLByAppendingPathExtension(pathExtension string) URL {
+func (n NSURL) URLByAppendingPathExtension(pathExtension string) URL {
 	result_ := C.C_NSURL_URLByAppendingPathExtension(n.Ptr(), NewString(pathExtension).Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSURL) StartAccessingSecurityScopedResource() bool {
+func (n NSURL) StartAccessingSecurityScopedResource() bool {
 	result_ := C.C_NSURL_StartAccessingSecurityScopedResource(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSURL) StopAccessingSecurityScopedResource() {
+func (n NSURL) StopAccessingSecurityScopedResource() {
 	C.C_NSURL_StopAccessingSecurityScopedResource(n.Ptr())
 }
 
-func (n *NSURL) DataRepresentation() []byte {
+func (n NSURL) DataRepresentation() []byte {
 	result_ := C.C_NSURL_DataRepresentation(n.Ptr())
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
@@ -219,52 +216,52 @@ func (n *NSURL) DataRepresentation() []byte {
 	return goResult_
 }
 
-func (n *NSURL) IsFileURL() bool {
+func (n NSURL) IsFileURL() bool {
 	result_ := C.C_NSURL_IsFileURL(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSURL) AbsoluteString() string {
+func (n NSURL) AbsoluteString() string {
 	result_ := C.C_NSURL_AbsoluteString(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSURL) AbsoluteURL() URL {
+func (n NSURL) AbsoluteURL() URL {
 	result_ := C.C_NSURL_AbsoluteURL(n.Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSURL) BaseURL() URL {
+func (n NSURL) BaseURL() URL {
 	result_ := C.C_NSURL_BaseURL(n.Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSURL) Fragment() string {
+func (n NSURL) Fragment() string {
 	result_ := C.C_NSURL_Fragment(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSURL) Host() string {
+func (n NSURL) Host() string {
 	result_ := C.C_NSURL_Host(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSURL) LastPathComponent() string {
+func (n NSURL) LastPathComponent() string {
 	result_ := C.C_NSURL_LastPathComponent(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSURL) Password() string {
+func (n NSURL) Password() string {
 	result_ := C.C_NSURL_Password(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSURL) Path() string {
+func (n NSURL) Path() string {
 	result_ := C.C_NSURL_Path(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSURL) PathComponents() []string {
+func (n NSURL) PathComponents() []string {
 	result_ := C.C_NSURL_PathComponents(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -275,77 +272,77 @@ func (n *NSURL) PathComponents() []string {
 	return goResult_
 }
 
-func (n *NSURL) PathExtension() string {
+func (n NSURL) PathExtension() string {
 	result_ := C.C_NSURL_PathExtension(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSURL) Port() Number {
+func (n NSURL) Port() Number {
 	result_ := C.C_NSURL_Port(n.Ptr())
 	return MakeNumber(result_)
 }
 
-func (n *NSURL) Query() string {
+func (n NSURL) Query() string {
 	result_ := C.C_NSURL_Query(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSURL) RelativePath() string {
+func (n NSURL) RelativePath() string {
 	result_ := C.C_NSURL_RelativePath(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSURL) RelativeString() string {
+func (n NSURL) RelativeString() string {
 	result_ := C.C_NSURL_RelativeString(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSURL) ResourceSpecifier() string {
+func (n NSURL) ResourceSpecifier() string {
 	result_ := C.C_NSURL_ResourceSpecifier(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSURL) Scheme() string {
+func (n NSURL) Scheme() string {
 	result_ := C.C_NSURL_Scheme(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSURL) StandardizedURL() URL {
+func (n NSURL) StandardizedURL() URL {
 	result_ := C.C_NSURL_StandardizedURL(n.Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSURL) User() string {
+func (n NSURL) User() string {
 	result_ := C.C_NSURL_User(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSURL) FilePathURL() URL {
+func (n NSURL) FilePathURL() URL {
 	result_ := C.C_NSURL_FilePathURL(n.Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSURL) URLByDeletingLastPathComponent() URL {
+func (n NSURL) URLByDeletingLastPathComponent() URL {
 	result_ := C.C_NSURL_URLByDeletingLastPathComponent(n.Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSURL) URLByDeletingPathExtension() URL {
+func (n NSURL) URLByDeletingPathExtension() URL {
 	result_ := C.C_NSURL_URLByDeletingPathExtension(n.Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSURL) URLByResolvingSymlinksInPath() URL {
+func (n NSURL) URLByResolvingSymlinksInPath() URL {
 	result_ := C.C_NSURL_URLByResolvingSymlinksInPath(n.Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSURL) URLByStandardizingPath() URL {
+func (n NSURL) URLByStandardizingPath() URL {
 	result_ := C.C_NSURL_URLByStandardizingPath(n.Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSURL) HasDirectoryPath() bool {
+func (n NSURL) HasDirectoryPath() bool {
 	result_ := C.C_NSURL_HasDirectoryPath(n.Ptr())
 	return bool(result_)
 }

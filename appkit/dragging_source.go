@@ -58,7 +58,7 @@ func draggingSource_IgnoreModifierKeysForDraggingSession(id int64, session unsaf
 
 //export DraggingSource_RespondsTo
 func DraggingSource_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
-	sel := objc.MakeSelector(selectorPtr)
+	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
 	delegate := resources.Get(id).(*DraggingSource)
 	switch selName {

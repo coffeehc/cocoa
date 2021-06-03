@@ -86,30 +86,27 @@ type NSDateFormatter struct {
 	NSFormatter
 }
 
-func MakeDateFormatter(ptr unsafe.Pointer) *NSDateFormatter {
-	if ptr == nil {
-		return nil
-	}
-	return &NSDateFormatter{
-		NSFormatter: *MakeFormatter(ptr),
+func MakeDateFormatter(ptr unsafe.Pointer) NSDateFormatter {
+	return NSDateFormatter{
+		NSFormatter: MakeFormatter(ptr),
 	}
 }
 
-func AllocDateFormatter() *NSDateFormatter {
+func AllocDateFormatter() NSDateFormatter {
 	return MakeDateFormatter(C.C_DateFormatter_Alloc())
 }
 
-func (n *NSDateFormatter) Init() DateFormatter {
+func (n NSDateFormatter) Init() DateFormatter {
 	result_ := C.C_NSDateFormatter_Init(n.Ptr())
 	return MakeDateFormatter(result_)
 }
 
-func (n *NSDateFormatter) DateFromString(_string string) Date {
+func (n NSDateFormatter) DateFromString(_string string) Date {
 	result_ := C.C_NSDateFormatter_DateFromString(n.Ptr(), NewString(_string).Ptr())
 	return MakeDate(result_)
 }
 
-func (n *NSDateFormatter) StringFromDate(date Date) string {
+func (n NSDateFormatter) StringFromDate(date Date) string {
 	result_ := C.C_NSDateFormatter_StringFromDate(n.Ptr(), objc.ExtractPtr(date))
 	return MakeString(result_).String()
 }
@@ -119,7 +116,7 @@ func DateFormatter_LocalizedStringFromDate_DateStyle_TimeStyle(date Date, dstyle
 	return MakeString(result_).String()
 }
 
-func (n *NSDateFormatter) SetLocalizedDateFormatFromTemplate(dateFormatTemplate string) {
+func (n NSDateFormatter) SetLocalizedDateFormatFromTemplate(dateFormatTemplate string) {
 	C.C_NSDateFormatter_SetLocalizedDateFormatFromTemplate(n.Ptr(), NewString(dateFormatTemplate).Ptr())
 }
 
@@ -128,102 +125,102 @@ func DateFormatter_DateFormatFromTemplate_Options_Locale(tmplate string, opts ui
 	return MakeString(result_).String()
 }
 
-func (n *NSDateFormatter) DateStyle() DateFormatterStyle {
+func (n NSDateFormatter) DateStyle() DateFormatterStyle {
 	result_ := C.C_NSDateFormatter_DateStyle(n.Ptr())
 	return DateFormatterStyle(uint(result_))
 }
 
-func (n *NSDateFormatter) SetDateStyle(value DateFormatterStyle) {
+func (n NSDateFormatter) SetDateStyle(value DateFormatterStyle) {
 	C.C_NSDateFormatter_SetDateStyle(n.Ptr(), C.uint(uint(value)))
 }
 
-func (n *NSDateFormatter) TimeStyle() DateFormatterStyle {
+func (n NSDateFormatter) TimeStyle() DateFormatterStyle {
 	result_ := C.C_NSDateFormatter_TimeStyle(n.Ptr())
 	return DateFormatterStyle(uint(result_))
 }
 
-func (n *NSDateFormatter) SetTimeStyle(value DateFormatterStyle) {
+func (n NSDateFormatter) SetTimeStyle(value DateFormatterStyle) {
 	C.C_NSDateFormatter_SetTimeStyle(n.Ptr(), C.uint(uint(value)))
 }
 
-func (n *NSDateFormatter) DateFormat() string {
+func (n NSDateFormatter) DateFormat() string {
 	result_ := C.C_NSDateFormatter_DateFormat(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSDateFormatter) SetDateFormat(value string) {
+func (n NSDateFormatter) SetDateFormat(value string) {
 	C.C_NSDateFormatter_SetDateFormat(n.Ptr(), NewString(value).Ptr())
 }
 
-func (n *NSDateFormatter) FormattingContext() FormattingContext {
+func (n NSDateFormatter) FormattingContext() FormattingContext {
 	result_ := C.C_NSDateFormatter_FormattingContext(n.Ptr())
 	return FormattingContext(int(result_))
 }
 
-func (n *NSDateFormatter) SetFormattingContext(value FormattingContext) {
+func (n NSDateFormatter) SetFormattingContext(value FormattingContext) {
 	C.C_NSDateFormatter_SetFormattingContext(n.Ptr(), C.int(int(value)))
 }
 
-func (n *NSDateFormatter) Calendar() Calendar {
+func (n NSDateFormatter) Calendar() Calendar {
 	result_ := C.C_NSDateFormatter_Calendar(n.Ptr())
 	return MakeCalendar(result_)
 }
 
-func (n *NSDateFormatter) SetCalendar(value Calendar) {
+func (n NSDateFormatter) SetCalendar(value Calendar) {
 	C.C_NSDateFormatter_SetCalendar(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (n *NSDateFormatter) DefaultDate() Date {
+func (n NSDateFormatter) DefaultDate() Date {
 	result_ := C.C_NSDateFormatter_DefaultDate(n.Ptr())
 	return MakeDate(result_)
 }
 
-func (n *NSDateFormatter) SetDefaultDate(value Date) {
+func (n NSDateFormatter) SetDefaultDate(value Date) {
 	C.C_NSDateFormatter_SetDefaultDate(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (n *NSDateFormatter) Locale() Locale {
+func (n NSDateFormatter) Locale() Locale {
 	result_ := C.C_NSDateFormatter_Locale(n.Ptr())
 	return MakeLocale(result_)
 }
 
-func (n *NSDateFormatter) SetLocale(value Locale) {
+func (n NSDateFormatter) SetLocale(value Locale) {
 	C.C_NSDateFormatter_SetLocale(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (n *NSDateFormatter) TimeZone() TimeZone {
+func (n NSDateFormatter) TimeZone() TimeZone {
 	result_ := C.C_NSDateFormatter_TimeZone(n.Ptr())
 	return MakeTimeZone(result_)
 }
 
-func (n *NSDateFormatter) SetTimeZone(value TimeZone) {
+func (n NSDateFormatter) SetTimeZone(value TimeZone) {
 	C.C_NSDateFormatter_SetTimeZone(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (n *NSDateFormatter) TwoDigitStartDate() Date {
+func (n NSDateFormatter) TwoDigitStartDate() Date {
 	result_ := C.C_NSDateFormatter_TwoDigitStartDate(n.Ptr())
 	return MakeDate(result_)
 }
 
-func (n *NSDateFormatter) SetTwoDigitStartDate(value Date) {
+func (n NSDateFormatter) SetTwoDigitStartDate(value Date) {
 	C.C_NSDateFormatter_SetTwoDigitStartDate(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (n *NSDateFormatter) GregorianStartDate() Date {
+func (n NSDateFormatter) GregorianStartDate() Date {
 	result_ := C.C_NSDateFormatter_GregorianStartDate(n.Ptr())
 	return MakeDate(result_)
 }
 
-func (n *NSDateFormatter) SetGregorianStartDate(value Date) {
+func (n NSDateFormatter) SetGregorianStartDate(value Date) {
 	C.C_NSDateFormatter_SetGregorianStartDate(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (n *NSDateFormatter) FormatterBehavior() DateFormatterBehavior {
+func (n NSDateFormatter) FormatterBehavior() DateFormatterBehavior {
 	result_ := C.C_NSDateFormatter_FormatterBehavior(n.Ptr())
 	return DateFormatterBehavior(uint(result_))
 }
 
-func (n *NSDateFormatter) SetFormatterBehavior(value DateFormatterBehavior) {
+func (n NSDateFormatter) SetFormatterBehavior(value DateFormatterBehavior) {
 	C.C_NSDateFormatter_SetFormatterBehavior(n.Ptr(), C.uint(uint(value)))
 }
 
@@ -236,43 +233,43 @@ func DateFormatter_SetDefaultFormatterBehavior(value DateFormatterBehavior) {
 	C.C_NSDateFormatter_DateFormatter_SetDefaultFormatterBehavior(C.uint(uint(value)))
 }
 
-func (n *NSDateFormatter) IsLenient() bool {
+func (n NSDateFormatter) IsLenient() bool {
 	result_ := C.C_NSDateFormatter_IsLenient(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSDateFormatter) SetLenient(value bool) {
+func (n NSDateFormatter) SetLenient(value bool) {
 	C.C_NSDateFormatter_SetLenient(n.Ptr(), C.bool(value))
 }
 
-func (n *NSDateFormatter) DoesRelativeDateFormatting() bool {
+func (n NSDateFormatter) DoesRelativeDateFormatting() bool {
 	result_ := C.C_NSDateFormatter_DoesRelativeDateFormatting(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSDateFormatter) SetDoesRelativeDateFormatting(value bool) {
+func (n NSDateFormatter) SetDoesRelativeDateFormatting(value bool) {
 	C.C_NSDateFormatter_SetDoesRelativeDateFormatting(n.Ptr(), C.bool(value))
 }
 
-func (n *NSDateFormatter) AMSymbol() string {
+func (n NSDateFormatter) AMSymbol() string {
 	result_ := C.C_NSDateFormatter_AMSymbol(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSDateFormatter) SetAMSymbol(value string) {
+func (n NSDateFormatter) SetAMSymbol(value string) {
 	C.C_NSDateFormatter_SetAMSymbol(n.Ptr(), NewString(value).Ptr())
 }
 
-func (n *NSDateFormatter) PMSymbol() string {
+func (n NSDateFormatter) PMSymbol() string {
 	result_ := C.C_NSDateFormatter_PMSymbol(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSDateFormatter) SetPMSymbol(value string) {
+func (n NSDateFormatter) SetPMSymbol(value string) {
 	C.C_NSDateFormatter_SetPMSymbol(n.Ptr(), NewString(value).Ptr())
 }
 
-func (n *NSDateFormatter) WeekdaySymbols() []string {
+func (n NSDateFormatter) WeekdaySymbols() []string {
 	result_ := C.C_NSDateFormatter_WeekdaySymbols(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -283,7 +280,7 @@ func (n *NSDateFormatter) WeekdaySymbols() []string {
 	return goResult_
 }
 
-func (n *NSDateFormatter) SetWeekdaySymbols(value []string) {
+func (n NSDateFormatter) SetWeekdaySymbols(value []string) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = NewString(v).Ptr()
@@ -292,7 +289,7 @@ func (n *NSDateFormatter) SetWeekdaySymbols(value []string) {
 	C.C_NSDateFormatter_SetWeekdaySymbols(n.Ptr(), cValue)
 }
 
-func (n *NSDateFormatter) ShortWeekdaySymbols() []string {
+func (n NSDateFormatter) ShortWeekdaySymbols() []string {
 	result_ := C.C_NSDateFormatter_ShortWeekdaySymbols(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -303,7 +300,7 @@ func (n *NSDateFormatter) ShortWeekdaySymbols() []string {
 	return goResult_
 }
 
-func (n *NSDateFormatter) SetShortWeekdaySymbols(value []string) {
+func (n NSDateFormatter) SetShortWeekdaySymbols(value []string) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = NewString(v).Ptr()
@@ -312,7 +309,7 @@ func (n *NSDateFormatter) SetShortWeekdaySymbols(value []string) {
 	C.C_NSDateFormatter_SetShortWeekdaySymbols(n.Ptr(), cValue)
 }
 
-func (n *NSDateFormatter) VeryShortWeekdaySymbols() []string {
+func (n NSDateFormatter) VeryShortWeekdaySymbols() []string {
 	result_ := C.C_NSDateFormatter_VeryShortWeekdaySymbols(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -323,7 +320,7 @@ func (n *NSDateFormatter) VeryShortWeekdaySymbols() []string {
 	return goResult_
 }
 
-func (n *NSDateFormatter) SetVeryShortWeekdaySymbols(value []string) {
+func (n NSDateFormatter) SetVeryShortWeekdaySymbols(value []string) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = NewString(v).Ptr()
@@ -332,7 +329,7 @@ func (n *NSDateFormatter) SetVeryShortWeekdaySymbols(value []string) {
 	C.C_NSDateFormatter_SetVeryShortWeekdaySymbols(n.Ptr(), cValue)
 }
 
-func (n *NSDateFormatter) StandaloneWeekdaySymbols() []string {
+func (n NSDateFormatter) StandaloneWeekdaySymbols() []string {
 	result_ := C.C_NSDateFormatter_StandaloneWeekdaySymbols(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -343,7 +340,7 @@ func (n *NSDateFormatter) StandaloneWeekdaySymbols() []string {
 	return goResult_
 }
 
-func (n *NSDateFormatter) SetStandaloneWeekdaySymbols(value []string) {
+func (n NSDateFormatter) SetStandaloneWeekdaySymbols(value []string) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = NewString(v).Ptr()
@@ -352,7 +349,7 @@ func (n *NSDateFormatter) SetStandaloneWeekdaySymbols(value []string) {
 	C.C_NSDateFormatter_SetStandaloneWeekdaySymbols(n.Ptr(), cValue)
 }
 
-func (n *NSDateFormatter) ShortStandaloneWeekdaySymbols() []string {
+func (n NSDateFormatter) ShortStandaloneWeekdaySymbols() []string {
 	result_ := C.C_NSDateFormatter_ShortStandaloneWeekdaySymbols(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -363,7 +360,7 @@ func (n *NSDateFormatter) ShortStandaloneWeekdaySymbols() []string {
 	return goResult_
 }
 
-func (n *NSDateFormatter) SetShortStandaloneWeekdaySymbols(value []string) {
+func (n NSDateFormatter) SetShortStandaloneWeekdaySymbols(value []string) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = NewString(v).Ptr()
@@ -372,7 +369,7 @@ func (n *NSDateFormatter) SetShortStandaloneWeekdaySymbols(value []string) {
 	C.C_NSDateFormatter_SetShortStandaloneWeekdaySymbols(n.Ptr(), cValue)
 }
 
-func (n *NSDateFormatter) VeryShortStandaloneWeekdaySymbols() []string {
+func (n NSDateFormatter) VeryShortStandaloneWeekdaySymbols() []string {
 	result_ := C.C_NSDateFormatter_VeryShortStandaloneWeekdaySymbols(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -383,7 +380,7 @@ func (n *NSDateFormatter) VeryShortStandaloneWeekdaySymbols() []string {
 	return goResult_
 }
 
-func (n *NSDateFormatter) SetVeryShortStandaloneWeekdaySymbols(value []string) {
+func (n NSDateFormatter) SetVeryShortStandaloneWeekdaySymbols(value []string) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = NewString(v).Ptr()
@@ -392,7 +389,7 @@ func (n *NSDateFormatter) SetVeryShortStandaloneWeekdaySymbols(value []string) {
 	C.C_NSDateFormatter_SetVeryShortStandaloneWeekdaySymbols(n.Ptr(), cValue)
 }
 
-func (n *NSDateFormatter) MonthSymbols() []string {
+func (n NSDateFormatter) MonthSymbols() []string {
 	result_ := C.C_NSDateFormatter_MonthSymbols(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -403,7 +400,7 @@ func (n *NSDateFormatter) MonthSymbols() []string {
 	return goResult_
 }
 
-func (n *NSDateFormatter) SetMonthSymbols(value []string) {
+func (n NSDateFormatter) SetMonthSymbols(value []string) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = NewString(v).Ptr()
@@ -412,7 +409,7 @@ func (n *NSDateFormatter) SetMonthSymbols(value []string) {
 	C.C_NSDateFormatter_SetMonthSymbols(n.Ptr(), cValue)
 }
 
-func (n *NSDateFormatter) ShortMonthSymbols() []string {
+func (n NSDateFormatter) ShortMonthSymbols() []string {
 	result_ := C.C_NSDateFormatter_ShortMonthSymbols(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -423,7 +420,7 @@ func (n *NSDateFormatter) ShortMonthSymbols() []string {
 	return goResult_
 }
 
-func (n *NSDateFormatter) SetShortMonthSymbols(value []string) {
+func (n NSDateFormatter) SetShortMonthSymbols(value []string) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = NewString(v).Ptr()
@@ -432,7 +429,7 @@ func (n *NSDateFormatter) SetShortMonthSymbols(value []string) {
 	C.C_NSDateFormatter_SetShortMonthSymbols(n.Ptr(), cValue)
 }
 
-func (n *NSDateFormatter) VeryShortMonthSymbols() []string {
+func (n NSDateFormatter) VeryShortMonthSymbols() []string {
 	result_ := C.C_NSDateFormatter_VeryShortMonthSymbols(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -443,7 +440,7 @@ func (n *NSDateFormatter) VeryShortMonthSymbols() []string {
 	return goResult_
 }
 
-func (n *NSDateFormatter) SetVeryShortMonthSymbols(value []string) {
+func (n NSDateFormatter) SetVeryShortMonthSymbols(value []string) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = NewString(v).Ptr()
@@ -452,7 +449,7 @@ func (n *NSDateFormatter) SetVeryShortMonthSymbols(value []string) {
 	C.C_NSDateFormatter_SetVeryShortMonthSymbols(n.Ptr(), cValue)
 }
 
-func (n *NSDateFormatter) StandaloneMonthSymbols() []string {
+func (n NSDateFormatter) StandaloneMonthSymbols() []string {
 	result_ := C.C_NSDateFormatter_StandaloneMonthSymbols(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -463,7 +460,7 @@ func (n *NSDateFormatter) StandaloneMonthSymbols() []string {
 	return goResult_
 }
 
-func (n *NSDateFormatter) SetStandaloneMonthSymbols(value []string) {
+func (n NSDateFormatter) SetStandaloneMonthSymbols(value []string) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = NewString(v).Ptr()
@@ -472,7 +469,7 @@ func (n *NSDateFormatter) SetStandaloneMonthSymbols(value []string) {
 	C.C_NSDateFormatter_SetStandaloneMonthSymbols(n.Ptr(), cValue)
 }
 
-func (n *NSDateFormatter) ShortStandaloneMonthSymbols() []string {
+func (n NSDateFormatter) ShortStandaloneMonthSymbols() []string {
 	result_ := C.C_NSDateFormatter_ShortStandaloneMonthSymbols(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -483,7 +480,7 @@ func (n *NSDateFormatter) ShortStandaloneMonthSymbols() []string {
 	return goResult_
 }
 
-func (n *NSDateFormatter) SetShortStandaloneMonthSymbols(value []string) {
+func (n NSDateFormatter) SetShortStandaloneMonthSymbols(value []string) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = NewString(v).Ptr()
@@ -492,7 +489,7 @@ func (n *NSDateFormatter) SetShortStandaloneMonthSymbols(value []string) {
 	C.C_NSDateFormatter_SetShortStandaloneMonthSymbols(n.Ptr(), cValue)
 }
 
-func (n *NSDateFormatter) VeryShortStandaloneMonthSymbols() []string {
+func (n NSDateFormatter) VeryShortStandaloneMonthSymbols() []string {
 	result_ := C.C_NSDateFormatter_VeryShortStandaloneMonthSymbols(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -503,7 +500,7 @@ func (n *NSDateFormatter) VeryShortStandaloneMonthSymbols() []string {
 	return goResult_
 }
 
-func (n *NSDateFormatter) SetVeryShortStandaloneMonthSymbols(value []string) {
+func (n NSDateFormatter) SetVeryShortStandaloneMonthSymbols(value []string) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = NewString(v).Ptr()
@@ -512,7 +509,7 @@ func (n *NSDateFormatter) SetVeryShortStandaloneMonthSymbols(value []string) {
 	C.C_NSDateFormatter_SetVeryShortStandaloneMonthSymbols(n.Ptr(), cValue)
 }
 
-func (n *NSDateFormatter) QuarterSymbols() []string {
+func (n NSDateFormatter) QuarterSymbols() []string {
 	result_ := C.C_NSDateFormatter_QuarterSymbols(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -523,7 +520,7 @@ func (n *NSDateFormatter) QuarterSymbols() []string {
 	return goResult_
 }
 
-func (n *NSDateFormatter) SetQuarterSymbols(value []string) {
+func (n NSDateFormatter) SetQuarterSymbols(value []string) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = NewString(v).Ptr()
@@ -532,7 +529,7 @@ func (n *NSDateFormatter) SetQuarterSymbols(value []string) {
 	C.C_NSDateFormatter_SetQuarterSymbols(n.Ptr(), cValue)
 }
 
-func (n *NSDateFormatter) ShortQuarterSymbols() []string {
+func (n NSDateFormatter) ShortQuarterSymbols() []string {
 	result_ := C.C_NSDateFormatter_ShortQuarterSymbols(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -543,7 +540,7 @@ func (n *NSDateFormatter) ShortQuarterSymbols() []string {
 	return goResult_
 }
 
-func (n *NSDateFormatter) SetShortQuarterSymbols(value []string) {
+func (n NSDateFormatter) SetShortQuarterSymbols(value []string) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = NewString(v).Ptr()
@@ -552,7 +549,7 @@ func (n *NSDateFormatter) SetShortQuarterSymbols(value []string) {
 	C.C_NSDateFormatter_SetShortQuarterSymbols(n.Ptr(), cValue)
 }
 
-func (n *NSDateFormatter) StandaloneQuarterSymbols() []string {
+func (n NSDateFormatter) StandaloneQuarterSymbols() []string {
 	result_ := C.C_NSDateFormatter_StandaloneQuarterSymbols(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -563,7 +560,7 @@ func (n *NSDateFormatter) StandaloneQuarterSymbols() []string {
 	return goResult_
 }
 
-func (n *NSDateFormatter) SetStandaloneQuarterSymbols(value []string) {
+func (n NSDateFormatter) SetStandaloneQuarterSymbols(value []string) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = NewString(v).Ptr()
@@ -572,7 +569,7 @@ func (n *NSDateFormatter) SetStandaloneQuarterSymbols(value []string) {
 	C.C_NSDateFormatter_SetStandaloneQuarterSymbols(n.Ptr(), cValue)
 }
 
-func (n *NSDateFormatter) ShortStandaloneQuarterSymbols() []string {
+func (n NSDateFormatter) ShortStandaloneQuarterSymbols() []string {
 	result_ := C.C_NSDateFormatter_ShortStandaloneQuarterSymbols(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -583,7 +580,7 @@ func (n *NSDateFormatter) ShortStandaloneQuarterSymbols() []string {
 	return goResult_
 }
 
-func (n *NSDateFormatter) SetShortStandaloneQuarterSymbols(value []string) {
+func (n NSDateFormatter) SetShortStandaloneQuarterSymbols(value []string) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = NewString(v).Ptr()
@@ -592,7 +589,7 @@ func (n *NSDateFormatter) SetShortStandaloneQuarterSymbols(value []string) {
 	C.C_NSDateFormatter_SetShortStandaloneQuarterSymbols(n.Ptr(), cValue)
 }
 
-func (n *NSDateFormatter) EraSymbols() []string {
+func (n NSDateFormatter) EraSymbols() []string {
 	result_ := C.C_NSDateFormatter_EraSymbols(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -603,7 +600,7 @@ func (n *NSDateFormatter) EraSymbols() []string {
 	return goResult_
 }
 
-func (n *NSDateFormatter) SetEraSymbols(value []string) {
+func (n NSDateFormatter) SetEraSymbols(value []string) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = NewString(v).Ptr()
@@ -612,7 +609,7 @@ func (n *NSDateFormatter) SetEraSymbols(value []string) {
 	C.C_NSDateFormatter_SetEraSymbols(n.Ptr(), cValue)
 }
 
-func (n *NSDateFormatter) LongEraSymbols() []string {
+func (n NSDateFormatter) LongEraSymbols() []string {
 	result_ := C.C_NSDateFormatter_LongEraSymbols(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -623,7 +620,7 @@ func (n *NSDateFormatter) LongEraSymbols() []string {
 	return goResult_
 }
 
-func (n *NSDateFormatter) SetLongEraSymbols(value []string) {
+func (n NSDateFormatter) SetLongEraSymbols(value []string) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = NewString(v).Ptr()
@@ -632,11 +629,11 @@ func (n *NSDateFormatter) SetLongEraSymbols(value []string) {
 	C.C_NSDateFormatter_SetLongEraSymbols(n.Ptr(), cValue)
 }
 
-func (n *NSDateFormatter) GeneratesCalendarDates() bool {
+func (n NSDateFormatter) GeneratesCalendarDates() bool {
 	result_ := C.C_NSDateFormatter_GeneratesCalendarDates(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSDateFormatter) SetGeneratesCalendarDates(value bool) {
+func (n NSDateFormatter) SetGeneratesCalendarDates(value bool) {
 	C.C_NSDateFormatter_SetGeneratesCalendarDates(n.Ptr(), C.bool(value))
 }

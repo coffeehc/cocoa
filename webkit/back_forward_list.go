@@ -21,40 +21,37 @@ type WKBackForwardList struct {
 	objc.NSObject
 }
 
-func MakeBackForwardList(ptr unsafe.Pointer) *WKBackForwardList {
-	if ptr == nil {
-		return nil
-	}
-	return &WKBackForwardList{
-		NSObject: *objc.MakeObject(ptr),
+func MakeBackForwardList(ptr unsafe.Pointer) WKBackForwardList {
+	return WKBackForwardList{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocBackForwardList() *WKBackForwardList {
+func AllocBackForwardList() WKBackForwardList {
 	return MakeBackForwardList(C.C_BackForwardList_Alloc())
 }
 
-func (w *WKBackForwardList) ItemAtIndex(index int) BackForwardListItem {
+func (w WKBackForwardList) ItemAtIndex(index int) BackForwardListItem {
 	result_ := C.C_WKBackForwardList_ItemAtIndex(w.Ptr(), C.int(index))
 	return MakeBackForwardListItem(result_)
 }
 
-func (w *WKBackForwardList) BackItem() BackForwardListItem {
+func (w WKBackForwardList) BackItem() BackForwardListItem {
 	result_ := C.C_WKBackForwardList_BackItem(w.Ptr())
 	return MakeBackForwardListItem(result_)
 }
 
-func (w *WKBackForwardList) CurrentItem() BackForwardListItem {
+func (w WKBackForwardList) CurrentItem() BackForwardListItem {
 	result_ := C.C_WKBackForwardList_CurrentItem(w.Ptr())
 	return MakeBackForwardListItem(result_)
 }
 
-func (w *WKBackForwardList) ForwardItem() BackForwardListItem {
+func (w WKBackForwardList) ForwardItem() BackForwardListItem {
 	result_ := C.C_WKBackForwardList_ForwardItem(w.Ptr())
 	return MakeBackForwardListItem(result_)
 }
 
-func (w *WKBackForwardList) BackList() []BackForwardListItem {
+func (w WKBackForwardList) BackList() []BackForwardListItem {
 	result_ := C.C_WKBackForwardList_BackList(w.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -65,7 +62,7 @@ func (w *WKBackForwardList) BackList() []BackForwardListItem {
 	return goResult_
 }
 
-func (w *WKBackForwardList) ForwardList() []BackForwardListItem {
+func (w WKBackForwardList) ForwardList() []BackForwardListItem {
 	result_ := C.C_WKBackForwardList_ForwardList(w.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]

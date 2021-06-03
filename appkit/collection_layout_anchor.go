@@ -21,16 +21,13 @@ type NSCollectionLayoutAnchor struct {
 	objc.NSObject
 }
 
-func MakeCollectionLayoutAnchor(ptr unsafe.Pointer) *NSCollectionLayoutAnchor {
-	if ptr == nil {
-		return nil
-	}
-	return &NSCollectionLayoutAnchor{
-		NSObject: *objc.MakeObject(ptr),
+func MakeCollectionLayoutAnchor(ptr unsafe.Pointer) NSCollectionLayoutAnchor {
+	return NSCollectionLayoutAnchor{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocCollectionLayoutAnchor() *NSCollectionLayoutAnchor {
+func AllocCollectionLayoutAnchor() NSCollectionLayoutAnchor {
 	return MakeCollectionLayoutAnchor(C.C_CollectionLayoutAnchor_Alloc())
 }
 
@@ -49,22 +46,22 @@ func CollectionLayoutAnchor_LayoutAnchorWithEdges_FractionalOffset(edges Directi
 	return MakeCollectionLayoutAnchor(result_)
 }
 
-func (n *NSCollectionLayoutAnchor) Edges() DirectionalRectEdge {
+func (n NSCollectionLayoutAnchor) Edges() DirectionalRectEdge {
 	result_ := C.C_NSCollectionLayoutAnchor_Edges(n.Ptr())
 	return DirectionalRectEdge(uint(result_))
 }
 
-func (n *NSCollectionLayoutAnchor) Offset() foundation.Point {
+func (n NSCollectionLayoutAnchor) Offset() foundation.Point {
 	result_ := C.C_NSCollectionLayoutAnchor_Offset(n.Ptr())
 	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
 }
 
-func (n *NSCollectionLayoutAnchor) IsAbsoluteOffset() bool {
+func (n NSCollectionLayoutAnchor) IsAbsoluteOffset() bool {
 	result_ := C.C_NSCollectionLayoutAnchor_IsAbsoluteOffset(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSCollectionLayoutAnchor) IsFractionalOffset() bool {
+func (n NSCollectionLayoutAnchor) IsFractionalOffset() bool {
 	result_ := C.C_NSCollectionLayoutAnchor_IsFractionalOffset(n.Ptr())
 	return bool(result_)
 }

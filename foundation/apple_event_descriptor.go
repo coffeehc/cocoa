@@ -25,30 +25,27 @@ type NSAppleEventDescriptor struct {
 	objc.NSObject
 }
 
-func MakeAppleEventDescriptor(ptr unsafe.Pointer) *NSAppleEventDescriptor {
-	if ptr == nil {
-		return nil
-	}
-	return &NSAppleEventDescriptor{
-		NSObject: *objc.MakeObject(ptr),
+func MakeAppleEventDescriptor(ptr unsafe.Pointer) NSAppleEventDescriptor {
+	return NSAppleEventDescriptor{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocAppleEventDescriptor() *NSAppleEventDescriptor {
+func AllocAppleEventDescriptor() NSAppleEventDescriptor {
 	return MakeAppleEventDescriptor(C.C_AppleEventDescriptor_Alloc())
 }
 
-func (n *NSAppleEventDescriptor) InitListDescriptor() AppleEventDescriptor {
+func (n NSAppleEventDescriptor) InitListDescriptor() AppleEventDescriptor {
 	result_ := C.C_NSAppleEventDescriptor_InitListDescriptor(n.Ptr())
 	return MakeAppleEventDescriptor(result_)
 }
 
-func (n *NSAppleEventDescriptor) InitRecordDescriptor() AppleEventDescriptor {
+func (n NSAppleEventDescriptor) InitRecordDescriptor() AppleEventDescriptor {
 	result_ := C.C_NSAppleEventDescriptor_InitRecordDescriptor(n.Ptr())
 	return MakeAppleEventDescriptor(result_)
 }
 
-func (n *NSAppleEventDescriptor) Init() AppleEventDescriptor {
+func (n NSAppleEventDescriptor) Init() AppleEventDescriptor {
 	result_ := C.C_NSAppleEventDescriptor_Init(n.Ptr())
 	return MakeAppleEventDescriptor(result_)
 }
@@ -73,16 +70,16 @@ func AppleEventDescriptor_RecordDescriptor() AppleEventDescriptor {
 	return MakeAppleEventDescriptor(result_)
 }
 
-func (n *NSAppleEventDescriptor) DescriptorAtIndex(index int) AppleEventDescriptor {
+func (n NSAppleEventDescriptor) DescriptorAtIndex(index int) AppleEventDescriptor {
 	result_ := C.C_NSAppleEventDescriptor_DescriptorAtIndex(n.Ptr(), C.int(index))
 	return MakeAppleEventDescriptor(result_)
 }
 
-func (n *NSAppleEventDescriptor) InsertDescriptor_AtIndex(descriptor AppleEventDescriptor, index int) {
+func (n NSAppleEventDescriptor) InsertDescriptor_AtIndex(descriptor AppleEventDescriptor, index int) {
 	C.C_NSAppleEventDescriptor_InsertDescriptor_AtIndex(n.Ptr(), objc.ExtractPtr(descriptor), C.int(index))
 }
 
-func (n *NSAppleEventDescriptor) RemoveDescriptorAtIndex(index int) {
+func (n NSAppleEventDescriptor) RemoveDescriptorAtIndex(index int) {
 	C.C_NSAppleEventDescriptor_RemoveDescriptorAtIndex(n.Ptr(), C.int(index))
 }
 
@@ -116,7 +113,7 @@ func AppleEventDescriptor_CurrentProcessDescriptor() AppleEventDescriptor {
 	return MakeAppleEventDescriptor(result_)
 }
 
-func (n *NSAppleEventDescriptor) Data() []byte {
+func (n NSAppleEventDescriptor) Data() []byte {
 	result_ := C.C_NSAppleEventDescriptor_Data(n.Ptr())
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
@@ -125,32 +122,32 @@ func (n *NSAppleEventDescriptor) Data() []byte {
 	return goResult_
 }
 
-func (n *NSAppleEventDescriptor) NumberOfItems() int {
+func (n NSAppleEventDescriptor) NumberOfItems() int {
 	result_ := C.C_NSAppleEventDescriptor_NumberOfItems(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSAppleEventDescriptor) StringValue() string {
+func (n NSAppleEventDescriptor) StringValue() string {
 	result_ := C.C_NSAppleEventDescriptor_StringValue(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSAppleEventDescriptor) DateValue() Date {
+func (n NSAppleEventDescriptor) DateValue() Date {
 	result_ := C.C_NSAppleEventDescriptor_DateValue(n.Ptr())
 	return MakeDate(result_)
 }
 
-func (n *NSAppleEventDescriptor) DoubleValue() float64 {
+func (n NSAppleEventDescriptor) DoubleValue() float64 {
 	result_ := C.C_NSAppleEventDescriptor_DoubleValue(n.Ptr())
 	return float64(result_)
 }
 
-func (n *NSAppleEventDescriptor) FileURLValue() URL {
+func (n NSAppleEventDescriptor) FileURLValue() URL {
 	result_ := C.C_NSAppleEventDescriptor_FileURLValue(n.Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSAppleEventDescriptor) IsRecordDescriptor() bool {
+func (n NSAppleEventDescriptor) IsRecordDescriptor() bool {
 	result_ := C.C_NSAppleEventDescriptor_IsRecordDescriptor(n.Ptr())
 	return bool(result_)
 }

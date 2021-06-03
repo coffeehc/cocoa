@@ -22,46 +22,41 @@ type UTType interface {
 	IsSupertypeOfType(type_ UTType) bool
 }
 
-var _ UTType = (*NSUTType)(nil)
-
 type NSUTType struct {
 	objc.NSObject
 }
 
-func MakeUTType(ptr unsafe.Pointer) *NSUTType {
-	if ptr == nil {
-		return nil
-	}
-	return &NSUTType{
-		NSObject: *objc.MakeObject(ptr),
+func MakeUTType(ptr unsafe.Pointer) NSUTType {
+	return NSUTType{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func (u *NSUTType) Identifier() string {
+func (u NSUTType) Identifier() string {
 	return C.GoString(C.UTType_Identifier(u.Ptr()))
 }
 
-func (u *NSUTType) PreferredFilenameExtension() string {
+func (u NSUTType) PreferredFilenameExtension() string {
 	return C.GoString(C.UTType_PreferredFilenameExtension(u.Ptr()))
 }
 
-func (u *NSUTType) PreferredMIMEType() string {
+func (u NSUTType) PreferredMIMEType() string {
 	return C.GoString(C.UTType_PreferredMIMEType(u.Ptr()))
 }
 
-func (u *NSUTType) IsDeclared() bool {
+func (u NSUTType) IsDeclared() bool {
 	return bool(C.UTType_IsDeclared(u.Ptr()))
 }
 
-func (u *NSUTType) IsDynamic() bool {
+func (u NSUTType) IsDynamic() bool {
 	return bool(C.UTType_IsDynamic(u.Ptr()))
 }
 
-func (u *NSUTType) IsPublicType() bool {
+func (u NSUTType) IsPublicType() bool {
 	return bool(C.UTType_IsPublicType(u.Ptr()))
 }
 
-func (u *NSUTType) ReferenceURL() foundation.URL {
+func (u NSUTType) ReferenceURL() foundation.URL {
 	return foundation.MakeURL(C.UTType_ReferenceURL(u.Ptr()))
 }
 
@@ -70,7 +65,7 @@ func typesWithTagConformingToType(tag string, tagClass string, supertype UTType)
 	defer C.free(unsafe.Pointer(cTag))
 	cTagClass := C.CString(tagClass)
 	defer C.free(unsafe.Pointer(cTagClass))
-	var cArray C.Array = C.UTType_typesWithTagConformingToType(cTag, cTagClass, toPointer(supertype))
+	var cArray C.Array = C.UTType_typesWithTagConformingToType(cTag, cTagClass, objc.ExtractPtr(supertype))
 	defer C.free(cArray.data)
 	result := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(cArray.data))[:cArray.len:cArray.len]
 	var goArray = make([]UTType, len(result))
@@ -89,7 +84,7 @@ func ExportedTypeWithIdentifier(identifier string) UTType {
 func exportedTypeWithIdentifierConformingToType(identifier string, parentType UTType) UTType {
 	cIdentifier := C.CString(identifier)
 	defer C.free(unsafe.Pointer(cIdentifier))
-	return MakeUTType(C.UTType_exportedTypeWithIdentifierConformingToType(cIdentifier, toPointer(parentType)))
+	return MakeUTType(C.UTType_exportedTypeWithIdentifierConformingToType(cIdentifier, objc.ExtractPtr(parentType)))
 }
 
 func ImportedTypeWithIdentifier(identifier string) UTType {
@@ -101,7 +96,7 @@ func ImportedTypeWithIdentifier(identifier string) UTType {
 func importedTypeWithIdentifierConformingToType(identifier string, parentType UTType) UTType {
 	cIdentifier := C.CString(identifier)
 	defer C.free(unsafe.Pointer(cIdentifier))
-	return MakeUTType(C.UTType_importedTypeWithIdentifierConformingToType(cIdentifier, toPointer(parentType)))
+	return MakeUTType(C.UTType_importedTypeWithIdentifierConformingToType(cIdentifier, objc.ExtractPtr(parentType)))
 }
 
 func TypeWithIdentifier(identifier string) UTType {
@@ -119,7 +114,7 @@ func TypeWithFilenameExtension(filenameExtension string) UTType {
 func typeWithFilenameExtensionConformingToType(filenameExtension string, supertype UTType) UTType {
 	cFilenameExtension := C.CString(filenameExtension)
 	defer C.free(unsafe.Pointer(cFilenameExtension))
-	return MakeUTType(C.UTType_typeWithFilenameExtensionConformingToType(cFilenameExtension, toPointer(supertype)))
+	return MakeUTType(C.UTType_typeWithFilenameExtensionConformingToType(cFilenameExtension, objc.ExtractPtr(supertype)))
 }
 
 func TypeWithMIMEType(mimeType string) UTType {
@@ -131,7 +126,7 @@ func TypeWithMIMEType(mimeType string) UTType {
 func typeWithMIMETypeConformingToType(mimeType string, supertype UTType) UTType {
 	cMimeType := C.CString(mimeType)
 	defer C.free(unsafe.Pointer(cMimeType))
-	return MakeUTType(C.UTType_typeWithMIMETypeConformingToType(cMimeType, toPointer(supertype)))
+	return MakeUTType(C.UTType_typeWithMIMETypeConformingToType(cMimeType, objc.ExtractPtr(supertype)))
 }
 
 func typeWithTagConformingToType(tag string, tagClass string, supertype UTType) UTType {
@@ -139,17 +134,17 @@ func typeWithTagConformingToType(tag string, tagClass string, supertype UTType) 
 	defer C.free(unsafe.Pointer(cTag))
 	cTagClass := C.CString(tagClass)
 	defer C.free(unsafe.Pointer(cTagClass))
-	return MakeUTType(C.UTType_typeWithTagConformingToType(cTag, cTagClass, toPointer(supertype)))
+	return MakeUTType(C.UTType_typeWithTagConformingToType(cTag, cTagClass, objc.ExtractPtr(supertype)))
 }
 
-func (u *NSUTType) ConformsToType(type_ UTType) bool {
-	return bool(C.UTType_ConformsToType(u.Ptr(), toPointer(type_)))
+func (u NSUTType) ConformsToType(type_ UTType) bool {
+	return bool(C.UTType_ConformsToType(u.Ptr(), objc.ExtractPtr(type_)))
 }
 
-func (u *NSUTType) IsSubtypeOfType(type_ UTType) bool {
-	return bool(C.UTType_IsSubtypeOfType(u.Ptr(), toPointer(type_)))
+func (u NSUTType) IsSubtypeOfType(type_ UTType) bool {
+	return bool(C.UTType_IsSubtypeOfType(u.Ptr(), objc.ExtractPtr(type_)))
 }
 
-func (u *NSUTType) IsSupertypeOfType(type_ UTType) bool {
-	return bool(C.UTType_IsSupertypeOfType(u.Ptr(), toPointer(type_)))
+func (u NSUTType) IsSupertypeOfType(type_ UTType) bool {
+	return bool(C.UTType_IsSupertypeOfType(u.Ptr(), objc.ExtractPtr(type_)))
 }

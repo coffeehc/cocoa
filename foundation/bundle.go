@@ -52,30 +52,27 @@ type NSBundle struct {
 	objc.NSObject
 }
 
-func MakeBundle(ptr unsafe.Pointer) *NSBundle {
-	if ptr == nil {
-		return nil
-	}
-	return &NSBundle{
-		NSObject: *objc.MakeObject(ptr),
+func MakeBundle(ptr unsafe.Pointer) NSBundle {
+	return NSBundle{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocBundle() *NSBundle {
+func AllocBundle() NSBundle {
 	return MakeBundle(C.C_Bundle_Alloc())
 }
 
-func (n *NSBundle) InitWithURL(url URL) Bundle {
+func (n NSBundle) InitWithURL(url URL) Bundle {
 	result_ := C.C_NSBundle_InitWithURL(n.Ptr(), objc.ExtractPtr(url))
 	return MakeBundle(result_)
 }
 
-func (n *NSBundle) InitWithPath(path string) Bundle {
+func (n NSBundle) InitWithPath(path string) Bundle {
 	result_ := C.C_NSBundle_InitWithPath(n.Ptr(), NewString(path).Ptr())
 	return MakeBundle(result_)
 }
 
-func (n *NSBundle) Init() Bundle {
+func (n NSBundle) Init() Bundle {
 	result_ := C.C_NSBundle_Init(n.Ptr())
 	return MakeBundle(result_)
 }
@@ -95,17 +92,17 @@ func BundleWithIdentifier(identifier string) Bundle {
 	return MakeBundle(result_)
 }
 
-func (n *NSBundle) URLForResource_WithExtension_Subdirectory(name string, ext string, subpath string) URL {
+func (n NSBundle) URLForResource_WithExtension_Subdirectory(name string, ext string, subpath string) URL {
 	result_ := C.C_NSBundle_URLForResource_WithExtension_Subdirectory(n.Ptr(), NewString(name).Ptr(), NewString(ext).Ptr(), NewString(subpath).Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSBundle) URLForResource_WithExtension(name string, ext string) URL {
+func (n NSBundle) URLForResource_WithExtension(name string, ext string) URL {
 	result_ := C.C_NSBundle_URLForResource_WithExtension(n.Ptr(), NewString(name).Ptr(), NewString(ext).Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSBundle) URLsForResourcesWithExtension_Subdirectory(ext string, subpath string) []URL {
+func (n NSBundle) URLsForResourcesWithExtension_Subdirectory(ext string, subpath string) []URL {
 	result_ := C.C_NSBundle_URLsForResourcesWithExtension_Subdirectory(n.Ptr(), NewString(ext).Ptr(), NewString(subpath).Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -116,12 +113,12 @@ func (n *NSBundle) URLsForResourcesWithExtension_Subdirectory(ext string, subpat
 	return goResult_
 }
 
-func (n *NSBundle) URLForResource_WithExtension_Subdirectory_Localization(name string, ext string, subpath string, localizationName string) URL {
+func (n NSBundle) URLForResource_WithExtension_Subdirectory_Localization(name string, ext string, subpath string, localizationName string) URL {
 	result_ := C.C_NSBundle_URLForResource_WithExtension_Subdirectory_Localization(n.Ptr(), NewString(name).Ptr(), NewString(ext).Ptr(), NewString(subpath).Ptr(), NewString(localizationName).Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSBundle) URLsForResourcesWithExtension_Subdirectory_Localization(ext string, subpath string, localizationName string) []URL {
+func (n NSBundle) URLsForResourcesWithExtension_Subdirectory_Localization(ext string, subpath string, localizationName string) []URL {
 	result_ := C.C_NSBundle_URLsForResourcesWithExtension_Subdirectory_Localization(n.Ptr(), NewString(ext).Ptr(), NewString(subpath).Ptr(), NewString(localizationName).Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -148,22 +145,22 @@ func Bundle_URLsForResourcesWithExtension_Subdirectory_InBundleWithURL(ext strin
 	return goResult_
 }
 
-func (n *NSBundle) PathForResource_OfType(name string, ext string) string {
+func (n NSBundle) PathForResource_OfType(name string, ext string) string {
 	result_ := C.C_NSBundle_PathForResource_OfType(n.Ptr(), NewString(name).Ptr(), NewString(ext).Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSBundle) PathForResource_OfType_InDirectory(name string, ext string, subpath string) string {
+func (n NSBundle) PathForResource_OfType_InDirectory(name string, ext string, subpath string) string {
 	result_ := C.C_NSBundle_PathForResource_OfType_InDirectory(n.Ptr(), NewString(name).Ptr(), NewString(ext).Ptr(), NewString(subpath).Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSBundle) PathForResource_OfType_InDirectory_ForLocalization(name string, ext string, subpath string, localizationName string) string {
+func (n NSBundle) PathForResource_OfType_InDirectory_ForLocalization(name string, ext string, subpath string, localizationName string) string {
 	result_ := C.C_NSBundle_PathForResource_OfType_InDirectory_ForLocalization(n.Ptr(), NewString(name).Ptr(), NewString(ext).Ptr(), NewString(subpath).Ptr(), NewString(localizationName).Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSBundle) PathsForResourcesOfType_InDirectory(ext string, subpath string) []string {
+func (n NSBundle) PathsForResourcesOfType_InDirectory(ext string, subpath string) []string {
 	result_ := C.C_NSBundle_PathsForResourcesOfType_InDirectory(n.Ptr(), NewString(ext).Ptr(), NewString(subpath).Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -174,7 +171,7 @@ func (n *NSBundle) PathsForResourcesOfType_InDirectory(ext string, subpath strin
 	return goResult_
 }
 
-func (n *NSBundle) PathsForResourcesOfType_InDirectory_ForLocalization(ext string, subpath string, localizationName string) []string {
+func (n NSBundle) PathsForResourcesOfType_InDirectory_ForLocalization(ext string, subpath string, localizationName string) []string {
 	result_ := C.C_NSBundle_PathsForResourcesOfType_InDirectory_ForLocalization(n.Ptr(), NewString(ext).Ptr(), NewString(subpath).Ptr(), NewString(localizationName).Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -185,22 +182,22 @@ func (n *NSBundle) PathsForResourcesOfType_InDirectory_ForLocalization(ext strin
 	return goResult_
 }
 
-func (n *NSBundle) LocalizedStringForKey_Value_Table(key string, value string, tableName string) string {
+func (n NSBundle) LocalizedStringForKey_Value_Table(key string, value string, tableName string) string {
 	result_ := C.C_NSBundle_LocalizedStringForKey_Value_Table(n.Ptr(), NewString(key).Ptr(), NewString(value).Ptr(), NewString(tableName).Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSBundle) URLForAuxiliaryExecutable(executableName string) URL {
+func (n NSBundle) URLForAuxiliaryExecutable(executableName string) URL {
 	result_ := C.C_NSBundle_URLForAuxiliaryExecutable(n.Ptr(), NewString(executableName).Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSBundle) PathForAuxiliaryExecutable(executableName string) string {
+func (n NSBundle) PathForAuxiliaryExecutable(executableName string) string {
 	result_ := C.C_NSBundle_PathForAuxiliaryExecutable(n.Ptr(), NewString(executableName).Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSBundle) ObjectForInfoDictionaryKey(key string) objc.Object {
+func (n NSBundle) ObjectForInfoDictionaryKey(key string) objc.Object {
 	result_ := C.C_NSBundle_ObjectForInfoDictionaryKey(n.Ptr(), NewString(key).Ptr())
 	return objc.MakeObject(result_)
 }
@@ -242,12 +239,12 @@ func Bundle_PreferredLocalizationsFromArray_ForPreferences(localizationsArray []
 	return goResult_
 }
 
-func (n *NSBundle) Load() bool {
+func (n NSBundle) Load() bool {
 	result_ := C.C_NSBundle_Load(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSBundle) Unload() bool {
+func (n NSBundle) Unload() bool {
 	result_ := C.C_NSBundle_Unload(n.Ptr())
 	return bool(result_)
 }
@@ -279,87 +276,87 @@ func Bundle_AllBundles() []Bundle {
 	return goResult_
 }
 
-func (n *NSBundle) ResourceURL() URL {
+func (n NSBundle) ResourceURL() URL {
 	result_ := C.C_NSBundle_ResourceURL(n.Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSBundle) ExecutableURL() URL {
+func (n NSBundle) ExecutableURL() URL {
 	result_ := C.C_NSBundle_ExecutableURL(n.Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSBundle) PrivateFrameworksURL() URL {
+func (n NSBundle) PrivateFrameworksURL() URL {
 	result_ := C.C_NSBundle_PrivateFrameworksURL(n.Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSBundle) SharedFrameworksURL() URL {
+func (n NSBundle) SharedFrameworksURL() URL {
 	result_ := C.C_NSBundle_SharedFrameworksURL(n.Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSBundle) BuiltInPlugInsURL() URL {
+func (n NSBundle) BuiltInPlugInsURL() URL {
 	result_ := C.C_NSBundle_BuiltInPlugInsURL(n.Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSBundle) SharedSupportURL() URL {
+func (n NSBundle) SharedSupportURL() URL {
 	result_ := C.C_NSBundle_SharedSupportURL(n.Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSBundle) AppStoreReceiptURL() URL {
+func (n NSBundle) AppStoreReceiptURL() URL {
 	result_ := C.C_NSBundle_AppStoreReceiptURL(n.Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSBundle) ResourcePath() string {
+func (n NSBundle) ResourcePath() string {
 	result_ := C.C_NSBundle_ResourcePath(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSBundle) ExecutablePath() string {
+func (n NSBundle) ExecutablePath() string {
 	result_ := C.C_NSBundle_ExecutablePath(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSBundle) PrivateFrameworksPath() string {
+func (n NSBundle) PrivateFrameworksPath() string {
 	result_ := C.C_NSBundle_PrivateFrameworksPath(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSBundle) SharedFrameworksPath() string {
+func (n NSBundle) SharedFrameworksPath() string {
 	result_ := C.C_NSBundle_SharedFrameworksPath(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSBundle) BuiltInPlugInsPath() string {
+func (n NSBundle) BuiltInPlugInsPath() string {
 	result_ := C.C_NSBundle_BuiltInPlugInsPath(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSBundle) SharedSupportPath() string {
+func (n NSBundle) SharedSupportPath() string {
 	result_ := C.C_NSBundle_SharedSupportPath(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSBundle) BundleURL() URL {
+func (n NSBundle) BundleURL() URL {
 	result_ := C.C_NSBundle_BundleURL(n.Ptr())
 	return MakeURL(result_)
 }
 
-func (n *NSBundle) BundlePath() string {
+func (n NSBundle) BundlePath() string {
 	result_ := C.C_NSBundle_BundlePath(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSBundle) BundleIdentifier() string {
+func (n NSBundle) BundleIdentifier() string {
 	result_ := C.C_NSBundle_BundleIdentifier(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSBundle) Localizations() []string {
+func (n NSBundle) Localizations() []string {
 	result_ := C.C_NSBundle_Localizations(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -370,7 +367,7 @@ func (n *NSBundle) Localizations() []string {
 	return goResult_
 }
 
-func (n *NSBundle) PreferredLocalizations() []string {
+func (n NSBundle) PreferredLocalizations() []string {
 	result_ := C.C_NSBundle_PreferredLocalizations(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -381,12 +378,12 @@ func (n *NSBundle) PreferredLocalizations() []string {
 	return goResult_
 }
 
-func (n *NSBundle) DevelopmentLocalization() string {
+func (n NSBundle) DevelopmentLocalization() string {
 	result_ := C.C_NSBundle_DevelopmentLocalization(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSBundle) ExecutableArchitectures() []Number {
+func (n NSBundle) ExecutableArchitectures() []Number {
 	result_ := C.C_NSBundle_ExecutableArchitectures(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -397,7 +394,7 @@ func (n *NSBundle) ExecutableArchitectures() []Number {
 	return goResult_
 }
 
-func (n *NSBundle) IsLoaded() bool {
+func (n NSBundle) IsLoaded() bool {
 	result_ := C.C_NSBundle_IsLoaded(n.Ptr())
 	return bool(result_)
 }

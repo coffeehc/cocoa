@@ -23,25 +23,22 @@ type NSTreeNode struct {
 	objc.NSObject
 }
 
-func MakeTreeNode(ptr unsafe.Pointer) *NSTreeNode {
-	if ptr == nil {
-		return nil
-	}
-	return &NSTreeNode{
-		NSObject: *objc.MakeObject(ptr),
+func MakeTreeNode(ptr unsafe.Pointer) NSTreeNode {
+	return NSTreeNode{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocTreeNode() *NSTreeNode {
+func AllocTreeNode() NSTreeNode {
 	return MakeTreeNode(C.C_TreeNode_Alloc())
 }
 
-func (n *NSTreeNode) InitWithRepresentedObject(modelObject objc.Object) TreeNode {
+func (n NSTreeNode) InitWithRepresentedObject(modelObject objc.Object) TreeNode {
 	result_ := C.C_NSTreeNode_InitWithRepresentedObject(n.Ptr(), objc.ExtractPtr(modelObject))
 	return MakeTreeNode(result_)
 }
 
-func (n *NSTreeNode) Init() TreeNode {
+func (n NSTreeNode) Init() TreeNode {
 	result_ := C.C_NSTreeNode_Init(n.Ptr())
 	return MakeTreeNode(result_)
 }
@@ -51,12 +48,12 @@ func TreeNodeWithRepresentedObject(modelObject objc.Object) TreeNode {
 	return MakeTreeNode(result_)
 }
 
-func (n *NSTreeNode) DescendantNodeAtIndexPath(indexPath foundation.IndexPath) TreeNode {
+func (n NSTreeNode) DescendantNodeAtIndexPath(indexPath foundation.IndexPath) TreeNode {
 	result_ := C.C_NSTreeNode_DescendantNodeAtIndexPath(n.Ptr(), objc.ExtractPtr(indexPath))
 	return MakeTreeNode(result_)
 }
 
-func (n *NSTreeNode) SortWithSortDescriptors_Recursively(sortDescriptors []foundation.SortDescriptor, recursively bool) {
+func (n NSTreeNode) SortWithSortDescriptors_Recursively(sortDescriptors []foundation.SortDescriptor, recursively bool) {
 	cSortDescriptorsData := make([]unsafe.Pointer, len(sortDescriptors))
 	for idx, v := range sortDescriptors {
 		cSortDescriptorsData[idx] = objc.ExtractPtr(v)
@@ -65,22 +62,22 @@ func (n *NSTreeNode) SortWithSortDescriptors_Recursively(sortDescriptors []found
 	C.C_NSTreeNode_SortWithSortDescriptors_Recursively(n.Ptr(), cSortDescriptors, C.bool(recursively))
 }
 
-func (n *NSTreeNode) RepresentedObject() objc.Object {
+func (n NSTreeNode) RepresentedObject() objc.Object {
 	result_ := C.C_NSTreeNode_RepresentedObject(n.Ptr())
 	return objc.MakeObject(result_)
 }
 
-func (n *NSTreeNode) IndexPath() foundation.IndexPath {
+func (n NSTreeNode) IndexPath() foundation.IndexPath {
 	result_ := C.C_NSTreeNode_IndexPath(n.Ptr())
 	return foundation.MakeIndexPath(result_)
 }
 
-func (n *NSTreeNode) IsLeaf() bool {
+func (n NSTreeNode) IsLeaf() bool {
 	result_ := C.C_NSTreeNode_IsLeaf(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTreeNode) ChildNodes() []TreeNode {
+func (n NSTreeNode) ChildNodes() []TreeNode {
 	result_ := C.C_NSTreeNode_ChildNodes(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -91,7 +88,7 @@ func (n *NSTreeNode) ChildNodes() []TreeNode {
 	return goResult_
 }
 
-func (n *NSTreeNode) ParentNode() TreeNode {
+func (n NSTreeNode) ParentNode() TreeNode {
 	result_ := C.C_NSTreeNode_ParentNode(n.Ptr())
 	return MakeTreeNode(result_)
 }

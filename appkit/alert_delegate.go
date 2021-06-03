@@ -27,7 +27,7 @@ func alertDelegate_AlertShowHelp(id int64, alert unsafe.Pointer) C.bool {
 
 //export AlertDelegate_RespondsTo
 func AlertDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
-	sel := objc.MakeSelector(selectorPtr)
+	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
 	delegate := resources.Get(id).(*AlertDelegate)
 	switch selName {

@@ -63,7 +63,7 @@ func springLoadingDestination_DraggingEnded(id int64, draggingInfo unsafe.Pointe
 
 //export SpringLoadingDestination_RespondsTo
 func SpringLoadingDestination_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
-	sel := objc.MakeSelector(selectorPtr)
+	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
 	delegate := resources.Get(id).(*SpringLoadingDestination)
 	switch selName {

@@ -21,16 +21,13 @@ type NSCollectionLayoutItem struct {
 	objc.NSObject
 }
 
-func MakeCollectionLayoutItem(ptr unsafe.Pointer) *NSCollectionLayoutItem {
-	if ptr == nil {
-		return nil
-	}
-	return &NSCollectionLayoutItem{
-		NSObject: *objc.MakeObject(ptr),
+func MakeCollectionLayoutItem(ptr unsafe.Pointer) NSCollectionLayoutItem {
+	return NSCollectionLayoutItem{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocCollectionLayoutItem() *NSCollectionLayoutItem {
+func AllocCollectionLayoutItem() NSCollectionLayoutItem {
 	return MakeCollectionLayoutItem(C.C_CollectionLayoutItem_Alloc())
 }
 
@@ -49,12 +46,12 @@ func CollectionLayoutItem_ItemWithLayoutSize_SupplementaryItems(layoutSize Colle
 	return MakeCollectionLayoutItem(result_)
 }
 
-func (n *NSCollectionLayoutItem) LayoutSize() CollectionLayoutSize {
+func (n NSCollectionLayoutItem) LayoutSize() CollectionLayoutSize {
 	result_ := C.C_NSCollectionLayoutItem_LayoutSize(n.Ptr())
 	return MakeCollectionLayoutSize(result_)
 }
 
-func (n *NSCollectionLayoutItem) SupplementaryItems() []CollectionLayoutSupplementaryItem {
+func (n NSCollectionLayoutItem) SupplementaryItems() []CollectionLayoutSupplementaryItem {
 	result_ := C.C_NSCollectionLayoutItem_SupplementaryItems(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -65,20 +62,20 @@ func (n *NSCollectionLayoutItem) SupplementaryItems() []CollectionLayoutSuppleme
 	return goResult_
 }
 
-func (n *NSCollectionLayoutItem) EdgeSpacing() CollectionLayoutEdgeSpacing {
+func (n NSCollectionLayoutItem) EdgeSpacing() CollectionLayoutEdgeSpacing {
 	result_ := C.C_NSCollectionLayoutItem_EdgeSpacing(n.Ptr())
 	return MakeCollectionLayoutEdgeSpacing(result_)
 }
 
-func (n *NSCollectionLayoutItem) SetEdgeSpacing(value CollectionLayoutEdgeSpacing) {
+func (n NSCollectionLayoutItem) SetEdgeSpacing(value CollectionLayoutEdgeSpacing) {
 	C.C_NSCollectionLayoutItem_SetEdgeSpacing(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (n *NSCollectionLayoutItem) ContentInsets() DirectionalEdgeInsets {
+func (n NSCollectionLayoutItem) ContentInsets() DirectionalEdgeInsets {
 	result_ := C.C_NSCollectionLayoutItem_ContentInsets(n.Ptr())
 	return FromNSDirectionalEdgeInsetsPointer(unsafe.Pointer(&result_))
 }
 
-func (n *NSCollectionLayoutItem) SetContentInsets(value DirectionalEdgeInsets) {
+func (n NSCollectionLayoutItem) SetContentInsets(value DirectionalEdgeInsets) {
 	C.C_NSCollectionLayoutItem_SetContentInsets(n.Ptr(), *(*C.NSDirectionalEdgeInsets)(ToNSDirectionalEdgeInsetsPointer(value)))
 }

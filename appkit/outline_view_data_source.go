@@ -140,7 +140,7 @@ func outlineViewDataSource_OutlineView_ValidateDrop_ProposedItem_ProposedChildIn
 
 //export OutlineViewDataSource_RespondsTo
 func OutlineViewDataSource_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
-	sel := objc.MakeSelector(selectorPtr)
+	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
 	delegate := resources.Get(id).(*OutlineViewDataSource)
 	switch selName {

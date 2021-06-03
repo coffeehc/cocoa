@@ -46,160 +46,157 @@ type NSTableRowView struct {
 	NSView
 }
 
-func MakeTableRowView(ptr unsafe.Pointer) *NSTableRowView {
-	if ptr == nil {
-		return nil
-	}
-	return &NSTableRowView{
-		NSView: *MakeView(ptr),
+func MakeTableRowView(ptr unsafe.Pointer) NSTableRowView {
+	return NSTableRowView{
+		NSView: MakeView(ptr),
 	}
 }
 
-func AllocTableRowView() *NSTableRowView {
+func AllocTableRowView() NSTableRowView {
 	return MakeTableRowView(C.C_TableRowView_Alloc())
 }
 
-func (n *NSTableRowView) InitWithFrame(frameRect foundation.Rect) TableRowView {
+func (n NSTableRowView) InitWithFrame(frameRect foundation.Rect) TableRowView {
 	result_ := C.C_NSTableRowView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeTableRowView(result_)
 }
 
-func (n *NSTableRowView) InitWithCoder(coder foundation.Coder) TableRowView {
+func (n NSTableRowView) InitWithCoder(coder foundation.Coder) TableRowView {
 	result_ := C.C_NSTableRowView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeTableRowView(result_)
 }
 
-func (n *NSTableRowView) Init() TableRowView {
+func (n NSTableRowView) Init() TableRowView {
 	result_ := C.C_NSTableRowView_Init(n.Ptr())
 	return MakeTableRowView(result_)
 }
 
-func (n *NSTableRowView) DrawBackgroundInRect(dirtyRect foundation.Rect) {
+func (n NSTableRowView) DrawBackgroundInRect(dirtyRect foundation.Rect) {
 	C.C_NSTableRowView_DrawBackgroundInRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(dirtyRect))))
 }
 
-func (n *NSTableRowView) DrawDraggingDestinationFeedbackInRect(dirtyRect foundation.Rect) {
+func (n NSTableRowView) DrawDraggingDestinationFeedbackInRect(dirtyRect foundation.Rect) {
 	C.C_NSTableRowView_DrawDraggingDestinationFeedbackInRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(dirtyRect))))
 }
 
-func (n *NSTableRowView) DrawSelectionInRect(dirtyRect foundation.Rect) {
+func (n NSTableRowView) DrawSelectionInRect(dirtyRect foundation.Rect) {
 	C.C_NSTableRowView_DrawSelectionInRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(dirtyRect))))
 }
 
-func (n *NSTableRowView) DrawSeparatorInRect(dirtyRect foundation.Rect) {
+func (n NSTableRowView) DrawSeparatorInRect(dirtyRect foundation.Rect) {
 	C.C_NSTableRowView_DrawSeparatorInRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(dirtyRect))))
 }
 
-func (n *NSTableRowView) ViewAtColumn(column int) objc.Object {
+func (n NSTableRowView) ViewAtColumn(column int) objc.Object {
 	result_ := C.C_NSTableRowView_ViewAtColumn(n.Ptr(), C.int(column))
 	return objc.MakeObject(result_)
 }
 
-func (n *NSTableRowView) IsEmphasized() bool {
+func (n NSTableRowView) IsEmphasized() bool {
 	result_ := C.C_NSTableRowView_IsEmphasized(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTableRowView) SetEmphasized(value bool) {
+func (n NSTableRowView) SetEmphasized(value bool) {
 	C.C_NSTableRowView_SetEmphasized(n.Ptr(), C.bool(value))
 }
 
-func (n *NSTableRowView) InteriorBackgroundStyle() BackgroundStyle {
+func (n NSTableRowView) InteriorBackgroundStyle() BackgroundStyle {
 	result_ := C.C_NSTableRowView_InteriorBackgroundStyle(n.Ptr())
 	return BackgroundStyle(int(result_))
 }
 
-func (n *NSTableRowView) IsFloating() bool {
+func (n NSTableRowView) IsFloating() bool {
 	result_ := C.C_NSTableRowView_IsFloating(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTableRowView) SetFloating(value bool) {
+func (n NSTableRowView) SetFloating(value bool) {
 	C.C_NSTableRowView_SetFloating(n.Ptr(), C.bool(value))
 }
 
-func (n *NSTableRowView) IsSelected() bool {
+func (n NSTableRowView) IsSelected() bool {
 	result_ := C.C_NSTableRowView_IsSelected(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTableRowView) SetSelected(value bool) {
+func (n NSTableRowView) SetSelected(value bool) {
 	C.C_NSTableRowView_SetSelected(n.Ptr(), C.bool(value))
 }
 
-func (n *NSTableRowView) SelectionHighlightStyle() TableViewSelectionHighlightStyle {
+func (n NSTableRowView) SelectionHighlightStyle() TableViewSelectionHighlightStyle {
 	result_ := C.C_NSTableRowView_SelectionHighlightStyle(n.Ptr())
 	return TableViewSelectionHighlightStyle(int(result_))
 }
 
-func (n *NSTableRowView) SetSelectionHighlightStyle(value TableViewSelectionHighlightStyle) {
+func (n NSTableRowView) SetSelectionHighlightStyle(value TableViewSelectionHighlightStyle) {
 	C.C_NSTableRowView_SetSelectionHighlightStyle(n.Ptr(), C.int(int(value)))
 }
 
-func (n *NSTableRowView) DraggingDestinationFeedbackStyle() TableViewDraggingDestinationFeedbackStyle {
+func (n NSTableRowView) DraggingDestinationFeedbackStyle() TableViewDraggingDestinationFeedbackStyle {
 	result_ := C.C_NSTableRowView_DraggingDestinationFeedbackStyle(n.Ptr())
 	return TableViewDraggingDestinationFeedbackStyle(int(result_))
 }
 
-func (n *NSTableRowView) SetDraggingDestinationFeedbackStyle(value TableViewDraggingDestinationFeedbackStyle) {
+func (n NSTableRowView) SetDraggingDestinationFeedbackStyle(value TableViewDraggingDestinationFeedbackStyle) {
 	C.C_NSTableRowView_SetDraggingDestinationFeedbackStyle(n.Ptr(), C.int(int(value)))
 }
 
-func (n *NSTableRowView) IndentationForDropOperation() coregraphics.Float {
+func (n NSTableRowView) IndentationForDropOperation() coregraphics.Float {
 	result_ := C.C_NSTableRowView_IndentationForDropOperation(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSTableRowView) SetIndentationForDropOperation(value coregraphics.Float) {
+func (n NSTableRowView) SetIndentationForDropOperation(value coregraphics.Float) {
 	C.C_NSTableRowView_SetIndentationForDropOperation(n.Ptr(), C.double(float64(value)))
 }
 
-func (n *NSTableRowView) IsTargetForDropOperation() bool {
+func (n NSTableRowView) IsTargetForDropOperation() bool {
 	result_ := C.C_NSTableRowView_IsTargetForDropOperation(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTableRowView) SetTargetForDropOperation(value bool) {
+func (n NSTableRowView) SetTargetForDropOperation(value bool) {
 	C.C_NSTableRowView_SetTargetForDropOperation(n.Ptr(), C.bool(value))
 }
 
-func (n *NSTableRowView) IsGroupRowStyle() bool {
+func (n NSTableRowView) IsGroupRowStyle() bool {
 	result_ := C.C_NSTableRowView_IsGroupRowStyle(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTableRowView) SetGroupRowStyle(value bool) {
+func (n NSTableRowView) SetGroupRowStyle(value bool) {
 	C.C_NSTableRowView_SetGroupRowStyle(n.Ptr(), C.bool(value))
 }
 
-func (n *NSTableRowView) NumberOfColumns() int {
+func (n NSTableRowView) NumberOfColumns() int {
 	result_ := C.C_NSTableRowView_NumberOfColumns(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSTableRowView) BackgroundColor() Color {
+func (n NSTableRowView) BackgroundColor() Color {
 	result_ := C.C_NSTableRowView_BackgroundColor(n.Ptr())
 	return MakeColor(result_)
 }
 
-func (n *NSTableRowView) SetBackgroundColor(value Color) {
+func (n NSTableRowView) SetBackgroundColor(value Color) {
 	C.C_NSTableRowView_SetBackgroundColor(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (n *NSTableRowView) IsNextRowSelected() bool {
+func (n NSTableRowView) IsNextRowSelected() bool {
 	result_ := C.C_NSTableRowView_IsNextRowSelected(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTableRowView) SetNextRowSelected(value bool) {
+func (n NSTableRowView) SetNextRowSelected(value bool) {
 	C.C_NSTableRowView_SetNextRowSelected(n.Ptr(), C.bool(value))
 }
 
-func (n *NSTableRowView) IsPreviousRowSelected() bool {
+func (n NSTableRowView) IsPreviousRowSelected() bool {
 	result_ := C.C_NSTableRowView_IsPreviousRowSelected(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTableRowView) SetPreviousRowSelected(value bool) {
+func (n NSTableRowView) SetPreviousRowSelected(value bool) {
 	C.C_NSTableRowView_SetPreviousRowSelected(n.Ptr(), C.bool(value))
 }

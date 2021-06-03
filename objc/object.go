@@ -3,7 +3,6 @@ package objc
 // #import "object.h"
 import "C"
 import (
-	"github.com/hsiafan/cocoa/internal/utils"
 	"sync"
 	"unsafe"
 )
@@ -22,32 +21,30 @@ type Object interface {
 
 // ExtractPtr return the objc ptr hold by Object. If is nil, or contains a nil pointer, return nil
 func ExtractPtr(o PointerHolder) unsafe.Pointer {
-	if utils.InterfaceIsNil(o) {
+	if o == nil {
 		return nil
 	}
 	return o.Ptr()
 }
-
-var _ Object = (*NSObject)(nil)
 
 // NSObject is wrapper for objc-NSObject
 type NSObject struct {
 	ptr unsafe.Pointer
 }
 
-func (o *NSObject) Dealloc() {
-	panic("to be implemented")
+func (o NSObject) Dealloc() {
+	if o.Ptr() == nil {
+		panic("objc object is null")
+	}
+	C.Object_Dealloc(o.Ptr())
 }
 
-func (o *NSObject) Ptr() unsafe.Pointer {
+func (o NSObject) Ptr() unsafe.Pointer {
 	return o.ptr
 }
 
-func MakeObject(ptr unsafe.Pointer) *NSObject {
-	if ptr == nil {
-		return nil
-	}
-	return &NSObject{ptr}
+func MakeObject(ptr unsafe.Pointer) NSObject {
+	return NSObject{ptr}
 }
 
 var tasks = make(map[int64]func())

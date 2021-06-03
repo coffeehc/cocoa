@@ -21,16 +21,13 @@ type NSCollectionLayoutSupplementaryItem struct {
 	NSCollectionLayoutItem
 }
 
-func MakeCollectionLayoutSupplementaryItem(ptr unsafe.Pointer) *NSCollectionLayoutSupplementaryItem {
-	if ptr == nil {
-		return nil
-	}
-	return &NSCollectionLayoutSupplementaryItem{
-		NSCollectionLayoutItem: *MakeCollectionLayoutItem(ptr),
+func MakeCollectionLayoutSupplementaryItem(ptr unsafe.Pointer) NSCollectionLayoutSupplementaryItem {
+	return NSCollectionLayoutSupplementaryItem{
+		NSCollectionLayoutItem: MakeCollectionLayoutItem(ptr),
 	}
 }
 
-func AllocCollectionLayoutSupplementaryItem() *NSCollectionLayoutSupplementaryItem {
+func AllocCollectionLayoutSupplementaryItem() NSCollectionLayoutSupplementaryItem {
 	return MakeCollectionLayoutSupplementaryItem(C.C_CollectionLayoutSupplementaryItem_Alloc())
 }
 
@@ -44,26 +41,26 @@ func CollectionLayoutSupplementaryItem_SupplementaryItemWithLayoutSize_ElementKi
 	return MakeCollectionLayoutSupplementaryItem(result_)
 }
 
-func (n *NSCollectionLayoutSupplementaryItem) ItemAnchor() CollectionLayoutAnchor {
+func (n NSCollectionLayoutSupplementaryItem) ItemAnchor() CollectionLayoutAnchor {
 	result_ := C.C_NSCollectionLayoutSupplementaryItem_ItemAnchor(n.Ptr())
 	return MakeCollectionLayoutAnchor(result_)
 }
 
-func (n *NSCollectionLayoutSupplementaryItem) ContainerAnchor() CollectionLayoutAnchor {
+func (n NSCollectionLayoutSupplementaryItem) ContainerAnchor() CollectionLayoutAnchor {
 	result_ := C.C_NSCollectionLayoutSupplementaryItem_ContainerAnchor(n.Ptr())
 	return MakeCollectionLayoutAnchor(result_)
 }
 
-func (n *NSCollectionLayoutSupplementaryItem) ElementKind() string {
+func (n NSCollectionLayoutSupplementaryItem) ElementKind() string {
 	result_ := C.C_NSCollectionLayoutSupplementaryItem_ElementKind(n.Ptr())
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSCollectionLayoutSupplementaryItem) ZIndex() int {
+func (n NSCollectionLayoutSupplementaryItem) ZIndex() int {
 	result_ := C.C_NSCollectionLayoutSupplementaryItem_ZIndex(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSCollectionLayoutSupplementaryItem) SetZIndex(value int) {
+func (n NSCollectionLayoutSupplementaryItem) SetZIndex(value int) {
 	C.C_NSCollectionLayoutSupplementaryItem_SetZIndex(n.Ptr(), C.int(value))
 }

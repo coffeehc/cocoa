@@ -21,16 +21,13 @@ type NSCollectionLayoutDimension struct {
 	objc.NSObject
 }
 
-func MakeCollectionLayoutDimension(ptr unsafe.Pointer) *NSCollectionLayoutDimension {
-	if ptr == nil {
-		return nil
-	}
-	return &NSCollectionLayoutDimension{
-		NSObject: *objc.MakeObject(ptr),
+func MakeCollectionLayoutDimension(ptr unsafe.Pointer) NSCollectionLayoutDimension {
+	return NSCollectionLayoutDimension{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocCollectionLayoutDimension() *NSCollectionLayoutDimension {
+func AllocCollectionLayoutDimension() NSCollectionLayoutDimension {
 	return MakeCollectionLayoutDimension(C.C_CollectionLayoutDimension_Alloc())
 }
 
@@ -54,27 +51,27 @@ func CollectionLayoutDimension_FractionalWidthDimension(fractionalWidth coregrap
 	return MakeCollectionLayoutDimension(result_)
 }
 
-func (n *NSCollectionLayoutDimension) Dimension() coregraphics.Float {
+func (n NSCollectionLayoutDimension) Dimension() coregraphics.Float {
 	result_ := C.C_NSCollectionLayoutDimension_Dimension(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSCollectionLayoutDimension) IsAbsolute() bool {
+func (n NSCollectionLayoutDimension) IsAbsolute() bool {
 	result_ := C.C_NSCollectionLayoutDimension_IsAbsolute(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSCollectionLayoutDimension) IsEstimated() bool {
+func (n NSCollectionLayoutDimension) IsEstimated() bool {
 	result_ := C.C_NSCollectionLayoutDimension_IsEstimated(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSCollectionLayoutDimension) IsFractionalHeight() bool {
+func (n NSCollectionLayoutDimension) IsFractionalHeight() bool {
 	result_ := C.C_NSCollectionLayoutDimension_IsFractionalHeight(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSCollectionLayoutDimension) IsFractionalWidth() bool {
+func (n NSCollectionLayoutDimension) IsFractionalWidth() bool {
 	result_ := C.C_NSCollectionLayoutDimension_IsFractionalWidth(n.Ptr())
 	return bool(result_)
 }

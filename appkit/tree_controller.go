@@ -56,44 +56,41 @@ type NSTreeController struct {
 	NSObjectController
 }
 
-func MakeTreeController(ptr unsafe.Pointer) *NSTreeController {
-	if ptr == nil {
-		return nil
-	}
-	return &NSTreeController{
-		NSObjectController: *MakeObjectController(ptr),
+func MakeTreeController(ptr unsafe.Pointer) NSTreeController {
+	return NSTreeController{
+		NSObjectController: MakeObjectController(ptr),
 	}
 }
 
-func AllocTreeController() *NSTreeController {
+func AllocTreeController() NSTreeController {
 	return MakeTreeController(C.C_TreeController_Alloc())
 }
 
-func (n *NSTreeController) InitWithContent(content objc.Object) TreeController {
+func (n NSTreeController) InitWithContent(content objc.Object) TreeController {
 	result_ := C.C_NSTreeController_InitWithContent(n.Ptr(), objc.ExtractPtr(content))
 	return MakeTreeController(result_)
 }
 
-func (n *NSTreeController) InitWithCoder(coder foundation.Coder) TreeController {
+func (n NSTreeController) InitWithCoder(coder foundation.Coder) TreeController {
 	result_ := C.C_NSTreeController_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeTreeController(result_)
 }
 
-func (n *NSTreeController) Init() TreeController {
+func (n NSTreeController) Init() TreeController {
 	result_ := C.C_NSTreeController_Init(n.Ptr())
 	return MakeTreeController(result_)
 }
 
-func (n *NSTreeController) RearrangeObjects() {
+func (n NSTreeController) RearrangeObjects() {
 	C.C_NSTreeController_RearrangeObjects(n.Ptr())
 }
 
-func (n *NSTreeController) SetSelectionIndexPath(indexPath foundation.IndexPath) bool {
+func (n NSTreeController) SetSelectionIndexPath(indexPath foundation.IndexPath) bool {
 	result_ := C.C_NSTreeController_SetSelectionIndexPath(n.Ptr(), objc.ExtractPtr(indexPath))
 	return bool(result_)
 }
 
-func (n *NSTreeController) SetSelectionIndexPaths(indexPaths []foundation.IndexPath) bool {
+func (n NSTreeController) SetSelectionIndexPaths(indexPaths []foundation.IndexPath) bool {
 	cIndexPathsData := make([]unsafe.Pointer, len(indexPaths))
 	for idx, v := range indexPaths {
 		cIndexPathsData[idx] = objc.ExtractPtr(v)
@@ -103,7 +100,7 @@ func (n *NSTreeController) SetSelectionIndexPaths(indexPaths []foundation.IndexP
 	return bool(result_)
 }
 
-func (n *NSTreeController) AddSelectionIndexPaths(indexPaths []foundation.IndexPath) bool {
+func (n NSTreeController) AddSelectionIndexPaths(indexPaths []foundation.IndexPath) bool {
 	cIndexPathsData := make([]unsafe.Pointer, len(indexPaths))
 	for idx, v := range indexPaths {
 		cIndexPathsData[idx] = objc.ExtractPtr(v)
@@ -113,7 +110,7 @@ func (n *NSTreeController) AddSelectionIndexPaths(indexPaths []foundation.IndexP
 	return bool(result_)
 }
 
-func (n *NSTreeController) RemoveSelectionIndexPaths(indexPaths []foundation.IndexPath) bool {
+func (n NSTreeController) RemoveSelectionIndexPaths(indexPaths []foundation.IndexPath) bool {
 	cIndexPathsData := make([]unsafe.Pointer, len(indexPaths))
 	for idx, v := range indexPaths {
 		cIndexPathsData[idx] = objc.ExtractPtr(v)
@@ -123,23 +120,23 @@ func (n *NSTreeController) RemoveSelectionIndexPaths(indexPaths []foundation.Ind
 	return bool(result_)
 }
 
-func (n *NSTreeController) AddChild(sender objc.Object) {
+func (n NSTreeController) AddChild(sender objc.Object) {
 	C.C_NSTreeController_AddChild(n.Ptr(), objc.ExtractPtr(sender))
 }
 
-func (n *NSTreeController) Insert(sender objc.Object) {
+func (n NSTreeController) Insert(sender objc.Object) {
 	C.C_NSTreeController_Insert(n.Ptr(), objc.ExtractPtr(sender))
 }
 
-func (n *NSTreeController) InsertChild(sender objc.Object) {
+func (n NSTreeController) InsertChild(sender objc.Object) {
 	C.C_NSTreeController_InsertChild(n.Ptr(), objc.ExtractPtr(sender))
 }
 
-func (n *NSTreeController) InsertObject_AtArrangedObjectIndexPath(object objc.Object, indexPath foundation.IndexPath) {
+func (n NSTreeController) InsertObject_AtArrangedObjectIndexPath(object objc.Object, indexPath foundation.IndexPath) {
 	C.C_NSTreeController_InsertObject_AtArrangedObjectIndexPath(n.Ptr(), objc.ExtractPtr(object), objc.ExtractPtr(indexPath))
 }
 
-func (n *NSTreeController) InsertObjects_AtArrangedObjectIndexPaths(objects []objc.Object, indexPaths []foundation.IndexPath) {
+func (n NSTreeController) InsertObjects_AtArrangedObjectIndexPaths(objects []objc.Object, indexPaths []foundation.IndexPath) {
 	cObjectsData := make([]unsafe.Pointer, len(objects))
 	for idx, v := range objects {
 		cObjectsData[idx] = objc.ExtractPtr(v)
@@ -153,11 +150,11 @@ func (n *NSTreeController) InsertObjects_AtArrangedObjectIndexPaths(objects []ob
 	C.C_NSTreeController_InsertObjects_AtArrangedObjectIndexPaths(n.Ptr(), cObjects, cIndexPaths)
 }
 
-func (n *NSTreeController) RemoveObjectAtArrangedObjectIndexPath(indexPath foundation.IndexPath) {
+func (n NSTreeController) RemoveObjectAtArrangedObjectIndexPath(indexPath foundation.IndexPath) {
 	C.C_NSTreeController_RemoveObjectAtArrangedObjectIndexPath(n.Ptr(), objc.ExtractPtr(indexPath))
 }
 
-func (n *NSTreeController) RemoveObjectsAtArrangedObjectIndexPaths(indexPaths []foundation.IndexPath) {
+func (n NSTreeController) RemoveObjectsAtArrangedObjectIndexPaths(indexPaths []foundation.IndexPath) {
 	cIndexPathsData := make([]unsafe.Pointer, len(indexPaths))
 	for idx, v := range indexPaths {
 		cIndexPathsData[idx] = objc.ExtractPtr(v)
@@ -166,11 +163,11 @@ func (n *NSTreeController) RemoveObjectsAtArrangedObjectIndexPaths(indexPaths []
 	C.C_NSTreeController_RemoveObjectsAtArrangedObjectIndexPaths(n.Ptr(), cIndexPaths)
 }
 
-func (n *NSTreeController) MoveNode_ToIndexPath(node TreeNode, indexPath foundation.IndexPath) {
+func (n NSTreeController) MoveNode_ToIndexPath(node TreeNode, indexPath foundation.IndexPath) {
 	C.C_NSTreeController_MoveNode_ToIndexPath(n.Ptr(), objc.ExtractPtr(node), objc.ExtractPtr(indexPath))
 }
 
-func (n *NSTreeController) MoveNodes_ToIndexPath(nodes []TreeNode, startingIndexPath foundation.IndexPath) {
+func (n NSTreeController) MoveNodes_ToIndexPath(nodes []TreeNode, startingIndexPath foundation.IndexPath) {
 	cNodesData := make([]unsafe.Pointer, len(nodes))
 	for idx, v := range nodes {
 		cNodesData[idx] = objc.ExtractPtr(v)
@@ -179,22 +176,22 @@ func (n *NSTreeController) MoveNodes_ToIndexPath(nodes []TreeNode, startingIndex
 	C.C_NSTreeController_MoveNodes_ToIndexPath(n.Ptr(), cNodes, objc.ExtractPtr(startingIndexPath))
 }
 
-func (n *NSTreeController) ChildrenKeyPathForNode(node TreeNode) string {
+func (n NSTreeController) ChildrenKeyPathForNode(node TreeNode) string {
 	result_ := C.C_NSTreeController_ChildrenKeyPathForNode(n.Ptr(), objc.ExtractPtr(node))
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSTreeController) CountKeyPathForNode(node TreeNode) string {
+func (n NSTreeController) CountKeyPathForNode(node TreeNode) string {
 	result_ := C.C_NSTreeController_CountKeyPathForNode(n.Ptr(), objc.ExtractPtr(node))
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSTreeController) LeafKeyPathForNode(node TreeNode) string {
+func (n NSTreeController) LeafKeyPathForNode(node TreeNode) string {
 	result_ := C.C_NSTreeController_LeafKeyPathForNode(n.Ptr(), objc.ExtractPtr(node))
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSTreeController) SortDescriptors() []foundation.SortDescriptor {
+func (n NSTreeController) SortDescriptors() []foundation.SortDescriptor {
 	result_ := C.C_NSTreeController_SortDescriptors(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -205,7 +202,7 @@ func (n *NSTreeController) SortDescriptors() []foundation.SortDescriptor {
 	return goResult_
 }
 
-func (n *NSTreeController) SetSortDescriptors(value []foundation.SortDescriptor) {
+func (n NSTreeController) SetSortDescriptors(value []foundation.SortDescriptor) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = objc.ExtractPtr(v)
@@ -214,17 +211,17 @@ func (n *NSTreeController) SetSortDescriptors(value []foundation.SortDescriptor)
 	C.C_NSTreeController_SetSortDescriptors(n.Ptr(), cValue)
 }
 
-func (n *NSTreeController) ArrangedObjects() TreeNode {
+func (n NSTreeController) ArrangedObjects() TreeNode {
 	result_ := C.C_NSTreeController_ArrangedObjects(n.Ptr())
 	return MakeTreeNode(result_)
 }
 
-func (n *NSTreeController) SelectionIndexPath() foundation.IndexPath {
+func (n NSTreeController) SelectionIndexPath() foundation.IndexPath {
 	result_ := C.C_NSTreeController_SelectionIndexPath(n.Ptr())
 	return foundation.MakeIndexPath(result_)
 }
 
-func (n *NSTreeController) SelectionIndexPaths() []foundation.IndexPath {
+func (n NSTreeController) SelectionIndexPaths() []foundation.IndexPath {
 	result_ := C.C_NSTreeController_SelectionIndexPaths(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -235,7 +232,7 @@ func (n *NSTreeController) SelectionIndexPaths() []foundation.IndexPath {
 	return goResult_
 }
 
-func (n *NSTreeController) SelectedNodes() []TreeNode {
+func (n NSTreeController) SelectedNodes() []TreeNode {
 	result_ := C.C_NSTreeController_SelectedNodes(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -246,80 +243,80 @@ func (n *NSTreeController) SelectedNodes() []TreeNode {
 	return goResult_
 }
 
-func (n *NSTreeController) SelectsInsertedObjects() bool {
+func (n NSTreeController) SelectsInsertedObjects() bool {
 	result_ := C.C_NSTreeController_SelectsInsertedObjects(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTreeController) SetSelectsInsertedObjects(value bool) {
+func (n NSTreeController) SetSelectsInsertedObjects(value bool) {
 	C.C_NSTreeController_SetSelectsInsertedObjects(n.Ptr(), C.bool(value))
 }
 
-func (n *NSTreeController) AvoidsEmptySelection() bool {
+func (n NSTreeController) AvoidsEmptySelection() bool {
 	result_ := C.C_NSTreeController_AvoidsEmptySelection(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTreeController) SetAvoidsEmptySelection(value bool) {
+func (n NSTreeController) SetAvoidsEmptySelection(value bool) {
 	C.C_NSTreeController_SetAvoidsEmptySelection(n.Ptr(), C.bool(value))
 }
 
-func (n *NSTreeController) PreservesSelection() bool {
+func (n NSTreeController) PreservesSelection() bool {
 	result_ := C.C_NSTreeController_PreservesSelection(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTreeController) SetPreservesSelection(value bool) {
+func (n NSTreeController) SetPreservesSelection(value bool) {
 	C.C_NSTreeController_SetPreservesSelection(n.Ptr(), C.bool(value))
 }
 
-func (n *NSTreeController) AlwaysUsesMultipleValuesMarker() bool {
+func (n NSTreeController) AlwaysUsesMultipleValuesMarker() bool {
 	result_ := C.C_NSTreeController_AlwaysUsesMultipleValuesMarker(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTreeController) SetAlwaysUsesMultipleValuesMarker(value bool) {
+func (n NSTreeController) SetAlwaysUsesMultipleValuesMarker(value bool) {
 	C.C_NSTreeController_SetAlwaysUsesMultipleValuesMarker(n.Ptr(), C.bool(value))
 }
 
-func (n *NSTreeController) CanAddChild() bool {
+func (n NSTreeController) CanAddChild() bool {
 	result_ := C.C_NSTreeController_CanAddChild(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTreeController) CanInsert() bool {
+func (n NSTreeController) CanInsert() bool {
 	result_ := C.C_NSTreeController_CanInsert(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTreeController) CanInsertChild() bool {
+func (n NSTreeController) CanInsertChild() bool {
 	result_ := C.C_NSTreeController_CanInsertChild(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTreeController) ChildrenKeyPath() string {
+func (n NSTreeController) ChildrenKeyPath() string {
 	result_ := C.C_NSTreeController_ChildrenKeyPath(n.Ptr())
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSTreeController) SetChildrenKeyPath(value string) {
+func (n NSTreeController) SetChildrenKeyPath(value string) {
 	C.C_NSTreeController_SetChildrenKeyPath(n.Ptr(), foundation.NewString(value).Ptr())
 }
 
-func (n *NSTreeController) CountKeyPath() string {
+func (n NSTreeController) CountKeyPath() string {
 	result_ := C.C_NSTreeController_CountKeyPath(n.Ptr())
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSTreeController) SetCountKeyPath(value string) {
+func (n NSTreeController) SetCountKeyPath(value string) {
 	C.C_NSTreeController_SetCountKeyPath(n.Ptr(), foundation.NewString(value).Ptr())
 }
 
-func (n *NSTreeController) LeafKeyPath() string {
+func (n NSTreeController) LeafKeyPath() string {
 	result_ := C.C_NSTreeController_LeafKeyPath(n.Ptr())
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSTreeController) SetLeafKeyPath(value string) {
+func (n NSTreeController) SetLeafKeyPath(value string) {
 	C.C_NSTreeController_SetLeafKeyPath(n.Ptr(), foundation.NewString(value).Ptr())
 }

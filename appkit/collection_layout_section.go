@@ -28,16 +28,13 @@ type NSCollectionLayoutSection struct {
 	objc.NSObject
 }
 
-func MakeCollectionLayoutSection(ptr unsafe.Pointer) *NSCollectionLayoutSection {
-	if ptr == nil {
-		return nil
-	}
-	return &NSCollectionLayoutSection{
-		NSObject: *objc.MakeObject(ptr),
+func MakeCollectionLayoutSection(ptr unsafe.Pointer) NSCollectionLayoutSection {
+	return NSCollectionLayoutSection{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocCollectionLayoutSection() *NSCollectionLayoutSection {
+func AllocCollectionLayoutSection() NSCollectionLayoutSection {
 	return MakeCollectionLayoutSection(C.C_CollectionLayoutSection_Alloc())
 }
 
@@ -46,43 +43,43 @@ func CollectionLayoutSection_SectionWithGroup(group CollectionLayoutGroup) Colle
 	return MakeCollectionLayoutSection(result_)
 }
 
-func (n *NSCollectionLayoutSection) OrthogonalScrollingBehavior() CollectionLayoutSectionOrthogonalScrollingBehavior {
+func (n NSCollectionLayoutSection) OrthogonalScrollingBehavior() CollectionLayoutSectionOrthogonalScrollingBehavior {
 	result_ := C.C_NSCollectionLayoutSection_OrthogonalScrollingBehavior(n.Ptr())
 	return CollectionLayoutSectionOrthogonalScrollingBehavior(int(result_))
 }
 
-func (n *NSCollectionLayoutSection) SetOrthogonalScrollingBehavior(value CollectionLayoutSectionOrthogonalScrollingBehavior) {
+func (n NSCollectionLayoutSection) SetOrthogonalScrollingBehavior(value CollectionLayoutSectionOrthogonalScrollingBehavior) {
 	C.C_NSCollectionLayoutSection_SetOrthogonalScrollingBehavior(n.Ptr(), C.int(int(value)))
 }
 
-func (n *NSCollectionLayoutSection) InterGroupSpacing() coregraphics.Float {
+func (n NSCollectionLayoutSection) InterGroupSpacing() coregraphics.Float {
 	result_ := C.C_NSCollectionLayoutSection_InterGroupSpacing(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSCollectionLayoutSection) SetInterGroupSpacing(value coregraphics.Float) {
+func (n NSCollectionLayoutSection) SetInterGroupSpacing(value coregraphics.Float) {
 	C.C_NSCollectionLayoutSection_SetInterGroupSpacing(n.Ptr(), C.double(float64(value)))
 }
 
-func (n *NSCollectionLayoutSection) ContentInsets() DirectionalEdgeInsets {
+func (n NSCollectionLayoutSection) ContentInsets() DirectionalEdgeInsets {
 	result_ := C.C_NSCollectionLayoutSection_ContentInsets(n.Ptr())
 	return FromNSDirectionalEdgeInsetsPointer(unsafe.Pointer(&result_))
 }
 
-func (n *NSCollectionLayoutSection) SetContentInsets(value DirectionalEdgeInsets) {
+func (n NSCollectionLayoutSection) SetContentInsets(value DirectionalEdgeInsets) {
 	C.C_NSCollectionLayoutSection_SetContentInsets(n.Ptr(), *(*C.NSDirectionalEdgeInsets)(ToNSDirectionalEdgeInsetsPointer(value)))
 }
 
-func (n *NSCollectionLayoutSection) SupplementariesFollowContentInsets() bool {
+func (n NSCollectionLayoutSection) SupplementariesFollowContentInsets() bool {
 	result_ := C.C_NSCollectionLayoutSection_SupplementariesFollowContentInsets(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSCollectionLayoutSection) SetSupplementariesFollowContentInsets(value bool) {
+func (n NSCollectionLayoutSection) SetSupplementariesFollowContentInsets(value bool) {
 	C.C_NSCollectionLayoutSection_SetSupplementariesFollowContentInsets(n.Ptr(), C.bool(value))
 }
 
-func (n *NSCollectionLayoutSection) BoundarySupplementaryItems() []CollectionLayoutBoundarySupplementaryItem {
+func (n NSCollectionLayoutSection) BoundarySupplementaryItems() []CollectionLayoutBoundarySupplementaryItem {
 	result_ := C.C_NSCollectionLayoutSection_BoundarySupplementaryItems(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -93,7 +90,7 @@ func (n *NSCollectionLayoutSection) BoundarySupplementaryItems() []CollectionLay
 	return goResult_
 }
 
-func (n *NSCollectionLayoutSection) SetBoundarySupplementaryItems(value []CollectionLayoutBoundarySupplementaryItem) {
+func (n NSCollectionLayoutSection) SetBoundarySupplementaryItems(value []CollectionLayoutBoundarySupplementaryItem) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = objc.ExtractPtr(v)
@@ -102,7 +99,7 @@ func (n *NSCollectionLayoutSection) SetBoundarySupplementaryItems(value []Collec
 	C.C_NSCollectionLayoutSection_SetBoundarySupplementaryItems(n.Ptr(), cValue)
 }
 
-func (n *NSCollectionLayoutSection) DecorationItems() []CollectionLayoutDecorationItem {
+func (n NSCollectionLayoutSection) DecorationItems() []CollectionLayoutDecorationItem {
 	result_ := C.C_NSCollectionLayoutSection_DecorationItems(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -113,7 +110,7 @@ func (n *NSCollectionLayoutSection) DecorationItems() []CollectionLayoutDecorati
 	return goResult_
 }
 
-func (n *NSCollectionLayoutSection) SetDecorationItems(value []CollectionLayoutDecorationItem) {
+func (n NSCollectionLayoutSection) SetDecorationItems(value []CollectionLayoutDecorationItem) {
 	cValueData := make([]unsafe.Pointer, len(value))
 	for idx, v := range value {
 		cValueData[idx] = objc.ExtractPtr(v)

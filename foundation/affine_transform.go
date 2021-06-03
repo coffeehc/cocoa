@@ -30,20 +30,17 @@ type NSAffineTransform struct {
 	objc.NSObject
 }
 
-func MakeAffineTransform(ptr unsafe.Pointer) *NSAffineTransform {
-	if ptr == nil {
-		return nil
-	}
-	return &NSAffineTransform{
-		NSObject: *objc.MakeObject(ptr),
+func MakeAffineTransform(ptr unsafe.Pointer) NSAffineTransform {
+	return NSAffineTransform{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocAffineTransform() *NSAffineTransform {
+func AllocAffineTransform() NSAffineTransform {
 	return MakeAffineTransform(C.C_AffineTransform_Alloc())
 }
 
-func (n *NSAffineTransform) InitWithTransform(transform AffineTransform) AffineTransform {
+func (n NSAffineTransform) InitWithTransform(transform AffineTransform) AffineTransform {
 	result_ := C.C_NSAffineTransform_InitWithTransform(n.Ptr(), objc.ExtractPtr(transform))
 	return MakeAffineTransform(result_)
 }
@@ -53,61 +50,61 @@ func AffineTransform_Transform() AffineTransform {
 	return MakeAffineTransform(result_)
 }
 
-func (n *NSAffineTransform) RotateByDegrees(angle coregraphics.Float) {
+func (n NSAffineTransform) RotateByDegrees(angle coregraphics.Float) {
 	C.C_NSAffineTransform_RotateByDegrees(n.Ptr(), C.double(float64(angle)))
 }
 
-func (n *NSAffineTransform) RotateByRadians(angle coregraphics.Float) {
+func (n NSAffineTransform) RotateByRadians(angle coregraphics.Float) {
 	C.C_NSAffineTransform_RotateByRadians(n.Ptr(), C.double(float64(angle)))
 }
 
-func (n *NSAffineTransform) ScaleBy(scale coregraphics.Float) {
+func (n NSAffineTransform) ScaleBy(scale coregraphics.Float) {
 	C.C_NSAffineTransform_ScaleBy(n.Ptr(), C.double(float64(scale)))
 }
 
-func (n *NSAffineTransform) ScaleXBy_YBy(scaleX coregraphics.Float, scaleY coregraphics.Float) {
+func (n NSAffineTransform) ScaleXBy_YBy(scaleX coregraphics.Float, scaleY coregraphics.Float) {
 	C.C_NSAffineTransform_ScaleXBy_YBy(n.Ptr(), C.double(float64(scaleX)), C.double(float64(scaleY)))
 }
 
-func (n *NSAffineTransform) TranslateXBy_YBy(deltaX coregraphics.Float, deltaY coregraphics.Float) {
+func (n NSAffineTransform) TranslateXBy_YBy(deltaX coregraphics.Float, deltaY coregraphics.Float) {
 	C.C_NSAffineTransform_TranslateXBy_YBy(n.Ptr(), C.double(float64(deltaX)), C.double(float64(deltaY)))
 }
 
-func (n *NSAffineTransform) AppendTransform(transform AffineTransform) {
+func (n NSAffineTransform) AppendTransform(transform AffineTransform) {
 	C.C_NSAffineTransform_AppendTransform(n.Ptr(), objc.ExtractPtr(transform))
 }
 
-func (n *NSAffineTransform) PrependTransform(transform AffineTransform) {
+func (n NSAffineTransform) PrependTransform(transform AffineTransform) {
 	C.C_NSAffineTransform_PrependTransform(n.Ptr(), objc.ExtractPtr(transform))
 }
 
-func (n *NSAffineTransform) Invert() {
+func (n NSAffineTransform) Invert() {
 	C.C_NSAffineTransform_Invert(n.Ptr())
 }
 
-func (n *NSAffineTransform) TransformPoint(aPoint Point) Point {
+func (n NSAffineTransform) TransformPoint(aPoint Point) Point {
 	result_ := C.C_NSAffineTransform_TransformPoint(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(aPoint))))
 	return Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
 }
 
-func (n *NSAffineTransform) TransformSize(aSize Size) Size {
+func (n NSAffineTransform) TransformSize(aSize Size) Size {
 	result_ := C.C_NSAffineTransform_TransformSize(n.Ptr(), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(aSize))))
 	return Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
-func (n *NSAffineTransform) Set() {
+func (n NSAffineTransform) Set() {
 	C.C_NSAffineTransform_Set(n.Ptr())
 }
 
-func (n *NSAffineTransform) Concat() {
+func (n NSAffineTransform) Concat() {
 	C.C_NSAffineTransform_Concat(n.Ptr())
 }
 
-func (n *NSAffineTransform) TransformStruct() AffineTransformStruct {
+func (n NSAffineTransform) TransformStruct() AffineTransformStruct {
 	result_ := C.C_NSAffineTransform_TransformStruct(n.Ptr())
 	return FromNSAffineTransformStructPointer(unsafe.Pointer(&result_))
 }
 
-func (n *NSAffineTransform) SetTransformStruct(value AffineTransformStruct) {
+func (n NSAffineTransform) SetTransformStruct(value AffineTransformStruct) {
 	C.C_NSAffineTransform_SetTransformStruct(n.Ptr(), *(*C.NSAffineTransformStruct)(ToNSAffineTransformStructPointer(value)))
 }

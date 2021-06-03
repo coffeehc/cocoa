@@ -87,7 +87,7 @@ func draggingDestination_UpdateDraggingItemsForDrag(id int64, sender unsafe.Poin
 
 //export DraggingDestination_RespondsTo
 func DraggingDestination_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
-	sel := objc.MakeSelector(selectorPtr)
+	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
 	delegate := resources.Get(id).(*DraggingDestination)
 	switch selName {

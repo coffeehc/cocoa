@@ -20,20 +20,17 @@ type NSAnimationContext struct {
 	objc.NSObject
 }
 
-func MakeAnimationContext(ptr unsafe.Pointer) *NSAnimationContext {
-	if ptr == nil {
-		return nil
-	}
-	return &NSAnimationContext{
-		NSObject: *objc.MakeObject(ptr),
+func MakeAnimationContext(ptr unsafe.Pointer) NSAnimationContext {
+	return NSAnimationContext{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocAnimationContext() *NSAnimationContext {
+func AllocAnimationContext() NSAnimationContext {
 	return MakeAnimationContext(C.C_AnimationContext_Alloc())
 }
 
-func (n *NSAnimationContext) Init() AnimationContext {
+func (n NSAnimationContext) Init() AnimationContext {
 	result_ := C.C_NSAnimationContext_Init(n.Ptr())
 	return MakeAnimationContext(result_)
 }
@@ -51,20 +48,20 @@ func AnimationContext_CurrentContext() AnimationContext {
 	return MakeAnimationContext(result_)
 }
 
-func (n *NSAnimationContext) Duration() foundation.TimeInterval {
+func (n NSAnimationContext) Duration() foundation.TimeInterval {
 	result_ := C.C_NSAnimationContext_Duration(n.Ptr())
 	return foundation.TimeInterval(float64(result_))
 }
 
-func (n *NSAnimationContext) SetDuration(value foundation.TimeInterval) {
+func (n NSAnimationContext) SetDuration(value foundation.TimeInterval) {
 	C.C_NSAnimationContext_SetDuration(n.Ptr(), C.double(float64(value)))
 }
 
-func (n *NSAnimationContext) AllowsImplicitAnimation() bool {
+func (n NSAnimationContext) AllowsImplicitAnimation() bool {
 	result_ := C.C_NSAnimationContext_AllowsImplicitAnimation(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSAnimationContext) SetAllowsImplicitAnimation(value bool) {
+func (n NSAnimationContext) SetAllowsImplicitAnimation(value bool) {
 	C.C_NSAnimationContext_SetAllowsImplicitAnimation(n.Ptr(), C.bool(value))
 }

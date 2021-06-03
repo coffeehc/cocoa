@@ -102,7 +102,7 @@ func tableViewDataSource_TableView_SortDescriptorsDidChange(id int64, tableView 
 
 //export TableViewDataSource_RespondsTo
 func TableViewDataSource_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
-	sel := objc.MakeSelector(selectorPtr)
+	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
 	delegate := resources.Get(id).(*TableViewDataSource)
 	switch selName {

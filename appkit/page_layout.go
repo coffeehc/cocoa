@@ -21,20 +21,17 @@ type NSPageLayout struct {
 	objc.NSObject
 }
 
-func MakePageLayout(ptr unsafe.Pointer) *NSPageLayout {
-	if ptr == nil {
-		return nil
-	}
-	return &NSPageLayout{
-		NSObject: *objc.MakeObject(ptr),
+func MakePageLayout(ptr unsafe.Pointer) NSPageLayout {
+	return NSPageLayout{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocPageLayout() *NSPageLayout {
+func AllocPageLayout() NSPageLayout {
 	return MakePageLayout(C.C_PageLayout_Alloc())
 }
 
-func (n *NSPageLayout) Init() PageLayout {
+func (n NSPageLayout) Init() PageLayout {
 	result_ := C.C_NSPageLayout_Init(n.Ptr())
 	return MakePageLayout(result_)
 }
@@ -44,25 +41,25 @@ func PageLayout_() PageLayout {
 	return MakePageLayout(result_)
 }
 
-func (n *NSPageLayout) RunModal() int {
+func (n NSPageLayout) RunModal() int {
 	result_ := C.C_NSPageLayout_RunModal(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSPageLayout) RunModalWithPrintInfo(printInfo PrintInfo) int {
+func (n NSPageLayout) RunModalWithPrintInfo(printInfo PrintInfo) int {
 	result_ := C.C_NSPageLayout_RunModalWithPrintInfo(n.Ptr(), objc.ExtractPtr(printInfo))
 	return int(result_)
 }
 
-func (n *NSPageLayout) AddAccessoryController(accessoryController ViewController) {
+func (n NSPageLayout) AddAccessoryController(accessoryController ViewController) {
 	C.C_NSPageLayout_AddAccessoryController(n.Ptr(), objc.ExtractPtr(accessoryController))
 }
 
-func (n *NSPageLayout) RemoveAccessoryController(accessoryController ViewController) {
+func (n NSPageLayout) RemoveAccessoryController(accessoryController ViewController) {
 	C.C_NSPageLayout_RemoveAccessoryController(n.Ptr(), objc.ExtractPtr(accessoryController))
 }
 
-func (n *NSPageLayout) AccessoryControllers() []ViewController {
+func (n NSPageLayout) AccessoryControllers() []ViewController {
 	result_ := C.C_NSPageLayout_AccessoryControllers(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -73,7 +70,7 @@ func (n *NSPageLayout) AccessoryControllers() []ViewController {
 	return goResult_
 }
 
-func (n *NSPageLayout) PrintInfo() PrintInfo {
+func (n NSPageLayout) PrintInfo() PrintInfo {
 	result_ := C.C_NSPageLayout_PrintInfo(n.Ptr())
 	return MakePrintInfo(result_)
 }

@@ -27,65 +27,62 @@ type NSCollectionViewLayoutInvalidationContext struct {
 	objc.NSObject
 }
 
-func MakeCollectionViewLayoutInvalidationContext(ptr unsafe.Pointer) *NSCollectionViewLayoutInvalidationContext {
-	if ptr == nil {
-		return nil
-	}
-	return &NSCollectionViewLayoutInvalidationContext{
-		NSObject: *objc.MakeObject(ptr),
+func MakeCollectionViewLayoutInvalidationContext(ptr unsafe.Pointer) NSCollectionViewLayoutInvalidationContext {
+	return NSCollectionViewLayoutInvalidationContext{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocCollectionViewLayoutInvalidationContext() *NSCollectionViewLayoutInvalidationContext {
+func AllocCollectionViewLayoutInvalidationContext() NSCollectionViewLayoutInvalidationContext {
 	return MakeCollectionViewLayoutInvalidationContext(C.C_CollectionViewLayoutInvalidationContext_Alloc())
 }
 
-func (n *NSCollectionViewLayoutInvalidationContext) Init() CollectionViewLayoutInvalidationContext {
+func (n NSCollectionViewLayoutInvalidationContext) Init() CollectionViewLayoutInvalidationContext {
 	result_ := C.C_NSCollectionViewLayoutInvalidationContext_Init(n.Ptr())
 	return MakeCollectionViewLayoutInvalidationContext(result_)
 }
 
-func (n *NSCollectionViewLayoutInvalidationContext) InvalidateItemsAtIndexPaths(indexPaths foundation.Set) {
+func (n NSCollectionViewLayoutInvalidationContext) InvalidateItemsAtIndexPaths(indexPaths foundation.Set) {
 	C.C_NSCollectionViewLayoutInvalidationContext_InvalidateItemsAtIndexPaths(n.Ptr(), objc.ExtractPtr(indexPaths))
 }
 
-func (n *NSCollectionViewLayoutInvalidationContext) InvalidateSupplementaryElementsOfKind_AtIndexPaths(elementKind CollectionViewSupplementaryElementKind, indexPaths foundation.Set) {
+func (n NSCollectionViewLayoutInvalidationContext) InvalidateSupplementaryElementsOfKind_AtIndexPaths(elementKind CollectionViewSupplementaryElementKind, indexPaths foundation.Set) {
 	C.C_NSCollectionViewLayoutInvalidationContext_InvalidateSupplementaryElementsOfKind_AtIndexPaths(n.Ptr(), foundation.NewString(string(elementKind)).Ptr(), objc.ExtractPtr(indexPaths))
 }
 
-func (n *NSCollectionViewLayoutInvalidationContext) InvalidateDecorationElementsOfKind_AtIndexPaths(elementKind CollectionViewDecorationElementKind, indexPaths foundation.Set) {
+func (n NSCollectionViewLayoutInvalidationContext) InvalidateDecorationElementsOfKind_AtIndexPaths(elementKind CollectionViewDecorationElementKind, indexPaths foundation.Set) {
 	C.C_NSCollectionViewLayoutInvalidationContext_InvalidateDecorationElementsOfKind_AtIndexPaths(n.Ptr(), foundation.NewString(string(elementKind)).Ptr(), objc.ExtractPtr(indexPaths))
 }
 
-func (n *NSCollectionViewLayoutInvalidationContext) InvalidateEverything() bool {
+func (n NSCollectionViewLayoutInvalidationContext) InvalidateEverything() bool {
 	result_ := C.C_NSCollectionViewLayoutInvalidationContext_InvalidateEverything(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSCollectionViewLayoutInvalidationContext) InvalidateDataSourceCounts() bool {
+func (n NSCollectionViewLayoutInvalidationContext) InvalidateDataSourceCounts() bool {
 	result_ := C.C_NSCollectionViewLayoutInvalidationContext_InvalidateDataSourceCounts(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSCollectionViewLayoutInvalidationContext) ContentOffsetAdjustment() foundation.Point {
+func (n NSCollectionViewLayoutInvalidationContext) ContentOffsetAdjustment() foundation.Point {
 	result_ := C.C_NSCollectionViewLayoutInvalidationContext_ContentOffsetAdjustment(n.Ptr())
 	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
 }
 
-func (n *NSCollectionViewLayoutInvalidationContext) SetContentOffsetAdjustment(value foundation.Point) {
+func (n NSCollectionViewLayoutInvalidationContext) SetContentOffsetAdjustment(value foundation.Point) {
 	C.C_NSCollectionViewLayoutInvalidationContext_SetContentOffsetAdjustment(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(value))))
 }
 
-func (n *NSCollectionViewLayoutInvalidationContext) ContentSizeAdjustment() foundation.Size {
+func (n NSCollectionViewLayoutInvalidationContext) ContentSizeAdjustment() foundation.Size {
 	result_ := C.C_NSCollectionViewLayoutInvalidationContext_ContentSizeAdjustment(n.Ptr())
 	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
-func (n *NSCollectionViewLayoutInvalidationContext) SetContentSizeAdjustment(value foundation.Size) {
+func (n NSCollectionViewLayoutInvalidationContext) SetContentSizeAdjustment(value foundation.Size) {
 	C.C_NSCollectionViewLayoutInvalidationContext_SetContentSizeAdjustment(n.Ptr(), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(value))))
 }
 
-func (n *NSCollectionViewLayoutInvalidationContext) InvalidatedItemIndexPaths() foundation.Set {
+func (n NSCollectionViewLayoutInvalidationContext) InvalidatedItemIndexPaths() foundation.Set {
 	result_ := C.C_NSCollectionViewLayoutInvalidationContext_InvalidatedItemIndexPaths(n.Ptr())
 	return foundation.MakeSet(result_)
 }

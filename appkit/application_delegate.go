@@ -301,7 +301,7 @@ func applicationDelegate_Application_DelegateHandlesKey(id int64, sender unsafe.
 
 //export ApplicationDelegate_RespondsTo
 func ApplicationDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
-	sel := objc.MakeSelector(selectorPtr)
+	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
 	delegate := resources.Get(id).(*ApplicationDelegate)
 	switch selName {

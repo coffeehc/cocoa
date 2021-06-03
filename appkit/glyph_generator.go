@@ -15,20 +15,17 @@ type NSGlyphGenerator struct {
 	objc.NSObject
 }
 
-func MakeGlyphGenerator(ptr unsafe.Pointer) *NSGlyphGenerator {
-	if ptr == nil {
-		return nil
-	}
-	return &NSGlyphGenerator{
-		NSObject: *objc.MakeObject(ptr),
+func MakeGlyphGenerator(ptr unsafe.Pointer) NSGlyphGenerator {
+	return NSGlyphGenerator{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocGlyphGenerator() *NSGlyphGenerator {
+func AllocGlyphGenerator() NSGlyphGenerator {
 	return MakeGlyphGenerator(C.C_GlyphGenerator_Alloc())
 }
 
-func (n *NSGlyphGenerator) Init() GlyphGenerator {
+func (n NSGlyphGenerator) Init() GlyphGenerator {
 	result_ := C.C_NSGlyphGenerator_Init(n.Ptr())
 	return MakeGlyphGenerator(result_)
 }

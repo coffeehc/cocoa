@@ -21,47 +21,44 @@ type NSController struct {
 	objc.NSObject
 }
 
-func MakeController(ptr unsafe.Pointer) *NSController {
-	if ptr == nil {
-		return nil
-	}
-	return &NSController{
-		NSObject: *objc.MakeObject(ptr),
+func MakeController(ptr unsafe.Pointer) NSController {
+	return NSController{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocController() *NSController {
+func AllocController() NSController {
 	return MakeController(C.C_Controller_Alloc())
 }
 
-func (n *NSController) Init() Controller {
+func (n NSController) Init() Controller {
 	result_ := C.C_NSController_Init(n.Ptr())
 	return MakeController(result_)
 }
 
-func (n *NSController) InitWithCoder(coder foundation.Coder) Controller {
+func (n NSController) InitWithCoder(coder foundation.Coder) Controller {
 	result_ := C.C_NSController_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeController(result_)
 }
 
-func (n *NSController) ObjectDidBeginEditing(editor objc.Object) {
+func (n NSController) ObjectDidBeginEditing(editor objc.Object) {
 	C.C_NSController_ObjectDidBeginEditing(n.Ptr(), objc.ExtractPtr(editor))
 }
 
-func (n *NSController) ObjectDidEndEditing(editor objc.Object) {
+func (n NSController) ObjectDidEndEditing(editor objc.Object) {
 	C.C_NSController_ObjectDidEndEditing(n.Ptr(), objc.ExtractPtr(editor))
 }
 
-func (n *NSController) CommitEditing() bool {
+func (n NSController) CommitEditing() bool {
 	result_ := C.C_NSController_CommitEditing(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSController) DiscardEditing() {
+func (n NSController) DiscardEditing() {
 	C.C_NSController_DiscardEditing(n.Ptr())
 }
 
-func (n *NSController) IsEditing() bool {
+func (n NSController) IsEditing() bool {
 	result_ := C.C_NSController_IsEditing(n.Ptr())
 	return bool(result_)
 }

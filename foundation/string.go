@@ -19,17 +19,17 @@ type NSString struct {
 	objc.NSObject
 }
 
-func (N *NSString) String() string {
+func (N NSString) String() string {
 	return C.GoString(C.String_Value(N.Ptr()))
 }
 
-func MakeString(ptr unsafe.Pointer) *NSString {
-	return &NSString{
-		NSObject: *objc.MakeObject(ptr),
+func MakeString(ptr unsafe.Pointer) NSString {
+	return NSString{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func NewString(str string) *NSString {
+func NewString(str string) NSString {
 	cstr := C.CString(str)
 	defer C.free(unsafe.Pointer(cstr))
 	ptr := C.String_New(cstr)
@@ -44,8 +44,8 @@ type NSMutableString struct {
 	NSString
 }
 
-func MakeMutableString(ptr unsafe.Pointer) *NSMutableString {
-	return &NSMutableString{
-		NSString: *MakeString(ptr),
+func MakeMutableString(ptr unsafe.Pointer) NSMutableString {
+	return NSMutableString{
+		NSString: MakeString(ptr),
 	}
 }

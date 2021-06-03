@@ -73,7 +73,7 @@ func menuDelegate_MenuNeedsUpdate(id int64, menu unsafe.Pointer) {
 
 //export MenuDelegate_RespondsTo
 func MenuDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
-	sel := objc.MakeSelector(selectorPtr)
+	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
 	delegate := resources.Get(id).(*MenuDelegate)
 	switch selName {

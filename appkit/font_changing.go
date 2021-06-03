@@ -34,7 +34,7 @@ func fontChanging_ValidModesForFontPanel(id int64, fontPanel unsafe.Pointer) C.u
 
 //export FontChanging_RespondsTo
 func FontChanging_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
-	sel := objc.MakeSelector(selectorPtr)
+	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
 	delegate := resources.Get(id).(*FontChanging)
 	switch selName {

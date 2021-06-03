@@ -25,50 +25,47 @@ type NSDate struct {
 	objc.NSObject
 }
 
-func MakeDate(ptr unsafe.Pointer) *NSDate {
-	if ptr == nil {
-		return nil
-	}
-	return &NSDate{
-		NSObject: *objc.MakeObject(ptr),
+func MakeDate(ptr unsafe.Pointer) NSDate {
+	return NSDate{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocDate() *NSDate {
+func AllocDate() NSDate {
 	return MakeDate(C.C_Date_Alloc())
 }
 
-func (n *NSDate) Init() Date {
+func (n NSDate) Init() Date {
 	result_ := C.C_NSDate_Init(n.Ptr())
 	return MakeDate(result_)
 }
 
-func (n *NSDate) InitWithTimeIntervalSinceNow(secs TimeInterval) Date {
+func (n NSDate) InitWithTimeIntervalSinceNow(secs TimeInterval) Date {
 	result_ := C.C_NSDate_InitWithTimeIntervalSinceNow(n.Ptr(), C.double(float64(secs)))
 	return MakeDate(result_)
 }
 
-func (n *NSDate) InitWithTimeInterval_SinceDate(secsToBeAdded TimeInterval, date Date) Date {
+func (n NSDate) InitWithTimeInterval_SinceDate(secsToBeAdded TimeInterval, date Date) Date {
 	result_ := C.C_NSDate_InitWithTimeInterval_SinceDate(n.Ptr(), C.double(float64(secsToBeAdded)), objc.ExtractPtr(date))
 	return MakeDate(result_)
 }
 
-func (n *NSDate) InitWithTimeIntervalSinceReferenceDate(ti TimeInterval) Date {
+func (n NSDate) InitWithTimeIntervalSinceReferenceDate(ti TimeInterval) Date {
 	result_ := C.C_NSDate_InitWithTimeIntervalSinceReferenceDate(n.Ptr(), C.double(float64(ti)))
 	return MakeDate(result_)
 }
 
-func (n *NSDate) InitWithTimeIntervalSince1970(secs TimeInterval) Date {
+func (n NSDate) InitWithTimeIntervalSince1970(secs TimeInterval) Date {
 	result_ := C.C_NSDate_InitWithTimeIntervalSince1970(n.Ptr(), C.double(float64(secs)))
 	return MakeDate(result_)
 }
 
-func (n *NSDate) InitWithCoder(coder Coder) Date {
+func (n NSDate) InitWithCoder(coder Coder) Date {
 	result_ := C.C_NSDate_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeDate(result_)
 }
 
-func (n *NSDate) DateByAddingTimeInterval(ti TimeInterval) Date {
+func (n NSDate) DateByAddingTimeInterval(ti TimeInterval) Date {
 	result_ := C.C_NSDate_DateByAddingTimeInterval(n.Ptr(), C.double(float64(ti)))
 	return MakeDate(result_)
 }
@@ -98,32 +95,32 @@ func DateWithTimeIntervalSince1970(secs TimeInterval) Date {
 	return MakeDate(result_)
 }
 
-func (n *NSDate) IsEqualToDate(otherDate Date) bool {
+func (n NSDate) IsEqualToDate(otherDate Date) bool {
 	result_ := C.C_NSDate_IsEqualToDate(n.Ptr(), objc.ExtractPtr(otherDate))
 	return bool(result_)
 }
 
-func (n *NSDate) EarlierDate(anotherDate Date) Date {
+func (n NSDate) EarlierDate(anotherDate Date) Date {
 	result_ := C.C_NSDate_EarlierDate(n.Ptr(), objc.ExtractPtr(anotherDate))
 	return MakeDate(result_)
 }
 
-func (n *NSDate) LaterDate(anotherDate Date) Date {
+func (n NSDate) LaterDate(anotherDate Date) Date {
 	result_ := C.C_NSDate_LaterDate(n.Ptr(), objc.ExtractPtr(anotherDate))
 	return MakeDate(result_)
 }
 
-func (n *NSDate) Compare(other Date) ComparisonResult {
+func (n NSDate) Compare(other Date) ComparisonResult {
 	result_ := C.C_NSDate_Compare(n.Ptr(), objc.ExtractPtr(other))
 	return ComparisonResult(int(result_))
 }
 
-func (n *NSDate) TimeIntervalSinceDate(anotherDate Date) TimeInterval {
+func (n NSDate) TimeIntervalSinceDate(anotherDate Date) TimeInterval {
 	result_ := C.C_NSDate_TimeIntervalSinceDate(n.Ptr(), objc.ExtractPtr(anotherDate))
 	return TimeInterval(float64(result_))
 }
 
-func (n *NSDate) DescriptionWithLocale(locale objc.Object) string {
+func (n NSDate) DescriptionWithLocale(locale objc.Object) string {
 	result_ := C.C_NSDate_DescriptionWithLocale(n.Ptr(), objc.ExtractPtr(locale))
 	return MakeString(result_).String()
 }
@@ -143,22 +140,22 @@ func Date_Now() Date {
 	return MakeDate(result_)
 }
 
-func (n *NSDate) TimeIntervalSinceNow() TimeInterval {
+func (n NSDate) TimeIntervalSinceNow() TimeInterval {
 	result_ := C.C_NSDate_TimeIntervalSinceNow(n.Ptr())
 	return TimeInterval(float64(result_))
 }
 
-func (n *NSDate) TimeIntervalSinceReferenceDate() TimeInterval {
+func (n NSDate) TimeIntervalSinceReferenceDate() TimeInterval {
 	result_ := C.C_NSDate_TimeIntervalSinceReferenceDate(n.Ptr())
 	return TimeInterval(float64(result_))
 }
 
-func (n *NSDate) TimeIntervalSince1970() TimeInterval {
+func (n NSDate) TimeIntervalSince1970() TimeInterval {
 	result_ := C.C_NSDate_TimeIntervalSince1970(n.Ptr())
 	return TimeInterval(float64(result_))
 }
 
-func (n *NSDate) Description() string {
+func (n NSDate) Description() string {
 	result_ := C.C_NSDate_Description(n.Ptr())
 	return MakeString(result_).String()
 }

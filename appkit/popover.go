@@ -33,97 +33,94 @@ type NSPopover struct {
 	NSResponder
 }
 
-func MakePopover(ptr unsafe.Pointer) *NSPopover {
-	if ptr == nil {
-		return nil
-	}
-	return &NSPopover{
-		NSResponder: *MakeResponder(ptr),
+func MakePopover(ptr unsafe.Pointer) NSPopover {
+	return NSPopover{
+		NSResponder: MakeResponder(ptr),
 	}
 }
 
-func AllocPopover() *NSPopover {
+func AllocPopover() NSPopover {
 	return MakePopover(C.C_Popover_Alloc())
 }
 
-func (n *NSPopover) Init() Popover {
+func (n NSPopover) Init() Popover {
 	result_ := C.C_NSPopover_Init(n.Ptr())
 	return MakePopover(result_)
 }
 
-func (n *NSPopover) InitWithCoder(coder foundation.Coder) Popover {
+func (n NSPopover) InitWithCoder(coder foundation.Coder) Popover {
 	result_ := C.C_NSPopover_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakePopover(result_)
 }
 
-func (n *NSPopover) ShowRelativeToRect_OfView_PreferredEdge(positioningRect foundation.Rect, positioningView View, preferredEdge foundation.RectEdge) {
+func (n NSPopover) ShowRelativeToRect_OfView_PreferredEdge(positioningRect foundation.Rect, positioningView View, preferredEdge foundation.RectEdge) {
 	C.C_NSPopover_ShowRelativeToRect_OfView_PreferredEdge(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(positioningRect))), objc.ExtractPtr(positioningView), C.uint(uint(preferredEdge)))
 }
 
-func (n *NSPopover) PerformClose(sender objc.Object) {
+func (n NSPopover) PerformClose(sender objc.Object) {
 	C.C_NSPopover_PerformClose(n.Ptr(), objc.ExtractPtr(sender))
 }
 
-func (n *NSPopover) Close() {
+func (n NSPopover) Close() {
 	C.C_NSPopover_Close(n.Ptr())
 }
 
-func (n *NSPopover) Behavior() PopoverBehavior {
+func (n NSPopover) Behavior() PopoverBehavior {
 	result_ := C.C_NSPopover_Behavior(n.Ptr())
 	return PopoverBehavior(int(result_))
 }
 
-func (n *NSPopover) SetBehavior(value PopoverBehavior) {
+func (n NSPopover) SetBehavior(value PopoverBehavior) {
 	C.C_NSPopover_SetBehavior(n.Ptr(), C.int(int(value)))
 }
 
-func (n *NSPopover) PositioningRect() foundation.Rect {
+func (n NSPopover) PositioningRect() foundation.Rect {
 	result_ := C.C_NSPopover_PositioningRect(n.Ptr())
 	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
-func (n *NSPopover) SetPositioningRect(value foundation.Rect) {
+func (n NSPopover) SetPositioningRect(value foundation.Rect) {
 	C.C_NSPopover_SetPositioningRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(value))))
 }
 
-func (n *NSPopover) Appearance() Appearance {
+func (n NSPopover) Appearance() Appearance {
 	result_ := C.C_NSPopover_Appearance(n.Ptr())
 	return MakeAppearance(result_)
 }
 
-func (n *NSPopover) SetAppearance(value Appearance) {
+func (n NSPopover) SetAppearance(value Appearance) {
 	C.C_NSPopover_SetAppearance(n.Ptr(), objc.ExtractPtr(value))
 }
 
-func (n *NSPopover) EffectiveAppearance() Appearance {
+func (n NSPopover) EffectiveAppearance() Appearance {
 	result_ := C.C_NSPopover_EffectiveAppearance(n.Ptr())
 	return MakeAppearance(result_)
 }
 
-func (n *NSPopover) Animates() bool {
+func (n NSPopover) Animates() bool {
 	result_ := C.C_NSPopover_Animates(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSPopover) SetAnimates(value bool) {
+func (n NSPopover) SetAnimates(value bool) {
 	C.C_NSPopover_SetAnimates(n.Ptr(), C.bool(value))
 }
 
-func (n *NSPopover) ContentSize() foundation.Size {
+func (n NSPopover) ContentSize() foundation.Size {
 	result_ := C.C_NSPopover_ContentSize(n.Ptr())
 	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
-func (n *NSPopover) SetContentSize(value foundation.Size) {
+func (n NSPopover) SetContentSize(value foundation.Size) {
 	C.C_NSPopover_SetContentSize(n.Ptr(), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(value))))
 }
 
-func (n *NSPopover) IsShown() bool {
+func (n NSPopover) IsShown() bool {
 	result_ := C.C_NSPopover_IsShown(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSPopover) IsDetached() bool {
+func (n NSPopover) IsDetached() bool {
 	result_ := C.C_NSPopover_IsDetached(n.Ptr())
 	return bool(result_)
 }

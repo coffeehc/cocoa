@@ -33,7 +33,7 @@ func viewControllerPresentationAnimator_AnimateDismissalOfViewController_FromVie
 
 //export ViewControllerPresentationAnimator_RespondsTo
 func ViewControllerPresentationAnimator_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
-	sel := objc.MakeSelector(selectorPtr)
+	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
 	delegate := resources.Get(id).(*ViewControllerPresentationAnimator)
 	switch selName {

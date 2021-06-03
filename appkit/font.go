@@ -42,20 +42,17 @@ type NSFont struct {
 	objc.NSObject
 }
 
-func MakeFont(ptr unsafe.Pointer) *NSFont {
-	if ptr == nil {
-		return nil
-	}
-	return &NSFont{
-		NSObject: *objc.MakeObject(ptr),
+func MakeFont(ptr unsafe.Pointer) NSFont {
+	return NSFont{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocFont() *NSFont {
+func AllocFont() NSFont {
 	return MakeFont(C.C_Font_Alloc())
 }
 
-func (n *NSFont) Init() Font {
+func (n NSFont) Init() Font {
 	result_ := C.C_NSFont_Init(n.Ptr())
 	return MakeFont(result_)
 }
@@ -155,11 +152,11 @@ func Font_SystemFontSizeForControlSize(controlSize ControlSize) coregraphics.Flo
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSFont) Set() {
+func (n NSFont) Set() {
 	C.C_NSFont_Set(n.Ptr())
 }
 
-func (n *NSFont) SetInContext(graphicsContext GraphicsContext) {
+func (n NSFont) SetInContext(graphicsContext GraphicsContext) {
 	C.C_NSFont_SetInContext(n.Ptr(), objc.ExtractPtr(graphicsContext))
 }
 
@@ -171,7 +168,7 @@ func SetUserFixedPitchFont(font Font) {
 	C.C_NSFont_SetUserFixedPitchFont(objc.ExtractPtr(font))
 }
 
-func (n *NSFont) FontWithSize(fontSize coregraphics.Float) Font {
+func (n NSFont) FontWithSize(fontSize coregraphics.Float) Font {
 	result_ := C.C_NSFont_FontWithSize(n.Ptr(), C.double(float64(fontSize)))
 	return MakeFont(result_)
 }
@@ -191,112 +188,112 @@ func Font_LabelFontSize() coregraphics.Float {
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSFont) PointSize() coregraphics.Float {
+func (n NSFont) PointSize() coregraphics.Float {
 	result_ := C.C_NSFont_PointSize(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSFont) CoveredCharacterSet() foundation.CharacterSet {
+func (n NSFont) CoveredCharacterSet() foundation.CharacterSet {
 	result_ := C.C_NSFont_CoveredCharacterSet(n.Ptr())
 	return foundation.MakeCharacterSet(result_)
 }
 
-func (n *NSFont) FontDescriptor() FontDescriptor {
+func (n NSFont) FontDescriptor() FontDescriptor {
 	result_ := C.C_NSFont_FontDescriptor(n.Ptr())
 	return MakeFontDescriptor(result_)
 }
 
-func (n *NSFont) IsFixedPitch() bool {
+func (n NSFont) IsFixedPitch() bool {
 	result_ := C.C_NSFont_IsFixedPitch(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSFont) MostCompatibleStringEncoding() foundation.StringEncoding {
+func (n NSFont) MostCompatibleStringEncoding() foundation.StringEncoding {
 	result_ := C.C_NSFont_MostCompatibleStringEncoding(n.Ptr())
 	return foundation.StringEncoding(uint(result_))
 }
 
-func (n *NSFont) NumberOfGlyphs() uint {
+func (n NSFont) NumberOfGlyphs() uint {
 	result_ := C.C_NSFont_NumberOfGlyphs(n.Ptr())
 	return uint(result_)
 }
 
-func (n *NSFont) DisplayName() string {
+func (n NSFont) DisplayName() string {
 	result_ := C.C_NSFont_DisplayName(n.Ptr())
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSFont) FamilyName() string {
+func (n NSFont) FamilyName() string {
 	result_ := C.C_NSFont_FamilyName(n.Ptr())
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSFont) FontName() string {
+func (n NSFont) FontName() string {
 	result_ := C.C_NSFont_FontName(n.Ptr())
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSFont) IsVertical() bool {
+func (n NSFont) IsVertical() bool {
 	result_ := C.C_NSFont_IsVertical(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSFont) VerticalFont() Font {
+func (n NSFont) VerticalFont() Font {
 	result_ := C.C_NSFont_VerticalFont(n.Ptr())
 	return MakeFont(result_)
 }
 
-func (n *NSFont) Ascender() coregraphics.Float {
+func (n NSFont) Ascender() coregraphics.Float {
 	result_ := C.C_NSFont_Ascender(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSFont) Descender() coregraphics.Float {
+func (n NSFont) Descender() coregraphics.Float {
 	result_ := C.C_NSFont_Descender(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSFont) CapHeight() coregraphics.Float {
+func (n NSFont) CapHeight() coregraphics.Float {
 	result_ := C.C_NSFont_CapHeight(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSFont) Leading() coregraphics.Float {
+func (n NSFont) Leading() coregraphics.Float {
 	result_ := C.C_NSFont_Leading(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSFont) XHeight() coregraphics.Float {
+func (n NSFont) XHeight() coregraphics.Float {
 	result_ := C.C_NSFont_XHeight(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSFont) ItalicAngle() coregraphics.Float {
+func (n NSFont) ItalicAngle() coregraphics.Float {
 	result_ := C.C_NSFont_ItalicAngle(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSFont) UnderlinePosition() coregraphics.Float {
+func (n NSFont) UnderlinePosition() coregraphics.Float {
 	result_ := C.C_NSFont_UnderlinePosition(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSFont) UnderlineThickness() coregraphics.Float {
+func (n NSFont) UnderlineThickness() coregraphics.Float {
 	result_ := C.C_NSFont_UnderlineThickness(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSFont) BoundingRectForFont() foundation.Rect {
+func (n NSFont) BoundingRectForFont() foundation.Rect {
 	result_ := C.C_NSFont_BoundingRectForFont(n.Ptr())
 	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
-func (n *NSFont) MaximumAdvancement() foundation.Size {
+func (n NSFont) MaximumAdvancement() foundation.Size {
 	result_ := C.C_NSFont_MaximumAdvancement(n.Ptr())
 	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }
 
-func (n *NSFont) TextTransform() foundation.AffineTransform {
+func (n NSFont) TextTransform() foundation.AffineTransform {
 	result_ := C.C_NSFont_TextTransform(n.Ptr())
 	return foundation.MakeAffineTransform(result_)
 }

@@ -18,20 +18,17 @@ type NSPredicate struct {
 	objc.NSObject
 }
 
-func MakePredicate(ptr unsafe.Pointer) *NSPredicate {
-	if ptr == nil {
-		return nil
-	}
-	return &NSPredicate{
-		NSObject: *objc.MakeObject(ptr),
+func MakePredicate(ptr unsafe.Pointer) NSPredicate {
+	return NSPredicate{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocPredicate() *NSPredicate {
+func AllocPredicate() NSPredicate {
 	return MakePredicate(C.C_Predicate_Alloc())
 }
 
-func (n *NSPredicate) Init() Predicate {
+func (n NSPredicate) Init() Predicate {
 	result_ := C.C_NSPredicate_Init(n.Ptr())
 	return MakePredicate(result_)
 }
@@ -56,16 +53,16 @@ func PredicateFromMetadataQueryString(queryString string) Predicate {
 	return MakePredicate(result_)
 }
 
-func (n *NSPredicate) EvaluateWithObject(object objc.Object) bool {
+func (n NSPredicate) EvaluateWithObject(object objc.Object) bool {
 	result_ := C.C_NSPredicate_EvaluateWithObject(n.Ptr(), objc.ExtractPtr(object))
 	return bool(result_)
 }
 
-func (n *NSPredicate) AllowEvaluation() {
+func (n NSPredicate) AllowEvaluation() {
 	C.C_NSPredicate_AllowEvaluation(n.Ptr())
 }
 
-func (n *NSPredicate) PredicateFormat() string {
+func (n NSPredicate) PredicateFormat() string {
 	result_ := C.C_NSPredicate_PredicateFormat(n.Ptr())
 	return MakeString(result_).String()
 }

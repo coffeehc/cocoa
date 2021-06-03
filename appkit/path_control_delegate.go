@@ -65,7 +65,7 @@ func pathControlDelegate_PathControl_ShouldDragItem_WithPasteboard(id int64, pat
 
 //export PathControlDelegate_RespondsTo
 func PathControlDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
-	sel := objc.MakeSelector(selectorPtr)
+	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
 	delegate := resources.Get(id).(*PathControlDelegate)
 	switch selName {

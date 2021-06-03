@@ -13,7 +13,7 @@ type SortDescriptor interface {
 	AllowEvaluation()
 	Ascending() bool
 	Key() string
-	Selector() *objc.Selector
+	Selector() objc.Selector
 	ReversedSortDescriptor() objc.Object
 }
 
@@ -21,35 +21,32 @@ type NSSortDescriptor struct {
 	objc.NSObject
 }
 
-func MakeSortDescriptor(ptr unsafe.Pointer) *NSSortDescriptor {
-	if ptr == nil {
-		return nil
-	}
-	return &NSSortDescriptor{
-		NSObject: *objc.MakeObject(ptr),
+func MakeSortDescriptor(ptr unsafe.Pointer) NSSortDescriptor {
+	return NSSortDescriptor{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocSortDescriptor() *NSSortDescriptor {
+func AllocSortDescriptor() NSSortDescriptor {
 	return MakeSortDescriptor(C.C_SortDescriptor_Alloc())
 }
 
-func (n *NSSortDescriptor) InitWithKey_Ascending(key string, ascending bool) SortDescriptor {
+func (n NSSortDescriptor) InitWithKey_Ascending(key string, ascending bool) SortDescriptor {
 	result_ := C.C_NSSortDescriptor_InitWithKey_Ascending(n.Ptr(), NewString(key).Ptr(), C.bool(ascending))
 	return MakeSortDescriptor(result_)
 }
 
-func (n *NSSortDescriptor) InitWithKey_Ascending_Selector(key string, ascending bool, selector *objc.Selector) SortDescriptor {
-	result_ := C.C_NSSortDescriptor_InitWithKey_Ascending_Selector(n.Ptr(), NewString(key).Ptr(), C.bool(ascending), objc.ExtractPtr(selector))
+func (n NSSortDescriptor) InitWithKey_Ascending_Selector(key string, ascending bool, selector objc.Selector) SortDescriptor {
+	result_ := C.C_NSSortDescriptor_InitWithKey_Ascending_Selector(n.Ptr(), NewString(key).Ptr(), C.bool(ascending), unsafe.Pointer(selector))
 	return MakeSortDescriptor(result_)
 }
 
-func (n *NSSortDescriptor) InitWithCoder(coder Coder) SortDescriptor {
+func (n NSSortDescriptor) InitWithCoder(coder Coder) SortDescriptor {
 	result_ := C.C_NSSortDescriptor_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeSortDescriptor(result_)
 }
 
-func (n *NSSortDescriptor) Init() SortDescriptor {
+func (n NSSortDescriptor) Init() SortDescriptor {
 	result_ := C.C_NSSortDescriptor_Init(n.Ptr())
 	return MakeSortDescriptor(result_)
 }
@@ -59,36 +56,36 @@ func SortDescriptorWithKey_Ascending(key string, ascending bool) SortDescriptor 
 	return MakeSortDescriptor(result_)
 }
 
-func SortDescriptorWithKey_Ascending_Selector(key string, ascending bool, selector *objc.Selector) SortDescriptor {
-	result_ := C.C_NSSortDescriptor_SortDescriptorWithKey_Ascending_Selector(NewString(key).Ptr(), C.bool(ascending), objc.ExtractPtr(selector))
+func SortDescriptorWithKey_Ascending_Selector(key string, ascending bool, selector objc.Selector) SortDescriptor {
+	result_ := C.C_NSSortDescriptor_SortDescriptorWithKey_Ascending_Selector(NewString(key).Ptr(), C.bool(ascending), unsafe.Pointer(selector))
 	return MakeSortDescriptor(result_)
 }
 
-func (n *NSSortDescriptor) CompareObject_ToObject(object1 objc.Object, object2 objc.Object) ComparisonResult {
+func (n NSSortDescriptor) CompareObject_ToObject(object1 objc.Object, object2 objc.Object) ComparisonResult {
 	result_ := C.C_NSSortDescriptor_CompareObject_ToObject(n.Ptr(), objc.ExtractPtr(object1), objc.ExtractPtr(object2))
 	return ComparisonResult(int(result_))
 }
 
-func (n *NSSortDescriptor) AllowEvaluation() {
+func (n NSSortDescriptor) AllowEvaluation() {
 	C.C_NSSortDescriptor_AllowEvaluation(n.Ptr())
 }
 
-func (n *NSSortDescriptor) Ascending() bool {
+func (n NSSortDescriptor) Ascending() bool {
 	result_ := C.C_NSSortDescriptor_Ascending(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSSortDescriptor) Key() string {
+func (n NSSortDescriptor) Key() string {
 	result_ := C.C_NSSortDescriptor_Key(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSSortDescriptor) Selector() *objc.Selector {
+func (n NSSortDescriptor) Selector() objc.Selector {
 	result_ := C.C_NSSortDescriptor_Selector(n.Ptr())
-	return objc.MakeSelector(result_)
+	return objc.Selector(result_)
 }
 
-func (n *NSSortDescriptor) ReversedSortDescriptor() objc.Object {
+func (n NSSortDescriptor) ReversedSortDescriptor() objc.Object {
 	result_ := C.C_NSSortDescriptor_ReversedSortDescriptor(n.Ptr())
 	return objc.MakeObject(result_)
 }

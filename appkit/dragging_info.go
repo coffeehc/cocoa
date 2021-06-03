@@ -35,7 +35,7 @@ func draggingInfo_ResetSpringLoading(id int64) {
 
 //export DraggingInfo_RespondsTo
 func DraggingInfo_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
-	sel := objc.MakeSelector(selectorPtr)
+	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
 	delegate := resources.Get(id).(*DraggingInfo)
 	switch selName {

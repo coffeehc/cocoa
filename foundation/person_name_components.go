@@ -29,83 +29,80 @@ type NSPersonNameComponents struct {
 	objc.NSObject
 }
 
-func MakePersonNameComponents(ptr unsafe.Pointer) *NSPersonNameComponents {
-	if ptr == nil {
-		return nil
-	}
-	return &NSPersonNameComponents{
-		NSObject: *objc.MakeObject(ptr),
+func MakePersonNameComponents(ptr unsafe.Pointer) NSPersonNameComponents {
+	return NSPersonNameComponents{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocPersonNameComponents() *NSPersonNameComponents {
+func AllocPersonNameComponents() NSPersonNameComponents {
 	return MakePersonNameComponents(C.C_PersonNameComponents_Alloc())
 }
 
-func (n *NSPersonNameComponents) Init() PersonNameComponents {
+func (n NSPersonNameComponents) Init() PersonNameComponents {
 	result_ := C.C_NSPersonNameComponents_Init(n.Ptr())
 	return MakePersonNameComponents(result_)
 }
 
-func (n *NSPersonNameComponents) NamePrefix() string {
+func (n NSPersonNameComponents) NamePrefix() string {
 	result_ := C.C_NSPersonNameComponents_NamePrefix(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSPersonNameComponents) SetNamePrefix(value string) {
+func (n NSPersonNameComponents) SetNamePrefix(value string) {
 	C.C_NSPersonNameComponents_SetNamePrefix(n.Ptr(), NewString(value).Ptr())
 }
 
-func (n *NSPersonNameComponents) GivenName() string {
+func (n NSPersonNameComponents) GivenName() string {
 	result_ := C.C_NSPersonNameComponents_GivenName(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSPersonNameComponents) SetGivenName(value string) {
+func (n NSPersonNameComponents) SetGivenName(value string) {
 	C.C_NSPersonNameComponents_SetGivenName(n.Ptr(), NewString(value).Ptr())
 }
 
-func (n *NSPersonNameComponents) MiddleName() string {
+func (n NSPersonNameComponents) MiddleName() string {
 	result_ := C.C_NSPersonNameComponents_MiddleName(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSPersonNameComponents) SetMiddleName(value string) {
+func (n NSPersonNameComponents) SetMiddleName(value string) {
 	C.C_NSPersonNameComponents_SetMiddleName(n.Ptr(), NewString(value).Ptr())
 }
 
-func (n *NSPersonNameComponents) FamilyName() string {
+func (n NSPersonNameComponents) FamilyName() string {
 	result_ := C.C_NSPersonNameComponents_FamilyName(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSPersonNameComponents) SetFamilyName(value string) {
+func (n NSPersonNameComponents) SetFamilyName(value string) {
 	C.C_NSPersonNameComponents_SetFamilyName(n.Ptr(), NewString(value).Ptr())
 }
 
-func (n *NSPersonNameComponents) NameSuffix() string {
+func (n NSPersonNameComponents) NameSuffix() string {
 	result_ := C.C_NSPersonNameComponents_NameSuffix(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSPersonNameComponents) SetNameSuffix(value string) {
+func (n NSPersonNameComponents) SetNameSuffix(value string) {
 	C.C_NSPersonNameComponents_SetNameSuffix(n.Ptr(), NewString(value).Ptr())
 }
 
-func (n *NSPersonNameComponents) Nickname() string {
+func (n NSPersonNameComponents) Nickname() string {
 	result_ := C.C_NSPersonNameComponents_Nickname(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSPersonNameComponents) SetNickname(value string) {
+func (n NSPersonNameComponents) SetNickname(value string) {
 	C.C_NSPersonNameComponents_SetNickname(n.Ptr(), NewString(value).Ptr())
 }
 
-func (n *NSPersonNameComponents) PhoneticRepresentation() PersonNameComponents {
+func (n NSPersonNameComponents) PhoneticRepresentation() PersonNameComponents {
 	result_ := C.C_NSPersonNameComponents_PhoneticRepresentation(n.Ptr())
 	return MakePersonNameComponents(result_)
 }
 
-func (n *NSPersonNameComponents) SetPhoneticRepresentation(value PersonNameComponents) {
+func (n NSPersonNameComponents) SetPhoneticRepresentation(value PersonNameComponents) {
 	C.C_NSPersonNameComponents_SetPhoneticRepresentation(n.Ptr(), objc.ExtractPtr(value))
 }

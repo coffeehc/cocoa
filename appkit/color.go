@@ -49,55 +49,52 @@ type NSColor struct {
 	objc.NSObject
 }
 
-func MakeColor(ptr unsafe.Pointer) *NSColor {
-	if ptr == nil {
-		return nil
-	}
-	return &NSColor{
-		NSObject: *objc.MakeObject(ptr),
+func MakeColor(ptr unsafe.Pointer) NSColor {
+	return NSColor{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocColor() *NSColor {
+func AllocColor() NSColor {
 	return MakeColor(C.C_Color_Alloc())
 }
 
-func (n *NSColor) Init() Color {
+func (n NSColor) Init() Color {
 	result_ := C.C_NSColor_Init(n.Ptr())
 	return MakeColor(result_)
 }
 
-func (n *NSColor) InitWithCoder(coder foundation.Coder) Color {
+func (n NSColor) InitWithCoder(coder foundation.Coder) Color {
 	result_ := C.C_NSColor_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeColor(result_)
 }
 
-func (n *NSColor) ColorWithSystemEffect(systemEffect ColorSystemEffect) Color {
+func (n NSColor) ColorWithSystemEffect(systemEffect ColorSystemEffect) Color {
 	result_ := C.C_NSColor_ColorWithSystemEffect(n.Ptr(), C.int(int(systemEffect)))
 	return MakeColor(result_)
 }
 
-func (n *NSColor) ColorUsingColorSpace(space ColorSpace) Color {
+func (n NSColor) ColorUsingColorSpace(space ColorSpace) Color {
 	result_ := C.C_NSColor_ColorUsingColorSpace(n.Ptr(), objc.ExtractPtr(space))
 	return MakeColor(result_)
 }
 
-func (n *NSColor) BlendedColorWithFraction_OfColor(fraction coregraphics.Float, color Color) Color {
+func (n NSColor) BlendedColorWithFraction_OfColor(fraction coregraphics.Float, color Color) Color {
 	result_ := C.C_NSColor_BlendedColorWithFraction_OfColor(n.Ptr(), C.double(float64(fraction)), objc.ExtractPtr(color))
 	return MakeColor(result_)
 }
 
-func (n *NSColor) ColorWithAlphaComponent(alpha coregraphics.Float) Color {
+func (n NSColor) ColorWithAlphaComponent(alpha coregraphics.Float) Color {
 	result_ := C.C_NSColor_ColorWithAlphaComponent(n.Ptr(), C.double(float64(alpha)))
 	return MakeColor(result_)
 }
 
-func (n *NSColor) HighlightWithLevel(val coregraphics.Float) Color {
+func (n NSColor) HighlightWithLevel(val coregraphics.Float) Color {
 	result_ := C.C_NSColor_HighlightWithLevel(n.Ptr(), C.double(float64(val)))
 	return MakeColor(result_)
 }
 
-func (n *NSColor) ShadowWithLevel(val coregraphics.Float) Color {
+func (n NSColor) ShadowWithLevel(val coregraphics.Float) Color {
 	result_ := C.C_NSColor_ShadowWithLevel(n.Ptr(), C.double(float64(val)))
 	return MakeColor(result_)
 }
@@ -107,28 +104,28 @@ func ColorFromPasteboard(pasteBoard Pasteboard) Color {
 	return MakeColor(result_)
 }
 
-func (n *NSColor) WriteToPasteboard(pasteBoard Pasteboard) {
+func (n NSColor) WriteToPasteboard(pasteBoard Pasteboard) {
 	C.C_NSColor_WriteToPasteboard(n.Ptr(), objc.ExtractPtr(pasteBoard))
 }
 
-func (n *NSColor) ColorUsingType(_type ColorType) Color {
+func (n NSColor) ColorUsingType(_type ColorType) Color {
 	result_ := C.C_NSColor_ColorUsingType(n.Ptr(), C.int(int(_type)))
 	return MakeColor(result_)
 }
 
-func (n *NSColor) DrawSwatchInRect(rect foundation.Rect) {
+func (n NSColor) DrawSwatchInRect(rect foundation.Rect) {
 	C.C_NSColor_DrawSwatchInRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
 }
 
-func (n *NSColor) Set() {
+func (n NSColor) Set() {
 	C.C_NSColor_Set(n.Ptr())
 }
 
-func (n *NSColor) SetFill() {
+func (n NSColor) SetFill() {
 	C.C_NSColor_SetFill(n.Ptr())
 }
 
-func (n *NSColor) SetStroke() {
+func (n NSColor) SetStroke() {
 	C.C_NSColor_SetStroke(n.Ptr())
 }
 
@@ -231,97 +228,97 @@ func Color_SetIgnoresAlpha(value bool) {
 	C.C_NSColor_Color_SetIgnoresAlpha(C.bool(value))
 }
 
-func (n *NSColor) NumberOfComponents() int {
+func (n NSColor) NumberOfComponents() int {
 	result_ := C.C_NSColor_NumberOfComponents(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSColor) AlphaComponent() coregraphics.Float {
+func (n NSColor) AlphaComponent() coregraphics.Float {
 	result_ := C.C_NSColor_AlphaComponent(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSColor) WhiteComponent() coregraphics.Float {
+func (n NSColor) WhiteComponent() coregraphics.Float {
 	result_ := C.C_NSColor_WhiteComponent(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSColor) RedComponent() coregraphics.Float {
+func (n NSColor) RedComponent() coregraphics.Float {
 	result_ := C.C_NSColor_RedComponent(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSColor) GreenComponent() coregraphics.Float {
+func (n NSColor) GreenComponent() coregraphics.Float {
 	result_ := C.C_NSColor_GreenComponent(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSColor) BlueComponent() coregraphics.Float {
+func (n NSColor) BlueComponent() coregraphics.Float {
 	result_ := C.C_NSColor_BlueComponent(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSColor) CyanComponent() coregraphics.Float {
+func (n NSColor) CyanComponent() coregraphics.Float {
 	result_ := C.C_NSColor_CyanComponent(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSColor) MagentaComponent() coregraphics.Float {
+func (n NSColor) MagentaComponent() coregraphics.Float {
 	result_ := C.C_NSColor_MagentaComponent(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSColor) YellowComponent() coregraphics.Float {
+func (n NSColor) YellowComponent() coregraphics.Float {
 	result_ := C.C_NSColor_YellowComponent(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSColor) BlackComponent() coregraphics.Float {
+func (n NSColor) BlackComponent() coregraphics.Float {
 	result_ := C.C_NSColor_BlackComponent(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSColor) HueComponent() coregraphics.Float {
+func (n NSColor) HueComponent() coregraphics.Float {
 	result_ := C.C_NSColor_HueComponent(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSColor) SaturationComponent() coregraphics.Float {
+func (n NSColor) SaturationComponent() coregraphics.Float {
 	result_ := C.C_NSColor_SaturationComponent(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSColor) BrightnessComponent() coregraphics.Float {
+func (n NSColor) BrightnessComponent() coregraphics.Float {
 	result_ := C.C_NSColor_BrightnessComponent(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSColor) CatalogNameComponent() ColorListName {
+func (n NSColor) CatalogNameComponent() ColorListName {
 	result_ := C.C_NSColor_CatalogNameComponent(n.Ptr())
 	return ColorListName(foundation.MakeString(result_).String())
 }
 
-func (n *NSColor) LocalizedCatalogNameComponent() string {
+func (n NSColor) LocalizedCatalogNameComponent() string {
 	result_ := C.C_NSColor_LocalizedCatalogNameComponent(n.Ptr())
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSColor) ColorNameComponent() ColorName {
+func (n NSColor) ColorNameComponent() ColorName {
 	result_ := C.C_NSColor_ColorNameComponent(n.Ptr())
 	return ColorName(foundation.MakeString(result_).String())
 }
 
-func (n *NSColor) LocalizedColorNameComponent() string {
+func (n NSColor) LocalizedColorNameComponent() string {
 	result_ := C.C_NSColor_LocalizedColorNameComponent(n.Ptr())
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSColor) Type() ColorType {
+func (n NSColor) Type() ColorType {
 	result_ := C.C_NSColor_Type(n.Ptr())
 	return ColorType(int(result_))
 }
 
-func (n *NSColor) ColorSpace() ColorSpace {
+func (n NSColor) ColorSpace() ColorSpace {
 	result_ := C.C_NSColor_ColorSpace(n.Ptr())
 	return MakeColorSpace(result_)
 }
@@ -642,7 +639,7 @@ func YellowColor() Color {
 	return MakeColor(result_)
 }
 
-func (n *NSColor) PatternImage() Image {
+func (n NSColor) PatternImage() Image {
 	result_ := C.C_NSColor_PatternImage(n.Ptr())
 	return MakeImage(result_)
 }

@@ -34,88 +34,85 @@ type NSOperation struct {
 	objc.NSObject
 }
 
-func MakeOperation(ptr unsafe.Pointer) *NSOperation {
-	if ptr == nil {
-		return nil
-	}
-	return &NSOperation{
-		NSObject: *objc.MakeObject(ptr),
+func MakeOperation(ptr unsafe.Pointer) NSOperation {
+	return NSOperation{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocOperation() *NSOperation {
+func AllocOperation() NSOperation {
 	return MakeOperation(C.C_Operation_Alloc())
 }
 
-func (n *NSOperation) Init() Operation {
+func (n NSOperation) Init() Operation {
 	result_ := C.C_NSOperation_Init(n.Ptr())
 	return MakeOperation(result_)
 }
 
-func (n *NSOperation) Start() {
+func (n NSOperation) Start() {
 	C.C_NSOperation_Start(n.Ptr())
 }
 
-func (n *NSOperation) Main() {
+func (n NSOperation) Main() {
 	C.C_NSOperation_Main(n.Ptr())
 }
 
-func (n *NSOperation) Cancel() {
+func (n NSOperation) Cancel() {
 	C.C_NSOperation_Cancel(n.Ptr())
 }
 
-func (n *NSOperation) AddDependency(op Operation) {
+func (n NSOperation) AddDependency(op Operation) {
 	C.C_NSOperation_AddDependency(n.Ptr(), objc.ExtractPtr(op))
 }
 
-func (n *NSOperation) RemoveDependency(op Operation) {
+func (n NSOperation) RemoveDependency(op Operation) {
 	C.C_NSOperation_RemoveDependency(n.Ptr(), objc.ExtractPtr(op))
 }
 
-func (n *NSOperation) WaitUntilFinished() {
+func (n NSOperation) WaitUntilFinished() {
 	C.C_NSOperation_WaitUntilFinished(n.Ptr())
 }
 
-func (n *NSOperation) IsCancelled() bool {
+func (n NSOperation) IsCancelled() bool {
 	result_ := C.C_NSOperation_IsCancelled(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSOperation) IsExecuting() bool {
+func (n NSOperation) IsExecuting() bool {
 	result_ := C.C_NSOperation_IsExecuting(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSOperation) IsFinished() bool {
+func (n NSOperation) IsFinished() bool {
 	result_ := C.C_NSOperation_IsFinished(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSOperation) IsConcurrent() bool {
+func (n NSOperation) IsConcurrent() bool {
 	result_ := C.C_NSOperation_IsConcurrent(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSOperation) IsAsynchronous() bool {
+func (n NSOperation) IsAsynchronous() bool {
 	result_ := C.C_NSOperation_IsAsynchronous(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSOperation) IsReady() bool {
+func (n NSOperation) IsReady() bool {
 	result_ := C.C_NSOperation_IsReady(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSOperation) Name() string {
+func (n NSOperation) Name() string {
 	result_ := C.C_NSOperation_Name(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSOperation) SetName(value string) {
+func (n NSOperation) SetName(value string) {
 	C.C_NSOperation_SetName(n.Ptr(), NewString(value).Ptr())
 }
 
-func (n *NSOperation) Dependencies() []Operation {
+func (n NSOperation) Dependencies() []Operation {
 	result_ := C.C_NSOperation_Dependencies(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -126,20 +123,20 @@ func (n *NSOperation) Dependencies() []Operation {
 	return goResult_
 }
 
-func (n *NSOperation) QualityOfService() QualityOfService {
+func (n NSOperation) QualityOfService() QualityOfService {
 	result_ := C.C_NSOperation_QualityOfService(n.Ptr())
 	return QualityOfService(int(result_))
 }
 
-func (n *NSOperation) SetQualityOfService(value QualityOfService) {
+func (n NSOperation) SetQualityOfService(value QualityOfService) {
 	C.C_NSOperation_SetQualityOfService(n.Ptr(), C.int(int(value)))
 }
 
-func (n *NSOperation) QueuePriority() OperationQueuePriority {
+func (n NSOperation) QueuePriority() OperationQueuePriority {
 	result_ := C.C_NSOperation_QueuePriority(n.Ptr())
 	return OperationQueuePriority(int(result_))
 }
 
-func (n *NSOperation) SetQueuePriority(value OperationQueuePriority) {
+func (n NSOperation) SetQueuePriority(value OperationQueuePriority) {
 	C.C_NSOperation_SetQueuePriority(n.Ptr(), C.int(int(value)))
 }

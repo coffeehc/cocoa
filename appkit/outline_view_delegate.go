@@ -51,7 +51,7 @@ type OutlineViewDelegate struct {
 	Control_DidFailToFormatString_ErrorDescription               func(control Control, _string string, error string) bool
 	Control_TextShouldBeginEditing                               func(control Control, fieldEditor Text) bool
 	Control_TextShouldEndEditing                                 func(control Control, fieldEditor Text) bool
-	Control_TextView_DoCommandBySelector                         func(control Control, textView TextView, commandSelector *objc.Selector) bool
+	Control_TextView_DoCommandBySelector                         func(control Control, textView TextView, commandSelector objc.Selector) bool
 	ControlTextDidBeginEditing                                   func(obj foundation.Notification)
 	ControlTextDidChange                                         func(obj foundation.Notification)
 	ControlTextDidEndEditing                                     func(obj foundation.Notification)
@@ -338,7 +338,7 @@ func outlineViewDelegate_Control_TextShouldEndEditing(id int64, control unsafe.P
 //export outlineViewDelegate_Control_TextView_DoCommandBySelector
 func outlineViewDelegate_Control_TextView_DoCommandBySelector(id int64, control unsafe.Pointer, textView unsafe.Pointer, commandSelector unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*OutlineViewDelegate)
-	result := delegate.Control_TextView_DoCommandBySelector(MakeControl(control), MakeTextView(textView), objc.MakeSelector(commandSelector))
+	result := delegate.Control_TextView_DoCommandBySelector(MakeControl(control), MakeTextView(textView), objc.Selector(commandSelector))
 	return C.bool(result)
 }
 
@@ -362,7 +362,7 @@ func outlineViewDelegate_ControlTextDidEndEditing(id int64, obj unsafe.Pointer) 
 
 //export OutlineViewDelegate_RespondsTo
 func OutlineViewDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
-	sel := objc.MakeSelector(selectorPtr)
+	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
 	delegate := resources.Get(id).(*OutlineViewDelegate)
 	switch selName {

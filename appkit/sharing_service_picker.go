@@ -20,20 +20,17 @@ type NSSharingServicePicker struct {
 	objc.NSObject
 }
 
-func MakeSharingServicePicker(ptr unsafe.Pointer) *NSSharingServicePicker {
-	if ptr == nil {
-		return nil
-	}
-	return &NSSharingServicePicker{
-		NSObject: *objc.MakeObject(ptr),
+func MakeSharingServicePicker(ptr unsafe.Pointer) NSSharingServicePicker {
+	return NSSharingServicePicker{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocSharingServicePicker() *NSSharingServicePicker {
+func AllocSharingServicePicker() NSSharingServicePicker {
 	return MakeSharingServicePicker(C.C_SharingServicePicker_Alloc())
 }
 
-func (n *NSSharingServicePicker) InitWithItems(items []objc.Object) SharingServicePicker {
+func (n NSSharingServicePicker) InitWithItems(items []objc.Object) SharingServicePicker {
 	cItemsData := make([]unsafe.Pointer, len(items))
 	for idx, v := range items {
 		cItemsData[idx] = objc.ExtractPtr(v)
@@ -43,15 +40,15 @@ func (n *NSSharingServicePicker) InitWithItems(items []objc.Object) SharingServi
 	return MakeSharingServicePicker(result_)
 }
 
-func (n *NSSharingServicePicker) ShowRelativeToRect_OfView_PreferredEdge(rect foundation.Rect, view View, preferredEdge foundation.RectEdge) {
+func (n NSSharingServicePicker) ShowRelativeToRect_OfView_PreferredEdge(rect foundation.Rect, view View, preferredEdge foundation.RectEdge) {
 	C.C_NSSharingServicePicker_ShowRelativeToRect_OfView_PreferredEdge(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))), objc.ExtractPtr(view), C.uint(uint(preferredEdge)))
 }
 
-func (n *NSSharingServicePicker) Delegate() objc.Object {
+func (n NSSharingServicePicker) Delegate() objc.Object {
 	result_ := C.C_NSSharingServicePicker_Delegate(n.Ptr())
 	return objc.MakeObject(result_)
 }
 
-func (n *NSSharingServicePicker) SetDelegate(value objc.Object) {
+func (n NSSharingServicePicker) SetDelegate(value objc.Object) {
 	C.C_NSSharingServicePicker_SetDelegate(n.Ptr(), objc.ExtractPtr(value))
 }

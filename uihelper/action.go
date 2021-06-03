@@ -17,7 +17,7 @@ type ActionHandler func(sender objc.Object)
 // CanSetAction is an interface for objc instance which can set a target and action
 type CanSetAction interface {
 	SetTarget(target objc.Object)
-	SetAction(sel *objc.Selector)
+	SetAction(sel objc.Selector)
 }
 
 // ActionTarget hold an objc ActionTarget target instance
@@ -30,7 +30,7 @@ var actionId int64 = 0
 var actionsMap = map[int64]ActionHandler{}
 
 // NewAction create a new objc ActionTarget instance, from ActionHandler
-func NewAction(handler ActionHandler) *ActionTarget {
+func NewAction(handler ActionHandler) ActionTarget {
 	if handler == nil {
 		panic("handler is nil")
 	}
@@ -39,8 +39,8 @@ func NewAction(handler ActionHandler) *ActionTarget {
 	id := actionId
 	actionsMap[id] = handler
 	actionsLock.Unlock()
-	return &ActionTarget{
-		NSObject: *objc.MakeObject(C.C_NewAction(C.long(id))),
+	return ActionTarget{
+		NSObject: objc.MakeObject(C.C_NewAction(C.long(id))),
 	}
 }
 

@@ -17,25 +17,22 @@ type WKContentRuleList struct {
 	objc.NSObject
 }
 
-func MakeContentRuleList(ptr unsafe.Pointer) *WKContentRuleList {
-	if ptr == nil {
-		return nil
-	}
-	return &WKContentRuleList{
-		NSObject: *objc.MakeObject(ptr),
+func MakeContentRuleList(ptr unsafe.Pointer) WKContentRuleList {
+	return WKContentRuleList{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocContentRuleList() *WKContentRuleList {
+func AllocContentRuleList() WKContentRuleList {
 	return MakeContentRuleList(C.C_ContentRuleList_Alloc())
 }
 
-func (w *WKContentRuleList) Init() ContentRuleList {
+func (w WKContentRuleList) Init() ContentRuleList {
 	result_ := C.C_WKContentRuleList_Init(w.Ptr())
 	return MakeContentRuleList(result_)
 }
 
-func (w *WKContentRuleList) Identifier() string {
+func (w WKContentRuleList) Identifier() string {
 	result_ := C.C_WKContentRuleList_Identifier(w.Ptr())
 	return foundation.MakeString(result_).String()
 }

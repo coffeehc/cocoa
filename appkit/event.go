@@ -70,20 +70,17 @@ type NSEvent struct {
 	objc.NSObject
 }
 
-func MakeEvent(ptr unsafe.Pointer) *NSEvent {
-	if ptr == nil {
-		return nil
-	}
-	return &NSEvent{
-		NSObject: *objc.MakeObject(ptr),
+func MakeEvent(ptr unsafe.Pointer) NSEvent {
+	return NSEvent{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocEvent() *NSEvent {
+func AllocEvent() NSEvent {
 	return MakeEvent(C.C_Event_Alloc())
 }
 
-func (n *NSEvent) Init() Event {
+func (n NSEvent) Init() Event {
 	result_ := C.C_NSEvent_Init(n.Ptr())
 	return MakeEvent(result_)
 }
@@ -101,22 +98,22 @@ func Event_StopPeriodicEvents() {
 	C.C_NSEvent_Event_StopPeriodicEvents()
 }
 
-func (n *NSEvent) TouchesMatchingPhase_InView(phase TouchPhase, view View) foundation.Set {
+func (n NSEvent) TouchesMatchingPhase_InView(phase TouchPhase, view View) foundation.Set {
 	result_ := C.C_NSEvent_TouchesMatchingPhase_InView(n.Ptr(), C.uint(uint(phase)), objc.ExtractPtr(view))
 	return foundation.MakeSet(result_)
 }
 
-func (n *NSEvent) AllTouches() foundation.Set {
+func (n NSEvent) AllTouches() foundation.Set {
 	result_ := C.C_NSEvent_AllTouches(n.Ptr())
 	return foundation.MakeSet(result_)
 }
 
-func (n *NSEvent) TouchesForView(view View) foundation.Set {
+func (n NSEvent) TouchesForView(view View) foundation.Set {
 	result_ := C.C_NSEvent_TouchesForView(n.Ptr(), objc.ExtractPtr(view))
 	return foundation.MakeSet(result_)
 }
 
-func (n *NSEvent) CoalescedTouchesForTouch(touch Touch) []Touch {
+func (n NSEvent) CoalescedTouchesForTouch(touch Touch) []Touch {
 	result_ := C.C_NSEvent_CoalescedTouchesForTouch(n.Ptr(), objc.ExtractPtr(touch))
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -131,37 +128,37 @@ func Event_RemoveMonitor(eventMonitor objc.Object) {
 	C.C_NSEvent_Event_RemoveMonitor(objc.ExtractPtr(eventMonitor))
 }
 
-func (n *NSEvent) CharactersByApplyingModifiers(modifiers EventModifierFlags) string {
+func (n NSEvent) CharactersByApplyingModifiers(modifiers EventModifierFlags) string {
 	result_ := C.C_NSEvent_CharactersByApplyingModifiers(n.Ptr(), C.uint(uint(modifiers)))
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSEvent) Type() EventType {
+func (n NSEvent) Type() EventType {
 	result_ := C.C_NSEvent_Type(n.Ptr())
 	return EventType(uint(result_))
 }
 
-func (n *NSEvent) ModifierFlags() EventModifierFlags {
+func (n NSEvent) ModifierFlags() EventModifierFlags {
 	result_ := C.C_NSEvent_ModifierFlags(n.Ptr())
 	return EventModifierFlags(uint(result_))
 }
 
-func (n *NSEvent) LocationInWindow() foundation.Point {
+func (n NSEvent) LocationInWindow() foundation.Point {
 	result_ := C.C_NSEvent_LocationInWindow(n.Ptr())
 	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
 }
 
-func (n *NSEvent) Timestamp() foundation.TimeInterval {
+func (n NSEvent) Timestamp() foundation.TimeInterval {
 	result_ := C.C_NSEvent_Timestamp(n.Ptr())
 	return foundation.TimeInterval(float64(result_))
 }
 
-func (n *NSEvent) Window() Window {
+func (n NSEvent) Window() Window {
 	result_ := C.C_NSEvent_Window(n.Ptr())
 	return MakeWindow(result_)
 }
 
-func (n *NSEvent) WindowNumber() int {
+func (n NSEvent) WindowNumber() int {
 	result_ := C.C_NSEvent_WindowNumber(n.Ptr())
 	return int(result_)
 }
@@ -176,17 +173,17 @@ func Event_KeyRepeatInterval() foundation.TimeInterval {
 	return foundation.TimeInterval(float64(result_))
 }
 
-func (n *NSEvent) Characters() string {
+func (n NSEvent) Characters() string {
 	result_ := C.C_NSEvent_Characters(n.Ptr())
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSEvent) CharactersIgnoringModifiers() string {
+func (n NSEvent) CharactersIgnoringModifiers() string {
 	result_ := C.C_NSEvent_CharactersIgnoringModifiers(n.Ptr())
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSEvent) IsARepeat() bool {
+func (n NSEvent) IsARepeat() bool {
 	result_ := C.C_NSEvent_IsARepeat(n.Ptr())
 	return bool(result_)
 }
@@ -206,167 +203,167 @@ func Event_MouseLocation() foundation.Point {
 	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
 }
 
-func (n *NSEvent) ButtonNumber() int {
+func (n NSEvent) ButtonNumber() int {
 	result_ := C.C_NSEvent_ButtonNumber(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSEvent) ClickCount() int {
+func (n NSEvent) ClickCount() int {
 	result_ := C.C_NSEvent_ClickCount(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSEvent) EventNumber() int {
+func (n NSEvent) EventNumber() int {
 	result_ := C.C_NSEvent_EventNumber(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSEvent) TrackingNumber() int {
+func (n NSEvent) TrackingNumber() int {
 	result_ := C.C_NSEvent_TrackingNumber(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSEvent) TrackingArea() TrackingArea {
+func (n NSEvent) TrackingArea() TrackingArea {
 	result_ := C.C_NSEvent_TrackingArea(n.Ptr())
 	return MakeTrackingArea(result_)
 }
 
-func (n *NSEvent) Data1() int {
+func (n NSEvent) Data1() int {
 	result_ := C.C_NSEvent_Data1(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSEvent) Data2() int {
+func (n NSEvent) Data2() int {
 	result_ := C.C_NSEvent_Data2(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSEvent) DeltaX() coregraphics.Float {
+func (n NSEvent) DeltaX() coregraphics.Float {
 	result_ := C.C_NSEvent_DeltaX(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSEvent) DeltaY() coregraphics.Float {
+func (n NSEvent) DeltaY() coregraphics.Float {
 	result_ := C.C_NSEvent_DeltaY(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSEvent) DeltaZ() coregraphics.Float {
+func (n NSEvent) DeltaZ() coregraphics.Float {
 	result_ := C.C_NSEvent_DeltaZ(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSEvent) Pressure() float32 {
+func (n NSEvent) Pressure() float32 {
 	result_ := C.C_NSEvent_Pressure(n.Ptr())
 	return float32(result_)
 }
 
-func (n *NSEvent) Stage() int {
+func (n NSEvent) Stage() int {
 	result_ := C.C_NSEvent_Stage(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSEvent) StageTransition() coregraphics.Float {
+func (n NSEvent) StageTransition() coregraphics.Float {
 	result_ := C.C_NSEvent_StageTransition(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSEvent) PressureBehavior() PressureBehavior {
+func (n NSEvent) PressureBehavior() PressureBehavior {
 	result_ := C.C_NSEvent_PressureBehavior(n.Ptr())
 	return PressureBehavior(int(result_))
 }
 
-func (n *NSEvent) CapabilityMask() uint {
+func (n NSEvent) CapabilityMask() uint {
 	result_ := C.C_NSEvent_CapabilityMask(n.Ptr())
 	return uint(result_)
 }
 
-func (n *NSEvent) DeviceID() uint {
+func (n NSEvent) DeviceID() uint {
 	result_ := C.C_NSEvent_DeviceID(n.Ptr())
 	return uint(result_)
 }
 
-func (n *NSEvent) IsEnteringProximity() bool {
+func (n NSEvent) IsEnteringProximity() bool {
 	result_ := C.C_NSEvent_IsEnteringProximity(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSEvent) PointingDeviceID() uint {
+func (n NSEvent) PointingDeviceID() uint {
 	result_ := C.C_NSEvent_PointingDeviceID(n.Ptr())
 	return uint(result_)
 }
 
-func (n *NSEvent) PointingDeviceSerialNumber() uint {
+func (n NSEvent) PointingDeviceSerialNumber() uint {
 	result_ := C.C_NSEvent_PointingDeviceSerialNumber(n.Ptr())
 	return uint(result_)
 }
 
-func (n *NSEvent) PointingDeviceType() PointingDeviceType {
+func (n NSEvent) PointingDeviceType() PointingDeviceType {
 	result_ := C.C_NSEvent_PointingDeviceType(n.Ptr())
 	return PointingDeviceType(uint(result_))
 }
 
-func (n *NSEvent) SystemTabletID() uint {
+func (n NSEvent) SystemTabletID() uint {
 	result_ := C.C_NSEvent_SystemTabletID(n.Ptr())
 	return uint(result_)
 }
 
-func (n *NSEvent) TabletID() uint {
+func (n NSEvent) TabletID() uint {
 	result_ := C.C_NSEvent_TabletID(n.Ptr())
 	return uint(result_)
 }
 
-func (n *NSEvent) VendorID() uint {
+func (n NSEvent) VendorID() uint {
 	result_ := C.C_NSEvent_VendorID(n.Ptr())
 	return uint(result_)
 }
 
-func (n *NSEvent) VendorPointingDeviceType() uint {
+func (n NSEvent) VendorPointingDeviceType() uint {
 	result_ := C.C_NSEvent_VendorPointingDeviceType(n.Ptr())
 	return uint(result_)
 }
 
-func (n *NSEvent) AbsoluteX() int {
+func (n NSEvent) AbsoluteX() int {
 	result_ := C.C_NSEvent_AbsoluteX(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSEvent) AbsoluteY() int {
+func (n NSEvent) AbsoluteY() int {
 	result_ := C.C_NSEvent_AbsoluteY(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSEvent) AbsoluteZ() int {
+func (n NSEvent) AbsoluteZ() int {
 	result_ := C.C_NSEvent_AbsoluteZ(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSEvent) ButtonMask() EventButtonMask {
+func (n NSEvent) ButtonMask() EventButtonMask {
 	result_ := C.C_NSEvent_ButtonMask(n.Ptr())
 	return EventButtonMask(uint(result_))
 }
 
-func (n *NSEvent) Rotation() float32 {
+func (n NSEvent) Rotation() float32 {
 	result_ := C.C_NSEvent_Rotation(n.Ptr())
 	return float32(result_)
 }
 
-func (n *NSEvent) TangentialPressure() float32 {
+func (n NSEvent) TangentialPressure() float32 {
 	result_ := C.C_NSEvent_TangentialPressure(n.Ptr())
 	return float32(result_)
 }
 
-func (n *NSEvent) Tilt() foundation.Point {
+func (n NSEvent) Tilt() foundation.Point {
 	result_ := C.C_NSEvent_Tilt(n.Ptr())
 	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
 }
 
-func (n *NSEvent) VendorDefined() objc.Object {
+func (n NSEvent) VendorDefined() objc.Object {
 	result_ := C.C_NSEvent_VendorDefined(n.Ptr())
 	return objc.MakeObject(result_)
 }
 
-func (n *NSEvent) Magnification() coregraphics.Float {
+func (n NSEvent) Magnification() coregraphics.Float {
 	result_ := C.C_NSEvent_Magnification(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
@@ -380,27 +377,27 @@ func Event_SetMouseCoalescingEnabled(value bool) {
 	C.C_NSEvent_Event_SetMouseCoalescingEnabled(C.bool(value))
 }
 
-func (n *NSEvent) HasPreciseScrollingDeltas() bool {
+func (n NSEvent) HasPreciseScrollingDeltas() bool {
 	result_ := C.C_NSEvent_HasPreciseScrollingDeltas(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSEvent) ScrollingDeltaX() coregraphics.Float {
+func (n NSEvent) ScrollingDeltaX() coregraphics.Float {
 	result_ := C.C_NSEvent_ScrollingDeltaX(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSEvent) ScrollingDeltaY() coregraphics.Float {
+func (n NSEvent) ScrollingDeltaY() coregraphics.Float {
 	result_ := C.C_NSEvent_ScrollingDeltaY(n.Ptr())
 	return coregraphics.Float(float64(result_))
 }
 
-func (n *NSEvent) MomentumPhase() EventPhase {
+func (n NSEvent) MomentumPhase() EventPhase {
 	result_ := C.C_NSEvent_MomentumPhase(n.Ptr())
 	return EventPhase(uint(result_))
 }
 
-func (n *NSEvent) Phase() EventPhase {
+func (n NSEvent) Phase() EventPhase {
 	result_ := C.C_NSEvent_Phase(n.Ptr())
 	return EventPhase(uint(result_))
 }
@@ -410,7 +407,7 @@ func Event_SwipeTrackingFromScrollEventsEnabled() bool {
 	return bool(result_)
 }
 
-func (n *NSEvent) IsDirectionInvertedFromDevice() bool {
+func (n NSEvent) IsDirectionInvertedFromDevice() bool {
 	result_ := C.C_NSEvent_IsDirectionInvertedFromDevice(n.Ptr())
 	return bool(result_)
 }

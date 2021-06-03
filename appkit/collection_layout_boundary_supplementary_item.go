@@ -23,16 +23,13 @@ type NSCollectionLayoutBoundarySupplementaryItem struct {
 	NSCollectionLayoutSupplementaryItem
 }
 
-func MakeCollectionLayoutBoundarySupplementaryItem(ptr unsafe.Pointer) *NSCollectionLayoutBoundarySupplementaryItem {
-	if ptr == nil {
-		return nil
-	}
-	return &NSCollectionLayoutBoundarySupplementaryItem{
-		NSCollectionLayoutSupplementaryItem: *MakeCollectionLayoutSupplementaryItem(ptr),
+func MakeCollectionLayoutBoundarySupplementaryItem(ptr unsafe.Pointer) NSCollectionLayoutBoundarySupplementaryItem {
+	return NSCollectionLayoutBoundarySupplementaryItem{
+		NSCollectionLayoutSupplementaryItem: MakeCollectionLayoutSupplementaryItem(ptr),
 	}
 }
 
-func AllocCollectionLayoutBoundarySupplementaryItem() *NSCollectionLayoutBoundarySupplementaryItem {
+func AllocCollectionLayoutBoundarySupplementaryItem() NSCollectionLayoutBoundarySupplementaryItem {
 	return MakeCollectionLayoutBoundarySupplementaryItem(C.C_CollectionLayoutBoundarySupplementaryItem_Alloc())
 }
 
@@ -46,30 +43,30 @@ func CollectionLayoutBoundarySupplementaryItem_BoundarySupplementaryItemWithLayo
 	return MakeCollectionLayoutBoundarySupplementaryItem(result_)
 }
 
-func (n *NSCollectionLayoutBoundarySupplementaryItem) PinToVisibleBounds() bool {
+func (n NSCollectionLayoutBoundarySupplementaryItem) PinToVisibleBounds() bool {
 	result_ := C.C_NSCollectionLayoutBoundarySupplementaryItem_PinToVisibleBounds(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSCollectionLayoutBoundarySupplementaryItem) SetPinToVisibleBounds(value bool) {
+func (n NSCollectionLayoutBoundarySupplementaryItem) SetPinToVisibleBounds(value bool) {
 	C.C_NSCollectionLayoutBoundarySupplementaryItem_SetPinToVisibleBounds(n.Ptr(), C.bool(value))
 }
 
-func (n *NSCollectionLayoutBoundarySupplementaryItem) Offset() foundation.Point {
+func (n NSCollectionLayoutBoundarySupplementaryItem) Offset() foundation.Point {
 	result_ := C.C_NSCollectionLayoutBoundarySupplementaryItem_Offset(n.Ptr())
 	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
 }
 
-func (n *NSCollectionLayoutBoundarySupplementaryItem) Alignment() RectAlignment {
+func (n NSCollectionLayoutBoundarySupplementaryItem) Alignment() RectAlignment {
 	result_ := C.C_NSCollectionLayoutBoundarySupplementaryItem_Alignment(n.Ptr())
 	return RectAlignment(int(result_))
 }
 
-func (n *NSCollectionLayoutBoundarySupplementaryItem) ExtendsBoundary() bool {
+func (n NSCollectionLayoutBoundarySupplementaryItem) ExtendsBoundary() bool {
 	result_ := C.C_NSCollectionLayoutBoundarySupplementaryItem_ExtendsBoundary(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSCollectionLayoutBoundarySupplementaryItem) SetExtendsBoundary(value bool) {
+func (n NSCollectionLayoutBoundarySupplementaryItem) SetExtendsBoundary(value bool) {
 	C.C_NSCollectionLayoutBoundarySupplementaryItem_SetExtendsBoundary(n.Ptr(), C.bool(value))
 }

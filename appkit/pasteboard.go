@@ -37,20 +37,17 @@ type NSPasteboard struct {
 	objc.NSObject
 }
 
-func MakePasteboard(ptr unsafe.Pointer) *NSPasteboard {
-	if ptr == nil {
-		return nil
-	}
-	return &NSPasteboard{
-		NSObject: *objc.MakeObject(ptr),
+func MakePasteboard(ptr unsafe.Pointer) NSPasteboard {
+	return NSPasteboard{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocPasteboard() *NSPasteboard {
+func AllocPasteboard() NSPasteboard {
 	return MakePasteboard(C.C_Pasteboard_Alloc())
 }
 
-func (n *NSPasteboard) Init() Pasteboard {
+func (n NSPasteboard) Init() Pasteboard {
 	result_ := C.C_NSPasteboard_Init(n.Ptr())
 	return MakePasteboard(result_)
 }
@@ -80,32 +77,32 @@ func PasteboardWithUniqueName() Pasteboard {
 	return MakePasteboard(result_)
 }
 
-func (n *NSPasteboard) ClearContents() int {
+func (n NSPasteboard) ClearContents() int {
 	result_ := C.C_NSPasteboard_ClearContents(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSPasteboard) SetData_ForType(data []byte, dataType PasteboardType) bool {
+func (n NSPasteboard) SetData_ForType(data []byte, dataType PasteboardType) bool {
 	result_ := C.C_NSPasteboard_SetData_ForType(n.Ptr(), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, foundation.NewString(string(dataType)).Ptr())
 	return bool(result_)
 }
 
-func (n *NSPasteboard) SetPropertyList_ForType(plist objc.Object, dataType PasteboardType) bool {
+func (n NSPasteboard) SetPropertyList_ForType(plist objc.Object, dataType PasteboardType) bool {
 	result_ := C.C_NSPasteboard_SetPropertyList_ForType(n.Ptr(), objc.ExtractPtr(plist), foundation.NewString(string(dataType)).Ptr())
 	return bool(result_)
 }
 
-func (n *NSPasteboard) SetString_ForType(_string string, dataType PasteboardType) bool {
+func (n NSPasteboard) SetString_ForType(_string string, dataType PasteboardType) bool {
 	result_ := C.C_NSPasteboard_SetString_ForType(n.Ptr(), foundation.NewString(_string).Ptr(), foundation.NewString(string(dataType)).Ptr())
 	return bool(result_)
 }
 
-func (n *NSPasteboard) IndexOfPasteboardItem(pasteboardItem PasteboardItem) uint {
+func (n NSPasteboard) IndexOfPasteboardItem(pasteboardItem PasteboardItem) uint {
 	result_ := C.C_NSPasteboard_IndexOfPasteboardItem(n.Ptr(), objc.ExtractPtr(pasteboardItem))
 	return uint(result_)
 }
 
-func (n *NSPasteboard) DataForType(dataType PasteboardType) []byte {
+func (n NSPasteboard) DataForType(dataType PasteboardType) []byte {
 	result_ := C.C_NSPasteboard_DataForType(n.Ptr(), foundation.NewString(string(dataType)).Ptr())
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
@@ -114,17 +111,17 @@ func (n *NSPasteboard) DataForType(dataType PasteboardType) []byte {
 	return goResult_
 }
 
-func (n *NSPasteboard) PropertyListForType(dataType PasteboardType) objc.Object {
+func (n NSPasteboard) PropertyListForType(dataType PasteboardType) objc.Object {
 	result_ := C.C_NSPasteboard_PropertyListForType(n.Ptr(), foundation.NewString(string(dataType)).Ptr())
 	return objc.MakeObject(result_)
 }
 
-func (n *NSPasteboard) StringForType(dataType PasteboardType) string {
+func (n NSPasteboard) StringForType(dataType PasteboardType) string {
 	result_ := C.C_NSPasteboard_StringForType(n.Ptr(), foundation.NewString(string(dataType)).Ptr())
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSPasteboard) AvailableTypeFromArray(types []PasteboardType) PasteboardType {
+func (n NSPasteboard) AvailableTypeFromArray(types []PasteboardType) PasteboardType {
 	cTypesData := make([]unsafe.Pointer, len(types))
 	for idx, v := range types {
 		cTypesData[idx] = foundation.NewString(string(v)).Ptr()
@@ -134,7 +131,7 @@ func (n *NSPasteboard) AvailableTypeFromArray(types []PasteboardType) Pasteboard
 	return PasteboardType(foundation.MakeString(result_).String())
 }
 
-func (n *NSPasteboard) CanReadItemWithDataConformingToTypes(types []string) bool {
+func (n NSPasteboard) CanReadItemWithDataConformingToTypes(types []string) bool {
 	cTypesData := make([]unsafe.Pointer, len(types))
 	for idx, v := range types {
 		cTypesData[idx] = foundation.NewString(v).Ptr()
@@ -155,12 +152,12 @@ func Pasteboard_TypesFilterableTo(_type PasteboardType) []PasteboardType {
 	return goResult_
 }
 
-func (n *NSPasteboard) PrepareForNewContentsWithOptions(options PasteboardContentsOptions) int {
+func (n NSPasteboard) PrepareForNewContentsWithOptions(options PasteboardContentsOptions) int {
 	result_ := C.C_NSPasteboard_PrepareForNewContentsWithOptions(n.Ptr(), C.uint(uint(options)))
 	return int(result_)
 }
 
-func (n *NSPasteboard) DeclareTypes_Owner(newTypes []PasteboardType, newOwner objc.Object) int {
+func (n NSPasteboard) DeclareTypes_Owner(newTypes []PasteboardType, newOwner objc.Object) int {
 	cNewTypesData := make([]unsafe.Pointer, len(newTypes))
 	for idx, v := range newTypes {
 		cNewTypesData[idx] = foundation.NewString(string(v)).Ptr()
@@ -170,7 +167,7 @@ func (n *NSPasteboard) DeclareTypes_Owner(newTypes []PasteboardType, newOwner ob
 	return int(result_)
 }
 
-func (n *NSPasteboard) AddTypes_Owner(newTypes []PasteboardType, newOwner objc.Object) int {
+func (n NSPasteboard) AddTypes_Owner(newTypes []PasteboardType, newOwner objc.Object) int {
 	cNewTypesData := make([]unsafe.Pointer, len(newTypes))
 	for idx, v := range newTypes {
 		cNewTypesData[idx] = foundation.NewString(string(v)).Ptr()
@@ -180,22 +177,22 @@ func (n *NSPasteboard) AddTypes_Owner(newTypes []PasteboardType, newOwner objc.O
 	return int(result_)
 }
 
-func (n *NSPasteboard) WriteFileContents(filename string) bool {
+func (n NSPasteboard) WriteFileContents(filename string) bool {
 	result_ := C.C_NSPasteboard_WriteFileContents(n.Ptr(), foundation.NewString(filename).Ptr())
 	return bool(result_)
 }
 
-func (n *NSPasteboard) WriteFileWrapper(wrapper foundation.FileWrapper) bool {
+func (n NSPasteboard) WriteFileWrapper(wrapper foundation.FileWrapper) bool {
 	result_ := C.C_NSPasteboard_WriteFileWrapper(n.Ptr(), objc.ExtractPtr(wrapper))
 	return bool(result_)
 }
 
-func (n *NSPasteboard) ReadFileContentsType_ToFile(_type PasteboardType, filename string) string {
+func (n NSPasteboard) ReadFileContentsType_ToFile(_type PasteboardType, filename string) string {
 	result_ := C.C_NSPasteboard_ReadFileContentsType_ToFile(n.Ptr(), foundation.NewString(string(_type)).Ptr(), foundation.NewString(filename).Ptr())
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSPasteboard) ReadFileWrapper() foundation.FileWrapper {
+func (n NSPasteboard) ReadFileWrapper() foundation.FileWrapper {
 	result_ := C.C_NSPasteboard_ReadFileWrapper(n.Ptr())
 	return foundation.MakeFileWrapper(result_)
 }
@@ -205,7 +202,7 @@ func GeneralPasteboard() Pasteboard {
 	return MakePasteboard(result_)
 }
 
-func (n *NSPasteboard) PasteboardItems() []PasteboardItem {
+func (n NSPasteboard) PasteboardItems() []PasteboardItem {
 	result_ := C.C_NSPasteboard_PasteboardItems(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -216,7 +213,7 @@ func (n *NSPasteboard) PasteboardItems() []PasteboardItem {
 	return goResult_
 }
 
-func (n *NSPasteboard) Types() []PasteboardType {
+func (n NSPasteboard) Types() []PasteboardType {
 	result_ := C.C_NSPasteboard_Types(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -227,12 +224,12 @@ func (n *NSPasteboard) Types() []PasteboardType {
 	return goResult_
 }
 
-func (n *NSPasteboard) Name() PasteboardName {
+func (n NSPasteboard) Name() PasteboardName {
 	result_ := C.C_NSPasteboard_Name(n.Ptr())
 	return PasteboardName(foundation.MakeString(result_).String())
 }
 
-func (n *NSPasteboard) ChangeCount() int {
+func (n NSPasteboard) ChangeCount() int {
 	result_ := C.C_NSPasteboard_ChangeCount(n.Ptr())
 	return int(result_)
 }

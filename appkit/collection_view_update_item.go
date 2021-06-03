@@ -19,35 +19,32 @@ type NSCollectionViewUpdateItem struct {
 	objc.NSObject
 }
 
-func MakeCollectionViewUpdateItem(ptr unsafe.Pointer) *NSCollectionViewUpdateItem {
-	if ptr == nil {
-		return nil
-	}
-	return &NSCollectionViewUpdateItem{
-		NSObject: *objc.MakeObject(ptr),
+func MakeCollectionViewUpdateItem(ptr unsafe.Pointer) NSCollectionViewUpdateItem {
+	return NSCollectionViewUpdateItem{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocCollectionViewUpdateItem() *NSCollectionViewUpdateItem {
+func AllocCollectionViewUpdateItem() NSCollectionViewUpdateItem {
 	return MakeCollectionViewUpdateItem(C.C_CollectionViewUpdateItem_Alloc())
 }
 
-func (n *NSCollectionViewUpdateItem) Init() CollectionViewUpdateItem {
+func (n NSCollectionViewUpdateItem) Init() CollectionViewUpdateItem {
 	result_ := C.C_NSCollectionViewUpdateItem_Init(n.Ptr())
 	return MakeCollectionViewUpdateItem(result_)
 }
 
-func (n *NSCollectionViewUpdateItem) IndexPathBeforeUpdate() foundation.IndexPath {
+func (n NSCollectionViewUpdateItem) IndexPathBeforeUpdate() foundation.IndexPath {
 	result_ := C.C_NSCollectionViewUpdateItem_IndexPathBeforeUpdate(n.Ptr())
 	return foundation.MakeIndexPath(result_)
 }
 
-func (n *NSCollectionViewUpdateItem) IndexPathAfterUpdate() foundation.IndexPath {
+func (n NSCollectionViewUpdateItem) IndexPathAfterUpdate() foundation.IndexPath {
 	result_ := C.C_NSCollectionViewUpdateItem_IndexPathAfterUpdate(n.Ptr())
 	return foundation.MakeIndexPath(result_)
 }
 
-func (n *NSCollectionViewUpdateItem) UpdateAction() CollectionUpdateAction {
+func (n NSCollectionViewUpdateItem) UpdateAction() CollectionUpdateAction {
 	result_ := C.C_NSCollectionViewUpdateItem_UpdateAction(n.Ptr())
 	return CollectionUpdateAction(int(result_))
 }

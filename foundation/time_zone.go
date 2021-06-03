@@ -30,25 +30,22 @@ type NSTimeZone struct {
 	objc.NSObject
 }
 
-func MakeTimeZone(ptr unsafe.Pointer) *NSTimeZone {
-	if ptr == nil {
-		return nil
-	}
-	return &NSTimeZone{
-		NSObject: *objc.MakeObject(ptr),
+func MakeTimeZone(ptr unsafe.Pointer) NSTimeZone {
+	return NSTimeZone{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocTimeZone() *NSTimeZone {
+func AllocTimeZone() NSTimeZone {
 	return MakeTimeZone(C.C_TimeZone_Alloc())
 }
 
-func (n *NSTimeZone) InitWithName(tzName string) TimeZone {
+func (n NSTimeZone) InitWithName(tzName string) TimeZone {
 	result_ := C.C_NSTimeZone_InitWithName(n.Ptr(), NewString(tzName).Ptr())
 	return MakeTimeZone(result_)
 }
 
-func (n *NSTimeZone) InitWithName_Data(tzName string, aData []byte) TimeZone {
+func (n NSTimeZone) InitWithName_Data(tzName string, aData []byte) TimeZone {
 	result_ := C.C_NSTimeZone_InitWithName_Data(n.Ptr(), NewString(tzName).Ptr(), C.Array{data: unsafe.Pointer(&aData[0]), len: C.int(len(aData))})
 	return MakeTimeZone(result_)
 }
@@ -77,37 +74,37 @@ func TimeZoneForSecondsFromGMT(seconds int) TimeZone {
 	return MakeTimeZone(result_)
 }
 
-func (n *NSTimeZone) AbbreviationForDate(aDate Date) string {
+func (n NSTimeZone) AbbreviationForDate(aDate Date) string {
 	result_ := C.C_NSTimeZone_AbbreviationForDate(n.Ptr(), objc.ExtractPtr(aDate))
 	return MakeString(result_).String()
 }
 
-func (n *NSTimeZone) SecondsFromGMTForDate(aDate Date) int {
+func (n NSTimeZone) SecondsFromGMTForDate(aDate Date) int {
 	result_ := C.C_NSTimeZone_SecondsFromGMTForDate(n.Ptr(), objc.ExtractPtr(aDate))
 	return int(result_)
 }
 
-func (n *NSTimeZone) IsDaylightSavingTimeForDate(aDate Date) bool {
+func (n NSTimeZone) IsDaylightSavingTimeForDate(aDate Date) bool {
 	result_ := C.C_NSTimeZone_IsDaylightSavingTimeForDate(n.Ptr(), objc.ExtractPtr(aDate))
 	return bool(result_)
 }
 
-func (n *NSTimeZone) DaylightSavingTimeOffsetForDate(aDate Date) TimeInterval {
+func (n NSTimeZone) DaylightSavingTimeOffsetForDate(aDate Date) TimeInterval {
 	result_ := C.C_NSTimeZone_DaylightSavingTimeOffsetForDate(n.Ptr(), objc.ExtractPtr(aDate))
 	return TimeInterval(float64(result_))
 }
 
-func (n *NSTimeZone) NextDaylightSavingTimeTransitionAfterDate(aDate Date) Date {
+func (n NSTimeZone) NextDaylightSavingTimeTransitionAfterDate(aDate Date) Date {
 	result_ := C.C_NSTimeZone_NextDaylightSavingTimeTransitionAfterDate(n.Ptr(), objc.ExtractPtr(aDate))
 	return MakeDate(result_)
 }
 
-func (n *NSTimeZone) IsEqualToTimeZone(aTimeZone TimeZone) bool {
+func (n NSTimeZone) IsEqualToTimeZone(aTimeZone TimeZone) bool {
 	result_ := C.C_NSTimeZone_IsEqualToTimeZone(n.Ptr(), objc.ExtractPtr(aTimeZone))
 	return bool(result_)
 }
 
-func (n *NSTimeZone) LocalizedName_Locale(style TimeZoneNameStyle, locale Locale) string {
+func (n NSTimeZone) LocalizedName_Locale(style TimeZoneNameStyle, locale Locale) string {
 	result_ := C.C_NSTimeZone_LocalizedName_Locale(n.Ptr(), C.int(int(style)), objc.ExtractPtr(locale))
 	return MakeString(result_).String()
 }
@@ -142,22 +139,22 @@ func TimeZone_KnownTimeZoneNames() []string {
 	return goResult_
 }
 
-func (n *NSTimeZone) Name() string {
+func (n NSTimeZone) Name() string {
 	result_ := C.C_NSTimeZone_Name(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSTimeZone) Abbreviation() string {
+func (n NSTimeZone) Abbreviation() string {
 	result_ := C.C_NSTimeZone_Abbreviation(n.Ptr())
 	return MakeString(result_).String()
 }
 
-func (n *NSTimeZone) SecondsFromGMT() int {
+func (n NSTimeZone) SecondsFromGMT() int {
 	result_ := C.C_NSTimeZone_SecondsFromGMT(n.Ptr())
 	return int(result_)
 }
 
-func (n *NSTimeZone) Data() []byte {
+func (n NSTimeZone) Data() []byte {
 	result_ := C.C_NSTimeZone_Data(n.Ptr())
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
@@ -171,22 +168,22 @@ func TimeZoneDataVersion() string {
 	return MakeString(result_).String()
 }
 
-func (n *NSTimeZone) IsDaylightSavingTime() bool {
+func (n NSTimeZone) IsDaylightSavingTime() bool {
 	result_ := C.C_NSTimeZone_IsDaylightSavingTime(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSTimeZone) DaylightSavingTimeOffset() TimeInterval {
+func (n NSTimeZone) DaylightSavingTimeOffset() TimeInterval {
 	result_ := C.C_NSTimeZone_DaylightSavingTimeOffset(n.Ptr())
 	return TimeInterval(float64(result_))
 }
 
-func (n *NSTimeZone) NextDaylightSavingTimeTransition() Date {
+func (n NSTimeZone) NextDaylightSavingTimeTransition() Date {
 	result_ := C.C_NSTimeZone_NextDaylightSavingTimeTransition(n.Ptr())
 	return MakeDate(result_)
 }
 
-func (n *NSTimeZone) Description() string {
+func (n NSTimeZone) Description() string {
 	result_ := C.C_NSTimeZone_Description(n.Ptr())
 	return MakeString(result_).String()
 }

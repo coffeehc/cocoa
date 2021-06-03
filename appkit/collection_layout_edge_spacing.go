@@ -19,16 +19,13 @@ type NSCollectionLayoutEdgeSpacing struct {
 	objc.NSObject
 }
 
-func MakeCollectionLayoutEdgeSpacing(ptr unsafe.Pointer) *NSCollectionLayoutEdgeSpacing {
-	if ptr == nil {
-		return nil
-	}
-	return &NSCollectionLayoutEdgeSpacing{
-		NSObject: *objc.MakeObject(ptr),
+func MakeCollectionLayoutEdgeSpacing(ptr unsafe.Pointer) NSCollectionLayoutEdgeSpacing {
+	return NSCollectionLayoutEdgeSpacing{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocCollectionLayoutEdgeSpacing() *NSCollectionLayoutEdgeSpacing {
+func AllocCollectionLayoutEdgeSpacing() NSCollectionLayoutEdgeSpacing {
 	return MakeCollectionLayoutEdgeSpacing(C.C_CollectionLayoutEdgeSpacing_Alloc())
 }
 
@@ -37,22 +34,22 @@ func CollectionLayoutEdgeSpacing_SpacingForLeading_Top_Trailing_Bottom(leading C
 	return MakeCollectionLayoutEdgeSpacing(result_)
 }
 
-func (n *NSCollectionLayoutEdgeSpacing) Leading() CollectionLayoutSpacing {
+func (n NSCollectionLayoutEdgeSpacing) Leading() CollectionLayoutSpacing {
 	result_ := C.C_NSCollectionLayoutEdgeSpacing_Leading(n.Ptr())
 	return MakeCollectionLayoutSpacing(result_)
 }
 
-func (n *NSCollectionLayoutEdgeSpacing) Top() CollectionLayoutSpacing {
+func (n NSCollectionLayoutEdgeSpacing) Top() CollectionLayoutSpacing {
 	result_ := C.C_NSCollectionLayoutEdgeSpacing_Top(n.Ptr())
 	return MakeCollectionLayoutSpacing(result_)
 }
 
-func (n *NSCollectionLayoutEdgeSpacing) Trailing() CollectionLayoutSpacing {
+func (n NSCollectionLayoutEdgeSpacing) Trailing() CollectionLayoutSpacing {
 	result_ := C.C_NSCollectionLayoutEdgeSpacing_Trailing(n.Ptr())
 	return MakeCollectionLayoutSpacing(result_)
 }
 
-func (n *NSCollectionLayoutEdgeSpacing) Bottom() CollectionLayoutSpacing {
+func (n NSCollectionLayoutEdgeSpacing) Bottom() CollectionLayoutSpacing {
 	result_ := C.C_NSCollectionLayoutEdgeSpacing_Bottom(n.Ptr())
 	return MakeCollectionLayoutSpacing(result_)
 }

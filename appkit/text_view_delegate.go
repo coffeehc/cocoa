@@ -27,7 +27,7 @@ type TextViewDelegate struct {
 	TextView_ShouldSetSpellingState_Range                             func(textView TextView, value int, affectedCharRange foundation.Range) int
 	TextView_DraggedCell_InRect_Event_AtIndex                         func(view TextView, cell objc.Object, rect foundation.Rect, event Event, charIndex uint)
 	TextView_WillShowSharingServicePicker_ForItems                    func(textView TextView, servicePicker SharingServicePicker, items []objc.Object) SharingServicePicker
-	TextView_DoCommandBySelector                                      func(textView TextView, commandSelector *objc.Selector) bool
+	TextView_DoCommandBySelector                                      func(textView TextView, commandSelector objc.Selector) bool
 	TextView_Menu_ForEvent_AtIndex                                    func(view TextView, menu Menu, event Event, charIndex uint) Menu
 	TextView_Candidates_ForSelectedRange                              func(textView TextView, candidates []foundation.TextCheckingResult, selectedRange foundation.Range) []foundation.TextCheckingResult
 	TextView_CandidatesForSelectedRange                               func(textView TextView, selectedRange foundation.Range) []objc.Object
@@ -204,7 +204,7 @@ func textViewDelegate_TextView_WillShowSharingServicePicker_ForItems(id int64, t
 //export textViewDelegate_TextView_DoCommandBySelector
 func textViewDelegate_TextView_DoCommandBySelector(id int64, textView unsafe.Pointer, commandSelector unsafe.Pointer) C.bool {
 	delegate := resources.Get(id).(*TextViewDelegate)
-	result := delegate.TextView_DoCommandBySelector(MakeTextView(textView), objc.MakeSelector(commandSelector))
+	result := delegate.TextView_DoCommandBySelector(MakeTextView(textView), objc.Selector(commandSelector))
 	return C.bool(result)
 }
 
@@ -304,7 +304,7 @@ func textViewDelegate_TextDidEndEditing(id int64, notification unsafe.Pointer) {
 
 //export TextViewDelegate_RespondsTo
 func TextViewDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
-	sel := objc.MakeSelector(selectorPtr)
+	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
 	delegate := resources.Get(id).(*TextViewDelegate)
 	switch selName {

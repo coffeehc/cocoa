@@ -52,29 +52,26 @@ type NSCollectionViewLayout struct {
 	objc.NSObject
 }
 
-func MakeCollectionViewLayout(ptr unsafe.Pointer) *NSCollectionViewLayout {
-	if ptr == nil {
-		return nil
-	}
-	return &NSCollectionViewLayout{
-		NSObject: *objc.MakeObject(ptr),
+func MakeCollectionViewLayout(ptr unsafe.Pointer) NSCollectionViewLayout {
+	return NSCollectionViewLayout{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocCollectionViewLayout() *NSCollectionViewLayout {
+func AllocCollectionViewLayout() NSCollectionViewLayout {
 	return MakeCollectionViewLayout(C.C_CollectionViewLayout_Alloc())
 }
 
-func (n *NSCollectionViewLayout) Init() CollectionViewLayout {
+func (n NSCollectionViewLayout) Init() CollectionViewLayout {
 	result_ := C.C_NSCollectionViewLayout_Init(n.Ptr())
 	return MakeCollectionViewLayout(result_)
 }
 
-func (n *NSCollectionViewLayout) PrepareLayout() {
+func (n NSCollectionViewLayout) PrepareLayout() {
 	C.C_NSCollectionViewLayout_PrepareLayout(n.Ptr())
 }
 
-func (n *NSCollectionViewLayout) LayoutAttributesForElementsInRect(rect foundation.Rect) []CollectionViewLayoutAttributes {
+func (n NSCollectionViewLayout) LayoutAttributesForElementsInRect(rect foundation.Rect) []CollectionViewLayoutAttributes {
 	result_ := C.C_NSCollectionViewLayout_LayoutAttributesForElementsInRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -85,42 +82,42 @@ func (n *NSCollectionViewLayout) LayoutAttributesForElementsInRect(rect foundati
 	return goResult_
 }
 
-func (n *NSCollectionViewLayout) LayoutAttributesForItemAtIndexPath(indexPath foundation.IndexPath) CollectionViewLayoutAttributes {
+func (n NSCollectionViewLayout) LayoutAttributesForItemAtIndexPath(indexPath foundation.IndexPath) CollectionViewLayoutAttributes {
 	result_ := C.C_NSCollectionViewLayout_LayoutAttributesForItemAtIndexPath(n.Ptr(), objc.ExtractPtr(indexPath))
 	return MakeCollectionViewLayoutAttributes(result_)
 }
 
-func (n *NSCollectionViewLayout) LayoutAttributesForSupplementaryViewOfKind_AtIndexPath(elementKind CollectionViewSupplementaryElementKind, indexPath foundation.IndexPath) CollectionViewLayoutAttributes {
+func (n NSCollectionViewLayout) LayoutAttributesForSupplementaryViewOfKind_AtIndexPath(elementKind CollectionViewSupplementaryElementKind, indexPath foundation.IndexPath) CollectionViewLayoutAttributes {
 	result_ := C.C_NSCollectionViewLayout_LayoutAttributesForSupplementaryViewOfKind_AtIndexPath(n.Ptr(), foundation.NewString(string(elementKind)).Ptr(), objc.ExtractPtr(indexPath))
 	return MakeCollectionViewLayoutAttributes(result_)
 }
 
-func (n *NSCollectionViewLayout) LayoutAttributesForDecorationViewOfKind_AtIndexPath(elementKind CollectionViewDecorationElementKind, indexPath foundation.IndexPath) CollectionViewLayoutAttributes {
+func (n NSCollectionViewLayout) LayoutAttributesForDecorationViewOfKind_AtIndexPath(elementKind CollectionViewDecorationElementKind, indexPath foundation.IndexPath) CollectionViewLayoutAttributes {
 	result_ := C.C_NSCollectionViewLayout_LayoutAttributesForDecorationViewOfKind_AtIndexPath(n.Ptr(), foundation.NewString(string(elementKind)).Ptr(), objc.ExtractPtr(indexPath))
 	return MakeCollectionViewLayoutAttributes(result_)
 }
 
-func (n *NSCollectionViewLayout) LayoutAttributesForDropTargetAtPoint(pointInCollectionView foundation.Point) CollectionViewLayoutAttributes {
+func (n NSCollectionViewLayout) LayoutAttributesForDropTargetAtPoint(pointInCollectionView foundation.Point) CollectionViewLayoutAttributes {
 	result_ := C.C_NSCollectionViewLayout_LayoutAttributesForDropTargetAtPoint(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(pointInCollectionView))))
 	return MakeCollectionViewLayoutAttributes(result_)
 }
 
-func (n *NSCollectionViewLayout) LayoutAttributesForInterItemGapBeforeIndexPath(indexPath foundation.IndexPath) CollectionViewLayoutAttributes {
+func (n NSCollectionViewLayout) LayoutAttributesForInterItemGapBeforeIndexPath(indexPath foundation.IndexPath) CollectionViewLayoutAttributes {
 	result_ := C.C_NSCollectionViewLayout_LayoutAttributesForInterItemGapBeforeIndexPath(n.Ptr(), objc.ExtractPtr(indexPath))
 	return MakeCollectionViewLayoutAttributes(result_)
 }
 
-func (n *NSCollectionViewLayout) TargetContentOffsetForProposedContentOffset(proposedContentOffset foundation.Point) foundation.Point {
+func (n NSCollectionViewLayout) TargetContentOffsetForProposedContentOffset(proposedContentOffset foundation.Point) foundation.Point {
 	result_ := C.C_NSCollectionViewLayout_TargetContentOffsetForProposedContentOffset(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(proposedContentOffset))))
 	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
 }
 
-func (n *NSCollectionViewLayout) TargetContentOffsetForProposedContentOffset_WithScrollingVelocity(proposedContentOffset foundation.Point, velocity foundation.Point) foundation.Point {
+func (n NSCollectionViewLayout) TargetContentOffsetForProposedContentOffset_WithScrollingVelocity(proposedContentOffset foundation.Point, velocity foundation.Point) foundation.Point {
 	result_ := C.C_NSCollectionViewLayout_TargetContentOffsetForProposedContentOffset_WithScrollingVelocity(n.Ptr(), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(proposedContentOffset))), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(velocity))))
 	return foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&result_)))
 }
 
-func (n *NSCollectionViewLayout) PrepareForCollectionViewUpdates(updateItems []CollectionViewUpdateItem) {
+func (n NSCollectionViewLayout) PrepareForCollectionViewUpdates(updateItems []CollectionViewUpdateItem) {
 	cUpdateItemsData := make([]unsafe.Pointer, len(updateItems))
 	for idx, v := range updateItems {
 		cUpdateItemsData[idx] = objc.ExtractPtr(v)
@@ -129,118 +126,118 @@ func (n *NSCollectionViewLayout) PrepareForCollectionViewUpdates(updateItems []C
 	C.C_NSCollectionViewLayout_PrepareForCollectionViewUpdates(n.Ptr(), cUpdateItems)
 }
 
-func (n *NSCollectionViewLayout) FinalizeCollectionViewUpdates() {
+func (n NSCollectionViewLayout) FinalizeCollectionViewUpdates() {
 	C.C_NSCollectionViewLayout_FinalizeCollectionViewUpdates(n.Ptr())
 }
 
-func (n *NSCollectionViewLayout) IndexPathsToInsertForSupplementaryViewOfKind(elementKind CollectionViewSupplementaryElementKind) foundation.Set {
+func (n NSCollectionViewLayout) IndexPathsToInsertForSupplementaryViewOfKind(elementKind CollectionViewSupplementaryElementKind) foundation.Set {
 	result_ := C.C_NSCollectionViewLayout_IndexPathsToInsertForSupplementaryViewOfKind(n.Ptr(), foundation.NewString(string(elementKind)).Ptr())
 	return foundation.MakeSet(result_)
 }
 
-func (n *NSCollectionViewLayout) IndexPathsToInsertForDecorationViewOfKind(elementKind CollectionViewDecorationElementKind) foundation.Set {
+func (n NSCollectionViewLayout) IndexPathsToInsertForDecorationViewOfKind(elementKind CollectionViewDecorationElementKind) foundation.Set {
 	result_ := C.C_NSCollectionViewLayout_IndexPathsToInsertForDecorationViewOfKind(n.Ptr(), foundation.NewString(string(elementKind)).Ptr())
 	return foundation.MakeSet(result_)
 }
 
-func (n *NSCollectionViewLayout) InitialLayoutAttributesForAppearingItemAtIndexPath(itemIndexPath foundation.IndexPath) CollectionViewLayoutAttributes {
+func (n NSCollectionViewLayout) InitialLayoutAttributesForAppearingItemAtIndexPath(itemIndexPath foundation.IndexPath) CollectionViewLayoutAttributes {
 	result_ := C.C_NSCollectionViewLayout_InitialLayoutAttributesForAppearingItemAtIndexPath(n.Ptr(), objc.ExtractPtr(itemIndexPath))
 	return MakeCollectionViewLayoutAttributes(result_)
 }
 
-func (n *NSCollectionViewLayout) InitialLayoutAttributesForAppearingSupplementaryElementOfKind_AtIndexPath(elementKind CollectionViewSupplementaryElementKind, elementIndexPath foundation.IndexPath) CollectionViewLayoutAttributes {
+func (n NSCollectionViewLayout) InitialLayoutAttributesForAppearingSupplementaryElementOfKind_AtIndexPath(elementKind CollectionViewSupplementaryElementKind, elementIndexPath foundation.IndexPath) CollectionViewLayoutAttributes {
 	result_ := C.C_NSCollectionViewLayout_InitialLayoutAttributesForAppearingSupplementaryElementOfKind_AtIndexPath(n.Ptr(), foundation.NewString(string(elementKind)).Ptr(), objc.ExtractPtr(elementIndexPath))
 	return MakeCollectionViewLayoutAttributes(result_)
 }
 
-func (n *NSCollectionViewLayout) InitialLayoutAttributesForAppearingDecorationElementOfKind_AtIndexPath(elementKind CollectionViewDecorationElementKind, decorationIndexPath foundation.IndexPath) CollectionViewLayoutAttributes {
+func (n NSCollectionViewLayout) InitialLayoutAttributesForAppearingDecorationElementOfKind_AtIndexPath(elementKind CollectionViewDecorationElementKind, decorationIndexPath foundation.IndexPath) CollectionViewLayoutAttributes {
 	result_ := C.C_NSCollectionViewLayout_InitialLayoutAttributesForAppearingDecorationElementOfKind_AtIndexPath(n.Ptr(), foundation.NewString(string(elementKind)).Ptr(), objc.ExtractPtr(decorationIndexPath))
 	return MakeCollectionViewLayoutAttributes(result_)
 }
 
-func (n *NSCollectionViewLayout) IndexPathsToDeleteForSupplementaryViewOfKind(elementKind CollectionViewSupplementaryElementKind) foundation.Set {
+func (n NSCollectionViewLayout) IndexPathsToDeleteForSupplementaryViewOfKind(elementKind CollectionViewSupplementaryElementKind) foundation.Set {
 	result_ := C.C_NSCollectionViewLayout_IndexPathsToDeleteForSupplementaryViewOfKind(n.Ptr(), foundation.NewString(string(elementKind)).Ptr())
 	return foundation.MakeSet(result_)
 }
 
-func (n *NSCollectionViewLayout) IndexPathsToDeleteForDecorationViewOfKind(elementKind CollectionViewDecorationElementKind) foundation.Set {
+func (n NSCollectionViewLayout) IndexPathsToDeleteForDecorationViewOfKind(elementKind CollectionViewDecorationElementKind) foundation.Set {
 	result_ := C.C_NSCollectionViewLayout_IndexPathsToDeleteForDecorationViewOfKind(n.Ptr(), foundation.NewString(string(elementKind)).Ptr())
 	return foundation.MakeSet(result_)
 }
 
-func (n *NSCollectionViewLayout) FinalLayoutAttributesForDisappearingItemAtIndexPath(itemIndexPath foundation.IndexPath) CollectionViewLayoutAttributes {
+func (n NSCollectionViewLayout) FinalLayoutAttributesForDisappearingItemAtIndexPath(itemIndexPath foundation.IndexPath) CollectionViewLayoutAttributes {
 	result_ := C.C_NSCollectionViewLayout_FinalLayoutAttributesForDisappearingItemAtIndexPath(n.Ptr(), objc.ExtractPtr(itemIndexPath))
 	return MakeCollectionViewLayoutAttributes(result_)
 }
 
-func (n *NSCollectionViewLayout) FinalLayoutAttributesForDisappearingSupplementaryElementOfKind_AtIndexPath(elementKind CollectionViewSupplementaryElementKind, elementIndexPath foundation.IndexPath) CollectionViewLayoutAttributes {
+func (n NSCollectionViewLayout) FinalLayoutAttributesForDisappearingSupplementaryElementOfKind_AtIndexPath(elementKind CollectionViewSupplementaryElementKind, elementIndexPath foundation.IndexPath) CollectionViewLayoutAttributes {
 	result_ := C.C_NSCollectionViewLayout_FinalLayoutAttributesForDisappearingSupplementaryElementOfKind_AtIndexPath(n.Ptr(), foundation.NewString(string(elementKind)).Ptr(), objc.ExtractPtr(elementIndexPath))
 	return MakeCollectionViewLayoutAttributes(result_)
 }
 
-func (n *NSCollectionViewLayout) FinalLayoutAttributesForDisappearingDecorationElementOfKind_AtIndexPath(elementKind CollectionViewDecorationElementKind, decorationIndexPath foundation.IndexPath) CollectionViewLayoutAttributes {
+func (n NSCollectionViewLayout) FinalLayoutAttributesForDisappearingDecorationElementOfKind_AtIndexPath(elementKind CollectionViewDecorationElementKind, decorationIndexPath foundation.IndexPath) CollectionViewLayoutAttributes {
 	result_ := C.C_NSCollectionViewLayout_FinalLayoutAttributesForDisappearingDecorationElementOfKind_AtIndexPath(n.Ptr(), foundation.NewString(string(elementKind)).Ptr(), objc.ExtractPtr(decorationIndexPath))
 	return MakeCollectionViewLayoutAttributes(result_)
 }
 
-func (n *NSCollectionViewLayout) InvalidateLayout() {
+func (n NSCollectionViewLayout) InvalidateLayout() {
 	C.C_NSCollectionViewLayout_InvalidateLayout(n.Ptr())
 }
 
-func (n *NSCollectionViewLayout) InvalidateLayoutWithContext(context CollectionViewLayoutInvalidationContext) {
+func (n NSCollectionViewLayout) InvalidateLayoutWithContext(context CollectionViewLayoutInvalidationContext) {
 	C.C_NSCollectionViewLayout_InvalidateLayoutWithContext(n.Ptr(), objc.ExtractPtr(context))
 }
 
-func (n *NSCollectionViewLayout) ShouldInvalidateLayoutForBoundsChange(newBounds foundation.Rect) bool {
+func (n NSCollectionViewLayout) ShouldInvalidateLayoutForBoundsChange(newBounds foundation.Rect) bool {
 	result_ := C.C_NSCollectionViewLayout_ShouldInvalidateLayoutForBoundsChange(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(newBounds))))
 	return bool(result_)
 }
 
-func (n *NSCollectionViewLayout) ShouldInvalidateLayoutForPreferredLayoutAttributes_WithOriginalAttributes(preferredAttributes CollectionViewLayoutAttributes, originalAttributes CollectionViewLayoutAttributes) bool {
+func (n NSCollectionViewLayout) ShouldInvalidateLayoutForPreferredLayoutAttributes_WithOriginalAttributes(preferredAttributes CollectionViewLayoutAttributes, originalAttributes CollectionViewLayoutAttributes) bool {
 	result_ := C.C_NSCollectionViewLayout_ShouldInvalidateLayoutForPreferredLayoutAttributes_WithOriginalAttributes(n.Ptr(), objc.ExtractPtr(preferredAttributes), objc.ExtractPtr(originalAttributes))
 	return bool(result_)
 }
 
-func (n *NSCollectionViewLayout) InvalidationContextForBoundsChange(newBounds foundation.Rect) CollectionViewLayoutInvalidationContext {
+func (n NSCollectionViewLayout) InvalidationContextForBoundsChange(newBounds foundation.Rect) CollectionViewLayoutInvalidationContext {
 	result_ := C.C_NSCollectionViewLayout_InvalidationContextForBoundsChange(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(newBounds))))
 	return MakeCollectionViewLayoutInvalidationContext(result_)
 }
 
-func (n *NSCollectionViewLayout) InvalidationContextForPreferredLayoutAttributes_WithOriginalAttributes(preferredAttributes CollectionViewLayoutAttributes, originalAttributes CollectionViewLayoutAttributes) CollectionViewLayoutInvalidationContext {
+func (n NSCollectionViewLayout) InvalidationContextForPreferredLayoutAttributes_WithOriginalAttributes(preferredAttributes CollectionViewLayoutAttributes, originalAttributes CollectionViewLayoutAttributes) CollectionViewLayoutInvalidationContext {
 	result_ := C.C_NSCollectionViewLayout_InvalidationContextForPreferredLayoutAttributes_WithOriginalAttributes(n.Ptr(), objc.ExtractPtr(preferredAttributes), objc.ExtractPtr(originalAttributes))
 	return MakeCollectionViewLayoutInvalidationContext(result_)
 }
 
-func (n *NSCollectionViewLayout) PrepareForAnimatedBoundsChange(oldBounds foundation.Rect) {
+func (n NSCollectionViewLayout) PrepareForAnimatedBoundsChange(oldBounds foundation.Rect) {
 	C.C_NSCollectionViewLayout_PrepareForAnimatedBoundsChange(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(oldBounds))))
 }
 
-func (n *NSCollectionViewLayout) FinalizeAnimatedBoundsChange() {
+func (n NSCollectionViewLayout) FinalizeAnimatedBoundsChange() {
 	C.C_NSCollectionViewLayout_FinalizeAnimatedBoundsChange(n.Ptr())
 }
 
-func (n *NSCollectionViewLayout) RegisterNib_ForDecorationViewOfKind(nib Nib, elementKind CollectionViewDecorationElementKind) {
+func (n NSCollectionViewLayout) RegisterNib_ForDecorationViewOfKind(nib Nib, elementKind CollectionViewDecorationElementKind) {
 	C.C_NSCollectionViewLayout_RegisterNib_ForDecorationViewOfKind(n.Ptr(), objc.ExtractPtr(nib), foundation.NewString(string(elementKind)).Ptr())
 }
 
-func (n *NSCollectionViewLayout) PrepareForTransitionFromLayout(oldLayout CollectionViewLayout) {
+func (n NSCollectionViewLayout) PrepareForTransitionFromLayout(oldLayout CollectionViewLayout) {
 	C.C_NSCollectionViewLayout_PrepareForTransitionFromLayout(n.Ptr(), objc.ExtractPtr(oldLayout))
 }
 
-func (n *NSCollectionViewLayout) PrepareForTransitionToLayout(newLayout CollectionViewLayout) {
+func (n NSCollectionViewLayout) PrepareForTransitionToLayout(newLayout CollectionViewLayout) {
 	C.C_NSCollectionViewLayout_PrepareForTransitionToLayout(n.Ptr(), objc.ExtractPtr(newLayout))
 }
 
-func (n *NSCollectionViewLayout) FinalizeLayoutTransition() {
+func (n NSCollectionViewLayout) FinalizeLayoutTransition() {
 	C.C_NSCollectionViewLayout_FinalizeLayoutTransition(n.Ptr())
 }
 
-func (n *NSCollectionViewLayout) CollectionView() CollectionView {
+func (n NSCollectionViewLayout) CollectionView() CollectionView {
 	result_ := C.C_NSCollectionViewLayout_CollectionView(n.Ptr())
 	return MakeCollectionView(result_)
 }
 
-func (n *NSCollectionViewLayout) CollectionViewContentSize() foundation.Size {
+func (n NSCollectionViewLayout) CollectionViewContentSize() foundation.Size {
 	result_ := C.C_NSCollectionViewLayout_CollectionViewContentSize(n.Ptr())
 	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }

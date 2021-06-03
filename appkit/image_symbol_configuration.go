@@ -17,20 +17,17 @@ type NSImageSymbolConfiguration struct {
 	objc.NSObject
 }
 
-func MakeImageSymbolConfiguration(ptr unsafe.Pointer) *NSImageSymbolConfiguration {
-	if ptr == nil {
-		return nil
-	}
-	return &NSImageSymbolConfiguration{
-		NSObject: *objc.MakeObject(ptr),
+func MakeImageSymbolConfiguration(ptr unsafe.Pointer) NSImageSymbolConfiguration {
+	return NSImageSymbolConfiguration{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocImageSymbolConfiguration() *NSImageSymbolConfiguration {
+func AllocImageSymbolConfiguration() NSImageSymbolConfiguration {
 	return MakeImageSymbolConfiguration(C.C_ImageSymbolConfiguration_Alloc())
 }
 
-func (n *NSImageSymbolConfiguration) Init() ImageSymbolConfiguration {
+func (n NSImageSymbolConfiguration) Init() ImageSymbolConfiguration {
 	result_ := C.C_NSImageSymbolConfiguration_Init(n.Ptr())
 	return MakeImageSymbolConfiguration(result_)
 }

@@ -3,44 +3,54 @@ package appkit
 // #include "layout_x_axis_anchor.h"
 import "C"
 import (
+	"github.com/hsiafan/cocoa/coregraphics"
+	"github.com/hsiafan/cocoa/objc"
 	"unsafe"
 )
 
 type LayoutXAxisAnchor interface {
 	LayoutAnchor
-	ConstraintEqualToSystemSpacingAfterAnchor(anchor LayoutXAxisAnchor, multiplier float64) LayoutConstraint
-	ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchor(anchor LayoutXAxisAnchor, multiplier float64) LayoutConstraint
-	ConstraintLessThanOrEqualToSystemSpacingAfterAnchor(anchor LayoutXAxisAnchor, multiplier float64) LayoutConstraint
+	ConstraintEqualToSystemSpacingAfterAnchor_Multiplier(anchor LayoutXAxisAnchor, multiplier coregraphics.Float) LayoutConstraint
+	ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchor_Multiplier(anchor LayoutXAxisAnchor, multiplier coregraphics.Float) LayoutConstraint
+	ConstraintLessThanOrEqualToSystemSpacingAfterAnchor_Multiplier(anchor LayoutXAxisAnchor, multiplier coregraphics.Float) LayoutConstraint
 	AnchorWithOffsetToAnchor(otherAnchor LayoutXAxisAnchor) LayoutDimension
 }
-
-var _ LayoutXAxisAnchor = (*NSLayoutXAxisAnchor)(nil)
 
 type NSLayoutXAxisAnchor struct {
 	NSLayoutAnchor
 }
 
-func MakeLayoutXAxisAnchor(ptr unsafe.Pointer) *NSLayoutXAxisAnchor {
-	if ptr == nil {
-		return nil
-	}
-	return &NSLayoutXAxisAnchor{
-		NSLayoutAnchor: *MakeLayoutAnchor(ptr),
+func MakeLayoutXAxisAnchor(ptr unsafe.Pointer) NSLayoutXAxisAnchor {
+	return NSLayoutXAxisAnchor{
+		NSLayoutAnchor: MakeLayoutAnchor(ptr),
 	}
 }
 
-func (l *NSLayoutXAxisAnchor) ConstraintEqualToSystemSpacingAfterAnchor(anchor LayoutXAxisAnchor, multiplier float64) LayoutConstraint {
-	return MakeLayoutConstraint(C.LayoutXAxisAnchor_ConstraintEqualToSystemSpacingAfterAnchor(l.Ptr(), toPointer(anchor), C.double(multiplier)))
+func AllocLayoutXAxisAnchor() NSLayoutXAxisAnchor {
+	return MakeLayoutXAxisAnchor(C.C_LayoutXAxisAnchor_Alloc())
 }
 
-func (l *NSLayoutXAxisAnchor) ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchor(anchor LayoutXAxisAnchor, multiplier float64) LayoutConstraint {
-	return MakeLayoutConstraint(C.LayoutXAxisAnchor_ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchor(l.Ptr(), toPointer(anchor), C.double(multiplier)))
+func (n NSLayoutXAxisAnchor) Init() LayoutXAxisAnchor {
+	result_ := C.C_NSLayoutXAxisAnchor_Init(n.Ptr())
+	return MakeLayoutXAxisAnchor(result_)
 }
 
-func (l *NSLayoutXAxisAnchor) ConstraintLessThanOrEqualToSystemSpacingAfterAnchor(anchor LayoutXAxisAnchor, multiplier float64) LayoutConstraint {
-	return MakeLayoutConstraint(C.LayoutXAxisAnchor_ConstraintLessThanOrEqualToSystemSpacingAfterAnchor(l.Ptr(), toPointer(anchor), C.double(multiplier)))
+func (n NSLayoutXAxisAnchor) ConstraintEqualToSystemSpacingAfterAnchor_Multiplier(anchor LayoutXAxisAnchor, multiplier coregraphics.Float) LayoutConstraint {
+	result_ := C.C_NSLayoutXAxisAnchor_ConstraintEqualToSystemSpacingAfterAnchor_Multiplier(n.Ptr(), objc.ExtractPtr(anchor), C.double(float64(multiplier)))
+	return MakeLayoutConstraint(result_)
 }
 
-func (l *NSLayoutXAxisAnchor) AnchorWithOffsetToAnchor(otherAnchor LayoutXAxisAnchor) LayoutDimension {
-	return MakeLayoutDimension(C.LayoutXAxisAnchor_AnchorWithOffsetToAnchor(l.Ptr(), toPointer(otherAnchor)))
+func (n NSLayoutXAxisAnchor) ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchor_Multiplier(anchor LayoutXAxisAnchor, multiplier coregraphics.Float) LayoutConstraint {
+	result_ := C.C_NSLayoutXAxisAnchor_ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchor_Multiplier(n.Ptr(), objc.ExtractPtr(anchor), C.double(float64(multiplier)))
+	return MakeLayoutConstraint(result_)
+}
+
+func (n NSLayoutXAxisAnchor) ConstraintLessThanOrEqualToSystemSpacingAfterAnchor_Multiplier(anchor LayoutXAxisAnchor, multiplier coregraphics.Float) LayoutConstraint {
+	result_ := C.C_NSLayoutXAxisAnchor_ConstraintLessThanOrEqualToSystemSpacingAfterAnchor_Multiplier(n.Ptr(), objc.ExtractPtr(anchor), C.double(float64(multiplier)))
+	return MakeLayoutConstraint(result_)
+}
+
+func (n NSLayoutXAxisAnchor) AnchorWithOffsetToAnchor(otherAnchor LayoutXAxisAnchor) LayoutDimension {
+	result_ := C.C_NSLayoutXAxisAnchor_AnchorWithOffsetToAnchor(n.Ptr(), objc.ExtractPtr(otherAnchor))
+	return MakeLayoutDimension(result_)
 }

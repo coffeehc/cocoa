@@ -27,55 +27,52 @@ type NSLayoutAnchor struct {
 	objc.NSObject
 }
 
-func MakeLayoutAnchor(ptr unsafe.Pointer) *NSLayoutAnchor {
-	if ptr == nil {
-		return nil
-	}
-	return &NSLayoutAnchor{
-		NSObject: *objc.MakeObject(ptr),
+func MakeLayoutAnchor(ptr unsafe.Pointer) NSLayoutAnchor {
+	return NSLayoutAnchor{
+		NSObject: objc.MakeObject(ptr),
 	}
 }
 
-func AllocLayoutAnchor() *NSLayoutAnchor {
+func AllocLayoutAnchor() NSLayoutAnchor {
 	return MakeLayoutAnchor(C.C_LayoutAnchor_Alloc())
 }
 
-func (n *NSLayoutAnchor) Init() LayoutAnchor {
+func (n NSLayoutAnchor) Init() LayoutAnchor {
 	result_ := C.C_NSLayoutAnchor_Init(n.Ptr())
 	return MakeLayoutAnchor(result_)
 }
 
-func (n *NSLayoutAnchor) ConstraintEqualToAnchor(anchor LayoutAnchor) LayoutConstraint {
+func (n NSLayoutAnchor) ConstraintEqualToAnchor(anchor LayoutAnchor) LayoutConstraint {
 	result_ := C.C_NSLayoutAnchor_ConstraintEqualToAnchor(n.Ptr(), objc.ExtractPtr(anchor))
 	return MakeLayoutConstraint(result_)
 }
 
-func (n *NSLayoutAnchor) ConstraintEqualToAnchor_Constant(anchor LayoutAnchor, c coregraphics.Float) LayoutConstraint {
+func (n NSLayoutAnchor) ConstraintEqualToAnchor_Constant(anchor LayoutAnchor, c coregraphics.Float) LayoutConstraint {
 	result_ := C.C_NSLayoutAnchor_ConstraintEqualToAnchor_Constant(n.Ptr(), objc.ExtractPtr(anchor), C.double(float64(c)))
 	return MakeLayoutConstraint(result_)
 }
 
-func (n *NSLayoutAnchor) ConstraintGreaterThanOrEqualToAnchor(anchor LayoutAnchor) LayoutConstraint {
+func (n NSLayoutAnchor) ConstraintGreaterThanOrEqualToAnchor(anchor LayoutAnchor) LayoutConstraint {
 	result_ := C.C_NSLayoutAnchor_ConstraintGreaterThanOrEqualToAnchor(n.Ptr(), objc.ExtractPtr(anchor))
 	return MakeLayoutConstraint(result_)
 }
 
-func (n *NSLayoutAnchor) ConstraintGreaterThanOrEqualToAnchor_Constant(anchor LayoutAnchor, c coregraphics.Float) LayoutConstraint {
+func (n NSLayoutAnchor) ConstraintGreaterThanOrEqualToAnchor_Constant(anchor LayoutAnchor, c coregraphics.Float) LayoutConstraint {
 	result_ := C.C_NSLayoutAnchor_ConstraintGreaterThanOrEqualToAnchor_Constant(n.Ptr(), objc.ExtractPtr(anchor), C.double(float64(c)))
 	return MakeLayoutConstraint(result_)
 }
 
-func (n *NSLayoutAnchor) ConstraintLessThanOrEqualToAnchor(anchor LayoutAnchor) LayoutConstraint {
+func (n NSLayoutAnchor) ConstraintLessThanOrEqualToAnchor(anchor LayoutAnchor) LayoutConstraint {
 	result_ := C.C_NSLayoutAnchor_ConstraintLessThanOrEqualToAnchor(n.Ptr(), objc.ExtractPtr(anchor))
 	return MakeLayoutConstraint(result_)
 }
 
-func (n *NSLayoutAnchor) ConstraintLessThanOrEqualToAnchor_Constant(anchor LayoutAnchor, c coregraphics.Float) LayoutConstraint {
+func (n NSLayoutAnchor) ConstraintLessThanOrEqualToAnchor_Constant(anchor LayoutAnchor, c coregraphics.Float) LayoutConstraint {
 	result_ := C.C_NSLayoutAnchor_ConstraintLessThanOrEqualToAnchor_Constant(n.Ptr(), objc.ExtractPtr(anchor), C.double(float64(c)))
 	return MakeLayoutConstraint(result_)
 }
 
-func (n *NSLayoutAnchor) ConstraintsAffectingLayout() []LayoutConstraint {
+func (n NSLayoutAnchor) ConstraintsAffectingLayout() []LayoutConstraint {
 	result_ := C.C_NSLayoutAnchor_ConstraintsAffectingLayout(n.Ptr())
 	defer C.free(result_.data)
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
@@ -86,17 +83,17 @@ func (n *NSLayoutAnchor) ConstraintsAffectingLayout() []LayoutConstraint {
 	return goResult_
 }
 
-func (n *NSLayoutAnchor) HasAmbiguousLayout() bool {
+func (n NSLayoutAnchor) HasAmbiguousLayout() bool {
 	result_ := C.C_NSLayoutAnchor_HasAmbiguousLayout(n.Ptr())
 	return bool(result_)
 }
 
-func (n *NSLayoutAnchor) Name() string {
+func (n NSLayoutAnchor) Name() string {
 	result_ := C.C_NSLayoutAnchor_Name(n.Ptr())
 	return foundation.MakeString(result_).String()
 }
 
-func (n *NSLayoutAnchor) Item() objc.Object {
+func (n NSLayoutAnchor) Item() objc.Object {
 	result_ := C.C_NSLayoutAnchor_Item(n.Ptr())
 	return objc.MakeObject(result_)
 }
