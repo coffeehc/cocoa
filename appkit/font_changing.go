@@ -4,6 +4,7 @@ package appkit
 import "C"
 import (
 	"github.com/hsiafan/cocoa/objc"
+	"runtime/cgo"
 	"unsafe"
 )
 
@@ -13,30 +14,29 @@ type FontChanging struct {
 }
 
 func WrapFontChanging(delegate *FontChanging) objc.Object {
-	id := resources.NextId()
-	resources.Store(id, delegate)
-	ptr := C.WrapFontChanging(C.long(id))
+	h := cgo.NewHandle(delegate)
+	ptr := C.WrapFontChanging(C.uintptr_t(h))
 	return objc.MakeObject(ptr)
 }
 
 //export fontChanging_ChangeFont
-func fontChanging_ChangeFont(id int64, sender unsafe.Pointer) {
-	delegate := resources.Get(id).(*FontChanging)
+func fontChanging_ChangeFont(hp C.uintptr_t, sender unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*FontChanging)
 	delegate.ChangeFont(MakeFontManager(sender))
 }
 
 //export fontChanging_ValidModesForFontPanel
-func fontChanging_ValidModesForFontPanel(id int64, fontPanel unsafe.Pointer) C.uint {
-	delegate := resources.Get(id).(*FontChanging)
+func fontChanging_ValidModesForFontPanel(hp C.uintptr_t, fontPanel unsafe.Pointer) C.uint {
+	delegate := cgo.Handle(hp).Value().(*FontChanging)
 	result := delegate.ValidModesForFontPanel(MakeFontPanel(fontPanel))
 	return C.uint(uint(result))
 }
 
 //export FontChanging_RespondsTo
-func FontChanging_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
+func FontChanging_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
-	delegate := resources.Get(id).(*FontChanging)
+	delegate := cgo.Handle(hp).Value().(*FontChanging)
 	switch selName {
 	case "changeFont:":
 		return delegate.ChangeFont != nil
@@ -48,6 +48,6 @@ func FontChanging_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
 }
 
 //export deleteFontChanging
-func deleteFontChanging(id int64) {
-	resources.Delete(id)
+func deleteFontChanging(hp C.uintptr_t) {
+	cgo.Handle(hp).Delete()
 }

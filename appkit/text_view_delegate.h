@@ -1,10 +1,11 @@
 #import <stdbool.h>
+#import <stdint.h>
 #import <stdlib.h>
 #import <utils.h>
 #import <Appkit/Appkit.h>
 
 @interface NSTextViewDelegateAdaptor : NSObject <NSTextViewDelegate>
-@property (assign) long goID;
+@property (assign) uintptr_t goID;
 @end
 
-void* WrapTextViewDelegate(long goID);
+void* WrapTextViewDelegate(uintptr_t goID);

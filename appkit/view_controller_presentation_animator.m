@@ -24,7 +24,7 @@
 }
 @end
 
-void* WrapViewControllerPresentationAnimator(long goID) {
+void* WrapViewControllerPresentationAnimator(uintptr_t goID) {
     NSViewControllerPresentationAnimatorAdaptor* adaptor = [[NSViewControllerPresentationAnimatorAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

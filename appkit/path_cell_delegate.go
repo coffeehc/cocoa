@@ -4,6 +4,7 @@ package appkit
 import "C"
 import (
 	"github.com/hsiafan/cocoa/objc"
+	"runtime/cgo"
 	"unsafe"
 )
 
@@ -13,29 +14,28 @@ type PathCellDelegate struct {
 }
 
 func WrapPathCellDelegate(delegate *PathCellDelegate) objc.Object {
-	id := resources.NextId()
-	resources.Store(id, delegate)
-	ptr := C.WrapPathCellDelegate(C.long(id))
+	h := cgo.NewHandle(delegate)
+	ptr := C.WrapPathCellDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)
 }
 
 //export pathCellDelegate_PathCell_WillDisplayOpenPanel
-func pathCellDelegate_PathCell_WillDisplayOpenPanel(id int64, pathCell unsafe.Pointer, openPanel unsafe.Pointer) {
-	delegate := resources.Get(id).(*PathCellDelegate)
+func pathCellDelegate_PathCell_WillDisplayOpenPanel(hp C.uintptr_t, pathCell unsafe.Pointer, openPanel unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*PathCellDelegate)
 	delegate.PathCell_WillDisplayOpenPanel(MakePathCell(pathCell), MakeOpenPanel(openPanel))
 }
 
 //export pathCellDelegate_PathCell_WillPopUpMenu
-func pathCellDelegate_PathCell_WillPopUpMenu(id int64, pathCell unsafe.Pointer, menu unsafe.Pointer) {
-	delegate := resources.Get(id).(*PathCellDelegate)
+func pathCellDelegate_PathCell_WillPopUpMenu(hp C.uintptr_t, pathCell unsafe.Pointer, menu unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*PathCellDelegate)
 	delegate.PathCell_WillPopUpMenu(MakePathCell(pathCell), MakeMenu(menu))
 }
 
 //export PathCellDelegate_RespondsTo
-func PathCellDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
+func PathCellDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
-	delegate := resources.Get(id).(*PathCellDelegate)
+	delegate := cgo.Handle(hp).Value().(*PathCellDelegate)
 	switch selName {
 	case "pathCell:willDisplayOpenPanel:":
 		return delegate.PathCell_WillDisplayOpenPanel != nil
@@ -47,6 +47,6 @@ func PathCellDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
 }
 
 //export deletePathCellDelegate
-func deletePathCellDelegate(id int64) {
-	resources.Delete(id)
+func deletePathCellDelegate(hp C.uintptr_t) {
+	cgo.Handle(hp).Delete()
 }

@@ -1,10 +1,11 @@
 #import <stdbool.h>
+#import <stdint.h>
 #import <stdlib.h>
 #import <utils.h>
 #import <Appkit/Appkit.h>
 
 @interface NSMenuDelegateAdaptor : NSObject <NSMenuDelegate>
-@property (assign) long goID;
+@property (assign) uintptr_t goID;
 @end
 
-void* WrapMenuDelegate(long goID);
+void* WrapMenuDelegate(uintptr_t goID);

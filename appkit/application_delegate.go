@@ -5,6 +5,7 @@ import "C"
 import (
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
+	"runtime/cgo"
 	"unsafe"
 )
 
@@ -48,153 +49,152 @@ type ApplicationDelegate struct {
 }
 
 func WrapApplicationDelegate(delegate *ApplicationDelegate) objc.Object {
-	id := resources.NextId()
-	resources.Store(id, delegate)
-	ptr := C.WrapApplicationDelegate(C.long(id))
+	h := cgo.NewHandle(delegate)
+	ptr := C.WrapApplicationDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)
 }
 
 //export applicationDelegate_ApplicationWillFinishLaunching
-func applicationDelegate_ApplicationWillFinishLaunching(id int64, notification unsafe.Pointer) {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_ApplicationWillFinishLaunching(hp C.uintptr_t, notification unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	delegate.ApplicationWillFinishLaunching(foundation.MakeNotification(notification))
 }
 
 //export applicationDelegate_ApplicationDidFinishLaunching
-func applicationDelegate_ApplicationDidFinishLaunching(id int64, notification unsafe.Pointer) {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_ApplicationDidFinishLaunching(hp C.uintptr_t, notification unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	delegate.ApplicationDidFinishLaunching(foundation.MakeNotification(notification))
 }
 
 //export applicationDelegate_ApplicationWillBecomeActive
-func applicationDelegate_ApplicationWillBecomeActive(id int64, notification unsafe.Pointer) {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_ApplicationWillBecomeActive(hp C.uintptr_t, notification unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	delegate.ApplicationWillBecomeActive(foundation.MakeNotification(notification))
 }
 
 //export applicationDelegate_ApplicationDidBecomeActive
-func applicationDelegate_ApplicationDidBecomeActive(id int64, notification unsafe.Pointer) {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_ApplicationDidBecomeActive(hp C.uintptr_t, notification unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	delegate.ApplicationDidBecomeActive(foundation.MakeNotification(notification))
 }
 
 //export applicationDelegate_ApplicationWillResignActive
-func applicationDelegate_ApplicationWillResignActive(id int64, notification unsafe.Pointer) {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_ApplicationWillResignActive(hp C.uintptr_t, notification unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	delegate.ApplicationWillResignActive(foundation.MakeNotification(notification))
 }
 
 //export applicationDelegate_ApplicationDidResignActive
-func applicationDelegate_ApplicationDidResignActive(id int64, notification unsafe.Pointer) {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_ApplicationDidResignActive(hp C.uintptr_t, notification unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	delegate.ApplicationDidResignActive(foundation.MakeNotification(notification))
 }
 
 //export applicationDelegate_ApplicationShouldTerminate
-func applicationDelegate_ApplicationShouldTerminate(id int64, sender unsafe.Pointer) C.uint {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_ApplicationShouldTerminate(hp C.uintptr_t, sender unsafe.Pointer) C.uint {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	result := delegate.ApplicationShouldTerminate(MakeApplication(sender))
 	return C.uint(uint(result))
 }
 
 //export applicationDelegate_ApplicationShouldTerminateAfterLastWindowClosed
-func applicationDelegate_ApplicationShouldTerminateAfterLastWindowClosed(id int64, sender unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_ApplicationShouldTerminateAfterLastWindowClosed(hp C.uintptr_t, sender unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	result := delegate.ApplicationShouldTerminateAfterLastWindowClosed(MakeApplication(sender))
 	return C.bool(result)
 }
 
 //export applicationDelegate_ApplicationWillTerminate
-func applicationDelegate_ApplicationWillTerminate(id int64, notification unsafe.Pointer) {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_ApplicationWillTerminate(hp C.uintptr_t, notification unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	delegate.ApplicationWillTerminate(foundation.MakeNotification(notification))
 }
 
 //export applicationDelegate_ApplicationWillHide
-func applicationDelegate_ApplicationWillHide(id int64, notification unsafe.Pointer) {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_ApplicationWillHide(hp C.uintptr_t, notification unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	delegate.ApplicationWillHide(foundation.MakeNotification(notification))
 }
 
 //export applicationDelegate_ApplicationDidHide
-func applicationDelegate_ApplicationDidHide(id int64, notification unsafe.Pointer) {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_ApplicationDidHide(hp C.uintptr_t, notification unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	delegate.ApplicationDidHide(foundation.MakeNotification(notification))
 }
 
 //export applicationDelegate_ApplicationWillUnhide
-func applicationDelegate_ApplicationWillUnhide(id int64, notification unsafe.Pointer) {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_ApplicationWillUnhide(hp C.uintptr_t, notification unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	delegate.ApplicationWillUnhide(foundation.MakeNotification(notification))
 }
 
 //export applicationDelegate_ApplicationDidUnhide
-func applicationDelegate_ApplicationDidUnhide(id int64, notification unsafe.Pointer) {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_ApplicationDidUnhide(hp C.uintptr_t, notification unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	delegate.ApplicationDidUnhide(foundation.MakeNotification(notification))
 }
 
 //export applicationDelegate_ApplicationWillUpdate
-func applicationDelegate_ApplicationWillUpdate(id int64, notification unsafe.Pointer) {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_ApplicationWillUpdate(hp C.uintptr_t, notification unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	delegate.ApplicationWillUpdate(foundation.MakeNotification(notification))
 }
 
 //export applicationDelegate_ApplicationDidUpdate
-func applicationDelegate_ApplicationDidUpdate(id int64, notification unsafe.Pointer) {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_ApplicationDidUpdate(hp C.uintptr_t, notification unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	delegate.ApplicationDidUpdate(foundation.MakeNotification(notification))
 }
 
 //export applicationDelegate_ApplicationShouldHandleReopen_HasVisibleWindows
-func applicationDelegate_ApplicationShouldHandleReopen_HasVisibleWindows(id int64, sender unsafe.Pointer, flag C.bool) C.bool {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_ApplicationShouldHandleReopen_HasVisibleWindows(hp C.uintptr_t, sender unsafe.Pointer, flag C.bool) C.bool {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	result := delegate.ApplicationShouldHandleReopen_HasVisibleWindows(MakeApplication(sender), bool(flag))
 	return C.bool(result)
 }
 
 //export applicationDelegate_ApplicationDockMenu
-func applicationDelegate_ApplicationDockMenu(id int64, sender unsafe.Pointer) unsafe.Pointer {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_ApplicationDockMenu(hp C.uintptr_t, sender unsafe.Pointer) unsafe.Pointer {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	result := delegate.ApplicationDockMenu(MakeApplication(sender))
 	return objc.ExtractPtr(result)
 }
 
 //export applicationDelegate_Application_WillPresentError
-func applicationDelegate_Application_WillPresentError(id int64, application unsafe.Pointer, error unsafe.Pointer) unsafe.Pointer {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_Application_WillPresentError(hp C.uintptr_t, application unsafe.Pointer, error unsafe.Pointer) unsafe.Pointer {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	result := delegate.Application_WillPresentError(MakeApplication(application), foundation.MakeError(error))
 	return objc.ExtractPtr(result)
 }
 
 //export applicationDelegate_ApplicationDidChangeScreenParameters
-func applicationDelegate_ApplicationDidChangeScreenParameters(id int64, notification unsafe.Pointer) {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_ApplicationDidChangeScreenParameters(hp C.uintptr_t, notification unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	delegate.ApplicationDidChangeScreenParameters(foundation.MakeNotification(notification))
 }
 
 //export applicationDelegate_Application_WillContinueUserActivityWithType
-func applicationDelegate_Application_WillContinueUserActivityWithType(id int64, application unsafe.Pointer, userActivityType unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_Application_WillContinueUserActivityWithType(hp C.uintptr_t, application unsafe.Pointer, userActivityType unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	result := delegate.Application_WillContinueUserActivityWithType(MakeApplication(application), foundation.MakeString(userActivityType).String())
 	return C.bool(result)
 }
 
 //export applicationDelegate_Application_DidFailToContinueUserActivityWithType_Error
-func applicationDelegate_Application_DidFailToContinueUserActivityWithType_Error(id int64, application unsafe.Pointer, userActivityType unsafe.Pointer, error unsafe.Pointer) {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_Application_DidFailToContinueUserActivityWithType_Error(hp C.uintptr_t, application unsafe.Pointer, userActivityType unsafe.Pointer, error unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	delegate.Application_DidFailToContinueUserActivityWithType_Error(MakeApplication(application), foundation.MakeString(userActivityType).String(), foundation.MakeError(error))
 }
 
 //export applicationDelegate_Application_DidUpdateUserActivity
-func applicationDelegate_Application_DidUpdateUserActivity(id int64, application unsafe.Pointer, userActivity unsafe.Pointer) {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_Application_DidUpdateUserActivity(hp C.uintptr_t, application unsafe.Pointer, userActivity unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	delegate.Application_DidUpdateUserActivity(MakeApplication(application), foundation.MakeUserActivity(userActivity))
 }
 
 //export applicationDelegate_Application_DidRegisterForRemoteNotificationsWithDeviceToken
-func applicationDelegate_Application_DidRegisterForRemoteNotificationsWithDeviceToken(id int64, application unsafe.Pointer, deviceToken C.Array) {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_Application_DidRegisterForRemoteNotificationsWithDeviceToken(hp C.uintptr_t, application unsafe.Pointer, deviceToken C.Array) {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	deviceTokenBuffer := (*[1 << 30]byte)(deviceToken.data)[:C.int(deviceToken.len)]
 	goDeviceToken := make([]byte, C.int(deviceToken.len))
 	copy(goDeviceToken, deviceTokenBuffer)
@@ -203,14 +203,14 @@ func applicationDelegate_Application_DidRegisterForRemoteNotificationsWithDevice
 }
 
 //export applicationDelegate_Application_DidFailToRegisterForRemoteNotificationsWithError
-func applicationDelegate_Application_DidFailToRegisterForRemoteNotificationsWithError(id int64, application unsafe.Pointer, error unsafe.Pointer) {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_Application_DidFailToRegisterForRemoteNotificationsWithError(hp C.uintptr_t, application unsafe.Pointer, error unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	delegate.Application_DidFailToRegisterForRemoteNotificationsWithError(MakeApplication(application), foundation.MakeError(error))
 }
 
 //export applicationDelegate_Application_OpenURLs
-func applicationDelegate_Application_OpenURLs(id int64, application unsafe.Pointer, urls C.Array) {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_Application_OpenURLs(hp C.uintptr_t, application unsafe.Pointer, urls C.Array) {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	defer C.free(urls.data)
 	urlsSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(urls.data))[:urls.len:urls.len]
 	var goUrls = make([]foundation.URL, len(urlsSlice))
@@ -221,29 +221,29 @@ func applicationDelegate_Application_OpenURLs(id int64, application unsafe.Point
 }
 
 //export applicationDelegate_Application_OpenFile
-func applicationDelegate_Application_OpenFile(id int64, sender unsafe.Pointer, filename unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_Application_OpenFile(hp C.uintptr_t, sender unsafe.Pointer, filename unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	result := delegate.Application_OpenFile(MakeApplication(sender), foundation.MakeString(filename).String())
 	return C.bool(result)
 }
 
 //export applicationDelegate_Application_OpenFileWithoutUI
-func applicationDelegate_Application_OpenFileWithoutUI(id int64, sender unsafe.Pointer, filename unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_Application_OpenFileWithoutUI(hp C.uintptr_t, sender unsafe.Pointer, filename unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	result := delegate.Application_OpenFileWithoutUI(objc.MakeObject(sender), foundation.MakeString(filename).String())
 	return C.bool(result)
 }
 
 //export applicationDelegate_Application_OpenTempFile
-func applicationDelegate_Application_OpenTempFile(id int64, sender unsafe.Pointer, filename unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_Application_OpenTempFile(hp C.uintptr_t, sender unsafe.Pointer, filename unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	result := delegate.Application_OpenTempFile(MakeApplication(sender), foundation.MakeString(filename).String())
 	return C.bool(result)
 }
 
 //export applicationDelegate_Application_OpenFiles
-func applicationDelegate_Application_OpenFiles(id int64, sender unsafe.Pointer, filenames C.Array) {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_Application_OpenFiles(hp C.uintptr_t, sender unsafe.Pointer, filenames C.Array) {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	defer C.free(filenames.data)
 	filenamesSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(filenames.data))[:filenames.len:filenames.len]
 	var goFilenames = make([]string, len(filenamesSlice))
@@ -254,56 +254,56 @@ func applicationDelegate_Application_OpenFiles(id int64, sender unsafe.Pointer, 
 }
 
 //export applicationDelegate_ApplicationOpenUntitledFile
-func applicationDelegate_ApplicationOpenUntitledFile(id int64, sender unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_ApplicationOpenUntitledFile(hp C.uintptr_t, sender unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	result := delegate.ApplicationOpenUntitledFile(MakeApplication(sender))
 	return C.bool(result)
 }
 
 //export applicationDelegate_ApplicationShouldOpenUntitledFile
-func applicationDelegate_ApplicationShouldOpenUntitledFile(id int64, sender unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_ApplicationShouldOpenUntitledFile(hp C.uintptr_t, sender unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	result := delegate.ApplicationShouldOpenUntitledFile(MakeApplication(sender))
 	return C.bool(result)
 }
 
 //export applicationDelegate_Application_PrintFile
-func applicationDelegate_Application_PrintFile(id int64, sender unsafe.Pointer, filename unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_Application_PrintFile(hp C.uintptr_t, sender unsafe.Pointer, filename unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	result := delegate.Application_PrintFile(MakeApplication(sender), foundation.MakeString(filename).String())
 	return C.bool(result)
 }
 
 //export applicationDelegate_Application_DidDecodeRestorableState
-func applicationDelegate_Application_DidDecodeRestorableState(id int64, app unsafe.Pointer, coder unsafe.Pointer) {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_Application_DidDecodeRestorableState(hp C.uintptr_t, app unsafe.Pointer, coder unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	delegate.Application_DidDecodeRestorableState(MakeApplication(app), foundation.MakeCoder(coder))
 }
 
 //export applicationDelegate_Application_WillEncodeRestorableState
-func applicationDelegate_Application_WillEncodeRestorableState(id int64, app unsafe.Pointer, coder unsafe.Pointer) {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_Application_WillEncodeRestorableState(hp C.uintptr_t, app unsafe.Pointer, coder unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	delegate.Application_WillEncodeRestorableState(MakeApplication(app), foundation.MakeCoder(coder))
 }
 
 //export applicationDelegate_ApplicationDidChangeOcclusionState
-func applicationDelegate_ApplicationDidChangeOcclusionState(id int64, notification unsafe.Pointer) {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_ApplicationDidChangeOcclusionState(hp C.uintptr_t, notification unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	delegate.ApplicationDidChangeOcclusionState(foundation.MakeNotification(notification))
 }
 
 //export applicationDelegate_Application_DelegateHandlesKey
-func applicationDelegate_Application_DelegateHandlesKey(id int64, sender unsafe.Pointer, key unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*ApplicationDelegate)
+func applicationDelegate_Application_DelegateHandlesKey(hp C.uintptr_t, sender unsafe.Pointer, key unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	result := delegate.Application_DelegateHandlesKey(MakeApplication(sender), foundation.MakeString(key).String())
 	return C.bool(result)
 }
 
 //export ApplicationDelegate_RespondsTo
-func ApplicationDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
+func ApplicationDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
-	delegate := resources.Get(id).(*ApplicationDelegate)
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	switch selName {
 	case "applicationWillFinishLaunching:":
 		return delegate.ApplicationWillFinishLaunching != nil
@@ -383,6 +383,6 @@ func ApplicationDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
 }
 
 //export deleteApplicationDelegate
-func deleteApplicationDelegate(id int64) {
-	resources.Delete(id)
+func deleteApplicationDelegate(hp C.uintptr_t) {
+	cgo.Handle(hp).Delete()
 }

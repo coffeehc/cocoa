@@ -6,6 +6,7 @@ import (
 	"github.com/hsiafan/cocoa/coregraphics"
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
+	"runtime/cgo"
 	"unsafe"
 )
 
@@ -20,62 +21,61 @@ type MenuDelegate struct {
 }
 
 func WrapMenuDelegate(delegate *MenuDelegate) objc.Object {
-	id := resources.NextId()
-	resources.Store(id, delegate)
-	ptr := C.WrapMenuDelegate(C.long(id))
+	h := cgo.NewHandle(delegate)
+	ptr := C.WrapMenuDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)
 }
 
 //export menuDelegate_Menu_UpdateItem_AtIndex_ShouldCancel
-func menuDelegate_Menu_UpdateItem_AtIndex_ShouldCancel(id int64, menu unsafe.Pointer, item unsafe.Pointer, index C.int, shouldCancel C.bool) C.bool {
-	delegate := resources.Get(id).(*MenuDelegate)
+func menuDelegate_Menu_UpdateItem_AtIndex_ShouldCancel(hp C.uintptr_t, menu unsafe.Pointer, item unsafe.Pointer, index C.int, shouldCancel C.bool) C.bool {
+	delegate := cgo.Handle(hp).Value().(*MenuDelegate)
 	result := delegate.Menu_UpdateItem_AtIndex_ShouldCancel(MakeMenu(menu), MakeMenuItem(item), int(index), bool(shouldCancel))
 	return C.bool(result)
 }
 
 //export menuDelegate_ConfinementRectForMenu_OnScreen
-func menuDelegate_ConfinementRectForMenu_OnScreen(id int64, menu unsafe.Pointer, screen unsafe.Pointer) C.CGRect {
-	delegate := resources.Get(id).(*MenuDelegate)
+func menuDelegate_ConfinementRectForMenu_OnScreen(hp C.uintptr_t, menu unsafe.Pointer, screen unsafe.Pointer) C.CGRect {
+	delegate := cgo.Handle(hp).Value().(*MenuDelegate)
 	result := delegate.ConfinementRectForMenu_OnScreen(MakeMenu(menu), MakeScreen(screen))
 	return *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(result)))
 }
 
 //export menuDelegate_Menu_WillHighlightItem
-func menuDelegate_Menu_WillHighlightItem(id int64, menu unsafe.Pointer, item unsafe.Pointer) {
-	delegate := resources.Get(id).(*MenuDelegate)
+func menuDelegate_Menu_WillHighlightItem(hp C.uintptr_t, menu unsafe.Pointer, item unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*MenuDelegate)
 	delegate.Menu_WillHighlightItem(MakeMenu(menu), MakeMenuItem(item))
 }
 
 //export menuDelegate_MenuWillOpen
-func menuDelegate_MenuWillOpen(id int64, menu unsafe.Pointer) {
-	delegate := resources.Get(id).(*MenuDelegate)
+func menuDelegate_MenuWillOpen(hp C.uintptr_t, menu unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*MenuDelegate)
 	delegate.MenuWillOpen(MakeMenu(menu))
 }
 
 //export menuDelegate_MenuDidClose
-func menuDelegate_MenuDidClose(id int64, menu unsafe.Pointer) {
-	delegate := resources.Get(id).(*MenuDelegate)
+func menuDelegate_MenuDidClose(hp C.uintptr_t, menu unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*MenuDelegate)
 	delegate.MenuDidClose(MakeMenu(menu))
 }
 
 //export menuDelegate_NumberOfItemsInMenu
-func menuDelegate_NumberOfItemsInMenu(id int64, menu unsafe.Pointer) C.int {
-	delegate := resources.Get(id).(*MenuDelegate)
+func menuDelegate_NumberOfItemsInMenu(hp C.uintptr_t, menu unsafe.Pointer) C.int {
+	delegate := cgo.Handle(hp).Value().(*MenuDelegate)
 	result := delegate.NumberOfItemsInMenu(MakeMenu(menu))
 	return C.int(result)
 }
 
 //export menuDelegate_MenuNeedsUpdate
-func menuDelegate_MenuNeedsUpdate(id int64, menu unsafe.Pointer) {
-	delegate := resources.Get(id).(*MenuDelegate)
+func menuDelegate_MenuNeedsUpdate(hp C.uintptr_t, menu unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*MenuDelegate)
 	delegate.MenuNeedsUpdate(MakeMenu(menu))
 }
 
 //export MenuDelegate_RespondsTo
-func MenuDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
+func MenuDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
-	delegate := resources.Get(id).(*MenuDelegate)
+	delegate := cgo.Handle(hp).Value().(*MenuDelegate)
 	switch selName {
 	case "menu:updateItem:atIndex:shouldCancel:":
 		return delegate.Menu_UpdateItem_AtIndex_ShouldCancel != nil
@@ -97,6 +97,6 @@ func MenuDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
 }
 
 //export deleteMenuDelegate
-func deleteMenuDelegate(id int64) {
-	resources.Delete(id)
+func deleteMenuDelegate(hp C.uintptr_t) {
+	cgo.Handle(hp).Delete()
 }

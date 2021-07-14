@@ -5,6 +5,7 @@ import "C"
 import (
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
+	"runtime/cgo"
 	"unsafe"
 )
 
@@ -13,24 +14,23 @@ type TouchBarDelegate struct {
 }
 
 func WrapTouchBarDelegate(delegate *TouchBarDelegate) objc.Object {
-	id := resources.NextId()
-	resources.Store(id, delegate)
-	ptr := C.WrapTouchBarDelegate(C.long(id))
+	h := cgo.NewHandle(delegate)
+	ptr := C.WrapTouchBarDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)
 }
 
 //export touchBarDelegate_TouchBar_MakeItemForIdentifier
-func touchBarDelegate_TouchBar_MakeItemForIdentifier(id int64, touchBar unsafe.Pointer, identifier unsafe.Pointer) unsafe.Pointer {
-	delegate := resources.Get(id).(*TouchBarDelegate)
+func touchBarDelegate_TouchBar_MakeItemForIdentifier(hp C.uintptr_t, touchBar unsafe.Pointer, identifier unsafe.Pointer) unsafe.Pointer {
+	delegate := cgo.Handle(hp).Value().(*TouchBarDelegate)
 	result := delegate.TouchBar_MakeItemForIdentifier(MakeTouchBar(touchBar), TouchBarItemIdentifier(foundation.MakeString(identifier).String()))
 	return objc.ExtractPtr(result)
 }
 
 //export TouchBarDelegate_RespondsTo
-func TouchBarDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
+func TouchBarDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
-	delegate := resources.Get(id).(*TouchBarDelegate)
+	delegate := cgo.Handle(hp).Value().(*TouchBarDelegate)
 	switch selName {
 	case "touchBar:makeItemForIdentifier:":
 		return delegate.TouchBar_MakeItemForIdentifier != nil
@@ -40,6 +40,6 @@ func TouchBarDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
 }
 
 //export deleteTouchBarDelegate
-func deleteTouchBarDelegate(id int64) {
-	resources.Delete(id)
+func deleteTouchBarDelegate(hp C.uintptr_t) {
+	cgo.Handle(hp).Delete()
 }

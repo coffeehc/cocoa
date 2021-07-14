@@ -3,7 +3,7 @@
 #import <objc/runtime.h>
 
 @interface ActionHandler : NSObject
-@property (assign) long goID;
+@property (assign) uintptr_t goID;
 @end
 
 @implementation ActionHandler
@@ -17,7 +17,7 @@
 }
 @end
 
-void* C_NewAction(long id) {
+void* C_NewAction(uintptr_t id) {
     ActionHandler* handler = [[ActionHandler alloc] init];
 	[handler setGoID:id];
 	return handler;

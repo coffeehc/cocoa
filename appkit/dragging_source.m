@@ -38,7 +38,7 @@
 }
 @end
 
-void* WrapDraggingSource(long goID) {
+void* WrapDraggingSource(uintptr_t goID) {
     NSDraggingSourceAdaptor* adaptor = [[NSDraggingSourceAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

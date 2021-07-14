@@ -1,6 +1,18 @@
 package foundation
 
 type CalendarOptions uint
+
+const (
+	CalendarWrapComponents                          CalendarOptions = 1 << 0
+	CalendarMatchStrictly                           CalendarOptions = 1 << 1
+	CalendarSearchBackwards                         CalendarOptions = 1 << 2
+	CalendarMatchPreviousTimePreservingSmallerUnits CalendarOptions = 1 << 8
+	CalendarMatchNextTimePreservingSmallerUnits     CalendarOptions = 1 << 9
+	CalendarMatchNextTime                           CalendarOptions = 1 << 10
+	CalendarMatchFirst                              CalendarOptions = 1 << 12
+	CalendarMatchLast                               CalendarOptions = 1 << 13
+)
+
 type CalendarUnit uint
 
 type TimeZoneNameStyle int

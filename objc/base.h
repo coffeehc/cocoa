@@ -1,4 +1,5 @@
 #import <stdlib.h>
+#import <stdint.h>
 
-void Dispatch_MainQueueAsync(long id);
-void Run_WithAutoreleasePool(long id);
+void Dispatch_MainQueueAsync(uintptr_t ptr);
+void Run_WithAutoreleasePool(uintptr_t ptr);

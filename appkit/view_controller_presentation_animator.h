@@ -1,10 +1,11 @@
 #import <stdbool.h>
+#import <stdint.h>
 #import <stdlib.h>
 #import <utils.h>
 #import <Appkit/Appkit.h>
 
 @interface NSViewControllerPresentationAnimatorAdaptor : NSObject <NSViewControllerPresentationAnimator>
-@property (assign) long goID;
+@property (assign) uintptr_t goID;
 @end
 
-void* WrapViewControllerPresentationAnimator(long goID);
+void* WrapViewControllerPresentationAnimator(uintptr_t goID);

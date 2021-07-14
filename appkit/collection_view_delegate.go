@@ -6,6 +6,7 @@ import (
 	"github.com/hsiafan/cocoa/coregraphics"
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
+	"runtime/cgo"
 	"unsafe"
 )
 
@@ -34,153 +35,152 @@ type CollectionViewDelegate struct {
 }
 
 func WrapCollectionViewDelegate(delegate *CollectionViewDelegate) objc.Object {
-	id := resources.NextId()
-	resources.Store(id, delegate)
-	ptr := C.WrapCollectionViewDelegate(C.long(id))
+	h := cgo.NewHandle(delegate)
+	ptr := C.WrapCollectionViewDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)
 }
 
 //export collectionViewDelegate_CollectionView_ShouldSelectItemsAtIndexPaths
-func collectionViewDelegate_CollectionView_ShouldSelectItemsAtIndexPaths(id int64, collectionView unsafe.Pointer, indexPaths unsafe.Pointer) unsafe.Pointer {
-	delegate := resources.Get(id).(*CollectionViewDelegate)
+func collectionViewDelegate_CollectionView_ShouldSelectItemsAtIndexPaths(hp C.uintptr_t, collectionView unsafe.Pointer, indexPaths unsafe.Pointer) unsafe.Pointer {
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDelegate)
 	result := delegate.CollectionView_ShouldSelectItemsAtIndexPaths(MakeCollectionView(collectionView), foundation.MakeSet(indexPaths))
 	return objc.ExtractPtr(result)
 }
 
 //export collectionViewDelegate_CollectionView_DidSelectItemsAtIndexPaths
-func collectionViewDelegate_CollectionView_DidSelectItemsAtIndexPaths(id int64, collectionView unsafe.Pointer, indexPaths unsafe.Pointer) {
-	delegate := resources.Get(id).(*CollectionViewDelegate)
+func collectionViewDelegate_CollectionView_DidSelectItemsAtIndexPaths(hp C.uintptr_t, collectionView unsafe.Pointer, indexPaths unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDelegate)
 	delegate.CollectionView_DidSelectItemsAtIndexPaths(MakeCollectionView(collectionView), foundation.MakeSet(indexPaths))
 }
 
 //export collectionViewDelegate_CollectionView_ShouldDeselectItemsAtIndexPaths
-func collectionViewDelegate_CollectionView_ShouldDeselectItemsAtIndexPaths(id int64, collectionView unsafe.Pointer, indexPaths unsafe.Pointer) unsafe.Pointer {
-	delegate := resources.Get(id).(*CollectionViewDelegate)
+func collectionViewDelegate_CollectionView_ShouldDeselectItemsAtIndexPaths(hp C.uintptr_t, collectionView unsafe.Pointer, indexPaths unsafe.Pointer) unsafe.Pointer {
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDelegate)
 	result := delegate.CollectionView_ShouldDeselectItemsAtIndexPaths(MakeCollectionView(collectionView), foundation.MakeSet(indexPaths))
 	return objc.ExtractPtr(result)
 }
 
 //export collectionViewDelegate_CollectionView_DidDeselectItemsAtIndexPaths
-func collectionViewDelegate_CollectionView_DidDeselectItemsAtIndexPaths(id int64, collectionView unsafe.Pointer, indexPaths unsafe.Pointer) {
-	delegate := resources.Get(id).(*CollectionViewDelegate)
+func collectionViewDelegate_CollectionView_DidDeselectItemsAtIndexPaths(hp C.uintptr_t, collectionView unsafe.Pointer, indexPaths unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDelegate)
 	delegate.CollectionView_DidDeselectItemsAtIndexPaths(MakeCollectionView(collectionView), foundation.MakeSet(indexPaths))
 }
 
 //export collectionViewDelegate_CollectionView_ShouldChangeItemsAtIndexPaths_ToHighlightState
-func collectionViewDelegate_CollectionView_ShouldChangeItemsAtIndexPaths_ToHighlightState(id int64, collectionView unsafe.Pointer, indexPaths unsafe.Pointer, highlightState C.int) unsafe.Pointer {
-	delegate := resources.Get(id).(*CollectionViewDelegate)
+func collectionViewDelegate_CollectionView_ShouldChangeItemsAtIndexPaths_ToHighlightState(hp C.uintptr_t, collectionView unsafe.Pointer, indexPaths unsafe.Pointer, highlightState C.int) unsafe.Pointer {
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDelegate)
 	result := delegate.CollectionView_ShouldChangeItemsAtIndexPaths_ToHighlightState(MakeCollectionView(collectionView), foundation.MakeSet(indexPaths), CollectionViewItemHighlightState(int(highlightState)))
 	return objc.ExtractPtr(result)
 }
 
 //export collectionViewDelegate_CollectionView_DidChangeItemsAtIndexPaths_ToHighlightState
-func collectionViewDelegate_CollectionView_DidChangeItemsAtIndexPaths_ToHighlightState(id int64, collectionView unsafe.Pointer, indexPaths unsafe.Pointer, highlightState C.int) {
-	delegate := resources.Get(id).(*CollectionViewDelegate)
+func collectionViewDelegate_CollectionView_DidChangeItemsAtIndexPaths_ToHighlightState(hp C.uintptr_t, collectionView unsafe.Pointer, indexPaths unsafe.Pointer, highlightState C.int) {
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDelegate)
 	delegate.CollectionView_DidChangeItemsAtIndexPaths_ToHighlightState(MakeCollectionView(collectionView), foundation.MakeSet(indexPaths), CollectionViewItemHighlightState(int(highlightState)))
 }
 
 //export collectionViewDelegate_CollectionView_WillDisplayItem_ForRepresentedObjectAtIndexPath
-func collectionViewDelegate_CollectionView_WillDisplayItem_ForRepresentedObjectAtIndexPath(id int64, collectionView unsafe.Pointer, item unsafe.Pointer, indexPath unsafe.Pointer) {
-	delegate := resources.Get(id).(*CollectionViewDelegate)
+func collectionViewDelegate_CollectionView_WillDisplayItem_ForRepresentedObjectAtIndexPath(hp C.uintptr_t, collectionView unsafe.Pointer, item unsafe.Pointer, indexPath unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDelegate)
 	delegate.CollectionView_WillDisplayItem_ForRepresentedObjectAtIndexPath(MakeCollectionView(collectionView), MakeCollectionViewItem(item), foundation.MakeIndexPath(indexPath))
 }
 
 //export collectionViewDelegate_CollectionView_DidEndDisplayingItem_ForRepresentedObjectAtIndexPath
-func collectionViewDelegate_CollectionView_DidEndDisplayingItem_ForRepresentedObjectAtIndexPath(id int64, collectionView unsafe.Pointer, item unsafe.Pointer, indexPath unsafe.Pointer) {
-	delegate := resources.Get(id).(*CollectionViewDelegate)
+func collectionViewDelegate_CollectionView_DidEndDisplayingItem_ForRepresentedObjectAtIndexPath(hp C.uintptr_t, collectionView unsafe.Pointer, item unsafe.Pointer, indexPath unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDelegate)
 	delegate.CollectionView_DidEndDisplayingItem_ForRepresentedObjectAtIndexPath(MakeCollectionView(collectionView), MakeCollectionViewItem(item), foundation.MakeIndexPath(indexPath))
 }
 
 //export collectionViewDelegate_CollectionView_WillDisplaySupplementaryView_ForElementKind_AtIndexPath
-func collectionViewDelegate_CollectionView_WillDisplaySupplementaryView_ForElementKind_AtIndexPath(id int64, collectionView unsafe.Pointer, view unsafe.Pointer, elementKind unsafe.Pointer, indexPath unsafe.Pointer) {
-	delegate := resources.Get(id).(*CollectionViewDelegate)
+func collectionViewDelegate_CollectionView_WillDisplaySupplementaryView_ForElementKind_AtIndexPath(hp C.uintptr_t, collectionView unsafe.Pointer, view unsafe.Pointer, elementKind unsafe.Pointer, indexPath unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDelegate)
 	delegate.CollectionView_WillDisplaySupplementaryView_ForElementKind_AtIndexPath(MakeCollectionView(collectionView), MakeView(view), CollectionViewSupplementaryElementKind(foundation.MakeString(elementKind).String()), foundation.MakeIndexPath(indexPath))
 }
 
 //export collectionViewDelegate_CollectionView_DidEndDisplayingSupplementaryView_ForElementOfKind_AtIndexPath
-func collectionViewDelegate_CollectionView_DidEndDisplayingSupplementaryView_ForElementOfKind_AtIndexPath(id int64, collectionView unsafe.Pointer, view unsafe.Pointer, elementKind unsafe.Pointer, indexPath unsafe.Pointer) {
-	delegate := resources.Get(id).(*CollectionViewDelegate)
+func collectionViewDelegate_CollectionView_DidEndDisplayingSupplementaryView_ForElementOfKind_AtIndexPath(hp C.uintptr_t, collectionView unsafe.Pointer, view unsafe.Pointer, elementKind unsafe.Pointer, indexPath unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDelegate)
 	delegate.CollectionView_DidEndDisplayingSupplementaryView_ForElementOfKind_AtIndexPath(MakeCollectionView(collectionView), MakeView(view), CollectionViewSupplementaryElementKind(foundation.MakeString(elementKind).String()), foundation.MakeIndexPath(indexPath))
 }
 
 //export collectionViewDelegate_CollectionView_TransitionLayoutForOldLayout_NewLayout
-func collectionViewDelegate_CollectionView_TransitionLayoutForOldLayout_NewLayout(id int64, collectionView unsafe.Pointer, fromLayout unsafe.Pointer, toLayout unsafe.Pointer) unsafe.Pointer {
-	delegate := resources.Get(id).(*CollectionViewDelegate)
+func collectionViewDelegate_CollectionView_TransitionLayoutForOldLayout_NewLayout(hp C.uintptr_t, collectionView unsafe.Pointer, fromLayout unsafe.Pointer, toLayout unsafe.Pointer) unsafe.Pointer {
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDelegate)
 	result := delegate.CollectionView_TransitionLayoutForOldLayout_NewLayout(MakeCollectionView(collectionView), MakeCollectionViewLayout(fromLayout), MakeCollectionViewLayout(toLayout))
 	return objc.ExtractPtr(result)
 }
 
 //export collectionViewDelegate_CollectionView_CanDragItemsAtIndexPaths_WithEvent
-func collectionViewDelegate_CollectionView_CanDragItemsAtIndexPaths_WithEvent(id int64, collectionView unsafe.Pointer, indexPaths unsafe.Pointer, event unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*CollectionViewDelegate)
+func collectionViewDelegate_CollectionView_CanDragItemsAtIndexPaths_WithEvent(hp C.uintptr_t, collectionView unsafe.Pointer, indexPaths unsafe.Pointer, event unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDelegate)
 	result := delegate.CollectionView_CanDragItemsAtIndexPaths_WithEvent(MakeCollectionView(collectionView), foundation.MakeSet(indexPaths), MakeEvent(event))
 	return C.bool(result)
 }
 
 //export collectionViewDelegate_CollectionView_PasteboardWriterForItemAtIndexPath
-func collectionViewDelegate_CollectionView_PasteboardWriterForItemAtIndexPath(id int64, collectionView unsafe.Pointer, indexPath unsafe.Pointer) unsafe.Pointer {
-	delegate := resources.Get(id).(*CollectionViewDelegate)
+func collectionViewDelegate_CollectionView_PasteboardWriterForItemAtIndexPath(hp C.uintptr_t, collectionView unsafe.Pointer, indexPath unsafe.Pointer) unsafe.Pointer {
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDelegate)
 	result := delegate.CollectionView_PasteboardWriterForItemAtIndexPath(MakeCollectionView(collectionView), foundation.MakeIndexPath(indexPath))
 	return objc.ExtractPtr(result)
 }
 
 //export collectionViewDelegate_CollectionView_DraggingSession_WillBeginAtPoint_ForItemsAtIndexPaths
-func collectionViewDelegate_CollectionView_DraggingSession_WillBeginAtPoint_ForItemsAtIndexPaths(id int64, collectionView unsafe.Pointer, session unsafe.Pointer, screenPoint C.CGPoint, indexPaths unsafe.Pointer) {
-	delegate := resources.Get(id).(*CollectionViewDelegate)
+func collectionViewDelegate_CollectionView_DraggingSession_WillBeginAtPoint_ForItemsAtIndexPaths(hp C.uintptr_t, collectionView unsafe.Pointer, session unsafe.Pointer, screenPoint C.CGPoint, indexPaths unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDelegate)
 	delegate.CollectionView_DraggingSession_WillBeginAtPoint_ForItemsAtIndexPaths(MakeCollectionView(collectionView), MakeDraggingSession(session), foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&screenPoint))), foundation.MakeSet(indexPaths))
 }
 
 //export collectionViewDelegate_CollectionView_DraggingSession_EndedAtPoint_DragOperation
-func collectionViewDelegate_CollectionView_DraggingSession_EndedAtPoint_DragOperation(id int64, collectionView unsafe.Pointer, session unsafe.Pointer, screenPoint C.CGPoint, operation C.uint) {
-	delegate := resources.Get(id).(*CollectionViewDelegate)
+func collectionViewDelegate_CollectionView_DraggingSession_EndedAtPoint_DragOperation(hp C.uintptr_t, collectionView unsafe.Pointer, session unsafe.Pointer, screenPoint C.CGPoint, operation C.uint) {
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDelegate)
 	delegate.CollectionView_DraggingSession_EndedAtPoint_DragOperation(MakeCollectionView(collectionView), MakeDraggingSession(session), foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&screenPoint))), DragOperation(uint(operation)))
 }
 
 //export collectionViewDelegate_CollectionView_UpdateDraggingItemsForDrag
-func collectionViewDelegate_CollectionView_UpdateDraggingItemsForDrag(id int64, collectionView unsafe.Pointer, draggingInfo unsafe.Pointer) {
-	delegate := resources.Get(id).(*CollectionViewDelegate)
+func collectionViewDelegate_CollectionView_UpdateDraggingItemsForDrag(hp C.uintptr_t, collectionView unsafe.Pointer, draggingInfo unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDelegate)
 	delegate.CollectionView_UpdateDraggingItemsForDrag(MakeCollectionView(collectionView), objc.MakeObject(draggingInfo))
 }
 
 //export collectionViewDelegate_CollectionView_AcceptDrop_IndexPath_DropOperation
-func collectionViewDelegate_CollectionView_AcceptDrop_IndexPath_DropOperation(id int64, collectionView unsafe.Pointer, draggingInfo unsafe.Pointer, indexPath unsafe.Pointer, dropOperation C.int) C.bool {
-	delegate := resources.Get(id).(*CollectionViewDelegate)
+func collectionViewDelegate_CollectionView_AcceptDrop_IndexPath_DropOperation(hp C.uintptr_t, collectionView unsafe.Pointer, draggingInfo unsafe.Pointer, indexPath unsafe.Pointer, dropOperation C.int) C.bool {
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDelegate)
 	result := delegate.CollectionView_AcceptDrop_IndexPath_DropOperation(MakeCollectionView(collectionView), objc.MakeObject(draggingInfo), foundation.MakeIndexPath(indexPath), CollectionViewDropOperation(int(dropOperation)))
 	return C.bool(result)
 }
 
 //export collectionViewDelegate_CollectionView_CanDragItemsAtIndexes_WithEvent
-func collectionViewDelegate_CollectionView_CanDragItemsAtIndexes_WithEvent(id int64, collectionView unsafe.Pointer, indexes unsafe.Pointer, event unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*CollectionViewDelegate)
+func collectionViewDelegate_CollectionView_CanDragItemsAtIndexes_WithEvent(hp C.uintptr_t, collectionView unsafe.Pointer, indexes unsafe.Pointer, event unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDelegate)
 	result := delegate.CollectionView_CanDragItemsAtIndexes_WithEvent(MakeCollectionView(collectionView), foundation.MakeIndexSet(indexes), MakeEvent(event))
 	return C.bool(result)
 }
 
 //export collectionViewDelegate_CollectionView_PasteboardWriterForItemAtIndex
-func collectionViewDelegate_CollectionView_PasteboardWriterForItemAtIndex(id int64, collectionView unsafe.Pointer, index C.uint) unsafe.Pointer {
-	delegate := resources.Get(id).(*CollectionViewDelegate)
+func collectionViewDelegate_CollectionView_PasteboardWriterForItemAtIndex(hp C.uintptr_t, collectionView unsafe.Pointer, index C.uint) unsafe.Pointer {
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDelegate)
 	result := delegate.CollectionView_PasteboardWriterForItemAtIndex(MakeCollectionView(collectionView), uint(index))
 	return objc.ExtractPtr(result)
 }
 
 //export collectionViewDelegate_CollectionView_DraggingSession_WillBeginAtPoint_ForItemsAtIndexes
-func collectionViewDelegate_CollectionView_DraggingSession_WillBeginAtPoint_ForItemsAtIndexes(id int64, collectionView unsafe.Pointer, session unsafe.Pointer, screenPoint C.CGPoint, indexes unsafe.Pointer) {
-	delegate := resources.Get(id).(*CollectionViewDelegate)
+func collectionViewDelegate_CollectionView_DraggingSession_WillBeginAtPoint_ForItemsAtIndexes(hp C.uintptr_t, collectionView unsafe.Pointer, session unsafe.Pointer, screenPoint C.CGPoint, indexes unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDelegate)
 	delegate.CollectionView_DraggingSession_WillBeginAtPoint_ForItemsAtIndexes(MakeCollectionView(collectionView), MakeDraggingSession(session), foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&screenPoint))), foundation.MakeIndexSet(indexes))
 }
 
 //export collectionViewDelegate_CollectionView_AcceptDrop_Index_DropOperation
-func collectionViewDelegate_CollectionView_AcceptDrop_Index_DropOperation(id int64, collectionView unsafe.Pointer, draggingInfo unsafe.Pointer, index C.int, dropOperation C.int) C.bool {
-	delegate := resources.Get(id).(*CollectionViewDelegate)
+func collectionViewDelegate_CollectionView_AcceptDrop_Index_DropOperation(hp C.uintptr_t, collectionView unsafe.Pointer, draggingInfo unsafe.Pointer, index C.int, dropOperation C.int) C.bool {
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDelegate)
 	result := delegate.CollectionView_AcceptDrop_Index_DropOperation(MakeCollectionView(collectionView), objc.MakeObject(draggingInfo), int(index), CollectionViewDropOperation(int(dropOperation)))
 	return C.bool(result)
 }
 
 //export CollectionViewDelegate_RespondsTo
-func CollectionViewDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
+func CollectionViewDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
-	delegate := resources.Get(id).(*CollectionViewDelegate)
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDelegate)
 	switch selName {
 	case "collectionView:shouldSelectItemsAtIndexPaths:":
 		return delegate.CollectionView_ShouldSelectItemsAtIndexPaths != nil
@@ -230,6 +230,6 @@ func CollectionViewDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) boo
 }
 
 //export deleteCollectionViewDelegate
-func deleteCollectionViewDelegate(id int64) {
-	resources.Delete(id)
+func deleteCollectionViewDelegate(hp C.uintptr_t) {
+	cgo.Handle(hp).Delete()
 }

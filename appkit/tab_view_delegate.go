@@ -4,6 +4,7 @@ package appkit
 import "C"
 import (
 	"github.com/hsiafan/cocoa/objc"
+	"runtime/cgo"
 	"unsafe"
 )
 
@@ -15,42 +16,41 @@ type TabViewDelegate struct {
 }
 
 func WrapTabViewDelegate(delegate *TabViewDelegate) objc.Object {
-	id := resources.NextId()
-	resources.Store(id, delegate)
-	ptr := C.WrapTabViewDelegate(C.long(id))
+	h := cgo.NewHandle(delegate)
+	ptr := C.WrapTabViewDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)
 }
 
 //export tabViewDelegate_TabViewDidChangeNumberOfTabViewItems
-func tabViewDelegate_TabViewDidChangeNumberOfTabViewItems(id int64, tabView unsafe.Pointer) {
-	delegate := resources.Get(id).(*TabViewDelegate)
+func tabViewDelegate_TabViewDidChangeNumberOfTabViewItems(hp C.uintptr_t, tabView unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*TabViewDelegate)
 	delegate.TabViewDidChangeNumberOfTabViewItems(MakeTabView(tabView))
 }
 
 //export tabViewDelegate_TabView_ShouldSelectTabViewItem
-func tabViewDelegate_TabView_ShouldSelectTabViewItem(id int64, tabView unsafe.Pointer, tabViewItem unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*TabViewDelegate)
+func tabViewDelegate_TabView_ShouldSelectTabViewItem(hp C.uintptr_t, tabView unsafe.Pointer, tabViewItem unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*TabViewDelegate)
 	result := delegate.TabView_ShouldSelectTabViewItem(MakeTabView(tabView), MakeTabViewItem(tabViewItem))
 	return C.bool(result)
 }
 
 //export tabViewDelegate_TabView_WillSelectTabViewItem
-func tabViewDelegate_TabView_WillSelectTabViewItem(id int64, tabView unsafe.Pointer, tabViewItem unsafe.Pointer) {
-	delegate := resources.Get(id).(*TabViewDelegate)
+func tabViewDelegate_TabView_WillSelectTabViewItem(hp C.uintptr_t, tabView unsafe.Pointer, tabViewItem unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*TabViewDelegate)
 	delegate.TabView_WillSelectTabViewItem(MakeTabView(tabView), MakeTabViewItem(tabViewItem))
 }
 
 //export tabViewDelegate_TabView_DidSelectTabViewItem
-func tabViewDelegate_TabView_DidSelectTabViewItem(id int64, tabView unsafe.Pointer, tabViewItem unsafe.Pointer) {
-	delegate := resources.Get(id).(*TabViewDelegate)
+func tabViewDelegate_TabView_DidSelectTabViewItem(hp C.uintptr_t, tabView unsafe.Pointer, tabViewItem unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*TabViewDelegate)
 	delegate.TabView_DidSelectTabViewItem(MakeTabView(tabView), MakeTabViewItem(tabViewItem))
 }
 
 //export TabViewDelegate_RespondsTo
-func TabViewDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
+func TabViewDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
-	delegate := resources.Get(id).(*TabViewDelegate)
+	delegate := cgo.Handle(hp).Value().(*TabViewDelegate)
 	switch selName {
 	case "tabViewDidChangeNumberOfTabViewItems:":
 		return delegate.TabViewDidChangeNumberOfTabViewItems != nil
@@ -66,6 +66,6 @@ func TabViewDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
 }
 
 //export deleteTabViewDelegate
-func deleteTabViewDelegate(id int64) {
-	resources.Delete(id)
+func deleteTabViewDelegate(hp C.uintptr_t) {
+	cgo.Handle(hp).Delete()
 }

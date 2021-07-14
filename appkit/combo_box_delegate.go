@@ -5,6 +5,7 @@ import "C"
 import (
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
+	"runtime/cgo"
 	"unsafe"
 )
 
@@ -28,39 +29,38 @@ type ComboBoxDelegate struct {
 }
 
 func WrapComboBoxDelegate(delegate *ComboBoxDelegate) objc.Object {
-	id := resources.NextId()
-	resources.Store(id, delegate)
-	ptr := C.WrapComboBoxDelegate(C.long(id))
+	h := cgo.NewHandle(delegate)
+	ptr := C.WrapComboBoxDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)
 }
 
 //export comboBoxDelegate_ComboBoxSelectionDidChange
-func comboBoxDelegate_ComboBoxSelectionDidChange(id int64, notification unsafe.Pointer) {
-	delegate := resources.Get(id).(*ComboBoxDelegate)
+func comboBoxDelegate_ComboBoxSelectionDidChange(hp C.uintptr_t, notification unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ComboBoxDelegate)
 	delegate.ComboBoxSelectionDidChange(foundation.MakeNotification(notification))
 }
 
 //export comboBoxDelegate_ComboBoxSelectionIsChanging
-func comboBoxDelegate_ComboBoxSelectionIsChanging(id int64, notification unsafe.Pointer) {
-	delegate := resources.Get(id).(*ComboBoxDelegate)
+func comboBoxDelegate_ComboBoxSelectionIsChanging(hp C.uintptr_t, notification unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ComboBoxDelegate)
 	delegate.ComboBoxSelectionIsChanging(foundation.MakeNotification(notification))
 }
 
 //export comboBoxDelegate_ComboBoxWillDismiss
-func comboBoxDelegate_ComboBoxWillDismiss(id int64, notification unsafe.Pointer) {
-	delegate := resources.Get(id).(*ComboBoxDelegate)
+func comboBoxDelegate_ComboBoxWillDismiss(hp C.uintptr_t, notification unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ComboBoxDelegate)
 	delegate.ComboBoxWillDismiss(foundation.MakeNotification(notification))
 }
 
 //export comboBoxDelegate_ComboBoxWillPopUp
-func comboBoxDelegate_ComboBoxWillPopUp(id int64, notification unsafe.Pointer) {
-	delegate := resources.Get(id).(*ComboBoxDelegate)
+func comboBoxDelegate_ComboBoxWillPopUp(hp C.uintptr_t, notification unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ComboBoxDelegate)
 	delegate.ComboBoxWillPopUp(foundation.MakeNotification(notification))
 }
 
 //export comboBoxDelegate_TextField_TextView_Candidates_ForSelectedRange
-func comboBoxDelegate_TextField_TextView_Candidates_ForSelectedRange(id int64, textField unsafe.Pointer, textView unsafe.Pointer, candidates C.Array, selectedRange C.NSRange) C.Array {
-	delegate := resources.Get(id).(*ComboBoxDelegate)
+func comboBoxDelegate_TextField_TextView_Candidates_ForSelectedRange(hp C.uintptr_t, textField unsafe.Pointer, textView unsafe.Pointer, candidates C.Array, selectedRange C.NSRange) C.Array {
+	delegate := cgo.Handle(hp).Value().(*ComboBoxDelegate)
 	defer C.free(candidates.data)
 	candidatesSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(candidates.data))[:candidates.len:candidates.len]
 	var goCandidates = make([]foundation.TextCheckingResult, len(candidatesSlice))
@@ -77,8 +77,8 @@ func comboBoxDelegate_TextField_TextView_Candidates_ForSelectedRange(id int64, t
 }
 
 //export comboBoxDelegate_TextField_TextView_CandidatesForSelectedRange
-func comboBoxDelegate_TextField_TextView_CandidatesForSelectedRange(id int64, textField unsafe.Pointer, textView unsafe.Pointer, selectedRange C.NSRange) C.Array {
-	delegate := resources.Get(id).(*ComboBoxDelegate)
+func comboBoxDelegate_TextField_TextView_CandidatesForSelectedRange(hp C.uintptr_t, textField unsafe.Pointer, textView unsafe.Pointer, selectedRange C.NSRange) C.Array {
+	delegate := cgo.Handle(hp).Value().(*ComboBoxDelegate)
 	result := delegate.TextField_TextView_CandidatesForSelectedRange(MakeTextField(textField), MakeTextView(textView), foundation.FromNSRangePointer(unsafe.Pointer(&selectedRange)))
 	cResultData := make([]unsafe.Pointer, len(result))
 	for idx, v := range result {
@@ -89,76 +89,76 @@ func comboBoxDelegate_TextField_TextView_CandidatesForSelectedRange(id int64, te
 }
 
 //export comboBoxDelegate_TextField_TextView_ShouldSelectCandidateAtIndex
-func comboBoxDelegate_TextField_TextView_ShouldSelectCandidateAtIndex(id int64, textField unsafe.Pointer, textView unsafe.Pointer, index C.uint) C.bool {
-	delegate := resources.Get(id).(*ComboBoxDelegate)
+func comboBoxDelegate_TextField_TextView_ShouldSelectCandidateAtIndex(hp C.uintptr_t, textField unsafe.Pointer, textView unsafe.Pointer, index C.uint) C.bool {
+	delegate := cgo.Handle(hp).Value().(*ComboBoxDelegate)
 	result := delegate.TextField_TextView_ShouldSelectCandidateAtIndex(MakeTextField(textField), MakeTextView(textView), uint(index))
 	return C.bool(result)
 }
 
 //export comboBoxDelegate_Control_IsValidObject
-func comboBoxDelegate_Control_IsValidObject(id int64, control unsafe.Pointer, obj unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*ComboBoxDelegate)
+func comboBoxDelegate_Control_IsValidObject(hp C.uintptr_t, control unsafe.Pointer, obj unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*ComboBoxDelegate)
 	result := delegate.Control_IsValidObject(MakeControl(control), objc.MakeObject(obj))
 	return C.bool(result)
 }
 
 //export comboBoxDelegate_Control_DidFailToValidatePartialString_ErrorDescription
-func comboBoxDelegate_Control_DidFailToValidatePartialString_ErrorDescription(id int64, control unsafe.Pointer, _string unsafe.Pointer, error unsafe.Pointer) {
-	delegate := resources.Get(id).(*ComboBoxDelegate)
+func comboBoxDelegate_Control_DidFailToValidatePartialString_ErrorDescription(hp C.uintptr_t, control unsafe.Pointer, _string unsafe.Pointer, error unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ComboBoxDelegate)
 	delegate.Control_DidFailToValidatePartialString_ErrorDescription(MakeControl(control), foundation.MakeString(_string).String(), foundation.MakeString(error).String())
 }
 
 //export comboBoxDelegate_Control_DidFailToFormatString_ErrorDescription
-func comboBoxDelegate_Control_DidFailToFormatString_ErrorDescription(id int64, control unsafe.Pointer, _string unsafe.Pointer, error unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*ComboBoxDelegate)
+func comboBoxDelegate_Control_DidFailToFormatString_ErrorDescription(hp C.uintptr_t, control unsafe.Pointer, _string unsafe.Pointer, error unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*ComboBoxDelegate)
 	result := delegate.Control_DidFailToFormatString_ErrorDescription(MakeControl(control), foundation.MakeString(_string).String(), foundation.MakeString(error).String())
 	return C.bool(result)
 }
 
 //export comboBoxDelegate_Control_TextShouldBeginEditing
-func comboBoxDelegate_Control_TextShouldBeginEditing(id int64, control unsafe.Pointer, fieldEditor unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*ComboBoxDelegate)
+func comboBoxDelegate_Control_TextShouldBeginEditing(hp C.uintptr_t, control unsafe.Pointer, fieldEditor unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*ComboBoxDelegate)
 	result := delegate.Control_TextShouldBeginEditing(MakeControl(control), MakeText(fieldEditor))
 	return C.bool(result)
 }
 
 //export comboBoxDelegate_Control_TextShouldEndEditing
-func comboBoxDelegate_Control_TextShouldEndEditing(id int64, control unsafe.Pointer, fieldEditor unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*ComboBoxDelegate)
+func comboBoxDelegate_Control_TextShouldEndEditing(hp C.uintptr_t, control unsafe.Pointer, fieldEditor unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*ComboBoxDelegate)
 	result := delegate.Control_TextShouldEndEditing(MakeControl(control), MakeText(fieldEditor))
 	return C.bool(result)
 }
 
 //export comboBoxDelegate_Control_TextView_DoCommandBySelector
-func comboBoxDelegate_Control_TextView_DoCommandBySelector(id int64, control unsafe.Pointer, textView unsafe.Pointer, commandSelector unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*ComboBoxDelegate)
+func comboBoxDelegate_Control_TextView_DoCommandBySelector(hp C.uintptr_t, control unsafe.Pointer, textView unsafe.Pointer, commandSelector unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*ComboBoxDelegate)
 	result := delegate.Control_TextView_DoCommandBySelector(MakeControl(control), MakeTextView(textView), objc.Selector(commandSelector))
 	return C.bool(result)
 }
 
 //export comboBoxDelegate_ControlTextDidBeginEditing
-func comboBoxDelegate_ControlTextDidBeginEditing(id int64, obj unsafe.Pointer) {
-	delegate := resources.Get(id).(*ComboBoxDelegate)
+func comboBoxDelegate_ControlTextDidBeginEditing(hp C.uintptr_t, obj unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ComboBoxDelegate)
 	delegate.ControlTextDidBeginEditing(foundation.MakeNotification(obj))
 }
 
 //export comboBoxDelegate_ControlTextDidChange
-func comboBoxDelegate_ControlTextDidChange(id int64, obj unsafe.Pointer) {
-	delegate := resources.Get(id).(*ComboBoxDelegate)
+func comboBoxDelegate_ControlTextDidChange(hp C.uintptr_t, obj unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ComboBoxDelegate)
 	delegate.ControlTextDidChange(foundation.MakeNotification(obj))
 }
 
 //export comboBoxDelegate_ControlTextDidEndEditing
-func comboBoxDelegate_ControlTextDidEndEditing(id int64, obj unsafe.Pointer) {
-	delegate := resources.Get(id).(*ComboBoxDelegate)
+func comboBoxDelegate_ControlTextDidEndEditing(hp C.uintptr_t, obj unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ComboBoxDelegate)
 	delegate.ControlTextDidEndEditing(foundation.MakeNotification(obj))
 }
 
 //export ComboBoxDelegate_RespondsTo
-func ComboBoxDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
+func ComboBoxDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
-	delegate := resources.Get(id).(*ComboBoxDelegate)
+	delegate := cgo.Handle(hp).Value().(*ComboBoxDelegate)
 	switch selName {
 	case "comboBoxSelectionDidChange:":
 		return delegate.ComboBoxSelectionDidChange != nil
@@ -198,6 +198,6 @@ func ComboBoxDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
 }
 
 //export deleteComboBoxDelegate
-func deleteComboBoxDelegate(id int64) {
-	resources.Delete(id)
+func deleteComboBoxDelegate(hp C.uintptr_t) {
+	cgo.Handle(hp).Delete()
 }

@@ -4,6 +4,7 @@ package appkit
 import "C"
 import (
 	"github.com/hsiafan/cocoa/objc"
+	"runtime/cgo"
 	"unsafe"
 )
 
@@ -12,24 +13,23 @@ type AlertDelegate struct {
 }
 
 func WrapAlertDelegate(delegate *AlertDelegate) objc.Object {
-	id := resources.NextId()
-	resources.Store(id, delegate)
-	ptr := C.WrapAlertDelegate(C.long(id))
+	h := cgo.NewHandle(delegate)
+	ptr := C.WrapAlertDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)
 }
 
 //export alertDelegate_AlertShowHelp
-func alertDelegate_AlertShowHelp(id int64, alert unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*AlertDelegate)
+func alertDelegate_AlertShowHelp(hp C.uintptr_t, alert unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*AlertDelegate)
 	result := delegate.AlertShowHelp(MakeAlert(alert))
 	return C.bool(result)
 }
 
 //export AlertDelegate_RespondsTo
-func AlertDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
+func AlertDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
-	delegate := resources.Get(id).(*AlertDelegate)
+	delegate := cgo.Handle(hp).Value().(*AlertDelegate)
 	switch selName {
 	case "alertShowHelp:":
 		return delegate.AlertShowHelp != nil
@@ -39,6 +39,6 @@ func AlertDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
 }
 
 //export deleteAlertDelegate
-func deleteAlertDelegate(id int64) {
-	resources.Delete(id)
+func deleteAlertDelegate(hp C.uintptr_t) {
+	cgo.Handle(hp).Delete()
 }

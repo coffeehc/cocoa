@@ -36,7 +36,7 @@
 }
 @end
 
-void* WrapCollectionViewDataSource(long goID) {
+void* WrapCollectionViewDataSource(uintptr_t goID) {
     NSCollectionViewDataSourceAdaptor* adaptor = [[NSCollectionViewDataSourceAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

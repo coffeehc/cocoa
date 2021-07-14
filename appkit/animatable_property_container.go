@@ -5,6 +5,7 @@ import "C"
 import (
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
+	"runtime/cgo"
 	"unsafe"
 )
 
@@ -14,31 +15,30 @@ type AnimatablePropertyContainer struct {
 }
 
 func WrapAnimatablePropertyContainer(delegate *AnimatablePropertyContainer) objc.Object {
-	id := resources.NextId()
-	resources.Store(id, delegate)
-	ptr := C.WrapAnimatablePropertyContainer(C.long(id))
+	h := cgo.NewHandle(delegate)
+	ptr := C.WrapAnimatablePropertyContainer(C.uintptr_t(h))
 	return objc.MakeObject(ptr)
 }
 
 //export animatablePropertyContainer_Animator
-func animatablePropertyContainer_Animator(id int64) unsafe.Pointer {
-	delegate := resources.Get(id).(*AnimatablePropertyContainer)
+func animatablePropertyContainer_Animator(hp C.uintptr_t) unsafe.Pointer {
+	delegate := cgo.Handle(hp).Value().(*AnimatablePropertyContainer)
 	result := delegate.Animator()
 	return objc.ExtractPtr(result)
 }
 
 //export animatablePropertyContainer_AnimationForKey
-func animatablePropertyContainer_AnimationForKey(id int64, key unsafe.Pointer) unsafe.Pointer {
-	delegate := resources.Get(id).(*AnimatablePropertyContainer)
+func animatablePropertyContainer_AnimationForKey(hp C.uintptr_t, key unsafe.Pointer) unsafe.Pointer {
+	delegate := cgo.Handle(hp).Value().(*AnimatablePropertyContainer)
 	result := delegate.AnimationForKey(AnimatablePropertyKey(foundation.MakeString(key).String()))
 	return objc.ExtractPtr(result)
 }
 
 //export AnimatablePropertyContainer_RespondsTo
-func AnimatablePropertyContainer_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
+func AnimatablePropertyContainer_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
-	delegate := resources.Get(id).(*AnimatablePropertyContainer)
+	delegate := cgo.Handle(hp).Value().(*AnimatablePropertyContainer)
 	switch selName {
 	case "animator:":
 		return delegate.Animator != nil
@@ -50,6 +50,6 @@ func AnimatablePropertyContainer_RespondsTo(id int64, selectorPtr unsafe.Pointer
 }
 
 //export deleteAnimatablePropertyContainer
-func deleteAnimatablePropertyContainer(id int64) {
-	resources.Delete(id)
+func deleteAnimatablePropertyContainer(hp C.uintptr_t) {
+	cgo.Handle(hp).Delete()
 }

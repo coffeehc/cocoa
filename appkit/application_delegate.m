@@ -194,7 +194,7 @@
 }
 @end
 
-void* WrapApplicationDelegate(long goID) {
+void* WrapApplicationDelegate(uintptr_t goID) {
     NSApplicationDelegateAdaptor* adaptor = [[NSApplicationDelegateAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

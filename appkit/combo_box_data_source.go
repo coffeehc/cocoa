@@ -5,6 +5,7 @@ import "C"
 import (
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
+	"runtime/cgo"
 	"unsafe"
 )
 
@@ -16,45 +17,44 @@ type ComboBoxDataSource struct {
 }
 
 func WrapComboBoxDataSource(delegate *ComboBoxDataSource) objc.Object {
-	id := resources.NextId()
-	resources.Store(id, delegate)
-	ptr := C.WrapComboBoxDataSource(C.long(id))
+	h := cgo.NewHandle(delegate)
+	ptr := C.WrapComboBoxDataSource(C.uintptr_t(h))
 	return objc.MakeObject(ptr)
 }
 
 //export comboBoxDataSource_ComboBox_CompletedString
-func comboBoxDataSource_ComboBox_CompletedString(id int64, comboBox unsafe.Pointer, _string unsafe.Pointer) unsafe.Pointer {
-	delegate := resources.Get(id).(*ComboBoxDataSource)
+func comboBoxDataSource_ComboBox_CompletedString(hp C.uintptr_t, comboBox unsafe.Pointer, _string unsafe.Pointer) unsafe.Pointer {
+	delegate := cgo.Handle(hp).Value().(*ComboBoxDataSource)
 	result := delegate.ComboBox_CompletedString(MakeComboBox(comboBox), foundation.MakeString(_string).String())
 	return foundation.NewString(result).Ptr()
 }
 
 //export comboBoxDataSource_ComboBox_IndexOfItemWithStringValue
-func comboBoxDataSource_ComboBox_IndexOfItemWithStringValue(id int64, comboBox unsafe.Pointer, _string unsafe.Pointer) C.uint {
-	delegate := resources.Get(id).(*ComboBoxDataSource)
+func comboBoxDataSource_ComboBox_IndexOfItemWithStringValue(hp C.uintptr_t, comboBox unsafe.Pointer, _string unsafe.Pointer) C.uint {
+	delegate := cgo.Handle(hp).Value().(*ComboBoxDataSource)
 	result := delegate.ComboBox_IndexOfItemWithStringValue(MakeComboBox(comboBox), foundation.MakeString(_string).String())
 	return C.uint(result)
 }
 
 //export comboBoxDataSource_ComboBox_ObjectValueForItemAtIndex
-func comboBoxDataSource_ComboBox_ObjectValueForItemAtIndex(id int64, comboBox unsafe.Pointer, index C.int) unsafe.Pointer {
-	delegate := resources.Get(id).(*ComboBoxDataSource)
+func comboBoxDataSource_ComboBox_ObjectValueForItemAtIndex(hp C.uintptr_t, comboBox unsafe.Pointer, index C.int) unsafe.Pointer {
+	delegate := cgo.Handle(hp).Value().(*ComboBoxDataSource)
 	result := delegate.ComboBox_ObjectValueForItemAtIndex(MakeComboBox(comboBox), int(index))
 	return objc.ExtractPtr(result)
 }
 
 //export comboBoxDataSource_NumberOfItemsInComboBox
-func comboBoxDataSource_NumberOfItemsInComboBox(id int64, comboBox unsafe.Pointer) C.int {
-	delegate := resources.Get(id).(*ComboBoxDataSource)
+func comboBoxDataSource_NumberOfItemsInComboBox(hp C.uintptr_t, comboBox unsafe.Pointer) C.int {
+	delegate := cgo.Handle(hp).Value().(*ComboBoxDataSource)
 	result := delegate.NumberOfItemsInComboBox(MakeComboBox(comboBox))
 	return C.int(result)
 }
 
 //export ComboBoxDataSource_RespondsTo
-func ComboBoxDataSource_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
+func ComboBoxDataSource_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
-	delegate := resources.Get(id).(*ComboBoxDataSource)
+	delegate := cgo.Handle(hp).Value().(*ComboBoxDataSource)
 	switch selName {
 	case "comboBox:completedString:":
 		return delegate.ComboBox_CompletedString != nil
@@ -70,6 +70,6 @@ func ComboBoxDataSource_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
 }
 
 //export deleteComboBoxDataSource
-func deleteComboBoxDataSource(id int64) {
-	resources.Delete(id)
+func deleteComboBoxDataSource(hp C.uintptr_t) {
+	cgo.Handle(hp).Delete()
 }

@@ -1,10 +1,11 @@
 #import <stdbool.h>
+#import <stdint.h>
 #import <stdlib.h>
 #import <utils.h>
 #import <Appkit/Appkit.h>
 
 @interface NSControlTextEditingDelegateAdaptor : NSObject <NSControlTextEditingDelegate>
-@property (assign) long goID;
+@property (assign) uintptr_t goID;
 @end
 
-void* WrapControlTextEditingDelegate(long goID);
+void* WrapControlTextEditingDelegate(uintptr_t goID);

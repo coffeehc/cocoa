@@ -109,7 +109,7 @@
 }
 @end
 
-void* WrapComboBoxDelegate(long goID) {
+void* WrapComboBoxDelegate(uintptr_t goID) {
     NSComboBoxDelegateAdaptor* adaptor = [[NSComboBoxDelegateAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

@@ -60,7 +60,7 @@
 }
 @end
 
-void* WrapColorPickingDefault(long goID) {
+void* WrapColorPickingDefault(uintptr_t goID) {
     NSColorPickingDefaultAdaptor* adaptor = [[NSColorPickingDefaultAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

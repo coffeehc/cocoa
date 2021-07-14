@@ -253,7 +253,7 @@
 }
 @end
 
-void* WrapWindowDelegate(long goID) {
+void* WrapWindowDelegate(uintptr_t goID) {
     NSWindowDelegateAdaptor* adaptor = [[NSWindowDelegateAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

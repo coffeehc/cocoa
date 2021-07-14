@@ -6,6 +6,7 @@ import (
 	"github.com/hsiafan/cocoa/coregraphics"
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
+	"runtime/cgo"
 	"unsafe"
 )
 
@@ -27,35 +28,34 @@ type OutlineViewDataSource struct {
 }
 
 func WrapOutlineViewDataSource(delegate *OutlineViewDataSource) objc.Object {
-	id := resources.NextId()
-	resources.Store(id, delegate)
-	ptr := C.WrapOutlineViewDataSource(C.long(id))
+	h := cgo.NewHandle(delegate)
+	ptr := C.WrapOutlineViewDataSource(C.uintptr_t(h))
 	return objc.MakeObject(ptr)
 }
 
 //export outlineViewDataSource_OutlineView_AcceptDrop_Item_ChildIndex
-func outlineViewDataSource_OutlineView_AcceptDrop_Item_ChildIndex(id int64, outlineView unsafe.Pointer, info unsafe.Pointer, item unsafe.Pointer, index C.int) C.bool {
-	delegate := resources.Get(id).(*OutlineViewDataSource)
+func outlineViewDataSource_OutlineView_AcceptDrop_Item_ChildIndex(hp C.uintptr_t, outlineView unsafe.Pointer, info unsafe.Pointer, item unsafe.Pointer, index C.int) C.bool {
+	delegate := cgo.Handle(hp).Value().(*OutlineViewDataSource)
 	result := delegate.OutlineView_AcceptDrop_Item_ChildIndex(MakeOutlineView(outlineView), objc.MakeObject(info), objc.MakeObject(item), int(index))
 	return C.bool(result)
 }
 
 //export outlineViewDataSource_OutlineView_Child_OfItem
-func outlineViewDataSource_OutlineView_Child_OfItem(id int64, outlineView unsafe.Pointer, index C.int, item unsafe.Pointer) unsafe.Pointer {
-	delegate := resources.Get(id).(*OutlineViewDataSource)
+func outlineViewDataSource_OutlineView_Child_OfItem(hp C.uintptr_t, outlineView unsafe.Pointer, index C.int, item unsafe.Pointer) unsafe.Pointer {
+	delegate := cgo.Handle(hp).Value().(*OutlineViewDataSource)
 	result := delegate.OutlineView_Child_OfItem(MakeOutlineView(outlineView), int(index), objc.MakeObject(item))
 	return objc.ExtractPtr(result)
 }
 
 //export outlineViewDataSource_OutlineView_DraggingSession_EndedAtPoint_Operation
-func outlineViewDataSource_OutlineView_DraggingSession_EndedAtPoint_Operation(id int64, outlineView unsafe.Pointer, session unsafe.Pointer, screenPoint C.CGPoint, operation C.uint) {
-	delegate := resources.Get(id).(*OutlineViewDataSource)
+func outlineViewDataSource_OutlineView_DraggingSession_EndedAtPoint_Operation(hp C.uintptr_t, outlineView unsafe.Pointer, session unsafe.Pointer, screenPoint C.CGPoint, operation C.uint) {
+	delegate := cgo.Handle(hp).Value().(*OutlineViewDataSource)
 	delegate.OutlineView_DraggingSession_EndedAtPoint_Operation(MakeOutlineView(outlineView), MakeDraggingSession(session), foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&screenPoint))), DragOperation(uint(operation)))
 }
 
 //export outlineViewDataSource_OutlineView_DraggingSession_WillBeginAtPoint_ForItems
-func outlineViewDataSource_OutlineView_DraggingSession_WillBeginAtPoint_ForItems(id int64, outlineView unsafe.Pointer, session unsafe.Pointer, screenPoint C.CGPoint, draggedItems C.Array) {
-	delegate := resources.Get(id).(*OutlineViewDataSource)
+func outlineViewDataSource_OutlineView_DraggingSession_WillBeginAtPoint_ForItems(hp C.uintptr_t, outlineView unsafe.Pointer, session unsafe.Pointer, screenPoint C.CGPoint, draggedItems C.Array) {
+	delegate := cgo.Handle(hp).Value().(*OutlineViewDataSource)
 	defer C.free(draggedItems.data)
 	draggedItemsSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(draggedItems.data))[:draggedItems.len:draggedItems.len]
 	var goDraggedItems = make([]objc.Object, len(draggedItemsSlice))
@@ -66,56 +66,56 @@ func outlineViewDataSource_OutlineView_DraggingSession_WillBeginAtPoint_ForItems
 }
 
 //export outlineViewDataSource_OutlineView_IsItemExpandable
-func outlineViewDataSource_OutlineView_IsItemExpandable(id int64, outlineView unsafe.Pointer, item unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*OutlineViewDataSource)
+func outlineViewDataSource_OutlineView_IsItemExpandable(hp C.uintptr_t, outlineView unsafe.Pointer, item unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*OutlineViewDataSource)
 	result := delegate.OutlineView_IsItemExpandable(MakeOutlineView(outlineView), objc.MakeObject(item))
 	return C.bool(result)
 }
 
 //export outlineViewDataSource_OutlineView_ItemForPersistentObject
-func outlineViewDataSource_OutlineView_ItemForPersistentObject(id int64, outlineView unsafe.Pointer, object unsafe.Pointer) unsafe.Pointer {
-	delegate := resources.Get(id).(*OutlineViewDataSource)
+func outlineViewDataSource_OutlineView_ItemForPersistentObject(hp C.uintptr_t, outlineView unsafe.Pointer, object unsafe.Pointer) unsafe.Pointer {
+	delegate := cgo.Handle(hp).Value().(*OutlineViewDataSource)
 	result := delegate.OutlineView_ItemForPersistentObject(MakeOutlineView(outlineView), objc.MakeObject(object))
 	return objc.ExtractPtr(result)
 }
 
 //export outlineViewDataSource_OutlineView_NumberOfChildrenOfItem
-func outlineViewDataSource_OutlineView_NumberOfChildrenOfItem(id int64, outlineView unsafe.Pointer, item unsafe.Pointer) C.int {
-	delegate := resources.Get(id).(*OutlineViewDataSource)
+func outlineViewDataSource_OutlineView_NumberOfChildrenOfItem(hp C.uintptr_t, outlineView unsafe.Pointer, item unsafe.Pointer) C.int {
+	delegate := cgo.Handle(hp).Value().(*OutlineViewDataSource)
 	result := delegate.OutlineView_NumberOfChildrenOfItem(MakeOutlineView(outlineView), objc.MakeObject(item))
 	return C.int(result)
 }
 
 //export outlineViewDataSource_OutlineView_ObjectValueForTableColumn_ByItem
-func outlineViewDataSource_OutlineView_ObjectValueForTableColumn_ByItem(id int64, outlineView unsafe.Pointer, tableColumn unsafe.Pointer, item unsafe.Pointer) unsafe.Pointer {
-	delegate := resources.Get(id).(*OutlineViewDataSource)
+func outlineViewDataSource_OutlineView_ObjectValueForTableColumn_ByItem(hp C.uintptr_t, outlineView unsafe.Pointer, tableColumn unsafe.Pointer, item unsafe.Pointer) unsafe.Pointer {
+	delegate := cgo.Handle(hp).Value().(*OutlineViewDataSource)
 	result := delegate.OutlineView_ObjectValueForTableColumn_ByItem(MakeOutlineView(outlineView), MakeTableColumn(tableColumn), objc.MakeObject(item))
 	return objc.ExtractPtr(result)
 }
 
 //export outlineViewDataSource_OutlineView_PasteboardWriterForItem
-func outlineViewDataSource_OutlineView_PasteboardWriterForItem(id int64, outlineView unsafe.Pointer, item unsafe.Pointer) unsafe.Pointer {
-	delegate := resources.Get(id).(*OutlineViewDataSource)
+func outlineViewDataSource_OutlineView_PasteboardWriterForItem(hp C.uintptr_t, outlineView unsafe.Pointer, item unsafe.Pointer) unsafe.Pointer {
+	delegate := cgo.Handle(hp).Value().(*OutlineViewDataSource)
 	result := delegate.OutlineView_PasteboardWriterForItem(MakeOutlineView(outlineView), objc.MakeObject(item))
 	return objc.ExtractPtr(result)
 }
 
 //export outlineViewDataSource_OutlineView_PersistentObjectForItem
-func outlineViewDataSource_OutlineView_PersistentObjectForItem(id int64, outlineView unsafe.Pointer, item unsafe.Pointer) unsafe.Pointer {
-	delegate := resources.Get(id).(*OutlineViewDataSource)
+func outlineViewDataSource_OutlineView_PersistentObjectForItem(hp C.uintptr_t, outlineView unsafe.Pointer, item unsafe.Pointer) unsafe.Pointer {
+	delegate := cgo.Handle(hp).Value().(*OutlineViewDataSource)
 	result := delegate.OutlineView_PersistentObjectForItem(MakeOutlineView(outlineView), objc.MakeObject(item))
 	return objc.ExtractPtr(result)
 }
 
 //export outlineViewDataSource_OutlineView_SetObjectValue_ForTableColumn_ByItem
-func outlineViewDataSource_OutlineView_SetObjectValue_ForTableColumn_ByItem(id int64, outlineView unsafe.Pointer, object unsafe.Pointer, tableColumn unsafe.Pointer, item unsafe.Pointer) {
-	delegate := resources.Get(id).(*OutlineViewDataSource)
+func outlineViewDataSource_OutlineView_SetObjectValue_ForTableColumn_ByItem(hp C.uintptr_t, outlineView unsafe.Pointer, object unsafe.Pointer, tableColumn unsafe.Pointer, item unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*OutlineViewDataSource)
 	delegate.OutlineView_SetObjectValue_ForTableColumn_ByItem(MakeOutlineView(outlineView), objc.MakeObject(object), MakeTableColumn(tableColumn), objc.MakeObject(item))
 }
 
 //export outlineViewDataSource_OutlineView_SortDescriptorsDidChange
-func outlineViewDataSource_OutlineView_SortDescriptorsDidChange(id int64, outlineView unsafe.Pointer, oldDescriptors C.Array) {
-	delegate := resources.Get(id).(*OutlineViewDataSource)
+func outlineViewDataSource_OutlineView_SortDescriptorsDidChange(hp C.uintptr_t, outlineView unsafe.Pointer, oldDescriptors C.Array) {
+	delegate := cgo.Handle(hp).Value().(*OutlineViewDataSource)
 	defer C.free(oldDescriptors.data)
 	oldDescriptorsSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(oldDescriptors.data))[:oldDescriptors.len:oldDescriptors.len]
 	var goOldDescriptors = make([]foundation.SortDescriptor, len(oldDescriptorsSlice))
@@ -126,23 +126,23 @@ func outlineViewDataSource_OutlineView_SortDescriptorsDidChange(id int64, outlin
 }
 
 //export outlineViewDataSource_OutlineView_UpdateDraggingItemsForDrag
-func outlineViewDataSource_OutlineView_UpdateDraggingItemsForDrag(id int64, outlineView unsafe.Pointer, draggingInfo unsafe.Pointer) {
-	delegate := resources.Get(id).(*OutlineViewDataSource)
+func outlineViewDataSource_OutlineView_UpdateDraggingItemsForDrag(hp C.uintptr_t, outlineView unsafe.Pointer, draggingInfo unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*OutlineViewDataSource)
 	delegate.OutlineView_UpdateDraggingItemsForDrag(MakeOutlineView(outlineView), objc.MakeObject(draggingInfo))
 }
 
 //export outlineViewDataSource_OutlineView_ValidateDrop_ProposedItem_ProposedChildIndex
-func outlineViewDataSource_OutlineView_ValidateDrop_ProposedItem_ProposedChildIndex(id int64, outlineView unsafe.Pointer, info unsafe.Pointer, item unsafe.Pointer, index C.int) C.uint {
-	delegate := resources.Get(id).(*OutlineViewDataSource)
+func outlineViewDataSource_OutlineView_ValidateDrop_ProposedItem_ProposedChildIndex(hp C.uintptr_t, outlineView unsafe.Pointer, info unsafe.Pointer, item unsafe.Pointer, index C.int) C.uint {
+	delegate := cgo.Handle(hp).Value().(*OutlineViewDataSource)
 	result := delegate.OutlineView_ValidateDrop_ProposedItem_ProposedChildIndex(MakeOutlineView(outlineView), objc.MakeObject(info), objc.MakeObject(item), int(index))
 	return C.uint(uint(result))
 }
 
 //export OutlineViewDataSource_RespondsTo
-func OutlineViewDataSource_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
+func OutlineViewDataSource_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
-	delegate := resources.Get(id).(*OutlineViewDataSource)
+	delegate := cgo.Handle(hp).Value().(*OutlineViewDataSource)
 	switch selName {
 	case "outlineView:acceptDrop:item:childIndex:":
 		return delegate.OutlineView_AcceptDrop_Item_ChildIndex != nil
@@ -178,6 +178,6 @@ func OutlineViewDataSource_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool
 }
 
 //export deleteOutlineViewDataSource
-func deleteOutlineViewDataSource(id int64) {
-	resources.Delete(id)
+func deleteOutlineViewDataSource(hp C.uintptr_t) {
+	cgo.Handle(hp).Delete()
 }

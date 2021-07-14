@@ -25,7 +25,7 @@
 }
 @end
 
-void* WrapFontChanging(long goID) {
+void* WrapFontChanging(uintptr_t goID) {
     NSFontChangingAdaptor* adaptor = [[NSFontChangingAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

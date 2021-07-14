@@ -1,10 +1,11 @@
 #import <stdbool.h>
+#import <stdint.h>
 #import <stdlib.h>
 #import <utils.h>
 #import <Appkit/Appkit.h>
 
 @interface NSAlertDelegateAdaptor : NSObject <NSAlertDelegate>
-@property (assign) long goID;
+@property (assign) uintptr_t goID;
 @end
 
-void* WrapAlertDelegate(long goID);
+void* WrapAlertDelegate(uintptr_t goID);

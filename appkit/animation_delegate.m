@@ -38,7 +38,7 @@
 }
 @end
 
-void* WrapAnimationDelegate(long goID) {
+void* WrapAnimationDelegate(uintptr_t goID) {
     NSAnimationDelegateAdaptor* adaptor = [[NSAnimationDelegateAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

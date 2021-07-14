@@ -4,6 +4,7 @@ package appkit
 import "C"
 import (
 	"github.com/hsiafan/cocoa/objc"
+	"runtime/cgo"
 	"unsafe"
 )
 
@@ -13,29 +14,28 @@ type ViewControllerPresentationAnimator struct {
 }
 
 func WrapViewControllerPresentationAnimator(delegate *ViewControllerPresentationAnimator) objc.Object {
-	id := resources.NextId()
-	resources.Store(id, delegate)
-	ptr := C.WrapViewControllerPresentationAnimator(C.long(id))
+	h := cgo.NewHandle(delegate)
+	ptr := C.WrapViewControllerPresentationAnimator(C.uintptr_t(h))
 	return objc.MakeObject(ptr)
 }
 
 //export viewControllerPresentationAnimator_AnimatePresentationOfViewController_FromViewController
-func viewControllerPresentationAnimator_AnimatePresentationOfViewController_FromViewController(id int64, viewController unsafe.Pointer, fromViewController unsafe.Pointer) {
-	delegate := resources.Get(id).(*ViewControllerPresentationAnimator)
+func viewControllerPresentationAnimator_AnimatePresentationOfViewController_FromViewController(hp C.uintptr_t, viewController unsafe.Pointer, fromViewController unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ViewControllerPresentationAnimator)
 	delegate.AnimatePresentationOfViewController_FromViewController(MakeViewController(viewController), MakeViewController(fromViewController))
 }
 
 //export viewControllerPresentationAnimator_AnimateDismissalOfViewController_FromViewController
-func viewControllerPresentationAnimator_AnimateDismissalOfViewController_FromViewController(id int64, viewController unsafe.Pointer, fromViewController unsafe.Pointer) {
-	delegate := resources.Get(id).(*ViewControllerPresentationAnimator)
+func viewControllerPresentationAnimator_AnimateDismissalOfViewController_FromViewController(hp C.uintptr_t, viewController unsafe.Pointer, fromViewController unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ViewControllerPresentationAnimator)
 	delegate.AnimateDismissalOfViewController_FromViewController(MakeViewController(viewController), MakeViewController(fromViewController))
 }
 
 //export ViewControllerPresentationAnimator_RespondsTo
-func ViewControllerPresentationAnimator_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
+func ViewControllerPresentationAnimator_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
-	delegate := resources.Get(id).(*ViewControllerPresentationAnimator)
+	delegate := cgo.Handle(hp).Value().(*ViewControllerPresentationAnimator)
 	switch selName {
 	case "animatePresentationOfViewController:fromViewController:":
 		return delegate.AnimatePresentationOfViewController_FromViewController != nil
@@ -47,6 +47,6 @@ func ViewControllerPresentationAnimator_RespondsTo(id int64, selectorPtr unsafe.
 }
 
 //export deleteViewControllerPresentationAnimator
-func deleteViewControllerPresentationAnimator(id int64) {
-	resources.Delete(id)
+func deleteViewControllerPresentationAnimator(hp C.uintptr_t) {
+	cgo.Handle(hp).Delete()
 }

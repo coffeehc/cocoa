@@ -193,7 +193,7 @@
 }
 @end
 
-void* WrapTableViewDelegate(long goID) {
+void* WrapTableViewDelegate(uintptr_t goID) {
     NSTableViewDelegateAdaptor* adaptor = [[NSTableViewDelegateAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

@@ -33,7 +33,7 @@
 }
 @end
 
-void* WrapTabViewDelegate(long goID) {
+void* WrapTabViewDelegate(uintptr_t goID) {
     NSTabViewDelegateAdaptor* adaptor = [[NSTabViewDelegateAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

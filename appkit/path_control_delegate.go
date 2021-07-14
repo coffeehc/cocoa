@@ -4,6 +4,7 @@ package appkit
 import "C"
 import (
 	"github.com/hsiafan/cocoa/objc"
+	"runtime/cgo"
 	"unsafe"
 )
 
@@ -17,57 +18,56 @@ type PathControlDelegate struct {
 }
 
 func WrapPathControlDelegate(delegate *PathControlDelegate) objc.Object {
-	id := resources.NextId()
-	resources.Store(id, delegate)
-	ptr := C.WrapPathControlDelegate(C.long(id))
+	h := cgo.NewHandle(delegate)
+	ptr := C.WrapPathControlDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)
 }
 
 //export pathControlDelegate_PathControl_ShouldDragPathComponentCell_WithPasteboard
-func pathControlDelegate_PathControl_ShouldDragPathComponentCell_WithPasteboard(id int64, pathControl unsafe.Pointer, pathComponentCell unsafe.Pointer, pasteboard unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*PathControlDelegate)
+func pathControlDelegate_PathControl_ShouldDragPathComponentCell_WithPasteboard(hp C.uintptr_t, pathControl unsafe.Pointer, pathComponentCell unsafe.Pointer, pasteboard unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*PathControlDelegate)
 	result := delegate.PathControl_ShouldDragPathComponentCell_WithPasteboard(MakePathControl(pathControl), MakePathComponentCell(pathComponentCell), MakePasteboard(pasteboard))
 	return C.bool(result)
 }
 
 //export pathControlDelegate_PathControl_ValidateDrop
-func pathControlDelegate_PathControl_ValidateDrop(id int64, pathControl unsafe.Pointer, info unsafe.Pointer) C.uint {
-	delegate := resources.Get(id).(*PathControlDelegate)
+func pathControlDelegate_PathControl_ValidateDrop(hp C.uintptr_t, pathControl unsafe.Pointer, info unsafe.Pointer) C.uint {
+	delegate := cgo.Handle(hp).Value().(*PathControlDelegate)
 	result := delegate.PathControl_ValidateDrop(MakePathControl(pathControl), objc.MakeObject(info))
 	return C.uint(uint(result))
 }
 
 //export pathControlDelegate_PathControl_AcceptDrop
-func pathControlDelegate_PathControl_AcceptDrop(id int64, pathControl unsafe.Pointer, info unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*PathControlDelegate)
+func pathControlDelegate_PathControl_AcceptDrop(hp C.uintptr_t, pathControl unsafe.Pointer, info unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*PathControlDelegate)
 	result := delegate.PathControl_AcceptDrop(MakePathControl(pathControl), objc.MakeObject(info))
 	return C.bool(result)
 }
 
 //export pathControlDelegate_PathControl_WillDisplayOpenPanel
-func pathControlDelegate_PathControl_WillDisplayOpenPanel(id int64, pathControl unsafe.Pointer, openPanel unsafe.Pointer) {
-	delegate := resources.Get(id).(*PathControlDelegate)
+func pathControlDelegate_PathControl_WillDisplayOpenPanel(hp C.uintptr_t, pathControl unsafe.Pointer, openPanel unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*PathControlDelegate)
 	delegate.PathControl_WillDisplayOpenPanel(MakePathControl(pathControl), MakeOpenPanel(openPanel))
 }
 
 //export pathControlDelegate_PathControl_WillPopUpMenu
-func pathControlDelegate_PathControl_WillPopUpMenu(id int64, pathControl unsafe.Pointer, menu unsafe.Pointer) {
-	delegate := resources.Get(id).(*PathControlDelegate)
+func pathControlDelegate_PathControl_WillPopUpMenu(hp C.uintptr_t, pathControl unsafe.Pointer, menu unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*PathControlDelegate)
 	delegate.PathControl_WillPopUpMenu(MakePathControl(pathControl), MakeMenu(menu))
 }
 
 //export pathControlDelegate_PathControl_ShouldDragItem_WithPasteboard
-func pathControlDelegate_PathControl_ShouldDragItem_WithPasteboard(id int64, pathControl unsafe.Pointer, pathItem unsafe.Pointer, pasteboard unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*PathControlDelegate)
+func pathControlDelegate_PathControl_ShouldDragItem_WithPasteboard(hp C.uintptr_t, pathControl unsafe.Pointer, pathItem unsafe.Pointer, pasteboard unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*PathControlDelegate)
 	result := delegate.PathControl_ShouldDragItem_WithPasteboard(MakePathControl(pathControl), MakePathControlItem(pathItem), MakePasteboard(pasteboard))
 	return C.bool(result)
 }
 
 //export PathControlDelegate_RespondsTo
-func PathControlDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
+func PathControlDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
-	delegate := resources.Get(id).(*PathControlDelegate)
+	delegate := cgo.Handle(hp).Value().(*PathControlDelegate)
 	switch selName {
 	case "pathControl:shouldDragPathComponentCell:withPasteboard:":
 		return delegate.PathControl_ShouldDragPathComponentCell_WithPasteboard != nil
@@ -87,6 +87,6 @@ func PathControlDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
 }
 
 //export deletePathControlDelegate
-func deletePathControlDelegate(id int64) {
-	resources.Delete(id)
+func deletePathControlDelegate(hp C.uintptr_t) {
+	cgo.Handle(hp).Delete()
 }

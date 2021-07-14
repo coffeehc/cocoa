@@ -21,7 +21,7 @@
 }
 @end
 
-void* WrapAlertDelegate(long goID) {
+void* WrapAlertDelegate(uintptr_t goID) {
     NSAlertDelegateAdaptor* adaptor = [[NSAlertDelegateAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

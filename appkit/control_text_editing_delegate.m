@@ -57,7 +57,7 @@
 }
 @end
 
-void* WrapControlTextEditingDelegate(long goID) {
+void* WrapControlTextEditingDelegate(uintptr_t goID) {
     NSControlTextEditingDelegateAdaptor* adaptor = [[NSControlTextEditingDelegateAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

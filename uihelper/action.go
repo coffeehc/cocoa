@@ -7,7 +7,7 @@ import "C"
 import (
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
-	"sync"
+	"runtime/cgo"
 	"unsafe"
 )
 
@@ -25,22 +25,14 @@ type ActionTarget struct {
 	objc.NSObject
 }
 
-var actionsLock sync.RWMutex
-var actionId int64 = 0
-var actionsMap = map[int64]ActionHandler{}
-
 // NewAction create a new objc ActionTarget instance, from ActionHandler
 func NewAction(handler ActionHandler) ActionTarget {
 	if handler == nil {
 		panic("handler is nil")
 	}
-	actionsLock.Lock()
-	actionId++
-	id := actionId
-	actionsMap[id] = handler
-	actionsLock.Unlock()
+	h := cgo.NewHandle(handler)
 	return ActionTarget{
-		NSObject: objc.MakeObject(C.C_NewAction(C.long(id))),
+		NSObject: objc.MakeObject(C.C_NewAction(C.uintptr_t(h))),
 	}
 }
 
@@ -52,19 +44,14 @@ func SetAction(instance CanSetAction, handler ActionHandler) {
 }
 
 //export callAction
-func callAction(id int64, senderPtr unsafe.Pointer) {
-	actionsLock.RLock()
-	handler := actionsMap[id]
-	actionsLock.RUnlock()
-	if handler == nil {
-		panic("handler not found")
-	}
+func callAction(hp C.uintptr_t, senderPtr unsafe.Pointer) {
+	h := cgo.Handle(hp)
+	handler := h.Value().(ActionHandler)
 	handler(objc.MakeObject(senderPtr))
 }
 
 //export deleteAction
-func deleteAction(id int64) {
-	actionsLock.Lock()
-	delete(actionsMap, id)
-	actionsLock.Unlock()
+func deleteAction(hp C.uintptr_t) {
+	h := cgo.Handle(hp)
+	h.Delete()
 }

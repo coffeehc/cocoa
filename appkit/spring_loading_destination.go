@@ -4,6 +4,7 @@ package appkit
 import "C"
 import (
 	"github.com/hsiafan/cocoa/objc"
+	"runtime/cgo"
 	"unsafe"
 )
 
@@ -17,55 +18,54 @@ type SpringLoadingDestination struct {
 }
 
 func WrapSpringLoadingDestination(delegate *SpringLoadingDestination) objc.Object {
-	id := resources.NextId()
-	resources.Store(id, delegate)
-	ptr := C.WrapSpringLoadingDestination(C.long(id))
+	h := cgo.NewHandle(delegate)
+	ptr := C.WrapSpringLoadingDestination(C.uintptr_t(h))
 	return objc.MakeObject(ptr)
 }
 
 //export springLoadingDestination_SpringLoadingActivated_DraggingInfo
-func springLoadingDestination_SpringLoadingActivated_DraggingInfo(id int64, activated C.bool, draggingInfo unsafe.Pointer) {
-	delegate := resources.Get(id).(*SpringLoadingDestination)
+func springLoadingDestination_SpringLoadingActivated_DraggingInfo(hp C.uintptr_t, activated C.bool, draggingInfo unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*SpringLoadingDestination)
 	delegate.SpringLoadingActivated_DraggingInfo(bool(activated), objc.MakeObject(draggingInfo))
 }
 
 //export springLoadingDestination_SpringLoadingHighlightChanged
-func springLoadingDestination_SpringLoadingHighlightChanged(id int64, draggingInfo unsafe.Pointer) {
-	delegate := resources.Get(id).(*SpringLoadingDestination)
+func springLoadingDestination_SpringLoadingHighlightChanged(hp C.uintptr_t, draggingInfo unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*SpringLoadingDestination)
 	delegate.SpringLoadingHighlightChanged(objc.MakeObject(draggingInfo))
 }
 
 //export springLoadingDestination_SpringLoadingEntered
-func springLoadingDestination_SpringLoadingEntered(id int64, draggingInfo unsafe.Pointer) C.uint {
-	delegate := resources.Get(id).(*SpringLoadingDestination)
+func springLoadingDestination_SpringLoadingEntered(hp C.uintptr_t, draggingInfo unsafe.Pointer) C.uint {
+	delegate := cgo.Handle(hp).Value().(*SpringLoadingDestination)
 	result := delegate.SpringLoadingEntered(objc.MakeObject(draggingInfo))
 	return C.uint(uint(result))
 }
 
 //export springLoadingDestination_SpringLoadingUpdated
-func springLoadingDestination_SpringLoadingUpdated(id int64, draggingInfo unsafe.Pointer) C.uint {
-	delegate := resources.Get(id).(*SpringLoadingDestination)
+func springLoadingDestination_SpringLoadingUpdated(hp C.uintptr_t, draggingInfo unsafe.Pointer) C.uint {
+	delegate := cgo.Handle(hp).Value().(*SpringLoadingDestination)
 	result := delegate.SpringLoadingUpdated(objc.MakeObject(draggingInfo))
 	return C.uint(uint(result))
 }
 
 //export springLoadingDestination_SpringLoadingExited
-func springLoadingDestination_SpringLoadingExited(id int64, draggingInfo unsafe.Pointer) {
-	delegate := resources.Get(id).(*SpringLoadingDestination)
+func springLoadingDestination_SpringLoadingExited(hp C.uintptr_t, draggingInfo unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*SpringLoadingDestination)
 	delegate.SpringLoadingExited(objc.MakeObject(draggingInfo))
 }
 
 //export springLoadingDestination_DraggingEnded
-func springLoadingDestination_DraggingEnded(id int64, draggingInfo unsafe.Pointer) {
-	delegate := resources.Get(id).(*SpringLoadingDestination)
+func springLoadingDestination_DraggingEnded(hp C.uintptr_t, draggingInfo unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*SpringLoadingDestination)
 	delegate.DraggingEnded(objc.MakeObject(draggingInfo))
 }
 
 //export SpringLoadingDestination_RespondsTo
-func SpringLoadingDestination_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
+func SpringLoadingDestination_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
-	delegate := resources.Get(id).(*SpringLoadingDestination)
+	delegate := cgo.Handle(hp).Value().(*SpringLoadingDestination)
 	switch selName {
 	case "springLoadingActivated:draggingInfo:":
 		return delegate.SpringLoadingActivated_DraggingInfo != nil
@@ -85,6 +85,6 @@ func SpringLoadingDestination_RespondsTo(id int64, selectorPtr unsafe.Pointer) b
 }
 
 //export deleteSpringLoadingDestination
-func deleteSpringLoadingDestination(id int64) {
-	resources.Delete(id)
+func deleteSpringLoadingDestination(hp C.uintptr_t) {
+	cgo.Handle(hp).Delete()
 }

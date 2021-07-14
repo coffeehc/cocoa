@@ -5,6 +5,7 @@ import "C"
 import (
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
+	"runtime/cgo"
 	"unsafe"
 )
 
@@ -21,76 +22,75 @@ type ControlTextEditingDelegate struct {
 }
 
 func WrapControlTextEditingDelegate(delegate *ControlTextEditingDelegate) objc.Object {
-	id := resources.NextId()
-	resources.Store(id, delegate)
-	ptr := C.WrapControlTextEditingDelegate(C.long(id))
+	h := cgo.NewHandle(delegate)
+	ptr := C.WrapControlTextEditingDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)
 }
 
 //export controlTextEditingDelegate_Control_IsValidObject
-func controlTextEditingDelegate_Control_IsValidObject(id int64, control unsafe.Pointer, obj unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*ControlTextEditingDelegate)
+func controlTextEditingDelegate_Control_IsValidObject(hp C.uintptr_t, control unsafe.Pointer, obj unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*ControlTextEditingDelegate)
 	result := delegate.Control_IsValidObject(MakeControl(control), objc.MakeObject(obj))
 	return C.bool(result)
 }
 
 //export controlTextEditingDelegate_Control_DidFailToValidatePartialString_ErrorDescription
-func controlTextEditingDelegate_Control_DidFailToValidatePartialString_ErrorDescription(id int64, control unsafe.Pointer, _string unsafe.Pointer, error unsafe.Pointer) {
-	delegate := resources.Get(id).(*ControlTextEditingDelegate)
+func controlTextEditingDelegate_Control_DidFailToValidatePartialString_ErrorDescription(hp C.uintptr_t, control unsafe.Pointer, _string unsafe.Pointer, error unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ControlTextEditingDelegate)
 	delegate.Control_DidFailToValidatePartialString_ErrorDescription(MakeControl(control), foundation.MakeString(_string).String(), foundation.MakeString(error).String())
 }
 
 //export controlTextEditingDelegate_Control_DidFailToFormatString_ErrorDescription
-func controlTextEditingDelegate_Control_DidFailToFormatString_ErrorDescription(id int64, control unsafe.Pointer, _string unsafe.Pointer, error unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*ControlTextEditingDelegate)
+func controlTextEditingDelegate_Control_DidFailToFormatString_ErrorDescription(hp C.uintptr_t, control unsafe.Pointer, _string unsafe.Pointer, error unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*ControlTextEditingDelegate)
 	result := delegate.Control_DidFailToFormatString_ErrorDescription(MakeControl(control), foundation.MakeString(_string).String(), foundation.MakeString(error).String())
 	return C.bool(result)
 }
 
 //export controlTextEditingDelegate_Control_TextShouldBeginEditing
-func controlTextEditingDelegate_Control_TextShouldBeginEditing(id int64, control unsafe.Pointer, fieldEditor unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*ControlTextEditingDelegate)
+func controlTextEditingDelegate_Control_TextShouldBeginEditing(hp C.uintptr_t, control unsafe.Pointer, fieldEditor unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*ControlTextEditingDelegate)
 	result := delegate.Control_TextShouldBeginEditing(MakeControl(control), MakeText(fieldEditor))
 	return C.bool(result)
 }
 
 //export controlTextEditingDelegate_Control_TextShouldEndEditing
-func controlTextEditingDelegate_Control_TextShouldEndEditing(id int64, control unsafe.Pointer, fieldEditor unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*ControlTextEditingDelegate)
+func controlTextEditingDelegate_Control_TextShouldEndEditing(hp C.uintptr_t, control unsafe.Pointer, fieldEditor unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*ControlTextEditingDelegate)
 	result := delegate.Control_TextShouldEndEditing(MakeControl(control), MakeText(fieldEditor))
 	return C.bool(result)
 }
 
 //export controlTextEditingDelegate_Control_TextView_DoCommandBySelector
-func controlTextEditingDelegate_Control_TextView_DoCommandBySelector(id int64, control unsafe.Pointer, textView unsafe.Pointer, commandSelector unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*ControlTextEditingDelegate)
+func controlTextEditingDelegate_Control_TextView_DoCommandBySelector(hp C.uintptr_t, control unsafe.Pointer, textView unsafe.Pointer, commandSelector unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*ControlTextEditingDelegate)
 	result := delegate.Control_TextView_DoCommandBySelector(MakeControl(control), MakeTextView(textView), objc.Selector(commandSelector))
 	return C.bool(result)
 }
 
 //export controlTextEditingDelegate_ControlTextDidBeginEditing
-func controlTextEditingDelegate_ControlTextDidBeginEditing(id int64, obj unsafe.Pointer) {
-	delegate := resources.Get(id).(*ControlTextEditingDelegate)
+func controlTextEditingDelegate_ControlTextDidBeginEditing(hp C.uintptr_t, obj unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ControlTextEditingDelegate)
 	delegate.ControlTextDidBeginEditing(foundation.MakeNotification(obj))
 }
 
 //export controlTextEditingDelegate_ControlTextDidChange
-func controlTextEditingDelegate_ControlTextDidChange(id int64, obj unsafe.Pointer) {
-	delegate := resources.Get(id).(*ControlTextEditingDelegate)
+func controlTextEditingDelegate_ControlTextDidChange(hp C.uintptr_t, obj unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ControlTextEditingDelegate)
 	delegate.ControlTextDidChange(foundation.MakeNotification(obj))
 }
 
 //export controlTextEditingDelegate_ControlTextDidEndEditing
-func controlTextEditingDelegate_ControlTextDidEndEditing(id int64, obj unsafe.Pointer) {
-	delegate := resources.Get(id).(*ControlTextEditingDelegate)
+func controlTextEditingDelegate_ControlTextDidEndEditing(hp C.uintptr_t, obj unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ControlTextEditingDelegate)
 	delegate.ControlTextDidEndEditing(foundation.MakeNotification(obj))
 }
 
 //export ControlTextEditingDelegate_RespondsTo
-func ControlTextEditingDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
+func ControlTextEditingDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
-	delegate := resources.Get(id).(*ControlTextEditingDelegate)
+	delegate := cgo.Handle(hp).Value().(*ControlTextEditingDelegate)
 	switch selName {
 	case "control:isValidObject:":
 		return delegate.Control_IsValidObject != nil
@@ -116,6 +116,6 @@ func ControlTextEditingDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer)
 }
 
 //export deleteControlTextEditingDelegate
-func deleteControlTextEditingDelegate(id int64) {
-	resources.Delete(id)
+func deleteControlTextEditingDelegate(hp C.uintptr_t) {
+	cgo.Handle(hp).Delete()
 }

@@ -1,10 +1,11 @@
 #import <stdbool.h>
+#import <stdint.h>
 #import <stdlib.h>
 #import <utils.h>
 #import <Appkit/Appkit.h>
 
 @interface NSTableViewDataSourceAdaptor : NSObject <NSTableViewDataSource>
-@property (assign) long goID;
+@property (assign) uintptr_t goID;
 @end
 
-void* WrapTableViewDataSource(long goID);
+void* WrapTableViewDataSource(uintptr_t goID);

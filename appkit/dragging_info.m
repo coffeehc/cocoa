@@ -24,7 +24,7 @@
 }
 @end
 
-void* WrapDraggingInfo(long goID) {
+void* WrapDraggingInfo(uintptr_t goID) {
     NSDraggingInfoAdaptor* adaptor = [[NSDraggingInfoAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

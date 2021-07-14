@@ -222,7 +222,7 @@
 }
 @end
 
-void* WrapOutlineViewDelegate(long goID) {
+void* WrapOutlineViewDelegate(uintptr_t goID) {
     NSOutlineViewDelegateAdaptor* adaptor = [[NSOutlineViewDelegateAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

@@ -4,6 +4,7 @@ package appkit
 import "C"
 import (
 	"github.com/hsiafan/cocoa/objc"
+	"runtime/cgo"
 	"unsafe"
 )
 
@@ -20,76 +21,75 @@ type DraggingDestination struct {
 }
 
 func WrapDraggingDestination(delegate *DraggingDestination) objc.Object {
-	id := resources.NextId()
-	resources.Store(id, delegate)
-	ptr := C.WrapDraggingDestination(C.long(id))
+	h := cgo.NewHandle(delegate)
+	ptr := C.WrapDraggingDestination(C.uintptr_t(h))
 	return objc.MakeObject(ptr)
 }
 
 //export draggingDestination_DraggingEntered
-func draggingDestination_DraggingEntered(id int64, sender unsafe.Pointer) C.uint {
-	delegate := resources.Get(id).(*DraggingDestination)
+func draggingDestination_DraggingEntered(hp C.uintptr_t, sender unsafe.Pointer) C.uint {
+	delegate := cgo.Handle(hp).Value().(*DraggingDestination)
 	result := delegate.DraggingEntered(objc.MakeObject(sender))
 	return C.uint(uint(result))
 }
 
 //export draggingDestination_WantsPeriodicDraggingUpdates
-func draggingDestination_WantsPeriodicDraggingUpdates(id int64) C.bool {
-	delegate := resources.Get(id).(*DraggingDestination)
+func draggingDestination_WantsPeriodicDraggingUpdates(hp C.uintptr_t) C.bool {
+	delegate := cgo.Handle(hp).Value().(*DraggingDestination)
 	result := delegate.WantsPeriodicDraggingUpdates()
 	return C.bool(result)
 }
 
 //export draggingDestination_DraggingUpdated
-func draggingDestination_DraggingUpdated(id int64, sender unsafe.Pointer) C.uint {
-	delegate := resources.Get(id).(*DraggingDestination)
+func draggingDestination_DraggingUpdated(hp C.uintptr_t, sender unsafe.Pointer) C.uint {
+	delegate := cgo.Handle(hp).Value().(*DraggingDestination)
 	result := delegate.DraggingUpdated(objc.MakeObject(sender))
 	return C.uint(uint(result))
 }
 
 //export draggingDestination_DraggingEnded
-func draggingDestination_DraggingEnded(id int64, sender unsafe.Pointer) {
-	delegate := resources.Get(id).(*DraggingDestination)
+func draggingDestination_DraggingEnded(hp C.uintptr_t, sender unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*DraggingDestination)
 	delegate.DraggingEnded(objc.MakeObject(sender))
 }
 
 //export draggingDestination_DraggingExited
-func draggingDestination_DraggingExited(id int64, sender unsafe.Pointer) {
-	delegate := resources.Get(id).(*DraggingDestination)
+func draggingDestination_DraggingExited(hp C.uintptr_t, sender unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*DraggingDestination)
 	delegate.DraggingExited(objc.MakeObject(sender))
 }
 
 //export draggingDestination_PrepareForDragOperation
-func draggingDestination_PrepareForDragOperation(id int64, sender unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*DraggingDestination)
+func draggingDestination_PrepareForDragOperation(hp C.uintptr_t, sender unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*DraggingDestination)
 	result := delegate.PrepareForDragOperation(objc.MakeObject(sender))
 	return C.bool(result)
 }
 
 //export draggingDestination_PerformDragOperation
-func draggingDestination_PerformDragOperation(id int64, sender unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*DraggingDestination)
+func draggingDestination_PerformDragOperation(hp C.uintptr_t, sender unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*DraggingDestination)
 	result := delegate.PerformDragOperation(objc.MakeObject(sender))
 	return C.bool(result)
 }
 
 //export draggingDestination_ConcludeDragOperation
-func draggingDestination_ConcludeDragOperation(id int64, sender unsafe.Pointer) {
-	delegate := resources.Get(id).(*DraggingDestination)
+func draggingDestination_ConcludeDragOperation(hp C.uintptr_t, sender unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*DraggingDestination)
 	delegate.ConcludeDragOperation(objc.MakeObject(sender))
 }
 
 //export draggingDestination_UpdateDraggingItemsForDrag
-func draggingDestination_UpdateDraggingItemsForDrag(id int64, sender unsafe.Pointer) {
-	delegate := resources.Get(id).(*DraggingDestination)
+func draggingDestination_UpdateDraggingItemsForDrag(hp C.uintptr_t, sender unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*DraggingDestination)
 	delegate.UpdateDraggingItemsForDrag(objc.MakeObject(sender))
 }
 
 //export DraggingDestination_RespondsTo
-func DraggingDestination_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
+func DraggingDestination_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
-	delegate := resources.Get(id).(*DraggingDestination)
+	delegate := cgo.Handle(hp).Value().(*DraggingDestination)
 	switch selName {
 	case "draggingEntered:":
 		return delegate.DraggingEntered != nil
@@ -115,6 +115,6 @@ func DraggingDestination_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
 }
 
 //export deleteDraggingDestination
-func deleteDraggingDestination(id int64) {
-	resources.Delete(id)
+func deleteDraggingDestination(hp C.uintptr_t) {
+	cgo.Handle(hp).Delete()
 }

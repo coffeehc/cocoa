@@ -24,7 +24,7 @@
 }
 @end
 
-void* WrapPathCellDelegate(long goID) {
+void* WrapPathCellDelegate(uintptr_t goID) {
     NSPathCellDelegateAdaptor* adaptor = [[NSPathCellDelegateAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

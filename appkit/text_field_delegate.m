@@ -93,7 +93,7 @@
 }
 @end
 
-void* WrapTextFieldDelegate(long goID) {
+void* WrapTextFieldDelegate(uintptr_t goID) {
     NSTextFieldDelegateAdaptor* adaptor = [[NSTextFieldDelegateAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

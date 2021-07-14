@@ -47,7 +47,7 @@
 }
 @end
 
-void* WrapMenuDelegate(long goID) {
+void* WrapMenuDelegate(uintptr_t goID) {
     NSMenuDelegateAdaptor* adaptor = [[NSMenuDelegateAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

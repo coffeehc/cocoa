@@ -164,7 +164,7 @@
 }
 @end
 
-void* WrapBrowserDelegate(long goID) {
+void* WrapBrowserDelegate(uintptr_t goID) {
     NSBrowserDelegateAdaptor* adaptor = [[NSBrowserDelegateAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

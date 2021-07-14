@@ -44,7 +44,7 @@
 }
 @end
 
-void* WrapPathControlDelegate(long goID) {
+void* WrapPathControlDelegate(uintptr_t goID) {
     NSPathControlDelegateAdaptor* adaptor = [[NSPathControlDelegateAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

@@ -5,6 +5,7 @@ import "C"
 import (
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
+	"runtime/cgo"
 	"unsafe"
 )
 
@@ -16,45 +17,44 @@ type CollectionViewDataSource struct {
 }
 
 func WrapCollectionViewDataSource(delegate *CollectionViewDataSource) objc.Object {
-	id := resources.NextId()
-	resources.Store(id, delegate)
-	ptr := C.WrapCollectionViewDataSource(C.long(id))
+	h := cgo.NewHandle(delegate)
+	ptr := C.WrapCollectionViewDataSource(C.uintptr_t(h))
 	return objc.MakeObject(ptr)
 }
 
 //export collectionViewDataSource_NumberOfSectionsInCollectionView
-func collectionViewDataSource_NumberOfSectionsInCollectionView(id int64, collectionView unsafe.Pointer) C.int {
-	delegate := resources.Get(id).(*CollectionViewDataSource)
+func collectionViewDataSource_NumberOfSectionsInCollectionView(hp C.uintptr_t, collectionView unsafe.Pointer) C.int {
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDataSource)
 	result := delegate.NumberOfSectionsInCollectionView(MakeCollectionView(collectionView))
 	return C.int(result)
 }
 
 //export collectionViewDataSource_CollectionView_NumberOfItemsInSection
-func collectionViewDataSource_CollectionView_NumberOfItemsInSection(id int64, collectionView unsafe.Pointer, section C.int) C.int {
-	delegate := resources.Get(id).(*CollectionViewDataSource)
+func collectionViewDataSource_CollectionView_NumberOfItemsInSection(hp C.uintptr_t, collectionView unsafe.Pointer, section C.int) C.int {
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDataSource)
 	result := delegate.CollectionView_NumberOfItemsInSection(MakeCollectionView(collectionView), int(section))
 	return C.int(result)
 }
 
 //export collectionViewDataSource_CollectionView_ItemForRepresentedObjectAtIndexPath
-func collectionViewDataSource_CollectionView_ItemForRepresentedObjectAtIndexPath(id int64, collectionView unsafe.Pointer, indexPath unsafe.Pointer) unsafe.Pointer {
-	delegate := resources.Get(id).(*CollectionViewDataSource)
+func collectionViewDataSource_CollectionView_ItemForRepresentedObjectAtIndexPath(hp C.uintptr_t, collectionView unsafe.Pointer, indexPath unsafe.Pointer) unsafe.Pointer {
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDataSource)
 	result := delegate.CollectionView_ItemForRepresentedObjectAtIndexPath(MakeCollectionView(collectionView), foundation.MakeIndexPath(indexPath))
 	return objc.ExtractPtr(result)
 }
 
 //export collectionViewDataSource_CollectionView_ViewForSupplementaryElementOfKind_AtIndexPath
-func collectionViewDataSource_CollectionView_ViewForSupplementaryElementOfKind_AtIndexPath(id int64, collectionView unsafe.Pointer, kind unsafe.Pointer, indexPath unsafe.Pointer) unsafe.Pointer {
-	delegate := resources.Get(id).(*CollectionViewDataSource)
+func collectionViewDataSource_CollectionView_ViewForSupplementaryElementOfKind_AtIndexPath(hp C.uintptr_t, collectionView unsafe.Pointer, kind unsafe.Pointer, indexPath unsafe.Pointer) unsafe.Pointer {
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDataSource)
 	result := delegate.CollectionView_ViewForSupplementaryElementOfKind_AtIndexPath(MakeCollectionView(collectionView), CollectionViewSupplementaryElementKind(foundation.MakeString(kind).String()), foundation.MakeIndexPath(indexPath))
 	return objc.ExtractPtr(result)
 }
 
 //export CollectionViewDataSource_RespondsTo
-func CollectionViewDataSource_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
+func CollectionViewDataSource_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
-	delegate := resources.Get(id).(*CollectionViewDataSource)
+	delegate := cgo.Handle(hp).Value().(*CollectionViewDataSource)
 	switch selName {
 	case "numberOfSectionsInCollectionView:":
 		return delegate.NumberOfSectionsInCollectionView != nil
@@ -70,6 +70,6 @@ func CollectionViewDataSource_RespondsTo(id int64, selectorPtr unsafe.Pointer) b
 }
 
 //export deleteCollectionViewDataSource
-func deleteCollectionViewDataSource(id int64) {
-	resources.Delete(id)
+func deleteCollectionViewDataSource(hp C.uintptr_t) {
+	cgo.Handle(hp).Delete()
 }

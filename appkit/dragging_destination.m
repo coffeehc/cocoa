@@ -57,7 +57,7 @@
 }
 @end
 
-void* WrapDraggingDestination(long goID) {
+void* WrapDraggingDestination(uintptr_t goID) {
     NSDraggingDestinationAdaptor* adaptor = [[NSDraggingDestinationAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

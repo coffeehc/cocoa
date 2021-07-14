@@ -70,7 +70,7 @@
 }
 @end
 
-void* WrapTableViewDataSource(long goID) {
+void* WrapTableViewDataSource(uintptr_t goID) {
     NSTableViewDataSourceAdaptor* adaptor = [[NSTableViewDataSourceAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

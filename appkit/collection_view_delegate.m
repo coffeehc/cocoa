@@ -110,7 +110,7 @@
 }
 @end
 
-void* WrapCollectionViewDelegate(long goID) {
+void* WrapCollectionViewDelegate(uintptr_t goID) {
     NSCollectionViewDelegateAdaptor* adaptor = [[NSCollectionViewDelegateAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

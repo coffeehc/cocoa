@@ -140,7 +140,7 @@
 }
 @end
 
-void* WrapCollectionViewDelegateFlowLayout(long goID) {
+void* WrapCollectionViewDelegateFlowLayout(uintptr_t goID) {
     NSCollectionViewDelegateFlowLayoutAdaptor* adaptor = [[NSCollectionViewDelegateFlowLayoutAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

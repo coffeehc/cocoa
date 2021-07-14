@@ -36,7 +36,7 @@
 }
 @end
 
-void* WrapComboBoxDataSource(long goID) {
+void* WrapComboBoxDataSource(uintptr_t goID) {
     NSComboBoxDataSourceAdaptor* adaptor = [[NSComboBoxDataSourceAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

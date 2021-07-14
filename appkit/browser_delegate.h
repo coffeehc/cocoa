@@ -1,10 +1,11 @@
 #import <stdbool.h>
+#import <stdint.h>
 #import <stdlib.h>
 #import <utils.h>
 #import <Appkit/Appkit.h>
 
 @interface NSBrowserDelegateAdaptor : NSObject <NSBrowserDelegate>
-@property (assign) long goID;
+@property (assign) uintptr_t goID;
 @end
 
-void* WrapBrowserDelegate(long goID);
+void* WrapBrowserDelegate(uintptr_t goID);

@@ -4,14 +4,14 @@
 #import <objc/runtime.h>
 
 
-void Dispatch_MainQueueAsync(long id) {
+void Dispatch_MainQueueAsync(uintptr_t ptr) {
     dispatch_async(dispatch_get_main_queue(), ^{
-            runTask(id);
+            runTask(ptr);
     });
 }
 
-void Run_WithAutoreleasePool(long id) {
+void Run_WithAutoreleasePool(uintptr_t ptr) {
     @autoreleasepool {
-        runTask(id);
+        runTask(ptr);
     }
 }

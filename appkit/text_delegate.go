@@ -5,6 +5,7 @@ import "C"
 import (
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
+	"runtime/cgo"
 	"unsafe"
 )
 
@@ -17,49 +18,48 @@ type TextDelegate struct {
 }
 
 func WrapTextDelegate(delegate *TextDelegate) objc.Object {
-	id := resources.NextId()
-	resources.Store(id, delegate)
-	ptr := C.WrapTextDelegate(C.long(id))
+	h := cgo.NewHandle(delegate)
+	ptr := C.WrapTextDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)
 }
 
 //export textDelegate_TextDidChange
-func textDelegate_TextDidChange(id int64, notification unsafe.Pointer) {
-	delegate := resources.Get(id).(*TextDelegate)
+func textDelegate_TextDidChange(hp C.uintptr_t, notification unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*TextDelegate)
 	delegate.TextDidChange(foundation.MakeNotification(notification))
 }
 
 //export textDelegate_TextShouldBeginEditing
-func textDelegate_TextShouldBeginEditing(id int64, textObject unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*TextDelegate)
+func textDelegate_TextShouldBeginEditing(hp C.uintptr_t, textObject unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*TextDelegate)
 	result := delegate.TextShouldBeginEditing(MakeText(textObject))
 	return C.bool(result)
 }
 
 //export textDelegate_TextDidBeginEditing
-func textDelegate_TextDidBeginEditing(id int64, notification unsafe.Pointer) {
-	delegate := resources.Get(id).(*TextDelegate)
+func textDelegate_TextDidBeginEditing(hp C.uintptr_t, notification unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*TextDelegate)
 	delegate.TextDidBeginEditing(foundation.MakeNotification(notification))
 }
 
 //export textDelegate_TextShouldEndEditing
-func textDelegate_TextShouldEndEditing(id int64, textObject unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*TextDelegate)
+func textDelegate_TextShouldEndEditing(hp C.uintptr_t, textObject unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*TextDelegate)
 	result := delegate.TextShouldEndEditing(MakeText(textObject))
 	return C.bool(result)
 }
 
 //export textDelegate_TextDidEndEditing
-func textDelegate_TextDidEndEditing(id int64, notification unsafe.Pointer) {
-	delegate := resources.Get(id).(*TextDelegate)
+func textDelegate_TextDidEndEditing(hp C.uintptr_t, notification unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*TextDelegate)
 	delegate.TextDidEndEditing(foundation.MakeNotification(notification))
 }
 
 //export TextDelegate_RespondsTo
-func TextDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
+func TextDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
-	delegate := resources.Get(id).(*TextDelegate)
+	delegate := cgo.Handle(hp).Value().(*TextDelegate)
 	switch selName {
 	case "textDidChange:":
 		return delegate.TextDidChange != nil
@@ -77,6 +77,6 @@ func TextDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
 }
 
 //export deleteTextDelegate
-func deleteTextDelegate(id int64) {
-	resources.Delete(id)
+func deleteTextDelegate(hp C.uintptr_t) {
+	cgo.Handle(hp).Delete()
 }

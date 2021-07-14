@@ -4,6 +4,7 @@ package appkit
 import "C"
 import (
 	"github.com/hsiafan/cocoa/objc"
+	"runtime/cgo"
 	"unsafe"
 )
 
@@ -16,49 +17,48 @@ type AnimationDelegate struct {
 }
 
 func WrapAnimationDelegate(delegate *AnimationDelegate) objc.Object {
-	id := resources.NextId()
-	resources.Store(id, delegate)
-	ptr := C.WrapAnimationDelegate(C.long(id))
+	h := cgo.NewHandle(delegate)
+	ptr := C.WrapAnimationDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)
 }
 
 //export animationDelegate_AnimationDidEnd
-func animationDelegate_AnimationDidEnd(id int64, animation unsafe.Pointer) {
-	delegate := resources.Get(id).(*AnimationDelegate)
+func animationDelegate_AnimationDidEnd(hp C.uintptr_t, animation unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*AnimationDelegate)
 	delegate.AnimationDidEnd(MakeAnimation(animation))
 }
 
 //export animationDelegate_AnimationDidStop
-func animationDelegate_AnimationDidStop(id int64, animation unsafe.Pointer) {
-	delegate := resources.Get(id).(*AnimationDelegate)
+func animationDelegate_AnimationDidStop(hp C.uintptr_t, animation unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*AnimationDelegate)
 	delegate.AnimationDidStop(MakeAnimation(animation))
 }
 
 //export animationDelegate_AnimationShouldStart
-func animationDelegate_AnimationShouldStart(id int64, animation unsafe.Pointer) C.bool {
-	delegate := resources.Get(id).(*AnimationDelegate)
+func animationDelegate_AnimationShouldStart(hp C.uintptr_t, animation unsafe.Pointer) C.bool {
+	delegate := cgo.Handle(hp).Value().(*AnimationDelegate)
 	result := delegate.AnimationShouldStart(MakeAnimation(animation))
 	return C.bool(result)
 }
 
 //export animationDelegate_Animation_ValueForProgress
-func animationDelegate_Animation_ValueForProgress(id int64, animation unsafe.Pointer, progress C.float) C.float {
-	delegate := resources.Get(id).(*AnimationDelegate)
+func animationDelegate_Animation_ValueForProgress(hp C.uintptr_t, animation unsafe.Pointer, progress C.float) C.float {
+	delegate := cgo.Handle(hp).Value().(*AnimationDelegate)
 	result := delegate.Animation_ValueForProgress(MakeAnimation(animation), AnimationProgress(float32(progress)))
 	return C.float(result)
 }
 
 //export animationDelegate_Animation_DidReachProgressMark
-func animationDelegate_Animation_DidReachProgressMark(id int64, animation unsafe.Pointer, progress C.float) {
-	delegate := resources.Get(id).(*AnimationDelegate)
+func animationDelegate_Animation_DidReachProgressMark(hp C.uintptr_t, animation unsafe.Pointer, progress C.float) {
+	delegate := cgo.Handle(hp).Value().(*AnimationDelegate)
 	delegate.Animation_DidReachProgressMark(MakeAnimation(animation), AnimationProgress(float32(progress)))
 }
 
 //export AnimationDelegate_RespondsTo
-func AnimationDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
+func AnimationDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
-	delegate := resources.Get(id).(*AnimationDelegate)
+	delegate := cgo.Handle(hp).Value().(*AnimationDelegate)
 	switch selName {
 	case "animationDidEnd:":
 		return delegate.AnimationDidEnd != nil
@@ -76,6 +76,6 @@ func AnimationDelegate_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
 }
 
 //export deleteAnimationDelegate
-func deleteAnimationDelegate(id int64) {
-	resources.Delete(id)
+func deleteAnimationDelegate(hp C.uintptr_t) {
+	cgo.Handle(hp).Delete()
 }

@@ -6,6 +6,7 @@ import (
 	"github.com/hsiafan/cocoa/coregraphics"
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
+	"runtime/cgo"
 	"unsafe"
 )
 
@@ -23,81 +24,80 @@ type ColorPickingDefault struct {
 }
 
 func WrapColorPickingDefault(delegate *ColorPickingDefault) objc.Object {
-	id := resources.NextId()
-	resources.Store(id, delegate)
-	ptr := C.WrapColorPickingDefault(C.long(id))
+	h := cgo.NewHandle(delegate)
+	ptr := C.WrapColorPickingDefault(C.uintptr_t(h))
 	return objc.MakeObject(ptr)
 }
 
 //export colorPickingDefault_InitWithPickerMask_ColorPanel
-func colorPickingDefault_InitWithPickerMask_ColorPanel(id int64, mask C.uint, owningColorPanel unsafe.Pointer) unsafe.Pointer {
-	delegate := resources.Get(id).(*ColorPickingDefault)
+func colorPickingDefault_InitWithPickerMask_ColorPanel(hp C.uintptr_t, mask C.uint, owningColorPanel unsafe.Pointer) unsafe.Pointer {
+	delegate := cgo.Handle(hp).Value().(*ColorPickingDefault)
 	result := delegate.InitWithPickerMask_ColorPanel(uint(mask), MakeColorPanel(owningColorPanel))
 	return objc.ExtractPtr(result)
 }
 
 //export colorPickingDefault_SetMode
-func colorPickingDefault_SetMode(id int64, mode C.int) {
-	delegate := resources.Get(id).(*ColorPickingDefault)
+func colorPickingDefault_SetMode(hp C.uintptr_t, mode C.int) {
+	delegate := cgo.Handle(hp).Value().(*ColorPickingDefault)
 	delegate.SetMode(ColorPanelMode(int(mode)))
 }
 
 //export colorPickingDefault_InsertNewButtonImage_In
-func colorPickingDefault_InsertNewButtonImage_In(id int64, newButtonImage unsafe.Pointer, buttonCell unsafe.Pointer) {
-	delegate := resources.Get(id).(*ColorPickingDefault)
+func colorPickingDefault_InsertNewButtonImage_In(hp C.uintptr_t, newButtonImage unsafe.Pointer, buttonCell unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ColorPickingDefault)
 	delegate.InsertNewButtonImage_In(MakeImage(newButtonImage), MakeButtonCell(buttonCell))
 }
 
 //export colorPickingDefault_ProvideNewButtonImage
-func colorPickingDefault_ProvideNewButtonImage(id int64) unsafe.Pointer {
-	delegate := resources.Get(id).(*ColorPickingDefault)
+func colorPickingDefault_ProvideNewButtonImage(hp C.uintptr_t) unsafe.Pointer {
+	delegate := cgo.Handle(hp).Value().(*ColorPickingDefault)
 	result := delegate.ProvideNewButtonImage()
 	return objc.ExtractPtr(result)
 }
 
 //export colorPickingDefault_MinContentSize
-func colorPickingDefault_MinContentSize(id int64) C.CGSize {
-	delegate := resources.Get(id).(*ColorPickingDefault)
+func colorPickingDefault_MinContentSize(hp C.uintptr_t) C.CGSize {
+	delegate := cgo.Handle(hp).Value().(*ColorPickingDefault)
 	result := delegate.MinContentSize()
 	return *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(result)))
 }
 
 //export colorPickingDefault_ButtonToolTip
-func colorPickingDefault_ButtonToolTip(id int64) unsafe.Pointer {
-	delegate := resources.Get(id).(*ColorPickingDefault)
+func colorPickingDefault_ButtonToolTip(hp C.uintptr_t) unsafe.Pointer {
+	delegate := cgo.Handle(hp).Value().(*ColorPickingDefault)
 	result := delegate.ButtonToolTip()
 	return foundation.NewString(result).Ptr()
 }
 
 //export colorPickingDefault_AlphaControlAddedOrRemoved
-func colorPickingDefault_AlphaControlAddedOrRemoved(id int64, sender unsafe.Pointer) {
-	delegate := resources.Get(id).(*ColorPickingDefault)
+func colorPickingDefault_AlphaControlAddedOrRemoved(hp C.uintptr_t, sender unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ColorPickingDefault)
 	delegate.AlphaControlAddedOrRemoved(objc.MakeObject(sender))
 }
 
 //export colorPickingDefault_ViewSizeChanged
-func colorPickingDefault_ViewSizeChanged(id int64, sender unsafe.Pointer) {
-	delegate := resources.Get(id).(*ColorPickingDefault)
+func colorPickingDefault_ViewSizeChanged(hp C.uintptr_t, sender unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ColorPickingDefault)
 	delegate.ViewSizeChanged(objc.MakeObject(sender))
 }
 
 //export colorPickingDefault_AttachColorList
-func colorPickingDefault_AttachColorList(id int64, colorList unsafe.Pointer) {
-	delegate := resources.Get(id).(*ColorPickingDefault)
+func colorPickingDefault_AttachColorList(hp C.uintptr_t, colorList unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ColorPickingDefault)
 	delegate.AttachColorList(MakeColorList(colorList))
 }
 
 //export colorPickingDefault_DetachColorList
-func colorPickingDefault_DetachColorList(id int64, colorList unsafe.Pointer) {
-	delegate := resources.Get(id).(*ColorPickingDefault)
+func colorPickingDefault_DetachColorList(hp C.uintptr_t, colorList unsafe.Pointer) {
+	delegate := cgo.Handle(hp).Value().(*ColorPickingDefault)
 	delegate.DetachColorList(MakeColorList(colorList))
 }
 
 //export ColorPickingDefault_RespondsTo
-func ColorPickingDefault_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
+func ColorPickingDefault_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
-	delegate := resources.Get(id).(*ColorPickingDefault)
+	delegate := cgo.Handle(hp).Value().(*ColorPickingDefault)
 	switch selName {
 	case "initWithPickerMask:colorPanel:":
 		return delegate.InitWithPickerMask_ColorPanel != nil
@@ -125,6 +125,6 @@ func ColorPickingDefault_RespondsTo(id int64, selectorPtr unsafe.Pointer) bool {
 }
 
 //export deleteColorPickingDefault
-func deleteColorPickingDefault(id int64) {
-	resources.Delete(id)
+func deleteColorPickingDefault(hp C.uintptr_t) {
+	cgo.Handle(hp).Delete()
 }

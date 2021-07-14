@@ -38,7 +38,7 @@
 }
 @end
 
-void* WrapTextDelegate(long goID) {
+void* WrapTextDelegate(uintptr_t goID) {
     NSTextDelegateAdaptor* adaptor = [[NSTextDelegateAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

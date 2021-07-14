@@ -21,7 +21,7 @@
 }
 @end
 
-void* WrapTouchBarDelegate(long goID) {
+void* WrapTouchBarDelegate(uintptr_t goID) {
     NSTouchBarDelegateAdaptor* adaptor = [[NSTouchBarDelegateAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

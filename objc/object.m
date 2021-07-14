@@ -11,20 +11,20 @@ void Object_Dealloc(void* ptr) {
 
 
 @interface Parasite : NSObject
-@property(nonatomic, assign) long hookId;
+@property(nonatomic, assign) uintptr_t hookPtr;
 @end
 
 @implementation Parasite
 - (void)dealloc {
-    runDeallocTask(self.hookId);
+    runDeallocTask(self.hookPtr);
     [super dealloc];
 }
 @end
 
 static void *kDeallocHookAssociation = &kDeallocHookAssociation;
 
-void Dealloc_AddHook(void* ptr, long hookId) {
+void Dealloc_AddHook(void* ptr, uintptr_t hookPtr) {
     Parasite *parasite = [Parasite alloc];
-    parasite.hookId = hookId;
+    parasite.hookPtr = hookPtr;
     objc_setAssociatedObject((NSObject*)ptr, &kDeallocHookAssociation, parasite, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }

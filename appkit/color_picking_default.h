@@ -1,10 +1,11 @@
 #import <stdbool.h>
+#import <stdint.h>
 #import <stdlib.h>
 #import <utils.h>
 #import <Appkit/Appkit.h>
 
 @interface NSColorPickingDefaultAdaptor : NSObject <NSColorPickingDefault>
-@property (assign) long goID;
+@property (assign) uintptr_t goID;
 @end
 
-void* WrapColorPickingDefault(long goID);
+void* WrapColorPickingDefault(uintptr_t goID);

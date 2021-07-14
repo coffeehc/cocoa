@@ -42,7 +42,7 @@
 }
 @end
 
-void* WrapSpringLoadingDestination(long goID) {
+void* WrapSpringLoadingDestination(uintptr_t goID) {
     NSSpringLoadingDestinationAdaptor* adaptor = [[NSSpringLoadingDestinationAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

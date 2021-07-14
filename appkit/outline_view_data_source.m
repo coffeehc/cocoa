@@ -99,7 +99,7 @@
 }
 @end
 
-void* WrapOutlineViewDataSource(long goID) {
+void* WrapOutlineViewDataSource(uintptr_t goID) {
     NSOutlineViewDataSourceAdaptor* adaptor = [[NSOutlineViewDataSourceAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;

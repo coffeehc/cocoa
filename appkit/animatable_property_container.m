@@ -26,7 +26,7 @@
 }
 @end
 
-void* WrapAnimatablePropertyContainer(long goID) {
+void* WrapAnimatablePropertyContainer(uintptr_t goID) {
     NSAnimatablePropertyContainerAdaptor* adaptor = [[NSAnimatablePropertyContainerAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;
