@@ -5,8 +5,6 @@ import (
 	"time"
 )
 
-type TimeInterval float64
-
 func DateToGoTime(date Date) time.Time {
 	secs := float64(date.TimeIntervalSince1970())
 	modf, frac := math.Modf(secs)
