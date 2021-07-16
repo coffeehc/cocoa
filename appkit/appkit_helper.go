@@ -2,18 +2,18 @@ package appkit
 
 import (
 	"github.com/hsiafan/cocoa/foundation"
+	"github.com/hsiafan/cocoa/uihelper"
 	"unsafe"
 )
 
-type ModalSession struct {
-}
+type ModalSession unsafe.Pointer
 
 func FromNSModalSessionPointer(p unsafe.Pointer) ModalSession {
-	panic("to be implemented")
+	return ModalSession(*(*unsafe.Pointer)(p))
 }
 
 func ToNSModalSessionPointer(m ModalSession) unsafe.Pointer {
-	panic("to be implemented")
+	return unsafe.Pointer(&m)
 }
 
 // NewPlainButton return a new common used Button
@@ -73,4 +73,16 @@ func NewWindow(rect foundation.Rect) Window {
 		BackingStoreBuffered,
 		false,
 	)
+}
+
+// NewBareMenuItem create a new menu item, with no action set
+func NewBareMenuItem(title string, charCode string) MenuItem {
+	return AllocMenuItem().InitWithTitle_Action_KeyEquivalent(title, nil, charCode)
+}
+
+// NewMenuItem create an new menu item with action
+func NewMenuItem(title string, charCode string, handler uihelper.ActionHandler) MenuItem {
+	item := AllocMenuItem().InitWithTitle_Action_KeyEquivalent(title, nil, charCode)
+	uihelper.SetAction(item, handler)
+	return item
 }

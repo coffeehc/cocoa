@@ -41,7 +41,7 @@ func initAndRun() {
 
 	stackView := appkit.StackViewWithViews([]appkit.View{label, button, button2, textView, gridView})
 	stackView.SetOrientation(appkit.UserInterfaceLayoutOrientationVertical)
-	stackView.SetDistribution(appkit.NSStackViewDistributionFillEqually)
+	stackView.SetDistribution(appkit.StackViewDistributionFillEqually)
 	stackView.SetAlignment(appkit.LayoutAttributeCenterX)
 	stackView.SetSpacing(10)
 

@@ -340,16 +340,16 @@ const (
 type UnderlineStyle int
 
 const (
-	UnderlineStyleNone              = 0x00
-	UnderlineStyleSingle            = 0x01
-	UnderlineStyleThick             = 0x02
-	UnderlineStyleDouble            = 0x09
-	UnderlineStylePatternSolid      = 0x0000
-	UnderlineStylePatternDot        = 0x0100
-	UnderlineStylePatternDash       = 0x0200
-	UnderlineStylePatternDashDot    = 0x0300
-	UnderlineStylePatternDashDotDot = 0x0400
-	UnderlineStyleByWord            = 0x8000
+	UnderlineStyleNone              UnderlineStyle = 0x00
+	UnderlineStyleSingle            UnderlineStyle = 0x01
+	UnderlineStyleThick             UnderlineStyle = 0x02
+	UnderlineStyleDouble            UnderlineStyle = 0x09
+	UnderlineStylePatternSolid      UnderlineStyle = 0x0000
+	UnderlineStylePatternDot        UnderlineStyle = 0x0100
+	UnderlineStylePatternDash       UnderlineStyle = 0x0200
+	UnderlineStylePatternDashDot    UnderlineStyle = 0x0300
+	UnderlineStylePatternDashDotDot UnderlineStyle = 0x0400
+	UnderlineStyleByWord            UnderlineStyle = 0x8000
 )
 
 type TypesetterBehavior int
@@ -380,10 +380,10 @@ type GlyphProperty int
 type LineBreakStrategy uint
 
 const (
-	LineBreakStrategyNone               = 0
-	LineBreakStrategyPushOut            = 1 << 0
-	LineBreakStrategyHangulWordPriority = 1 << 1
-	LineBreakStrategyStandard           = 0xFFFF
+	LineBreakStrategyNone               LineBreakStrategy = 0
+	LineBreakStrategyPushOut            LineBreakStrategy = 1 << 0
+	LineBreakStrategyHangulWordPriority LineBreakStrategy = 1 << 1
+	LineBreakStrategyStandard           LineBreakStrategy = 0xFFFF
 )
 
 type TextBlockValueType uint
@@ -483,8 +483,8 @@ const (
 type SelectionAffinity uint
 
 const (
-	SelectionAffinityUpstream   = 0
-	SelectionAffinityDownstream = 1
+	SelectionAffinityUpstream   SelectionAffinity = 0
+	SelectionAffinityDownstream SelectionAffinity = 1
 )
 
 type SelectionGranularity uint
@@ -1047,10 +1047,10 @@ const (
 type SpringLoadingOptions uint
 
 const (
-	SpringLoadingDisabled             = 0
-	SpringLoadingEnabled              = 1 << 0
-	SpringLoadingContinuousActivation = 1 << 1
-	SpringLoadingNoHover              = 1 << 3
+	SpringLoadingDisabled             SpringLoadingOptions = 0
+	SpringLoadingEnabled              SpringLoadingOptions = 1 << 0
+	SpringLoadingContinuousActivation SpringLoadingOptions = 1 << 1
+	SpringLoadingNoHover              SpringLoadingOptions = 1 << 3
 )
 
 type AlertStyle uint
@@ -1880,4 +1880,15 @@ type WindowTitleVisibility int
 const (
 	WindowTitleVisible WindowTitleVisibility = 0
 	WindowTitleHidden  WindowTitleVisibility = 1
+)
+
+type MenuProperties uint
+
+const (
+	MenuPropertyItemTitle                    MenuProperties = 1 << 0 // the menu item's title
+	MenuPropertyItemAttributedTitle          MenuProperties = 1 << 1 // the menu item's attributed title
+	MenuPropertyItemKeyEquivalent            MenuProperties = 1 << 2 // the menu item's key equivalent
+	MenuPropertyItemImage                    MenuProperties = 1 << 3 // the menu item's image
+	MenuPropertyItemEnabled                  MenuProperties = 1 << 4 // whether the menu item is enabled or disabled
+	MenuPropertyItemAccessibilityDescription MenuProperties = 1 << 5 // the menu item's accessibility description
 )
