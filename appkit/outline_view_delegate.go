@@ -58,7 +58,7 @@ type OutlineViewDelegate struct {
 	ControlTextDidEndEditing                                     func(obj foundation.Notification)
 }
 
-func WrapOutlineViewDelegate(delegate *OutlineViewDelegate) objc.Object {
+func (delegate *OutlineViewDelegate) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapOutlineViewDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

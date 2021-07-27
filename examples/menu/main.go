@@ -34,7 +34,7 @@ func initAndRun() {
 	w.MakeKeyAndOrderFront(nil)
 	w.Center()
 
-	app.SetDelegate(appkit.WrapApplicationDelegate(&appkit.ApplicationDelegate{
+	appDelegate := &appkit.ApplicationDelegate{
 		ApplicationDidFinishLaunching: func(notification foundation.Notification) {
 			app.SetActivationPolicy(appkit.ApplicationActivationPolicyRegular)
 			app.ActivateIgnoringOtherApps(true)
@@ -46,7 +46,8 @@ func initAndRun() {
 		ApplicationShouldTerminateAfterLastWindowClosed: func(sender appkit.Application) bool {
 			return true
 		},
-	}))
+	}
+	app.SetDelegate(appDelegate.ToObjc())
 
 	// should set system bar after window show
 	setSystemBar(app)

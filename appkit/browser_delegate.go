@@ -44,7 +44,7 @@ type BrowserDelegate struct {
 	Browser_ShouldShowCellExpansionForRow_Column                func(browser Browser, row int, column int) bool
 }
 
-func WrapBrowserDelegate(delegate *BrowserDelegate) objc.Object {
+func (delegate *BrowserDelegate) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapBrowserDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

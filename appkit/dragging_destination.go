@@ -20,7 +20,7 @@ type DraggingDestination struct {
 	UpdateDraggingItemsForDrag   func(sender objc.Object)
 }
 
-func WrapDraggingDestination(delegate *DraggingDestination) objc.Object {
+func (delegate *DraggingDestination) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapDraggingDestination(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

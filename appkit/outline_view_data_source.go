@@ -27,7 +27,7 @@ type OutlineViewDataSource struct {
 	OutlineView_ValidateDrop_ProposedItem_ProposedChildIndex func(outlineView OutlineView, info objc.Object, item objc.Object, index int) DragOperation
 }
 
-func WrapOutlineViewDataSource(delegate *OutlineViewDataSource) objc.Object {
+func (delegate *OutlineViewDataSource) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapOutlineViewDataSource(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

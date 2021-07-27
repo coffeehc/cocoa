@@ -28,7 +28,7 @@ type ComboBoxDelegate struct {
 	ControlTextDidEndEditing                                func(obj foundation.Notification)
 }
 
-func WrapComboBoxDelegate(delegate *ComboBoxDelegate) objc.Object {
+func (delegate *ComboBoxDelegate) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapComboBoxDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

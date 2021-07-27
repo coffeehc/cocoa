@@ -21,7 +21,7 @@ type ControlTextEditingDelegate struct {
 	ControlTextDidEndEditing                                func(obj foundation.Notification)
 }
 
-func WrapControlTextEditingDelegate(delegate *ControlTextEditingDelegate) objc.Object {
+func (delegate *ControlTextEditingDelegate) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapControlTextEditingDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

@@ -20,7 +20,7 @@ type MenuDelegate struct {
 	MenuNeedsUpdate                      func(menu Menu)
 }
 
-func WrapMenuDelegate(delegate *MenuDelegate) objc.Object {
+func (delegate *MenuDelegate) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapMenuDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

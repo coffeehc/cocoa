@@ -16,7 +16,7 @@ type ComboBoxDataSource struct {
 	NumberOfItemsInComboBox             func(comboBox ComboBox) int
 }
 
-func WrapComboBoxDataSource(delegate *ComboBoxDataSource) objc.Object {
+func (delegate *ComboBoxDataSource) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapComboBoxDataSource(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

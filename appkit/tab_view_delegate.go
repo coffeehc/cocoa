@@ -15,7 +15,7 @@ type TabViewDelegate struct {
 	TabView_DidSelectTabViewItem         func(tabView TabView, tabViewItem TabViewItem)
 }
 
-func WrapTabViewDelegate(delegate *TabViewDelegate) objc.Object {
+func (delegate *TabViewDelegate) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapTabViewDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

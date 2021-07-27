@@ -24,7 +24,7 @@ type TextFieldDelegate struct {
 	ControlTextDidEndEditing                                func(obj foundation.Notification)
 }
 
-func WrapTextFieldDelegate(delegate *TextFieldDelegate) objc.Object {
+func (delegate *TextFieldDelegate) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapTextFieldDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

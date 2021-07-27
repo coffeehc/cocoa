@@ -34,7 +34,7 @@ type CollectionViewDelegate struct {
 	CollectionView_AcceptDrop_Index_DropOperation                                 func(collectionView CollectionView, draggingInfo objc.Object, index int, dropOperation CollectionViewDropOperation) bool
 }
 
-func WrapCollectionViewDelegate(delegate *CollectionViewDelegate) objc.Object {
+func (delegate *CollectionViewDelegate) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapCollectionViewDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

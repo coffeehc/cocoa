@@ -12,7 +12,7 @@ type AlertDelegate struct {
 	AlertShowHelp func(alert Alert) bool
 }
 
-func WrapAlertDelegate(delegate *AlertDelegate) objc.Object {
+func (delegate *AlertDelegate) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapAlertDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

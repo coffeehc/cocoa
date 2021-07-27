@@ -64,7 +64,7 @@ type WindowDelegate struct {
 	WindowDidExitVersionBrowser                                           func(notification foundation.Notification)
 }
 
-func WrapWindowDelegate(delegate *WindowDelegate) objc.Object {
+func (delegate *WindowDelegate) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapWindowDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

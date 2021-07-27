@@ -15,7 +15,7 @@ type DraggingInfo struct {
 	ResetSpringLoading  func()                             // required
 }
 
-func WrapDraggingInfo(delegate *DraggingInfo) objc.Object {
+func (delegate *DraggingInfo) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapDraggingInfo(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

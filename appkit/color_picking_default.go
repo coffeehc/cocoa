@@ -23,7 +23,7 @@ type ColorPickingDefault struct {
 	DetachColorList               func(colorList ColorList)                                // required
 }
 
-func WrapColorPickingDefault(delegate *ColorPickingDefault) objc.Object {
+func (delegate *ColorPickingDefault) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapColorPickingDefault(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

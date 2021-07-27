@@ -17,7 +17,7 @@ type SpringLoadingDestination struct {
 	DraggingEnded                       func(draggingInfo objc.Object)
 }
 
-func WrapSpringLoadingDestination(delegate *SpringLoadingDestination) objc.Object {
+func (delegate *SpringLoadingDestination) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapSpringLoadingDestination(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

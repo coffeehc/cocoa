@@ -27,7 +27,7 @@ type ColorPickingCustom struct {
 	DetachColorList               func(colorList ColorList)                                // required
 }
 
-func WrapColorPickingCustom(delegate *ColorPickingCustom) objc.Object {
+func (delegate *ColorPickingCustom) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapColorPickingCustom(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

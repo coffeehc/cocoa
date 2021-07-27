@@ -48,7 +48,7 @@ type ApplicationDelegate struct {
 	Application_DelegateHandlesKey                               func(sender Application, key string) bool
 }
 
-func WrapApplicationDelegate(delegate *ApplicationDelegate) objc.Object {
+func (delegate *ApplicationDelegate) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapApplicationDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

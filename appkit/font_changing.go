@@ -13,7 +13,7 @@ type FontChanging struct {
 	ValidModesForFontPanel func(fontPanel FontPanel) FontPanelModeMask
 }
 
-func WrapFontChanging(delegate *FontChanging) objc.Object {
+func (delegate *FontChanging) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapFontChanging(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

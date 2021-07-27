@@ -50,7 +50,7 @@ type TableViewDelegate struct {
 	ControlTextDidEndEditing                                   func(obj foundation.Notification)
 }
 
-func WrapTableViewDelegate(delegate *TableViewDelegate) objc.Object {
+func (delegate *TableViewDelegate) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapTableViewDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

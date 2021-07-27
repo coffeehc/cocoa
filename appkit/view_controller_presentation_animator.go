@@ -13,7 +13,7 @@ type ViewControllerPresentationAnimator struct {
 	AnimateDismissalOfViewController_FromViewController    func(viewController ViewController, fromViewController ViewController) // required
 }
 
-func WrapViewControllerPresentationAnimator(delegate *ViewControllerPresentationAnimator) objc.Object {
+func (delegate *ViewControllerPresentationAnimator) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapViewControllerPresentationAnimator(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

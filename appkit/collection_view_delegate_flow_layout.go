@@ -40,7 +40,7 @@ type CollectionViewDelegateFlowLayout struct {
 	CollectionView_AcceptDrop_Index_DropOperation                                 func(collectionView CollectionView, draggingInfo objc.Object, index int, dropOperation CollectionViewDropOperation) bool
 }
 
-func WrapCollectionViewDelegateFlowLayout(delegate *CollectionViewDelegateFlowLayout) objc.Object {
+func (delegate *CollectionViewDelegateFlowLayout) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapCollectionViewDelegateFlowLayout(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

@@ -16,7 +16,7 @@ type AnimationDelegate struct {
 	Animation_DidReachProgressMark func(animation Animation, progress AnimationProgress)
 }
 
-func WrapAnimationDelegate(delegate *AnimationDelegate) objc.Object {
+func (delegate *AnimationDelegate) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapAnimationDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

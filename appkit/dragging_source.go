@@ -18,7 +18,7 @@ type DraggingSource struct {
 	IgnoreModifierKeysForDraggingSession                  func(session DraggingSession) bool
 }
 
-func WrapDraggingSource(delegate *DraggingSource) objc.Object {
+func (delegate *DraggingSource) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapDraggingSource(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

@@ -13,7 +13,7 @@ type TouchBarDelegate struct {
 	TouchBar_MakeItemForIdentifier func(touchBar TouchBar, identifier TouchBarItemIdentifier) TouchBarItem
 }
 
-func WrapTouchBarDelegate(delegate *TouchBarDelegate) objc.Object {
+func (delegate *TouchBarDelegate) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapTouchBarDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

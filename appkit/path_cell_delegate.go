@@ -13,7 +13,7 @@ type PathCellDelegate struct {
 	PathCell_WillPopUpMenu        func(pathCell PathCell, menu Menu)
 }
 
-func WrapPathCellDelegate(delegate *PathCellDelegate) objc.Object {
+func (delegate *PathCellDelegate) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapPathCellDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

@@ -41,7 +41,7 @@ type TextViewDelegate struct {
 	TextDidEndEditing                                                 func(notification foundation.Notification)
 }
 
-func WrapTextViewDelegate(delegate *TextViewDelegate) objc.Object {
+func (delegate *TextViewDelegate) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapTextViewDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

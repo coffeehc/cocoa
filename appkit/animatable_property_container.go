@@ -14,7 +14,7 @@ type AnimatablePropertyContainer struct {
 	AnimationForKey func(key AnimatablePropertyKey) objc.Object // required
 }
 
-func WrapAnimatablePropertyContainer(delegate *AnimatablePropertyContainer) objc.Object {
+func (delegate *AnimatablePropertyContainer) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapAnimatablePropertyContainer(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

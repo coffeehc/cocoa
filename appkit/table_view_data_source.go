@@ -23,7 +23,7 @@ type TableViewDataSource struct {
 	TableView_SortDescriptorsDidChange                       func(tableView TableView, oldDescriptors []foundation.SortDescriptor)
 }
 
-func WrapTableViewDataSource(delegate *TableViewDataSource) objc.Object {
+func (delegate *TableViewDataSource) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapTableViewDataSource(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

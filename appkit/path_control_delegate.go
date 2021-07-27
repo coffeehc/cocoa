@@ -17,7 +17,7 @@ type PathControlDelegate struct {
 	PathControl_ShouldDragItem_WithPasteboard              func(pathControl PathControl, pathItem PathControlItem, pasteboard Pasteboard) bool
 }
 
-func WrapPathControlDelegate(delegate *PathControlDelegate) objc.Object {
+func (delegate *PathControlDelegate) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapPathControlDelegate(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

@@ -16,7 +16,7 @@ type CollectionViewDataSource struct {
 	CollectionView_ViewForSupplementaryElementOfKind_AtIndexPath func(collectionView CollectionView, kind CollectionViewSupplementaryElementKind, indexPath foundation.IndexPath) View
 }
 
-func WrapCollectionViewDataSource(delegate *CollectionViewDataSource) objc.Object {
+func (delegate *CollectionViewDataSource) ToObjc() objc.Object {
 	h := cgo.NewHandle(delegate)
 	ptr := C.WrapCollectionViewDataSource(C.uintptr_t(h))
 	return objc.MakeObject(ptr)

@@ -107,13 +107,14 @@ func initAndRun() {
 	label := appkit.NewLabel()
 	label.SetFrame(foundation.MakeRect(170, 100, 150, 25))
 	w.ContentView().AddSubview(label)
-	tf.SetDelegate(appkit.WrapTextFieldDelegate(&appkit.TextFieldDelegate{
+	tfDelegate := &appkit.TextFieldDelegate{
 		ControlTextDidChange: func(obj foundation.Notification) {
 			objc.DispatchAsyncToMainQueue(func() {
 				label.SetStringValue(tf.StringValue())
 			})
 		},
-	}))
+	}
+	tf.SetDelegate(tfDelegate.ToObjc())
 	uihelper.SetAction(btn, func(sender objc.Object) {
 		label.SetTextColor(appkit.RedColor())
 	})
@@ -121,13 +122,14 @@ func initAndRun() {
 	// password
 	stf := appkit.NewSecureTextField()
 	stf.SetFrame(foundation.MakeRect(340, 100, 150, 25))
-	stf.SetDelegate(appkit.WrapTextFieldDelegate(&appkit.TextFieldDelegate{
+	stfDelegate := &appkit.TextFieldDelegate{
 		ControlTextDidChange: func(obj foundation.Notification) {
 			objc.DispatchAsyncToMainQueue(func() {
 				label.SetStringValue(tf.StringValue())
 			})
 		},
-	}))
+	}
+	stf.SetDelegate(stfDelegate.ToObjc())
 	w.ContentView().AddSubview(stf)
 
 	// progress indicator
@@ -163,17 +165,17 @@ func initAndRun() {
 	appkit.MakeTextView(sv2.DocumentView().Ptr()).SetAllowsUndo(true)
 	w.ContentView().AddSubview(sv2)
 
-	wd := &appkit.WindowDelegate{
+	winDelegate := &appkit.WindowDelegate{
 		WindowDidMove: func(notification foundation.Notification) {
-			fmt.Println("window move to ", w.Frame().Origin.X, w.Frame().Origin.Y)
+			frame := w.Frame()
+			fmt.Println("window move to ", frame.Origin.X, frame.Origin.Y)
 		},
 	}
-	wdo := appkit.WrapWindowDelegate(wd)
-	w.SetDelegate(wdo)
+	w.SetDelegate(winDelegate.ToObjc())
 	w.MakeKeyAndOrderFront(nil)
 	w.Center()
 
-	app.SetDelegate(appkit.WrapApplicationDelegate(&appkit.ApplicationDelegate{
+	appDelegate := &appkit.ApplicationDelegate{
 		ApplicationDidFinishLaunching: func(notification foundation.Notification) {
 			app.SetActivationPolicy(appkit.ApplicationActivationPolicyRegular)
 			app.ActivateIgnoringOtherApps(true)
@@ -181,7 +183,8 @@ func initAndRun() {
 		ApplicationShouldTerminateAfterLastWindowClosed: func(sender appkit.Application) bool {
 			return true
 		},
-	}))
+	}
+	app.SetDelegate(appDelegate.ToObjc())
 
 	app.Run()
 }
