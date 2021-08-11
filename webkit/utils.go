@@ -1,5 +1,5 @@
 package webkit
 
 // #cgo CFLAGS: -x objective-c
-// #cgo LDFLAGS: -framework Webkit
+// #cgo LDFLAGS: -framework Webkit -framework Foundation
 import "C"
