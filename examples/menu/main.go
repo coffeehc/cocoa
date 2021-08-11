@@ -59,28 +59,22 @@ func setMainMenu(app appkit.Application) {
 	menu := appkit.AllocMenu().InitWithTitle("main")
 	app.SetMainMenu(menu)
 
-	mainMenuItem := appkit.NewMenuItem("", "", func(sender objc.Object) {
-	})
+	mainMenuItem := appkit.NewMenuItem("", "", nil)
 	mainMenuMenu := appkit.AllocMenu().InitWithTitle("App")
-	mainMenuMenu.AddItem(appkit.NewMenuItem("Hide", "h", func(sender objc.Object) {
-		app.Hide(nil)
-	}))
-	mainMenuMenu.AddItem(appkit.NewMenuItem("Quit", "q", func(sender objc.Object) {
-		app.Terminate(nil)
-	}))
+	mainMenuMenu.AddItem(appkit.NewMenuItemWithAction("Hide", "h", app.Hide))
+	mainMenuMenu.AddItem(appkit.NewMenuItemWithAction("Quit", "q", app.Terminate))
 	mainMenuItem.SetSubmenu(mainMenuMenu)
 	menu.AddItem(mainMenuItem)
 
-	testMenuItem := appkit.NewMenuItem("", "", func(sender objc.Object) {
-	})
+	testMenuItem := appkit.NewMenuItem("", "", nil)
 	testMenu := appkit.AllocMenu().InitWithTitle("Test")
-	testMenu.AddItem(appkit.AllocMenuItem().InitWithTitle_Action_KeyEquivalent("Select All", foundation.SelectorFromString("selectAll:"), "a"))
+	testMenu.AddItem(appkit.NewMenuItem("Select All", "a", foundation.SelectorFromString("selectAll:")))
 	testMenu.AddItem(appkit.MenuItem_SeparatorItem())
-	testMenu.AddItem(appkit.AllocMenuItem().InitWithTitle_Action_KeyEquivalent("Copy", foundation.SelectorFromString("copy:"), "c"))
-	testMenu.AddItem(appkit.AllocMenuItem().InitWithTitle_Action_KeyEquivalent("Paste", foundation.SelectorFromString("paste:"), "v"))
-	testMenu.AddItem(appkit.AllocMenuItem().InitWithTitle_Action_KeyEquivalent("Cut", foundation.SelectorFromString("cut:"), "x"))
-	testMenu.AddItem(appkit.AllocMenuItem().InitWithTitle_Action_KeyEquivalent("Undo", foundation.SelectorFromString("undo:"), "z"))
-	testMenu.AddItem(appkit.AllocMenuItem().InitWithTitle_Action_KeyEquivalent("Redo", foundation.SelectorFromString("redo:"), "Z"))
+	testMenu.AddItem(appkit.NewMenuItem("Copy", "c", foundation.SelectorFromString("copy:")))
+	testMenu.AddItem(appkit.NewMenuItem("Paste", "v", foundation.SelectorFromString("paste:")))
+	testMenu.AddItem(appkit.NewMenuItem("Cut", "x", foundation.SelectorFromString("cut:")))
+	testMenu.AddItem(appkit.NewMenuItem("Undo", "z", foundation.SelectorFromString("undo:")))
+	testMenu.AddItem(appkit.NewMenuItem("Redo", "Z", foundation.SelectorFromString("redo:")))
 	testMenuItem.SetSubmenu(testMenu)
 	menu.AddItem(testMenuItem)
 }
@@ -92,12 +86,8 @@ func setSystemBar(app appkit.Application) {
 	button.SetTitle("TestTray")
 
 	menu := appkit.AllocMenu().InitWithTitle("main")
-	menu.AddItem(appkit.NewMenuItem("Hide", "h", func(sender objc.Object) {
-		app.Hide(nil)
-	}))
-	menu.AddItem(appkit.NewMenuItem("Quit", "q", func(sender objc.Object) {
-		app.Terminate(nil)
-	}))
+	menu.AddItem(appkit.NewMenuItemWithAction("Hide", "h", app.Hide))
+	menu.AddItem(appkit.NewMenuItemWithAction("Quit", "q", app.Terminate))
 	item.SetMenu(menu)
 }
 

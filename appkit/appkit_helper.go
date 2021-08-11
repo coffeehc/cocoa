@@ -2,6 +2,7 @@ package appkit
 
 import (
 	"github.com/hsiafan/cocoa/foundation"
+	"github.com/hsiafan/cocoa/objc"
 	"github.com/hsiafan/cocoa/uihelper"
 	"unsafe"
 )
@@ -75,13 +76,13 @@ func NewWindow(rect foundation.Rect) Window {
 	)
 }
 
-// NewBareMenuItem create a new menu item, with no action set
-func NewBareMenuItem(title string, charCode string) MenuItem {
-	return AllocMenuItem().InitWithTitle_Action_KeyEquivalent(title, nil, charCode)
+// NewMenuItem create a new menu item, with selector
+func NewMenuItem(title string, charCode string, selector objc.Selector) MenuItem {
+	return AllocMenuItem().InitWithTitle_Action_KeyEquivalent(title, selector, charCode)
 }
 
-// NewMenuItem create an new menu item with action
-func NewMenuItem(title string, charCode string, handler uihelper.ActionHandler) MenuItem {
+// NewMenuItemWithAction create a new menu item with action
+func NewMenuItemWithAction(title string, charCode string, handler uihelper.ActionHandler) MenuItem {
 	item := AllocMenuItem().InitWithTitle_Action_KeyEquivalent(title, nil, charCode)
 	uihelper.SetAction(item, handler)
 	return item
