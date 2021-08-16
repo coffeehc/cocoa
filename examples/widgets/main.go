@@ -27,9 +27,8 @@ func initAndRun() {
 	filePathField.SetEditable(false)
 	w.ContentView().AddSubview(filePathField)
 
-	saveButton := appkit.NewPlainButton()
+	saveButton := appkit.NewPlainButton("Save...")
 	saveButton.SetFrame(foundation.MakeRect(250, 330, 80, 20))
-	saveButton.SetTitle("Save...")
 	uihelper.SetAction(saveButton, func(sender objc.Object) {
 		savePanel := appkit.AllocSavePanel().Init()
 		if savePanel.RunModal() == appkit.ModalResponseOK {
@@ -67,14 +66,12 @@ func initAndRun() {
 	w.ContentView().AddSubview(datePicker)
 
 	// buttons
-	cb := appkit.NewCheckBox()
+	cb := appkit.NewCheckBox("check box")
 	cb.SetFrame(foundation.MakeRect(10, 250, 80, 25))
-	cb.SetTitle("check box")
 	w.ContentView().AddSubview(cb)
 
-	rb := appkit.NewRadioButton()
+	rb := appkit.NewRadioButton("radio button")
 	rb.SetFrame(foundation.MakeRect(150, 250, 120, 25))
-	rb.SetTitle("radio button")
 	w.ContentView().AddSubview(rb)
 
 	sw := appkit.AllocSwitch().InitWithFrame(foundation.MakeRect(260, 250, 120, 25))
@@ -85,14 +82,12 @@ func initAndRun() {
 	li.SetDoubleValue(3)
 	w.ContentView().AddSubview(li)
 
-	btn := appkit.NewPlainButton()
+	btn := appkit.NewPlainButton("change color")
 	btn.SetFrame(foundation.MakeRect(10, 160, 120, 25))
-	btn.SetTitle("change color")
 	w.ContentView().AddSubview(btn)
 
-	quitBtn := appkit.NewPlainButton()
+	quitBtn := appkit.NewPlainButton("Quit")
 	quitBtn.SetFrame(foundation.MakeRect(10, 130, 80, 25))
-	quitBtn.SetTitle("Quit")
 	uihelper.SetAction(quitBtn, func(sender objc.Object) {
 		app.Terminate(nil)
 	})
@@ -104,7 +99,7 @@ func initAndRun() {
 	tf.SetFrame(foundation.MakeRect(10, 100, 150, 25))
 
 	// label
-	label := appkit.NewLabel()
+	label := appkit.NewLabel("")
 	label.SetFrame(foundation.MakeRect(170, 100, 150, 25))
 	w.ContentView().AddSubview(label)
 	tfDelegate := &appkit.TextFieldDelegate{
@@ -190,7 +185,5 @@ func initAndRun() {
 }
 
 func main() {
-	objc.WithAutoreleasePool(func() {
-		initAndRun()
-	})
+	objc.WithAutoreleasePool(initAndRun)
 }

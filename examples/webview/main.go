@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/hsiafan/cocoa/uihelper/layouts"
 	"runtime"
 
 	"github.com/hsiafan/cocoa/appkit"
@@ -23,11 +24,8 @@ func initAndRun() {
 	webView.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	webView.LoadRequest(foundation.AllocURLRequest().InitWithURL(foundation.URLWithString("https://www.baidu.com")))
 	//webView.LoadHTMLString("<h1>Test</h1>", "https://www.baidu.com")
-	w.ContentView().AddSubview(webView)
-	w.ContentView().LeadingAnchor().ConstraintEqualToAnchor_Constant(webView.LeadingAnchor(), -10).SetActive(true)
-	w.ContentView().TopAnchor().ConstraintEqualToAnchor_Constant(webView.TopAnchor(), -10).SetActive(true)
-	w.ContentView().TrailingAnchor().ConstraintEqualToAnchor_Constant(webView.TrailingAnchor(), 10).SetActive(true)
-	w.ContentView().BottomAnchor().ConstraintEqualToAnchor_Constant(webView.BottomAnchor(), 10).SetActive(true)
+
+	layouts.AddViewWithPadding(w.ContentView(), webView, 10, 10, 10, 10)
 
 	w.MakeKeyAndOrderFront(nil)
 	w.Center()
@@ -47,7 +45,5 @@ func initAndRun() {
 }
 
 func main() {
-	objc.WithAutoreleasePool(func() {
-		initAndRun()
-	})
+	objc.WithAutoreleasePool(initAndRun)
 }

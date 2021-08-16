@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/hsiafan/cocoa/appkit"
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
@@ -19,30 +18,17 @@ func initAndRun() {
 	app.SetActivationPolicy(appkit.ApplicationActivationPolicyRegular)
 	app.ActivateIgnoringOtherApps(true)
 	w := appkit.NewWindow(foundation.MakeRect(0, 0, 600, 400))
-	w.SetTitle("Test Layout")
+	w.SetTitle("Form")
 
-	label := appkit.NewLabel("label")
-	button := appkit.NewPlainButton("button")
-	button2 := appkit.NewPlainButton("button2")
-	textView := appkit.ScrollableTextView()
+	fv := layouts.NewFormView()
+	fv.AddRow("user", appkit.NewTextField())
+	fv.AddRow("password", appkit.NewSecureTextField())
+	cb := appkit.NewCheckBox("")
+	fv.AddRow("males", cb)
+	fv.SetLabelWidth(100)
+	fv.AddExpandRow()
 
-	gridView := appkit.AllocGridView().Init()
-	for i := 0; i < 3; i++ {
-		var views []appkit.View
-		for j := 0; j < 4; j++ {
-			label := appkit.NewLabel(fmt.Sprintf("label-%v-%v", i, j))
-			views = append(views, label)
-		}
-		gridView.AddRowWithViews(views)
-	}
-
-	stackView := appkit.StackViewWithViews([]appkit.View{label, button, button2, textView, gridView})
-	stackView.SetOrientation(appkit.UserInterfaceLayoutOrientationVertical)
-	stackView.SetDistribution(appkit.StackViewDistributionFillEqually)
-	stackView.SetAlignment(appkit.LayoutAttributeCenterX)
-	stackView.SetSpacing(10)
-
-	layouts.AddViewWithPadding(w.ContentView(), stackView, 10, 10, 10, 10)
+	layouts.AddViewWithPadding(w.ContentView(), fv, 10, 10, 10, 10)
 
 	w.MakeKeyAndOrderFront(nil)
 	w.Center()

@@ -92,7 +92,5 @@ func setSystemBar(app appkit.Application) {
 }
 
 func main() {
-	objc.WithAutoreleasePool(func() {
-		initAndRun()
-	})
+	objc.WithAutoreleasePool(initAndRun)
 }

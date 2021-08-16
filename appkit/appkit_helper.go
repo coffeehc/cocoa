@@ -18,39 +18,48 @@ func ToNSModalSessionPointer(m ModalSession) unsafe.Pointer {
 }
 
 // NewPlainButton return a new common used Button
-func NewPlainButton() Button {
+func NewPlainButton(title string) Button {
 	btn := AllocButton().Init()
+	btn.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	btn.SetBezelStyle(BezelStyleRounded)
+	btn.SetTitle(title)
 	return btn
 }
 
 // NewCheckBox return a new common used switch Button
-func NewCheckBox() Button {
+func NewCheckBox(title string) Button {
 	btn := AllocButton().Init()
+	btn.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	btn.SetButtonType(ButtonTypeSwitch)
+	btn.SetTitle(title)
 	return btn
 }
 
 // NewRadioButton return a new common used radio Button
-func NewRadioButton() Button {
+func NewRadioButton(title string) Button {
 	btn := AllocButton().Init()
+	btn.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	btn.SetButtonType(ButtonTypeRadio)
+	btn.SetTitle(title)
 	return btn
 }
 
 // NewLabel create a text field, which looks like a Label
-func NewLabel() TextField {
+func NewLabel(title string) TextField {
 	tf := AllocTextField().Init()
+	tf.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	tf.SetBezeled(false)
 	tf.SetDrawsBackground(false)
 	tf.SetEditable(false)
 	tf.SetSelectable(false)
+	tf.SetStringValue(title)
 	return tf
 }
 
 // NewTextField return a plain TextField
 func NewTextField() TextField {
 	field := AllocTextField().Init()
+	field.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	cell := field.Cell()
 	cell.SetScrollable(true)
 	cell.SetWraps(false)
@@ -60,6 +69,7 @@ func NewTextField() TextField {
 // NewSecureTextField return a plain SecureTextField
 func NewSecureTextField() SecureTextField {
 	field := AllocSecureTextField().Init()
+	field.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	cell := field.Cell()
 	cell.SetScrollable(true)
 	cell.SetWraps(false)
@@ -76,6 +86,12 @@ func NewWindow(rect foundation.Rect) Window {
 	)
 }
 
+// NewWindowWithStyle create a common window with styles
+func NewWindowWithStyle(rect foundation.Rect, style WindowStyleMask) Window {
+	return AllocWindow().InitWithContentRect_StyleMask_Backing_Defer(rect, style,
+		BackingStoreBuffered, false)
+}
+
 // NewMenuItem create a new menu item, with selector
 func NewMenuItem(title string, charCode string, selector objc.Selector) MenuItem {
 	return AllocMenuItem().InitWithTitle_Action_KeyEquivalent(title, selector, charCode)
@@ -85,5 +101,12 @@ func NewMenuItem(title string, charCode string, selector objc.Selector) MenuItem
 func NewMenuItemWithAction(title string, charCode string, handler uihelper.ActionHandler) MenuItem {
 	item := AllocMenuItem().InitWithTitle_Action_KeyEquivalent(title, nil, charCode)
 	uihelper.SetAction(item, handler)
+	return item
+}
+
+// NewSubMenuItem create a menu item that hold a sub menu
+func NewSubMenuItem(menu Menu) MenuItem {
+	item := AllocMenuItem().InitWithTitle_Action_KeyEquivalent("", nil, "")
+	item.SetMenu(menu)
 	return item
 }
