@@ -60,6 +60,7 @@ func NewLabel(title string) TextField {
 func NewTextField() TextField {
 	field := AllocTextField().Init()
 	field.SetTranslatesAutoresizingMaskIntoConstraints(false)
+	field.SetUsesSingleLineMode(true)
 	cell := field.Cell()
 	cell.SetScrollable(true)
 	cell.SetWraps(false)
@@ -70,6 +71,7 @@ func NewTextField() TextField {
 func NewSecureTextField() SecureTextField {
 	field := AllocSecureTextField().Init()
 	field.SetTranslatesAutoresizingMaskIntoConstraints(false)
+	field.SetUsesSingleLineMode(true)
 	cell := field.Cell()
 	cell.SetScrollable(true)
 	cell.SetWraps(false)
@@ -111,10 +113,41 @@ func NewSubMenuItem(menu Menu) MenuItem {
 	return item
 }
 
-func NewScrollableTextView() {
-
+// A TextScrollView that contains a TextView
+type TextScrollView struct {
+	ScrollView
+	textView TextView
 }
 
-func NewVerticalStackView() {
+// TextView return the inner TextView
+func (t TextScrollView) TextView() TextView {
+	return t.textView
+}
 
+// NewScrollableTextView create and return new scrollable text view.
+func NewScrollableTextView() TextScrollView {
+	stv := ScrollableTextView()
+	stv.SetTranslatesAutoresizingMaskIntoConstraints(false)
+	tv := MakeTextView(stv.DocumentView().Ptr())
+	tv.SetAllowsUndo(true)
+	return TextScrollView{
+		ScrollView: stv,
+		textView:   tv,
+	}
+}
+
+// NewVerticalStackView return a new vertical StackView
+func NewVerticalStackView() StackView {
+	sv := AllocStackView().Init()
+	sv.SetOrientation(UserInterfaceLayoutOrientationVertical)
+	sv.SetTranslatesAutoresizingMaskIntoConstraints(false)
+	return sv
+}
+
+// NewHorizontalStackView return a new horizontal StackView
+func NewHorizontalStackView() StackView {
+	sv := AllocStackView().Init()
+	sv.SetOrientation(UserInterfaceLayoutOrientationHorizontal)
+	sv.SetTranslatesAutoresizingMaskIntoConstraints(false)
+	return sv
 }
