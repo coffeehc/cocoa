@@ -18,6 +18,7 @@ bool C_NSImageRep_ImageRep_CanInitWithPasteboard(void* pasteboard);
 bool C_NSImageRep_Draw(void* ptr);
 bool C_NSImageRep_DrawAtPoint(void* ptr, CGPoint point);
 bool C_NSImageRep_DrawInRect(void* ptr, CGRect rect);
+bool C_NSImageRep_DrawInRect_FromRect_Operation_Fraction_RespectFlipped_Hints(void* ptr, CGRect dstSpacePortionRect, CGRect srcSpacePortionRect, unsigned int op, double requestedAlpha, bool respectContextIsFlipped, Dictionary hints);
 Array C_NSImageRep_ImageRep_ImageTypes();
 Array C_NSImageRep_ImageRep_ImageUnfilteredTypes();
 CGSize C_NSImageRep_Size(void* ptr);

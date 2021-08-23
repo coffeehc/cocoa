@@ -1892,3 +1892,50 @@ const (
 	MenuPropertyItemEnabled                  MenuProperties = 1 << 4 // whether the menu item is enabled or disabled
 	MenuPropertyItemAccessibilityDescription MenuProperties = 1 << 5 // the menu item's accessibility description
 )
+
+type BitmapImageFileType uint
+
+const (
+	BitmapImageFileTypeTIFF BitmapImageFileType = iota
+	BitmapImageFileTypeBMP
+	BitmapImageFileTypeGIF
+	BitmapImageFileTypeJPEG
+	BitmapImageFileTypePNG
+	BitmapImageFileTypeJPEG2000
+)
+
+type BitmapImageRepPropertyKey string
+
+const (
+	ImageColorSyncProfileData    BitmapImageRepPropertyKey = "NSImageColorSyncProfileData"
+	ImageCompressionFactor       BitmapImageRepPropertyKey = "NSImageCompressionFactor"
+	ImageCompressionMethod       BitmapImageRepPropertyKey = "NSImageCompressionMethod"
+	ImageCurrentFrame            BitmapImageRepPropertyKey = "NSImageCurrentFrame"
+	ImageCurrentFrameDuration    BitmapImageRepPropertyKey = "NSImageCurrentFrameDuration"
+	ImageDitherTransparency      BitmapImageRepPropertyKey = "NSImageDitherTransparency"
+	ImageEXIFData                BitmapImageRepPropertyKey = "NSImageEXIFData"
+	ImageFallbackBackgroundColor BitmapImageRepPropertyKey = "NSImageFallbackBackgroundColor"
+	ImageFrameCount              BitmapImageRepPropertyKey = "NSImageFrameCount"
+	ImageGamma                   BitmapImageRepPropertyKey = "NSImageGamma"
+	ImageInterlaced              BitmapImageRepPropertyKey = "NSImageInterlaced"
+	ImageLoopCount               BitmapImageRepPropertyKey = "NSImageLoopCount"
+	ImageProgressive             BitmapImageRepPropertyKey = "NSImageProgressive"
+	ImageRGBColorTable           BitmapImageRepPropertyKey = "NSImageRGBColorTable"
+)
+
+type ColorSpaceName string
+
+const (
+	CalibratedRGBColorSpaceName   ColorSpaceName = "NSCalibratedRGBColorSpace"
+	CalibratedWhiteColorSpaceName ColorSpaceName = "NSCalibratedWhiteColorSpace"
+	CustomColorSpaceName          ColorSpaceName = "NSCustomColorSpace"
+	DeviceCMYKColorSpaceName      ColorSpaceName = "NSDeviceCMYKColorSpace"
+	DeviceRGBColorSpaceName       ColorSpaceName = "NSDeviceRGBColorSpace"
+	DeviceWhiteColorSpaceName     ColorSpaceName = "NSDeviceWhiteColorSpace"
+	NamedColorSpaceName           ColorSpaceName = "NSNamedColorSpace"
+	PatternColorSpaceName         ColorSpaceName = "NSPatternColorSpace"
+)
+
+type AboutPanelOptionKey string
+type PrintInfoAttributeKey string
+type ImageHintKey string

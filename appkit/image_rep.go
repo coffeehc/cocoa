@@ -14,6 +14,7 @@ type ImageRep interface {
 	Draw() bool
 	DrawAtPoint(point foundation.Point) bool
 	DrawInRect(rect foundation.Rect) bool
+	DrawInRect_FromRect_Operation_Fraction_RespectFlipped_Hints(dstSpacePortionRect foundation.Rect, srcSpacePortionRect foundation.Rect, op CompositingOperation, requestedAlpha coregraphics.Float, respectContextIsFlipped bool, hints map[ImageHintKey]objc.Object) bool
 	Size() foundation.Size
 	SetSize(value foundation.Size)
 	BitsPerSample() int
@@ -126,6 +127,20 @@ func (n NSImageRep) DrawAtPoint(point foundation.Point) bool {
 
 func (n NSImageRep) DrawInRect(rect foundation.Rect) bool {
 	result_ := C.C_NSImageRep_DrawInRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
+	return bool(result_)
+}
+
+func (n NSImageRep) DrawInRect_FromRect_Operation_Fraction_RespectFlipped_Hints(dstSpacePortionRect foundation.Rect, srcSpacePortionRect foundation.Rect, op CompositingOperation, requestedAlpha coregraphics.Float, respectContextIsFlipped bool, hints map[ImageHintKey]objc.Object) bool {
+	cHintsKeyData := make([]unsafe.Pointer, len(hints))
+	cHintsValueData := make([]unsafe.Pointer, len(hints))
+	var idx = 0
+	for k, v := range hints {
+		cHintsKeyData[idx] = foundation.NewString(string(k)).Ptr()
+		cHintsValueData[idx] = objc.ExtractPtr(v)
+		idx++
+	}
+	cHints := C.Dictionary{key_data: unsafe.Pointer(&cHintsKeyData[0]), value_data: unsafe.Pointer(&cHintsValueData[0]), len: C.int(len(hints))}
+	result_ := C.C_NSImageRep_DrawInRect_FromRect_Operation_Fraction_RespectFlipped_Hints(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(dstSpacePortionRect))), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(srcSpacePortionRect))), C.uint(uint(op)), C.double(float64(requestedAlpha)), C.bool(respectContextIsFlipped), cHints)
 	return bool(result_)
 }
 

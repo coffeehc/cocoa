@@ -1,7 +1,10 @@
 package main
 
 import (
+	"fmt"
+	"github.com/hsiafan/cocoa/uihelper"
 	"github.com/hsiafan/cocoa/uihelper/layouts"
+	"os"
 	"runtime"
 
 	"github.com/hsiafan/cocoa/appkit"
@@ -25,7 +28,20 @@ func initAndRun() {
 	webView.LoadRequest(foundation.AllocURLRequest().InitWithURL(foundation.URLWithString("https://www.baidu.com")))
 	//webView.LoadHTMLString("<h1>Test</h1>", "https://www.baidu.com")
 
-	layouts.AddViewWithPadding(w.ContentView(), webView, 10, 10, 10, 10)
+	layouts.AddViewWithPadding(w.ContentView(), webView, 10, 10, 10, 20)
+	cb := appkit.NewPlainButton("capture")
+	uihelper.SetAction(cb, func(sender objc.Object) {
+		bitMapImageRep := webView.BitmapImageRepForCachingDisplayInRect(webView.Bounds())
+		data := bitMapImageRep.RepresentationUsingType_Properties(appkit.BitmapImageFileTypePNG, map[appkit.BitmapImageRepPropertyKey]objc.Object{
+			"xxxxx": foundation.NewString("1"),
+		})
+		if err := os.WriteFile("a.png", data, os.ModePerm); err != nil {
+			fmt.Println("write image to file error:", err)
+		}
+	})
+	w.ContentView().AddSubview(cb)
+	cb.LeftAnchor().ConstraintEqualToAnchor_Constant(w.ContentView().LeftAnchor(), -10)
+	cb.BottomAnchor().ConstraintEqualToAnchor_Constant(w.ContentView().BottomAnchor(), -10)
 
 	w.MakeKeyAndOrderFront(nil)
 	w.Center()

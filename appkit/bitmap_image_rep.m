@@ -90,6 +90,45 @@ Array C_NSBitmapImageRep_TIFFRepresentationUsingCompression_Factor(void* ptr, un
     return result_array;
 }
 
+Array C_NSBitmapImageRep_BitmapImageRep_RepresentationOfImageRepsInArray_UsingType_Properties(Array imageReps, unsigned int storageType, Dictionary properties) {
+    NSMutableArray* objcImageReps = [[NSMutableArray alloc] init];
+    void** imageRepsData = (void**)imageReps.data;
+    for (int i = 0; i < imageReps.len; i++) {
+    	void* p = imageRepsData[i];
+    	[objcImageReps addObject:(NSImageRep*)(NSImageRep*)p];
+    }
+    NSMutableDictionary* objcProperties = [[NSMutableDictionary alloc] initWithCapacity: properties.len];
+    void** propertiesKeyData = (void**)properties.key_data;
+    void** propertiesValueData = (void**)properties.value_data;
+    for (int i = 0; i < properties.len; i++) {
+    	void* kp = propertiesKeyData[i];
+    	void* vp = propertiesValueData[i];
+    	[objcProperties setObject:(NSBitmapImageRepPropertyKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    }
+    NSData* result_ = [NSBitmapImageRep representationOfImageRepsInArray:objcImageReps usingType:storageType properties:objcProperties];
+    Array result_array;
+    result_array.data = [result_ bytes];
+    result_array.len = result_.length;
+    return result_array;
+}
+
+Array C_NSBitmapImageRep_RepresentationUsingType_Properties(void* ptr, unsigned int storageType, Dictionary properties) {
+    NSBitmapImageRep* nSBitmapImageRep = (NSBitmapImageRep*)ptr;
+    NSMutableDictionary* objcProperties = [[NSMutableDictionary alloc] initWithCapacity: properties.len];
+    void** propertiesKeyData = (void**)properties.key_data;
+    void** propertiesValueData = (void**)properties.value_data;
+    for (int i = 0; i < properties.len; i++) {
+    	void* kp = propertiesKeyData[i];
+    	void* vp = propertiesValueData[i];
+    	[objcProperties setObject:(NSBitmapImageRepPropertyKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    }
+    NSData* result_ = [nSBitmapImageRep representationUsingType:storageType properties:objcProperties];
+    Array result_array;
+    result_array.data = [result_ bytes];
+    result_array.len = result_.length;
+    return result_array;
+}
+
 void* C_NSBitmapImageRep_BitmapImageRep_LocalizedNameForTIFFCompressionType(unsigned int compression) {
     NSString* result_ = [NSBitmapImageRep localizedNameForTIFFCompressionType:compression];
     return result_;

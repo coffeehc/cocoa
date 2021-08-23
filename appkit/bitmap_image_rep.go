@@ -13,6 +13,7 @@ type BitmapImageRep interface {
 	ImageRep
 	ColorizeByMappingGray_ToColor_BlackMapping_WhiteMapping(midPoint coregraphics.Float, midPointColor Color, shadowColor Color, lightColor Color)
 	TIFFRepresentationUsingCompression_Factor(comp TIFFCompression, factor float32) []byte
+	RepresentationUsingType_Properties(storageType BitmapImageFileType, properties map[BitmapImageRepPropertyKey]objc.Object) []byte
 	CanBeCompressedUsing(compression TIFFCompression) bool
 	SetCompression_Factor(compression TIFFCompression, factor float32)
 	SetProperty_WithValue(property BitmapImageRepPropertyKey, value objc.Object)
@@ -117,6 +118,47 @@ func BitmapImageRep_TIFFRepresentationOfImageRepsInArray_UsingCompression_Factor
 
 func (n NSBitmapImageRep) TIFFRepresentationUsingCompression_Factor(comp TIFFCompression, factor float32) []byte {
 	result_ := C.C_NSBitmapImageRep_TIFFRepresentationUsingCompression_Factor(n.Ptr(), C.uint(uint(comp)), C.float(factor))
+	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
+	goResult_ := make([]byte, C.int(result_.len))
+	copy(goResult_, result_Buffer)
+	C.free(result_.data)
+	return goResult_
+}
+
+func BitmapImageRep_RepresentationOfImageRepsInArray_UsingType_Properties(imageReps []ImageRep, storageType BitmapImageFileType, properties map[BitmapImageRepPropertyKey]objc.Object) []byte {
+	cImageRepsData := make([]unsafe.Pointer, len(imageReps))
+	for idx, v := range imageReps {
+		cImageRepsData[idx] = objc.ExtractPtr(v)
+	}
+	cImageReps := C.Array{data: unsafe.Pointer(&cImageRepsData[0]), len: C.int(len(imageReps))}
+	cPropertiesKeyData := make([]unsafe.Pointer, len(properties))
+	cPropertiesValueData := make([]unsafe.Pointer, len(properties))
+	var idx = 0
+	for k, v := range properties {
+		cPropertiesKeyData[idx] = foundation.NewString(string(k)).Ptr()
+		cPropertiesValueData[idx] = objc.ExtractPtr(v)
+		idx++
+	}
+	cProperties := C.Dictionary{key_data: unsafe.Pointer(&cPropertiesKeyData[0]), value_data: unsafe.Pointer(&cPropertiesValueData[0]), len: C.int(len(properties))}
+	result_ := C.C_NSBitmapImageRep_BitmapImageRep_RepresentationOfImageRepsInArray_UsingType_Properties(cImageReps, C.uint(uint(storageType)), cProperties)
+	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
+	goResult_ := make([]byte, C.int(result_.len))
+	copy(goResult_, result_Buffer)
+	C.free(result_.data)
+	return goResult_
+}
+
+func (n NSBitmapImageRep) RepresentationUsingType_Properties(storageType BitmapImageFileType, properties map[BitmapImageRepPropertyKey]objc.Object) []byte {
+	cPropertiesKeyData := make([]unsafe.Pointer, len(properties))
+	cPropertiesValueData := make([]unsafe.Pointer, len(properties))
+	var idx = 0
+	for k, v := range properties {
+		cPropertiesKeyData[idx] = foundation.NewString(string(k)).Ptr()
+		cPropertiesValueData[idx] = objc.ExtractPtr(v)
+		idx++
+	}
+	cProperties := C.Dictionary{key_data: unsafe.Pointer(&cPropertiesKeyData[0]), value_data: unsafe.Pointer(&cPropertiesValueData[0]), len: C.int(len(properties))}
+	result_ := C.C_NSBitmapImageRep_RepresentationUsingType_Properties(n.Ptr(), C.uint(uint(storageType)), cProperties)
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)

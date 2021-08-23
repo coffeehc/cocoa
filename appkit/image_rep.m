@@ -102,6 +102,20 @@ bool C_NSImageRep_DrawInRect(void* ptr, CGRect rect) {
     return result_;
 }
 
+bool C_NSImageRep_DrawInRect_FromRect_Operation_Fraction_RespectFlipped_Hints(void* ptr, CGRect dstSpacePortionRect, CGRect srcSpacePortionRect, unsigned int op, double requestedAlpha, bool respectContextIsFlipped, Dictionary hints) {
+    NSImageRep* nSImageRep = (NSImageRep*)ptr;
+    NSMutableDictionary* objcHints = [[NSMutableDictionary alloc] initWithCapacity: hints.len];
+    void** hintsKeyData = (void**)hints.key_data;
+    void** hintsValueData = (void**)hints.value_data;
+    for (int i = 0; i < hints.len; i++) {
+    	void* kp = hintsKeyData[i];
+    	void* vp = hintsValueData[i];
+    	[objcHints setObject:(NSImageHintKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    }
+    BOOL result_ = [nSImageRep drawInRect:dstSpacePortionRect fromRect:srcSpacePortionRect operation:op fraction:requestedAlpha respectFlipped:respectContextIsFlipped hints:objcHints];
+    return result_;
+}
+
 Array C_NSImageRep_ImageRep_ImageTypes() {
     NSArray* result_ = [NSImageRep imageTypes];
     int result_count = [result_ count];
