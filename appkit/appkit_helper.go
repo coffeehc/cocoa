@@ -110,3 +110,11 @@ func NewSubMenuItem(menu Menu) MenuItem {
 	item.SetMenu(menu)
 	return item
 }
+
+func NewScrollableTextView() {
+
+}
+
+func NewVerticalStackView() {
+
+}

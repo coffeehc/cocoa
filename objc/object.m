@@ -9,6 +9,20 @@ void Object_Dealloc(void* ptr) {
     [obj dealloc];
 }
 
+void* Object_PerformSelector(void* ptr, void* sel_p) {
+    NSObject* obj = (NSObject*)ptr;
+    return [obj performSelector:(SEL)sel_p];
+}
+
+void* Object_PerformSelector_WithObject(void* ptr, void* sel_p, void* param) {
+    NSObject* obj = (NSObject*)ptr;
+    return [obj performSelector:(SEL)sel_p withObject:(NSObject*)param];
+}
+
+void* Object_PerformSelector_WithObject_WithObject(void* ptr, void* sel_p, void* param1, void* param2) {
+    NSObject* obj = (NSObject*)ptr;
+    return [obj performSelector:(SEL)sel_p withObject:(NSObject*)param1  withObject:(NSObject*)param2];
+}
 
 @interface Parasite : NSObject
 @property(nonatomic, assign) uintptr_t hookPtr;

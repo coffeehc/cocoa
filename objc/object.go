@@ -9,7 +9,7 @@ import (
 
 // PointerHolder is a interface for holding a objc pointer
 type PointerHolder interface {
-	// Ptr return the delegate objc objc pointer
+	// Ptr return the delegate objc pointer
 	Ptr() unsafe.Pointer
 }
 
@@ -30,6 +30,38 @@ func ExtractPtr(o PointerHolder) unsafe.Pointer {
 // NSObject is wrapper for objc-NSObject
 type NSObject struct {
 	ptr unsafe.Pointer
+}
+
+func (o NSObject) PerformSelector(sel Selector) Object {
+	rp := C.Object_PerformSelector(o.Ptr(), unsafe.Pointer(sel))
+	return MakeObject(rp)
+}
+
+func (o NSObject) PerformSelector_WithObject(sel Selector, object Object) Object {
+	var param unsafe.Pointer
+	if object != nil {
+		param = object.Ptr()
+	} else {
+		param = nil
+	}
+	rp := C.Object_PerformSelector_WithObject(o.Ptr(), unsafe.Pointer(sel), param)
+	return MakeObject(rp)
+}
+
+func (o NSObject) PerformSelector_WithObject_WithObject(sel Selector, obj1, obj2 Object) Object {
+	var param1, param2 unsafe.Pointer
+	if obj1 != nil {
+		param1 = obj1.Ptr()
+	} else {
+		param1 = nil
+	}
+	if obj2 != nil {
+		param2 = obj2.Ptr()
+	} else {
+		param2 = nil
+	}
+	rp := C.Object_PerformSelector_WithObject_WithObject(o.Ptr(), unsafe.Pointer(sel), param1, param2)
+	return MakeObject(rp)
 }
 
 func (o NSObject) Dealloc() {

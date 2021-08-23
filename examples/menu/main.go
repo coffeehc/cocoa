@@ -67,7 +67,7 @@ func setMainMenu(app appkit.Application) {
 	menu.AddItem(mainMenuItem)
 
 	testMenuItem := appkit.NewMenuItem("", "", nil)
-	testMenu := appkit.AllocMenu().InitWithTitle("Test")
+	testMenu := appkit.AllocMenu().InitWithTitle("Edit")
 	testMenu.AddItem(appkit.NewMenuItem("Select All", "a", foundation.SelectorFromString("selectAll:")))
 	testMenu.AddItem(appkit.MenuItem_SeparatorItem())
 	testMenu.AddItem(appkit.NewMenuItem("Copy", "c", foundation.SelectorFromString("copy:")))
