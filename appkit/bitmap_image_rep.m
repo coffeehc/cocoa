@@ -5,6 +5,12 @@ void* C_BitmapImageRep_Alloc() {
     return [NSBitmapImageRep alloc];
 }
 
+void* C_NSBitmapImageRep_InitWithCGImage(void* ptr, void* cgImage) {
+    NSBitmapImageRep* nSBitmapImageRep = (NSBitmapImageRep*)ptr;
+    NSBitmapImageRep* result_ = [nSBitmapImageRep initWithCGImage:(CGImageRef)cgImage];
+    return result_;
+}
+
 void* C_NSBitmapImageRep_InitWithData(void* ptr, Array data) {
     NSBitmapImageRep* nSBitmapImageRep = (NSBitmapImageRep*)ptr;
     NSBitmapImageRep* result_ = [nSBitmapImageRep initWithData:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len]];
@@ -98,12 +104,14 @@ Array C_NSBitmapImageRep_BitmapImageRep_RepresentationOfImageRepsInArray_UsingTy
     	[objcImageReps addObject:(NSImageRep*)(NSImageRep*)p];
     }
     NSMutableDictionary* objcProperties = [[NSMutableDictionary alloc] initWithCapacity: properties.len];
-    void** propertiesKeyData = (void**)properties.key_data;
-    void** propertiesValueData = (void**)properties.value_data;
-    for (int i = 0; i < properties.len; i++) {
-    	void* kp = propertiesKeyData[i];
-    	void* vp = propertiesValueData[i];
-    	[objcProperties setObject:(NSBitmapImageRepPropertyKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    if (properties.len > 0) {
+    	void** propertiesKeyData = (void**)properties.key_data;
+    	void** propertiesValueData = (void**)properties.value_data;
+    	for (int i = 0; i < properties.len; i++) {
+    		void* kp = propertiesKeyData[i];
+    		void* vp = propertiesValueData[i];
+    		[objcProperties setObject:(NSBitmapImageRepPropertyKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
     }
     NSData* result_ = [NSBitmapImageRep representationOfImageRepsInArray:objcImageReps usingType:storageType properties:objcProperties];
     Array result_array;
@@ -115,12 +123,14 @@ Array C_NSBitmapImageRep_BitmapImageRep_RepresentationOfImageRepsInArray_UsingTy
 Array C_NSBitmapImageRep_RepresentationUsingType_Properties(void* ptr, unsigned int storageType, Dictionary properties) {
     NSBitmapImageRep* nSBitmapImageRep = (NSBitmapImageRep*)ptr;
     NSMutableDictionary* objcProperties = [[NSMutableDictionary alloc] initWithCapacity: properties.len];
-    void** propertiesKeyData = (void**)properties.key_data;
-    void** propertiesValueData = (void**)properties.value_data;
-    for (int i = 0; i < properties.len; i++) {
-    	void* kp = propertiesKeyData[i];
-    	void* vp = propertiesValueData[i];
-    	[objcProperties setObject:(NSBitmapImageRepPropertyKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    if (properties.len > 0) {
+    	void** propertiesKeyData = (void**)properties.key_data;
+    	void** propertiesValueData = (void**)properties.value_data;
+    	for (int i = 0; i < properties.len; i++) {
+    		void* kp = propertiesKeyData[i];
+    		void* vp = propertiesValueData[i];
+    		[objcProperties setObject:(NSBitmapImageRepPropertyKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
     }
     NSData* result_ = [nSBitmapImageRep representationUsingType:storageType properties:objcProperties];
     Array result_array;
@@ -234,6 +244,12 @@ Array C_NSBitmapImageRep_TIFFRepresentation(void* ptr) {
     result_array.data = [result_ bytes];
     result_array.len = result_.length;
     return result_array;
+}
+
+void* C_NSBitmapImageRep_CGImage(void* ptr) {
+    NSBitmapImageRep* nSBitmapImageRep = (NSBitmapImageRep*)ptr;
+    CGImageRef result_ = [nSBitmapImageRep CGImage];
+    return result_;
 }
 
 void* C_NSBitmapImageRep_ColorSpace(void* ptr) {

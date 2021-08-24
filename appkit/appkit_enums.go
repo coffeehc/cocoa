@@ -1939,3 +1939,4 @@ const (
 type AboutPanelOptionKey string
 type PrintInfoAttributeKey string
 type ImageHintKey string
+type GraphicsContextAttributeKey string

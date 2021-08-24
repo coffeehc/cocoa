@@ -5,6 +5,7 @@
 
 void* C_BitmapImageRep_Alloc();
 
+void* C_NSBitmapImageRep_InitWithCGImage(void* ptr, void* cgImage);
 void* C_NSBitmapImageRep_InitWithData(void* ptr, Array data);
 void* C_NSBitmapImageRep_InitForIncrementalLoad(void* ptr);
 void* C_NSBitmapImageRep_Init(void* ptr);
@@ -35,4 +36,5 @@ bool C_NSBitmapImageRep_IsPlanar(void* ptr);
 int C_NSBitmapImageRep_NumberOfPlanes(void* ptr);
 int C_NSBitmapImageRep_SamplesPerPixel(void* ptr);
 Array C_NSBitmapImageRep_TIFFRepresentation(void* ptr);
+void* C_NSBitmapImageRep_CGImage(void* ptr);
 void* C_NSBitmapImageRep_ColorSpace(void* ptr);

@@ -41,6 +41,12 @@ void* C_NSImage_InitWithDataIgnoringOrientation(void* ptr, Array data) {
     return result_;
 }
 
+void* C_NSImage_InitWithCGImage_Size(void* ptr, void* cgImage, CGSize size) {
+    NSImage* nSImage = (NSImage*)ptr;
+    NSImage* result_ = [nSImage initWithCGImage:(CGImageRef)cgImage size:size];
+    return result_;
+}
+
 void* C_NSImage_InitWithPasteboard(void* ptr, void* pasteboard) {
     NSImage* nSImage = (NSImage*)ptr;
     NSImage* result_ = [nSImage initWithPasteboard:(NSPasteboard*)pasteboard];
@@ -119,6 +125,22 @@ void C_NSImage_RemoveRepresentation(void* ptr, void* imageRep) {
     [nSImage removeRepresentation:(NSImageRep*)imageRep];
 }
 
+void* C_NSImage_BestRepresentationForRect_Context_Hints(void* ptr, CGRect rect, void* referenceContext, Dictionary hints) {
+    NSImage* nSImage = (NSImage*)ptr;
+    NSMutableDictionary* objcHints = [[NSMutableDictionary alloc] initWithCapacity: hints.len];
+    if (hints.len > 0) {
+    	void** hintsKeyData = (void**)hints.key_data;
+    	void** hintsValueData = (void**)hints.value_data;
+    	for (int i = 0; i < hints.len; i++) {
+    		void* kp = hintsKeyData[i];
+    		void* vp = hintsValueData[i];
+    		[objcHints setObject:(NSImageHintKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    NSImageRep* result_ = [nSImage bestRepresentationForRect:rect context:(NSGraphicsContext*)referenceContext hints:objcHints];
+    return result_;
+}
+
 void C_NSImage_DrawInRect(void* ptr, CGRect rect) {
     NSImage* nSImage = (NSImage*)ptr;
     [nSImage drawInRect:rect];
@@ -132,6 +154,21 @@ void C_NSImage_DrawAtPoint_FromRect_Operation_Fraction(void* ptr, CGPoint point,
 void C_NSImage_DrawInRect_FromRect_Operation_Fraction(void* ptr, CGRect rect, CGRect fromRect, unsigned int op, double delta) {
     NSImage* nSImage = (NSImage*)ptr;
     [nSImage drawInRect:rect fromRect:fromRect operation:op fraction:delta];
+}
+
+void C_NSImage_DrawInRect_FromRect_Operation_Fraction_RespectFlipped_Hints(void* ptr, CGRect dstSpacePortionRect, CGRect srcSpacePortionRect, unsigned int op, double requestedAlpha, bool respectContextIsFlipped, Dictionary hints) {
+    NSImage* nSImage = (NSImage*)ptr;
+    NSMutableDictionary* objcHints = [[NSMutableDictionary alloc] initWithCapacity: hints.len];
+    if (hints.len > 0) {
+    	void** hintsKeyData = (void**)hints.key_data;
+    	void** hintsValueData = (void**)hints.value_data;
+    	for (int i = 0; i < hints.len; i++) {
+    		void* kp = hintsKeyData[i];
+    		void* vp = hintsValueData[i];
+    		[objcHints setObject:(NSImageHintKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    [nSImage drawInRect:dstSpacePortionRect fromRect:srcSpacePortionRect operation:op fraction:requestedAlpha respectFlipped:respectContextIsFlipped hints:objcHints];
 }
 
 bool C_NSImage_DrawRepresentation_InRect(void* ptr, void* imageRep, CGRect rect) {
@@ -172,6 +209,22 @@ Array C_NSImage_TIFFRepresentationUsingCompression_Factor(void* ptr, unsigned in
 void C_NSImage_CancelIncrementalLoad(void* ptr) {
     NSImage* nSImage = (NSImage*)ptr;
     [nSImage cancelIncrementalLoad];
+}
+
+bool C_NSImage_HitTestRect_WithImageDestinationRect_Context_Hints_Flipped(void* ptr, CGRect testRectDestSpace, CGRect imageRectDestSpace, void* context, Dictionary hints, bool flipped) {
+    NSImage* nSImage = (NSImage*)ptr;
+    NSMutableDictionary* objcHints = [[NSMutableDictionary alloc] initWithCapacity: hints.len];
+    if (hints.len > 0) {
+    	void** hintsKeyData = (void**)hints.key_data;
+    	void** hintsValueData = (void**)hints.value_data;
+    	for (int i = 0; i < hints.len; i++) {
+    		void* kp = hintsKeyData[i];
+    		void* vp = hintsValueData[i];
+    		[objcHints setObject:(NSImageHintKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    BOOL result_ = [nSImage hitTestRect:testRectDestSpace withImageDestinationRect:imageRectDestSpace context:(NSGraphicsContext*)context hints:objcHints flipped:flipped];
+    return result_;
 }
 
 void* C_NSImage_LayerContentsForContentsScale(void* ptr, double layerContentsScale) {

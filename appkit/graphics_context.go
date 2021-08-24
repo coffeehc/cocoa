@@ -12,7 +12,9 @@ import (
 type GraphicsContext interface {
 	objc.Object
 	FlushGraphics()
+	CGContext() coregraphics.ContextRef
 	IsDrawingToScreen() bool
+	Attributes() map[GraphicsContextAttributeKey]objc.Object
 	IsFlipped() bool
 	CompositingOperation() CompositingOperation
 	SetCompositingOperation(value CompositingOperation)
@@ -45,8 +47,32 @@ func (n NSGraphicsContext) Init() GraphicsContext {
 	return MakeGraphicsContext(result_)
 }
 
+func GraphicsContextWithAttributes(attributes map[GraphicsContextAttributeKey]objc.Object) GraphicsContext {
+	var cAttributes C.Dictionary
+	if len(attributes) == 0 {
+		cAttributes = C.Dictionary{len: 0}
+	} else {
+		cAttributesKeyData := make([]unsafe.Pointer, len(attributes))
+		cAttributesValueData := make([]unsafe.Pointer, len(attributes))
+		var idx = 0
+		for k, v := range attributes {
+			cAttributesKeyData[idx] = foundation.NewString(string(k)).Ptr()
+			cAttributesValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cAttributes = C.Dictionary{key_data: unsafe.Pointer(&cAttributesKeyData[0]), value_data: unsafe.Pointer(&cAttributesValueData[0]), len: C.int(len(attributes))}
+	}
+	result_ := C.C_NSGraphicsContext_GraphicsContextWithAttributes(cAttributes)
+	return MakeGraphicsContext(result_)
+}
+
 func GraphicsContextWithBitmapImageRep(bitmapRep BitmapImageRep) GraphicsContext {
 	result_ := C.C_NSGraphicsContext_GraphicsContextWithBitmapImageRep(objc.ExtractPtr(bitmapRep))
+	return MakeGraphicsContext(result_)
+}
+
+func GraphicsContextWithCGContext_Flipped(graphicsPort coregraphics.ContextRef, initialFlippedState bool) GraphicsContext {
+	result_ := C.C_NSGraphicsContext_GraphicsContextWithCGContext_Flipped(unsafe.Pointer(graphicsPort), C.bool(initialFlippedState))
 	return MakeGraphicsContext(result_)
 }
 
@@ -81,9 +107,28 @@ func GraphicsContext_SetCurrentContext(value GraphicsContext) {
 	C.C_NSGraphicsContext_GraphicsContext_SetCurrentContext(objc.ExtractPtr(value))
 }
 
+func (n NSGraphicsContext) CGContext() coregraphics.ContextRef {
+	result_ := C.C_NSGraphicsContext_CGContext(n.Ptr())
+	return coregraphics.ContextRef(result_)
+}
+
 func (n NSGraphicsContext) IsDrawingToScreen() bool {
 	result_ := C.C_NSGraphicsContext_IsDrawingToScreen(n.Ptr())
 	return bool(result_)
+}
+
+func (n NSGraphicsContext) Attributes() map[GraphicsContextAttributeKey]objc.Object {
+	result_ := C.C_NSGraphicsContext_Attributes(n.Ptr())
+	defer C.free(result_.key_data)
+	defer C.free(result_.value_data)
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[GraphicsContextAttributeKey]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[GraphicsContextAttributeKey(foundation.MakeString(k).String())] = objc.MakeObject(v)
+	}
+	return goResult_
 }
 
 func (n NSGraphicsContext) IsFlipped() bool {

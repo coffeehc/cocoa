@@ -17,9 +17,11 @@ type Image interface {
 	AddRepresentation(imageRep ImageRep)
 	AddRepresentations(imageReps []ImageRep)
 	RemoveRepresentation(imageRep ImageRep)
+	BestRepresentationForRect_Context_Hints(rect foundation.Rect, referenceContext GraphicsContext, hints map[ImageHintKey]objc.Object) ImageRep
 	DrawInRect(rect foundation.Rect)
 	DrawAtPoint_FromRect_Operation_Fraction(point foundation.Point, fromRect foundation.Rect, op CompositingOperation, delta coregraphics.Float)
 	DrawInRect_FromRect_Operation_Fraction(rect foundation.Rect, fromRect foundation.Rect, op CompositingOperation, delta coregraphics.Float)
+	DrawInRect_FromRect_Operation_Fraction_RespectFlipped_Hints(dstSpacePortionRect foundation.Rect, srcSpacePortionRect foundation.Rect, op CompositingOperation, requestedAlpha coregraphics.Float, respectContextIsFlipped bool, hints map[ImageHintKey]objc.Object)
 	DrawRepresentation_InRect(imageRep ImageRep, rect foundation.Rect) bool
 	LockFocus()
 	LockFocusFlipped(flipped bool)
@@ -27,6 +29,7 @@ type Image interface {
 	Recache()
 	TIFFRepresentationUsingCompression_Factor(comp TIFFCompression, factor float32) []byte
 	CancelIncrementalLoad()
+	HitTestRect_WithImageDestinationRect_Context_Hints_Flipped(testRectDestSpace foundation.Rect, imageRectDestSpace foundation.Rect, context GraphicsContext, hints map[ImageHintKey]objc.Object, flipped bool) bool
 	LayerContentsForContentsScale(layerContentsScale coregraphics.Float) objc.Object
 	RecommendedLayerContentsScale(preferredContentsScale coregraphics.Float) coregraphics.Float
 	Delegate() objc.Object
@@ -104,6 +107,11 @@ func (n NSImage) InitWithDataIgnoringOrientation(data []byte) Image {
 	return MakeImage(result_)
 }
 
+func (n NSImage) InitWithCGImage_Size(cgImage coregraphics.ImageRef, size foundation.Size) Image {
+	result_ := C.C_NSImage_InitWithCGImage_Size(n.Ptr(), unsafe.Pointer(cgImage), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(size))))
+	return MakeImage(result_)
+}
+
 func (n NSImage) InitWithPasteboard(pasteboard Pasteboard) Image {
 	result_ := C.C_NSImage_InitWithPasteboard(n.Ptr(), objc.ExtractPtr(pasteboard))
 	return MakeImage(result_)
@@ -171,6 +179,25 @@ func (n NSImage) RemoveRepresentation(imageRep ImageRep) {
 	C.C_NSImage_RemoveRepresentation(n.Ptr(), objc.ExtractPtr(imageRep))
 }
 
+func (n NSImage) BestRepresentationForRect_Context_Hints(rect foundation.Rect, referenceContext GraphicsContext, hints map[ImageHintKey]objc.Object) ImageRep {
+	var cHints C.Dictionary
+	if len(hints) == 0 {
+		cHints = C.Dictionary{len: 0}
+	} else {
+		cHintsKeyData := make([]unsafe.Pointer, len(hints))
+		cHintsValueData := make([]unsafe.Pointer, len(hints))
+		var idx = 0
+		for k, v := range hints {
+			cHintsKeyData[idx] = foundation.NewString(string(k)).Ptr()
+			cHintsValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cHints = C.Dictionary{key_data: unsafe.Pointer(&cHintsKeyData[0]), value_data: unsafe.Pointer(&cHintsValueData[0]), len: C.int(len(hints))}
+	}
+	result_ := C.C_NSImage_BestRepresentationForRect_Context_Hints(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))), objc.ExtractPtr(referenceContext), cHints)
+	return MakeImageRep(result_)
+}
+
 func (n NSImage) DrawInRect(rect foundation.Rect) {
 	C.C_NSImage_DrawInRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
 }
@@ -181,6 +208,24 @@ func (n NSImage) DrawAtPoint_FromRect_Operation_Fraction(point foundation.Point,
 
 func (n NSImage) DrawInRect_FromRect_Operation_Fraction(rect foundation.Rect, fromRect foundation.Rect, op CompositingOperation, delta coregraphics.Float) {
 	C.C_NSImage_DrawInRect_FromRect_Operation_Fraction(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(fromRect))), C.uint(uint(op)), C.double(float64(delta)))
+}
+
+func (n NSImage) DrawInRect_FromRect_Operation_Fraction_RespectFlipped_Hints(dstSpacePortionRect foundation.Rect, srcSpacePortionRect foundation.Rect, op CompositingOperation, requestedAlpha coregraphics.Float, respectContextIsFlipped bool, hints map[ImageHintKey]objc.Object) {
+	var cHints C.Dictionary
+	if len(hints) == 0 {
+		cHints = C.Dictionary{len: 0}
+	} else {
+		cHintsKeyData := make([]unsafe.Pointer, len(hints))
+		cHintsValueData := make([]unsafe.Pointer, len(hints))
+		var idx = 0
+		for k, v := range hints {
+			cHintsKeyData[idx] = foundation.NewString(string(k)).Ptr()
+			cHintsValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cHints = C.Dictionary{key_data: unsafe.Pointer(&cHintsKeyData[0]), value_data: unsafe.Pointer(&cHintsValueData[0]), len: C.int(len(hints))}
+	}
+	C.C_NSImage_DrawInRect_FromRect_Operation_Fraction_RespectFlipped_Hints(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(dstSpacePortionRect))), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(srcSpacePortionRect))), C.uint(uint(op)), C.double(float64(requestedAlpha)), C.bool(respectContextIsFlipped), cHints)
 }
 
 func (n NSImage) DrawRepresentation_InRect(imageRep ImageRep, rect foundation.Rect) bool {
@@ -209,12 +254,30 @@ func (n NSImage) TIFFRepresentationUsingCompression_Factor(comp TIFFCompression,
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)
-	C.free(result_.data)
 	return goResult_
 }
 
 func (n NSImage) CancelIncrementalLoad() {
 	C.C_NSImage_CancelIncrementalLoad(n.Ptr())
+}
+
+func (n NSImage) HitTestRect_WithImageDestinationRect_Context_Hints_Flipped(testRectDestSpace foundation.Rect, imageRectDestSpace foundation.Rect, context GraphicsContext, hints map[ImageHintKey]objc.Object, flipped bool) bool {
+	var cHints C.Dictionary
+	if len(hints) == 0 {
+		cHints = C.Dictionary{len: 0}
+	} else {
+		cHintsKeyData := make([]unsafe.Pointer, len(hints))
+		cHintsValueData := make([]unsafe.Pointer, len(hints))
+		var idx = 0
+		for k, v := range hints {
+			cHintsKeyData[idx] = foundation.NewString(string(k)).Ptr()
+			cHintsValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cHints = C.Dictionary{key_data: unsafe.Pointer(&cHintsKeyData[0]), value_data: unsafe.Pointer(&cHintsValueData[0]), len: C.int(len(hints))}
+	}
+	result_ := C.C_NSImage_HitTestRect_WithImageDestinationRect_Context_Hints_Flipped(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(testRectDestSpace))), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(imageRectDestSpace))), objc.ExtractPtr(context), cHints, C.bool(flipped))
+	return bool(result_)
 }
 
 func (n NSImage) LayerContentsForContentsScale(layerContentsScale coregraphics.Float) objc.Object {
@@ -369,7 +432,6 @@ func (n NSImage) TIFFRepresentation() []byte {
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)
-	C.free(result_.data)
 	return goResult_
 }
 

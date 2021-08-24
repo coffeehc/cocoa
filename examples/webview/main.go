@@ -26,18 +26,22 @@ func initAndRun() {
 	webView := webkit.AllocWebView().Init()
 	webView.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	webView.LoadRequest(foundation.AllocURLRequest().InitWithURL(foundation.URLWithString("https://www.baidu.com")))
-	//webView.LoadHTMLString("<h1>Test</h1>", "https://www.baidu.com")
 
 	layouts.AddViewWithPadding(w.ContentView(), webView, 10, 10, 10, 20)
 	cb := appkit.NewPlainButton("capture")
 	uihelper.SetAction(cb, func(sender objc.Object) {
-		bitMapImageRep := webView.BitmapImageRepForCachingDisplayInRect(webView.Bounds())
-		data := bitMapImageRep.RepresentationUsingType_Properties(appkit.BitmapImageFileTypePNG, map[appkit.BitmapImageRepPropertyKey]objc.Object{
-			"xxxxx": foundation.NewString("1"),
+		webView.(webkit.WKWebView).TakeSnapshotWithConfiguration(nil, func(image appkit.Image, err foundation.Error) {
+			imageRef := image.(appkit.NSImage).CGImageForProposedRect_Context_Hints()
+			imageRepo := appkit.AllocBitmapImageRep().InitWithCGImage(imageRef)
+			imageRepo.SetSize(image.Size())
+			pngData := imageRepo.RepresentationUsingType_Properties(appkit.BitmapImageFileTypePNG, nil)
+
+			if err := os.WriteFile("b.png", pngData, os.ModePerm); err != nil {
+				fmt.Println("write image to file error:", err)
+			} else {
+				fmt.Println("image captured")
+			}
 		})
-		if err := os.WriteFile("a.png", data, os.ModePerm); err != nil {
-			fmt.Println("write image to file error:", err)
-		}
 	})
 	w.ContentView().AddSubview(cb)
 	cb.LeftAnchor().ConstraintEqualToAnchor_Constant(w.ContentView().LeftAnchor(), -10)

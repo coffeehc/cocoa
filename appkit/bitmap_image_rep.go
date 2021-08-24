@@ -31,6 +31,7 @@ type BitmapImageRep interface {
 	NumberOfPlanes() int
 	SamplesPerPixel() int
 	TIFFRepresentation() []byte
+	CGImage() coregraphics.ImageRef
 	ColorSpace() ColorSpace
 }
 
@@ -46,6 +47,11 @@ func MakeBitmapImageRep(ptr unsafe.Pointer) NSBitmapImageRep {
 
 func AllocBitmapImageRep() NSBitmapImageRep {
 	return MakeBitmapImageRep(C.C_BitmapImageRep_Alloc())
+}
+
+func (n NSBitmapImageRep) InitWithCGImage(cgImage coregraphics.ImageRef) BitmapImageRep {
+	result_ := C.C_NSBitmapImageRep_InitWithCGImage(n.Ptr(), unsafe.Pointer(cgImage))
+	return MakeBitmapImageRep(result_)
 }
 
 func (n NSBitmapImageRep) InitWithData(data []byte) BitmapImageRep {
@@ -98,7 +104,6 @@ func BitmapImageRep_TIFFRepresentationOfImageRepsInArray(array []ImageRep) []byt
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)
-	C.free(result_.data)
 	return goResult_
 }
 
@@ -112,7 +117,6 @@ func BitmapImageRep_TIFFRepresentationOfImageRepsInArray_UsingCompression_Factor
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)
-	C.free(result_.data)
 	return goResult_
 }
 
@@ -121,7 +125,6 @@ func (n NSBitmapImageRep) TIFFRepresentationUsingCompression_Factor(comp TIFFCom
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)
-	C.free(result_.data)
 	return goResult_
 }
 
@@ -131,38 +134,46 @@ func BitmapImageRep_RepresentationOfImageRepsInArray_UsingType_Properties(imageR
 		cImageRepsData[idx] = objc.ExtractPtr(v)
 	}
 	cImageReps := C.Array{data: unsafe.Pointer(&cImageRepsData[0]), len: C.int(len(imageReps))}
-	cPropertiesKeyData := make([]unsafe.Pointer, len(properties))
-	cPropertiesValueData := make([]unsafe.Pointer, len(properties))
-	var idx = 0
-	for k, v := range properties {
-		cPropertiesKeyData[idx] = foundation.NewString(string(k)).Ptr()
-		cPropertiesValueData[idx] = objc.ExtractPtr(v)
-		idx++
+	var cProperties C.Dictionary
+	if len(properties) == 0 {
+		cProperties = C.Dictionary{len: 0}
+	} else {
+		cPropertiesKeyData := make([]unsafe.Pointer, len(properties))
+		cPropertiesValueData := make([]unsafe.Pointer, len(properties))
+		var idx = 0
+		for k, v := range properties {
+			cPropertiesKeyData[idx] = foundation.NewString(string(k)).Ptr()
+			cPropertiesValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cProperties = C.Dictionary{key_data: unsafe.Pointer(&cPropertiesKeyData[0]), value_data: unsafe.Pointer(&cPropertiesValueData[0]), len: C.int(len(properties))}
 	}
-	cProperties := C.Dictionary{key_data: unsafe.Pointer(&cPropertiesKeyData[0]), value_data: unsafe.Pointer(&cPropertiesValueData[0]), len: C.int(len(properties))}
 	result_ := C.C_NSBitmapImageRep_BitmapImageRep_RepresentationOfImageRepsInArray_UsingType_Properties(cImageReps, C.uint(uint(storageType)), cProperties)
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)
-	C.free(result_.data)
 	return goResult_
 }
 
 func (n NSBitmapImageRep) RepresentationUsingType_Properties(storageType BitmapImageFileType, properties map[BitmapImageRepPropertyKey]objc.Object) []byte {
-	cPropertiesKeyData := make([]unsafe.Pointer, len(properties))
-	cPropertiesValueData := make([]unsafe.Pointer, len(properties))
-	var idx = 0
-	for k, v := range properties {
-		cPropertiesKeyData[idx] = foundation.NewString(string(k)).Ptr()
-		cPropertiesValueData[idx] = objc.ExtractPtr(v)
-		idx++
+	var cProperties C.Dictionary
+	if len(properties) == 0 {
+		cProperties = C.Dictionary{len: 0}
+	} else {
+		cPropertiesKeyData := make([]unsafe.Pointer, len(properties))
+		cPropertiesValueData := make([]unsafe.Pointer, len(properties))
+		var idx = 0
+		for k, v := range properties {
+			cPropertiesKeyData[idx] = foundation.NewString(string(k)).Ptr()
+			cPropertiesValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cProperties = C.Dictionary{key_data: unsafe.Pointer(&cPropertiesKeyData[0]), value_data: unsafe.Pointer(&cPropertiesValueData[0]), len: C.int(len(properties))}
 	}
-	cProperties := C.Dictionary{key_data: unsafe.Pointer(&cPropertiesKeyData[0]), value_data: unsafe.Pointer(&cPropertiesValueData[0]), len: C.int(len(properties))}
 	result_ := C.C_NSBitmapImageRep_RepresentationUsingType_Properties(n.Ptr(), C.uint(uint(storageType)), cProperties)
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)
-	C.free(result_.data)
 	return goResult_
 }
 
@@ -253,8 +264,12 @@ func (n NSBitmapImageRep) TIFFRepresentation() []byte {
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)
-	C.free(result_.data)
 	return goResult_
+}
+
+func (n NSBitmapImageRep) CGImage() coregraphics.ImageRef {
+	result_ := C.C_NSBitmapImageRep_CGImage(n.Ptr())
+	return coregraphics.ImageRef(result_)
 }
 
 func (n NSBitmapImageRep) ColorSpace() ColorSpace {

@@ -6,7 +6,9 @@
 void* C_GraphicsContext_Alloc();
 
 void* C_NSGraphicsContext_Init(void* ptr);
+void* C_NSGraphicsContext_GraphicsContextWithAttributes(Dictionary attributes);
 void* C_NSGraphicsContext_GraphicsContextWithBitmapImageRep(void* bitmapRep);
+void* C_NSGraphicsContext_GraphicsContextWithCGContext_Flipped(void* graphicsPort, bool initialFlippedState);
 void* C_NSGraphicsContext_GraphicsContextWithWindow(void* window);
 void C_NSGraphicsContext_GraphicsContext_RestoreGraphicsState();
 void C_NSGraphicsContext_GraphicsContext_SaveGraphicsState();
@@ -14,7 +16,9 @@ bool C_NSGraphicsContext_GraphicsContext_CurrentContextDrawingToScreen();
 void C_NSGraphicsContext_FlushGraphics(void* ptr);
 void* C_NSGraphicsContext_GraphicsContext_CurrentContext();
 void C_NSGraphicsContext_GraphicsContext_SetCurrentContext(void* value);
+void* C_NSGraphicsContext_CGContext(void* ptr);
 bool C_NSGraphicsContext_IsDrawingToScreen(void* ptr);
+Dictionary C_NSGraphicsContext_Attributes(void* ptr);
 bool C_NSGraphicsContext_IsFlipped(void* ptr);
 unsigned int C_NSGraphicsContext_CompositingOperation(void* ptr);
 void C_NSGraphicsContext_SetCompositingOperation(void* ptr, unsigned int value);
