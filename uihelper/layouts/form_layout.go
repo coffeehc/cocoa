@@ -11,14 +11,14 @@ type FormView struct {
 	labelWidth          float64
 	labelAlignment      appkit.TextAlignment
 	labelControlSpacing float64
+	labelFont           appkit.Font
 }
 
 // NewFormView create new form view
 func NewFormView() *FormView {
-	sv := appkit.AllocStackView().Init()
-	sv.SetOrientation(appkit.UserInterfaceLayoutOrientationVertical)
+	sv := appkit.NewVerticalStackView()
 	sv.SetDistribution(appkit.StackViewDistributionFillEqually)
-	sv.SetAlignment(appkit.LayoutAttributeCenterX)
+	sv.SetAlignment(appkit.LayoutAttributeBottom)
 	sv.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	sv.SetHuggingPriority_ForOrientation(appkit.LayoutPriorityRequired, appkit.LayoutConstraintOrientationVertical)
 	sv.SetAlignment(appkit.LayoutAttributeLeft)
@@ -41,7 +41,7 @@ func (f *FormView) AddExpandRow() {
 
 // AddRow add a new form row
 func (f *FormView) AddRow(name string, control appkit.Control) {
-	r := newFormRowView(name, control, f.labelWidth, f.labelAlignment)
+	r := newFormRowView(name, control, f.labelWidth, f.labelAlignment, f.labelFont)
 	r.SetSpacing(f.labelControlSpacing)
 	f.rows = append(f.rows, r)
 
@@ -55,7 +55,7 @@ func (f *FormView) InsertRow(index uint, name string, control appkit.Control) {
 		panic("index out of range")
 	}
 
-	r := newFormRowView(name, control, f.labelWidth, f.labelAlignment)
+	r := newFormRowView(name, control, f.labelWidth, f.labelAlignment, f.labelFont)
 	r.SetSpacing(f.labelControlSpacing)
 	f.rows = append(append(f.rows[:index], r), f.rows[index:]...)
 	f.stackView.InsertView_AtIndex_InGravity(r, index, appkit.StackViewGravityTop)
@@ -82,6 +82,14 @@ func (f *FormView) SetLabelAlignment(alignment appkit.TextAlignment) {
 	}
 }
 
+// SetLabelFont set label font
+func (f *FormView) SetLabelFont(font appkit.Font) {
+	f.labelFont = font
+	for _, r := range f.rows {
+		r.label.SetFont(font)
+	}
+}
+
 // SetLabelControlSpacing set spacing between label and control
 func (f *FormView) SetLabelControlSpacing(spacing float64) {
 	f.labelControlSpacing = spacing
@@ -100,7 +108,7 @@ type formRowView struct {
 }
 
 func newFormRowView(name string, control appkit.Control, labelWidth float64,
-	labelAlignment appkit.TextAlignment) *formRowView {
+	labelAlignment appkit.TextAlignment, labelFont appkit.Font) *formRowView {
 	row := appkit.AllocStackView().Init()
 	row.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	row.SetOrientation(appkit.UserInterfaceLayoutOrientationHorizontal)
@@ -112,6 +120,9 @@ func newFormRowView(name string, control appkit.Control, labelWidth float64,
 	labelWidthConstant := label.WidthAnchor().ConstraintEqualToConstant(labelWidth)
 	labelWidthConstant.SetActive(true)
 	label.SetAlignment(labelAlignment)
+	if labelFont != nil && labelFont.Ptr() != nil {
+		label.SetFont(label.Font())
+	}
 	row.AddView_InGravity(label, appkit.StackViewGravityLeading)
 
 	control.SetTranslatesAutoresizingMaskIntoConstraints(false)
