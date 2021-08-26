@@ -4,6 +4,5 @@
 #import <utils.h>
 #import <WebKit/WebKit.h>
 
-// custom begin
 void TakeSnapshotWithConfiguration(void* ptr, void* configuration, uintptr_t handler);
-// custom end
+void EvaluateJavaScript(void* ptr, void* javascript, uintptr_t handler);

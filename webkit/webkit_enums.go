@@ -30,3 +30,5 @@ const (
 	UserScriptInjectionTimeAtDocumentStart UserScriptInjectionTime = iota
 	UserScriptInjectionTimeAtDocumentEnd
 )
+
+type NavigationType int

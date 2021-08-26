@@ -27,6 +27,14 @@ func initAndRun() {
 	webView.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	webView.LoadRequest(foundation.AllocURLRequest().InitWithURL(foundation.URLWithString("https://www.baidu.com")))
 
+	webView.SetNavigationDelegate((&webkit.NavigationDelegate{
+		WebView_DidFinishNavigation: func(webView webkit.WebView, navigation webkit.Navigation) {
+			webView.(webkit.WKWebView).EvaluateJavaScript("document.documentElement.outerHTML.toString()", func(value objc.Object, err foundation.Error) {
+				fmt.Println(foundation.MakeString(value.Ptr()).String())
+			})
+		},
+	}).ToObjc())
+
 	layouts.AddViewWithPadding(w.ContentView(), webView, 10, 10, 10, 20)
 	cb := appkit.NewPlainButton("capture")
 	uihelper.SetAction(cb, func(sender objc.Object) {
