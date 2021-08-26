@@ -16,6 +16,11 @@ void* C_NSEvent_Event_MouseEventWithType_Location_ModifierFlags_Timestamp_Window
     return result_;
 }
 
+void* C_NSEvent_EventWithCGEvent(void* cgEvent) {
+    NSEvent* result_ = [NSEvent eventWithCGEvent:(CGEventRef)cgEvent];
+    return result_;
+}
+
 void C_NSEvent_Event_StartPeriodicEventsAfterDelay_WithPeriod(double delay, double period) {
     [NSEvent startPeriodicEventsAfterDelay:delay withPeriod:period];
 }
@@ -45,15 +50,17 @@ void* C_NSEvent_TouchesForView(void* ptr, void* view) {
 Array C_NSEvent_CoalescedTouchesForTouch(void* ptr, void* touch) {
     NSEvent* nSEvent = (NSEvent*)ptr;
     NSArray* result_ = [nSEvent coalescedTouchesForTouch:(NSTouch*)touch];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -100,6 +107,12 @@ void* C_NSEvent_Window(void* ptr) {
 int C_NSEvent_WindowNumber(void* ptr) {
     NSEvent* nSEvent = (NSEvent*)ptr;
     NSInteger result_ = [nSEvent windowNumber];
+    return result_;
+}
+
+void* C_NSEvent_CGEvent(void* ptr) {
+    NSEvent* nSEvent = (NSEvent*)ptr;
+    CGEventRef result_ = [nSEvent CGEvent];
     return result_;
 }
 

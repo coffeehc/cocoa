@@ -154,6 +154,7 @@ bool C_NSWindow_PreventsApplicationTerminationWhenModal(void* ptr);
 void C_NSWindow_SetPreventsApplicationTerminationWhenModal(void* ptr, bool value);
 int32_t C_NSWindow_Window_DefaultDepthLimit();
 int C_NSWindow_WindowNumber(void* ptr);
+Dictionary C_NSWindow_DeviceDescription(void* ptr);
 bool C_NSWindow_CanBecomeVisibleWithoutLogin(void* ptr);
 void C_NSWindow_SetCanBecomeVisibleWithoutLogin(void* ptr, bool value);
 unsigned int C_NSWindow_SharingType(void* ptr);

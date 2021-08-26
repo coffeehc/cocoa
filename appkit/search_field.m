@@ -59,25 +59,29 @@ void C_NSSearchField_SetSendsWholeSearchString(void* ptr, bool value) {
 Array C_NSSearchField_RecentSearches(void* ptr) {
     NSSearchField* nSSearchField = (NSSearchField*)ptr;
     NSArray* result_ = [nSSearchField recentSearches];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSSearchField_SetRecentSearches(void* ptr, Array value) {
     NSSearchField* nSSearchField = (NSSearchField*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSString*)(NSString*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSString*)(NSString*)p];
+    	}
     }
     [nSSearchField setRecentSearches:objcValue];
 }

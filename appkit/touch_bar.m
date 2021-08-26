@@ -48,25 +48,29 @@ void C_NSTouchBar_SetTemplateItems(void* ptr, void* value) {
 Array C_NSTouchBar_DefaultItemIdentifiers(void* ptr) {
     NSTouchBar* nSTouchBar = (NSTouchBar*)ptr;
     NSArray* result_ = [nSTouchBar defaultItemIdentifiers];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSTouchBar_SetDefaultItemIdentifiers(void* ptr, Array value) {
     NSTouchBar* nSTouchBar = (NSTouchBar*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSTouchBarItemIdentifier)(NSString*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSTouchBarItemIdentifier)(NSString*)p];
+    	}
     }
     [nSTouchBar setDefaultItemIdentifiers:objcValue];
 }
@@ -102,15 +106,17 @@ bool C_NSTouchBar_IsVisible(void* ptr) {
 Array C_NSTouchBar_ItemIdentifiers(void* ptr) {
     NSTouchBar* nSTouchBar = (NSTouchBar*)ptr;
     NSArray* result_ = [nSTouchBar itemIdentifiers];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -128,25 +134,29 @@ void C_NSTouchBar_SetCustomizationIdentifier(void* ptr, void* value) {
 Array C_NSTouchBar_CustomizationAllowedItemIdentifiers(void* ptr) {
     NSTouchBar* nSTouchBar = (NSTouchBar*)ptr;
     NSArray* result_ = [nSTouchBar customizationAllowedItemIdentifiers];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSTouchBar_SetCustomizationAllowedItemIdentifiers(void* ptr, Array value) {
     NSTouchBar* nSTouchBar = (NSTouchBar*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSTouchBarItemIdentifier)(NSString*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSTouchBarItemIdentifier)(NSString*)p];
+    	}
     }
     [nSTouchBar setCustomizationAllowedItemIdentifiers:objcValue];
 }
@@ -154,25 +164,29 @@ void C_NSTouchBar_SetCustomizationAllowedItemIdentifiers(void* ptr, Array value)
 Array C_NSTouchBar_CustomizationRequiredItemIdentifiers(void* ptr) {
     NSTouchBar* nSTouchBar = (NSTouchBar*)ptr;
     NSArray* result_ = [nSTouchBar customizationRequiredItemIdentifiers];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSTouchBar_SetCustomizationRequiredItemIdentifiers(void* ptr, Array value) {
     NSTouchBar* nSTouchBar = (NSTouchBar*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSTouchBarItemIdentifier)(NSString*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSTouchBarItemIdentifier)(NSString*)p];
+    	}
     }
     [nSTouchBar setCustomizationRequiredItemIdentifiers:objcValue];
 }

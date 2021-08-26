@@ -67,6 +67,65 @@ void C_NSScriptCommand_SetReceiversSpecifier(void* ptr, void* value) {
     [nSScriptCommand setReceiversSpecifier:(NSScriptObjectSpecifier*)value];
 }
 
+Dictionary C_NSScriptCommand_Arguments(void* ptr) {
+    NSScriptCommand* nSScriptCommand = (NSScriptCommand*)ptr;
+    NSDictionary* result_ = [nSScriptCommand arguments];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSString* kp = [result_Keys objectAtIndex:i];
+    		id vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
+}
+
+void C_NSScriptCommand_SetArguments(void* ptr, Dictionary value) {
+    NSScriptCommand* nSScriptCommand = (NSScriptCommand*)ptr;
+    NSMutableDictionary* objcValue = [[NSMutableDictionary alloc] initWithCapacity: value.len];
+    if (value.len > 0) {
+    	void** valueKeyData = (void**)value.key_data;
+    	void** valueValueData = (void**)value.value_data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* kp = valueKeyData[i];
+    		void* vp = valueValueData[i];
+    		[objcValue setObject:(NSString*)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    [nSScriptCommand setArguments:objcValue];
+}
+
+Dictionary C_NSScriptCommand_EvaluatedArguments(void* ptr) {
+    NSScriptCommand* nSScriptCommand = (NSScriptCommand*)ptr;
+    NSDictionary* result_ = [nSScriptCommand evaluatedArguments];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSString* kp = [result_Keys objectAtIndex:i];
+    		id vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
+}
+
 void* C_NSScriptCommand_DirectParameter(void* ptr) {
     NSScriptCommand* nSScriptCommand = (NSScriptCommand*)ptr;
     id result_ = [nSScriptCommand directParameter];

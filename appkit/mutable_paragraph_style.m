@@ -84,10 +84,12 @@ void C_NSMutableParagraphStyle_SetBaseWritingDirection(void* ptr, int value) {
 void C_NSMutableParagraphStyle_SetTabStops(void* ptr, Array value) {
     NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSTextTab*)(NSTextTab*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSTextTab*)(NSTextTab*)p];
+    	}
     }
     [nSMutableParagraphStyle setTabStops:objcValue];
 }
@@ -100,10 +102,12 @@ void C_NSMutableParagraphStyle_SetDefaultTabInterval(void* ptr, double value) {
 void C_NSMutableParagraphStyle_SetTextBlocks(void* ptr, Array value) {
     NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSTextBlock*)(NSTextBlock*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSTextBlock*)(NSTextBlock*)p];
+    	}
     }
     [nSMutableParagraphStyle setTextBlocks:objcValue];
 }
@@ -111,10 +115,12 @@ void C_NSMutableParagraphStyle_SetTextBlocks(void* ptr, Array value) {
 void C_NSMutableParagraphStyle_SetTextLists(void* ptr, Array value) {
     NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSTextList*)(NSTextList*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSTextList*)(NSTextList*)p];
+    	}
     }
     [nSMutableParagraphStyle setTextLists:objcValue];
 }

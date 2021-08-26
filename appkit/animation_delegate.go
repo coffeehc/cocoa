@@ -74,8 +74,3 @@ func AnimationDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bo
 		return false
 	}
 }
-
-//export deleteAnimationDelegate
-func deleteAnimationDelegate(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
-}

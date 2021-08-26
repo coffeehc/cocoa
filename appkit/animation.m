@@ -77,15 +77,17 @@ void C_NSAnimation_SetAnimationBlockingMode(void* ptr, unsigned int value) {
 Array C_NSAnimation_RunLoopModesForAnimating(void* ptr) {
     NSAnimation* nSAnimation = (NSAnimation*)ptr;
     NSArray* result_ = [nSAnimation runLoopModesForAnimating];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -159,25 +161,29 @@ float C_NSAnimation_CurrentValue(void* ptr) {
 Array C_NSAnimation_ProgressMarks(void* ptr) {
     NSAnimation* nSAnimation = (NSAnimation*)ptr;
     NSArray* result_ = [nSAnimation progressMarks];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSAnimation_SetProgressMarks(void* ptr, Array value) {
     NSAnimation* nSAnimation = (NSAnimation*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSNumber*)(NSNumber*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSNumber*)(NSNumber*)p];
+    	}
     }
     [nSAnimation setProgressMarks:objcValue];
 }

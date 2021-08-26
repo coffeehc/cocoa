@@ -76,11 +76,15 @@ func (n NSStackView) Init() StackView {
 }
 
 func StackViewWithViews(views []View) StackView {
-	cViewsData := make([]unsafe.Pointer, len(views))
-	for idx, v := range views {
-		cViewsData[idx] = objc.ExtractPtr(v)
+	var cViews C.Array
+	if len(views) > 0 {
+		cViewsData := make([]unsafe.Pointer, len(views))
+		for idx, v := range views {
+			cViewsData[idx] = objc.ExtractPtr(v)
+		}
+		cViews.data = unsafe.Pointer(&cViewsData[0])
+		cViews.len = C.int(len(views))
 	}
-	cViews := C.Array{data: unsafe.Pointer(&cViewsData[0]), len: C.int(len(views))}
 	result_ := C.C_NSStackView_StackViewWithViews(cViews)
 	return MakeStackView(result_)
 }
@@ -94,11 +98,15 @@ func (n NSStackView) InsertView_AtIndex_InGravity(view View, index uint, gravity
 }
 
 func (n NSStackView) SetViews_InGravity(views []View, gravity StackViewGravity) {
-	cViewsData := make([]unsafe.Pointer, len(views))
-	for idx, v := range views {
-		cViewsData[idx] = objc.ExtractPtr(v)
+	var cViews C.Array
+	if len(views) > 0 {
+		cViewsData := make([]unsafe.Pointer, len(views))
+		for idx, v := range views {
+			cViewsData[idx] = objc.ExtractPtr(v)
+		}
+		cViews.data = unsafe.Pointer(&cViewsData[0])
+		cViews.len = C.int(len(views))
 	}
-	cViews := C.Array{data: unsafe.Pointer(&cViewsData[0]), len: C.int(len(views))}
 	C.C_NSStackView_SetViews_InGravity(n.Ptr(), cViews, C.int(int(gravity)))
 }
 
@@ -120,7 +128,9 @@ func (n NSStackView) RemoveArrangedSubview(view View) {
 
 func (n NSStackView) ViewsInGravity(gravity StackViewGravity) []View {
 	result_ := C.C_NSStackView_ViewsInGravity(n.Ptr(), C.int(int(gravity)))
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]View, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -176,7 +186,9 @@ func (n NSStackView) SetDelegate(value objc.Object) {
 
 func (n NSStackView) ArrangedSubviews() []View {
 	result_ := C.C_NSStackView_ArrangedSubviews(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]View, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -187,7 +199,9 @@ func (n NSStackView) ArrangedSubviews() []View {
 
 func (n NSStackView) Views() []View {
 	result_ := C.C_NSStackView_Views(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]View, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -198,7 +212,9 @@ func (n NSStackView) Views() []View {
 
 func (n NSStackView) DetachedViews() []View {
 	result_ := C.C_NSStackView_DetachedViews(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]View, len(result_Slice))
 	for idx, r := range result_Slice {

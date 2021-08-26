@@ -14,15 +14,17 @@ void* C_NSFontManager_Init(void* ptr) {
 Array C_NSFontManager_AvailableFontNamesWithTraits(void* ptr, unsigned int someTraits) {
     NSFontManager* nSFontManager = (NSFontManager*)ptr;
     NSArray* result_ = [nSFontManager availableFontNamesWithTraits:someTraits];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -162,6 +164,53 @@ void* C_NSFontManager_FontMenu(void* ptr, bool create) {
     return result_;
 }
 
+void C_NSFontManager_SetSelectedAttributes_IsMultiple(void* ptr, Dictionary attributes, bool flag) {
+    NSFontManager* nSFontManager = (NSFontManager*)ptr;
+    NSMutableDictionary* objcAttributes = [[NSMutableDictionary alloc] initWithCapacity: attributes.len];
+    if (attributes.len > 0) {
+    	void** attributesKeyData = (void**)attributes.key_data;
+    	void** attributesValueData = (void**)attributes.value_data;
+    	for (int i = 0; i < attributes.len; i++) {
+    		void* kp = attributesKeyData[i];
+    		void* vp = attributesValueData[i];
+    		[objcAttributes setObject:(NSString*)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    [nSFontManager setSelectedAttributes:objcAttributes isMultiple:flag];
+}
+
+Dictionary C_NSFontManager_ConvertAttributes(void* ptr, Dictionary attributes) {
+    NSFontManager* nSFontManager = (NSFontManager*)ptr;
+    NSMutableDictionary* objcAttributes = [[NSMutableDictionary alloc] initWithCapacity: attributes.len];
+    if (attributes.len > 0) {
+    	void** attributesKeyData = (void**)attributes.key_data;
+    	void** attributesValueData = (void**)attributes.value_data;
+    	for (int i = 0; i < attributes.len; i++) {
+    		void* kp = attributesKeyData[i];
+    		void* vp = attributesValueData[i];
+    		[objcAttributes setObject:(NSString*)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    NSDictionary* result_ = [nSFontManager convertAttributes:objcAttributes];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSString* kp = [result_Keys objectAtIndex:i];
+    		id vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
+}
+
 void* C_NSFontManager_SharedFontManager() {
     NSFontManager* result_ = [NSFontManager sharedFontManager];
     return result_;
@@ -170,30 +219,34 @@ void* C_NSFontManager_SharedFontManager() {
 Array C_NSFontManager_AvailableFonts(void* ptr) {
     NSFontManager* nSFontManager = (NSFontManager*)ptr;
     NSArray* result_ = [nSFontManager availableFonts];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 Array C_NSFontManager_AvailableFontFamilies(void* ptr) {
     NSFontManager* nSFontManager = (NSFontManager*)ptr;
     NSArray* result_ = [nSFontManager availableFontFamilies];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 

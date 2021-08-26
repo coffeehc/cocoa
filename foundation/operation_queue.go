@@ -48,11 +48,15 @@ func (n NSOperationQueue) AddOperation(op Operation) {
 }
 
 func (n NSOperationQueue) AddOperations_WaitUntilFinished(ops []Operation, wait bool) {
-	cOpsData := make([]unsafe.Pointer, len(ops))
-	for idx, v := range ops {
-		cOpsData[idx] = objc.ExtractPtr(v)
+	var cOps C.Array
+	if len(ops) > 0 {
+		cOpsData := make([]unsafe.Pointer, len(ops))
+		for idx, v := range ops {
+			cOpsData[idx] = objc.ExtractPtr(v)
+		}
+		cOps.data = unsafe.Pointer(&cOpsData[0])
+		cOps.len = C.int(len(ops))
 	}
-	cOps := C.Array{data: unsafe.Pointer(&cOpsData[0]), len: C.int(len(ops))}
 	C.C_NSOperationQueue_AddOperations_WaitUntilFinished(n.Ptr(), cOps, C.bool(wait))
 }
 

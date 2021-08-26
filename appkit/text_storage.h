@@ -6,6 +6,7 @@
 void* C_TextStorage_Alloc();
 
 void* C_NSTextStorage_InitWithString(void* ptr, void* str);
+void* C_NSTextStorage_InitWithString_Attributes(void* ptr, void* str, Dictionary attrs);
 void* C_NSTextStorage_InitWithAttributedString(void* ptr, void* attrStr);
 void* C_NSTextStorage_Init(void* ptr);
 void C_NSTextStorage_AddLayoutManager(void* ptr, void* aLayoutManager);

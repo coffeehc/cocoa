@@ -104,10 +104,12 @@ func (n NSPasteboard) IndexOfPasteboardItem(pasteboardItem PasteboardItem) uint 
 
 func (n NSPasteboard) DataForType(dataType PasteboardType) []byte {
 	result_ := C.C_NSPasteboard_DataForType(n.Ptr(), foundation.NewString(string(dataType)).Ptr())
+	if result_.len > 0 {
+		C.free(result_.data)
+	}
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)
-	C.free(result_.data)
 	return goResult_
 }
 
@@ -122,28 +124,38 @@ func (n NSPasteboard) StringForType(dataType PasteboardType) string {
 }
 
 func (n NSPasteboard) AvailableTypeFromArray(types []PasteboardType) PasteboardType {
-	cTypesData := make([]unsafe.Pointer, len(types))
-	for idx, v := range types {
-		cTypesData[idx] = foundation.NewString(string(v)).Ptr()
+	var cTypes C.Array
+	if len(types) > 0 {
+		cTypesData := make([]unsafe.Pointer, len(types))
+		for idx, v := range types {
+			cTypesData[idx] = foundation.NewString(string(v)).Ptr()
+		}
+		cTypes.data = unsafe.Pointer(&cTypesData[0])
+		cTypes.len = C.int(len(types))
 	}
-	cTypes := C.Array{data: unsafe.Pointer(&cTypesData[0]), len: C.int(len(types))}
 	result_ := C.C_NSPasteboard_AvailableTypeFromArray(n.Ptr(), cTypes)
 	return PasteboardType(foundation.MakeString(result_).String())
 }
 
 func (n NSPasteboard) CanReadItemWithDataConformingToTypes(types []string) bool {
-	cTypesData := make([]unsafe.Pointer, len(types))
-	for idx, v := range types {
-		cTypesData[idx] = foundation.NewString(v).Ptr()
+	var cTypes C.Array
+	if len(types) > 0 {
+		cTypesData := make([]unsafe.Pointer, len(types))
+		for idx, v := range types {
+			cTypesData[idx] = foundation.NewString(v).Ptr()
+		}
+		cTypes.data = unsafe.Pointer(&cTypesData[0])
+		cTypes.len = C.int(len(types))
 	}
-	cTypes := C.Array{data: unsafe.Pointer(&cTypesData[0]), len: C.int(len(types))}
 	result_ := C.C_NSPasteboard_CanReadItemWithDataConformingToTypes(n.Ptr(), cTypes)
 	return bool(result_)
 }
 
 func Pasteboard_TypesFilterableTo(_type PasteboardType) []PasteboardType {
 	result_ := C.C_NSPasteboard_Pasteboard_TypesFilterableTo(foundation.NewString(string(_type)).Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]PasteboardType, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -158,21 +170,29 @@ func (n NSPasteboard) PrepareForNewContentsWithOptions(options PasteboardContent
 }
 
 func (n NSPasteboard) DeclareTypes_Owner(newTypes []PasteboardType, newOwner objc.Object) int {
-	cNewTypesData := make([]unsafe.Pointer, len(newTypes))
-	for idx, v := range newTypes {
-		cNewTypesData[idx] = foundation.NewString(string(v)).Ptr()
+	var cNewTypes C.Array
+	if len(newTypes) > 0 {
+		cNewTypesData := make([]unsafe.Pointer, len(newTypes))
+		for idx, v := range newTypes {
+			cNewTypesData[idx] = foundation.NewString(string(v)).Ptr()
+		}
+		cNewTypes.data = unsafe.Pointer(&cNewTypesData[0])
+		cNewTypes.len = C.int(len(newTypes))
 	}
-	cNewTypes := C.Array{data: unsafe.Pointer(&cNewTypesData[0]), len: C.int(len(newTypes))}
 	result_ := C.C_NSPasteboard_DeclareTypes_Owner(n.Ptr(), cNewTypes, objc.ExtractPtr(newOwner))
 	return int(result_)
 }
 
 func (n NSPasteboard) AddTypes_Owner(newTypes []PasteboardType, newOwner objc.Object) int {
-	cNewTypesData := make([]unsafe.Pointer, len(newTypes))
-	for idx, v := range newTypes {
-		cNewTypesData[idx] = foundation.NewString(string(v)).Ptr()
+	var cNewTypes C.Array
+	if len(newTypes) > 0 {
+		cNewTypesData := make([]unsafe.Pointer, len(newTypes))
+		for idx, v := range newTypes {
+			cNewTypesData[idx] = foundation.NewString(string(v)).Ptr()
+		}
+		cNewTypes.data = unsafe.Pointer(&cNewTypesData[0])
+		cNewTypes.len = C.int(len(newTypes))
 	}
-	cNewTypes := C.Array{data: unsafe.Pointer(&cNewTypesData[0]), len: C.int(len(newTypes))}
 	result_ := C.C_NSPasteboard_AddTypes_Owner(n.Ptr(), cNewTypes, objc.ExtractPtr(newOwner))
 	return int(result_)
 }
@@ -204,7 +224,9 @@ func GeneralPasteboard() Pasteboard {
 
 func (n NSPasteboard) PasteboardItems() []PasteboardItem {
 	result_ := C.C_NSPasteboard_PasteboardItems(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]PasteboardItem, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -215,7 +237,9 @@ func (n NSPasteboard) PasteboardItems() []PasteboardItem {
 
 func (n NSPasteboard) Types() []PasteboardType {
 	result_ := C.C_NSPasteboard_Types(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]PasteboardType, len(result_Slice))
 	for idx, r := range result_Slice {

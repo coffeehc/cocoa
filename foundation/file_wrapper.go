@@ -17,12 +17,15 @@ type FileWrapper interface {
 	IsRegularFile() bool
 	IsDirectory() bool
 	IsSymbolicLink() bool
+	FileWrappers() map[string]FileWrapper
 	SymbolicLinkDestinationURL() URL
 	SerializedRepresentation() []byte
 	Filename() string
 	SetFilename(value string)
 	PreferredFilename() string
 	SetPreferredFilename(value string)
+	FileAttributes() map[string]objc.Object
+	SetFileAttributes(value map[string]objc.Object)
 	RegularFileContents() []byte
 }
 
@@ -38,6 +41,25 @@ func MakeFileWrapper(ptr unsafe.Pointer) NSFileWrapper {
 
 func AllocFileWrapper() NSFileWrapper {
 	return MakeFileWrapper(C.C_FileWrapper_Alloc())
+}
+
+func (n NSFileWrapper) InitDirectoryWithFileWrappers(childrenByPreferredName map[string]FileWrapper) FileWrapper {
+	var cChildrenByPreferredName C.Dictionary
+	if len(childrenByPreferredName) > 0 {
+		cChildrenByPreferredNameKeyData := make([]unsafe.Pointer, len(childrenByPreferredName))
+		cChildrenByPreferredNameValueData := make([]unsafe.Pointer, len(childrenByPreferredName))
+		var idx = 0
+		for k, v := range childrenByPreferredName {
+			cChildrenByPreferredNameKeyData[idx] = NewString(k).Ptr()
+			cChildrenByPreferredNameValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cChildrenByPreferredName.key_data = unsafe.Pointer(&cChildrenByPreferredNameKeyData[0])
+		cChildrenByPreferredName.value_data = unsafe.Pointer(&cChildrenByPreferredNameValueData[0])
+		cChildrenByPreferredName.len = C.int(len(childrenByPreferredName))
+	}
+	result_ := C.C_NSFileWrapper_InitDirectoryWithFileWrappers(n.Ptr(), cChildrenByPreferredName)
+	return MakeFileWrapper(result_)
 }
 
 func (n NSFileWrapper) InitRegularFileWithContents(contents []byte) FileWrapper {
@@ -104,6 +126,22 @@ func (n NSFileWrapper) IsSymbolicLink() bool {
 	return bool(result_)
 }
 
+func (n NSFileWrapper) FileWrappers() map[string]FileWrapper {
+	result_ := C.C_NSFileWrapper_FileWrappers(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[string]FileWrapper)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[MakeString(k).String()] = MakeFileWrapper(v)
+	}
+	return goResult_
+}
+
 func (n NSFileWrapper) SymbolicLinkDestinationURL() URL {
 	result_ := C.C_NSFileWrapper_SymbolicLinkDestinationURL(n.Ptr())
 	return MakeURL(result_)
@@ -111,10 +149,12 @@ func (n NSFileWrapper) SymbolicLinkDestinationURL() URL {
 
 func (n NSFileWrapper) SerializedRepresentation() []byte {
 	result_ := C.C_NSFileWrapper_SerializedRepresentation(n.Ptr())
+	if result_.len > 0 {
+		C.free(result_.data)
+	}
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)
-	C.free(result_.data)
 	return goResult_
 }
 
@@ -136,11 +176,47 @@ func (n NSFileWrapper) SetPreferredFilename(value string) {
 	C.C_NSFileWrapper_SetPreferredFilename(n.Ptr(), NewString(value).Ptr())
 }
 
+func (n NSFileWrapper) FileAttributes() map[string]objc.Object {
+	result_ := C.C_NSFileWrapper_FileAttributes(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[string]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[MakeString(k).String()] = objc.MakeObject(v)
+	}
+	return goResult_
+}
+
+func (n NSFileWrapper) SetFileAttributes(value map[string]objc.Object) {
+	var cValue C.Dictionary
+	if len(value) > 0 {
+		cValueKeyData := make([]unsafe.Pointer, len(value))
+		cValueValueData := make([]unsafe.Pointer, len(value))
+		var idx = 0
+		for k, v := range value {
+			cValueKeyData[idx] = NewString(k).Ptr()
+			cValueValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cValue.key_data = unsafe.Pointer(&cValueKeyData[0])
+		cValue.value_data = unsafe.Pointer(&cValueValueData[0])
+		cValue.len = C.int(len(value))
+	}
+	C.C_NSFileWrapper_SetFileAttributes(n.Ptr(), cValue)
+}
+
 func (n NSFileWrapper) RegularFileContents() []byte {
 	result_ := C.C_NSFileWrapper_RegularFileContents(n.Ptr())
+	if result_.len > 0 {
+		C.free(result_.data)
+	}
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)
-	C.free(result_.data)
 	return goResult_
 }

@@ -133,10 +133,12 @@
 - (NSArray*)tableView:(NSTableView*)tableView rowActionsForRow:(NSInteger)row edge:(NSTableRowActionEdge)edge {
     Array result_ = tableViewDelegate_TableView_RowActionsForRow_Edge([self goID], tableView, row, edge);
     NSMutableArray* objcResult_ = [[NSMutableArray alloc] init];
-    void** result_Data = (void**)result_.data;
-    for (int i = 0; i < result_.len; i++) {
-    	void* p = result_Data[i];
-    	[objcResult_ addObject:(NSTableViewRowAction*)(NSTableViewRowAction*)p];
+    if (result_.len > 0) {
+    	void** result_Data = (void**)result_.data;
+    	for (int i = 0; i < result_.len; i++) {
+    		void* p = result_Data[i];
+    		[objcResult_ addObject:(NSTableViewRowAction*)(NSTableViewRowAction*)p];
+    	}
     }
     return objcResult_;
 }
@@ -188,7 +190,7 @@
 }
 
 - (void)dealloc {
-	deleteTableViewDelegate([self goID]);
+	deleteAppKitHandle([self goID]);
 	[super dealloc];
 }
 @end

@@ -49,9 +49,7 @@ func (n NSGraphicsContext) Init() GraphicsContext {
 
 func GraphicsContextWithAttributes(attributes map[GraphicsContextAttributeKey]objc.Object) GraphicsContext {
 	var cAttributes C.Dictionary
-	if len(attributes) == 0 {
-		cAttributes = C.Dictionary{len: 0}
-	} else {
+	if len(attributes) > 0 {
 		cAttributesKeyData := make([]unsafe.Pointer, len(attributes))
 		cAttributesValueData := make([]unsafe.Pointer, len(attributes))
 		var idx = 0
@@ -60,7 +58,9 @@ func GraphicsContextWithAttributes(attributes map[GraphicsContextAttributeKey]ob
 			cAttributesValueData[idx] = objc.ExtractPtr(v)
 			idx++
 		}
-		cAttributes = C.Dictionary{key_data: unsafe.Pointer(&cAttributesKeyData[0]), value_data: unsafe.Pointer(&cAttributesValueData[0]), len: C.int(len(attributes))}
+		cAttributes.key_data = unsafe.Pointer(&cAttributesKeyData[0])
+		cAttributes.value_data = unsafe.Pointer(&cAttributesValueData[0])
+		cAttributes.len = C.int(len(attributes))
 	}
 	result_ := C.C_NSGraphicsContext_GraphicsContextWithAttributes(cAttributes)
 	return MakeGraphicsContext(result_)
@@ -119,8 +119,10 @@ func (n NSGraphicsContext) IsDrawingToScreen() bool {
 
 func (n NSGraphicsContext) Attributes() map[GraphicsContextAttributeKey]objc.Object {
 	result_ := C.C_NSGraphicsContext_Attributes(n.Ptr())
-	defer C.free(result_.key_data)
-	defer C.free(result_.value_data)
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
 	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
 	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
 	var goResult_ = make(map[GraphicsContextAttributeKey]objc.Object)

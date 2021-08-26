@@ -25,10 +25,12 @@ void* C_NSStackView_Init(void* ptr) {
 
 void* C_NSStackView_StackViewWithViews(Array views) {
     NSMutableArray* objcViews = [[NSMutableArray alloc] init];
-    void** viewsData = (void**)views.data;
-    for (int i = 0; i < views.len; i++) {
-    	void* p = viewsData[i];
-    	[objcViews addObject:(NSView*)(NSView*)p];
+    if (views.len > 0) {
+    	void** viewsData = (void**)views.data;
+    	for (int i = 0; i < views.len; i++) {
+    		void* p = viewsData[i];
+    		[objcViews addObject:(NSView*)(NSView*)p];
+    	}
     }
     NSStackView* result_ = [NSStackView stackViewWithViews:objcViews];
     return result_;
@@ -47,10 +49,12 @@ void C_NSStackView_InsertView_AtIndex_InGravity(void* ptr, void* view, unsigned 
 void C_NSStackView_SetViews_InGravity(void* ptr, Array views, int gravity) {
     NSStackView* nSStackView = (NSStackView*)ptr;
     NSMutableArray* objcViews = [[NSMutableArray alloc] init];
-    void** viewsData = (void**)views.data;
-    for (int i = 0; i < views.len; i++) {
-    	void* p = viewsData[i];
-    	[objcViews addObject:(NSView*)(NSView*)p];
+    if (views.len > 0) {
+    	void** viewsData = (void**)views.data;
+    	for (int i = 0; i < views.len; i++) {
+    		void* p = viewsData[i];
+    		[objcViews addObject:(NSView*)(NSView*)p];
+    	}
     }
     [nSStackView setViews:objcViews inGravity:gravity];
 }
@@ -78,15 +82,17 @@ void C_NSStackView_RemoveArrangedSubview(void* ptr, void* view) {
 Array C_NSStackView_ViewsInGravity(void* ptr, int gravity) {
     NSStackView* nSStackView = (NSStackView*)ptr;
     NSArray* result_ = [nSStackView viewsInGravity:gravity];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -148,45 +154,51 @@ void C_NSStackView_SetDelegate(void* ptr, void* value) {
 Array C_NSStackView_ArrangedSubviews(void* ptr) {
     NSStackView* nSStackView = (NSStackView*)ptr;
     NSArray* result_ = [nSStackView arrangedSubviews];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 Array C_NSStackView_Views(void* ptr) {
     NSStackView* nSStackView = (NSStackView*)ptr;
     NSArray* result_ = [nSStackView views];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 Array C_NSStackView_DetachedViews(void* ptr) {
     NSStackView* nSStackView = (NSStackView*)ptr;
     NSArray* result_ = [nSStackView detachedViews];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 

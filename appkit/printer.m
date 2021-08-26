@@ -29,29 +29,33 @@ CGSize C_NSPrinter_PageSizeForPaper(void* ptr, void* paperName) {
 
 Array C_NSPrinter_PrinterNames() {
     NSArray* result_ = [NSPrinter printerNames];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 Array C_NSPrinter_PrinterTypes() {
     NSArray* result_ = [NSPrinter printerTypes];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -71,4 +75,26 @@ int C_NSPrinter_LanguageLevel(void* ptr) {
     NSPrinter* nSPrinter = (NSPrinter*)ptr;
     NSInteger result_ = [nSPrinter languageLevel];
     return result_;
+}
+
+Dictionary C_NSPrinter_DeviceDescription(void* ptr) {
+    NSPrinter* nSPrinter = (NSPrinter*)ptr;
+    NSDictionary* result_ = [nSPrinter deviceDescription];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSDeviceDescriptionKey kp = [result_Keys objectAtIndex:i];
+    		id vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
 }

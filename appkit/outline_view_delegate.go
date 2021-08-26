@@ -460,8 +460,3 @@ func OutlineViewDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) 
 		return false
 	}
 }
-
-//export deleteOutlineViewDelegate
-func deleteOutlineViewDelegate(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
-}

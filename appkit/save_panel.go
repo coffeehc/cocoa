@@ -171,7 +171,9 @@ func (n NSSavePanel) SetShowsTagField(value bool) {
 
 func (n NSSavePanel) TagNames() []string {
 	result_ := C.C_NSSavePanel_TagNames(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -181,11 +183,15 @@ func (n NSSavePanel) TagNames() []string {
 }
 
 func (n NSSavePanel) SetTagNames(value []string) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = foundation.NewString(v).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = foundation.NewString(v).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSSavePanel_SetTagNames(n.Ptr(), cValue)
 }
 
@@ -232,7 +238,9 @@ func (n NSSavePanel) IsExpanded() bool {
 
 func (n NSSavePanel) AllowedContentTypes() []uti.UTType {
 	result_ := C.C_NSSavePanel_AllowedContentTypes(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]uti.UTType, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -242,11 +250,15 @@ func (n NSSavePanel) AllowedContentTypes() []uti.UTType {
 }
 
 func (n NSSavePanel) SetAllowedContentTypes(value []uti.UTType) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = objc.ExtractPtr(v)
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = objc.ExtractPtr(v)
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSSavePanel_SetAllowedContentTypes(n.Ptr(), cValue)
 }
 

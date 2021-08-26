@@ -288,8 +288,3 @@ func CollectionViewDelegateFlowLayout_RespondsTo(hp C.uintptr_t, selectorPtr uns
 		return false
 	}
 }
-
-//export deleteCollectionViewDelegateFlowLayout
-func deleteCollectionViewDelegateFlowLayout(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
-}

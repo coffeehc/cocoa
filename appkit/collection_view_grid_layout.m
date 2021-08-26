@@ -91,25 +91,29 @@ void C_NSCollectionViewGridLayout_SetMargins(void* ptr, NSEdgeInsets value) {
 Array C_NSCollectionViewGridLayout_BackgroundColors(void* ptr) {
     NSCollectionViewGridLayout* nSCollectionViewGridLayout = (NSCollectionViewGridLayout*)ptr;
     NSArray* result_ = [nSCollectionViewGridLayout backgroundColors];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSCollectionViewGridLayout_SetBackgroundColors(void* ptr, Array value) {
     NSCollectionViewGridLayout* nSCollectionViewGridLayout = (NSCollectionViewGridLayout*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSColor*)(NSColor*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSColor*)(NSColor*)p];
+    	}
     }
     [nSCollectionViewGridLayout setBackgroundColors:objcValue];
 }

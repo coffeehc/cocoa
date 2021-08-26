@@ -271,7 +271,9 @@ func (n NSDateFormatter) SetPMSymbol(value string) {
 
 func (n NSDateFormatter) WeekdaySymbols() []string {
 	result_ := C.C_NSDateFormatter_WeekdaySymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -281,17 +283,23 @@ func (n NSDateFormatter) WeekdaySymbols() []string {
 }
 
 func (n NSDateFormatter) SetWeekdaySymbols(value []string) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = NewString(v).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = NewString(v).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSDateFormatter_SetWeekdaySymbols(n.Ptr(), cValue)
 }
 
 func (n NSDateFormatter) ShortWeekdaySymbols() []string {
 	result_ := C.C_NSDateFormatter_ShortWeekdaySymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -301,17 +309,23 @@ func (n NSDateFormatter) ShortWeekdaySymbols() []string {
 }
 
 func (n NSDateFormatter) SetShortWeekdaySymbols(value []string) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = NewString(v).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = NewString(v).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSDateFormatter_SetShortWeekdaySymbols(n.Ptr(), cValue)
 }
 
 func (n NSDateFormatter) VeryShortWeekdaySymbols() []string {
 	result_ := C.C_NSDateFormatter_VeryShortWeekdaySymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -321,17 +335,23 @@ func (n NSDateFormatter) VeryShortWeekdaySymbols() []string {
 }
 
 func (n NSDateFormatter) SetVeryShortWeekdaySymbols(value []string) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = NewString(v).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = NewString(v).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSDateFormatter_SetVeryShortWeekdaySymbols(n.Ptr(), cValue)
 }
 
 func (n NSDateFormatter) StandaloneWeekdaySymbols() []string {
 	result_ := C.C_NSDateFormatter_StandaloneWeekdaySymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -341,17 +361,23 @@ func (n NSDateFormatter) StandaloneWeekdaySymbols() []string {
 }
 
 func (n NSDateFormatter) SetStandaloneWeekdaySymbols(value []string) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = NewString(v).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = NewString(v).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSDateFormatter_SetStandaloneWeekdaySymbols(n.Ptr(), cValue)
 }
 
 func (n NSDateFormatter) ShortStandaloneWeekdaySymbols() []string {
 	result_ := C.C_NSDateFormatter_ShortStandaloneWeekdaySymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -361,17 +387,23 @@ func (n NSDateFormatter) ShortStandaloneWeekdaySymbols() []string {
 }
 
 func (n NSDateFormatter) SetShortStandaloneWeekdaySymbols(value []string) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = NewString(v).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = NewString(v).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSDateFormatter_SetShortStandaloneWeekdaySymbols(n.Ptr(), cValue)
 }
 
 func (n NSDateFormatter) VeryShortStandaloneWeekdaySymbols() []string {
 	result_ := C.C_NSDateFormatter_VeryShortStandaloneWeekdaySymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -381,17 +413,23 @@ func (n NSDateFormatter) VeryShortStandaloneWeekdaySymbols() []string {
 }
 
 func (n NSDateFormatter) SetVeryShortStandaloneWeekdaySymbols(value []string) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = NewString(v).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = NewString(v).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSDateFormatter_SetVeryShortStandaloneWeekdaySymbols(n.Ptr(), cValue)
 }
 
 func (n NSDateFormatter) MonthSymbols() []string {
 	result_ := C.C_NSDateFormatter_MonthSymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -401,17 +439,23 @@ func (n NSDateFormatter) MonthSymbols() []string {
 }
 
 func (n NSDateFormatter) SetMonthSymbols(value []string) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = NewString(v).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = NewString(v).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSDateFormatter_SetMonthSymbols(n.Ptr(), cValue)
 }
 
 func (n NSDateFormatter) ShortMonthSymbols() []string {
 	result_ := C.C_NSDateFormatter_ShortMonthSymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -421,17 +465,23 @@ func (n NSDateFormatter) ShortMonthSymbols() []string {
 }
 
 func (n NSDateFormatter) SetShortMonthSymbols(value []string) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = NewString(v).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = NewString(v).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSDateFormatter_SetShortMonthSymbols(n.Ptr(), cValue)
 }
 
 func (n NSDateFormatter) VeryShortMonthSymbols() []string {
 	result_ := C.C_NSDateFormatter_VeryShortMonthSymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -441,17 +491,23 @@ func (n NSDateFormatter) VeryShortMonthSymbols() []string {
 }
 
 func (n NSDateFormatter) SetVeryShortMonthSymbols(value []string) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = NewString(v).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = NewString(v).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSDateFormatter_SetVeryShortMonthSymbols(n.Ptr(), cValue)
 }
 
 func (n NSDateFormatter) StandaloneMonthSymbols() []string {
 	result_ := C.C_NSDateFormatter_StandaloneMonthSymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -461,17 +517,23 @@ func (n NSDateFormatter) StandaloneMonthSymbols() []string {
 }
 
 func (n NSDateFormatter) SetStandaloneMonthSymbols(value []string) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = NewString(v).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = NewString(v).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSDateFormatter_SetStandaloneMonthSymbols(n.Ptr(), cValue)
 }
 
 func (n NSDateFormatter) ShortStandaloneMonthSymbols() []string {
 	result_ := C.C_NSDateFormatter_ShortStandaloneMonthSymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -481,17 +543,23 @@ func (n NSDateFormatter) ShortStandaloneMonthSymbols() []string {
 }
 
 func (n NSDateFormatter) SetShortStandaloneMonthSymbols(value []string) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = NewString(v).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = NewString(v).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSDateFormatter_SetShortStandaloneMonthSymbols(n.Ptr(), cValue)
 }
 
 func (n NSDateFormatter) VeryShortStandaloneMonthSymbols() []string {
 	result_ := C.C_NSDateFormatter_VeryShortStandaloneMonthSymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -501,17 +569,23 @@ func (n NSDateFormatter) VeryShortStandaloneMonthSymbols() []string {
 }
 
 func (n NSDateFormatter) SetVeryShortStandaloneMonthSymbols(value []string) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = NewString(v).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = NewString(v).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSDateFormatter_SetVeryShortStandaloneMonthSymbols(n.Ptr(), cValue)
 }
 
 func (n NSDateFormatter) QuarterSymbols() []string {
 	result_ := C.C_NSDateFormatter_QuarterSymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -521,17 +595,23 @@ func (n NSDateFormatter) QuarterSymbols() []string {
 }
 
 func (n NSDateFormatter) SetQuarterSymbols(value []string) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = NewString(v).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = NewString(v).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSDateFormatter_SetQuarterSymbols(n.Ptr(), cValue)
 }
 
 func (n NSDateFormatter) ShortQuarterSymbols() []string {
 	result_ := C.C_NSDateFormatter_ShortQuarterSymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -541,17 +621,23 @@ func (n NSDateFormatter) ShortQuarterSymbols() []string {
 }
 
 func (n NSDateFormatter) SetShortQuarterSymbols(value []string) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = NewString(v).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = NewString(v).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSDateFormatter_SetShortQuarterSymbols(n.Ptr(), cValue)
 }
 
 func (n NSDateFormatter) StandaloneQuarterSymbols() []string {
 	result_ := C.C_NSDateFormatter_StandaloneQuarterSymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -561,17 +647,23 @@ func (n NSDateFormatter) StandaloneQuarterSymbols() []string {
 }
 
 func (n NSDateFormatter) SetStandaloneQuarterSymbols(value []string) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = NewString(v).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = NewString(v).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSDateFormatter_SetStandaloneQuarterSymbols(n.Ptr(), cValue)
 }
 
 func (n NSDateFormatter) ShortStandaloneQuarterSymbols() []string {
 	result_ := C.C_NSDateFormatter_ShortStandaloneQuarterSymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -581,17 +673,23 @@ func (n NSDateFormatter) ShortStandaloneQuarterSymbols() []string {
 }
 
 func (n NSDateFormatter) SetShortStandaloneQuarterSymbols(value []string) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = NewString(v).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = NewString(v).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSDateFormatter_SetShortStandaloneQuarterSymbols(n.Ptr(), cValue)
 }
 
 func (n NSDateFormatter) EraSymbols() []string {
 	result_ := C.C_NSDateFormatter_EraSymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -601,17 +699,23 @@ func (n NSDateFormatter) EraSymbols() []string {
 }
 
 func (n NSDateFormatter) SetEraSymbols(value []string) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = NewString(v).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = NewString(v).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSDateFormatter_SetEraSymbols(n.Ptr(), cValue)
 }
 
 func (n NSDateFormatter) LongEraSymbols() []string {
 	result_ := C.C_NSDateFormatter_LongEraSymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -621,11 +725,15 @@ func (n NSDateFormatter) LongEraSymbols() []string {
 }
 
 func (n NSDateFormatter) SetLongEraSymbols(value []string) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = NewString(v).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = NewString(v).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSDateFormatter_SetLongEraSymbols(n.Ptr(), cValue)
 }
 

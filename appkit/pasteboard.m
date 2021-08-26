@@ -90,10 +90,12 @@ void* C_NSPasteboard_StringForType(void* ptr, void* dataType) {
 void* C_NSPasteboard_AvailableTypeFromArray(void* ptr, Array types) {
     NSPasteboard* nSPasteboard = (NSPasteboard*)ptr;
     NSMutableArray* objcTypes = [[NSMutableArray alloc] init];
-    void** typesData = (void**)types.data;
-    for (int i = 0; i < types.len; i++) {
-    	void* p = typesData[i];
-    	[objcTypes addObject:(NSPasteboardType)(NSString*)p];
+    if (types.len > 0) {
+    	void** typesData = (void**)types.data;
+    	for (int i = 0; i < types.len; i++) {
+    		void* p = typesData[i];
+    		[objcTypes addObject:(NSPasteboardType)(NSString*)p];
+    	}
     }
     NSPasteboardType result_ = [nSPasteboard availableTypeFromArray:objcTypes];
     return result_;
@@ -102,10 +104,12 @@ void* C_NSPasteboard_AvailableTypeFromArray(void* ptr, Array types) {
 bool C_NSPasteboard_CanReadItemWithDataConformingToTypes(void* ptr, Array types) {
     NSPasteboard* nSPasteboard = (NSPasteboard*)ptr;
     NSMutableArray* objcTypes = [[NSMutableArray alloc] init];
-    void** typesData = (void**)types.data;
-    for (int i = 0; i < types.len; i++) {
-    	void* p = typesData[i];
-    	[objcTypes addObject:(NSString*)(NSString*)p];
+    if (types.len > 0) {
+    	void** typesData = (void**)types.data;
+    	for (int i = 0; i < types.len; i++) {
+    		void* p = typesData[i];
+    		[objcTypes addObject:(NSString*)(NSString*)p];
+    	}
     }
     BOOL result_ = [nSPasteboard canReadItemWithDataConformingToTypes:objcTypes];
     return result_;
@@ -113,15 +117,17 @@ bool C_NSPasteboard_CanReadItemWithDataConformingToTypes(void* ptr, Array types)
 
 Array C_NSPasteboard_Pasteboard_TypesFilterableTo(void* _type) {
     NSArray* result_ = [NSPasteboard typesFilterableTo:(NSString*)_type];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -134,10 +140,12 @@ int C_NSPasteboard_PrepareForNewContentsWithOptions(void* ptr, unsigned int opti
 int C_NSPasteboard_DeclareTypes_Owner(void* ptr, Array newTypes, void* newOwner) {
     NSPasteboard* nSPasteboard = (NSPasteboard*)ptr;
     NSMutableArray* objcNewTypes = [[NSMutableArray alloc] init];
-    void** newTypesData = (void**)newTypes.data;
-    for (int i = 0; i < newTypes.len; i++) {
-    	void* p = newTypesData[i];
-    	[objcNewTypes addObject:(NSPasteboardType)(NSString*)p];
+    if (newTypes.len > 0) {
+    	void** newTypesData = (void**)newTypes.data;
+    	for (int i = 0; i < newTypes.len; i++) {
+    		void* p = newTypesData[i];
+    		[objcNewTypes addObject:(NSPasteboardType)(NSString*)p];
+    	}
     }
     NSInteger result_ = [nSPasteboard declareTypes:objcNewTypes owner:(id)newOwner];
     return result_;
@@ -146,10 +154,12 @@ int C_NSPasteboard_DeclareTypes_Owner(void* ptr, Array newTypes, void* newOwner)
 int C_NSPasteboard_AddTypes_Owner(void* ptr, Array newTypes, void* newOwner) {
     NSPasteboard* nSPasteboard = (NSPasteboard*)ptr;
     NSMutableArray* objcNewTypes = [[NSMutableArray alloc] init];
-    void** newTypesData = (void**)newTypes.data;
-    for (int i = 0; i < newTypes.len; i++) {
-    	void* p = newTypesData[i];
-    	[objcNewTypes addObject:(NSPasteboardType)(NSString*)p];
+    if (newTypes.len > 0) {
+    	void** newTypesData = (void**)newTypes.data;
+    	for (int i = 0; i < newTypes.len; i++) {
+    		void* p = newTypesData[i];
+    		[objcNewTypes addObject:(NSPasteboardType)(NSString*)p];
+    	}
     }
     NSInteger result_ = [nSPasteboard addTypes:objcNewTypes owner:(id)newOwner];
     return result_;
@@ -187,30 +197,34 @@ void* C_NSPasteboard_GeneralPasteboard() {
 Array C_NSPasteboard_PasteboardItems(void* ptr) {
     NSPasteboard* nSPasteboard = (NSPasteboard*)ptr;
     NSArray* result_ = [nSPasteboard pasteboardItems];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 Array C_NSPasteboard_Types(void* ptr) {
     NSPasteboard* nSPasteboard = (NSPasteboard*)ptr;
     NSArray* result_ = [nSPasteboard types];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 

@@ -14,3 +14,4 @@ Array C_NSPrinter_PrinterTypes();
 void* C_NSPrinter_Name(void* ptr);
 void* C_NSPrinter_Type(void* ptr);
 int C_NSPrinter_LanguageLevel(void* ptr);
+Dictionary C_NSPrinter_DeviceDescription(void* ptr);

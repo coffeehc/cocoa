@@ -227,7 +227,9 @@ func (n NSViewController) SetPreferredContentSize(value foundation.Size) {
 
 func (n NSViewController) ChildViewControllers() []ViewController {
 	result_ := C.C_NSViewController_ChildViewControllers(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]ViewController, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -237,11 +239,15 @@ func (n NSViewController) ChildViewControllers() []ViewController {
 }
 
 func (n NSViewController) SetChildViewControllers(value []ViewController) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = objc.ExtractPtr(v)
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = objc.ExtractPtr(v)
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSViewController_SetChildViewControllers(n.Ptr(), cValue)
 }
 
@@ -252,7 +258,9 @@ func (n NSViewController) ParentViewController() ViewController {
 
 func (n NSViewController) PresentedViewControllers() []ViewController {
 	result_ := C.C_NSViewController_PresentedViewControllers(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]ViewController, len(result_Slice))
 	for idx, r := range result_Slice {

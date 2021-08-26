@@ -10,8 +10,6 @@ import (
 	"unsafe"
 )
 
-// custom begin
-
 func (w WKWebView) TakeSnapshotWithConfiguration(configuration SnapshotConfiguration, completionHandler func(image appkit.Image, err foundation.Error)) {
 	handle := cgo.NewHandle(completionHandler)
 	C.TakeSnapshotWithConfiguration(w.Ptr(), objc.ExtractPtr(configuration), C.uintptr_t(handle))
@@ -34,9 +32,7 @@ func callEvaluateJavaScript(hp C.uintptr_t, valuePtr unsafe.Pointer, errPtr unsa
 	handler(objc.MakeObject(valuePtr), foundation.MakeError(errPtr))
 }
 
-//export deleteHandle
-func deleteHandle(hp C.uintptr_t) {
+//export deleteWebKitHandle
+func deleteWebKitHandle(hp C.uintptr_t) {
 	cgo.Handle(hp).Delete()
 }
-
-// custom end

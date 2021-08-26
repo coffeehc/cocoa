@@ -478,7 +478,9 @@ func (n NSBrowser) SelectedCell() objc.Object {
 
 func (n NSBrowser) SelectedCells() []Cell {
 	result_ := C.C_NSBrowser_SelectedCells(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]Cell, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -498,7 +500,9 @@ func (n NSBrowser) SetSelectionIndexPath(value foundation.IndexPath) {
 
 func (n NSBrowser) SelectionIndexPaths() []foundation.IndexPath {
 	result_ := C.C_NSBrowser_SelectionIndexPaths(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]foundation.IndexPath, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -508,11 +512,15 @@ func (n NSBrowser) SelectionIndexPaths() []foundation.IndexPath {
 }
 
 func (n NSBrowser) SetSelectionIndexPaths(value []foundation.IndexPath) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = objc.ExtractPtr(v)
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = objc.ExtractPtr(v)
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSBrowser_SetSelectionIndexPaths(n.Ptr(), cValue)
 }
 

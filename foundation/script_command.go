@@ -17,6 +17,9 @@ type ScriptCommand interface {
 	EvaluatedReceivers() objc.Object
 	ReceiversSpecifier() ScriptObjectSpecifier
 	SetReceiversSpecifier(value ScriptObjectSpecifier)
+	Arguments() map[string]objc.Object
+	SetArguments(value map[string]objc.Object)
+	EvaluatedArguments() map[string]objc.Object
 	DirectParameter() objc.Object
 	SetDirectParameter(value objc.Object)
 	CommandDescription() ScriptCommandDescription
@@ -95,6 +98,56 @@ func (n NSScriptCommand) ReceiversSpecifier() ScriptObjectSpecifier {
 
 func (n NSScriptCommand) SetReceiversSpecifier(value ScriptObjectSpecifier) {
 	C.C_NSScriptCommand_SetReceiversSpecifier(n.Ptr(), objc.ExtractPtr(value))
+}
+
+func (n NSScriptCommand) Arguments() map[string]objc.Object {
+	result_ := C.C_NSScriptCommand_Arguments(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[string]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[MakeString(k).String()] = objc.MakeObject(v)
+	}
+	return goResult_
+}
+
+func (n NSScriptCommand) SetArguments(value map[string]objc.Object) {
+	var cValue C.Dictionary
+	if len(value) > 0 {
+		cValueKeyData := make([]unsafe.Pointer, len(value))
+		cValueValueData := make([]unsafe.Pointer, len(value))
+		var idx = 0
+		for k, v := range value {
+			cValueKeyData[idx] = NewString(k).Ptr()
+			cValueValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cValue.key_data = unsafe.Pointer(&cValueKeyData[0])
+		cValue.value_data = unsafe.Pointer(&cValueValueData[0])
+		cValue.len = C.int(len(value))
+	}
+	C.C_NSScriptCommand_SetArguments(n.Ptr(), cValue)
+}
+
+func (n NSScriptCommand) EvaluatedArguments() map[string]objc.Object {
+	result_ := C.C_NSScriptCommand_EvaluatedArguments(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[string]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[MakeString(k).String()] = objc.MakeObject(v)
+	}
+	return goResult_
 }
 
 func (n NSScriptCommand) DirectParameter() objc.Object {

@@ -57,25 +57,29 @@ void C_NSCollectionLayoutSection_SetSupplementariesFollowContentInsets(void* ptr
 Array C_NSCollectionLayoutSection_BoundarySupplementaryItems(void* ptr) {
     NSCollectionLayoutSection* nSCollectionLayoutSection = (NSCollectionLayoutSection*)ptr;
     NSArray* result_ = [nSCollectionLayoutSection boundarySupplementaryItems];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSCollectionLayoutSection_SetBoundarySupplementaryItems(void* ptr, Array value) {
     NSCollectionLayoutSection* nSCollectionLayoutSection = (NSCollectionLayoutSection*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSCollectionLayoutBoundarySupplementaryItem*)(NSCollectionLayoutBoundarySupplementaryItem*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSCollectionLayoutBoundarySupplementaryItem*)(NSCollectionLayoutBoundarySupplementaryItem*)p];
+    	}
     }
     [nSCollectionLayoutSection setBoundarySupplementaryItems:objcValue];
 }
@@ -83,25 +87,29 @@ void C_NSCollectionLayoutSection_SetBoundarySupplementaryItems(void* ptr, Array 
 Array C_NSCollectionLayoutSection_DecorationItems(void* ptr) {
     NSCollectionLayoutSection* nSCollectionLayoutSection = (NSCollectionLayoutSection*)ptr;
     NSArray* result_ = [nSCollectionLayoutSection decorationItems];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSCollectionLayoutSection_SetDecorationItems(void* ptr, Array value) {
     NSCollectionLayoutSection* nSCollectionLayoutSection = (NSCollectionLayoutSection*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSCollectionLayoutDecorationItem*)(NSCollectionLayoutDecorationItem*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSCollectionLayoutDecorationItem*)(NSCollectionLayoutDecorationItem*)p];
+    	}
     }
     [nSCollectionLayoutSection setDecorationItems:objcValue];
 }

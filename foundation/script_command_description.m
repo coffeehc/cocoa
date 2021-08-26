@@ -50,15 +50,17 @@ void* C_NSScriptCommandDescription_SuiteName(void* ptr) {
 Array C_NSScriptCommandDescription_ArgumentNames(void* ptr) {
     NSScriptCommandDescription* nSScriptCommandDescription = (NSScriptCommandDescription*)ptr;
     NSArray* result_ = [nSScriptCommandDescription argumentNames];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 

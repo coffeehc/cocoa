@@ -37,8 +37,3 @@ func AlertDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 		return false
 	}
 }
-
-//export deleteAlertDelegate
-func deleteAlertDelegate(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
-}

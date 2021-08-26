@@ -78,11 +78,15 @@ func (n NSComboBox) Init() ComboBox {
 }
 
 func (n NSComboBox) AddItemsWithObjectValues(objects []objc.Object) {
-	cObjectsData := make([]unsafe.Pointer, len(objects))
-	for idx, v := range objects {
-		cObjectsData[idx] = objc.ExtractPtr(v)
+	var cObjects C.Array
+	if len(objects) > 0 {
+		cObjectsData := make([]unsafe.Pointer, len(objects))
+		for idx, v := range objects {
+			cObjectsData[idx] = objc.ExtractPtr(v)
+		}
+		cObjects.data = unsafe.Pointer(&cObjectsData[0])
+		cObjects.len = C.int(len(objects))
 	}
-	cObjects := C.Array{data: unsafe.Pointer(&cObjectsData[0]), len: C.int(len(objects))}
 	C.C_NSComboBox_AddItemsWithObjectValues(n.Ptr(), cObjects)
 }
 
@@ -209,7 +213,9 @@ func (n NSComboBox) SetUsesDataSource(value bool) {
 
 func (n NSComboBox) ObjectValues() []objc.Object {
 	result_ := C.C_NSComboBox_ObjectValues(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]objc.Object, len(result_Slice))
 	for idx, r := range result_Slice {

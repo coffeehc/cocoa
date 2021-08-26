@@ -113,8 +113,3 @@ func DraggingDestination_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) 
 		return false
 	}
 }
-
-//export deleteDraggingDestination
-func deleteDraggingDestination(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
-}

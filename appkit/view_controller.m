@@ -199,25 +199,29 @@ void C_NSViewController_SetPreferredContentSize(void* ptr, CGSize value) {
 Array C_NSViewController_ChildViewControllers(void* ptr) {
     NSViewController* nSViewController = (NSViewController*)ptr;
     NSArray* result_ = [nSViewController childViewControllers];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSViewController_SetChildViewControllers(void* ptr, Array value) {
     NSViewController* nSViewController = (NSViewController*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSViewController*)(NSViewController*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSViewController*)(NSViewController*)p];
+    	}
     }
     [nSViewController setChildViewControllers:objcValue];
 }
@@ -231,15 +235,17 @@ void* C_NSViewController_ParentViewController(void* ptr) {
 Array C_NSViewController_PresentedViewControllers(void* ptr) {
     NSViewController* nSViewController = (NSViewController*)ptr;
     NSArray* result_ = [nSViewController presentedViewControllers];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 

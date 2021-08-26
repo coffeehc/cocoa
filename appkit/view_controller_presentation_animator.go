@@ -45,8 +45,3 @@ func ViewControllerPresentationAnimator_RespondsTo(hp C.uintptr_t, selectorPtr u
 		return false
 	}
 }
-
-//export deleteViewControllerPresentationAnimator
-func deleteViewControllerPresentationAnimator(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
-}

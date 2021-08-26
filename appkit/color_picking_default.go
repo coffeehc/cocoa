@@ -123,8 +123,3 @@ func ColorPickingDefault_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) 
 		return false
 	}
 }
-
-//export deleteColorPickingDefault
-func deleteColorPickingDefault(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
-}

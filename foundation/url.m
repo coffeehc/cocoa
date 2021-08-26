@@ -97,10 +97,12 @@ void* C_NSURL_URL_FileURLWithPath(void* path) {
 
 void* C_NSURL_URL_FileURLWithPathComponents(Array components) {
     NSMutableArray* objcComponents = [[NSMutableArray alloc] init];
-    void** componentsData = (void**)components.data;
-    for (int i = 0; i < components.len; i++) {
-    	void* p = componentsData[i];
-    	[objcComponents addObject:(NSString*)(NSString*)p];
+    if (components.len > 0) {
+    	void** componentsData = (void**)components.data;
+    	for (int i = 0; i < components.len; i++) {
+    		void* p = componentsData[i];
+    		[objcComponents addObject:(NSString*)(NSString*)p];
+    	}
     }
     NSURL* result_ = [NSURL fileURLWithPathComponents:objcComponents];
     return result_;
@@ -159,6 +161,35 @@ void* C_NSURL_URLByAppendingPathExtension(void* ptr, void* pathExtension) {
     NSURL* nSURL = (NSURL*)ptr;
     NSURL* result_ = [nSURL URLByAppendingPathExtension:(NSString*)pathExtension];
     return result_;
+}
+
+Dictionary C_NSURL_URL_ResourceValuesForKeys_FromBookmarkData(Array keys, Array bookmarkData) {
+    NSMutableArray* objcKeys = [[NSMutableArray alloc] init];
+    if (keys.len > 0) {
+    	void** keysData = (void**)keys.data;
+    	for (int i = 0; i < keys.len; i++) {
+    		void* p = keysData[i];
+    		[objcKeys addObject:(NSURLResourceKey)(NSString*)p];
+    	}
+    }
+    NSDictionary* result_ = [NSURL resourceValuesForKeys:objcKeys fromBookmarkData:[[NSData alloc] initWithBytes:(Byte *)bookmarkData.data length:bookmarkData.len]];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSURLResourceKey kp = [result_Keys objectAtIndex:i];
+    		id vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
 }
 
 bool C_NSURL_StartAccessingSecurityScopedResource(void* ptr) {
@@ -238,15 +269,17 @@ void* C_NSURL_Path(void* ptr) {
 Array C_NSURL_PathComponents(void* ptr) {
     NSURL* nSURL = (NSURL*)ptr;
     NSArray* result_ = [nSURL pathComponents];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 

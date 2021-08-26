@@ -6,14 +6,14 @@ void TakeSnapshotWithConfiguration(void* ptr, void* configuration, uintptr_t han
     WKWebView* wKWebView = (WKWebView*)ptr;
     [wKWebView takeSnapshotWithConfiguration:(WKSnapshotConfiguration*)configuration completionHandler:^(NSImage * _Nullable image, NSError * _Nullable error) {
         callTakeSnapshotWithConfiguration(handler, image, error);
-        deleteHandle(handler);
+        deleteWebKitHandle(handler);
     }];
 }
 
 void EvaluateJavaScript(void* ptr, void* javascript, uintptr_t handler) {
-        WKWebView* wKWebView = (WKWebView*)ptr;
-        [wKWebView evaluateJavaScript:(NSString*)javascript completionHandler:^(id value, NSError * _Nullable error) {
-            callEvaluateJavaScript(handler, value, error);
-            deleteHandle(handler);
-        }];
+    WKWebView* wKWebView = (WKWebView*)ptr;
+    [wKWebView evaluateJavaScript:(NSString*)javascript completionHandler:^(id value, NSError * _Nullable error) {
+        callEvaluateJavaScript(handler, value, error);
+        deleteWebKitHandle(handler);
+    }];
 }

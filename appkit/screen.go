@@ -16,6 +16,7 @@ type Screen interface {
 	ConvertRectToBacking(rect foundation.Rect) foundation.Rect
 	Depth() WindowDepth
 	Frame() foundation.Rect
+	DeviceDescription() map[DeviceDescriptionKey]objc.Object
 	VisibleFrame() foundation.Rect
 	ColorSpace() ColorSpace
 	BackingScaleFactor() coregraphics.Float
@@ -71,7 +72,9 @@ func DeepestScreen() Screen {
 
 func Screens() []Screen {
 	result_ := C.C_NSScreen_Screens()
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]Screen, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -88,6 +91,22 @@ func (n NSScreen) Depth() WindowDepth {
 func (n NSScreen) Frame() foundation.Rect {
 	result_ := C.C_NSScreen_Frame(n.Ptr())
 	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
+}
+
+func (n NSScreen) DeviceDescription() map[DeviceDescriptionKey]objc.Object {
+	result_ := C.C_NSScreen_DeviceDescription(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[DeviceDescriptionKey]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[DeviceDescriptionKey(foundation.MakeString(k).String())] = objc.MakeObject(v)
+	}
+	return goResult_
 }
 
 func (n NSScreen) VisibleFrame() foundation.Rect {

@@ -72,6 +72,28 @@ void* C_NSURLRequest_MainDocumentURL(void* ptr) {
     return result_;
 }
 
+Dictionary C_NSURLRequest_AllHTTPHeaderFields(void* ptr) {
+    NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
+    NSDictionary* result_ = [nSURLRequest allHTTPHeaderFields];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSString* kp = [result_Keys objectAtIndex:i];
+    		NSString* vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
+}
+
 double C_NSURLRequest_TimeoutInterval(void* ptr) {
     NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
     NSTimeInterval result_ = [nSURLRequest timeoutInterval];

@@ -85,15 +85,17 @@ void C_NSPrintPanel_SetHelpAnchor(void* ptr, void* value) {
 Array C_NSPrintPanel_AccessoryControllers(void* ptr) {
     NSPrintPanel* nSPrintPanel = (NSPrintPanel*)ptr;
     NSArray* result_ = [nSPrintPanel accessoryControllers];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 

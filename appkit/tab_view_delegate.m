@@ -28,7 +28,7 @@
 }
 
 - (void)dealloc {
-	deleteTabViewDelegate([self goID]);
+	deleteAppKitHandle([self goID]);
 	[super dealloc];
 }
 @end

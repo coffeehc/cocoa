@@ -68,7 +68,9 @@ type LayoutManager interface {
 	LayoutManagerOwnsFirstResponderInWindow(window Window) bool
 	DefaultLineHeightForFont(theFont Font) coregraphics.Float
 	DefaultBaselineOffsetForFont(theFont Font) coregraphics.Float
+	AddTemporaryAttributes_ForCharacterRange(attrs map[foundation.AttributedStringKey]objc.Object, charRange foundation.Range)
 	AddTemporaryAttribute_Value_ForCharacterRange(attrName foundation.AttributedStringKey, value objc.Object, charRange foundation.Range)
+	SetTemporaryAttributes_ForCharacterRange(attrs map[foundation.AttributedStringKey]objc.Object, charRange foundation.Range)
 	RemoveTemporaryAttribute_ForCharacterRange(attrName foundation.AttributedStringKey, charRange foundation.Range)
 	Delegate() objc.Object
 	SetDelegate(value objc.Object)
@@ -366,7 +368,9 @@ func (n NSLayoutManager) RulerAccessoryViewForTextView_ParagraphStyle_Ruler_Enab
 
 func (n NSLayoutManager) RulerMarkersForTextView_ParagraphStyle_Ruler(view TextView, style ParagraphStyle, ruler RulerView) []RulerMarker {
 	result_ := C.C_NSLayoutManager_RulerMarkersForTextView_ParagraphStyle_Ruler(n.Ptr(), objc.ExtractPtr(view), objc.ExtractPtr(style), objc.ExtractPtr(ruler))
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]RulerMarker, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -390,8 +394,44 @@ func (n NSLayoutManager) DefaultBaselineOffsetForFont(theFont Font) coregraphics
 	return coregraphics.Float(float64(result_))
 }
 
+func (n NSLayoutManager) AddTemporaryAttributes_ForCharacterRange(attrs map[foundation.AttributedStringKey]objc.Object, charRange foundation.Range) {
+	var cAttrs C.Dictionary
+	if len(attrs) > 0 {
+		cAttrsKeyData := make([]unsafe.Pointer, len(attrs))
+		cAttrsValueData := make([]unsafe.Pointer, len(attrs))
+		var idx = 0
+		for k, v := range attrs {
+			cAttrsKeyData[idx] = foundation.NewString(string(k)).Ptr()
+			cAttrsValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cAttrs.key_data = unsafe.Pointer(&cAttrsKeyData[0])
+		cAttrs.value_data = unsafe.Pointer(&cAttrsValueData[0])
+		cAttrs.len = C.int(len(attrs))
+	}
+	C.C_NSLayoutManager_AddTemporaryAttributes_ForCharacterRange(n.Ptr(), cAttrs, *(*C.NSRange)(foundation.ToNSRangePointer(charRange)))
+}
+
 func (n NSLayoutManager) AddTemporaryAttribute_Value_ForCharacterRange(attrName foundation.AttributedStringKey, value objc.Object, charRange foundation.Range) {
 	C.C_NSLayoutManager_AddTemporaryAttribute_Value_ForCharacterRange(n.Ptr(), foundation.NewString(string(attrName)).Ptr(), objc.ExtractPtr(value), *(*C.NSRange)(foundation.ToNSRangePointer(charRange)))
+}
+
+func (n NSLayoutManager) SetTemporaryAttributes_ForCharacterRange(attrs map[foundation.AttributedStringKey]objc.Object, charRange foundation.Range) {
+	var cAttrs C.Dictionary
+	if len(attrs) > 0 {
+		cAttrsKeyData := make([]unsafe.Pointer, len(attrs))
+		cAttrsValueData := make([]unsafe.Pointer, len(attrs))
+		var idx = 0
+		for k, v := range attrs {
+			cAttrsKeyData[idx] = foundation.NewString(string(k)).Ptr()
+			cAttrsValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cAttrs.key_data = unsafe.Pointer(&cAttrsKeyData[0])
+		cAttrs.value_data = unsafe.Pointer(&cAttrsValueData[0])
+		cAttrs.len = C.int(len(attrs))
+	}
+	C.C_NSLayoutManager_SetTemporaryAttributes_ForCharacterRange(n.Ptr(), cAttrs, *(*C.NSRange)(foundation.ToNSRangePointer(charRange)))
 }
 
 func (n NSLayoutManager) RemoveTemporaryAttribute_ForCharacterRange(attrName foundation.AttributedStringKey, charRange foundation.Range) {
@@ -486,7 +526,9 @@ func (n NSLayoutManager) SetUsesDefaultHyphenation(value bool) {
 
 func (n NSLayoutManager) TextContainers() []TextContainer {
 	result_ := C.C_NSLayoutManager_TextContainers(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]TextContainer, len(result_Slice))
 	for idx, r := range result_Slice {

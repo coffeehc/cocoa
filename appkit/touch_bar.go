@@ -80,7 +80,9 @@ func (n NSTouchBar) SetTemplateItems(value foundation.Set) {
 
 func (n NSTouchBar) DefaultItemIdentifiers() []TouchBarItemIdentifier {
 	result_ := C.C_NSTouchBar_DefaultItemIdentifiers(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]TouchBarItemIdentifier, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -90,11 +92,15 @@ func (n NSTouchBar) DefaultItemIdentifiers() []TouchBarItemIdentifier {
 }
 
 func (n NSTouchBar) SetDefaultItemIdentifiers(value []TouchBarItemIdentifier) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = foundation.NewString(string(v)).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = foundation.NewString(string(v)).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSTouchBar_SetDefaultItemIdentifiers(n.Ptr(), cValue)
 }
 
@@ -123,7 +129,9 @@ func (n NSTouchBar) IsVisible() bool {
 
 func (n NSTouchBar) ItemIdentifiers() []TouchBarItemIdentifier {
 	result_ := C.C_NSTouchBar_ItemIdentifiers(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]TouchBarItemIdentifier, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -143,7 +151,9 @@ func (n NSTouchBar) SetCustomizationIdentifier(value TouchBarCustomizationIdenti
 
 func (n NSTouchBar) CustomizationAllowedItemIdentifiers() []TouchBarItemIdentifier {
 	result_ := C.C_NSTouchBar_CustomizationAllowedItemIdentifiers(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]TouchBarItemIdentifier, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -153,17 +163,23 @@ func (n NSTouchBar) CustomizationAllowedItemIdentifiers() []TouchBarItemIdentifi
 }
 
 func (n NSTouchBar) SetCustomizationAllowedItemIdentifiers(value []TouchBarItemIdentifier) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = foundation.NewString(string(v)).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = foundation.NewString(string(v)).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSTouchBar_SetCustomizationAllowedItemIdentifiers(n.Ptr(), cValue)
 }
 
 func (n NSTouchBar) CustomizationRequiredItemIdentifiers() []TouchBarItemIdentifier {
 	result_ := C.C_NSTouchBar_CustomizationRequiredItemIdentifiers(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]TouchBarItemIdentifier, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -173,11 +189,15 @@ func (n NSTouchBar) CustomizationRequiredItemIdentifiers() []TouchBarItemIdentif
 }
 
 func (n NSTouchBar) SetCustomizationRequiredItemIdentifiers(value []TouchBarItemIdentifier) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = foundation.NewString(string(v)).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = foundation.NewString(string(v)).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSTouchBar_SetCustomizationRequiredItemIdentifiers(n.Ptr(), cValue)
 }
 

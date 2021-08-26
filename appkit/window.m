@@ -62,15 +62,17 @@ void C_NSWindow_SetContentBorderThickness_ForEdge(void* ptr, double thickness, u
 
 Array C_NSWindow_WindowNumbersWithOptions(unsigned int options) {
     NSArray* result_ = [NSWindow windowNumbersWithOptions:options];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -461,10 +463,12 @@ void C_NSWindow_DragImage_At_Offset_Event_Pasteboard_Source_SlideBack(void* ptr,
 void C_NSWindow_RegisterForDraggedTypes(void* ptr, Array newTypes) {
     NSWindow* nSWindow = (NSWindow*)ptr;
     NSMutableArray* objcNewTypes = [[NSMutableArray alloc] init];
-    void** newTypesData = (void**)newTypes.data;
-    for (int i = 0; i < newTypes.len; i++) {
-    	void* p = newTypesData[i];
-    	[objcNewTypes addObject:(NSPasteboardType)(NSString*)p];
+    if (newTypes.len > 0) {
+    	void** newTypesData = (void**)newTypes.data;
+    	for (int i = 0; i < newTypes.len; i++) {
+    		void* p = newTypesData[i];
+    		[objcNewTypes addObject:(NSPasteboardType)(NSString*)p];
+    	}
     }
     [nSWindow registerForDraggedTypes:objcNewTypes];
 }
@@ -569,10 +573,12 @@ void C_NSWindow_LayoutIfNeeded(void* ptr) {
 void C_NSWindow_VisualizeConstraints(void* ptr, Array constraints) {
     NSWindow* nSWindow = (NSWindow*)ptr;
     NSMutableArray* objcConstraints = [[NSMutableArray alloc] init];
-    void** constraintsData = (void**)constraints.data;
-    for (int i = 0; i < constraints.len; i++) {
-    	void* p = constraintsData[i];
-    	[objcConstraints addObject:(NSLayoutConstraint*)(NSLayoutConstraint*)p];
+    if (constraints.len > 0) {
+    	void** constraintsData = (void**)constraints.data;
+    	for (int i = 0; i < constraints.len; i++) {
+    		void* p = constraintsData[i];
+    		[objcConstraints addObject:(NSLayoutConstraint*)(NSLayoutConstraint*)p];
+    	}
     }
     [nSWindow visualizeConstraints:objcConstraints];
 }
@@ -822,6 +828,28 @@ int C_NSWindow_WindowNumber(void* ptr) {
     return result_;
 }
 
+Dictionary C_NSWindow_DeviceDescription(void* ptr) {
+    NSWindow* nSWindow = (NSWindow*)ptr;
+    NSDictionary* result_ = [nSWindow deviceDescription];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSDeviceDescriptionKey kp = [result_Keys objectAtIndex:i];
+    		id vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
+}
+
 bool C_NSWindow_CanBecomeVisibleWithoutLogin(void* ptr) {
     NSWindow* nSWindow = (NSWindow*)ptr;
     BOOL result_ = [nSWindow canBecomeVisibleWithoutLogin];
@@ -904,15 +932,17 @@ void* C_NSWindow_SheetParent(void* ptr) {
 Array C_NSWindow_Sheets(void* ptr) {
     NSWindow* nSWindow = (NSWindow*)ptr;
     NSArray* result_ = [nSWindow sheets];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -1146,15 +1176,17 @@ void C_NSWindow_SetToolbar(void* ptr, void* value) {
 Array C_NSWindow_ChildWindows(void* ptr) {
     NSWindow* nSWindow = (NSWindow*)ptr;
     NSArray* result_ = [nSWindow childWindows];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -1244,25 +1276,29 @@ void C_NSWindow_SetTitlebarSeparatorStyle(void* ptr, int value) {
 Array C_NSWindow_TitlebarAccessoryViewControllers(void* ptr) {
     NSWindow* nSWindow = (NSWindow*)ptr;
     NSArray* result_ = [nSWindow titlebarAccessoryViewControllers];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSWindow_SetTitlebarAccessoryViewControllers(void* ptr, Array value) {
     NSWindow* nSWindow = (NSWindow*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSTitlebarAccessoryViewController*)(NSTitlebarAccessoryViewController*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSTitlebarAccessoryViewController*)(NSTitlebarAccessoryViewController*)p];
+    	}
     }
     [nSWindow setTitlebarAccessoryViewControllers:objcValue];
 }
@@ -1312,15 +1348,17 @@ void C_NSWindow_SetTabbingMode(void* ptr, int value) {
 Array C_NSWindow_TabbedWindows(void* ptr) {
     NSWindow* nSWindow = (NSWindow*)ptr;
     NSArray* result_ = [nSWindow tabbedWindows];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 

@@ -13,6 +13,7 @@ type TextTab interface {
 	objc.Object
 	Location() coregraphics.Float
 	Alignment() TextAlignment
+	Options() map[TextTabOptionKey]objc.Object
 }
 
 type NSTextTab struct {
@@ -27,6 +28,25 @@ func MakeTextTab(ptr unsafe.Pointer) NSTextTab {
 
 func AllocTextTab() NSTextTab {
 	return MakeTextTab(C.C_TextTab_Alloc())
+}
+
+func (n NSTextTab) InitWithTextAlignment_Location_Options(alignment TextAlignment, loc coregraphics.Float, options map[TextTabOptionKey]objc.Object) TextTab {
+	var cOptions C.Dictionary
+	if len(options) > 0 {
+		cOptionsKeyData := make([]unsafe.Pointer, len(options))
+		cOptionsValueData := make([]unsafe.Pointer, len(options))
+		var idx = 0
+		for k, v := range options {
+			cOptionsKeyData[idx] = foundation.NewString(string(k)).Ptr()
+			cOptionsValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cOptions.key_data = unsafe.Pointer(&cOptionsKeyData[0])
+		cOptions.value_data = unsafe.Pointer(&cOptionsValueData[0])
+		cOptions.len = C.int(len(options))
+	}
+	result_ := C.C_NSTextTab_InitWithTextAlignment_Location_Options(n.Ptr(), C.int(int(alignment)), C.double(float64(loc)), cOptions)
+	return MakeTextTab(result_)
 }
 
 func (n NSTextTab) Init() TextTab {
@@ -47,4 +67,20 @@ func (n NSTextTab) Location() coregraphics.Float {
 func (n NSTextTab) Alignment() TextAlignment {
 	result_ := C.C_NSTextTab_Alignment(n.Ptr())
 	return TextAlignment(int(result_))
+}
+
+func (n NSTextTab) Options() map[TextTabOptionKey]objc.Object {
+	result_ := C.C_NSTextTab_Options(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[TextTabOptionKey]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[TextTabOptionKey(foundation.MakeString(k).String())] = objc.MakeObject(v)
+	}
+	return goResult_
 }

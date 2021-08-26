@@ -466,6 +466,80 @@ void C_NSNumberFormatter_SetNegativeSuffix(void* ptr, void* value) {
     [nSNumberFormatter setNegativeSuffix:(NSString*)value];
 }
 
+Dictionary C_NSNumberFormatter_TextAttributesForNegativeValues(void* ptr) {
+    NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
+    NSDictionary* result_ = [nSNumberFormatter textAttributesForNegativeValues];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSString* kp = [result_Keys objectAtIndex:i];
+    		id vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
+}
+
+void C_NSNumberFormatter_SetTextAttributesForNegativeValues(void* ptr, Dictionary value) {
+    NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
+    NSMutableDictionary* objcValue = [[NSMutableDictionary alloc] initWithCapacity: value.len];
+    if (value.len > 0) {
+    	void** valueKeyData = (void**)value.key_data;
+    	void** valueValueData = (void**)value.value_data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* kp = valueKeyData[i];
+    		void* vp = valueValueData[i];
+    		[objcValue setObject:(NSString*)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    [nSNumberFormatter setTextAttributesForNegativeValues:objcValue];
+}
+
+Dictionary C_NSNumberFormatter_TextAttributesForPositiveValues(void* ptr) {
+    NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
+    NSDictionary* result_ = [nSNumberFormatter textAttributesForPositiveValues];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSString* kp = [result_Keys objectAtIndex:i];
+    		id vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
+}
+
+void C_NSNumberFormatter_SetTextAttributesForPositiveValues(void* ptr, Dictionary value) {
+    NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
+    NSMutableDictionary* objcValue = [[NSMutableDictionary alloc] initWithCapacity: value.len];
+    if (value.len > 0) {
+    	void** valueKeyData = (void**)value.key_data;
+    	void** valueValueData = (void**)value.value_data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* kp = valueKeyData[i];
+    		void* vp = valueValueData[i];
+    		[objcValue setObject:(NSString*)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    [nSNumberFormatter setTextAttributesForPositiveValues:objcValue];
+}
+
 void* C_NSNumberFormatter_AttributedStringForZero(void* ptr) {
     NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
     NSAttributedString* result_ = [nSNumberFormatter attributedStringForZero];
@@ -475,6 +549,43 @@ void* C_NSNumberFormatter_AttributedStringForZero(void* ptr) {
 void C_NSNumberFormatter_SetAttributedStringForZero(void* ptr, void* value) {
     NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
     [nSNumberFormatter setAttributedStringForZero:(NSAttributedString*)value];
+}
+
+Dictionary C_NSNumberFormatter_TextAttributesForZero(void* ptr) {
+    NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
+    NSDictionary* result_ = [nSNumberFormatter textAttributesForZero];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSString* kp = [result_Keys objectAtIndex:i];
+    		id vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
+}
+
+void C_NSNumberFormatter_SetTextAttributesForZero(void* ptr, Dictionary value) {
+    NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
+    NSMutableDictionary* objcValue = [[NSMutableDictionary alloc] initWithCapacity: value.len];
+    if (value.len > 0) {
+    	void** valueKeyData = (void**)value.key_data;
+    	void** valueValueData = (void**)value.value_data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* kp = valueKeyData[i];
+    		void* vp = valueValueData[i];
+    		[objcValue setObject:(NSString*)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    [nSNumberFormatter setTextAttributesForZero:objcValue];
 }
 
 void* C_NSNumberFormatter_AttributedStringForNil(void* ptr) {
@@ -488,6 +599,43 @@ void C_NSNumberFormatter_SetAttributedStringForNil(void* ptr, void* value) {
     [nSNumberFormatter setAttributedStringForNil:(NSAttributedString*)value];
 }
 
+Dictionary C_NSNumberFormatter_TextAttributesForNil(void* ptr) {
+    NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
+    NSDictionary* result_ = [nSNumberFormatter textAttributesForNil];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSString* kp = [result_Keys objectAtIndex:i];
+    		id vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
+}
+
+void C_NSNumberFormatter_SetTextAttributesForNil(void* ptr, Dictionary value) {
+    NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
+    NSMutableDictionary* objcValue = [[NSMutableDictionary alloc] initWithCapacity: value.len];
+    if (value.len > 0) {
+    	void** valueKeyData = (void**)value.key_data;
+    	void** valueValueData = (void**)value.value_data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* kp = valueKeyData[i];
+    		void* vp = valueValueData[i];
+    		[objcValue setObject:(NSString*)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    [nSNumberFormatter setTextAttributesForNil:objcValue];
+}
+
 void* C_NSNumberFormatter_AttributedStringForNotANumber(void* ptr) {
     NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
     NSAttributedString* result_ = [nSNumberFormatter attributedStringForNotANumber];
@@ -497,6 +645,117 @@ void* C_NSNumberFormatter_AttributedStringForNotANumber(void* ptr) {
 void C_NSNumberFormatter_SetAttributedStringForNotANumber(void* ptr, void* value) {
     NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
     [nSNumberFormatter setAttributedStringForNotANumber:(NSAttributedString*)value];
+}
+
+Dictionary C_NSNumberFormatter_TextAttributesForNotANumber(void* ptr) {
+    NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
+    NSDictionary* result_ = [nSNumberFormatter textAttributesForNotANumber];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSString* kp = [result_Keys objectAtIndex:i];
+    		id vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
+}
+
+void C_NSNumberFormatter_SetTextAttributesForNotANumber(void* ptr, Dictionary value) {
+    NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
+    NSMutableDictionary* objcValue = [[NSMutableDictionary alloc] initWithCapacity: value.len];
+    if (value.len > 0) {
+    	void** valueKeyData = (void**)value.key_data;
+    	void** valueValueData = (void**)value.value_data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* kp = valueKeyData[i];
+    		void* vp = valueValueData[i];
+    		[objcValue setObject:(NSString*)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    [nSNumberFormatter setTextAttributesForNotANumber:objcValue];
+}
+
+Dictionary C_NSNumberFormatter_TextAttributesForPositiveInfinity(void* ptr) {
+    NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
+    NSDictionary* result_ = [nSNumberFormatter textAttributesForPositiveInfinity];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSString* kp = [result_Keys objectAtIndex:i];
+    		id vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
+}
+
+void C_NSNumberFormatter_SetTextAttributesForPositiveInfinity(void* ptr, Dictionary value) {
+    NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
+    NSMutableDictionary* objcValue = [[NSMutableDictionary alloc] initWithCapacity: value.len];
+    if (value.len > 0) {
+    	void** valueKeyData = (void**)value.key_data;
+    	void** valueValueData = (void**)value.value_data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* kp = valueKeyData[i];
+    		void* vp = valueValueData[i];
+    		[objcValue setObject:(NSString*)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    [nSNumberFormatter setTextAttributesForPositiveInfinity:objcValue];
+}
+
+Dictionary C_NSNumberFormatter_TextAttributesForNegativeInfinity(void* ptr) {
+    NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
+    NSDictionary* result_ = [nSNumberFormatter textAttributesForNegativeInfinity];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSString* kp = [result_Keys objectAtIndex:i];
+    		id vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
+}
+
+void C_NSNumberFormatter_SetTextAttributesForNegativeInfinity(void* ptr, Dictionary value) {
+    NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
+    NSMutableDictionary* objcValue = [[NSMutableDictionary alloc] initWithCapacity: value.len];
+    if (value.len > 0) {
+    	void** valueKeyData = (void**)value.key_data;
+    	void** valueValueData = (void**)value.value_data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* kp = valueKeyData[i];
+    		void* vp = valueValueData[i];
+    		[objcValue setObject:(NSString*)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    [nSNumberFormatter setTextAttributesForNegativeInfinity:objcValue];
 }
 
 void* C_NSNumberFormatter_GroupingSeparator(void* ptr) {

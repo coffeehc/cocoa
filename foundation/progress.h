@@ -5,6 +5,7 @@
 
 void* C_Progress_Alloc();
 
+void* C_NSProgress_InitWithParent_UserInfo(void* ptr, void* parentProgressOrNil, Dictionary userInfoOrNil);
 void* C_NSProgress_Init(void* ptr);
 void* C_NSProgress_Progress_DiscreteProgressWithTotalUnitCount(long unitCount);
 void* C_NSProgress_ProgressWithTotalUnitCount(long unitCount);
@@ -38,6 +39,7 @@ bool C_NSProgress_IsPaused(void* ptr);
 bool C_NSProgress_IsIndeterminate(void* ptr);
 void* C_NSProgress_Kind(void* ptr);
 void C_NSProgress_SetKind(void* ptr, void* value);
+Dictionary C_NSProgress_UserInfo(void* ptr);
 void* C_NSProgress_FileOperationKind(void* ptr);
 void C_NSProgress_SetFileOperationKind(void* ptr, void* value);
 void* C_NSProgress_FileURL(void* ptr);

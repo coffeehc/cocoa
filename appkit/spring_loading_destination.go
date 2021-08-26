@@ -83,8 +83,3 @@ func SpringLoadingDestination_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Poin
 		return false
 	}
 }
-
-//export deleteSpringLoadingDestination
-func deleteSpringLoadingDestination(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
-}

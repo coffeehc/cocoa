@@ -5,6 +5,7 @@
 
 void* C_FileWrapper_Alloc();
 
+void* C_NSFileWrapper_InitDirectoryWithFileWrappers(void* ptr, Dictionary childrenByPreferredName);
 void* C_NSFileWrapper_InitRegularFileWithContents(void* ptr, Array contents);
 void* C_NSFileWrapper_InitSymbolicLinkWithDestinationURL(void* ptr, void* url);
 void* C_NSFileWrapper_InitWithSerializedRepresentation(void* ptr, Array serializeRepresentation);
@@ -18,10 +19,13 @@ bool C_NSFileWrapper_MatchesContentsOfURL(void* ptr, void* url);
 bool C_NSFileWrapper_IsRegularFile(void* ptr);
 bool C_NSFileWrapper_IsDirectory(void* ptr);
 bool C_NSFileWrapper_IsSymbolicLink(void* ptr);
+Dictionary C_NSFileWrapper_FileWrappers(void* ptr);
 void* C_NSFileWrapper_SymbolicLinkDestinationURL(void* ptr);
 Array C_NSFileWrapper_SerializedRepresentation(void* ptr);
 void* C_NSFileWrapper_Filename(void* ptr);
 void C_NSFileWrapper_SetFilename(void* ptr, void* value);
 void* C_NSFileWrapper_PreferredFilename(void* ptr);
 void C_NSFileWrapper_SetPreferredFilename(void* ptr, void* value);
+Dictionary C_NSFileWrapper_FileAttributes(void* ptr);
+void C_NSFileWrapper_SetFileAttributes(void* ptr, Dictionary value);
 Array C_NSFileWrapper_RegularFileContents(void* ptr);

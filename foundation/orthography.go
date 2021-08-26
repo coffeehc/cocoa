@@ -53,7 +53,9 @@ func (n NSOrthography) DominantLanguageForScript(script string) string {
 
 func (n NSOrthography) LanguagesForScript(script string) []string {
 	result_ := C.C_NSOrthography_LanguagesForScript(n.Ptr(), NewString(script).Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -74,7 +76,9 @@ func (n NSOrthography) DominantScript() string {
 
 func (n NSOrthography) AllScripts() []string {
 	result_ := C.C_NSOrthography_AllScripts(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -85,7 +89,9 @@ func (n NSOrthography) AllScripts() []string {
 
 func (n NSOrthography) AllLanguages() []string {
 	result_ := C.C_NSOrthography_AllLanguages(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {

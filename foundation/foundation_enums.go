@@ -265,3 +265,6 @@ type ProgressKind string
 type ProgressFileOperationKind string
 
 type SaveOptions uint
+
+type ErrorUserInfoKey string
+type TextCheckingKey string

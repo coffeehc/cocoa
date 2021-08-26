@@ -20,7 +20,7 @@
 }
 
 - (void)dealloc {
-	deleteFontChanging([self goID]);
+	deleteAppKitHandle([self goID]);
 	[super dealloc];
 }
 @end

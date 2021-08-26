@@ -196,7 +196,9 @@ func (n NSUndoManager) RedoMenuItemTitle() string {
 
 func (n NSUndoManager) RunLoopModes() []RunLoopMode {
 	result_ := C.C_NSUndoManager_RunLoopModes(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]RunLoopMode, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -206,11 +208,15 @@ func (n NSUndoManager) RunLoopModes() []RunLoopMode {
 }
 
 func (n NSUndoManager) SetRunLoopModes(value []RunLoopMode) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = NewString(string(v)).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = NewString(string(v)).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSUndoManager_SetRunLoopModes(n.Ptr(), cValue)
 }
 

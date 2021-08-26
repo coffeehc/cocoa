@@ -86,25 +86,29 @@ void C_NSPathControl_SetDelegate(void* ptr, void* value) {
 Array C_NSPathControl_AllowedTypes(void* ptr) {
     NSPathControl* nSPathControl = (NSPathControl*)ptr;
     NSArray* result_ = [nSPathControl allowedTypes];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSPathControl_SetAllowedTypes(void* ptr, Array value) {
     NSPathControl* nSPathControl = (NSPathControl*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSString*)(NSString*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSString*)(NSString*)p];
+    	}
     }
     [nSPathControl setAllowedTypes:objcValue];
 }
@@ -129,25 +133,29 @@ void C_NSPathControl_SetEditable(void* ptr, bool value) {
 Array C_NSPathControl_PathItems(void* ptr) {
     NSPathControl* nSPathControl = (NSPathControl*)ptr;
     NSArray* result_ = [nSPathControl pathItems];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSPathControl_SetPathItems(void* ptr, Array value) {
     NSPathControl* nSPathControl = (NSPathControl*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSPathControlItem*)(NSPathControlItem*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSPathControlItem*)(NSPathControlItem*)p];
+    	}
     }
     [nSPathControl setPathItems:objcValue];
 }

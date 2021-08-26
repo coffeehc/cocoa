@@ -31,7 +31,7 @@
 }
 
 - (void)dealloc {
-	deleteCollectionViewDataSource([self goID]);
+	deleteAppKitHandle([self goID]);
 	[super dealloc];
 }
 @end

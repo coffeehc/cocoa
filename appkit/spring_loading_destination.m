@@ -37,7 +37,7 @@
 }
 
 - (void)dealloc {
-	deleteSpringLoadingDestination([self goID]);
+	deleteAppKitHandle([self goID]);
 	[super dealloc];
 }
 @end

@@ -216,19 +216,23 @@ func (n NSText) WriteRTFDToFile_Atomically(path string, flag bool) bool {
 
 func (n NSText) RTFDFromRange(_range foundation.Range) []byte {
 	result_ := C.C_NSText_RTFDFromRange(n.Ptr(), *(*C.NSRange)(foundation.ToNSRangePointer(_range)))
+	if result_.len > 0 {
+		C.free(result_.data)
+	}
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)
-	C.free(result_.data)
 	return goResult_
 }
 
 func (n NSText) RTFFromRange(_range foundation.Range) []byte {
 	result_ := C.C_NSText_RTFFromRange(n.Ptr(), *(*C.NSRange)(foundation.ToNSRangePointer(_range)))
+	if result_.len > 0 {
+		C.free(result_.data)
+	}
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)
-	C.free(result_.data)
 	return goResult_
 }
 

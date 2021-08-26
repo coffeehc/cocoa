@@ -36,6 +36,21 @@ void* C_NSFont_Font_UserFixedPitchFontOfSize(double fontSize) {
     return result_;
 }
 
+void* C_NSFont_Font_PreferredFontForTextStyle_Options(void* style, Dictionary options) {
+    NSMutableDictionary* objcOptions = [[NSMutableDictionary alloc] initWithCapacity: options.len];
+    if (options.len > 0) {
+    	void** optionsKeyData = (void**)options.key_data;
+    	void** optionsValueData = (void**)options.value_data;
+    	for (int i = 0; i < options.len; i++) {
+    		void* kp = optionsKeyData[i];
+    		void* vp = optionsValueData[i];
+    		[objcOptions setObject:(NSFontTextStyleOptionKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    NSFont* result_ = [NSFont preferredFontForTextStyle:(NSString*)style options:objcOptions];
+    return result_;
+}
+
 void* C_NSFont_Font_SystemFontOfSize(double fontSize) {
     NSFont* result_ = [NSFont systemFontOfSize:fontSize];
     return result_;

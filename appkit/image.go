@@ -167,11 +167,15 @@ func (n NSImage) AddRepresentation(imageRep ImageRep) {
 }
 
 func (n NSImage) AddRepresentations(imageReps []ImageRep) {
-	cImageRepsData := make([]unsafe.Pointer, len(imageReps))
-	for idx, v := range imageReps {
-		cImageRepsData[idx] = objc.ExtractPtr(v)
+	var cImageReps C.Array
+	if len(imageReps) > 0 {
+		cImageRepsData := make([]unsafe.Pointer, len(imageReps))
+		for idx, v := range imageReps {
+			cImageRepsData[idx] = objc.ExtractPtr(v)
+		}
+		cImageReps.data = unsafe.Pointer(&cImageRepsData[0])
+		cImageReps.len = C.int(len(imageReps))
 	}
-	cImageReps := C.Array{data: unsafe.Pointer(&cImageRepsData[0]), len: C.int(len(imageReps))}
 	C.C_NSImage_AddRepresentations(n.Ptr(), cImageReps)
 }
 
@@ -181,9 +185,7 @@ func (n NSImage) RemoveRepresentation(imageRep ImageRep) {
 
 func (n NSImage) BestRepresentationForRect_Context_Hints(rect foundation.Rect, referenceContext GraphicsContext, hints map[ImageHintKey]objc.Object) ImageRep {
 	var cHints C.Dictionary
-	if len(hints) == 0 {
-		cHints = C.Dictionary{len: 0}
-	} else {
+	if len(hints) > 0 {
 		cHintsKeyData := make([]unsafe.Pointer, len(hints))
 		cHintsValueData := make([]unsafe.Pointer, len(hints))
 		var idx = 0
@@ -192,7 +194,9 @@ func (n NSImage) BestRepresentationForRect_Context_Hints(rect foundation.Rect, r
 			cHintsValueData[idx] = objc.ExtractPtr(v)
 			idx++
 		}
-		cHints = C.Dictionary{key_data: unsafe.Pointer(&cHintsKeyData[0]), value_data: unsafe.Pointer(&cHintsValueData[0]), len: C.int(len(hints))}
+		cHints.key_data = unsafe.Pointer(&cHintsKeyData[0])
+		cHints.value_data = unsafe.Pointer(&cHintsValueData[0])
+		cHints.len = C.int(len(hints))
 	}
 	result_ := C.C_NSImage_BestRepresentationForRect_Context_Hints(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))), objc.ExtractPtr(referenceContext), cHints)
 	return MakeImageRep(result_)
@@ -212,9 +216,7 @@ func (n NSImage) DrawInRect_FromRect_Operation_Fraction(rect foundation.Rect, fr
 
 func (n NSImage) DrawInRect_FromRect_Operation_Fraction_RespectFlipped_Hints(dstSpacePortionRect foundation.Rect, srcSpacePortionRect foundation.Rect, op CompositingOperation, requestedAlpha coregraphics.Float, respectContextIsFlipped bool, hints map[ImageHintKey]objc.Object) {
 	var cHints C.Dictionary
-	if len(hints) == 0 {
-		cHints = C.Dictionary{len: 0}
-	} else {
+	if len(hints) > 0 {
 		cHintsKeyData := make([]unsafe.Pointer, len(hints))
 		cHintsValueData := make([]unsafe.Pointer, len(hints))
 		var idx = 0
@@ -223,7 +225,9 @@ func (n NSImage) DrawInRect_FromRect_Operation_Fraction_RespectFlipped_Hints(dst
 			cHintsValueData[idx] = objc.ExtractPtr(v)
 			idx++
 		}
-		cHints = C.Dictionary{key_data: unsafe.Pointer(&cHintsKeyData[0]), value_data: unsafe.Pointer(&cHintsValueData[0]), len: C.int(len(hints))}
+		cHints.key_data = unsafe.Pointer(&cHintsKeyData[0])
+		cHints.value_data = unsafe.Pointer(&cHintsValueData[0])
+		cHints.len = C.int(len(hints))
 	}
 	C.C_NSImage_DrawInRect_FromRect_Operation_Fraction_RespectFlipped_Hints(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(dstSpacePortionRect))), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(srcSpacePortionRect))), C.uint(uint(op)), C.double(float64(requestedAlpha)), C.bool(respectContextIsFlipped), cHints)
 }
@@ -251,6 +255,9 @@ func (n NSImage) Recache() {
 
 func (n NSImage) TIFFRepresentationUsingCompression_Factor(comp TIFFCompression, factor float32) []byte {
 	result_ := C.C_NSImage_TIFFRepresentationUsingCompression_Factor(n.Ptr(), C.uint(uint(comp)), C.float(factor))
+	if result_.len > 0 {
+		C.free(result_.data)
+	}
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)
@@ -263,9 +270,7 @@ func (n NSImage) CancelIncrementalLoad() {
 
 func (n NSImage) HitTestRect_WithImageDestinationRect_Context_Hints_Flipped(testRectDestSpace foundation.Rect, imageRectDestSpace foundation.Rect, context GraphicsContext, hints map[ImageHintKey]objc.Object, flipped bool) bool {
 	var cHints C.Dictionary
-	if len(hints) == 0 {
-		cHints = C.Dictionary{len: 0}
-	} else {
+	if len(hints) > 0 {
 		cHintsKeyData := make([]unsafe.Pointer, len(hints))
 		cHintsValueData := make([]unsafe.Pointer, len(hints))
 		var idx = 0
@@ -274,7 +279,9 @@ func (n NSImage) HitTestRect_WithImageDestinationRect_Context_Hints_Flipped(test
 			cHintsValueData[idx] = objc.ExtractPtr(v)
 			idx++
 		}
-		cHints = C.Dictionary{key_data: unsafe.Pointer(&cHintsKeyData[0]), value_data: unsafe.Pointer(&cHintsValueData[0]), len: C.int(len(hints))}
+		cHints.key_data = unsafe.Pointer(&cHintsKeyData[0])
+		cHints.value_data = unsafe.Pointer(&cHintsValueData[0])
+		cHints.len = C.int(len(hints))
 	}
 	result_ := C.C_NSImage_HitTestRect_WithImageDestinationRect_Context_Hints_Flipped(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(testRectDestSpace))), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(imageRectDestSpace))), objc.ExtractPtr(context), cHints, C.bool(flipped))
 	return bool(result_)
@@ -319,7 +326,9 @@ func (n NSImage) SetTemplate(value bool) {
 
 func ImageTypes() []string {
 	result_ := C.C_NSImage_ImageTypes()
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -330,7 +339,9 @@ func ImageTypes() []string {
 
 func ImageUnfilteredTypes() []string {
 	result_ := C.C_NSImage_ImageUnfilteredTypes()
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -341,7 +352,9 @@ func ImageUnfilteredTypes() []string {
 
 func (n NSImage) Representations() []ImageRep {
 	result_ := C.C_NSImage_Representations(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]ImageRep, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -429,6 +442,9 @@ func (n NSImage) SetCacheMode(value ImageCacheMode) {
 
 func (n NSImage) TIFFRepresentation() []byte {
 	result_ := C.C_NSImage_TIFFRepresentation(n.Ptr())
+	if result_.len > 0 {
+		C.free(result_.data)
+	}
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)

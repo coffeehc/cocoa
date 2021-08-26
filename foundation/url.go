@@ -142,11 +142,15 @@ func URL_FileURLWithPath(path string) URL {
 }
 
 func URL_FileURLWithPathComponents(components []string) URL {
-	cComponentsData := make([]unsafe.Pointer, len(components))
-	for idx, v := range components {
-		cComponentsData[idx] = NewString(v).Ptr()
+	var cComponents C.Array
+	if len(components) > 0 {
+		cComponentsData := make([]unsafe.Pointer, len(components))
+		for idx, v := range components {
+			cComponentsData[idx] = NewString(v).Ptr()
+		}
+		cComponents.data = unsafe.Pointer(&cComponentsData[0])
+		cComponents.len = C.int(len(components))
 	}
-	cComponents := C.Array{data: unsafe.Pointer(&cComponentsData[0]), len: C.int(len(components))}
 	result_ := C.C_NSURL_URL_FileURLWithPathComponents(cComponents)
 	return MakeURL(result_)
 }
@@ -198,6 +202,31 @@ func (n NSURL) URLByAppendingPathExtension(pathExtension string) URL {
 	return MakeURL(result_)
 }
 
+func URL_ResourceValuesForKeys_FromBookmarkData(keys []URLResourceKey, bookmarkData []byte) map[URLResourceKey]objc.Object {
+	var cKeys C.Array
+	if len(keys) > 0 {
+		cKeysData := make([]unsafe.Pointer, len(keys))
+		for idx, v := range keys {
+			cKeysData[idx] = NewString(string(v)).Ptr()
+		}
+		cKeys.data = unsafe.Pointer(&cKeysData[0])
+		cKeys.len = C.int(len(keys))
+	}
+	result_ := C.C_NSURL_URL_ResourceValuesForKeys_FromBookmarkData(cKeys, C.Array{data: unsafe.Pointer(&bookmarkData[0]), len: C.int(len(bookmarkData))})
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[URLResourceKey]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[URLResourceKey(MakeString(k).String())] = objc.MakeObject(v)
+	}
+	return goResult_
+}
+
 func (n NSURL) StartAccessingSecurityScopedResource() bool {
 	result_ := C.C_NSURL_StartAccessingSecurityScopedResource(n.Ptr())
 	return bool(result_)
@@ -209,10 +238,12 @@ func (n NSURL) StopAccessingSecurityScopedResource() {
 
 func (n NSURL) DataRepresentation() []byte {
 	result_ := C.C_NSURL_DataRepresentation(n.Ptr())
+	if result_.len > 0 {
+		C.free(result_.data)
+	}
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)
-	C.free(result_.data)
 	return goResult_
 }
 
@@ -263,7 +294,9 @@ func (n NSURL) Path() string {
 
 func (n NSURL) PathComponents() []string {
 	result_ := C.C_NSURL_PathComponents(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {

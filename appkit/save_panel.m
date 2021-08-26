@@ -135,25 +135,29 @@ void C_NSSavePanel_SetShowsTagField(void* ptr, bool value) {
 Array C_NSSavePanel_TagNames(void* ptr) {
     NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
     NSArray* result_ = [nSSavePanel tagNames];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSSavePanel_SetTagNames(void* ptr, Array value) {
     NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSString*)(NSString*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSString*)(NSString*)p];
+    	}
     }
     [nSSavePanel setTagNames:objcValue];
 }
@@ -211,25 +215,29 @@ bool C_NSSavePanel_IsExpanded(void* ptr) {
 Array C_NSSavePanel_AllowedContentTypes(void* ptr) {
     NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
     NSArray* result_ = [nSSavePanel allowedContentTypes];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSSavePanel_SetAllowedContentTypes(void* ptr, Array value) {
     NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(UTType*)(UTType*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(UTType*)(UTType*)p];
+    	}
     }
     [nSSavePanel setAllowedContentTypes:objcValue];
 }

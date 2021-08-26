@@ -41,9 +41,11 @@ type Bundle interface {
 	BundleURL() URL
 	BundlePath() string
 	BundleIdentifier() string
+	InfoDictionary() map[string]objc.Object
 	Localizations() []string
 	PreferredLocalizations() []string
 	DevelopmentLocalization() string
+	LocalizedInfoDictionary() map[string]objc.Object
 	ExecutableArchitectures() []Number
 	IsLoaded() bool
 }
@@ -104,7 +106,9 @@ func (n NSBundle) URLForResource_WithExtension(name string, ext string) URL {
 
 func (n NSBundle) URLsForResourcesWithExtension_Subdirectory(ext string, subpath string) []URL {
 	result_ := C.C_NSBundle_URLsForResourcesWithExtension_Subdirectory(n.Ptr(), NewString(ext).Ptr(), NewString(subpath).Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]URL, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -120,7 +124,9 @@ func (n NSBundle) URLForResource_WithExtension_Subdirectory_Localization(name st
 
 func (n NSBundle) URLsForResourcesWithExtension_Subdirectory_Localization(ext string, subpath string, localizationName string) []URL {
 	result_ := C.C_NSBundle_URLsForResourcesWithExtension_Subdirectory_Localization(n.Ptr(), NewString(ext).Ptr(), NewString(subpath).Ptr(), NewString(localizationName).Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]URL, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -136,7 +142,9 @@ func Bundle_URLForResource_WithExtension_Subdirectory_InBundleWithURL(name strin
 
 func Bundle_URLsForResourcesWithExtension_Subdirectory_InBundleWithURL(ext string, subpath string, bundleURL URL) []URL {
 	result_ := C.C_NSBundle_Bundle_URLsForResourcesWithExtension_Subdirectory_InBundleWithURL(NewString(ext).Ptr(), NewString(subpath).Ptr(), objc.ExtractPtr(bundleURL))
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]URL, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -162,7 +170,9 @@ func (n NSBundle) PathForResource_OfType_InDirectory_ForLocalization(name string
 
 func (n NSBundle) PathsForResourcesOfType_InDirectory(ext string, subpath string) []string {
 	result_ := C.C_NSBundle_PathsForResourcesOfType_InDirectory(n.Ptr(), NewString(ext).Ptr(), NewString(subpath).Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -173,7 +183,9 @@ func (n NSBundle) PathsForResourcesOfType_InDirectory(ext string, subpath string
 
 func (n NSBundle) PathsForResourcesOfType_InDirectory_ForLocalization(ext string, subpath string, localizationName string) []string {
 	result_ := C.C_NSBundle_PathsForResourcesOfType_InDirectory_ForLocalization(n.Ptr(), NewString(ext).Ptr(), NewString(subpath).Ptr(), NewString(localizationName).Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -203,13 +215,19 @@ func (n NSBundle) ObjectForInfoDictionaryKey(key string) objc.Object {
 }
 
 func Bundle_PreferredLocalizationsFromArray(localizationsArray []string) []string {
-	cLocalizationsArrayData := make([]unsafe.Pointer, len(localizationsArray))
-	for idx, v := range localizationsArray {
-		cLocalizationsArrayData[idx] = NewString(v).Ptr()
+	var cLocalizationsArray C.Array
+	if len(localizationsArray) > 0 {
+		cLocalizationsArrayData := make([]unsafe.Pointer, len(localizationsArray))
+		for idx, v := range localizationsArray {
+			cLocalizationsArrayData[idx] = NewString(v).Ptr()
+		}
+		cLocalizationsArray.data = unsafe.Pointer(&cLocalizationsArrayData[0])
+		cLocalizationsArray.len = C.int(len(localizationsArray))
 	}
-	cLocalizationsArray := C.Array{data: unsafe.Pointer(&cLocalizationsArrayData[0]), len: C.int(len(localizationsArray))}
 	result_ := C.C_NSBundle_Bundle_PreferredLocalizationsFromArray(cLocalizationsArray)
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -219,18 +237,28 @@ func Bundle_PreferredLocalizationsFromArray(localizationsArray []string) []strin
 }
 
 func Bundle_PreferredLocalizationsFromArray_ForPreferences(localizationsArray []string, preferencesArray []string) []string {
-	cLocalizationsArrayData := make([]unsafe.Pointer, len(localizationsArray))
-	for idx, v := range localizationsArray {
-		cLocalizationsArrayData[idx] = NewString(v).Ptr()
+	var cLocalizationsArray C.Array
+	if len(localizationsArray) > 0 {
+		cLocalizationsArrayData := make([]unsafe.Pointer, len(localizationsArray))
+		for idx, v := range localizationsArray {
+			cLocalizationsArrayData[idx] = NewString(v).Ptr()
+		}
+		cLocalizationsArray.data = unsafe.Pointer(&cLocalizationsArrayData[0])
+		cLocalizationsArray.len = C.int(len(localizationsArray))
 	}
-	cLocalizationsArray := C.Array{data: unsafe.Pointer(&cLocalizationsArrayData[0]), len: C.int(len(localizationsArray))}
-	cPreferencesArrayData := make([]unsafe.Pointer, len(preferencesArray))
-	for idx, v := range preferencesArray {
-		cPreferencesArrayData[idx] = NewString(v).Ptr()
+	var cPreferencesArray C.Array
+	if len(preferencesArray) > 0 {
+		cPreferencesArrayData := make([]unsafe.Pointer, len(preferencesArray))
+		for idx, v := range preferencesArray {
+			cPreferencesArrayData[idx] = NewString(v).Ptr()
+		}
+		cPreferencesArray.data = unsafe.Pointer(&cPreferencesArrayData[0])
+		cPreferencesArray.len = C.int(len(preferencesArray))
 	}
-	cPreferencesArray := C.Array{data: unsafe.Pointer(&cPreferencesArrayData[0]), len: C.int(len(preferencesArray))}
 	result_ := C.C_NSBundle_Bundle_PreferredLocalizationsFromArray_ForPreferences(cLocalizationsArray, cPreferencesArray)
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -256,7 +284,9 @@ func MainBundle() Bundle {
 
 func Bundle_AllFrameworks() []Bundle {
 	result_ := C.C_NSBundle_Bundle_AllFrameworks()
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]Bundle, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -267,7 +297,9 @@ func Bundle_AllFrameworks() []Bundle {
 
 func Bundle_AllBundles() []Bundle {
 	result_ := C.C_NSBundle_Bundle_AllBundles()
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]Bundle, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -356,9 +388,27 @@ func (n NSBundle) BundleIdentifier() string {
 	return MakeString(result_).String()
 }
 
+func (n NSBundle) InfoDictionary() map[string]objc.Object {
+	result_ := C.C_NSBundle_InfoDictionary(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[string]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[MakeString(k).String()] = objc.MakeObject(v)
+	}
+	return goResult_
+}
+
 func (n NSBundle) Localizations() []string {
 	result_ := C.C_NSBundle_Localizations(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -369,7 +419,9 @@ func (n NSBundle) Localizations() []string {
 
 func (n NSBundle) PreferredLocalizations() []string {
 	result_ := C.C_NSBundle_PreferredLocalizations(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -383,9 +435,27 @@ func (n NSBundle) DevelopmentLocalization() string {
 	return MakeString(result_).String()
 }
 
+func (n NSBundle) LocalizedInfoDictionary() map[string]objc.Object {
+	result_ := C.C_NSBundle_LocalizedInfoDictionary(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[string]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[MakeString(k).String()] = objc.MakeObject(v)
+	}
+	return goResult_
+}
+
 func (n NSBundle) ExecutableArchitectures() []Number {
 	result_ := C.C_NSBundle_ExecutableArchitectures(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]Number, len(result_Slice))
 	for idx, r := range result_Slice {

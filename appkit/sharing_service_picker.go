@@ -31,11 +31,15 @@ func AllocSharingServicePicker() NSSharingServicePicker {
 }
 
 func (n NSSharingServicePicker) InitWithItems(items []objc.Object) SharingServicePicker {
-	cItemsData := make([]unsafe.Pointer, len(items))
-	for idx, v := range items {
-		cItemsData[idx] = objc.ExtractPtr(v)
+	var cItems C.Array
+	if len(items) > 0 {
+		cItemsData := make([]unsafe.Pointer, len(items))
+		for idx, v := range items {
+			cItemsData[idx] = objc.ExtractPtr(v)
+		}
+		cItems.data = unsafe.Pointer(&cItemsData[0])
+		cItems.len = C.int(len(items))
 	}
-	cItems := C.Array{data: unsafe.Pointer(&cItemsData[0]), len: C.int(len(items))}
 	result_ := C.C_NSSharingServicePicker_InitWithItems(n.Ptr(), cItems)
 	return MakeSharingServicePicker(result_)
 }

@@ -56,7 +56,9 @@ func outlineViewDataSource_OutlineView_DraggingSession_EndedAtPoint_Operation(hp
 //export outlineViewDataSource_OutlineView_DraggingSession_WillBeginAtPoint_ForItems
 func outlineViewDataSource_OutlineView_DraggingSession_WillBeginAtPoint_ForItems(hp C.uintptr_t, outlineView unsafe.Pointer, session unsafe.Pointer, screenPoint C.CGPoint, draggedItems C.Array) {
 	delegate := cgo.Handle(hp).Value().(*OutlineViewDataSource)
-	defer C.free(draggedItems.data)
+	if draggedItems.len > 0 {
+		defer C.free(draggedItems.data)
+	}
 	draggedItemsSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(draggedItems.data))[:draggedItems.len:draggedItems.len]
 	var goDraggedItems = make([]objc.Object, len(draggedItemsSlice))
 	for idx, r := range draggedItemsSlice {
@@ -116,7 +118,9 @@ func outlineViewDataSource_OutlineView_SetObjectValue_ForTableColumn_ByItem(hp C
 //export outlineViewDataSource_OutlineView_SortDescriptorsDidChange
 func outlineViewDataSource_OutlineView_SortDescriptorsDidChange(hp C.uintptr_t, outlineView unsafe.Pointer, oldDescriptors C.Array) {
 	delegate := cgo.Handle(hp).Value().(*OutlineViewDataSource)
-	defer C.free(oldDescriptors.data)
+	if oldDescriptors.len > 0 {
+		defer C.free(oldDescriptors.data)
+	}
 	oldDescriptorsSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(oldDescriptors.data))[:oldDescriptors.len:oldDescriptors.len]
 	var goOldDescriptors = make([]foundation.SortDescriptor, len(oldDescriptorsSlice))
 	for idx, r := range oldDescriptorsSlice {
@@ -175,9 +179,4 @@ func OutlineViewDataSource_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer
 	default:
 		return false
 	}
-}
-
-//export deleteOutlineViewDataSource
-func deleteOutlineViewDataSource(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
 }

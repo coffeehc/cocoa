@@ -68,8 +68,3 @@ func ComboBoxDataSource_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) b
 		return false
 	}
 }
-
-//export deleteComboBoxDataSource
-func deleteComboBoxDataSource(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
-}

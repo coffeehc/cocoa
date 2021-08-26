@@ -59,6 +59,7 @@ type Application interface {
 	RunModalSession(session ModalSession) ModalResponse
 	OrderFrontColorPanel(sender objc.Object)
 	OrderFrontStandardAboutPanel(sender objc.Object)
+	OrderFrontStandardAboutPanelWithOptions(optionsDictionary map[AboutPanelOptionKey]objc.Object)
 	OrderFrontCharacterPalette(sender objc.Object)
 	RunPageLayout(sender objc.Object)
 	AddWindowsItem_Title_Filename(win Window, _string string, isFilename bool)
@@ -341,6 +342,24 @@ func (n NSApplication) OrderFrontStandardAboutPanel(sender objc.Object) {
 	C.C_NSApplication_OrderFrontStandardAboutPanel(n.Ptr(), objc.ExtractPtr(sender))
 }
 
+func (n NSApplication) OrderFrontStandardAboutPanelWithOptions(optionsDictionary map[AboutPanelOptionKey]objc.Object) {
+	var cOptionsDictionary C.Dictionary
+	if len(optionsDictionary) > 0 {
+		cOptionsDictionaryKeyData := make([]unsafe.Pointer, len(optionsDictionary))
+		cOptionsDictionaryValueData := make([]unsafe.Pointer, len(optionsDictionary))
+		var idx = 0
+		for k, v := range optionsDictionary {
+			cOptionsDictionaryKeyData[idx] = foundation.NewString(string(k)).Ptr()
+			cOptionsDictionaryValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cOptionsDictionary.key_data = unsafe.Pointer(&cOptionsDictionaryKeyData[0])
+		cOptionsDictionary.value_data = unsafe.Pointer(&cOptionsDictionaryValueData[0])
+		cOptionsDictionary.len = C.int(len(optionsDictionary))
+	}
+	C.C_NSApplication_OrderFrontStandardAboutPanelWithOptions(n.Ptr(), cOptionsDictionary)
+}
+
 func (n NSApplication) OrderFrontCharacterPalette(sender objc.Object) {
 	C.C_NSApplication_OrderFrontCharacterPalette(n.Ptr(), objc.ExtractPtr(sender))
 }
@@ -366,16 +385,24 @@ func (n NSApplication) UpdateWindowsItem(win Window) {
 }
 
 func (n NSApplication) RegisterServicesMenuSendTypes_ReturnTypes(sendTypes []PasteboardType, returnTypes []PasteboardType) {
-	cSendTypesData := make([]unsafe.Pointer, len(sendTypes))
-	for idx, v := range sendTypes {
-		cSendTypesData[idx] = foundation.NewString(string(v)).Ptr()
+	var cSendTypes C.Array
+	if len(sendTypes) > 0 {
+		cSendTypesData := make([]unsafe.Pointer, len(sendTypes))
+		for idx, v := range sendTypes {
+			cSendTypesData[idx] = foundation.NewString(string(v)).Ptr()
+		}
+		cSendTypes.data = unsafe.Pointer(&cSendTypesData[0])
+		cSendTypes.len = C.int(len(sendTypes))
 	}
-	cSendTypes := C.Array{data: unsafe.Pointer(&cSendTypesData[0]), len: C.int(len(sendTypes))}
-	cReturnTypesData := make([]unsafe.Pointer, len(returnTypes))
-	for idx, v := range returnTypes {
-		cReturnTypesData[idx] = foundation.NewString(string(v)).Ptr()
+	var cReturnTypes C.Array
+	if len(returnTypes) > 0 {
+		cReturnTypesData := make([]unsafe.Pointer, len(returnTypes))
+		for idx, v := range returnTypes {
+			cReturnTypesData[idx] = foundation.NewString(string(v)).Ptr()
+		}
+		cReturnTypes.data = unsafe.Pointer(&cReturnTypesData[0])
+		cReturnTypes.len = C.int(len(returnTypes))
 	}
-	cReturnTypes := C.Array{data: unsafe.Pointer(&cReturnTypesData[0]), len: C.int(len(returnTypes))}
 	C.C_NSApplication_RegisterServicesMenuSendTypes_ReturnTypes(n.Ptr(), cSendTypes, cReturnTypes)
 }
 
@@ -494,7 +521,9 @@ func (n NSApplication) IsFullKeyboardAccessEnabled() bool {
 
 func (n NSApplication) OrderedDocuments() []Document {
 	result_ := C.C_NSApplication_OrderedDocuments(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]Document, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -505,7 +534,9 @@ func (n NSApplication) OrderedDocuments() []Document {
 
 func (n NSApplication) OrderedWindows() []Window {
 	result_ := C.C_NSApplication_OrderedWindows(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]Window, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -526,7 +557,9 @@ func (n NSApplication) MainWindow() Window {
 
 func (n NSApplication) Windows() []Window {
 	result_ := C.C_NSApplication_Windows(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]Window, len(result_Slice))
 	for idx, r := range result_Slice {

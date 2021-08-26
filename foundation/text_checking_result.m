@@ -27,6 +27,36 @@ void* C_NSTextCheckingResult_TextCheckingResult_LinkCheckingResultWithRange_URL(
     return result_;
 }
 
+void* C_NSTextCheckingResult_TextCheckingResult_AddressCheckingResultWithRange_Components(NSRange _range, Dictionary components) {
+    NSMutableDictionary* objcComponents = [[NSMutableDictionary alloc] initWithCapacity: components.len];
+    if (components.len > 0) {
+    	void** componentsKeyData = (void**)components.key_data;
+    	void** componentsValueData = (void**)components.value_data;
+    	for (int i = 0; i < components.len; i++) {
+    		void* kp = componentsKeyData[i];
+    		void* vp = componentsValueData[i];
+    		[objcComponents setObject:(NSTextCheckingKey)(NSString*)kp forKey:(NSString*)(NSString*)vp];
+    	}
+    }
+    NSTextCheckingResult* result_ = [NSTextCheckingResult addressCheckingResultWithRange:_range components:objcComponents];
+    return result_;
+}
+
+void* C_NSTextCheckingResult_TextCheckingResult_TransitInformationCheckingResultWithRange_Components(NSRange _range, Dictionary components) {
+    NSMutableDictionary* objcComponents = [[NSMutableDictionary alloc] initWithCapacity: components.len];
+    if (components.len > 0) {
+    	void** componentsKeyData = (void**)components.key_data;
+    	void** componentsValueData = (void**)components.value_data;
+    	for (int i = 0; i < components.len; i++) {
+    		void* kp = componentsKeyData[i];
+    		void* vp = componentsValueData[i];
+    		[objcComponents setObject:(NSTextCheckingKey)(NSString*)kp forKey:(NSString*)(NSString*)vp];
+    	}
+    }
+    NSTextCheckingResult* result_ = [NSTextCheckingResult transitInformationCheckingResultWithRange:_range components:objcComponents];
+    return result_;
+}
+
 void* C_NSTextCheckingResult_TextCheckingResult_PhoneNumberCheckingResultWithRange_PhoneNumber(NSRange _range, void* phoneNumber) {
     NSTextCheckingResult* result_ = [NSTextCheckingResult phoneNumberCheckingResultWithRange:_range phoneNumber:(NSString*)phoneNumber];
     return result_;
@@ -81,10 +111,12 @@ NSRange C_NSTextCheckingResult_RangeWithName(void* ptr, void* name) {
 
 void* C_NSTextCheckingResult_TextCheckingResult_CorrectionCheckingResultWithRange_ReplacementString_AlternativeStrings(NSRange _range, void* replacementString, Array alternativeStrings) {
     NSMutableArray* objcAlternativeStrings = [[NSMutableArray alloc] init];
-    void** alternativeStringsData = (void**)alternativeStrings.data;
-    for (int i = 0; i < alternativeStrings.len; i++) {
-    	void* p = alternativeStringsData[i];
-    	[objcAlternativeStrings addObject:(NSString*)(NSString*)p];
+    if (alternativeStrings.len > 0) {
+    	void** alternativeStringsData = (void**)alternativeStrings.data;
+    	for (int i = 0; i < alternativeStrings.len; i++) {
+    		void* p = alternativeStringsData[i];
+    		[objcAlternativeStrings addObject:(NSString*)(NSString*)p];
+    	}
     }
     NSTextCheckingResult* result_ = [NSTextCheckingResult correctionCheckingResultWithRange:_range replacementString:(NSString*)replacementString alternativeStrings:objcAlternativeStrings];
     return result_;
@@ -114,10 +146,54 @@ void* C_NSTextCheckingResult_RegularExpression(void* ptr) {
     return result_;
 }
 
+Dictionary C_NSTextCheckingResult_Components(void* ptr) {
+    NSTextCheckingResult* nSTextCheckingResult = (NSTextCheckingResult*)ptr;
+    NSDictionary* result_ = [nSTextCheckingResult components];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSTextCheckingKey kp = [result_Keys objectAtIndex:i];
+    		NSString* vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
+}
+
 void* C_NSTextCheckingResult_URL(void* ptr) {
     NSTextCheckingResult* nSTextCheckingResult = (NSTextCheckingResult*)ptr;
     NSURL* result_ = [nSTextCheckingResult URL];
     return result_;
+}
+
+Dictionary C_NSTextCheckingResult_AddressComponents(void* ptr) {
+    NSTextCheckingResult* nSTextCheckingResult = (NSTextCheckingResult*)ptr;
+    NSDictionary* result_ = [nSTextCheckingResult addressComponents];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSTextCheckingKey kp = [result_Keys objectAtIndex:i];
+    		NSString* vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
 }
 
 void* C_NSTextCheckingResult_PhoneNumber(void* ptr) {
@@ -153,14 +229,16 @@ void* C_NSTextCheckingResult_Orthography(void* ptr) {
 Array C_NSTextCheckingResult_AlternativeStrings(void* ptr) {
     NSTextCheckingResult* nSTextCheckingResult = (NSTextCheckingResult*)ptr;
     NSArray* result_ = [nSTextCheckingResult alternativeStrings];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }

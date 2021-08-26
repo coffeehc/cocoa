@@ -33,7 +33,7 @@
 }
 
 - (void)dealloc {
-	deleteTextDelegate([self goID]);
+	deleteAppKitHandle([self goID]);
 	[super dealloc];
 }
 @end

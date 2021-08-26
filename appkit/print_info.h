@@ -5,9 +5,11 @@
 
 void* C_PrintInfo_Alloc();
 
+void* C_NSPrintInfo_InitWithDictionary(void* ptr, Dictionary attributes);
 void* C_NSPrintInfo_Init(void* ptr);
 void* C_NSPrintInfo_InitWithCoder(void* ptr, void* coder);
 void C_NSPrintInfo_SetUpPrintOperationDefaultValues(void* ptr);
+Dictionary C_NSPrintInfo_Dictionary(void* ptr);
 void C_NSPrintInfo_UpdateFromPMPageFormat(void* ptr);
 void C_NSPrintInfo_UpdateFromPMPrintSettings(void* ptr);
 void C_NSPrintInfo_TakeSettingsFromPDFInfo(void* ptr, void* inPDFInfo);
@@ -45,4 +47,5 @@ bool C_NSPrintInfo_IsSelectionOnly(void* ptr);
 void C_NSPrintInfo_SetSelectionOnly(void* ptr, bool value);
 double C_NSPrintInfo_ScalingFactor(void* ptr);
 void C_NSPrintInfo_SetScalingFactor(void* ptr, double value);
+Dictionary C_NSPrintInfo_PrintSettings(void* ptr);
 void* C_NSPrintInfo_PrintInfo_DefaultPrinter();

@@ -91,31 +91,43 @@ func (n NSTreeController) SetSelectionIndexPath(indexPath foundation.IndexPath) 
 }
 
 func (n NSTreeController) SetSelectionIndexPaths(indexPaths []foundation.IndexPath) bool {
-	cIndexPathsData := make([]unsafe.Pointer, len(indexPaths))
-	for idx, v := range indexPaths {
-		cIndexPathsData[idx] = objc.ExtractPtr(v)
+	var cIndexPaths C.Array
+	if len(indexPaths) > 0 {
+		cIndexPathsData := make([]unsafe.Pointer, len(indexPaths))
+		for idx, v := range indexPaths {
+			cIndexPathsData[idx] = objc.ExtractPtr(v)
+		}
+		cIndexPaths.data = unsafe.Pointer(&cIndexPathsData[0])
+		cIndexPaths.len = C.int(len(indexPaths))
 	}
-	cIndexPaths := C.Array{data: unsafe.Pointer(&cIndexPathsData[0]), len: C.int(len(indexPaths))}
 	result_ := C.C_NSTreeController_SetSelectionIndexPaths(n.Ptr(), cIndexPaths)
 	return bool(result_)
 }
 
 func (n NSTreeController) AddSelectionIndexPaths(indexPaths []foundation.IndexPath) bool {
-	cIndexPathsData := make([]unsafe.Pointer, len(indexPaths))
-	for idx, v := range indexPaths {
-		cIndexPathsData[idx] = objc.ExtractPtr(v)
+	var cIndexPaths C.Array
+	if len(indexPaths) > 0 {
+		cIndexPathsData := make([]unsafe.Pointer, len(indexPaths))
+		for idx, v := range indexPaths {
+			cIndexPathsData[idx] = objc.ExtractPtr(v)
+		}
+		cIndexPaths.data = unsafe.Pointer(&cIndexPathsData[0])
+		cIndexPaths.len = C.int(len(indexPaths))
 	}
-	cIndexPaths := C.Array{data: unsafe.Pointer(&cIndexPathsData[0]), len: C.int(len(indexPaths))}
 	result_ := C.C_NSTreeController_AddSelectionIndexPaths(n.Ptr(), cIndexPaths)
 	return bool(result_)
 }
 
 func (n NSTreeController) RemoveSelectionIndexPaths(indexPaths []foundation.IndexPath) bool {
-	cIndexPathsData := make([]unsafe.Pointer, len(indexPaths))
-	for idx, v := range indexPaths {
-		cIndexPathsData[idx] = objc.ExtractPtr(v)
+	var cIndexPaths C.Array
+	if len(indexPaths) > 0 {
+		cIndexPathsData := make([]unsafe.Pointer, len(indexPaths))
+		for idx, v := range indexPaths {
+			cIndexPathsData[idx] = objc.ExtractPtr(v)
+		}
+		cIndexPaths.data = unsafe.Pointer(&cIndexPathsData[0])
+		cIndexPaths.len = C.int(len(indexPaths))
 	}
-	cIndexPaths := C.Array{data: unsafe.Pointer(&cIndexPathsData[0]), len: C.int(len(indexPaths))}
 	result_ := C.C_NSTreeController_RemoveSelectionIndexPaths(n.Ptr(), cIndexPaths)
 	return bool(result_)
 }
@@ -137,16 +149,24 @@ func (n NSTreeController) InsertObject_AtArrangedObjectIndexPath(object objc.Obj
 }
 
 func (n NSTreeController) InsertObjects_AtArrangedObjectIndexPaths(objects []objc.Object, indexPaths []foundation.IndexPath) {
-	cObjectsData := make([]unsafe.Pointer, len(objects))
-	for idx, v := range objects {
-		cObjectsData[idx] = objc.ExtractPtr(v)
+	var cObjects C.Array
+	if len(objects) > 0 {
+		cObjectsData := make([]unsafe.Pointer, len(objects))
+		for idx, v := range objects {
+			cObjectsData[idx] = objc.ExtractPtr(v)
+		}
+		cObjects.data = unsafe.Pointer(&cObjectsData[0])
+		cObjects.len = C.int(len(objects))
 	}
-	cObjects := C.Array{data: unsafe.Pointer(&cObjectsData[0]), len: C.int(len(objects))}
-	cIndexPathsData := make([]unsafe.Pointer, len(indexPaths))
-	for idx, v := range indexPaths {
-		cIndexPathsData[idx] = objc.ExtractPtr(v)
+	var cIndexPaths C.Array
+	if len(indexPaths) > 0 {
+		cIndexPathsData := make([]unsafe.Pointer, len(indexPaths))
+		for idx, v := range indexPaths {
+			cIndexPathsData[idx] = objc.ExtractPtr(v)
+		}
+		cIndexPaths.data = unsafe.Pointer(&cIndexPathsData[0])
+		cIndexPaths.len = C.int(len(indexPaths))
 	}
-	cIndexPaths := C.Array{data: unsafe.Pointer(&cIndexPathsData[0]), len: C.int(len(indexPaths))}
 	C.C_NSTreeController_InsertObjects_AtArrangedObjectIndexPaths(n.Ptr(), cObjects, cIndexPaths)
 }
 
@@ -155,11 +175,15 @@ func (n NSTreeController) RemoveObjectAtArrangedObjectIndexPath(indexPath founda
 }
 
 func (n NSTreeController) RemoveObjectsAtArrangedObjectIndexPaths(indexPaths []foundation.IndexPath) {
-	cIndexPathsData := make([]unsafe.Pointer, len(indexPaths))
-	for idx, v := range indexPaths {
-		cIndexPathsData[idx] = objc.ExtractPtr(v)
+	var cIndexPaths C.Array
+	if len(indexPaths) > 0 {
+		cIndexPathsData := make([]unsafe.Pointer, len(indexPaths))
+		for idx, v := range indexPaths {
+			cIndexPathsData[idx] = objc.ExtractPtr(v)
+		}
+		cIndexPaths.data = unsafe.Pointer(&cIndexPathsData[0])
+		cIndexPaths.len = C.int(len(indexPaths))
 	}
-	cIndexPaths := C.Array{data: unsafe.Pointer(&cIndexPathsData[0]), len: C.int(len(indexPaths))}
 	C.C_NSTreeController_RemoveObjectsAtArrangedObjectIndexPaths(n.Ptr(), cIndexPaths)
 }
 
@@ -168,11 +192,15 @@ func (n NSTreeController) MoveNode_ToIndexPath(node TreeNode, indexPath foundati
 }
 
 func (n NSTreeController) MoveNodes_ToIndexPath(nodes []TreeNode, startingIndexPath foundation.IndexPath) {
-	cNodesData := make([]unsafe.Pointer, len(nodes))
-	for idx, v := range nodes {
-		cNodesData[idx] = objc.ExtractPtr(v)
+	var cNodes C.Array
+	if len(nodes) > 0 {
+		cNodesData := make([]unsafe.Pointer, len(nodes))
+		for idx, v := range nodes {
+			cNodesData[idx] = objc.ExtractPtr(v)
+		}
+		cNodes.data = unsafe.Pointer(&cNodesData[0])
+		cNodes.len = C.int(len(nodes))
 	}
-	cNodes := C.Array{data: unsafe.Pointer(&cNodesData[0]), len: C.int(len(nodes))}
 	C.C_NSTreeController_MoveNodes_ToIndexPath(n.Ptr(), cNodes, objc.ExtractPtr(startingIndexPath))
 }
 
@@ -193,7 +221,9 @@ func (n NSTreeController) LeafKeyPathForNode(node TreeNode) string {
 
 func (n NSTreeController) SortDescriptors() []foundation.SortDescriptor {
 	result_ := C.C_NSTreeController_SortDescriptors(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]foundation.SortDescriptor, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -203,11 +233,15 @@ func (n NSTreeController) SortDescriptors() []foundation.SortDescriptor {
 }
 
 func (n NSTreeController) SetSortDescriptors(value []foundation.SortDescriptor) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = objc.ExtractPtr(v)
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = objc.ExtractPtr(v)
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSTreeController_SetSortDescriptors(n.Ptr(), cValue)
 }
 
@@ -223,7 +257,9 @@ func (n NSTreeController) SelectionIndexPath() foundation.IndexPath {
 
 func (n NSTreeController) SelectionIndexPaths() []foundation.IndexPath {
 	result_ := C.C_NSTreeController_SelectionIndexPaths(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]foundation.IndexPath, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -234,7 +270,9 @@ func (n NSTreeController) SelectionIndexPaths() []foundation.IndexPath {
 
 func (n NSTreeController) SelectedNodes() []TreeNode {
 	result_ := C.C_NSTreeController_SelectedNodes(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]TreeNode, len(result_Slice))
 	for idx, r := range result_Slice {

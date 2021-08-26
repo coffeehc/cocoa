@@ -80,11 +80,15 @@ func (n NSPopUpButton) AddItemWithTitle(title string) {
 }
 
 func (n NSPopUpButton) AddItemsWithTitles(itemTitles []string) {
-	cItemTitlesData := make([]unsafe.Pointer, len(itemTitles))
-	for idx, v := range itemTitles {
-		cItemTitlesData[idx] = foundation.NewString(v).Ptr()
+	var cItemTitles C.Array
+	if len(itemTitles) > 0 {
+		cItemTitlesData := make([]unsafe.Pointer, len(itemTitles))
+		for idx, v := range itemTitles {
+			cItemTitlesData[idx] = foundation.NewString(v).Ptr()
+		}
+		cItemTitles.data = unsafe.Pointer(&cItemTitlesData[0])
+		cItemTitles.len = C.int(len(itemTitles))
 	}
-	cItemTitles := C.Array{data: unsafe.Pointer(&cItemTitlesData[0]), len: C.int(len(itemTitles))}
 	C.C_NSPopUpButton_AddItemsWithTitles(n.Ptr(), cItemTitles)
 }
 
@@ -210,7 +214,9 @@ func (n NSPopUpButton) NumberOfItems() int {
 
 func (n NSPopUpButton) ItemArray() []MenuItem {
 	result_ := C.C_NSPopUpButton_ItemArray(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]MenuItem, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -221,7 +227,9 @@ func (n NSPopUpButton) ItemArray() []MenuItem {
 
 func (n NSPopUpButton) ItemTitles() []string {
 	result_ := C.C_NSPopUpButton_ItemTitles(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {

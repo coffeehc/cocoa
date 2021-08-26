@@ -12,6 +12,7 @@ import (
 type PrintInfo interface {
 	objc.Object
 	SetUpPrintOperationDefaultValues()
+	Dictionary() map[PrintInfoAttributeKey]objc.Object
 	UpdateFromPMPageFormat()
 	UpdateFromPMPrintSettings()
 	TakeSettingsFromPDFInfo(inPDFInfo PDFInfo)
@@ -47,6 +48,7 @@ type PrintInfo interface {
 	SetSelectionOnly(value bool)
 	ScalingFactor() coregraphics.Float
 	SetScalingFactor(value coregraphics.Float)
+	PrintSettings() map[PrintInfoSettingKey]objc.Object
 }
 
 type NSPrintInfo struct {
@@ -63,6 +65,25 @@ func AllocPrintInfo() NSPrintInfo {
 	return MakePrintInfo(C.C_PrintInfo_Alloc())
 }
 
+func (n NSPrintInfo) InitWithDictionary(attributes map[PrintInfoAttributeKey]objc.Object) PrintInfo {
+	var cAttributes C.Dictionary
+	if len(attributes) > 0 {
+		cAttributesKeyData := make([]unsafe.Pointer, len(attributes))
+		cAttributesValueData := make([]unsafe.Pointer, len(attributes))
+		var idx = 0
+		for k, v := range attributes {
+			cAttributesKeyData[idx] = foundation.NewString(string(k)).Ptr()
+			cAttributesValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cAttributes.key_data = unsafe.Pointer(&cAttributesKeyData[0])
+		cAttributes.value_data = unsafe.Pointer(&cAttributesValueData[0])
+		cAttributes.len = C.int(len(attributes))
+	}
+	result_ := C.C_NSPrintInfo_InitWithDictionary(n.Ptr(), cAttributes)
+	return MakePrintInfo(result_)
+}
+
 func (n NSPrintInfo) Init() PrintInfo {
 	result_ := C.C_NSPrintInfo_Init(n.Ptr())
 	return MakePrintInfo(result_)
@@ -75,6 +96,22 @@ func (n NSPrintInfo) InitWithCoder(coder foundation.Coder) PrintInfo {
 
 func (n NSPrintInfo) SetUpPrintOperationDefaultValues() {
 	C.C_NSPrintInfo_SetUpPrintOperationDefaultValues(n.Ptr())
+}
+
+func (n NSPrintInfo) Dictionary() map[PrintInfoAttributeKey]objc.Object {
+	result_ := C.C_NSPrintInfo_Dictionary(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[PrintInfoAttributeKey]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[PrintInfoAttributeKey(foundation.MakeString(k).String())] = objc.MakeObject(v)
+	}
+	return goResult_
 }
 
 func (n NSPrintInfo) UpdateFromPMPageFormat() {
@@ -241,6 +278,22 @@ func (n NSPrintInfo) ScalingFactor() coregraphics.Float {
 
 func (n NSPrintInfo) SetScalingFactor(value coregraphics.Float) {
 	C.C_NSPrintInfo_SetScalingFactor(n.Ptr(), C.double(float64(value)))
+}
+
+func (n NSPrintInfo) PrintSettings() map[PrintInfoSettingKey]objc.Object {
+	result_ := C.C_NSPrintInfo_PrintSettings(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[PrintInfoSettingKey]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[PrintInfoSettingKey(foundation.MakeString(k).String())] = objc.MakeObject(v)
+	}
+	return goResult_
 }
 
 func PrintInfo_DefaultPrinter() Printer {

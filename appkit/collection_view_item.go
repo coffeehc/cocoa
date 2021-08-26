@@ -72,7 +72,9 @@ func (n NSCollectionViewItem) CollectionView() CollectionView {
 
 func (n NSCollectionViewItem) DraggingImageComponents() []DraggingImageComponent {
 	result_ := C.C_NSCollectionViewItem_DraggingImageComponents(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]DraggingImageComponent, len(result_Slice))
 	for idx, r := range result_Slice {

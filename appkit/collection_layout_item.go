@@ -37,11 +37,15 @@ func CollectionLayoutItem_ItemWithLayoutSize(layoutSize CollectionLayoutSize) Co
 }
 
 func CollectionLayoutItem_ItemWithLayoutSize_SupplementaryItems(layoutSize CollectionLayoutSize, supplementaryItems []CollectionLayoutSupplementaryItem) CollectionLayoutItem {
-	cSupplementaryItemsData := make([]unsafe.Pointer, len(supplementaryItems))
-	for idx, v := range supplementaryItems {
-		cSupplementaryItemsData[idx] = objc.ExtractPtr(v)
+	var cSupplementaryItems C.Array
+	if len(supplementaryItems) > 0 {
+		cSupplementaryItemsData := make([]unsafe.Pointer, len(supplementaryItems))
+		for idx, v := range supplementaryItems {
+			cSupplementaryItemsData[idx] = objc.ExtractPtr(v)
+		}
+		cSupplementaryItems.data = unsafe.Pointer(&cSupplementaryItemsData[0])
+		cSupplementaryItems.len = C.int(len(supplementaryItems))
 	}
-	cSupplementaryItems := C.Array{data: unsafe.Pointer(&cSupplementaryItemsData[0]), len: C.int(len(supplementaryItems))}
 	result_ := C.C_NSCollectionLayoutItem_CollectionLayoutItem_ItemWithLayoutSize_SupplementaryItems(objc.ExtractPtr(layoutSize), cSupplementaryItems)
 	return MakeCollectionLayoutItem(result_)
 }
@@ -53,7 +57,9 @@ func (n NSCollectionLayoutItem) LayoutSize() CollectionLayoutSize {
 
 func (n NSCollectionLayoutItem) SupplementaryItems() []CollectionLayoutSupplementaryItem {
 	result_ := C.C_NSCollectionLayoutItem_SupplementaryItems(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]CollectionLayoutSupplementaryItem, len(result_Slice))
 	for idx, r := range result_Slice {

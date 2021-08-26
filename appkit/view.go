@@ -100,6 +100,8 @@ type View interface {
 	DrawFocusRingMask()
 	NoteFocusRingMaskChanged()
 	SetKeyboardFocusRingNeedsDisplayInRect(rect foundation.Rect)
+	EnterFullScreenMode_WithOptions(screen Screen, options map[ViewFullScreenModeOptionKey]objc.Object) bool
+	ExitFullScreenModeWithOptions(options map[ViewFullScreenModeOptionKey]objc.Object)
 	ViewDidHide()
 	ViewDidUnhide()
 	ViewWillStartLiveResize()
@@ -421,19 +423,23 @@ func (n NSView) BeginPageInRect_AtPlacement(rect foundation.Rect, location found
 
 func (n NSView) DataWithEPSInsideRect(rect foundation.Rect) []byte {
 	result_ := C.C_NSView_DataWithEPSInsideRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
+	if result_.len > 0 {
+		C.free(result_.data)
+	}
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)
-	C.free(result_.data)
 	return goResult_
 }
 
 func (n NSView) DataWithPDFInsideRect(rect foundation.Rect) []byte {
 	result_ := C.C_NSView_DataWithPDFInsideRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
+	if result_.len > 0 {
+		C.free(result_.data)
+	}
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)
-	C.free(result_.data)
 	return goResult_
 }
 
@@ -623,11 +629,15 @@ func (n NSView) AddConstraint(constraint LayoutConstraint) {
 }
 
 func (n NSView) AddConstraints(constraints []LayoutConstraint) {
-	cConstraintsData := make([]unsafe.Pointer, len(constraints))
-	for idx, v := range constraints {
-		cConstraintsData[idx] = objc.ExtractPtr(v)
+	var cConstraints C.Array
+	if len(constraints) > 0 {
+		cConstraintsData := make([]unsafe.Pointer, len(constraints))
+		for idx, v := range constraints {
+			cConstraintsData[idx] = objc.ExtractPtr(v)
+		}
+		cConstraints.data = unsafe.Pointer(&cConstraintsData[0])
+		cConstraints.len = C.int(len(constraints))
 	}
-	cConstraints := C.Array{data: unsafe.Pointer(&cConstraintsData[0]), len: C.int(len(constraints))}
 	C.C_NSView_AddConstraints(n.Ptr(), cConstraints)
 }
 
@@ -636,11 +646,15 @@ func (n NSView) RemoveConstraint(constraint LayoutConstraint) {
 }
 
 func (n NSView) RemoveConstraints(constraints []LayoutConstraint) {
-	cConstraintsData := make([]unsafe.Pointer, len(constraints))
-	for idx, v := range constraints {
-		cConstraintsData[idx] = objc.ExtractPtr(v)
+	var cConstraints C.Array
+	if len(constraints) > 0 {
+		cConstraintsData := make([]unsafe.Pointer, len(constraints))
+		for idx, v := range constraints {
+			cConstraintsData[idx] = objc.ExtractPtr(v)
+		}
+		cConstraints.data = unsafe.Pointer(&cConstraintsData[0])
+		cConstraints.len = C.int(len(constraints))
 	}
-	cConstraints := C.Array{data: unsafe.Pointer(&cConstraintsData[0]), len: C.int(len(constraints))}
 	C.C_NSView_RemoveConstraints(n.Ptr(), cConstraints)
 }
 
@@ -702,7 +716,9 @@ func (n NSView) UpdateConstraintsForSubtreeIfNeeded() {
 
 func (n NSView) ConstraintsAffectingLayoutForOrientation(orientation LayoutConstraintOrientation) []LayoutConstraint {
 	result_ := C.C_NSView_ConstraintsAffectingLayoutForOrientation(n.Ptr(), C.int(int(orientation)))
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]LayoutConstraint, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -725,6 +741,43 @@ func (n NSView) NoteFocusRingMaskChanged() {
 
 func (n NSView) SetKeyboardFocusRingNeedsDisplayInRect(rect foundation.Rect) {
 	C.C_NSView_SetKeyboardFocusRingNeedsDisplayInRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
+}
+
+func (n NSView) EnterFullScreenMode_WithOptions(screen Screen, options map[ViewFullScreenModeOptionKey]objc.Object) bool {
+	var cOptions C.Dictionary
+	if len(options) > 0 {
+		cOptionsKeyData := make([]unsafe.Pointer, len(options))
+		cOptionsValueData := make([]unsafe.Pointer, len(options))
+		var idx = 0
+		for k, v := range options {
+			cOptionsKeyData[idx] = foundation.NewString(string(k)).Ptr()
+			cOptionsValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cOptions.key_data = unsafe.Pointer(&cOptionsKeyData[0])
+		cOptions.value_data = unsafe.Pointer(&cOptionsValueData[0])
+		cOptions.len = C.int(len(options))
+	}
+	result_ := C.C_NSView_EnterFullScreenMode_WithOptions(n.Ptr(), objc.ExtractPtr(screen), cOptions)
+	return bool(result_)
+}
+
+func (n NSView) ExitFullScreenModeWithOptions(options map[ViewFullScreenModeOptionKey]objc.Object) {
+	var cOptions C.Dictionary
+	if len(options) > 0 {
+		cOptionsKeyData := make([]unsafe.Pointer, len(options))
+		cOptionsValueData := make([]unsafe.Pointer, len(options))
+		var idx = 0
+		for k, v := range options {
+			cOptionsKeyData[idx] = foundation.NewString(string(k)).Ptr()
+			cOptionsValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cOptions.key_data = unsafe.Pointer(&cOptionsKeyData[0])
+		cOptions.value_data = unsafe.Pointer(&cOptionsValueData[0])
+		cOptions.len = C.int(len(options))
+	}
+	C.C_NSView_ExitFullScreenModeWithOptions(n.Ptr(), cOptions)
 }
 
 func (n NSView) ViewDidHide() {
@@ -798,11 +851,15 @@ func (n NSView) ReflectScrolledClipView(clipView ClipView) {
 }
 
 func (n NSView) RegisterForDraggedTypes(newTypes []PasteboardType) {
-	cNewTypesData := make([]unsafe.Pointer, len(newTypes))
-	for idx, v := range newTypes {
-		cNewTypesData[idx] = foundation.NewString(string(v)).Ptr()
+	var cNewTypes C.Array
+	if len(newTypes) > 0 {
+		cNewTypesData := make([]unsafe.Pointer, len(newTypes))
+		for idx, v := range newTypes {
+			cNewTypesData[idx] = foundation.NewString(string(v)).Ptr()
+		}
+		cNewTypes.data = unsafe.Pointer(&cNewTypesData[0])
+		cNewTypes.len = C.int(len(newTypes))
 	}
-	cNewTypes := C.Array{data: unsafe.Pointer(&cNewTypesData[0]), len: C.int(len(newTypes))}
 	C.C_NSView_RegisterForDraggedTypes(n.Ptr(), cNewTypes)
 }
 
@@ -811,11 +868,15 @@ func (n NSView) UnregisterDraggedTypes() {
 }
 
 func (n NSView) BeginDraggingSessionWithItems_Event_Source(items []DraggingItem, event Event, source objc.Object) DraggingSession {
-	cItemsData := make([]unsafe.Pointer, len(items))
-	for idx, v := range items {
-		cItemsData[idx] = objc.ExtractPtr(v)
+	var cItems C.Array
+	if len(items) > 0 {
+		cItemsData := make([]unsafe.Pointer, len(items))
+		for idx, v := range items {
+			cItemsData[idx] = objc.ExtractPtr(v)
+		}
+		cItems.data = unsafe.Pointer(&cItemsData[0])
+		cItems.len = C.int(len(items))
 	}
-	cItems := C.Array{data: unsafe.Pointer(&cItemsData[0]), len: C.int(len(items))}
 	result_ := C.C_NSView_BeginDraggingSessionWithItems_Event_Source(n.Ptr(), cItems, objc.ExtractPtr(event), objc.ExtractPtr(source))
 	return MakeDraggingSession(result_)
 }
@@ -974,7 +1035,9 @@ func (n NSView) Superview() View {
 
 func (n NSView) Subviews() []View {
 	result_ := C.C_NSView_Subviews(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]View, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -984,11 +1047,15 @@ func (n NSView) Subviews() []View {
 }
 
 func (n NSView) SetSubviews(value []View) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = objc.ExtractPtr(v)
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = objc.ExtractPtr(v)
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSView_SetSubviews(n.Ptr(), cValue)
 }
 
@@ -1273,7 +1340,9 @@ func (n NSView) WidthAnchor() LayoutDimension {
 
 func (n NSView) Constraints() []LayoutConstraint {
 	result_ := C.C_NSView_Constraints(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]LayoutConstraint, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -1284,7 +1353,9 @@ func (n NSView) Constraints() []LayoutConstraint {
 
 func (n NSView) LayoutGuides() []LayoutGuide {
 	result_ := C.C_NSView_LayoutGuides(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]LayoutGuide, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -1435,7 +1506,9 @@ func (n NSView) RectPreservedDuringLiveResize() foundation.Rect {
 
 func (n NSView) GestureRecognizers() []GestureRecognizer {
 	result_ := C.C_NSView_GestureRecognizers(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]GestureRecognizer, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -1445,11 +1518,15 @@ func (n NSView) GestureRecognizers() []GestureRecognizer {
 }
 
 func (n NSView) SetGestureRecognizers(value []GestureRecognizer) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = objc.ExtractPtr(v)
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = objc.ExtractPtr(v)
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSView_SetGestureRecognizers(n.Ptr(), cValue)
 }
 
@@ -1522,7 +1599,9 @@ func (n NSView) EnclosingScrollView() ScrollView {
 
 func (n NSView) RegisteredDraggedTypes() []PasteboardType {
 	result_ := C.C_NSView_RegisteredDraggedTypes(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]PasteboardType, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -1565,7 +1644,9 @@ func (n NSView) SetToolTip(value string) {
 
 func (n NSView) TrackingAreas() []TrackingArea {
 	result_ := C.C_NSView_TrackingAreas(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]TrackingArea, len(result_Slice))
 	for idx, r := range result_Slice {

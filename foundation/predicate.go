@@ -10,6 +10,7 @@ import (
 type Predicate interface {
 	objc.Object
 	EvaluateWithObject(object objc.Object) bool
+	EvaluateWithObject_SubstitutionVariables(object objc.Object, bindings map[string]objc.Object) bool
 	AllowEvaluation()
 	PredicateFormat() string
 }
@@ -28,17 +29,40 @@ func AllocPredicate() NSPredicate {
 	return MakePredicate(C.C_Predicate_Alloc())
 }
 
+func (n NSPredicate) PredicateWithSubstitutionVariables(variables map[string]objc.Object) Predicate {
+	var cVariables C.Dictionary
+	if len(variables) > 0 {
+		cVariablesKeyData := make([]unsafe.Pointer, len(variables))
+		cVariablesValueData := make([]unsafe.Pointer, len(variables))
+		var idx = 0
+		for k, v := range variables {
+			cVariablesKeyData[idx] = NewString(k).Ptr()
+			cVariablesValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cVariables.key_data = unsafe.Pointer(&cVariablesKeyData[0])
+		cVariables.value_data = unsafe.Pointer(&cVariablesValueData[0])
+		cVariables.len = C.int(len(variables))
+	}
+	result_ := C.C_NSPredicate_PredicateWithSubstitutionVariables(n.Ptr(), cVariables)
+	return MakePredicate(result_)
+}
+
 func (n NSPredicate) Init() Predicate {
 	result_ := C.C_NSPredicate_Init(n.Ptr())
 	return MakePredicate(result_)
 }
 
 func PredicateWithFormat_ArgumentArray(predicateFormat string, arguments []objc.Object) Predicate {
-	cArgumentsData := make([]unsafe.Pointer, len(arguments))
-	for idx, v := range arguments {
-		cArgumentsData[idx] = objc.ExtractPtr(v)
+	var cArguments C.Array
+	if len(arguments) > 0 {
+		cArgumentsData := make([]unsafe.Pointer, len(arguments))
+		for idx, v := range arguments {
+			cArgumentsData[idx] = objc.ExtractPtr(v)
+		}
+		cArguments.data = unsafe.Pointer(&cArgumentsData[0])
+		cArguments.len = C.int(len(arguments))
 	}
-	cArguments := C.Array{data: unsafe.Pointer(&cArgumentsData[0]), len: C.int(len(arguments))}
 	result_ := C.C_NSPredicate_PredicateWithFormat_ArgumentArray(NewString(predicateFormat).Ptr(), cArguments)
 	return MakePredicate(result_)
 }
@@ -55,6 +79,25 @@ func PredicateFromMetadataQueryString(queryString string) Predicate {
 
 func (n NSPredicate) EvaluateWithObject(object objc.Object) bool {
 	result_ := C.C_NSPredicate_EvaluateWithObject(n.Ptr(), objc.ExtractPtr(object))
+	return bool(result_)
+}
+
+func (n NSPredicate) EvaluateWithObject_SubstitutionVariables(object objc.Object, bindings map[string]objc.Object) bool {
+	var cBindings C.Dictionary
+	if len(bindings) > 0 {
+		cBindingsKeyData := make([]unsafe.Pointer, len(bindings))
+		cBindingsValueData := make([]unsafe.Pointer, len(bindings))
+		var idx = 0
+		for k, v := range bindings {
+			cBindingsKeyData[idx] = NewString(k).Ptr()
+			cBindingsValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cBindings.key_data = unsafe.Pointer(&cBindingsKeyData[0])
+		cBindings.value_data = unsafe.Pointer(&cBindingsValueData[0])
+		cBindings.len = C.int(len(bindings))
+	}
+	result_ := C.C_NSPredicate_EvaluateWithObject_SubstitutionVariables(n.Ptr(), objc.ExtractPtr(object), cBindings)
 	return bool(result_)
 }
 

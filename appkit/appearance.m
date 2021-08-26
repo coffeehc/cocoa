@@ -31,10 +31,12 @@ void* C_NSAppearance_AppearanceNamed(void* name) {
 void* C_NSAppearance_BestMatchFromAppearancesWithNames(void* ptr, Array appearances) {
     NSAppearance* nSAppearance = (NSAppearance*)ptr;
     NSMutableArray* objcAppearances = [[NSMutableArray alloc] init];
-    void** appearancesData = (void**)appearances.data;
-    for (int i = 0; i < appearances.len; i++) {
-    	void* p = appearancesData[i];
-    	[objcAppearances addObject:(NSAppearanceName)(NSString*)p];
+    if (appearances.len > 0) {
+    	void** appearancesData = (void**)appearances.data;
+    	for (int i = 0; i < appearances.len; i++) {
+    		void* p = appearancesData[i];
+    		[objcAppearances addObject:(NSAppearanceName)(NSString*)p];
+    	}
     }
     NSAppearanceName result_ = [nSAppearance bestMatchFromAppearancesWithNames:objcAppearances];
     return result_;

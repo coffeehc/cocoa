@@ -81,7 +81,9 @@ func (n NSCollectionLayoutSection) SetSupplementariesFollowContentInsets(value b
 
 func (n NSCollectionLayoutSection) BoundarySupplementaryItems() []CollectionLayoutBoundarySupplementaryItem {
 	result_ := C.C_NSCollectionLayoutSection_BoundarySupplementaryItems(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]CollectionLayoutBoundarySupplementaryItem, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -91,17 +93,23 @@ func (n NSCollectionLayoutSection) BoundarySupplementaryItems() []CollectionLayo
 }
 
 func (n NSCollectionLayoutSection) SetBoundarySupplementaryItems(value []CollectionLayoutBoundarySupplementaryItem) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = objc.ExtractPtr(v)
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = objc.ExtractPtr(v)
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSCollectionLayoutSection_SetBoundarySupplementaryItems(n.Ptr(), cValue)
 }
 
 func (n NSCollectionLayoutSection) DecorationItems() []CollectionLayoutDecorationItem {
 	result_ := C.C_NSCollectionLayoutSection_DecorationItems(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]CollectionLayoutDecorationItem, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -111,10 +119,14 @@ func (n NSCollectionLayoutSection) DecorationItems() []CollectionLayoutDecoratio
 }
 
 func (n NSCollectionLayoutSection) SetDecorationItems(value []CollectionLayoutDecorationItem) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = objc.ExtractPtr(v)
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = objc.ExtractPtr(v)
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSCollectionLayoutSection_SetDecorationItems(n.Ptr(), cValue)
 }

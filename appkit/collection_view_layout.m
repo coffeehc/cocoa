@@ -19,15 +19,17 @@ void C_NSCollectionViewLayout_PrepareLayout(void* ptr) {
 Array C_NSCollectionViewLayout_LayoutAttributesForElementsInRect(void* ptr, CGRect rect) {
     NSCollectionViewLayout* nSCollectionViewLayout = (NSCollectionViewLayout*)ptr;
     NSArray* result_ = [nSCollectionViewLayout layoutAttributesForElementsInRect:rect];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -76,10 +78,12 @@ CGPoint C_NSCollectionViewLayout_TargetContentOffsetForProposedContentOffset_Wit
 void C_NSCollectionViewLayout_PrepareForCollectionViewUpdates(void* ptr, Array updateItems) {
     NSCollectionViewLayout* nSCollectionViewLayout = (NSCollectionViewLayout*)ptr;
     NSMutableArray* objcUpdateItems = [[NSMutableArray alloc] init];
-    void** updateItemsData = (void**)updateItems.data;
-    for (int i = 0; i < updateItems.len; i++) {
-    	void* p = updateItemsData[i];
-    	[objcUpdateItems addObject:(NSCollectionViewUpdateItem*)(NSCollectionViewUpdateItem*)p];
+    if (updateItems.len > 0) {
+    	void** updateItemsData = (void**)updateItems.data;
+    	for (int i = 0; i < updateItems.len; i++) {
+    		void* p = updateItemsData[i];
+    		[objcUpdateItems addObject:(NSCollectionViewUpdateItem*)(NSCollectionViewUpdateItem*)p];
+    	}
     }
     [nSCollectionViewLayout prepareForCollectionViewUpdates:objcUpdateItems];
 }

@@ -83,20 +83,22 @@ bool C_NSGraphicsContext_IsDrawingToScreen(void* ptr) {
 Dictionary C_NSGraphicsContext_Attributes(void* ptr) {
     NSGraphicsContext* nSGraphicsContext = (NSGraphicsContext*)ptr;
     NSDictionary* result_ = [nSGraphicsContext attributes];
+    Dictionary result_Array;
     NSArray * result_Keys = [result_ allKeys];
     int result_Count = [result_Keys count];
-    void** result_KeyData = malloc(result_Count * sizeof(void*));
-    void** result_ValueData = malloc(result_Count * sizeof(void*));
-    for (int i = 0; i < result_Count; i++) {
-    	 NSGraphicsContextAttributeKey kp = [result_Keys objectAtIndex:i];
-    	 id vp = result_[kp];
-    	 result_KeyData[i] = kp;
-    	 result_ValueData[i] = vp;
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSGraphicsContextAttributeKey kp = [result_Keys objectAtIndex:i];
+    		id vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
     }
-    Dictionary result_Array;
-    result_Array.key_data = result_KeyData;
-    result_Array.value_data = result_ValueData;
-    result_Array.len = result_Count;
     return result_Array;
 }
 

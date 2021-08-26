@@ -124,15 +124,17 @@ void C_NSCollectionView_DeselectItemsAtIndexPaths(void* ptr, void* indexPaths) {
 Array C_NSCollectionView_VisibleItems(void* ptr) {
     NSCollectionView* nSCollectionView = (NSCollectionView*)ptr;
     NSArray* result_ = [nSCollectionView visibleItems];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -237,25 +239,29 @@ void C_NSCollectionView_SetDelegate(void* ptr, void* value) {
 Array C_NSCollectionView_Content(void* ptr) {
     NSCollectionView* nSCollectionView = (NSCollectionView*)ptr;
     NSArray* result_ = [nSCollectionView content];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSCollectionView_SetContent(void* ptr, Array value) {
     NSCollectionView* nSCollectionView = (NSCollectionView*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(id)(id)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(id)(id)p];
+    	}
     }
     [nSCollectionView setContent:objcValue];
 }
@@ -274,25 +280,29 @@ void C_NSCollectionView_SetBackgroundView(void* ptr, void* value) {
 Array C_NSCollectionView_BackgroundColors(void* ptr) {
     NSCollectionView* nSCollectionView = (NSCollectionView*)ptr;
     NSArray* result_ = [nSCollectionView backgroundColors];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSCollectionView_SetBackgroundColors(void* ptr, Array value) {
     NSCollectionView* nSCollectionView = (NSCollectionView*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSColor*)(NSColor*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSColor*)(NSColor*)p];
+    	}
     }
     [nSCollectionView setBackgroundColors:objcValue];
 }

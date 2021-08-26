@@ -5,6 +5,22 @@ void* C_Progress_Alloc() {
     return [NSProgress alloc];
 }
 
+void* C_NSProgress_InitWithParent_UserInfo(void* ptr, void* parentProgressOrNil, Dictionary userInfoOrNil) {
+    NSProgress* nSProgress = (NSProgress*)ptr;
+    NSMutableDictionary* objcUserInfoOrNil = [[NSMutableDictionary alloc] initWithCapacity: userInfoOrNil.len];
+    if (userInfoOrNil.len > 0) {
+    	void** userInfoOrNilKeyData = (void**)userInfoOrNil.key_data;
+    	void** userInfoOrNilValueData = (void**)userInfoOrNil.value_data;
+    	for (int i = 0; i < userInfoOrNil.len; i++) {
+    		void* kp = userInfoOrNilKeyData[i];
+    		void* vp = userInfoOrNilValueData[i];
+    		[objcUserInfoOrNil setObject:(NSProgressUserInfoKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    NSProgress* result_ = [nSProgress initWithParent:(NSProgress*)parentProgressOrNil userInfo:objcUserInfoOrNil];
+    return result_;
+}
+
 void* C_NSProgress_Init(void* ptr) {
     NSProgress* nSProgress = (NSProgress*)ptr;
     NSProgress* result_ = [nSProgress init];
@@ -179,6 +195,28 @@ void* C_NSProgress_Kind(void* ptr) {
 void C_NSProgress_SetKind(void* ptr, void* value) {
     NSProgress* nSProgress = (NSProgress*)ptr;
     [nSProgress setKind:(NSString*)value];
+}
+
+Dictionary C_NSProgress_UserInfo(void* ptr) {
+    NSProgress* nSProgress = (NSProgress*)ptr;
+    NSDictionary* result_ = [nSProgress userInfo];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSProgressUserInfoKey kp = [result_Keys objectAtIndex:i];
+    		id vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
 }
 
 void* C_NSProgress_FileOperationKind(void* ptr) {

@@ -1,5 +1,4 @@
 #import <WebKit/WebKit.h>
-#include "_cgo_export.h"
 #import "web_view.h"
 
 void* C_WebView_Alloc() {

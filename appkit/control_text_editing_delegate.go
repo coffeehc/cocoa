@@ -114,8 +114,3 @@ func ControlTextEditingDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Po
 		return false
 	}
 }
-
-//export deleteControlTextEditingDelegate
-func deleteControlTextEditingDelegate(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
-}

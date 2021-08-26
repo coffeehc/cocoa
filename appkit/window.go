@@ -148,6 +148,7 @@ type Window interface {
 	PreventsApplicationTerminationWhenModal() bool
 	SetPreventsApplicationTerminationWhenModal(value bool)
 	WindowNumber() int
+	DeviceDescription() map[DeviceDescriptionKey]objc.Object
 	CanBecomeVisibleWithoutLogin() bool
 	SetCanBecomeVisibleWithoutLogin(value bool)
 	SharingType() WindowSharingType
@@ -357,7 +358,9 @@ func (n NSWindow) SetContentBorderThickness_ForEdge(thickness coregraphics.Float
 
 func WindowNumbersWithOptions(options WindowNumberListOptions) []foundation.Number {
 	result_ := C.C_NSWindow_WindowNumbersWithOptions(C.uint(uint(options)))
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]foundation.Number, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -682,11 +685,15 @@ func (n NSWindow) DragImage_At_Offset_Event_Pasteboard_Source_SlideBack(image Im
 }
 
 func (n NSWindow) RegisterForDraggedTypes(newTypes []PasteboardType) {
-	cNewTypesData := make([]unsafe.Pointer, len(newTypes))
-	for idx, v := range newTypes {
-		cNewTypesData[idx] = foundation.NewString(string(v)).Ptr()
+	var cNewTypes C.Array
+	if len(newTypes) > 0 {
+		cNewTypesData := make([]unsafe.Pointer, len(newTypes))
+		for idx, v := range newTypes {
+			cNewTypesData[idx] = foundation.NewString(string(v)).Ptr()
+		}
+		cNewTypes.data = unsafe.Pointer(&cNewTypesData[0])
+		cNewTypes.len = C.int(len(newTypes))
 	}
-	cNewTypes := C.Array{data: unsafe.Pointer(&cNewTypesData[0]), len: C.int(len(newTypes))}
 	C.C_NSWindow_RegisterForDraggedTypes(n.Ptr(), cNewTypes)
 }
 
@@ -748,19 +755,23 @@ func (n NSWindow) Print(sender objc.Object) {
 
 func (n NSWindow) DataWithEPSInsideRect(rect foundation.Rect) []byte {
 	result_ := C.C_NSWindow_DataWithEPSInsideRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
+	if result_.len > 0 {
+		C.free(result_.data)
+	}
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)
-	C.free(result_.data)
 	return goResult_
 }
 
 func (n NSWindow) DataWithPDFInsideRect(rect foundation.Rect) []byte {
 	result_ := C.C_NSWindow_DataWithPDFInsideRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
+	if result_.len > 0 {
+		C.free(result_.data)
+	}
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)
-	C.free(result_.data)
 	return goResult_
 }
 
@@ -773,11 +784,15 @@ func (n NSWindow) LayoutIfNeeded() {
 }
 
 func (n NSWindow) VisualizeConstraints(constraints []LayoutConstraint) {
-	cConstraintsData := make([]unsafe.Pointer, len(constraints))
-	for idx, v := range constraints {
-		cConstraintsData[idx] = objc.ExtractPtr(v)
+	var cConstraints C.Array
+	if len(constraints) > 0 {
+		cConstraintsData := make([]unsafe.Pointer, len(constraints))
+		for idx, v := range constraints {
+			cConstraintsData[idx] = objc.ExtractPtr(v)
+		}
+		cConstraints.data = unsafe.Pointer(&cConstraintsData[0])
+		cConstraints.len = C.int(len(constraints))
 	}
-	cConstraints := C.Array{data: unsafe.Pointer(&cConstraintsData[0]), len: C.int(len(constraints))}
 	C.C_NSWindow_VisualizeConstraints(n.Ptr(), cConstraints)
 }
 
@@ -983,6 +998,22 @@ func (n NSWindow) WindowNumber() int {
 	return int(result_)
 }
 
+func (n NSWindow) DeviceDescription() map[DeviceDescriptionKey]objc.Object {
+	result_ := C.C_NSWindow_DeviceDescription(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[DeviceDescriptionKey]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[DeviceDescriptionKey(foundation.MakeString(k).String())] = objc.MakeObject(v)
+	}
+	return goResult_
+}
+
 func (n NSWindow) CanBecomeVisibleWithoutLogin() bool {
 	result_ := C.C_NSWindow_CanBecomeVisibleWithoutLogin(n.Ptr())
 	return bool(result_)
@@ -1050,7 +1081,9 @@ func (n NSWindow) SheetParent() Window {
 
 func (n NSWindow) Sheets() []Window {
 	result_ := C.C_NSWindow_Sheets(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]Window, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -1248,7 +1281,9 @@ func (n NSWindow) SetToolbar(value Toolbar) {
 
 func (n NSWindow) ChildWindows() []Window {
 	result_ := C.C_NSWindow_ChildWindows(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]Window, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -1327,7 +1362,9 @@ func (n NSWindow) SetTitlebarSeparatorStyle(value TitlebarSeparatorStyle) {
 
 func (n NSWindow) TitlebarAccessoryViewControllers() []TitlebarAccessoryViewController {
 	result_ := C.C_NSWindow_TitlebarAccessoryViewControllers(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]TitlebarAccessoryViewController, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -1337,11 +1374,15 @@ func (n NSWindow) TitlebarAccessoryViewControllers() []TitlebarAccessoryViewCont
 }
 
 func (n NSWindow) SetTitlebarAccessoryViewControllers(value []TitlebarAccessoryViewController) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = objc.ExtractPtr(v)
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = objc.ExtractPtr(v)
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSWindow_SetTitlebarAccessoryViewControllers(n.Ptr(), cValue)
 }
 
@@ -1384,7 +1425,9 @@ func (n NSWindow) SetTabbingMode(value WindowTabbingMode) {
 
 func (n NSWindow) TabbedWindows() []Window {
 	result_ := C.C_NSWindow_TabbedWindows(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]Window, len(result_Slice))
 	for idx, r := range result_Slice {

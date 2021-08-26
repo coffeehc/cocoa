@@ -307,15 +307,17 @@ void* C_NSLayoutManager_RulerAccessoryViewForTextView_ParagraphStyle_Ruler_Enabl
 Array C_NSLayoutManager_RulerMarkersForTextView_ParagraphStyle_Ruler(void* ptr, void* view, void* style, void* ruler) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
     NSArray* result_ = [nSLayoutManager rulerMarkersForTextView:(NSTextView*)view paragraphStyle:(NSParagraphStyle*)style ruler:(NSRulerView*)ruler];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -337,9 +339,39 @@ double C_NSLayoutManager_DefaultBaselineOffsetForFont(void* ptr, void* theFont) 
     return result_;
 }
 
+void C_NSLayoutManager_AddTemporaryAttributes_ForCharacterRange(void* ptr, Dictionary attrs, NSRange charRange) {
+    NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
+    NSMutableDictionary* objcAttrs = [[NSMutableDictionary alloc] initWithCapacity: attrs.len];
+    if (attrs.len > 0) {
+    	void** attrsKeyData = (void**)attrs.key_data;
+    	void** attrsValueData = (void**)attrs.value_data;
+    	for (int i = 0; i < attrs.len; i++) {
+    		void* kp = attrsKeyData[i];
+    		void* vp = attrsValueData[i];
+    		[objcAttrs setObject:(NSAttributedStringKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    [nSLayoutManager addTemporaryAttributes:objcAttrs forCharacterRange:charRange];
+}
+
 void C_NSLayoutManager_AddTemporaryAttribute_Value_ForCharacterRange(void* ptr, void* attrName, void* value, NSRange charRange) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
     [nSLayoutManager addTemporaryAttribute:(NSString*)attrName value:(id)value forCharacterRange:charRange];
+}
+
+void C_NSLayoutManager_SetTemporaryAttributes_ForCharacterRange(void* ptr, Dictionary attrs, NSRange charRange) {
+    NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
+    NSMutableDictionary* objcAttrs = [[NSMutableDictionary alloc] initWithCapacity: attrs.len];
+    if (attrs.len > 0) {
+    	void** attrsKeyData = (void**)attrs.key_data;
+    	void** attrsValueData = (void**)attrs.value_data;
+    	for (int i = 0; i < attrs.len; i++) {
+    		void* kp = attrsKeyData[i];
+    		void* vp = attrsValueData[i];
+    		[objcAttrs setObject:(NSAttributedStringKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    [nSLayoutManager setTemporaryAttributes:objcAttrs forCharacterRange:charRange];
 }
 
 void C_NSLayoutManager_RemoveTemporaryAttribute_ForCharacterRange(void* ptr, void* attrName, NSRange charRange) {
@@ -455,15 +487,17 @@ void C_NSLayoutManager_SetUsesDefaultHyphenation(void* ptr, bool value) {
 Array C_NSLayoutManager_TextContainers(void* ptr) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
     NSArray* result_ = [nSLayoutManager textContainers];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 

@@ -73,7 +73,9 @@ func (n NSCollectionViewLayout) PrepareLayout() {
 
 func (n NSCollectionViewLayout) LayoutAttributesForElementsInRect(rect foundation.Rect) []CollectionViewLayoutAttributes {
 	result_ := C.C_NSCollectionViewLayout_LayoutAttributesForElementsInRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]CollectionViewLayoutAttributes, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -118,11 +120,15 @@ func (n NSCollectionViewLayout) TargetContentOffsetForProposedContentOffset_With
 }
 
 func (n NSCollectionViewLayout) PrepareForCollectionViewUpdates(updateItems []CollectionViewUpdateItem) {
-	cUpdateItemsData := make([]unsafe.Pointer, len(updateItems))
-	for idx, v := range updateItems {
-		cUpdateItemsData[idx] = objc.ExtractPtr(v)
+	var cUpdateItems C.Array
+	if len(updateItems) > 0 {
+		cUpdateItemsData := make([]unsafe.Pointer, len(updateItems))
+		for idx, v := range updateItems {
+			cUpdateItemsData[idx] = objc.ExtractPtr(v)
+		}
+		cUpdateItems.data = unsafe.Pointer(&cUpdateItemsData[0])
+		cUpdateItems.len = C.int(len(updateItems))
 	}
-	cUpdateItems := C.Array{data: unsafe.Pointer(&cUpdateItemsData[0]), len: C.int(len(updateItems))}
 	C.C_NSCollectionViewLayout_PrepareForCollectionViewUpdates(n.Ptr(), cUpdateItems)
 }
 

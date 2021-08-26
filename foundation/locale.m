@@ -27,6 +27,42 @@ void* C_NSLocale_Locale_CanonicalLocaleIdentifierFromString(void* _string) {
     return result_;
 }
 
+Dictionary C_NSLocale_Locale_ComponentsFromLocaleIdentifier(void* _string) {
+    NSDictionary* result_ = [NSLocale componentsFromLocaleIdentifier:(NSString*)_string];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSString* kp = [result_Keys objectAtIndex:i];
+    		NSString* vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
+}
+
+void* C_NSLocale_LocaleIdentifierFromComponents(Dictionary dict) {
+    NSMutableDictionary* objcDict = [[NSMutableDictionary alloc] initWithCapacity: dict.len];
+    if (dict.len > 0) {
+    	void** dictKeyData = (void**)dict.key_data;
+    	void** dictValueData = (void**)dict.value_data;
+    	for (int i = 0; i < dict.len; i++) {
+    		void* kp = dictKeyData[i];
+    		void* vp = dictValueData[i];
+    		[objcDict setObject:(NSString*)(NSString*)kp forKey:(NSString*)(NSString*)vp];
+    	}
+    }
+    NSString* result_ = [NSLocale localeIdentifierFromComponents:objcDict];
+    return result_;
+}
+
 void* C_NSLocale_Locale_CanonicalLanguageIdentifierFromString(void* _string) {
     NSString* result_ = [NSLocale canonicalLanguageIdentifierFromString:(NSString*)_string];
     return result_;
@@ -135,71 +171,81 @@ void* C_NSLocale_SystemLocale() {
 
 Array C_NSLocale_Locale_AvailableLocaleIdentifiers() {
     NSArray* result_ = [NSLocale availableLocaleIdentifiers];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 Array C_NSLocale_Locale_ISOCountryCodes() {
     NSArray* result_ = [NSLocale ISOCountryCodes];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 Array C_NSLocale_Locale_ISOLanguageCodes() {
     NSArray* result_ = [NSLocale ISOLanguageCodes];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 Array C_NSLocale_Locale_ISOCurrencyCodes() {
     NSArray* result_ = [NSLocale ISOCurrencyCodes];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 Array C_NSLocale_Locale_CommonISOCurrencyCodes() {
     NSArray* result_ = [NSLocale commonISOCurrencyCodes];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -313,14 +359,16 @@ void* C_NSLocale_AlternateQuotationEndDelimiter(void* ptr) {
 
 Array C_NSLocale_Locale_PreferredLanguages() {
     NSArray* result_ = [NSLocale preferredLanguages];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }

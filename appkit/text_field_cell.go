@@ -116,7 +116,9 @@ func (n NSTextFieldCell) SetPlaceholderAttributedString(value foundation.Attribu
 
 func (n NSTextFieldCell) AllowedInputSourceLocales() []string {
 	result_ := C.C_NSTextFieldCell_AllowedInputSourceLocales(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -126,10 +128,14 @@ func (n NSTextFieldCell) AllowedInputSourceLocales() []string {
 }
 
 func (n NSTextFieldCell) SetAllowedInputSourceLocales(value []string) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = foundation.NewString(v).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = foundation.NewString(v).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSTextFieldCell_SetAllowedInputSourceLocales(n.Ptr(), cValue)
 }

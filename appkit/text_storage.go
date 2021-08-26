@@ -56,6 +56,25 @@ func (n NSTextStorage) InitWithString(str string) TextStorage {
 	return MakeTextStorage(result_)
 }
 
+func (n NSTextStorage) InitWithString_Attributes(str string, attrs map[foundation.AttributedStringKey]objc.Object) TextStorage {
+	var cAttrs C.Dictionary
+	if len(attrs) > 0 {
+		cAttrsKeyData := make([]unsafe.Pointer, len(attrs))
+		cAttrsValueData := make([]unsafe.Pointer, len(attrs))
+		var idx = 0
+		for k, v := range attrs {
+			cAttrsKeyData[idx] = foundation.NewString(string(k)).Ptr()
+			cAttrsValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cAttrs.key_data = unsafe.Pointer(&cAttrsKeyData[0])
+		cAttrs.value_data = unsafe.Pointer(&cAttrsValueData[0])
+		cAttrs.len = C.int(len(attrs))
+	}
+	result_ := C.C_NSTextStorage_InitWithString_Attributes(n.Ptr(), foundation.NewString(str).Ptr(), cAttrs)
+	return MakeTextStorage(result_)
+}
+
 func (n NSTextStorage) InitWithAttributedString(attrStr foundation.AttributedString) TextStorage {
 	result_ := C.C_NSTextStorage_InitWithAttributedString(n.Ptr(), objc.ExtractPtr(attrStr))
 	return MakeTextStorage(result_)
@@ -101,7 +120,9 @@ func (n NSTextStorage) SetDelegate(value objc.Object) {
 
 func (n NSTextStorage) LayoutManagers() []LayoutManager {
 	result_ := C.C_NSTextStorage_LayoutManagers(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]LayoutManager, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -132,7 +153,9 @@ func (n NSTextStorage) ChangeInLength() int {
 
 func (n NSTextStorage) AttributeRuns() []TextStorage {
 	result_ := C.C_NSTextStorage_AttributeRuns(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]TextStorage, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -142,17 +165,23 @@ func (n NSTextStorage) AttributeRuns() []TextStorage {
 }
 
 func (n NSTextStorage) SetAttributeRuns(value []TextStorage) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = objc.ExtractPtr(v)
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = objc.ExtractPtr(v)
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSTextStorage_SetAttributeRuns(n.Ptr(), cValue)
 }
 
 func (n NSTextStorage) Paragraphs() []TextStorage {
 	result_ := C.C_NSTextStorage_Paragraphs(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]TextStorage, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -162,17 +191,23 @@ func (n NSTextStorage) Paragraphs() []TextStorage {
 }
 
 func (n NSTextStorage) SetParagraphs(value []TextStorage) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = objc.ExtractPtr(v)
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = objc.ExtractPtr(v)
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSTextStorage_SetParagraphs(n.Ptr(), cValue)
 }
 
 func (n NSTextStorage) Words() []TextStorage {
 	result_ := C.C_NSTextStorage_Words(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]TextStorage, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -182,17 +217,23 @@ func (n NSTextStorage) Words() []TextStorage {
 }
 
 func (n NSTextStorage) SetWords(value []TextStorage) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = objc.ExtractPtr(v)
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = objc.ExtractPtr(v)
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSTextStorage_SetWords(n.Ptr(), cValue)
 }
 
 func (n NSTextStorage) Characters() []TextStorage {
 	result_ := C.C_NSTextStorage_Characters(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]TextStorage, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -202,11 +243,15 @@ func (n NSTextStorage) Characters() []TextStorage {
 }
 
 func (n NSTextStorage) SetCharacters(value []TextStorage) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = objc.ExtractPtr(v)
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = objc.ExtractPtr(v)
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSTextStorage_SetCharacters(n.Ptr(), cValue)
 }
 

@@ -91,7 +91,9 @@ func tableViewDataSource_TableView_DraggingSession_EndedAtPoint_Operation(hp C.u
 //export tableViewDataSource_TableView_SortDescriptorsDidChange
 func tableViewDataSource_TableView_SortDescriptorsDidChange(hp C.uintptr_t, tableView unsafe.Pointer, oldDescriptors C.Array) {
 	delegate := cgo.Handle(hp).Value().(*TableViewDataSource)
-	defer C.free(oldDescriptors.data)
+	if oldDescriptors.len > 0 {
+		defer C.free(oldDescriptors.data)
+	}
 	oldDescriptorsSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(oldDescriptors.data))[:oldDescriptors.len:oldDescriptors.len]
 	var goOldDescriptors = make([]foundation.SortDescriptor, len(oldDescriptorsSlice))
 	for idx, r := range oldDescriptorsSlice {
@@ -129,9 +131,4 @@ func TableViewDataSource_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) 
 	default:
 		return false
 	}
-}
-
-//export deleteTableViewDataSource
-func deleteTableViewDataSource(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
 }

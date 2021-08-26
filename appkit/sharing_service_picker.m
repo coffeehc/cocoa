@@ -8,10 +8,12 @@ void* C_SharingServicePicker_Alloc() {
 void* C_NSSharingServicePicker_InitWithItems(void* ptr, Array items) {
     NSSharingServicePicker* nSSharingServicePicker = (NSSharingServicePicker*)ptr;
     NSMutableArray* objcItems = [[NSMutableArray alloc] init];
-    void** itemsData = (void**)items.data;
-    for (int i = 0; i < items.len; i++) {
-    	void* p = itemsData[i];
-    	[objcItems addObject:(NSObject*)(NSObject*)p];
+    if (items.len > 0) {
+    	void** itemsData = (void**)items.data;
+    	for (int i = 0; i < items.len; i++) {
+    		void* p = itemsData[i];
+    		[objcItems addObject:(NSObject*)(NSObject*)p];
+    	}
     }
     NSSharingServicePicker* result_ = [nSSharingServicePicker initWithItems:objcItems];
     return result_;

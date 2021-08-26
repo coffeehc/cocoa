@@ -131,20 +131,28 @@ func (n NSButton) SetPeriodicDelay_Interval(delay float32, interval float32) {
 }
 
 func (n NSButton) CompressWithPrioritizedCompressionOptions(prioritizedOptions []UserInterfaceCompressionOptions) {
-	cPrioritizedOptionsData := make([]unsafe.Pointer, len(prioritizedOptions))
-	for idx, v := range prioritizedOptions {
-		cPrioritizedOptionsData[idx] = objc.ExtractPtr(v)
+	var cPrioritizedOptions C.Array
+	if len(prioritizedOptions) > 0 {
+		cPrioritizedOptionsData := make([]unsafe.Pointer, len(prioritizedOptions))
+		for idx, v := range prioritizedOptions {
+			cPrioritizedOptionsData[idx] = objc.ExtractPtr(v)
+		}
+		cPrioritizedOptions.data = unsafe.Pointer(&cPrioritizedOptionsData[0])
+		cPrioritizedOptions.len = C.int(len(prioritizedOptions))
 	}
-	cPrioritizedOptions := C.Array{data: unsafe.Pointer(&cPrioritizedOptionsData[0]), len: C.int(len(prioritizedOptions))}
 	C.C_NSButton_CompressWithPrioritizedCompressionOptions(n.Ptr(), cPrioritizedOptions)
 }
 
 func (n NSButton) MinimumSizeWithPrioritizedCompressionOptions(prioritizedOptions []UserInterfaceCompressionOptions) foundation.Size {
-	cPrioritizedOptionsData := make([]unsafe.Pointer, len(prioritizedOptions))
-	for idx, v := range prioritizedOptions {
-		cPrioritizedOptionsData[idx] = objc.ExtractPtr(v)
+	var cPrioritizedOptions C.Array
+	if len(prioritizedOptions) > 0 {
+		cPrioritizedOptionsData := make([]unsafe.Pointer, len(prioritizedOptions))
+		for idx, v := range prioritizedOptions {
+			cPrioritizedOptionsData[idx] = objc.ExtractPtr(v)
+		}
+		cPrioritizedOptions.data = unsafe.Pointer(&cPrioritizedOptionsData[0])
+		cPrioritizedOptions.len = C.int(len(prioritizedOptions))
 	}
-	cPrioritizedOptions := C.Array{data: unsafe.Pointer(&cPrioritizedOptionsData[0]), len: C.int(len(prioritizedOptions))}
 	result_ := C.C_NSButton_MinimumSizeWithPrioritizedCompressionOptions(n.Ptr(), cPrioritizedOptions)
 	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
 }

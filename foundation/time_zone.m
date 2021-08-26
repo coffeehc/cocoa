@@ -104,16 +104,53 @@ void C_NSTimeZone_SetDefaultTimeZone(void* value) {
 
 Array C_NSTimeZone_TimeZone_KnownTimeZoneNames() {
     NSArray* result_ = [NSTimeZone knownTimeZoneNames];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
+}
+
+Dictionary C_NSTimeZone_TimeZone_AbbreviationDictionary() {
+    NSDictionary* result_ = [NSTimeZone abbreviationDictionary];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSString* kp = [result_Keys objectAtIndex:i];
+    		NSString* vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
+}
+
+void C_NSTimeZone_TimeZone_SetAbbreviationDictionary(Dictionary value) {
+    NSMutableDictionary* objcValue = [[NSMutableDictionary alloc] initWithCapacity: value.len];
+    if (value.len > 0) {
+    	void** valueKeyData = (void**)value.key_data;
+    	void** valueValueData = (void**)value.value_data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* kp = valueKeyData[i];
+    		void* vp = valueValueData[i];
+    		[objcValue setObject:(NSString*)(NSString*)kp forKey:(NSString*)(NSString*)vp];
+    	}
+    }
+    [NSTimeZone setAbbreviationDictionary:objcValue];
 }
 
 void* C_NSTimeZone_Name(void* ptr) {

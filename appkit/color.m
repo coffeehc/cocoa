@@ -179,6 +179,11 @@ void* C_NSColor_ColorWithPatternImage(void* image) {
     return result_;
 }
 
+void* C_NSColor_ColorWithCGColor(void* cgColor) {
+    NSColor* result_ = [NSColor colorWithCGColor:(CGColorRef)cgColor];
+    return result_;
+}
+
 bool C_NSColor_Color_IgnoresAlpha() {
     BOOL result_ = [NSColor ignoresAlpha];
     return result_;
@@ -302,6 +307,12 @@ void* C_NSColor_ColorSpace(void* ptr) {
     return result_;
 }
 
+void* C_NSColor_CGColor(void* ptr) {
+    NSColor* nSColor = (NSColor*)ptr;
+    CGColorRef result_ = [nSColor CGColor];
+    return result_;
+}
+
 void* C_NSColor_LabelColor() {
     NSColor* result_ = [NSColor labelColor];
     return result_;
@@ -399,15 +410,17 @@ void* C_NSColor_HeaderTextColor() {
 
 Array C_NSColor_Color_AlternatingContentBackgroundColors() {
     NSArray* result_ = [NSColor alternatingContentBackgroundColors];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 

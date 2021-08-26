@@ -38,8 +38,3 @@ func TouchBarDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) boo
 		return false
 	}
 }
-
-//export deleteTouchBarDelegate
-func deleteTouchBarDelegate(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
-}

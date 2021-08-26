@@ -97,6 +97,8 @@ void C_NSView_ExerciseAmbiguityInLayout(void* ptr);
 void C_NSView_DrawFocusRingMask(void* ptr);
 void C_NSView_NoteFocusRingMaskChanged(void* ptr);
 void C_NSView_SetKeyboardFocusRingNeedsDisplayInRect(void* ptr, CGRect rect);
+bool C_NSView_EnterFullScreenMode_WithOptions(void* ptr, void* screen, Dictionary options);
+void C_NSView_ExitFullScreenModeWithOptions(void* ptr, Dictionary options);
 void C_NSView_ViewDidHide(void* ptr);
 void C_NSView_ViewDidUnhide(void* ptr);
 void C_NSView_ViewWillStartLiveResize(void* ptr);

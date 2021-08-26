@@ -19,10 +19,12 @@ void C_NSOperationQueue_AddOperation(void* ptr, void* op) {
 void C_NSOperationQueue_AddOperations_WaitUntilFinished(void* ptr, Array ops, bool wait) {
     NSOperationQueue* nSOperationQueue = (NSOperationQueue*)ptr;
     NSMutableArray* objcOps = [[NSMutableArray alloc] init];
-    void** opsData = (void**)ops.data;
-    for (int i = 0; i < ops.len; i++) {
-    	void* p = opsData[i];
-    	[objcOps addObject:(NSOperation*)(NSOperation*)p];
+    if (ops.len > 0) {
+    	void** opsData = (void**)ops.data;
+    	for (int i = 0; i < ops.len; i++) {
+    		void* p = opsData[i];
+    		[objcOps addObject:(NSOperation*)(NSOperation*)p];
+    	}
     }
     [nSOperationQueue addOperations:objcOps waitUntilFinished:wait];
 }

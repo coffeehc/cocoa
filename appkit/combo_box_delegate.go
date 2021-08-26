@@ -61,18 +61,24 @@ func comboBoxDelegate_ComboBoxWillPopUp(hp C.uintptr_t, notification unsafe.Poin
 //export comboBoxDelegate_TextField_TextView_Candidates_ForSelectedRange
 func comboBoxDelegate_TextField_TextView_Candidates_ForSelectedRange(hp C.uintptr_t, textField unsafe.Pointer, textView unsafe.Pointer, candidates C.Array, selectedRange C.NSRange) C.Array {
 	delegate := cgo.Handle(hp).Value().(*ComboBoxDelegate)
-	defer C.free(candidates.data)
+	if candidates.len > 0 {
+		defer C.free(candidates.data)
+	}
 	candidatesSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(candidates.data))[:candidates.len:candidates.len]
 	var goCandidates = make([]foundation.TextCheckingResult, len(candidatesSlice))
 	for idx, r := range candidatesSlice {
 		goCandidates[idx] = foundation.MakeTextCheckingResult(r)
 	}
 	result := delegate.TextField_TextView_Candidates_ForSelectedRange(MakeTextField(textField), MakeTextView(textView), goCandidates, foundation.FromNSRangePointer(unsafe.Pointer(&selectedRange)))
-	cResultData := make([]unsafe.Pointer, len(result))
-	for idx, v := range result {
-		cResultData[idx] = objc.ExtractPtr(v)
+	var cResult C.Array
+	if len(result) > 0 {
+		cResultData := make([]unsafe.Pointer, len(result))
+		for idx, v := range result {
+			cResultData[idx] = objc.ExtractPtr(v)
+		}
+		cResult.data = unsafe.Pointer(&cResultData[0])
+		cResult.len = C.int(len(result))
 	}
-	cResult := C.Array{data: unsafe.Pointer(&cResultData[0]), len: C.int(len(result))}
 	return cResult
 }
 
@@ -80,11 +86,15 @@ func comboBoxDelegate_TextField_TextView_Candidates_ForSelectedRange(hp C.uintpt
 func comboBoxDelegate_TextField_TextView_CandidatesForSelectedRange(hp C.uintptr_t, textField unsafe.Pointer, textView unsafe.Pointer, selectedRange C.NSRange) C.Array {
 	delegate := cgo.Handle(hp).Value().(*ComboBoxDelegate)
 	result := delegate.TextField_TextView_CandidatesForSelectedRange(MakeTextField(textField), MakeTextView(textView), foundation.FromNSRangePointer(unsafe.Pointer(&selectedRange)))
-	cResultData := make([]unsafe.Pointer, len(result))
-	for idx, v := range result {
-		cResultData[idx] = objc.ExtractPtr(v)
+	var cResult C.Array
+	if len(result) > 0 {
+		cResultData := make([]unsafe.Pointer, len(result))
+		for idx, v := range result {
+			cResultData[idx] = objc.ExtractPtr(v)
+		}
+		cResult.data = unsafe.Pointer(&cResultData[0])
+		cResult.len = C.int(len(result))
 	}
-	cResult := C.Array{data: unsafe.Pointer(&cResultData[0]), len: C.int(len(result))}
 	return cResult
 }
 
@@ -195,9 +205,4 @@ func ComboBoxDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) boo
 	default:
 		return false
 	}
-}
-
-//export deleteComboBoxDelegate
-func deleteComboBoxDelegate(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
 }

@@ -41,21 +41,29 @@ func (n NSPasteboardItem) Init() PasteboardItem {
 }
 
 func (n NSPasteboardItem) AvailableTypeFromArray(types []PasteboardType) PasteboardType {
-	cTypesData := make([]unsafe.Pointer, len(types))
-	for idx, v := range types {
-		cTypesData[idx] = foundation.NewString(string(v)).Ptr()
+	var cTypes C.Array
+	if len(types) > 0 {
+		cTypesData := make([]unsafe.Pointer, len(types))
+		for idx, v := range types {
+			cTypesData[idx] = foundation.NewString(string(v)).Ptr()
+		}
+		cTypes.data = unsafe.Pointer(&cTypesData[0])
+		cTypes.len = C.int(len(types))
 	}
-	cTypes := C.Array{data: unsafe.Pointer(&cTypesData[0]), len: C.int(len(types))}
 	result_ := C.C_NSPasteboardItem_AvailableTypeFromArray(n.Ptr(), cTypes)
 	return PasteboardType(foundation.MakeString(result_).String())
 }
 
 func (n NSPasteboardItem) SetDataProvider_ForTypes(dataProvider objc.Object, types []PasteboardType) bool {
-	cTypesData := make([]unsafe.Pointer, len(types))
-	for idx, v := range types {
-		cTypesData[idx] = foundation.NewString(string(v)).Ptr()
+	var cTypes C.Array
+	if len(types) > 0 {
+		cTypesData := make([]unsafe.Pointer, len(types))
+		for idx, v := range types {
+			cTypesData[idx] = foundation.NewString(string(v)).Ptr()
+		}
+		cTypes.data = unsafe.Pointer(&cTypesData[0])
+		cTypes.len = C.int(len(types))
 	}
-	cTypes := C.Array{data: unsafe.Pointer(&cTypesData[0]), len: C.int(len(types))}
 	result_ := C.C_NSPasteboardItem_SetDataProvider_ForTypes(n.Ptr(), objc.ExtractPtr(dataProvider), cTypes)
 	return bool(result_)
 }
@@ -77,10 +85,12 @@ func (n NSPasteboardItem) SetPropertyList_ForType(propertyList objc.Object, _typ
 
 func (n NSPasteboardItem) DataForType(_type PasteboardType) []byte {
 	result_ := C.C_NSPasteboardItem_DataForType(n.Ptr(), foundation.NewString(string(_type)).Ptr())
+	if result_.len > 0 {
+		C.free(result_.data)
+	}
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)
-	C.free(result_.data)
 	return goResult_
 }
 
@@ -96,7 +106,9 @@ func (n NSPasteboardItem) PropertyListForType(_type PasteboardType) objc.Object 
 
 func (n NSPasteboardItem) Types() []PasteboardType {
 	result_ := C.C_NSPasteboardItem_Types(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]PasteboardType, len(result_Slice))
 	for idx, r := range result_Slice {

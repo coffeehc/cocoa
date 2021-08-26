@@ -64,7 +64,9 @@ Array C_NSLayoutManager_RulerMarkersForTextView_ParagraphStyle_Ruler(void* ptr, 
 bool C_NSLayoutManager_LayoutManagerOwnsFirstResponderInWindow(void* ptr, void* window);
 double C_NSLayoutManager_DefaultLineHeightForFont(void* ptr, void* theFont);
 double C_NSLayoutManager_DefaultBaselineOffsetForFont(void* ptr, void* theFont);
+void C_NSLayoutManager_AddTemporaryAttributes_ForCharacterRange(void* ptr, Dictionary attrs, NSRange charRange);
 void C_NSLayoutManager_AddTemporaryAttribute_Value_ForCharacterRange(void* ptr, void* attrName, void* value, NSRange charRange);
+void C_NSLayoutManager_SetTemporaryAttributes_ForCharacterRange(void* ptr, Dictionary attrs, NSRange charRange);
 void C_NSLayoutManager_RemoveTemporaryAttribute_ForCharacterRange(void* ptr, void* attrName, NSRange charRange);
 void* C_NSLayoutManager_Delegate(void* ptr);
 void C_NSLayoutManager_SetDelegate(void* ptr, void* value);

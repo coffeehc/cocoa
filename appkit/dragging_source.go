@@ -76,8 +76,3 @@ func DraggingSource_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool 
 		return false
 	}
 }
-
-//export deleteDraggingSource
-func deleteDraggingSource(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
-}

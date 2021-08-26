@@ -31,7 +31,7 @@
 }
 
 - (void)dealloc {
-	deleteComboBoxDataSource([self goID]);
+	deleteAppKitHandle([self goID]);
 	[super dealloc];
 }
 @end

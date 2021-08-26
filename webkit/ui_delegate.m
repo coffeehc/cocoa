@@ -20,7 +20,7 @@
 }
 
 - (void)dealloc {
-	deleteUIDelegate([self goID]);
+	deleteWebKitHandle([self goID]);
 	[super dealloc];
 }
 @end

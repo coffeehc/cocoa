@@ -115,7 +115,9 @@ func (n NSPathControl) SetDelegate(value objc.Object) {
 
 func (n NSPathControl) AllowedTypes() []string {
 	result_ := C.C_NSPathControl_AllowedTypes(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -125,11 +127,15 @@ func (n NSPathControl) AllowedTypes() []string {
 }
 
 func (n NSPathControl) SetAllowedTypes(value []string) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = foundation.NewString(v).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = foundation.NewString(v).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSPathControl_SetAllowedTypes(n.Ptr(), cValue)
 }
 
@@ -149,7 +155,9 @@ func (n NSPathControl) SetEditable(value bool) {
 
 func (n NSPathControl) PathItems() []PathControlItem {
 	result_ := C.C_NSPathControl_PathItems(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]PathControlItem, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -159,11 +167,15 @@ func (n NSPathControl) PathItems() []PathControlItem {
 }
 
 func (n NSPathControl) SetPathItems(value []PathControlItem) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = objc.ExtractPtr(v)
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = objc.ExtractPtr(v)
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSPathControl_SetPathItems(n.Ptr(), cValue)
 }
 

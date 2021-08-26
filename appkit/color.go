@@ -42,6 +42,7 @@ type Color interface {
 	LocalizedColorNameComponent() string
 	Type() ColorType
 	ColorSpace() ColorSpace
+	CGColor() coregraphics.ColorRef
 	PatternImage() Image
 }
 
@@ -219,6 +220,11 @@ func ColorWithPatternImage(image Image) Color {
 	return MakeColor(result_)
 }
 
+func ColorWithCGColor(cgColor coregraphics.ColorRef) Color {
+	result_ := C.C_NSColor_ColorWithCGColor(unsafe.Pointer(cgColor))
+	return MakeColor(result_)
+}
+
 func Color_IgnoresAlpha() bool {
 	result_ := C.C_NSColor_Color_IgnoresAlpha()
 	return bool(result_)
@@ -323,6 +329,11 @@ func (n NSColor) ColorSpace() ColorSpace {
 	return MakeColorSpace(result_)
 }
 
+func (n NSColor) CGColor() coregraphics.ColorRef {
+	result_ := C.C_NSColor_CGColor(n.Ptr())
+	return coregraphics.ColorRef(result_)
+}
+
 func LabelColor() Color {
 	result_ := C.C_NSColor_LabelColor()
 	return MakeColor(result_)
@@ -420,7 +431,9 @@ func HeaderTextColor() Color {
 
 func Color_AlternatingContentBackgroundColors() []Color {
 	result_ := C.C_NSColor_Color_AlternatingContentBackgroundColors()
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]Color, len(result_Slice))
 	for idx, r := range result_Slice {

@@ -32,6 +32,21 @@ void C_NSToolbar_RunCustomizationPalette(void* ptr, void* sender) {
     [nSToolbar runCustomizationPalette:(id)sender];
 }
 
+void C_NSToolbar_SetConfigurationFromDictionary(void* ptr, Dictionary configDict) {
+    NSToolbar* nSToolbar = (NSToolbar*)ptr;
+    NSMutableDictionary* objcConfigDict = [[NSMutableDictionary alloc] initWithCapacity: configDict.len];
+    if (configDict.len > 0) {
+    	void** configDictKeyData = (void**)configDict.key_data;
+    	void** configDictValueData = (void**)configDict.value_data;
+    	for (int i = 0; i < configDict.len; i++) {
+    		void* kp = configDictKeyData[i];
+    		void* vp = configDictValueData[i];
+    		[objcConfigDict setObject:(NSString*)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    [nSToolbar setConfigurationFromDictionary:objcConfigDict];
+}
+
 void C_NSToolbar_ValidateVisibleItems(void* ptr) {
     NSToolbar* nSToolbar = (NSToolbar*)ptr;
     [nSToolbar validateVisibleItems];
@@ -101,30 +116,34 @@ void C_NSToolbar_SetAllowsExtensionItems(void* ptr, bool value) {
 Array C_NSToolbar_Items(void* ptr) {
     NSToolbar* nSToolbar = (NSToolbar*)ptr;
     NSArray* result_ = [nSToolbar items];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 Array C_NSToolbar_VisibleItems(void* ptr) {
     NSToolbar* nSToolbar = (NSToolbar*)ptr;
     NSArray* result_ = [nSToolbar visibleItems];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -187,4 +206,26 @@ bool C_NSToolbar_AutosavesConfiguration(void* ptr) {
 void C_NSToolbar_SetAutosavesConfiguration(void* ptr, bool value) {
     NSToolbar* nSToolbar = (NSToolbar*)ptr;
     [nSToolbar setAutosavesConfiguration:value];
+}
+
+Dictionary C_NSToolbar_ConfigurationDictionary(void* ptr) {
+    NSToolbar* nSToolbar = (NSToolbar*)ptr;
+    NSDictionary* result_ = [nSToolbar configurationDictionary];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSString* kp = [result_Keys objectAtIndex:i];
+    		id vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
 }

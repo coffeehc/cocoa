@@ -61,10 +61,12 @@ void C_NSButton_SetPeriodicDelay_Interval(void* ptr, float delay, float interval
 void C_NSButton_CompressWithPrioritizedCompressionOptions(void* ptr, Array prioritizedOptions) {
     NSButton* nSButton = (NSButton*)ptr;
     NSMutableArray* objcPrioritizedOptions = [[NSMutableArray alloc] init];
-    void** prioritizedOptionsData = (void**)prioritizedOptions.data;
-    for (int i = 0; i < prioritizedOptions.len; i++) {
-    	void* p = prioritizedOptionsData[i];
-    	[objcPrioritizedOptions addObject:(NSUserInterfaceCompressionOptions*)(NSUserInterfaceCompressionOptions*)p];
+    if (prioritizedOptions.len > 0) {
+    	void** prioritizedOptionsData = (void**)prioritizedOptions.data;
+    	for (int i = 0; i < prioritizedOptions.len; i++) {
+    		void* p = prioritizedOptionsData[i];
+    		[objcPrioritizedOptions addObject:(NSUserInterfaceCompressionOptions*)(NSUserInterfaceCompressionOptions*)p];
+    	}
     }
     [nSButton compressWithPrioritizedCompressionOptions:objcPrioritizedOptions];
 }
@@ -72,10 +74,12 @@ void C_NSButton_CompressWithPrioritizedCompressionOptions(void* ptr, Array prior
 CGSize C_NSButton_MinimumSizeWithPrioritizedCompressionOptions(void* ptr, Array prioritizedOptions) {
     NSButton* nSButton = (NSButton*)ptr;
     NSMutableArray* objcPrioritizedOptions = [[NSMutableArray alloc] init];
-    void** prioritizedOptionsData = (void**)prioritizedOptions.data;
-    for (int i = 0; i < prioritizedOptions.len; i++) {
-    	void* p = prioritizedOptionsData[i];
-    	[objcPrioritizedOptions addObject:(NSUserInterfaceCompressionOptions*)(NSUserInterfaceCompressionOptions*)p];
+    if (prioritizedOptions.len > 0) {
+    	void** prioritizedOptionsData = (void**)prioritizedOptions.data;
+    	for (int i = 0; i < prioritizedOptions.len; i++) {
+    		void* p = prioritizedOptionsData[i];
+    		[objcPrioritizedOptions addObject:(NSUserInterfaceCompressionOptions*)(NSUserInterfaceCompressionOptions*)p];
+    	}
     }
     NSSize result_ = [nSButton minimumSizeWithPrioritizedCompressionOptions:objcPrioritizedOptions];
     return result_;

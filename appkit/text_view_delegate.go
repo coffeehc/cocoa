@@ -21,6 +21,7 @@ type TextViewDelegate struct {
 	TextView_WriteCell_AtIndex_ToPasteboard_Type                      func(view TextView, cell objc.Object, charIndex uint, pboard Pasteboard, _type PasteboardType) bool
 	TextView_ShouldChangeTextInRange_ReplacementString                func(textView TextView, affectedCharRange foundation.Range, replacementString string) bool
 	TextView_ShouldChangeTextInRanges_ReplacementStrings              func(textView TextView, affectedRanges []foundation.Value, replacementStrings []string) bool
+	TextView_ShouldChangeTypingAttributes_ToAttributes                func(textView TextView, oldTypingAttributes map[string]objc.Object, newTypingAttributes map[foundation.AttributedStringKey]objc.Object) map[foundation.AttributedStringKey]objc.Object
 	TextViewDidChangeTypingAttributes                                 func(notification foundation.Notification)
 	TextView_ClickedOnCell_InRect_AtIndex                             func(textView TextView, cell objc.Object, cellFrame foundation.Rect, charIndex uint)
 	TextView_DoubleClickedOnCell_InRect_AtIndex                       func(textView TextView, cell objc.Object, cellFrame foundation.Rect, charIndex uint)
@@ -78,24 +79,32 @@ func textViewDelegate_TextView_WillChangeSelectionFromCharacterRange_ToCharacter
 //export textViewDelegate_TextView_WillChangeSelectionFromCharacterRanges_ToCharacterRanges
 func textViewDelegate_TextView_WillChangeSelectionFromCharacterRanges_ToCharacterRanges(hp C.uintptr_t, textView unsafe.Pointer, oldSelectedCharRanges C.Array, newSelectedCharRanges C.Array) C.Array {
 	delegate := cgo.Handle(hp).Value().(*TextViewDelegate)
-	defer C.free(oldSelectedCharRanges.data)
+	if oldSelectedCharRanges.len > 0 {
+		defer C.free(oldSelectedCharRanges.data)
+	}
 	oldSelectedCharRangesSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(oldSelectedCharRanges.data))[:oldSelectedCharRanges.len:oldSelectedCharRanges.len]
 	var goOldSelectedCharRanges = make([]foundation.Value, len(oldSelectedCharRangesSlice))
 	for idx, r := range oldSelectedCharRangesSlice {
 		goOldSelectedCharRanges[idx] = foundation.MakeValue(r)
 	}
-	defer C.free(newSelectedCharRanges.data)
+	if newSelectedCharRanges.len > 0 {
+		defer C.free(newSelectedCharRanges.data)
+	}
 	newSelectedCharRangesSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(newSelectedCharRanges.data))[:newSelectedCharRanges.len:newSelectedCharRanges.len]
 	var goNewSelectedCharRanges = make([]foundation.Value, len(newSelectedCharRangesSlice))
 	for idx, r := range newSelectedCharRangesSlice {
 		goNewSelectedCharRanges[idx] = foundation.MakeValue(r)
 	}
 	result := delegate.TextView_WillChangeSelectionFromCharacterRanges_ToCharacterRanges(MakeTextView(textView), goOldSelectedCharRanges, goNewSelectedCharRanges)
-	cResultData := make([]unsafe.Pointer, len(result))
-	for idx, v := range result {
-		cResultData[idx] = objc.ExtractPtr(v)
+	var cResult C.Array
+	if len(result) > 0 {
+		cResultData := make([]unsafe.Pointer, len(result))
+		for idx, v := range result {
+			cResultData[idx] = objc.ExtractPtr(v)
+		}
+		cResult.data = unsafe.Pointer(&cResultData[0])
+		cResult.len = C.int(len(result))
 	}
-	cResult := C.Array{data: unsafe.Pointer(&cResultData[0]), len: C.int(len(result))}
 	return cResult
 }
 
@@ -109,11 +118,15 @@ func textViewDelegate_TextViewDidChangeSelection(hp C.uintptr_t, notification un
 func textViewDelegate_TextView_WritablePasteboardTypesForCell_AtIndex(hp C.uintptr_t, view unsafe.Pointer, cell unsafe.Pointer, charIndex C.uint) C.Array {
 	delegate := cgo.Handle(hp).Value().(*TextViewDelegate)
 	result := delegate.TextView_WritablePasteboardTypesForCell_AtIndex(MakeTextView(view), objc.MakeObject(cell), uint(charIndex))
-	cResultData := make([]unsafe.Pointer, len(result))
-	for idx, v := range result {
-		cResultData[idx] = foundation.NewString(string(v)).Ptr()
+	var cResult C.Array
+	if len(result) > 0 {
+		cResultData := make([]unsafe.Pointer, len(result))
+		for idx, v := range result {
+			cResultData[idx] = foundation.NewString(string(v)).Ptr()
+		}
+		cResult.data = unsafe.Pointer(&cResultData[0])
+		cResult.len = C.int(len(result))
 	}
-	cResult := C.Array{data: unsafe.Pointer(&cResultData[0]), len: C.int(len(result))}
 	return cResult
 }
 
@@ -134,13 +147,17 @@ func textViewDelegate_TextView_ShouldChangeTextInRange_ReplacementString(hp C.ui
 //export textViewDelegate_TextView_ShouldChangeTextInRanges_ReplacementStrings
 func textViewDelegate_TextView_ShouldChangeTextInRanges_ReplacementStrings(hp C.uintptr_t, textView unsafe.Pointer, affectedRanges C.Array, replacementStrings C.Array) C.bool {
 	delegate := cgo.Handle(hp).Value().(*TextViewDelegate)
-	defer C.free(affectedRanges.data)
+	if affectedRanges.len > 0 {
+		defer C.free(affectedRanges.data)
+	}
 	affectedRangesSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(affectedRanges.data))[:affectedRanges.len:affectedRanges.len]
 	var goAffectedRanges = make([]foundation.Value, len(affectedRangesSlice))
 	for idx, r := range affectedRangesSlice {
 		goAffectedRanges[idx] = foundation.MakeValue(r)
 	}
-	defer C.free(replacementStrings.data)
+	if replacementStrings.len > 0 {
+		defer C.free(replacementStrings.data)
+	}
 	replacementStringsSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(replacementStrings.data))[:replacementStrings.len:replacementStrings.len]
 	var goReplacementStrings = make([]string, len(replacementStringsSlice))
 	for idx, r := range replacementStringsSlice {
@@ -148,6 +165,49 @@ func textViewDelegate_TextView_ShouldChangeTextInRanges_ReplacementStrings(hp C.
 	}
 	result := delegate.TextView_ShouldChangeTextInRanges_ReplacementStrings(MakeTextView(textView), goAffectedRanges, goReplacementStrings)
 	return C.bool(result)
+}
+
+//export textViewDelegate_TextView_ShouldChangeTypingAttributes_ToAttributes
+func textViewDelegate_TextView_ShouldChangeTypingAttributes_ToAttributes(hp C.uintptr_t, textView unsafe.Pointer, oldTypingAttributes C.Dictionary, newTypingAttributes C.Dictionary) C.Dictionary {
+	delegate := cgo.Handle(hp).Value().(*TextViewDelegate)
+	if oldTypingAttributes.len > 0 {
+		defer C.free(oldTypingAttributes.key_data)
+		defer C.free(oldTypingAttributes.value_data)
+	}
+	oldTypingAttributesKeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(oldTypingAttributes.key_data))[:oldTypingAttributes.len:oldTypingAttributes.len]
+	oldTypingAttributesValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(oldTypingAttributes.value_data))[:oldTypingAttributes.len:oldTypingAttributes.len]
+	var goOldTypingAttributes = make(map[string]objc.Object)
+	for idx, k := range oldTypingAttributesKeySlice {
+		v := oldTypingAttributesValueSlice[idx]
+		goOldTypingAttributes[foundation.MakeString(k).String()] = objc.MakeObject(v)
+	}
+	if newTypingAttributes.len > 0 {
+		defer C.free(newTypingAttributes.key_data)
+		defer C.free(newTypingAttributes.value_data)
+	}
+	newTypingAttributesKeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(newTypingAttributes.key_data))[:newTypingAttributes.len:newTypingAttributes.len]
+	newTypingAttributesValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(newTypingAttributes.value_data))[:newTypingAttributes.len:newTypingAttributes.len]
+	var goNewTypingAttributes = make(map[foundation.AttributedStringKey]objc.Object)
+	for idx, k := range newTypingAttributesKeySlice {
+		v := newTypingAttributesValueSlice[idx]
+		goNewTypingAttributes[foundation.AttributedStringKey(foundation.MakeString(k).String())] = objc.MakeObject(v)
+	}
+	result := delegate.TextView_ShouldChangeTypingAttributes_ToAttributes(MakeTextView(textView), goOldTypingAttributes, goNewTypingAttributes)
+	var cResult C.Dictionary
+	if len(result) > 0 {
+		cResultKeyData := make([]unsafe.Pointer, len(result))
+		cResultValueData := make([]unsafe.Pointer, len(result))
+		var idx = 0
+		for k, v := range result {
+			cResultKeyData[idx] = foundation.NewString(string(k)).Ptr()
+			cResultValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cResult.key_data = unsafe.Pointer(&cResultKeyData[0])
+		cResult.value_data = unsafe.Pointer(&cResultValueData[0])
+		cResult.len = C.int(len(result))
+	}
+	return cResult
 }
 
 //export textViewDelegate_TextViewDidChangeTypingAttributes
@@ -191,7 +251,9 @@ func textViewDelegate_TextView_DraggedCell_InRect_Event_AtIndex(hp C.uintptr_t, 
 //export textViewDelegate_TextView_WillShowSharingServicePicker_ForItems
 func textViewDelegate_TextView_WillShowSharingServicePicker_ForItems(hp C.uintptr_t, textView unsafe.Pointer, servicePicker unsafe.Pointer, items C.Array) unsafe.Pointer {
 	delegate := cgo.Handle(hp).Value().(*TextViewDelegate)
-	defer C.free(items.data)
+	if items.len > 0 {
+		defer C.free(items.data)
+	}
 	itemsSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(items.data))[:items.len:items.len]
 	var goItems = make([]objc.Object, len(itemsSlice))
 	for idx, r := range itemsSlice {
@@ -218,18 +280,24 @@ func textViewDelegate_TextView_Menu_ForEvent_AtIndex(hp C.uintptr_t, view unsafe
 //export textViewDelegate_TextView_Candidates_ForSelectedRange
 func textViewDelegate_TextView_Candidates_ForSelectedRange(hp C.uintptr_t, textView unsafe.Pointer, candidates C.Array, selectedRange C.NSRange) C.Array {
 	delegate := cgo.Handle(hp).Value().(*TextViewDelegate)
-	defer C.free(candidates.data)
+	if candidates.len > 0 {
+		defer C.free(candidates.data)
+	}
 	candidatesSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(candidates.data))[:candidates.len:candidates.len]
 	var goCandidates = make([]foundation.TextCheckingResult, len(candidatesSlice))
 	for idx, r := range candidatesSlice {
 		goCandidates[idx] = foundation.MakeTextCheckingResult(r)
 	}
 	result := delegate.TextView_Candidates_ForSelectedRange(MakeTextView(textView), goCandidates, foundation.FromNSRangePointer(unsafe.Pointer(&selectedRange)))
-	cResultData := make([]unsafe.Pointer, len(result))
-	for idx, v := range result {
-		cResultData[idx] = objc.ExtractPtr(v)
+	var cResult C.Array
+	if len(result) > 0 {
+		cResultData := make([]unsafe.Pointer, len(result))
+		for idx, v := range result {
+			cResultData[idx] = objc.ExtractPtr(v)
+		}
+		cResult.data = unsafe.Pointer(&cResultData[0])
+		cResult.len = C.int(len(result))
 	}
-	cResult := C.Array{data: unsafe.Pointer(&cResultData[0]), len: C.int(len(result))}
 	return cResult
 }
 
@@ -237,11 +305,15 @@ func textViewDelegate_TextView_Candidates_ForSelectedRange(hp C.uintptr_t, textV
 func textViewDelegate_TextView_CandidatesForSelectedRange(hp C.uintptr_t, textView unsafe.Pointer, selectedRange C.NSRange) C.Array {
 	delegate := cgo.Handle(hp).Value().(*TextViewDelegate)
 	result := delegate.TextView_CandidatesForSelectedRange(MakeTextView(textView), foundation.FromNSRangePointer(unsafe.Pointer(&selectedRange)))
-	cResultData := make([]unsafe.Pointer, len(result))
-	for idx, v := range result {
-		cResultData[idx] = objc.ExtractPtr(v)
+	var cResult C.Array
+	if len(result) > 0 {
+		cResultData := make([]unsafe.Pointer, len(result))
+		for idx, v := range result {
+			cResultData[idx] = objc.ExtractPtr(v)
+		}
+		cResult.data = unsafe.Pointer(&cResultData[0])
+		cResult.len = C.int(len(result))
 	}
-	cResult := C.Array{data: unsafe.Pointer(&cResultData[0]), len: C.int(len(result))}
 	return cResult
 }
 
@@ -255,18 +327,24 @@ func textViewDelegate_TextView_ShouldSelectCandidateAtIndex(hp C.uintptr_t, text
 //export textViewDelegate_TextView_ShouldUpdateTouchBarItemIdentifiers
 func textViewDelegate_TextView_ShouldUpdateTouchBarItemIdentifiers(hp C.uintptr_t, textView unsafe.Pointer, identifiers C.Array) C.Array {
 	delegate := cgo.Handle(hp).Value().(*TextViewDelegate)
-	defer C.free(identifiers.data)
+	if identifiers.len > 0 {
+		defer C.free(identifiers.data)
+	}
 	identifiersSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(identifiers.data))[:identifiers.len:identifiers.len]
 	var goIdentifiers = make([]TouchBarItemIdentifier, len(identifiersSlice))
 	for idx, r := range identifiersSlice {
 		goIdentifiers[idx] = TouchBarItemIdentifier(foundation.MakeString(r).String())
 	}
 	result := delegate.TextView_ShouldUpdateTouchBarItemIdentifiers(MakeTextView(textView), goIdentifiers)
-	cResultData := make([]unsafe.Pointer, len(result))
-	for idx, v := range result {
-		cResultData[idx] = foundation.NewString(string(v)).Ptr()
+	var cResult C.Array
+	if len(result) > 0 {
+		cResultData := make([]unsafe.Pointer, len(result))
+		for idx, v := range result {
+			cResultData[idx] = foundation.NewString(string(v)).Ptr()
+		}
+		cResult.data = unsafe.Pointer(&cResultData[0])
+		cResult.len = C.int(len(result))
 	}
-	cResult := C.Array{data: unsafe.Pointer(&cResultData[0]), len: C.int(len(result))}
 	return cResult
 }
 
@@ -328,6 +406,8 @@ func TextViewDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) boo
 		return delegate.TextView_ShouldChangeTextInRange_ReplacementString != nil
 	case "textView:shouldChangeTextInRanges:replacementStrings:":
 		return delegate.TextView_ShouldChangeTextInRanges_ReplacementStrings != nil
+	case "textView:shouldChangeTypingAttributes:toAttributes:":
+		return delegate.TextView_ShouldChangeTypingAttributes_ToAttributes != nil
 	case "textViewDidChangeTypingAttributes:":
 		return delegate.TextViewDidChangeTypingAttributes != nil
 	case "textView:clickedOnCell:inRect:atIndex:":
@@ -367,9 +447,4 @@ func TextViewDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) boo
 	default:
 		return false
 	}
-}
-
-//export deleteTextViewDelegate
-func deleteTextViewDelegate(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
 }

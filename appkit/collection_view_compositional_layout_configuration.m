@@ -36,25 +36,29 @@ void C_NSCollectionViewCompositionalLayoutConfiguration_SetInterSectionSpacing(v
 Array C_NSCollectionViewCompositionalLayoutConfiguration_BoundarySupplementaryItems(void* ptr) {
     NSCollectionViewCompositionalLayoutConfiguration* nSCollectionViewCompositionalLayoutConfiguration = (NSCollectionViewCompositionalLayoutConfiguration*)ptr;
     NSArray* result_ = [nSCollectionViewCompositionalLayoutConfiguration boundarySupplementaryItems];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSCollectionViewCompositionalLayoutConfiguration_SetBoundarySupplementaryItems(void* ptr, Array value) {
     NSCollectionViewCompositionalLayoutConfiguration* nSCollectionViewCompositionalLayoutConfiguration = (NSCollectionViewCompositionalLayoutConfiguration*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSCollectionLayoutBoundarySupplementaryItem*)(NSCollectionLayoutBoundarySupplementaryItem*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSCollectionLayoutBoundarySupplementaryItem*)(NSCollectionLayoutBoundarySupplementaryItem*)p];
+    	}
     }
     [nSCollectionViewCompositionalLayoutConfiguration setBoundarySupplementaryItems:objcValue];
 }

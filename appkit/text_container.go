@@ -95,7 +95,9 @@ func (n NSTextContainer) SetSize(value foundation.Size) {
 
 func (n NSTextContainer) ExclusionPaths() []BezierPath {
 	result_ := C.C_NSTextContainer_ExclusionPaths(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]BezierPath, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -105,11 +107,15 @@ func (n NSTextContainer) ExclusionPaths() []BezierPath {
 }
 
 func (n NSTextContainer) SetExclusionPaths(value []BezierPath) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = objc.ExtractPtr(v)
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = objc.ExtractPtr(v)
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSTextContainer_SetExclusionPaths(n.Ptr(), cValue)
 }
 

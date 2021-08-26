@@ -24,6 +24,8 @@ void* C_NSTimeZone_SystemTimeZone();
 void* C_NSTimeZone_DefaultTimeZone();
 void C_NSTimeZone_SetDefaultTimeZone(void* value);
 Array C_NSTimeZone_TimeZone_KnownTimeZoneNames();
+Dictionary C_NSTimeZone_TimeZone_AbbreviationDictionary();
+void C_NSTimeZone_TimeZone_SetAbbreviationDictionary(Dictionary value);
 void* C_NSTimeZone_Name(void* ptr);
 void* C_NSTimeZone_Abbreviation(void* ptr);
 int C_NSTimeZone_SecondsFromGMT(void* ptr);

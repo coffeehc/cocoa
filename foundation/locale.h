@@ -9,6 +9,8 @@ void* C_NSLocale_InitWithLocaleIdentifier(void* ptr, void* _string);
 void* C_NSLocale_InitWithCoder(void* ptr, void* coder);
 void* C_NSLocale_LocaleWithLocaleIdentifier(void* ident);
 void* C_NSLocale_Locale_CanonicalLocaleIdentifierFromString(void* _string);
+Dictionary C_NSLocale_Locale_ComponentsFromLocaleIdentifier(void* _string);
+void* C_NSLocale_LocaleIdentifierFromComponents(Dictionary dict);
 void* C_NSLocale_Locale_CanonicalLanguageIdentifierFromString(void* _string);
 void* C_NSLocale_LocaleIdentifierFromWindowsLocaleCode(uint32_t lcid);
 uint32_t C_NSLocale_Locale_WindowsLocaleCodeFromLocaleIdentifier(void* localeIdentifier);

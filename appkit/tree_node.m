@@ -31,10 +31,12 @@ void* C_NSTreeNode_DescendantNodeAtIndexPath(void* ptr, void* indexPath) {
 void C_NSTreeNode_SortWithSortDescriptors_Recursively(void* ptr, Array sortDescriptors, bool recursively) {
     NSTreeNode* nSTreeNode = (NSTreeNode*)ptr;
     NSMutableArray* objcSortDescriptors = [[NSMutableArray alloc] init];
-    void** sortDescriptorsData = (void**)sortDescriptors.data;
-    for (int i = 0; i < sortDescriptors.len; i++) {
-    	void* p = sortDescriptorsData[i];
-    	[objcSortDescriptors addObject:(NSSortDescriptor*)(NSSortDescriptor*)p];
+    if (sortDescriptors.len > 0) {
+    	void** sortDescriptorsData = (void**)sortDescriptors.data;
+    	for (int i = 0; i < sortDescriptors.len; i++) {
+    		void* p = sortDescriptorsData[i];
+    		[objcSortDescriptors addObject:(NSSortDescriptor*)(NSSortDescriptor*)p];
+    	}
     }
     [nSTreeNode sortWithSortDescriptors:objcSortDescriptors recursively:recursively];
 }
@@ -60,15 +62,17 @@ bool C_NSTreeNode_IsLeaf(void* ptr) {
 Array C_NSTreeNode_ChildNodes(void* ptr) {
     NSTreeNode* nSTreeNode = (NSTreeNode*)ptr;
     NSArray* result_ = [nSTreeNode childNodes];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 

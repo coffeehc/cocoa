@@ -82,6 +82,25 @@ func Font_UserFixedPitchFontOfSize(fontSize coregraphics.Float) Font {
 	return MakeFont(result_)
 }
 
+func Font_PreferredFontForTextStyle_Options(style FontTextStyle, options map[FontTextStyleOptionKey]objc.Object) Font {
+	var cOptions C.Dictionary
+	if len(options) > 0 {
+		cOptionsKeyData := make([]unsafe.Pointer, len(options))
+		cOptionsValueData := make([]unsafe.Pointer, len(options))
+		var idx = 0
+		for k, v := range options {
+			cOptionsKeyData[idx] = foundation.NewString(string(k)).Ptr()
+			cOptionsValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cOptions.key_data = unsafe.Pointer(&cOptionsKeyData[0])
+		cOptions.value_data = unsafe.Pointer(&cOptionsValueData[0])
+		cOptions.len = C.int(len(options))
+	}
+	result_ := C.C_NSFont_Font_PreferredFontForTextStyle_Options(foundation.NewString(string(style)).Ptr(), cOptions)
+	return MakeFont(result_)
+}
+
 func Font_SystemFontOfSize(fontSize coregraphics.Float) Font {
 	result_ := C.C_NSFont_Font_SystemFontOfSize(C.double(float64(fontSize)))
 	return MakeFont(result_)

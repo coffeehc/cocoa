@@ -33,7 +33,7 @@
 }
 
 - (void)dealloc {
-	deleteAnimationDelegate([self goID]);
+	deleteAppKitHandle([self goID]);
 	[super dealloc];
 }
 @end

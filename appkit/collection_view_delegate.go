@@ -228,8 +228,3 @@ func CollectionViewDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointe
 		return false
 	}
 }
-
-//export deleteCollectionViewDelegate
-func deleteCollectionViewDelegate(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
-}

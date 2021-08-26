@@ -136,11 +136,15 @@ func (n NSMatrix) AddColumn() {
 }
 
 func (n NSMatrix) AddColumnWithCells(newCells []Cell) {
-	cNewCellsData := make([]unsafe.Pointer, len(newCells))
-	for idx, v := range newCells {
-		cNewCellsData[idx] = objc.ExtractPtr(v)
+	var cNewCells C.Array
+	if len(newCells) > 0 {
+		cNewCellsData := make([]unsafe.Pointer, len(newCells))
+		for idx, v := range newCells {
+			cNewCellsData[idx] = objc.ExtractPtr(v)
+		}
+		cNewCells.data = unsafe.Pointer(&cNewCellsData[0])
+		cNewCells.len = C.int(len(newCells))
 	}
-	cNewCells := C.Array{data: unsafe.Pointer(&cNewCellsData[0]), len: C.int(len(newCells))}
 	C.C_NSMatrix_AddColumnWithCells(n.Ptr(), cNewCells)
 }
 
@@ -149,11 +153,15 @@ func (n NSMatrix) AddRow() {
 }
 
 func (n NSMatrix) AddRowWithCells(newCells []Cell) {
-	cNewCellsData := make([]unsafe.Pointer, len(newCells))
-	for idx, v := range newCells {
-		cNewCellsData[idx] = objc.ExtractPtr(v)
+	var cNewCells C.Array
+	if len(newCells) > 0 {
+		cNewCellsData := make([]unsafe.Pointer, len(newCells))
+		for idx, v := range newCells {
+			cNewCellsData[idx] = objc.ExtractPtr(v)
+		}
+		cNewCells.data = unsafe.Pointer(&cNewCellsData[0])
+		cNewCells.len = C.int(len(newCells))
 	}
-	cNewCells := C.Array{data: unsafe.Pointer(&cNewCellsData[0]), len: C.int(len(newCells))}
 	C.C_NSMatrix_AddRowWithCells(n.Ptr(), cNewCells)
 }
 
@@ -167,11 +175,15 @@ func (n NSMatrix) InsertColumn(column int) {
 }
 
 func (n NSMatrix) InsertColumn_WithCells(column int, newCells []Cell) {
-	cNewCellsData := make([]unsafe.Pointer, len(newCells))
-	for idx, v := range newCells {
-		cNewCellsData[idx] = objc.ExtractPtr(v)
+	var cNewCells C.Array
+	if len(newCells) > 0 {
+		cNewCellsData := make([]unsafe.Pointer, len(newCells))
+		for idx, v := range newCells {
+			cNewCellsData[idx] = objc.ExtractPtr(v)
+		}
+		cNewCells.data = unsafe.Pointer(&cNewCellsData[0])
+		cNewCells.len = C.int(len(newCells))
 	}
-	cNewCells := C.Array{data: unsafe.Pointer(&cNewCellsData[0]), len: C.int(len(newCells))}
 	C.C_NSMatrix_InsertColumn_WithCells(n.Ptr(), C.int(column), cNewCells)
 }
 
@@ -180,11 +192,15 @@ func (n NSMatrix) InsertRow(row int) {
 }
 
 func (n NSMatrix) InsertRow_WithCells(row int, newCells []Cell) {
-	cNewCellsData := make([]unsafe.Pointer, len(newCells))
-	for idx, v := range newCells {
-		cNewCellsData[idx] = objc.ExtractPtr(v)
+	var cNewCells C.Array
+	if len(newCells) > 0 {
+		cNewCellsData := make([]unsafe.Pointer, len(newCells))
+		for idx, v := range newCells {
+			cNewCellsData[idx] = objc.ExtractPtr(v)
+		}
+		cNewCells.data = unsafe.Pointer(&cNewCellsData[0])
+		cNewCells.len = C.int(len(newCells))
 	}
-	cNewCells := C.Array{data: unsafe.Pointer(&cNewCellsData[0]), len: C.int(len(newCells))}
 	C.C_NSMatrix_InsertRow_WithCells(n.Ptr(), C.int(row), cNewCells)
 }
 
@@ -418,7 +434,9 @@ func (n NSMatrix) SelectedCell() Cell {
 
 func (n NSMatrix) SelectedCells() []Cell {
 	result_ := C.C_NSMatrix_SelectedCells(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]Cell, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -439,7 +457,9 @@ func (n NSMatrix) SelectedRow() int {
 
 func (n NSMatrix) Cells() []Cell {
 	result_ := C.C_NSMatrix_Cells(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]Cell, len(result_Slice))
 	for idx, r := range result_Slice {

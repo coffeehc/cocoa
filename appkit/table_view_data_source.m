@@ -47,15 +47,17 @@
 }
 
 - (void)tableView:(NSTableView*)tableView sortDescriptorsDidChange:(NSArray*)oldDescriptors {
-    int oldDescriptorscount = [oldDescriptors count];
-    void** oldDescriptorsData = malloc(oldDescriptorscount * sizeof(void*));
-    for (int i = 0; i < oldDescriptorscount; i++) {
-    	 void* p = [oldDescriptors objectAtIndex:i];
-    	 oldDescriptorsData[i] = p;
-    }
     Array oldDescriptorsArray;
-    oldDescriptorsArray.data = oldDescriptorsData;
-    oldDescriptorsArray.len = oldDescriptorscount;
+    int oldDescriptorscount = [oldDescriptors count];
+    if (oldDescriptorscount > 0) {
+    	void** oldDescriptorsData = malloc(oldDescriptorscount * sizeof(void*));
+    	for (int i = 0; i < oldDescriptorscount; i++) {
+    		 void* p = [oldDescriptors objectAtIndex:i];
+    		 oldDescriptorsData[i] = p;
+    	}
+    	oldDescriptorsArray.data = oldDescriptorsData;
+    	oldDescriptorsArray.len = oldDescriptorscount;
+    }
     tableViewDataSource_TableView_SortDescriptorsDidChange([self goID], tableView, oldDescriptorsArray);
 }
 
@@ -65,7 +67,7 @@
 }
 
 - (void)dealloc {
-	deleteTableViewDataSource([self goID]);
+	deleteAppKitHandle([self goID]);
 	[super dealloc];
 }
 @end

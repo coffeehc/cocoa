@@ -108,10 +108,12 @@ void C_NSResponder_KeyUp(void* ptr, void* event) {
 void C_NSResponder_InterpretKeyEvents(void* ptr, Array eventArray) {
     NSResponder* nSResponder = (NSResponder*)ptr;
     NSMutableArray* objcEventArray = [[NSMutableArray alloc] init];
-    void** eventArrayData = (void**)eventArray.data;
-    for (int i = 0; i < eventArray.len; i++) {
-    	void* p = eventArrayData[i];
-    	[objcEventArray addObject:(NSEvent*)(NSEvent*)p];
+    if (eventArray.len > 0) {
+    	void** eventArrayData = (void**)eventArray.data;
+    	for (int i = 0; i < eventArray.len; i++) {
+    		void* p = eventArrayData[i];
+    		[objcEventArray addObject:(NSEvent*)(NSEvent*)p];
+    	}
     }
     [nSResponder interpretKeyEvents:objcEventArray];
 }
@@ -340,15 +342,17 @@ void C_NSResponder_SetNextResponder(void* ptr, void* value) {
 
 Array C_NSResponder_Responder_RestorableStateKeyPaths() {
     NSArray* result_ = [NSResponder restorableStateKeyPaths];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 

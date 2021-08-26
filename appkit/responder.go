@@ -175,11 +175,15 @@ func (n NSResponder) KeyUp(event Event) {
 }
 
 func (n NSResponder) InterpretKeyEvents(eventArray []Event) {
-	cEventArrayData := make([]unsafe.Pointer, len(eventArray))
-	for idx, v := range eventArray {
-		cEventArrayData[idx] = objc.ExtractPtr(v)
+	var cEventArray C.Array
+	if len(eventArray) > 0 {
+		cEventArrayData := make([]unsafe.Pointer, len(eventArray))
+		for idx, v := range eventArray {
+			cEventArrayData[idx] = objc.ExtractPtr(v)
+		}
+		cEventArray.data = unsafe.Pointer(&cEventArrayData[0])
+		cEventArray.len = C.int(len(eventArray))
 	}
-	cEventArray := C.Array{data: unsafe.Pointer(&cEventArrayData[0]), len: C.int(len(eventArray))}
 	C.C_NSResponder_InterpretKeyEvents(n.Ptr(), cEventArray)
 }
 
@@ -365,7 +369,9 @@ func (n NSResponder) SetNextResponder(value Responder) {
 
 func Responder_RestorableStateKeyPaths() []string {
 	result_ := C.C_NSResponder_Responder_RestorableStateKeyPaths()
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {

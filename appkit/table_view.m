@@ -328,6 +328,28 @@ void C_NSTableView_SetUsesStaticContents(void* ptr, bool value) {
     [nSTableView setUsesStaticContents:value];
 }
 
+Dictionary C_NSTableView_RegisteredNibsByIdentifier(void* ptr) {
+    NSTableView* nSTableView = (NSTableView*)ptr;
+    NSDictionary* result_ = [nSTableView registeredNibsByIdentifier];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSUserInterfaceItemIdentifier kp = [result_Keys objectAtIndex:i];
+    		NSNib* vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
+}
+
 void* C_NSTableView_DoubleAction(void* ptr) {
     NSTableView* nSTableView = (NSTableView*)ptr;
     SEL result_ = [nSTableView doubleAction];
@@ -531,15 +553,17 @@ void C_NSTableView_SetRowSizeStyle(void* ptr, int value) {
 Array C_NSTableView_TableColumns(void* ptr) {
     NSTableView* nSTableView = (NSTableView*)ptr;
     NSArray* result_ = [nSTableView tableColumns];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -727,25 +751,29 @@ void C_NSTableView_SetDraggingDestinationFeedbackStyle(void* ptr, int value) {
 Array C_NSTableView_SortDescriptors(void* ptr) {
     NSTableView* nSTableView = (NSTableView*)ptr;
     NSArray* result_ = [nSTableView sortDescriptors];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSTableView_SetSortDescriptors(void* ptr, Array value) {
     NSTableView* nSTableView = (NSTableView*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSSortDescriptor*)(NSSortDescriptor*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSSortDescriptor*)(NSSortDescriptor*)p];
+    	}
     }
     [nSTableView setSortDescriptors:objcValue];
 }

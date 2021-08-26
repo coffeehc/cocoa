@@ -21,7 +21,7 @@
 }
 
 - (void)dealloc {
-	deleteAnimatablePropertyContainer([self goID]);
+	deleteAppKitHandle([self goID]);
 	[super dealloc];
 }
 @end

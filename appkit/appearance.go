@@ -50,11 +50,15 @@ func AppearanceNamed(name AppearanceName) Appearance {
 }
 
 func (n NSAppearance) BestMatchFromAppearancesWithNames(appearances []AppearanceName) AppearanceName {
-	cAppearancesData := make([]unsafe.Pointer, len(appearances))
-	for idx, v := range appearances {
-		cAppearancesData[idx] = foundation.NewString(string(v)).Ptr()
+	var cAppearances C.Array
+	if len(appearances) > 0 {
+		cAppearancesData := make([]unsafe.Pointer, len(appearances))
+		for idx, v := range appearances {
+			cAppearancesData[idx] = foundation.NewString(string(v)).Ptr()
+		}
+		cAppearances.data = unsafe.Pointer(&cAppearancesData[0])
+		cAppearances.len = C.int(len(appearances))
 	}
-	cAppearances := C.Array{data: unsafe.Pointer(&cAppearancesData[0]), len: C.int(len(appearances))}
 	result_ := C.C_NSAppearance_BestMatchFromAppearancesWithNames(n.Ptr(), cAppearances)
 	return AppearanceName(foundation.MakeString(result_).String())
 }

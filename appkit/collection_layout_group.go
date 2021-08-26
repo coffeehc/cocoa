@@ -32,11 +32,15 @@ func AllocCollectionLayoutGroup() NSCollectionLayoutGroup {
 }
 
 func CollectionLayoutGroup_HorizontalGroupWithLayoutSize_Subitems(layoutSize CollectionLayoutSize, subitems []CollectionLayoutItem) CollectionLayoutGroup {
-	cSubitemsData := make([]unsafe.Pointer, len(subitems))
-	for idx, v := range subitems {
-		cSubitemsData[idx] = objc.ExtractPtr(v)
+	var cSubitems C.Array
+	if len(subitems) > 0 {
+		cSubitemsData := make([]unsafe.Pointer, len(subitems))
+		for idx, v := range subitems {
+			cSubitemsData[idx] = objc.ExtractPtr(v)
+		}
+		cSubitems.data = unsafe.Pointer(&cSubitemsData[0])
+		cSubitems.len = C.int(len(subitems))
 	}
-	cSubitems := C.Array{data: unsafe.Pointer(&cSubitemsData[0]), len: C.int(len(subitems))}
 	result_ := C.C_NSCollectionLayoutGroup_CollectionLayoutGroup_HorizontalGroupWithLayoutSize_Subitems(objc.ExtractPtr(layoutSize), cSubitems)
 	return MakeCollectionLayoutGroup(result_)
 }
@@ -47,11 +51,15 @@ func CollectionLayoutGroup_HorizontalGroupWithLayoutSize_Subitem_Count(layoutSiz
 }
 
 func CollectionLayoutGroup_VerticalGroupWithLayoutSize_Subitems(layoutSize CollectionLayoutSize, subitems []CollectionLayoutItem) CollectionLayoutGroup {
-	cSubitemsData := make([]unsafe.Pointer, len(subitems))
-	for idx, v := range subitems {
-		cSubitemsData[idx] = objc.ExtractPtr(v)
+	var cSubitems C.Array
+	if len(subitems) > 0 {
+		cSubitemsData := make([]unsafe.Pointer, len(subitems))
+		for idx, v := range subitems {
+			cSubitemsData[idx] = objc.ExtractPtr(v)
+		}
+		cSubitems.data = unsafe.Pointer(&cSubitemsData[0])
+		cSubitems.len = C.int(len(subitems))
 	}
-	cSubitems := C.Array{data: unsafe.Pointer(&cSubitemsData[0]), len: C.int(len(subitems))}
 	result_ := C.C_NSCollectionLayoutGroup_CollectionLayoutGroup_VerticalGroupWithLayoutSize_Subitems(objc.ExtractPtr(layoutSize), cSubitems)
 	return MakeCollectionLayoutGroup(result_)
 }
@@ -68,7 +76,9 @@ func (n NSCollectionLayoutGroup) VisualDescription() string {
 
 func (n NSCollectionLayoutGroup) Subitems() []CollectionLayoutItem {
 	result_ := C.C_NSCollectionLayoutGroup_Subitems(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]CollectionLayoutItem, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -78,11 +88,15 @@ func (n NSCollectionLayoutGroup) Subitems() []CollectionLayoutItem {
 }
 
 func (n NSCollectionLayoutGroup) SetSupplementaryItems(value []CollectionLayoutSupplementaryItem) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = objc.ExtractPtr(v)
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = objc.ExtractPtr(v)
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSCollectionLayoutGroup_SetSupplementaryItems(n.Ptr(), cValue)
 }
 

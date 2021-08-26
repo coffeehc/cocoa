@@ -190,15 +190,17 @@ void* C_NSTypesetter_CurrentTextContainer(void* ptr) {
 Array C_NSTypesetter_TextContainers(void* ptr) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
     NSArray* result_ = [nSTypesetter textContainers];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -263,4 +265,26 @@ NSRange C_NSTypesetter_ParagraphSeparatorCharacterRange(void* ptr) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
     NSRange result_ = [nSTypesetter paragraphSeparatorCharacterRange];
     return result_;
+}
+
+Dictionary C_NSTypesetter_AttributesForExtraLineFragment(void* ptr) {
+    NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
+    NSDictionary* result_ = [nSTypesetter attributesForExtraLineFragment];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSAttributedStringKey kp = [result_Keys objectAtIndex:i];
+    		id vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
 }

@@ -37,10 +37,12 @@ bool C_NSTreeController_SetSelectionIndexPath(void* ptr, void* indexPath) {
 bool C_NSTreeController_SetSelectionIndexPaths(void* ptr, Array indexPaths) {
     NSTreeController* nSTreeController = (NSTreeController*)ptr;
     NSMutableArray* objcIndexPaths = [[NSMutableArray alloc] init];
-    void** indexPathsData = (void**)indexPaths.data;
-    for (int i = 0; i < indexPaths.len; i++) {
-    	void* p = indexPathsData[i];
-    	[objcIndexPaths addObject:(NSIndexPath*)(NSIndexPath*)p];
+    if (indexPaths.len > 0) {
+    	void** indexPathsData = (void**)indexPaths.data;
+    	for (int i = 0; i < indexPaths.len; i++) {
+    		void* p = indexPathsData[i];
+    		[objcIndexPaths addObject:(NSIndexPath*)(NSIndexPath*)p];
+    	}
     }
     BOOL result_ = [nSTreeController setSelectionIndexPaths:objcIndexPaths];
     return result_;
@@ -49,10 +51,12 @@ bool C_NSTreeController_SetSelectionIndexPaths(void* ptr, Array indexPaths) {
 bool C_NSTreeController_AddSelectionIndexPaths(void* ptr, Array indexPaths) {
     NSTreeController* nSTreeController = (NSTreeController*)ptr;
     NSMutableArray* objcIndexPaths = [[NSMutableArray alloc] init];
-    void** indexPathsData = (void**)indexPaths.data;
-    for (int i = 0; i < indexPaths.len; i++) {
-    	void* p = indexPathsData[i];
-    	[objcIndexPaths addObject:(NSIndexPath*)(NSIndexPath*)p];
+    if (indexPaths.len > 0) {
+    	void** indexPathsData = (void**)indexPaths.data;
+    	for (int i = 0; i < indexPaths.len; i++) {
+    		void* p = indexPathsData[i];
+    		[objcIndexPaths addObject:(NSIndexPath*)(NSIndexPath*)p];
+    	}
     }
     BOOL result_ = [nSTreeController addSelectionIndexPaths:objcIndexPaths];
     return result_;
@@ -61,10 +65,12 @@ bool C_NSTreeController_AddSelectionIndexPaths(void* ptr, Array indexPaths) {
 bool C_NSTreeController_RemoveSelectionIndexPaths(void* ptr, Array indexPaths) {
     NSTreeController* nSTreeController = (NSTreeController*)ptr;
     NSMutableArray* objcIndexPaths = [[NSMutableArray alloc] init];
-    void** indexPathsData = (void**)indexPaths.data;
-    for (int i = 0; i < indexPaths.len; i++) {
-    	void* p = indexPathsData[i];
-    	[objcIndexPaths addObject:(NSIndexPath*)(NSIndexPath*)p];
+    if (indexPaths.len > 0) {
+    	void** indexPathsData = (void**)indexPaths.data;
+    	for (int i = 0; i < indexPaths.len; i++) {
+    		void* p = indexPathsData[i];
+    		[objcIndexPaths addObject:(NSIndexPath*)(NSIndexPath*)p];
+    	}
     }
     BOOL result_ = [nSTreeController removeSelectionIndexPaths:objcIndexPaths];
     return result_;
@@ -93,16 +99,20 @@ void C_NSTreeController_InsertObject_AtArrangedObjectIndexPath(void* ptr, void* 
 void C_NSTreeController_InsertObjects_AtArrangedObjectIndexPaths(void* ptr, Array objects, Array indexPaths) {
     NSTreeController* nSTreeController = (NSTreeController*)ptr;
     NSMutableArray* objcObjects = [[NSMutableArray alloc] init];
-    void** objectsData = (void**)objects.data;
-    for (int i = 0; i < objects.len; i++) {
-    	void* p = objectsData[i];
-    	[objcObjects addObject:(NSObject*)(NSObject*)p];
+    if (objects.len > 0) {
+    	void** objectsData = (void**)objects.data;
+    	for (int i = 0; i < objects.len; i++) {
+    		void* p = objectsData[i];
+    		[objcObjects addObject:(NSObject*)(NSObject*)p];
+    	}
     }
     NSMutableArray* objcIndexPaths = [[NSMutableArray alloc] init];
-    void** indexPathsData = (void**)indexPaths.data;
-    for (int i = 0; i < indexPaths.len; i++) {
-    	void* p = indexPathsData[i];
-    	[objcIndexPaths addObject:(NSIndexPath*)(NSIndexPath*)p];
+    if (indexPaths.len > 0) {
+    	void** indexPathsData = (void**)indexPaths.data;
+    	for (int i = 0; i < indexPaths.len; i++) {
+    		void* p = indexPathsData[i];
+    		[objcIndexPaths addObject:(NSIndexPath*)(NSIndexPath*)p];
+    	}
     }
     [nSTreeController insertObjects:objcObjects atArrangedObjectIndexPaths:objcIndexPaths];
 }
@@ -115,10 +125,12 @@ void C_NSTreeController_RemoveObjectAtArrangedObjectIndexPath(void* ptr, void* i
 void C_NSTreeController_RemoveObjectsAtArrangedObjectIndexPaths(void* ptr, Array indexPaths) {
     NSTreeController* nSTreeController = (NSTreeController*)ptr;
     NSMutableArray* objcIndexPaths = [[NSMutableArray alloc] init];
-    void** indexPathsData = (void**)indexPaths.data;
-    for (int i = 0; i < indexPaths.len; i++) {
-    	void* p = indexPathsData[i];
-    	[objcIndexPaths addObject:(NSIndexPath*)(NSIndexPath*)p];
+    if (indexPaths.len > 0) {
+    	void** indexPathsData = (void**)indexPaths.data;
+    	for (int i = 0; i < indexPaths.len; i++) {
+    		void* p = indexPathsData[i];
+    		[objcIndexPaths addObject:(NSIndexPath*)(NSIndexPath*)p];
+    	}
     }
     [nSTreeController removeObjectsAtArrangedObjectIndexPaths:objcIndexPaths];
 }
@@ -131,10 +143,12 @@ void C_NSTreeController_MoveNode_ToIndexPath(void* ptr, void* node, void* indexP
 void C_NSTreeController_MoveNodes_ToIndexPath(void* ptr, Array nodes, void* startingIndexPath) {
     NSTreeController* nSTreeController = (NSTreeController*)ptr;
     NSMutableArray* objcNodes = [[NSMutableArray alloc] init];
-    void** nodesData = (void**)nodes.data;
-    for (int i = 0; i < nodes.len; i++) {
-    	void* p = nodesData[i];
-    	[objcNodes addObject:(NSTreeNode*)(NSTreeNode*)p];
+    if (nodes.len > 0) {
+    	void** nodesData = (void**)nodes.data;
+    	for (int i = 0; i < nodes.len; i++) {
+    		void* p = nodesData[i];
+    		[objcNodes addObject:(NSTreeNode*)(NSTreeNode*)p];
+    	}
     }
     [nSTreeController moveNodes:objcNodes toIndexPath:(NSIndexPath*)startingIndexPath];
 }
@@ -160,25 +174,29 @@ void* C_NSTreeController_LeafKeyPathForNode(void* ptr, void* node) {
 Array C_NSTreeController_SortDescriptors(void* ptr) {
     NSTreeController* nSTreeController = (NSTreeController*)ptr;
     NSArray* result_ = [nSTreeController sortDescriptors];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSTreeController_SetSortDescriptors(void* ptr, Array value) {
     NSTreeController* nSTreeController = (NSTreeController*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSSortDescriptor*)(NSSortDescriptor*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSSortDescriptor*)(NSSortDescriptor*)p];
+    	}
     }
     [nSTreeController setSortDescriptors:objcValue];
 }
@@ -198,30 +216,34 @@ void* C_NSTreeController_SelectionIndexPath(void* ptr) {
 Array C_NSTreeController_SelectionIndexPaths(void* ptr) {
     NSTreeController* nSTreeController = (NSTreeController*)ptr;
     NSArray* result_ = [nSTreeController selectionIndexPaths];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 Array C_NSTreeController_SelectedNodes(void* ptr) {
     NSTreeController* nSTreeController = (NSTreeController*)ptr;
     NSArray* result_ = [nSTreeController selectedNodes];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 

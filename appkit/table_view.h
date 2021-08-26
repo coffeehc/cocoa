@@ -65,6 +65,7 @@ void* C_NSTableView_DataSource(void* ptr);
 void C_NSTableView_SetDataSource(void* ptr, void* value);
 bool C_NSTableView_UsesStaticContents(void* ptr);
 void C_NSTableView_SetUsesStaticContents(void* ptr, bool value);
+Dictionary C_NSTableView_RegisteredNibsByIdentifier(void* ptr);
 void* C_NSTableView_DoubleAction(void* ptr);
 void C_NSTableView_SetDoubleAction(void* ptr, void* value);
 int C_NSTableView_ClickedColumn(void* ptr);

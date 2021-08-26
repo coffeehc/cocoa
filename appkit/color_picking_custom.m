@@ -74,7 +74,7 @@
 }
 
 - (void)dealloc {
-	deleteColorPickingCustom([self goID]);
+	deleteAppKitHandle([self goID]);
 	[super dealloc];
 }
 @end

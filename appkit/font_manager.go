@@ -36,6 +36,8 @@ type FontManager interface {
 	FontPanel(create bool) FontPanel
 	SetFontMenu(newMenu Menu)
 	FontMenu(create bool) Menu
+	SetSelectedAttributes_IsMultiple(attributes map[string]objc.Object, flag bool)
+	ConvertAttributes(attributes map[string]objc.Object) map[string]objc.Object
 	AvailableFonts() []string
 	AvailableFontFamilies() []string
 	SelectedFont() Font
@@ -70,7 +72,9 @@ func (n NSFontManager) Init() FontManager {
 
 func (n NSFontManager) AvailableFontNamesWithTraits(someTraits FontTraitMask) []string {
 	result_ := C.C_NSFontManager_AvailableFontNamesWithTraits(n.Ptr(), C.uint(uint(someTraits)))
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -191,6 +195,54 @@ func (n NSFontManager) FontMenu(create bool) Menu {
 	return MakeMenu(result_)
 }
 
+func (n NSFontManager) SetSelectedAttributes_IsMultiple(attributes map[string]objc.Object, flag bool) {
+	var cAttributes C.Dictionary
+	if len(attributes) > 0 {
+		cAttributesKeyData := make([]unsafe.Pointer, len(attributes))
+		cAttributesValueData := make([]unsafe.Pointer, len(attributes))
+		var idx = 0
+		for k, v := range attributes {
+			cAttributesKeyData[idx] = foundation.NewString(k).Ptr()
+			cAttributesValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cAttributes.key_data = unsafe.Pointer(&cAttributesKeyData[0])
+		cAttributes.value_data = unsafe.Pointer(&cAttributesValueData[0])
+		cAttributes.len = C.int(len(attributes))
+	}
+	C.C_NSFontManager_SetSelectedAttributes_IsMultiple(n.Ptr(), cAttributes, C.bool(flag))
+}
+
+func (n NSFontManager) ConvertAttributes(attributes map[string]objc.Object) map[string]objc.Object {
+	var cAttributes C.Dictionary
+	if len(attributes) > 0 {
+		cAttributesKeyData := make([]unsafe.Pointer, len(attributes))
+		cAttributesValueData := make([]unsafe.Pointer, len(attributes))
+		var idx = 0
+		for k, v := range attributes {
+			cAttributesKeyData[idx] = foundation.NewString(k).Ptr()
+			cAttributesValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cAttributes.key_data = unsafe.Pointer(&cAttributesKeyData[0])
+		cAttributes.value_data = unsafe.Pointer(&cAttributesValueData[0])
+		cAttributes.len = C.int(len(attributes))
+	}
+	result_ := C.C_NSFontManager_ConvertAttributes(n.Ptr(), cAttributes)
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[string]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[foundation.MakeString(k).String()] = objc.MakeObject(v)
+	}
+	return goResult_
+}
+
 func SharedFontManager() FontManager {
 	result_ := C.C_NSFontManager_SharedFontManager()
 	return MakeFontManager(result_)
@@ -198,7 +250,9 @@ func SharedFontManager() FontManager {
 
 func (n NSFontManager) AvailableFonts() []string {
 	result_ := C.C_NSFontManager_AvailableFonts(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -209,7 +263,9 @@ func (n NSFontManager) AvailableFonts() []string {
 
 func (n NSFontManager) AvailableFontFamilies() []string {
 	result_ := C.C_NSFontManager_AvailableFontFamilies(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {

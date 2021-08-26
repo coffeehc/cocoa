@@ -276,6 +276,21 @@ void C_NSApplication_OrderFrontStandardAboutPanel(void* ptr, void* sender) {
     [nSApplication orderFrontStandardAboutPanel:(id)sender];
 }
 
+void C_NSApplication_OrderFrontStandardAboutPanelWithOptions(void* ptr, Dictionary optionsDictionary) {
+    NSApplication* nSApplication = (NSApplication*)ptr;
+    NSMutableDictionary* objcOptionsDictionary = [[NSMutableDictionary alloc] initWithCapacity: optionsDictionary.len];
+    if (optionsDictionary.len > 0) {
+    	void** optionsDictionaryKeyData = (void**)optionsDictionary.key_data;
+    	void** optionsDictionaryValueData = (void**)optionsDictionary.value_data;
+    	for (int i = 0; i < optionsDictionary.len; i++) {
+    		void* kp = optionsDictionaryKeyData[i];
+    		void* vp = optionsDictionaryValueData[i];
+    		[objcOptionsDictionary setObject:(NSAboutPanelOptionKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    [nSApplication orderFrontStandardAboutPanelWithOptions:objcOptionsDictionary];
+}
+
 void C_NSApplication_OrderFrontCharacterPalette(void* ptr, void* sender) {
     NSApplication* nSApplication = (NSApplication*)ptr;
     [nSApplication orderFrontCharacterPalette:(id)sender];
@@ -309,16 +324,20 @@ void C_NSApplication_UpdateWindowsItem(void* ptr, void* win) {
 void C_NSApplication_RegisterServicesMenuSendTypes_ReturnTypes(void* ptr, Array sendTypes, Array returnTypes) {
     NSApplication* nSApplication = (NSApplication*)ptr;
     NSMutableArray* objcSendTypes = [[NSMutableArray alloc] init];
-    void** sendTypesData = (void**)sendTypes.data;
-    for (int i = 0; i < sendTypes.len; i++) {
-    	void* p = sendTypesData[i];
-    	[objcSendTypes addObject:(NSPasteboardType)(NSString*)p];
+    if (sendTypes.len > 0) {
+    	void** sendTypesData = (void**)sendTypes.data;
+    	for (int i = 0; i < sendTypes.len; i++) {
+    		void* p = sendTypesData[i];
+    		[objcSendTypes addObject:(NSPasteboardType)(NSString*)p];
+    	}
     }
     NSMutableArray* objcReturnTypes = [[NSMutableArray alloc] init];
-    void** returnTypesData = (void**)returnTypes.data;
-    for (int i = 0; i < returnTypes.len; i++) {
-    	void* p = returnTypesData[i];
-    	[objcReturnTypes addObject:(NSPasteboardType)(NSString*)p];
+    if (returnTypes.len > 0) {
+    	void** returnTypesData = (void**)returnTypes.data;
+    	for (int i = 0; i < returnTypes.len; i++) {
+    		void* p = returnTypesData[i];
+    		[objcReturnTypes addObject:(NSPasteboardType)(NSString*)p];
+    	}
     }
     [nSApplication registerServicesMenuSendTypes:objcSendTypes returnTypes:objcReturnTypes];
 }
@@ -462,30 +481,34 @@ bool C_NSApplication_IsFullKeyboardAccessEnabled(void* ptr) {
 Array C_NSApplication_OrderedDocuments(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
     NSArray* result_ = [nSApplication orderedDocuments];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 Array C_NSApplication_OrderedWindows(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
     NSArray* result_ = [nSApplication orderedWindows];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -504,15 +527,17 @@ void* C_NSApplication_MainWindow(void* ptr) {
 Array C_NSApplication_Windows(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
     NSArray* result_ = [nSApplication windows];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 

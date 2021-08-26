@@ -22,6 +22,7 @@ type Event interface {
 	Timestamp() foundation.TimeInterval
 	Window() Window
 	WindowNumber() int
+	CGEvent() coregraphics.EventRef
 	Characters() string
 	CharactersIgnoringModifiers() string
 	IsARepeat() bool
@@ -90,6 +91,11 @@ func Event_MouseEventWithType_Location_ModifierFlags_Timestamp_WindowNumber_Cont
 	return MakeEvent(result_)
 }
 
+func EventWithCGEvent(cgEvent coregraphics.EventRef) Event {
+	result_ := C.C_NSEvent_EventWithCGEvent(unsafe.Pointer(cgEvent))
+	return MakeEvent(result_)
+}
+
 func Event_StartPeriodicEventsAfterDelay_WithPeriod(delay foundation.TimeInterval, period foundation.TimeInterval) {
 	C.C_NSEvent_Event_StartPeriodicEventsAfterDelay_WithPeriod(C.double(float64(delay)), C.double(float64(period)))
 }
@@ -115,7 +121,9 @@ func (n NSEvent) TouchesForView(view View) foundation.Set {
 
 func (n NSEvent) CoalescedTouchesForTouch(touch Touch) []Touch {
 	result_ := C.C_NSEvent_CoalescedTouchesForTouch(n.Ptr(), objc.ExtractPtr(touch))
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]Touch, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -161,6 +169,11 @@ func (n NSEvent) Window() Window {
 func (n NSEvent) WindowNumber() int {
 	result_ := C.C_NSEvent_WindowNumber(n.Ptr())
 	return int(result_)
+}
+
+func (n NSEvent) CGEvent() coregraphics.EventRef {
+	result_ := C.C_NSEvent_CGEvent(n.Ptr())
+	return coregraphics.EventRef(result_)
 }
 
 func Event_KeyRepeatDelay() foundation.TimeInterval {

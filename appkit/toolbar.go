@@ -13,6 +13,7 @@ type Toolbar interface {
 	InsertItemWithItemIdentifier_AtIndex(itemIdentifier ToolbarItemIdentifier, index int)
 	RemoveItemAtIndex(index int)
 	RunCustomizationPalette(sender objc.Object)
+	SetConfigurationFromDictionary(configDict map[string]objc.Object)
 	ValidateVisibleItems()
 	Delegate() objc.Object
 	SetDelegate(value objc.Object)
@@ -38,6 +39,7 @@ type Toolbar interface {
 	CustomizationPaletteIsRunning() bool
 	AutosavesConfiguration() bool
 	SetAutosavesConfiguration(value bool)
+	ConfigurationDictionary() map[string]objc.Object
 }
 
 type NSToolbar struct {
@@ -74,6 +76,24 @@ func (n NSToolbar) RemoveItemAtIndex(index int) {
 
 func (n NSToolbar) RunCustomizationPalette(sender objc.Object) {
 	C.C_NSToolbar_RunCustomizationPalette(n.Ptr(), objc.ExtractPtr(sender))
+}
+
+func (n NSToolbar) SetConfigurationFromDictionary(configDict map[string]objc.Object) {
+	var cConfigDict C.Dictionary
+	if len(configDict) > 0 {
+		cConfigDictKeyData := make([]unsafe.Pointer, len(configDict))
+		cConfigDictValueData := make([]unsafe.Pointer, len(configDict))
+		var idx = 0
+		for k, v := range configDict {
+			cConfigDictKeyData[idx] = foundation.NewString(k).Ptr()
+			cConfigDictValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cConfigDict.key_data = unsafe.Pointer(&cConfigDictKeyData[0])
+		cConfigDict.value_data = unsafe.Pointer(&cConfigDictValueData[0])
+		cConfigDict.len = C.int(len(configDict))
+	}
+	C.C_NSToolbar_SetConfigurationFromDictionary(n.Ptr(), cConfigDict)
 }
 
 func (n NSToolbar) ValidateVisibleItems() {
@@ -132,7 +152,9 @@ func (n NSToolbar) SetAllowsExtensionItems(value bool) {
 
 func (n NSToolbar) Items() []ToolbarItem {
 	result_ := C.C_NSToolbar_Items(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]ToolbarItem, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -143,7 +165,9 @@ func (n NSToolbar) Items() []ToolbarItem {
 
 func (n NSToolbar) VisibleItems() []ToolbarItem {
 	result_ := C.C_NSToolbar_VisibleItems(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]ToolbarItem, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -200,4 +224,20 @@ func (n NSToolbar) AutosavesConfiguration() bool {
 
 func (n NSToolbar) SetAutosavesConfiguration(value bool) {
 	C.C_NSToolbar_SetAutosavesConfiguration(n.Ptr(), C.bool(value))
+}
+
+func (n NSToolbar) ConfigurationDictionary() map[string]objc.Object {
+	result_ := C.C_NSToolbar_ConfigurationDictionary(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[string]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[foundation.MakeString(k).String()] = objc.MakeObject(v)
+	}
+	return goResult_
 }

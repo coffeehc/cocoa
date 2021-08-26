@@ -15,6 +15,7 @@ type Printer interface {
 	Name() string
 	Type() PrinterTypeName
 	LanguageLevel() int
+	DeviceDescription() map[DeviceDescriptionKey]objc.Object
 }
 
 type NSPrinter struct {
@@ -53,7 +54,9 @@ func (n NSPrinter) PageSizeForPaper(paperName PrinterPaperName) foundation.Size 
 
 func PrinterNames() []string {
 	result_ := C.C_NSPrinter_PrinterNames()
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -64,7 +67,9 @@ func PrinterNames() []string {
 
 func PrinterTypes() []PrinterTypeName {
 	result_ := C.C_NSPrinter_PrinterTypes()
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]PrinterTypeName, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -86,4 +91,20 @@ func (n NSPrinter) Type() PrinterTypeName {
 func (n NSPrinter) LanguageLevel() int {
 	result_ := C.C_NSPrinter_LanguageLevel(n.Ptr())
 	return int(result_)
+}
+
+func (n NSPrinter) DeviceDescription() map[DeviceDescriptionKey]objc.Object {
+	result_ := C.C_NSPrinter_DeviceDescription(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[DeviceDescriptionKey]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[DeviceDescriptionKey(foundation.MakeString(k).String())] = objc.MakeObject(v)
+	}
+	return goResult_
 }

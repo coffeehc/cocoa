@@ -47,8 +47,3 @@ func DraggingInfo_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 		return false
 	}
 }
-
-//export deleteDraggingInfo
-func deleteDraggingInfo(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
-}

@@ -109,8 +109,3 @@ func NavigationDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) b
 		return false
 	}
 }
-
-//export deleteNavigationDelegate
-func deleteNavigationDelegate(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
-}

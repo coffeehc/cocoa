@@ -90,7 +90,9 @@ func (n NSPathCell) PathComponentCellAtPoint_WithFrame_InView(point foundation.P
 
 func (n NSPathCell) AllowedTypes() []string {
 	result_ := C.C_NSPathCell_AllowedTypes(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -100,11 +102,15 @@ func (n NSPathCell) AllowedTypes() []string {
 }
 
 func (n NSPathCell) SetAllowedTypes(value []string) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = foundation.NewString(v).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = foundation.NewString(v).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSPathCell_SetAllowedTypes(n.Ptr(), cValue)
 }
 
@@ -151,7 +157,9 @@ func (n NSPathCell) ClickedPathComponentCell() PathComponentCell {
 
 func (n NSPathCell) PathComponentCells() []PathComponentCell {
 	result_ := C.C_NSPathCell_PathComponentCells(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]PathComponentCell, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -161,11 +169,15 @@ func (n NSPathCell) PathComponentCells() []PathComponentCell {
 }
 
 func (n NSPathCell) SetPathComponentCells(value []PathComponentCell) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = objc.ExtractPtr(v)
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = objc.ExtractPtr(v)
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSPathCell_SetPathComponentCells(n.Ptr(), cValue)
 }
 

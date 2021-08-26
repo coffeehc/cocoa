@@ -6,6 +6,7 @@
 void* C_LayoutConstraint_Alloc();
 
 void* C_NSLayoutConstraint_Init(void* ptr);
+Array C_NSLayoutConstraint_LayoutConstraint_ConstraintsWithVisualFormat_Options_Metrics_Views(void* format, unsigned int opts, Dictionary metrics, Dictionary views);
 void* C_NSLayoutConstraint_LayoutConstraint_ConstraintWithItem_Attribute_RelatedBy_ToItem_Attribute_Multiplier_Constant(void* view1, int attr1, int relation, void* view2, int attr2, double multiplier, double c);
 void C_NSLayoutConstraint_LayoutConstraint_ActivateConstraints(Array constraints);
 void C_NSLayoutConstraint_LayoutConstraint_DeactivateConstraints(Array constraints);

@@ -332,8 +332,3 @@ func BrowserDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool
 		return false
 	}
 }
-
-//export deleteBrowserDelegate
-func deleteBrowserDelegate(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
-}

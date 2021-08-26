@@ -20,15 +20,17 @@
 }
 
 - (void)outlineView:(NSOutlineView*)outlineView draggingSession:(NSDraggingSession*)session willBeginAtPoint:(NSPoint)screenPoint forItems:(NSArray*)draggedItems {
-    int draggedItemscount = [draggedItems count];
-    void** draggedItemsData = malloc(draggedItemscount * sizeof(void*));
-    for (int i = 0; i < draggedItemscount; i++) {
-    	 void* p = [draggedItems objectAtIndex:i];
-    	 draggedItemsData[i] = p;
-    }
     Array draggedItemsArray;
-    draggedItemsArray.data = draggedItemsData;
-    draggedItemsArray.len = draggedItemscount;
+    int draggedItemscount = [draggedItems count];
+    if (draggedItemscount > 0) {
+    	void** draggedItemsData = malloc(draggedItemscount * sizeof(void*));
+    	for (int i = 0; i < draggedItemscount; i++) {
+    		 void* p = [draggedItems objectAtIndex:i];
+    		 draggedItemsData[i] = p;
+    	}
+    	draggedItemsArray.data = draggedItemsData;
+    	draggedItemsArray.len = draggedItemscount;
+    }
     outlineViewDataSource_OutlineView_DraggingSession_WillBeginAtPoint_ForItems([self goID], outlineView, session, screenPoint, draggedItemsArray);
 }
 
@@ -67,15 +69,17 @@
 }
 
 - (void)outlineView:(NSOutlineView*)outlineView sortDescriptorsDidChange:(NSArray*)oldDescriptors {
-    int oldDescriptorscount = [oldDescriptors count];
-    void** oldDescriptorsData = malloc(oldDescriptorscount * sizeof(void*));
-    for (int i = 0; i < oldDescriptorscount; i++) {
-    	 void* p = [oldDescriptors objectAtIndex:i];
-    	 oldDescriptorsData[i] = p;
-    }
     Array oldDescriptorsArray;
-    oldDescriptorsArray.data = oldDescriptorsData;
-    oldDescriptorsArray.len = oldDescriptorscount;
+    int oldDescriptorscount = [oldDescriptors count];
+    if (oldDescriptorscount > 0) {
+    	void** oldDescriptorsData = malloc(oldDescriptorscount * sizeof(void*));
+    	for (int i = 0; i < oldDescriptorscount; i++) {
+    		 void* p = [oldDescriptors objectAtIndex:i];
+    		 oldDescriptorsData[i] = p;
+    	}
+    	oldDescriptorsArray.data = oldDescriptorsData;
+    	oldDescriptorsArray.len = oldDescriptorscount;
+    }
     outlineViewDataSource_OutlineView_SortDescriptorsDidChange([self goID], outlineView, oldDescriptorsArray);
 }
 
@@ -94,7 +98,7 @@
 }
 
 - (void)dealloc {
-	deleteOutlineViewDataSource([self goID]);
+	deleteAppKitHandle([self goID]);
 	[super dealloc];
 }
 @end

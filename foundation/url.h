@@ -32,6 +32,7 @@ void* C_NSURL_FileReferenceURL(void* ptr);
 void* C_NSURL_URLByAppendingPathComponent(void* ptr, void* pathComponent);
 void* C_NSURL_URLByAppendingPathComponent_IsDirectory(void* ptr, void* pathComponent, bool isDirectory);
 void* C_NSURL_URLByAppendingPathExtension(void* ptr, void* pathExtension);
+Dictionary C_NSURL_URL_ResourceValuesForKeys_FromBookmarkData(Array keys, Array bookmarkData);
 bool C_NSURL_StartAccessingSecurityScopedResource(void* ptr);
 void C_NSURL_StopAccessingSecurityScopedResource(void* ptr);
 Array C_NSURL_DataRepresentation(void* ptr);

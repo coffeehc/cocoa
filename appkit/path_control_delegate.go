@@ -85,8 +85,3 @@ func PathControlDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) 
 		return false
 	}
 }
-
-//export deletePathControlDelegate
-func deletePathControlDelegate(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
-}

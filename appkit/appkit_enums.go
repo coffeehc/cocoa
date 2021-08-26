@@ -1940,3 +1940,10 @@ type AboutPanelOptionKey string
 type PrintInfoAttributeKey string
 type ImageHintKey string
 type GraphicsContextAttributeKey string
+type FontTextStyleOptionKey string
+type PrintInfoSettingKey string
+type DeviceDescriptionKey string
+type TextTabOptionKey string
+type ViewFullScreenModeOptionKey string
+
+type ApplicationPrintReply uint

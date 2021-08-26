@@ -54,11 +54,15 @@ func (n NSTreeNode) DescendantNodeAtIndexPath(indexPath foundation.IndexPath) Tr
 }
 
 func (n NSTreeNode) SortWithSortDescriptors_Recursively(sortDescriptors []foundation.SortDescriptor, recursively bool) {
-	cSortDescriptorsData := make([]unsafe.Pointer, len(sortDescriptors))
-	for idx, v := range sortDescriptors {
-		cSortDescriptorsData[idx] = objc.ExtractPtr(v)
+	var cSortDescriptors C.Array
+	if len(sortDescriptors) > 0 {
+		cSortDescriptorsData := make([]unsafe.Pointer, len(sortDescriptors))
+		for idx, v := range sortDescriptors {
+			cSortDescriptorsData[idx] = objc.ExtractPtr(v)
+		}
+		cSortDescriptors.data = unsafe.Pointer(&cSortDescriptorsData[0])
+		cSortDescriptors.len = C.int(len(sortDescriptors))
 	}
-	cSortDescriptors := C.Array{data: unsafe.Pointer(&cSortDescriptorsData[0]), len: C.int(len(sortDescriptors))}
 	C.C_NSTreeNode_SortWithSortDescriptors_Recursively(n.Ptr(), cSortDescriptors, C.bool(recursively))
 }
 
@@ -79,7 +83,9 @@ func (n NSTreeNode) IsLeaf() bool {
 
 func (n NSTreeNode) ChildNodes() []TreeNode {
 	result_ := C.C_NSTreeNode_ChildNodes(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]TreeNode, len(result_Slice))
 	for idx, r := range result_Slice {

@@ -110,16 +110,38 @@
     applicationDelegate_Application_DidFailToRegisterForRemoteNotificationsWithError([self goID], application, error);
 }
 
-- (void)application:(NSApplication*)application openURLs:(NSArray*)urls {
-    int urlscount = [urls count];
-    void** urlsData = malloc(urlscount * sizeof(void*));
-    for (int i = 0; i < urlscount; i++) {
-    	 void* p = [urls objectAtIndex:i];
-    	 urlsData[i] = p;
+- (void)application:(NSApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo {
+    Dictionary userInfoArray;
+    NSArray * userInfoKeys = [userInfo allKeys];
+    int userInfoCount = [userInfoKeys count];
+    if (userInfoCount > 0) {
+    	void** userInfoKeyData = malloc(userInfoCount * sizeof(void*));
+    	void** userInfoValueData = malloc(userInfoCount * sizeof(void*));
+    	for (int i = 0; i < userInfoCount; i++) {
+    		NSString* kp = [userInfoKeys objectAtIndex:i];
+    		id vp = userInfo[kp];
+    		 userInfoKeyData[i] = kp;
+    		 userInfoValueData[i] = vp;
+    	}
+    	userInfoArray.key_data = userInfoKeyData;
+    	userInfoArray.value_data = userInfoValueData;
+    	userInfoArray.len = userInfoCount;
     }
+    applicationDelegate_Application_DidReceiveRemoteNotification([self goID], application, userInfoArray);
+}
+
+- (void)application:(NSApplication*)application openURLs:(NSArray*)urls {
     Array urlsArray;
-    urlsArray.data = urlsData;
-    urlsArray.len = urlscount;
+    int urlscount = [urls count];
+    if (urlscount > 0) {
+    	void** urlsData = malloc(urlscount * sizeof(void*));
+    	for (int i = 0; i < urlscount; i++) {
+    		 void* p = [urls objectAtIndex:i];
+    		 urlsData[i] = p;
+    	}
+    	urlsArray.data = urlsData;
+    	urlsArray.len = urlscount;
+    }
     applicationDelegate_Application_OpenURLs([self goID], application, urlsArray);
 }
 
@@ -139,15 +161,17 @@
 }
 
 - (void)application:(NSApplication*)sender openFiles:(NSArray*)filenames {
-    int filenamescount = [filenames count];
-    void** filenamesData = malloc(filenamescount * sizeof(void*));
-    for (int i = 0; i < filenamescount; i++) {
-    	 void* p = [filenames objectAtIndex:i];
-    	 filenamesData[i] = p;
-    }
     Array filenamesArray;
-    filenamesArray.data = filenamesData;
-    filenamesArray.len = filenamescount;
+    int filenamescount = [filenames count];
+    if (filenamescount > 0) {
+    	void** filenamesData = malloc(filenamescount * sizeof(void*));
+    	for (int i = 0; i < filenamescount; i++) {
+    		 void* p = [filenames objectAtIndex:i];
+    		 filenamesData[i] = p;
+    	}
+    	filenamesArray.data = filenamesData;
+    	filenamesArray.len = filenamescount;
+    }
     applicationDelegate_Application_OpenFiles([self goID], sender, filenamesArray);
 }
 
@@ -163,6 +187,38 @@
 
 - (BOOL)application:(NSApplication*)sender printFile:(NSString*)filename {
     bool result_ = applicationDelegate_Application_PrintFile([self goID], sender, filename);
+    return result_;
+}
+
+- (NSApplicationPrintReply)application:(NSApplication*)application printFiles:(NSArray*)fileNames withSettings:(NSDictionary*)printSettings showPrintPanels:(BOOL)showPrintPanels {
+    Array fileNamesArray;
+    int fileNamescount = [fileNames count];
+    if (fileNamescount > 0) {
+    	void** fileNamesData = malloc(fileNamescount * sizeof(void*));
+    	for (int i = 0; i < fileNamescount; i++) {
+    		 void* p = [fileNames objectAtIndex:i];
+    		 fileNamesData[i] = p;
+    	}
+    	fileNamesArray.data = fileNamesData;
+    	fileNamesArray.len = fileNamescount;
+    }
+    Dictionary printSettingsArray;
+    NSArray * printSettingsKeys = [printSettings allKeys];
+    int printSettingsCount = [printSettingsKeys count];
+    if (printSettingsCount > 0) {
+    	void** printSettingsKeyData = malloc(printSettingsCount * sizeof(void*));
+    	void** printSettingsValueData = malloc(printSettingsCount * sizeof(void*));
+    	for (int i = 0; i < printSettingsCount; i++) {
+    		NSPrintInfoAttributeKey kp = [printSettingsKeys objectAtIndex:i];
+    		id vp = printSettings[kp];
+    		 printSettingsKeyData[i] = kp;
+    		 printSettingsValueData[i] = vp;
+    	}
+    	printSettingsArray.key_data = printSettingsKeyData;
+    	printSettingsArray.value_data = printSettingsValueData;
+    	printSettingsArray.len = printSettingsCount;
+    }
+    unsigned int result_ = applicationDelegate_Application_PrintFiles_WithSettings_ShowPrintPanels([self goID], application, fileNamesArray, printSettingsArray, showPrintPanels);
     return result_;
 }
 
@@ -189,7 +245,7 @@
 }
 
 - (void)dealloc {
-	deleteApplicationDelegate([self goID]);
+	deleteAppKitHandle([self goID]);
 	[super dealloc];
 }
 @end

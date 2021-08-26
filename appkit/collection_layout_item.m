@@ -12,10 +12,12 @@ void* C_NSCollectionLayoutItem_CollectionLayoutItem_ItemWithLayoutSize(void* lay
 
 void* C_NSCollectionLayoutItem_CollectionLayoutItem_ItemWithLayoutSize_SupplementaryItems(void* layoutSize, Array supplementaryItems) {
     NSMutableArray* objcSupplementaryItems = [[NSMutableArray alloc] init];
-    void** supplementaryItemsData = (void**)supplementaryItems.data;
-    for (int i = 0; i < supplementaryItems.len; i++) {
-    	void* p = supplementaryItemsData[i];
-    	[objcSupplementaryItems addObject:(NSCollectionLayoutSupplementaryItem*)(NSCollectionLayoutSupplementaryItem*)p];
+    if (supplementaryItems.len > 0) {
+    	void** supplementaryItemsData = (void**)supplementaryItems.data;
+    	for (int i = 0; i < supplementaryItems.len; i++) {
+    		void* p = supplementaryItemsData[i];
+    		[objcSupplementaryItems addObject:(NSCollectionLayoutSupplementaryItem*)(NSCollectionLayoutSupplementaryItem*)p];
+    	}
     }
     NSCollectionLayoutItem* result_ = [NSCollectionLayoutItem itemWithLayoutSize:(NSCollectionLayoutSize*)layoutSize supplementaryItems:objcSupplementaryItems];
     return result_;
@@ -30,15 +32,17 @@ void* C_NSCollectionLayoutItem_LayoutSize(void* ptr) {
 Array C_NSCollectionLayoutItem_SupplementaryItems(void* ptr) {
     NSCollectionLayoutItem* nSCollectionLayoutItem = (NSCollectionLayoutItem*)ptr;
     NSArray* result_ = [nSCollectionLayoutItem supplementaryItems];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 

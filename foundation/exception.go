@@ -51,7 +51,9 @@ func (n NSException) Reason() string {
 
 func (n NSException) CallStackReturnAddresses() []Number {
 	result_ := C.C_NSException_CallStackReturnAddresses(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]Number, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -62,7 +64,9 @@ func (n NSException) CallStackReturnAddresses() []Number {
 
 func (n NSException) CallStackSymbols() []string {
 	result_ := C.C_NSException_CallStackSymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {

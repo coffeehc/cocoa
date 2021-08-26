@@ -34,6 +34,7 @@ type ApplicationDelegate struct {
 	Application_DidUpdateUserActivity                            func(application Application, userActivity foundation.UserActivity)
 	Application_DidRegisterForRemoteNotificationsWithDeviceToken func(application Application, deviceToken []byte)
 	Application_DidFailToRegisterForRemoteNotificationsWithError func(application Application, error foundation.Error)
+	Application_DidReceiveRemoteNotification                     func(application Application, userInfo map[string]objc.Object)
 	Application_OpenURLs                                         func(application Application, urls []foundation.URL)
 	Application_OpenFile                                         func(sender Application, filename string) bool
 	Application_OpenFileWithoutUI                                func(sender objc.Object, filename string) bool
@@ -42,6 +43,7 @@ type ApplicationDelegate struct {
 	ApplicationOpenUntitledFile                                  func(sender Application) bool
 	ApplicationShouldOpenUntitledFile                            func(sender Application) bool
 	Application_PrintFile                                        func(sender Application, filename string) bool
+	Application_PrintFiles_WithSettings_ShowPrintPanels          func(application Application, fileNames []string, printSettings map[PrintInfoAttributeKey]objc.Object, showPrintPanels bool) ApplicationPrintReply
 	Application_DidDecodeRestorableState                         func(app Application, coder foundation.Coder)
 	Application_WillEncodeRestorableState                        func(app Application, coder foundation.Coder)
 	ApplicationDidChangeOcclusionState                           func(notification foundation.Notification)
@@ -195,10 +197,12 @@ func applicationDelegate_Application_DidUpdateUserActivity(hp C.uintptr_t, appli
 //export applicationDelegate_Application_DidRegisterForRemoteNotificationsWithDeviceToken
 func applicationDelegate_Application_DidRegisterForRemoteNotificationsWithDeviceToken(hp C.uintptr_t, application unsafe.Pointer, deviceToken C.Array) {
 	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
+	if deviceToken.len > 0 {
+		C.free(deviceToken.data)
+	}
 	deviceTokenBuffer := (*[1 << 30]byte)(deviceToken.data)[:C.int(deviceToken.len)]
 	goDeviceToken := make([]byte, C.int(deviceToken.len))
 	copy(goDeviceToken, deviceTokenBuffer)
-	C.free(deviceToken.data)
 	delegate.Application_DidRegisterForRemoteNotificationsWithDeviceToken(MakeApplication(application), goDeviceToken)
 }
 
@@ -208,10 +212,29 @@ func applicationDelegate_Application_DidFailToRegisterForRemoteNotificationsWith
 	delegate.Application_DidFailToRegisterForRemoteNotificationsWithError(MakeApplication(application), foundation.MakeError(error))
 }
 
+//export applicationDelegate_Application_DidReceiveRemoteNotification
+func applicationDelegate_Application_DidReceiveRemoteNotification(hp C.uintptr_t, application unsafe.Pointer, userInfo C.Dictionary) {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
+	if userInfo.len > 0 {
+		defer C.free(userInfo.key_data)
+		defer C.free(userInfo.value_data)
+	}
+	userInfoKeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(userInfo.key_data))[:userInfo.len:userInfo.len]
+	userInfoValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(userInfo.value_data))[:userInfo.len:userInfo.len]
+	var goUserInfo = make(map[string]objc.Object)
+	for idx, k := range userInfoKeySlice {
+		v := userInfoValueSlice[idx]
+		goUserInfo[foundation.MakeString(k).String()] = objc.MakeObject(v)
+	}
+	delegate.Application_DidReceiveRemoteNotification(MakeApplication(application), goUserInfo)
+}
+
 //export applicationDelegate_Application_OpenURLs
 func applicationDelegate_Application_OpenURLs(hp C.uintptr_t, application unsafe.Pointer, urls C.Array) {
 	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
-	defer C.free(urls.data)
+	if urls.len > 0 {
+		defer C.free(urls.data)
+	}
 	urlsSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(urls.data))[:urls.len:urls.len]
 	var goUrls = make([]foundation.URL, len(urlsSlice))
 	for idx, r := range urlsSlice {
@@ -244,7 +267,9 @@ func applicationDelegate_Application_OpenTempFile(hp C.uintptr_t, sender unsafe.
 //export applicationDelegate_Application_OpenFiles
 func applicationDelegate_Application_OpenFiles(hp C.uintptr_t, sender unsafe.Pointer, filenames C.Array) {
 	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
-	defer C.free(filenames.data)
+	if filenames.len > 0 {
+		defer C.free(filenames.data)
+	}
 	filenamesSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(filenames.data))[:filenames.len:filenames.len]
 	var goFilenames = make([]string, len(filenamesSlice))
 	for idx, r := range filenamesSlice {
@@ -272,6 +297,32 @@ func applicationDelegate_Application_PrintFile(hp C.uintptr_t, sender unsafe.Poi
 	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
 	result := delegate.Application_PrintFile(MakeApplication(sender), foundation.MakeString(filename).String())
 	return C.bool(result)
+}
+
+//export applicationDelegate_Application_PrintFiles_WithSettings_ShowPrintPanels
+func applicationDelegate_Application_PrintFiles_WithSettings_ShowPrintPanels(hp C.uintptr_t, application unsafe.Pointer, fileNames C.Array, printSettings C.Dictionary, showPrintPanels C.bool) C.uint {
+	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
+	if fileNames.len > 0 {
+		defer C.free(fileNames.data)
+	}
+	fileNamesSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(fileNames.data))[:fileNames.len:fileNames.len]
+	var goFileNames = make([]string, len(fileNamesSlice))
+	for idx, r := range fileNamesSlice {
+		goFileNames[idx] = foundation.MakeString(r).String()
+	}
+	if printSettings.len > 0 {
+		defer C.free(printSettings.key_data)
+		defer C.free(printSettings.value_data)
+	}
+	printSettingsKeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(printSettings.key_data))[:printSettings.len:printSettings.len]
+	printSettingsValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(printSettings.value_data))[:printSettings.len:printSettings.len]
+	var goPrintSettings = make(map[PrintInfoAttributeKey]objc.Object)
+	for idx, k := range printSettingsKeySlice {
+		v := printSettingsValueSlice[idx]
+		goPrintSettings[PrintInfoAttributeKey(foundation.MakeString(k).String())] = objc.MakeObject(v)
+	}
+	result := delegate.Application_PrintFiles_WithSettings_ShowPrintPanels(MakeApplication(application), goFileNames, goPrintSettings, bool(showPrintPanels))
+	return C.uint(uint(result))
 }
 
 //export applicationDelegate_Application_DidDecodeRestorableState
@@ -353,6 +404,8 @@ func ApplicationDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) 
 		return delegate.Application_DidRegisterForRemoteNotificationsWithDeviceToken != nil
 	case "application:didFailToRegisterForRemoteNotificationsWithError:":
 		return delegate.Application_DidFailToRegisterForRemoteNotificationsWithError != nil
+	case "application:didReceiveRemoteNotification:":
+		return delegate.Application_DidReceiveRemoteNotification != nil
 	case "application:openURLs:":
 		return delegate.Application_OpenURLs != nil
 	case "application:openFile:":
@@ -369,6 +422,8 @@ func ApplicationDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) 
 		return delegate.ApplicationShouldOpenUntitledFile != nil
 	case "application:printFile:":
 		return delegate.Application_PrintFile != nil
+	case "application:printFiles:withSettings:showPrintPanels:":
+		return delegate.Application_PrintFiles_WithSettings_ShowPrintPanels != nil
 	case "application:didDecodeRestorableState:":
 		return delegate.Application_DidDecodeRestorableState != nil
 	case "application:willEncodeRestorableState:":
@@ -380,9 +435,4 @@ func ApplicationDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) 
 	default:
 		return false
 	}
-}
-
-//export deleteApplicationDelegate
-func deleteApplicationDelegate(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
 }

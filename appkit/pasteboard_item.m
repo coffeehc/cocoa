@@ -14,10 +14,12 @@ void* C_NSPasteboardItem_Init(void* ptr) {
 void* C_NSPasteboardItem_AvailableTypeFromArray(void* ptr, Array types) {
     NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
     NSMutableArray* objcTypes = [[NSMutableArray alloc] init];
-    void** typesData = (void**)types.data;
-    for (int i = 0; i < types.len; i++) {
-    	void* p = typesData[i];
-    	[objcTypes addObject:(NSPasteboardType)(NSString*)p];
+    if (types.len > 0) {
+    	void** typesData = (void**)types.data;
+    	for (int i = 0; i < types.len; i++) {
+    		void* p = typesData[i];
+    		[objcTypes addObject:(NSPasteboardType)(NSString*)p];
+    	}
     }
     NSPasteboardType result_ = [nSPasteboardItem availableTypeFromArray:objcTypes];
     return result_;
@@ -26,10 +28,12 @@ void* C_NSPasteboardItem_AvailableTypeFromArray(void* ptr, Array types) {
 bool C_NSPasteboardItem_SetDataProvider_ForTypes(void* ptr, void* dataProvider, Array types) {
     NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
     NSMutableArray* objcTypes = [[NSMutableArray alloc] init];
-    void** typesData = (void**)types.data;
-    for (int i = 0; i < types.len; i++) {
-    	void* p = typesData[i];
-    	[objcTypes addObject:(NSPasteboardType)(NSString*)p];
+    if (types.len > 0) {
+    	void** typesData = (void**)types.data;
+    	for (int i = 0; i < types.len; i++) {
+    		void* p = typesData[i];
+    		[objcTypes addObject:(NSPasteboardType)(NSString*)p];
+    	}
     }
     BOOL result_ = [nSPasteboardItem setDataProvider:(id)dataProvider forTypes:objcTypes];
     return result_;
@@ -77,14 +81,16 @@ void* C_NSPasteboardItem_PropertyListForType(void* ptr, void* _type) {
 Array C_NSPasteboardItem_Types(void* ptr) {
     NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
     NSArray* result_ = [nSPasteboardItem types];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }

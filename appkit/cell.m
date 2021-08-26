@@ -135,15 +135,17 @@ void C_NSCell_ResetCursorRect_InView(void* ptr, CGRect cellFrame, void* controlV
 Array C_NSCell_DraggingImageComponentsWithFrame_InView(void* ptr, CGRect frame, void* view) {
     NSCell* nSCell = (NSCell*)ptr;
     NSArray* result_ = [nSCell draggingImageComponentsWithFrame:frame inView:(NSView*)view];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 

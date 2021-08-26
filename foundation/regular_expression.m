@@ -20,15 +20,17 @@ unsigned int C_NSRegularExpression_NumberOfMatchesInString_Options_Range(void* p
 Array C_NSRegularExpression_MatchesInString_Options_Range(void* ptr, void* _string, unsigned int options, NSRange _range) {
     NSRegularExpression* nSRegularExpression = (NSRegularExpression*)ptr;
     NSArray* result_ = [nSRegularExpression matchesInString:(NSString*)_string options:options range:_range];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 

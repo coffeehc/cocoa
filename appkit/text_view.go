@@ -127,8 +127,16 @@ type TextView interface {
 	SetSelectionGranularity(value SelectionGranularity)
 	InsertionPointColor() Color
 	SetInsertionPointColor(value Color)
+	SelectedTextAttributes() map[foundation.AttributedStringKey]objc.Object
+	SetSelectedTextAttributes(value map[foundation.AttributedStringKey]objc.Object)
+	MarkedTextAttributes() map[foundation.AttributedStringKey]objc.Object
+	SetMarkedTextAttributes(value map[foundation.AttributedStringKey]objc.Object)
+	LinkTextAttributes() map[foundation.AttributedStringKey]objc.Object
+	SetLinkTextAttributes(value map[foundation.AttributedStringKey]objc.Object)
 	ReadablePasteboardTypes() []PasteboardType
 	WritablePasteboardTypes() []PasteboardType
+	TypingAttributes() map[foundation.AttributedStringKey]objc.Object
+	SetTypingAttributes(value map[foundation.AttributedStringKey]objc.Object)
 	IsCoalescingUndo() bool
 	AcceptableDragTypes() []PasteboardType
 	RangeForUserCharacterAttributeChange() foundation.Range
@@ -262,11 +270,15 @@ func (n NSTextView) ToggleAutomaticLinkDetection(sender objc.Object) {
 }
 
 func (n NSTextView) SetSelectedRanges_Affinity_StillSelecting(ranges []foundation.Value, affinity SelectionAffinity, stillSelectingFlag bool) {
-	cRangesData := make([]unsafe.Pointer, len(ranges))
-	for idx, v := range ranges {
-		cRangesData[idx] = objc.ExtractPtr(v)
+	var cRanges C.Array
+	if len(ranges) > 0 {
+		cRangesData := make([]unsafe.Pointer, len(ranges))
+		for idx, v := range ranges {
+			cRangesData[idx] = objc.ExtractPtr(v)
+		}
+		cRanges.data = unsafe.Pointer(&cRangesData[0])
+		cRanges.len = C.int(len(ranges))
 	}
-	cRanges := C.Array{data: unsafe.Pointer(&cRangesData[0]), len: C.int(len(ranges))}
 	C.C_NSTextView_SetSelectedRanges_Affinity_StillSelecting(n.Ptr(), cRanges, C.uint(uint(affinity)), C.bool(stillSelectingFlag))
 }
 
@@ -280,16 +292,24 @@ func (n NSTextView) CharacterIndexForInsertionAtPoint(point foundation.Point) ui
 }
 
 func (n NSTextView) PreferredPasteboardTypeFromArray_RestrictedToTypesFromArray(availableTypes []PasteboardType, allowedTypes []PasteboardType) PasteboardType {
-	cAvailableTypesData := make([]unsafe.Pointer, len(availableTypes))
-	for idx, v := range availableTypes {
-		cAvailableTypesData[idx] = foundation.NewString(string(v)).Ptr()
+	var cAvailableTypes C.Array
+	if len(availableTypes) > 0 {
+		cAvailableTypesData := make([]unsafe.Pointer, len(availableTypes))
+		for idx, v := range availableTypes {
+			cAvailableTypesData[idx] = foundation.NewString(string(v)).Ptr()
+		}
+		cAvailableTypes.data = unsafe.Pointer(&cAvailableTypesData[0])
+		cAvailableTypes.len = C.int(len(availableTypes))
 	}
-	cAvailableTypes := C.Array{data: unsafe.Pointer(&cAvailableTypesData[0]), len: C.int(len(availableTypes))}
-	cAllowedTypesData := make([]unsafe.Pointer, len(allowedTypes))
-	for idx, v := range allowedTypes {
-		cAllowedTypesData[idx] = foundation.NewString(string(v)).Ptr()
+	var cAllowedTypes C.Array
+	if len(allowedTypes) > 0 {
+		cAllowedTypesData := make([]unsafe.Pointer, len(allowedTypes))
+		for idx, v := range allowedTypes {
+			cAllowedTypesData[idx] = foundation.NewString(string(v)).Ptr()
+		}
+		cAllowedTypes.data = unsafe.Pointer(&cAllowedTypesData[0])
+		cAllowedTypes.len = C.int(len(allowedTypes))
 	}
-	cAllowedTypes := C.Array{data: unsafe.Pointer(&cAllowedTypesData[0]), len: C.int(len(allowedTypes))}
 	result_ := C.C_NSTextView_PreferredPasteboardTypeFromArray_RestrictedToTypesFromArray(n.Ptr(), cAvailableTypes, cAllowedTypes)
 	return PasteboardType(foundation.MakeString(result_).String())
 }
@@ -310,11 +330,15 @@ func (n NSTextView) WriteSelectionToPasteboard_Type(pboard Pasteboard, _type Pas
 }
 
 func (n NSTextView) WriteSelectionToPasteboard_Types(pboard Pasteboard, types []PasteboardType) bool {
-	cTypesData := make([]unsafe.Pointer, len(types))
-	for idx, v := range types {
-		cTypesData[idx] = foundation.NewString(string(v)).Ptr()
+	var cTypes C.Array
+	if len(types) > 0 {
+		cTypesData := make([]unsafe.Pointer, len(types))
+		for idx, v := range types {
+			cTypesData[idx] = foundation.NewString(string(v)).Ptr()
+		}
+		cTypes.data = unsafe.Pointer(&cTypesData[0])
+		cTypes.len = C.int(len(types))
 	}
-	cTypes := C.Array{data: unsafe.Pointer(&cTypesData[0]), len: C.int(len(types))}
 	result_ := C.C_NSTextView_WriteSelectionToPasteboard_Types(n.Ptr(), objc.ExtractPtr(pboard), cTypes)
 	return bool(result_)
 }
@@ -410,16 +434,24 @@ func (n NSTextView) ShouldChangeTextInRange_ReplacementString(affectedCharRange 
 }
 
 func (n NSTextView) ShouldChangeTextInRanges_ReplacementStrings(affectedRanges []foundation.Value, replacementStrings []string) bool {
-	cAffectedRangesData := make([]unsafe.Pointer, len(affectedRanges))
-	for idx, v := range affectedRanges {
-		cAffectedRangesData[idx] = objc.ExtractPtr(v)
+	var cAffectedRanges C.Array
+	if len(affectedRanges) > 0 {
+		cAffectedRangesData := make([]unsafe.Pointer, len(affectedRanges))
+		for idx, v := range affectedRanges {
+			cAffectedRangesData[idx] = objc.ExtractPtr(v)
+		}
+		cAffectedRanges.data = unsafe.Pointer(&cAffectedRangesData[0])
+		cAffectedRanges.len = C.int(len(affectedRanges))
 	}
-	cAffectedRanges := C.Array{data: unsafe.Pointer(&cAffectedRangesData[0]), len: C.int(len(affectedRanges))}
-	cReplacementStringsData := make([]unsafe.Pointer, len(replacementStrings))
-	for idx, v := range replacementStrings {
-		cReplacementStringsData[idx] = foundation.NewString(v).Ptr()
+	var cReplacementStrings C.Array
+	if len(replacementStrings) > 0 {
+		cReplacementStringsData := make([]unsafe.Pointer, len(replacementStrings))
+		for idx, v := range replacementStrings {
+			cReplacementStringsData[idx] = foundation.NewString(v).Ptr()
+		}
+		cReplacementStrings.data = unsafe.Pointer(&cReplacementStringsData[0])
+		cReplacementStrings.len = C.int(len(replacementStrings))
 	}
-	cReplacementStrings := C.Array{data: unsafe.Pointer(&cReplacementStringsData[0]), len: C.int(len(replacementStrings))}
 	result_ := C.C_NSTextView_ShouldChangeTextInRanges_ReplacementStrings(n.Ptr(), cAffectedRanges, cReplacementStrings)
 	return bool(result_)
 }
@@ -643,7 +675,9 @@ func (n NSTextView) ShouldDrawInsertionPoint() bool {
 
 func (n NSTextView) AllowedInputSourceLocales() []string {
 	result_ := C.C_NSTextView_AllowedInputSourceLocales(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -653,11 +687,15 @@ func (n NSTextView) AllowedInputSourceLocales() []string {
 }
 
 func (n NSTextView) SetAllowedInputSourceLocales(value []string) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = foundation.NewString(v).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = foundation.NewString(v).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSTextView_SetAllowedInputSourceLocales(n.Ptr(), cValue)
 }
 
@@ -739,7 +777,9 @@ func (n NSTextView) SetUsesInspectorBar(value bool) {
 
 func (n NSTextView) SelectedRanges() []foundation.Value {
 	result_ := C.C_NSTextView_SelectedRanges(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]foundation.Value, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -749,11 +789,15 @@ func (n NSTextView) SelectedRanges() []foundation.Value {
 }
 
 func (n NSTextView) SetSelectedRanges(value []foundation.Value) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = objc.ExtractPtr(v)
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = objc.ExtractPtr(v)
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSTextView_SetSelectedRanges(n.Ptr(), cValue)
 }
 
@@ -780,9 +824,113 @@ func (n NSTextView) SetInsertionPointColor(value Color) {
 	C.C_NSTextView_SetInsertionPointColor(n.Ptr(), objc.ExtractPtr(value))
 }
 
+func (n NSTextView) SelectedTextAttributes() map[foundation.AttributedStringKey]objc.Object {
+	result_ := C.C_NSTextView_SelectedTextAttributes(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[foundation.AttributedStringKey]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[foundation.AttributedStringKey(foundation.MakeString(k).String())] = objc.MakeObject(v)
+	}
+	return goResult_
+}
+
+func (n NSTextView) SetSelectedTextAttributes(value map[foundation.AttributedStringKey]objc.Object) {
+	var cValue C.Dictionary
+	if len(value) > 0 {
+		cValueKeyData := make([]unsafe.Pointer, len(value))
+		cValueValueData := make([]unsafe.Pointer, len(value))
+		var idx = 0
+		for k, v := range value {
+			cValueKeyData[idx] = foundation.NewString(string(k)).Ptr()
+			cValueValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cValue.key_data = unsafe.Pointer(&cValueKeyData[0])
+		cValue.value_data = unsafe.Pointer(&cValueValueData[0])
+		cValue.len = C.int(len(value))
+	}
+	C.C_NSTextView_SetSelectedTextAttributes(n.Ptr(), cValue)
+}
+
+func (n NSTextView) MarkedTextAttributes() map[foundation.AttributedStringKey]objc.Object {
+	result_ := C.C_NSTextView_MarkedTextAttributes(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[foundation.AttributedStringKey]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[foundation.AttributedStringKey(foundation.MakeString(k).String())] = objc.MakeObject(v)
+	}
+	return goResult_
+}
+
+func (n NSTextView) SetMarkedTextAttributes(value map[foundation.AttributedStringKey]objc.Object) {
+	var cValue C.Dictionary
+	if len(value) > 0 {
+		cValueKeyData := make([]unsafe.Pointer, len(value))
+		cValueValueData := make([]unsafe.Pointer, len(value))
+		var idx = 0
+		for k, v := range value {
+			cValueKeyData[idx] = foundation.NewString(string(k)).Ptr()
+			cValueValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cValue.key_data = unsafe.Pointer(&cValueKeyData[0])
+		cValue.value_data = unsafe.Pointer(&cValueValueData[0])
+		cValue.len = C.int(len(value))
+	}
+	C.C_NSTextView_SetMarkedTextAttributes(n.Ptr(), cValue)
+}
+
+func (n NSTextView) LinkTextAttributes() map[foundation.AttributedStringKey]objc.Object {
+	result_ := C.C_NSTextView_LinkTextAttributes(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[foundation.AttributedStringKey]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[foundation.AttributedStringKey(foundation.MakeString(k).String())] = objc.MakeObject(v)
+	}
+	return goResult_
+}
+
+func (n NSTextView) SetLinkTextAttributes(value map[foundation.AttributedStringKey]objc.Object) {
+	var cValue C.Dictionary
+	if len(value) > 0 {
+		cValueKeyData := make([]unsafe.Pointer, len(value))
+		cValueValueData := make([]unsafe.Pointer, len(value))
+		var idx = 0
+		for k, v := range value {
+			cValueKeyData[idx] = foundation.NewString(string(k)).Ptr()
+			cValueValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cValue.key_data = unsafe.Pointer(&cValueKeyData[0])
+		cValue.value_data = unsafe.Pointer(&cValueValueData[0])
+		cValue.len = C.int(len(value))
+	}
+	C.C_NSTextView_SetLinkTextAttributes(n.Ptr(), cValue)
+}
+
 func (n NSTextView) ReadablePasteboardTypes() []PasteboardType {
 	result_ := C.C_NSTextView_ReadablePasteboardTypes(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]PasteboardType, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -793,13 +941,49 @@ func (n NSTextView) ReadablePasteboardTypes() []PasteboardType {
 
 func (n NSTextView) WritablePasteboardTypes() []PasteboardType {
 	result_ := C.C_NSTextView_WritablePasteboardTypes(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]PasteboardType, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = PasteboardType(foundation.MakeString(r).String())
 	}
 	return goResult_
+}
+
+func (n NSTextView) TypingAttributes() map[foundation.AttributedStringKey]objc.Object {
+	result_ := C.C_NSTextView_TypingAttributes(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[foundation.AttributedStringKey]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[foundation.AttributedStringKey(foundation.MakeString(k).String())] = objc.MakeObject(v)
+	}
+	return goResult_
+}
+
+func (n NSTextView) SetTypingAttributes(value map[foundation.AttributedStringKey]objc.Object) {
+	var cValue C.Dictionary
+	if len(value) > 0 {
+		cValueKeyData := make([]unsafe.Pointer, len(value))
+		cValueValueData := make([]unsafe.Pointer, len(value))
+		var idx = 0
+		for k, v := range value {
+			cValueKeyData[idx] = foundation.NewString(string(k)).Ptr()
+			cValueValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cValue.key_data = unsafe.Pointer(&cValueKeyData[0])
+		cValue.value_data = unsafe.Pointer(&cValueValueData[0])
+		cValue.len = C.int(len(value))
+	}
+	C.C_NSTextView_SetTypingAttributes(n.Ptr(), cValue)
 }
 
 func (n NSTextView) IsCoalescingUndo() bool {
@@ -809,7 +993,9 @@ func (n NSTextView) IsCoalescingUndo() bool {
 
 func (n NSTextView) AcceptableDragTypes() []PasteboardType {
 	result_ := C.C_NSTextView_AcceptableDragTypes(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]PasteboardType, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -825,7 +1011,9 @@ func (n NSTextView) RangeForUserCharacterAttributeChange() foundation.Range {
 
 func (n NSTextView) RangesForUserCharacterAttributeChange() []foundation.Value {
 	result_ := C.C_NSTextView_RangesForUserCharacterAttributeChange(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]foundation.Value, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -841,7 +1029,9 @@ func (n NSTextView) RangeForUserParagraphAttributeChange() foundation.Range {
 
 func (n NSTextView) RangesForUserParagraphAttributeChange() []foundation.Value {
 	result_ := C.C_NSTextView_RangesForUserParagraphAttributeChange(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]foundation.Value, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -857,7 +1047,9 @@ func (n NSTextView) RangeForUserTextChange() foundation.Range {
 
 func (n NSTextView) RangesForUserTextChange() []foundation.Value {
 	result_ := C.C_NSTextView_RangesForUserTextChange(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]foundation.Value, len(result_Slice))
 	for idx, r := range result_Slice {

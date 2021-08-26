@@ -16,3 +16,4 @@ int C_NSPDFInfo_Orientation(void* ptr);
 void C_NSPDFInfo_SetOrientation(void* ptr, int value);
 CGSize C_NSPDFInfo_PaperSize(void* ptr);
 void C_NSPDFInfo_SetPaperSize(void* ptr, CGSize value);
+Dictionary C_NSPDFInfo_Attributes(void* ptr);

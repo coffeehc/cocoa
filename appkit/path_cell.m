@@ -54,25 +54,29 @@ void* C_NSPathCell_PathComponentCellAtPoint_WithFrame_InView(void* ptr, CGPoint 
 Array C_NSPathCell_AllowedTypes(void* ptr) {
     NSPathCell* nSPathCell = (NSPathCell*)ptr;
     NSArray* result_ = [nSPathCell allowedTypes];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSPathCell_SetAllowedTypes(void* ptr, Array value) {
     NSPathCell* nSPathCell = (NSPathCell*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSString*)(NSString*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSString*)(NSString*)p];
+    	}
     }
     [nSPathCell setAllowedTypes:objcValue];
 }
@@ -130,25 +134,29 @@ void* C_NSPathCell_ClickedPathComponentCell(void* ptr) {
 Array C_NSPathCell_PathComponentCells(void* ptr) {
     NSPathCell* nSPathCell = (NSPathCell*)ptr;
     NSArray* result_ = [nSPathCell pathComponentCells];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSPathCell_SetPathComponentCells(void* ptr, Array value) {
     NSPathCell* nSPathCell = (NSPathCell*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSPathComponentCell*)(NSPathComponentCell*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSPathComponentCell*)(NSPathComponentCell*)p];
+    	}
     }
     [nSPathCell setPathComponentCells:objcValue];
 }

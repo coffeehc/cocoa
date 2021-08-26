@@ -11,6 +11,7 @@ import (
 
 type FontDescriptor interface {
 	objc.Object
+	FontDescriptorByAddingAttributes(attributes map[FontDescriptorAttributeName]objc.Object) FontDescriptor
 	FontDescriptorWithFace(newFace string) FontDescriptor
 	FontDescriptorWithFamily(newFamily string) FontDescriptor
 	FontDescriptorWithMatrix(matrix foundation.AffineTransform) FontDescriptor
@@ -19,6 +20,7 @@ type FontDescriptor interface {
 	MatchingFontDescriptorsWithMandatoryKeys(mandatoryKeys foundation.Set) []FontDescriptor
 	MatchingFontDescriptorWithMandatoryKeys(mandatoryKeys foundation.Set) FontDescriptor
 	ObjectForKey(attribute FontDescriptorAttributeName) objc.Object
+	FontAttributes() map[FontDescriptorAttributeName]objc.Object
 	Matrix() foundation.AffineTransform
 	PointSize() coregraphics.Float
 	PostscriptName() string
@@ -40,6 +42,25 @@ func AllocFontDescriptor() NSFontDescriptor {
 	return MakeFontDescriptor(C.C_FontDescriptor_Alloc())
 }
 
+func (n NSFontDescriptor) InitWithFontAttributes(attributes map[FontDescriptorAttributeName]objc.Object) FontDescriptor {
+	var cAttributes C.Dictionary
+	if len(attributes) > 0 {
+		cAttributesKeyData := make([]unsafe.Pointer, len(attributes))
+		cAttributesValueData := make([]unsafe.Pointer, len(attributes))
+		var idx = 0
+		for k, v := range attributes {
+			cAttributesKeyData[idx] = foundation.NewString(string(k)).Ptr()
+			cAttributesValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cAttributes.key_data = unsafe.Pointer(&cAttributesKeyData[0])
+		cAttributes.value_data = unsafe.Pointer(&cAttributesValueData[0])
+		cAttributes.len = C.int(len(attributes))
+	}
+	result_ := C.C_NSFontDescriptor_InitWithFontAttributes(n.Ptr(), cAttributes)
+	return MakeFontDescriptor(result_)
+}
+
 func (n NSFontDescriptor) FontDescriptorWithDesign(design FontDescriptorSystemDesign) FontDescriptor {
 	result_ := C.C_NSFontDescriptor_FontDescriptorWithDesign(n.Ptr(), foundation.NewString(string(design)).Ptr())
 	return MakeFontDescriptor(result_)
@@ -50,6 +71,44 @@ func (n NSFontDescriptor) Init() FontDescriptor {
 	return MakeFontDescriptor(result_)
 }
 
+func FontDescriptor_PreferredFontDescriptorForTextStyle_Options(style FontTextStyle, options map[FontTextStyleOptionKey]objc.Object) FontDescriptor {
+	var cOptions C.Dictionary
+	if len(options) > 0 {
+		cOptionsKeyData := make([]unsafe.Pointer, len(options))
+		cOptionsValueData := make([]unsafe.Pointer, len(options))
+		var idx = 0
+		for k, v := range options {
+			cOptionsKeyData[idx] = foundation.NewString(string(k)).Ptr()
+			cOptionsValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cOptions.key_data = unsafe.Pointer(&cOptionsKeyData[0])
+		cOptions.value_data = unsafe.Pointer(&cOptionsValueData[0])
+		cOptions.len = C.int(len(options))
+	}
+	result_ := C.C_NSFontDescriptor_FontDescriptor_PreferredFontDescriptorForTextStyle_Options(foundation.NewString(string(style)).Ptr(), cOptions)
+	return MakeFontDescriptor(result_)
+}
+
+func FontDescriptorWithFontAttributes(attributes map[FontDescriptorAttributeName]objc.Object) FontDescriptor {
+	var cAttributes C.Dictionary
+	if len(attributes) > 0 {
+		cAttributesKeyData := make([]unsafe.Pointer, len(attributes))
+		cAttributesValueData := make([]unsafe.Pointer, len(attributes))
+		var idx = 0
+		for k, v := range attributes {
+			cAttributesKeyData[idx] = foundation.NewString(string(k)).Ptr()
+			cAttributesValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cAttributes.key_data = unsafe.Pointer(&cAttributesKeyData[0])
+		cAttributes.value_data = unsafe.Pointer(&cAttributesValueData[0])
+		cAttributes.len = C.int(len(attributes))
+	}
+	result_ := C.C_NSFontDescriptor_FontDescriptorWithFontAttributes(cAttributes)
+	return MakeFontDescriptor(result_)
+}
+
 func FontDescriptorWithName_Matrix(fontName string, matrix foundation.AffineTransform) FontDescriptor {
 	result_ := C.C_NSFontDescriptor_FontDescriptorWithName_Matrix(foundation.NewString(fontName).Ptr(), objc.ExtractPtr(matrix))
 	return MakeFontDescriptor(result_)
@@ -57,6 +116,25 @@ func FontDescriptorWithName_Matrix(fontName string, matrix foundation.AffineTran
 
 func FontDescriptorWithName_Size(fontName string, size coregraphics.Float) FontDescriptor {
 	result_ := C.C_NSFontDescriptor_FontDescriptorWithName_Size(foundation.NewString(fontName).Ptr(), C.double(float64(size)))
+	return MakeFontDescriptor(result_)
+}
+
+func (n NSFontDescriptor) FontDescriptorByAddingAttributes(attributes map[FontDescriptorAttributeName]objc.Object) FontDescriptor {
+	var cAttributes C.Dictionary
+	if len(attributes) > 0 {
+		cAttributesKeyData := make([]unsafe.Pointer, len(attributes))
+		cAttributesValueData := make([]unsafe.Pointer, len(attributes))
+		var idx = 0
+		for k, v := range attributes {
+			cAttributesKeyData[idx] = foundation.NewString(string(k)).Ptr()
+			cAttributesValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cAttributes.key_data = unsafe.Pointer(&cAttributesKeyData[0])
+		cAttributes.value_data = unsafe.Pointer(&cAttributesValueData[0])
+		cAttributes.len = C.int(len(attributes))
+	}
+	result_ := C.C_NSFontDescriptor_FontDescriptorByAddingAttributes(n.Ptr(), cAttributes)
 	return MakeFontDescriptor(result_)
 }
 
@@ -87,7 +165,9 @@ func (n NSFontDescriptor) FontDescriptorWithSymbolicTraits(symbolicTraits FontDe
 
 func (n NSFontDescriptor) MatchingFontDescriptorsWithMandatoryKeys(mandatoryKeys foundation.Set) []FontDescriptor {
 	result_ := C.C_NSFontDescriptor_MatchingFontDescriptorsWithMandatoryKeys(n.Ptr(), objc.ExtractPtr(mandatoryKeys))
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]FontDescriptor, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -104,6 +184,22 @@ func (n NSFontDescriptor) MatchingFontDescriptorWithMandatoryKeys(mandatoryKeys 
 func (n NSFontDescriptor) ObjectForKey(attribute FontDescriptorAttributeName) objc.Object {
 	result_ := C.C_NSFontDescriptor_ObjectForKey(n.Ptr(), foundation.NewString(string(attribute)).Ptr())
 	return objc.MakeObject(result_)
+}
+
+func (n NSFontDescriptor) FontAttributes() map[FontDescriptorAttributeName]objc.Object {
+	result_ := C.C_NSFontDescriptor_FontAttributes(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[FontDescriptorAttributeName]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[FontDescriptorAttributeName(foundation.MakeString(k).String())] = objc.MakeObject(v)
+	}
+	return goResult_
 }
 
 func (n NSFontDescriptor) Matrix() foundation.AffineTransform {

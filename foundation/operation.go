@@ -114,7 +114,9 @@ func (n NSOperation) SetName(value string) {
 
 func (n NSOperation) Dependencies() []Operation {
 	result_ := C.C_NSOperation_Dependencies(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]Operation, len(result_Slice))
 	for idx, r := range result_Slice {

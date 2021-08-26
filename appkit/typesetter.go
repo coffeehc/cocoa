@@ -52,6 +52,7 @@ type Typesetter interface {
 	ParagraphSeparatorGlyphRange() foundation.Range
 	ParagraphCharacterRange() foundation.Range
 	ParagraphSeparatorCharacterRange() foundation.Range
+	AttributesForExtraLineFragment() map[foundation.AttributedStringKey]objc.Object
 }
 
 type NSTypesetter struct {
@@ -222,7 +223,9 @@ func (n NSTypesetter) CurrentTextContainer() TextContainer {
 
 func (n NSTypesetter) TextContainers() []TextContainer {
 	result_ := C.C_NSTypesetter_TextContainers(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]TextContainer, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -281,4 +284,20 @@ func (n NSTypesetter) ParagraphCharacterRange() foundation.Range {
 func (n NSTypesetter) ParagraphSeparatorCharacterRange() foundation.Range {
 	result_ := C.C_NSTypesetter_ParagraphSeparatorCharacterRange(n.Ptr())
 	return foundation.FromNSRangePointer(unsafe.Pointer(&result_))
+}
+
+func (n NSTypesetter) AttributesForExtraLineFragment() map[foundation.AttributedStringKey]objc.Object {
+	result_ := C.C_NSTypesetter_AttributesForExtraLineFragment(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[foundation.AttributedStringKey]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[foundation.AttributedStringKey(foundation.MakeString(k).String())] = objc.MakeObject(v)
+	}
+	return goResult_
 }

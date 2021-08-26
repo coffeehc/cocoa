@@ -184,7 +184,9 @@ func (n NSCollectionView) DeselectItemsAtIndexPaths(indexPaths foundation.Set) {
 
 func (n NSCollectionView) VisibleItems() []CollectionViewItem {
 	result_ := C.C_NSCollectionView_VisibleItems(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]CollectionViewItem, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -276,7 +278,9 @@ func (n NSCollectionView) SetDelegate(value objc.Object) {
 
 func (n NSCollectionView) Content() []objc.Object {
 	result_ := C.C_NSCollectionView_Content(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]objc.Object, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -286,11 +290,15 @@ func (n NSCollectionView) Content() []objc.Object {
 }
 
 func (n NSCollectionView) SetContent(value []objc.Object) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = objc.ExtractPtr(v)
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = objc.ExtractPtr(v)
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSCollectionView_SetContent(n.Ptr(), cValue)
 }
 
@@ -305,7 +313,9 @@ func (n NSCollectionView) SetBackgroundView(value View) {
 
 func (n NSCollectionView) BackgroundColors() []Color {
 	result_ := C.C_NSCollectionView_BackgroundColors(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]Color, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -315,11 +325,15 @@ func (n NSCollectionView) BackgroundColors() []Color {
 }
 
 func (n NSCollectionView) SetBackgroundColors(value []Color) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = objc.ExtractPtr(v)
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = objc.ExtractPtr(v)
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSCollectionView_SetBackgroundColors(n.Ptr(), cValue)
 }
 

@@ -65,10 +65,12 @@ func (n NSTextAttachment) SetBounds(value foundation.Rect) {
 
 func (n NSTextAttachment) Contents() []byte {
 	result_ := C.C_NSTextAttachment_Contents(n.Ptr())
+	if result_.len > 0 {
+		C.free(result_.data)
+	}
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)
-	C.free(result_.data)
 	return goResult_
 }
 

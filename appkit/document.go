@@ -139,7 +139,9 @@ func Document_IsNativeType(_type string) bool {
 
 func (n NSDocument) WritableTypesForSaveOperation(saveOperation SaveOperationType) []string {
 	result_ := C.C_NSDocument_WritableTypesForSaveOperation(n.Ptr(), C.uint(uint(saveOperation)))
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -394,7 +396,9 @@ func (n NSDocument) IsInViewingMode() bool {
 
 func Document_ReadableTypes() []string {
 	result_ := C.C_NSDocument_Document_ReadableTypes()
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -405,7 +409,9 @@ func Document_ReadableTypes() []string {
 
 func Document_WritableTypes() []string {
 	result_ := C.C_NSDocument_Document_WritableTypes()
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -416,7 +422,9 @@ func Document_WritableTypes() []string {
 
 func (n NSDocument) WindowControllers() []WindowController {
 	result_ := C.C_NSDocument_WindowControllers(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]WindowController, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -514,7 +522,9 @@ func (n NSDocument) SetHasUndoManager(value bool) {
 
 func Document_RestorableStateKeyPaths() []string {
 	result_ := C.C_NSDocument_Document_RestorableStateKeyPaths()
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {

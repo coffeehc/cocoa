@@ -57,6 +57,7 @@ NSModalSession C_NSApplication_BeginModalSessionForWindow(void* ptr, void* windo
 int C_NSApplication_RunModalSession(void* ptr, NSModalSession session);
 void C_NSApplication_OrderFrontColorPanel(void* ptr, void* sender);
 void C_NSApplication_OrderFrontStandardAboutPanel(void* ptr, void* sender);
+void C_NSApplication_OrderFrontStandardAboutPanelWithOptions(void* ptr, Dictionary optionsDictionary);
 void C_NSApplication_OrderFrontCharacterPalette(void* ptr, void* sender);
 void C_NSApplication_RunPageLayout(void* ptr, void* sender);
 void C_NSApplication_AddWindowsItem_Title_Filename(void* ptr, void* win, void* _string, bool isFilename);

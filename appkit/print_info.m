@@ -5,6 +5,22 @@ void* C_PrintInfo_Alloc() {
     return [NSPrintInfo alloc];
 }
 
+void* C_NSPrintInfo_InitWithDictionary(void* ptr, Dictionary attributes) {
+    NSPrintInfo* nSPrintInfo = (NSPrintInfo*)ptr;
+    NSMutableDictionary* objcAttributes = [[NSMutableDictionary alloc] initWithCapacity: attributes.len];
+    if (attributes.len > 0) {
+    	void** attributesKeyData = (void**)attributes.key_data;
+    	void** attributesValueData = (void**)attributes.value_data;
+    	for (int i = 0; i < attributes.len; i++) {
+    		void* kp = attributesKeyData[i];
+    		void* vp = attributesValueData[i];
+    		[objcAttributes setObject:(NSPrintInfoAttributeKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    NSPrintInfo* result_ = [nSPrintInfo initWithDictionary:objcAttributes];
+    return result_;
+}
+
 void* C_NSPrintInfo_Init(void* ptr) {
     NSPrintInfo* nSPrintInfo = (NSPrintInfo*)ptr;
     NSPrintInfo* result_ = [nSPrintInfo init];
@@ -20,6 +36,28 @@ void* C_NSPrintInfo_InitWithCoder(void* ptr, void* coder) {
 void C_NSPrintInfo_SetUpPrintOperationDefaultValues(void* ptr) {
     NSPrintInfo* nSPrintInfo = (NSPrintInfo*)ptr;
     [nSPrintInfo setUpPrintOperationDefaultValues];
+}
+
+Dictionary C_NSPrintInfo_Dictionary(void* ptr) {
+    NSPrintInfo* nSPrintInfo = (NSPrintInfo*)ptr;
+    NSDictionary* result_ = [nSPrintInfo dictionary];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSPrintInfoAttributeKey kp = [result_Keys objectAtIndex:i];
+    		id vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
 }
 
 void C_NSPrintInfo_UpdateFromPMPageFormat(void* ptr) {
@@ -221,6 +259,28 @@ double C_NSPrintInfo_ScalingFactor(void* ptr) {
 void C_NSPrintInfo_SetScalingFactor(void* ptr, double value) {
     NSPrintInfo* nSPrintInfo = (NSPrintInfo*)ptr;
     [nSPrintInfo setScalingFactor:value];
+}
+
+Dictionary C_NSPrintInfo_PrintSettings(void* ptr) {
+    NSPrintInfo* nSPrintInfo = (NSPrintInfo*)ptr;
+    NSDictionary* result_ = [nSPrintInfo printSettings];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSPrintInfoSettingKey kp = [result_Keys objectAtIndex:i];
+    		id vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
 }
 
 void* C_NSPrintInfo_PrintInfo_DefaultPrinter() {

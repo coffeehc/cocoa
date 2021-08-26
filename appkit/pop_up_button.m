@@ -31,10 +31,12 @@ void C_NSPopUpButton_AddItemWithTitle(void* ptr, void* title) {
 void C_NSPopUpButton_AddItemsWithTitles(void* ptr, Array itemTitles) {
     NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
     NSMutableArray* objcItemTitles = [[NSMutableArray alloc] init];
-    void** itemTitlesData = (void**)itemTitles.data;
-    for (int i = 0; i < itemTitles.len; i++) {
-    	void* p = itemTitlesData[i];
-    	[objcItemTitles addObject:(NSString*)(NSString*)p];
+    if (itemTitles.len > 0) {
+    	void** itemTitlesData = (void**)itemTitles.data;
+    	for (int i = 0; i < itemTitles.len; i++) {
+    		void* p = itemTitlesData[i];
+    		[objcItemTitles addObject:(NSString*)(NSString*)p];
+    	}
     }
     [nSPopUpButton addItemsWithTitles:objcItemTitles];
 }
@@ -188,30 +190,34 @@ int C_NSPopUpButton_NumberOfItems(void* ptr) {
 Array C_NSPopUpButton_ItemArray(void* ptr) {
     NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
     NSArray* result_ = [nSPopUpButton itemArray];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 Array C_NSPopUpButton_ItemTitles(void* ptr) {
     NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
     NSArray* result_ = [nSPopUpButton itemTitles];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 

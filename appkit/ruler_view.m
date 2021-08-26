@@ -31,16 +31,20 @@ void* C_NSRulerView_Init(void* ptr) {
 
 void C_NSRulerView_RulerView_RegisterUnitWithName_Abbreviation_UnitToPointsConversionFactor_StepUpCycle_StepDownCycle(void* unitName, void* abbreviation, double conversionFactor, Array stepUpCycle, Array stepDownCycle) {
     NSMutableArray* objcStepUpCycle = [[NSMutableArray alloc] init];
-    void** stepUpCycleData = (void**)stepUpCycle.data;
-    for (int i = 0; i < stepUpCycle.len; i++) {
-    	void* p = stepUpCycleData[i];
-    	[objcStepUpCycle addObject:(NSNumber*)(NSNumber*)p];
+    if (stepUpCycle.len > 0) {
+    	void** stepUpCycleData = (void**)stepUpCycle.data;
+    	for (int i = 0; i < stepUpCycle.len; i++) {
+    		void* p = stepUpCycleData[i];
+    		[objcStepUpCycle addObject:(NSNumber*)(NSNumber*)p];
+    	}
     }
     NSMutableArray* objcStepDownCycle = [[NSMutableArray alloc] init];
-    void** stepDownCycleData = (void**)stepDownCycle.data;
-    for (int i = 0; i < stepDownCycle.len; i++) {
-    	void* p = stepDownCycleData[i];
-    	[objcStepDownCycle addObject:(NSNumber*)(NSNumber*)p];
+    if (stepDownCycle.len > 0) {
+    	void** stepDownCycleData = (void**)stepDownCycle.data;
+    	for (int i = 0; i < stepDownCycle.len; i++) {
+    		void* p = stepDownCycleData[i];
+    		[objcStepDownCycle addObject:(NSNumber*)(NSNumber*)p];
+    	}
     }
     [NSRulerView registerUnitWithName:(NSString*)unitName abbreviation:(NSString*)abbreviation unitToPointsConversionFactor:conversionFactor stepUpCycle:objcStepUpCycle stepDownCycle:objcStepDownCycle];
 }
@@ -128,25 +132,29 @@ void C_NSRulerView_SetOriginOffset(void* ptr, double value) {
 Array C_NSRulerView_Markers(void* ptr) {
     NSRulerView* nSRulerView = (NSRulerView*)ptr;
     NSArray* result_ = [nSRulerView markers];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSRulerView_SetMarkers(void* ptr, Array value) {
     NSRulerView* nSRulerView = (NSRulerView*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSRulerMarker*)(NSRulerMarker*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSRulerMarker*)(NSRulerMarker*)p];
+    	}
     }
     [nSRulerView setMarkers:objcValue];
 }

@@ -3,6 +3,7 @@ package appkit
 // #include "color_space.h"
 import "C"
 import (
+	"github.com/hsiafan/cocoa/coregraphics"
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
 	"unsafe"
@@ -10,6 +11,7 @@ import (
 
 type ColorSpace interface {
 	objc.Object
+	CGColorSpace() coregraphics.ColorSpaceRef
 	ColorSpaceModel() ColorSpaceModel
 	ICCProfileData() []byte
 	LocalizedName() string
@@ -30,6 +32,11 @@ func AllocColorSpace() NSColorSpace {
 	return MakeColorSpace(C.C_ColorSpace_Alloc())
 }
 
+func (n NSColorSpace) InitWithCGColorSpace(cgColorSpace coregraphics.ColorSpaceRef) ColorSpace {
+	result_ := C.C_NSColorSpace_InitWithCGColorSpace(n.Ptr(), unsafe.Pointer(cgColorSpace))
+	return MakeColorSpace(result_)
+}
+
 func (n NSColorSpace) InitWithICCProfileData(iccData []byte) ColorSpace {
 	result_ := C.C_NSColorSpace_InitWithICCProfileData(n.Ptr(), C.Array{data: unsafe.Pointer(&iccData[0]), len: C.int(len(iccData))})
 	return MakeColorSpace(result_)
@@ -42,7 +49,9 @@ func (n NSColorSpace) Init() ColorSpace {
 
 func ColorSpace_AvailableColorSpacesWithModel(model ColorSpaceModel) []ColorSpace {
 	result_ := C.C_NSColorSpace_ColorSpace_AvailableColorSpacesWithModel(C.int(int(model)))
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]ColorSpace, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -111,6 +120,11 @@ func AdobeRGB1998ColorSpace() ColorSpace {
 	return MakeColorSpace(result_)
 }
 
+func (n NSColorSpace) CGColorSpace() coregraphics.ColorSpaceRef {
+	result_ := C.C_NSColorSpace_CGColorSpace(n.Ptr())
+	return coregraphics.ColorSpaceRef(result_)
+}
+
 func (n NSColorSpace) ColorSpaceModel() ColorSpaceModel {
 	result_ := C.C_NSColorSpace_ColorSpaceModel(n.Ptr())
 	return ColorSpaceModel(int(result_))
@@ -118,10 +132,12 @@ func (n NSColorSpace) ColorSpaceModel() ColorSpaceModel {
 
 func (n NSColorSpace) ICCProfileData() []byte {
 	result_ := C.C_NSColorSpace_ICCProfileData(n.Ptr())
+	if result_.len > 0 {
+		C.free(result_.data)
+	}
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)
-	C.free(result_.data)
 	return goResult_
 }
 

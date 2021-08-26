@@ -89,12 +89,26 @@ type NumberFormatter interface {
 	SetNegativePrefix(value string)
 	NegativeSuffix() string
 	SetNegativeSuffix(value string)
+	TextAttributesForNegativeValues() map[string]objc.Object
+	SetTextAttributesForNegativeValues(value map[string]objc.Object)
+	TextAttributesForPositiveValues() map[string]objc.Object
+	SetTextAttributesForPositiveValues(value map[string]objc.Object)
 	AttributedStringForZero() AttributedString
 	SetAttributedStringForZero(value AttributedString)
+	TextAttributesForZero() map[string]objc.Object
+	SetTextAttributesForZero(value map[string]objc.Object)
 	AttributedStringForNil() AttributedString
 	SetAttributedStringForNil(value AttributedString)
+	TextAttributesForNil() map[string]objc.Object
+	SetTextAttributesForNil(value map[string]objc.Object)
 	AttributedStringForNotANumber() AttributedString
 	SetAttributedStringForNotANumber(value AttributedString)
+	TextAttributesForNotANumber() map[string]objc.Object
+	SetTextAttributesForNotANumber(value map[string]objc.Object)
+	TextAttributesForPositiveInfinity() map[string]objc.Object
+	SetTextAttributesForPositiveInfinity(value map[string]objc.Object)
+	TextAttributesForNegativeInfinity() map[string]objc.Object
+	SetTextAttributesForNegativeInfinity(value map[string]objc.Object)
 	GroupingSeparator() string
 	SetGroupingSeparator(value string)
 	UsesGroupingSeparator() bool
@@ -523,6 +537,74 @@ func (n NSNumberFormatter) SetNegativeSuffix(value string) {
 	C.C_NSNumberFormatter_SetNegativeSuffix(n.Ptr(), NewString(value).Ptr())
 }
 
+func (n NSNumberFormatter) TextAttributesForNegativeValues() map[string]objc.Object {
+	result_ := C.C_NSNumberFormatter_TextAttributesForNegativeValues(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[string]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[MakeString(k).String()] = objc.MakeObject(v)
+	}
+	return goResult_
+}
+
+func (n NSNumberFormatter) SetTextAttributesForNegativeValues(value map[string]objc.Object) {
+	var cValue C.Dictionary
+	if len(value) > 0 {
+		cValueKeyData := make([]unsafe.Pointer, len(value))
+		cValueValueData := make([]unsafe.Pointer, len(value))
+		var idx = 0
+		for k, v := range value {
+			cValueKeyData[idx] = NewString(k).Ptr()
+			cValueValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cValue.key_data = unsafe.Pointer(&cValueKeyData[0])
+		cValue.value_data = unsafe.Pointer(&cValueValueData[0])
+		cValue.len = C.int(len(value))
+	}
+	C.C_NSNumberFormatter_SetTextAttributesForNegativeValues(n.Ptr(), cValue)
+}
+
+func (n NSNumberFormatter) TextAttributesForPositiveValues() map[string]objc.Object {
+	result_ := C.C_NSNumberFormatter_TextAttributesForPositiveValues(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[string]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[MakeString(k).String()] = objc.MakeObject(v)
+	}
+	return goResult_
+}
+
+func (n NSNumberFormatter) SetTextAttributesForPositiveValues(value map[string]objc.Object) {
+	var cValue C.Dictionary
+	if len(value) > 0 {
+		cValueKeyData := make([]unsafe.Pointer, len(value))
+		cValueValueData := make([]unsafe.Pointer, len(value))
+		var idx = 0
+		for k, v := range value {
+			cValueKeyData[idx] = NewString(k).Ptr()
+			cValueValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cValue.key_data = unsafe.Pointer(&cValueKeyData[0])
+		cValue.value_data = unsafe.Pointer(&cValueValueData[0])
+		cValue.len = C.int(len(value))
+	}
+	C.C_NSNumberFormatter_SetTextAttributesForPositiveValues(n.Ptr(), cValue)
+}
+
 func (n NSNumberFormatter) AttributedStringForZero() AttributedString {
 	result_ := C.C_NSNumberFormatter_AttributedStringForZero(n.Ptr())
 	return MakeAttributedString(result_)
@@ -530,6 +612,40 @@ func (n NSNumberFormatter) AttributedStringForZero() AttributedString {
 
 func (n NSNumberFormatter) SetAttributedStringForZero(value AttributedString) {
 	C.C_NSNumberFormatter_SetAttributedStringForZero(n.Ptr(), objc.ExtractPtr(value))
+}
+
+func (n NSNumberFormatter) TextAttributesForZero() map[string]objc.Object {
+	result_ := C.C_NSNumberFormatter_TextAttributesForZero(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[string]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[MakeString(k).String()] = objc.MakeObject(v)
+	}
+	return goResult_
+}
+
+func (n NSNumberFormatter) SetTextAttributesForZero(value map[string]objc.Object) {
+	var cValue C.Dictionary
+	if len(value) > 0 {
+		cValueKeyData := make([]unsafe.Pointer, len(value))
+		cValueValueData := make([]unsafe.Pointer, len(value))
+		var idx = 0
+		for k, v := range value {
+			cValueKeyData[idx] = NewString(k).Ptr()
+			cValueValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cValue.key_data = unsafe.Pointer(&cValueKeyData[0])
+		cValue.value_data = unsafe.Pointer(&cValueValueData[0])
+		cValue.len = C.int(len(value))
+	}
+	C.C_NSNumberFormatter_SetTextAttributesForZero(n.Ptr(), cValue)
 }
 
 func (n NSNumberFormatter) AttributedStringForNil() AttributedString {
@@ -541,6 +657,40 @@ func (n NSNumberFormatter) SetAttributedStringForNil(value AttributedString) {
 	C.C_NSNumberFormatter_SetAttributedStringForNil(n.Ptr(), objc.ExtractPtr(value))
 }
 
+func (n NSNumberFormatter) TextAttributesForNil() map[string]objc.Object {
+	result_ := C.C_NSNumberFormatter_TextAttributesForNil(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[string]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[MakeString(k).String()] = objc.MakeObject(v)
+	}
+	return goResult_
+}
+
+func (n NSNumberFormatter) SetTextAttributesForNil(value map[string]objc.Object) {
+	var cValue C.Dictionary
+	if len(value) > 0 {
+		cValueKeyData := make([]unsafe.Pointer, len(value))
+		cValueValueData := make([]unsafe.Pointer, len(value))
+		var idx = 0
+		for k, v := range value {
+			cValueKeyData[idx] = NewString(k).Ptr()
+			cValueValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cValue.key_data = unsafe.Pointer(&cValueKeyData[0])
+		cValue.value_data = unsafe.Pointer(&cValueValueData[0])
+		cValue.len = C.int(len(value))
+	}
+	C.C_NSNumberFormatter_SetTextAttributesForNil(n.Ptr(), cValue)
+}
+
 func (n NSNumberFormatter) AttributedStringForNotANumber() AttributedString {
 	result_ := C.C_NSNumberFormatter_AttributedStringForNotANumber(n.Ptr())
 	return MakeAttributedString(result_)
@@ -548,6 +698,108 @@ func (n NSNumberFormatter) AttributedStringForNotANumber() AttributedString {
 
 func (n NSNumberFormatter) SetAttributedStringForNotANumber(value AttributedString) {
 	C.C_NSNumberFormatter_SetAttributedStringForNotANumber(n.Ptr(), objc.ExtractPtr(value))
+}
+
+func (n NSNumberFormatter) TextAttributesForNotANumber() map[string]objc.Object {
+	result_ := C.C_NSNumberFormatter_TextAttributesForNotANumber(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[string]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[MakeString(k).String()] = objc.MakeObject(v)
+	}
+	return goResult_
+}
+
+func (n NSNumberFormatter) SetTextAttributesForNotANumber(value map[string]objc.Object) {
+	var cValue C.Dictionary
+	if len(value) > 0 {
+		cValueKeyData := make([]unsafe.Pointer, len(value))
+		cValueValueData := make([]unsafe.Pointer, len(value))
+		var idx = 0
+		for k, v := range value {
+			cValueKeyData[idx] = NewString(k).Ptr()
+			cValueValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cValue.key_data = unsafe.Pointer(&cValueKeyData[0])
+		cValue.value_data = unsafe.Pointer(&cValueValueData[0])
+		cValue.len = C.int(len(value))
+	}
+	C.C_NSNumberFormatter_SetTextAttributesForNotANumber(n.Ptr(), cValue)
+}
+
+func (n NSNumberFormatter) TextAttributesForPositiveInfinity() map[string]objc.Object {
+	result_ := C.C_NSNumberFormatter_TextAttributesForPositiveInfinity(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[string]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[MakeString(k).String()] = objc.MakeObject(v)
+	}
+	return goResult_
+}
+
+func (n NSNumberFormatter) SetTextAttributesForPositiveInfinity(value map[string]objc.Object) {
+	var cValue C.Dictionary
+	if len(value) > 0 {
+		cValueKeyData := make([]unsafe.Pointer, len(value))
+		cValueValueData := make([]unsafe.Pointer, len(value))
+		var idx = 0
+		for k, v := range value {
+			cValueKeyData[idx] = NewString(k).Ptr()
+			cValueValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cValue.key_data = unsafe.Pointer(&cValueKeyData[0])
+		cValue.value_data = unsafe.Pointer(&cValueValueData[0])
+		cValue.len = C.int(len(value))
+	}
+	C.C_NSNumberFormatter_SetTextAttributesForPositiveInfinity(n.Ptr(), cValue)
+}
+
+func (n NSNumberFormatter) TextAttributesForNegativeInfinity() map[string]objc.Object {
+	result_ := C.C_NSNumberFormatter_TextAttributesForNegativeInfinity(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[string]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[MakeString(k).String()] = objc.MakeObject(v)
+	}
+	return goResult_
+}
+
+func (n NSNumberFormatter) SetTextAttributesForNegativeInfinity(value map[string]objc.Object) {
+	var cValue C.Dictionary
+	if len(value) > 0 {
+		cValueKeyData := make([]unsafe.Pointer, len(value))
+		cValueValueData := make([]unsafe.Pointer, len(value))
+		var idx = 0
+		for k, v := range value {
+			cValueKeyData[idx] = NewString(k).Ptr()
+			cValueValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cValue.key_data = unsafe.Pointer(&cValueKeyData[0])
+		cValue.value_data = unsafe.Pointer(&cValueValueData[0])
+		cValue.len = C.int(len(value))
+	}
+	C.C_NSNumberFormatter_SetTextAttributesForNegativeInfinity(n.Ptr(), cValue)
 }
 
 func (n NSNumberFormatter) GroupingSeparator() string {

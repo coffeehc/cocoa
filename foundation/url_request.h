@@ -16,6 +16,7 @@ void* C_NSURLRequest_HTTPMethod(void* ptr);
 void* C_NSURLRequest_URL(void* ptr);
 Array C_NSURLRequest_HTTPBody(void* ptr);
 void* C_NSURLRequest_MainDocumentURL(void* ptr);
+Dictionary C_NSURLRequest_AllHTTPHeaderFields(void* ptr);
 double C_NSURLRequest_TimeoutInterval(void* ptr);
 bool C_NSURLRequest_HTTPShouldHandleCookies(void* ptr);
 bool C_NSURLRequest_HTTPShouldUsePipelining(void* ptr);

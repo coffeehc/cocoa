@@ -296,7 +296,9 @@ func (n NSCalendar) PMSymbol() string {
 
 func (n NSCalendar) WeekdaySymbols() []string {
 	result_ := C.C_NSCalendar_WeekdaySymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -307,7 +309,9 @@ func (n NSCalendar) WeekdaySymbols() []string {
 
 func (n NSCalendar) ShortWeekdaySymbols() []string {
 	result_ := C.C_NSCalendar_ShortWeekdaySymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -318,7 +322,9 @@ func (n NSCalendar) ShortWeekdaySymbols() []string {
 
 func (n NSCalendar) VeryShortWeekdaySymbols() []string {
 	result_ := C.C_NSCalendar_VeryShortWeekdaySymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -329,7 +335,9 @@ func (n NSCalendar) VeryShortWeekdaySymbols() []string {
 
 func (n NSCalendar) StandaloneWeekdaySymbols() []string {
 	result_ := C.C_NSCalendar_StandaloneWeekdaySymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -340,7 +348,9 @@ func (n NSCalendar) StandaloneWeekdaySymbols() []string {
 
 func (n NSCalendar) ShortStandaloneWeekdaySymbols() []string {
 	result_ := C.C_NSCalendar_ShortStandaloneWeekdaySymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -351,7 +361,9 @@ func (n NSCalendar) ShortStandaloneWeekdaySymbols() []string {
 
 func (n NSCalendar) VeryShortStandaloneWeekdaySymbols() []string {
 	result_ := C.C_NSCalendar_VeryShortStandaloneWeekdaySymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -362,7 +374,9 @@ func (n NSCalendar) VeryShortStandaloneWeekdaySymbols() []string {
 
 func (n NSCalendar) MonthSymbols() []string {
 	result_ := C.C_NSCalendar_MonthSymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -373,7 +387,9 @@ func (n NSCalendar) MonthSymbols() []string {
 
 func (n NSCalendar) ShortMonthSymbols() []string {
 	result_ := C.C_NSCalendar_ShortMonthSymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -384,7 +400,9 @@ func (n NSCalendar) ShortMonthSymbols() []string {
 
 func (n NSCalendar) VeryShortMonthSymbols() []string {
 	result_ := C.C_NSCalendar_VeryShortMonthSymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -395,7 +413,9 @@ func (n NSCalendar) VeryShortMonthSymbols() []string {
 
 func (n NSCalendar) StandaloneMonthSymbols() []string {
 	result_ := C.C_NSCalendar_StandaloneMonthSymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -406,7 +426,9 @@ func (n NSCalendar) StandaloneMonthSymbols() []string {
 
 func (n NSCalendar) ShortStandaloneMonthSymbols() []string {
 	result_ := C.C_NSCalendar_ShortStandaloneMonthSymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -417,7 +439,9 @@ func (n NSCalendar) ShortStandaloneMonthSymbols() []string {
 
 func (n NSCalendar) VeryShortStandaloneMonthSymbols() []string {
 	result_ := C.C_NSCalendar_VeryShortStandaloneMonthSymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -428,7 +452,9 @@ func (n NSCalendar) VeryShortStandaloneMonthSymbols() []string {
 
 func (n NSCalendar) QuarterSymbols() []string {
 	result_ := C.C_NSCalendar_QuarterSymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -439,7 +465,9 @@ func (n NSCalendar) QuarterSymbols() []string {
 
 func (n NSCalendar) ShortQuarterSymbols() []string {
 	result_ := C.C_NSCalendar_ShortQuarterSymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -450,7 +478,9 @@ func (n NSCalendar) ShortQuarterSymbols() []string {
 
 func (n NSCalendar) StandaloneQuarterSymbols() []string {
 	result_ := C.C_NSCalendar_StandaloneQuarterSymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -461,7 +491,9 @@ func (n NSCalendar) StandaloneQuarterSymbols() []string {
 
 func (n NSCalendar) ShortStandaloneQuarterSymbols() []string {
 	result_ := C.C_NSCalendar_ShortStandaloneQuarterSymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -472,7 +504,9 @@ func (n NSCalendar) ShortStandaloneQuarterSymbols() []string {
 
 func (n NSCalendar) EraSymbols() []string {
 	result_ := C.C_NSCalendar_EraSymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -483,7 +517,9 @@ func (n NSCalendar) EraSymbols() []string {
 
 func (n NSCalendar) LongEraSymbols() []string {
 	result_ := C.C_NSCalendar_LongEraSymbols(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {

@@ -122,25 +122,29 @@ int C_NSTabView_NumberOfTabViewItems(void* ptr) {
 Array C_NSTabView_TabViewItems(void* ptr) {
     NSTabView* nSTabView = (NSTabView*)ptr;
     NSArray* result_ = [nSTabView tabViewItems];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSTabView_SetTabViewItems(void* ptr, Array value) {
     NSTabView* nSTabView = (NSTabView*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSTabViewItem*)(NSTabViewItem*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSTabViewItem*)(NSTabViewItem*)p];
+    	}
     }
     [nSTabView setTabViewItems:objcValue];
 }

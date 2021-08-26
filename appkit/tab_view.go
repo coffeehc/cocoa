@@ -159,7 +159,9 @@ func (n NSTabView) NumberOfTabViewItems() int {
 
 func (n NSTabView) TabViewItems() []TabViewItem {
 	result_ := C.C_NSTabView_TabViewItems(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]TabViewItem, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -169,11 +171,15 @@ func (n NSTabView) TabViewItems() []TabViewItem {
 }
 
 func (n NSTabView) SetTabViewItems(value []TabViewItem) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = objc.ExtractPtr(v)
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = objc.ExtractPtr(v)
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSTabView_SetTabViewItems(n.Ptr(), cValue)
 }
 

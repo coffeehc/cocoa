@@ -77,16 +77,24 @@ func (n NSRulerView) Init() RulerView {
 }
 
 func RulerView_RegisterUnitWithName_Abbreviation_UnitToPointsConversionFactor_StepUpCycle_StepDownCycle(unitName RulerViewUnitName, abbreviation string, conversionFactor coregraphics.Float, stepUpCycle []foundation.Number, stepDownCycle []foundation.Number) {
-	cStepUpCycleData := make([]unsafe.Pointer, len(stepUpCycle))
-	for idx, v := range stepUpCycle {
-		cStepUpCycleData[idx] = objc.ExtractPtr(v)
+	var cStepUpCycle C.Array
+	if len(stepUpCycle) > 0 {
+		cStepUpCycleData := make([]unsafe.Pointer, len(stepUpCycle))
+		for idx, v := range stepUpCycle {
+			cStepUpCycleData[idx] = objc.ExtractPtr(v)
+		}
+		cStepUpCycle.data = unsafe.Pointer(&cStepUpCycleData[0])
+		cStepUpCycle.len = C.int(len(stepUpCycle))
 	}
-	cStepUpCycle := C.Array{data: unsafe.Pointer(&cStepUpCycleData[0]), len: C.int(len(stepUpCycle))}
-	cStepDownCycleData := make([]unsafe.Pointer, len(stepDownCycle))
-	for idx, v := range stepDownCycle {
-		cStepDownCycleData[idx] = objc.ExtractPtr(v)
+	var cStepDownCycle C.Array
+	if len(stepDownCycle) > 0 {
+		cStepDownCycleData := make([]unsafe.Pointer, len(stepDownCycle))
+		for idx, v := range stepDownCycle {
+			cStepDownCycleData[idx] = objc.ExtractPtr(v)
+		}
+		cStepDownCycle.data = unsafe.Pointer(&cStepDownCycleData[0])
+		cStepDownCycle.len = C.int(len(stepDownCycle))
 	}
-	cStepDownCycle := C.Array{data: unsafe.Pointer(&cStepDownCycleData[0]), len: C.int(len(stepDownCycle))}
 	C.C_NSRulerView_RulerView_RegisterUnitWithName_Abbreviation_UnitToPointsConversionFactor_StepUpCycle_StepDownCycle(foundation.NewString(string(unitName)).Ptr(), foundation.NewString(abbreviation).Ptr(), C.double(float64(conversionFactor)), cStepUpCycle, cStepDownCycle)
 }
 
@@ -157,7 +165,9 @@ func (n NSRulerView) SetOriginOffset(value coregraphics.Float) {
 
 func (n NSRulerView) Markers() []RulerMarker {
 	result_ := C.C_NSRulerView_Markers(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]RulerMarker, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -167,11 +177,15 @@ func (n NSRulerView) Markers() []RulerMarker {
 }
 
 func (n NSRulerView) SetMarkers(value []RulerMarker) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = objc.ExtractPtr(v)
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = objc.ExtractPtr(v)
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSRulerView_SetMarkers(n.Ptr(), cValue)
 }
 

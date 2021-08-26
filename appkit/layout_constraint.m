@@ -11,6 +11,42 @@ void* C_NSLayoutConstraint_Init(void* ptr) {
     return result_;
 }
 
+Array C_NSLayoutConstraint_LayoutConstraint_ConstraintsWithVisualFormat_Options_Metrics_Views(void* format, unsigned int opts, Dictionary metrics, Dictionary views) {
+    NSMutableDictionary* objcMetrics = [[NSMutableDictionary alloc] initWithCapacity: metrics.len];
+    if (metrics.len > 0) {
+    	void** metricsKeyData = (void**)metrics.key_data;
+    	void** metricsValueData = (void**)metrics.value_data;
+    	for (int i = 0; i < metrics.len; i++) {
+    		void* kp = metricsKeyData[i];
+    		void* vp = metricsValueData[i];
+    		[objcMetrics setObject:(NSString*)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    NSMutableDictionary* objcViews = [[NSMutableDictionary alloc] initWithCapacity: views.len];
+    if (views.len > 0) {
+    	void** viewsKeyData = (void**)views.key_data;
+    	void** viewsValueData = (void**)views.value_data;
+    	for (int i = 0; i < views.len; i++) {
+    		void* kp = viewsKeyData[i];
+    		void* vp = viewsValueData[i];
+    		[objcViews setObject:(NSString*)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    NSArray* result_ = [NSLayoutConstraint constraintsWithVisualFormat:(NSString*)format options:opts metrics:objcMetrics views:objcViews];
+    Array result_Array;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
+    return result_Array;
+}
+
 void* C_NSLayoutConstraint_LayoutConstraint_ConstraintWithItem_Attribute_RelatedBy_ToItem_Attribute_Multiplier_Constant(void* view1, int attr1, int relation, void* view2, int attr2, double multiplier, double c) {
     NSLayoutConstraint* result_ = [NSLayoutConstraint constraintWithItem:(id)view1 attribute:attr1 relatedBy:relation toItem:(id)view2 attribute:attr2 multiplier:multiplier constant:c];
     return result_;
@@ -18,20 +54,24 @@ void* C_NSLayoutConstraint_LayoutConstraint_ConstraintWithItem_Attribute_Related
 
 void C_NSLayoutConstraint_LayoutConstraint_ActivateConstraints(Array constraints) {
     NSMutableArray* objcConstraints = [[NSMutableArray alloc] init];
-    void** constraintsData = (void**)constraints.data;
-    for (int i = 0; i < constraints.len; i++) {
-    	void* p = constraintsData[i];
-    	[objcConstraints addObject:(NSLayoutConstraint*)(NSLayoutConstraint*)p];
+    if (constraints.len > 0) {
+    	void** constraintsData = (void**)constraints.data;
+    	for (int i = 0; i < constraints.len; i++) {
+    		void* p = constraintsData[i];
+    		[objcConstraints addObject:(NSLayoutConstraint*)(NSLayoutConstraint*)p];
+    	}
     }
     [NSLayoutConstraint activateConstraints:objcConstraints];
 }
 
 void C_NSLayoutConstraint_LayoutConstraint_DeactivateConstraints(Array constraints) {
     NSMutableArray* objcConstraints = [[NSMutableArray alloc] init];
-    void** constraintsData = (void**)constraints.data;
-    for (int i = 0; i < constraints.len; i++) {
-    	void* p = constraintsData[i];
-    	[objcConstraints addObject:(NSLayoutConstraint*)(NSLayoutConstraint*)p];
+    if (constraints.len > 0) {
+    	void** constraintsData = (void**)constraints.data;
+    	for (int i = 0; i < constraints.len; i++) {
+    		void* p = constraintsData[i];
+    		[objcConstraints addObject:(NSLayoutConstraint*)(NSLayoutConstraint*)p];
+    	}
     }
     [NSLayoutConstraint deactivateConstraints:objcConstraints];
 }

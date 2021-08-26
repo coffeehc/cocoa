@@ -217,7 +217,7 @@
 }
 
 - (void)dealloc {
-	deleteOutlineViewDelegate([self goID]);
+	deleteAppKitHandle([self goID]);
 	[super dealloc];
 }
 @end

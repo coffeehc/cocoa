@@ -159,7 +159,7 @@
 }
 
 - (void)dealloc {
-	deleteBrowserDelegate([self goID]);
+	deleteAppKitHandle([self goID]);
 	[super dealloc];
 }
 @end

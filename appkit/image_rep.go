@@ -59,7 +59,9 @@ func (n NSImageRep) InitWithCoder(coder foundation.Coder) ImageRep {
 
 func ImageRepsWithContentsOfFile(filename string) []ImageRep {
 	result_ := C.C_NSImageRep_ImageRepsWithContentsOfFile(foundation.NewString(filename).Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]ImageRep, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -70,7 +72,9 @@ func ImageRepsWithContentsOfFile(filename string) []ImageRep {
 
 func ImageRepsWithPasteboard(pasteboard Pasteboard) []ImageRep {
 	result_ := C.C_NSImageRep_ImageRepsWithPasteboard(objc.ExtractPtr(pasteboard))
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]ImageRep, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -81,7 +85,9 @@ func ImageRepsWithPasteboard(pasteboard Pasteboard) []ImageRep {
 
 func ImageRepsWithContentsOfURL(url foundation.URL) []ImageRep {
 	result_ := C.C_NSImageRep_ImageRepsWithContentsOfURL(objc.ExtractPtr(url))
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]ImageRep, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -132,9 +138,7 @@ func (n NSImageRep) DrawInRect(rect foundation.Rect) bool {
 
 func (n NSImageRep) DrawInRect_FromRect_Operation_Fraction_RespectFlipped_Hints(dstSpacePortionRect foundation.Rect, srcSpacePortionRect foundation.Rect, op CompositingOperation, requestedAlpha coregraphics.Float, respectContextIsFlipped bool, hints map[ImageHintKey]objc.Object) bool {
 	var cHints C.Dictionary
-	if len(hints) == 0 {
-		cHints = C.Dictionary{len: 0}
-	} else {
+	if len(hints) > 0 {
 		cHintsKeyData := make([]unsafe.Pointer, len(hints))
 		cHintsValueData := make([]unsafe.Pointer, len(hints))
 		var idx = 0
@@ -143,7 +147,9 @@ func (n NSImageRep) DrawInRect_FromRect_Operation_Fraction_RespectFlipped_Hints(
 			cHintsValueData[idx] = objc.ExtractPtr(v)
 			idx++
 		}
-		cHints = C.Dictionary{key_data: unsafe.Pointer(&cHintsKeyData[0]), value_data: unsafe.Pointer(&cHintsValueData[0]), len: C.int(len(hints))}
+		cHints.key_data = unsafe.Pointer(&cHintsKeyData[0])
+		cHints.value_data = unsafe.Pointer(&cHintsValueData[0])
+		cHints.len = C.int(len(hints))
 	}
 	result_ := C.C_NSImageRep_DrawInRect_FromRect_Operation_Fraction_RespectFlipped_Hints(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(dstSpacePortionRect))), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(srcSpacePortionRect))), C.uint(uint(op)), C.double(float64(requestedAlpha)), C.bool(respectContextIsFlipped), cHints)
 	return bool(result_)
@@ -151,7 +157,9 @@ func (n NSImageRep) DrawInRect_FromRect_Operation_Fraction_RespectFlipped_Hints(
 
 func ImageRep_ImageTypes() []string {
 	result_ := C.C_NSImageRep_ImageRep_ImageTypes()
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -162,7 +170,9 @@ func ImageRep_ImageTypes() []string {
 
 func ImageRep_ImageUnfilteredTypes() []string {
 	result_ := C.C_NSImageRep_ImageRep_ImageUnfilteredTypes()
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {

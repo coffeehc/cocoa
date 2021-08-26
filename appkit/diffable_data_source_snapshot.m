@@ -14,10 +14,12 @@ void* C_NSDiffableDataSourceSnapshot_Init(void* ptr) {
 void C_NSDiffableDataSourceSnapshot_AppendSectionsWithIdentifiers(void* ptr, Array sectionIdentifiers) {
     NSDiffableDataSourceSnapshot* nSDiffableDataSourceSnapshot = (NSDiffableDataSourceSnapshot*)ptr;
     NSMutableArray* objcSectionIdentifiers = [[NSMutableArray alloc] init];
-    void** sectionIdentifiersData = (void**)sectionIdentifiers.data;
-    for (int i = 0; i < sectionIdentifiers.len; i++) {
-    	void* p = sectionIdentifiersData[i];
-    	[objcSectionIdentifiers addObject:(NSObject*)(NSObject*)p];
+    if (sectionIdentifiers.len > 0) {
+    	void** sectionIdentifiersData = (void**)sectionIdentifiers.data;
+    	for (int i = 0; i < sectionIdentifiers.len; i++) {
+    		void* p = sectionIdentifiersData[i];
+    		[objcSectionIdentifiers addObject:(NSObject*)(NSObject*)p];
+    	}
     }
     [nSDiffableDataSourceSnapshot appendSectionsWithIdentifiers:objcSectionIdentifiers];
 }

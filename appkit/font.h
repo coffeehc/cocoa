@@ -11,6 +11,7 @@ void* C_NSFont_FontWithDescriptor_Size(void* fontDescriptor, double fontSize);
 void* C_NSFont_FontWithDescriptor_TextTransform(void* fontDescriptor, void* textTransform);
 void* C_NSFont_Font_UserFontOfSize(double fontSize);
 void* C_NSFont_Font_UserFixedPitchFontOfSize(double fontSize);
+void* C_NSFont_Font_PreferredFontForTextStyle_Options(void* style, Dictionary options);
 void* C_NSFont_Font_SystemFontOfSize(double fontSize);
 void* C_NSFont_Font_SystemFontOfSize_Weight(double fontSize, double weight);
 void* C_NSFont_Font_BoldSystemFontOfSize(double fontSize);

@@ -11,6 +11,22 @@ void* C_NSMutableAttributedString_InitWithString(void* ptr, void* str) {
     return result_;
 }
 
+void* C_NSMutableAttributedString_InitWithString_Attributes(void* ptr, void* str, Dictionary attrs) {
+    NSMutableAttributedString* nSMutableAttributedString = (NSMutableAttributedString*)ptr;
+    NSMutableDictionary* objcAttrs = [[NSMutableDictionary alloc] initWithCapacity: attrs.len];
+    if (attrs.len > 0) {
+    	void** attrsKeyData = (void**)attrs.key_data;
+    	void** attrsValueData = (void**)attrs.value_data;
+    	for (int i = 0; i < attrs.len; i++) {
+    		void* kp = attrsKeyData[i];
+    		void* vp = attrsValueData[i];
+    		[objcAttrs setObject:(NSAttributedStringKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    NSMutableAttributedString* result_ = [nSMutableAttributedString initWithString:(NSString*)str attributes:objcAttrs];
+    return result_;
+}
+
 void* C_NSMutableAttributedString_InitWithAttributedString(void* ptr, void* attrStr) {
     NSMutableAttributedString* nSMutableAttributedString = (NSMutableAttributedString*)ptr;
     NSMutableAttributedString* result_ = [nSMutableAttributedString initWithAttributedString:(NSAttributedString*)attrStr];

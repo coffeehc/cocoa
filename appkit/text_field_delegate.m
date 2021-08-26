@@ -6,21 +6,25 @@
 
 
 - (NSArray*)textField:(NSTextField*)textField textView:(NSTextView*)textView candidates:(NSArray*)candidates forSelectedRange:(NSRange)selectedRange {
-    int candidatescount = [candidates count];
-    void** candidatesData = malloc(candidatescount * sizeof(void*));
-    for (int i = 0; i < candidatescount; i++) {
-    	 void* p = [candidates objectAtIndex:i];
-    	 candidatesData[i] = p;
-    }
     Array candidatesArray;
-    candidatesArray.data = candidatesData;
-    candidatesArray.len = candidatescount;
+    int candidatescount = [candidates count];
+    if (candidatescount > 0) {
+    	void** candidatesData = malloc(candidatescount * sizeof(void*));
+    	for (int i = 0; i < candidatescount; i++) {
+    		 void* p = [candidates objectAtIndex:i];
+    		 candidatesData[i] = p;
+    	}
+    	candidatesArray.data = candidatesData;
+    	candidatesArray.len = candidatescount;
+    }
     Array result_ = textFieldDelegate_TextField_TextView_Candidates_ForSelectedRange([self goID], textField, textView, candidatesArray, selectedRange);
     NSMutableArray* objcResult_ = [[NSMutableArray alloc] init];
-    void** result_Data = (void**)result_.data;
-    for (int i = 0; i < result_.len; i++) {
-    	void* p = result_Data[i];
-    	[objcResult_ addObject:(NSTextCheckingResult*)(NSTextCheckingResult*)p];
+    if (result_.len > 0) {
+    	void** result_Data = (void**)result_.data;
+    	for (int i = 0; i < result_.len; i++) {
+    		void* p = result_Data[i];
+    		[objcResult_ addObject:(NSTextCheckingResult*)(NSTextCheckingResult*)p];
+    	}
     }
     return objcResult_;
 }
@@ -28,10 +32,12 @@
 - (NSArray*)textField:(NSTextField*)textField textView:(NSTextView*)textView candidatesForSelectedRange:(NSRange)selectedRange {
     Array result_ = textFieldDelegate_TextField_TextView_CandidatesForSelectedRange([self goID], textField, textView, selectedRange);
     NSMutableArray* objcResult_ = [[NSMutableArray alloc] init];
-    void** result_Data = (void**)result_.data;
-    for (int i = 0; i < result_.len; i++) {
-    	void* p = result_Data[i];
-    	[objcResult_ addObject:(NSObject*)(NSObject*)p];
+    if (result_.len > 0) {
+    	void** result_Data = (void**)result_.data;
+    	for (int i = 0; i < result_.len; i++) {
+    		void* p = result_Data[i];
+    		[objcResult_ addObject:(NSObject*)(NSObject*)p];
+    	}
     }
     return objcResult_;
 }
@@ -88,7 +94,7 @@
 }
 
 - (void)dealloc {
-	deleteTextFieldDelegate([self goID]);
+	deleteAppKitHandle([self goID]);
 	[super dealloc];
 }
 @end

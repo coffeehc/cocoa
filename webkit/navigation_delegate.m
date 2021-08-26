@@ -47,7 +47,7 @@
 }
 
 - (void)dealloc {
-	deleteNavigationDelegate([self goID]);
+	deleteWebKitHandle([self goID]);
 	[super dealloc];
 }
 @end

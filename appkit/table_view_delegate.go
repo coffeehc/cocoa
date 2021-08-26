@@ -239,11 +239,15 @@ func tableViewDelegate_TableView_ShouldTrackCell_ForTableColumn_Row(hp C.uintptr
 func tableViewDelegate_TableView_RowActionsForRow_Edge(hp C.uintptr_t, tableView unsafe.Pointer, row C.int, edge C.int) C.Array {
 	delegate := cgo.Handle(hp).Value().(*TableViewDelegate)
 	result := delegate.TableView_RowActionsForRow_Edge(MakeTableView(tableView), int(row), TableRowActionEdge(int(edge)))
-	cResultData := make([]unsafe.Pointer, len(result))
-	for idx, v := range result {
-		cResultData[idx] = objc.ExtractPtr(v)
+	var cResult C.Array
+	if len(result) > 0 {
+		cResultData := make([]unsafe.Pointer, len(result))
+		for idx, v := range result {
+			cResultData[idx] = objc.ExtractPtr(v)
+		}
+		cResult.data = unsafe.Pointer(&cResultData[0])
+		cResult.len = C.int(len(result))
 	}
-	cResult := C.Array{data: unsafe.Pointer(&cResultData[0]), len: C.int(len(result))}
 	return cResult
 }
 
@@ -389,9 +393,4 @@ func TableViewDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bo
 	default:
 		return false
 	}
-}
-
-//export deleteTableViewDelegate
-func deleteTableViewDelegate(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
 }

@@ -41,15 +41,17 @@ void* C_NSScreen_DeepestScreen() {
 
 Array C_NSScreen_Screens() {
     NSArray* result_ = [NSScreen screens];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -63,6 +65,28 @@ CGRect C_NSScreen_Frame(void* ptr) {
     NSScreen* nSScreen = (NSScreen*)ptr;
     NSRect result_ = [nSScreen frame];
     return result_;
+}
+
+Dictionary C_NSScreen_DeviceDescription(void* ptr) {
+    NSScreen* nSScreen = (NSScreen*)ptr;
+    NSDictionary* result_ = [nSScreen deviceDescription];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSDeviceDescriptionKey kp = [result_Keys objectAtIndex:i];
+    		id vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
 }
 
 CGRect C_NSScreen_VisibleFrame(void* ptr) {

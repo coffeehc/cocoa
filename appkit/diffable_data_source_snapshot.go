@@ -35,11 +35,15 @@ func (n NSDiffableDataSourceSnapshot) Init() DiffableDataSourceSnapshot {
 }
 
 func (n NSDiffableDataSourceSnapshot) AppendSectionsWithIdentifiers(sectionIdentifiers []objc.Object) {
-	cSectionIdentifiersData := make([]unsafe.Pointer, len(sectionIdentifiers))
-	for idx, v := range sectionIdentifiers {
-		cSectionIdentifiersData[idx] = objc.ExtractPtr(v)
+	var cSectionIdentifiers C.Array
+	if len(sectionIdentifiers) > 0 {
+		cSectionIdentifiersData := make([]unsafe.Pointer, len(sectionIdentifiers))
+		for idx, v := range sectionIdentifiers {
+			cSectionIdentifiersData[idx] = objc.ExtractPtr(v)
+		}
+		cSectionIdentifiers.data = unsafe.Pointer(&cSectionIdentifiersData[0])
+		cSectionIdentifiers.len = C.int(len(sectionIdentifiers))
 	}
-	cSectionIdentifiers := C.Array{data: unsafe.Pointer(&cSectionIdentifiersData[0]), len: C.int(len(sectionIdentifiers))}
 	C.C_NSDiffableDataSourceSnapshot_AppendSectionsWithIdentifiers(n.Ptr(), cSectionIdentifiers)
 }
 

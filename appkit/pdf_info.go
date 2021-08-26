@@ -21,6 +21,7 @@ type PDFInfo interface {
 	SetOrientation(value PaperOrientation)
 	PaperSize() foundation.Size
 	SetPaperSize(value foundation.Size)
+	Attributes() map[PrintInfoAttributeKey]objc.Object
 }
 
 type NSPDFInfo struct {
@@ -62,7 +63,9 @@ func (n NSPDFInfo) SetFileExtensionHidden(value bool) {
 
 func (n NSPDFInfo) TagNames() []string {
 	result_ := C.C_NSPDFInfo_TagNames(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -72,11 +75,15 @@ func (n NSPDFInfo) TagNames() []string {
 }
 
 func (n NSPDFInfo) SetTagNames(value []string) {
-	cValueData := make([]unsafe.Pointer, len(value))
-	for idx, v := range value {
-		cValueData[idx] = foundation.NewString(v).Ptr()
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = foundation.NewString(v).Ptr()
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
 	}
-	cValue := C.Array{data: unsafe.Pointer(&cValueData[0]), len: C.int(len(value))}
 	C.C_NSPDFInfo_SetTagNames(n.Ptr(), cValue)
 }
 
@@ -96,4 +103,20 @@ func (n NSPDFInfo) PaperSize() foundation.Size {
 
 func (n NSPDFInfo) SetPaperSize(value foundation.Size) {
 	C.C_NSPDFInfo_SetPaperSize(n.Ptr(), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(value))))
+}
+
+func (n NSPDFInfo) Attributes() map[PrintInfoAttributeKey]objc.Object {
+	result_ := C.C_NSPDFInfo_Attributes(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[PrintInfoAttributeKey]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[PrintInfoAttributeKey(foundation.MakeString(k).String())] = objc.MakeObject(v)
+	}
+	return goResult_
 }

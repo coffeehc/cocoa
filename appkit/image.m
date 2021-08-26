@@ -112,10 +112,12 @@ void C_NSImage_AddRepresentation(void* ptr, void* imageRep) {
 void C_NSImage_AddRepresentations(void* ptr, Array imageReps) {
     NSImage* nSImage = (NSImage*)ptr;
     NSMutableArray* objcImageReps = [[NSMutableArray alloc] init];
-    void** imageRepsData = (void**)imageReps.data;
-    for (int i = 0; i < imageReps.len; i++) {
-    	void* p = imageRepsData[i];
-    	[objcImageReps addObject:(NSImageRep*)(NSImageRep*)p];
+    if (imageReps.len > 0) {
+    	void** imageRepsData = (void**)imageReps.data;
+    	for (int i = 0; i < imageReps.len; i++) {
+    		void* p = imageRepsData[i];
+    		[objcImageReps addObject:(NSImageRep*)(NSImageRep*)p];
+    	}
     }
     [nSImage addRepresentations:objcImageReps];
 }
@@ -274,44 +276,50 @@ void C_NSImage_SetTemplate(void* ptr, bool value) {
 
 Array C_NSImage_ImageTypes() {
     NSArray* result_ = [NSImage imageTypes];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 Array C_NSImage_ImageUnfilteredTypes() {
     NSArray* result_ = [NSImage imageUnfilteredTypes];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 Array C_NSImage_Representations(void* ptr) {
     NSImage* nSImage = (NSImage*)ptr;
     NSArray* result_ = [nSImage representations];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 

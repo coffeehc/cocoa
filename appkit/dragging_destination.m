@@ -52,7 +52,7 @@
 }
 
 - (void)dealloc {
-	deleteDraggingDestination([self goID]);
+	deleteAppKitHandle([self goID]);
 	[super dealloc];
 }
 @end

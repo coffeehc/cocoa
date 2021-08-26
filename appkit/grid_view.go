@@ -95,21 +95,29 @@ func (n NSGridView) IndexOfRow(row GridRow) int {
 }
 
 func (n NSGridView) AddRowWithViews(views []View) GridRow {
-	cViewsData := make([]unsafe.Pointer, len(views))
-	for idx, v := range views {
-		cViewsData[idx] = objc.ExtractPtr(v)
+	var cViews C.Array
+	if len(views) > 0 {
+		cViewsData := make([]unsafe.Pointer, len(views))
+		for idx, v := range views {
+			cViewsData[idx] = objc.ExtractPtr(v)
+		}
+		cViews.data = unsafe.Pointer(&cViewsData[0])
+		cViews.len = C.int(len(views))
 	}
-	cViews := C.Array{data: unsafe.Pointer(&cViewsData[0]), len: C.int(len(views))}
 	result_ := C.C_NSGridView_AddRowWithViews(n.Ptr(), cViews)
 	return MakeGridRow(result_)
 }
 
 func (n NSGridView) InsertRowAtIndex_WithViews(index int, views []View) GridRow {
-	cViewsData := make([]unsafe.Pointer, len(views))
-	for idx, v := range views {
-		cViewsData[idx] = objc.ExtractPtr(v)
+	var cViews C.Array
+	if len(views) > 0 {
+		cViewsData := make([]unsafe.Pointer, len(views))
+		for idx, v := range views {
+			cViewsData[idx] = objc.ExtractPtr(v)
+		}
+		cViews.data = unsafe.Pointer(&cViewsData[0])
+		cViews.len = C.int(len(views))
 	}
-	cViews := C.Array{data: unsafe.Pointer(&cViewsData[0]), len: C.int(len(views))}
 	result_ := C.C_NSGridView_InsertRowAtIndex_WithViews(n.Ptr(), C.int(index), cViews)
 	return MakeGridRow(result_)
 }
@@ -123,21 +131,29 @@ func (n NSGridView) MoveRowAtIndex_ToIndex(fromIndex int, toIndex int) {
 }
 
 func (n NSGridView) AddColumnWithViews(views []View) GridColumn {
-	cViewsData := make([]unsafe.Pointer, len(views))
-	for idx, v := range views {
-		cViewsData[idx] = objc.ExtractPtr(v)
+	var cViews C.Array
+	if len(views) > 0 {
+		cViewsData := make([]unsafe.Pointer, len(views))
+		for idx, v := range views {
+			cViewsData[idx] = objc.ExtractPtr(v)
+		}
+		cViews.data = unsafe.Pointer(&cViewsData[0])
+		cViews.len = C.int(len(views))
 	}
-	cViews := C.Array{data: unsafe.Pointer(&cViewsData[0]), len: C.int(len(views))}
 	result_ := C.C_NSGridView_AddColumnWithViews(n.Ptr(), cViews)
 	return MakeGridColumn(result_)
 }
 
 func (n NSGridView) InsertColumnAtIndex_WithViews(index int, views []View) GridColumn {
-	cViewsData := make([]unsafe.Pointer, len(views))
-	for idx, v := range views {
-		cViewsData[idx] = objc.ExtractPtr(v)
+	var cViews C.Array
+	if len(views) > 0 {
+		cViewsData := make([]unsafe.Pointer, len(views))
+		for idx, v := range views {
+			cViewsData[idx] = objc.ExtractPtr(v)
+		}
+		cViews.data = unsafe.Pointer(&cViewsData[0])
+		cViews.len = C.int(len(views))
 	}
-	cViews := C.Array{data: unsafe.Pointer(&cViewsData[0]), len: C.int(len(views))}
 	result_ := C.C_NSGridView_InsertColumnAtIndex_WithViews(n.Ptr(), C.int(index), cViews)
 	return MakeGridColumn(result_)
 }

@@ -130,13 +130,49 @@ func SetDefaultTimeZone(value TimeZone) {
 
 func TimeZone_KnownTimeZoneNames() []string {
 	result_ := C.C_NSTimeZone_TimeZone_KnownTimeZoneNames()
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeString(r).String()
 	}
 	return goResult_
+}
+
+func TimeZone_AbbreviationDictionary() map[string]string {
+	result_ := C.C_NSTimeZone_TimeZone_AbbreviationDictionary()
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[string]string)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[MakeString(k).String()] = MakeString(v).String()
+	}
+	return goResult_
+}
+
+func TimeZone_SetAbbreviationDictionary(value map[string]string) {
+	var cValue C.Dictionary
+	if len(value) > 0 {
+		cValueKeyData := make([]unsafe.Pointer, len(value))
+		cValueValueData := make([]unsafe.Pointer, len(value))
+		var idx = 0
+		for k, v := range value {
+			cValueKeyData[idx] = NewString(k).Ptr()
+			cValueValueData[idx] = NewString(v).Ptr()
+			idx++
+		}
+		cValue.key_data = unsafe.Pointer(&cValueKeyData[0])
+		cValue.value_data = unsafe.Pointer(&cValueValueData[0])
+		cValue.len = C.int(len(value))
+	}
+	C.C_NSTimeZone_TimeZone_SetAbbreviationDictionary(cValue)
 }
 
 func (n NSTimeZone) Name() string {
@@ -156,10 +192,12 @@ func (n NSTimeZone) SecondsFromGMT() int {
 
 func (n NSTimeZone) Data() []byte {
 	result_ := C.C_NSTimeZone_Data(n.Ptr())
+	if result_.len > 0 {
+		C.free(result_.data)
+	}
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)
-	C.free(result_.data)
 	return goResult_
 }
 

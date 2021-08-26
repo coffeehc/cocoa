@@ -67,25 +67,29 @@ void C_NSTextInputContext_SetAcceptsGlyphInfo(void* ptr, bool value) {
 Array C_NSTextInputContext_AllowedInputSourceLocales(void* ptr) {
     NSTextInputContext* nSTextInputContext = (NSTextInputContext*)ptr;
     NSArray* result_ = [nSTextInputContext allowedInputSourceLocales];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSTextInputContext_SetAllowedInputSourceLocales(void* ptr, Array value) {
     NSTextInputContext* nSTextInputContext = (NSTextInputContext*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSString*)(NSString*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSString*)(NSString*)p];
+    	}
     }
     [nSTextInputContext setAllowedInputSourceLocales:objcValue];
 }
@@ -93,15 +97,17 @@ void C_NSTextInputContext_SetAllowedInputSourceLocales(void* ptr, Array value) {
 Array C_NSTextInputContext_KeyboardInputSources(void* ptr) {
     NSTextInputContext* nSTextInputContext = (NSTextInputContext*)ptr;
     NSArray* result_ = [nSTextInputContext keyboardInputSources];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 

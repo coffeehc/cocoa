@@ -37,10 +37,12 @@ void C_NSMatrix_AddColumn(void* ptr) {
 void C_NSMatrix_AddColumnWithCells(void* ptr, Array newCells) {
     NSMatrix* nSMatrix = (NSMatrix*)ptr;
     NSMutableArray* objcNewCells = [[NSMutableArray alloc] init];
-    void** newCellsData = (void**)newCells.data;
-    for (int i = 0; i < newCells.len; i++) {
-    	void* p = newCellsData[i];
-    	[objcNewCells addObject:(NSCell*)(NSCell*)p];
+    if (newCells.len > 0) {
+    	void** newCellsData = (void**)newCells.data;
+    	for (int i = 0; i < newCells.len; i++) {
+    		void* p = newCellsData[i];
+    		[objcNewCells addObject:(NSCell*)(NSCell*)p];
+    	}
     }
     [nSMatrix addColumnWithCells:objcNewCells];
 }
@@ -53,10 +55,12 @@ void C_NSMatrix_AddRow(void* ptr) {
 void C_NSMatrix_AddRowWithCells(void* ptr, Array newCells) {
     NSMatrix* nSMatrix = (NSMatrix*)ptr;
     NSMutableArray* objcNewCells = [[NSMutableArray alloc] init];
-    void** newCellsData = (void**)newCells.data;
-    for (int i = 0; i < newCells.len; i++) {
-    	void* p = newCellsData[i];
-    	[objcNewCells addObject:(NSCell*)(NSCell*)p];
+    if (newCells.len > 0) {
+    	void** newCellsData = (void**)newCells.data;
+    	for (int i = 0; i < newCells.len; i++) {
+    		void* p = newCellsData[i];
+    		[objcNewCells addObject:(NSCell*)(NSCell*)p];
+    	}
     }
     [nSMatrix addRowWithCells:objcNewCells];
 }
@@ -75,10 +79,12 @@ void C_NSMatrix_InsertColumn(void* ptr, int column) {
 void C_NSMatrix_InsertColumn_WithCells(void* ptr, int column, Array newCells) {
     NSMatrix* nSMatrix = (NSMatrix*)ptr;
     NSMutableArray* objcNewCells = [[NSMutableArray alloc] init];
-    void** newCellsData = (void**)newCells.data;
-    for (int i = 0; i < newCells.len; i++) {
-    	void* p = newCellsData[i];
-    	[objcNewCells addObject:(NSCell*)(NSCell*)p];
+    if (newCells.len > 0) {
+    	void** newCellsData = (void**)newCells.data;
+    	for (int i = 0; i < newCells.len; i++) {
+    		void* p = newCellsData[i];
+    		[objcNewCells addObject:(NSCell*)(NSCell*)p];
+    	}
     }
     [nSMatrix insertColumn:column withCells:objcNewCells];
 }
@@ -91,10 +97,12 @@ void C_NSMatrix_InsertRow(void* ptr, int row) {
 void C_NSMatrix_InsertRow_WithCells(void* ptr, int row, Array newCells) {
     NSMatrix* nSMatrix = (NSMatrix*)ptr;
     NSMutableArray* objcNewCells = [[NSMutableArray alloc] init];
-    void** newCellsData = (void**)newCells.data;
-    for (int i = 0; i < newCells.len; i++) {
-    	void* p = newCellsData[i];
-    	[objcNewCells addObject:(NSCell*)(NSCell*)p];
+    if (newCells.len > 0) {
+    	void** newCellsData = (void**)newCells.data;
+    	for (int i = 0; i < newCells.len; i++) {
+    		void* p = newCellsData[i];
+    		[objcNewCells addObject:(NSCell*)(NSCell*)p];
+    	}
     }
     [nSMatrix insertRow:row withCells:objcNewCells];
 }
@@ -382,15 +390,17 @@ void* C_NSMatrix_SelectedCell(void* ptr) {
 Array C_NSMatrix_SelectedCells(void* ptr) {
     NSMatrix* nSMatrix = (NSMatrix*)ptr;
     NSArray* result_ = [nSMatrix selectedCells];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -409,15 +419,17 @@ int C_NSMatrix_SelectedRow(void* ptr) {
 Array C_NSMatrix_Cells(void* ptr) {
     NSMatrix* nSMatrix = (NSMatrix*)ptr;
     NSArray* result_ = [nSMatrix cells];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 

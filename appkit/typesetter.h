@@ -50,3 +50,4 @@ NSRange C_NSTypesetter_ParagraphGlyphRange(void* ptr);
 NSRange C_NSTypesetter_ParagraphSeparatorGlyphRange(void* ptr);
 NSRange C_NSTypesetter_ParagraphCharacterRange(void* ptr);
 NSRange C_NSTypesetter_ParagraphSeparatorCharacterRange(void* ptr);
+Dictionary C_NSTypesetter_AttributesForExtraLineFragment(void* ptr);

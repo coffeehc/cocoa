@@ -74,6 +74,41 @@ func Locale_CanonicalLocaleIdentifierFromString(_string string) string {
 	return MakeString(result_).String()
 }
 
+func Locale_ComponentsFromLocaleIdentifier(_string string) map[string]string {
+	result_ := C.C_NSLocale_Locale_ComponentsFromLocaleIdentifier(NewString(_string).Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[string]string)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[MakeString(k).String()] = MakeString(v).String()
+	}
+	return goResult_
+}
+
+func LocaleIdentifierFromComponents(dict map[string]string) string {
+	var cDict C.Dictionary
+	if len(dict) > 0 {
+		cDictKeyData := make([]unsafe.Pointer, len(dict))
+		cDictValueData := make([]unsafe.Pointer, len(dict))
+		var idx = 0
+		for k, v := range dict {
+			cDictKeyData[idx] = NewString(k).Ptr()
+			cDictValueData[idx] = NewString(v).Ptr()
+			idx++
+		}
+		cDict.key_data = unsafe.Pointer(&cDictKeyData[0])
+		cDict.value_data = unsafe.Pointer(&cDictValueData[0])
+		cDict.len = C.int(len(dict))
+	}
+	result_ := C.C_NSLocale_LocaleIdentifierFromComponents(cDict)
+	return MakeString(result_).String()
+}
+
 func Locale_CanonicalLanguageIdentifierFromString(_string string) string {
 	result_ := C.C_NSLocale_Locale_CanonicalLanguageIdentifierFromString(NewString(_string).Ptr())
 	return MakeString(result_).String()
@@ -171,7 +206,9 @@ func SystemLocale() Locale {
 
 func Locale_AvailableLocaleIdentifiers() []string {
 	result_ := C.C_NSLocale_Locale_AvailableLocaleIdentifiers()
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -182,7 +219,9 @@ func Locale_AvailableLocaleIdentifiers() []string {
 
 func Locale_ISOCountryCodes() []string {
 	result_ := C.C_NSLocale_Locale_ISOCountryCodes()
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -193,7 +232,9 @@ func Locale_ISOCountryCodes() []string {
 
 func Locale_ISOLanguageCodes() []string {
 	result_ := C.C_NSLocale_Locale_ISOLanguageCodes()
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -204,7 +245,9 @@ func Locale_ISOLanguageCodes() []string {
 
 func Locale_ISOCurrencyCodes() []string {
 	result_ := C.C_NSLocale_Locale_ISOCurrencyCodes()
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -215,7 +258,9 @@ func Locale_ISOCurrencyCodes() []string {
 
 func Locale_CommonISOCurrencyCodes() []string {
 	result_ := C.C_NSLocale_Locale_CommonISOCurrencyCodes()
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
@@ -316,7 +361,9 @@ func (n NSLocale) AlternateQuotationEndDelimiter() string {
 
 func Locale_PreferredLanguages() []string {
 	result_ := C.C_NSLocale_Locale_PreferredLanguages()
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {

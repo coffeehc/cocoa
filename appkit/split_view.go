@@ -134,7 +134,9 @@ func (n NSSplitView) SetArrangesAllSubviews(value bool) {
 
 func (n NSSplitView) ArrangedSubviews() []View {
 	result_ := C.C_NSSplitView_ArrangedSubviews(n.Ptr())
-	defer C.free(result_.data)
+	if result_.len > 0 {
+		defer C.free(result_.data)
+	}
 	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
 	var goResult_ = make([]View, len(result_Slice))
 	for idx, r := range result_Slice {

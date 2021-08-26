@@ -36,25 +36,29 @@ void C_NSPDFInfo_SetFileExtensionHidden(void* ptr, bool value) {
 Array C_NSPDFInfo_TagNames(void* ptr) {
     NSPDFInfo* nSPDFInfo = (NSPDFInfo*)ptr;
     NSArray* result_ = [nSPDFInfo tagNames];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSPDFInfo_SetTagNames(void* ptr, Array value) {
     NSPDFInfo* nSPDFInfo = (NSPDFInfo*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSString*)(NSString*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSString*)(NSString*)p];
+    	}
     }
     [nSPDFInfo setTagNames:objcValue];
 }
@@ -79,4 +83,26 @@ CGSize C_NSPDFInfo_PaperSize(void* ptr) {
 void C_NSPDFInfo_SetPaperSize(void* ptr, CGSize value) {
     NSPDFInfo* nSPDFInfo = (NSPDFInfo*)ptr;
     [nSPDFInfo setPaperSize:value];
+}
+
+Dictionary C_NSPDFInfo_Attributes(void* ptr) {
+    NSPDFInfo* nSPDFInfo = (NSPDFInfo*)ptr;
+    NSDictionary* result_ = [nSPDFInfo attributes];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSPrintInfoAttributeKey kp = [result_Keys objectAtIndex:i];
+    		id vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
 }

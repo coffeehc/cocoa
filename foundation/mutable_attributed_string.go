@@ -31,6 +31,25 @@ func (n NSMutableAttributedString) InitWithString(str string) MutableAttributedS
 	return MakeMutableAttributedString(result_)
 }
 
+func (n NSMutableAttributedString) InitWithString_Attributes(str string, attrs map[AttributedStringKey]objc.Object) MutableAttributedString {
+	var cAttrs C.Dictionary
+	if len(attrs) > 0 {
+		cAttrsKeyData := make([]unsafe.Pointer, len(attrs))
+		cAttrsValueData := make([]unsafe.Pointer, len(attrs))
+		var idx = 0
+		for k, v := range attrs {
+			cAttrsKeyData[idx] = NewString(string(k)).Ptr()
+			cAttrsValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cAttrs.key_data = unsafe.Pointer(&cAttrsKeyData[0])
+		cAttrs.value_data = unsafe.Pointer(&cAttrsValueData[0])
+		cAttrs.len = C.int(len(attrs))
+	}
+	result_ := C.C_NSMutableAttributedString_InitWithString_Attributes(n.Ptr(), NewString(str).Ptr(), cAttrs)
+	return MakeMutableAttributedString(result_)
+}
+
 func (n NSMutableAttributedString) InitWithAttributedString(attrStr AttributedString) MutableAttributedString {
 	result_ := C.C_NSMutableAttributedString_InitWithAttributedString(n.Ptr(), objc.ExtractPtr(attrStr))
 	return MakeMutableAttributedString(result_)

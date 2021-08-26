@@ -5,6 +5,22 @@ void* C_FontDescriptor_Alloc() {
     return [NSFontDescriptor alloc];
 }
 
+void* C_NSFontDescriptor_InitWithFontAttributes(void* ptr, Dictionary attributes) {
+    NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
+    NSMutableDictionary* objcAttributes = [[NSMutableDictionary alloc] initWithCapacity: attributes.len];
+    if (attributes.len > 0) {
+    	void** attributesKeyData = (void**)attributes.key_data;
+    	void** attributesValueData = (void**)attributes.value_data;
+    	for (int i = 0; i < attributes.len; i++) {
+    		void* kp = attributesKeyData[i];
+    		void* vp = attributesValueData[i];
+    		[objcAttributes setObject:(NSFontDescriptorAttributeName)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    NSFontDescriptor* result_ = [nSFontDescriptor initWithFontAttributes:objcAttributes];
+    return result_;
+}
+
 void* C_NSFontDescriptor_FontDescriptorWithDesign(void* ptr, void* design) {
     NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
     NSFontDescriptor* result_ = [nSFontDescriptor fontDescriptorWithDesign:(NSString*)design];
@@ -17,6 +33,36 @@ void* C_NSFontDescriptor_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSFontDescriptor_FontDescriptor_PreferredFontDescriptorForTextStyle_Options(void* style, Dictionary options) {
+    NSMutableDictionary* objcOptions = [[NSMutableDictionary alloc] initWithCapacity: options.len];
+    if (options.len > 0) {
+    	void** optionsKeyData = (void**)options.key_data;
+    	void** optionsValueData = (void**)options.value_data;
+    	for (int i = 0; i < options.len; i++) {
+    		void* kp = optionsKeyData[i];
+    		void* vp = optionsValueData[i];
+    		[objcOptions setObject:(NSFontTextStyleOptionKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    NSFontDescriptor* result_ = [NSFontDescriptor preferredFontDescriptorForTextStyle:(NSString*)style options:objcOptions];
+    return result_;
+}
+
+void* C_NSFontDescriptor_FontDescriptorWithFontAttributes(Dictionary attributes) {
+    NSMutableDictionary* objcAttributes = [[NSMutableDictionary alloc] initWithCapacity: attributes.len];
+    if (attributes.len > 0) {
+    	void** attributesKeyData = (void**)attributes.key_data;
+    	void** attributesValueData = (void**)attributes.value_data;
+    	for (int i = 0; i < attributes.len; i++) {
+    		void* kp = attributesKeyData[i];
+    		void* vp = attributesValueData[i];
+    		[objcAttributes setObject:(NSFontDescriptorAttributeName)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    NSFontDescriptor* result_ = [NSFontDescriptor fontDescriptorWithFontAttributes:objcAttributes];
+    return result_;
+}
+
 void* C_NSFontDescriptor_FontDescriptorWithName_Matrix(void* fontName, void* matrix) {
     NSFontDescriptor* result_ = [NSFontDescriptor fontDescriptorWithName:(NSString*)fontName matrix:(NSAffineTransform*)matrix];
     return result_;
@@ -24,6 +70,22 @@ void* C_NSFontDescriptor_FontDescriptorWithName_Matrix(void* fontName, void* mat
 
 void* C_NSFontDescriptor_FontDescriptorWithName_Size(void* fontName, double size) {
     NSFontDescriptor* result_ = [NSFontDescriptor fontDescriptorWithName:(NSString*)fontName size:size];
+    return result_;
+}
+
+void* C_NSFontDescriptor_FontDescriptorByAddingAttributes(void* ptr, Dictionary attributes) {
+    NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
+    NSMutableDictionary* objcAttributes = [[NSMutableDictionary alloc] initWithCapacity: attributes.len];
+    if (attributes.len > 0) {
+    	void** attributesKeyData = (void**)attributes.key_data;
+    	void** attributesValueData = (void**)attributes.value_data;
+    	for (int i = 0; i < attributes.len; i++) {
+    		void* kp = attributesKeyData[i];
+    		void* vp = attributesValueData[i];
+    		[objcAttributes setObject:(NSFontDescriptorAttributeName)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    NSFontDescriptor* result_ = [nSFontDescriptor fontDescriptorByAddingAttributes:objcAttributes];
     return result_;
 }
 
@@ -60,15 +122,17 @@ void* C_NSFontDescriptor_FontDescriptorWithSymbolicTraits(void* ptr, uint32_t sy
 Array C_NSFontDescriptor_MatchingFontDescriptorsWithMandatoryKeys(void* ptr, void* mandatoryKeys) {
     NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
     NSArray* result_ = [nSFontDescriptor matchingFontDescriptorsWithMandatoryKeys:(NSSet*)mandatoryKeys];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -82,6 +146,28 @@ void* C_NSFontDescriptor_ObjectForKey(void* ptr, void* attribute) {
     NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
     id result_ = [nSFontDescriptor objectForKey:(NSString*)attribute];
     return result_;
+}
+
+Dictionary C_NSFontDescriptor_FontAttributes(void* ptr) {
+    NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
+    NSDictionary* result_ = [nSFontDescriptor fontAttributes];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSFontDescriptorAttributeName kp = [result_Keys objectAtIndex:i];
+    		id vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
 }
 
 void* C_NSFontDescriptor_Matrix(void* ptr) {

@@ -7,6 +7,7 @@ void* C_Event_Alloc();
 
 void* C_NSEvent_Init(void* ptr);
 void* C_NSEvent_Event_MouseEventWithType_Location_ModifierFlags_Timestamp_WindowNumber_Context_EventNumber_ClickCount_Pressure(unsigned int _type, CGPoint location, unsigned int flags, double time, int wNum, void* unusedPassNil, int eNum, int cNum, float pressure);
+void* C_NSEvent_EventWithCGEvent(void* cgEvent);
 void C_NSEvent_Event_StartPeriodicEventsAfterDelay_WithPeriod(double delay, double period);
 void C_NSEvent_Event_StopPeriodicEvents();
 void* C_NSEvent_TouchesMatchingPhase_InView(void* ptr, unsigned int phase, void* view);
@@ -21,6 +22,7 @@ CGPoint C_NSEvent_LocationInWindow(void* ptr);
 double C_NSEvent_Timestamp(void* ptr);
 void* C_NSEvent_Window(void* ptr);
 int C_NSEvent_WindowNumber(void* ptr);
+void* C_NSEvent_CGEvent(void* ptr);
 double C_NSEvent_Event_KeyRepeatDelay();
 double C_NSEvent_Event_KeyRepeatInterval();
 void* C_NSEvent_Characters(void* ptr);

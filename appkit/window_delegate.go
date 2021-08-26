@@ -188,11 +188,15 @@ func windowDelegate_WindowDidExitFullScreen(hp C.uintptr_t, notification unsafe.
 func windowDelegate_CustomWindowsToEnterFullScreenForWindow(hp C.uintptr_t, window unsafe.Pointer) C.Array {
 	delegate := cgo.Handle(hp).Value().(*WindowDelegate)
 	result := delegate.CustomWindowsToEnterFullScreenForWindow(MakeWindow(window))
-	cResultData := make([]unsafe.Pointer, len(result))
-	for idx, v := range result {
-		cResultData[idx] = objc.ExtractPtr(v)
+	var cResult C.Array
+	if len(result) > 0 {
+		cResultData := make([]unsafe.Pointer, len(result))
+		for idx, v := range result {
+			cResultData[idx] = objc.ExtractPtr(v)
+		}
+		cResult.data = unsafe.Pointer(&cResultData[0])
+		cResult.len = C.int(len(result))
 	}
-	cResult := C.Array{data: unsafe.Pointer(&cResultData[0]), len: C.int(len(result))}
 	return cResult
 }
 
@@ -200,11 +204,15 @@ func windowDelegate_CustomWindowsToEnterFullScreenForWindow(hp C.uintptr_t, wind
 func windowDelegate_CustomWindowsToEnterFullScreenForWindow_OnScreen(hp C.uintptr_t, window unsafe.Pointer, screen unsafe.Pointer) C.Array {
 	delegate := cgo.Handle(hp).Value().(*WindowDelegate)
 	result := delegate.CustomWindowsToEnterFullScreenForWindow_OnScreen(MakeWindow(window), MakeScreen(screen))
-	cResultData := make([]unsafe.Pointer, len(result))
-	for idx, v := range result {
-		cResultData[idx] = objc.ExtractPtr(v)
+	var cResult C.Array
+	if len(result) > 0 {
+		cResultData := make([]unsafe.Pointer, len(result))
+		for idx, v := range result {
+			cResultData[idx] = objc.ExtractPtr(v)
+		}
+		cResult.data = unsafe.Pointer(&cResultData[0])
+		cResult.len = C.int(len(result))
 	}
-	cResult := C.Array{data: unsafe.Pointer(&cResultData[0]), len: C.int(len(result))}
 	return cResult
 }
 
@@ -230,11 +238,15 @@ func windowDelegate_WindowDidFailToEnterFullScreen(hp C.uintptr_t, window unsafe
 func windowDelegate_CustomWindowsToExitFullScreenForWindow(hp C.uintptr_t, window unsafe.Pointer) C.Array {
 	delegate := cgo.Handle(hp).Value().(*WindowDelegate)
 	result := delegate.CustomWindowsToExitFullScreenForWindow(MakeWindow(window))
-	cResultData := make([]unsafe.Pointer, len(result))
-	for idx, v := range result {
-		cResultData[idx] = objc.ExtractPtr(v)
+	var cResult C.Array
+	if len(result) > 0 {
+		cResultData := make([]unsafe.Pointer, len(result))
+		for idx, v := range result {
+			cResultData[idx] = objc.ExtractPtr(v)
+		}
+		cResult.data = unsafe.Pointer(&cResultData[0])
+		cResult.len = C.int(len(result))
 	}
-	cResult := C.Array{data: unsafe.Pointer(&cResultData[0]), len: C.int(len(result))}
 	return cResult
 }
 
@@ -517,9 +529,4 @@ func WindowDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool 
 	default:
 		return false
 	}
-}
-
-//export deleteWindowDelegate
-func deleteWindowDelegate(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
 }

@@ -15,6 +15,7 @@ type URLRequest interface {
 	URL() URL
 	HTTPBody() []byte
 	MainDocumentURL() URL
+	AllHTTPHeaderFields() map[string]string
 	TimeoutInterval() TimeInterval
 	HTTPShouldHandleCookies() bool
 	HTTPShouldUsePipelining() bool
@@ -86,16 +87,34 @@ func (n NSURLRequest) URL() URL {
 
 func (n NSURLRequest) HTTPBody() []byte {
 	result_ := C.C_NSURLRequest_HTTPBody(n.Ptr())
+	if result_.len > 0 {
+		C.free(result_.data)
+	}
 	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
 	goResult_ := make([]byte, C.int(result_.len))
 	copy(goResult_, result_Buffer)
-	C.free(result_.data)
 	return goResult_
 }
 
 func (n NSURLRequest) MainDocumentURL() URL {
 	result_ := C.C_NSURLRequest_MainDocumentURL(n.Ptr())
 	return MakeURL(result_)
+}
+
+func (n NSURLRequest) AllHTTPHeaderFields() map[string]string {
+	result_ := C.C_NSURLRequest_AllHTTPHeaderFields(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[string]string)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[MakeString(k).String()] = MakeString(v).String()
+	}
+	return goResult_
 }
 
 func (n NSURLRequest) TimeoutInterval() TimeInterval {

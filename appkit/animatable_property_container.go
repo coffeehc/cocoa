@@ -48,8 +48,3 @@ func AnimatablePropertyContainer_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.P
 		return false
 	}
 }
-
-//export deleteAnimatablePropertyContainer
-func deleteAnimatablePropertyContainer(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
-}

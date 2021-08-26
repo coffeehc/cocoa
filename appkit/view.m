@@ -399,10 +399,12 @@ void C_NSView_AddConstraint(void* ptr, void* constraint) {
 void C_NSView_AddConstraints(void* ptr, Array constraints) {
     NSView* nSView = (NSView*)ptr;
     NSMutableArray* objcConstraints = [[NSMutableArray alloc] init];
-    void** constraintsData = (void**)constraints.data;
-    for (int i = 0; i < constraints.len; i++) {
-    	void* p = constraintsData[i];
-    	[objcConstraints addObject:(NSLayoutConstraint*)(NSLayoutConstraint*)p];
+    if (constraints.len > 0) {
+    	void** constraintsData = (void**)constraints.data;
+    	for (int i = 0; i < constraints.len; i++) {
+    		void* p = constraintsData[i];
+    		[objcConstraints addObject:(NSLayoutConstraint*)(NSLayoutConstraint*)p];
+    	}
     }
     [nSView addConstraints:objcConstraints];
 }
@@ -415,10 +417,12 @@ void C_NSView_RemoveConstraint(void* ptr, void* constraint) {
 void C_NSView_RemoveConstraints(void* ptr, Array constraints) {
     NSView* nSView = (NSView*)ptr;
     NSMutableArray* objcConstraints = [[NSMutableArray alloc] init];
-    void** constraintsData = (void**)constraints.data;
-    for (int i = 0; i < constraints.len; i++) {
-    	void* p = constraintsData[i];
-    	[objcConstraints addObject:(NSLayoutConstraint*)(NSLayoutConstraint*)p];
+    if (constraints.len > 0) {
+    	void** constraintsData = (void**)constraints.data;
+    	for (int i = 0; i < constraints.len; i++) {
+    		void* p = constraintsData[i];
+    		[objcConstraints addObject:(NSLayoutConstraint*)(NSLayoutConstraint*)p];
+    	}
     }
     [nSView removeConstraints:objcConstraints];
 }
@@ -495,15 +499,17 @@ void C_NSView_UpdateConstraintsForSubtreeIfNeeded(void* ptr) {
 Array C_NSView_ConstraintsAffectingLayoutForOrientation(void* ptr, int orientation) {
     NSView* nSView = (NSView*)ptr;
     NSArray* result_ = [nSView constraintsAffectingLayoutForOrientation:orientation];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -525,6 +531,37 @@ void C_NSView_NoteFocusRingMaskChanged(void* ptr) {
 void C_NSView_SetKeyboardFocusRingNeedsDisplayInRect(void* ptr, CGRect rect) {
     NSView* nSView = (NSView*)ptr;
     [nSView setKeyboardFocusRingNeedsDisplayInRect:rect];
+}
+
+bool C_NSView_EnterFullScreenMode_WithOptions(void* ptr, void* screen, Dictionary options) {
+    NSView* nSView = (NSView*)ptr;
+    NSMutableDictionary* objcOptions = [[NSMutableDictionary alloc] initWithCapacity: options.len];
+    if (options.len > 0) {
+    	void** optionsKeyData = (void**)options.key_data;
+    	void** optionsValueData = (void**)options.value_data;
+    	for (int i = 0; i < options.len; i++) {
+    		void* kp = optionsKeyData[i];
+    		void* vp = optionsValueData[i];
+    		[objcOptions setObject:(NSViewFullScreenModeOptionKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    BOOL result_ = [nSView enterFullScreenMode:(NSScreen*)screen withOptions:objcOptions];
+    return result_;
+}
+
+void C_NSView_ExitFullScreenModeWithOptions(void* ptr, Dictionary options) {
+    NSView* nSView = (NSView*)ptr;
+    NSMutableDictionary* objcOptions = [[NSMutableDictionary alloc] initWithCapacity: options.len];
+    if (options.len > 0) {
+    	void** optionsKeyData = (void**)options.key_data;
+    	void** optionsValueData = (void**)options.value_data;
+    	for (int i = 0; i < options.len; i++) {
+    		void* kp = optionsKeyData[i];
+    		void* vp = optionsValueData[i];
+    		[objcOptions setObject:(NSViewFullScreenModeOptionKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    [nSView exitFullScreenModeWithOptions:objcOptions];
 }
 
 void C_NSView_ViewDidHide(void* ptr) {
@@ -616,10 +653,12 @@ void C_NSView_ReflectScrolledClipView(void* ptr, void* clipView) {
 void C_NSView_RegisterForDraggedTypes(void* ptr, Array newTypes) {
     NSView* nSView = (NSView*)ptr;
     NSMutableArray* objcNewTypes = [[NSMutableArray alloc] init];
-    void** newTypesData = (void**)newTypes.data;
-    for (int i = 0; i < newTypes.len; i++) {
-    	void* p = newTypesData[i];
-    	[objcNewTypes addObject:(NSPasteboardType)(NSString*)p];
+    if (newTypes.len > 0) {
+    	void** newTypesData = (void**)newTypes.data;
+    	for (int i = 0; i < newTypes.len; i++) {
+    		void* p = newTypesData[i];
+    		[objcNewTypes addObject:(NSPasteboardType)(NSString*)p];
+    	}
     }
     [nSView registerForDraggedTypes:objcNewTypes];
 }
@@ -632,10 +671,12 @@ void C_NSView_UnregisterDraggedTypes(void* ptr) {
 void* C_NSView_BeginDraggingSessionWithItems_Event_Source(void* ptr, Array items, void* event, void* source) {
     NSView* nSView = (NSView*)ptr;
     NSMutableArray* objcItems = [[NSMutableArray alloc] init];
-    void** itemsData = (void**)items.data;
-    for (int i = 0; i < items.len; i++) {
-    	void* p = itemsData[i];
-    	[objcItems addObject:(NSDraggingItem*)(NSDraggingItem*)p];
+    if (items.len > 0) {
+    	void** itemsData = (void**)items.data;
+    	for (int i = 0; i < items.len; i++) {
+    		void* p = itemsData[i];
+    		[objcItems addObject:(NSDraggingItem*)(NSDraggingItem*)p];
+    	}
     }
     NSDraggingSession* result_ = [nSView beginDraggingSessionWithItems:objcItems event:(NSEvent*)event source:(id)source];
     return result_;
@@ -831,25 +872,29 @@ void* C_NSView_Superview(void* ptr) {
 Array C_NSView_Subviews(void* ptr) {
     NSView* nSView = (NSView*)ptr;
     NSArray* result_ = [nSView subviews];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSView_SetSubviews(void* ptr, Array value) {
     NSView* nSView = (NSView*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSView*)(NSView*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSView*)(NSView*)p];
+    	}
     }
     [nSView setSubviews:objcValue];
 }
@@ -1195,30 +1240,34 @@ void* C_NSView_WidthAnchor(void* ptr) {
 Array C_NSView_Constraints(void* ptr) {
     NSView* nSView = (NSView*)ptr;
     NSArray* result_ = [nSView constraints];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 Array C_NSView_LayoutGuides(void* ptr) {
     NSView* nSView = (NSView*)ptr;
     NSArray* result_ = [nSView layoutGuides];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -1391,25 +1440,29 @@ CGRect C_NSView_RectPreservedDuringLiveResize(void* ptr) {
 Array C_NSView_GestureRecognizers(void* ptr) {
     NSView* nSView = (NSView*)ptr;
     NSArray* result_ = [nSView gestureRecognizers];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 void C_NSView_SetGestureRecognizers(void* ptr, Array value) {
     NSView* nSView = (NSView*)ptr;
     NSMutableArray* objcValue = [[NSMutableArray alloc] init];
-    void** valueData = (void**)value.data;
-    for (int i = 0; i < value.len; i++) {
-    	void* p = valueData[i];
-    	[objcValue addObject:(NSGestureRecognizer*)(NSGestureRecognizer*)p];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSGestureRecognizer*)(NSGestureRecognizer*)p];
+    	}
     }
     [nSView setGestureRecognizers:objcValue];
 }
@@ -1498,15 +1551,17 @@ void* C_NSView_EnclosingScrollView(void* ptr) {
 Array C_NSView_RegisteredDraggedTypes(void* ptr) {
     NSView* nSView = (NSView*)ptr;
     NSArray* result_ = [nSView registeredDraggedTypes];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -1552,15 +1607,17 @@ void C_NSView_SetToolTip(void* ptr, void* value) {
 Array C_NSView_TrackingAreas(void* ptr) {
     NSView* nSView = (NSView*)ptr;
     NSArray* result_ = [nSView trackingAreas];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 

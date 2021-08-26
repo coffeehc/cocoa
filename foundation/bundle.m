@@ -53,15 +53,17 @@ void* C_NSBundle_URLForResource_WithExtension(void* ptr, void* name, void* ext) 
 Array C_NSBundle_URLsForResourcesWithExtension_Subdirectory(void* ptr, void* ext, void* subpath) {
     NSBundle* nSBundle = (NSBundle*)ptr;
     NSArray* result_ = [nSBundle URLsForResourcesWithExtension:(NSString*)ext subdirectory:(NSString*)subpath];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -74,15 +76,17 @@ void* C_NSBundle_URLForResource_WithExtension_Subdirectory_Localization(void* pt
 Array C_NSBundle_URLsForResourcesWithExtension_Subdirectory_Localization(void* ptr, void* ext, void* subpath, void* localizationName) {
     NSBundle* nSBundle = (NSBundle*)ptr;
     NSArray* result_ = [nSBundle URLsForResourcesWithExtension:(NSString*)ext subdirectory:(NSString*)subpath localization:(NSString*)localizationName];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -93,15 +97,17 @@ void* C_NSBundle_Bundle_URLForResource_WithExtension_Subdirectory_InBundleWithUR
 
 Array C_NSBundle_Bundle_URLsForResourcesWithExtension_Subdirectory_InBundleWithURL(void* ext, void* subpath, void* bundleURL) {
     NSArray* result_ = [NSBundle URLsForResourcesWithExtension:(NSString*)ext subdirectory:(NSString*)subpath inBundleWithURL:(NSURL*)bundleURL];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -126,30 +132,34 @@ void* C_NSBundle_PathForResource_OfType_InDirectory_ForLocalization(void* ptr, v
 Array C_NSBundle_PathsForResourcesOfType_InDirectory(void* ptr, void* ext, void* subpath) {
     NSBundle* nSBundle = (NSBundle*)ptr;
     NSArray* result_ = [nSBundle pathsForResourcesOfType:(NSString*)ext inDirectory:(NSString*)subpath];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 Array C_NSBundle_PathsForResourcesOfType_InDirectory_ForLocalization(void* ptr, void* ext, void* subpath, void* localizationName) {
     NSBundle* nSBundle = (NSBundle*)ptr;
     NSArray* result_ = [nSBundle pathsForResourcesOfType:(NSString*)ext inDirectory:(NSString*)subpath forLocalization:(NSString*)localizationName];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -179,47 +189,57 @@ void* C_NSBundle_ObjectForInfoDictionaryKey(void* ptr, void* key) {
 
 Array C_NSBundle_Bundle_PreferredLocalizationsFromArray(Array localizationsArray) {
     NSMutableArray* objcLocalizationsArray = [[NSMutableArray alloc] init];
-    void** localizationsArrayData = (void**)localizationsArray.data;
-    for (int i = 0; i < localizationsArray.len; i++) {
-    	void* p = localizationsArrayData[i];
-    	[objcLocalizationsArray addObject:(NSString*)(NSString*)p];
+    if (localizationsArray.len > 0) {
+    	void** localizationsArrayData = (void**)localizationsArray.data;
+    	for (int i = 0; i < localizationsArray.len; i++) {
+    		void* p = localizationsArrayData[i];
+    		[objcLocalizationsArray addObject:(NSString*)(NSString*)p];
+    	}
     }
     NSArray* result_ = [NSBundle preferredLocalizationsFromArray:objcLocalizationsArray];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 Array C_NSBundle_Bundle_PreferredLocalizationsFromArray_ForPreferences(Array localizationsArray, Array preferencesArray) {
     NSMutableArray* objcLocalizationsArray = [[NSMutableArray alloc] init];
-    void** localizationsArrayData = (void**)localizationsArray.data;
-    for (int i = 0; i < localizationsArray.len; i++) {
-    	void* p = localizationsArrayData[i];
-    	[objcLocalizationsArray addObject:(NSString*)(NSString*)p];
+    if (localizationsArray.len > 0) {
+    	void** localizationsArrayData = (void**)localizationsArray.data;
+    	for (int i = 0; i < localizationsArray.len; i++) {
+    		void* p = localizationsArrayData[i];
+    		[objcLocalizationsArray addObject:(NSString*)(NSString*)p];
+    	}
     }
     NSMutableArray* objcPreferencesArray = [[NSMutableArray alloc] init];
-    void** preferencesArrayData = (void**)preferencesArray.data;
-    for (int i = 0; i < preferencesArray.len; i++) {
-    	void* p = preferencesArrayData[i];
-    	[objcPreferencesArray addObject:(NSString*)(NSString*)p];
+    if (preferencesArray.len > 0) {
+    	void** preferencesArrayData = (void**)preferencesArray.data;
+    	for (int i = 0; i < preferencesArray.len; i++) {
+    		void* p = preferencesArrayData[i];
+    		[objcPreferencesArray addObject:(NSString*)(NSString*)p];
+    	}
     }
     NSArray* result_ = [NSBundle preferredLocalizationsFromArray:objcLocalizationsArray forPreferences:objcPreferencesArray];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -242,29 +262,33 @@ void* C_NSBundle_MainBundle() {
 
 Array C_NSBundle_Bundle_AllFrameworks() {
     NSArray* result_ = [NSBundle allFrameworks];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 Array C_NSBundle_Bundle_AllBundles() {
     NSArray* result_ = [NSBundle allBundles];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -364,33 +388,59 @@ void* C_NSBundle_BundleIdentifier(void* ptr) {
     return result_;
 }
 
+Dictionary C_NSBundle_InfoDictionary(void* ptr) {
+    NSBundle* nSBundle = (NSBundle*)ptr;
+    NSDictionary* result_ = [nSBundle infoDictionary];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSString* kp = [result_Keys objectAtIndex:i];
+    		id vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
+}
+
 Array C_NSBundle_Localizations(void* ptr) {
     NSBundle* nSBundle = (NSBundle*)ptr;
     NSArray* result_ = [nSBundle localizations];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
 Array C_NSBundle_PreferredLocalizations(void* ptr) {
     NSBundle* nSBundle = (NSBundle*)ptr;
     NSArray* result_ = [nSBundle preferredLocalizations];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
@@ -400,18 +450,42 @@ void* C_NSBundle_DevelopmentLocalization(void* ptr) {
     return result_;
 }
 
+Dictionary C_NSBundle_LocalizedInfoDictionary(void* ptr) {
+    NSBundle* nSBundle = (NSBundle*)ptr;
+    NSDictionary* result_ = [nSBundle localizedInfoDictionary];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSString* kp = [result_Keys objectAtIndex:i];
+    		id vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
+}
+
 Array C_NSBundle_ExecutableArchitectures(void* ptr) {
     NSBundle* nSBundle = (NSBundle*)ptr;
     NSArray* result_ = [nSBundle executableArchitectures];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 

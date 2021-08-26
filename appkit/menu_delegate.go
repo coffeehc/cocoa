@@ -95,8 +95,3 @@ func MenuDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 		return false
 	}
 }
-
-//export deleteMenuDelegate
-func deleteMenuDelegate(hp C.uintptr_t) {
-	cgo.Handle(hp).Delete()
-}

@@ -36,6 +36,7 @@ type Progress interface {
 	IsIndeterminate() bool
 	Kind() ProgressKind
 	SetKind(value ProgressKind)
+	UserInfo() map[ProgressUserInfoKey]objc.Object
 	FileOperationKind() ProgressFileOperationKind
 	SetFileOperationKind(value ProgressFileOperationKind)
 	FileURL() URL
@@ -64,6 +65,25 @@ func MakeProgress(ptr unsafe.Pointer) NSProgress {
 
 func AllocProgress() NSProgress {
 	return MakeProgress(C.C_Progress_Alloc())
+}
+
+func (n NSProgress) InitWithParent_UserInfo(parentProgressOrNil Progress, userInfoOrNil map[ProgressUserInfoKey]objc.Object) Progress {
+	var cUserInfoOrNil C.Dictionary
+	if len(userInfoOrNil) > 0 {
+		cUserInfoOrNilKeyData := make([]unsafe.Pointer, len(userInfoOrNil))
+		cUserInfoOrNilValueData := make([]unsafe.Pointer, len(userInfoOrNil))
+		var idx = 0
+		for k, v := range userInfoOrNil {
+			cUserInfoOrNilKeyData[idx] = NewString(string(k)).Ptr()
+			cUserInfoOrNilValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cUserInfoOrNil.key_data = unsafe.Pointer(&cUserInfoOrNilKeyData[0])
+		cUserInfoOrNil.value_data = unsafe.Pointer(&cUserInfoOrNilValueData[0])
+		cUserInfoOrNil.len = C.int(len(userInfoOrNil))
+	}
+	result_ := C.C_NSProgress_InitWithParent_UserInfo(n.Ptr(), objc.ExtractPtr(parentProgressOrNil), cUserInfoOrNil)
+	return MakeProgress(result_)
 }
 
 func (n NSProgress) Init() Progress {
@@ -212,6 +232,22 @@ func (n NSProgress) Kind() ProgressKind {
 
 func (n NSProgress) SetKind(value ProgressKind) {
 	C.C_NSProgress_SetKind(n.Ptr(), NewString(string(value)).Ptr())
+}
+
+func (n NSProgress) UserInfo() map[ProgressUserInfoKey]objc.Object {
+	result_ := C.C_NSProgress_UserInfo(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
+	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	var goResult_ = make(map[ProgressUserInfoKey]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[ProgressUserInfoKey(MakeString(k).String())] = objc.MakeObject(v)
+	}
+	return goResult_
 }
 
 func (n NSProgress) FileOperationKind() ProgressFileOperationKind {

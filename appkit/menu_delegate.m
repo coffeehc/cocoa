@@ -42,7 +42,7 @@
 }
 
 - (void)dealloc {
-	deleteMenuDelegate([self goID]);
+	deleteAppKitHandle([self goID]);
 	[super dealloc];
 }
 @end

@@ -31,6 +31,8 @@ int C_NSFontManager_WeightOfFont(void* ptr, void* fontObj);
 void* C_NSFontManager_FontPanel(void* ptr, bool create);
 void C_NSFontManager_SetFontMenu(void* ptr, void* newMenu);
 void* C_NSFontManager_FontMenu(void* ptr, bool create);
+void C_NSFontManager_SetSelectedAttributes_IsMultiple(void* ptr, Dictionary attributes, bool flag);
+Dictionary C_NSFontManager_ConvertAttributes(void* ptr, Dictionary attributes);
 void* C_NSFontManager_SharedFontManager();
 Array C_NSFontManager_AvailableFonts(void* ptr);
 Array C_NSFontManager_AvailableFontFamilies(void* ptr);

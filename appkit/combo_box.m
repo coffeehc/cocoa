@@ -26,10 +26,12 @@ void* C_NSComboBox_Init(void* ptr) {
 void C_NSComboBox_AddItemsWithObjectValues(void* ptr, Array objects) {
     NSComboBox* nSComboBox = (NSComboBox*)ptr;
     NSMutableArray* objcObjects = [[NSMutableArray alloc] init];
-    void** objectsData = (void**)objects.data;
-    for (int i = 0; i < objects.len; i++) {
-    	void* p = objectsData[i];
-    	[objcObjects addObject:(NSObject*)(NSObject*)p];
+    if (objects.len > 0) {
+    	void** objectsData = (void**)objects.data;
+    	for (int i = 0; i < objects.len; i++) {
+    		void* p = objectsData[i];
+    		[objcObjects addObject:(NSObject*)(NSObject*)p];
+    	}
     }
     [nSComboBox addItemsWithObjectValues:objcObjects];
 }
@@ -186,15 +188,17 @@ void C_NSComboBox_SetUsesDataSource(void* ptr, bool value) {
 Array C_NSComboBox_ObjectValues(void* ptr) {
     NSComboBox* nSComboBox = (NSComboBox*)ptr;
     NSArray* result_ = [nSComboBox objectValues];
-    int result_count = [result_ count];
-    void** result_Data = malloc(result_count * sizeof(void*));
-    for (int i = 0; i < result_count; i++) {
-    	 void* p = [result_ objectAtIndex:i];
-    	 result_Data[i] = p;
-    }
     Array result_Array;
-    result_Array.data = result_Data;
-    result_Array.len = result_count;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
     return result_Array;
 }
 
