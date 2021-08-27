@@ -11,12 +11,28 @@ func AddViewWithPadding(view appkit.View, subView appkit.View, left, top, right,
 	view.BottomAnchor().ConstraintEqualToAnchor_Constant(subView.BottomAnchor(), bottom).SetActive(true)
 }
 
-// SetWidthConstraint add and active width constraintEqual
-func SetWidthConstraint(view appkit.View, width float64) {
+// SetPreferredWidth add and active width constraintEqual
+func SetPreferredWidth(view appkit.View, width float64) {
 	view.WidthAnchor().ConstraintEqualToConstant(width).SetActive(true)
 }
 
-// SetHeightConstraint add and active height constraintEqual
-func SetHeightConstraint(view appkit.View, height float64) {
+// SetPreferredHeight add and active height constraintEqual
+func SetPreferredHeight(view appkit.View, height float64) {
 	view.HeightAnchor().ConstraintEqualToConstant(height).SetActive(true)
+}
+
+func SetPreferredMaxWidth(view appkit.View, width float64) {
+	view.WidthAnchor().ConstraintLessThanOrEqualToConstant(width).SetActive(true)
+}
+
+func SetPreferredMaxHeight(view appkit.View, height float64) {
+	view.HeightAnchor().ConstraintLessThanOrEqualToConstant(height).SetActive(true)
+}
+
+func SetPreferredMinWidth(view appkit.View, width float64) {
+	view.WidthAnchor().ConstraintGreaterThanOrEqualToConstant(width).SetActive(true)
+}
+
+func SetPreferredMinHeight(view appkit.View, height float64) {
+	view.HeightAnchor().ConstraintGreaterThanOrEqualToConstant(height).SetActive(true)
 }
