@@ -30,7 +30,8 @@ func initAndRun() {
 	webView.SetNavigationDelegate((&webkit.NavigationDelegate{
 		WebView_DidFinishNavigation: func(webView webkit.WebView, navigation webkit.Navigation) {
 			webView.(webkit.WKWebView).EvaluateJavaScript("document.documentElement.outerHTML.toString()", func(value objc.Object, err foundation.Error) {
-				fmt.Println(foundation.MakeString(value.Ptr()).String())
+				content := foundation.MakeString(value.Ptr()).String()
+				_ = content
 			})
 		},
 	}).ToObjc())

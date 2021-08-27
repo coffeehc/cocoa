@@ -25,7 +25,6 @@ func initAndRun() {
 	fv.AddRow("password", appkit.NewSecureTextField())
 	cb := appkit.NewCheckBox("")
 	fv.AddRow("males", cb)
-	fv.SetLabelWidth(100)
 	fv.AddExpandRow()
 
 	layouts.AddViewWithPadding(w.ContentView(), fv, 10, 10, 10, 10)

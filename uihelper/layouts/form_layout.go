@@ -1,6 +1,8 @@
 package layouts
 
-import "github.com/hsiafan/cocoa/appkit"
+import (
+	"github.com/hsiafan/cocoa/appkit"
+)
 
 // FormView ia an appkit.View that arrange form field name and controls.
 type FormView struct {
@@ -26,7 +28,7 @@ func NewFormView() *FormView {
 	return &FormView{
 		View:                sv,
 		stackView:           sv,
-		labelWidth:          100,
+		labelWidth:          0,
 		labelAlignment:      appkit.TextAlignmentRight,
 		labelControlSpacing: 10,
 	}
@@ -41,7 +43,7 @@ func (f *FormView) AddExpandRow() {
 
 // AddRow add a new form row
 func (f *FormView) AddRow(name string, control appkit.Control) {
-	r := newFormRowView(name, control, f.labelWidth, f.labelAlignment, f.labelFont)
+	r := f.newFormRowView(name, control)
 	r.SetSpacing(f.labelControlSpacing)
 	f.rows = append(f.rows, r)
 
@@ -55,7 +57,7 @@ func (f *FormView) InsertRow(index uint, name string, control appkit.Control) {
 		panic("index out of range")
 	}
 
-	r := newFormRowView(name, control, f.labelWidth, f.labelAlignment, f.labelFont)
+	r := f.newFormRowView(name, control)
 	r.SetSpacing(f.labelControlSpacing)
 	f.rows = append(append(f.rows[:index], r), f.rows[index:]...)
 	f.stackView.InsertView_AtIndex_InGravity(r, index, appkit.StackViewGravityTop)
@@ -107,8 +109,7 @@ type formRowView struct {
 	labelWidthConstant appkit.LayoutConstraint
 }
 
-func newFormRowView(name string, control appkit.Control, labelWidth float64,
-	labelAlignment appkit.TextAlignment, labelFont appkit.Font) *formRowView {
+func (f *FormView) newFormRowView(name string, control appkit.Control) *formRowView {
 	row := appkit.AllocStackView().Init()
 	row.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	row.SetOrientation(appkit.UserInterfaceLayoutOrientationHorizontal)
@@ -117,10 +118,15 @@ func newFormRowView(name string, control appkit.Control, labelWidth float64,
 
 	label := appkit.NewLabel(name)
 	label.SetTranslatesAutoresizingMaskIntoConstraints(false)
-	labelWidthConstant := label.WidthAnchor().ConstraintEqualToConstant(labelWidth)
+	label.SizeToFit()
+	labelFitWidth := label.Bounds().Size.Width
+	if f.labelWidth < labelFitWidth {
+		f.SetLabelWidth(labelFitWidth)
+	}
+	labelWidthConstant := label.WidthAnchor().ConstraintEqualToConstant(f.labelWidth)
 	labelWidthConstant.SetActive(true)
-	label.SetAlignment(labelAlignment)
-	if labelFont != nil && labelFont.Ptr() != nil {
+	label.SetAlignment(f.labelAlignment)
+	if f.labelFont != nil && f.labelFont.Ptr() != nil {
 		label.SetFont(label.Font())
 	}
 	row.AddView_InGravity(label, appkit.StackViewGravityLeading)
