@@ -5,7 +5,9 @@ import (
 	"github.com/hsiafan/cocoa/appkit"
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
+	"github.com/hsiafan/cocoa/uihelper"
 	"github.com/hsiafan/cocoa/uihelper/layouts"
+	"github.com/hsiafan/cocoa/uihelper/widgets"
 	"runtime"
 )
 
@@ -22,9 +24,26 @@ func initAndRun() {
 	w.SetTitle("Test Layout")
 
 	label := appkit.NewLabel("label")
-	button := appkit.NewPlainButton("button")
-	button2 := appkit.NewPlainButton("button2")
+	mdButton := appkit.NewPlainButton("modal dialog")
+	dButton := appkit.NewPlainButton("dialog")
 	textView := appkit.ScrollableTextView()
+
+	uihelper.SetAction(mdButton, func(sender objc.Object) {
+		d := widgets.NewDialog(400, 300)
+		d.SetView(appkit.NewLabel("test modal dialog"))
+		if d.RunModal() == appkit.ModalResponseOK {
+			fmt.Println("ok!")
+		}
+	})
+
+	uihelper.SetAction(dButton, func(sender objc.Object) {
+		d := widgets.NewDialog(400, 300)
+		d.SetView(appkit.NewLabel("test dialog"))
+		d.Center()
+		d.Show(func() {
+			fmt.Println("ok!")
+		})
+	})
 
 	gridView := appkit.AllocGridView().Init()
 	for i := 0; i < 3; i++ {
@@ -36,7 +55,7 @@ func initAndRun() {
 		gridView.AddRowWithViews(views)
 	}
 
-	stackView := appkit.StackViewWithViews([]appkit.View{label, button, button2, textView, gridView})
+	stackView := appkit.StackViewWithViews([]appkit.View{label, mdButton, dButton, textView, gridView})
 	stackView.SetOrientation(appkit.UserInterfaceLayoutOrientationVertical)
 	stackView.SetDistribution(appkit.StackViewDistributionFillEqually)
 	stackView.SetAlignment(appkit.LayoutAttributeCenterX)
