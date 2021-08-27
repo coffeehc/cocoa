@@ -79,9 +79,9 @@ func NewSecureTextField() SecureTextField {
 }
 
 // NewWindow create a common window with close/minimize buttons
-func NewWindow(rect foundation.Rect) Window {
+func NewWindow(width, height float64) Window {
 	return AllocWindow().InitWithContentRect_StyleMask_Backing_Defer(
-		rect,
+		foundation.MakeRect(0, 0, width, height),
 		WindowStyleMaskTitled|WindowStyleMaskClosable|WindowStyleMaskResizable|WindowStyleMaskMiniaturizable,
 		BackingStoreBuffered,
 		false,
@@ -89,9 +89,13 @@ func NewWindow(rect foundation.Rect) Window {
 }
 
 // NewWindowWithStyle create a common window with styles
-func NewWindowWithStyle(rect foundation.Rect, style WindowStyleMask) Window {
-	return AllocWindow().InitWithContentRect_StyleMask_Backing_Defer(rect, style,
-		BackingStoreBuffered, false)
+func NewWindowWithStyle(width, height float64, style WindowStyleMask) Window {
+	return AllocWindow().InitWithContentRect_StyleMask_Backing_Defer(
+		foundation.MakeRect(0, 0, width, height),
+		style,
+		BackingStoreBuffered,
+		false,
+	)
 }
 
 // NewMenuItem create a new menu item, with selector
