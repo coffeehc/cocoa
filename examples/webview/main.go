@@ -29,7 +29,7 @@ func initAndRun() {
 
 	webView.SetNavigationDelegate((&webkit.NavigationDelegate{
 		WebView_DidFinishNavigation: func(webView webkit.WebView, navigation webkit.Navigation) {
-			webView.(webkit.WKWebView).EvaluateJavaScript("document.documentElement.outerHTML.toString()", func(value objc.Object, err foundation.Error) {
+			webView.EvaluateJavaScript("document.documentElement.outerHTML.toString()", func(value objc.Object, err foundation.Error) {
 				content := foundation.MakeString(value.Ptr()).String()
 				_ = content
 			})
@@ -39,8 +39,8 @@ func initAndRun() {
 	layouts.AddViewWithPadding(w.ContentView(), webView, 10, 10, 10, 20)
 	cb := appkit.NewPlainButton("capture")
 	uihelper.SetAction(cb, func(sender objc.Object) {
-		webView.(webkit.WKWebView).TakeSnapshotWithConfiguration(nil, func(image appkit.Image, err foundation.Error) {
-			imageRef := image.(appkit.NSImage).CGImageForProposedRect_Context_Hints()
+		webView.TakeSnapshotWithConfiguration(nil, func(image appkit.Image, err foundation.Error) {
+			imageRef := image.CGImageForProposedRect_Context_Hints()
 			imageRepo := appkit.AllocBitmapImageRep().InitWithCGImage(imageRef)
 			imageRepo.SetSize(image.Size())
 			pngData := imageRepo.RepresentationUsingType_Properties(appkit.BitmapImageFileTypePNG, nil)

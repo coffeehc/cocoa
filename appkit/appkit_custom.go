@@ -7,6 +7,10 @@ import (
 	"runtime/cgo"
 )
 
+type extImage interface {
+	CGImageForProposedRect_Context_Hints() coregraphics.ImageRef
+}
+
 func (n NSImage) CGImageForProposedRect_Context_Hints() coregraphics.ImageRef {
 	result_ := C.C_NSImage_CGImageForProposedRect_Context_Hints(n.Ptr())
 	return coregraphics.ImageRef(result_)

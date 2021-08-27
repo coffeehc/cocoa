@@ -70,8 +70,8 @@ func (n NSDate) DateByAddingTimeInterval(ti TimeInterval) Date {
 	return MakeDate(result_)
 }
 
-func CurrentDate() Date {
-	result_ := C.C_NSDate_CurrentDate()
+func Date_() Date {
+	result_ := C.C_NSDate_Date_()
 	return MakeDate(result_)
 }
 

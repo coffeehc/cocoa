@@ -12,7 +12,7 @@ void* C_NSDate_InitWithTimeIntervalSinceReferenceDate(void* ptr, double ti);
 void* C_NSDate_InitWithTimeIntervalSince1970(void* ptr, double secs);
 void* C_NSDate_InitWithCoder(void* ptr, void* coder);
 void* C_NSDate_DateByAddingTimeInterval(void* ptr, double ti);
-void* C_NSDate_CurrentDate();
+void* C_NSDate_Date_();
 void* C_NSDate_DateWithTimeIntervalSinceNow(double secs);
 void* C_NSDate_DateWithTimeInterval_SinceDate(double secsToBeAdded, void* date);
 void* C_NSDate_DateWithTimeIntervalSinceReferenceDate(double ti);

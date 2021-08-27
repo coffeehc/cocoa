@@ -47,7 +47,7 @@ void* C_NSDate_DateByAddingTimeInterval(void* ptr, double ti) {
     return result_;
 }
 
-void* C_NSDate_CurrentDate() {
+void* C_NSDate_Date_() {
     NSDate* result_ = [NSDate date];
     return result_;
 }

@@ -10,6 +10,11 @@ import (
 	"unsafe"
 )
 
+type extWebView interface {
+	TakeSnapshotWithConfiguration(configuration SnapshotConfiguration, completionHandler func(image appkit.Image, err foundation.Error))
+	EvaluateJavaScript(javascript string, completionHandler func(value objc.Object, err foundation.Error))
+}
+
 func (w WKWebView) TakeSnapshotWithConfiguration(configuration SnapshotConfiguration, completionHandler func(image appkit.Image, err foundation.Error)) {
 	handle := cgo.NewHandle(completionHandler)
 	C.TakeSnapshotWithConfiguration(w.Ptr(), objc.ExtractPtr(configuration), C.uintptr_t(handle))

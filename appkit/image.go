@@ -11,6 +11,7 @@ import (
 
 type Image interface {
 	objc.Object
+	extImage
 	SetName(_string ImageName) bool
 	Name() ImageName
 	ImageWithSymbolConfiguration(configuration ImageSymbolConfiguration) Image

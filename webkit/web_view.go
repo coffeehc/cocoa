@@ -12,6 +12,7 @@ import (
 
 type WebView interface {
 	appkit.View
+	extWebView
 	LoadRequest(request foundation.URLRequest) Navigation
 	LoadHTMLString_BaseURL(_string string, baseURL foundation.URL) Navigation
 	LoadFileURL_AllowingReadAccessToURL(URL foundation.URL, readAccessURL foundation.URL) Navigation
