@@ -428,8 +428,8 @@ func (n NSTableView) RegisteredNibsByIdentifier() map[UserInterfaceItemIdentifie
 		defer C.free(result_.key_data)
 		defer C.free(result_.value_data)
 	}
-	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
-	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	result_KeySlice := unsafe.Slice((*unsafe.Pointer)(result_.key_data), int(result_.len))
+	result_ValueSlice := unsafe.Slice((*unsafe.Pointer)(result_.value_data), int(result_.len))
 	var goResult_ = make(map[UserInterfaceItemIdentifier]Nib)
 	for idx, k := range result_KeySlice {
 		v := result_ValueSlice[idx]
@@ -607,7 +607,7 @@ func (n NSTableView) TableColumns() []TableColumn {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]TableColumn, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeTableColumn(r)
@@ -769,7 +769,7 @@ func (n NSTableView) SortDescriptors() []foundation.SortDescriptor {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]foundation.SortDescriptor, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = foundation.MakeSortDescriptor(r)

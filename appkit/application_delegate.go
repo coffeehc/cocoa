@@ -197,12 +197,12 @@ func applicationDelegate_Application_DidUpdateUserActivity(hp C.uintptr_t, appli
 //export applicationDelegate_Application_DidRegisterForRemoteNotificationsWithDeviceToken
 func applicationDelegate_Application_DidRegisterForRemoteNotificationsWithDeviceToken(hp C.uintptr_t, application unsafe.Pointer, deviceToken C.Array) {
 	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
+	var goDeviceToken []byte
 	if deviceToken.len > 0 {
-		C.free(deviceToken.data)
+		deviceTokenBuffer := unsafe.Slice((*byte)(deviceToken.data), int(deviceToken.len))
+		goDeviceToken = make([]byte, C.int(deviceToken.len))
+		copy(goDeviceToken, deviceTokenBuffer)
 	}
-	deviceTokenBuffer := (*[1 << 30]byte)(deviceToken.data)[:C.int(deviceToken.len)]
-	goDeviceToken := make([]byte, C.int(deviceToken.len))
-	copy(goDeviceToken, deviceTokenBuffer)
 	delegate.Application_DidRegisterForRemoteNotificationsWithDeviceToken(MakeApplication(application), goDeviceToken)
 }
 
@@ -219,8 +219,8 @@ func applicationDelegate_Application_DidReceiveRemoteNotification(hp C.uintptr_t
 		defer C.free(userInfo.key_data)
 		defer C.free(userInfo.value_data)
 	}
-	userInfoKeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(userInfo.key_data))[:userInfo.len:userInfo.len]
-	userInfoValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(userInfo.value_data))[:userInfo.len:userInfo.len]
+	userInfoKeySlice := unsafe.Slice((*unsafe.Pointer)(userInfo.key_data), int(userInfo.len))
+	userInfoValueSlice := unsafe.Slice((*unsafe.Pointer)(userInfo.value_data), int(userInfo.len))
 	var goUserInfo = make(map[string]objc.Object)
 	for idx, k := range userInfoKeySlice {
 		v := userInfoValueSlice[idx]
@@ -235,7 +235,7 @@ func applicationDelegate_Application_OpenURLs(hp C.uintptr_t, application unsafe
 	if urls.len > 0 {
 		defer C.free(urls.data)
 	}
-	urlsSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(urls.data))[:urls.len:urls.len]
+	urlsSlice := unsafe.Slice((*unsafe.Pointer)(urls.data), int(urls.len))
 	var goUrls = make([]foundation.URL, len(urlsSlice))
 	for idx, r := range urlsSlice {
 		goUrls[idx] = foundation.MakeURL(r)
@@ -270,7 +270,7 @@ func applicationDelegate_Application_OpenFiles(hp C.uintptr_t, sender unsafe.Poi
 	if filenames.len > 0 {
 		defer C.free(filenames.data)
 	}
-	filenamesSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(filenames.data))[:filenames.len:filenames.len]
+	filenamesSlice := unsafe.Slice((*unsafe.Pointer)(filenames.data), int(filenames.len))
 	var goFilenames = make([]string, len(filenamesSlice))
 	for idx, r := range filenamesSlice {
 		goFilenames[idx] = foundation.MakeString(r).String()
@@ -305,7 +305,7 @@ func applicationDelegate_Application_PrintFiles_WithSettings_ShowPrintPanels(hp 
 	if fileNames.len > 0 {
 		defer C.free(fileNames.data)
 	}
-	fileNamesSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(fileNames.data))[:fileNames.len:fileNames.len]
+	fileNamesSlice := unsafe.Slice((*unsafe.Pointer)(fileNames.data), int(fileNames.len))
 	var goFileNames = make([]string, len(fileNamesSlice))
 	for idx, r := range fileNamesSlice {
 		goFileNames[idx] = foundation.MakeString(r).String()
@@ -314,8 +314,8 @@ func applicationDelegate_Application_PrintFiles_WithSettings_ShowPrintPanels(hp 
 		defer C.free(printSettings.key_data)
 		defer C.free(printSettings.value_data)
 	}
-	printSettingsKeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(printSettings.key_data))[:printSettings.len:printSettings.len]
-	printSettingsValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(printSettings.value_data))[:printSettings.len:printSettings.len]
+	printSettingsKeySlice := unsafe.Slice((*unsafe.Pointer)(printSettings.key_data), int(printSettings.len))
+	printSettingsValueSlice := unsafe.Slice((*unsafe.Pointer)(printSettings.value_data), int(printSettings.len))
 	var goPrintSettings = make(map[PrintInfoAttributeKey]objc.Object)
 	for idx, k := range printSettingsKeySlice {
 		v := printSettingsValueSlice[idx]

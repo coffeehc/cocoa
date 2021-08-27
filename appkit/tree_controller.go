@@ -224,7 +224,7 @@ func (n NSTreeController) SortDescriptors() []foundation.SortDescriptor {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]foundation.SortDescriptor, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = foundation.MakeSortDescriptor(r)
@@ -260,7 +260,7 @@ func (n NSTreeController) SelectionIndexPaths() []foundation.IndexPath {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]foundation.IndexPath, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = foundation.MakeIndexPath(r)
@@ -273,7 +273,7 @@ func (n NSTreeController) SelectedNodes() []TreeNode {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]TreeNode, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeTreeNode(r)

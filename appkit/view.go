@@ -423,23 +423,23 @@ func (n NSView) BeginPageInRect_AtPlacement(rect foundation.Rect, location found
 
 func (n NSView) DataWithEPSInsideRect(rect foundation.Rect) []byte {
 	result_ := C.C_NSView_DataWithEPSInsideRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
+	var goResult_ []byte
 	if result_.len > 0 {
-		C.free(result_.data)
+		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
+		goResult_ = make([]byte, C.int(result_.len))
+		copy(goResult_, result_Buffer)
 	}
-	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
-	goResult_ := make([]byte, C.int(result_.len))
-	copy(goResult_, result_Buffer)
 	return goResult_
 }
 
 func (n NSView) DataWithPDFInsideRect(rect foundation.Rect) []byte {
 	result_ := C.C_NSView_DataWithPDFInsideRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
+	var goResult_ []byte
 	if result_.len > 0 {
-		C.free(result_.data)
+		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
+		goResult_ = make([]byte, C.int(result_.len))
+		copy(goResult_, result_Buffer)
 	}
-	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
-	goResult_ := make([]byte, C.int(result_.len))
-	copy(goResult_, result_Buffer)
 	return goResult_
 }
 
@@ -719,7 +719,7 @@ func (n NSView) ConstraintsAffectingLayoutForOrientation(orientation LayoutConst
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]LayoutConstraint, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeLayoutConstraint(r)
@@ -1038,7 +1038,7 @@ func (n NSView) Subviews() []View {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]View, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeView(r)
@@ -1343,7 +1343,7 @@ func (n NSView) Constraints() []LayoutConstraint {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]LayoutConstraint, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeLayoutConstraint(r)
@@ -1356,7 +1356,7 @@ func (n NSView) LayoutGuides() []LayoutGuide {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]LayoutGuide, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeLayoutGuide(r)
@@ -1509,7 +1509,7 @@ func (n NSView) GestureRecognizers() []GestureRecognizer {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]GestureRecognizer, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeGestureRecognizer(r)
@@ -1602,7 +1602,7 @@ func (n NSView) RegisteredDraggedTypes() []PasteboardType {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]PasteboardType, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = PasteboardType(foundation.MakeString(r).String())
@@ -1647,7 +1647,7 @@ func (n NSView) TrackingAreas() []TrackingArea {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]TrackingArea, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeTrackingArea(r)

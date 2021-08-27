@@ -115,12 +115,12 @@ func AppleEventDescriptor_CurrentProcessDescriptor() AppleEventDescriptor {
 
 func (n NSAppleEventDescriptor) Data() []byte {
 	result_ := C.C_NSAppleEventDescriptor_Data(n.Ptr())
+	var goResult_ []byte
 	if result_.len > 0 {
-		C.free(result_.data)
+		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
+		goResult_ = make([]byte, C.int(result_.len))
+		copy(goResult_, result_Buffer)
 	}
-	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
-	goResult_ := make([]byte, C.int(result_.len))
-	copy(goResult_, result_Buffer)
 	return goResult_
 }
 

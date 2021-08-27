@@ -123,8 +123,8 @@ func (n NSGraphicsContext) Attributes() map[GraphicsContextAttributeKey]objc.Obj
 		defer C.free(result_.key_data)
 		defer C.free(result_.value_data)
 	}
-	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
-	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	result_KeySlice := unsafe.Slice((*unsafe.Pointer)(result_.key_data), int(result_.len))
+	result_ValueSlice := unsafe.Slice((*unsafe.Pointer)(result_.value_data), int(result_.len))
 	var goResult_ = make(map[GraphicsContextAttributeKey]objc.Object)
 	for idx, k := range result_KeySlice {
 		v := result_ValueSlice[idx]

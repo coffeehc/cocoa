@@ -678,7 +678,7 @@ func (n NSTextView) AllowedInputSourceLocales() []string {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = foundation.MakeString(r).String()
@@ -780,7 +780,7 @@ func (n NSTextView) SelectedRanges() []foundation.Value {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]foundation.Value, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = foundation.MakeValue(r)
@@ -830,8 +830,8 @@ func (n NSTextView) SelectedTextAttributes() map[foundation.AttributedStringKey]
 		defer C.free(result_.key_data)
 		defer C.free(result_.value_data)
 	}
-	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
-	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	result_KeySlice := unsafe.Slice((*unsafe.Pointer)(result_.key_data), int(result_.len))
+	result_ValueSlice := unsafe.Slice((*unsafe.Pointer)(result_.value_data), int(result_.len))
 	var goResult_ = make(map[foundation.AttributedStringKey]objc.Object)
 	for idx, k := range result_KeySlice {
 		v := result_ValueSlice[idx]
@@ -864,8 +864,8 @@ func (n NSTextView) MarkedTextAttributes() map[foundation.AttributedStringKey]ob
 		defer C.free(result_.key_data)
 		defer C.free(result_.value_data)
 	}
-	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
-	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	result_KeySlice := unsafe.Slice((*unsafe.Pointer)(result_.key_data), int(result_.len))
+	result_ValueSlice := unsafe.Slice((*unsafe.Pointer)(result_.value_data), int(result_.len))
 	var goResult_ = make(map[foundation.AttributedStringKey]objc.Object)
 	for idx, k := range result_KeySlice {
 		v := result_ValueSlice[idx]
@@ -898,8 +898,8 @@ func (n NSTextView) LinkTextAttributes() map[foundation.AttributedStringKey]objc
 		defer C.free(result_.key_data)
 		defer C.free(result_.value_data)
 	}
-	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
-	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	result_KeySlice := unsafe.Slice((*unsafe.Pointer)(result_.key_data), int(result_.len))
+	result_ValueSlice := unsafe.Slice((*unsafe.Pointer)(result_.value_data), int(result_.len))
 	var goResult_ = make(map[foundation.AttributedStringKey]objc.Object)
 	for idx, k := range result_KeySlice {
 		v := result_ValueSlice[idx]
@@ -931,7 +931,7 @@ func (n NSTextView) ReadablePasteboardTypes() []PasteboardType {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]PasteboardType, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = PasteboardType(foundation.MakeString(r).String())
@@ -944,7 +944,7 @@ func (n NSTextView) WritablePasteboardTypes() []PasteboardType {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]PasteboardType, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = PasteboardType(foundation.MakeString(r).String())
@@ -958,8 +958,8 @@ func (n NSTextView) TypingAttributes() map[foundation.AttributedStringKey]objc.O
 		defer C.free(result_.key_data)
 		defer C.free(result_.value_data)
 	}
-	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
-	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	result_KeySlice := unsafe.Slice((*unsafe.Pointer)(result_.key_data), int(result_.len))
+	result_ValueSlice := unsafe.Slice((*unsafe.Pointer)(result_.value_data), int(result_.len))
 	var goResult_ = make(map[foundation.AttributedStringKey]objc.Object)
 	for idx, k := range result_KeySlice {
 		v := result_ValueSlice[idx]
@@ -996,7 +996,7 @@ func (n NSTextView) AcceptableDragTypes() []PasteboardType {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]PasteboardType, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = PasteboardType(foundation.MakeString(r).String())
@@ -1014,7 +1014,7 @@ func (n NSTextView) RangesForUserCharacterAttributeChange() []foundation.Value {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]foundation.Value, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = foundation.MakeValue(r)
@@ -1032,7 +1032,7 @@ func (n NSTextView) RangesForUserParagraphAttributeChange() []foundation.Value {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]foundation.Value, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = foundation.MakeValue(r)
@@ -1050,7 +1050,7 @@ func (n NSTextView) RangesForUserTextChange() []foundation.Value {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]foundation.Value, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = foundation.MakeValue(r)

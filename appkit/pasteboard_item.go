@@ -85,12 +85,12 @@ func (n NSPasteboardItem) SetPropertyList_ForType(propertyList objc.Object, _typ
 
 func (n NSPasteboardItem) DataForType(_type PasteboardType) []byte {
 	result_ := C.C_NSPasteboardItem_DataForType(n.Ptr(), foundation.NewString(string(_type)).Ptr())
+	var goResult_ []byte
 	if result_.len > 0 {
-		C.free(result_.data)
+		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
+		goResult_ = make([]byte, C.int(result_.len))
+		copy(goResult_, result_Buffer)
 	}
-	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
-	goResult_ := make([]byte, C.int(result_.len))
-	copy(goResult_, result_Buffer)
 	return goResult_
 }
 
@@ -109,7 +109,7 @@ func (n NSPasteboardItem) Types() []PasteboardType {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]PasteboardType, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = PasteboardType(foundation.MakeString(r).String())

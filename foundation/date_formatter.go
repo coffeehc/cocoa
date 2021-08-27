@@ -274,7 +274,7 @@ func (n NSDateFormatter) WeekdaySymbols() []string {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeString(r).String()
@@ -300,7 +300,7 @@ func (n NSDateFormatter) ShortWeekdaySymbols() []string {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeString(r).String()
@@ -326,7 +326,7 @@ func (n NSDateFormatter) VeryShortWeekdaySymbols() []string {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeString(r).String()
@@ -352,7 +352,7 @@ func (n NSDateFormatter) StandaloneWeekdaySymbols() []string {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeString(r).String()
@@ -378,7 +378,7 @@ func (n NSDateFormatter) ShortStandaloneWeekdaySymbols() []string {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeString(r).String()
@@ -404,7 +404,7 @@ func (n NSDateFormatter) VeryShortStandaloneWeekdaySymbols() []string {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeString(r).String()
@@ -430,7 +430,7 @@ func (n NSDateFormatter) MonthSymbols() []string {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeString(r).String()
@@ -456,7 +456,7 @@ func (n NSDateFormatter) ShortMonthSymbols() []string {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeString(r).String()
@@ -482,7 +482,7 @@ func (n NSDateFormatter) VeryShortMonthSymbols() []string {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeString(r).String()
@@ -508,7 +508,7 @@ func (n NSDateFormatter) StandaloneMonthSymbols() []string {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeString(r).String()
@@ -534,7 +534,7 @@ func (n NSDateFormatter) ShortStandaloneMonthSymbols() []string {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeString(r).String()
@@ -560,7 +560,7 @@ func (n NSDateFormatter) VeryShortStandaloneMonthSymbols() []string {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeString(r).String()
@@ -586,7 +586,7 @@ func (n NSDateFormatter) QuarterSymbols() []string {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeString(r).String()
@@ -612,7 +612,7 @@ func (n NSDateFormatter) ShortQuarterSymbols() []string {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeString(r).String()
@@ -638,7 +638,7 @@ func (n NSDateFormatter) StandaloneQuarterSymbols() []string {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeString(r).String()
@@ -664,7 +664,7 @@ func (n NSDateFormatter) ShortStandaloneQuarterSymbols() []string {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeString(r).String()
@@ -690,7 +690,7 @@ func (n NSDateFormatter) EraSymbols() []string {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeString(r).String()
@@ -716,7 +716,7 @@ func (n NSDateFormatter) LongEraSymbols() []string {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeString(r).String()

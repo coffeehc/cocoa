@@ -94,7 +94,7 @@ func tableViewDataSource_TableView_SortDescriptorsDidChange(hp C.uintptr_t, tabl
 	if oldDescriptors.len > 0 {
 		defer C.free(oldDescriptors.data)
 	}
-	oldDescriptorsSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(oldDescriptors.data))[:oldDescriptors.len:oldDescriptors.len]
+	oldDescriptorsSlice := unsafe.Slice((*unsafe.Pointer)(oldDescriptors.data), int(oldDescriptors.len))
 	var goOldDescriptors = make([]foundation.SortDescriptor, len(oldDescriptorsSlice))
 	for idx, r := range oldDescriptorsSlice {
 		goOldDescriptors[idx] = foundation.MakeSortDescriptor(r)

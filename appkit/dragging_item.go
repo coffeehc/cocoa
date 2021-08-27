@@ -55,7 +55,7 @@ func (n NSDraggingItem) ImageComponents() []DraggingImageComponent {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]DraggingImageComponent, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeDraggingImageComponent(r)

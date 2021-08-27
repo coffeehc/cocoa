@@ -217,8 +217,8 @@ func URL_ResourceValuesForKeys_FromBookmarkData(keys []URLResourceKey, bookmarkD
 		defer C.free(result_.key_data)
 		defer C.free(result_.value_data)
 	}
-	result_KeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.key_data))[:result_.len:result_.len]
-	result_ValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.value_data))[:result_.len:result_.len]
+	result_KeySlice := unsafe.Slice((*unsafe.Pointer)(result_.key_data), int(result_.len))
+	result_ValueSlice := unsafe.Slice((*unsafe.Pointer)(result_.value_data), int(result_.len))
 	var goResult_ = make(map[URLResourceKey]objc.Object)
 	for idx, k := range result_KeySlice {
 		v := result_ValueSlice[idx]
@@ -238,12 +238,12 @@ func (n NSURL) StopAccessingSecurityScopedResource() {
 
 func (n NSURL) DataRepresentation() []byte {
 	result_ := C.C_NSURL_DataRepresentation(n.Ptr())
+	var goResult_ []byte
 	if result_.len > 0 {
-		C.free(result_.data)
+		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
+		goResult_ = make([]byte, C.int(result_.len))
+		copy(goResult_, result_Buffer)
 	}
-	result_Buffer := (*[1 << 30]byte)(result_.data)[:C.int(result_.len)]
-	goResult_ := make([]byte, C.int(result_.len))
-	copy(goResult_, result_Buffer)
 	return goResult_
 }
 
@@ -297,7 +297,7 @@ func (n NSURL) PathComponents() []string {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]string, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeString(r).String()

@@ -64,7 +64,7 @@ func comboBoxDelegate_TextField_TextView_Candidates_ForSelectedRange(hp C.uintpt
 	if candidates.len > 0 {
 		defer C.free(candidates.data)
 	}
-	candidatesSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(candidates.data))[:candidates.len:candidates.len]
+	candidatesSlice := unsafe.Slice((*unsafe.Pointer)(candidates.data), int(candidates.len))
 	var goCandidates = make([]foundation.TextCheckingResult, len(candidatesSlice))
 	for idx, r := range candidatesSlice {
 		goCandidates[idx] = foundation.MakeTextCheckingResult(r)

@@ -82,7 +82,7 @@ func textViewDelegate_TextView_WillChangeSelectionFromCharacterRanges_ToCharacte
 	if oldSelectedCharRanges.len > 0 {
 		defer C.free(oldSelectedCharRanges.data)
 	}
-	oldSelectedCharRangesSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(oldSelectedCharRanges.data))[:oldSelectedCharRanges.len:oldSelectedCharRanges.len]
+	oldSelectedCharRangesSlice := unsafe.Slice((*unsafe.Pointer)(oldSelectedCharRanges.data), int(oldSelectedCharRanges.len))
 	var goOldSelectedCharRanges = make([]foundation.Value, len(oldSelectedCharRangesSlice))
 	for idx, r := range oldSelectedCharRangesSlice {
 		goOldSelectedCharRanges[idx] = foundation.MakeValue(r)
@@ -90,7 +90,7 @@ func textViewDelegate_TextView_WillChangeSelectionFromCharacterRanges_ToCharacte
 	if newSelectedCharRanges.len > 0 {
 		defer C.free(newSelectedCharRanges.data)
 	}
-	newSelectedCharRangesSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(newSelectedCharRanges.data))[:newSelectedCharRanges.len:newSelectedCharRanges.len]
+	newSelectedCharRangesSlice := unsafe.Slice((*unsafe.Pointer)(newSelectedCharRanges.data), int(newSelectedCharRanges.len))
 	var goNewSelectedCharRanges = make([]foundation.Value, len(newSelectedCharRangesSlice))
 	for idx, r := range newSelectedCharRangesSlice {
 		goNewSelectedCharRanges[idx] = foundation.MakeValue(r)
@@ -150,7 +150,7 @@ func textViewDelegate_TextView_ShouldChangeTextInRanges_ReplacementStrings(hp C.
 	if affectedRanges.len > 0 {
 		defer C.free(affectedRanges.data)
 	}
-	affectedRangesSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(affectedRanges.data))[:affectedRanges.len:affectedRanges.len]
+	affectedRangesSlice := unsafe.Slice((*unsafe.Pointer)(affectedRanges.data), int(affectedRanges.len))
 	var goAffectedRanges = make([]foundation.Value, len(affectedRangesSlice))
 	for idx, r := range affectedRangesSlice {
 		goAffectedRanges[idx] = foundation.MakeValue(r)
@@ -158,7 +158,7 @@ func textViewDelegate_TextView_ShouldChangeTextInRanges_ReplacementStrings(hp C.
 	if replacementStrings.len > 0 {
 		defer C.free(replacementStrings.data)
 	}
-	replacementStringsSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(replacementStrings.data))[:replacementStrings.len:replacementStrings.len]
+	replacementStringsSlice := unsafe.Slice((*unsafe.Pointer)(replacementStrings.data), int(replacementStrings.len))
 	var goReplacementStrings = make([]string, len(replacementStringsSlice))
 	for idx, r := range replacementStringsSlice {
 		goReplacementStrings[idx] = foundation.MakeString(r).String()
@@ -174,8 +174,8 @@ func textViewDelegate_TextView_ShouldChangeTypingAttributes_ToAttributes(hp C.ui
 		defer C.free(oldTypingAttributes.key_data)
 		defer C.free(oldTypingAttributes.value_data)
 	}
-	oldTypingAttributesKeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(oldTypingAttributes.key_data))[:oldTypingAttributes.len:oldTypingAttributes.len]
-	oldTypingAttributesValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(oldTypingAttributes.value_data))[:oldTypingAttributes.len:oldTypingAttributes.len]
+	oldTypingAttributesKeySlice := unsafe.Slice((*unsafe.Pointer)(oldTypingAttributes.key_data), int(oldTypingAttributes.len))
+	oldTypingAttributesValueSlice := unsafe.Slice((*unsafe.Pointer)(oldTypingAttributes.value_data), int(oldTypingAttributes.len))
 	var goOldTypingAttributes = make(map[string]objc.Object)
 	for idx, k := range oldTypingAttributesKeySlice {
 		v := oldTypingAttributesValueSlice[idx]
@@ -185,8 +185,8 @@ func textViewDelegate_TextView_ShouldChangeTypingAttributes_ToAttributes(hp C.ui
 		defer C.free(newTypingAttributes.key_data)
 		defer C.free(newTypingAttributes.value_data)
 	}
-	newTypingAttributesKeySlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(newTypingAttributes.key_data))[:newTypingAttributes.len:newTypingAttributes.len]
-	newTypingAttributesValueSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(newTypingAttributes.value_data))[:newTypingAttributes.len:newTypingAttributes.len]
+	newTypingAttributesKeySlice := unsafe.Slice((*unsafe.Pointer)(newTypingAttributes.key_data), int(newTypingAttributes.len))
+	newTypingAttributesValueSlice := unsafe.Slice((*unsafe.Pointer)(newTypingAttributes.value_data), int(newTypingAttributes.len))
 	var goNewTypingAttributes = make(map[foundation.AttributedStringKey]objc.Object)
 	for idx, k := range newTypingAttributesKeySlice {
 		v := newTypingAttributesValueSlice[idx]
@@ -254,7 +254,7 @@ func textViewDelegate_TextView_WillShowSharingServicePicker_ForItems(hp C.uintpt
 	if items.len > 0 {
 		defer C.free(items.data)
 	}
-	itemsSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(items.data))[:items.len:items.len]
+	itemsSlice := unsafe.Slice((*unsafe.Pointer)(items.data), int(items.len))
 	var goItems = make([]objc.Object, len(itemsSlice))
 	for idx, r := range itemsSlice {
 		goItems[idx] = objc.MakeObject(r)
@@ -283,7 +283,7 @@ func textViewDelegate_TextView_Candidates_ForSelectedRange(hp C.uintptr_t, textV
 	if candidates.len > 0 {
 		defer C.free(candidates.data)
 	}
-	candidatesSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(candidates.data))[:candidates.len:candidates.len]
+	candidatesSlice := unsafe.Slice((*unsafe.Pointer)(candidates.data), int(candidates.len))
 	var goCandidates = make([]foundation.TextCheckingResult, len(candidatesSlice))
 	for idx, r := range candidatesSlice {
 		goCandidates[idx] = foundation.MakeTextCheckingResult(r)
@@ -330,7 +330,7 @@ func textViewDelegate_TextView_ShouldUpdateTouchBarItemIdentifiers(hp C.uintptr_
 	if identifiers.len > 0 {
 		defer C.free(identifiers.data)
 	}
-	identifiersSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(identifiers.data))[:identifiers.len:identifiers.len]
+	identifiersSlice := unsafe.Slice((*unsafe.Pointer)(identifiers.data), int(identifiers.len))
 	var goIdentifiers = make([]TouchBarItemIdentifier, len(identifiersSlice))
 	for idx, r := range identifiersSlice {
 		goIdentifiers[idx] = TouchBarItemIdentifier(foundation.MakeString(r).String())

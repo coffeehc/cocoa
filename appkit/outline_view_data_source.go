@@ -59,7 +59,7 @@ func outlineViewDataSource_OutlineView_DraggingSession_WillBeginAtPoint_ForItems
 	if draggedItems.len > 0 {
 		defer C.free(draggedItems.data)
 	}
-	draggedItemsSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(draggedItems.data))[:draggedItems.len:draggedItems.len]
+	draggedItemsSlice := unsafe.Slice((*unsafe.Pointer)(draggedItems.data), int(draggedItems.len))
 	var goDraggedItems = make([]objc.Object, len(draggedItemsSlice))
 	for idx, r := range draggedItemsSlice {
 		goDraggedItems[idx] = objc.MakeObject(r)
@@ -121,7 +121,7 @@ func outlineViewDataSource_OutlineView_SortDescriptorsDidChange(hp C.uintptr_t, 
 	if oldDescriptors.len > 0 {
 		defer C.free(oldDescriptors.data)
 	}
-	oldDescriptorsSlice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(oldDescriptors.data))[:oldDescriptors.len:oldDescriptors.len]
+	oldDescriptorsSlice := unsafe.Slice((*unsafe.Pointer)(oldDescriptors.data), int(oldDescriptors.len))
 	var goOldDescriptors = make([]foundation.SortDescriptor, len(oldDescriptorsSlice))
 	for idx, r := range oldDescriptorsSlice {
 		goOldDescriptors[idx] = foundation.MakeSortDescriptor(r)

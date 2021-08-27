@@ -123,7 +123,7 @@ func (n NSTextStorage) LayoutManagers() []LayoutManager {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]LayoutManager, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeLayoutManager(r)
@@ -156,7 +156,7 @@ func (n NSTextStorage) AttributeRuns() []TextStorage {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]TextStorage, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeTextStorage(r)
@@ -182,7 +182,7 @@ func (n NSTextStorage) Paragraphs() []TextStorage {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]TextStorage, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeTextStorage(r)
@@ -208,7 +208,7 @@ func (n NSTextStorage) Words() []TextStorage {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]TextStorage, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeTextStorage(r)
@@ -234,7 +234,7 @@ func (n NSTextStorage) Characters() []TextStorage {
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
-	result_Slice := (*[1 << 28]unsafe.Pointer)(unsafe.Pointer(result_.data))[:result_.len:result_.len]
+	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
 	var goResult_ = make([]TextStorage, len(result_Slice))
 	for idx, r := range result_Slice {
 		goResult_[idx] = MakeTextStorage(r)
