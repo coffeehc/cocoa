@@ -33,7 +33,7 @@ bool C_NSBundle_Load(void* ptr);
 bool C_NSBundle_Unload(void* ptr);
 void* C_NSBundle_MainBundle();
 Array C_NSBundle_Bundle_AllFrameworks();
-Array C_NSBundle_Bundle_AllBundles();
+Array C_NSBundle_AllBundles();
 void* C_NSBundle_ResourceURL(void* ptr);
 void* C_NSBundle_ExecutableURL(void* ptr);
 void* C_NSBundle_PrivateFrameworksURL(void* ptr);

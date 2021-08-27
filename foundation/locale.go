@@ -69,13 +69,13 @@ func LocaleWithLocaleIdentifier(ident string) Locale {
 	return MakeLocale(result_)
 }
 
-func Locale_CanonicalLocaleIdentifierFromString(_string string) string {
-	result_ := C.C_NSLocale_Locale_CanonicalLocaleIdentifierFromString(NewString(_string).Ptr())
+func CanonicalLocaleIdentifierFromString(_string string) string {
+	result_ := C.C_NSLocale_CanonicalLocaleIdentifierFromString(NewString(_string).Ptr())
 	return MakeString(result_).String()
 }
 
-func Locale_ComponentsFromLocaleIdentifier(_string string) map[string]string {
-	result_ := C.C_NSLocale_Locale_ComponentsFromLocaleIdentifier(NewString(_string).Ptr())
+func ComponentsFromLocaleIdentifier(_string string) map[string]string {
+	result_ := C.C_NSLocale_ComponentsFromLocaleIdentifier(NewString(_string).Ptr())
 	if result_.len > 0 {
 		defer C.free(result_.key_data)
 		defer C.free(result_.value_data)
@@ -119,8 +119,8 @@ func LocaleIdentifierFromWindowsLocaleCode(lcid uint32) string {
 	return MakeString(result_).String()
 }
 
-func Locale_WindowsLocaleCodeFromLocaleIdentifier(localeIdentifier string) uint32 {
-	result_ := C.C_NSLocale_Locale_WindowsLocaleCodeFromLocaleIdentifier(NewString(localeIdentifier).Ptr())
+func WindowsLocaleCodeFromLocaleIdentifier(localeIdentifier string) uint32 {
+	result_ := C.C_NSLocale_WindowsLocaleCodeFromLocaleIdentifier(NewString(localeIdentifier).Ptr())
 	return uint32(result_)
 }
 
@@ -204,8 +204,8 @@ func SystemLocale() Locale {
 	return MakeLocale(result_)
 }
 
-func Locale_AvailableLocaleIdentifiers() []string {
-	result_ := C.C_NSLocale_Locale_AvailableLocaleIdentifiers()
+func AvailableLocaleIdentifiers() []string {
+	result_ := C.C_NSLocale_AvailableLocaleIdentifiers()
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}

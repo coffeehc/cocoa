@@ -35,4 +35,4 @@ void* C_NSCursor_ResizeLeftRightCursor();
 void* C_NSCursor_ResizeRightCursor();
 void* C_NSCursor_ResizeUpCursor();
 void* C_NSCursor_ResizeUpDownCursor();
-void* C_NSCursor_Cursor_IBeamCursorForVerticalLayout();
+void* C_NSCursor_IBeamCursorForVerticalLayout();

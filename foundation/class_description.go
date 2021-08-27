@@ -34,8 +34,8 @@ func (n NSClassDescription) Init() ClassDescription {
 	return MakeClassDescription(result_)
 }
 
-func ClassDescription_InvalidateClassDescriptionCache() {
-	C.C_NSClassDescription_ClassDescription_InvalidateClassDescriptionCache()
+func InvalidateClassDescriptionCache() {
+	C.C_NSClassDescription_InvalidateClassDescriptionCache()
 }
 
 func (n NSClassDescription) InverseForRelationshipKey(relationshipKey string) string {

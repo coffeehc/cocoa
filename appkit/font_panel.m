@@ -44,7 +44,7 @@ void* C_NSFontPanel_SharedFontPanel() {
     return result_;
 }
 
-bool C_NSFontPanel_FontPanel_SharedFontPanelExists() {
+bool C_NSFontPanel_SharedFontPanelExists() {
     BOOL result_ = [NSFontPanel sharedFontPanelExists];
     return result_;
 }

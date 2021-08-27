@@ -107,8 +107,8 @@ func ButtonWithImage_Target_Action(image Image, target objc.Object, action objc.
 	return MakeButton(result_)
 }
 
-func Button_RadioButtonWithTitle_Target_Action(title string, target objc.Object, action objc.Selector) Button {
-	result_ := C.C_NSButton_Button_RadioButtonWithTitle_Target_Action(foundation.NewString(title).Ptr(), objc.ExtractPtr(target), unsafe.Pointer(action))
+func RadioButtonWithTitle_Target_Action(title string, target objc.Object, action objc.Selector) Button {
+	result_ := C.C_NSButton_RadioButtonWithTitle_Target_Action(foundation.NewString(title).Ptr(), objc.ExtractPtr(target), unsafe.Pointer(action))
 	return MakeButton(result_)
 }
 

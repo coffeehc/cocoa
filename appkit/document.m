@@ -11,7 +11,7 @@ void* C_NSDocument_Init(void* ptr) {
     return result_;
 }
 
-bool C_NSDocument_Document_CanConcurrentlyReadDocumentsOfType(void* typeName) {
+bool C_NSDocument_CanConcurrentlyReadDocumentsOfType(void* typeName) {
     BOOL result_ = [NSDocument canConcurrentlyReadDocumentsOfType:(NSString*)typeName];
     return result_;
 }

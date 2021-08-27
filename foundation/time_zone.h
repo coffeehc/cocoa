@@ -23,7 +23,7 @@ void* C_NSTimeZone_LocalTimeZone();
 void* C_NSTimeZone_SystemTimeZone();
 void* C_NSTimeZone_DefaultTimeZone();
 void C_NSTimeZone_SetDefaultTimeZone(void* value);
-Array C_NSTimeZone_TimeZone_KnownTimeZoneNames();
+Array C_NSTimeZone_KnownTimeZoneNames();
 Dictionary C_NSTimeZone_TimeZone_AbbreviationDictionary();
 void C_NSTimeZone_TimeZone_SetAbbreviationDictionary(Dictionary value);
 void* C_NSTimeZone_Name(void* ptr);

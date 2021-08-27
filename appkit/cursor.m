@@ -156,7 +156,7 @@ void* C_NSCursor_ResizeUpDownCursor() {
     return result_;
 }
 
-void* C_NSCursor_Cursor_IBeamCursorForVerticalLayout() {
+void* C_NSCursor_IBeamCursorForVerticalLayout() {
     NSCursor* result_ = [NSCursor IBeamCursorForVerticalLayout];
     return result_;
 }

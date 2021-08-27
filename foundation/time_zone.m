@@ -102,7 +102,7 @@ void C_NSTimeZone_SetDefaultTimeZone(void* value) {
     [NSTimeZone setDefaultTimeZone:(NSTimeZone*)value];
 }
 
-Array C_NSTimeZone_TimeZone_KnownTimeZoneNames() {
+Array C_NSTimeZone_KnownTimeZoneNames() {
     NSArray* result_ = [NSTimeZone knownTimeZoneNames];
     Array result_Array;
     int result_count = [result_ count];

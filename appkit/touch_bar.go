@@ -201,11 +201,11 @@ func (n NSTouchBar) SetCustomizationRequiredItemIdentifiers(value []TouchBarItem
 	C.C_NSTouchBar_SetCustomizationRequiredItemIdentifiers(n.Ptr(), cValue)
 }
 
-func TouchBar_AutomaticCustomizeTouchBarMenuItemEnabled() bool {
-	result_ := C.C_NSTouchBar_TouchBar_AutomaticCustomizeTouchBarMenuItemEnabled()
+func AutomaticCustomizeTouchBarMenuItemEnabled() bool {
+	result_ := C.C_NSTouchBar_AutomaticCustomizeTouchBarMenuItemEnabled()
 	return bool(result_)
 }
 
-func TouchBar_SetAutomaticCustomizeTouchBarMenuItemEnabled(value bool) {
-	C.C_NSTouchBar_TouchBar_SetAutomaticCustomizeTouchBarMenuItemEnabled(C.bool(value))
+func SetAutomaticCustomizeTouchBarMenuItemEnabled(value bool) {
+	C.C_NSTouchBar_SetAutomaticCustomizeTouchBarMenuItemEnabled(C.bool(value))
 }

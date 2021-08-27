@@ -121,27 +121,27 @@ func URLWithString_RelativeToURL(URLString string, baseURL URL) URL {
 	return MakeURL(result_)
 }
 
-func URL_FileURLWithPath_IsDirectory(path string, isDir bool) URL {
-	result_ := C.C_NSURL_URL_FileURLWithPath_IsDirectory(NewString(path).Ptr(), C.bool(isDir))
+func FileURLWithPath_IsDirectory(path string, isDir bool) URL {
+	result_ := C.C_NSURL_FileURLWithPath_IsDirectory(NewString(path).Ptr(), C.bool(isDir))
 	return MakeURL(result_)
 }
 
-func URL_FileURLWithPath_RelativeToURL(path string, baseURL URL) URL {
-	result_ := C.C_NSURL_URL_FileURLWithPath_RelativeToURL(NewString(path).Ptr(), objc.ExtractPtr(baseURL))
+func FileURLWithPath_RelativeToURL(path string, baseURL URL) URL {
+	result_ := C.C_NSURL_FileURLWithPath_RelativeToURL(NewString(path).Ptr(), objc.ExtractPtr(baseURL))
 	return MakeURL(result_)
 }
 
-func URL_FileURLWithPath_IsDirectory_RelativeToURL(path string, isDir bool, baseURL URL) URL {
-	result_ := C.C_NSURL_URL_FileURLWithPath_IsDirectory_RelativeToURL(NewString(path).Ptr(), C.bool(isDir), objc.ExtractPtr(baseURL))
+func FileURLWithPath_IsDirectory_RelativeToURL(path string, isDir bool, baseURL URL) URL {
+	result_ := C.C_NSURL_FileURLWithPath_IsDirectory_RelativeToURL(NewString(path).Ptr(), C.bool(isDir), objc.ExtractPtr(baseURL))
 	return MakeURL(result_)
 }
 
-func URL_FileURLWithPath(path string) URL {
-	result_ := C.C_NSURL_URL_FileURLWithPath(NewString(path).Ptr())
+func FileURLWithPath(path string) URL {
+	result_ := C.C_NSURL_FileURLWithPath(NewString(path).Ptr())
 	return MakeURL(result_)
 }
 
-func URL_FileURLWithPathComponents(components []string) URL {
+func FileURLWithPathComponents(components []string) URL {
 	var cComponents C.Array
 	if len(components) > 0 {
 		cComponentsData := make([]unsafe.Pointer, len(components))
@@ -151,12 +151,12 @@ func URL_FileURLWithPathComponents(components []string) URL {
 		cComponents.data = unsafe.Pointer(&cComponentsData[0])
 		cComponents.len = C.int(len(components))
 	}
-	result_ := C.C_NSURL_URL_FileURLWithPathComponents(cComponents)
+	result_ := C.C_NSURL_FileURLWithPathComponents(cComponents)
 	return MakeURL(result_)
 }
 
-func URL_AbsoluteURLWithDataRepresentation_RelativeToURL(data []byte, baseURL URL) URL {
-	result_ := C.C_NSURL_URL_AbsoluteURLWithDataRepresentation_RelativeToURL(C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, objc.ExtractPtr(baseURL))
+func AbsoluteURLWithDataRepresentation_RelativeToURL(data []byte, baseURL URL) URL {
+	result_ := C.C_NSURL_AbsoluteURLWithDataRepresentation_RelativeToURL(C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, objc.ExtractPtr(baseURL))
 	return MakeURL(result_)
 }
 

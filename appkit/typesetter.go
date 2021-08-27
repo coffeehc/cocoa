@@ -74,8 +74,8 @@ func (n NSTypesetter) Init() Typesetter {
 	return MakeTypesetter(result_)
 }
 
-func Typesetter_SharedSystemTypesetterForBehavior(behavior TypesetterBehavior) objc.Object {
-	result_ := C.C_NSTypesetter_Typesetter_SharedSystemTypesetterForBehavior(C.int(int(behavior)))
+func SharedSystemTypesetterForBehavior(behavior TypesetterBehavior) objc.Object {
+	result_ := C.C_NSTypesetter_SharedSystemTypesetterForBehavior(C.int(int(behavior)))
 	return objc.MakeObject(result_)
 }
 
@@ -179,8 +179,8 @@ func SharedSystemTypesetter() Typesetter {
 	return MakeTypesetter(result_)
 }
 
-func Typesetter_DefaultTypesetterBehavior() TypesetterBehavior {
-	result_ := C.C_NSTypesetter_Typesetter_DefaultTypesetterBehavior()
+func DefaultTypesetterBehavior() TypesetterBehavior {
+	result_ := C.C_NSTypesetter_DefaultTypesetterBehavior()
 	return TypesetterBehavior(int(result_))
 }
 

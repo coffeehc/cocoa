@@ -47,8 +47,8 @@ func (n NSColorSpace) Init() ColorSpace {
 	return MakeColorSpace(result_)
 }
 
-func ColorSpace_AvailableColorSpacesWithModel(model ColorSpaceModel) []ColorSpace {
-	result_ := C.C_NSColorSpace_ColorSpace_AvailableColorSpacesWithModel(C.int(int(model)))
+func AvailableColorSpacesWithModel(model ColorSpaceModel) []ColorSpace {
+	result_ := C.C_NSColorSpace_AvailableColorSpacesWithModel(C.int(int(model)))
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}

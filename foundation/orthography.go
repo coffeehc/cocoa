@@ -41,8 +41,8 @@ func (n NSOrthography) Init() Orthography {
 	return MakeOrthography(result_)
 }
 
-func Orthography_DefaultOrthographyForLanguage(language string) Orthography {
-	result_ := C.C_NSOrthography_Orthography_DefaultOrthographyForLanguage(NewString(language).Ptr())
+func DefaultOrthographyForLanguage(language string) Orthography {
+	result_ := C.C_NSOrthography_DefaultOrthographyForLanguage(NewString(language).Ptr())
 	return MakeOrthography(result_)
 }
 

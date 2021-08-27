@@ -72,7 +72,7 @@ unsigned int C_NSScroller_HitPart(void* ptr) {
     return result_;
 }
 
-int C_NSScroller_Scroller_PreferredScrollerStyle() {
+int C_NSScroller_PreferredScrollerStyle() {
     NSScrollerStyle result_ = [NSScroller preferredScrollerStyle];
     return result_;
 }
@@ -105,7 +105,7 @@ double C_NSScroller_KnobProportion(void* ptr) {
     return result_;
 }
 
-bool C_NSScroller_Scroller_CompatibleWithOverlayScrollers() {
+bool C_NSScroller_CompatibleWithOverlayScrollers() {
     BOOL result_ = [NSScroller compatibleWithOverlayScrollers];
     return result_;
 }

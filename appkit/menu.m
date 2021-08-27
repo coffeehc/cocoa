@@ -28,7 +28,7 @@ bool C_NSMenu_MenuBarVisible() {
     return result_;
 }
 
-void C_NSMenu_Menu_SetMenuBarVisible(bool visible) {
+void C_NSMenu_SetMenuBarVisible(bool visible) {
     [NSMenu setMenuBarVisible:visible];
 }
 

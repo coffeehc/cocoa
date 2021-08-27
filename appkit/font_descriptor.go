@@ -71,7 +71,7 @@ func (n NSFontDescriptor) Init() FontDescriptor {
 	return MakeFontDescriptor(result_)
 }
 
-func FontDescriptor_PreferredFontDescriptorForTextStyle_Options(style FontTextStyle, options map[FontTextStyleOptionKey]objc.Object) FontDescriptor {
+func PreferredFontDescriptorForTextStyle_Options(style FontTextStyle, options map[FontTextStyleOptionKey]objc.Object) FontDescriptor {
 	var cOptions C.Dictionary
 	if len(options) > 0 {
 		cOptionsKeyData := make([]unsafe.Pointer, len(options))
@@ -86,7 +86,7 @@ func FontDescriptor_PreferredFontDescriptorForTextStyle_Options(style FontTextSt
 		cOptions.value_data = unsafe.Pointer(&cOptionsValueData[0])
 		cOptions.len = C.int(len(options))
 	}
-	result_ := C.C_NSFontDescriptor_FontDescriptor_PreferredFontDescriptorForTextStyle_Options(foundation.NewString(string(style)).Ptr(), cOptions)
+	result_ := C.C_NSFontDescriptor_PreferredFontDescriptorForTextStyle_Options(foundation.NewString(string(style)).Ptr(), cOptions)
 	return MakeFontDescriptor(result_)
 }
 

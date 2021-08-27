@@ -97,8 +97,8 @@ func MenuBarVisible() bool {
 	return bool(result_)
 }
 
-func Menu_SetMenuBarVisible(visible bool) {
-	C.C_NSMenu_Menu_SetMenuBarVisible(C.bool(visible))
+func SetMenuBarVisible(visible bool) {
+	C.C_NSMenu_SetMenuBarVisible(C.bool(visible))
 }
 
 func (n NSMenu) InsertItem_AtIndex(newItem MenuItem, index int) {

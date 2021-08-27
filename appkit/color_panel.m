@@ -61,7 +61,7 @@ void* C_NSColorPanel_SharedColorPanel() {
     return result_;
 }
 
-bool C_NSColorPanel_ColorPanel_SharedColorPanelExists() {
+bool C_NSColorPanel_SharedColorPanelExists() {
     BOOL result_ = [NSColorPanel sharedColorPanelExists];
     return result_;
 }

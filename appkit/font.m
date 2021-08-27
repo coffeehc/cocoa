@@ -26,17 +26,17 @@ void* C_NSFont_FontWithDescriptor_TextTransform(void* fontDescriptor, void* text
     return result_;
 }
 
-void* C_NSFont_Font_UserFontOfSize(double fontSize) {
+void* C_NSFont_UserFontOfSize(double fontSize) {
     NSFont* result_ = [NSFont userFontOfSize:fontSize];
     return result_;
 }
 
-void* C_NSFont_Font_UserFixedPitchFontOfSize(double fontSize) {
+void* C_NSFont_UserFixedPitchFontOfSize(double fontSize) {
     NSFont* result_ = [NSFont userFixedPitchFontOfSize:fontSize];
     return result_;
 }
 
-void* C_NSFont_Font_PreferredFontForTextStyle_Options(void* style, Dictionary options) {
+void* C_NSFont_PreferredFontForTextStyle_Options(void* style, Dictionary options) {
     NSMutableDictionary* objcOptions = [[NSMutableDictionary alloc] initWithCapacity: options.len];
     if (options.len > 0) {
     	void** optionsKeyData = (void**)options.key_data;
@@ -51,72 +51,72 @@ void* C_NSFont_Font_PreferredFontForTextStyle_Options(void* style, Dictionary op
     return result_;
 }
 
-void* C_NSFont_Font_SystemFontOfSize(double fontSize) {
+void* C_NSFont_SystemFontOfSize(double fontSize) {
     NSFont* result_ = [NSFont systemFontOfSize:fontSize];
     return result_;
 }
 
-void* C_NSFont_Font_SystemFontOfSize_Weight(double fontSize, double weight) {
+void* C_NSFont_SystemFontOfSize_Weight(double fontSize, double weight) {
     NSFont* result_ = [NSFont systemFontOfSize:fontSize weight:weight];
     return result_;
 }
 
-void* C_NSFont_Font_BoldSystemFontOfSize(double fontSize) {
+void* C_NSFont_BoldSystemFontOfSize(double fontSize) {
     NSFont* result_ = [NSFont boldSystemFontOfSize:fontSize];
     return result_;
 }
 
-void* C_NSFont_Font_MonospacedSystemFontOfSize_Weight(double fontSize, double weight) {
+void* C_NSFont_MonospacedSystemFontOfSize_Weight(double fontSize, double weight) {
     NSFont* result_ = [NSFont monospacedSystemFontOfSize:fontSize weight:weight];
     return result_;
 }
 
-void* C_NSFont_Font_MonospacedDigitSystemFontOfSize_Weight(double fontSize, double weight) {
+void* C_NSFont_MonospacedDigitSystemFontOfSize_Weight(double fontSize, double weight) {
     NSFont* result_ = [NSFont monospacedDigitSystemFontOfSize:fontSize weight:weight];
     return result_;
 }
 
-void* C_NSFont_Font_LabelFontOfSize(double fontSize) {
+void* C_NSFont_LabelFontOfSize(double fontSize) {
     NSFont* result_ = [NSFont labelFontOfSize:fontSize];
     return result_;
 }
 
-void* C_NSFont_Font_MessageFontOfSize(double fontSize) {
+void* C_NSFont_MessageFontOfSize(double fontSize) {
     NSFont* result_ = [NSFont messageFontOfSize:fontSize];
     return result_;
 }
 
-void* C_NSFont_Font_MenuBarFontOfSize(double fontSize) {
+void* C_NSFont_MenuBarFontOfSize(double fontSize) {
     NSFont* result_ = [NSFont menuBarFontOfSize:fontSize];
     return result_;
 }
 
-void* C_NSFont_Font_MenuFontOfSize(double fontSize) {
+void* C_NSFont_MenuFontOfSize(double fontSize) {
     NSFont* result_ = [NSFont menuFontOfSize:fontSize];
     return result_;
 }
 
-void* C_NSFont_Font_ControlContentFontOfSize(double fontSize) {
+void* C_NSFont_ControlContentFontOfSize(double fontSize) {
     NSFont* result_ = [NSFont controlContentFontOfSize:fontSize];
     return result_;
 }
 
-void* C_NSFont_Font_TitleBarFontOfSize(double fontSize) {
+void* C_NSFont_TitleBarFontOfSize(double fontSize) {
     NSFont* result_ = [NSFont titleBarFontOfSize:fontSize];
     return result_;
 }
 
-void* C_NSFont_Font_PaletteFontOfSize(double fontSize) {
+void* C_NSFont_PaletteFontOfSize(double fontSize) {
     NSFont* result_ = [NSFont paletteFontOfSize:fontSize];
     return result_;
 }
 
-void* C_NSFont_Font_ToolTipsFontOfSize(double fontSize) {
+void* C_NSFont_ToolTipsFontOfSize(double fontSize) {
     NSFont* result_ = [NSFont toolTipsFontOfSize:fontSize];
     return result_;
 }
 
-double C_NSFont_Font_SystemFontSizeForControlSize(unsigned int controlSize) {
+double C_NSFont_SystemFontSizeForControlSize(unsigned int controlSize) {
     CGFloat result_ = [NSFont systemFontSizeForControlSize:controlSize];
     return result_;
 }
@@ -145,17 +145,17 @@ void* C_NSFont_FontWithSize(void* ptr, double fontSize) {
     return result_;
 }
 
-double C_NSFont_Font_SystemFontSize() {
+double C_NSFont_SystemFontSize() {
     CGFloat result_ = [NSFont systemFontSize];
     return result_;
 }
 
-double C_NSFont_Font_SmallSystemFontSize() {
+double C_NSFont_SmallSystemFontSize() {
     CGFloat result_ = [NSFont smallSystemFontSize];
     return result_;
 }
 
-double C_NSFont_Font_LabelFontSize() {
+double C_NSFont_LabelFontSize() {
     CGFloat result_ = [NSFont labelFontSize];
     return result_;
 }

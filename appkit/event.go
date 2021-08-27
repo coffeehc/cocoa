@@ -86,8 +86,8 @@ func (n NSEvent) Init() Event {
 	return MakeEvent(result_)
 }
 
-func Event_MouseEventWithType_Location_ModifierFlags_Timestamp_WindowNumber_Context_EventNumber_ClickCount_Pressure(_type EventType, location foundation.Point, flags EventModifierFlags, time foundation.TimeInterval, wNum int, unusedPassNil GraphicsContext, eNum int, cNum int, pressure float32) Event {
-	result_ := C.C_NSEvent_Event_MouseEventWithType_Location_ModifierFlags_Timestamp_WindowNumber_Context_EventNumber_ClickCount_Pressure(C.uint(uint(_type)), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(location))), C.uint(uint(flags)), C.double(float64(time)), C.int(wNum), objc.ExtractPtr(unusedPassNil), C.int(eNum), C.int(cNum), C.float(pressure))
+func MouseEventWithType_Location_ModifierFlags_Timestamp_WindowNumber_Context_EventNumber_ClickCount_Pressure(_type EventType, location foundation.Point, flags EventModifierFlags, time foundation.TimeInterval, wNum int, unusedPassNil GraphicsContext, eNum int, cNum int, pressure float32) Event {
+	result_ := C.C_NSEvent_MouseEventWithType_Location_ModifierFlags_Timestamp_WindowNumber_Context_EventNumber_ClickCount_Pressure(C.uint(uint(_type)), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(location))), C.uint(uint(flags)), C.double(float64(time)), C.int(wNum), objc.ExtractPtr(unusedPassNil), C.int(eNum), C.int(cNum), C.float(pressure))
 	return MakeEvent(result_)
 }
 
@@ -96,12 +96,12 @@ func EventWithCGEvent(cgEvent coregraphics.EventRef) Event {
 	return MakeEvent(result_)
 }
 
-func Event_StartPeriodicEventsAfterDelay_WithPeriod(delay foundation.TimeInterval, period foundation.TimeInterval) {
-	C.C_NSEvent_Event_StartPeriodicEventsAfterDelay_WithPeriod(C.double(float64(delay)), C.double(float64(period)))
+func StartPeriodicEventsAfterDelay_WithPeriod(delay foundation.TimeInterval, period foundation.TimeInterval) {
+	C.C_NSEvent_StartPeriodicEventsAfterDelay_WithPeriod(C.double(float64(delay)), C.double(float64(period)))
 }
 
-func Event_StopPeriodicEvents() {
-	C.C_NSEvent_Event_StopPeriodicEvents()
+func StopPeriodicEvents() {
+	C.C_NSEvent_StopPeriodicEvents()
 }
 
 func (n NSEvent) TouchesMatchingPhase_InView(phase TouchPhase, view View) foundation.Set {
@@ -415,8 +415,8 @@ func (n NSEvent) Phase() EventPhase {
 	return EventPhase(uint(result_))
 }
 
-func Event_SwipeTrackingFromScrollEventsEnabled() bool {
-	result_ := C.C_NSEvent_Event_SwipeTrackingFromScrollEventsEnabled()
+func SwipeTrackingFromScrollEventsEnabled() bool {
+	result_ := C.C_NSEvent_SwipeTrackingFromScrollEventsEnabled()
 	return bool(result_)
 }
 

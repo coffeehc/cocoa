@@ -11,7 +11,7 @@ void* C_NSTypesetter_Init(void* ptr) {
     return result_;
 }
 
-void* C_NSTypesetter_Typesetter_SharedSystemTypesetterForBehavior(int behavior) {
+void* C_NSTypesetter_SharedSystemTypesetterForBehavior(int behavior) {
     id result_ = [NSTypesetter sharedSystemTypesetterForBehavior:behavior];
     return result_;
 }
@@ -137,7 +137,7 @@ void* C_NSTypesetter_SharedSystemTypesetter() {
     return result_;
 }
 
-int C_NSTypesetter_Typesetter_DefaultTypesetterBehavior() {
+int C_NSTypesetter_DefaultTypesetterBehavior() {
     NSTypesetterBehavior result_ = [NSTypesetter defaultTypesetterBehavior];
     return result_;
 }

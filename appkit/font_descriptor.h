@@ -8,7 +8,7 @@ void* C_FontDescriptor_Alloc();
 void* C_NSFontDescriptor_InitWithFontAttributes(void* ptr, Dictionary attributes);
 void* C_NSFontDescriptor_FontDescriptorWithDesign(void* ptr, void* design);
 void* C_NSFontDescriptor_Init(void* ptr);
-void* C_NSFontDescriptor_FontDescriptor_PreferredFontDescriptorForTextStyle_Options(void* style, Dictionary options);
+void* C_NSFontDescriptor_PreferredFontDescriptorForTextStyle_Options(void* style, Dictionary options);
 void* C_NSFontDescriptor_FontDescriptorWithFontAttributes(Dictionary attributes);
 void* C_NSFontDescriptor_FontDescriptorWithName_Matrix(void* fontName, void* matrix);
 void* C_NSFontDescriptor_FontDescriptorWithName_Size(void* fontName, double size);

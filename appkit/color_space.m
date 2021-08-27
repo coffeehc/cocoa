@@ -23,7 +23,7 @@ void* C_NSColorSpace_Init(void* ptr) {
     return result_;
 }
 
-Array C_NSColorSpace_ColorSpace_AvailableColorSpacesWithModel(int model) {
+Array C_NSColorSpace_AvailableColorSpacesWithModel(int model) {
     NSArray* result_ = [NSColorSpace availableColorSpacesWithModel:model];
     Array result_Array;
     int result_count = [result_ count];

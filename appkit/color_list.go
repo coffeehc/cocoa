@@ -75,8 +75,8 @@ func (n NSColorList) RemoveFile() {
 	C.C_NSColorList_RemoveFile(n.Ptr())
 }
 
-func ColorList_AvailableColorLists() []ColorList {
-	result_ := C.C_NSColorList_ColorList_AvailableColorLists()
+func AvailableColorLists() []ColorList {
+	result_ := C.C_NSColorList_AvailableColorLists()
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}

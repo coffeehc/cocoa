@@ -118,8 +118,8 @@ func (n NSDocument) Init() Document {
 	return MakeDocument(result_)
 }
 
-func Document_CanConcurrentlyReadDocumentsOfType(typeName string) bool {
-	result_ := C.C_NSDocument_Document_CanConcurrentlyReadDocumentsOfType(foundation.NewString(typeName).Ptr())
+func CanConcurrentlyReadDocumentsOfType(typeName string) bool {
+	result_ := C.C_NSDocument_CanConcurrentlyReadDocumentsOfType(foundation.NewString(typeName).Ptr())
 	return bool(result_)
 }
 

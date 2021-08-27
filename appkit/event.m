@@ -11,7 +11,7 @@ void* C_NSEvent_Init(void* ptr) {
     return result_;
 }
 
-void* C_NSEvent_Event_MouseEventWithType_Location_ModifierFlags_Timestamp_WindowNumber_Context_EventNumber_ClickCount_Pressure(unsigned int _type, CGPoint location, unsigned int flags, double time, int wNum, void* unusedPassNil, int eNum, int cNum, float pressure) {
+void* C_NSEvent_MouseEventWithType_Location_ModifierFlags_Timestamp_WindowNumber_Context_EventNumber_ClickCount_Pressure(unsigned int _type, CGPoint location, unsigned int flags, double time, int wNum, void* unusedPassNil, int eNum, int cNum, float pressure) {
     NSEvent* result_ = [NSEvent mouseEventWithType:_type location:location modifierFlags:flags timestamp:time windowNumber:wNum context:(NSGraphicsContext*)unusedPassNil eventNumber:eNum clickCount:cNum pressure:pressure];
     return result_;
 }
@@ -21,11 +21,11 @@ void* C_NSEvent_EventWithCGEvent(void* cgEvent) {
     return result_;
 }
 
-void C_NSEvent_Event_StartPeriodicEventsAfterDelay_WithPeriod(double delay, double period) {
+void C_NSEvent_StartPeriodicEventsAfterDelay_WithPeriod(double delay, double period) {
     [NSEvent startPeriodicEventsAfterDelay:delay withPeriod:period];
 }
 
-void C_NSEvent_Event_StopPeriodicEvents() {
+void C_NSEvent_StopPeriodicEvents() {
     [NSEvent stopPeriodicEvents];
 }
 
@@ -396,7 +396,7 @@ unsigned int C_NSEvent_Phase(void* ptr) {
     return result_;
 }
 
-bool C_NSEvent_Event_SwipeTrackingFromScrollEventsEnabled() {
+bool C_NSEvent_SwipeTrackingFromScrollEventsEnabled() {
     BOOL result_ = [NSEvent swipeTrackingFromScrollEventsEnabled];
     return result_;
 }

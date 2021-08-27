@@ -17,12 +17,12 @@ void* C_NSURL_InitWithScheme_Host_Path(void* ptr, void* scheme, void* host, void
 void* C_NSURL_Init(void* ptr);
 void* C_NSURL_URLWithString(void* URLString);
 void* C_NSURL_URLWithString_RelativeToURL(void* URLString, void* baseURL);
-void* C_NSURL_URL_FileURLWithPath_IsDirectory(void* path, bool isDir);
-void* C_NSURL_URL_FileURLWithPath_RelativeToURL(void* path, void* baseURL);
-void* C_NSURL_URL_FileURLWithPath_IsDirectory_RelativeToURL(void* path, bool isDir, void* baseURL);
-void* C_NSURL_URL_FileURLWithPath(void* path);
-void* C_NSURL_URL_FileURLWithPathComponents(Array components);
-void* C_NSURL_URL_AbsoluteURLWithDataRepresentation_RelativeToURL(Array data, void* baseURL);
+void* C_NSURL_FileURLWithPath_IsDirectory(void* path, bool isDir);
+void* C_NSURL_FileURLWithPath_RelativeToURL(void* path, void* baseURL);
+void* C_NSURL_FileURLWithPath_IsDirectory_RelativeToURL(void* path, bool isDir, void* baseURL);
+void* C_NSURL_FileURLWithPath(void* path);
+void* C_NSURL_FileURLWithPathComponents(Array components);
+void* C_NSURL_AbsoluteURLWithDataRepresentation_RelativeToURL(Array data, void* baseURL);
 void* C_NSURL_URLWithDataRepresentation_RelativeToURL(Array data, void* baseURL);
 bool C_NSURL_IsFileReferenceURL(void* ptr);
 void C_NSURL_RemoveAllCachedResourceValues(void* ptr);

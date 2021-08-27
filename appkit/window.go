@@ -568,8 +568,8 @@ func (n NSWindow) ResetCursorRects() {
 	C.C_NSWindow_ResetCursorRects(n.Ptr())
 }
 
-func Window_StandardWindowButton_ForStyleMask(b WindowButton, styleMask WindowStyleMask) Button {
-	result_ := C.C_NSWindow_Window_StandardWindowButton_ForStyleMask(C.uint(uint(b)), C.uint(uint(styleMask)))
+func StandardWindowButton_ForStyleMask(b WindowButton, styleMask WindowStyleMask) Button {
+	result_ := C.C_NSWindow_StandardWindowButton_ForStyleMask(C.uint(uint(b)), C.uint(uint(styleMask)))
 	return MakeButton(result_)
 }
 
@@ -1386,13 +1386,13 @@ func (n NSWindow) SetTitlebarAccessoryViewControllers(value []TitlebarAccessoryV
 	C.C_NSWindow_SetTitlebarAccessoryViewControllers(n.Ptr(), cValue)
 }
 
-func Window_AllowsAutomaticWindowTabbing() bool {
-	result_ := C.C_NSWindow_Window_AllowsAutomaticWindowTabbing()
+func AllowsAutomaticWindowTabbing() bool {
+	result_ := C.C_NSWindow_AllowsAutomaticWindowTabbing()
 	return bool(result_)
 }
 
-func Window_SetAllowsAutomaticWindowTabbing(value bool) {
-	C.C_NSWindow_Window_SetAllowsAutomaticWindowTabbing(C.bool(value))
+func SetAllowsAutomaticWindowTabbing(value bool) {
+	C.C_NSWindow_SetAllowsAutomaticWindowTabbing(C.bool(value))
 }
 
 func Window_UserTabbingPreference() WindowUserTabbingPreference {

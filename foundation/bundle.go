@@ -295,8 +295,8 @@ func Bundle_AllFrameworks() []Bundle {
 	return goResult_
 }
 
-func Bundle_AllBundles() []Bundle {
-	result_ := C.C_NSBundle_Bundle_AllBundles()
+func AllBundles() []Bundle {
+	result_ := C.C_NSBundle_AllBundles()
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}

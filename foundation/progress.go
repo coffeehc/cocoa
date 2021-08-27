@@ -91,8 +91,8 @@ func (n NSProgress) Init() Progress {
 	return MakeProgress(result_)
 }
 
-func Progress_DiscreteProgressWithTotalUnitCount(unitCount int64) Progress {
-	result_ := C.C_NSProgress_Progress_DiscreteProgressWithTotalUnitCount(C.long(unitCount))
+func DiscreteProgressWithTotalUnitCount(unitCount int64) Progress {
+	result_ := C.C_NSProgress_DiscreteProgressWithTotalUnitCount(C.long(unitCount))
 	return MakeProgress(result_)
 }
 

@@ -20,7 +20,7 @@ func init() {
 
 func initAndRun() {
 	app := appkit.SharedApplication()
-	w := appkit.NewWindow(foundation.MakeRect(0, 0, 600, 400))
+	w := appkit.NewWindow(600, 400)
 	w.SetTitle("Test widgets")
 
 	webView := webkit.AllocWebView().Init()

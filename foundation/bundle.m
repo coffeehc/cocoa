@@ -276,7 +276,7 @@ Array C_NSBundle_Bundle_AllFrameworks() {
     return result_Array;
 }
 
-Array C_NSBundle_Bundle_AllBundles() {
+Array C_NSBundle_AllBundles() {
     NSArray* result_ = [NSBundle allBundles];
     Array result_Array;
     int result_count = [result_ count];

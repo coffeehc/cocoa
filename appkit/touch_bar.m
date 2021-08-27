@@ -191,11 +191,11 @@ void C_NSTouchBar_SetCustomizationRequiredItemIdentifiers(void* ptr, Array value
     [nSTouchBar setCustomizationRequiredItemIdentifiers:objcValue];
 }
 
-bool C_NSTouchBar_TouchBar_AutomaticCustomizeTouchBarMenuItemEnabled() {
+bool C_NSTouchBar_AutomaticCustomizeTouchBarMenuItemEnabled() {
     BOOL result_ = [NSTouchBar automaticCustomizeTouchBarMenuItemEnabled];
     return result_;
 }
 
-void C_NSTouchBar_TouchBar_SetAutomaticCustomizeTouchBarMenuItemEnabled(bool value) {
+void C_NSTouchBar_SetAutomaticCustomizeTouchBarMenuItemEnabled(bool value) {
     [NSTouchBar setAutomaticCustomizeTouchBarMenuItemEnabled:value];
 }

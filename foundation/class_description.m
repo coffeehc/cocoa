@@ -11,7 +11,7 @@ void* C_NSClassDescription_Init(void* ptr) {
     return result_;
 }
 
-void C_NSClassDescription_ClassDescription_InvalidateClassDescriptionCache() {
+void C_NSClassDescription_InvalidateClassDescriptionCache() {
     [NSClassDescription invalidateClassDescriptionCache];
 }
 

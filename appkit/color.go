@@ -429,8 +429,8 @@ func HeaderTextColor() Color {
 	return MakeColor(result_)
 }
 
-func Color_AlternatingContentBackgroundColors() []Color {
-	result_ := C.C_NSColor_Color_AlternatingContentBackgroundColors()
+func AlternatingContentBackgroundColors() []Color {
+	result_ := C.C_NSColor_AlternatingContentBackgroundColors()
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}

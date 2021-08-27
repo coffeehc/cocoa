@@ -91,8 +91,8 @@ func SharedColorPanel() ColorPanel {
 	return MakeColorPanel(result_)
 }
 
-func ColorPanel_SharedColorPanelExists() bool {
-	result_ := C.C_NSColorPanel_ColorPanel_SharedColorPanelExists()
+func SharedColorPanelExists() bool {
+	result_ := C.C_NSColorPanel_SharedColorPanelExists()
 	return bool(result_)
 }
 

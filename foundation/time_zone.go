@@ -128,8 +128,8 @@ func SetDefaultTimeZone(value TimeZone) {
 	C.C_NSTimeZone_SetDefaultTimeZone(objc.ExtractPtr(value))
 }
 
-func TimeZone_KnownTimeZoneNames() []string {
-	result_ := C.C_NSTimeZone_TimeZone_KnownTimeZoneNames()
+func KnownTimeZoneNames() []string {
+	result_ := C.C_NSTimeZone_KnownTimeZoneNames()
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}

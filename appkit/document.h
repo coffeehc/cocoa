@@ -6,7 +6,7 @@
 void* C_Document_Alloc();
 
 void* C_NSDocument_Init(void* ptr);
-bool C_NSDocument_Document_CanConcurrentlyReadDocumentsOfType(void* typeName);
+bool C_NSDocument_CanConcurrentlyReadDocumentsOfType(void* typeName);
 bool C_NSDocument_CanAsynchronouslyWriteToURL_OfType_ForSaveOperation(void* ptr, void* url, void* typeName, unsigned int saveOperation);
 void C_NSDocument_UnblockUserInteraction(void* ptr);
 bool C_NSDocument_Document_IsNativeType(void* _type);

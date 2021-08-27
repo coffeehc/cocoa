@@ -33,7 +33,7 @@ void* C_NSFontDescriptor_Init(void* ptr) {
     return result_;
 }
 
-void* C_NSFontDescriptor_FontDescriptor_PreferredFontDescriptorForTextStyle_Options(void* style, Dictionary options) {
+void* C_NSFontDescriptor_PreferredFontDescriptorForTextStyle_Options(void* style, Dictionary options) {
     NSMutableDictionary* objcOptions = [[NSMutableDictionary alloc] initWithCapacity: options.len];
     if (options.len > 0) {
     	void** optionsKeyData = (void**)options.key_data;

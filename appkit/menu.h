@@ -9,7 +9,7 @@ void* C_NSMenu_InitWithTitle(void* ptr, void* title);
 void* C_NSMenu_InitWithCoder(void* ptr, void* coder);
 void* C_NSMenu_Init(void* ptr);
 bool C_NSMenu_MenuBarVisible();
-void C_NSMenu_Menu_SetMenuBarVisible(bool visible);
+void C_NSMenu_SetMenuBarVisible(bool visible);
 void C_NSMenu_InsertItem_AtIndex(void* ptr, void* newItem, int index);
 void* C_NSMenu_InsertItemWithTitle_Action_KeyEquivalent_AtIndex(void* ptr, void* _string, void* selector, void* charCode, int index);
 void C_NSMenu_AddItem(void* ptr, void* newItem);

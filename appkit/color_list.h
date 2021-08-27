@@ -14,7 +14,7 @@ void C_NSColorList_InsertColor_Key_AtIndex(void* ptr, void* color, void* key, un
 void C_NSColorList_RemoveColorWithKey(void* ptr, void* key);
 void C_NSColorList_SetColor_ForKey(void* ptr, void* color, void* key);
 void C_NSColorList_RemoveFile(void* ptr);
-Array C_NSColorList_ColorList_AvailableColorLists();
+Array C_NSColorList_AvailableColorLists();
 void* C_NSColorList_Name(void* ptr);
 bool C_NSColorList_IsEditable(void* ptr);
 Array C_NSColorList_AllKeys(void* ptr);

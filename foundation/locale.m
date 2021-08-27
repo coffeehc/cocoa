@@ -22,12 +22,12 @@ void* C_NSLocale_LocaleWithLocaleIdentifier(void* ident) {
     return result_;
 }
 
-void* C_NSLocale_Locale_CanonicalLocaleIdentifierFromString(void* _string) {
+void* C_NSLocale_CanonicalLocaleIdentifierFromString(void* _string) {
     NSString* result_ = [NSLocale canonicalLocaleIdentifierFromString:(NSString*)_string];
     return result_;
 }
 
-Dictionary C_NSLocale_Locale_ComponentsFromLocaleIdentifier(void* _string) {
+Dictionary C_NSLocale_ComponentsFromLocaleIdentifier(void* _string) {
     NSDictionary* result_ = [NSLocale componentsFromLocaleIdentifier:(NSString*)_string];
     Dictionary result_Array;
     NSArray * result_Keys = [result_ allKeys];
@@ -73,7 +73,7 @@ void* C_NSLocale_LocaleIdentifierFromWindowsLocaleCode(uint32_t lcid) {
     return result_;
 }
 
-uint32_t C_NSLocale_Locale_WindowsLocaleCodeFromLocaleIdentifier(void* localeIdentifier) {
+uint32_t C_NSLocale_WindowsLocaleCodeFromLocaleIdentifier(void* localeIdentifier) {
     uint32_t result_ = [NSLocale windowsLocaleCodeFromLocaleIdentifier:(NSString*)localeIdentifier];
     return result_;
 }
@@ -169,7 +169,7 @@ void* C_NSLocale_SystemLocale() {
     return result_;
 }
 
-Array C_NSLocale_Locale_AvailableLocaleIdentifiers() {
+Array C_NSLocale_AvailableLocaleIdentifiers() {
     NSArray* result_ = [NSLocale availableLocaleIdentifiers];
     Array result_Array;
     int result_count = [result_ count];

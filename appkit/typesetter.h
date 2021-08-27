@@ -6,7 +6,7 @@
 void* C_Typesetter_Alloc();
 
 void* C_NSTypesetter_Init(void* ptr);
-void* C_NSTypesetter_Typesetter_SharedSystemTypesetterForBehavior(int behavior);
+void* C_NSTypesetter_SharedSystemTypesetterForBehavior(int behavior);
 double C_NSTypesetter_BaselineOffsetInLayoutManager_GlyphIndex(void* ptr, void* layoutMgr, unsigned int glyphIndex);
 void* C_NSTypesetter_SubstituteFontForFont(void* ptr, void* originalFont);
 void* C_NSTypesetter_TextTabForGlyphLocation_WritingDirection_MaxLocation(void* ptr, double glyphLocation, int direction, double maxLocation);
@@ -29,7 +29,7 @@ void C_NSTypesetter_SetDrawsOutsideLineFragment_ForGlyphRange(void* ptr, bool fl
 void C_NSTypesetter_SetLineFragmentRect_ForGlyphRange_UsedRect_BaselineOffset(void* ptr, CGRect fragmentRect, NSRange glyphRange, CGRect usedRect, double baselineOffset);
 void C_NSTypesetter_SetNotShownAttribute_ForGlyphRange(void* ptr, bool flag, NSRange glyphRange);
 void* C_NSTypesetter_SharedSystemTypesetter();
-int C_NSTypesetter_Typesetter_DefaultTypesetterBehavior();
+int C_NSTypesetter_DefaultTypesetterBehavior();
 void* C_NSTypesetter_LayoutManager(void* ptr);
 bool C_NSTypesetter_UsesFontLeading(void* ptr);
 void C_NSTypesetter_SetUsesFontLeading(void* ptr, bool value);

@@ -12,7 +12,7 @@ void C_NSFontPanel_ReloadDefaultFontFamilies(void* ptr);
 void C_NSFontPanel_SetPanelFont_IsMultiple(void* ptr, void* fontObj, bool flag);
 void* C_NSFontPanel_PanelConvertFont(void* ptr, void* fontObj);
 void* C_NSFontPanel_SharedFontPanel();
-bool C_NSFontPanel_FontPanel_SharedFontPanelExists();
+bool C_NSFontPanel_SharedFontPanelExists();
 bool C_NSFontPanel_IsEnabled(void* ptr);
 void C_NSFontPanel_SetEnabled(void* ptr, bool value);
 void* C_NSFontPanel_AccessoryView(void* ptr);

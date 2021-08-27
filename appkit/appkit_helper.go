@@ -117,6 +117,13 @@ func NewSubMenuItem(menu Menu) MenuItem {
 	return item
 }
 
+// NewView create new View
+func NewView() View {
+	v := AllocView().Init()
+	v.SetTranslatesAutoresizingMaskIntoConstraints(false)
+	return v
+}
+
 // A TextScrollView that contains a TextView
 type TextScrollView struct {
 	ScrollView

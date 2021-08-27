@@ -27,7 +27,7 @@ void* C_NSProgress_Init(void* ptr) {
     return result_;
 }
 
-void* C_NSProgress_Progress_DiscreteProgressWithTotalUnitCount(long unitCount) {
+void* C_NSProgress_DiscreteProgressWithTotalUnitCount(long unitCount) {
     NSProgress* result_ = [NSProgress discreteProgressWithTotalUnitCount:unitCount];
     return result_;
 }

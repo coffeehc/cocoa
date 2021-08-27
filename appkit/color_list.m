@@ -54,7 +54,7 @@ void C_NSColorList_RemoveFile(void* ptr) {
     [nSColorList removeFile];
 }
 
-Array C_NSColorList_ColorList_AvailableColorLists() {
+Array C_NSColorList_AvailableColorLists() {
     NSArray* result_ = [NSColorList availableColorLists];
     Array result_Array;
     int result_count = [result_ count];

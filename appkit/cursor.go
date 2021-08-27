@@ -175,7 +175,7 @@ func ResizeUpDownCursor() Cursor {
 	return MakeCursor(result_)
 }
 
-func Cursor_IBeamCursorForVerticalLayout() Cursor {
-	result_ := C.C_NSCursor_Cursor_IBeamCursorForVerticalLayout()
+func IBeamCursorForVerticalLayout() Cursor {
+	result_ := C.C_NSCursor_IBeamCursorForVerticalLayout()
 	return MakeCursor(result_)
 }

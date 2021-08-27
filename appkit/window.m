@@ -318,7 +318,7 @@ void C_NSWindow_ResetCursorRects(void* ptr) {
     [nSWindow resetCursorRects];
 }
 
-void* C_NSWindow_Window_StandardWindowButton_ForStyleMask(unsigned int b, unsigned int styleMask) {
+void* C_NSWindow_StandardWindowButton_ForStyleMask(unsigned int b, unsigned int styleMask) {
     NSButton* result_ = [NSWindow standardWindowButton:b forStyleMask:styleMask];
     return result_;
 }
@@ -1303,12 +1303,12 @@ void C_NSWindow_SetTitlebarAccessoryViewControllers(void* ptr, Array value) {
     [nSWindow setTitlebarAccessoryViewControllers:objcValue];
 }
 
-bool C_NSWindow_Window_AllowsAutomaticWindowTabbing() {
+bool C_NSWindow_AllowsAutomaticWindowTabbing() {
     BOOL result_ = [NSWindow allowsAutomaticWindowTabbing];
     return result_;
 }
 
-void C_NSWindow_Window_SetAllowsAutomaticWindowTabbing(bool value) {
+void C_NSWindow_SetAllowsAutomaticWindowTabbing(bool value) {
     [NSWindow setAllowsAutomaticWindowTabbing:value];
 }
 

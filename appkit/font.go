@@ -72,17 +72,17 @@ func FontWithDescriptor_TextTransform(fontDescriptor FontDescriptor, textTransfo
 	return MakeFont(result_)
 }
 
-func Font_UserFontOfSize(fontSize coregraphics.Float) Font {
-	result_ := C.C_NSFont_Font_UserFontOfSize(C.double(float64(fontSize)))
+func UserFontOfSize(fontSize coregraphics.Float) Font {
+	result_ := C.C_NSFont_UserFontOfSize(C.double(float64(fontSize)))
 	return MakeFont(result_)
 }
 
-func Font_UserFixedPitchFontOfSize(fontSize coregraphics.Float) Font {
-	result_ := C.C_NSFont_Font_UserFixedPitchFontOfSize(C.double(float64(fontSize)))
+func UserFixedPitchFontOfSize(fontSize coregraphics.Float) Font {
+	result_ := C.C_NSFont_UserFixedPitchFontOfSize(C.double(float64(fontSize)))
 	return MakeFont(result_)
 }
 
-func Font_PreferredFontForTextStyle_Options(style FontTextStyle, options map[FontTextStyleOptionKey]objc.Object) Font {
+func PreferredFontForTextStyle_Options(style FontTextStyle, options map[FontTextStyleOptionKey]objc.Object) Font {
 	var cOptions C.Dictionary
 	if len(options) > 0 {
 		cOptionsKeyData := make([]unsafe.Pointer, len(options))
@@ -97,77 +97,77 @@ func Font_PreferredFontForTextStyle_Options(style FontTextStyle, options map[Fon
 		cOptions.value_data = unsafe.Pointer(&cOptionsValueData[0])
 		cOptions.len = C.int(len(options))
 	}
-	result_ := C.C_NSFont_Font_PreferredFontForTextStyle_Options(foundation.NewString(string(style)).Ptr(), cOptions)
+	result_ := C.C_NSFont_PreferredFontForTextStyle_Options(foundation.NewString(string(style)).Ptr(), cOptions)
 	return MakeFont(result_)
 }
 
-func Font_SystemFontOfSize(fontSize coregraphics.Float) Font {
-	result_ := C.C_NSFont_Font_SystemFontOfSize(C.double(float64(fontSize)))
+func SystemFontOfSize(fontSize coregraphics.Float) Font {
+	result_ := C.C_NSFont_SystemFontOfSize(C.double(float64(fontSize)))
 	return MakeFont(result_)
 }
 
-func Font_SystemFontOfSize_Weight(fontSize coregraphics.Float, weight FontWeight) Font {
-	result_ := C.C_NSFont_Font_SystemFontOfSize_Weight(C.double(float64(fontSize)), C.double(float64(coregraphics.Float(weight))))
+func SystemFontOfSize_Weight(fontSize coregraphics.Float, weight FontWeight) Font {
+	result_ := C.C_NSFont_SystemFontOfSize_Weight(C.double(float64(fontSize)), C.double(float64(coregraphics.Float(weight))))
 	return MakeFont(result_)
 }
 
-func Font_BoldSystemFontOfSize(fontSize coregraphics.Float) Font {
-	result_ := C.C_NSFont_Font_BoldSystemFontOfSize(C.double(float64(fontSize)))
+func BoldSystemFontOfSize(fontSize coregraphics.Float) Font {
+	result_ := C.C_NSFont_BoldSystemFontOfSize(C.double(float64(fontSize)))
 	return MakeFont(result_)
 }
 
-func Font_MonospacedSystemFontOfSize_Weight(fontSize coregraphics.Float, weight FontWeight) Font {
-	result_ := C.C_NSFont_Font_MonospacedSystemFontOfSize_Weight(C.double(float64(fontSize)), C.double(float64(coregraphics.Float(weight))))
+func MonospacedSystemFontOfSize_Weight(fontSize coregraphics.Float, weight FontWeight) Font {
+	result_ := C.C_NSFont_MonospacedSystemFontOfSize_Weight(C.double(float64(fontSize)), C.double(float64(coregraphics.Float(weight))))
 	return MakeFont(result_)
 }
 
-func Font_MonospacedDigitSystemFontOfSize_Weight(fontSize coregraphics.Float, weight FontWeight) Font {
-	result_ := C.C_NSFont_Font_MonospacedDigitSystemFontOfSize_Weight(C.double(float64(fontSize)), C.double(float64(coregraphics.Float(weight))))
+func MonospacedDigitSystemFontOfSize_Weight(fontSize coregraphics.Float, weight FontWeight) Font {
+	result_ := C.C_NSFont_MonospacedDigitSystemFontOfSize_Weight(C.double(float64(fontSize)), C.double(float64(coregraphics.Float(weight))))
 	return MakeFont(result_)
 }
 
-func Font_LabelFontOfSize(fontSize coregraphics.Float) Font {
-	result_ := C.C_NSFont_Font_LabelFontOfSize(C.double(float64(fontSize)))
+func LabelFontOfSize(fontSize coregraphics.Float) Font {
+	result_ := C.C_NSFont_LabelFontOfSize(C.double(float64(fontSize)))
 	return MakeFont(result_)
 }
 
-func Font_MessageFontOfSize(fontSize coregraphics.Float) Font {
-	result_ := C.C_NSFont_Font_MessageFontOfSize(C.double(float64(fontSize)))
+func MessageFontOfSize(fontSize coregraphics.Float) Font {
+	result_ := C.C_NSFont_MessageFontOfSize(C.double(float64(fontSize)))
 	return MakeFont(result_)
 }
 
-func Font_MenuBarFontOfSize(fontSize coregraphics.Float) Font {
-	result_ := C.C_NSFont_Font_MenuBarFontOfSize(C.double(float64(fontSize)))
+func MenuBarFontOfSize(fontSize coregraphics.Float) Font {
+	result_ := C.C_NSFont_MenuBarFontOfSize(C.double(float64(fontSize)))
 	return MakeFont(result_)
 }
 
-func Font_MenuFontOfSize(fontSize coregraphics.Float) Font {
-	result_ := C.C_NSFont_Font_MenuFontOfSize(C.double(float64(fontSize)))
+func MenuFontOfSize(fontSize coregraphics.Float) Font {
+	result_ := C.C_NSFont_MenuFontOfSize(C.double(float64(fontSize)))
 	return MakeFont(result_)
 }
 
-func Font_ControlContentFontOfSize(fontSize coregraphics.Float) Font {
-	result_ := C.C_NSFont_Font_ControlContentFontOfSize(C.double(float64(fontSize)))
+func ControlContentFontOfSize(fontSize coregraphics.Float) Font {
+	result_ := C.C_NSFont_ControlContentFontOfSize(C.double(float64(fontSize)))
 	return MakeFont(result_)
 }
 
-func Font_TitleBarFontOfSize(fontSize coregraphics.Float) Font {
-	result_ := C.C_NSFont_Font_TitleBarFontOfSize(C.double(float64(fontSize)))
+func TitleBarFontOfSize(fontSize coregraphics.Float) Font {
+	result_ := C.C_NSFont_TitleBarFontOfSize(C.double(float64(fontSize)))
 	return MakeFont(result_)
 }
 
-func Font_PaletteFontOfSize(fontSize coregraphics.Float) Font {
-	result_ := C.C_NSFont_Font_PaletteFontOfSize(C.double(float64(fontSize)))
+func PaletteFontOfSize(fontSize coregraphics.Float) Font {
+	result_ := C.C_NSFont_PaletteFontOfSize(C.double(float64(fontSize)))
 	return MakeFont(result_)
 }
 
-func Font_ToolTipsFontOfSize(fontSize coregraphics.Float) Font {
-	result_ := C.C_NSFont_Font_ToolTipsFontOfSize(C.double(float64(fontSize)))
+func ToolTipsFontOfSize(fontSize coregraphics.Float) Font {
+	result_ := C.C_NSFont_ToolTipsFontOfSize(C.double(float64(fontSize)))
 	return MakeFont(result_)
 }
 
-func Font_SystemFontSizeForControlSize(controlSize ControlSize) coregraphics.Float {
-	result_ := C.C_NSFont_Font_SystemFontSizeForControlSize(C.uint(uint(controlSize)))
+func SystemFontSizeForControlSize(controlSize ControlSize) coregraphics.Float {
+	result_ := C.C_NSFont_SystemFontSizeForControlSize(C.uint(uint(controlSize)))
 	return coregraphics.Float(float64(result_))
 }
 
@@ -192,18 +192,18 @@ func (n NSFont) FontWithSize(fontSize coregraphics.Float) Font {
 	return MakeFont(result_)
 }
 
-func Font_SystemFontSize() coregraphics.Float {
-	result_ := C.C_NSFont_Font_SystemFontSize()
+func SystemFontSize() coregraphics.Float {
+	result_ := C.C_NSFont_SystemFontSize()
 	return coregraphics.Float(float64(result_))
 }
 
-func Font_SmallSystemFontSize() coregraphics.Float {
-	result_ := C.C_NSFont_Font_SmallSystemFontSize()
+func SmallSystemFontSize() coregraphics.Float {
+	result_ := C.C_NSFont_SmallSystemFontSize()
 	return coregraphics.Float(float64(result_))
 }
 
-func Font_LabelFontSize() coregraphics.Float {
-	result_ := C.C_NSFont_Font_LabelFontSize()
+func LabelFontSize() coregraphics.Float {
+	result_ := C.C_NSFont_LabelFontSize()
 	return coregraphics.Float(float64(result_))
 }
 

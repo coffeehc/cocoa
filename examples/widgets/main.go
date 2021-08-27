@@ -17,7 +17,8 @@ func init() {
 
 func initAndRun() {
 	app := appkit.SharedApplication()
-	w := appkit.NewWindow(foundation.MakeRect(150, 150, 600, 400))
+	w := appkit.NewWindow(600, 400)
+
 	w.SetTitle("Test widgets")
 
 	filePathField := appkit.AllocTextField().InitWithFrame(foundation.MakeRect(10, 330, 200, 20))
@@ -167,8 +168,8 @@ func initAndRun() {
 		},
 	}
 	w.SetDelegate(winDelegate.ToObjc())
-	w.MakeKeyAndOrderFront(nil)
 	w.Center()
+	w.MakeKeyAndOrderFront(nil)
 
 	appDelegate := &appkit.ApplicationDelegate{
 		ApplicationDidFinishLaunching: func(notification foundation.Notification) {

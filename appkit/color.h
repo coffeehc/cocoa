@@ -80,7 +80,7 @@ void* C_NSColor_UnemphasizedSelectedContentBackgroundColor();
 void* C_NSColor_SelectedMenuItemTextColor();
 void* C_NSColor_GridColor();
 void* C_NSColor_HeaderTextColor();
-Array C_NSColor_Color_AlternatingContentBackgroundColors();
+Array C_NSColor_AlternatingContentBackgroundColors();
 void* C_NSColor_ControlAccentColor();
 void* C_NSColor_ControlColor();
 void* C_NSColor_ControlBackgroundColor();

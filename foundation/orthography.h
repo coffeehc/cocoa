@@ -7,7 +7,7 @@ void* C_Orthography_Alloc();
 
 void* C_NSOrthography_InitWithCoder(void* ptr, void* coder);
 void* C_NSOrthography_Init(void* ptr);
-void* C_NSOrthography_Orthography_DefaultOrthographyForLanguage(void* language);
+void* C_NSOrthography_DefaultOrthographyForLanguage(void* language);
 void* C_NSOrthography_DominantLanguageForScript(void* ptr, void* script);
 Array C_NSOrthography_LanguagesForScript(void* ptr, void* script);
 void* C_NSOrthography_DominantLanguage(void* ptr);

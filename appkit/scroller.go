@@ -96,8 +96,8 @@ func (n NSScroller) HitPart() ScrollerPart {
 	return ScrollerPart(uint(result_))
 }
 
-func Scroller_PreferredScrollerStyle() ScrollerStyle {
-	result_ := C.C_NSScroller_Scroller_PreferredScrollerStyle()
+func PreferredScrollerStyle() ScrollerStyle {
+	result_ := C.C_NSScroller_PreferredScrollerStyle()
 	return ScrollerStyle(int(result_))
 }
 
@@ -124,7 +124,7 @@ func (n NSScroller) KnobProportion() coregraphics.Float {
 	return coregraphics.Float(float64(result_))
 }
 
-func Scroller_CompatibleWithOverlayScrollers() bool {
-	result_ := C.C_NSScroller_Scroller_CompatibleWithOverlayScrollers()
+func CompatibleWithOverlayScrollers() bool {
+	result_ := C.C_NSScroller_CompatibleWithOverlayScrollers()
 	return bool(result_)
 }

@@ -16,7 +16,7 @@ void C_NSColorPanel_AttachColorList(void* ptr, void* colorList);
 void C_NSColorPanel_DetachColorList(void* ptr, void* colorList);
 bool C_NSColorPanel_ColorPanel_DragColor_WithEvent_FromView(void* color, void* event, void* sourceView);
 void* C_NSColorPanel_SharedColorPanel();
-bool C_NSColorPanel_ColorPanel_SharedColorPanelExists();
+bool C_NSColorPanel_SharedColorPanelExists();
 int C_NSColorPanel_Mode(void* ptr);
 void C_NSColorPanel_SetMode(void* ptr, int value);
 void* C_NSColorPanel_AccessoryView(void* ptr);

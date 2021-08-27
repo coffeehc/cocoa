@@ -408,7 +408,7 @@ void* C_NSColor_HeaderTextColor() {
     return result_;
 }
 
-Array C_NSColor_Color_AlternatingContentBackgroundColors() {
+Array C_NSColor_AlternatingContentBackgroundColors() {
     NSArray* result_ = [NSColor alternatingContentBackgroundColors];
     Array result_Array;
     int result_count = [result_ count];

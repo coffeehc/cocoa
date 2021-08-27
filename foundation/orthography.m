@@ -17,7 +17,7 @@ void* C_NSOrthography_Init(void* ptr) {
     return result_;
 }
 
-void* C_NSOrthography_Orthography_DefaultOrthographyForLanguage(void* language) {
+void* C_NSOrthography_DefaultOrthographyForLanguage(void* language) {
     NSOrthography* result_ = [NSOrthography defaultOrthographyForLanguage:(NSString*)language];
     return result_;
 }

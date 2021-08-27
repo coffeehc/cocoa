@@ -33,7 +33,7 @@ void* C_NSButton_ButtonWithImage_Target_Action(void* image, void* target, void* 
     return result_;
 }
 
-void* C_NSButton_Button_RadioButtonWithTitle_Target_Action(void* title, void* target, void* action) {
+void* C_NSButton_RadioButtonWithTitle_Target_Action(void* title, void* target, void* action) {
     NSButton* result_ = [NSButton radioButtonWithTitle:(NSString*)title target:(id)target action:(SEL)action];
     return result_;
 }

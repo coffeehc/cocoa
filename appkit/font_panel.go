@@ -67,8 +67,8 @@ func SharedFontPanel() FontPanel {
 	return MakeFontPanel(result_)
 }
 
-func FontPanel_SharedFontPanelExists() bool {
-	result_ := C.C_NSFontPanel_FontPanel_SharedFontPanelExists()
+func SharedFontPanelExists() bool {
+	result_ := C.C_NSFontPanel_SharedFontPanelExists()
 	return bool(result_)
 }
 
