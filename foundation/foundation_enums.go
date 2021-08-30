@@ -261,10 +261,73 @@ type URLBookmarkFileCreationOptions uint
 type TimeInterval float64
 
 type ProgressUserInfoKey string
+
+const (
+	ProgressEstimatedTimeRemainingKey         ProgressUserInfoKey = "NSProgressEstimatedTimeRemainingKey"
+	ProgressThroughputKey                     ProgressUserInfoKey = "NSProgressThroughputKey"
+	ProgressFileAnimationImageKey             ProgressUserInfoKey = "NSProgressFlyToImageKey"
+	ProgressFileAnimationImageOriginalRectKey ProgressUserInfoKey = "NSProgressFileAnimationImageOriginalRectKey"
+	ProgressFileCompletedCountKey             ProgressUserInfoKey = "NSProgressFileCompletedCountKey"
+	ProgressFileIconKey                       ProgressUserInfoKey = "NSProgressFileIconKey"
+	ProgressFileOperationKindKey              ProgressUserInfoKey = "NSProgressFileOperationKindKey"
+	ProgressFileTotalCountKey                 ProgressUserInfoKey = "NSProgressFileTotalCountKey"
+	ProgressFileURLKey                        ProgressUserInfoKey = "NSProgressFileURLKey"
+)
+
 type ProgressKind string
+
+const (
+	ProgressKindFile ProgressKind = "NSProgressKindFile"
+)
+
 type ProgressFileOperationKind string
+
+const (
+	ProgressFileOperationKindCopying                       ProgressFileOperationKind = "NSProgressFileOperationKindCopying"
+	ProgressFileOperationKindDecompressingAfterDownloading ProgressFileOperationKind = "NSProgressFileOperationKindDecompressingAfterDownloading"
+	ProgressFileOperationKindDownloading                   ProgressFileOperationKind = "NSProgressFileOperationKindDownloading"
+	ProgressFileOperationKindReceiving                     ProgressFileOperationKind = "NSProgressFileOperationKindReceiving"
+	ProgressFileOperationKindUploading                     ProgressFileOperationKind = "NSProgressFileOperationKindUploading"
+)
 
 type SaveOptions uint
 
+const (
+	SaveOptionsYes SaveOptions = 0
+	SaveOptionsNo  SaveOptions = 1
+	SaveOptionsAsk SaveOptions = 2
+)
+
 type ErrorUserInfoKey string
+
+const (
+	URLErrorKey                         ErrorUserInfoKey = "NSURL"
+	FilePathErrorKey                    ErrorUserInfoKey = "NSFilePath"
+	HelpAnchorErrorKey                  ErrorUserInfoKey = "NSHelpAnchor"
+	LocalizedDescriptionKey             ErrorUserInfoKey = "NSLocalizedDescription"
+	LocalizedFailureErrorKey            ErrorUserInfoKey = "NSLocalizedFailure"
+	LocalizedFailureReasonErrorKey      ErrorUserInfoKey = "NSLocalizedFailureReason"
+	LocalizedRecoveryOptionsErrorKey    ErrorUserInfoKey = "NSLocalizedRecoveryOptions"
+	LocalizedRecoverySuggestionErrorKey ErrorUserInfoKey = "NSLocalizedRecoverySuggestion"
+	RecoveryAttempterErrorKey           ErrorUserInfoKey = "NSRecoveryAttempter"
+	StringEncodingErrorKey              ErrorUserInfoKey = "NSStringEncoding"
+	UnderlyingErrorKey                  ErrorUserInfoKey = "NSUnderlyingError"
+	DebugDescriptionErrorKey            ErrorUserInfoKey = "NSDebugDescription"
+	MultipleUnderlyingErrorsKey         ErrorUserInfoKey = "NSMultipleUnderlyingErrorsKey"
+)
+
 type TextCheckingKey string
+
+const (
+	TextCheckingAirlineKey      TextCheckingKey = "Airline"
+	TextCheckingCityKey         TextCheckingKey = "City"
+	TextCheckingCountryKey      TextCheckingKey = "Country"
+	TextCheckingFlightKey       TextCheckingKey = "Flight"
+	TextCheckingJobTitleKey     TextCheckingKey = "JobTitle"
+	TextCheckingNameKey         TextCheckingKey = "Name"
+	TextCheckingOrganizationKey TextCheckingKey = "Organization"
+	TextCheckingPhoneKey        TextCheckingKey = "Phone"
+	TextCheckingStateKey        TextCheckingKey = "State"
+	TextCheckingStreetKey       TextCheckingKey = "Street"
+	TextCheckingZIPKey          TextCheckingKey = "ZIP"
+)

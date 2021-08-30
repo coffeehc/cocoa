@@ -32,3 +32,12 @@ const (
 )
 
 type NavigationType int
+
+const (
+	NavigationTypeOther           NavigationType = -1
+	NavigationTypeLinkActivated   NavigationType = 0
+	NavigationTypeFormSubmitted   NavigationType = 1
+	NavigationTypeBackForward     NavigationType = 2
+	NavigationTypeReload          NavigationType = 3
+	NavigationTypeFormResubmitted NavigationType = 4
+)

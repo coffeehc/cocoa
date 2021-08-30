@@ -1585,9 +1585,44 @@ const (
 
 type PasteboardName string
 
+const (
+	PasteboardNameDrag    PasteboardName = "Apple CFPasteboard drag"
+	PasteboardNameFind    PasteboardName = "Apple CFPasteboard find"
+	PasteboardNameFont    PasteboardName = "Apple CFPasteboard font"
+	PasteboardNameGeneral PasteboardName = "Apple CFPasteboard general"
+	PasteboardNameRuler   PasteboardName = "Apple CFPasteboard ruler"
+)
+
 type PasteboardType string
 
+const (
+	PasteboardTypeColor                  PasteboardType = "com.apple.cocoa.pasteboard.color"
+	PasteboardTypeFileURL                PasteboardType = "public.file-url"
+	PasteboardTypeFindPanelSearchOptions PasteboardType = "com.apple.cocoa.pasteboard.find-panel-search-options"
+	PasteboardTypeFont                   PasteboardType = "com.apple.cocoa.pasteboard.character-formatting"
+	PasteboardTypeHTML                   PasteboardType = "public.html"
+	PasteboardTypeMultipleTextSelection  PasteboardType = "com.apple.cocoa.pasteboard.multiple-text-selection"
+	PasteboardTypePDF                    PasteboardType = "com.adobe.pdf"
+	PasteboardTypePNG                    PasteboardType = "public.png"
+	PasteboardTypeRTF                    PasteboardType = "public.rtf"
+	PasteboardTypeRTFD                   PasteboardType = "com.apple.flat-rtfd"
+	PasteboardTypeRuler                  PasteboardType = "com.apple.cocoa.pasteboard.paragraph-formatting"
+	PasteboardTypeSound                  PasteboardType = "com.apple.cocoa.pasteboard.sound"
+	PasteboardTypeString                 PasteboardType = "public.utf8-plain-text"
+	PasteboardTypeTIFF                   PasteboardType = "public.tiff"
+	PasteboardTypeTabularText            PasteboardType = "public.utf8-tab-separated-values-text"
+	PasteboardTypeTextFinderOptions      PasteboardType = "com.apple.cocoa.pasteboard.find-panel-search-options"
+	PasteboardTypeURL                    PasteboardType = "public.url"
+)
+
 type RulerViewUnitName string
+
+const (
+	RulerViewUnitCentimeters RulerViewUnitName = "Centimeters"
+	RulerViewUnitInches      RulerViewUnitName = "Inches"
+	RulerViewUnitPicas       RulerViewUnitName = "Picas"
+	RulerViewUnitPoints      RulerViewUnitName = "Points"
+)
 
 type SliderType uint
 
@@ -1698,7 +1733,15 @@ type TextInputSourceIdentifier string
 
 type ToolbarItemIdentifier string
 type ToolbarIdentifier string
+
 type TitlebarSeparatorStyle int
+
+const (
+	TitlebarSeparatorStyleAutomatic TitlebarSeparatorStyle = 0
+	TitlebarSeparatorStyleLine      TitlebarSeparatorStyle = 2
+	TitlebarSeparatorStyleNone      TitlebarSeparatorStyle = 1
+	TitlebarSeparatorStyleShadow    TitlebarSeparatorStyle = 3
+)
 
 type TouchBarItemIdentifier string
 type TouchBarCustomizationIdentifier string
@@ -1937,13 +1980,92 @@ const (
 )
 
 type AboutPanelOptionKey string
+
+const (
+	AboutPanelOptionApplicationIcon    AboutPanelOptionKey = "ApplicationIcon"
+	AboutPanelOptionApplicationName    AboutPanelOptionKey = "ApplicationName"
+	AboutPanelOptionApplicationVersion AboutPanelOptionKey = "ApplicationVersion"
+	AboutPanelOptionCredits            AboutPanelOptionKey = "Credits"
+	AboutPanelOptionVersion            AboutPanelOptionKey = "Version"
+)
+
 type PrintInfoAttributeKey string
+
+const (
+	PrintPaperName                        PrintInfoAttributeKey = "NSPaperName"
+	PrintPaperSize                        PrintInfoAttributeKey = "NSPaperSize"
+	PrintOrientation                      PrintInfoAttributeKey = "NSOrientation"
+	PrintScalingFactor                    PrintInfoAttributeKey = "NSScalingFactor"
+	PrintLeftMargin                       PrintInfoAttributeKey = "NSLeftMargin"
+	PrintRightMargin                      PrintInfoAttributeKey = "NSRightMargin"
+	PrintTopMargin                        PrintInfoAttributeKey = "NSTopMargin"
+	PrintBottomMargin                     PrintInfoAttributeKey = "NSBottomMargin"
+	PrintHorizontallyCentered             PrintInfoAttributeKey = "NSHorizontallyCentered"
+	PrintVerticallyCentered               PrintInfoAttributeKey = "NSVerticallyCentered"
+	PrintHorizontalPagination             PrintInfoAttributeKey = "NSHorizonalPagination"
+	PrintVerticalPagination               PrintInfoAttributeKey = "NSVerticalPagination"
+	PrintAllPages                         PrintInfoAttributeKey = "NSPrintAllPages"
+	PrintCopies                           PrintInfoAttributeKey = "NSCopies"
+	PrintDetailedErrorReporting           PrintInfoAttributeKey = "NSDetailedErrorReporting"
+	PrintFaxNumber                        PrintInfoAttributeKey = "NSFaxNumber"
+	PrintFirstPage                        PrintInfoAttributeKey = "NSFirstPage"
+	PrintHeaderAndFooter                  PrintInfoAttributeKey = "NSPrintHeaderAndFooter"
+	PrintJobDisposition                   PrintInfoAttributeKey = "NSJobDisposition"
+	PrintJobSavingFileNameExtensionHidden PrintInfoAttributeKey = "NSJobSavingFileNameExtensionHidden"
+	PrintJobSavingURL                     PrintInfoAttributeKey = "NSJobSavingURL"
+	PrintLastPage                         PrintInfoAttributeKey = "NSLastPage"
+	PrintMustCollate                      PrintInfoAttributeKey = "NSMustCollate"
+	PrintPagesAcross                      PrintInfoAttributeKey = "NSPagesAcross"
+	PrintPagesDown                        PrintInfoAttributeKey = "NSPagesDown"
+	PrintPrinter                          PrintInfoAttributeKey = "NSPrinter"
+	PrintPrinterName                      PrintInfoAttributeKey = "NSPrinterName"
+	PrintReversePageOrder                 PrintInfoAttributeKey = "NSReversePageOrder"
+	PrintSelectionOnly                    PrintInfoAttributeKey = "NSPrintSelectionOnly"
+	PrintTime                             PrintInfoAttributeKey = "NSPrintTime"
+)
+
 type ImageHintKey string
+
+const (
+	ImageHintCTM                          ImageHintKey = "NSImageHintCTM"
+	ImageHintInterpolation                ImageHintKey = "NSImageHintInterpolation"
+	ImageHintUserInterfaceLayoutDirection ImageHintKey = "NSImageHintUserInterfaceLayoutDirection"
+)
+
 type GraphicsContextAttributeKey string
 type FontTextStyleOptionKey string
 type PrintInfoSettingKey string
 type DeviceDescriptionKey string
+
+const (
+	DeviceBitsPerSample  DeviceDescriptionKey = "NSDeviceBitsPerSample"
+	DeviceColorSpaceName DeviceDescriptionKey = "NSDeviceColorSpaceName"
+	DeviceIsPrinter      DeviceDescriptionKey = "NSDeviceIsPrinter"
+	DeviceIsScreen       DeviceDescriptionKey = "NSDeviceIsScreen"
+	DeviceResolution     DeviceDescriptionKey = "NSDeviceResolution"
+	DeviceSize           DeviceDescriptionKey = "NSDeviceSize"
+)
+
 type TextTabOptionKey string
+
+const (
+	TabColumnTerminatorsAttributeName TextTabOptionKey = "NSTabColumnTerminatorsAttributeName"
+)
+
 type ViewFullScreenModeOptionKey string
 
+const (
+	FullScreenModeAllScreens                     ViewFullScreenModeOptionKey = "NSFullScreenModeAllScreens"
+	FullScreenModeApplicationPresentationOptions ViewFullScreenModeOptionKey = "NSFullScreenModeApplicationPresentationOptions"
+	FullScreenModeSetting                        ViewFullScreenModeOptionKey = "NSFullScreenModeSetting"
+	FullScreenModeWindowLevel                    ViewFullScreenModeOptionKey = "NSFullScreenModeWindowLevel"
+)
+
 type ApplicationPrintReply uint
+
+const (
+	PrintingCancelled  ApplicationPrintReply = 0
+	PrintingSuccess    ApplicationPrintReply = 1
+	PrintingReplyLater ApplicationPrintReply = 2
+	PrintingFailure    ApplicationPrintReply = 3
+)
