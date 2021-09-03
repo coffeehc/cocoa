@@ -11,28 +11,32 @@ func AddViewWithPadding(view appkit.View, subView appkit.View, left, top, right,
 	view.BottomAnchor().ConstraintEqualToAnchor_Constant(subView.BottomAnchor(), bottom).SetActive(true)
 }
 
-// SetPreferredWidth add and active width constraintEqual
-func SetPreferredWidth(view appkit.View, width float64) {
-	view.WidthAnchor().ConstraintEqualToConstant(width).SetActive(true)
+// UseSameWidth set width constant for multi controls, using the max width for width
+func UseSameWidth(controls ...appkit.Control) {
+	var maxWidth float64
+	for _, c := range controls {
+		c.SizeToFit()
+		width := c.Bounds().Size.Width
+		if maxWidth < width {
+			maxWidth = width
+		}
+	}
+	for _, c := range controls {
+		c.WidthAnchor().ConstraintEqualToConstant(maxWidth).SetActive(true)
+	}
 }
 
-// SetPreferredHeight add and active height constraintEqual
-func SetPreferredHeight(view appkit.View, height float64) {
-	view.HeightAnchor().ConstraintEqualToConstant(height).SetActive(true)
-}
-
-func SetPreferredMaxWidth(view appkit.View, width float64) {
-	view.WidthAnchor().ConstraintLessThanOrEqualToConstant(width).SetActive(true)
-}
-
-func SetPreferredMaxHeight(view appkit.View, height float64) {
-	view.HeightAnchor().ConstraintLessThanOrEqualToConstant(height).SetActive(true)
-}
-
-func SetPreferredMinWidth(view appkit.View, width float64) {
-	view.WidthAnchor().ConstraintGreaterThanOrEqualToConstant(width).SetActive(true)
-}
-
-func SetPreferredMinHeight(view appkit.View, height float64) {
-	view.HeightAnchor().ConstraintGreaterThanOrEqualToConstant(height).SetActive(true)
+// UseSameHeight set height constant for multi controls, using the max height for height
+func UseSameHeight(controls ...appkit.Control) {
+	var maxHeight float64
+	for _, c := range controls {
+		c.SizeToFit()
+		height := c.Bounds().Size.Height
+		if maxHeight < height {
+			maxHeight = height
+		}
+	}
+	for _, c := range controls {
+		c.HeightAnchor().ConstraintEqualToConstant(maxHeight).SetActive(true)
+	}
 }
