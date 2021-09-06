@@ -56,7 +56,7 @@ func (n NSSound) InitWithContentsOfURL_ByReference(url foundation.URL, byRef boo
 }
 
 func (n NSSound) InitWithData(data []byte) Sound {
-	result_ := C.C_NSSound_InitWithData(n.Ptr(), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))})
+	result_ := C.C_NSSound_InitWithData(n.Ptr(), foundation.NewData(data).Ptr())
 	return MakeSound(result_)
 }
 

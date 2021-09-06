@@ -542,22 +542,16 @@ void C_NSWindow_Print(void* ptr, void* sender) {
     [nSWindow print:(id)sender];
 }
 
-Array C_NSWindow_DataWithEPSInsideRect(void* ptr, CGRect rect) {
+void* C_NSWindow_DataWithEPSInsideRect(void* ptr, CGRect rect) {
     NSWindow* nSWindow = (NSWindow*)ptr;
     NSData* result_ = [nSWindow dataWithEPSInsideRect:rect];
-    Array result_array;
-    result_array.data = [result_ bytes];
-    result_array.len = result_.length;
-    return result_array;
+    return result_;
 }
 
-Array C_NSWindow_DataWithPDFInsideRect(void* ptr, CGRect rect) {
+void* C_NSWindow_DataWithPDFInsideRect(void* ptr, CGRect rect) {
     NSWindow* nSWindow = (NSWindow*)ptr;
     NSData* result_ = [nSWindow dataWithPDFInsideRect:rect];
-    Array result_array;
-    result_array.data = [result_ bytes];
-    result_array.len = result_.length;
-    return result_array;
+    return result_;
 }
 
 void C_NSWindow_UpdateConstraintsIfNeeded(void* ptr) {

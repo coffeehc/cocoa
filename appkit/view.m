@@ -152,22 +152,16 @@ void C_NSView_BeginPageInRect_AtPlacement(void* ptr, CGRect rect, CGPoint locati
     [nSView beginPageInRect:rect atPlacement:location];
 }
 
-Array C_NSView_DataWithEPSInsideRect(void* ptr, CGRect rect) {
+void* C_NSView_DataWithEPSInsideRect(void* ptr, CGRect rect) {
     NSView* nSView = (NSView*)ptr;
     NSData* result_ = [nSView dataWithEPSInsideRect:rect];
-    Array result_array;
-    result_array.data = [result_ bytes];
-    result_array.len = result_.length;
-    return result_array;
+    return result_;
 }
 
-Array C_NSView_DataWithPDFInsideRect(void* ptr, CGRect rect) {
+void* C_NSView_DataWithPDFInsideRect(void* ptr, CGRect rect) {
     NSView* nSView = (NSView*)ptr;
     NSData* result_ = [nSView dataWithPDFInsideRect:rect];
-    Array result_array;
-    result_array.data = [result_ bytes];
-    result_array.len = result_.length;
-    return result_array;
+    return result_;
 }
 
 void C_NSView_WriteEPSInsideRect_ToPasteboard(void* ptr, CGRect rect, void* pasteboard) {

@@ -53,7 +53,7 @@ func (n NSPasteboard) Init() Pasteboard {
 }
 
 func PasteboardByFilteringData_OfType(data []byte, _type PasteboardType) Pasteboard {
-	result_ := C.C_NSPasteboard_PasteboardByFilteringData_OfType(C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, foundation.NewString(string(_type)).Ptr())
+	result_ := C.C_NSPasteboard_PasteboardByFilteringData_OfType(foundation.NewData(data).Ptr(), foundation.NewString(string(_type)).Ptr())
 	return MakePasteboard(result_)
 }
 
@@ -83,7 +83,7 @@ func (n NSPasteboard) ClearContents() int {
 }
 
 func (n NSPasteboard) SetData_ForType(data []byte, dataType PasteboardType) bool {
-	result_ := C.C_NSPasteboard_SetData_ForType(n.Ptr(), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, foundation.NewString(string(dataType)).Ptr())
+	result_ := C.C_NSPasteboard_SetData_ForType(n.Ptr(), foundation.NewData(data).Ptr(), foundation.NewString(string(dataType)).Ptr())
 	return bool(result_)
 }
 
@@ -104,13 +104,7 @@ func (n NSPasteboard) IndexOfPasteboardItem(pasteboardItem PasteboardItem) uint 
 
 func (n NSPasteboard) DataForType(dataType PasteboardType) []byte {
 	result_ := C.C_NSPasteboard_DataForType(n.Ptr(), foundation.NewString(string(dataType)).Ptr())
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return foundation.MakeData(result_).ToBytes()
 }
 
 func (n NSPasteboard) PropertyListForType(dataType PasteboardType) objc.Object {

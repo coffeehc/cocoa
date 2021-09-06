@@ -6,17 +6,17 @@
 void* C_Pasteboard_Alloc();
 
 void* C_NSPasteboard_Init(void* ptr);
-void* C_NSPasteboard_PasteboardByFilteringData_OfType(Array data, void* _type);
+void* C_NSPasteboard_PasteboardByFilteringData_OfType(void* data, void* _type);
 void* C_NSPasteboard_PasteboardByFilteringFile(void* filename);
 void* C_NSPasteboard_PasteboardByFilteringTypesInPasteboard(void* pboard);
 void* C_NSPasteboard_PasteboardWithName(void* name);
 void* C_NSPasteboard_PasteboardWithUniqueName();
 int C_NSPasteboard_ClearContents(void* ptr);
-bool C_NSPasteboard_SetData_ForType(void* ptr, Array data, void* dataType);
+bool C_NSPasteboard_SetData_ForType(void* ptr, void* data, void* dataType);
 bool C_NSPasteboard_SetPropertyList_ForType(void* ptr, void* plist, void* dataType);
 bool C_NSPasteboard_SetString_ForType(void* ptr, void* _string, void* dataType);
 unsigned int C_NSPasteboard_IndexOfPasteboardItem(void* ptr, void* pasteboardItem);
-Array C_NSPasteboard_DataForType(void* ptr, void* dataType);
+void* C_NSPasteboard_DataForType(void* ptr, void* dataType);
 void* C_NSPasteboard_PropertyListForType(void* ptr, void* dataType);
 void* C_NSPasteboard_StringForType(void* ptr, void* dataType);
 void* C_NSPasteboard_AvailableTypeFromArray(void* ptr, Array types);

@@ -60,12 +60,12 @@ func (n NSPrintOperation) Init() PrintOperation {
 }
 
 func PrintOperation_EPSOperationWithView_InsideRect_ToData(view View, rect foundation.Rect, data []byte) PrintOperation {
-	result_ := C.C_NSPrintOperation_PrintOperation_EPSOperationWithView_InsideRect_ToData(objc.ExtractPtr(view), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))})
+	result_ := C.C_NSPrintOperation_PrintOperation_EPSOperationWithView_InsideRect_ToData(objc.ExtractPtr(view), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))), foundation.NewData(data).Ptr())
 	return MakePrintOperation(result_)
 }
 
 func PrintOperation_EPSOperationWithView_InsideRect_ToData_PrintInfo(view View, rect foundation.Rect, data []byte, printInfo PrintInfo) PrintOperation {
-	result_ := C.C_NSPrintOperation_PrintOperation_EPSOperationWithView_InsideRect_ToData_PrintInfo(objc.ExtractPtr(view), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, objc.ExtractPtr(printInfo))
+	result_ := C.C_NSPrintOperation_PrintOperation_EPSOperationWithView_InsideRect_ToData_PrintInfo(objc.ExtractPtr(view), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))), foundation.NewData(data).Ptr(), objc.ExtractPtr(printInfo))
 	return MakePrintOperation(result_)
 }
 
@@ -75,12 +75,12 @@ func PrintOperation_EPSOperationWithView_InsideRect_ToPath_PrintInfo(view View, 
 }
 
 func PrintOperation_PDFOperationWithView_InsideRect_ToData(view View, rect foundation.Rect, data []byte) PrintOperation {
-	result_ := C.C_NSPrintOperation_PrintOperation_PDFOperationWithView_InsideRect_ToData(objc.ExtractPtr(view), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))})
+	result_ := C.C_NSPrintOperation_PrintOperation_PDFOperationWithView_InsideRect_ToData(objc.ExtractPtr(view), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))), foundation.NewData(data).Ptr())
 	return MakePrintOperation(result_)
 }
 
 func PrintOperation_PDFOperationWithView_InsideRect_ToData_PrintInfo(view View, rect foundation.Rect, data []byte, printInfo PrintInfo) PrintOperation {
-	result_ := C.C_NSPrintOperation_PrintOperation_PDFOperationWithView_InsideRect_ToData_PrintInfo(objc.ExtractPtr(view), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, objc.ExtractPtr(printInfo))
+	result_ := C.C_NSPrintOperation_PrintOperation_PDFOperationWithView_InsideRect_ToData_PrintInfo(objc.ExtractPtr(view), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))), foundation.NewData(data).Ptr(), objc.ExtractPtr(printInfo))
 	return MakePrintOperation(result_)
 }
 

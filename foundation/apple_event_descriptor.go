@@ -115,13 +115,7 @@ func AppleEventDescriptor_CurrentProcessDescriptor() AppleEventDescriptor {
 
 func (n NSAppleEventDescriptor) Data() []byte {
 	result_ := C.C_NSAppleEventDescriptor_Data(n.Ptr())
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return MakeData(result_).ToBytes()
 }
 
 func (n NSAppleEventDescriptor) NumberOfItems() int {

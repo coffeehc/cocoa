@@ -6,5 +6,5 @@
 void* C_Nib_Alloc();
 
 void* C_NSNib_InitWithNibNamed_Bundle(void* ptr, void* nibName, void* bundle);
-void* C_NSNib_InitWithNibData_Bundle(void* ptr, Array nibData, void* bundle);
+void* C_NSNib_InitWithNibData_Bundle(void* ptr, void* nibData, void* bundle);
 void* C_NSNib_Init(void* ptr);

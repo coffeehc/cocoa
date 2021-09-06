@@ -57,13 +57,10 @@ void* C_NSURLRequest_URL(void* ptr) {
     return result_;
 }
 
-Array C_NSURLRequest_HTTPBody(void* ptr) {
+void* C_NSURLRequest_HTTPBody(void* ptr) {
     NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
     NSData* result_ = [nSURLRequest HTTPBody];
-    Array result_array;
-    result_array.data = [result_ bytes];
-    result_array.len = result_.length;
-    return result_array;
+    return result_;
 }
 
 void* C_NSURLRequest_MainDocumentURL(void* ptr) {

@@ -21,7 +21,7 @@ void* C_NSAppleEventDescriptor_AppleEventDescriptor_DescriptorWithDate(void* dat
 void* C_NSAppleEventDescriptor_AppleEventDescriptor_DescriptorWithDouble(double doubleValue);
 void* C_NSAppleEventDescriptor_AppleEventDescriptor_DescriptorWithFileURL(void* fileURL);
 void* C_NSAppleEventDescriptor_AppleEventDescriptor_CurrentProcessDescriptor();
-Array C_NSAppleEventDescriptor_Data(void* ptr);
+void* C_NSAppleEventDescriptor_Data(void* ptr);
 int C_NSAppleEventDescriptor_NumberOfItems(void* ptr);
 void* C_NSAppleEventDescriptor_StringValue(void* ptr);
 void* C_NSAppleEventDescriptor_DateValue(void* ptr);

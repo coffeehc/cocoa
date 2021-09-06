@@ -87,13 +87,7 @@ func (n NSURLRequest) URL() URL {
 
 func (n NSURLRequest) HTTPBody() []byte {
 	result_ := C.C_NSURLRequest_HTTPBody(n.Ptr())
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return MakeData(result_).ToBytes()
 }
 
 func (n NSURLRequest) MainDocumentURL() URL {

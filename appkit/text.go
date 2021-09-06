@@ -117,11 +117,11 @@ func (n NSText) ToggleRuler(sender objc.Object) {
 }
 
 func (n NSText) ReplaceCharactersInRange_WithRTF(_range foundation.Range, rtfData []byte) {
-	C.C_NSText_ReplaceCharactersInRange_WithRTF(n.Ptr(), *(*C.NSRange)(foundation.ToNSRangePointer(_range)), C.Array{data: unsafe.Pointer(&rtfData[0]), len: C.int(len(rtfData))})
+	C.C_NSText_ReplaceCharactersInRange_WithRTF(n.Ptr(), *(*C.NSRange)(foundation.ToNSRangePointer(_range)), foundation.NewData(rtfData).Ptr())
 }
 
 func (n NSText) ReplaceCharactersInRange_WithRTFD(_range foundation.Range, rtfdData []byte) {
-	C.C_NSText_ReplaceCharactersInRange_WithRTFD(n.Ptr(), *(*C.NSRange)(foundation.ToNSRangePointer(_range)), C.Array{data: unsafe.Pointer(&rtfdData[0]), len: C.int(len(rtfdData))})
+	C.C_NSText_ReplaceCharactersInRange_WithRTFD(n.Ptr(), *(*C.NSRange)(foundation.ToNSRangePointer(_range)), foundation.NewData(rtfdData).Ptr())
 }
 
 func (n NSText) ReplaceCharactersInRange_WithString(_range foundation.Range, _string string) {
@@ -216,24 +216,12 @@ func (n NSText) WriteRTFDToFile_Atomically(path string, flag bool) bool {
 
 func (n NSText) RTFDFromRange(_range foundation.Range) []byte {
 	result_ := C.C_NSText_RTFDFromRange(n.Ptr(), *(*C.NSRange)(foundation.ToNSRangePointer(_range)))
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return foundation.MakeData(result_).ToBytes()
 }
 
 func (n NSText) RTFFromRange(_range foundation.Range) []byte {
 	result_ := C.C_NSText_RTFFromRange(n.Ptr(), *(*C.NSRange)(foundation.ToNSRangePointer(_range)))
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return foundation.MakeData(result_).ToBytes()
 }
 
 func (n NSText) CheckSpelling(sender objc.Object) {

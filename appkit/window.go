@@ -755,24 +755,12 @@ func (n NSWindow) Print(sender objc.Object) {
 
 func (n NSWindow) DataWithEPSInsideRect(rect foundation.Rect) []byte {
 	result_ := C.C_NSWindow_DataWithEPSInsideRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return foundation.MakeData(result_).ToBytes()
 }
 
 func (n NSWindow) DataWithPDFInsideRect(rect foundation.Rect) []byte {
 	result_ := C.C_NSWindow_DataWithPDFInsideRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return foundation.MakeData(result_).ToBytes()
 }
 
 func (n NSWindow) UpdateConstraintsIfNeeded() {

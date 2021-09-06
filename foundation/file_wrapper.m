@@ -21,9 +21,9 @@ void* C_NSFileWrapper_InitDirectoryWithFileWrappers(void* ptr, Dictionary childr
     return result_;
 }
 
-void* C_NSFileWrapper_InitRegularFileWithContents(void* ptr, Array contents) {
+void* C_NSFileWrapper_InitRegularFileWithContents(void* ptr, void* contents) {
     NSFileWrapper* nSFileWrapper = (NSFileWrapper*)ptr;
-    NSFileWrapper* result_ = [nSFileWrapper initRegularFileWithContents:[[NSData alloc] initWithBytes:(Byte *)contents.data length:contents.len]];
+    NSFileWrapper* result_ = [nSFileWrapper initRegularFileWithContents:(NSData*)contents];
     return result_;
 }
 
@@ -33,9 +33,9 @@ void* C_NSFileWrapper_InitSymbolicLinkWithDestinationURL(void* ptr, void* url) {
     return result_;
 }
 
-void* C_NSFileWrapper_InitWithSerializedRepresentation(void* ptr, Array serializeRepresentation) {
+void* C_NSFileWrapper_InitWithSerializedRepresentation(void* ptr, void* serializeRepresentation) {
     NSFileWrapper* nSFileWrapper = (NSFileWrapper*)ptr;
-    NSFileWrapper* result_ = [nSFileWrapper initWithSerializedRepresentation:[[NSData alloc] initWithBytes:(Byte *)serializeRepresentation.data length:serializeRepresentation.len]];
+    NSFileWrapper* result_ = [nSFileWrapper initWithSerializedRepresentation:(NSData*)serializeRepresentation];
     return result_;
 }
 
@@ -62,9 +62,9 @@ void C_NSFileWrapper_RemoveFileWrapper(void* ptr, void* child) {
     [nSFileWrapper removeFileWrapper:(NSFileWrapper*)child];
 }
 
-void* C_NSFileWrapper_AddRegularFileWithContents_PreferredFilename(void* ptr, Array data, void* fileName) {
+void* C_NSFileWrapper_AddRegularFileWithContents_PreferredFilename(void* ptr, void* data, void* fileName) {
     NSFileWrapper* nSFileWrapper = (NSFileWrapper*)ptr;
-    NSString* result_ = [nSFileWrapper addRegularFileWithContents:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len] preferredFilename:(NSString*)fileName];
+    NSString* result_ = [nSFileWrapper addRegularFileWithContents:(NSData*)data preferredFilename:(NSString*)fileName];
     return result_;
 }
 
@@ -126,13 +126,10 @@ void* C_NSFileWrapper_SymbolicLinkDestinationURL(void* ptr) {
     return result_;
 }
 
-Array C_NSFileWrapper_SerializedRepresentation(void* ptr) {
+void* C_NSFileWrapper_SerializedRepresentation(void* ptr) {
     NSFileWrapper* nSFileWrapper = (NSFileWrapper*)ptr;
     NSData* result_ = [nSFileWrapper serializedRepresentation];
-    Array result_array;
-    result_array.data = [result_ bytes];
-    result_array.len = result_.length;
-    return result_array;
+    return result_;
 }
 
 void* C_NSFileWrapper_Filename(void* ptr) {
@@ -194,11 +191,8 @@ void C_NSFileWrapper_SetFileAttributes(void* ptr, Dictionary value) {
     [nSFileWrapper setFileAttributes:objcValue];
 }
 
-Array C_NSFileWrapper_RegularFileContents(void* ptr) {
+void* C_NSFileWrapper_RegularFileContents(void* ptr) {
     NSFileWrapper* nSFileWrapper = (NSFileWrapper*)ptr;
     NSData* result_ = [nSFileWrapper regularFileContents];
-    Array result_array;
-    result_array.data = [result_ bytes];
-    result_array.len = result_.length;
-    return result_array;
+    return result_;
 }

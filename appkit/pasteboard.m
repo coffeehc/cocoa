@@ -11,8 +11,8 @@ void* C_NSPasteboard_Init(void* ptr) {
     return result_;
 }
 
-void* C_NSPasteboard_PasteboardByFilteringData_OfType(Array data, void* _type) {
-    NSPasteboard* result_ = [NSPasteboard pasteboardByFilteringData:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len] ofType:(NSString*)_type];
+void* C_NSPasteboard_PasteboardByFilteringData_OfType(void* data, void* _type) {
+    NSPasteboard* result_ = [NSPasteboard pasteboardByFilteringData:(NSData*)data ofType:(NSString*)_type];
     return result_;
 }
 
@@ -42,9 +42,9 @@ int C_NSPasteboard_ClearContents(void* ptr) {
     return result_;
 }
 
-bool C_NSPasteboard_SetData_ForType(void* ptr, Array data, void* dataType) {
+bool C_NSPasteboard_SetData_ForType(void* ptr, void* data, void* dataType) {
     NSPasteboard* nSPasteboard = (NSPasteboard*)ptr;
-    BOOL result_ = [nSPasteboard setData:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len] forType:(NSString*)dataType];
+    BOOL result_ = [nSPasteboard setData:(NSData*)data forType:(NSString*)dataType];
     return result_;
 }
 
@@ -66,13 +66,10 @@ unsigned int C_NSPasteboard_IndexOfPasteboardItem(void* ptr, void* pasteboardIte
     return result_;
 }
 
-Array C_NSPasteboard_DataForType(void* ptr, void* dataType) {
+void* C_NSPasteboard_DataForType(void* ptr, void* dataType) {
     NSPasteboard* nSPasteboard = (NSPasteboard*)ptr;
     NSData* result_ = [nSPasteboard dataForType:(NSString*)dataType];
-    Array result_array;
-    result_array.data = [result_ bytes];
-    result_array.len = result_.length;
-    return result_array;
+    return result_;
 }
 
 void* C_NSPasteboard_PropertyListForType(void* ptr, void* dataType) {

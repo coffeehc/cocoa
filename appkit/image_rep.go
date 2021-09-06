@@ -112,7 +112,7 @@ func ImageRepWithContentsOfURL(url foundation.URL) ImageRep {
 }
 
 func ImageRep_CanInitWithData(data []byte) bool {
-	result_ := C.C_NSImageRep_ImageRep_CanInitWithData(C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))})
+	result_ := C.C_NSImageRep_ImageRep_CanInitWithData(foundation.NewData(data).Ptr())
 	return bool(result_)
 }
 

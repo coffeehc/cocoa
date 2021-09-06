@@ -28,14 +28,14 @@ void C_NSText_ToggleRuler(void* ptr, void* sender) {
     [nSText toggleRuler:(id)sender];
 }
 
-void C_NSText_ReplaceCharactersInRange_WithRTF(void* ptr, NSRange _range, Array rtfData) {
+void C_NSText_ReplaceCharactersInRange_WithRTF(void* ptr, NSRange _range, void* rtfData) {
     NSText* nSText = (NSText*)ptr;
-    [nSText replaceCharactersInRange:_range withRTF:[[NSData alloc] initWithBytes:(Byte *)rtfData.data length:rtfData.len]];
+    [nSText replaceCharactersInRange:_range withRTF:(NSData*)rtfData];
 }
 
-void C_NSText_ReplaceCharactersInRange_WithRTFD(void* ptr, NSRange _range, Array rtfdData) {
+void C_NSText_ReplaceCharactersInRange_WithRTFD(void* ptr, NSRange _range, void* rtfdData) {
     NSText* nSText = (NSText*)ptr;
-    [nSText replaceCharactersInRange:_range withRTFD:[[NSData alloc] initWithBytes:(Byte *)rtfdData.data length:rtfdData.len]];
+    [nSText replaceCharactersInRange:_range withRTFD:(NSData*)rtfdData];
 }
 
 void C_NSText_ReplaceCharactersInRange_WithString(void* ptr, NSRange _range, void* _string) {
@@ -150,22 +150,16 @@ bool C_NSText_WriteRTFDToFile_Atomically(void* ptr, void* path, bool flag) {
     return result_;
 }
 
-Array C_NSText_RTFDFromRange(void* ptr, NSRange _range) {
+void* C_NSText_RTFDFromRange(void* ptr, NSRange _range) {
     NSText* nSText = (NSText*)ptr;
     NSData* result_ = [nSText RTFDFromRange:_range];
-    Array result_array;
-    result_array.data = [result_ bytes];
-    result_array.len = result_.length;
-    return result_array;
+    return result_;
 }
 
-Array C_NSText_RTFFromRange(void* ptr, NSRange _range) {
+void* C_NSText_RTFFromRange(void* ptr, NSRange _range) {
     NSText* nSText = (NSText*)ptr;
     NSData* result_ = [nSText RTFFromRange:_range];
-    Array result_array;
-    result_array.data = [result_ bytes];
-    result_array.len = result_.length;
-    return result_array;
+    return result_;
 }
 
 void C_NSText_CheckSpelling(void* ptr, void* sender) {

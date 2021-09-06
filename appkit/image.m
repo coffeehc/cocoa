@@ -29,15 +29,15 @@ void* C_NSImage_InitWithContentsOfURL(void* ptr, void* url) {
     return result_;
 }
 
-void* C_NSImage_InitWithData(void* ptr, Array data) {
+void* C_NSImage_InitWithData(void* ptr, void* data) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSImage* result_ = [nSImage initWithData:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len]];
+    NSImage* result_ = [nSImage initWithData:(NSData*)data];
     return result_;
 }
 
-void* C_NSImage_InitWithDataIgnoringOrientation(void* ptr, Array data) {
+void* C_NSImage_InitWithDataIgnoringOrientation(void* ptr, void* data) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSImage* result_ = [nSImage initWithDataIgnoringOrientation:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len]];
+    NSImage* result_ = [nSImage initWithDataIgnoringOrientation:(NSData*)data];
     return result_;
 }
 
@@ -199,13 +199,10 @@ void C_NSImage_Recache(void* ptr) {
     [nSImage recache];
 }
 
-Array C_NSImage_TIFFRepresentationUsingCompression_Factor(void* ptr, unsigned int comp, float factor) {
+void* C_NSImage_TIFFRepresentationUsingCompression_Factor(void* ptr, unsigned int comp, float factor) {
     NSImage* nSImage = (NSImage*)ptr;
     NSData* result_ = [nSImage TIFFRepresentationUsingCompression:comp factor:factor];
-    Array result_array;
-    result_array.data = [result_ bytes];
-    result_array.len = result_.length;
-    return result_array;
+    return result_;
 }
 
 void C_NSImage_CancelIncrementalLoad(void* ptr) {
@@ -417,13 +414,10 @@ void C_NSImage_SetCacheMode(void* ptr, unsigned int value) {
     [nSImage setCacheMode:value];
 }
 
-Array C_NSImage_TIFFRepresentation(void* ptr) {
+void* C_NSImage_TIFFRepresentation(void* ptr) {
     NSImage* nSImage = (NSImage*)ptr;
     NSData* result_ = [nSImage TIFFRepresentation];
-    Array result_array;
-    result_array.data = [result_ bytes];
-    result_array.len = result_.length;
-    return result_array;
+    return result_;
 }
 
 void* C_NSImage_AccessibilityDescription(void* ptr) {

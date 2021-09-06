@@ -44,7 +44,7 @@ func CharacterSetWithRange(aRange Range) CharacterSet {
 }
 
 func CharacterSetWithBitmapRepresentation(data []byte) CharacterSet {
-	result_ := C.C_NSCharacterSet_CharacterSetWithBitmapRepresentation(C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))})
+	result_ := C.C_NSCharacterSet_CharacterSetWithBitmapRepresentation(NewData(data).Ptr())
 	return MakeCharacterSet(result_)
 }
 
@@ -165,13 +165,7 @@ func URLUserAllowedCharacterSet() CharacterSet {
 
 func (n NSCharacterSet) BitmapRepresentation() []byte {
 	result_ := C.C_NSCharacterSet_BitmapRepresentation(n.Ptr())
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return MakeData(result_).ToBytes()
 }
 
 func (n NSCharacterSet) InvertedSet() CharacterSet {

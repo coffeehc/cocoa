@@ -11,9 +11,9 @@ void* C_NSColorSpace_InitWithCGColorSpace(void* ptr, void* cgColorSpace) {
     return result_;
 }
 
-void* C_NSColorSpace_InitWithICCProfileData(void* ptr, Array iccData) {
+void* C_NSColorSpace_InitWithICCProfileData(void* ptr, void* iccData) {
     NSColorSpace* nSColorSpace = (NSColorSpace*)ptr;
-    NSColorSpace* result_ = [nSColorSpace initWithICCProfileData:[[NSData alloc] initWithBytes:(Byte *)iccData.data length:iccData.len]];
+    NSColorSpace* result_ = [nSColorSpace initWithICCProfileData:(NSData*)iccData];
     return result_;
 }
 
@@ -111,13 +111,10 @@ int C_NSColorSpace_ColorSpaceModel(void* ptr) {
     return result_;
 }
 
-Array C_NSColorSpace_ICCProfileData(void* ptr) {
+void* C_NSColorSpace_ICCProfileData(void* ptr) {
     NSColorSpace* nSColorSpace = (NSColorSpace*)ptr;
     NSData* result_ = [nSColorSpace ICCProfileData];
-    Array result_array;
-    result_array.data = [result_ bytes];
-    result_array.len = result_.length;
-    return result_array;
+    return result_;
 }
 
 void* C_NSColorSpace_LocalizedName(void* ptr) {

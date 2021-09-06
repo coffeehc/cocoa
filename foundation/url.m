@@ -41,15 +41,15 @@ void* C_NSURL_InitFileURLWithPath(void* ptr, void* path) {
     return result_;
 }
 
-void* C_NSURL_InitAbsoluteURLWithDataRepresentation_RelativeToURL(void* ptr, Array data, void* baseURL) {
+void* C_NSURL_InitAbsoluteURLWithDataRepresentation_RelativeToURL(void* ptr, void* data, void* baseURL) {
     NSURL* nSURL = (NSURL*)ptr;
-    NSURL* result_ = [nSURL initAbsoluteURLWithDataRepresentation:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len] relativeToURL:(NSURL*)baseURL];
+    NSURL* result_ = [nSURL initAbsoluteURLWithDataRepresentation:(NSData*)data relativeToURL:(NSURL*)baseURL];
     return result_;
 }
 
-void* C_NSURL_InitWithDataRepresentation_RelativeToURL(void* ptr, Array data, void* baseURL) {
+void* C_NSURL_InitWithDataRepresentation_RelativeToURL(void* ptr, void* data, void* baseURL) {
     NSURL* nSURL = (NSURL*)ptr;
-    NSURL* result_ = [nSURL initWithDataRepresentation:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len] relativeToURL:(NSURL*)baseURL];
+    NSURL* result_ = [nSURL initWithDataRepresentation:(NSData*)data relativeToURL:(NSURL*)baseURL];
     return result_;
 }
 
@@ -108,13 +108,13 @@ void* C_NSURL_FileURLWithPathComponents(Array components) {
     return result_;
 }
 
-void* C_NSURL_AbsoluteURLWithDataRepresentation_RelativeToURL(Array data, void* baseURL) {
-    NSURL* result_ = [NSURL absoluteURLWithDataRepresentation:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len] relativeToURL:(NSURL*)baseURL];
+void* C_NSURL_AbsoluteURLWithDataRepresentation_RelativeToURL(void* data, void* baseURL) {
+    NSURL* result_ = [NSURL absoluteURLWithDataRepresentation:(NSData*)data relativeToURL:(NSURL*)baseURL];
     return result_;
 }
 
-void* C_NSURL_URLWithDataRepresentation_RelativeToURL(Array data, void* baseURL) {
-    NSURL* result_ = [NSURL URLWithDataRepresentation:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len] relativeToURL:(NSURL*)baseURL];
+void* C_NSURL_URLWithDataRepresentation_RelativeToURL(void* data, void* baseURL) {
+    NSURL* result_ = [NSURL URLWithDataRepresentation:(NSData*)data relativeToURL:(NSURL*)baseURL];
     return result_;
 }
 
@@ -163,7 +163,7 @@ void* C_NSURL_URLByAppendingPathExtension(void* ptr, void* pathExtension) {
     return result_;
 }
 
-Dictionary C_NSURL_URL_ResourceValuesForKeys_FromBookmarkData(Array keys, Array bookmarkData) {
+Dictionary C_NSURL_URL_ResourceValuesForKeys_FromBookmarkData(Array keys, void* bookmarkData) {
     NSMutableArray* objcKeys = [[NSMutableArray alloc] init];
     if (keys.len > 0) {
     	void** keysData = (void**)keys.data;
@@ -172,7 +172,7 @@ Dictionary C_NSURL_URL_ResourceValuesForKeys_FromBookmarkData(Array keys, Array 
     		[objcKeys addObject:(NSURLResourceKey)(NSString*)p];
     	}
     }
-    NSDictionary* result_ = [NSURL resourceValuesForKeys:objcKeys fromBookmarkData:[[NSData alloc] initWithBytes:(Byte *)bookmarkData.data length:bookmarkData.len]];
+    NSDictionary* result_ = [NSURL resourceValuesForKeys:objcKeys fromBookmarkData:(NSData*)bookmarkData];
     Dictionary result_Array;
     NSArray * result_Keys = [result_ allKeys];
     int result_Count = [result_Keys count];
@@ -203,13 +203,10 @@ void C_NSURL_StopAccessingSecurityScopedResource(void* ptr) {
     [nSURL stopAccessingSecurityScopedResource];
 }
 
-Array C_NSURL_DataRepresentation(void* ptr) {
+void* C_NSURL_DataRepresentation(void* ptr) {
     NSURL* nSURL = (NSURL*)ptr;
     NSData* result_ = [nSURL dataRepresentation];
-    Array result_array;
-    result_array.data = [result_ bytes];
-    result_array.len = result_.length;
-    return result_array;
+    return result_;
 }
 
 bool C_NSURL_IsFileURL(void* ptr) {

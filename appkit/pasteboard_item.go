@@ -69,7 +69,7 @@ func (n NSPasteboardItem) SetDataProvider_ForTypes(dataProvider objc.Object, typ
 }
 
 func (n NSPasteboardItem) SetData_ForType(data []byte, _type PasteboardType) bool {
-	result_ := C.C_NSPasteboardItem_SetData_ForType(n.Ptr(), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, foundation.NewString(string(_type)).Ptr())
+	result_ := C.C_NSPasteboardItem_SetData_ForType(n.Ptr(), foundation.NewData(data).Ptr(), foundation.NewString(string(_type)).Ptr())
 	return bool(result_)
 }
 
@@ -85,13 +85,7 @@ func (n NSPasteboardItem) SetPropertyList_ForType(propertyList objc.Object, _typ
 
 func (n NSPasteboardItem) DataForType(_type PasteboardType) []byte {
 	result_ := C.C_NSPasteboardItem_DataForType(n.Ptr(), foundation.NewString(string(_type)).Ptr())
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return foundation.MakeData(result_).ToBytes()
 }
 
 func (n NSPasteboardItem) StringForType(_type PasteboardType) string {

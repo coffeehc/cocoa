@@ -100,10 +100,7 @@
 }
 
 - (void)application:(NSApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken {
-    Array deviceTokenarray;
-    deviceTokenarray.data = [deviceToken bytes];
-    deviceTokenarray.len = deviceToken.length;
-    applicationDelegate_Application_DidRegisterForRemoteNotificationsWithDeviceToken([self goID], application, deviceTokenarray);
+    applicationDelegate_Application_DidRegisterForRemoteNotificationsWithDeviceToken([self goID], application, deviceToken);
 }
 
 - (void)application:(NSApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error {

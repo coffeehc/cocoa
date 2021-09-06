@@ -12,7 +12,7 @@ bool C_WKWebView_WebView_HandlesURLScheme(void* urlScheme);
 void* C_WKWebView_LoadRequest(void* ptr, void* request);
 void* C_WKWebView_LoadHTMLString_BaseURL(void* ptr, void* _string, void* baseURL);
 void* C_WKWebView_LoadFileURL_AllowingReadAccessToURL(void* ptr, void* URL, void* readAccessURL);
-void* C_WKWebView_LoadData_MIMEType_CharacterEncodingName_BaseURL(void* ptr, Array data, void* MIMEType, void* characterEncodingName, void* baseURL);
+void* C_WKWebView_LoadData_MIMEType_CharacterEncodingName_BaseURL(void* ptr, void* data, void* MIMEType, void* characterEncodingName, void* baseURL);
 void* C_WKWebView_Reload(void* ptr);
 void* C_WKWebView_ReloadFromOrigin(void* ptr);
 void C_WKWebView_StopLoading(void* ptr);

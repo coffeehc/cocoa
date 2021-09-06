@@ -80,8 +80,8 @@ void* C_NSImageRep_ImageRepWithContentsOfURL(void* url) {
     return result_;
 }
 
-bool C_NSImageRep_ImageRep_CanInitWithData(Array data) {
-    BOOL result_ = [NSImageRep canInitWithData:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len]];
+bool C_NSImageRep_ImageRep_CanInitWithData(void* data) {
+    BOOL result_ = [NSImageRep canInitWithData:(NSData*)data];
     return result_;
 }
 

@@ -89,13 +89,10 @@ void* C_NSAppleEventDescriptor_AppleEventDescriptor_CurrentProcessDescriptor() {
     return result_;
 }
 
-Array C_NSAppleEventDescriptor_Data(void* ptr) {
+void* C_NSAppleEventDescriptor_Data(void* ptr) {
     NSAppleEventDescriptor* nSAppleEventDescriptor = (NSAppleEventDescriptor*)ptr;
     NSData* result_ = [nSAppleEventDescriptor data];
-    Array result_array;
-    result_array.data = [result_ bytes];
-    result_array.len = result_.length;
-    return result_array;
+    return result_;
 }
 
 int C_NSAppleEventDescriptor_NumberOfItems(void* ptr) {

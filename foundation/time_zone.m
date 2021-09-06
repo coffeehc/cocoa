@@ -11,9 +11,9 @@ void* C_NSTimeZone_InitWithName(void* ptr, void* tzName) {
     return result_;
 }
 
-void* C_NSTimeZone_InitWithName_Data(void* ptr, void* tzName, Array aData) {
+void* C_NSTimeZone_InitWithName_Data(void* ptr, void* tzName, void* aData) {
     NSTimeZone* nSTimeZone = (NSTimeZone*)ptr;
-    NSTimeZone* result_ = [nSTimeZone initWithName:(NSString*)tzName data:[[NSData alloc] initWithBytes:(Byte *)aData.data length:aData.len]];
+    NSTimeZone* result_ = [nSTimeZone initWithName:(NSString*)tzName data:(NSData*)aData];
     return result_;
 }
 
@@ -26,8 +26,8 @@ void* C_NSTimeZone_TimeZoneWithName(void* tzName) {
     return result_;
 }
 
-void* C_NSTimeZone_TimeZoneWithName_Data(void* tzName, Array aData) {
-    NSTimeZone* result_ = [NSTimeZone timeZoneWithName:(NSString*)tzName data:[[NSData alloc] initWithBytes:(Byte *)aData.data length:aData.len]];
+void* C_NSTimeZone_TimeZoneWithName_Data(void* tzName, void* aData) {
+    NSTimeZone* result_ = [NSTimeZone timeZoneWithName:(NSString*)tzName data:(NSData*)aData];
     return result_;
 }
 
@@ -171,13 +171,10 @@ int C_NSTimeZone_SecondsFromGMT(void* ptr) {
     return result_;
 }
 
-Array C_NSTimeZone_Data(void* ptr) {
+void* C_NSTimeZone_Data(void* ptr) {
     NSTimeZone* nSTimeZone = (NSTimeZone*)ptr;
     NSData* result_ = [nSTimeZone data];
-    Array result_array;
-    result_array.data = [result_ bytes];
-    result_array.len = result_.length;
-    return result_array;
+    return result_;
 }
 
 void* C_NSTimeZone_TimeZoneDataVersion() {

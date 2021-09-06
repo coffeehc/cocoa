@@ -38,7 +38,7 @@ func (n NSColorSpace) InitWithCGColorSpace(cgColorSpace coregraphics.ColorSpaceR
 }
 
 func (n NSColorSpace) InitWithICCProfileData(iccData []byte) ColorSpace {
-	result_ := C.C_NSColorSpace_InitWithICCProfileData(n.Ptr(), C.Array{data: unsafe.Pointer(&iccData[0]), len: C.int(len(iccData))})
+	result_ := C.C_NSColorSpace_InitWithICCProfileData(n.Ptr(), foundation.NewData(iccData).Ptr())
 	return MakeColorSpace(result_)
 }
 
@@ -132,13 +132,7 @@ func (n NSColorSpace) ColorSpaceModel() ColorSpaceModel {
 
 func (n NSColorSpace) ICCProfileData() []byte {
 	result_ := C.C_NSColorSpace_ICCProfileData(n.Ptr())
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return foundation.MakeData(result_).ToBytes()
 }
 
 func (n NSColorSpace) LocalizedName() string {

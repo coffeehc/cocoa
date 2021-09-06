@@ -6,11 +6,11 @@
 void* C_PrintOperation_Alloc();
 
 void* C_NSPrintOperation_Init(void* ptr);
-void* C_NSPrintOperation_PrintOperation_EPSOperationWithView_InsideRect_ToData(void* view, CGRect rect, Array data);
-void* C_NSPrintOperation_PrintOperation_EPSOperationWithView_InsideRect_ToData_PrintInfo(void* view, CGRect rect, Array data, void* printInfo);
+void* C_NSPrintOperation_PrintOperation_EPSOperationWithView_InsideRect_ToData(void* view, CGRect rect, void* data);
+void* C_NSPrintOperation_PrintOperation_EPSOperationWithView_InsideRect_ToData_PrintInfo(void* view, CGRect rect, void* data, void* printInfo);
 void* C_NSPrintOperation_PrintOperation_EPSOperationWithView_InsideRect_ToPath_PrintInfo(void* view, CGRect rect, void* path, void* printInfo);
-void* C_NSPrintOperation_PrintOperation_PDFOperationWithView_InsideRect_ToData(void* view, CGRect rect, Array data);
-void* C_NSPrintOperation_PrintOperation_PDFOperationWithView_InsideRect_ToData_PrintInfo(void* view, CGRect rect, Array data, void* printInfo);
+void* C_NSPrintOperation_PrintOperation_PDFOperationWithView_InsideRect_ToData(void* view, CGRect rect, void* data);
+void* C_NSPrintOperation_PrintOperation_PDFOperationWithView_InsideRect_ToData_PrintInfo(void* view, CGRect rect, void* data, void* printInfo);
 void* C_NSPrintOperation_PrintOperation_PDFOperationWithView_InsideRect_ToPath_PrintInfo(void* view, CGRect rect, void* path, void* printInfo);
 void* C_NSPrintOperation_PrintOperationWithView(void* view);
 void* C_NSPrintOperation_PrintOperationWithView_PrintInfo(void* view, void* printInfo);

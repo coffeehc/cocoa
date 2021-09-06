@@ -6,7 +6,7 @@
 void* C_ColorSpace_Alloc();
 
 void* C_NSColorSpace_InitWithCGColorSpace(void* ptr, void* cgColorSpace);
-void* C_NSColorSpace_InitWithICCProfileData(void* ptr, Array iccData);
+void* C_NSColorSpace_InitWithICCProfileData(void* ptr, void* iccData);
 void* C_NSColorSpace_Init(void* ptr);
 Array C_NSColorSpace_AvailableColorSpacesWithModel(int model);
 void* C_NSColorSpace_DeviceRGBColorSpace();
@@ -23,6 +23,6 @@ void* C_NSColorSpace_ExtendedGenericGamma22GrayColorSpace();
 void* C_NSColorSpace_AdobeRGB1998ColorSpace();
 void* C_NSColorSpace_CGColorSpace(void* ptr);
 int C_NSColorSpace_ColorSpaceModel(void* ptr);
-Array C_NSColorSpace_ICCProfileData(void* ptr);
+void* C_NSColorSpace_ICCProfileData(void* ptr);
 void* C_NSColorSpace_LocalizedName(void* ptr);
 int C_NSColorSpace_NumberOfColorComponents(void* ptr);

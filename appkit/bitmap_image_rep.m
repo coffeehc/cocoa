@@ -11,9 +11,9 @@ void* C_NSBitmapImageRep_InitWithCGImage(void* ptr, void* cgImage) {
     return result_;
 }
 
-void* C_NSBitmapImageRep_InitWithData(void* ptr, Array data) {
+void* C_NSBitmapImageRep_InitWithData(void* ptr, void* data) {
     NSBitmapImageRep* nSBitmapImageRep = (NSBitmapImageRep*)ptr;
-    NSBitmapImageRep* result_ = [nSBitmapImageRep initWithData:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len]];
+    NSBitmapImageRep* result_ = [nSBitmapImageRep initWithData:(NSData*)data];
     return result_;
 }
 
@@ -35,13 +35,13 @@ void* C_NSBitmapImageRep_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
-void* C_NSBitmapImageRep_BitmapImageRep_ImageRepWithData(Array data) {
-    NSBitmapImageRep* result_ = [NSBitmapImageRep imageRepWithData:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len]];
+void* C_NSBitmapImageRep_BitmapImageRep_ImageRepWithData(void* data) {
+    NSBitmapImageRep* result_ = [NSBitmapImageRep imageRepWithData:(NSData*)data];
     return result_;
 }
 
-Array C_NSBitmapImageRep_BitmapImageRep_ImageRepsWithData(Array data) {
-    NSArray* result_ = [NSBitmapImageRep imageRepsWithData:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len]];
+Array C_NSBitmapImageRep_BitmapImageRep_ImageRepsWithData(void* data) {
+    NSArray* result_ = [NSBitmapImageRep imageRepsWithData:(NSData*)data];
     Array result_Array;
     int result_count = [result_ count];
     if (result_count > 0) {
@@ -61,7 +61,7 @@ void C_NSBitmapImageRep_ColorizeByMappingGray_ToColor_BlackMapping_WhiteMapping(
     [nSBitmapImageRep colorizeByMappingGray:midPoint toColor:(NSColor*)midPointColor blackMapping:(NSColor*)shadowColor whiteMapping:(NSColor*)lightColor];
 }
 
-Array C_NSBitmapImageRep_BitmapImageRep_TIFFRepresentationOfImageRepsInArray(Array array) {
+void* C_NSBitmapImageRep_BitmapImageRep_TIFFRepresentationOfImageRepsInArray(Array array) {
     NSMutableArray* objcArray = [[NSMutableArray alloc] init];
     if (array.len > 0) {
     	void** arrayData = (void**)array.data;
@@ -71,13 +71,10 @@ Array C_NSBitmapImageRep_BitmapImageRep_TIFFRepresentationOfImageRepsInArray(Arr
     	}
     }
     NSData* result_ = [NSBitmapImageRep TIFFRepresentationOfImageRepsInArray:objcArray];
-    Array result_array;
-    result_array.data = [result_ bytes];
-    result_array.len = result_.length;
-    return result_array;
+    return result_;
 }
 
-Array C_NSBitmapImageRep_BitmapImageRep_TIFFRepresentationOfImageRepsInArray_UsingCompression_Factor(Array array, unsigned int comp, float factor) {
+void* C_NSBitmapImageRep_BitmapImageRep_TIFFRepresentationOfImageRepsInArray_UsingCompression_Factor(Array array, unsigned int comp, float factor) {
     NSMutableArray* objcArray = [[NSMutableArray alloc] init];
     if (array.len > 0) {
     	void** arrayData = (void**)array.data;
@@ -87,22 +84,16 @@ Array C_NSBitmapImageRep_BitmapImageRep_TIFFRepresentationOfImageRepsInArray_Usi
     	}
     }
     NSData* result_ = [NSBitmapImageRep TIFFRepresentationOfImageRepsInArray:objcArray usingCompression:comp factor:factor];
-    Array result_array;
-    result_array.data = [result_ bytes];
-    result_array.len = result_.length;
-    return result_array;
+    return result_;
 }
 
-Array C_NSBitmapImageRep_TIFFRepresentationUsingCompression_Factor(void* ptr, unsigned int comp, float factor) {
+void* C_NSBitmapImageRep_TIFFRepresentationUsingCompression_Factor(void* ptr, unsigned int comp, float factor) {
     NSBitmapImageRep* nSBitmapImageRep = (NSBitmapImageRep*)ptr;
     NSData* result_ = [nSBitmapImageRep TIFFRepresentationUsingCompression:comp factor:factor];
-    Array result_array;
-    result_array.data = [result_ bytes];
-    result_array.len = result_.length;
-    return result_array;
+    return result_;
 }
 
-Array C_NSBitmapImageRep_BitmapImageRep_RepresentationOfImageRepsInArray_UsingType_Properties(Array imageReps, unsigned int storageType, Dictionary properties) {
+void* C_NSBitmapImageRep_BitmapImageRep_RepresentationOfImageRepsInArray_UsingType_Properties(Array imageReps, unsigned int storageType, Dictionary properties) {
     NSMutableArray* objcImageReps = [[NSMutableArray alloc] init];
     if (imageReps.len > 0) {
     	void** imageRepsData = (void**)imageReps.data;
@@ -122,13 +113,10 @@ Array C_NSBitmapImageRep_BitmapImageRep_RepresentationOfImageRepsInArray_UsingTy
     	}
     }
     NSData* result_ = [NSBitmapImageRep representationOfImageRepsInArray:objcImageReps usingType:storageType properties:objcProperties];
-    Array result_array;
-    result_array.data = [result_ bytes];
-    result_array.len = result_.length;
-    return result_array;
+    return result_;
 }
 
-Array C_NSBitmapImageRep_RepresentationUsingType_Properties(void* ptr, unsigned int storageType, Dictionary properties) {
+void* C_NSBitmapImageRep_RepresentationUsingType_Properties(void* ptr, unsigned int storageType, Dictionary properties) {
     NSBitmapImageRep* nSBitmapImageRep = (NSBitmapImageRep*)ptr;
     NSMutableDictionary* objcProperties = [[NSMutableDictionary alloc] initWithCapacity: properties.len];
     if (properties.len > 0) {
@@ -141,10 +129,7 @@ Array C_NSBitmapImageRep_RepresentationUsingType_Properties(void* ptr, unsigned 
     	}
     }
     NSData* result_ = [nSBitmapImageRep representationUsingType:storageType properties:objcProperties];
-    Array result_array;
-    result_array.data = [result_ bytes];
-    result_array.len = result_.length;
-    return result_array;
+    return result_;
 }
 
 void* C_NSBitmapImageRep_BitmapImageRep_LocalizedNameForTIFFCompressionType(unsigned int compression) {
@@ -174,9 +159,9 @@ void* C_NSBitmapImageRep_ValueForProperty(void* ptr, void* property) {
     return result_;
 }
 
-int C_NSBitmapImageRep_IncrementalLoadFromData_Complete(void* ptr, Array data, bool complete) {
+int C_NSBitmapImageRep_IncrementalLoadFromData_Complete(void* ptr, void* data, bool complete) {
     NSBitmapImageRep* nSBitmapImageRep = (NSBitmapImageRep*)ptr;
-    NSInteger result_ = [nSBitmapImageRep incrementalLoadFromData:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len] complete:complete];
+    NSInteger result_ = [nSBitmapImageRep incrementalLoadFromData:(NSData*)data complete:complete];
     return result_;
 }
 
@@ -245,13 +230,10 @@ int C_NSBitmapImageRep_SamplesPerPixel(void* ptr) {
     return result_;
 }
 
-Array C_NSBitmapImageRep_TIFFRepresentation(void* ptr) {
+void* C_NSBitmapImageRep_TIFFRepresentation(void* ptr) {
     NSBitmapImageRep* nSBitmapImageRep = (NSBitmapImageRep*)ptr;
     NSData* result_ = [nSBitmapImageRep TIFFRepresentation];
-    Array result_array;
-    result_array.data = [result_ bytes];
-    result_array.len = result_.length;
-    return result_array;
+    return result_;
 }
 
 void* C_NSBitmapImageRep_CGImage(void* ptr) {

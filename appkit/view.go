@@ -423,24 +423,12 @@ func (n NSView) BeginPageInRect_AtPlacement(rect foundation.Rect, location found
 
 func (n NSView) DataWithEPSInsideRect(rect foundation.Rect) []byte {
 	result_ := C.C_NSView_DataWithEPSInsideRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return foundation.MakeData(result_).ToBytes()
 }
 
 func (n NSView) DataWithPDFInsideRect(rect foundation.Rect) []byte {
 	result_ := C.C_NSView_DataWithPDFInsideRect(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(rect))))
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return foundation.MakeData(result_).ToBytes()
 }
 
 func (n NSView) WriteEPSInsideRect_ToPasteboard(rect foundation.Rect, pasteboard Pasteboard) {

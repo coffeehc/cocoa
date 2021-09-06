@@ -63,7 +63,7 @@ func (n NSFileWrapper) InitDirectoryWithFileWrappers(childrenByPreferredName map
 }
 
 func (n NSFileWrapper) InitRegularFileWithContents(contents []byte) FileWrapper {
-	result_ := C.C_NSFileWrapper_InitRegularFileWithContents(n.Ptr(), C.Array{data: unsafe.Pointer(&contents[0]), len: C.int(len(contents))})
+	result_ := C.C_NSFileWrapper_InitRegularFileWithContents(n.Ptr(), NewData(contents).Ptr())
 	return MakeFileWrapper(result_)
 }
 
@@ -73,7 +73,7 @@ func (n NSFileWrapper) InitSymbolicLinkWithDestinationURL(url URL) FileWrapper {
 }
 
 func (n NSFileWrapper) InitWithSerializedRepresentation(serializeRepresentation []byte) FileWrapper {
-	result_ := C.C_NSFileWrapper_InitWithSerializedRepresentation(n.Ptr(), C.Array{data: unsafe.Pointer(&serializeRepresentation[0]), len: C.int(len(serializeRepresentation))})
+	result_ := C.C_NSFileWrapper_InitWithSerializedRepresentation(n.Ptr(), NewData(serializeRepresentation).Ptr())
 	return MakeFileWrapper(result_)
 }
 
@@ -97,7 +97,7 @@ func (n NSFileWrapper) RemoveFileWrapper(child FileWrapper) {
 }
 
 func (n NSFileWrapper) AddRegularFileWithContents_PreferredFilename(data []byte, fileName string) string {
-	result_ := C.C_NSFileWrapper_AddRegularFileWithContents_PreferredFilename(n.Ptr(), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, NewString(fileName).Ptr())
+	result_ := C.C_NSFileWrapper_AddRegularFileWithContents_PreferredFilename(n.Ptr(), NewData(data).Ptr(), NewString(fileName).Ptr())
 	return MakeString(result_).String()
 }
 
@@ -149,13 +149,7 @@ func (n NSFileWrapper) SymbolicLinkDestinationURL() URL {
 
 func (n NSFileWrapper) SerializedRepresentation() []byte {
 	result_ := C.C_NSFileWrapper_SerializedRepresentation(n.Ptr())
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return MakeData(result_).ToBytes()
 }
 
 func (n NSFileWrapper) Filename() string {
@@ -212,11 +206,5 @@ func (n NSFileWrapper) SetFileAttributes(value map[string]objc.Object) {
 
 func (n NSFileWrapper) RegularFileContents() []byte {
 	result_ := C.C_NSFileWrapper_RegularFileContents(n.Ptr())
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return MakeData(result_).ToBytes()
 }

@@ -42,9 +42,9 @@ void C_NSCoder_EncodeConditionalObject_ForKey(void* ptr, void* object, void* key
     [nSCoder encodeConditionalObject:(id)object forKey:(NSString*)key];
 }
 
-void C_NSCoder_EncodeDataObject(void* ptr, Array data) {
+void C_NSCoder_EncodeDataObject(void* ptr, void* data) {
     NSCoder* nSCoder = (NSCoder*)ptr;
-    [nSCoder encodeDataObject:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len]];
+    [nSCoder encodeDataObject:(NSData*)data];
 }
 
 void C_NSCoder_EncodeDouble_ForKey(void* ptr, double value, void* key) {
@@ -128,13 +128,10 @@ bool C_NSCoder_DecodeBoolForKey(void* ptr, void* key) {
     return result_;
 }
 
-Array C_NSCoder_DecodeDataObject(void* ptr) {
+void* C_NSCoder_DecodeDataObject(void* ptr) {
     NSCoder* nSCoder = (NSCoder*)ptr;
     NSData* result_ = [nSCoder decodeDataObject];
-    Array result_array;
-    result_array.data = [result_ bytes];
-    result_array.len = result_.length;
-    return result_array;
+    return result_;
 }
 
 double C_NSCoder_DecodeDoubleForKey(void* ptr, void* key) {

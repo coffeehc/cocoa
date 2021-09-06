@@ -105,7 +105,7 @@ func (n NSCoder) EncodeConditionalObject_ForKey(object objc.Object, key string) 
 }
 
 func (n NSCoder) EncodeDataObject(data []byte) {
-	C.C_NSCoder_EncodeDataObject(n.Ptr(), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))})
+	C.C_NSCoder_EncodeDataObject(n.Ptr(), NewData(data).Ptr())
 }
 
 func (n NSCoder) EncodeDouble_ForKey(value float64, key string) {
@@ -175,13 +175,7 @@ func (n NSCoder) DecodeBoolForKey(key string) bool {
 
 func (n NSCoder) DecodeDataObject() []byte {
 	result_ := C.C_NSCoder_DecodeDataObject(n.Ptr())
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return MakeData(result_).ToBytes()
 }
 
 func (n NSCoder) DecodeDoubleForKey(key string) float64 {

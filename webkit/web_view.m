@@ -46,9 +46,9 @@ void* C_WKWebView_LoadFileURL_AllowingReadAccessToURL(void* ptr, void* URL, void
     return result_;
 }
 
-void* C_WKWebView_LoadData_MIMEType_CharacterEncodingName_BaseURL(void* ptr, Array data, void* MIMEType, void* characterEncodingName, void* baseURL) {
+void* C_WKWebView_LoadData_MIMEType_CharacterEncodingName_BaseURL(void* ptr, void* data, void* MIMEType, void* characterEncodingName, void* baseURL) {
     WKWebView* wKWebView = (WKWebView*)ptr;
-    WKNavigation* result_ = [wKWebView loadData:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len] MIMEType:(NSString*)MIMEType characterEncodingName:(NSString*)characterEncodingName baseURL:(NSURL*)baseURL];
+    WKNavigation* result_ = [wKWebView loadData:(NSData*)data MIMEType:(NSString*)MIMEType characterEncodingName:(NSString*)characterEncodingName baseURL:(NSURL*)baseURL];
     return result_;
 }
 

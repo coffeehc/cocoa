@@ -21,8 +21,8 @@ void* C_NSCharacterSet_CharacterSetWithRange(NSRange aRange) {
     return result_;
 }
 
-void* C_NSCharacterSet_CharacterSetWithBitmapRepresentation(Array data) {
-    NSCharacterSet* result_ = [NSCharacterSet characterSetWithBitmapRepresentation:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len]];
+void* C_NSCharacterSet_CharacterSetWithBitmapRepresentation(void* data) {
+    NSCharacterSet* result_ = [NSCharacterSet characterSetWithBitmapRepresentation:(NSData*)data];
     return result_;
 }
 
@@ -142,13 +142,10 @@ void* C_NSCharacterSet_URLUserAllowedCharacterSet() {
     return result_;
 }
 
-Array C_NSCharacterSet_BitmapRepresentation(void* ptr) {
+void* C_NSCharacterSet_BitmapRepresentation(void* ptr) {
     NSCharacterSet* nSCharacterSet = (NSCharacterSet*)ptr;
     NSData* result_ = [nSCharacterSet bitmapRepresentation];
-    Array result_array;
-    result_array.data = [result_ bytes];
-    result_array.len = result_.length;
-    return result_array;
+    return result_;
 }
 
 void* C_NSCharacterSet_InvertedSet(void* ptr) {

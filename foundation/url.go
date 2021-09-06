@@ -92,12 +92,12 @@ func (n NSURL) InitFileURLWithPath(path string) URL {
 }
 
 func (n NSURL) InitAbsoluteURLWithDataRepresentation_RelativeToURL(data []byte, baseURL URL) URL {
-	result_ := C.C_NSURL_InitAbsoluteURLWithDataRepresentation_RelativeToURL(n.Ptr(), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, objc.ExtractPtr(baseURL))
+	result_ := C.C_NSURL_InitAbsoluteURLWithDataRepresentation_RelativeToURL(n.Ptr(), NewData(data).Ptr(), objc.ExtractPtr(baseURL))
 	return MakeURL(result_)
 }
 
 func (n NSURL) InitWithDataRepresentation_RelativeToURL(data []byte, baseURL URL) URL {
-	result_ := C.C_NSURL_InitWithDataRepresentation_RelativeToURL(n.Ptr(), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, objc.ExtractPtr(baseURL))
+	result_ := C.C_NSURL_InitWithDataRepresentation_RelativeToURL(n.Ptr(), NewData(data).Ptr(), objc.ExtractPtr(baseURL))
 	return MakeURL(result_)
 }
 
@@ -156,12 +156,12 @@ func FileURLWithPathComponents(components []string) URL {
 }
 
 func AbsoluteURLWithDataRepresentation_RelativeToURL(data []byte, baseURL URL) URL {
-	result_ := C.C_NSURL_AbsoluteURLWithDataRepresentation_RelativeToURL(C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, objc.ExtractPtr(baseURL))
+	result_ := C.C_NSURL_AbsoluteURLWithDataRepresentation_RelativeToURL(NewData(data).Ptr(), objc.ExtractPtr(baseURL))
 	return MakeURL(result_)
 }
 
 func URLWithDataRepresentation_RelativeToURL(data []byte, baseURL URL) URL {
-	result_ := C.C_NSURL_URLWithDataRepresentation_RelativeToURL(C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, objc.ExtractPtr(baseURL))
+	result_ := C.C_NSURL_URLWithDataRepresentation_RelativeToURL(NewData(data).Ptr(), objc.ExtractPtr(baseURL))
 	return MakeURL(result_)
 }
 
@@ -212,7 +212,7 @@ func URL_ResourceValuesForKeys_FromBookmarkData(keys []URLResourceKey, bookmarkD
 		cKeys.data = unsafe.Pointer(&cKeysData[0])
 		cKeys.len = C.int(len(keys))
 	}
-	result_ := C.C_NSURL_URL_ResourceValuesForKeys_FromBookmarkData(cKeys, C.Array{data: unsafe.Pointer(&bookmarkData[0]), len: C.int(len(bookmarkData))})
+	result_ := C.C_NSURL_URL_ResourceValuesForKeys_FromBookmarkData(cKeys, NewData(bookmarkData).Ptr())
 	if result_.len > 0 {
 		defer C.free(result_.key_data)
 		defer C.free(result_.value_data)
@@ -238,13 +238,7 @@ func (n NSURL) StopAccessingSecurityScopedResource() {
 
 func (n NSURL) DataRepresentation() []byte {
 	result_ := C.C_NSURL_DataRepresentation(n.Ptr())
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return MakeData(result_).ToBytes()
 }
 
 func (n NSURL) IsFileURL() bool {

@@ -32,7 +32,7 @@ func (n NSNib) InitWithNibNamed_Bundle(nibName NibName, bundle foundation.Bundle
 }
 
 func (n NSNib) InitWithNibData_Bundle(nibData []byte, bundle foundation.Bundle) Nib {
-	result_ := C.C_NSNib_InitWithNibData_Bundle(n.Ptr(), C.Array{data: unsafe.Pointer(&nibData[0]), len: C.int(len(nibData))}, objc.ExtractPtr(bundle))
+	result_ := C.C_NSNib_InitWithNibData_Bundle(n.Ptr(), foundation.NewData(nibData).Ptr(), objc.ExtractPtr(bundle))
 	return MakeNib(result_)
 }
 

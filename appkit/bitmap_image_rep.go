@@ -55,7 +55,7 @@ func (n NSBitmapImageRep) InitWithCGImage(cgImage coregraphics.ImageRef) BitmapI
 }
 
 func (n NSBitmapImageRep) InitWithData(data []byte) BitmapImageRep {
-	result_ := C.C_NSBitmapImageRep_InitWithData(n.Ptr(), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))})
+	result_ := C.C_NSBitmapImageRep_InitWithData(n.Ptr(), foundation.NewData(data).Ptr())
 	return MakeBitmapImageRep(result_)
 }
 
@@ -75,12 +75,12 @@ func (n NSBitmapImageRep) InitWithCoder(coder foundation.Coder) BitmapImageRep {
 }
 
 func BitmapImageRep_ImageRepWithData(data []byte) BitmapImageRep {
-	result_ := C.C_NSBitmapImageRep_BitmapImageRep_ImageRepWithData(C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))})
+	result_ := C.C_NSBitmapImageRep_BitmapImageRep_ImageRepWithData(foundation.NewData(data).Ptr())
 	return MakeBitmapImageRep(result_)
 }
 
 func BitmapImageRep_ImageRepsWithData(data []byte) []ImageRep {
-	result_ := C.C_NSBitmapImageRep_BitmapImageRep_ImageRepsWithData(C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))})
+	result_ := C.C_NSBitmapImageRep_BitmapImageRep_ImageRepsWithData(foundation.NewData(data).Ptr())
 	if result_.len > 0 {
 		defer C.free(result_.data)
 	}
@@ -107,13 +107,7 @@ func BitmapImageRep_TIFFRepresentationOfImageRepsInArray(array []ImageRep) []byt
 		cArray.len = C.int(len(array))
 	}
 	result_ := C.C_NSBitmapImageRep_BitmapImageRep_TIFFRepresentationOfImageRepsInArray(cArray)
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return foundation.MakeData(result_).ToBytes()
 }
 
 func BitmapImageRep_TIFFRepresentationOfImageRepsInArray_UsingCompression_Factor(array []ImageRep, comp TIFFCompression, factor float32) []byte {
@@ -127,24 +121,12 @@ func BitmapImageRep_TIFFRepresentationOfImageRepsInArray_UsingCompression_Factor
 		cArray.len = C.int(len(array))
 	}
 	result_ := C.C_NSBitmapImageRep_BitmapImageRep_TIFFRepresentationOfImageRepsInArray_UsingCompression_Factor(cArray, C.uint(uint(comp)), C.float(factor))
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return foundation.MakeData(result_).ToBytes()
 }
 
 func (n NSBitmapImageRep) TIFFRepresentationUsingCompression_Factor(comp TIFFCompression, factor float32) []byte {
 	result_ := C.C_NSBitmapImageRep_TIFFRepresentationUsingCompression_Factor(n.Ptr(), C.uint(uint(comp)), C.float(factor))
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return foundation.MakeData(result_).ToBytes()
 }
 
 func BitmapImageRep_RepresentationOfImageRepsInArray_UsingType_Properties(imageReps []ImageRep, storageType BitmapImageFileType, properties map[BitmapImageRepPropertyKey]objc.Object) []byte {
@@ -172,13 +154,7 @@ func BitmapImageRep_RepresentationOfImageRepsInArray_UsingType_Properties(imageR
 		cProperties.len = C.int(len(properties))
 	}
 	result_ := C.C_NSBitmapImageRep_BitmapImageRep_RepresentationOfImageRepsInArray_UsingType_Properties(cImageReps, C.uint(uint(storageType)), cProperties)
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return foundation.MakeData(result_).ToBytes()
 }
 
 func (n NSBitmapImageRep) RepresentationUsingType_Properties(storageType BitmapImageFileType, properties map[BitmapImageRepPropertyKey]objc.Object) []byte {
@@ -197,13 +173,7 @@ func (n NSBitmapImageRep) RepresentationUsingType_Properties(storageType BitmapI
 		cProperties.len = C.int(len(properties))
 	}
 	result_ := C.C_NSBitmapImageRep_RepresentationUsingType_Properties(n.Ptr(), C.uint(uint(storageType)), cProperties)
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return foundation.MakeData(result_).ToBytes()
 }
 
 func BitmapImageRep_LocalizedNameForTIFFCompressionType(compression TIFFCompression) string {
@@ -230,7 +200,7 @@ func (n NSBitmapImageRep) ValueForProperty(property BitmapImageRepPropertyKey) o
 }
 
 func (n NSBitmapImageRep) IncrementalLoadFromData_Complete(data []byte, complete bool) int {
-	result_ := C.C_NSBitmapImageRep_IncrementalLoadFromData_Complete(n.Ptr(), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, C.bool(complete))
+	result_ := C.C_NSBitmapImageRep_IncrementalLoadFromData_Complete(n.Ptr(), foundation.NewData(data).Ptr(), C.bool(complete))
 	return int(result_)
 }
 
@@ -290,13 +260,7 @@ func (n NSBitmapImageRep) SamplesPerPixel() int {
 
 func (n NSBitmapImageRep) TIFFRepresentation() []byte {
 	result_ := C.C_NSBitmapImageRep_TIFFRepresentation(n.Ptr())
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return foundation.MakeData(result_).ToBytes()
 }
 
 func (n NSBitmapImageRep) CGImage() coregraphics.ImageRef {

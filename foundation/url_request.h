@@ -14,7 +14,7 @@ void* C_NSURLRequest_ValueForHTTPHeaderField(void* ptr, void* field);
 unsigned int C_NSURLRequest_CachePolicy(void* ptr);
 void* C_NSURLRequest_HTTPMethod(void* ptr);
 void* C_NSURLRequest_URL(void* ptr);
-Array C_NSURLRequest_HTTPBody(void* ptr);
+void* C_NSURLRequest_HTTPBody(void* ptr);
 void* C_NSURLRequest_MainDocumentURL(void* ptr);
 Dictionary C_NSURLRequest_AllHTTPHeaderFields(void* ptr);
 double C_NSURLRequest_TimeoutInterval(void* ptr);

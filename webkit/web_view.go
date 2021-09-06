@@ -105,7 +105,7 @@ func (w WKWebView) LoadFileURL_AllowingReadAccessToURL(URL foundation.URL, readA
 }
 
 func (w WKWebView) LoadData_MIMEType_CharacterEncodingName_BaseURL(data []byte, MIMEType string, characterEncodingName string, baseURL foundation.URL) Navigation {
-	result_ := C.C_WKWebView_LoadData_MIMEType_CharacterEncodingName_BaseURL(w.Ptr(), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))}, foundation.NewString(MIMEType).Ptr(), foundation.NewString(characterEncodingName).Ptr(), objc.ExtractPtr(baseURL))
+	result_ := C.C_WKWebView_LoadData_MIMEType_CharacterEncodingName_BaseURL(w.Ptr(), foundation.NewData(data).Ptr(), foundation.NewString(MIMEType).Ptr(), foundation.NewString(characterEncodingName).Ptr(), objc.ExtractPtr(baseURL))
 	return MakeNavigation(result_)
 }
 

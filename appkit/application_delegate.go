@@ -195,15 +195,9 @@ func applicationDelegate_Application_DidUpdateUserActivity(hp C.uintptr_t, appli
 }
 
 //export applicationDelegate_Application_DidRegisterForRemoteNotificationsWithDeviceToken
-func applicationDelegate_Application_DidRegisterForRemoteNotificationsWithDeviceToken(hp C.uintptr_t, application unsafe.Pointer, deviceToken C.Array) {
+func applicationDelegate_Application_DidRegisterForRemoteNotificationsWithDeviceToken(hp C.uintptr_t, application unsafe.Pointer, deviceToken unsafe.Pointer) {
 	delegate := cgo.Handle(hp).Value().(*ApplicationDelegate)
-	var goDeviceToken []byte
-	if deviceToken.len > 0 {
-		deviceTokenBuffer := unsafe.Slice((*byte)(deviceToken.data), int(deviceToken.len))
-		goDeviceToken = make([]byte, C.int(deviceToken.len))
-		copy(goDeviceToken, deviceTokenBuffer)
-	}
-	delegate.Application_DidRegisterForRemoteNotificationsWithDeviceToken(MakeApplication(application), goDeviceToken)
+	delegate.Application_DidRegisterForRemoteNotificationsWithDeviceToken(MakeApplication(application), foundation.MakeData(deviceToken).ToBytes())
 }
 
 //export applicationDelegate_Application_DidFailToRegisterForRemoteNotificationsWithError

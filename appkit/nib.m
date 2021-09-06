@@ -11,9 +11,9 @@ void* C_NSNib_InitWithNibNamed_Bundle(void* ptr, void* nibName, void* bundle) {
     return result_;
 }
 
-void* C_NSNib_InitWithNibData_Bundle(void* ptr, Array nibData, void* bundle) {
+void* C_NSNib_InitWithNibData_Bundle(void* ptr, void* nibData, void* bundle) {
     NSNib* nSNib = (NSNib*)ptr;
-    NSNib* result_ = [nSNib initWithNibData:[[NSData alloc] initWithBytes:(Byte *)nibData.data length:nibData.len] bundle:(NSBundle*)bundle];
+    NSNib* result_ = [nSNib initWithNibData:(NSData*)nibData bundle:(NSBundle*)bundle];
     return result_;
 }
 

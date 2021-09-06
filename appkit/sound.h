@@ -7,7 +7,7 @@ void* C_Sound_Alloc();
 
 void* C_NSSound_InitWithContentsOfFile_ByReference(void* ptr, void* path, bool byRef);
 void* C_NSSound_InitWithContentsOfURL_ByReference(void* ptr, void* url, bool byRef);
-void* C_NSSound_InitWithData(void* ptr, Array data);
+void* C_NSSound_InitWithData(void* ptr, void* data);
 void* C_NSSound_InitWithPasteboard(void* ptr, void* pasteboard);
 void* C_NSSound_Init(void* ptr);
 bool C_NSSound_Sound_CanInitWithPasteboard(void* pasteboard);

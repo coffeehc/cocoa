@@ -39,9 +39,9 @@ bool C_NSPasteboardItem_SetDataProvider_ForTypes(void* ptr, void* dataProvider, 
     return result_;
 }
 
-bool C_NSPasteboardItem_SetData_ForType(void* ptr, Array data, void* _type) {
+bool C_NSPasteboardItem_SetData_ForType(void* ptr, void* data, void* _type) {
     NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
-    BOOL result_ = [nSPasteboardItem setData:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len] forType:(NSString*)_type];
+    BOOL result_ = [nSPasteboardItem setData:(NSData*)data forType:(NSString*)_type];
     return result_;
 }
 
@@ -57,13 +57,10 @@ bool C_NSPasteboardItem_SetPropertyList_ForType(void* ptr, void* propertyList, v
     return result_;
 }
 
-Array C_NSPasteboardItem_DataForType(void* ptr, void* _type) {
+void* C_NSPasteboardItem_DataForType(void* ptr, void* _type) {
     NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
     NSData* result_ = [nSPasteboardItem dataForType:(NSString*)_type];
-    Array result_array;
-    result_array.data = [result_ bytes];
-    result_array.len = result_.length;
-    return result_array;
+    return result_;
 }
 
 void* C_NSPasteboardItem_StringForType(void* ptr, void* _type) {

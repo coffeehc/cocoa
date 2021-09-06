@@ -99,12 +99,12 @@ func (n NSImage) InitWithContentsOfURL(url foundation.URL) Image {
 }
 
 func (n NSImage) InitWithData(data []byte) Image {
-	result_ := C.C_NSImage_InitWithData(n.Ptr(), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))})
+	result_ := C.C_NSImage_InitWithData(n.Ptr(), foundation.NewData(data).Ptr())
 	return MakeImage(result_)
 }
 
 func (n NSImage) InitWithDataIgnoringOrientation(data []byte) Image {
-	result_ := C.C_NSImage_InitWithDataIgnoringOrientation(n.Ptr(), C.Array{data: unsafe.Pointer(&data[0]), len: C.int(len(data))})
+	result_ := C.C_NSImage_InitWithDataIgnoringOrientation(n.Ptr(), foundation.NewData(data).Ptr())
 	return MakeImage(result_)
 }
 
@@ -256,13 +256,7 @@ func (n NSImage) Recache() {
 
 func (n NSImage) TIFFRepresentationUsingCompression_Factor(comp TIFFCompression, factor float32) []byte {
 	result_ := C.C_NSImage_TIFFRepresentationUsingCompression_Factor(n.Ptr(), C.uint(uint(comp)), C.float(factor))
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return foundation.MakeData(result_).ToBytes()
 }
 
 func (n NSImage) CancelIncrementalLoad() {
@@ -443,13 +437,7 @@ func (n NSImage) SetCacheMode(value ImageCacheMode) {
 
 func (n NSImage) TIFFRepresentation() []byte {
 	result_ := C.C_NSImage_TIFFRepresentation(n.Ptr())
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return foundation.MakeData(result_).ToBytes()
 }
 
 func (n NSImage) AccessibilityDescription() string {

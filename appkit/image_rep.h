@@ -13,7 +13,7 @@ Array C_NSImageRep_ImageRepsWithContentsOfURL(void* url);
 void* C_NSImageRep_ImageRepWithContentsOfFile(void* filename);
 void* C_NSImageRep_ImageRepWithPasteboard(void* pasteboard);
 void* C_NSImageRep_ImageRepWithContentsOfURL(void* url);
-bool C_NSImageRep_ImageRep_CanInitWithData(Array data);
+bool C_NSImageRep_ImageRep_CanInitWithData(void* data);
 bool C_NSImageRep_ImageRep_CanInitWithPasteboard(void* pasteboard);
 bool C_NSImageRep_Draw(void* ptr);
 bool C_NSImageRep_DrawAtPoint(void* ptr, CGPoint point);

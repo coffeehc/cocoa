@@ -17,9 +17,9 @@ void* C_NSSound_InitWithContentsOfURL_ByReference(void* ptr, void* url, bool byR
     return result_;
 }
 
-void* C_NSSound_InitWithData(void* ptr, Array data) {
+void* C_NSSound_InitWithData(void* ptr, void* data) {
     NSSound* nSSound = (NSSound*)ptr;
-    NSSound* result_ = [nSSound initWithData:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len]];
+    NSSound* result_ = [nSSound initWithData:(NSData*)data];
     return result_;
 }
 

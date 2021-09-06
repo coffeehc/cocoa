@@ -46,7 +46,7 @@ func (n NSTimeZone) InitWithName(tzName string) TimeZone {
 }
 
 func (n NSTimeZone) InitWithName_Data(tzName string, aData []byte) TimeZone {
-	result_ := C.C_NSTimeZone_InitWithName_Data(n.Ptr(), NewString(tzName).Ptr(), C.Array{data: unsafe.Pointer(&aData[0]), len: C.int(len(aData))})
+	result_ := C.C_NSTimeZone_InitWithName_Data(n.Ptr(), NewString(tzName).Ptr(), NewData(aData).Ptr())
 	return MakeTimeZone(result_)
 }
 
@@ -60,7 +60,7 @@ func TimeZoneWithName(tzName string) TimeZone {
 }
 
 func TimeZoneWithName_Data(tzName string, aData []byte) TimeZone {
-	result_ := C.C_NSTimeZone_TimeZoneWithName_Data(NewString(tzName).Ptr(), C.Array{data: unsafe.Pointer(&aData[0]), len: C.int(len(aData))})
+	result_ := C.C_NSTimeZone_TimeZoneWithName_Data(NewString(tzName).Ptr(), NewData(aData).Ptr())
 	return MakeTimeZone(result_)
 }
 
@@ -192,13 +192,7 @@ func (n NSTimeZone) SecondsFromGMT() int {
 
 func (n NSTimeZone) Data() []byte {
 	result_ := C.C_NSTimeZone_Data(n.Ptr())
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return MakeData(result_).ToBytes()
 }
 
 func TimeZoneDataVersion() string {

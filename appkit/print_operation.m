@@ -11,13 +11,13 @@ void* C_NSPrintOperation_Init(void* ptr) {
     return result_;
 }
 
-void* C_NSPrintOperation_PrintOperation_EPSOperationWithView_InsideRect_ToData(void* view, CGRect rect, Array data) {
-    NSPrintOperation* result_ = [NSPrintOperation EPSOperationWithView:(NSView*)view insideRect:rect toData:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len]];
+void* C_NSPrintOperation_PrintOperation_EPSOperationWithView_InsideRect_ToData(void* view, CGRect rect, void* data) {
+    NSPrintOperation* result_ = [NSPrintOperation EPSOperationWithView:(NSView*)view insideRect:rect toData:(NSData*)data];
     return result_;
 }
 
-void* C_NSPrintOperation_PrintOperation_EPSOperationWithView_InsideRect_ToData_PrintInfo(void* view, CGRect rect, Array data, void* printInfo) {
-    NSPrintOperation* result_ = [NSPrintOperation EPSOperationWithView:(NSView*)view insideRect:rect toData:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len] printInfo:(NSPrintInfo*)printInfo];
+void* C_NSPrintOperation_PrintOperation_EPSOperationWithView_InsideRect_ToData_PrintInfo(void* view, CGRect rect, void* data, void* printInfo) {
+    NSPrintOperation* result_ = [NSPrintOperation EPSOperationWithView:(NSView*)view insideRect:rect toData:(NSData*)data printInfo:(NSPrintInfo*)printInfo];
     return result_;
 }
 
@@ -26,13 +26,13 @@ void* C_NSPrintOperation_PrintOperation_EPSOperationWithView_InsideRect_ToPath_P
     return result_;
 }
 
-void* C_NSPrintOperation_PrintOperation_PDFOperationWithView_InsideRect_ToData(void* view, CGRect rect, Array data) {
-    NSPrintOperation* result_ = [NSPrintOperation PDFOperationWithView:(NSView*)view insideRect:rect toData:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len]];
+void* C_NSPrintOperation_PrintOperation_PDFOperationWithView_InsideRect_ToData(void* view, CGRect rect, void* data) {
+    NSPrintOperation* result_ = [NSPrintOperation PDFOperationWithView:(NSView*)view insideRect:rect toData:(NSData*)data];
     return result_;
 }
 
-void* C_NSPrintOperation_PrintOperation_PDFOperationWithView_InsideRect_ToData_PrintInfo(void* view, CGRect rect, Array data, void* printInfo) {
-    NSPrintOperation* result_ = [NSPrintOperation PDFOperationWithView:(NSView*)view insideRect:rect toData:[[NSData alloc] initWithBytes:(Byte *)data.data length:data.len] printInfo:(NSPrintInfo*)printInfo];
+void* C_NSPrintOperation_PrintOperation_PDFOperationWithView_InsideRect_ToData_PrintInfo(void* view, CGRect rect, void* data, void* printInfo) {
+    NSPrintOperation* result_ = [NSPrintOperation PDFOperationWithView:(NSView*)view insideRect:rect toData:(NSData*)data printInfo:(NSPrintInfo*)printInfo];
     return result_;
 }
 

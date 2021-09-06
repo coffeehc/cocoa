@@ -45,7 +45,7 @@ func (n NSTextAttachment) InitWithFileWrapper(fileWrapper foundation.FileWrapper
 }
 
 func (n NSTextAttachment) InitWithData_OfType(contentData []byte, uti string) TextAttachment {
-	result_ := C.C_NSTextAttachment_InitWithData_OfType(n.Ptr(), C.Array{data: unsafe.Pointer(&contentData[0]), len: C.int(len(contentData))}, foundation.NewString(uti).Ptr())
+	result_ := C.C_NSTextAttachment_InitWithData_OfType(n.Ptr(), foundation.NewData(contentData).Ptr(), foundation.NewString(uti).Ptr())
 	return MakeTextAttachment(result_)
 }
 
@@ -65,17 +65,11 @@ func (n NSTextAttachment) SetBounds(value foundation.Rect) {
 
 func (n NSTextAttachment) Contents() []byte {
 	result_ := C.C_NSTextAttachment_Contents(n.Ptr())
-	var goResult_ []byte
-	if result_.len > 0 {
-		result_Buffer := unsafe.Slice((*byte)(result_.data), int(result_.len))
-		goResult_ = make([]byte, C.int(result_.len))
-		copy(goResult_, result_Buffer)
-	}
-	return goResult_
+	return foundation.MakeData(result_).ToBytes()
 }
 
 func (n NSTextAttachment) SetContents(value []byte) {
-	C.C_NSTextAttachment_SetContents(n.Ptr(), C.Array{data: unsafe.Pointer(&value[0]), len: C.int(len(value))})
+	C.C_NSTextAttachment_SetContents(n.Ptr(), foundation.NewData(value).Ptr())
 }
 
 func (n NSTextAttachment) FileType() string {
