@@ -1,4 +1,4 @@
-package uihelper
+package actions
 
 // #cgo CFLAGS: -x objective-c
 // #cgo LDFLAGS: -framework Foundation

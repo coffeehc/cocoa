@@ -1,52 +1,42 @@
-package appkit
+package appkits
 
 import (
+	"github.com/hsiafan/cocoa/actions"
+	"github.com/hsiafan/cocoa/appkit"
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
-	"github.com/hsiafan/cocoa/uihelper"
-	"unsafe"
 )
 
-type ModalSession unsafe.Pointer
-
-func FromNSModalSessionPointer(p unsafe.Pointer) ModalSession {
-	return ModalSession(*(*unsafe.Pointer)(p))
-}
-
-func ToNSModalSessionPointer(m ModalSession) unsafe.Pointer {
-	return unsafe.Pointer(&m)
-}
-
 // NewPlainButton return a new common used Button
-func NewPlainButton(title string) Button {
-	btn := AllocButton().Init()
+func NewPlainButton(title string) appkit.Button {
+	btn := appkit.AllocButton().Init()
 	btn.SetTranslatesAutoresizingMaskIntoConstraints(false)
-	btn.SetBezelStyle(BezelStyleRounded)
+	btn.SetBezelStyle(appkit.BezelStyleRounded)
 	btn.SetTitle(title)
 	return btn
 }
 
 // NewCheckBox return a new common used switch Button
-func NewCheckBox(title string) Button {
-	btn := AllocButton().Init()
+func NewCheckBox(title string) appkit.Button {
+	btn := appkit.AllocButton().Init()
 	btn.SetTranslatesAutoresizingMaskIntoConstraints(false)
-	btn.SetButtonType(ButtonTypeSwitch)
+	btn.SetButtonType(appkit.ButtonTypeSwitch)
 	btn.SetTitle(title)
 	return btn
 }
 
 // NewRadioButton return a new common used radio Button
-func NewRadioButton(title string) Button {
-	btn := AllocButton().Init()
+func NewRadioButton(title string) appkit.Button {
+	btn := appkit.AllocButton().Init()
 	btn.SetTranslatesAutoresizingMaskIntoConstraints(false)
-	btn.SetButtonType(ButtonTypeRadio)
+	btn.SetButtonType(appkit.ButtonTypeRadio)
 	btn.SetTitle(title)
 	return btn
 }
 
 // NewLabel create a text field, which looks like a Label
-func NewLabel(title string) TextField {
-	tf := AllocTextField().Init()
+func NewLabel(title string) appkit.TextField {
+	tf := appkit.AllocTextField().Init()
 	tf.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	tf.SetBezeled(false)
 	tf.SetDrawsBackground(false)
@@ -57,8 +47,8 @@ func NewLabel(title string) TextField {
 }
 
 // NewTextField return a plain TextField
-func NewTextField() TextField {
-	field := AllocTextField().Init()
+func NewTextField() appkit.TextField {
+	field := appkit.AllocTextField().Init()
 	field.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	field.SetUsesSingleLineMode(true)
 	cell := field.Cell()
@@ -68,8 +58,8 @@ func NewTextField() TextField {
 }
 
 // NewSecureTextField return a plain SecureTextField
-func NewSecureTextField() SecureTextField {
-	field := AllocSecureTextField().Init()
+func NewSecureTextField() appkit.SecureTextField {
+	field := appkit.AllocSecureTextField().Init()
 	field.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	field.SetUsesSingleLineMode(true)
 	cell := field.Cell()
@@ -79,67 +69,67 @@ func NewSecureTextField() SecureTextField {
 }
 
 // NewWindow create a common window with close/minimize buttons
-func NewWindow(width, height float64) Window {
-	return AllocWindow().InitWithContentRect_StyleMask_Backing_Defer(
+func NewWindow(width, height float64) appkit.Window {
+	return appkit.AllocWindow().InitWithContentRect_StyleMask_Backing_Defer(
 		foundation.MakeRect(0, 0, width, height),
-		WindowStyleMaskTitled|WindowStyleMaskClosable|WindowStyleMaskResizable|WindowStyleMaskMiniaturizable,
-		BackingStoreBuffered,
+		appkit.WindowStyleMaskTitled|appkit.WindowStyleMaskClosable|appkit.WindowStyleMaskResizable|appkit.WindowStyleMaskMiniaturizable,
+		appkit.BackingStoreBuffered,
 		false,
 	)
 }
 
 // NewWindowWithStyle create a common window with styles
-func NewWindowWithStyle(width, height float64, style WindowStyleMask) Window {
-	return AllocWindow().InitWithContentRect_StyleMask_Backing_Defer(
+func NewWindowWithStyle(width, height float64, style appkit.WindowStyleMask) appkit.Window {
+	return appkit.AllocWindow().InitWithContentRect_StyleMask_Backing_Defer(
 		foundation.MakeRect(0, 0, width, height),
 		style,
-		BackingStoreBuffered,
+		appkit.BackingStoreBuffered,
 		false,
 	)
 }
 
 // NewMenuItem create a new menu item, with selector
-func NewMenuItem(title string, charCode string, selector objc.Selector) MenuItem {
-	return AllocMenuItem().InitWithTitle_Action_KeyEquivalent(title, selector, charCode)
+func NewMenuItem(title string, charCode string, selector objc.Selector) appkit.MenuItem {
+	return appkit.AllocMenuItem().InitWithTitle_Action_KeyEquivalent(title, selector, charCode)
 }
 
 // NewMenuItemWithAction create a new menu item with action
-func NewMenuItemWithAction(title string, charCode string, handler uihelper.ActionHandler) MenuItem {
-	item := AllocMenuItem().InitWithTitle_Action_KeyEquivalent(title, nil, charCode)
-	uihelper.SetAction(item, handler)
+func NewMenuItemWithAction(title string, charCode string, handler actions.ActionHandler) appkit.MenuItem {
+	item := appkit.AllocMenuItem().InitWithTitle_Action_KeyEquivalent(title, nil, charCode)
+	actions.SetAction(item, handler)
 	return item
 }
 
 // NewSubMenuItem create a menu item that hold a sub menu
-func NewSubMenuItem(menu Menu) MenuItem {
-	item := AllocMenuItem().InitWithTitle_Action_KeyEquivalent("", nil, "")
+func NewSubMenuItem(menu appkit.Menu) appkit.MenuItem {
+	item := appkit.AllocMenuItem().InitWithTitle_Action_KeyEquivalent("", nil, "")
 	item.SetMenu(menu)
 	return item
 }
 
 // NewView create new View
-func NewView() View {
-	v := AllocView().Init()
+func NewView() appkit.View {
+	v := appkit.AllocView().Init()
 	v.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	return v
 }
 
 // A TextScrollView that contains a TextView
 type TextScrollView struct {
-	ScrollView
-	textView TextView
+	appkit.ScrollView
+	textView appkit.TextView
 }
 
 // TextView return the inner TextView
-func (t TextScrollView) TextView() TextView {
+func (t TextScrollView) TextView() appkit.TextView {
 	return t.textView
 }
 
 // NewScrollableTextView create and return new scrollable text view.
 func NewScrollableTextView() TextScrollView {
-	stv := ScrollableTextView()
+	stv := appkit.ScrollableTextView()
 	stv.SetTranslatesAutoresizingMaskIntoConstraints(false)
-	tv := MakeTextView(stv.DocumentView().Ptr())
+	tv := appkit.MakeTextView(stv.DocumentView().Ptr())
 	tv.SetAllowsUndo(true)
 	return TextScrollView{
 		ScrollView: stv,
@@ -148,17 +138,17 @@ func NewScrollableTextView() TextScrollView {
 }
 
 // NewVerticalStackView return a new vertical StackView
-func NewVerticalStackView() StackView {
-	sv := AllocStackView().Init()
-	sv.SetOrientation(UserInterfaceLayoutOrientationVertical)
+func NewVerticalStackView() appkit.StackView {
+	sv := appkit.AllocStackView().Init()
+	sv.SetOrientation(appkit.UserInterfaceLayoutOrientationVertical)
 	sv.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	return sv
 }
 
 // NewHorizontalStackView return a new horizontal StackView
-func NewHorizontalStackView() StackView {
-	sv := AllocStackView().Init()
-	sv.SetOrientation(UserInterfaceLayoutOrientationHorizontal)
+func NewHorizontalStackView() appkit.StackView {
+	sv := appkit.AllocStackView().Init()
+	sv.SetOrientation(appkit.UserInterfaceLayoutOrientationHorizontal)
 	sv.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	return sv
 }

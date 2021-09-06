@@ -2,9 +2,9 @@ package main
 
 import (
 	"github.com/hsiafan/cocoa/appkit"
+	"github.com/hsiafan/cocoa/appkits"
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
-	"github.com/hsiafan/cocoa/uihelper/layouts"
 	"runtime"
 )
 
@@ -17,17 +17,21 @@ func initAndRun() {
 	app := appkit.SharedApplication()
 	app.SetActivationPolicy(appkit.ApplicationActivationPolicyRegular)
 	app.ActivateIgnoringOtherApps(true)
-	w := appkit.NewWindow(600, 400)
+	w := appkits.NewWindow(600, 400)
 	w.SetTitle("Form")
 
-	fv := layouts.NewFormView()
-	fv.AddRow("user", appkit.NewTextField())
-	fv.AddRow("password", appkit.NewSecureTextField())
-	cb := appkit.NewCheckBox("")
+	fv := appkits.NewFormView()
+	fv.AddRow("user", appkits.NewTextField())
+	fv.AddRow("password", appkits.NewSecureTextField())
+	cb := appkits.NewCheckBox("")
 	fv.AddRow("males", cb)
 	fv.AddExpandRow()
 
-	layouts.AddViewWithPadding(w.ContentView(), fv, 10, 10, 10, 10)
+	w.ContentView().AddSubview(fv)
+	fv.LeftAnchor().ConstraintEqualToAnchor_Constant(w.ContentView().LeftAnchor(), 10).SetActive(true)
+	fv.TopAnchor().ConstraintEqualToAnchor_Constant(w.ContentView().TopAnchor(), 10).SetActive(true)
+	fv.RightAnchor().ConstraintEqualToAnchor_Constant(w.ContentView().RightAnchor(), 10).SetActive(true)
+	fv.BottomAnchor().ConstraintEqualToAnchor_Constant(w.ContentView().BottomAnchor(), 10).SetActive(true)
 
 	w.MakeKeyAndOrderFront(nil)
 	w.Center()

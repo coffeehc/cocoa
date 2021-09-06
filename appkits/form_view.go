@@ -1,12 +1,33 @@
-package layouts
+package appkits
 
 import (
 	"github.com/hsiafan/cocoa/appkit"
 )
 
 // FormView ia an appkit.View that arrange form field name and controls.
-type FormView struct {
+type FormView interface {
 	appkit.View
+	// AddExpandRow add a row, expand to fill parent view height.
+	AddExpandRow()
+	// AddRow add a new form row
+	AddRow(name string, control appkit.Control)
+	// InsertRow insert a new form row at specific location
+	InsertRow(index uint, name string, control appkit.Control)
+	// SetRowSpacing set spacing between rows.
+	SetRowSpacing(spacing float64)
+	// SetLabelWidth set width for labels
+	SetLabelWidth(width float64)
+	// SetLabelAlignment set label text alignment
+	SetLabelAlignment(alignment appkit.TextAlignment)
+	// SetLabelFont set label font
+	SetLabelFont(font appkit.Font)
+	// SetLabelControlSpacing set spacing between label and control
+	SetLabelControlSpacing(spacing float64)
+}
+
+// FormViewImpl implements FormView
+type FormViewImpl struct {
+	appkit.NSStackView
 	stackView appkit.StackView
 	rows      []*formRowView
 
@@ -17,16 +38,16 @@ type FormView struct {
 }
 
 // NewFormView create new form view
-func NewFormView() *FormView {
-	sv := appkit.NewVerticalStackView()
+func NewFormView() FormView {
+	sv := NewVerticalStackView()
 	sv.SetDistribution(appkit.StackViewDistributionFillEqually)
 	sv.SetAlignment(appkit.LayoutAttributeBottom)
 	sv.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	sv.SetHuggingPriority_ForOrientation(appkit.LayoutPriorityRequired, appkit.LayoutConstraintOrientationVertical)
 	sv.SetAlignment(appkit.LayoutAttributeLeft)
 
-	return &FormView{
-		View:                sv,
+	return &FormViewImpl{
+		NSStackView:         sv.(appkit.NSStackView),
 		stackView:           sv,
 		labelWidth:          0,
 		labelAlignment:      appkit.TextAlignmentRight,
@@ -34,15 +55,13 @@ func NewFormView() *FormView {
 	}
 }
 
-// AddExpandRow add a row, expand to fill parent view height.
-func (f *FormView) AddExpandRow() {
+func (f *FormViewImpl) AddExpandRow() {
 	v := appkit.AllocView().Init()
 	v.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	f.stackView.AddView_InGravity(v, appkit.StackViewGravityTop)
 }
 
-// AddRow add a new form row
-func (f *FormView) AddRow(name string, control appkit.Control) {
+func (f *FormViewImpl) AddRow(name string, control appkit.Control) {
 	r := f.newFormRowView(name, control)
 	r.SetSpacing(f.labelControlSpacing)
 	f.rows = append(f.rows, r)
@@ -51,8 +70,7 @@ func (f *FormView) AddRow(name string, control appkit.Control) {
 
 }
 
-// InsertRow insert a new form row at specific location
-func (f *FormView) InsertRow(index uint, name string, control appkit.Control) {
+func (f *FormViewImpl) InsertRow(index uint, name string, control appkit.Control) {
 	if index > uint(len(f.rows)) {
 		panic("index out of range")
 	}
@@ -63,44 +81,39 @@ func (f *FormView) InsertRow(index uint, name string, control appkit.Control) {
 	f.stackView.InsertView_AtIndex_InGravity(r, index, appkit.StackViewGravityTop)
 }
 
-// SetRowSpacing set spacing between rows.
-func (f *FormView) SetRowSpacing(spacing float64) {
+func (f *FormViewImpl) SetRowSpacing(spacing float64) {
 	f.stackView.SetSpacing(spacing)
 }
 
-// SetLabelWidth set width for labels
-func (f *FormView) SetLabelWidth(width float64) {
+func (f *FormViewImpl) SetLabelWidth(width float64) {
 	f.labelWidth = width
 	for _, r := range f.rows {
 		r.labelWidthConstant.SetConstant(f.labelWidth)
 	}
 }
 
-// SetLabelAlignment set label text alignment
-func (f *FormView) SetLabelAlignment(alignment appkit.TextAlignment) {
+func (f *FormViewImpl) SetLabelAlignment(alignment appkit.TextAlignment) {
 	f.labelAlignment = alignment
 	for _, r := range f.rows {
 		r.label.SetAlignment(alignment)
 	}
 }
 
-// SetLabelFont set label font
-func (f *FormView) SetLabelFont(font appkit.Font) {
+func (f *FormViewImpl) SetLabelFont(font appkit.Font) {
 	f.labelFont = font
 	for _, r := range f.rows {
 		r.label.SetFont(font)
 	}
 }
 
-// SetLabelControlSpacing set spacing between label and control
-func (f *FormView) SetLabelControlSpacing(spacing float64) {
+func (f *FormViewImpl) SetLabelControlSpacing(spacing float64) {
 	f.labelControlSpacing = spacing
 	for _, r := range f.rows {
 		r.SetSpacing(spacing)
 	}
 }
 
-// formRowView is a row of FormView
+// formRowView is a row of FormViewImpl
 type formRowView struct {
 	appkit.StackView
 	name               string
@@ -109,14 +122,14 @@ type formRowView struct {
 	labelWidthConstant appkit.LayoutConstraint
 }
 
-func (f *FormView) newFormRowView(name string, control appkit.Control) *formRowView {
+func (f *FormViewImpl) newFormRowView(name string, control appkit.Control) *formRowView {
 	row := appkit.AllocStackView().Init()
 	row.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	row.SetOrientation(appkit.UserInterfaceLayoutOrientationHorizontal)
 	row.SetDistribution(appkit.StackViewDistributionFillProportionally)
 	row.SetAlignment(appkit.LayoutAttributeTop)
 
-	label := appkit.NewLabel(name)
+	label := NewLabel(name)
 	label.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	label.SizeToFit()
 	labelFitWidth := label.Bounds().Size.Width

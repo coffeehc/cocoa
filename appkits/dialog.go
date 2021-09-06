@@ -1,30 +1,41 @@
-package widgets
+package appkits
 
 import (
+	"github.com/hsiafan/cocoa/actions"
 	"github.com/hsiafan/cocoa/appkit"
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
-	"github.com/hsiafan/cocoa/uihelper"
 )
 
 // Dialog is appkit.Panel with optional OK|CANCEL buttons
-type Dialog struct {
+type Dialog interface {
 	appkit.Panel
+	// SetView set the view for Dialog
+	SetView(view appkit.View)
+	// Show display dialog in non-modal mode
+	Show(handle func())
+	// RunModal display dialog in modal mode
+	RunModal() appkit.ModalResponse
+}
+
+// DialogImpl implements Dialog
+type DialogImpl struct {
+	appkit.NSPanel
 	content appkit.View
 	ok      appkit.Button
 	cancel  appkit.Button
 }
 
-// NewDialog create new Dialog
-func NewDialog(width, height float64) *Dialog {
+// NewDialog create new DialogImpl
+func NewDialog(width, height float64) Dialog {
 	panel := appkit.AllocPanel().Init()
 	panel.SetFrame_Display(foundation.MakeRect(0, 0, width, height), true)
 
 	contentView := panel.ContentView()
 	view := appkit.AllocView().Init()
 	view.SetTranslatesAutoresizingMaskIntoConstraints(false)
-	ok := appkit.NewPlainButton("OK")
-	cancel := appkit.NewPlainButton("Cancel")
+	ok := NewPlainButton("OK")
+	cancel := NewPlainButton("Cancel")
 	contentView.AddSubview(view)
 	contentView.AddSubview(ok)
 	contentView.AddSubview(cancel)
@@ -39,16 +50,16 @@ func NewDialog(width, height float64) *Dialog {
 	view.TopAnchor().ConstraintEqualToAnchor(contentView.TopAnchor()).SetActive(true)
 	view.RightAnchor().ConstraintEqualToAnchor(contentView.RightAnchor()).SetActive(true)
 
-	return &Dialog{
-		Panel:   panel,
+	return &DialogImpl{
+		NSPanel: panel.(appkit.NSPanel),
 		content: view,
 		ok:      ok,
 		cancel:  cancel,
 	}
 }
 
-// SetView set inner content view for Dialog
-func (d *Dialog) SetView(view appkit.View) {
+// SetView set inner content view for DialogImpl
+func (d *DialogImpl) SetView(view appkit.View) {
 	d.content.AddSubview(view)
 	view.LeftAnchor().ConstraintEqualToAnchor(d.content.LeftAnchor()).SetActive(true)
 	view.TopAnchor().ConstraintEqualToAnchor(d.content.TopAnchor()).SetActive(true)
@@ -56,28 +67,28 @@ func (d *Dialog) SetView(view appkit.View) {
 	view.BottomAnchor().ConstraintEqualToAnchor(d.content.BottomAnchor()).SetActive(true)
 }
 
-func (d *Dialog) Show(handle func()) {
-	uihelper.SetAction(d.ok, func(sender objc.Object) {
+func (d *DialogImpl) Show(handle func()) {
+	actions.SetAction(d.ok, func(sender objc.Object) {
 		handle()
 		d.Close()
 	})
 
-	uihelper.SetAction(d.cancel, func(sender objc.Object) {
+	actions.SetAction(d.cancel, func(sender objc.Object) {
 		d.Close()
 	})
 
-	d.MakeKeyAndOrderFront(d.Panel)
+	d.MakeKeyAndOrderFront(d.NSPanel)
 }
 
-func (d *Dialog) RunModal() appkit.ModalResponse {
+func (d *DialogImpl) RunModal() appkit.ModalResponse {
 	app := appkit.SharedApplication()
 
-	uihelper.SetAction(d.ok, func(sender objc.Object) {
+	actions.SetAction(d.ok, func(sender objc.Object) {
 		app.StopModalWithCode(appkit.ModalResponseOK)
 		d.Close()
 	})
 
-	uihelper.SetAction(d.cancel, func(sender objc.Object) {
+	actions.SetAction(d.cancel, func(sender objc.Object) {
 		app.StopModalWithCode(appkit.ModalResponseCancel)
 		d.Close()
 	})

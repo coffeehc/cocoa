@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
+	"github.com/hsiafan/cocoa/actions"
 	"github.com/hsiafan/cocoa/appkit"
+	"github.com/hsiafan/cocoa/appkits"
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
-	"github.com/hsiafan/cocoa/uihelper"
 	"runtime"
 	"time"
 )
@@ -17,7 +18,7 @@ func init() {
 
 func initAndRun() {
 	app := appkit.SharedApplication()
-	w := appkit.NewWindow(600, 400)
+	w := appkits.NewWindow(600, 400)
 
 	w.SetTitle("Test widgets")
 
@@ -28,9 +29,9 @@ func initAndRun() {
 	filePathField.SetEditable(false)
 	w.ContentView().AddSubview(filePathField)
 
-	saveButton := appkit.NewPlainButton("Save...")
+	saveButton := appkits.NewPlainButton("Save...")
 	saveButton.SetFrame(foundation.MakeRect(250, 330, 80, 20))
-	uihelper.SetAction(saveButton, func(sender objc.Object) {
+	actions.SetAction(saveButton, func(sender objc.Object) {
 		savePanel := appkit.AllocSavePanel().Init()
 		if savePanel.RunModal() == appkit.ModalResponseOK {
 			filePathField.SetStringValue(savePanel.URL().Path())
@@ -57,7 +58,7 @@ func initAndRun() {
 	w.ContentView().AddSubview(comboBox)
 
 	slider := appkit.AllocSlider().InitWithFrame(foundation.MakeRect(330, 290, 100, 25))
-	uihelper.SetAction(slider, func(sender objc.Object) {
+	actions.SetAction(slider, func(sender objc.Object) {
 		presentationTF.SetDoubleValue(slider.DoubleValue())
 	})
 	slider.SetMaxValue(10)
@@ -67,11 +68,11 @@ func initAndRun() {
 	w.ContentView().AddSubview(datePicker)
 
 	// buttons
-	cb := appkit.NewCheckBox("check box")
+	cb := appkits.NewCheckBox("check box")
 	cb.SetFrame(foundation.MakeRect(10, 250, 80, 25))
 	w.ContentView().AddSubview(cb)
 
-	rb := appkit.NewRadioButton("radio button")
+	rb := appkits.NewRadioButton("radio button")
 	rb.SetFrame(foundation.MakeRect(150, 250, 120, 25))
 	w.ContentView().AddSubview(rb)
 
@@ -83,24 +84,24 @@ func initAndRun() {
 	li.SetDoubleValue(3)
 	w.ContentView().AddSubview(li)
 
-	btn := appkit.NewPlainButton("change color")
+	btn := appkits.NewPlainButton("change color")
 	btn.SetFrame(foundation.MakeRect(10, 160, 120, 25))
 	w.ContentView().AddSubview(btn)
 
-	quitBtn := appkit.NewPlainButton("Quit")
+	quitBtn := appkits.NewPlainButton("Quit")
 	quitBtn.SetFrame(foundation.MakeRect(10, 130, 80, 25))
-	uihelper.SetAction(quitBtn, func(sender objc.Object) {
+	actions.SetAction(quitBtn, func(sender objc.Object) {
 		app.Terminate(nil)
 	})
 	w.ContentView().AddSubview(quitBtn)
 
 	// text field
-	tf := appkit.NewTextField()
+	tf := appkits.NewTextField()
 	w.ContentView().AddSubview(tf)
 	tf.SetFrame(foundation.MakeRect(10, 100, 150, 25))
 
 	// label
-	label := appkit.NewLabel("")
+	label := appkits.NewLabel("")
 	label.SetFrame(foundation.MakeRect(170, 100, 150, 25))
 	w.ContentView().AddSubview(label)
 	tfDelegate := &appkit.TextFieldDelegate{
@@ -111,12 +112,12 @@ func initAndRun() {
 		},
 	}
 	tf.SetDelegate(tfDelegate.ToObjc())
-	uihelper.SetAction(btn, func(sender objc.Object) {
+	actions.SetAction(btn, func(sender objc.Object) {
 		label.SetTextColor(appkit.RedColor())
 	})
 
 	// password
-	stf := appkit.NewSecureTextField()
+	stf := appkits.NewSecureTextField()
 	stf.SetFrame(foundation.MakeRect(340, 100, 150, 25))
 	stfDelegate := &appkit.TextFieldDelegate{
 		ControlTextDidChange: func(obj foundation.Notification) {

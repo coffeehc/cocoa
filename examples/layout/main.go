@@ -2,12 +2,11 @@ package main
 
 import (
 	"fmt"
+	"github.com/hsiafan/cocoa/actions"
 	"github.com/hsiafan/cocoa/appkit"
+	"github.com/hsiafan/cocoa/appkits"
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/objc"
-	"github.com/hsiafan/cocoa/uihelper"
-	"github.com/hsiafan/cocoa/uihelper/layouts"
-	"github.com/hsiafan/cocoa/uihelper/widgets"
 	"runtime"
 )
 
@@ -20,25 +19,25 @@ func initAndRun() {
 	app := appkit.SharedApplication()
 	app.SetActivationPolicy(appkit.ApplicationActivationPolicyRegular)
 	app.ActivateIgnoringOtherApps(true)
-	w := appkit.NewWindow(600, 400)
+	w := appkits.NewWindow(600, 400)
 	w.SetTitle("Test Layout")
 
-	label := appkit.NewLabel("label")
-	mdButton := appkit.NewPlainButton("modal dialog")
-	dButton := appkit.NewPlainButton("dialog")
+	label := appkits.NewLabel("label")
+	mdButton := appkits.NewPlainButton("modal dialog")
+	dButton := appkits.NewPlainButton("dialog")
 	textView := appkit.ScrollableTextView()
 
-	uihelper.SetAction(mdButton, func(sender objc.Object) {
-		d := widgets.NewDialog(400, 300)
-		d.SetView(appkit.NewLabel("test modal dialog"))
+	actions.SetAction(mdButton, func(sender objc.Object) {
+		d := appkits.NewDialog(400, 300)
+		d.SetView(appkits.NewLabel("test modal dialog"))
 		if d.RunModal() == appkit.ModalResponseOK {
 			fmt.Println("ok!")
 		}
 	})
 
-	uihelper.SetAction(dButton, func(sender objc.Object) {
-		d := widgets.NewDialog(400, 300)
-		d.SetView(appkit.NewLabel("test dialog"))
+	actions.SetAction(dButton, func(sender objc.Object) {
+		d := appkits.NewDialog(400, 300)
+		d.SetView(appkits.NewLabel("test dialog"))
 		d.Center()
 		d.Show(func() {
 			fmt.Println("ok!")
@@ -49,7 +48,7 @@ func initAndRun() {
 	for i := 0; i < 3; i++ {
 		var views []appkit.View
 		for j := 0; j < 4; j++ {
-			label := appkit.NewLabel(fmt.Sprintf("label-%v-%v", i, j))
+			label := appkits.NewLabel(fmt.Sprintf("label-%v-%v", i, j))
 			views = append(views, label)
 		}
 		gridView.AddRowWithViews(views)
@@ -61,7 +60,7 @@ func initAndRun() {
 	stackView.SetAlignment(appkit.LayoutAttributeCenterX)
 	stackView.SetSpacing(10)
 
-	layouts.AddViewWithPadding(w.ContentView(), stackView, 10, 10, 10, 10)
+	w.SetContentView(stackView)
 
 	w.MakeKeyAndOrderFront(nil)
 	w.Center()

@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/hsiafan/cocoa/uihelper"
-	"github.com/hsiafan/cocoa/uihelper/layouts"
+	"github.com/hsiafan/cocoa/actions"
+	"github.com/hsiafan/cocoa/appkits"
 	"os"
 	"runtime"
 
@@ -20,15 +20,18 @@ func init() {
 
 func initAndRun() {
 	app := appkit.SharedApplication()
-	w := appkit.NewWindow(600, 400)
+	w := appkits.NewWindow(600, 400)
 	w.SetTitle("Test widgets")
+
+	sv := appkits.NewVerticalStackView()
+	w.SetContentView(sv)
 
 	webView := webkit.AllocWebView().Init()
 	webView.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	webView.LoadRequest(foundation.AllocURLRequest().InitWithURL(foundation.URLWithString("https://www.baidu.com")))
+	sv.AddView_InGravity(webView, appkit.StackViewGravityTop)
 
-	layouts.AddViewWithPadding(w.ContentView(), webView, 10, 10, 10, 20)
-	cb := appkit.NewPlainButton("capture")
+	snapshotButton := appkits.NewPlainButton("capture")
 
 	webView.SetNavigationDelegate((&webkit.NavigationDelegate{
 		WebView_DidFinishNavigation: func(webView webkit.WebView, navigation webkit.Navigation) {
@@ -40,7 +43,7 @@ func initAndRun() {
 				width := foundation.MakeNumber(value.Ptr()).DoubleValue()
 				webView.EvaluateJavaScript("document.body.scrollHeight", func(value objc.Object, err foundation.Error) {
 					height := foundation.MakeNumber(value.Ptr()).DoubleValue()
-					nw := appkit.NewWindow(width, height)
+					nw := appkits.NewWindow(width, height)
 					nw.SetTitle("Test widgets")
 
 					nwv := webkit.AllocWebView().Init()
@@ -50,7 +53,7 @@ func initAndRun() {
 					nwv.LoadRequest(foundation.AllocURLRequest().InitWithURL(foundation.URLWithString("https://www.baidu.com")))
 					nw.SetContentView(nwv)
 
-					uihelper.SetAction(cb, func(sender objc.Object) {
+					actions.SetAction(snapshotButton, func(sender objc.Object) {
 						nwv.TakeSnapshotWithConfiguration(nil, func(image appkit.Image, err foundation.Error) {
 							imageRef := image.CGImageForProposedRect_Context_Hints()
 							imageRepo := appkit.AllocBitmapImageRep().InitWithCGImage(imageRef)
@@ -70,9 +73,7 @@ func initAndRun() {
 		},
 	}).ToObjc())
 
-	w.ContentView().AddSubview(cb)
-	cb.LeftAnchor().ConstraintEqualToAnchor_Constant(w.ContentView().LeftAnchor(), -10)
-	cb.BottomAnchor().ConstraintEqualToAnchor_Constant(w.ContentView().BottomAnchor(), -10)
+	sv.AddView_InGravity(snapshotButton, appkit.StackViewGravityTop)
 
 	w.MakeKeyAndOrderFront(nil)
 	w.Center()
