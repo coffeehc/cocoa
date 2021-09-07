@@ -53,6 +53,9 @@ func initAndRun() {
 		}
 		gridView.AddRowWithViews(views)
 	}
+	gridView.SetContentHuggingPriority_ForOrientation(appkit.LayoutPriorityDefaultHigh, appkit.LayoutConstraintOrientationHorizontal)
+	gridView.ColumnAtIndex(0).SetXPlacement(appkit.GridCellPlacementTrailing)
+	gridView.SetRowAlignment(appkit.GridRowAlignmentLastBaseline)
 
 	stackView := appkit.StackViewWithViews([]appkit.View{label, mdButton, dButton, textView, gridView})
 	stackView.SetOrientation(appkit.UserInterfaceLayoutOrientationVertical)
