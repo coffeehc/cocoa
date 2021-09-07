@@ -254,15 +254,15 @@ void C_NSApplication_AbortModal(void* ptr) {
     [nSApplication abortModal];
 }
 
-NSModalSession C_NSApplication_BeginModalSessionForWindow(void* ptr, void* window) {
+void* C_NSApplication_BeginModalSessionForWindow(void* ptr, void* window) {
     NSApplication* nSApplication = (NSApplication*)ptr;
     NSModalSession result_ = [nSApplication beginModalSessionForWindow:(NSWindow*)window];
     return result_;
 }
 
-int C_NSApplication_RunModalSession(void* ptr, NSModalSession session) {
+int C_NSApplication_RunModalSession(void* ptr, void* session) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSModalResponse result_ = [nSApplication runModalSession:session];
+    NSModalResponse result_ = [nSApplication runModalSession:(NSModalSession)session];
     return result_;
 }
 
@@ -342,9 +342,9 @@ void C_NSApplication_RegisterServicesMenuSendTypes_ReturnTypes(void* ptr, Array 
     [nSApplication registerServicesMenuSendTypes:objcSendTypes returnTypes:objcReturnTypes];
 }
 
-void C_NSApplication_EndModalSession(void* ptr, NSModalSession session) {
+void C_NSApplication_EndModalSession(void* ptr, void* session) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    [nSApplication endModalSession:session];
+    [nSApplication endModalSession:(NSModalSession)session];
 }
 
 void* C_NSApplication_SharedApplication() {

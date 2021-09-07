@@ -326,11 +326,11 @@ func (n NSApplication) AbortModal() {
 
 func (n NSApplication) BeginModalSessionForWindow(window Window) ModalSession {
 	result_ := C.C_NSApplication_BeginModalSessionForWindow(n.Ptr(), objc.ExtractPtr(window))
-	return FromNSModalSessionPointer(unsafe.Pointer(&result_))
+	return ModalSession(result_)
 }
 
 func (n NSApplication) RunModalSession(session ModalSession) ModalResponse {
-	result_ := C.C_NSApplication_RunModalSession(n.Ptr(), *(*C.NSModalSession)(ToNSModalSessionPointer(session)))
+	result_ := C.C_NSApplication_RunModalSession(n.Ptr(), unsafe.Pointer(session))
 	return ModalResponse(int(result_))
 }
 
@@ -407,7 +407,7 @@ func (n NSApplication) RegisterServicesMenuSendTypes_ReturnTypes(sendTypes []Pas
 }
 
 func (n NSApplication) EndModalSession(session ModalSession) {
-	C.C_NSApplication_EndModalSession(n.Ptr(), *(*C.NSModalSession)(ToNSModalSessionPointer(session)))
+	C.C_NSApplication_EndModalSession(n.Ptr(), unsafe.Pointer(session))
 }
 
 func SharedApplication() Application {

@@ -23,11 +23,3 @@ func deleteAppKitHandle(hp C.uintptr_t) {
 }
 
 type ModalSession unsafe.Pointer
-
-func FromNSModalSessionPointer(p unsafe.Pointer) ModalSession {
-	return ModalSession(*(*unsafe.Pointer)(p))
-}
-
-func ToNSModalSessionPointer(m ModalSession) unsafe.Pointer {
-	return unsafe.Pointer(&m)
-}

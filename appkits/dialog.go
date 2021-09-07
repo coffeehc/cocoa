@@ -1,9 +1,9 @@
 package appkits
 
 import (
-	"github.com/hsiafan/cocoa/actions"
 	"github.com/hsiafan/cocoa/appkit"
 	"github.com/hsiafan/cocoa/foundation"
+	"github.com/hsiafan/cocoa/helper/actions"
 	"github.com/hsiafan/cocoa/objc"
 )
 
@@ -68,12 +68,12 @@ func (d *DialogImpl) SetView(view appkit.View) {
 }
 
 func (d *DialogImpl) Show(handle func()) {
-	actions.SetAction(d.ok, func(sender objc.Object) {
+	actions.Set(d.ok, func(sender objc.Object) {
 		handle()
 		d.Close()
 	})
 
-	actions.SetAction(d.cancel, func(sender objc.Object) {
+	actions.Set(d.cancel, func(sender objc.Object) {
 		d.Close()
 	})
 
@@ -83,12 +83,12 @@ func (d *DialogImpl) Show(handle func()) {
 func (d *DialogImpl) RunModal() appkit.ModalResponse {
 	app := appkit.SharedApplication()
 
-	actions.SetAction(d.ok, func(sender objc.Object) {
+	actions.Set(d.ok, func(sender objc.Object) {
 		app.StopModalWithCode(appkit.ModalResponseOK)
 		d.Close()
 	})
 
-	actions.SetAction(d.cancel, func(sender objc.Object) {
+	actions.Set(d.cancel, func(sender objc.Object) {
 		app.StopModalWithCode(appkit.ModalResponseCancel)
 		d.Close()
 	})

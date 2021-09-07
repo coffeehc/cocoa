@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/hsiafan/cocoa/actions"
 	"github.com/hsiafan/cocoa/appkit"
 	"github.com/hsiafan/cocoa/appkits"
 	"github.com/hsiafan/cocoa/foundation"
+	"github.com/hsiafan/cocoa/helper/actions"
 	"github.com/hsiafan/cocoa/objc"
 	"runtime"
 )
@@ -27,7 +27,7 @@ func initAndRun() {
 	dButton := appkits.NewPlainButton("dialog")
 	textView := appkit.ScrollableTextView()
 
-	actions.SetAction(mdButton, func(sender objc.Object) {
+	actions.Set(mdButton, func(sender objc.Object) {
 		d := appkits.NewDialog(400, 300)
 		d.SetView(appkits.NewLabel("test modal dialog"))
 		if d.RunModal() == appkit.ModalResponseOK {
@@ -35,7 +35,7 @@ func initAndRun() {
 		}
 	})
 
-	actions.SetAction(dButton, func(sender objc.Object) {
+	actions.Set(dButton, func(sender objc.Object) {
 		d := appkits.NewDialog(400, 300)
 		d.SetView(appkits.NewLabel("test dialog"))
 		d.Center()

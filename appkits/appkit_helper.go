@@ -1,9 +1,9 @@
 package appkits
 
 import (
-	"github.com/hsiafan/cocoa/actions"
 	"github.com/hsiafan/cocoa/appkit"
 	"github.com/hsiafan/cocoa/foundation"
+	"github.com/hsiafan/cocoa/helper/actions"
 	"github.com/hsiafan/cocoa/objc"
 )
 
@@ -96,7 +96,7 @@ func NewMenuItem(title string, charCode string, selector objc.Selector) appkit.M
 // NewMenuItemWithAction create a new menu item with action
 func NewMenuItemWithAction(title string, charCode string, handler actions.ActionHandler) appkit.MenuItem {
 	item := appkit.AllocMenuItem().InitWithTitle_Action_KeyEquivalent(title, nil, charCode)
-	actions.SetAction(item, handler)
+	actions.Set(item, handler)
 	return item
 }
 

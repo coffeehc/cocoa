@@ -36,8 +36,8 @@ func NewAction(handler ActionHandler) ActionTarget {
 	}
 }
 
-// SetAction set action for an ojbc instance, if it has hasTarget and setAction method.
-func SetAction(instance CanSetAction, handler ActionHandler) {
+// Set action for an ojbc instance, if it has hasTarget and setAction method.
+func Set(instance CanSetAction, handler ActionHandler) {
 	target := NewAction(handler)
 	instance.SetTarget(target)
 	instance.SetAction(foundation.SelectorFromString("onAction:"))

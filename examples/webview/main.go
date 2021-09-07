@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/hsiafan/cocoa/actions"
 	"github.com/hsiafan/cocoa/appkits"
+	"github.com/hsiafan/cocoa/helper/actions"
 	"os"
 	"runtime"
 
@@ -53,7 +53,7 @@ func initAndRun() {
 					nwv.LoadRequest(foundation.AllocURLRequest().InitWithURL(foundation.URLWithString("https://www.baidu.com")))
 					nw.SetContentView(nwv)
 
-					actions.SetAction(snapshotButton, func(sender objc.Object) {
+					actions.Set(snapshotButton, func(sender objc.Object) {
 						nwv.TakeSnapshotWithConfiguration(nil, func(image appkit.Image, err foundation.Error) {
 							imageRef := image.CGImageForProposedRect_Context_Hints()
 							imageRepo := appkit.AllocBitmapImageRep().InitWithCGImage(imageRef)

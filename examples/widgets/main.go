@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/hsiafan/cocoa/actions"
 	"github.com/hsiafan/cocoa/appkit"
 	"github.com/hsiafan/cocoa/appkits"
 	"github.com/hsiafan/cocoa/foundation"
+	"github.com/hsiafan/cocoa/helper/actions"
 	"github.com/hsiafan/cocoa/objc"
 	"runtime"
 	"time"
@@ -31,7 +31,7 @@ func initAndRun() {
 
 	saveButton := appkits.NewPlainButton("Save...")
 	saveButton.SetFrame(foundation.MakeRect(250, 330, 80, 20))
-	actions.SetAction(saveButton, func(sender objc.Object) {
+	actions.Set(saveButton, func(sender objc.Object) {
 		savePanel := appkit.AllocSavePanel().Init()
 		if savePanel.RunModal() == appkit.ModalResponseOK {
 			filePathField.SetStringValue(savePanel.URL().Path())
@@ -58,7 +58,7 @@ func initAndRun() {
 	w.ContentView().AddSubview(comboBox)
 
 	slider := appkit.AllocSlider().InitWithFrame(foundation.MakeRect(330, 290, 100, 25))
-	actions.SetAction(slider, func(sender objc.Object) {
+	actions.Set(slider, func(sender objc.Object) {
 		presentationTF.SetDoubleValue(slider.DoubleValue())
 	})
 	slider.SetMaxValue(10)
@@ -90,7 +90,7 @@ func initAndRun() {
 
 	quitBtn := appkits.NewPlainButton("Quit")
 	quitBtn.SetFrame(foundation.MakeRect(10, 130, 80, 25))
-	actions.SetAction(quitBtn, func(sender objc.Object) {
+	actions.Set(quitBtn, func(sender objc.Object) {
 		app.Terminate(nil)
 	})
 	w.ContentView().AddSubview(quitBtn)
@@ -112,7 +112,7 @@ func initAndRun() {
 		},
 	}
 	tf.SetDelegate(tfDelegate.ToObjc())
-	actions.SetAction(btn, func(sender objc.Object) {
+	actions.Set(btn, func(sender objc.Object) {
 		label.SetTextColor(appkit.RedColor())
 	})
 
