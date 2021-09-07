@@ -21,7 +21,11 @@ func initAndRun() {
 	w.SetTitle("Form")
 
 	fv := appkits.NewFormView()
+	fv.SetLabelWidth(100)
+	fv.SetLabelAlignment(appkits.LabelAlignmentTrailing)
+	fv.SetLabelControlSpacing(10)
 	fv.AddRow("user", appkits.NewTextField())
+	fv.SetLabelFont(appkit.UserFontOfSize(13))
 	fv.AddRow("password", appkits.NewSecureTextField())
 	cb := appkits.NewCheckBox("")
 	fv.AddRow("males", cb)
@@ -30,8 +34,8 @@ func initAndRun() {
 	w.ContentView().AddSubview(fv)
 	fv.LeftAnchor().ConstraintEqualToAnchor_Constant(w.ContentView().LeftAnchor(), 10).SetActive(true)
 	fv.TopAnchor().ConstraintEqualToAnchor_Constant(w.ContentView().TopAnchor(), 10).SetActive(true)
-	fv.RightAnchor().ConstraintEqualToAnchor_Constant(w.ContentView().RightAnchor(), 10).SetActive(true)
-	fv.BottomAnchor().ConstraintEqualToAnchor_Constant(w.ContentView().BottomAnchor(), 10).SetActive(true)
+	fv.RightAnchor().ConstraintEqualToAnchor_Constant(w.ContentView().RightAnchor(), -10).SetActive(true)
+	fv.BottomAnchor().ConstraintEqualToAnchor_Constant(w.ContentView().BottomAnchor(), -10).SetActive(true)
 
 	w.MakeKeyAndOrderFront(nil)
 	w.Center()

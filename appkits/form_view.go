@@ -12,148 +12,105 @@ type FormView interface {
 	// AddRow add a new form row
 	AddRow(name string, control appkit.Control)
 	// InsertRow insert a new form row at specific location
-	InsertRow(index uint, name string, control appkit.Control)
+	InsertRow(index int, name string, control appkit.Control)
 	// SetRowSpacing set spacing between rows.
 	SetRowSpacing(spacing float64)
 	// SetLabelWidth set width for labels
 	SetLabelWidth(width float64)
 	// SetLabelAlignment set label text alignment
-	SetLabelAlignment(alignment appkit.TextAlignment)
+	SetLabelAlignment(alignment LabelAlignment)
 	// SetLabelFont set label font
 	SetLabelFont(font appkit.Font)
 	// SetLabelControlSpacing set spacing between label and control
 	SetLabelControlSpacing(spacing float64)
 }
 
+type LabelAlignment int
+
+const (
+	LabelAlignmentLeading  = 0
+	LabelAlignmentTrailing = 1
+	LabelAlignmentCenter   = 2
+)
+
 // FormViewImpl implements FormView
 type FormViewImpl struct {
-	appkit.NSStackView
-	stackView appkit.StackView
-	rows      []*formRowView
+	appkit.NSGridView
 
-	labelWidth          float64
-	labelAlignment      appkit.TextAlignment
-	labelControlSpacing float64
-	labelFont           appkit.Font
+	labelFont appkit.Font
 }
 
 // NewFormView create new form view
 func NewFormView() FormView {
-	sv := NewVerticalStackView()
-	sv.SetDistribution(appkit.StackViewDistributionFillEqually)
-	sv.SetAlignment(appkit.LayoutAttributeBottom)
-	sv.SetTranslatesAutoresizingMaskIntoConstraints(false)
-	sv.SetHuggingPriority_ForOrientation(appkit.LayoutPriorityRequired, appkit.LayoutConstraintOrientationVertical)
-	sv.SetAlignment(appkit.LayoutAttributeLeft)
+	gv := appkit.GridViewWithNumberOfColumns_Rows(2, 0)
+	gv.SetTranslatesAutoresizingMaskIntoConstraints(false)
+	gv.SetContentHuggingPriority_ForOrientation(appkit.LayoutPriorityDefaultHigh, appkit.LayoutConstraintOrientationHorizontal)
+	gv.SetContentHuggingPriority_ForOrientation(appkit.LayoutPriorityDefaultHigh, appkit.LayoutConstraintOrientationVertical)
 
 	return &FormViewImpl{
-		NSStackView:         sv.(appkit.NSStackView),
-		stackView:           sv,
-		labelWidth:          0,
-		labelAlignment:      appkit.TextAlignmentRight,
-		labelControlSpacing: 10,
+		NSGridView: gv.(appkit.NSGridView),
 	}
 }
 
 func (f *FormViewImpl) AddExpandRow() {
 	v := appkit.AllocView().Init()
 	v.SetTranslatesAutoresizingMaskIntoConstraints(false)
-	f.stackView.AddView_InGravity(v, appkit.StackViewGravityTop)
+	f.AddRowWithViews([]appkit.View{NewView(), NewView()})
 }
 
 func (f *FormViewImpl) AddRow(name string, control appkit.Control) {
-	r := f.newFormRowView(name, control)
-	r.SetSpacing(f.labelControlSpacing)
-	f.rows = append(f.rows, r)
-
-	f.stackView.AddView_InGravity(r, appkit.StackViewGravityTop)
-
+	label := f.newLabel(name)
+	f.AddRowWithViews([]appkit.View{label, control})
 }
 
-func (f *FormViewImpl) InsertRow(index uint, name string, control appkit.Control) {
-	if index > uint(len(f.rows)) {
-		panic("index out of range")
+func (f *FormViewImpl) InsertRow(index int, name string, control appkit.Control) {
+	if index > f.NumberOfRows() {
+		panic("index out of row range")
 	}
-
-	r := f.newFormRowView(name, control)
-	r.SetSpacing(f.labelControlSpacing)
-	f.rows = append(append(f.rows[:index], r), f.rows[index:]...)
-	f.stackView.InsertView_AtIndex_InGravity(r, index, appkit.StackViewGravityTop)
+	label := f.newLabel(name)
+	f.InsertRowAtIndex_WithViews(index, []appkit.View{label, control})
 }
 
 func (f *FormViewImpl) SetRowSpacing(spacing float64) {
-	f.stackView.SetSpacing(spacing)
+	f.SetRowSpacing(spacing)
 }
 
 func (f *FormViewImpl) SetLabelWidth(width float64) {
-	f.labelWidth = width
-	for _, r := range f.rows {
-		r.labelWidthConstant.SetConstant(f.labelWidth)
-	}
+	f.ColumnAtIndex(0).SetWidth(width)
 }
 
-func (f *FormViewImpl) SetLabelAlignment(alignment appkit.TextAlignment) {
-	f.labelAlignment = alignment
-	for _, r := range f.rows {
-		r.label.SetAlignment(alignment)
+func (f *FormViewImpl) SetLabelAlignment(alignment LabelAlignment) {
+	switch alignment {
+	case LabelAlignmentLeading:
+		f.ColumnAtIndex(0).SetXPlacement(appkit.GridCellPlacementLeading)
+	case LabelAlignmentTrailing:
+		f.ColumnAtIndex(0).SetXPlacement(appkit.GridCellPlacementTrailing)
+	case LabelAlignmentCenter:
+		f.ColumnAtIndex(0).SetXPlacement(appkit.GridCellPlacementCenter)
 	}
 }
 
 func (f *FormViewImpl) SetLabelFont(font appkit.Font) {
 	f.labelFont = font
-	for _, r := range f.rows {
-		r.label.SetFont(font)
+	labelColumn := f.ColumnAtIndex(0)
+	size := labelColumn.NumberOfCells()
+	for i := 0; i < size; i++ {
+		v := labelColumn.CellAtIndex(i).ContentView()
+		label := appkit.MakeTextField(v.Ptr())
+		label.SetFont(font)
 	}
 }
 
 func (f *FormViewImpl) SetLabelControlSpacing(spacing float64) {
-	f.labelControlSpacing = spacing
-	for _, r := range f.rows {
-		r.SetSpacing(spacing)
-	}
+	f.SetColumnSpacing(spacing)
 }
 
-// formRowView is a row of FormViewImpl
-type formRowView struct {
-	appkit.StackView
-	name               string
-	label              appkit.TextField
-	control            appkit.Control
-	labelWidthConstant appkit.LayoutConstraint
-}
-
-func (f *FormViewImpl) newFormRowView(name string, control appkit.Control) *formRowView {
-	row := appkit.AllocStackView().Init()
-	row.SetTranslatesAutoresizingMaskIntoConstraints(false)
-	row.SetOrientation(appkit.UserInterfaceLayoutOrientationHorizontal)
-	row.SetDistribution(appkit.StackViewDistributionFillProportionally)
-	row.SetAlignment(appkit.LayoutAttributeTop)
-
+func (f *FormViewImpl) newLabel(name string) appkit.TextField {
 	label := NewLabel(name)
 	label.SetTranslatesAutoresizingMaskIntoConstraints(false)
-	label.SizeToFit()
-	labelFitWidth := label.Bounds().Size.Width
-	if f.labelWidth < labelFitWidth {
-		f.SetLabelWidth(labelFitWidth)
-	}
-	labelWidthConstant := label.WidthAnchor().ConstraintEqualToConstant(f.labelWidth)
-	labelWidthConstant.SetActive(true)
-	label.SetAlignment(f.labelAlignment)
 	if f.labelFont != nil && f.labelFont.Ptr() != nil {
-		label.SetFont(label.Font())
+		label.SetFont(f.labelFont)
 	}
-	row.AddView_InGravity(label, appkit.StackViewGravityLeading)
 
-	control.SetTranslatesAutoresizingMaskIntoConstraints(false)
-	row.AddView_InGravity(control, appkit.StackViewGravityLeading)
-
-	row.SetHuggingPriority_ForOrientation(1000, appkit.LayoutConstraintOrientationVertical)
-
-	return &formRowView{
-		StackView:          row,
-		name:               name,
-		label:              label,
-		control:            control,
-		labelWidthConstant: labelWidthConstant,
-	}
+	return label
 }
