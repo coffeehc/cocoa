@@ -11,30 +11,34 @@ import (
 )
 
 type extWebView interface {
-	TakeSnapshotWithConfiguration(configuration SnapshotConfiguration, completionHandler func(image appkit.Image, err foundation.Error))
-	EvaluateJavaScript(javascript string, completionHandler func(value objc.Object, err foundation.Error))
+	TakeSnapshotWithConfiguration(configuration SnapshotConfiguration, handler func(image appkit.Image, err foundation.Error))
+	EvaluateJavaScript(javascript string, handler func(value objc.Object, err foundation.Error))
 }
 
-func (w WKWebView) TakeSnapshotWithConfiguration(configuration SnapshotConfiguration, completionHandler func(image appkit.Image, err foundation.Error)) {
-	handle := cgo.NewHandle(completionHandler)
-	C.TakeSnapshotWithConfiguration(w.Ptr(), objc.ExtractPtr(configuration), C.uintptr_t(handle))
+func (w WKWebView) TakeSnapshotWithConfiguration(configuration SnapshotConfiguration, handler func(image appkit.Image, err foundation.Error)) {
+	handle := cgo.NewHandle(handler)
+	C.WebView_TakeSnapshotWithConfiguration(w.Ptr(), objc.ExtractPtr(configuration), C.uintptr_t(handle))
 }
 
-func (w WKWebView) EvaluateJavaScript(javascript string, completionHandler func(value objc.Object, err foundation.Error)) {
-	handle := cgo.NewHandle(completionHandler)
-	C.EvaluateJavaScript(w.Ptr(), foundation.NewString(javascript).Ptr(), C.uintptr_t(handle))
+func (w WKWebView) EvaluateJavaScript(javascript string, handler func(value objc.Object, err foundation.Error)) {
+	handle := cgo.NewHandle(handler)
+	C.WebView_EvaluateJavaScript(w.Ptr(), foundation.NewString(javascript).Ptr(), C.uintptr_t(handle))
 }
 
-//export callTakeSnapshotWithConfiguration
-func callTakeSnapshotWithConfiguration(hp C.uintptr_t, imagePtr unsafe.Pointer, errPtr unsafe.Pointer) {
-	handler := cgo.Handle(hp).Value().(func(appkit.Image, foundation.Error))
+//export callTakeSnapshotHandler
+func callTakeSnapshotHandler(hp C.uintptr_t, imagePtr unsafe.Pointer, errPtr unsafe.Pointer) {
+	handle := cgo.Handle(hp)
+	handler := handle.Value().(func(appkit.Image, foundation.Error))
 	handler(appkit.MakeImage(imagePtr), foundation.MakeError(errPtr))
+	handle.Delete()
 }
 
-//export callEvaluateJavaScript
-func callEvaluateJavaScript(hp C.uintptr_t, valuePtr unsafe.Pointer, errPtr unsafe.Pointer) {
-	handler := cgo.Handle(hp).Value().(func(objc.Object, foundation.Error))
+//export callEvaluateJavaScriptHandler
+func callEvaluateJavaScriptHandler(hp C.uintptr_t, valuePtr unsafe.Pointer, errPtr unsafe.Pointer) {
+	handle := cgo.Handle(hp)
+	handler := handle.Value().(func(objc.Object, foundation.Error))
 	handler(objc.MakeObject(valuePtr), foundation.MakeError(errPtr))
+	handle.Delete()
 }
 
 //export deleteWebKitHandle

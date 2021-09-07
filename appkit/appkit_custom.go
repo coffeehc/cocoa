@@ -4,6 +4,7 @@ package appkit
 import "C"
 import (
 	"github.com/hsiafan/cocoa/coregraphics"
+	"github.com/hsiafan/cocoa/objc"
 	"runtime/cgo"
 	"unsafe"
 )
@@ -23,3 +24,26 @@ func deleteAppKitHandle(hp C.uintptr_t) {
 }
 
 type ModalSession unsafe.Pointer
+
+type extSavePanel interface {
+	BeginWithCompletionHandler(handler func(response ModalResponse))
+	BeginSheetModalForWindow(window Window, handler func(response ModalResponse))
+}
+
+func (n NSSavePanel) BeginWithCompletionHandler(handler func(response ModalResponse)) {
+	handle := cgo.NewHandle(handler)
+	C.SavePanel_BeginWithCompletionHandler(n.Ptr(), C.uintptr_t(handle))
+}
+
+func (n NSSavePanel) BeginSheetModalForWindow(window Window, handler func(response ModalResponse)) {
+	handle := cgo.NewHandle(handler)
+	C.SavePanel_BeginSheetModalForWindow(n.Ptr(), objc.ExtractPtr(window), C.uintptr_t(handle))
+}
+
+//export callModalResponseHandler
+func callModalResponseHandler(hp C.uintptr_t, response C.int) {
+	handle := cgo.Handle(hp)
+	handler := handle.Value().(func(ModalResponse))
+	handler(ModalResponse(response))
+	handle.Delete()
+}

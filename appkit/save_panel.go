@@ -12,6 +12,7 @@ import (
 
 type SavePanel interface {
 	Panel
+	extSavePanel
 	RunModal() ModalResponse
 	ValidateVisibleColumns()
 	Ok(sender objc.Object)
