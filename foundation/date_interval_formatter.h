@@ -5,7 +5,11 @@
 
 void* C_DateIntervalFormatter_Alloc();
 
+void* C_NSDateIntervalFormatter_AllocDateIntervalFormatter();
 void* C_NSDateIntervalFormatter_Init(void* ptr);
+void* C_NSDateIntervalFormatter_NewDateIntervalFormatter();
+void* C_NSDateIntervalFormatter_Autorelease(void* ptr);
+void* C_NSDateIntervalFormatter_Retain(void* ptr);
 void* C_NSDateIntervalFormatter_StringFromDate_ToDate(void* ptr, void* fromDate, void* toDate);
 void* C_NSDateIntervalFormatter_StringFromDateInterval(void* ptr, void* dateInterval);
 unsigned int C_NSDateIntervalFormatter_DateStyle(void* ptr);

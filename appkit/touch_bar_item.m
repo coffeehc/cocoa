@@ -17,6 +17,23 @@ void* C_NSTouchBarItem_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSTouchBarItem_AllocTouchBarItem() {
+    NSTouchBarItem* result_ = [NSTouchBarItem alloc];
+    return result_;
+}
+
+void* C_NSTouchBarItem_Autorelease(void* ptr) {
+    NSTouchBarItem* nSTouchBarItem = (NSTouchBarItem*)ptr;
+    NSTouchBarItem* result_ = [nSTouchBarItem autorelease];
+    return result_;
+}
+
+void* C_NSTouchBarItem_Retain(void* ptr) {
+    NSTouchBarItem* nSTouchBarItem = (NSTouchBarItem*)ptr;
+    NSTouchBarItem* result_ = [nSTouchBarItem retain];
+    return result_;
+}
+
 void* C_NSTouchBarItem_Identifier(void* ptr) {
     NSTouchBarItem* nSTouchBarItem = (NSTouchBarItem*)ptr;
     NSTouchBarItemIdentifier result_ = [nSTouchBarItem identifier];

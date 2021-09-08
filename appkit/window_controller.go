@@ -48,37 +48,53 @@ func MakeWindowController(ptr unsafe.Pointer) NSWindowController {
 	}
 }
 
-func AllocWindowController() NSWindowController {
-	return MakeWindowController(C.C_WindowController_Alloc())
-}
-
-func (n NSWindowController) InitWithWindow(window Window) WindowController {
+func (n NSWindowController) InitWithWindow(window Window) NSWindowController {
 	result_ := C.C_NSWindowController_InitWithWindow(n.Ptr(), objc.ExtractPtr(window))
 	return MakeWindowController(result_)
 }
 
-func (n NSWindowController) InitWithWindowNibName(windowNibName NibName) WindowController {
+func (n NSWindowController) InitWithWindowNibName(windowNibName NibName) NSWindowController {
 	result_ := C.C_NSWindowController_InitWithWindowNibName(n.Ptr(), foundation.NewString(string(windowNibName)).Ptr())
 	return MakeWindowController(result_)
 }
 
-func (n NSWindowController) InitWithWindowNibName_Owner(windowNibName NibName, owner objc.Object) WindowController {
+func (n NSWindowController) InitWithWindowNibName_Owner(windowNibName NibName, owner objc.Object) NSWindowController {
 	result_ := C.C_NSWindowController_InitWithWindowNibName_Owner(n.Ptr(), foundation.NewString(string(windowNibName)).Ptr(), objc.ExtractPtr(owner))
 	return MakeWindowController(result_)
 }
 
-func (n NSWindowController) InitWithWindowNibPath_Owner(windowNibPath string, owner objc.Object) WindowController {
+func (n NSWindowController) InitWithWindowNibPath_Owner(windowNibPath string, owner objc.Object) NSWindowController {
 	result_ := C.C_NSWindowController_InitWithWindowNibPath_Owner(n.Ptr(), foundation.NewString(windowNibPath).Ptr(), objc.ExtractPtr(owner))
 	return MakeWindowController(result_)
 }
 
-func (n NSWindowController) InitWithCoder(coder foundation.Coder) WindowController {
+func (n NSWindowController) InitWithCoder(coder foundation.Coder) NSWindowController {
 	result_ := C.C_NSWindowController_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeWindowController(result_)
 }
 
-func (n NSWindowController) Init() WindowController {
+func (n NSWindowController) Init() NSWindowController {
 	result_ := C.C_NSWindowController_Init(n.Ptr())
+	return MakeWindowController(result_)
+}
+
+func AllocWindowController() NSWindowController {
+	result_ := C.C_NSWindowController_AllocWindowController()
+	return MakeWindowController(result_)
+}
+
+func NewWindowController() NSWindowController {
+	result_ := C.C_NSWindowController_NewWindowController()
+	return MakeWindowController(result_)
+}
+
+func (n NSWindowController) Autorelease() NSWindowController {
+	result_ := C.C_NSWindowController_Autorelease(n.Ptr())
+	return MakeWindowController(result_)
+}
+
+func (n NSWindowController) Retain() NSWindowController {
+	result_ := C.C_NSWindowController_Retain(n.Ptr())
 	return MakeWindowController(result_)
 }
 

@@ -5,9 +5,19 @@ void* C_TreeNode_Alloc() {
     return [NSTreeNode alloc];
 }
 
+void* C_NSTreeNode_TreeNodeWithRepresentedObject(void* modelObject) {
+    NSTreeNode* result_ = [NSTreeNode treeNodeWithRepresentedObject:(id)modelObject];
+    return result_;
+}
+
 void* C_NSTreeNode_InitWithRepresentedObject(void* ptr, void* modelObject) {
     NSTreeNode* nSTreeNode = (NSTreeNode*)ptr;
     NSTreeNode* result_ = [nSTreeNode initWithRepresentedObject:(id)modelObject];
+    return result_;
+}
+
+void* C_NSTreeNode_AllocTreeNode() {
+    NSTreeNode* result_ = [NSTreeNode alloc];
     return result_;
 }
 
@@ -17,8 +27,20 @@ void* C_NSTreeNode_Init(void* ptr) {
     return result_;
 }
 
-void* C_NSTreeNode_TreeNodeWithRepresentedObject(void* modelObject) {
-    NSTreeNode* result_ = [NSTreeNode treeNodeWithRepresentedObject:(id)modelObject];
+void* C_NSTreeNode_NewTreeNode() {
+    NSTreeNode* result_ = [NSTreeNode new];
+    return result_;
+}
+
+void* C_NSTreeNode_Autorelease(void* ptr) {
+    NSTreeNode* nSTreeNode = (NSTreeNode*)ptr;
+    NSTreeNode* result_ = [nSTreeNode autorelease];
+    return result_;
+}
+
+void* C_NSTreeNode_Retain(void* ptr) {
+    NSTreeNode* nSTreeNode = (NSTreeNode*)ptr;
+    NSTreeNode* result_ = [nSTreeNode retain];
     return result_;
 }
 
@@ -30,7 +52,7 @@ void* C_NSTreeNode_DescendantNodeAtIndexPath(void* ptr, void* indexPath) {
 
 void C_NSTreeNode_SortWithSortDescriptors_Recursively(void* ptr, Array sortDescriptors, bool recursively) {
     NSTreeNode* nSTreeNode = (NSTreeNode*)ptr;
-    NSMutableArray* objcSortDescriptors = [[NSMutableArray alloc] init];
+    NSMutableArray* objcSortDescriptors = [NSMutableArray arrayWithCapacity:sortDescriptors.len];
     if (sortDescriptors.len > 0) {
     	void** sortDescriptorsData = (void**)sortDescriptors.data;
     	for (int i = 0; i < sortDescriptors.len; i++) {

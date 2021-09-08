@@ -17,6 +17,28 @@ void* C_NSResponder_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSResponder_AllocResponder() {
+    NSResponder* result_ = [NSResponder alloc];
+    return result_;
+}
+
+void* C_NSResponder_NewResponder() {
+    NSResponder* result_ = [NSResponder new];
+    return result_;
+}
+
+void* C_NSResponder_Autorelease(void* ptr) {
+    NSResponder* nSResponder = (NSResponder*)ptr;
+    NSResponder* result_ = [nSResponder autorelease];
+    return result_;
+}
+
+void* C_NSResponder_Retain(void* ptr) {
+    NSResponder* nSResponder = (NSResponder*)ptr;
+    NSResponder* result_ = [nSResponder retain];
+    return result_;
+}
+
 bool C_NSResponder_BecomeFirstResponder(void* ptr) {
     NSResponder* nSResponder = (NSResponder*)ptr;
     BOOL result_ = [nSResponder becomeFirstResponder];
@@ -107,7 +129,7 @@ void C_NSResponder_KeyUp(void* ptr, void* event) {
 
 void C_NSResponder_InterpretKeyEvents(void* ptr, Array eventArray) {
     NSResponder* nSResponder = (NSResponder*)ptr;
-    NSMutableArray* objcEventArray = [[NSMutableArray alloc] init];
+    NSMutableArray* objcEventArray = [NSMutableArray arrayWithCapacity:eventArray.len];
     if (eventArray.len > 0) {
     	void** eventArrayData = (void**)eventArray.data;
     	for (int i = 0; i < eventArray.len; i++) {

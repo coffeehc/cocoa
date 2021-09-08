@@ -5,6 +5,23 @@ void* C_Measurement_Alloc() {
     return [NSMeasurement alloc];
 }
 
+void* C_NSMeasurement_AllocMeasurement() {
+    NSMeasurement* result_ = [NSMeasurement alloc];
+    return result_;
+}
+
+void* C_NSMeasurement_Autorelease(void* ptr) {
+    NSMeasurement* nSMeasurement = (NSMeasurement*)ptr;
+    NSMeasurement* result_ = [nSMeasurement autorelease];
+    return result_;
+}
+
+void* C_NSMeasurement_Retain(void* ptr) {
+    NSMeasurement* nSMeasurement = (NSMeasurement*)ptr;
+    NSMeasurement* result_ = [nSMeasurement retain];
+    return result_;
+}
+
 bool C_NSMeasurement_CanBeConvertedToUnit(void* ptr, void* unit) {
     NSMeasurement* nSMeasurement = (NSMeasurement*)ptr;
     BOOL result_ = [nSMeasurement canBeConvertedToUnit:(NSUnit*)unit];

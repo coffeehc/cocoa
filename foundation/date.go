@@ -31,67 +31,83 @@ func MakeDate(ptr unsafe.Pointer) NSDate {
 	}
 }
 
-func AllocDate() NSDate {
-	return MakeDate(C.C_Date_Alloc())
-}
-
-func (n NSDate) Init() Date {
-	result_ := C.C_NSDate_Init(n.Ptr())
-	return MakeDate(result_)
-}
-
-func (n NSDate) InitWithTimeIntervalSinceNow(secs TimeInterval) Date {
-	result_ := C.C_NSDate_InitWithTimeIntervalSinceNow(n.Ptr(), C.double(float64(secs)))
-	return MakeDate(result_)
-}
-
-func (n NSDate) InitWithTimeInterval_SinceDate(secsToBeAdded TimeInterval, date Date) Date {
-	result_ := C.C_NSDate_InitWithTimeInterval_SinceDate(n.Ptr(), C.double(float64(secsToBeAdded)), objc.ExtractPtr(date))
-	return MakeDate(result_)
-}
-
-func (n NSDate) InitWithTimeIntervalSinceReferenceDate(ti TimeInterval) Date {
-	result_ := C.C_NSDate_InitWithTimeIntervalSinceReferenceDate(n.Ptr(), C.double(float64(ti)))
-	return MakeDate(result_)
-}
-
-func (n NSDate) InitWithTimeIntervalSince1970(secs TimeInterval) Date {
-	result_ := C.C_NSDate_InitWithTimeIntervalSince1970(n.Ptr(), C.double(float64(secs)))
-	return MakeDate(result_)
-}
-
-func (n NSDate) InitWithCoder(coder Coder) Date {
-	result_ := C.C_NSDate_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeDate(result_)
-}
-
-func (n NSDate) DateByAddingTimeInterval(ti TimeInterval) Date {
-	result_ := C.C_NSDate_DateByAddingTimeInterval(n.Ptr(), C.double(float64(ti)))
-	return MakeDate(result_)
-}
-
-func Date_() Date {
+func Date_() NSDate {
 	result_ := C.C_NSDate_Date_()
 	return MakeDate(result_)
 }
 
-func DateWithTimeIntervalSinceNow(secs TimeInterval) Date {
+func DateWithTimeIntervalSinceNow(secs TimeInterval) NSDate {
 	result_ := C.C_NSDate_DateWithTimeIntervalSinceNow(C.double(float64(secs)))
 	return MakeDate(result_)
 }
 
-func DateWithTimeInterval_SinceDate(secsToBeAdded TimeInterval, date Date) Date {
+func DateWithTimeInterval_SinceDate(secsToBeAdded TimeInterval, date Date) NSDate {
 	result_ := C.C_NSDate_DateWithTimeInterval_SinceDate(C.double(float64(secsToBeAdded)), objc.ExtractPtr(date))
 	return MakeDate(result_)
 }
 
-func DateWithTimeIntervalSinceReferenceDate(ti TimeInterval) Date {
+func DateWithTimeIntervalSinceReferenceDate(ti TimeInterval) NSDate {
 	result_ := C.C_NSDate_DateWithTimeIntervalSinceReferenceDate(C.double(float64(ti)))
 	return MakeDate(result_)
 }
 
-func DateWithTimeIntervalSince1970(secs TimeInterval) Date {
+func DateWithTimeIntervalSince1970(secs TimeInterval) NSDate {
 	result_ := C.C_NSDate_DateWithTimeIntervalSince1970(C.double(float64(secs)))
+	return MakeDate(result_)
+}
+
+func (n NSDate) Init() NSDate {
+	result_ := C.C_NSDate_Init(n.Ptr())
+	return MakeDate(result_)
+}
+
+func (n NSDate) InitWithTimeIntervalSinceNow(secs TimeInterval) NSDate {
+	result_ := C.C_NSDate_InitWithTimeIntervalSinceNow(n.Ptr(), C.double(float64(secs)))
+	return MakeDate(result_)
+}
+
+func (n NSDate) InitWithTimeInterval_SinceDate(secsToBeAdded TimeInterval, date Date) NSDate {
+	result_ := C.C_NSDate_InitWithTimeInterval_SinceDate(n.Ptr(), C.double(float64(secsToBeAdded)), objc.ExtractPtr(date))
+	return MakeDate(result_)
+}
+
+func (n NSDate) InitWithTimeIntervalSinceReferenceDate(ti TimeInterval) NSDate {
+	result_ := C.C_NSDate_InitWithTimeIntervalSinceReferenceDate(n.Ptr(), C.double(float64(ti)))
+	return MakeDate(result_)
+}
+
+func (n NSDate) InitWithTimeIntervalSince1970(secs TimeInterval) NSDate {
+	result_ := C.C_NSDate_InitWithTimeIntervalSince1970(n.Ptr(), C.double(float64(secs)))
+	return MakeDate(result_)
+}
+
+func (n NSDate) InitWithCoder(coder Coder) NSDate {
+	result_ := C.C_NSDate_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeDate(result_)
+}
+
+func (n NSDate) DateByAddingTimeInterval(ti TimeInterval) NSDate {
+	result_ := C.C_NSDate_DateByAddingTimeInterval(n.Ptr(), C.double(float64(ti)))
+	return MakeDate(result_)
+}
+
+func AllocDate() NSDate {
+	result_ := C.C_NSDate_AllocDate()
+	return MakeDate(result_)
+}
+
+func NewDate() NSDate {
+	result_ := C.C_NSDate_NewDate()
+	return MakeDate(result_)
+}
+
+func (n NSDate) Autorelease() NSDate {
+	result_ := C.C_NSDate_Autorelease(n.Ptr())
+	return MakeDate(result_)
+}
+
+func (n NSDate) Retain() NSDate {
+	result_ := C.C_NSDate_Retain(n.Ptr())
 	return MakeDate(result_)
 }
 

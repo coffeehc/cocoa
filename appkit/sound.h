@@ -9,7 +9,11 @@ void* C_NSSound_InitWithContentsOfFile_ByReference(void* ptr, void* path, bool b
 void* C_NSSound_InitWithContentsOfURL_ByReference(void* ptr, void* url, bool byRef);
 void* C_NSSound_InitWithData(void* ptr, void* data);
 void* C_NSSound_InitWithPasteboard(void* ptr, void* pasteboard);
+void* C_NSSound_AllocSound();
 void* C_NSSound_Init(void* ptr);
+void* C_NSSound_NewSound();
+void* C_NSSound_Autorelease(void* ptr);
+void* C_NSSound_Retain(void* ptr);
 bool C_NSSound_Sound_CanInitWithPasteboard(void* pasteboard);
 bool C_NSSound_SetName(void* ptr, void* _string);
 void* C_NSSound_SoundNamed(void* name);

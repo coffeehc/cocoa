@@ -17,9 +17,31 @@ void* C_NSColorSpace_InitWithICCProfileData(void* ptr, void* iccData) {
     return result_;
 }
 
+void* C_NSColorSpace_AllocColorSpace() {
+    NSColorSpace* result_ = [NSColorSpace alloc];
+    return result_;
+}
+
 void* C_NSColorSpace_Init(void* ptr) {
     NSColorSpace* nSColorSpace = (NSColorSpace*)ptr;
     NSColorSpace* result_ = [nSColorSpace init];
+    return result_;
+}
+
+void* C_NSColorSpace_NewColorSpace() {
+    NSColorSpace* result_ = [NSColorSpace new];
+    return result_;
+}
+
+void* C_NSColorSpace_Autorelease(void* ptr) {
+    NSColorSpace* nSColorSpace = (NSColorSpace*)ptr;
+    NSColorSpace* result_ = [nSColorSpace autorelease];
+    return result_;
+}
+
+void* C_NSColorSpace_Retain(void* ptr) {
+    NSColorSpace* nSColorSpace = (NSColorSpace*)ptr;
+    NSColorSpace* result_ = [nSColorSpace retain];
     return result_;
 }
 

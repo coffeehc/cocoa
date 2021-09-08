@@ -5,9 +5,31 @@ void* C_Font_Alloc() {
     return [NSFont alloc];
 }
 
+void* C_NSFont_AllocFont() {
+    NSFont* result_ = [NSFont alloc];
+    return result_;
+}
+
 void* C_NSFont_Init(void* ptr) {
     NSFont* nSFont = (NSFont*)ptr;
     NSFont* result_ = [nSFont init];
+    return result_;
+}
+
+void* C_NSFont_NewFont() {
+    NSFont* result_ = [NSFont new];
+    return result_;
+}
+
+void* C_NSFont_Autorelease(void* ptr) {
+    NSFont* nSFont = (NSFont*)ptr;
+    NSFont* result_ = [nSFont autorelease];
+    return result_;
+}
+
+void* C_NSFont_Retain(void* ptr) {
+    NSFont* nSFont = (NSFont*)ptr;
+    NSFont* result_ = [nSFont retain];
     return result_;
 }
 
@@ -37,7 +59,7 @@ void* C_NSFont_UserFixedPitchFontOfSize(double fontSize) {
 }
 
 void* C_NSFont_PreferredFontForTextStyle_Options(void* style, Dictionary options) {
-    NSMutableDictionary* objcOptions = [[NSMutableDictionary alloc] initWithCapacity: options.len];
+    NSMutableDictionary* objcOptions = [NSMutableDictionary dictionaryWithCapacity:options.len];
     if (options.len > 0) {
     	void** optionsKeyData = (void**)options.key_data;
     	void** optionsValueData = (void**)options.value_data;

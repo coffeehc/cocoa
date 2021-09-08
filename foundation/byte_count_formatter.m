@@ -5,9 +5,31 @@ void* C_ByteCountFormatter_Alloc() {
     return [NSByteCountFormatter alloc];
 }
 
+void* C_NSByteCountFormatter_AllocByteCountFormatter() {
+    NSByteCountFormatter* result_ = [NSByteCountFormatter alloc];
+    return result_;
+}
+
 void* C_NSByteCountFormatter_Init(void* ptr) {
     NSByteCountFormatter* nSByteCountFormatter = (NSByteCountFormatter*)ptr;
     NSByteCountFormatter* result_ = [nSByteCountFormatter init];
+    return result_;
+}
+
+void* C_NSByteCountFormatter_NewByteCountFormatter() {
+    NSByteCountFormatter* result_ = [NSByteCountFormatter new];
+    return result_;
+}
+
+void* C_NSByteCountFormatter_Autorelease(void* ptr) {
+    NSByteCountFormatter* nSByteCountFormatter = (NSByteCountFormatter*)ptr;
+    NSByteCountFormatter* result_ = [nSByteCountFormatter autorelease];
+    return result_;
+}
+
+void* C_NSByteCountFormatter_Retain(void* ptr) {
+    NSByteCountFormatter* nSByteCountFormatter = (NSByteCountFormatter*)ptr;
+    NSByteCountFormatter* result_ = [nSByteCountFormatter retain];
     return result_;
 }
 

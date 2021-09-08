@@ -47,11 +47,27 @@ func MakeDateComponentsFormatter(ptr unsafe.Pointer) NSDateComponentsFormatter {
 }
 
 func AllocDateComponentsFormatter() NSDateComponentsFormatter {
-	return MakeDateComponentsFormatter(C.C_DateComponentsFormatter_Alloc())
+	result_ := C.C_NSDateComponentsFormatter_AllocDateComponentsFormatter()
+	return MakeDateComponentsFormatter(result_)
 }
 
-func (n NSDateComponentsFormatter) Init() DateComponentsFormatter {
+func (n NSDateComponentsFormatter) Init() NSDateComponentsFormatter {
 	result_ := C.C_NSDateComponentsFormatter_Init(n.Ptr())
+	return MakeDateComponentsFormatter(result_)
+}
+
+func NewDateComponentsFormatter() NSDateComponentsFormatter {
+	result_ := C.C_NSDateComponentsFormatter_NewDateComponentsFormatter()
+	return MakeDateComponentsFormatter(result_)
+}
+
+func (n NSDateComponentsFormatter) Autorelease() NSDateComponentsFormatter {
+	result_ := C.C_NSDateComponentsFormatter_Autorelease(n.Ptr())
+	return MakeDateComponentsFormatter(result_)
+}
+
+func (n NSDateComponentsFormatter) Retain() NSDateComponentsFormatter {
+	result_ := C.C_NSDateComponentsFormatter_Retain(n.Ptr())
 	return MakeDateComponentsFormatter(result_)
 }
 

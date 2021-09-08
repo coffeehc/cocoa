@@ -61,22 +61,43 @@ func MakeSavePanel(ptr unsafe.Pointer) NSSavePanel {
 	}
 }
 
-func AllocSavePanel() NSSavePanel {
-	return MakeSavePanel(C.C_SavePanel_Alloc())
+func SavePanel_WindowWithContentViewController(contentViewController ViewController) NSSavePanel {
+	result_ := C.C_NSSavePanel_SavePanel_WindowWithContentViewController(objc.ExtractPtr(contentViewController))
+	return MakeSavePanel(result_)
 }
 
-func (n NSSavePanel) InitWithContentRect_StyleMask_Backing_Defer(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool) SavePanel {
+func (n NSSavePanel) InitWithContentRect_StyleMask_Backing_Defer(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool) NSSavePanel {
 	result_ := C.C_NSSavePanel_InitWithContentRect_StyleMask_Backing_Defer(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag))
 	return MakeSavePanel(result_)
 }
 
-func (n NSSavePanel) InitWithContentRect_StyleMask_Backing_Defer_Screen(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool, screen Screen) SavePanel {
+func (n NSSavePanel) InitWithContentRect_StyleMask_Backing_Defer_Screen(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool, screen Screen) NSSavePanel {
 	result_ := C.C_NSSavePanel_InitWithContentRect_StyleMask_Backing_Defer_Screen(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag), objc.ExtractPtr(screen))
 	return MakeSavePanel(result_)
 }
 
-func (n NSSavePanel) Init() SavePanel {
+func (n NSSavePanel) Init() NSSavePanel {
 	result_ := C.C_NSSavePanel_Init(n.Ptr())
+	return MakeSavePanel(result_)
+}
+
+func AllocSavePanel() NSSavePanel {
+	result_ := C.C_NSSavePanel_AllocSavePanel()
+	return MakeSavePanel(result_)
+}
+
+func NewSavePanel() NSSavePanel {
+	result_ := C.C_NSSavePanel_NewSavePanel()
+	return MakeSavePanel(result_)
+}
+
+func (n NSSavePanel) Autorelease() NSSavePanel {
+	result_ := C.C_NSSavePanel_Autorelease(n.Ptr())
+	return MakeSavePanel(result_)
+}
+
+func (n NSSavePanel) Retain() NSSavePanel {
+	result_ := C.C_NSSavePanel_Retain(n.Ptr())
 	return MakeSavePanel(result_)
 }
 

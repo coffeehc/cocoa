@@ -73,22 +73,38 @@ func MakeMenu(ptr unsafe.Pointer) NSMenu {
 	}
 }
 
-func AllocMenu() NSMenu {
-	return MakeMenu(C.C_Menu_Alloc())
-}
-
-func (n NSMenu) InitWithTitle(title string) Menu {
+func (n NSMenu) InitWithTitle(title string) NSMenu {
 	result_ := C.C_NSMenu_InitWithTitle(n.Ptr(), foundation.NewString(title).Ptr())
 	return MakeMenu(result_)
 }
 
-func (n NSMenu) InitWithCoder(coder foundation.Coder) Menu {
+func (n NSMenu) InitWithCoder(coder foundation.Coder) NSMenu {
 	result_ := C.C_NSMenu_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeMenu(result_)
 }
 
-func (n NSMenu) Init() Menu {
+func AllocMenu() NSMenu {
+	result_ := C.C_NSMenu_AllocMenu()
+	return MakeMenu(result_)
+}
+
+func (n NSMenu) Init() NSMenu {
 	result_ := C.C_NSMenu_Init(n.Ptr())
+	return MakeMenu(result_)
+}
+
+func NewMenu() NSMenu {
+	result_ := C.C_NSMenu_NewMenu()
+	return MakeMenu(result_)
+}
+
+func (n NSMenu) Autorelease() NSMenu {
+	result_ := C.C_NSMenu_Autorelease(n.Ptr())
+	return MakeMenu(result_)
+}
+
+func (n NSMenu) Retain() NSMenu {
+	result_ := C.C_NSMenu_Retain(n.Ptr())
 	return MakeMenu(result_)
 }
 

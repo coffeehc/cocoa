@@ -11,9 +11,31 @@ void* C_NSURLResponse_InitWithURL_MIMEType_ExpectedContentLength_TextEncodingNam
     return result_;
 }
 
+void* C_NSURLResponse_AllocURLResponse() {
+    NSURLResponse* result_ = [NSURLResponse alloc];
+    return result_;
+}
+
 void* C_NSURLResponse_Init(void* ptr) {
     NSURLResponse* nSURLResponse = (NSURLResponse*)ptr;
     NSURLResponse* result_ = [nSURLResponse init];
+    return result_;
+}
+
+void* C_NSURLResponse_NewURLResponse() {
+    NSURLResponse* result_ = [NSURLResponse new];
+    return result_;
+}
+
+void* C_NSURLResponse_Autorelease(void* ptr) {
+    NSURLResponse* nSURLResponse = (NSURLResponse*)ptr;
+    NSURLResponse* result_ = [nSURLResponse autorelease];
+    return result_;
+}
+
+void* C_NSURLResponse_Retain(void* ptr) {
+    NSURLResponse* nSURLResponse = (NSURLResponse*)ptr;
+    NSURLResponse* result_ = [nSURLResponse retain];
     return result_;
 }
 

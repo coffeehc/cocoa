@@ -31,11 +31,27 @@ func MakeWindowFeatures(ptr unsafe.Pointer) WKWindowFeatures {
 }
 
 func AllocWindowFeatures() WKWindowFeatures {
-	return MakeWindowFeatures(C.C_WindowFeatures_Alloc())
+	result_ := C.C_WKWindowFeatures_AllocWindowFeatures()
+	return MakeWindowFeatures(result_)
 }
 
-func (w WKWindowFeatures) Init() WindowFeatures {
+func (w WKWindowFeatures) Init() WKWindowFeatures {
 	result_ := C.C_WKWindowFeatures_Init(w.Ptr())
+	return MakeWindowFeatures(result_)
+}
+
+func NewWindowFeatures() WKWindowFeatures {
+	result_ := C.C_WKWindowFeatures_NewWindowFeatures()
+	return MakeWindowFeatures(result_)
+}
+
+func (w WKWindowFeatures) Autorelease() WKWindowFeatures {
+	result_ := C.C_WKWindowFeatures_Autorelease(w.Ptr())
+	return MakeWindowFeatures(result_)
+}
+
+func (w WKWindowFeatures) Retain() WKWindowFeatures {
+	result_ := C.C_WKWindowFeatures_Retain(w.Ptr())
 	return MakeWindowFeatures(result_)
 }
 

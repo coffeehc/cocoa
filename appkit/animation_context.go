@@ -27,11 +27,27 @@ func MakeAnimationContext(ptr unsafe.Pointer) NSAnimationContext {
 }
 
 func AllocAnimationContext() NSAnimationContext {
-	return MakeAnimationContext(C.C_AnimationContext_Alloc())
+	result_ := C.C_NSAnimationContext_AllocAnimationContext()
+	return MakeAnimationContext(result_)
 }
 
-func (n NSAnimationContext) Init() AnimationContext {
+func (n NSAnimationContext) Init() NSAnimationContext {
 	result_ := C.C_NSAnimationContext_Init(n.Ptr())
+	return MakeAnimationContext(result_)
+}
+
+func NewAnimationContext() NSAnimationContext {
+	result_ := C.C_NSAnimationContext_NewAnimationContext()
+	return MakeAnimationContext(result_)
+}
+
+func (n NSAnimationContext) Autorelease() NSAnimationContext {
+	result_ := C.C_NSAnimationContext_Autorelease(n.Ptr())
+	return MakeAnimationContext(result_)
+}
+
+func (n NSAnimationContext) Retain() NSAnimationContext {
+	result_ := C.C_NSAnimationContext_Retain(n.Ptr())
 	return MakeAnimationContext(result_)
 }
 

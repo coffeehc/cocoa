@@ -5,9 +5,31 @@ void* C_NumberFormatter_Alloc() {
     return [NSNumberFormatter alloc];
 }
 
+void* C_NSNumberFormatter_AllocNumberFormatter() {
+    NSNumberFormatter* result_ = [NSNumberFormatter alloc];
+    return result_;
+}
+
 void* C_NSNumberFormatter_Init(void* ptr) {
     NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
     NSNumberFormatter* result_ = [nSNumberFormatter init];
+    return result_;
+}
+
+void* C_NSNumberFormatter_NewNumberFormatter() {
+    NSNumberFormatter* result_ = [NSNumberFormatter new];
+    return result_;
+}
+
+void* C_NSNumberFormatter_Autorelease(void* ptr) {
+    NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
+    NSNumberFormatter* result_ = [nSNumberFormatter autorelease];
+    return result_;
+}
+
+void* C_NSNumberFormatter_Retain(void* ptr) {
+    NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
+    NSNumberFormatter* result_ = [nSNumberFormatter retain];
     return result_;
 }
 
@@ -490,7 +512,7 @@ Dictionary C_NSNumberFormatter_TextAttributesForNegativeValues(void* ptr) {
 
 void C_NSNumberFormatter_SetTextAttributesForNegativeValues(void* ptr, Dictionary value) {
     NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
-    NSMutableDictionary* objcValue = [[NSMutableDictionary alloc] initWithCapacity: value.len];
+    NSMutableDictionary* objcValue = [NSMutableDictionary dictionaryWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueKeyData = (void**)value.key_data;
     	void** valueValueData = (void**)value.value_data;
@@ -527,7 +549,7 @@ Dictionary C_NSNumberFormatter_TextAttributesForPositiveValues(void* ptr) {
 
 void C_NSNumberFormatter_SetTextAttributesForPositiveValues(void* ptr, Dictionary value) {
     NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
-    NSMutableDictionary* objcValue = [[NSMutableDictionary alloc] initWithCapacity: value.len];
+    NSMutableDictionary* objcValue = [NSMutableDictionary dictionaryWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueKeyData = (void**)value.key_data;
     	void** valueValueData = (void**)value.value_data;
@@ -575,7 +597,7 @@ Dictionary C_NSNumberFormatter_TextAttributesForZero(void* ptr) {
 
 void C_NSNumberFormatter_SetTextAttributesForZero(void* ptr, Dictionary value) {
     NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
-    NSMutableDictionary* objcValue = [[NSMutableDictionary alloc] initWithCapacity: value.len];
+    NSMutableDictionary* objcValue = [NSMutableDictionary dictionaryWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueKeyData = (void**)value.key_data;
     	void** valueValueData = (void**)value.value_data;
@@ -623,7 +645,7 @@ Dictionary C_NSNumberFormatter_TextAttributesForNil(void* ptr) {
 
 void C_NSNumberFormatter_SetTextAttributesForNil(void* ptr, Dictionary value) {
     NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
-    NSMutableDictionary* objcValue = [[NSMutableDictionary alloc] initWithCapacity: value.len];
+    NSMutableDictionary* objcValue = [NSMutableDictionary dictionaryWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueKeyData = (void**)value.key_data;
     	void** valueValueData = (void**)value.value_data;
@@ -671,7 +693,7 @@ Dictionary C_NSNumberFormatter_TextAttributesForNotANumber(void* ptr) {
 
 void C_NSNumberFormatter_SetTextAttributesForNotANumber(void* ptr, Dictionary value) {
     NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
-    NSMutableDictionary* objcValue = [[NSMutableDictionary alloc] initWithCapacity: value.len];
+    NSMutableDictionary* objcValue = [NSMutableDictionary dictionaryWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueKeyData = (void**)value.key_data;
     	void** valueValueData = (void**)value.value_data;
@@ -708,7 +730,7 @@ Dictionary C_NSNumberFormatter_TextAttributesForPositiveInfinity(void* ptr) {
 
 void C_NSNumberFormatter_SetTextAttributesForPositiveInfinity(void* ptr, Dictionary value) {
     NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
-    NSMutableDictionary* objcValue = [[NSMutableDictionary alloc] initWithCapacity: value.len];
+    NSMutableDictionary* objcValue = [NSMutableDictionary dictionaryWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueKeyData = (void**)value.key_data;
     	void** valueValueData = (void**)value.value_data;
@@ -745,7 +767,7 @@ Dictionary C_NSNumberFormatter_TextAttributesForNegativeInfinity(void* ptr) {
 
 void C_NSNumberFormatter_SetTextAttributesForNegativeInfinity(void* ptr, Dictionary value) {
     NSNumberFormatter* nSNumberFormatter = (NSNumberFormatter*)ptr;
-    NSMutableDictionary* objcValue = [[NSMutableDictionary alloc] initWithCapacity: value.len];
+    NSMutableDictionary* objcValue = [NSMutableDictionary dictionaryWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueKeyData = (void**)value.key_data;
     	void** valueValueData = (void**)value.value_data;

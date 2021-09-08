@@ -5,7 +5,11 @@
 
 void* C_LayoutDimension_Alloc();
 
+void* C_NSLayoutDimension_AllocLayoutDimension();
 void* C_NSLayoutDimension_Init(void* ptr);
+void* C_NSLayoutDimension_NewLayoutDimension();
+void* C_NSLayoutDimension_Autorelease(void* ptr);
+void* C_NSLayoutDimension_Retain(void* ptr);
 void* C_NSLayoutDimension_ConstraintEqualToAnchor_Multiplier(void* ptr, void* anchor, double m);
 void* C_NSLayoutDimension_ConstraintEqualToAnchor_Multiplier_Constant(void* ptr, void* anchor, double m, double c);
 void* C_NSLayoutDimension_ConstraintEqualToConstant(void* ptr, double c);

@@ -26,11 +26,27 @@ func MakeDiffableDataSourceSnapshot(ptr unsafe.Pointer) NSDiffableDataSourceSnap
 }
 
 func AllocDiffableDataSourceSnapshot() NSDiffableDataSourceSnapshot {
-	return MakeDiffableDataSourceSnapshot(C.C_DiffableDataSourceSnapshot_Alloc())
+	result_ := C.C_NSDiffableDataSourceSnapshot_AllocDiffableDataSourceSnapshot()
+	return MakeDiffableDataSourceSnapshot(result_)
 }
 
-func (n NSDiffableDataSourceSnapshot) Init() DiffableDataSourceSnapshot {
+func (n NSDiffableDataSourceSnapshot) Init() NSDiffableDataSourceSnapshot {
 	result_ := C.C_NSDiffableDataSourceSnapshot_Init(n.Ptr())
+	return MakeDiffableDataSourceSnapshot(result_)
+}
+
+func NewDiffableDataSourceSnapshot() NSDiffableDataSourceSnapshot {
+	result_ := C.C_NSDiffableDataSourceSnapshot_NewDiffableDataSourceSnapshot()
+	return MakeDiffableDataSourceSnapshot(result_)
+}
+
+func (n NSDiffableDataSourceSnapshot) Autorelease() NSDiffableDataSourceSnapshot {
+	result_ := C.C_NSDiffableDataSourceSnapshot_Autorelease(n.Ptr())
+	return MakeDiffableDataSourceSnapshot(result_)
+}
+
+func (n NSDiffableDataSourceSnapshot) Retain() NSDiffableDataSourceSnapshot {
+	result_ := C.C_NSDiffableDataSourceSnapshot_Retain(n.Ptr())
 	return MakeDiffableDataSourceSnapshot(result_)
 }
 

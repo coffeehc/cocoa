@@ -5,9 +5,31 @@ void* C_LayoutXAxisAnchor_Alloc() {
     return [NSLayoutXAxisAnchor alloc];
 }
 
+void* C_NSLayoutXAxisAnchor_AllocLayoutXAxisAnchor() {
+    NSLayoutXAxisAnchor* result_ = [NSLayoutXAxisAnchor alloc];
+    return result_;
+}
+
 void* C_NSLayoutXAxisAnchor_Init(void* ptr) {
     NSLayoutXAxisAnchor* nSLayoutXAxisAnchor = (NSLayoutXAxisAnchor*)ptr;
     NSLayoutXAxisAnchor* result_ = [nSLayoutXAxisAnchor init];
+    return result_;
+}
+
+void* C_NSLayoutXAxisAnchor_NewLayoutXAxisAnchor() {
+    NSLayoutXAxisAnchor* result_ = [NSLayoutXAxisAnchor new];
+    return result_;
+}
+
+void* C_NSLayoutXAxisAnchor_Autorelease(void* ptr) {
+    NSLayoutXAxisAnchor* nSLayoutXAxisAnchor = (NSLayoutXAxisAnchor*)ptr;
+    NSLayoutXAxisAnchor* result_ = [nSLayoutXAxisAnchor autorelease];
+    return result_;
+}
+
+void* C_NSLayoutXAxisAnchor_Retain(void* ptr) {
+    NSLayoutXAxisAnchor* nSLayoutXAxisAnchor = (NSLayoutXAxisAnchor*)ptr;
+    NSLayoutXAxisAnchor* result_ = [nSLayoutXAxisAnchor retain];
     return result_;
 }
 

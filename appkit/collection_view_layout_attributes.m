@@ -5,12 +5,6 @@ void* C_CollectionViewLayoutAttributes_Alloc() {
     return [NSCollectionViewLayoutAttributes alloc];
 }
 
-void* C_NSCollectionViewLayoutAttributes_Init(void* ptr) {
-    NSCollectionViewLayoutAttributes* nSCollectionViewLayoutAttributes = (NSCollectionViewLayoutAttributes*)ptr;
-    NSCollectionViewLayoutAttributes* result_ = [nSCollectionViewLayoutAttributes init];
-    return result_;
-}
-
 void* C_NSCollectionViewLayoutAttributes_CollectionViewLayoutAttributes_LayoutAttributesForItemWithIndexPath(void* indexPath) {
     NSCollectionViewLayoutAttributes* result_ = [NSCollectionViewLayoutAttributes layoutAttributesForItemWithIndexPath:(NSIndexPath*)indexPath];
     return result_;
@@ -28,6 +22,34 @@ void* C_NSCollectionViewLayoutAttributes_CollectionViewLayoutAttributes_LayoutAt
 
 void* C_NSCollectionViewLayoutAttributes_CollectionViewLayoutAttributes_LayoutAttributesForInterItemGapBeforeIndexPath(void* indexPath) {
     NSCollectionViewLayoutAttributes* result_ = [NSCollectionViewLayoutAttributes layoutAttributesForInterItemGapBeforeIndexPath:(NSIndexPath*)indexPath];
+    return result_;
+}
+
+void* C_NSCollectionViewLayoutAttributes_AllocCollectionViewLayoutAttributes() {
+    NSCollectionViewLayoutAttributes* result_ = [NSCollectionViewLayoutAttributes alloc];
+    return result_;
+}
+
+void* C_NSCollectionViewLayoutAttributes_Init(void* ptr) {
+    NSCollectionViewLayoutAttributes* nSCollectionViewLayoutAttributes = (NSCollectionViewLayoutAttributes*)ptr;
+    NSCollectionViewLayoutAttributes* result_ = [nSCollectionViewLayoutAttributes init];
+    return result_;
+}
+
+void* C_NSCollectionViewLayoutAttributes_NewCollectionViewLayoutAttributes() {
+    NSCollectionViewLayoutAttributes* result_ = [NSCollectionViewLayoutAttributes new];
+    return result_;
+}
+
+void* C_NSCollectionViewLayoutAttributes_Autorelease(void* ptr) {
+    NSCollectionViewLayoutAttributes* nSCollectionViewLayoutAttributes = (NSCollectionViewLayoutAttributes*)ptr;
+    NSCollectionViewLayoutAttributes* result_ = [nSCollectionViewLayoutAttributes autorelease];
+    return result_;
+}
+
+void* C_NSCollectionViewLayoutAttributes_Retain(void* ptr) {
+    NSCollectionViewLayoutAttributes* nSCollectionViewLayoutAttributes = (NSCollectionViewLayoutAttributes*)ptr;
+    NSCollectionViewLayoutAttributes* result_ = [nSCollectionViewLayoutAttributes retain];
     return result_;
 }
 

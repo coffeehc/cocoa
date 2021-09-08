@@ -5,6 +5,21 @@ void* C_IndexSet_Alloc() {
     return [NSIndexSet alloc];
 }
 
+void* C_NSIndexSet_IndexSet_() {
+    NSIndexSet* result_ = [NSIndexSet indexSet];
+    return result_;
+}
+
+void* C_NSIndexSet_IndexSetWithIndex(unsigned int value) {
+    NSIndexSet* result_ = [NSIndexSet indexSetWithIndex:value];
+    return result_;
+}
+
+void* C_NSIndexSet_IndexSetWithIndexesInRange(NSRange _range) {
+    NSIndexSet* result_ = [NSIndexSet indexSetWithIndexesInRange:_range];
+    return result_;
+}
+
 void* C_NSIndexSet_InitWithIndex(void* ptr, unsigned int value) {
     NSIndexSet* nSIndexSet = (NSIndexSet*)ptr;
     NSIndexSet* result_ = [nSIndexSet initWithIndex:value];
@@ -23,24 +38,31 @@ void* C_NSIndexSet_InitWithIndexSet(void* ptr, void* indexSet) {
     return result_;
 }
 
+void* C_NSIndexSet_AllocIndexSet() {
+    NSIndexSet* result_ = [NSIndexSet alloc];
+    return result_;
+}
+
 void* C_NSIndexSet_Init(void* ptr) {
     NSIndexSet* nSIndexSet = (NSIndexSet*)ptr;
     NSIndexSet* result_ = [nSIndexSet init];
     return result_;
 }
 
-void* C_NSIndexSet_IndexSet_() {
-    NSIndexSet* result_ = [NSIndexSet indexSet];
+void* C_NSIndexSet_NewIndexSet() {
+    NSIndexSet* result_ = [NSIndexSet new];
     return result_;
 }
 
-void* C_NSIndexSet_IndexSetWithIndex(unsigned int value) {
-    NSIndexSet* result_ = [NSIndexSet indexSetWithIndex:value];
+void* C_NSIndexSet_Autorelease(void* ptr) {
+    NSIndexSet* nSIndexSet = (NSIndexSet*)ptr;
+    NSIndexSet* result_ = [nSIndexSet autorelease];
     return result_;
 }
 
-void* C_NSIndexSet_IndexSetWithIndexesInRange(NSRange _range) {
-    NSIndexSet* result_ = [NSIndexSet indexSetWithIndexesInRange:_range];
+void* C_NSIndexSet_Retain(void* ptr) {
+    NSIndexSet* nSIndexSet = (NSIndexSet*)ptr;
+    NSIndexSet* result_ = [nSIndexSet retain];
     return result_;
 }
 

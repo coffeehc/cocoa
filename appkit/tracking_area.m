@@ -7,7 +7,7 @@ void* C_TrackingArea_Alloc() {
 
 void* C_NSTrackingArea_InitWithRect_Options_Owner_UserInfo(void* ptr, CGRect rect, unsigned int options, void* owner, Dictionary userInfo) {
     NSTrackingArea* nSTrackingArea = (NSTrackingArea*)ptr;
-    NSMutableDictionary* objcUserInfo = [[NSMutableDictionary alloc] initWithCapacity: userInfo.len];
+    NSMutableDictionary* objcUserInfo = [NSMutableDictionary dictionaryWithCapacity:userInfo.len];
     if (userInfo.len > 0) {
     	void** userInfoKeyData = (void**)userInfo.key_data;
     	void** userInfoValueData = (void**)userInfo.value_data;
@@ -21,9 +21,31 @@ void* C_NSTrackingArea_InitWithRect_Options_Owner_UserInfo(void* ptr, CGRect rec
     return result_;
 }
 
+void* C_NSTrackingArea_AllocTrackingArea() {
+    NSTrackingArea* result_ = [NSTrackingArea alloc];
+    return result_;
+}
+
 void* C_NSTrackingArea_Init(void* ptr) {
     NSTrackingArea* nSTrackingArea = (NSTrackingArea*)ptr;
     NSTrackingArea* result_ = [nSTrackingArea init];
+    return result_;
+}
+
+void* C_NSTrackingArea_NewTrackingArea() {
+    NSTrackingArea* result_ = [NSTrackingArea new];
+    return result_;
+}
+
+void* C_NSTrackingArea_Autorelease(void* ptr) {
+    NSTrackingArea* nSTrackingArea = (NSTrackingArea*)ptr;
+    NSTrackingArea* result_ = [nSTrackingArea autorelease];
+    return result_;
+}
+
+void* C_NSTrackingArea_Retain(void* ptr) {
+    NSTrackingArea* nSTrackingArea = (NSTrackingArea*)ptr;
+    NSTrackingArea* result_ = [nSTrackingArea retain];
     return result_;
 }
 

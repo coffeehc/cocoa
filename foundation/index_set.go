@@ -34,42 +34,58 @@ func MakeIndexSet(ptr unsafe.Pointer) NSIndexSet {
 	}
 }
 
-func AllocIndexSet() NSIndexSet {
-	return MakeIndexSet(C.C_IndexSet_Alloc())
-}
-
-func (n NSIndexSet) InitWithIndex(value uint) IndexSet {
-	result_ := C.C_NSIndexSet_InitWithIndex(n.Ptr(), C.uint(value))
-	return MakeIndexSet(result_)
-}
-
-func (n NSIndexSet) InitWithIndexesInRange(_range Range) IndexSet {
-	result_ := C.C_NSIndexSet_InitWithIndexesInRange(n.Ptr(), *(*C.NSRange)(ToNSRangePointer(_range)))
-	return MakeIndexSet(result_)
-}
-
-func (n NSIndexSet) InitWithIndexSet(indexSet IndexSet) IndexSet {
-	result_ := C.C_NSIndexSet_InitWithIndexSet(n.Ptr(), objc.ExtractPtr(indexSet))
-	return MakeIndexSet(result_)
-}
-
-func (n NSIndexSet) Init() IndexSet {
-	result_ := C.C_NSIndexSet_Init(n.Ptr())
-	return MakeIndexSet(result_)
-}
-
-func IndexSet_() IndexSet {
+func IndexSet_() NSIndexSet {
 	result_ := C.C_NSIndexSet_IndexSet_()
 	return MakeIndexSet(result_)
 }
 
-func IndexSetWithIndex(value uint) IndexSet {
+func IndexSetWithIndex(value uint) NSIndexSet {
 	result_ := C.C_NSIndexSet_IndexSetWithIndex(C.uint(value))
 	return MakeIndexSet(result_)
 }
 
-func IndexSetWithIndexesInRange(_range Range) IndexSet {
+func IndexSetWithIndexesInRange(_range Range) NSIndexSet {
 	result_ := C.C_NSIndexSet_IndexSetWithIndexesInRange(*(*C.NSRange)(ToNSRangePointer(_range)))
+	return MakeIndexSet(result_)
+}
+
+func (n NSIndexSet) InitWithIndex(value uint) NSIndexSet {
+	result_ := C.C_NSIndexSet_InitWithIndex(n.Ptr(), C.uint(value))
+	return MakeIndexSet(result_)
+}
+
+func (n NSIndexSet) InitWithIndexesInRange(_range Range) NSIndexSet {
+	result_ := C.C_NSIndexSet_InitWithIndexesInRange(n.Ptr(), *(*C.NSRange)(ToNSRangePointer(_range)))
+	return MakeIndexSet(result_)
+}
+
+func (n NSIndexSet) InitWithIndexSet(indexSet IndexSet) NSIndexSet {
+	result_ := C.C_NSIndexSet_InitWithIndexSet(n.Ptr(), objc.ExtractPtr(indexSet))
+	return MakeIndexSet(result_)
+}
+
+func AllocIndexSet() NSIndexSet {
+	result_ := C.C_NSIndexSet_AllocIndexSet()
+	return MakeIndexSet(result_)
+}
+
+func (n NSIndexSet) Init() NSIndexSet {
+	result_ := C.C_NSIndexSet_Init(n.Ptr())
+	return MakeIndexSet(result_)
+}
+
+func NewIndexSet() NSIndexSet {
+	result_ := C.C_NSIndexSet_NewIndexSet()
+	return MakeIndexSet(result_)
+}
+
+func (n NSIndexSet) Autorelease() NSIndexSet {
+	result_ := C.C_NSIndexSet_Autorelease(n.Ptr())
+	return MakeIndexSet(result_)
+}
+
+func (n NSIndexSet) Retain() NSIndexSet {
+	result_ := C.C_NSIndexSet_Retain(n.Ptr())
 	return MakeIndexSet(result_)
 }
 

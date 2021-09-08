@@ -5,9 +5,31 @@ void* C_GridColumn_Alloc() {
     return [NSGridColumn alloc];
 }
 
+void* C_NSGridColumn_AllocGridColumn() {
+    NSGridColumn* result_ = [NSGridColumn alloc];
+    return result_;
+}
+
 void* C_NSGridColumn_Init(void* ptr) {
     NSGridColumn* nSGridColumn = (NSGridColumn*)ptr;
     NSGridColumn* result_ = [nSGridColumn init];
+    return result_;
+}
+
+void* C_NSGridColumn_NewGridColumn() {
+    NSGridColumn* result_ = [NSGridColumn new];
+    return result_;
+}
+
+void* C_NSGridColumn_Autorelease(void* ptr) {
+    NSGridColumn* nSGridColumn = (NSGridColumn*)ptr;
+    NSGridColumn* result_ = [nSGridColumn autorelease];
+    return result_;
+}
+
+void* C_NSGridColumn_Retain(void* ptr) {
+    NSGridColumn* nSGridColumn = (NSGridColumn*)ptr;
+    NSGridColumn* result_ = [nSGridColumn retain];
     return result_;
 }
 

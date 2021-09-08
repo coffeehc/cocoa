@@ -56,22 +56,63 @@ func MakePopUpButton(ptr unsafe.Pointer) NSPopUpButton {
 	}
 }
 
-func AllocPopUpButton() NSPopUpButton {
-	return MakePopUpButton(C.C_PopUpButton_Alloc())
-}
-
-func (n NSPopUpButton) InitWithFrame_PullsDown(buttonFrame foundation.Rect, flag bool) PopUpButton {
+func (n NSPopUpButton) InitWithFrame_PullsDown(buttonFrame foundation.Rect, flag bool) NSPopUpButton {
 	result_ := C.C_NSPopUpButton_InitWithFrame_PullsDown(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(buttonFrame))), C.bool(flag))
 	return MakePopUpButton(result_)
 }
 
-func (n NSPopUpButton) InitWithCoder(coder foundation.Coder) PopUpButton {
+func PopUpButton_CheckboxWithTitle_Target_Action(title string, target objc.Object, action objc.Selector) NSPopUpButton {
+	result_ := C.C_NSPopUpButton_PopUpButton_CheckboxWithTitle_Target_Action(foundation.NewString(title).Ptr(), objc.ExtractPtr(target), unsafe.Pointer(action))
+	return MakePopUpButton(result_)
+}
+
+func PopUpButton_ButtonWithImage_Target_Action(image Image, target objc.Object, action objc.Selector) NSPopUpButton {
+	result_ := C.C_NSPopUpButton_PopUpButton_ButtonWithImage_Target_Action(objc.ExtractPtr(image), objc.ExtractPtr(target), unsafe.Pointer(action))
+	return MakePopUpButton(result_)
+}
+
+func PopUpButton_RadioButtonWithTitle_Target_Action(title string, target objc.Object, action objc.Selector) NSPopUpButton {
+	result_ := C.C_NSPopUpButton_PopUpButton_RadioButtonWithTitle_Target_Action(foundation.NewString(title).Ptr(), objc.ExtractPtr(target), unsafe.Pointer(action))
+	return MakePopUpButton(result_)
+}
+
+func PopUpButton_ButtonWithTitle_Image_Target_Action(title string, image Image, target objc.Object, action objc.Selector) NSPopUpButton {
+	result_ := C.C_NSPopUpButton_PopUpButton_ButtonWithTitle_Image_Target_Action(foundation.NewString(title).Ptr(), objc.ExtractPtr(image), objc.ExtractPtr(target), unsafe.Pointer(action))
+	return MakePopUpButton(result_)
+}
+
+func PopUpButton_ButtonWithTitle_Target_Action(title string, target objc.Object, action objc.Selector) NSPopUpButton {
+	result_ := C.C_NSPopUpButton_PopUpButton_ButtonWithTitle_Target_Action(foundation.NewString(title).Ptr(), objc.ExtractPtr(target), unsafe.Pointer(action))
+	return MakePopUpButton(result_)
+}
+
+func (n NSPopUpButton) InitWithCoder(coder foundation.Coder) NSPopUpButton {
 	result_ := C.C_NSPopUpButton_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakePopUpButton(result_)
 }
 
-func (n NSPopUpButton) Init() PopUpButton {
+func (n NSPopUpButton) Init() NSPopUpButton {
 	result_ := C.C_NSPopUpButton_Init(n.Ptr())
+	return MakePopUpButton(result_)
+}
+
+func AllocPopUpButton() NSPopUpButton {
+	result_ := C.C_NSPopUpButton_AllocPopUpButton()
+	return MakePopUpButton(result_)
+}
+
+func NewPopUpButton() NSPopUpButton {
+	result_ := C.C_NSPopUpButton_NewPopUpButton()
+	return MakePopUpButton(result_)
+}
+
+func (n NSPopUpButton) Autorelease() NSPopUpButton {
+	result_ := C.C_NSPopUpButton_Autorelease(n.Ptr())
+	return MakePopUpButton(result_)
+}
+
+func (n NSPopUpButton) Retain() NSPopUpButton {
+	result_ := C.C_NSPopUpButton_Retain(n.Ptr())
 	return MakePopUpButton(result_)
 }
 

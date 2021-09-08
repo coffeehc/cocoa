@@ -17,6 +17,28 @@ void* C_NSController_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSController_AllocController() {
+    NSController* result_ = [NSController alloc];
+    return result_;
+}
+
+void* C_NSController_NewController() {
+    NSController* result_ = [NSController new];
+    return result_;
+}
+
+void* C_NSController_Autorelease(void* ptr) {
+    NSController* nSController = (NSController*)ptr;
+    NSController* result_ = [nSController autorelease];
+    return result_;
+}
+
+void* C_NSController_Retain(void* ptr) {
+    NSController* nSController = (NSController*)ptr;
+    NSController* result_ = [nSController retain];
+    return result_;
+}
+
 void C_NSController_ObjectDidBeginEditing(void* ptr, void* editor) {
     NSController* nSController = (NSController*)ptr;
     [nSController objectDidBeginEditing:(id)editor];

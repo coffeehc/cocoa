@@ -5,7 +5,11 @@
 
 void* C_Pasteboard_Alloc();
 
+void* C_NSPasteboard_AllocPasteboard();
 void* C_NSPasteboard_Init(void* ptr);
+void* C_NSPasteboard_NewPasteboard();
+void* C_NSPasteboard_Autorelease(void* ptr);
+void* C_NSPasteboard_Retain(void* ptr);
 void* C_NSPasteboard_PasteboardByFilteringData_OfType(void* data, void* _type);
 void* C_NSPasteboard_PasteboardByFilteringFile(void* filename);
 void* C_NSPasteboard_PasteboardByFilteringTypesInPasteboard(void* pboard);

@@ -23,6 +23,28 @@ void* C_NSTabView_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSTabView_AllocTabView() {
+    NSTabView* result_ = [NSTabView alloc];
+    return result_;
+}
+
+void* C_NSTabView_NewTabView() {
+    NSTabView* result_ = [NSTabView new];
+    return result_;
+}
+
+void* C_NSTabView_Autorelease(void* ptr) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    NSTabView* result_ = [nSTabView autorelease];
+    return result_;
+}
+
+void* C_NSTabView_Retain(void* ptr) {
+    NSTabView* nSTabView = (NSTabView*)ptr;
+    NSTabView* result_ = [nSTabView retain];
+    return result_;
+}
+
 void C_NSTabView_AddTabViewItem(void* ptr, void* tabViewItem) {
     NSTabView* nSTabView = (NSTabView*)ptr;
     [nSTabView addTabViewItem:(NSTabViewItem*)tabViewItem];
@@ -138,7 +160,7 @@ Array C_NSTabView_TabViewItems(void* ptr) {
 
 void C_NSTabView_SetTabViewItems(void* ptr, Array value) {
     NSTabView* nSTabView = (NSTabView*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

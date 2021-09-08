@@ -6,6 +6,9 @@
 void* C_CollectionLayoutSection_Alloc();
 
 void* C_NSCollectionLayoutSection_CollectionLayoutSection_SectionWithGroup(void* group);
+void* C_NSCollectionLayoutSection_AllocCollectionLayoutSection();
+void* C_NSCollectionLayoutSection_Autorelease(void* ptr);
+void* C_NSCollectionLayoutSection_Retain(void* ptr);
 int C_NSCollectionLayoutSection_OrthogonalScrollingBehavior(void* ptr);
 void C_NSCollectionLayoutSection_SetOrthogonalScrollingBehavior(void* ptr, int value);
 double C_NSCollectionLayoutSection_InterGroupSpacing(void* ptr);

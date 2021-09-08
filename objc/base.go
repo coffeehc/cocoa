@@ -1,7 +1,5 @@
 package objc
 
-// #cgo CFLAGS: -x objective-c
-// #cgo LDFLAGS: -framework Foundation
 // #import "base.h"
 import "C"
 import "runtime/cgo"

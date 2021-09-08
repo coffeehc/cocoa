@@ -23,17 +23,33 @@ func MakePressureConfiguration(ptr unsafe.Pointer) NSPressureConfiguration {
 	}
 }
 
-func AllocPressureConfiguration() NSPressureConfiguration {
-	return MakePressureConfiguration(C.C_PressureConfiguration_Alloc())
-}
-
-func (n NSPressureConfiguration) InitWithPressureBehavior(pressureBehavior PressureBehavior) PressureConfiguration {
+func (n NSPressureConfiguration) InitWithPressureBehavior(pressureBehavior PressureBehavior) NSPressureConfiguration {
 	result_ := C.C_NSPressureConfiguration_InitWithPressureBehavior(n.Ptr(), C.int(int(pressureBehavior)))
 	return MakePressureConfiguration(result_)
 }
 
-func (n NSPressureConfiguration) Init() PressureConfiguration {
+func AllocPressureConfiguration() NSPressureConfiguration {
+	result_ := C.C_NSPressureConfiguration_AllocPressureConfiguration()
+	return MakePressureConfiguration(result_)
+}
+
+func (n NSPressureConfiguration) Init() NSPressureConfiguration {
 	result_ := C.C_NSPressureConfiguration_Init(n.Ptr())
+	return MakePressureConfiguration(result_)
+}
+
+func NewPressureConfiguration() NSPressureConfiguration {
+	result_ := C.C_NSPressureConfiguration_NewPressureConfiguration()
+	return MakePressureConfiguration(result_)
+}
+
+func (n NSPressureConfiguration) Autorelease() NSPressureConfiguration {
+	result_ := C.C_NSPressureConfiguration_Autorelease(n.Ptr())
+	return MakePressureConfiguration(result_)
+}
+
+func (n NSPressureConfiguration) Retain() NSPressureConfiguration {
+	result_ := C.C_NSPressureConfiguration_Retain(n.Ptr())
 	return MakePressureConfiguration(result_)
 }
 

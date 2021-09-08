@@ -5,7 +5,11 @@
 
 void* C_DockTile_Alloc();
 
+void* C_NSDockTile_AllocDockTile();
 void* C_NSDockTile_Init(void* ptr);
+void* C_NSDockTile_NewDockTile();
+void* C_NSDockTile_Autorelease(void* ptr);
+void* C_NSDockTile_Retain(void* ptr);
 void C_NSDockTile_Display(void* ptr);
 void* C_NSDockTile_ContentView(void* ptr);
 void C_NSDockTile_SetContentView(void* ptr, void* value);

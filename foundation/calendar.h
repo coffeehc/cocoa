@@ -5,6 +5,9 @@
 
 void* C_Calendar_Alloc();
 
+void* C_NSCalendar_AllocCalendar();
+void* C_NSCalendar_Autorelease(void* ptr);
+void* C_NSCalendar_Retain(void* ptr);
 void* C_NSCalendar_CalendarWithIdentifier(void* calendarIdentifierConstant);
 void* C_NSCalendar_InitWithCalendarIdentifier(void* ptr, void* ident);
 bool C_NSCalendar_Date_MatchesComponents(void* ptr, void* date, void* components);

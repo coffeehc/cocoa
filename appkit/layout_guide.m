@@ -5,9 +5,31 @@ void* C_LayoutGuide_Alloc() {
     return [NSLayoutGuide alloc];
 }
 
+void* C_NSLayoutGuide_AllocLayoutGuide() {
+    NSLayoutGuide* result_ = [NSLayoutGuide alloc];
+    return result_;
+}
+
 void* C_NSLayoutGuide_Init(void* ptr) {
     NSLayoutGuide* nSLayoutGuide = (NSLayoutGuide*)ptr;
     NSLayoutGuide* result_ = [nSLayoutGuide init];
+    return result_;
+}
+
+void* C_NSLayoutGuide_NewLayoutGuide() {
+    NSLayoutGuide* result_ = [NSLayoutGuide new];
+    return result_;
+}
+
+void* C_NSLayoutGuide_Autorelease(void* ptr) {
+    NSLayoutGuide* nSLayoutGuide = (NSLayoutGuide*)ptr;
+    NSLayoutGuide* result_ = [nSLayoutGuide autorelease];
+    return result_;
+}
+
+void* C_NSLayoutGuide_Retain(void* ptr) {
+    NSLayoutGuide* nSLayoutGuide = (NSLayoutGuide*)ptr;
+    NSLayoutGuide* result_ = [nSLayoutGuide retain];
     return result_;
 }
 

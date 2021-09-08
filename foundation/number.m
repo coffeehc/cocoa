@@ -11,9 +11,31 @@ void* C_NSNumber_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSNumber_AllocNumber() {
+    NSNumber* result_ = [NSNumber alloc];
+    return result_;
+}
+
 void* C_NSNumber_Init(void* ptr) {
     NSNumber* nSNumber = (NSNumber*)ptr;
     NSNumber* result_ = [nSNumber init];
+    return result_;
+}
+
+void* C_NSNumber_NewNumber() {
+    NSNumber* result_ = [NSNumber new];
+    return result_;
+}
+
+void* C_NSNumber_Autorelease(void* ptr) {
+    NSNumber* nSNumber = (NSNumber*)ptr;
+    NSNumber* result_ = [nSNumber autorelease];
+    return result_;
+}
+
+void* C_NSNumber_Retain(void* ptr) {
+    NSNumber* nSNumber = (NSNumber*)ptr;
+    NSNumber* result_ = [nSNumber retain];
     return result_;
 }
 

@@ -29,6 +29,28 @@ void* C_NSDateInterval_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSDateInterval_AllocDateInterval() {
+    NSDateInterval* result_ = [NSDateInterval alloc];
+    return result_;
+}
+
+void* C_NSDateInterval_NewDateInterval() {
+    NSDateInterval* result_ = [NSDateInterval new];
+    return result_;
+}
+
+void* C_NSDateInterval_Autorelease(void* ptr) {
+    NSDateInterval* nSDateInterval = (NSDateInterval*)ptr;
+    NSDateInterval* result_ = [nSDateInterval autorelease];
+    return result_;
+}
+
+void* C_NSDateInterval_Retain(void* ptr) {
+    NSDateInterval* nSDateInterval = (NSDateInterval*)ptr;
+    NSDateInterval* result_ = [nSDateInterval retain];
+    return result_;
+}
+
 int C_NSDateInterval_Compare(void* ptr, void* dateInterval) {
     NSDateInterval* nSDateInterval = (NSDateInterval*)ptr;
     NSComparisonResult result_ = [nSDateInterval compare:(NSDateInterval*)dateInterval];

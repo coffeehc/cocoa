@@ -47,11 +47,27 @@ func MakeWebViewConfiguration(ptr unsafe.Pointer) WKWebViewConfiguration {
 }
 
 func AllocWebViewConfiguration() WKWebViewConfiguration {
-	return MakeWebViewConfiguration(C.C_WebViewConfiguration_Alloc())
+	result_ := C.C_WKWebViewConfiguration_AllocWebViewConfiguration()
+	return MakeWebViewConfiguration(result_)
 }
 
-func (w WKWebViewConfiguration) Init() WebViewConfiguration {
+func (w WKWebViewConfiguration) Init() WKWebViewConfiguration {
 	result_ := C.C_WKWebViewConfiguration_Init(w.Ptr())
+	return MakeWebViewConfiguration(result_)
+}
+
+func NewWebViewConfiguration() WKWebViewConfiguration {
+	result_ := C.C_WKWebViewConfiguration_NewWebViewConfiguration()
+	return MakeWebViewConfiguration(result_)
+}
+
+func (w WKWebViewConfiguration) Autorelease() WKWebViewConfiguration {
+	result_ := C.C_WKWebViewConfiguration_Autorelease(w.Ptr())
+	return MakeWebViewConfiguration(result_)
+}
+
+func (w WKWebViewConfiguration) Retain() WKWebViewConfiguration {
+	result_ := C.C_WKWebViewConfiguration_Retain(w.Ptr())
 	return MakeWebViewConfiguration(result_)
 }
 

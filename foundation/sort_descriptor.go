@@ -27,37 +27,53 @@ func MakeSortDescriptor(ptr unsafe.Pointer) NSSortDescriptor {
 	}
 }
 
-func AllocSortDescriptor() NSSortDescriptor {
-	return MakeSortDescriptor(C.C_SortDescriptor_Alloc())
-}
-
-func (n NSSortDescriptor) InitWithKey_Ascending(key string, ascending bool) SortDescriptor {
-	result_ := C.C_NSSortDescriptor_InitWithKey_Ascending(n.Ptr(), NewString(key).Ptr(), C.bool(ascending))
-	return MakeSortDescriptor(result_)
-}
-
-func (n NSSortDescriptor) InitWithKey_Ascending_Selector(key string, ascending bool, selector objc.Selector) SortDescriptor {
-	result_ := C.C_NSSortDescriptor_InitWithKey_Ascending_Selector(n.Ptr(), NewString(key).Ptr(), C.bool(ascending), unsafe.Pointer(selector))
-	return MakeSortDescriptor(result_)
-}
-
-func (n NSSortDescriptor) InitWithCoder(coder Coder) SortDescriptor {
-	result_ := C.C_NSSortDescriptor_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeSortDescriptor(result_)
-}
-
-func (n NSSortDescriptor) Init() SortDescriptor {
-	result_ := C.C_NSSortDescriptor_Init(n.Ptr())
-	return MakeSortDescriptor(result_)
-}
-
-func SortDescriptorWithKey_Ascending(key string, ascending bool) SortDescriptor {
+func SortDescriptorWithKey_Ascending(key string, ascending bool) NSSortDescriptor {
 	result_ := C.C_NSSortDescriptor_SortDescriptorWithKey_Ascending(NewString(key).Ptr(), C.bool(ascending))
 	return MakeSortDescriptor(result_)
 }
 
-func SortDescriptorWithKey_Ascending_Selector(key string, ascending bool, selector objc.Selector) SortDescriptor {
+func (n NSSortDescriptor) InitWithKey_Ascending(key string, ascending bool) NSSortDescriptor {
+	result_ := C.C_NSSortDescriptor_InitWithKey_Ascending(n.Ptr(), NewString(key).Ptr(), C.bool(ascending))
+	return MakeSortDescriptor(result_)
+}
+
+func SortDescriptorWithKey_Ascending_Selector(key string, ascending bool, selector objc.Selector) NSSortDescriptor {
 	result_ := C.C_NSSortDescriptor_SortDescriptorWithKey_Ascending_Selector(NewString(key).Ptr(), C.bool(ascending), unsafe.Pointer(selector))
+	return MakeSortDescriptor(result_)
+}
+
+func (n NSSortDescriptor) InitWithKey_Ascending_Selector(key string, ascending bool, selector objc.Selector) NSSortDescriptor {
+	result_ := C.C_NSSortDescriptor_InitWithKey_Ascending_Selector(n.Ptr(), NewString(key).Ptr(), C.bool(ascending), unsafe.Pointer(selector))
+	return MakeSortDescriptor(result_)
+}
+
+func (n NSSortDescriptor) InitWithCoder(coder Coder) NSSortDescriptor {
+	result_ := C.C_NSSortDescriptor_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeSortDescriptor(result_)
+}
+
+func AllocSortDescriptor() NSSortDescriptor {
+	result_ := C.C_NSSortDescriptor_AllocSortDescriptor()
+	return MakeSortDescriptor(result_)
+}
+
+func (n NSSortDescriptor) Init() NSSortDescriptor {
+	result_ := C.C_NSSortDescriptor_Init(n.Ptr())
+	return MakeSortDescriptor(result_)
+}
+
+func NewSortDescriptor() NSSortDescriptor {
+	result_ := C.C_NSSortDescriptor_NewSortDescriptor()
+	return MakeSortDescriptor(result_)
+}
+
+func (n NSSortDescriptor) Autorelease() NSSortDescriptor {
+	result_ := C.C_NSSortDescriptor_Autorelease(n.Ptr())
+	return MakeSortDescriptor(result_)
+}
+
+func (n NSSortDescriptor) Retain() NSSortDescriptor {
+	result_ := C.C_NSSortDescriptor_Retain(n.Ptr())
 	return MakeSortDescriptor(result_)
 }
 

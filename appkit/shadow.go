@@ -30,12 +30,28 @@ func MakeShadow(ptr unsafe.Pointer) NSShadow {
 	}
 }
 
-func AllocShadow() NSShadow {
-	return MakeShadow(C.C_Shadow_Alloc())
+func (n NSShadow) Init() NSShadow {
+	result_ := C.C_NSShadow_Init(n.Ptr())
+	return MakeShadow(result_)
 }
 
-func (n NSShadow) Init() Shadow {
-	result_ := C.C_NSShadow_Init(n.Ptr())
+func AllocShadow() NSShadow {
+	result_ := C.C_NSShadow_AllocShadow()
+	return MakeShadow(result_)
+}
+
+func NewShadow() NSShadow {
+	result_ := C.C_NSShadow_NewShadow()
+	return MakeShadow(result_)
+}
+
+func (n NSShadow) Autorelease() NSShadow {
+	result_ := C.C_NSShadow_Autorelease(n.Ptr())
+	return MakeShadow(result_)
+}
+
+func (n NSShadow) Retain() NSShadow {
+	result_ := C.C_NSShadow_Retain(n.Ptr())
 	return MakeShadow(result_)
 }
 

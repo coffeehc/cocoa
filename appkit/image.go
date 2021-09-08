@@ -74,62 +74,83 @@ func MakeImage(ptr unsafe.Pointer) NSImage {
 	}
 }
 
-func AllocImage() NSImage {
-	return MakeImage(C.C_Image_Alloc())
+func ImageWithSystemSymbolName_AccessibilityDescription(symbolName string, description string) NSImage {
+	result_ := C.C_NSImage_ImageWithSystemSymbolName_AccessibilityDescription(foundation.NewString(symbolName).Ptr(), foundation.NewString(description).Ptr())
+	return MakeImage(result_)
 }
 
-func (n NSImage) InitByReferencingFile(fileName string) Image {
+func (n NSImage) InitByReferencingFile(fileName string) NSImage {
 	result_ := C.C_NSImage_InitByReferencingFile(n.Ptr(), foundation.NewString(fileName).Ptr())
 	return MakeImage(result_)
 }
 
-func (n NSImage) InitByReferencingURL(url foundation.URL) Image {
+func (n NSImage) InitByReferencingURL(url foundation.URL) NSImage {
 	result_ := C.C_NSImage_InitByReferencingURL(n.Ptr(), objc.ExtractPtr(url))
 	return MakeImage(result_)
 }
 
-func (n NSImage) InitWithContentsOfFile(fileName string) Image {
+func (n NSImage) InitWithContentsOfFile(fileName string) NSImage {
 	result_ := C.C_NSImage_InitWithContentsOfFile(n.Ptr(), foundation.NewString(fileName).Ptr())
 	return MakeImage(result_)
 }
 
-func (n NSImage) InitWithContentsOfURL(url foundation.URL) Image {
+func (n NSImage) InitWithContentsOfURL(url foundation.URL) NSImage {
 	result_ := C.C_NSImage_InitWithContentsOfURL(n.Ptr(), objc.ExtractPtr(url))
 	return MakeImage(result_)
 }
 
-func (n NSImage) InitWithData(data []byte) Image {
+func (n NSImage) InitWithData(data []byte) NSImage {
 	result_ := C.C_NSImage_InitWithData(n.Ptr(), foundation.NewData(data).Ptr())
 	return MakeImage(result_)
 }
 
-func (n NSImage) InitWithDataIgnoringOrientation(data []byte) Image {
+func (n NSImage) InitWithDataIgnoringOrientation(data []byte) NSImage {
 	result_ := C.C_NSImage_InitWithDataIgnoringOrientation(n.Ptr(), foundation.NewData(data).Ptr())
 	return MakeImage(result_)
 }
 
-func (n NSImage) InitWithCGImage_Size(cgImage coregraphics.ImageRef, size foundation.Size) Image {
+func (n NSImage) InitWithCGImage_Size(cgImage coregraphics.ImageRef, size foundation.Size) NSImage {
 	result_ := C.C_NSImage_InitWithCGImage_Size(n.Ptr(), unsafe.Pointer(cgImage), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(size))))
 	return MakeImage(result_)
 }
 
-func (n NSImage) InitWithPasteboard(pasteboard Pasteboard) Image {
+func (n NSImage) InitWithPasteboard(pasteboard Pasteboard) NSImage {
 	result_ := C.C_NSImage_InitWithPasteboard(n.Ptr(), objc.ExtractPtr(pasteboard))
 	return MakeImage(result_)
 }
 
-func (n NSImage) InitWithCoder(coder foundation.Coder) Image {
+func (n NSImage) InitWithCoder(coder foundation.Coder) NSImage {
 	result_ := C.C_NSImage_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeImage(result_)
 }
 
-func (n NSImage) InitWithSize(size foundation.Size) Image {
+func (n NSImage) InitWithSize(size foundation.Size) NSImage {
 	result_ := C.C_NSImage_InitWithSize(n.Ptr(), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(size))))
 	return MakeImage(result_)
 }
 
-func (n NSImage) Init() Image {
+func AllocImage() NSImage {
+	result_ := C.C_NSImage_AllocImage()
+	return MakeImage(result_)
+}
+
+func (n NSImage) Init() NSImage {
 	result_ := C.C_NSImage_Init(n.Ptr())
+	return MakeImage(result_)
+}
+
+func NewImage() NSImage {
+	result_ := C.C_NSImage_NewImage()
+	return MakeImage(result_)
+}
+
+func (n NSImage) Autorelease() NSImage {
+	result_ := C.C_NSImage_Autorelease(n.Ptr())
+	return MakeImage(result_)
+}
+
+func (n NSImage) Retain() NSImage {
+	result_ := C.C_NSImage_Retain(n.Ptr())
 	return MakeImage(result_)
 }
 
@@ -146,11 +167,6 @@ func (n NSImage) SetName(_string ImageName) bool {
 func (n NSImage) Name() ImageName {
 	result_ := C.C_NSImage_Name(n.Ptr())
 	return ImageName(foundation.MakeString(result_).String())
-}
-
-func ImageWithSystemSymbolName_AccessibilityDescription(symbolName string, description string) Image {
-	result_ := C.C_NSImage_ImageWithSystemSymbolName_AccessibilityDescription(foundation.NewString(symbolName).Ptr(), foundation.NewString(description).Ptr())
-	return MakeImage(result_)
 }
 
 func (n NSImage) ImageWithSymbolConfiguration(configuration ImageSymbolConfiguration) Image {

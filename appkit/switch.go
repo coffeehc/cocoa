@@ -25,22 +25,38 @@ func MakeSwitch(ptr unsafe.Pointer) NSSwitch {
 	}
 }
 
-func AllocSwitch() NSSwitch {
-	return MakeSwitch(C.C_Switch_Alloc())
-}
-
-func (n NSSwitch) InitWithFrame(frameRect foundation.Rect) Switch {
+func (n NSSwitch) InitWithFrame(frameRect foundation.Rect) NSSwitch {
 	result_ := C.C_NSSwitch_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeSwitch(result_)
 }
 
-func (n NSSwitch) InitWithCoder(coder foundation.Coder) Switch {
+func (n NSSwitch) InitWithCoder(coder foundation.Coder) NSSwitch {
 	result_ := C.C_NSSwitch_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeSwitch(result_)
 }
 
-func (n NSSwitch) Init() Switch {
+func (n NSSwitch) Init() NSSwitch {
 	result_ := C.C_NSSwitch_Init(n.Ptr())
+	return MakeSwitch(result_)
+}
+
+func AllocSwitch() NSSwitch {
+	result_ := C.C_NSSwitch_AllocSwitch()
+	return MakeSwitch(result_)
+}
+
+func NewSwitch() NSSwitch {
+	result_ := C.C_NSSwitch_NewSwitch()
+	return MakeSwitch(result_)
+}
+
+func (n NSSwitch) Autorelease() NSSwitch {
+	result_ := C.C_NSSwitch_Autorelease(n.Ptr())
+	return MakeSwitch(result_)
+}
+
+func (n NSSwitch) Retain() NSSwitch {
+	result_ := C.C_NSSwitch_Retain(n.Ptr())
 	return MakeSwitch(result_)
 }
 

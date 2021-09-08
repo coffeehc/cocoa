@@ -5,9 +5,12 @@
 
 void* C_Locale_Alloc();
 
+void* C_NSLocale_LocaleWithLocaleIdentifier(void* ident);
 void* C_NSLocale_InitWithLocaleIdentifier(void* ptr, void* _string);
 void* C_NSLocale_InitWithCoder(void* ptr, void* coder);
-void* C_NSLocale_LocaleWithLocaleIdentifier(void* ident);
+void* C_NSLocale_AllocLocale();
+void* C_NSLocale_Autorelease(void* ptr);
+void* C_NSLocale_Retain(void* ptr);
 void* C_NSLocale_CanonicalLocaleIdentifierFromString(void* _string);
 Dictionary C_NSLocale_ComponentsFromLocaleIdentifier(void* _string);
 void* C_NSLocale_LocaleIdentifierFromComponents(Dictionary dict);

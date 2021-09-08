@@ -33,11 +33,27 @@ func MakeWindowTabGroup(ptr unsafe.Pointer) NSWindowTabGroup {
 }
 
 func AllocWindowTabGroup() NSWindowTabGroup {
-	return MakeWindowTabGroup(C.C_WindowTabGroup_Alloc())
+	result_ := C.C_NSWindowTabGroup_AllocWindowTabGroup()
+	return MakeWindowTabGroup(result_)
 }
 
-func (n NSWindowTabGroup) Init() WindowTabGroup {
+func (n NSWindowTabGroup) Init() NSWindowTabGroup {
 	result_ := C.C_NSWindowTabGroup_Init(n.Ptr())
+	return MakeWindowTabGroup(result_)
+}
+
+func NewWindowTabGroup() NSWindowTabGroup {
+	result_ := C.C_NSWindowTabGroup_NewWindowTabGroup()
+	return MakeWindowTabGroup(result_)
+}
+
+func (n NSWindowTabGroup) Autorelease() NSWindowTabGroup {
+	result_ := C.C_NSWindowTabGroup_Autorelease(n.Ptr())
+	return MakeWindowTabGroup(result_)
+}
+
+func (n NSWindowTabGroup) Retain() NSWindowTabGroup {
+	result_ := C.C_NSWindowTabGroup_Retain(n.Ptr())
 	return MakeWindowTabGroup(result_)
 }
 

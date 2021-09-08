@@ -13,7 +13,7 @@ void* Data_New(void* data, int len) {
     if (len <= 0) {
         return [NSData data];
     }
-    return [[NSData alloc] initWithBytes:(Byte *)data length:len];
+    return [NSData dataWithBytes:(Byte *)data length:len];
 }
 
 Data Data_ToBytes(void* ptr) {
@@ -25,9 +25,10 @@ Data Data_ToBytes(void* ptr) {
     return array;
 }
 
-void* Array_New(void* data, int len) {
-    if (len <= 0) {
-        return [NSData data];
-    }
-    return [[NSData alloc] initWithBytes:(Byte *)data length:len];
+void* Selector_SelectorFromString(const char* name) {
+    return NSSelectorFromString([NSString stringWithUTF8String:name]);
+}
+
+const char* Selector_StringFromSelector(void *selector) {
+    return [NSStringFromSelector((SEL)selector) UTF8String];
 }

@@ -5,9 +5,31 @@ void* C_Event_Alloc() {
     return [NSEvent alloc];
 }
 
+void* C_NSEvent_AllocEvent() {
+    NSEvent* result_ = [NSEvent alloc];
+    return result_;
+}
+
 void* C_NSEvent_Init(void* ptr) {
     NSEvent* nSEvent = (NSEvent*)ptr;
     NSEvent* result_ = [nSEvent init];
+    return result_;
+}
+
+void* C_NSEvent_NewEvent() {
+    NSEvent* result_ = [NSEvent new];
+    return result_;
+}
+
+void* C_NSEvent_Autorelease(void* ptr) {
+    NSEvent* nSEvent = (NSEvent*)ptr;
+    NSEvent* result_ = [nSEvent autorelease];
+    return result_;
+}
+
+void* C_NSEvent_Retain(void* ptr) {
+    NSEvent* nSEvent = (NSEvent*)ptr;
+    NSEvent* result_ = [nSEvent retain];
     return result_;
 }
 

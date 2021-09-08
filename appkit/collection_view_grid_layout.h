@@ -5,7 +5,11 @@
 
 void* C_CollectionViewGridLayout_Alloc();
 
+void* C_NSCollectionViewGridLayout_AllocCollectionViewGridLayout();
 void* C_NSCollectionViewGridLayout_Init(void* ptr);
+void* C_NSCollectionViewGridLayout_NewCollectionViewGridLayout();
+void* C_NSCollectionViewGridLayout_Autorelease(void* ptr);
+void* C_NSCollectionViewGridLayout_Retain(void* ptr);
 unsigned int C_NSCollectionViewGridLayout_MaximumNumberOfRows(void* ptr);
 void C_NSCollectionViewGridLayout_SetMaximumNumberOfRows(void* ptr, unsigned int value);
 unsigned int C_NSCollectionViewGridLayout_MaximumNumberOfColumns(void* ptr);

@@ -5,6 +5,11 @@ void* C_Locale_Alloc() {
     return [NSLocale alloc];
 }
 
+void* C_NSLocale_LocaleWithLocaleIdentifier(void* ident) {
+    NSLocale* result_ = [NSLocale localeWithLocaleIdentifier:(NSString*)ident];
+    return result_;
+}
+
 void* C_NSLocale_InitWithLocaleIdentifier(void* ptr, void* _string) {
     NSLocale* nSLocale = (NSLocale*)ptr;
     NSLocale* result_ = [nSLocale initWithLocaleIdentifier:(NSString*)_string];
@@ -17,8 +22,20 @@ void* C_NSLocale_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
-void* C_NSLocale_LocaleWithLocaleIdentifier(void* ident) {
-    NSLocale* result_ = [NSLocale localeWithLocaleIdentifier:(NSString*)ident];
+void* C_NSLocale_AllocLocale() {
+    NSLocale* result_ = [NSLocale alloc];
+    return result_;
+}
+
+void* C_NSLocale_Autorelease(void* ptr) {
+    NSLocale* nSLocale = (NSLocale*)ptr;
+    NSLocale* result_ = [nSLocale autorelease];
+    return result_;
+}
+
+void* C_NSLocale_Retain(void* ptr) {
+    NSLocale* nSLocale = (NSLocale*)ptr;
+    NSLocale* result_ = [nSLocale retain];
     return result_;
 }
 
@@ -49,7 +66,7 @@ Dictionary C_NSLocale_ComponentsFromLocaleIdentifier(void* _string) {
 }
 
 void* C_NSLocale_LocaleIdentifierFromComponents(Dictionary dict) {
-    NSMutableDictionary* objcDict = [[NSMutableDictionary alloc] initWithCapacity: dict.len];
+    NSMutableDictionary* objcDict = [NSMutableDictionary dictionaryWithCapacity:dict.len];
     if (dict.len > 0) {
     	void** dictKeyData = (void**)dict.key_data;
     	void** dictValueData = (void**)dict.value_data;

@@ -17,6 +17,28 @@ void* C_NSColor_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSColor_AllocColor() {
+    NSColor* result_ = [NSColor alloc];
+    return result_;
+}
+
+void* C_NSColor_NewColor() {
+    NSColor* result_ = [NSColor new];
+    return result_;
+}
+
+void* C_NSColor_Autorelease(void* ptr) {
+    NSColor* nSColor = (NSColor*)ptr;
+    NSColor* result_ = [nSColor autorelease];
+    return result_;
+}
+
+void* C_NSColor_Retain(void* ptr) {
+    NSColor* nSColor = (NSColor*)ptr;
+    NSColor* result_ = [nSColor retain];
+    return result_;
+}
+
 void* C_NSColor_ColorWithSystemEffect(void* ptr, int systemEffect) {
     NSColor* nSColor = (NSColor*)ptr;
     NSColor* result_ = [nSColor colorWithSystemEffect:systemEffect];

@@ -5,10 +5,14 @@
 
 void* C_StackView_Alloc();
 
+void* C_NSStackView_StackViewWithViews(Array views);
 void* C_NSStackView_InitWithFrame(void* ptr, CGRect frameRect);
 void* C_NSStackView_InitWithCoder(void* ptr, void* coder);
 void* C_NSStackView_Init(void* ptr);
-void* C_NSStackView_StackViewWithViews(Array views);
+void* C_NSStackView_AllocStackView();
+void* C_NSStackView_NewStackView();
+void* C_NSStackView_Autorelease(void* ptr);
+void* C_NSStackView_Retain(void* ptr);
 void C_NSStackView_AddView_InGravity(void* ptr, void* view, int gravity);
 void C_NSStackView_InsertView_AtIndex_InGravity(void* ptr, void* view, unsigned int index, int gravity);
 void C_NSStackView_SetViews_InGravity(void* ptr, Array views, int gravity);

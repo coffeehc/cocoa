@@ -5,6 +5,23 @@ void* C_BackForwardListItem_Alloc() {
     return [WKBackForwardListItem alloc];
 }
 
+void* C_WKBackForwardListItem_AllocBackForwardListItem() {
+    WKBackForwardListItem* result_ = [WKBackForwardListItem alloc];
+    return result_;
+}
+
+void* C_WKBackForwardListItem_Autorelease(void* ptr) {
+    WKBackForwardListItem* wKBackForwardListItem = (WKBackForwardListItem*)ptr;
+    WKBackForwardListItem* result_ = [wKBackForwardListItem autorelease];
+    return result_;
+}
+
+void* C_WKBackForwardListItem_Retain(void* ptr) {
+    WKBackForwardListItem* wKBackForwardListItem = (WKBackForwardListItem*)ptr;
+    WKBackForwardListItem* result_ = [wKBackForwardListItem retain];
+    return result_;
+}
+
 void* C_WKBackForwardListItem_Title(void* ptr) {
     WKBackForwardListItem* wKBackForwardListItem = (WKBackForwardListItem*)ptr;
     NSString* result_ = [wKBackForwardListItem title];

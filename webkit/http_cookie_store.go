@@ -24,7 +24,18 @@ func MakeHTTPCookieStore(ptr unsafe.Pointer) WKHTTPCookieStore {
 }
 
 func AllocHTTPCookieStore() WKHTTPCookieStore {
-	return MakeHTTPCookieStore(C.C_HTTPCookieStore_Alloc())
+	result_ := C.C_WKHTTPCookieStore_AllocHTTPCookieStore()
+	return MakeHTTPCookieStore(result_)
+}
+
+func (w WKHTTPCookieStore) Autorelease() WKHTTPCookieStore {
+	result_ := C.C_WKHTTPCookieStore_Autorelease(w.Ptr())
+	return MakeHTTPCookieStore(result_)
+}
+
+func (w WKHTTPCookieStore) Retain() WKHTTPCookieStore {
+	result_ := C.C_WKHTTPCookieStore_Retain(w.Ptr())
+	return MakeHTTPCookieStore(result_)
 }
 
 func (w WKHTTPCookieStore) AddObserver(observer objc.Object) {

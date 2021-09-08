@@ -46,27 +46,43 @@ func MakePathCell(ptr unsafe.Pointer) NSPathCell {
 	}
 }
 
-func AllocPathCell() NSPathCell {
-	return MakePathCell(C.C_PathCell_Alloc())
-}
-
-func (n NSPathCell) InitImageCell(image Image) PathCell {
+func (n NSPathCell) InitImageCell(image Image) NSPathCell {
 	result_ := C.C_NSPathCell_InitImageCell(n.Ptr(), objc.ExtractPtr(image))
 	return MakePathCell(result_)
 }
 
-func (n NSPathCell) InitTextCell(_string string) PathCell {
+func (n NSPathCell) InitTextCell(_string string) NSPathCell {
 	result_ := C.C_NSPathCell_InitTextCell(n.Ptr(), foundation.NewString(_string).Ptr())
 	return MakePathCell(result_)
 }
 
-func (n NSPathCell) Init() PathCell {
+func (n NSPathCell) Init() NSPathCell {
 	result_ := C.C_NSPathCell_Init(n.Ptr())
 	return MakePathCell(result_)
 }
 
-func (n NSPathCell) InitWithCoder(coder foundation.Coder) PathCell {
+func (n NSPathCell) InitWithCoder(coder foundation.Coder) NSPathCell {
 	result_ := C.C_NSPathCell_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakePathCell(result_)
+}
+
+func AllocPathCell() NSPathCell {
+	result_ := C.C_NSPathCell_AllocPathCell()
+	return MakePathCell(result_)
+}
+
+func NewPathCell() NSPathCell {
+	result_ := C.C_NSPathCell_NewPathCell()
+	return MakePathCell(result_)
+}
+
+func (n NSPathCell) Autorelease() NSPathCell {
+	result_ := C.C_NSPathCell_Autorelease(n.Ptr())
+	return MakePathCell(result_)
+}
+
+func (n NSPathCell) Retain() NSPathCell {
+	result_ := C.C_NSPathCell_Retain(n.Ptr())
 	return MakePathCell(result_)
 }
 

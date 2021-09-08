@@ -5,9 +5,31 @@ void* C_DateFormatter_Alloc() {
     return [NSDateFormatter alloc];
 }
 
+void* C_NSDateFormatter_AllocDateFormatter() {
+    NSDateFormatter* result_ = [NSDateFormatter alloc];
+    return result_;
+}
+
 void* C_NSDateFormatter_Init(void* ptr) {
     NSDateFormatter* nSDateFormatter = (NSDateFormatter*)ptr;
     NSDateFormatter* result_ = [nSDateFormatter init];
+    return result_;
+}
+
+void* C_NSDateFormatter_NewDateFormatter() {
+    NSDateFormatter* result_ = [NSDateFormatter new];
+    return result_;
+}
+
+void* C_NSDateFormatter_Autorelease(void* ptr) {
+    NSDateFormatter* nSDateFormatter = (NSDateFormatter*)ptr;
+    NSDateFormatter* result_ = [nSDateFormatter autorelease];
+    return result_;
+}
+
+void* C_NSDateFormatter_Retain(void* ptr) {
+    NSDateFormatter* nSDateFormatter = (NSDateFormatter*)ptr;
+    NSDateFormatter* result_ = [nSDateFormatter retain];
     return result_;
 }
 
@@ -231,7 +253,7 @@ Array C_NSDateFormatter_WeekdaySymbols(void* ptr) {
 
 void C_NSDateFormatter_SetWeekdaySymbols(void* ptr, Array value) {
     NSDateFormatter* nSDateFormatter = (NSDateFormatter*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -261,7 +283,7 @@ Array C_NSDateFormatter_ShortWeekdaySymbols(void* ptr) {
 
 void C_NSDateFormatter_SetShortWeekdaySymbols(void* ptr, Array value) {
     NSDateFormatter* nSDateFormatter = (NSDateFormatter*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -291,7 +313,7 @@ Array C_NSDateFormatter_VeryShortWeekdaySymbols(void* ptr) {
 
 void C_NSDateFormatter_SetVeryShortWeekdaySymbols(void* ptr, Array value) {
     NSDateFormatter* nSDateFormatter = (NSDateFormatter*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -321,7 +343,7 @@ Array C_NSDateFormatter_StandaloneWeekdaySymbols(void* ptr) {
 
 void C_NSDateFormatter_SetStandaloneWeekdaySymbols(void* ptr, Array value) {
     NSDateFormatter* nSDateFormatter = (NSDateFormatter*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -351,7 +373,7 @@ Array C_NSDateFormatter_ShortStandaloneWeekdaySymbols(void* ptr) {
 
 void C_NSDateFormatter_SetShortStandaloneWeekdaySymbols(void* ptr, Array value) {
     NSDateFormatter* nSDateFormatter = (NSDateFormatter*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -381,7 +403,7 @@ Array C_NSDateFormatter_VeryShortStandaloneWeekdaySymbols(void* ptr) {
 
 void C_NSDateFormatter_SetVeryShortStandaloneWeekdaySymbols(void* ptr, Array value) {
     NSDateFormatter* nSDateFormatter = (NSDateFormatter*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -411,7 +433,7 @@ Array C_NSDateFormatter_MonthSymbols(void* ptr) {
 
 void C_NSDateFormatter_SetMonthSymbols(void* ptr, Array value) {
     NSDateFormatter* nSDateFormatter = (NSDateFormatter*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -441,7 +463,7 @@ Array C_NSDateFormatter_ShortMonthSymbols(void* ptr) {
 
 void C_NSDateFormatter_SetShortMonthSymbols(void* ptr, Array value) {
     NSDateFormatter* nSDateFormatter = (NSDateFormatter*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -471,7 +493,7 @@ Array C_NSDateFormatter_VeryShortMonthSymbols(void* ptr) {
 
 void C_NSDateFormatter_SetVeryShortMonthSymbols(void* ptr, Array value) {
     NSDateFormatter* nSDateFormatter = (NSDateFormatter*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -501,7 +523,7 @@ Array C_NSDateFormatter_StandaloneMonthSymbols(void* ptr) {
 
 void C_NSDateFormatter_SetStandaloneMonthSymbols(void* ptr, Array value) {
     NSDateFormatter* nSDateFormatter = (NSDateFormatter*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -531,7 +553,7 @@ Array C_NSDateFormatter_ShortStandaloneMonthSymbols(void* ptr) {
 
 void C_NSDateFormatter_SetShortStandaloneMonthSymbols(void* ptr, Array value) {
     NSDateFormatter* nSDateFormatter = (NSDateFormatter*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -561,7 +583,7 @@ Array C_NSDateFormatter_VeryShortStandaloneMonthSymbols(void* ptr) {
 
 void C_NSDateFormatter_SetVeryShortStandaloneMonthSymbols(void* ptr, Array value) {
     NSDateFormatter* nSDateFormatter = (NSDateFormatter*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -591,7 +613,7 @@ Array C_NSDateFormatter_QuarterSymbols(void* ptr) {
 
 void C_NSDateFormatter_SetQuarterSymbols(void* ptr, Array value) {
     NSDateFormatter* nSDateFormatter = (NSDateFormatter*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -621,7 +643,7 @@ Array C_NSDateFormatter_ShortQuarterSymbols(void* ptr) {
 
 void C_NSDateFormatter_SetShortQuarterSymbols(void* ptr, Array value) {
     NSDateFormatter* nSDateFormatter = (NSDateFormatter*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -651,7 +673,7 @@ Array C_NSDateFormatter_StandaloneQuarterSymbols(void* ptr) {
 
 void C_NSDateFormatter_SetStandaloneQuarterSymbols(void* ptr, Array value) {
     NSDateFormatter* nSDateFormatter = (NSDateFormatter*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -681,7 +703,7 @@ Array C_NSDateFormatter_ShortStandaloneQuarterSymbols(void* ptr) {
 
 void C_NSDateFormatter_SetShortStandaloneQuarterSymbols(void* ptr, Array value) {
     NSDateFormatter* nSDateFormatter = (NSDateFormatter*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -711,7 +733,7 @@ Array C_NSDateFormatter_EraSymbols(void* ptr) {
 
 void C_NSDateFormatter_SetEraSymbols(void* ptr, Array value) {
     NSDateFormatter* nSDateFormatter = (NSDateFormatter*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -741,7 +763,7 @@ Array C_NSDateFormatter_LongEraSymbols(void* ptr) {
 
 void C_NSDateFormatter_SetLongEraSymbols(void* ptr, Array value) {
     NSDateFormatter* nSDateFormatter = (NSDateFormatter*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

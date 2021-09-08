@@ -47,16 +47,12 @@ func MakeTextStorage(ptr unsafe.Pointer) NSTextStorage {
 	}
 }
 
-func AllocTextStorage() NSTextStorage {
-	return MakeTextStorage(C.C_TextStorage_Alloc())
-}
-
-func (n NSTextStorage) InitWithString(str string) TextStorage {
+func (n NSTextStorage) InitWithString(str string) NSTextStorage {
 	result_ := C.C_NSTextStorage_InitWithString(n.Ptr(), foundation.NewString(str).Ptr())
 	return MakeTextStorage(result_)
 }
 
-func (n NSTextStorage) InitWithString_Attributes(str string, attrs map[foundation.AttributedStringKey]objc.Object) TextStorage {
+func (n NSTextStorage) InitWithString_Attributes(str string, attrs map[foundation.AttributedStringKey]objc.Object) NSTextStorage {
 	var cAttrs C.Dictionary
 	if len(attrs) > 0 {
 		cAttrsKeyData := make([]unsafe.Pointer, len(attrs))
@@ -75,13 +71,33 @@ func (n NSTextStorage) InitWithString_Attributes(str string, attrs map[foundatio
 	return MakeTextStorage(result_)
 }
 
-func (n NSTextStorage) InitWithAttributedString(attrStr foundation.AttributedString) TextStorage {
+func (n NSTextStorage) InitWithAttributedString(attrStr foundation.AttributedString) NSTextStorage {
 	result_ := C.C_NSTextStorage_InitWithAttributedString(n.Ptr(), objc.ExtractPtr(attrStr))
 	return MakeTextStorage(result_)
 }
 
-func (n NSTextStorage) Init() TextStorage {
+func AllocTextStorage() NSTextStorage {
+	result_ := C.C_NSTextStorage_AllocTextStorage()
+	return MakeTextStorage(result_)
+}
+
+func (n NSTextStorage) Init() NSTextStorage {
 	result_ := C.C_NSTextStorage_Init(n.Ptr())
+	return MakeTextStorage(result_)
+}
+
+func NewTextStorage() NSTextStorage {
+	result_ := C.C_NSTextStorage_NewTextStorage()
+	return MakeTextStorage(result_)
+}
+
+func (n NSTextStorage) Autorelease() NSTextStorage {
+	result_ := C.C_NSTextStorage_Autorelease(n.Ptr())
+	return MakeTextStorage(result_)
+}
+
+func (n NSTextStorage) Retain() NSTextStorage {
+	result_ := C.C_NSTextStorage_Retain(n.Ptr())
 	return MakeTextStorage(result_)
 }
 

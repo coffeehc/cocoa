@@ -23,6 +23,28 @@ void* C_NSDatePicker_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSDatePicker_AllocDatePicker() {
+    NSDatePicker* result_ = [NSDatePicker alloc];
+    return result_;
+}
+
+void* C_NSDatePicker_NewDatePicker() {
+    NSDatePicker* result_ = [NSDatePicker new];
+    return result_;
+}
+
+void* C_NSDatePicker_Autorelease(void* ptr) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    NSDatePicker* result_ = [nSDatePicker autorelease];
+    return result_;
+}
+
+void* C_NSDatePicker_Retain(void* ptr) {
+    NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
+    NSDatePicker* result_ = [nSDatePicker retain];
+    return result_;
+}
+
 bool C_NSDatePicker_IsBezeled(void* ptr) {
     NSDatePicker* nSDatePicker = (NSDatePicker*)ptr;
     BOOL result_ = [nSDatePicker isBezeled];

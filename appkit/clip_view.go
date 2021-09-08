@@ -41,22 +41,38 @@ func MakeClipView(ptr unsafe.Pointer) NSClipView {
 	}
 }
 
-func AllocClipView() NSClipView {
-	return MakeClipView(C.C_ClipView_Alloc())
-}
-
-func (n NSClipView) InitWithFrame(frameRect foundation.Rect) ClipView {
+func (n NSClipView) InitWithFrame(frameRect foundation.Rect) NSClipView {
 	result_ := C.C_NSClipView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeClipView(result_)
 }
 
-func (n NSClipView) InitWithCoder(coder foundation.Coder) ClipView {
+func (n NSClipView) InitWithCoder(coder foundation.Coder) NSClipView {
 	result_ := C.C_NSClipView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeClipView(result_)
 }
 
-func (n NSClipView) Init() ClipView {
+func (n NSClipView) Init() NSClipView {
 	result_ := C.C_NSClipView_Init(n.Ptr())
+	return MakeClipView(result_)
+}
+
+func AllocClipView() NSClipView {
+	result_ := C.C_NSClipView_AllocClipView()
+	return MakeClipView(result_)
+}
+
+func NewClipView() NSClipView {
+	result_ := C.C_NSClipView_NewClipView()
+	return MakeClipView(result_)
+}
+
+func (n NSClipView) Autorelease() NSClipView {
+	result_ := C.C_NSClipView_Autorelease(n.Ptr())
+	return MakeClipView(result_)
+}
+
+func (n NSClipView) Retain() NSClipView {
+	result_ := C.C_NSClipView_Retain(n.Ptr())
 	return MakeClipView(result_)
 }
 

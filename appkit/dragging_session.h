@@ -5,7 +5,11 @@
 
 void* C_DraggingSession_Alloc();
 
+void* C_NSDraggingSession_AllocDraggingSession();
 void* C_NSDraggingSession_Init(void* ptr);
+void* C_NSDraggingSession_NewDraggingSession();
+void* C_NSDraggingSession_Autorelease(void* ptr);
+void* C_NSDraggingSession_Retain(void* ptr);
 void* C_NSDraggingSession_DraggingPasteboard(void* ptr);
 bool C_NSDraggingSession_AnimatesToStartingPositionsOnCancelOrFail(void* ptr);
 void C_NSDraggingSession_SetAnimatesToStartingPositionsOnCancelOrFail(void* ptr, bool value);

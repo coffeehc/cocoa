@@ -7,6 +7,10 @@ void* C_TouchBar_Alloc();
 
 void* C_NSTouchBar_Init(void* ptr);
 void* C_NSTouchBar_InitWithCoder(void* ptr, void* coder);
+void* C_NSTouchBar_AllocTouchBar();
+void* C_NSTouchBar_NewTouchBar();
+void* C_NSTouchBar_Autorelease(void* ptr);
+void* C_NSTouchBar_Retain(void* ptr);
 void* C_NSTouchBar_ItemForIdentifier(void* ptr, void* identifier);
 void* C_NSTouchBar_Delegate(void* ptr);
 void C_NSTouchBar_SetDelegate(void* ptr, void* value);

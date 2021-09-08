@@ -7,6 +7,10 @@ void* C_Responder_Alloc();
 
 void* C_NSResponder_Init(void* ptr);
 void* C_NSResponder_InitWithCoder(void* ptr, void* coder);
+void* C_NSResponder_AllocResponder();
+void* C_NSResponder_NewResponder();
+void* C_NSResponder_Autorelease(void* ptr);
+void* C_NSResponder_Retain(void* ptr);
 bool C_NSResponder_BecomeFirstResponder(void* ptr);
 bool C_NSResponder_ResignFirstResponder(void* ptr);
 bool C_NSResponder_ValidateProposedFirstResponder_ForEvent(void* ptr, void* responder, void* event);

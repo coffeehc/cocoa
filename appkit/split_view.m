@@ -23,6 +23,28 @@ void* C_NSSplitView_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSSplitView_AllocSplitView() {
+    NSSplitView* result_ = [NSSplitView alloc];
+    return result_;
+}
+
+void* C_NSSplitView_NewSplitView() {
+    NSSplitView* result_ = [NSSplitView new];
+    return result_;
+}
+
+void* C_NSSplitView_Autorelease(void* ptr) {
+    NSSplitView* nSSplitView = (NSSplitView*)ptr;
+    NSSplitView* result_ = [nSSplitView autorelease];
+    return result_;
+}
+
+void* C_NSSplitView_Retain(void* ptr) {
+    NSSplitView* nSSplitView = (NSSplitView*)ptr;
+    NSSplitView* result_ = [nSSplitView retain];
+    return result_;
+}
+
 void C_NSSplitView_AddArrangedSubview(void* ptr, void* view) {
     NSSplitView* nSSplitView = (NSSplitView*)ptr;
     [nSSplitView addArrangedSubview:(NSView*)view];

@@ -7,7 +7,7 @@ void* C_FileWrapper_Alloc() {
 
 void* C_NSFileWrapper_InitDirectoryWithFileWrappers(void* ptr, Dictionary childrenByPreferredName) {
     NSFileWrapper* nSFileWrapper = (NSFileWrapper*)ptr;
-    NSMutableDictionary* objcChildrenByPreferredName = [[NSMutableDictionary alloc] initWithCapacity: childrenByPreferredName.len];
+    NSMutableDictionary* objcChildrenByPreferredName = [NSMutableDictionary dictionaryWithCapacity:childrenByPreferredName.len];
     if (childrenByPreferredName.len > 0) {
     	void** childrenByPreferredNameKeyData = (void**)childrenByPreferredName.key_data;
     	void** childrenByPreferredNameValueData = (void**)childrenByPreferredName.value_data;
@@ -45,9 +45,31 @@ void* C_NSFileWrapper_InitWithCoder(void* ptr, void* inCoder) {
     return result_;
 }
 
+void* C_NSFileWrapper_AllocFileWrapper() {
+    NSFileWrapper* result_ = [NSFileWrapper alloc];
+    return result_;
+}
+
 void* C_NSFileWrapper_Init(void* ptr) {
     NSFileWrapper* nSFileWrapper = (NSFileWrapper*)ptr;
     NSFileWrapper* result_ = [nSFileWrapper init];
+    return result_;
+}
+
+void* C_NSFileWrapper_NewFileWrapper() {
+    NSFileWrapper* result_ = [NSFileWrapper new];
+    return result_;
+}
+
+void* C_NSFileWrapper_Autorelease(void* ptr) {
+    NSFileWrapper* nSFileWrapper = (NSFileWrapper*)ptr;
+    NSFileWrapper* result_ = [nSFileWrapper autorelease];
+    return result_;
+}
+
+void* C_NSFileWrapper_Retain(void* ptr) {
+    NSFileWrapper* nSFileWrapper = (NSFileWrapper*)ptr;
+    NSFileWrapper* result_ = [nSFileWrapper retain];
     return result_;
 }
 
@@ -178,7 +200,7 @@ Dictionary C_NSFileWrapper_FileAttributes(void* ptr) {
 
 void C_NSFileWrapper_SetFileAttributes(void* ptr, Dictionary value) {
     NSFileWrapper* nSFileWrapper = (NSFileWrapper*)ptr;
-    NSMutableDictionary* objcValue = [[NSMutableDictionary alloc] initWithCapacity: value.len];
+    NSMutableDictionary* objcValue = [NSMutableDictionary dictionaryWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueKeyData = (void**)value.key_data;
     	void** valueValueData = (void**)value.value_data;

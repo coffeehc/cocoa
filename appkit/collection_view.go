@@ -84,22 +84,38 @@ func MakeCollectionView(ptr unsafe.Pointer) NSCollectionView {
 	}
 }
 
-func AllocCollectionView() NSCollectionView {
-	return MakeCollectionView(C.C_CollectionView_Alloc())
-}
-
-func (n NSCollectionView) InitWithFrame(frameRect foundation.Rect) CollectionView {
+func (n NSCollectionView) InitWithFrame(frameRect foundation.Rect) NSCollectionView {
 	result_ := C.C_NSCollectionView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeCollectionView(result_)
 }
 
-func (n NSCollectionView) InitWithCoder(coder foundation.Coder) CollectionView {
+func (n NSCollectionView) InitWithCoder(coder foundation.Coder) NSCollectionView {
 	result_ := C.C_NSCollectionView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeCollectionView(result_)
 }
 
-func (n NSCollectionView) Init() CollectionView {
+func (n NSCollectionView) Init() NSCollectionView {
 	result_ := C.C_NSCollectionView_Init(n.Ptr())
+	return MakeCollectionView(result_)
+}
+
+func AllocCollectionView() NSCollectionView {
+	result_ := C.C_NSCollectionView_AllocCollectionView()
+	return MakeCollectionView(result_)
+}
+
+func NewCollectionView() NSCollectionView {
+	result_ := C.C_NSCollectionView_NewCollectionView()
+	return MakeCollectionView(result_)
+}
+
+func (n NSCollectionView) Autorelease() NSCollectionView {
+	result_ := C.C_NSCollectionView_Autorelease(n.Ptr())
+	return MakeCollectionView(result_)
+}
+
+func (n NSCollectionView) Retain() NSCollectionView {
+	result_ := C.C_NSCollectionView_Retain(n.Ptr())
 	return MakeCollectionView(result_)
 }
 

@@ -6,6 +6,10 @@
 void* C_TextBlock_Alloc();
 
 void* C_NSTextBlock_Init(void* ptr);
+void* C_NSTextBlock_AllocTextBlock();
+void* C_NSTextBlock_NewTextBlock();
+void* C_NSTextBlock_Autorelease(void* ptr);
+void* C_NSTextBlock_Retain(void* ptr);
 void C_NSTextBlock_SetValue_Type_ForDimension(void* ptr, double val, unsigned int _type, unsigned int dimension);
 double C_NSTextBlock_ValueForDimension(void* ptr, unsigned int dimension);
 unsigned int C_NSTextBlock_ValueTypeForDimension(void* ptr, unsigned int dimension);

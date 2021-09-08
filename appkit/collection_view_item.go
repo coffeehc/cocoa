@@ -28,22 +28,38 @@ func MakeCollectionViewItem(ptr unsafe.Pointer) NSCollectionViewItem {
 	}
 }
 
-func AllocCollectionViewItem() NSCollectionViewItem {
-	return MakeCollectionViewItem(C.C_CollectionViewItem_Alloc())
-}
-
-func (n NSCollectionViewItem) InitWithNibName_Bundle(nibNameOrNil NibName, nibBundleOrNil foundation.Bundle) CollectionViewItem {
+func (n NSCollectionViewItem) InitWithNibName_Bundle(nibNameOrNil NibName, nibBundleOrNil foundation.Bundle) NSCollectionViewItem {
 	result_ := C.C_NSCollectionViewItem_InitWithNibName_Bundle(n.Ptr(), foundation.NewString(string(nibNameOrNil)).Ptr(), objc.ExtractPtr(nibBundleOrNil))
 	return MakeCollectionViewItem(result_)
 }
 
-func (n NSCollectionViewItem) InitWithCoder(coder foundation.Coder) CollectionViewItem {
+func (n NSCollectionViewItem) InitWithCoder(coder foundation.Coder) NSCollectionViewItem {
 	result_ := C.C_NSCollectionViewItem_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeCollectionViewItem(result_)
 }
 
-func (n NSCollectionViewItem) Init() CollectionViewItem {
+func (n NSCollectionViewItem) Init() NSCollectionViewItem {
 	result_ := C.C_NSCollectionViewItem_Init(n.Ptr())
+	return MakeCollectionViewItem(result_)
+}
+
+func AllocCollectionViewItem() NSCollectionViewItem {
+	result_ := C.C_NSCollectionViewItem_AllocCollectionViewItem()
+	return MakeCollectionViewItem(result_)
+}
+
+func NewCollectionViewItem() NSCollectionViewItem {
+	result_ := C.C_NSCollectionViewItem_NewCollectionViewItem()
+	return MakeCollectionViewItem(result_)
+}
+
+func (n NSCollectionViewItem) Autorelease() NSCollectionViewItem {
+	result_ := C.C_NSCollectionViewItem_Autorelease(n.Ptr())
+	return MakeCollectionViewItem(result_)
+}
+
+func (n NSCollectionViewItem) Retain() NSCollectionViewItem {
+	result_ := C.C_NSCollectionViewItem_Retain(n.Ptr())
 	return MakeCollectionViewItem(result_)
 }
 

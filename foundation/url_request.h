@@ -5,11 +5,15 @@
 
 void* C_URLRequest_Alloc();
 
-void* C_NSURLRequest_InitWithURL(void* ptr, void* URL);
-void* C_NSURLRequest_InitWithURL_CachePolicy_TimeoutInterval(void* ptr, void* URL, unsigned int cachePolicy, double timeoutInterval);
-void* C_NSURLRequest_Init(void* ptr);
 void* C_NSURLRequest_URLRequest_RequestWithURL(void* URL);
+void* C_NSURLRequest_InitWithURL(void* ptr, void* URL);
 void* C_NSURLRequest_URLRequest_RequestWithURL_CachePolicy_TimeoutInterval(void* URL, unsigned int cachePolicy, double timeoutInterval);
+void* C_NSURLRequest_InitWithURL_CachePolicy_TimeoutInterval(void* ptr, void* URL, unsigned int cachePolicy, double timeoutInterval);
+void* C_NSURLRequest_AllocURLRequest();
+void* C_NSURLRequest_Init(void* ptr);
+void* C_NSURLRequest_NewURLRequest();
+void* C_NSURLRequest_Autorelease(void* ptr);
+void* C_NSURLRequest_Retain(void* ptr);
 void* C_NSURLRequest_ValueForHTTPHeaderField(void* ptr, void* field);
 unsigned int C_NSURLRequest_CachePolicy(void* ptr);
 void* C_NSURLRequest_HTTPMethod(void* ptr);

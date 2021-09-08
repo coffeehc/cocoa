@@ -29,9 +29,31 @@ void* C_NSSound_InitWithPasteboard(void* ptr, void* pasteboard) {
     return result_;
 }
 
+void* C_NSSound_AllocSound() {
+    NSSound* result_ = [NSSound alloc];
+    return result_;
+}
+
 void* C_NSSound_Init(void* ptr) {
     NSSound* nSSound = (NSSound*)ptr;
     NSSound* result_ = [nSSound init];
+    return result_;
+}
+
+void* C_NSSound_NewSound() {
+    NSSound* result_ = [NSSound new];
+    return result_;
+}
+
+void* C_NSSound_Autorelease(void* ptr) {
+    NSSound* nSSound = (NSSound*)ptr;
+    NSSound* result_ = [nSSound autorelease];
+    return result_;
+}
+
+void* C_NSSound_Retain(void* ptr) {
+    NSSound* nSSound = (NSSound*)ptr;
+    NSSound* result_ = [nSSound retain];
     return result_;
 }
 

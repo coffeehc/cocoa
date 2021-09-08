@@ -41,11 +41,27 @@ func MakeLayoutGuide(ptr unsafe.Pointer) NSLayoutGuide {
 }
 
 func AllocLayoutGuide() NSLayoutGuide {
-	return MakeLayoutGuide(C.C_LayoutGuide_Alloc())
+	result_ := C.C_NSLayoutGuide_AllocLayoutGuide()
+	return MakeLayoutGuide(result_)
 }
 
-func (n NSLayoutGuide) Init() LayoutGuide {
+func (n NSLayoutGuide) Init() NSLayoutGuide {
 	result_ := C.C_NSLayoutGuide_Init(n.Ptr())
+	return MakeLayoutGuide(result_)
+}
+
+func NewLayoutGuide() NSLayoutGuide {
+	result_ := C.C_NSLayoutGuide_NewLayoutGuide()
+	return MakeLayoutGuide(result_)
+}
+
+func (n NSLayoutGuide) Autorelease() NSLayoutGuide {
+	result_ := C.C_NSLayoutGuide_Autorelease(n.Ptr())
+	return MakeLayoutGuide(result_)
+}
+
+func (n NSLayoutGuide) Retain() NSLayoutGuide {
+	result_ := C.C_NSLayoutGuide_Retain(n.Ptr())
 	return MakeLayoutGuide(result_)
 }
 

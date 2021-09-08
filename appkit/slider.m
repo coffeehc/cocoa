@@ -5,6 +5,16 @@ void* C_Slider_Alloc() {
     return [NSSlider alloc];
 }
 
+void* C_NSSlider_SliderWithTarget_Action(void* target, void* action) {
+    NSSlider* result_ = [NSSlider sliderWithTarget:(id)target action:(SEL)action];
+    return result_;
+}
+
+void* C_NSSlider_SliderWithValue_MinValue_MaxValue_Target_Action(double value, double minValue, double maxValue, void* target, void* action) {
+    NSSlider* result_ = [NSSlider sliderWithValue:value minValue:minValue maxValue:maxValue target:(id)target action:(SEL)action];
+    return result_;
+}
+
 void* C_NSSlider_InitWithFrame(void* ptr, CGRect frameRect) {
     NSSlider* nSSlider = (NSSlider*)ptr;
     NSSlider* result_ = [nSSlider initWithFrame:frameRect];
@@ -23,13 +33,25 @@ void* C_NSSlider_Init(void* ptr) {
     return result_;
 }
 
-void* C_NSSlider_SliderWithTarget_Action(void* target, void* action) {
-    NSSlider* result_ = [NSSlider sliderWithTarget:(id)target action:(SEL)action];
+void* C_NSSlider_AllocSlider() {
+    NSSlider* result_ = [NSSlider alloc];
     return result_;
 }
 
-void* C_NSSlider_SliderWithValue_MinValue_MaxValue_Target_Action(double value, double minValue, double maxValue, void* target, void* action) {
-    NSSlider* result_ = [NSSlider sliderWithValue:value minValue:minValue maxValue:maxValue target:(id)target action:(SEL)action];
+void* C_NSSlider_NewSlider() {
+    NSSlider* result_ = [NSSlider new];
+    return result_;
+}
+
+void* C_NSSlider_Autorelease(void* ptr) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    NSSlider* result_ = [nSSlider autorelease];
+    return result_;
+}
+
+void* C_NSSlider_Retain(void* ptr) {
+    NSSlider* nSSlider = (NSSlider*)ptr;
+    NSSlider* result_ = [nSSlider retain];
     return result_;
 }
 

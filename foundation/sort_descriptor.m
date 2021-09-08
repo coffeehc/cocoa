@@ -5,9 +5,19 @@ void* C_SortDescriptor_Alloc() {
     return [NSSortDescriptor alloc];
 }
 
+void* C_NSSortDescriptor_SortDescriptorWithKey_Ascending(void* key, bool ascending) {
+    NSSortDescriptor* result_ = [NSSortDescriptor sortDescriptorWithKey:(NSString*)key ascending:ascending];
+    return result_;
+}
+
 void* C_NSSortDescriptor_InitWithKey_Ascending(void* ptr, void* key, bool ascending) {
     NSSortDescriptor* nSSortDescriptor = (NSSortDescriptor*)ptr;
     NSSortDescriptor* result_ = [nSSortDescriptor initWithKey:(NSString*)key ascending:ascending];
+    return result_;
+}
+
+void* C_NSSortDescriptor_SortDescriptorWithKey_Ascending_Selector(void* key, bool ascending, void* selector) {
+    NSSortDescriptor* result_ = [NSSortDescriptor sortDescriptorWithKey:(NSString*)key ascending:ascending selector:(SEL)selector];
     return result_;
 }
 
@@ -23,19 +33,31 @@ void* C_NSSortDescriptor_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSSortDescriptor_AllocSortDescriptor() {
+    NSSortDescriptor* result_ = [NSSortDescriptor alloc];
+    return result_;
+}
+
 void* C_NSSortDescriptor_Init(void* ptr) {
     NSSortDescriptor* nSSortDescriptor = (NSSortDescriptor*)ptr;
     NSSortDescriptor* result_ = [nSSortDescriptor init];
     return result_;
 }
 
-void* C_NSSortDescriptor_SortDescriptorWithKey_Ascending(void* key, bool ascending) {
-    NSSortDescriptor* result_ = [NSSortDescriptor sortDescriptorWithKey:(NSString*)key ascending:ascending];
+void* C_NSSortDescriptor_NewSortDescriptor() {
+    NSSortDescriptor* result_ = [NSSortDescriptor new];
     return result_;
 }
 
-void* C_NSSortDescriptor_SortDescriptorWithKey_Ascending_Selector(void* key, bool ascending, void* selector) {
-    NSSortDescriptor* result_ = [NSSortDescriptor sortDescriptorWithKey:(NSString*)key ascending:ascending selector:(SEL)selector];
+void* C_NSSortDescriptor_Autorelease(void* ptr) {
+    NSSortDescriptor* nSSortDescriptor = (NSSortDescriptor*)ptr;
+    NSSortDescriptor* result_ = [nSSortDescriptor autorelease];
+    return result_;
+}
+
+void* C_NSSortDescriptor_Retain(void* ptr) {
+    NSSortDescriptor* nSSortDescriptor = (NSSortDescriptor*)ptr;
+    NSSortDescriptor* result_ = [nSSortDescriptor retain];
     return result_;
 }
 

@@ -27,17 +27,33 @@ func MakeController(ptr unsafe.Pointer) NSController {
 	}
 }
 
-func AllocController() NSController {
-	return MakeController(C.C_Controller_Alloc())
-}
-
-func (n NSController) Init() Controller {
+func (n NSController) Init() NSController {
 	result_ := C.C_NSController_Init(n.Ptr())
 	return MakeController(result_)
 }
 
-func (n NSController) InitWithCoder(coder foundation.Coder) Controller {
+func (n NSController) InitWithCoder(coder foundation.Coder) NSController {
 	result_ := C.C_NSController_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeController(result_)
+}
+
+func AllocController() NSController {
+	result_ := C.C_NSController_AllocController()
+	return MakeController(result_)
+}
+
+func NewController() NSController {
+	result_ := C.C_NSController_NewController()
+	return MakeController(result_)
+}
+
+func (n NSController) Autorelease() NSController {
+	result_ := C.C_NSController_Autorelease(n.Ptr())
+	return MakeController(result_)
+}
+
+func (n NSController) Retain() NSController {
+	result_ := C.C_NSController_Retain(n.Ptr())
 	return MakeController(result_)
 }
 

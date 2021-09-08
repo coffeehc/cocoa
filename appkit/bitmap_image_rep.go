@@ -45,37 +45,53 @@ func MakeBitmapImageRep(ptr unsafe.Pointer) NSBitmapImageRep {
 	}
 }
 
-func AllocBitmapImageRep() NSBitmapImageRep {
-	return MakeBitmapImageRep(C.C_BitmapImageRep_Alloc())
+func BitmapImageRep_ImageRepWithData(data []byte) NSBitmapImageRep {
+	result_ := C.C_NSBitmapImageRep_BitmapImageRep_ImageRepWithData(foundation.NewData(data).Ptr())
+	return MakeBitmapImageRep(result_)
 }
 
-func (n NSBitmapImageRep) InitWithCGImage(cgImage coregraphics.ImageRef) BitmapImageRep {
+func (n NSBitmapImageRep) InitWithCGImage(cgImage coregraphics.ImageRef) NSBitmapImageRep {
 	result_ := C.C_NSBitmapImageRep_InitWithCGImage(n.Ptr(), unsafe.Pointer(cgImage))
 	return MakeBitmapImageRep(result_)
 }
 
-func (n NSBitmapImageRep) InitWithData(data []byte) BitmapImageRep {
+func (n NSBitmapImageRep) InitWithData(data []byte) NSBitmapImageRep {
 	result_ := C.C_NSBitmapImageRep_InitWithData(n.Ptr(), foundation.NewData(data).Ptr())
 	return MakeBitmapImageRep(result_)
 }
 
-func (n NSBitmapImageRep) InitForIncrementalLoad() BitmapImageRep {
+func (n NSBitmapImageRep) InitForIncrementalLoad() NSBitmapImageRep {
 	result_ := C.C_NSBitmapImageRep_InitForIncrementalLoad(n.Ptr())
 	return MakeBitmapImageRep(result_)
 }
 
-func (n NSBitmapImageRep) Init() BitmapImageRep {
+func (n NSBitmapImageRep) Init() NSBitmapImageRep {
 	result_ := C.C_NSBitmapImageRep_Init(n.Ptr())
 	return MakeBitmapImageRep(result_)
 }
 
-func (n NSBitmapImageRep) InitWithCoder(coder foundation.Coder) BitmapImageRep {
+func (n NSBitmapImageRep) InitWithCoder(coder foundation.Coder) NSBitmapImageRep {
 	result_ := C.C_NSBitmapImageRep_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeBitmapImageRep(result_)
 }
 
-func BitmapImageRep_ImageRepWithData(data []byte) BitmapImageRep {
-	result_ := C.C_NSBitmapImageRep_BitmapImageRep_ImageRepWithData(foundation.NewData(data).Ptr())
+func AllocBitmapImageRep() NSBitmapImageRep {
+	result_ := C.C_NSBitmapImageRep_AllocBitmapImageRep()
+	return MakeBitmapImageRep(result_)
+}
+
+func NewBitmapImageRep() NSBitmapImageRep {
+	result_ := C.C_NSBitmapImageRep_NewBitmapImageRep()
+	return MakeBitmapImageRep(result_)
+}
+
+func (n NSBitmapImageRep) Autorelease() NSBitmapImageRep {
+	result_ := C.C_NSBitmapImageRep_Autorelease(n.Ptr())
+	return MakeBitmapImageRep(result_)
+}
+
+func (n NSBitmapImageRep) Retain() NSBitmapImageRep {
+	result_ := C.C_NSBitmapImageRep_Retain(n.Ptr())
 	return MakeBitmapImageRep(result_)
 }
 

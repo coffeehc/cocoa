@@ -5,9 +5,31 @@ void* C_DateIntervalFormatter_Alloc() {
     return [NSDateIntervalFormatter alloc];
 }
 
+void* C_NSDateIntervalFormatter_AllocDateIntervalFormatter() {
+    NSDateIntervalFormatter* result_ = [NSDateIntervalFormatter alloc];
+    return result_;
+}
+
 void* C_NSDateIntervalFormatter_Init(void* ptr) {
     NSDateIntervalFormatter* nSDateIntervalFormatter = (NSDateIntervalFormatter*)ptr;
     NSDateIntervalFormatter* result_ = [nSDateIntervalFormatter init];
+    return result_;
+}
+
+void* C_NSDateIntervalFormatter_NewDateIntervalFormatter() {
+    NSDateIntervalFormatter* result_ = [NSDateIntervalFormatter new];
+    return result_;
+}
+
+void* C_NSDateIntervalFormatter_Autorelease(void* ptr) {
+    NSDateIntervalFormatter* nSDateIntervalFormatter = (NSDateIntervalFormatter*)ptr;
+    NSDateIntervalFormatter* result_ = [nSDateIntervalFormatter autorelease];
+    return result_;
+}
+
+void* C_NSDateIntervalFormatter_Retain(void* ptr) {
+    NSDateIntervalFormatter* nSDateIntervalFormatter = (NSDateIntervalFormatter*)ptr;
+    NSDateIntervalFormatter* result_ = [nSDateIntervalFormatter retain];
     return result_;
 }
 

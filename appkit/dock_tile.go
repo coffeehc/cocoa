@@ -33,11 +33,27 @@ func MakeDockTile(ptr unsafe.Pointer) NSDockTile {
 }
 
 func AllocDockTile() NSDockTile {
-	return MakeDockTile(C.C_DockTile_Alloc())
+	result_ := C.C_NSDockTile_AllocDockTile()
+	return MakeDockTile(result_)
 }
 
-func (n NSDockTile) Init() DockTile {
+func (n NSDockTile) Init() NSDockTile {
 	result_ := C.C_NSDockTile_Init(n.Ptr())
+	return MakeDockTile(result_)
+}
+
+func NewDockTile() NSDockTile {
+	result_ := C.C_NSDockTile_NewDockTile()
+	return MakeDockTile(result_)
+}
+
+func (n NSDockTile) Autorelease() NSDockTile {
+	result_ := C.C_NSDockTile_Autorelease(n.Ptr())
+	return MakeDockTile(result_)
+}
+
+func (n NSDockTile) Retain() NSDockTile {
+	result_ := C.C_NSDockTile_Retain(n.Ptr())
 	return MakeDockTile(result_)
 }
 

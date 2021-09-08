@@ -24,7 +24,18 @@ func MakeCollectionViewDiffableDataSource(ptr unsafe.Pointer) NSCollectionViewDi
 }
 
 func AllocCollectionViewDiffableDataSource() NSCollectionViewDiffableDataSource {
-	return MakeCollectionViewDiffableDataSource(C.C_CollectionViewDiffableDataSource_Alloc())
+	result_ := C.C_NSCollectionViewDiffableDataSource_AllocCollectionViewDiffableDataSource()
+	return MakeCollectionViewDiffableDataSource(result_)
+}
+
+func (n NSCollectionViewDiffableDataSource) Autorelease() NSCollectionViewDiffableDataSource {
+	result_ := C.C_NSCollectionViewDiffableDataSource_Autorelease(n.Ptr())
+	return MakeCollectionViewDiffableDataSource(result_)
+}
+
+func (n NSCollectionViewDiffableDataSource) Retain() NSCollectionViewDiffableDataSource {
+	result_ := C.C_NSCollectionViewDiffableDataSource_Retain(n.Ptr())
+	return MakeCollectionViewDiffableDataSource(result_)
 }
 
 func (n NSCollectionViewDiffableDataSource) Snapshot() DiffableDataSourceSnapshot {

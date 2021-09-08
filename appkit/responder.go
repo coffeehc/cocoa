@@ -89,17 +89,33 @@ func MakeResponder(ptr unsafe.Pointer) NSResponder {
 	}
 }
 
-func AllocResponder() NSResponder {
-	return MakeResponder(C.C_Responder_Alloc())
-}
-
-func (n NSResponder) Init() Responder {
+func (n NSResponder) Init() NSResponder {
 	result_ := C.C_NSResponder_Init(n.Ptr())
 	return MakeResponder(result_)
 }
 
-func (n NSResponder) InitWithCoder(coder foundation.Coder) Responder {
+func (n NSResponder) InitWithCoder(coder foundation.Coder) NSResponder {
 	result_ := C.C_NSResponder_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeResponder(result_)
+}
+
+func AllocResponder() NSResponder {
+	result_ := C.C_NSResponder_AllocResponder()
+	return MakeResponder(result_)
+}
+
+func NewResponder() NSResponder {
+	result_ := C.C_NSResponder_NewResponder()
+	return MakeResponder(result_)
+}
+
+func (n NSResponder) Autorelease() NSResponder {
+	result_ := C.C_NSResponder_Autorelease(n.Ptr())
+	return MakeResponder(result_)
+}
+
+func (n NSResponder) Retain() NSResponder {
+	result_ := C.C_NSResponder_Retain(n.Ptr())
 	return MakeResponder(result_)
 }
 

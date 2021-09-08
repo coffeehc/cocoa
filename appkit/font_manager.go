@@ -62,11 +62,27 @@ func MakeFontManager(ptr unsafe.Pointer) NSFontManager {
 }
 
 func AllocFontManager() NSFontManager {
-	return MakeFontManager(C.C_FontManager_Alloc())
+	result_ := C.C_NSFontManager_AllocFontManager()
+	return MakeFontManager(result_)
 }
 
-func (n NSFontManager) Init() FontManager {
+func (n NSFontManager) Init() NSFontManager {
 	result_ := C.C_NSFontManager_Init(n.Ptr())
+	return MakeFontManager(result_)
+}
+
+func NewFontManager() NSFontManager {
+	result_ := C.C_NSFontManager_NewFontManager()
+	return MakeFontManager(result_)
+}
+
+func (n NSFontManager) Autorelease() NSFontManager {
+	result_ := C.C_NSFontManager_Autorelease(n.Ptr())
+	return MakeFontManager(result_)
+}
+
+func (n NSFontManager) Retain() NSFontManager {
+	result_ := C.C_NSFontManager_Retain(n.Ptr())
 	return MakeFontManager(result_)
 }
 

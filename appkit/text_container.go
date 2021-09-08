@@ -43,22 +43,38 @@ func MakeTextContainer(ptr unsafe.Pointer) NSTextContainer {
 	}
 }
 
-func AllocTextContainer() NSTextContainer {
-	return MakeTextContainer(C.C_TextContainer_Alloc())
-}
-
-func (n NSTextContainer) InitWithSize(size foundation.Size) TextContainer {
+func (n NSTextContainer) InitWithSize(size foundation.Size) NSTextContainer {
 	result_ := C.C_NSTextContainer_InitWithSize(n.Ptr(), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(size))))
 	return MakeTextContainer(result_)
 }
 
-func (n NSTextContainer) InitWithCoder(coder foundation.Coder) TextContainer {
+func (n NSTextContainer) InitWithCoder(coder foundation.Coder) NSTextContainer {
 	result_ := C.C_NSTextContainer_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeTextContainer(result_)
 }
 
-func (n NSTextContainer) Init() TextContainer {
+func AllocTextContainer() NSTextContainer {
+	result_ := C.C_NSTextContainer_AllocTextContainer()
+	return MakeTextContainer(result_)
+}
+
+func (n NSTextContainer) Init() NSTextContainer {
 	result_ := C.C_NSTextContainer_Init(n.Ptr())
+	return MakeTextContainer(result_)
+}
+
+func NewTextContainer() NSTextContainer {
+	result_ := C.C_NSTextContainer_NewTextContainer()
+	return MakeTextContainer(result_)
+}
+
+func (n NSTextContainer) Autorelease() NSTextContainer {
+	result_ := C.C_NSTextContainer_Autorelease(n.Ptr())
+	return MakeTextContainer(result_)
+}
+
+func (n NSTextContainer) Retain() NSTextContainer {
+	result_ := C.C_NSTextContainer_Retain(n.Ptr())
 	return MakeTextContainer(result_)
 }
 

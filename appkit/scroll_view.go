@@ -102,22 +102,38 @@ func MakeScrollView(ptr unsafe.Pointer) NSScrollView {
 	}
 }
 
-func AllocScrollView() NSScrollView {
-	return MakeScrollView(C.C_ScrollView_Alloc())
-}
-
-func (n NSScrollView) InitWithCoder(coder foundation.Coder) ScrollView {
+func (n NSScrollView) InitWithCoder(coder foundation.Coder) NSScrollView {
 	result_ := C.C_NSScrollView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeScrollView(result_)
 }
 
-func (n NSScrollView) InitWithFrame(frameRect foundation.Rect) ScrollView {
+func (n NSScrollView) InitWithFrame(frameRect foundation.Rect) NSScrollView {
 	result_ := C.C_NSScrollView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeScrollView(result_)
 }
 
-func (n NSScrollView) Init() ScrollView {
+func (n NSScrollView) Init() NSScrollView {
 	result_ := C.C_NSScrollView_Init(n.Ptr())
+	return MakeScrollView(result_)
+}
+
+func AllocScrollView() NSScrollView {
+	result_ := C.C_NSScrollView_AllocScrollView()
+	return MakeScrollView(result_)
+}
+
+func NewScrollView() NSScrollView {
+	result_ := C.C_NSScrollView_NewScrollView()
+	return MakeScrollView(result_)
+}
+
+func (n NSScrollView) Autorelease() NSScrollView {
+	result_ := C.C_NSScrollView_Autorelease(n.Ptr())
+	return MakeScrollView(result_)
+}
+
+func (n NSScrollView) Retain() NSScrollView {
+	result_ := C.C_NSScrollView_Retain(n.Ptr())
 	return MakeScrollView(result_)
 }
 

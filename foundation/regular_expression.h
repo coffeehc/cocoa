@@ -5,7 +5,11 @@
 
 void* C_RegularExpression_Alloc();
 
+void* C_NSRegularExpression_AllocRegularExpression();
 void* C_NSRegularExpression_Init(void* ptr);
+void* C_NSRegularExpression_NewRegularExpression();
+void* C_NSRegularExpression_Autorelease(void* ptr);
+void* C_NSRegularExpression_Retain(void* ptr);
 unsigned int C_NSRegularExpression_NumberOfMatchesInString_Options_Range(void* ptr, void* _string, unsigned int options, NSRange _range);
 Array C_NSRegularExpression_MatchesInString_Options_Range(void* ptr, void* _string, unsigned int options, NSRange _range);
 void* C_NSRegularExpression_FirstMatchInString_Options_Range(void* ptr, void* _string, unsigned int options, NSRange _range);

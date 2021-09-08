@@ -35,22 +35,38 @@ func MakeTextAttachment(ptr unsafe.Pointer) NSTextAttachment {
 	}
 }
 
-func AllocTextAttachment() NSTextAttachment {
-	return MakeTextAttachment(C.C_TextAttachment_Alloc())
-}
-
-func (n NSTextAttachment) InitWithFileWrapper(fileWrapper foundation.FileWrapper) TextAttachment {
+func (n NSTextAttachment) InitWithFileWrapper(fileWrapper foundation.FileWrapper) NSTextAttachment {
 	result_ := C.C_NSTextAttachment_InitWithFileWrapper(n.Ptr(), objc.ExtractPtr(fileWrapper))
 	return MakeTextAttachment(result_)
 }
 
-func (n NSTextAttachment) InitWithData_OfType(contentData []byte, uti string) TextAttachment {
+func (n NSTextAttachment) InitWithData_OfType(contentData []byte, uti string) NSTextAttachment {
 	result_ := C.C_NSTextAttachment_InitWithData_OfType(n.Ptr(), foundation.NewData(contentData).Ptr(), foundation.NewString(uti).Ptr())
 	return MakeTextAttachment(result_)
 }
 
-func (n NSTextAttachment) Init() TextAttachment {
+func AllocTextAttachment() NSTextAttachment {
+	result_ := C.C_NSTextAttachment_AllocTextAttachment()
+	return MakeTextAttachment(result_)
+}
+
+func (n NSTextAttachment) Init() NSTextAttachment {
 	result_ := C.C_NSTextAttachment_Init(n.Ptr())
+	return MakeTextAttachment(result_)
+}
+
+func NewTextAttachment() NSTextAttachment {
+	result_ := C.C_NSTextAttachment_NewTextAttachment()
+	return MakeTextAttachment(result_)
+}
+
+func (n NSTextAttachment) Autorelease() NSTextAttachment {
+	result_ := C.C_NSTextAttachment_Autorelease(n.Ptr())
+	return MakeTextAttachment(result_)
+}
+
+func (n NSTextAttachment) Retain() NSTextAttachment {
+	result_ := C.C_NSTextAttachment_Retain(n.Ptr())
 	return MakeTextAttachment(result_)
 }
 

@@ -5,7 +5,11 @@
 
 void* C_Printer_Alloc();
 
+void* C_NSPrinter_AllocPrinter();
 void* C_NSPrinter_Init(void* ptr);
+void* C_NSPrinter_NewPrinter();
+void* C_NSPrinter_Autorelease(void* ptr);
+void* C_NSPrinter_Retain(void* ptr);
 void* C_NSPrinter_PrinterWithName(void* name);
 void* C_NSPrinter_PrinterWithType(void* _type);
 CGSize C_NSPrinter_PageSizeForPaper(void* ptr, void* paperName);

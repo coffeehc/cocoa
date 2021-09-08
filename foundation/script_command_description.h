@@ -6,6 +6,9 @@
 void* C_ScriptCommandDescription_Alloc();
 
 void* C_NSScriptCommandDescription_InitWithCoder(void* ptr, void* inCoder);
+void* C_NSScriptCommandDescription_AllocScriptCommandDescription();
+void* C_NSScriptCommandDescription_Autorelease(void* ptr);
+void* C_NSScriptCommandDescription_Retain(void* ptr);
 bool C_NSScriptCommandDescription_IsOptionalArgumentWithName(void* ptr, void* argumentName);
 void* C_NSScriptCommandDescription_TypeForArgumentWithName(void* ptr, void* argumentName);
 void* C_NSScriptCommandDescription_CreateCommandInstance(void* ptr);

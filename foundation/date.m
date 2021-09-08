@@ -5,6 +5,31 @@ void* C_Date_Alloc() {
     return [NSDate alloc];
 }
 
+void* C_NSDate_Date_() {
+    NSDate* result_ = [NSDate date];
+    return result_;
+}
+
+void* C_NSDate_DateWithTimeIntervalSinceNow(double secs) {
+    NSDate* result_ = [NSDate dateWithTimeIntervalSinceNow:secs];
+    return result_;
+}
+
+void* C_NSDate_DateWithTimeInterval_SinceDate(double secsToBeAdded, void* date) {
+    NSDate* result_ = [NSDate dateWithTimeInterval:secsToBeAdded sinceDate:(NSDate*)date];
+    return result_;
+}
+
+void* C_NSDate_DateWithTimeIntervalSinceReferenceDate(double ti) {
+    NSDate* result_ = [NSDate dateWithTimeIntervalSinceReferenceDate:ti];
+    return result_;
+}
+
+void* C_NSDate_DateWithTimeIntervalSince1970(double secs) {
+    NSDate* result_ = [NSDate dateWithTimeIntervalSince1970:secs];
+    return result_;
+}
+
 void* C_NSDate_Init(void* ptr) {
     NSDate* nSDate = (NSDate*)ptr;
     NSDate* result_ = [nSDate init];
@@ -47,28 +72,25 @@ void* C_NSDate_DateByAddingTimeInterval(void* ptr, double ti) {
     return result_;
 }
 
-void* C_NSDate_Date_() {
-    NSDate* result_ = [NSDate date];
+void* C_NSDate_AllocDate() {
+    NSDate* result_ = [NSDate alloc];
     return result_;
 }
 
-void* C_NSDate_DateWithTimeIntervalSinceNow(double secs) {
-    NSDate* result_ = [NSDate dateWithTimeIntervalSinceNow:secs];
+void* C_NSDate_NewDate() {
+    NSDate* result_ = [NSDate new];
     return result_;
 }
 
-void* C_NSDate_DateWithTimeInterval_SinceDate(double secsToBeAdded, void* date) {
-    NSDate* result_ = [NSDate dateWithTimeInterval:secsToBeAdded sinceDate:(NSDate*)date];
+void* C_NSDate_Autorelease(void* ptr) {
+    NSDate* nSDate = (NSDate*)ptr;
+    NSDate* result_ = [nSDate autorelease];
     return result_;
 }
 
-void* C_NSDate_DateWithTimeIntervalSinceReferenceDate(double ti) {
-    NSDate* result_ = [NSDate dateWithTimeIntervalSinceReferenceDate:ti];
-    return result_;
-}
-
-void* C_NSDate_DateWithTimeIntervalSince1970(double secs) {
-    NSDate* result_ = [NSDate dateWithTimeIntervalSince1970:secs];
+void* C_NSDate_Retain(void* ptr) {
+    NSDate* nSDate = (NSDate*)ptr;
+    NSDate* result_ = [nSDate retain];
     return result_;
 }
 

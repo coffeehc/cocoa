@@ -25,11 +25,7 @@ func MakePredicate(ptr unsafe.Pointer) NSPredicate {
 	}
 }
 
-func AllocPredicate() NSPredicate {
-	return MakePredicate(C.C_Predicate_Alloc())
-}
-
-func (n NSPredicate) PredicateWithSubstitutionVariables(variables map[string]objc.Object) Predicate {
+func (n NSPredicate) PredicateWithSubstitutionVariables(variables map[string]objc.Object) NSPredicate {
 	var cVariables C.Dictionary
 	if len(variables) > 0 {
 		cVariablesKeyData := make([]unsafe.Pointer, len(variables))
@@ -48,8 +44,28 @@ func (n NSPredicate) PredicateWithSubstitutionVariables(variables map[string]obj
 	return MakePredicate(result_)
 }
 
-func (n NSPredicate) Init() Predicate {
+func AllocPredicate() NSPredicate {
+	result_ := C.C_NSPredicate_AllocPredicate()
+	return MakePredicate(result_)
+}
+
+func (n NSPredicate) Init() NSPredicate {
 	result_ := C.C_NSPredicate_Init(n.Ptr())
+	return MakePredicate(result_)
+}
+
+func NewPredicate() NSPredicate {
+	result_ := C.C_NSPredicate_NewPredicate()
+	return MakePredicate(result_)
+}
+
+func (n NSPredicate) Autorelease() NSPredicate {
+	result_ := C.C_NSPredicate_Autorelease(n.Ptr())
+	return MakePredicate(result_)
+}
+
+func (n NSPredicate) Retain() NSPredicate {
+	result_ := C.C_NSPredicate_Retain(n.Ptr())
 	return MakePredicate(result_)
 }
 

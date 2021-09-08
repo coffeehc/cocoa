@@ -23,6 +23,28 @@ void* C_NSTitlebarAccessoryViewController_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSTitlebarAccessoryViewController_AllocTitlebarAccessoryViewController() {
+    NSTitlebarAccessoryViewController* result_ = [NSTitlebarAccessoryViewController alloc];
+    return result_;
+}
+
+void* C_NSTitlebarAccessoryViewController_NewTitlebarAccessoryViewController() {
+    NSTitlebarAccessoryViewController* result_ = [NSTitlebarAccessoryViewController new];
+    return result_;
+}
+
+void* C_NSTitlebarAccessoryViewController_Autorelease(void* ptr) {
+    NSTitlebarAccessoryViewController* nSTitlebarAccessoryViewController = (NSTitlebarAccessoryViewController*)ptr;
+    NSTitlebarAccessoryViewController* result_ = [nSTitlebarAccessoryViewController autorelease];
+    return result_;
+}
+
+void* C_NSTitlebarAccessoryViewController_Retain(void* ptr) {
+    NSTitlebarAccessoryViewController* nSTitlebarAccessoryViewController = (NSTitlebarAccessoryViewController*)ptr;
+    NSTitlebarAccessoryViewController* result_ = [nSTitlebarAccessoryViewController retain];
+    return result_;
+}
+
 double C_NSTitlebarAccessoryViewController_FullScreenMinHeight(void* ptr) {
     NSTitlebarAccessoryViewController* nSTitlebarAccessoryViewController = (NSTitlebarAccessoryViewController*)ptr;
     CGFloat result_ = [nSTitlebarAccessoryViewController fullScreenMinHeight];

@@ -41,6 +41,28 @@ void* C_NSWindowController_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSWindowController_AllocWindowController() {
+    NSWindowController* result_ = [NSWindowController alloc];
+    return result_;
+}
+
+void* C_NSWindowController_NewWindowController() {
+    NSWindowController* result_ = [NSWindowController new];
+    return result_;
+}
+
+void* C_NSWindowController_Autorelease(void* ptr) {
+    NSWindowController* nSWindowController = (NSWindowController*)ptr;
+    NSWindowController* result_ = [nSWindowController autorelease];
+    return result_;
+}
+
+void* C_NSWindowController_Retain(void* ptr) {
+    NSWindowController* nSWindowController = (NSWindowController*)ptr;
+    NSWindowController* result_ = [nSWindowController retain];
+    return result_;
+}
+
 void C_NSWindowController_LoadWindow(void* ptr) {
     NSWindowController* nSWindowController = (NSWindowController*)ptr;
     [nSWindowController loadWindow];

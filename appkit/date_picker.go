@@ -57,22 +57,38 @@ func MakeDatePicker(ptr unsafe.Pointer) NSDatePicker {
 	}
 }
 
-func AllocDatePicker() NSDatePicker {
-	return MakeDatePicker(C.C_DatePicker_Alloc())
-}
-
-func (n NSDatePicker) InitWithFrame(frameRect foundation.Rect) DatePicker {
+func (n NSDatePicker) InitWithFrame(frameRect foundation.Rect) NSDatePicker {
 	result_ := C.C_NSDatePicker_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeDatePicker(result_)
 }
 
-func (n NSDatePicker) InitWithCoder(coder foundation.Coder) DatePicker {
+func (n NSDatePicker) InitWithCoder(coder foundation.Coder) NSDatePicker {
 	result_ := C.C_NSDatePicker_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeDatePicker(result_)
 }
 
-func (n NSDatePicker) Init() DatePicker {
+func (n NSDatePicker) Init() NSDatePicker {
 	result_ := C.C_NSDatePicker_Init(n.Ptr())
+	return MakeDatePicker(result_)
+}
+
+func AllocDatePicker() NSDatePicker {
+	result_ := C.C_NSDatePicker_AllocDatePicker()
+	return MakeDatePicker(result_)
+}
+
+func NewDatePicker() NSDatePicker {
+	result_ := C.C_NSDatePicker_NewDatePicker()
+	return MakeDatePicker(result_)
+}
+
+func (n NSDatePicker) Autorelease() NSDatePicker {
+	result_ := C.C_NSDatePicker_Autorelease(n.Ptr())
+	return MakeDatePicker(result_)
+}
+
+func (n NSDatePicker) Retain() NSDatePicker {
+	result_ := C.C_NSDatePicker_Retain(n.Ptr())
 	return MakeDatePicker(result_)
 }
 

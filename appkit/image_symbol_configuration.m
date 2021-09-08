@@ -5,9 +5,31 @@ void* C_ImageSymbolConfiguration_Alloc() {
     return [NSImageSymbolConfiguration alloc];
 }
 
+void* C_NSImageSymbolConfiguration_AllocImageSymbolConfiguration() {
+    NSImageSymbolConfiguration* result_ = [NSImageSymbolConfiguration alloc];
+    return result_;
+}
+
 void* C_NSImageSymbolConfiguration_Init(void* ptr) {
     NSImageSymbolConfiguration* nSImageSymbolConfiguration = (NSImageSymbolConfiguration*)ptr;
     NSImageSymbolConfiguration* result_ = [nSImageSymbolConfiguration init];
+    return result_;
+}
+
+void* C_NSImageSymbolConfiguration_NewImageSymbolConfiguration() {
+    NSImageSymbolConfiguration* result_ = [NSImageSymbolConfiguration new];
+    return result_;
+}
+
+void* C_NSImageSymbolConfiguration_Autorelease(void* ptr) {
+    NSImageSymbolConfiguration* nSImageSymbolConfiguration = (NSImageSymbolConfiguration*)ptr;
+    NSImageSymbolConfiguration* result_ = [nSImageSymbolConfiguration autorelease];
+    return result_;
+}
+
+void* C_NSImageSymbolConfiguration_Retain(void* ptr) {
+    NSImageSymbolConfiguration* nSImageSymbolConfiguration = (NSImageSymbolConfiguration*)ptr;
+    NSImageSymbolConfiguration* result_ = [nSImageSymbolConfiguration retain];
     return result_;
 }
 

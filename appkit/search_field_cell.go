@@ -44,22 +44,38 @@ func MakeSearchFieldCell(ptr unsafe.Pointer) NSSearchFieldCell {
 	}
 }
 
-func AllocSearchFieldCell() NSSearchFieldCell {
-	return MakeSearchFieldCell(C.C_SearchFieldCell_Alloc())
-}
-
-func (n NSSearchFieldCell) InitWithCoder(coder foundation.Coder) SearchFieldCell {
+func (n NSSearchFieldCell) InitWithCoder(coder foundation.Coder) NSSearchFieldCell {
 	result_ := C.C_NSSearchFieldCell_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeSearchFieldCell(result_)
 }
 
-func (n NSSearchFieldCell) InitTextCell(_string string) SearchFieldCell {
+func (n NSSearchFieldCell) InitTextCell(_string string) NSSearchFieldCell {
 	result_ := C.C_NSSearchFieldCell_InitTextCell(n.Ptr(), foundation.NewString(_string).Ptr())
 	return MakeSearchFieldCell(result_)
 }
 
-func (n NSSearchFieldCell) Init() SearchFieldCell {
+func (n NSSearchFieldCell) Init() NSSearchFieldCell {
 	result_ := C.C_NSSearchFieldCell_Init(n.Ptr())
+	return MakeSearchFieldCell(result_)
+}
+
+func AllocSearchFieldCell() NSSearchFieldCell {
+	result_ := C.C_NSSearchFieldCell_AllocSearchFieldCell()
+	return MakeSearchFieldCell(result_)
+}
+
+func NewSearchFieldCell() NSSearchFieldCell {
+	result_ := C.C_NSSearchFieldCell_NewSearchFieldCell()
+	return MakeSearchFieldCell(result_)
+}
+
+func (n NSSearchFieldCell) Autorelease() NSSearchFieldCell {
+	result_ := C.C_NSSearchFieldCell_Autorelease(n.Ptr())
+	return MakeSearchFieldCell(result_)
+}
+
+func (n NSSearchFieldCell) Retain() NSSearchFieldCell {
+	result_ := C.C_NSSearchFieldCell_Retain(n.Ptr())
 	return MakeSearchFieldCell(result_)
 }
 

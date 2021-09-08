@@ -5,9 +5,31 @@ void* C_MutableParagraphStyle_Alloc() {
     return [NSMutableParagraphStyle alloc];
 }
 
+void* C_NSMutableParagraphStyle_AllocMutableParagraphStyle() {
+    NSMutableParagraphStyle* result_ = [NSMutableParagraphStyle alloc];
+    return result_;
+}
+
 void* C_NSMutableParagraphStyle_Init(void* ptr) {
     NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
     NSMutableParagraphStyle* result_ = [nSMutableParagraphStyle init];
+    return result_;
+}
+
+void* C_NSMutableParagraphStyle_NewMutableParagraphStyle() {
+    NSMutableParagraphStyle* result_ = [NSMutableParagraphStyle new];
+    return result_;
+}
+
+void* C_NSMutableParagraphStyle_Autorelease(void* ptr) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    NSMutableParagraphStyle* result_ = [nSMutableParagraphStyle autorelease];
+    return result_;
+}
+
+void* C_NSMutableParagraphStyle_Retain(void* ptr) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    NSMutableParagraphStyle* result_ = [nSMutableParagraphStyle retain];
     return result_;
 }
 
@@ -83,7 +105,7 @@ void C_NSMutableParagraphStyle_SetBaseWritingDirection(void* ptr, int value) {
 
 void C_NSMutableParagraphStyle_SetTabStops(void* ptr, Array value) {
     NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -101,7 +123,7 @@ void C_NSMutableParagraphStyle_SetDefaultTabInterval(void* ptr, double value) {
 
 void C_NSMutableParagraphStyle_SetTextBlocks(void* ptr, Array value) {
     NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -114,7 +136,7 @@ void C_NSMutableParagraphStyle_SetTextBlocks(void* ptr, Array value) {
 
 void C_NSMutableParagraphStyle_SetTextLists(void* ptr, Array value) {
     NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

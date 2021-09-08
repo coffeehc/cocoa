@@ -28,22 +28,38 @@ func MakeColorSpace(ptr unsafe.Pointer) NSColorSpace {
 	}
 }
 
-func AllocColorSpace() NSColorSpace {
-	return MakeColorSpace(C.C_ColorSpace_Alloc())
-}
-
-func (n NSColorSpace) InitWithCGColorSpace(cgColorSpace coregraphics.ColorSpaceRef) ColorSpace {
+func (n NSColorSpace) InitWithCGColorSpace(cgColorSpace coregraphics.ColorSpaceRef) NSColorSpace {
 	result_ := C.C_NSColorSpace_InitWithCGColorSpace(n.Ptr(), unsafe.Pointer(cgColorSpace))
 	return MakeColorSpace(result_)
 }
 
-func (n NSColorSpace) InitWithICCProfileData(iccData []byte) ColorSpace {
+func (n NSColorSpace) InitWithICCProfileData(iccData []byte) NSColorSpace {
 	result_ := C.C_NSColorSpace_InitWithICCProfileData(n.Ptr(), foundation.NewData(iccData).Ptr())
 	return MakeColorSpace(result_)
 }
 
-func (n NSColorSpace) Init() ColorSpace {
+func AllocColorSpace() NSColorSpace {
+	result_ := C.C_NSColorSpace_AllocColorSpace()
+	return MakeColorSpace(result_)
+}
+
+func (n NSColorSpace) Init() NSColorSpace {
 	result_ := C.C_NSColorSpace_Init(n.Ptr())
+	return MakeColorSpace(result_)
+}
+
+func NewColorSpace() NSColorSpace {
+	result_ := C.C_NSColorSpace_NewColorSpace()
+	return MakeColorSpace(result_)
+}
+
+func (n NSColorSpace) Autorelease() NSColorSpace {
+	result_ := C.C_NSColorSpace_Autorelease(n.Ptr())
+	return MakeColorSpace(result_)
+}
+
+func (n NSColorSpace) Retain() NSColorSpace {
+	result_ := C.C_NSColorSpace_Retain(n.Ptr())
 	return MakeColorSpace(result_)
 }
 

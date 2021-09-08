@@ -5,12 +5,6 @@ void* C_TintConfiguration_Alloc() {
     return [NSTintConfiguration alloc];
 }
 
-void* C_NSTintConfiguration_Init(void* ptr) {
-    NSTintConfiguration* nSTintConfiguration = (NSTintConfiguration*)ptr;
-    NSTintConfiguration* result_ = [nSTintConfiguration init];
-    return result_;
-}
-
 void* C_NSTintConfiguration_TintConfigurationWithFixedColor(void* color) {
     NSTintConfiguration* result_ = [NSTintConfiguration tintConfigurationWithFixedColor:(NSColor*)color];
     return result_;
@@ -18,6 +12,34 @@ void* C_NSTintConfiguration_TintConfigurationWithFixedColor(void* color) {
 
 void* C_NSTintConfiguration_TintConfigurationWithPreferredColor(void* color) {
     NSTintConfiguration* result_ = [NSTintConfiguration tintConfigurationWithPreferredColor:(NSColor*)color];
+    return result_;
+}
+
+void* C_NSTintConfiguration_AllocTintConfiguration() {
+    NSTintConfiguration* result_ = [NSTintConfiguration alloc];
+    return result_;
+}
+
+void* C_NSTintConfiguration_Init(void* ptr) {
+    NSTintConfiguration* nSTintConfiguration = (NSTintConfiguration*)ptr;
+    NSTintConfiguration* result_ = [nSTintConfiguration init];
+    return result_;
+}
+
+void* C_NSTintConfiguration_NewTintConfiguration() {
+    NSTintConfiguration* result_ = [NSTintConfiguration new];
+    return result_;
+}
+
+void* C_NSTintConfiguration_Autorelease(void* ptr) {
+    NSTintConfiguration* nSTintConfiguration = (NSTintConfiguration*)ptr;
+    NSTintConfiguration* result_ = [nSTintConfiguration autorelease];
+    return result_;
+}
+
+void* C_NSTintConfiguration_Retain(void* ptr) {
+    NSTintConfiguration* nSTintConfiguration = (NSTintConfiguration*)ptr;
+    NSTintConfiguration* result_ = [nSTintConfiguration retain];
     return result_;
 }
 

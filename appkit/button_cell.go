@@ -61,27 +61,43 @@ func MakeButtonCell(ptr unsafe.Pointer) NSButtonCell {
 	}
 }
 
-func AllocButtonCell() NSButtonCell {
-	return MakeButtonCell(C.C_ButtonCell_Alloc())
-}
-
-func (n NSButtonCell) InitWithCoder(coder foundation.Coder) ButtonCell {
+func (n NSButtonCell) InitWithCoder(coder foundation.Coder) NSButtonCell {
 	result_ := C.C_NSButtonCell_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeButtonCell(result_)
 }
 
-func (n NSButtonCell) InitImageCell(image Image) ButtonCell {
+func (n NSButtonCell) InitImageCell(image Image) NSButtonCell {
 	result_ := C.C_NSButtonCell_InitImageCell(n.Ptr(), objc.ExtractPtr(image))
 	return MakeButtonCell(result_)
 }
 
-func (n NSButtonCell) InitTextCell(_string string) ButtonCell {
+func (n NSButtonCell) InitTextCell(_string string) NSButtonCell {
 	result_ := C.C_NSButtonCell_InitTextCell(n.Ptr(), foundation.NewString(_string).Ptr())
 	return MakeButtonCell(result_)
 }
 
-func (n NSButtonCell) Init() ButtonCell {
+func (n NSButtonCell) Init() NSButtonCell {
 	result_ := C.C_NSButtonCell_Init(n.Ptr())
+	return MakeButtonCell(result_)
+}
+
+func AllocButtonCell() NSButtonCell {
+	result_ := C.C_NSButtonCell_AllocButtonCell()
+	return MakeButtonCell(result_)
+}
+
+func NewButtonCell() NSButtonCell {
+	result_ := C.C_NSButtonCell_NewButtonCell()
+	return MakeButtonCell(result_)
+}
+
+func (n NSButtonCell) Autorelease() NSButtonCell {
+	result_ := C.C_NSButtonCell_Autorelease(n.Ptr())
+	return MakeButtonCell(result_)
+}
+
+func (n NSButtonCell) Retain() NSButtonCell {
+	result_ := C.C_NSButtonCell_Retain(n.Ptr())
 	return MakeButtonCell(result_)
 }
 

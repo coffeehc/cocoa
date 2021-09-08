@@ -5,6 +5,23 @@ void* C_ContentWorld_Alloc() {
     return [WKContentWorld alloc];
 }
 
+void* C_WKContentWorld_AllocContentWorld() {
+    WKContentWorld* result_ = [WKContentWorld alloc];
+    return result_;
+}
+
+void* C_WKContentWorld_Autorelease(void* ptr) {
+    WKContentWorld* wKContentWorld = (WKContentWorld*)ptr;
+    WKContentWorld* result_ = [wKContentWorld autorelease];
+    return result_;
+}
+
+void* C_WKContentWorld_Retain(void* ptr) {
+    WKContentWorld* wKContentWorld = (WKContentWorld*)ptr;
+    WKContentWorld* result_ = [wKContentWorld retain];
+    return result_;
+}
+
 void* C_WKContentWorld_ContentWorld_WorldWithName(void* name) {
     WKContentWorld* result_ = [WKContentWorld worldWithName:(NSString*)name];
     return result_;

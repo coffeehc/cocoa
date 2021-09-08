@@ -41,32 +41,48 @@ func MakeSound(ptr unsafe.Pointer) NSSound {
 	}
 }
 
-func AllocSound() NSSound {
-	return MakeSound(C.C_Sound_Alloc())
-}
-
-func (n NSSound) InitWithContentsOfFile_ByReference(path string, byRef bool) Sound {
+func (n NSSound) InitWithContentsOfFile_ByReference(path string, byRef bool) NSSound {
 	result_ := C.C_NSSound_InitWithContentsOfFile_ByReference(n.Ptr(), foundation.NewString(path).Ptr(), C.bool(byRef))
 	return MakeSound(result_)
 }
 
-func (n NSSound) InitWithContentsOfURL_ByReference(url foundation.URL, byRef bool) Sound {
+func (n NSSound) InitWithContentsOfURL_ByReference(url foundation.URL, byRef bool) NSSound {
 	result_ := C.C_NSSound_InitWithContentsOfURL_ByReference(n.Ptr(), objc.ExtractPtr(url), C.bool(byRef))
 	return MakeSound(result_)
 }
 
-func (n NSSound) InitWithData(data []byte) Sound {
+func (n NSSound) InitWithData(data []byte) NSSound {
 	result_ := C.C_NSSound_InitWithData(n.Ptr(), foundation.NewData(data).Ptr())
 	return MakeSound(result_)
 }
 
-func (n NSSound) InitWithPasteboard(pasteboard Pasteboard) Sound {
+func (n NSSound) InitWithPasteboard(pasteboard Pasteboard) NSSound {
 	result_ := C.C_NSSound_InitWithPasteboard(n.Ptr(), objc.ExtractPtr(pasteboard))
 	return MakeSound(result_)
 }
 
-func (n NSSound) Init() Sound {
+func AllocSound() NSSound {
+	result_ := C.C_NSSound_AllocSound()
+	return MakeSound(result_)
+}
+
+func (n NSSound) Init() NSSound {
 	result_ := C.C_NSSound_Init(n.Ptr())
+	return MakeSound(result_)
+}
+
+func NewSound() NSSound {
+	result_ := C.C_NSSound_NewSound()
+	return MakeSound(result_)
+}
+
+func (n NSSound) Autorelease() NSSound {
+	result_ := C.C_NSSound_Autorelease(n.Ptr())
+	return MakeSound(result_)
+}
+
+func (n NSSound) Retain() NSSound {
+	result_ := C.C_NSSound_Retain(n.Ptr())
 	return MakeSound(result_)
 }
 

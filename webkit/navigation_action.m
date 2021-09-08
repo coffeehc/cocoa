@@ -5,9 +5,31 @@ void* C_NavigationAction_Alloc() {
     return [WKNavigationAction alloc];
 }
 
+void* C_WKNavigationAction_AllocNavigationAction() {
+    WKNavigationAction* result_ = [WKNavigationAction alloc];
+    return result_;
+}
+
 void* C_WKNavigationAction_Init(void* ptr) {
     WKNavigationAction* wKNavigationAction = (WKNavigationAction*)ptr;
     WKNavigationAction* result_ = [wKNavigationAction init];
+    return result_;
+}
+
+void* C_WKNavigationAction_NewNavigationAction() {
+    WKNavigationAction* result_ = [WKNavigationAction new];
+    return result_;
+}
+
+void* C_WKNavigationAction_Autorelease(void* ptr) {
+    WKNavigationAction* wKNavigationAction = (WKNavigationAction*)ptr;
+    WKNavigationAction* result_ = [wKNavigationAction autorelease];
+    return result_;
+}
+
+void* C_WKNavigationAction_Retain(void* ptr) {
+    WKNavigationAction* wKNavigationAction = (WKNavigationAction*)ptr;
+    WKNavigationAction* result_ = [wKNavigationAction retain];
     return result_;
 }
 

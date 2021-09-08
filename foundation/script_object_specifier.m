@@ -23,9 +23,31 @@ void* C_NSScriptObjectSpecifier_InitWithCoder(void* ptr, void* inCoder) {
     return result_;
 }
 
+void* C_NSScriptObjectSpecifier_AllocScriptObjectSpecifier() {
+    NSScriptObjectSpecifier* result_ = [NSScriptObjectSpecifier alloc];
+    return result_;
+}
+
 void* C_NSScriptObjectSpecifier_Init(void* ptr) {
     NSScriptObjectSpecifier* nSScriptObjectSpecifier = (NSScriptObjectSpecifier*)ptr;
     NSScriptObjectSpecifier* result_ = [nSScriptObjectSpecifier init];
+    return result_;
+}
+
+void* C_NSScriptObjectSpecifier_NewScriptObjectSpecifier() {
+    NSScriptObjectSpecifier* result_ = [NSScriptObjectSpecifier new];
+    return result_;
+}
+
+void* C_NSScriptObjectSpecifier_Autorelease(void* ptr) {
+    NSScriptObjectSpecifier* nSScriptObjectSpecifier = (NSScriptObjectSpecifier*)ptr;
+    NSScriptObjectSpecifier* result_ = [nSScriptObjectSpecifier autorelease];
+    return result_;
+}
+
+void* C_NSScriptObjectSpecifier_Retain(void* ptr) {
+    NSScriptObjectSpecifier* nSScriptObjectSpecifier = (NSScriptObjectSpecifier*)ptr;
+    NSScriptObjectSpecifier* result_ = [nSScriptObjectSpecifier retain];
     return result_;
 }
 

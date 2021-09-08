@@ -17,6 +17,28 @@ void* C_NSTouchBar_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSTouchBar_AllocTouchBar() {
+    NSTouchBar* result_ = [NSTouchBar alloc];
+    return result_;
+}
+
+void* C_NSTouchBar_NewTouchBar() {
+    NSTouchBar* result_ = [NSTouchBar new];
+    return result_;
+}
+
+void* C_NSTouchBar_Autorelease(void* ptr) {
+    NSTouchBar* nSTouchBar = (NSTouchBar*)ptr;
+    NSTouchBar* result_ = [nSTouchBar autorelease];
+    return result_;
+}
+
+void* C_NSTouchBar_Retain(void* ptr) {
+    NSTouchBar* nSTouchBar = (NSTouchBar*)ptr;
+    NSTouchBar* result_ = [nSTouchBar retain];
+    return result_;
+}
+
 void* C_NSTouchBar_ItemForIdentifier(void* ptr, void* identifier) {
     NSTouchBar* nSTouchBar = (NSTouchBar*)ptr;
     NSTouchBarItem* result_ = [nSTouchBar itemForIdentifier:(NSString*)identifier];
@@ -64,7 +86,7 @@ Array C_NSTouchBar_DefaultItemIdentifiers(void* ptr) {
 
 void C_NSTouchBar_SetDefaultItemIdentifiers(void* ptr, Array value) {
     NSTouchBar* nSTouchBar = (NSTouchBar*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -150,7 +172,7 @@ Array C_NSTouchBar_CustomizationAllowedItemIdentifiers(void* ptr) {
 
 void C_NSTouchBar_SetCustomizationAllowedItemIdentifiers(void* ptr, Array value) {
     NSTouchBar* nSTouchBar = (NSTouchBar*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -180,7 +202,7 @@ Array C_NSTouchBar_CustomizationRequiredItemIdentifiers(void* ptr) {
 
 void C_NSTouchBar_SetCustomizationRequiredItemIdentifiers(void* ptr, Array value) {
     NSTouchBar* nSTouchBar = (NSTouchBar*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

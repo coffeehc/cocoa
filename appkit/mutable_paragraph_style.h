@@ -5,7 +5,11 @@
 
 void* C_MutableParagraphStyle_Alloc();
 
+void* C_NSMutableParagraphStyle_AllocMutableParagraphStyle();
 void* C_NSMutableParagraphStyle_Init(void* ptr);
+void* C_NSMutableParagraphStyle_NewMutableParagraphStyle();
+void* C_NSMutableParagraphStyle_Autorelease(void* ptr);
+void* C_NSMutableParagraphStyle_Retain(void* ptr);
 void C_NSMutableParagraphStyle_SetParagraphStyle(void* ptr, void* obj);
 void C_NSMutableParagraphStyle_AddTabStop(void* ptr, void* anObject);
 void C_NSMutableParagraphStyle_RemoveTabStop(void* ptr, void* anObject);

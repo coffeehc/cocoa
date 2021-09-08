@@ -35,12 +35,23 @@ func MakeTextInputContext(ptr unsafe.Pointer) NSTextInputContext {
 	}
 }
 
-func AllocTextInputContext() NSTextInputContext {
-	return MakeTextInputContext(C.C_TextInputContext_Alloc())
+func (n NSTextInputContext) InitWithClient(client objc.Object) NSTextInputContext {
+	result_ := C.C_NSTextInputContext_InitWithClient(n.Ptr(), objc.ExtractPtr(client))
+	return MakeTextInputContext(result_)
 }
 
-func (n NSTextInputContext) InitWithClient(client objc.Object) TextInputContext {
-	result_ := C.C_NSTextInputContext_InitWithClient(n.Ptr(), objc.ExtractPtr(client))
+func AllocTextInputContext() NSTextInputContext {
+	result_ := C.C_NSTextInputContext_AllocTextInputContext()
+	return MakeTextInputContext(result_)
+}
+
+func (n NSTextInputContext) Autorelease() NSTextInputContext {
+	result_ := C.C_NSTextInputContext_Autorelease(n.Ptr())
+	return MakeTextInputContext(result_)
+}
+
+func (n NSTextInputContext) Retain() NSTextInputContext {
+	result_ := C.C_NSTextInputContext_Retain(n.Ptr())
 	return MakeTextInputContext(result_)
 }
 

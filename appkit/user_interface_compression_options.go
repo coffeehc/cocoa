@@ -27,27 +27,43 @@ func MakeUserInterfaceCompressionOptions(ptr unsafe.Pointer) NSUserInterfaceComp
 	}
 }
 
-func AllocUserInterfaceCompressionOptions() NSUserInterfaceCompressionOptions {
-	return MakeUserInterfaceCompressionOptions(C.C_UserInterfaceCompressionOptions_Alloc())
-}
-
-func (n NSUserInterfaceCompressionOptions) Init() UserInterfaceCompressionOptions {
+func (n NSUserInterfaceCompressionOptions) Init() NSUserInterfaceCompressionOptions {
 	result_ := C.C_NSUserInterfaceCompressionOptions_Init(n.Ptr())
 	return MakeUserInterfaceCompressionOptions(result_)
 }
 
-func (n NSUserInterfaceCompressionOptions) InitWithCompressionOptions(options foundation.Set) UserInterfaceCompressionOptions {
+func (n NSUserInterfaceCompressionOptions) InitWithCompressionOptions(options foundation.Set) NSUserInterfaceCompressionOptions {
 	result_ := C.C_NSUserInterfaceCompressionOptions_InitWithCompressionOptions(n.Ptr(), objc.ExtractPtr(options))
 	return MakeUserInterfaceCompressionOptions(result_)
 }
 
-func (n NSUserInterfaceCompressionOptions) InitWithIdentifier(identifier string) UserInterfaceCompressionOptions {
+func (n NSUserInterfaceCompressionOptions) InitWithIdentifier(identifier string) NSUserInterfaceCompressionOptions {
 	result_ := C.C_NSUserInterfaceCompressionOptions_InitWithIdentifier(n.Ptr(), foundation.NewString(identifier).Ptr())
 	return MakeUserInterfaceCompressionOptions(result_)
 }
 
-func (n NSUserInterfaceCompressionOptions) InitWithCoder(coder foundation.Coder) UserInterfaceCompressionOptions {
+func (n NSUserInterfaceCompressionOptions) InitWithCoder(coder foundation.Coder) NSUserInterfaceCompressionOptions {
 	result_ := C.C_NSUserInterfaceCompressionOptions_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeUserInterfaceCompressionOptions(result_)
+}
+
+func AllocUserInterfaceCompressionOptions() NSUserInterfaceCompressionOptions {
+	result_ := C.C_NSUserInterfaceCompressionOptions_AllocUserInterfaceCompressionOptions()
+	return MakeUserInterfaceCompressionOptions(result_)
+}
+
+func NewUserInterfaceCompressionOptions() NSUserInterfaceCompressionOptions {
+	result_ := C.C_NSUserInterfaceCompressionOptions_NewUserInterfaceCompressionOptions()
+	return MakeUserInterfaceCompressionOptions(result_)
+}
+
+func (n NSUserInterfaceCompressionOptions) Autorelease() NSUserInterfaceCompressionOptions {
+	result_ := C.C_NSUserInterfaceCompressionOptions_Autorelease(n.Ptr())
+	return MakeUserInterfaceCompressionOptions(result_)
+}
+
+func (n NSUserInterfaceCompressionOptions) Retain() NSUserInterfaceCompressionOptions {
+	result_ := C.C_NSUserInterfaceCompressionOptions_Retain(n.Ptr())
 	return MakeUserInterfaceCompressionOptions(result_)
 }
 

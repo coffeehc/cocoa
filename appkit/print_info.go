@@ -61,11 +61,7 @@ func MakePrintInfo(ptr unsafe.Pointer) NSPrintInfo {
 	}
 }
 
-func AllocPrintInfo() NSPrintInfo {
-	return MakePrintInfo(C.C_PrintInfo_Alloc())
-}
-
-func (n NSPrintInfo) InitWithDictionary(attributes map[PrintInfoAttributeKey]objc.Object) PrintInfo {
+func (n NSPrintInfo) InitWithDictionary(attributes map[PrintInfoAttributeKey]objc.Object) NSPrintInfo {
 	var cAttributes C.Dictionary
 	if len(attributes) > 0 {
 		cAttributesKeyData := make([]unsafe.Pointer, len(attributes))
@@ -84,13 +80,33 @@ func (n NSPrintInfo) InitWithDictionary(attributes map[PrintInfoAttributeKey]obj
 	return MakePrintInfo(result_)
 }
 
-func (n NSPrintInfo) Init() PrintInfo {
+func (n NSPrintInfo) Init() NSPrintInfo {
 	result_ := C.C_NSPrintInfo_Init(n.Ptr())
 	return MakePrintInfo(result_)
 }
 
-func (n NSPrintInfo) InitWithCoder(coder foundation.Coder) PrintInfo {
+func (n NSPrintInfo) InitWithCoder(coder foundation.Coder) NSPrintInfo {
 	result_ := C.C_NSPrintInfo_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakePrintInfo(result_)
+}
+
+func AllocPrintInfo() NSPrintInfo {
+	result_ := C.C_NSPrintInfo_AllocPrintInfo()
+	return MakePrintInfo(result_)
+}
+
+func NewPrintInfo() NSPrintInfo {
+	result_ := C.C_NSPrintInfo_NewPrintInfo()
+	return MakePrintInfo(result_)
+}
+
+func (n NSPrintInfo) Autorelease() NSPrintInfo {
+	result_ := C.C_NSPrintInfo_Autorelease(n.Ptr())
+	return MakePrintInfo(result_)
+}
+
+func (n NSPrintInfo) Retain() NSPrintInfo {
+	result_ := C.C_NSPrintInfo_Retain(n.Ptr())
 	return MakePrintInfo(result_)
 }
 

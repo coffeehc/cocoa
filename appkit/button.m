@@ -5,24 +5,6 @@ void* C_Button_Alloc() {
     return [NSButton alloc];
 }
 
-void* C_NSButton_InitWithFrame(void* ptr, CGRect frameRect) {
-    NSButton* nSButton = (NSButton*)ptr;
-    NSButton* result_ = [nSButton initWithFrame:frameRect];
-    return result_;
-}
-
-void* C_NSButton_InitWithCoder(void* ptr, void* coder) {
-    NSButton* nSButton = (NSButton*)ptr;
-    NSButton* result_ = [nSButton initWithCoder:(NSCoder*)coder];
-    return result_;
-}
-
-void* C_NSButton_Init(void* ptr) {
-    NSButton* nSButton = (NSButton*)ptr;
-    NSButton* result_ = [nSButton init];
-    return result_;
-}
-
 void* C_NSButton_Button_CheckboxWithTitle_Target_Action(void* title, void* target, void* action) {
     NSButton* result_ = [NSButton checkboxWithTitle:(NSString*)title target:(id)target action:(SEL)action];
     return result_;
@@ -48,6 +30,46 @@ void* C_NSButton_ButtonWithTitle_Target_Action(void* title, void* target, void* 
     return result_;
 }
 
+void* C_NSButton_InitWithFrame(void* ptr, CGRect frameRect) {
+    NSButton* nSButton = (NSButton*)ptr;
+    NSButton* result_ = [nSButton initWithFrame:frameRect];
+    return result_;
+}
+
+void* C_NSButton_InitWithCoder(void* ptr, void* coder) {
+    NSButton* nSButton = (NSButton*)ptr;
+    NSButton* result_ = [nSButton initWithCoder:(NSCoder*)coder];
+    return result_;
+}
+
+void* C_NSButton_Init(void* ptr) {
+    NSButton* nSButton = (NSButton*)ptr;
+    NSButton* result_ = [nSButton init];
+    return result_;
+}
+
+void* C_NSButton_AllocButton() {
+    NSButton* result_ = [NSButton alloc];
+    return result_;
+}
+
+void* C_NSButton_NewButton() {
+    NSButton* result_ = [NSButton new];
+    return result_;
+}
+
+void* C_NSButton_Autorelease(void* ptr) {
+    NSButton* nSButton = (NSButton*)ptr;
+    NSButton* result_ = [nSButton autorelease];
+    return result_;
+}
+
+void* C_NSButton_Retain(void* ptr) {
+    NSButton* nSButton = (NSButton*)ptr;
+    NSButton* result_ = [nSButton retain];
+    return result_;
+}
+
 void C_NSButton_SetButtonType(void* ptr, unsigned int _type) {
     NSButton* nSButton = (NSButton*)ptr;
     [nSButton setButtonType:_type];
@@ -60,7 +82,7 @@ void C_NSButton_SetPeriodicDelay_Interval(void* ptr, float delay, float interval
 
 void C_NSButton_CompressWithPrioritizedCompressionOptions(void* ptr, Array prioritizedOptions) {
     NSButton* nSButton = (NSButton*)ptr;
-    NSMutableArray* objcPrioritizedOptions = [[NSMutableArray alloc] init];
+    NSMutableArray* objcPrioritizedOptions = [NSMutableArray arrayWithCapacity:prioritizedOptions.len];
     if (prioritizedOptions.len > 0) {
     	void** prioritizedOptionsData = (void**)prioritizedOptions.data;
     	for (int i = 0; i < prioritizedOptions.len; i++) {
@@ -73,7 +95,7 @@ void C_NSButton_CompressWithPrioritizedCompressionOptions(void* ptr, Array prior
 
 CGSize C_NSButton_MinimumSizeWithPrioritizedCompressionOptions(void* ptr, Array prioritizedOptions) {
     NSButton* nSButton = (NSButton*)ptr;
-    NSMutableArray* objcPrioritizedOptions = [[NSMutableArray alloc] init];
+    NSMutableArray* objcPrioritizedOptions = [NSMutableArray arrayWithCapacity:prioritizedOptions.len];
     if (prioritizedOptions.len > 0) {
     	void** prioritizedOptionsData = (void**)prioritizedOptions.data;
     	for (int i = 0; i < prioritizedOptions.len; i++) {

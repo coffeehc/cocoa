@@ -23,6 +23,28 @@ void* C_NSTableCellView_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSTableCellView_AllocTableCellView() {
+    NSTableCellView* result_ = [NSTableCellView alloc];
+    return result_;
+}
+
+void* C_NSTableCellView_NewTableCellView() {
+    NSTableCellView* result_ = [NSTableCellView new];
+    return result_;
+}
+
+void* C_NSTableCellView_Autorelease(void* ptr) {
+    NSTableCellView* nSTableCellView = (NSTableCellView*)ptr;
+    NSTableCellView* result_ = [nSTableCellView autorelease];
+    return result_;
+}
+
+void* C_NSTableCellView_Retain(void* ptr) {
+    NSTableCellView* nSTableCellView = (NSTableCellView*)ptr;
+    NSTableCellView* result_ = [nSTableCellView retain];
+    return result_;
+}
+
 void* C_NSTableCellView_ObjectValue(void* ptr) {
     NSTableCellView* nSTableCellView = (NSTableCellView*)ptr;
     id result_ = [nSTableCellView objectValue];

@@ -5,6 +5,26 @@ void* C_TextField_Alloc() {
     return [NSTextField alloc];
 }
 
+void* C_NSTextField_TextField_LabelWithAttributedString(void* attributedStringValue) {
+    NSTextField* result_ = [NSTextField labelWithAttributedString:(NSAttributedString*)attributedStringValue];
+    return result_;
+}
+
+void* C_NSTextField_TextField_LabelWithString(void* stringValue) {
+    NSTextField* result_ = [NSTextField labelWithString:(NSString*)stringValue];
+    return result_;
+}
+
+void* C_NSTextField_TextFieldWithString(void* stringValue) {
+    NSTextField* result_ = [NSTextField textFieldWithString:(NSString*)stringValue];
+    return result_;
+}
+
+void* C_NSTextField_TextField_WrappingLabelWithString(void* stringValue) {
+    NSTextField* result_ = [NSTextField wrappingLabelWithString:(NSString*)stringValue];
+    return result_;
+}
+
 void* C_NSTextField_InitWithFrame(void* ptr, CGRect frameRect) {
     NSTextField* nSTextField = (NSTextField*)ptr;
     NSTextField* result_ = [nSTextField initWithFrame:frameRect];
@@ -23,23 +43,25 @@ void* C_NSTextField_Init(void* ptr) {
     return result_;
 }
 
-void* C_NSTextField_TextField_LabelWithAttributedString(void* attributedStringValue) {
-    NSTextField* result_ = [NSTextField labelWithAttributedString:(NSAttributedString*)attributedStringValue];
+void* C_NSTextField_AllocTextField() {
+    NSTextField* result_ = [NSTextField alloc];
     return result_;
 }
 
-void* C_NSTextField_TextField_LabelWithString(void* stringValue) {
-    NSTextField* result_ = [NSTextField labelWithString:(NSString*)stringValue];
+void* C_NSTextField_NewTextField() {
+    NSTextField* result_ = [NSTextField new];
     return result_;
 }
 
-void* C_NSTextField_TextFieldWithString(void* stringValue) {
-    NSTextField* result_ = [NSTextField textFieldWithString:(NSString*)stringValue];
+void* C_NSTextField_Autorelease(void* ptr) {
+    NSTextField* nSTextField = (NSTextField*)ptr;
+    NSTextField* result_ = [nSTextField autorelease];
     return result_;
 }
 
-void* C_NSTextField_TextField_WrappingLabelWithString(void* stringValue) {
-    NSTextField* result_ = [NSTextField wrappingLabelWithString:(NSString*)stringValue];
+void* C_NSTextField_Retain(void* ptr) {
+    NSTextField* nSTextField = (NSTextField*)ptr;
+    NSTextField* result_ = [nSTextField retain];
     return result_;
 }
 

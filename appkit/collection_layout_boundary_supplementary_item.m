@@ -15,6 +15,51 @@ void* C_NSCollectionLayoutBoundarySupplementaryItem_CollectionLayoutBoundarySupp
     return result_;
 }
 
+void* C_NSCollectionLayoutBoundarySupplementaryItem_CollectionLayoutBoundarySupplementaryItem_SupplementaryItemWithLayoutSize_ElementKind_ContainerAnchor(void* layoutSize, void* elementKind, void* containerAnchor) {
+    NSCollectionLayoutBoundarySupplementaryItem* result_ = [NSCollectionLayoutBoundarySupplementaryItem supplementaryItemWithLayoutSize:(NSCollectionLayoutSize*)layoutSize elementKind:(NSString*)elementKind containerAnchor:(NSCollectionLayoutAnchor*)containerAnchor];
+    return result_;
+}
+
+void* C_NSCollectionLayoutBoundarySupplementaryItem_CollectionLayoutBoundarySupplementaryItem_SupplementaryItemWithLayoutSize_ElementKind_ContainerAnchor_ItemAnchor(void* layoutSize, void* elementKind, void* containerAnchor, void* itemAnchor) {
+    NSCollectionLayoutBoundarySupplementaryItem* result_ = [NSCollectionLayoutBoundarySupplementaryItem supplementaryItemWithLayoutSize:(NSCollectionLayoutSize*)layoutSize elementKind:(NSString*)elementKind containerAnchor:(NSCollectionLayoutAnchor*)containerAnchor itemAnchor:(NSCollectionLayoutAnchor*)itemAnchor];
+    return result_;
+}
+
+void* C_NSCollectionLayoutBoundarySupplementaryItem_CollectionLayoutBoundarySupplementaryItem_ItemWithLayoutSize(void* layoutSize) {
+    NSCollectionLayoutBoundarySupplementaryItem* result_ = [NSCollectionLayoutBoundarySupplementaryItem itemWithLayoutSize:(NSCollectionLayoutSize*)layoutSize];
+    return result_;
+}
+
+void* C_NSCollectionLayoutBoundarySupplementaryItem_CollectionLayoutBoundarySupplementaryItem_ItemWithLayoutSize_SupplementaryItems(void* layoutSize, Array supplementaryItems) {
+    NSMutableArray* objcSupplementaryItems = [NSMutableArray arrayWithCapacity:supplementaryItems.len];
+    if (supplementaryItems.len > 0) {
+    	void** supplementaryItemsData = (void**)supplementaryItems.data;
+    	for (int i = 0; i < supplementaryItems.len; i++) {
+    		void* p = supplementaryItemsData[i];
+    		[objcSupplementaryItems addObject:(NSCollectionLayoutSupplementaryItem*)(NSCollectionLayoutSupplementaryItem*)p];
+    	}
+    }
+    NSCollectionLayoutBoundarySupplementaryItem* result_ = [NSCollectionLayoutBoundarySupplementaryItem itemWithLayoutSize:(NSCollectionLayoutSize*)layoutSize supplementaryItems:objcSupplementaryItems];
+    return result_;
+}
+
+void* C_NSCollectionLayoutBoundarySupplementaryItem_AllocCollectionLayoutBoundarySupplementaryItem() {
+    NSCollectionLayoutBoundarySupplementaryItem* result_ = [NSCollectionLayoutBoundarySupplementaryItem alloc];
+    return result_;
+}
+
+void* C_NSCollectionLayoutBoundarySupplementaryItem_Autorelease(void* ptr) {
+    NSCollectionLayoutBoundarySupplementaryItem* nSCollectionLayoutBoundarySupplementaryItem = (NSCollectionLayoutBoundarySupplementaryItem*)ptr;
+    NSCollectionLayoutBoundarySupplementaryItem* result_ = [nSCollectionLayoutBoundarySupplementaryItem autorelease];
+    return result_;
+}
+
+void* C_NSCollectionLayoutBoundarySupplementaryItem_Retain(void* ptr) {
+    NSCollectionLayoutBoundarySupplementaryItem* nSCollectionLayoutBoundarySupplementaryItem = (NSCollectionLayoutBoundarySupplementaryItem*)ptr;
+    NSCollectionLayoutBoundarySupplementaryItem* result_ = [nSCollectionLayoutBoundarySupplementaryItem retain];
+    return result_;
+}
+
 bool C_NSCollectionLayoutBoundarySupplementaryItem_PinToVisibleBounds(void* ptr) {
     NSCollectionLayoutBoundarySupplementaryItem* nSCollectionLayoutBoundarySupplementaryItem = (NSCollectionLayoutBoundarySupplementaryItem*)ptr;
     BOOL result_ = [nSCollectionLayoutBoundarySupplementaryItem pinToVisibleBounds];

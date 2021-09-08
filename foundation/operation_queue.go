@@ -35,11 +35,27 @@ func MakeOperationQueue(ptr unsafe.Pointer) NSOperationQueue {
 }
 
 func AllocOperationQueue() NSOperationQueue {
-	return MakeOperationQueue(C.C_OperationQueue_Alloc())
+	result_ := C.C_NSOperationQueue_AllocOperationQueue()
+	return MakeOperationQueue(result_)
 }
 
-func (n NSOperationQueue) Init() OperationQueue {
+func (n NSOperationQueue) Init() NSOperationQueue {
 	result_ := C.C_NSOperationQueue_Init(n.Ptr())
+	return MakeOperationQueue(result_)
+}
+
+func NewOperationQueue() NSOperationQueue {
+	result_ := C.C_NSOperationQueue_NewOperationQueue()
+	return MakeOperationQueue(result_)
+}
+
+func (n NSOperationQueue) Autorelease() NSOperationQueue {
+	result_ := C.C_NSOperationQueue_Autorelease(n.Ptr())
+	return MakeOperationQueue(result_)
+}
+
+func (n NSOperationQueue) Retain() NSOperationQueue {
+	result_ := C.C_NSOperationQueue_Retain(n.Ptr())
 	return MakeOperationQueue(result_)
 }
 

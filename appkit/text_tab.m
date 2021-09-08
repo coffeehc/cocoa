@@ -7,7 +7,7 @@ void* C_TextTab_Alloc() {
 
 void* C_NSTextTab_InitWithTextAlignment_Location_Options(void* ptr, int alignment, double loc, Dictionary options) {
     NSTextTab* nSTextTab = (NSTextTab*)ptr;
-    NSMutableDictionary* objcOptions = [[NSMutableDictionary alloc] initWithCapacity: options.len];
+    NSMutableDictionary* objcOptions = [NSMutableDictionary dictionaryWithCapacity:options.len];
     if (options.len > 0) {
     	void** optionsKeyData = (void**)options.key_data;
     	void** optionsValueData = (void**)options.value_data;
@@ -21,9 +21,31 @@ void* C_NSTextTab_InitWithTextAlignment_Location_Options(void* ptr, int alignmen
     return result_;
 }
 
+void* C_NSTextTab_AllocTextTab() {
+    NSTextTab* result_ = [NSTextTab alloc];
+    return result_;
+}
+
 void* C_NSTextTab_Init(void* ptr) {
     NSTextTab* nSTextTab = (NSTextTab*)ptr;
     NSTextTab* result_ = [nSTextTab init];
+    return result_;
+}
+
+void* C_NSTextTab_NewTextTab() {
+    NSTextTab* result_ = [NSTextTab new];
+    return result_;
+}
+
+void* C_NSTextTab_Autorelease(void* ptr) {
+    NSTextTab* nSTextTab = (NSTextTab*)ptr;
+    NSTextTab* result_ = [nSTextTab autorelease];
+    return result_;
+}
+
+void* C_NSTextTab_Retain(void* ptr) {
+    NSTextTab* nSTextTab = (NSTextTab*)ptr;
+    NSTextTab* result_ = [nSTextTab retain];
     return result_;
 }
 

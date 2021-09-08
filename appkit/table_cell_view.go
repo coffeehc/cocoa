@@ -30,22 +30,38 @@ func MakeTableCellView(ptr unsafe.Pointer) NSTableCellView {
 	}
 }
 
-func AllocTableCellView() NSTableCellView {
-	return MakeTableCellView(C.C_TableCellView_Alloc())
-}
-
-func (n NSTableCellView) InitWithFrame(frameRect foundation.Rect) TableCellView {
+func (n NSTableCellView) InitWithFrame(frameRect foundation.Rect) NSTableCellView {
 	result_ := C.C_NSTableCellView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeTableCellView(result_)
 }
 
-func (n NSTableCellView) InitWithCoder(coder foundation.Coder) TableCellView {
+func (n NSTableCellView) InitWithCoder(coder foundation.Coder) NSTableCellView {
 	result_ := C.C_NSTableCellView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeTableCellView(result_)
 }
 
-func (n NSTableCellView) Init() TableCellView {
+func (n NSTableCellView) Init() NSTableCellView {
 	result_ := C.C_NSTableCellView_Init(n.Ptr())
+	return MakeTableCellView(result_)
+}
+
+func AllocTableCellView() NSTableCellView {
+	result_ := C.C_NSTableCellView_AllocTableCellView()
+	return MakeTableCellView(result_)
+}
+
+func NewTableCellView() NSTableCellView {
+	result_ := C.C_NSTableCellView_NewTableCellView()
+	return MakeTableCellView(result_)
+}
+
+func (n NSTableCellView) Autorelease() NSTableCellView {
+	result_ := C.C_NSTableCellView_Autorelease(n.Ptr())
+	return MakeTableCellView(result_)
+}
+
+func (n NSTableCellView) Retain() NSTableCellView {
+	result_ := C.C_NSTableCellView_Retain(n.Ptr())
 	return MakeTableCellView(result_)
 }
 

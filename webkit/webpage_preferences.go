@@ -26,11 +26,27 @@ func MakeWebpagePreferences(ptr unsafe.Pointer) WKWebpagePreferences {
 }
 
 func AllocWebpagePreferences() WKWebpagePreferences {
-	return MakeWebpagePreferences(C.C_WebpagePreferences_Alloc())
+	result_ := C.C_WKWebpagePreferences_AllocWebpagePreferences()
+	return MakeWebpagePreferences(result_)
 }
 
-func (w WKWebpagePreferences) Init() WebpagePreferences {
+func (w WKWebpagePreferences) Init() WKWebpagePreferences {
 	result_ := C.C_WKWebpagePreferences_Init(w.Ptr())
+	return MakeWebpagePreferences(result_)
+}
+
+func NewWebpagePreferences() WKWebpagePreferences {
+	result_ := C.C_WKWebpagePreferences_NewWebpagePreferences()
+	return MakeWebpagePreferences(result_)
+}
+
+func (w WKWebpagePreferences) Autorelease() WKWebpagePreferences {
+	result_ := C.C_WKWebpagePreferences_Autorelease(w.Ptr())
+	return MakeWebpagePreferences(result_)
+}
+
+func (w WKWebpagePreferences) Retain() WKWebpagePreferences {
+	result_ := C.C_WKWebpagePreferences_Retain(w.Ptr())
 	return MakeWebpagePreferences(result_)
 }
 

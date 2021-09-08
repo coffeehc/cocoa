@@ -29,17 +29,57 @@ func MakeCollectionLayoutBoundarySupplementaryItem(ptr unsafe.Pointer) NSCollect
 	}
 }
 
-func AllocCollectionLayoutBoundarySupplementaryItem() NSCollectionLayoutBoundarySupplementaryItem {
-	return MakeCollectionLayoutBoundarySupplementaryItem(C.C_CollectionLayoutBoundarySupplementaryItem_Alloc())
-}
-
-func CollectionLayoutBoundarySupplementaryItem_BoundarySupplementaryItemWithLayoutSize_ElementKind_Alignment(layoutSize CollectionLayoutSize, elementKind string, alignment RectAlignment) CollectionLayoutBoundarySupplementaryItem {
+func CollectionLayoutBoundarySupplementaryItem_BoundarySupplementaryItemWithLayoutSize_ElementKind_Alignment(layoutSize CollectionLayoutSize, elementKind string, alignment RectAlignment) NSCollectionLayoutBoundarySupplementaryItem {
 	result_ := C.C_NSCollectionLayoutBoundarySupplementaryItem_CollectionLayoutBoundarySupplementaryItem_BoundarySupplementaryItemWithLayoutSize_ElementKind_Alignment(objc.ExtractPtr(layoutSize), foundation.NewString(elementKind).Ptr(), C.int(int(alignment)))
 	return MakeCollectionLayoutBoundarySupplementaryItem(result_)
 }
 
-func CollectionLayoutBoundarySupplementaryItem_BoundarySupplementaryItemWithLayoutSize_ElementKind_Alignment_AbsoluteOffset(layoutSize CollectionLayoutSize, elementKind string, alignment RectAlignment, absoluteOffset foundation.Point) CollectionLayoutBoundarySupplementaryItem {
+func CollectionLayoutBoundarySupplementaryItem_BoundarySupplementaryItemWithLayoutSize_ElementKind_Alignment_AbsoluteOffset(layoutSize CollectionLayoutSize, elementKind string, alignment RectAlignment, absoluteOffset foundation.Point) NSCollectionLayoutBoundarySupplementaryItem {
 	result_ := C.C_NSCollectionLayoutBoundarySupplementaryItem_CollectionLayoutBoundarySupplementaryItem_BoundarySupplementaryItemWithLayoutSize_ElementKind_Alignment_AbsoluteOffset(objc.ExtractPtr(layoutSize), foundation.NewString(elementKind).Ptr(), C.int(int(alignment)), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(absoluteOffset))))
+	return MakeCollectionLayoutBoundarySupplementaryItem(result_)
+}
+
+func CollectionLayoutBoundarySupplementaryItem_SupplementaryItemWithLayoutSize_ElementKind_ContainerAnchor(layoutSize CollectionLayoutSize, elementKind string, containerAnchor CollectionLayoutAnchor) NSCollectionLayoutBoundarySupplementaryItem {
+	result_ := C.C_NSCollectionLayoutBoundarySupplementaryItem_CollectionLayoutBoundarySupplementaryItem_SupplementaryItemWithLayoutSize_ElementKind_ContainerAnchor(objc.ExtractPtr(layoutSize), foundation.NewString(elementKind).Ptr(), objc.ExtractPtr(containerAnchor))
+	return MakeCollectionLayoutBoundarySupplementaryItem(result_)
+}
+
+func CollectionLayoutBoundarySupplementaryItem_SupplementaryItemWithLayoutSize_ElementKind_ContainerAnchor_ItemAnchor(layoutSize CollectionLayoutSize, elementKind string, containerAnchor CollectionLayoutAnchor, itemAnchor CollectionLayoutAnchor) NSCollectionLayoutBoundarySupplementaryItem {
+	result_ := C.C_NSCollectionLayoutBoundarySupplementaryItem_CollectionLayoutBoundarySupplementaryItem_SupplementaryItemWithLayoutSize_ElementKind_ContainerAnchor_ItemAnchor(objc.ExtractPtr(layoutSize), foundation.NewString(elementKind).Ptr(), objc.ExtractPtr(containerAnchor), objc.ExtractPtr(itemAnchor))
+	return MakeCollectionLayoutBoundarySupplementaryItem(result_)
+}
+
+func CollectionLayoutBoundarySupplementaryItem_ItemWithLayoutSize(layoutSize CollectionLayoutSize) NSCollectionLayoutBoundarySupplementaryItem {
+	result_ := C.C_NSCollectionLayoutBoundarySupplementaryItem_CollectionLayoutBoundarySupplementaryItem_ItemWithLayoutSize(objc.ExtractPtr(layoutSize))
+	return MakeCollectionLayoutBoundarySupplementaryItem(result_)
+}
+
+func CollectionLayoutBoundarySupplementaryItem_ItemWithLayoutSize_SupplementaryItems(layoutSize CollectionLayoutSize, supplementaryItems []CollectionLayoutSupplementaryItem) NSCollectionLayoutBoundarySupplementaryItem {
+	var cSupplementaryItems C.Array
+	if len(supplementaryItems) > 0 {
+		cSupplementaryItemsData := make([]unsafe.Pointer, len(supplementaryItems))
+		for idx, v := range supplementaryItems {
+			cSupplementaryItemsData[idx] = objc.ExtractPtr(v)
+		}
+		cSupplementaryItems.data = unsafe.Pointer(&cSupplementaryItemsData[0])
+		cSupplementaryItems.len = C.int(len(supplementaryItems))
+	}
+	result_ := C.C_NSCollectionLayoutBoundarySupplementaryItem_CollectionLayoutBoundarySupplementaryItem_ItemWithLayoutSize_SupplementaryItems(objc.ExtractPtr(layoutSize), cSupplementaryItems)
+	return MakeCollectionLayoutBoundarySupplementaryItem(result_)
+}
+
+func AllocCollectionLayoutBoundarySupplementaryItem() NSCollectionLayoutBoundarySupplementaryItem {
+	result_ := C.C_NSCollectionLayoutBoundarySupplementaryItem_AllocCollectionLayoutBoundarySupplementaryItem()
+	return MakeCollectionLayoutBoundarySupplementaryItem(result_)
+}
+
+func (n NSCollectionLayoutBoundarySupplementaryItem) Autorelease() NSCollectionLayoutBoundarySupplementaryItem {
+	result_ := C.C_NSCollectionLayoutBoundarySupplementaryItem_Autorelease(n.Ptr())
+	return MakeCollectionLayoutBoundarySupplementaryItem(result_)
+}
+
+func (n NSCollectionLayoutBoundarySupplementaryItem) Retain() NSCollectionLayoutBoundarySupplementaryItem {
+	result_ := C.C_NSCollectionLayoutBoundarySupplementaryItem_Retain(n.Ptr())
 	return MakeCollectionLayoutBoundarySupplementaryItem(result_)
 }
 

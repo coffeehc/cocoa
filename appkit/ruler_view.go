@@ -52,27 +52,43 @@ func MakeRulerView(ptr unsafe.Pointer) NSRulerView {
 	}
 }
 
-func AllocRulerView() NSRulerView {
-	return MakeRulerView(C.C_RulerView_Alloc())
-}
-
-func (n NSRulerView) InitWithScrollView_Orientation(scrollView ScrollView, orientation RulerOrientation) RulerView {
+func (n NSRulerView) InitWithScrollView_Orientation(scrollView ScrollView, orientation RulerOrientation) NSRulerView {
 	result_ := C.C_NSRulerView_InitWithScrollView_Orientation(n.Ptr(), objc.ExtractPtr(scrollView), C.uint(uint(orientation)))
 	return MakeRulerView(result_)
 }
 
-func (n NSRulerView) InitWithCoder(coder foundation.Coder) RulerView {
+func (n NSRulerView) InitWithCoder(coder foundation.Coder) NSRulerView {
 	result_ := C.C_NSRulerView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeRulerView(result_)
 }
 
-func (n NSRulerView) InitWithFrame(frameRect foundation.Rect) RulerView {
+func (n NSRulerView) InitWithFrame(frameRect foundation.Rect) NSRulerView {
 	result_ := C.C_NSRulerView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeRulerView(result_)
 }
 
-func (n NSRulerView) Init() RulerView {
+func (n NSRulerView) Init() NSRulerView {
 	result_ := C.C_NSRulerView_Init(n.Ptr())
+	return MakeRulerView(result_)
+}
+
+func AllocRulerView() NSRulerView {
+	result_ := C.C_NSRulerView_AllocRulerView()
+	return MakeRulerView(result_)
+}
+
+func NewRulerView() NSRulerView {
+	result_ := C.C_NSRulerView_NewRulerView()
+	return MakeRulerView(result_)
+}
+
+func (n NSRulerView) Autorelease() NSRulerView {
+	result_ := C.C_NSRulerView_Autorelease(n.Ptr())
+	return MakeRulerView(result_)
+}
+
+func (n NSRulerView) Retain() NSRulerView {
+	result_ := C.C_NSRulerView_Retain(n.Ptr())
 	return MakeRulerView(result_)
 }
 

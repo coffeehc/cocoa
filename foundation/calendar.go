@@ -80,7 +80,18 @@ func MakeCalendar(ptr unsafe.Pointer) NSCalendar {
 }
 
 func AllocCalendar() NSCalendar {
-	return MakeCalendar(C.C_Calendar_Alloc())
+	result_ := C.C_NSCalendar_AllocCalendar()
+	return MakeCalendar(result_)
+}
+
+func (n NSCalendar) Autorelease() NSCalendar {
+	result_ := C.C_NSCalendar_Autorelease(n.Ptr())
+	return MakeCalendar(result_)
+}
+
+func (n NSCalendar) Retain() NSCalendar {
+	result_ := C.C_NSCalendar_Retain(n.Ptr())
+	return MakeCalendar(result_)
 }
 
 func CalendarWithIdentifier(calendarIdentifierConstant CalendarIdentifier) Calendar {

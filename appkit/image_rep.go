@@ -43,17 +43,33 @@ func MakeImageRep(ptr unsafe.Pointer) NSImageRep {
 	}
 }
 
-func AllocImageRep() NSImageRep {
-	return MakeImageRep(C.C_ImageRep_Alloc())
-}
-
-func (n NSImageRep) Init() ImageRep {
+func (n NSImageRep) Init() NSImageRep {
 	result_ := C.C_NSImageRep_Init(n.Ptr())
 	return MakeImageRep(result_)
 }
 
-func (n NSImageRep) InitWithCoder(coder foundation.Coder) ImageRep {
+func (n NSImageRep) InitWithCoder(coder foundation.Coder) NSImageRep {
 	result_ := C.C_NSImageRep_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeImageRep(result_)
+}
+
+func AllocImageRep() NSImageRep {
+	result_ := C.C_NSImageRep_AllocImageRep()
+	return MakeImageRep(result_)
+}
+
+func NewImageRep() NSImageRep {
+	result_ := C.C_NSImageRep_NewImageRep()
+	return MakeImageRep(result_)
+}
+
+func (n NSImageRep) Autorelease() NSImageRep {
+	result_ := C.C_NSImageRep_Autorelease(n.Ptr())
+	return MakeImageRep(result_)
+}
+
+func (n NSImageRep) Retain() NSImageRep {
+	result_ := C.C_NSImageRep_Retain(n.Ptr())
 	return MakeImageRep(result_)
 }
 

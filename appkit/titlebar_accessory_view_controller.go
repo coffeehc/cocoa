@@ -31,22 +31,38 @@ func MakeTitlebarAccessoryViewController(ptr unsafe.Pointer) NSTitlebarAccessory
 	}
 }
 
-func AllocTitlebarAccessoryViewController() NSTitlebarAccessoryViewController {
-	return MakeTitlebarAccessoryViewController(C.C_TitlebarAccessoryViewController_Alloc())
-}
-
-func (n NSTitlebarAccessoryViewController) InitWithNibName_Bundle(nibNameOrNil NibName, nibBundleOrNil foundation.Bundle) TitlebarAccessoryViewController {
+func (n NSTitlebarAccessoryViewController) InitWithNibName_Bundle(nibNameOrNil NibName, nibBundleOrNil foundation.Bundle) NSTitlebarAccessoryViewController {
 	result_ := C.C_NSTitlebarAccessoryViewController_InitWithNibName_Bundle(n.Ptr(), foundation.NewString(string(nibNameOrNil)).Ptr(), objc.ExtractPtr(nibBundleOrNil))
 	return MakeTitlebarAccessoryViewController(result_)
 }
 
-func (n NSTitlebarAccessoryViewController) InitWithCoder(coder foundation.Coder) TitlebarAccessoryViewController {
+func (n NSTitlebarAccessoryViewController) InitWithCoder(coder foundation.Coder) NSTitlebarAccessoryViewController {
 	result_ := C.C_NSTitlebarAccessoryViewController_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeTitlebarAccessoryViewController(result_)
 }
 
-func (n NSTitlebarAccessoryViewController) Init() TitlebarAccessoryViewController {
+func (n NSTitlebarAccessoryViewController) Init() NSTitlebarAccessoryViewController {
 	result_ := C.C_NSTitlebarAccessoryViewController_Init(n.Ptr())
+	return MakeTitlebarAccessoryViewController(result_)
+}
+
+func AllocTitlebarAccessoryViewController() NSTitlebarAccessoryViewController {
+	result_ := C.C_NSTitlebarAccessoryViewController_AllocTitlebarAccessoryViewController()
+	return MakeTitlebarAccessoryViewController(result_)
+}
+
+func NewTitlebarAccessoryViewController() NSTitlebarAccessoryViewController {
+	result_ := C.C_NSTitlebarAccessoryViewController_NewTitlebarAccessoryViewController()
+	return MakeTitlebarAccessoryViewController(result_)
+}
+
+func (n NSTitlebarAccessoryViewController) Autorelease() NSTitlebarAccessoryViewController {
+	result_ := C.C_NSTitlebarAccessoryViewController_Autorelease(n.Ptr())
+	return MakeTitlebarAccessoryViewController(result_)
+}
+
+func (n NSTitlebarAccessoryViewController) Retain() NSTitlebarAccessoryViewController {
+	result_ := C.C_NSTitlebarAccessoryViewController_Retain(n.Ptr())
 	return MakeTitlebarAccessoryViewController(result_)
 }
 

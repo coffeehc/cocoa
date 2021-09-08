@@ -5,7 +5,11 @@
 
 void* C_NavigationAction_Alloc();
 
+void* C_WKNavigationAction_AllocNavigationAction();
 void* C_WKNavigationAction_Init(void* ptr);
+void* C_WKNavigationAction_NewNavigationAction();
+void* C_WKNavigationAction_Autorelease(void* ptr);
+void* C_WKNavigationAction_Retain(void* ptr);
 int C_WKNavigationAction_NavigationType(void* ptr);
 void* C_WKNavigationAction_Request(void* ptr);
 void* C_WKNavigationAction_SourceFrame(void* ptr);

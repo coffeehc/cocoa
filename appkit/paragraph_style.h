@@ -5,7 +5,11 @@
 
 void* C_ParagraphStyle_Alloc();
 
+void* C_NSParagraphStyle_AllocParagraphStyle();
 void* C_NSParagraphStyle_Init(void* ptr);
+void* C_NSParagraphStyle_NewParagraphStyle();
+void* C_NSParagraphStyle_Autorelease(void* ptr);
+void* C_NSParagraphStyle_Retain(void* ptr);
 int C_NSParagraphStyle_ParagraphStyle_DefaultWritingDirectionForLanguage(void* languageName);
 void* C_NSParagraphStyle_DefaultParagraphStyle();
 int C_NSParagraphStyle_Alignment(void* ptr);

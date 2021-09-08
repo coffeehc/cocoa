@@ -5,7 +5,11 @@
 
 void* C_NumberFormatter_Alloc();
 
+void* C_NSNumberFormatter_AllocNumberFormatter();
 void* C_NSNumberFormatter_Init(void* ptr);
+void* C_NSNumberFormatter_NewNumberFormatter();
+void* C_NSNumberFormatter_Autorelease(void* ptr);
+void* C_NSNumberFormatter_Retain(void* ptr);
 void C_NSNumberFormatter_NumberFormatter_SetDefaultFormatterBehavior(unsigned int behavior);
 unsigned int C_NSNumberFormatter_NumberFormatter_DefaultFormatterBehavior();
 void* C_NSNumberFormatter_NumberFromString(void* ptr, void* _string);

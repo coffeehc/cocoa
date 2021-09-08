@@ -29,11 +29,27 @@ func MakeCollectionViewCompositionalLayoutConfiguration(ptr unsafe.Pointer) NSCo
 }
 
 func AllocCollectionViewCompositionalLayoutConfiguration() NSCollectionViewCompositionalLayoutConfiguration {
-	return MakeCollectionViewCompositionalLayoutConfiguration(C.C_CollectionViewCompositionalLayoutConfiguration_Alloc())
+	result_ := C.C_NSCollectionViewCompositionalLayoutConfiguration_AllocCollectionViewCompositionalLayoutConfiguration()
+	return MakeCollectionViewCompositionalLayoutConfiguration(result_)
 }
 
-func (n NSCollectionViewCompositionalLayoutConfiguration) Init() CollectionViewCompositionalLayoutConfiguration {
+func (n NSCollectionViewCompositionalLayoutConfiguration) Init() NSCollectionViewCompositionalLayoutConfiguration {
 	result_ := C.C_NSCollectionViewCompositionalLayoutConfiguration_Init(n.Ptr())
+	return MakeCollectionViewCompositionalLayoutConfiguration(result_)
+}
+
+func NewCollectionViewCompositionalLayoutConfiguration() NSCollectionViewCompositionalLayoutConfiguration {
+	result_ := C.C_NSCollectionViewCompositionalLayoutConfiguration_NewCollectionViewCompositionalLayoutConfiguration()
+	return MakeCollectionViewCompositionalLayoutConfiguration(result_)
+}
+
+func (n NSCollectionViewCompositionalLayoutConfiguration) Autorelease() NSCollectionViewCompositionalLayoutConfiguration {
+	result_ := C.C_NSCollectionViewCompositionalLayoutConfiguration_Autorelease(n.Ptr())
+	return MakeCollectionViewCompositionalLayoutConfiguration(result_)
+}
+
+func (n NSCollectionViewCompositionalLayoutConfiguration) Retain() NSCollectionViewCompositionalLayoutConfiguration {
+	result_ := C.C_NSCollectionViewCompositionalLayoutConfiguration_Retain(n.Ptr())
 	return MakeCollectionViewCompositionalLayoutConfiguration(result_)
 }
 

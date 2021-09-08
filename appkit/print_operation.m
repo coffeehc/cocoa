@@ -5,9 +5,31 @@ void* C_PrintOperation_Alloc() {
     return [NSPrintOperation alloc];
 }
 
+void* C_NSPrintOperation_AllocPrintOperation() {
+    NSPrintOperation* result_ = [NSPrintOperation alloc];
+    return result_;
+}
+
 void* C_NSPrintOperation_Init(void* ptr) {
     NSPrintOperation* nSPrintOperation = (NSPrintOperation*)ptr;
     NSPrintOperation* result_ = [nSPrintOperation init];
+    return result_;
+}
+
+void* C_NSPrintOperation_NewPrintOperation() {
+    NSPrintOperation* result_ = [NSPrintOperation new];
+    return result_;
+}
+
+void* C_NSPrintOperation_Autorelease(void* ptr) {
+    NSPrintOperation* nSPrintOperation = (NSPrintOperation*)ptr;
+    NSPrintOperation* result_ = [nSPrintOperation autorelease];
+    return result_;
+}
+
+void* C_NSPrintOperation_Retain(void* ptr) {
+    NSPrintOperation* nSPrintOperation = (NSPrintOperation*)ptr;
+    NSPrintOperation* result_ = [nSPrintOperation retain];
     return result_;
 }
 

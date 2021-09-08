@@ -30,11 +30,27 @@ func MakeSnapshotConfiguration(ptr unsafe.Pointer) WKSnapshotConfiguration {
 }
 
 func AllocSnapshotConfiguration() WKSnapshotConfiguration {
-	return MakeSnapshotConfiguration(C.C_SnapshotConfiguration_Alloc())
+	result_ := C.C_WKSnapshotConfiguration_AllocSnapshotConfiguration()
+	return MakeSnapshotConfiguration(result_)
 }
 
-func (w WKSnapshotConfiguration) Init() SnapshotConfiguration {
+func (w WKSnapshotConfiguration) Init() WKSnapshotConfiguration {
 	result_ := C.C_WKSnapshotConfiguration_Init(w.Ptr())
+	return MakeSnapshotConfiguration(result_)
+}
+
+func NewSnapshotConfiguration() WKSnapshotConfiguration {
+	result_ := C.C_WKSnapshotConfiguration_NewSnapshotConfiguration()
+	return MakeSnapshotConfiguration(result_)
+}
+
+func (w WKSnapshotConfiguration) Autorelease() WKSnapshotConfiguration {
+	result_ := C.C_WKSnapshotConfiguration_Autorelease(w.Ptr())
+	return MakeSnapshotConfiguration(result_)
+}
+
+func (w WKSnapshotConfiguration) Retain() WKSnapshotConfiguration {
+	result_ := C.C_WKSnapshotConfiguration_Retain(w.Ptr())
 	return MakeSnapshotConfiguration(result_)
 }
 

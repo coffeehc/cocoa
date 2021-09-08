@@ -5,7 +5,11 @@
 
 void* C_Screen_Alloc();
 
+void* C_NSScreen_AllocScreen();
 void* C_NSScreen_Init(void* ptr);
+void* C_NSScreen_NewScreen();
+void* C_NSScreen_Autorelease(void* ptr);
+void* C_NSScreen_Retain(void* ptr);
 bool C_NSScreen_CanRepresentDisplayGamut(void* ptr, int displayGamut);
 CGRect C_NSScreen_ConvertRectFromBacking(void* ptr, CGRect rect);
 CGRect C_NSScreen_ConvertRectToBacking(void* ptr, CGRect rect);

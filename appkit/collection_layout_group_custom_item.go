@@ -25,17 +25,28 @@ func MakeCollectionLayoutGroupCustomItem(ptr unsafe.Pointer) NSCollectionLayoutG
 	}
 }
 
-func AllocCollectionLayoutGroupCustomItem() NSCollectionLayoutGroupCustomItem {
-	return MakeCollectionLayoutGroupCustomItem(C.C_CollectionLayoutGroupCustomItem_Alloc())
-}
-
-func CollectionLayoutGroupCustomItem_CustomItemWithFrame(frame foundation.Rect) CollectionLayoutGroupCustomItem {
+func CollectionLayoutGroupCustomItem_CustomItemWithFrame(frame foundation.Rect) NSCollectionLayoutGroupCustomItem {
 	result_ := C.C_NSCollectionLayoutGroupCustomItem_CollectionLayoutGroupCustomItem_CustomItemWithFrame(*(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frame))))
 	return MakeCollectionLayoutGroupCustomItem(result_)
 }
 
-func CollectionLayoutGroupCustomItem_CustomItemWithFrame_ZIndex(frame foundation.Rect, zIndex int) CollectionLayoutGroupCustomItem {
+func CollectionLayoutGroupCustomItem_CustomItemWithFrame_ZIndex(frame foundation.Rect, zIndex int) NSCollectionLayoutGroupCustomItem {
 	result_ := C.C_NSCollectionLayoutGroupCustomItem_CollectionLayoutGroupCustomItem_CustomItemWithFrame_ZIndex(*(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frame))), C.int(zIndex))
+	return MakeCollectionLayoutGroupCustomItem(result_)
+}
+
+func AllocCollectionLayoutGroupCustomItem() NSCollectionLayoutGroupCustomItem {
+	result_ := C.C_NSCollectionLayoutGroupCustomItem_AllocCollectionLayoutGroupCustomItem()
+	return MakeCollectionLayoutGroupCustomItem(result_)
+}
+
+func (n NSCollectionLayoutGroupCustomItem) Autorelease() NSCollectionLayoutGroupCustomItem {
+	result_ := C.C_NSCollectionLayoutGroupCustomItem_Autorelease(n.Ptr())
+	return MakeCollectionLayoutGroupCustomItem(result_)
+}
+
+func (n NSCollectionLayoutGroupCustomItem) Retain() NSCollectionLayoutGroupCustomItem {
+	result_ := C.C_NSCollectionLayoutGroupCustomItem_Retain(n.Ptr())
 	return MakeCollectionLayoutGroupCustomItem(result_)
 }
 

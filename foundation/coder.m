@@ -5,9 +5,31 @@ void* C_Coder_Alloc() {
     return [NSCoder alloc];
 }
 
+void* C_NSCoder_AllocCoder() {
+    NSCoder* result_ = [NSCoder alloc];
+    return result_;
+}
+
 void* C_NSCoder_Init(void* ptr) {
     NSCoder* nSCoder = (NSCoder*)ptr;
     NSCoder* result_ = [nSCoder init];
+    return result_;
+}
+
+void* C_NSCoder_NewCoder() {
+    NSCoder* result_ = [NSCoder new];
+    return result_;
+}
+
+void* C_NSCoder_Autorelease(void* ptr) {
+    NSCoder* nSCoder = (NSCoder*)ptr;
+    NSCoder* result_ = [nSCoder autorelease];
+    return result_;
+}
+
+void* C_NSCoder_Retain(void* ptr) {
+    NSCoder* nSCoder = (NSCoder*)ptr;
+    NSCoder* result_ = [nSCoder retain];
     return result_;
 }
 

@@ -5,7 +5,11 @@
 
 void* C_Alert_Alloc();
 
+void* C_NSAlert_AllocAlert();
 void* C_NSAlert_Init(void* ptr);
+void* C_NSAlert_NewAlert();
+void* C_NSAlert_Autorelease(void* ptr);
+void* C_NSAlert_Retain(void* ptr);
 void* C_NSAlert_AlertWithError(void* error);
 void C_NSAlert_Layout(void* ptr);
 int C_NSAlert_RunModal(void* ptr);

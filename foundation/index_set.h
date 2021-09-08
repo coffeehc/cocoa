@@ -5,13 +5,17 @@
 
 void* C_IndexSet_Alloc();
 
-void* C_NSIndexSet_InitWithIndex(void* ptr, unsigned int value);
-void* C_NSIndexSet_InitWithIndexesInRange(void* ptr, NSRange _range);
-void* C_NSIndexSet_InitWithIndexSet(void* ptr, void* indexSet);
-void* C_NSIndexSet_Init(void* ptr);
 void* C_NSIndexSet_IndexSet_();
 void* C_NSIndexSet_IndexSetWithIndex(unsigned int value);
 void* C_NSIndexSet_IndexSetWithIndexesInRange(NSRange _range);
+void* C_NSIndexSet_InitWithIndex(void* ptr, unsigned int value);
+void* C_NSIndexSet_InitWithIndexesInRange(void* ptr, NSRange _range);
+void* C_NSIndexSet_InitWithIndexSet(void* ptr, void* indexSet);
+void* C_NSIndexSet_AllocIndexSet();
+void* C_NSIndexSet_Init(void* ptr);
+void* C_NSIndexSet_NewIndexSet();
+void* C_NSIndexSet_Autorelease(void* ptr);
+void* C_NSIndexSet_Retain(void* ptr);
 bool C_NSIndexSet_ContainsIndex(void* ptr, unsigned int value);
 bool C_NSIndexSet_ContainsIndexes(void* ptr, void* indexSet);
 bool C_NSIndexSet_ContainsIndexesInRange(void* ptr, NSRange _range);

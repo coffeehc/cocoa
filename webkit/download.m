@@ -5,9 +5,31 @@ void* C_Download_Alloc() {
     return [WKDownload alloc];
 }
 
+void* C_WKDownload_AllocDownload() {
+    WKDownload* result_ = [WKDownload alloc];
+    return result_;
+}
+
 void* C_WKDownload_Init(void* ptr) {
     WKDownload* wKDownload = (WKDownload*)ptr;
     WKDownload* result_ = [wKDownload init];
+    return result_;
+}
+
+void* C_WKDownload_NewDownload() {
+    WKDownload* result_ = [WKDownload new];
+    return result_;
+}
+
+void* C_WKDownload_Autorelease(void* ptr) {
+    WKDownload* wKDownload = (WKDownload*)ptr;
+    WKDownload* result_ = [wKDownload autorelease];
+    return result_;
+}
+
+void* C_WKDownload_Retain(void* ptr) {
+    WKDownload* wKDownload = (WKDownload*)ptr;
+    WKDownload* result_ = [wKDownload retain];
     return result_;
 }
 

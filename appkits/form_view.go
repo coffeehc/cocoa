@@ -48,7 +48,7 @@ func NewFormView() FormView {
 	gv.SetContentHuggingPriority_ForOrientation(appkit.LayoutPriorityDefaultHigh, appkit.LayoutConstraintOrientationVertical)
 
 	return &FormViewImpl{
-		NSGridView: gv.(appkit.NSGridView),
+		NSGridView: gv,
 	}
 }
 

@@ -5,9 +5,31 @@ void* C_Invocation_Alloc() {
     return [NSInvocation alloc];
 }
 
+void* C_NSInvocation_AllocInvocation() {
+    NSInvocation* result_ = [NSInvocation alloc];
+    return result_;
+}
+
 void* C_NSInvocation_Init(void* ptr) {
     NSInvocation* nSInvocation = (NSInvocation*)ptr;
     NSInvocation* result_ = [nSInvocation init];
+    return result_;
+}
+
+void* C_NSInvocation_NewInvocation() {
+    NSInvocation* result_ = [NSInvocation new];
+    return result_;
+}
+
+void* C_NSInvocation_Autorelease(void* ptr) {
+    NSInvocation* nSInvocation = (NSInvocation*)ptr;
+    NSInvocation* result_ = [nSInvocation autorelease];
+    return result_;
+}
+
+void* C_NSInvocation_Retain(void* ptr) {
+    NSInvocation* nSInvocation = (NSInvocation*)ptr;
+    NSInvocation* result_ = [nSInvocation retain];
     return result_;
 }
 

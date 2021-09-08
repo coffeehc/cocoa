@@ -5,6 +5,23 @@ void* C_Calendar_Alloc() {
     return [NSCalendar alloc];
 }
 
+void* C_NSCalendar_AllocCalendar() {
+    NSCalendar* result_ = [NSCalendar alloc];
+    return result_;
+}
+
+void* C_NSCalendar_Autorelease(void* ptr) {
+    NSCalendar* nSCalendar = (NSCalendar*)ptr;
+    NSCalendar* result_ = [nSCalendar autorelease];
+    return result_;
+}
+
+void* C_NSCalendar_Retain(void* ptr) {
+    NSCalendar* nSCalendar = (NSCalendar*)ptr;
+    NSCalendar* result_ = [nSCalendar retain];
+    return result_;
+}
+
 void* C_NSCalendar_CalendarWithIdentifier(void* calendarIdentifierConstant) {
     NSCalendar* result_ = [NSCalendar calendarWithIdentifier:(NSString*)calendarIdentifierConstant];
     return result_;

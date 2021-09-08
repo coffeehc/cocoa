@@ -5,9 +5,31 @@ void* C_TableViewRowAction_Alloc() {
     return [NSTableViewRowAction alloc];
 }
 
+void* C_NSTableViewRowAction_AllocTableViewRowAction() {
+    NSTableViewRowAction* result_ = [NSTableViewRowAction alloc];
+    return result_;
+}
+
 void* C_NSTableViewRowAction_Init(void* ptr) {
     NSTableViewRowAction* nSTableViewRowAction = (NSTableViewRowAction*)ptr;
     NSTableViewRowAction* result_ = [nSTableViewRowAction init];
+    return result_;
+}
+
+void* C_NSTableViewRowAction_NewTableViewRowAction() {
+    NSTableViewRowAction* result_ = [NSTableViewRowAction new];
+    return result_;
+}
+
+void* C_NSTableViewRowAction_Autorelease(void* ptr) {
+    NSTableViewRowAction* nSTableViewRowAction = (NSTableViewRowAction*)ptr;
+    NSTableViewRowAction* result_ = [nSTableViewRowAction autorelease];
+    return result_;
+}
+
+void* C_NSTableViewRowAction_Retain(void* ptr) {
+    NSTableViewRowAction* nSTableViewRowAction = (NSTableViewRowAction*)ptr;
+    NSTableViewRowAction* result_ = [nSTableViewRowAction retain];
     return result_;
 }
 

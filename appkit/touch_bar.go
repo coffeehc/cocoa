@@ -41,17 +41,33 @@ func MakeTouchBar(ptr unsafe.Pointer) NSTouchBar {
 	}
 }
 
-func AllocTouchBar() NSTouchBar {
-	return MakeTouchBar(C.C_TouchBar_Alloc())
-}
-
-func (n NSTouchBar) Init() TouchBar {
+func (n NSTouchBar) Init() NSTouchBar {
 	result_ := C.C_NSTouchBar_Init(n.Ptr())
 	return MakeTouchBar(result_)
 }
 
-func (n NSTouchBar) InitWithCoder(coder foundation.Coder) TouchBar {
+func (n NSTouchBar) InitWithCoder(coder foundation.Coder) NSTouchBar {
 	result_ := C.C_NSTouchBar_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeTouchBar(result_)
+}
+
+func AllocTouchBar() NSTouchBar {
+	result_ := C.C_NSTouchBar_AllocTouchBar()
+	return MakeTouchBar(result_)
+}
+
+func NewTouchBar() NSTouchBar {
+	result_ := C.C_NSTouchBar_NewTouchBar()
+	return MakeTouchBar(result_)
+}
+
+func (n NSTouchBar) Autorelease() NSTouchBar {
+	result_ := C.C_NSTouchBar_Autorelease(n.Ptr())
+	return MakeTouchBar(result_)
+}
+
+func (n NSTouchBar) Retain() NSTouchBar {
+	result_ := C.C_NSTouchBar_Retain(n.Ptr())
 	return MakeTouchBar(result_)
 }
 

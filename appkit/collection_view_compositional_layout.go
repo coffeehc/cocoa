@@ -23,17 +23,28 @@ func MakeCollectionViewCompositionalLayout(ptr unsafe.Pointer) NSCollectionViewC
 	}
 }
 
-func AllocCollectionViewCompositionalLayout() NSCollectionViewCompositionalLayout {
-	return MakeCollectionViewCompositionalLayout(C.C_CollectionViewCompositionalLayout_Alloc())
-}
-
-func (n NSCollectionViewCompositionalLayout) InitWithSection(section CollectionLayoutSection) CollectionViewCompositionalLayout {
+func (n NSCollectionViewCompositionalLayout) InitWithSection(section CollectionLayoutSection) NSCollectionViewCompositionalLayout {
 	result_ := C.C_NSCollectionViewCompositionalLayout_InitWithSection(n.Ptr(), objc.ExtractPtr(section))
 	return MakeCollectionViewCompositionalLayout(result_)
 }
 
-func (n NSCollectionViewCompositionalLayout) InitWithSection_Configuration(section CollectionLayoutSection, configuration CollectionViewCompositionalLayoutConfiguration) CollectionViewCompositionalLayout {
+func (n NSCollectionViewCompositionalLayout) InitWithSection_Configuration(section CollectionLayoutSection, configuration CollectionViewCompositionalLayoutConfiguration) NSCollectionViewCompositionalLayout {
 	result_ := C.C_NSCollectionViewCompositionalLayout_InitWithSection_Configuration(n.Ptr(), objc.ExtractPtr(section), objc.ExtractPtr(configuration))
+	return MakeCollectionViewCompositionalLayout(result_)
+}
+
+func AllocCollectionViewCompositionalLayout() NSCollectionViewCompositionalLayout {
+	result_ := C.C_NSCollectionViewCompositionalLayout_AllocCollectionViewCompositionalLayout()
+	return MakeCollectionViewCompositionalLayout(result_)
+}
+
+func (n NSCollectionViewCompositionalLayout) Autorelease() NSCollectionViewCompositionalLayout {
+	result_ := C.C_NSCollectionViewCompositionalLayout_Autorelease(n.Ptr())
+	return MakeCollectionViewCompositionalLayout(result_)
+}
+
+func (n NSCollectionViewCompositionalLayout) Retain() NSCollectionViewCompositionalLayout {
+	result_ := C.C_NSCollectionViewCompositionalLayout_Retain(n.Ptr())
 	return MakeCollectionViewCompositionalLayout(result_)
 }
 

@@ -23,6 +23,28 @@ void* C_NSCollectionViewItem_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSCollectionViewItem_AllocCollectionViewItem() {
+    NSCollectionViewItem* result_ = [NSCollectionViewItem alloc];
+    return result_;
+}
+
+void* C_NSCollectionViewItem_NewCollectionViewItem() {
+    NSCollectionViewItem* result_ = [NSCollectionViewItem new];
+    return result_;
+}
+
+void* C_NSCollectionViewItem_Autorelease(void* ptr) {
+    NSCollectionViewItem* nSCollectionViewItem = (NSCollectionViewItem*)ptr;
+    NSCollectionViewItem* result_ = [nSCollectionViewItem autorelease];
+    return result_;
+}
+
+void* C_NSCollectionViewItem_Retain(void* ptr) {
+    NSCollectionViewItem* nSCollectionViewItem = (NSCollectionViewItem*)ptr;
+    NSCollectionViewItem* result_ = [nSCollectionViewItem retain];
+    return result_;
+}
+
 bool C_NSCollectionViewItem_IsSelected(void* ptr) {
     NSCollectionViewItem* nSCollectionViewItem = (NSCollectionViewItem*)ptr;
     BOOL result_ = [nSCollectionViewItem isSelected];

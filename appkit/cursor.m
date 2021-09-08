@@ -17,9 +17,31 @@ void* C_NSCursor_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSCursor_AllocCursor() {
+    NSCursor* result_ = [NSCursor alloc];
+    return result_;
+}
+
 void* C_NSCursor_Init(void* ptr) {
     NSCursor* nSCursor = (NSCursor*)ptr;
     NSCursor* result_ = [nSCursor init];
+    return result_;
+}
+
+void* C_NSCursor_NewCursor() {
+    NSCursor* result_ = [NSCursor new];
+    return result_;
+}
+
+void* C_NSCursor_Autorelease(void* ptr) {
+    NSCursor* nSCursor = (NSCursor*)ptr;
+    NSCursor* result_ = [nSCursor autorelease];
+    return result_;
+}
+
+void* C_NSCursor_Retain(void* ptr) {
+    NSCursor* nSCursor = (NSCursor*)ptr;
+    NSCursor* result_ = [nSCursor retain];
     return result_;
 }
 

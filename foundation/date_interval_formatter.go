@@ -36,11 +36,27 @@ func MakeDateIntervalFormatter(ptr unsafe.Pointer) NSDateIntervalFormatter {
 }
 
 func AllocDateIntervalFormatter() NSDateIntervalFormatter {
-	return MakeDateIntervalFormatter(C.C_DateIntervalFormatter_Alloc())
+	result_ := C.C_NSDateIntervalFormatter_AllocDateIntervalFormatter()
+	return MakeDateIntervalFormatter(result_)
 }
 
-func (n NSDateIntervalFormatter) Init() DateIntervalFormatter {
+func (n NSDateIntervalFormatter) Init() NSDateIntervalFormatter {
 	result_ := C.C_NSDateIntervalFormatter_Init(n.Ptr())
+	return MakeDateIntervalFormatter(result_)
+}
+
+func NewDateIntervalFormatter() NSDateIntervalFormatter {
+	result_ := C.C_NSDateIntervalFormatter_NewDateIntervalFormatter()
+	return MakeDateIntervalFormatter(result_)
+}
+
+func (n NSDateIntervalFormatter) Autorelease() NSDateIntervalFormatter {
+	result_ := C.C_NSDateIntervalFormatter_Autorelease(n.Ptr())
+	return MakeDateIntervalFormatter(result_)
+}
+
+func (n NSDateIntervalFormatter) Retain() NSDateIntervalFormatter {
+	result_ := C.C_NSDateIntervalFormatter_Retain(n.Ptr())
 	return MakeDateIntervalFormatter(result_)
 }
 

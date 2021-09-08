@@ -5,9 +5,31 @@ void* C_WebViewConfiguration_Alloc() {
     return [WKWebViewConfiguration alloc];
 }
 
+void* C_WKWebViewConfiguration_AllocWebViewConfiguration() {
+    WKWebViewConfiguration* result_ = [WKWebViewConfiguration alloc];
+    return result_;
+}
+
 void* C_WKWebViewConfiguration_Init(void* ptr) {
     WKWebViewConfiguration* wKWebViewConfiguration = (WKWebViewConfiguration*)ptr;
     WKWebViewConfiguration* result_ = [wKWebViewConfiguration init];
+    return result_;
+}
+
+void* C_WKWebViewConfiguration_NewWebViewConfiguration() {
+    WKWebViewConfiguration* result_ = [WKWebViewConfiguration new];
+    return result_;
+}
+
+void* C_WKWebViewConfiguration_Autorelease(void* ptr) {
+    WKWebViewConfiguration* wKWebViewConfiguration = (WKWebViewConfiguration*)ptr;
+    WKWebViewConfiguration* result_ = [wKWebViewConfiguration autorelease];
+    return result_;
+}
+
+void* C_WKWebViewConfiguration_Retain(void* ptr) {
+    WKWebViewConfiguration* wKWebViewConfiguration = (WKWebViewConfiguration*)ptr;
+    WKWebViewConfiguration* result_ = [wKWebViewConfiguration retain];
     return result_;
 }
 

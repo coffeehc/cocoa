@@ -5,7 +5,11 @@
 
 void* C_OperationQueue_Alloc();
 
+void* C_NSOperationQueue_AllocOperationQueue();
 void* C_NSOperationQueue_Init(void* ptr);
+void* C_NSOperationQueue_NewOperationQueue();
+void* C_NSOperationQueue_Autorelease(void* ptr);
+void* C_NSOperationQueue_Retain(void* ptr);
 void C_NSOperationQueue_AddOperation(void* ptr, void* op);
 void C_NSOperationQueue_AddOperations_WaitUntilFinished(void* ptr, Array ops, bool wait);
 void C_NSOperationQueue_CancelAllOperations(void* ptr);

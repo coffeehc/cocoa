@@ -23,6 +23,28 @@ void* C_NSColorWell_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSColorWell_AllocColorWell() {
+    NSColorWell* result_ = [NSColorWell alloc];
+    return result_;
+}
+
+void* C_NSColorWell_NewColorWell() {
+    NSColorWell* result_ = [NSColorWell new];
+    return result_;
+}
+
+void* C_NSColorWell_Autorelease(void* ptr) {
+    NSColorWell* nSColorWell = (NSColorWell*)ptr;
+    NSColorWell* result_ = [nSColorWell autorelease];
+    return result_;
+}
+
+void* C_NSColorWell_Retain(void* ptr) {
+    NSColorWell* nSColorWell = (NSColorWell*)ptr;
+    NSColorWell* result_ = [nSColorWell retain];
+    return result_;
+}
+
 void C_NSColorWell_TakeColorFrom(void* ptr, void* sender) {
     NSColorWell* nSColorWell = (NSColorWell*)ptr;
     [nSColorWell takeColorFrom:(id)sender];

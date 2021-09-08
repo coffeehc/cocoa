@@ -38,22 +38,43 @@ func MakeColorPanel(ptr unsafe.Pointer) NSColorPanel {
 	}
 }
 
-func AllocColorPanel() NSColorPanel {
-	return MakeColorPanel(C.C_ColorPanel_Alloc())
+func ColorPanel_WindowWithContentViewController(contentViewController ViewController) NSColorPanel {
+	result_ := C.C_NSColorPanel_ColorPanel_WindowWithContentViewController(objc.ExtractPtr(contentViewController))
+	return MakeColorPanel(result_)
 }
 
-func (n NSColorPanel) InitWithContentRect_StyleMask_Backing_Defer(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool) ColorPanel {
+func (n NSColorPanel) InitWithContentRect_StyleMask_Backing_Defer(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool) NSColorPanel {
 	result_ := C.C_NSColorPanel_InitWithContentRect_StyleMask_Backing_Defer(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag))
 	return MakeColorPanel(result_)
 }
 
-func (n NSColorPanel) InitWithContentRect_StyleMask_Backing_Defer_Screen(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool, screen Screen) ColorPanel {
+func (n NSColorPanel) InitWithContentRect_StyleMask_Backing_Defer_Screen(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool, screen Screen) NSColorPanel {
 	result_ := C.C_NSColorPanel_InitWithContentRect_StyleMask_Backing_Defer_Screen(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag), objc.ExtractPtr(screen))
 	return MakeColorPanel(result_)
 }
 
-func (n NSColorPanel) Init() ColorPanel {
+func (n NSColorPanel) Init() NSColorPanel {
 	result_ := C.C_NSColorPanel_Init(n.Ptr())
+	return MakeColorPanel(result_)
+}
+
+func AllocColorPanel() NSColorPanel {
+	result_ := C.C_NSColorPanel_AllocColorPanel()
+	return MakeColorPanel(result_)
+}
+
+func NewColorPanel() NSColorPanel {
+	result_ := C.C_NSColorPanel_NewColorPanel()
+	return MakeColorPanel(result_)
+}
+
+func (n NSColorPanel) Autorelease() NSColorPanel {
+	result_ := C.C_NSColorPanel_Autorelease(n.Ptr())
+	return MakeColorPanel(result_)
+}
+
+func (n NSColorPanel) Retain() NSColorPanel {
+	result_ := C.C_NSColorPanel_Retain(n.Ptr())
 	return MakeColorPanel(result_)
 }
 

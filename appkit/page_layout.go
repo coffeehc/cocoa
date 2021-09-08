@@ -28,11 +28,27 @@ func MakePageLayout(ptr unsafe.Pointer) NSPageLayout {
 }
 
 func AllocPageLayout() NSPageLayout {
-	return MakePageLayout(C.C_PageLayout_Alloc())
+	result_ := C.C_NSPageLayout_AllocPageLayout()
+	return MakePageLayout(result_)
 }
 
-func (n NSPageLayout) Init() PageLayout {
+func (n NSPageLayout) Init() NSPageLayout {
 	result_ := C.C_NSPageLayout_Init(n.Ptr())
+	return MakePageLayout(result_)
+}
+
+func NewPageLayout() NSPageLayout {
+	result_ := C.C_NSPageLayout_NewPageLayout()
+	return MakePageLayout(result_)
+}
+
+func (n NSPageLayout) Autorelease() NSPageLayout {
+	result_ := C.C_NSPageLayout_Autorelease(n.Ptr())
+	return MakePageLayout(result_)
+}
+
+func (n NSPageLayout) Retain() NSPageLayout {
+	result_ := C.C_NSPageLayout_Retain(n.Ptr())
 	return MakePageLayout(result_)
 }
 

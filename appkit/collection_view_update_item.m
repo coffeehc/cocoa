@@ -5,9 +5,31 @@ void* C_CollectionViewUpdateItem_Alloc() {
     return [NSCollectionViewUpdateItem alloc];
 }
 
+void* C_NSCollectionViewUpdateItem_AllocCollectionViewUpdateItem() {
+    NSCollectionViewUpdateItem* result_ = [NSCollectionViewUpdateItem alloc];
+    return result_;
+}
+
 void* C_NSCollectionViewUpdateItem_Init(void* ptr) {
     NSCollectionViewUpdateItem* nSCollectionViewUpdateItem = (NSCollectionViewUpdateItem*)ptr;
     NSCollectionViewUpdateItem* result_ = [nSCollectionViewUpdateItem init];
+    return result_;
+}
+
+void* C_NSCollectionViewUpdateItem_NewCollectionViewUpdateItem() {
+    NSCollectionViewUpdateItem* result_ = [NSCollectionViewUpdateItem new];
+    return result_;
+}
+
+void* C_NSCollectionViewUpdateItem_Autorelease(void* ptr) {
+    NSCollectionViewUpdateItem* nSCollectionViewUpdateItem = (NSCollectionViewUpdateItem*)ptr;
+    NSCollectionViewUpdateItem* result_ = [nSCollectionViewUpdateItem autorelease];
+    return result_;
+}
+
+void* C_NSCollectionViewUpdateItem_Retain(void* ptr) {
+    NSCollectionViewUpdateItem* nSCollectionViewUpdateItem = (NSCollectionViewUpdateItem*)ptr;
+    NSCollectionViewUpdateItem* result_ = [nSCollectionViewUpdateItem retain];
     return result_;
 }
 

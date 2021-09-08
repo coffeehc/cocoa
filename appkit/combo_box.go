@@ -58,22 +58,58 @@ func MakeComboBox(ptr unsafe.Pointer) NSComboBox {
 	}
 }
 
-func AllocComboBox() NSComboBox {
-	return MakeComboBox(C.C_ComboBox_Alloc())
+func ComboBox_LabelWithAttributedString(attributedStringValue foundation.AttributedString) NSComboBox {
+	result_ := C.C_NSComboBox_ComboBox_LabelWithAttributedString(objc.ExtractPtr(attributedStringValue))
+	return MakeComboBox(result_)
 }
 
-func (n NSComboBox) InitWithFrame(frameRect foundation.Rect) ComboBox {
+func ComboBox_LabelWithString(stringValue string) NSComboBox {
+	result_ := C.C_NSComboBox_ComboBox_LabelWithString(foundation.NewString(stringValue).Ptr())
+	return MakeComboBox(result_)
+}
+
+func ComboBox_TextFieldWithString(stringValue string) NSComboBox {
+	result_ := C.C_NSComboBox_ComboBox_TextFieldWithString(foundation.NewString(stringValue).Ptr())
+	return MakeComboBox(result_)
+}
+
+func ComboBox_WrappingLabelWithString(stringValue string) NSComboBox {
+	result_ := C.C_NSComboBox_ComboBox_WrappingLabelWithString(foundation.NewString(stringValue).Ptr())
+	return MakeComboBox(result_)
+}
+
+func (n NSComboBox) InitWithFrame(frameRect foundation.Rect) NSComboBox {
 	result_ := C.C_NSComboBox_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeComboBox(result_)
 }
 
-func (n NSComboBox) InitWithCoder(coder foundation.Coder) ComboBox {
+func (n NSComboBox) InitWithCoder(coder foundation.Coder) NSComboBox {
 	result_ := C.C_NSComboBox_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeComboBox(result_)
 }
 
-func (n NSComboBox) Init() ComboBox {
+func (n NSComboBox) Init() NSComboBox {
 	result_ := C.C_NSComboBox_Init(n.Ptr())
+	return MakeComboBox(result_)
+}
+
+func AllocComboBox() NSComboBox {
+	result_ := C.C_NSComboBox_AllocComboBox()
+	return MakeComboBox(result_)
+}
+
+func NewComboBox() NSComboBox {
+	result_ := C.C_NSComboBox_NewComboBox()
+	return MakeComboBox(result_)
+}
+
+func (n NSComboBox) Autorelease() NSComboBox {
+	result_ := C.C_NSComboBox_Autorelease(n.Ptr())
+	return MakeComboBox(result_)
+}
+
+func (n NSComboBox) Retain() NSComboBox {
+	result_ := C.C_NSComboBox_Retain(n.Ptr())
 	return MakeComboBox(result_)
 }
 

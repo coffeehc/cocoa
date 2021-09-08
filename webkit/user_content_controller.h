@@ -5,7 +5,11 @@
 
 void* C_UserContentController_Alloc();
 
+void* C_WKUserContentController_AllocUserContentController();
 void* C_WKUserContentController_Init(void* ptr);
+void* C_WKUserContentController_NewUserContentController();
+void* C_WKUserContentController_Autorelease(void* ptr);
+void* C_WKUserContentController_Retain(void* ptr);
 void C_WKUserContentController_AddUserScript(void* ptr, void* userScript);
 void C_WKUserContentController_RemoveAllUserScripts(void* ptr);
 void C_WKUserContentController_AddScriptMessageHandler_Name(void* ptr, void* scriptMessageHandler, void* name);

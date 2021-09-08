@@ -5,9 +5,31 @@ void* C_Alert_Alloc() {
     return [NSAlert alloc];
 }
 
+void* C_NSAlert_AllocAlert() {
+    NSAlert* result_ = [NSAlert alloc];
+    return result_;
+}
+
 void* C_NSAlert_Init(void* ptr) {
     NSAlert* nSAlert = (NSAlert*)ptr;
     NSAlert* result_ = [nSAlert init];
+    return result_;
+}
+
+void* C_NSAlert_NewAlert() {
+    NSAlert* result_ = [NSAlert new];
+    return result_;
+}
+
+void* C_NSAlert_Autorelease(void* ptr) {
+    NSAlert* nSAlert = (NSAlert*)ptr;
+    NSAlert* result_ = [nSAlert autorelease];
+    return result_;
+}
+
+void* C_NSAlert_Retain(void* ptr) {
+    NSAlert* nSAlert = (NSAlert*)ptr;
+    NSAlert* result_ = [nSAlert retain];
     return result_;
 }
 

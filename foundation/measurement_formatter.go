@@ -32,11 +32,27 @@ func MakeMeasurementFormatter(ptr unsafe.Pointer) NSMeasurementFormatter {
 }
 
 func AllocMeasurementFormatter() NSMeasurementFormatter {
-	return MakeMeasurementFormatter(C.C_MeasurementFormatter_Alloc())
+	result_ := C.C_NSMeasurementFormatter_AllocMeasurementFormatter()
+	return MakeMeasurementFormatter(result_)
 }
 
-func (n NSMeasurementFormatter) Init() MeasurementFormatter {
+func (n NSMeasurementFormatter) Init() NSMeasurementFormatter {
 	result_ := C.C_NSMeasurementFormatter_Init(n.Ptr())
+	return MakeMeasurementFormatter(result_)
+}
+
+func NewMeasurementFormatter() NSMeasurementFormatter {
+	result_ := C.C_NSMeasurementFormatter_NewMeasurementFormatter()
+	return MakeMeasurementFormatter(result_)
+}
+
+func (n NSMeasurementFormatter) Autorelease() NSMeasurementFormatter {
+	result_ := C.C_NSMeasurementFormatter_Autorelease(n.Ptr())
+	return MakeMeasurementFormatter(result_)
+}
+
+func (n NSMeasurementFormatter) Retain() NSMeasurementFormatter {
+	result_ := C.C_NSMeasurementFormatter_Retain(n.Ptr())
 	return MakeMeasurementFormatter(result_)
 }
 

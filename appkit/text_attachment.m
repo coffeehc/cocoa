@@ -17,9 +17,31 @@ void* C_NSTextAttachment_InitWithData_OfType(void* ptr, void* contentData, void*
     return result_;
 }
 
+void* C_NSTextAttachment_AllocTextAttachment() {
+    NSTextAttachment* result_ = [NSTextAttachment alloc];
+    return result_;
+}
+
 void* C_NSTextAttachment_Init(void* ptr) {
     NSTextAttachment* nSTextAttachment = (NSTextAttachment*)ptr;
     NSTextAttachment* result_ = [nSTextAttachment init];
+    return result_;
+}
+
+void* C_NSTextAttachment_NewTextAttachment() {
+    NSTextAttachment* result_ = [NSTextAttachment new];
+    return result_;
+}
+
+void* C_NSTextAttachment_Autorelease(void* ptr) {
+    NSTextAttachment* nSTextAttachment = (NSTextAttachment*)ptr;
+    NSTextAttachment* result_ = [nSTextAttachment autorelease];
+    return result_;
+}
+
+void* C_NSTextAttachment_Retain(void* ptr) {
+    NSTextAttachment* nSTextAttachment = (NSTextAttachment*)ptr;
+    NSTextAttachment* result_ = [nSTextAttachment retain];
     return result_;
 }
 

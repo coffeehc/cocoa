@@ -34,11 +34,27 @@ func MakeCollectionViewLayoutInvalidationContext(ptr unsafe.Pointer) NSCollectio
 }
 
 func AllocCollectionViewLayoutInvalidationContext() NSCollectionViewLayoutInvalidationContext {
-	return MakeCollectionViewLayoutInvalidationContext(C.C_CollectionViewLayoutInvalidationContext_Alloc())
+	result_ := C.C_NSCollectionViewLayoutInvalidationContext_AllocCollectionViewLayoutInvalidationContext()
+	return MakeCollectionViewLayoutInvalidationContext(result_)
 }
 
-func (n NSCollectionViewLayoutInvalidationContext) Init() CollectionViewLayoutInvalidationContext {
+func (n NSCollectionViewLayoutInvalidationContext) Init() NSCollectionViewLayoutInvalidationContext {
 	result_ := C.C_NSCollectionViewLayoutInvalidationContext_Init(n.Ptr())
+	return MakeCollectionViewLayoutInvalidationContext(result_)
+}
+
+func NewCollectionViewLayoutInvalidationContext() NSCollectionViewLayoutInvalidationContext {
+	result_ := C.C_NSCollectionViewLayoutInvalidationContext_NewCollectionViewLayoutInvalidationContext()
+	return MakeCollectionViewLayoutInvalidationContext(result_)
+}
+
+func (n NSCollectionViewLayoutInvalidationContext) Autorelease() NSCollectionViewLayoutInvalidationContext {
+	result_ := C.C_NSCollectionViewLayoutInvalidationContext_Autorelease(n.Ptr())
+	return MakeCollectionViewLayoutInvalidationContext(result_)
+}
+
+func (n NSCollectionViewLayoutInvalidationContext) Retain() NSCollectionViewLayoutInvalidationContext {
+	result_ := C.C_NSCollectionViewLayoutInvalidationContext_Retain(n.Ptr())
 	return MakeCollectionViewLayoutInvalidationContext(result_)
 }
 

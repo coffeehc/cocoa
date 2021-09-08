@@ -7,6 +7,10 @@ void* C_LayoutManager_Alloc();
 
 void* C_NSLayoutManager_Init(void* ptr);
 void* C_NSLayoutManager_InitWithCoder(void* ptr, void* coder);
+void* C_NSLayoutManager_AllocLayoutManager();
+void* C_NSLayoutManager_NewLayoutManager();
+void* C_NSLayoutManager_Autorelease(void* ptr);
+void* C_NSLayoutManager_Retain(void* ptr);
 void C_NSLayoutManager_ReplaceTextStorage(void* ptr, void* newTextStorage);
 void C_NSLayoutManager_AddTextContainer(void* ptr, void* container);
 void C_NSLayoutManager_InsertTextContainer_AtIndex(void* ptr, void* container, unsigned int index);

@@ -17,6 +17,23 @@ void* C_NSScriptCommand_InitWithCoder(void* ptr, void* inCoder) {
     return result_;
 }
 
+void* C_NSScriptCommand_AllocScriptCommand() {
+    NSScriptCommand* result_ = [NSScriptCommand alloc];
+    return result_;
+}
+
+void* C_NSScriptCommand_Autorelease(void* ptr) {
+    NSScriptCommand* nSScriptCommand = (NSScriptCommand*)ptr;
+    NSScriptCommand* result_ = [nSScriptCommand autorelease];
+    return result_;
+}
+
+void* C_NSScriptCommand_Retain(void* ptr) {
+    NSScriptCommand* nSScriptCommand = (NSScriptCommand*)ptr;
+    NSScriptCommand* result_ = [nSScriptCommand retain];
+    return result_;
+}
+
 void* C_NSScriptCommand_ScriptCommand_CurrentCommand() {
     NSScriptCommand* result_ = [NSScriptCommand currentCommand];
     return result_;
@@ -91,7 +108,7 @@ Dictionary C_NSScriptCommand_Arguments(void* ptr) {
 
 void C_NSScriptCommand_SetArguments(void* ptr, Dictionary value) {
     NSScriptCommand* nSScriptCommand = (NSScriptCommand*)ptr;
-    NSMutableDictionary* objcValue = [[NSMutableDictionary alloc] initWithCapacity: value.len];
+    NSMutableDictionary* objcValue = [NSMutableDictionary dictionaryWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueKeyData = (void**)value.key_data;
     	void** valueValueData = (void**)value.value_data;

@@ -23,6 +23,28 @@ void* C_NSTableView_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSTableView_AllocTableView() {
+    NSTableView* result_ = [NSTableView alloc];
+    return result_;
+}
+
+void* C_NSTableView_NewTableView() {
+    NSTableView* result_ = [NSTableView new];
+    return result_;
+}
+
+void* C_NSTableView_Autorelease(void* ptr) {
+    NSTableView* nSTableView = (NSTableView*)ptr;
+    NSTableView* result_ = [nSTableView autorelease];
+    return result_;
+}
+
+void* C_NSTableView_Retain(void* ptr) {
+    NSTableView* nSTableView = (NSTableView*)ptr;
+    NSTableView* result_ = [nSTableView retain];
+    return result_;
+}
+
 void C_NSTableView_ReloadData(void* ptr) {
     NSTableView* nSTableView = (NSTableView*)ptr;
     [nSTableView reloadData];
@@ -767,7 +789,7 @@ Array C_NSTableView_SortDescriptors(void* ptr) {
 
 void C_NSTableView_SetSortDescriptors(void* ptr, Array value) {
     NSTableView* nSTableView = (NSTableView*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

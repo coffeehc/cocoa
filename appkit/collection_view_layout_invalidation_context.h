@@ -5,7 +5,11 @@
 
 void* C_CollectionViewLayoutInvalidationContext_Alloc();
 
+void* C_NSCollectionViewLayoutInvalidationContext_AllocCollectionViewLayoutInvalidationContext();
 void* C_NSCollectionViewLayoutInvalidationContext_Init(void* ptr);
+void* C_NSCollectionViewLayoutInvalidationContext_NewCollectionViewLayoutInvalidationContext();
+void* C_NSCollectionViewLayoutInvalidationContext_Autorelease(void* ptr);
+void* C_NSCollectionViewLayoutInvalidationContext_Retain(void* ptr);
 void C_NSCollectionViewLayoutInvalidationContext_InvalidateItemsAtIndexPaths(void* ptr, void* indexPaths);
 void C_NSCollectionViewLayoutInvalidationContext_InvalidateSupplementaryElementsOfKind_AtIndexPaths(void* ptr, void* elementKind, void* indexPaths);
 void C_NSCollectionViewLayoutInvalidationContext_InvalidateDecorationElementsOfKind_AtIndexPaths(void* ptr, void* elementKind, void* indexPaths);

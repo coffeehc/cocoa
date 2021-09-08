@@ -5,6 +5,16 @@ void* C_TimeZone_Alloc() {
     return [NSTimeZone alloc];
 }
 
+void* C_NSTimeZone_TimeZoneWithName(void* tzName) {
+    NSTimeZone* result_ = [NSTimeZone timeZoneWithName:(NSString*)tzName];
+    return result_;
+}
+
+void* C_NSTimeZone_TimeZoneWithName_Data(void* tzName, void* aData) {
+    NSTimeZone* result_ = [NSTimeZone timeZoneWithName:(NSString*)tzName data:(NSData*)aData];
+    return result_;
+}
+
 void* C_NSTimeZone_InitWithName(void* ptr, void* tzName) {
     NSTimeZone* nSTimeZone = (NSTimeZone*)ptr;
     NSTimeZone* result_ = [nSTimeZone initWithName:(NSString*)tzName];
@@ -17,20 +27,6 @@ void* C_NSTimeZone_InitWithName_Data(void* ptr, void* tzName, void* aData) {
     return result_;
 }
 
-void C_NSTimeZone_ResetSystemTimeZone() {
-    [NSTimeZone resetSystemTimeZone];
-}
-
-void* C_NSTimeZone_TimeZoneWithName(void* tzName) {
-    NSTimeZone* result_ = [NSTimeZone timeZoneWithName:(NSString*)tzName];
-    return result_;
-}
-
-void* C_NSTimeZone_TimeZoneWithName_Data(void* tzName, void* aData) {
-    NSTimeZone* result_ = [NSTimeZone timeZoneWithName:(NSString*)tzName data:(NSData*)aData];
-    return result_;
-}
-
 void* C_NSTimeZone_TimeZoneWithAbbreviation(void* abbreviation) {
     NSTimeZone* result_ = [NSTimeZone timeZoneWithAbbreviation:(NSString*)abbreviation];
     return result_;
@@ -39,6 +35,27 @@ void* C_NSTimeZone_TimeZoneWithAbbreviation(void* abbreviation) {
 void* C_NSTimeZone_TimeZoneForSecondsFromGMT(int seconds) {
     NSTimeZone* result_ = [NSTimeZone timeZoneForSecondsFromGMT:seconds];
     return result_;
+}
+
+void* C_NSTimeZone_AllocTimeZone() {
+    NSTimeZone* result_ = [NSTimeZone alloc];
+    return result_;
+}
+
+void* C_NSTimeZone_Autorelease(void* ptr) {
+    NSTimeZone* nSTimeZone = (NSTimeZone*)ptr;
+    NSTimeZone* result_ = [nSTimeZone autorelease];
+    return result_;
+}
+
+void* C_NSTimeZone_Retain(void* ptr) {
+    NSTimeZone* nSTimeZone = (NSTimeZone*)ptr;
+    NSTimeZone* result_ = [nSTimeZone retain];
+    return result_;
+}
+
+void C_NSTimeZone_ResetSystemTimeZone() {
+    [NSTimeZone resetSystemTimeZone];
 }
 
 void* C_NSTimeZone_AbbreviationForDate(void* ptr, void* aDate) {
@@ -140,7 +157,7 @@ Dictionary C_NSTimeZone_TimeZone_AbbreviationDictionary() {
 }
 
 void C_NSTimeZone_TimeZone_SetAbbreviationDictionary(Dictionary value) {
-    NSMutableDictionary* objcValue = [[NSMutableDictionary alloc] initWithCapacity: value.len];
+    NSMutableDictionary* objcValue = [NSMutableDictionary dictionaryWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueKeyData = (void**)value.key_data;
     	void** valueValueData = (void**)value.value_data;

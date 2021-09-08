@@ -5,7 +5,11 @@
 
 void* C_GridColumn_Alloc();
 
+void* C_NSGridColumn_AllocGridColumn();
 void* C_NSGridColumn_Init(void* ptr);
+void* C_NSGridColumn_NewGridColumn();
+void* C_NSGridColumn_Autorelease(void* ptr);
+void* C_NSGridColumn_Retain(void* ptr);
 void* C_NSGridColumn_CellAtIndex(void* ptr, int index);
 void C_NSGridColumn_MergeCellsInRange(void* ptr, NSRange _range);
 void* C_NSGridColumn_GridView(void* ptr);

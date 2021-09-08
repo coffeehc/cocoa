@@ -28,11 +28,27 @@ func MakeExtensionContext(ptr unsafe.Pointer) NSExtensionContext {
 }
 
 func AllocExtensionContext() NSExtensionContext {
-	return MakeExtensionContext(C.C_ExtensionContext_Alloc())
+	result_ := C.C_NSExtensionContext_AllocExtensionContext()
+	return MakeExtensionContext(result_)
 }
 
-func (n NSExtensionContext) Init() ExtensionContext {
+func (n NSExtensionContext) Init() NSExtensionContext {
 	result_ := C.C_NSExtensionContext_Init(n.Ptr())
+	return MakeExtensionContext(result_)
+}
+
+func NewExtensionContext() NSExtensionContext {
+	result_ := C.C_NSExtensionContext_NewExtensionContext()
+	return MakeExtensionContext(result_)
+}
+
+func (n NSExtensionContext) Autorelease() NSExtensionContext {
+	result_ := C.C_NSExtensionContext_Autorelease(n.Ptr())
+	return MakeExtensionContext(result_)
+}
+
+func (n NSExtensionContext) Retain() NSExtensionContext {
+	result_ := C.C_NSExtensionContext_Retain(n.Ptr())
 	return MakeExtensionContext(result_)
 }
 

@@ -26,11 +26,7 @@ func MakeSharingServicePicker(ptr unsafe.Pointer) NSSharingServicePicker {
 	}
 }
 
-func AllocSharingServicePicker() NSSharingServicePicker {
-	return MakeSharingServicePicker(C.C_SharingServicePicker_Alloc())
-}
-
-func (n NSSharingServicePicker) InitWithItems(items []objc.Object) SharingServicePicker {
+func (n NSSharingServicePicker) InitWithItems(items []objc.Object) NSSharingServicePicker {
 	var cItems C.Array
 	if len(items) > 0 {
 		cItemsData := make([]unsafe.Pointer, len(items))
@@ -41,6 +37,21 @@ func (n NSSharingServicePicker) InitWithItems(items []objc.Object) SharingServic
 		cItems.len = C.int(len(items))
 	}
 	result_ := C.C_NSSharingServicePicker_InitWithItems(n.Ptr(), cItems)
+	return MakeSharingServicePicker(result_)
+}
+
+func AllocSharingServicePicker() NSSharingServicePicker {
+	result_ := C.C_NSSharingServicePicker_AllocSharingServicePicker()
+	return MakeSharingServicePicker(result_)
+}
+
+func (n NSSharingServicePicker) Autorelease() NSSharingServicePicker {
+	result_ := C.C_NSSharingServicePicker_Autorelease(n.Ptr())
+	return MakeSharingServicePicker(result_)
+}
+
+func (n NSSharingServicePicker) Retain() NSSharingServicePicker {
+	result_ := C.C_NSSharingServicePicker_Retain(n.Ptr())
 	return MakeSharingServicePicker(result_)
 }
 

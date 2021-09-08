@@ -5,7 +5,11 @@
 
 void* C_CollectionViewLayout_Alloc();
 
+void* C_NSCollectionViewLayout_AllocCollectionViewLayout();
 void* C_NSCollectionViewLayout_Init(void* ptr);
+void* C_NSCollectionViewLayout_NewCollectionViewLayout();
+void* C_NSCollectionViewLayout_Autorelease(void* ptr);
+void* C_NSCollectionViewLayout_Retain(void* ptr);
 void C_NSCollectionViewLayout_PrepareLayout(void* ptr);
 Array C_NSCollectionViewLayout_LayoutAttributesForElementsInRect(void* ptr, CGRect rect);
 void* C_NSCollectionViewLayout_LayoutAttributesForItemAtIndexPath(void* ptr, void* indexPath);

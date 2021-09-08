@@ -7,7 +7,11 @@ void* C_GestureRecognizer_Alloc();
 
 void* C_NSGestureRecognizer_InitWithTarget_Action(void* ptr, void* target, void* action);
 void* C_NSGestureRecognizer_InitWithCoder(void* ptr, void* coder);
+void* C_NSGestureRecognizer_AllocGestureRecognizer();
 void* C_NSGestureRecognizer_Init(void* ptr);
+void* C_NSGestureRecognizer_NewGestureRecognizer();
+void* C_NSGestureRecognizer_Autorelease(void* ptr);
+void* C_NSGestureRecognizer_Retain(void* ptr);
 CGPoint C_NSGestureRecognizer_LocationInView(void* ptr, void* view);
 void C_NSGestureRecognizer_Reset(void* ptr);
 void C_NSGestureRecognizer_MouseDown(void* ptr, void* event);

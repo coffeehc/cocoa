@@ -7,7 +7,11 @@ void* C_AppleEventDescriptor_Alloc();
 
 void* C_NSAppleEventDescriptor_InitListDescriptor(void* ptr);
 void* C_NSAppleEventDescriptor_InitRecordDescriptor(void* ptr);
+void* C_NSAppleEventDescriptor_AllocAppleEventDescriptor();
 void* C_NSAppleEventDescriptor_Init(void* ptr);
+void* C_NSAppleEventDescriptor_NewAppleEventDescriptor();
+void* C_NSAppleEventDescriptor_Autorelease(void* ptr);
+void* C_NSAppleEventDescriptor_Retain(void* ptr);
 void* C_NSAppleEventDescriptor_AppleEventDescriptor_DescriptorWithString(void* _string);
 void* C_NSAppleEventDescriptor_AppleEventDescriptor_ListDescriptor();
 void* C_NSAppleEventDescriptor_AppleEventDescriptor_NullDescriptor();

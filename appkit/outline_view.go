@@ -57,22 +57,38 @@ func MakeOutlineView(ptr unsafe.Pointer) NSOutlineView {
 	}
 }
 
-func AllocOutlineView() NSOutlineView {
-	return MakeOutlineView(C.C_OutlineView_Alloc())
-}
-
-func (n NSOutlineView) InitWithCoder(coder foundation.Coder) OutlineView {
+func (n NSOutlineView) InitWithCoder(coder foundation.Coder) NSOutlineView {
 	result_ := C.C_NSOutlineView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeOutlineView(result_)
 }
 
-func (n NSOutlineView) InitWithFrame(frameRect foundation.Rect) OutlineView {
+func (n NSOutlineView) InitWithFrame(frameRect foundation.Rect) NSOutlineView {
 	result_ := C.C_NSOutlineView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeOutlineView(result_)
 }
 
-func (n NSOutlineView) Init() OutlineView {
+func (n NSOutlineView) Init() NSOutlineView {
 	result_ := C.C_NSOutlineView_Init(n.Ptr())
+	return MakeOutlineView(result_)
+}
+
+func AllocOutlineView() NSOutlineView {
+	result_ := C.C_NSOutlineView_AllocOutlineView()
+	return MakeOutlineView(result_)
+}
+
+func NewOutlineView() NSOutlineView {
+	result_ := C.C_NSOutlineView_NewOutlineView()
+	return MakeOutlineView(result_)
+}
+
+func (n NSOutlineView) Autorelease() NSOutlineView {
+	result_ := C.C_NSOutlineView_Autorelease(n.Ptr())
+	return MakeOutlineView(result_)
+}
+
+func (n NSOutlineView) Retain() NSOutlineView {
+	result_ := C.C_NSOutlineView_Retain(n.Ptr())
 	return MakeOutlineView(result_)
 }
 

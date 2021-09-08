@@ -5,14 +5,36 @@ void* C_GraphicsContext_Alloc() {
     return [NSGraphicsContext alloc];
 }
 
+void* C_NSGraphicsContext_AllocGraphicsContext() {
+    NSGraphicsContext* result_ = [NSGraphicsContext alloc];
+    return result_;
+}
+
 void* C_NSGraphicsContext_Init(void* ptr) {
     NSGraphicsContext* nSGraphicsContext = (NSGraphicsContext*)ptr;
     NSGraphicsContext* result_ = [nSGraphicsContext init];
     return result_;
 }
 
+void* C_NSGraphicsContext_NewGraphicsContext() {
+    NSGraphicsContext* result_ = [NSGraphicsContext new];
+    return result_;
+}
+
+void* C_NSGraphicsContext_Autorelease(void* ptr) {
+    NSGraphicsContext* nSGraphicsContext = (NSGraphicsContext*)ptr;
+    NSGraphicsContext* result_ = [nSGraphicsContext autorelease];
+    return result_;
+}
+
+void* C_NSGraphicsContext_Retain(void* ptr) {
+    NSGraphicsContext* nSGraphicsContext = (NSGraphicsContext*)ptr;
+    NSGraphicsContext* result_ = [nSGraphicsContext retain];
+    return result_;
+}
+
 void* C_NSGraphicsContext_GraphicsContextWithAttributes(Dictionary attributes) {
-    NSMutableDictionary* objcAttributes = [[NSMutableDictionary alloc] initWithCapacity: attributes.len];
+    NSMutableDictionary* objcAttributes = [NSMutableDictionary dictionaryWithCapacity:attributes.len];
     if (attributes.len > 0) {
     	void** attributesKeyData = (void**)attributes.key_data;
     	void** attributesValueData = (void**)attributes.value_data;

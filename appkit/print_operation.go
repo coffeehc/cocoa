@@ -51,11 +51,27 @@ func MakePrintOperation(ptr unsafe.Pointer) NSPrintOperation {
 }
 
 func AllocPrintOperation() NSPrintOperation {
-	return MakePrintOperation(C.C_PrintOperation_Alloc())
+	result_ := C.C_NSPrintOperation_AllocPrintOperation()
+	return MakePrintOperation(result_)
 }
 
-func (n NSPrintOperation) Init() PrintOperation {
+func (n NSPrintOperation) Init() NSPrintOperation {
 	result_ := C.C_NSPrintOperation_Init(n.Ptr())
+	return MakePrintOperation(result_)
+}
+
+func NewPrintOperation() NSPrintOperation {
+	result_ := C.C_NSPrintOperation_NewPrintOperation()
+	return MakePrintOperation(result_)
+}
+
+func (n NSPrintOperation) Autorelease() NSPrintOperation {
+	result_ := C.C_NSPrintOperation_Autorelease(n.Ptr())
+	return MakePrintOperation(result_)
+}
+
+func (n NSPrintOperation) Retain() NSPrintOperation {
+	result_ := C.C_NSPrintOperation_Retain(n.Ptr())
 	return MakePrintOperation(result_)
 }
 

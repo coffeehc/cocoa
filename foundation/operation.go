@@ -41,11 +41,27 @@ func MakeOperation(ptr unsafe.Pointer) NSOperation {
 }
 
 func AllocOperation() NSOperation {
-	return MakeOperation(C.C_Operation_Alloc())
+	result_ := C.C_NSOperation_AllocOperation()
+	return MakeOperation(result_)
 }
 
-func (n NSOperation) Init() Operation {
+func (n NSOperation) Init() NSOperation {
 	result_ := C.C_NSOperation_Init(n.Ptr())
+	return MakeOperation(result_)
+}
+
+func NewOperation() NSOperation {
+	result_ := C.C_NSOperation_NewOperation()
+	return MakeOperation(result_)
+}
+
+func (n NSOperation) Autorelease() NSOperation {
+	result_ := C.C_NSOperation_Autorelease(n.Ptr())
+	return MakeOperation(result_)
+}
+
+func (n NSOperation) Retain() NSOperation {
+	result_ := C.C_NSOperation_Retain(n.Ptr())
 	return MakeOperation(result_)
 }
 

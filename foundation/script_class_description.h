@@ -5,7 +5,11 @@
 
 void* C_ScriptClassDescription_Alloc();
 
+void* C_NSScriptClassDescription_AllocScriptClassDescription();
 void* C_NSScriptClassDescription_Init(void* ptr);
+void* C_NSScriptClassDescription_NewScriptClassDescription();
+void* C_NSScriptClassDescription_Autorelease(void* ptr);
+void* C_NSScriptClassDescription_Retain(void* ptr);
 void* C_NSScriptClassDescription_ClassDescriptionForKey(void* ptr, void* key);
 bool C_NSScriptClassDescription_IsLocationRequiredToCreateForKey(void* ptr, void* toManyRelationshipKey);
 bool C_NSScriptClassDescription_HasOrderedToManyRelationshipForKey(void* ptr, void* key);

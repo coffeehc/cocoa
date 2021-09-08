@@ -60,32 +60,48 @@ func MakeBundle(ptr unsafe.Pointer) NSBundle {
 	}
 }
 
-func AllocBundle() NSBundle {
-	return MakeBundle(C.C_Bundle_Alloc())
-}
-
-func (n NSBundle) InitWithURL(url URL) Bundle {
-	result_ := C.C_NSBundle_InitWithURL(n.Ptr(), objc.ExtractPtr(url))
-	return MakeBundle(result_)
-}
-
-func (n NSBundle) InitWithPath(path string) Bundle {
-	result_ := C.C_NSBundle_InitWithPath(n.Ptr(), NewString(path).Ptr())
-	return MakeBundle(result_)
-}
-
-func (n NSBundle) Init() Bundle {
-	result_ := C.C_NSBundle_Init(n.Ptr())
-	return MakeBundle(result_)
-}
-
-func BundleWithURL(url URL) Bundle {
+func BundleWithURL(url URL) NSBundle {
 	result_ := C.C_NSBundle_BundleWithURL(objc.ExtractPtr(url))
 	return MakeBundle(result_)
 }
 
-func BundleWithPath(path string) Bundle {
+func BundleWithPath(path string) NSBundle {
 	result_ := C.C_NSBundle_BundleWithPath(NewString(path).Ptr())
+	return MakeBundle(result_)
+}
+
+func (n NSBundle) InitWithURL(url URL) NSBundle {
+	result_ := C.C_NSBundle_InitWithURL(n.Ptr(), objc.ExtractPtr(url))
+	return MakeBundle(result_)
+}
+
+func (n NSBundle) InitWithPath(path string) NSBundle {
+	result_ := C.C_NSBundle_InitWithPath(n.Ptr(), NewString(path).Ptr())
+	return MakeBundle(result_)
+}
+
+func AllocBundle() NSBundle {
+	result_ := C.C_NSBundle_AllocBundle()
+	return MakeBundle(result_)
+}
+
+func (n NSBundle) Init() NSBundle {
+	result_ := C.C_NSBundle_Init(n.Ptr())
+	return MakeBundle(result_)
+}
+
+func NewBundle() NSBundle {
+	result_ := C.C_NSBundle_NewBundle()
+	return MakeBundle(result_)
+}
+
+func (n NSBundle) Autorelease() NSBundle {
+	result_ := C.C_NSBundle_Autorelease(n.Ptr())
+	return MakeBundle(result_)
+}
+
+func (n NSBundle) Retain() NSBundle {
+	result_ := C.C_NSBundle_Retain(n.Ptr())
 	return MakeBundle(result_)
 }
 

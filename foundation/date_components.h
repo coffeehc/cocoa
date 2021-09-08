@@ -5,7 +5,11 @@
 
 void* C_DateComponents_Alloc();
 
+void* C_NSDateComponents_AllocDateComponents();
 void* C_NSDateComponents_Init(void* ptr);
+void* C_NSDateComponents_NewDateComponents();
+void* C_NSDateComponents_Autorelease(void* ptr);
+void* C_NSDateComponents_Retain(void* ptr);
 bool C_NSDateComponents_IsValidDateInCalendar(void* ptr, void* calendar);
 int C_NSDateComponents_ValueForComponent(void* ptr, unsigned int unit);
 void C_NSDateComponents_SetValue_ForComponent(void* ptr, int value, unsigned int unit);

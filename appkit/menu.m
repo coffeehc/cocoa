@@ -17,9 +17,31 @@ void* C_NSMenu_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSMenu_AllocMenu() {
+    NSMenu* result_ = [NSMenu alloc];
+    return result_;
+}
+
 void* C_NSMenu_Init(void* ptr) {
     NSMenu* nSMenu = (NSMenu*)ptr;
     NSMenu* result_ = [nSMenu init];
+    return result_;
+}
+
+void* C_NSMenu_NewMenu() {
+    NSMenu* result_ = [NSMenu new];
+    return result_;
+}
+
+void* C_NSMenu_Autorelease(void* ptr) {
+    NSMenu* nSMenu = (NSMenu*)ptr;
+    NSMenu* result_ = [nSMenu autorelease];
+    return result_;
+}
+
+void* C_NSMenu_Retain(void* ptr) {
+    NSMenu* nSMenu = (NSMenu*)ptr;
+    NSMenu* result_ = [nSMenu retain];
     return result_;
 }
 
@@ -209,7 +231,7 @@ Array C_NSMenu_ItemArray(void* ptr) {
 
 void C_NSMenu_SetItemArray(void* ptr, Array value) {
     NSMenu* nSMenu = (NSMenu*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

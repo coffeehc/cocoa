@@ -45,22 +45,38 @@ func MakePathControl(ptr unsafe.Pointer) NSPathControl {
 	}
 }
 
-func AllocPathControl() NSPathControl {
-	return MakePathControl(C.C_PathControl_Alloc())
-}
-
-func (n NSPathControl) InitWithFrame(frameRect foundation.Rect) PathControl {
+func (n NSPathControl) InitWithFrame(frameRect foundation.Rect) NSPathControl {
 	result_ := C.C_NSPathControl_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakePathControl(result_)
 }
 
-func (n NSPathControl) InitWithCoder(coder foundation.Coder) PathControl {
+func (n NSPathControl) InitWithCoder(coder foundation.Coder) NSPathControl {
 	result_ := C.C_NSPathControl_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakePathControl(result_)
 }
 
-func (n NSPathControl) Init() PathControl {
+func (n NSPathControl) Init() NSPathControl {
 	result_ := C.C_NSPathControl_Init(n.Ptr())
+	return MakePathControl(result_)
+}
+
+func AllocPathControl() NSPathControl {
+	result_ := C.C_NSPathControl_AllocPathControl()
+	return MakePathControl(result_)
+}
+
+func NewPathControl() NSPathControl {
+	result_ := C.C_NSPathControl_NewPathControl()
+	return MakePathControl(result_)
+}
+
+func (n NSPathControl) Autorelease() NSPathControl {
+	result_ := C.C_NSPathControl_Autorelease(n.Ptr())
+	return MakePathControl(result_)
+}
+
+func (n NSPathControl) Retain() NSPathControl {
+	result_ := C.C_NSPathControl_Retain(n.Ptr())
 	return MakePathControl(result_)
 }
 

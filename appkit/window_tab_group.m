@@ -5,9 +5,31 @@ void* C_WindowTabGroup_Alloc() {
     return [NSWindowTabGroup alloc];
 }
 
+void* C_NSWindowTabGroup_AllocWindowTabGroup() {
+    NSWindowTabGroup* result_ = [NSWindowTabGroup alloc];
+    return result_;
+}
+
 void* C_NSWindowTabGroup_Init(void* ptr) {
     NSWindowTabGroup* nSWindowTabGroup = (NSWindowTabGroup*)ptr;
     NSWindowTabGroup* result_ = [nSWindowTabGroup init];
+    return result_;
+}
+
+void* C_NSWindowTabGroup_NewWindowTabGroup() {
+    NSWindowTabGroup* result_ = [NSWindowTabGroup new];
+    return result_;
+}
+
+void* C_NSWindowTabGroup_Autorelease(void* ptr) {
+    NSWindowTabGroup* nSWindowTabGroup = (NSWindowTabGroup*)ptr;
+    NSWindowTabGroup* result_ = [nSWindowTabGroup autorelease];
+    return result_;
+}
+
+void* C_NSWindowTabGroup_Retain(void* ptr) {
+    NSWindowTabGroup* nSWindowTabGroup = (NSWindowTabGroup*)ptr;
+    NSWindowTabGroup* result_ = [nSWindowTabGroup retain];
     return result_;
 }
 

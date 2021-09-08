@@ -23,6 +23,28 @@ void* C_NSBrowser_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSBrowser_AllocBrowser() {
+    NSBrowser* result_ = [NSBrowser alloc];
+    return result_;
+}
+
+void* C_NSBrowser_NewBrowser() {
+    NSBrowser* result_ = [NSBrowser new];
+    return result_;
+}
+
+void* C_NSBrowser_Autorelease(void* ptr) {
+    NSBrowser* nSBrowser = (NSBrowser*)ptr;
+    NSBrowser* result_ = [nSBrowser autorelease];
+    return result_;
+}
+
+void* C_NSBrowser_Retain(void* ptr) {
+    NSBrowser* nSBrowser = (NSBrowser*)ptr;
+    NSBrowser* result_ = [nSBrowser retain];
+    return result_;
+}
+
 void C_NSBrowser_Tile(void* ptr) {
     NSBrowser* nSBrowser = (NSBrowser*)ptr;
     [nSBrowser tile];
@@ -471,7 +493,7 @@ Array C_NSBrowser_SelectionIndexPaths(void* ptr) {
 
 void C_NSBrowser_SetSelectionIndexPaths(void* ptr, Array value) {
     NSBrowser* nSBrowser = (NSBrowser*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

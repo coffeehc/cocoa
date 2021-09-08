@@ -5,9 +5,31 @@ void* C_ScriptClassDescription_Alloc() {
     return [NSScriptClassDescription alloc];
 }
 
+void* C_NSScriptClassDescription_AllocScriptClassDescription() {
+    NSScriptClassDescription* result_ = [NSScriptClassDescription alloc];
+    return result_;
+}
+
 void* C_NSScriptClassDescription_Init(void* ptr) {
     NSScriptClassDescription* nSScriptClassDescription = (NSScriptClassDescription*)ptr;
     NSScriptClassDescription* result_ = [nSScriptClassDescription init];
+    return result_;
+}
+
+void* C_NSScriptClassDescription_NewScriptClassDescription() {
+    NSScriptClassDescription* result_ = [NSScriptClassDescription new];
+    return result_;
+}
+
+void* C_NSScriptClassDescription_Autorelease(void* ptr) {
+    NSScriptClassDescription* nSScriptClassDescription = (NSScriptClassDescription*)ptr;
+    NSScriptClassDescription* result_ = [nSScriptClassDescription autorelease];
+    return result_;
+}
+
+void* C_NSScriptClassDescription_Retain(void* ptr) {
+    NSScriptClassDescription* nSScriptClassDescription = (NSScriptClassDescription*)ptr;
+    NSScriptClassDescription* result_ = [nSScriptClassDescription retain];
     return result_;
 }
 

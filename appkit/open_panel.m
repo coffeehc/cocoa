@@ -5,6 +5,11 @@ void* C_OpenPanel_Alloc() {
     return [NSOpenPanel alloc];
 }
 
+void* C_NSOpenPanel_OpenPanel_WindowWithContentViewController(void* contentViewController) {
+    NSOpenPanel* result_ = [NSOpenPanel windowWithContentViewController:(NSViewController*)contentViewController];
+    return result_;
+}
+
 void* C_NSOpenPanel_InitWithContentRect_StyleMask_Backing_Defer(void* ptr, CGRect contentRect, unsigned int style, unsigned int backingStoreType, bool flag) {
     NSOpenPanel* nSOpenPanel = (NSOpenPanel*)ptr;
     NSOpenPanel* result_ = [nSOpenPanel initWithContentRect:contentRect styleMask:style backing:backingStoreType defer:flag];
@@ -20,6 +25,28 @@ void* C_NSOpenPanel_InitWithContentRect_StyleMask_Backing_Defer_Screen(void* ptr
 void* C_NSOpenPanel_Init(void* ptr) {
     NSOpenPanel* nSOpenPanel = (NSOpenPanel*)ptr;
     NSOpenPanel* result_ = [nSOpenPanel init];
+    return result_;
+}
+
+void* C_NSOpenPanel_AllocOpenPanel() {
+    NSOpenPanel* result_ = [NSOpenPanel alloc];
+    return result_;
+}
+
+void* C_NSOpenPanel_NewOpenPanel() {
+    NSOpenPanel* result_ = [NSOpenPanel new];
+    return result_;
+}
+
+void* C_NSOpenPanel_Autorelease(void* ptr) {
+    NSOpenPanel* nSOpenPanel = (NSOpenPanel*)ptr;
+    NSOpenPanel* result_ = [nSOpenPanel autorelease];
+    return result_;
+}
+
+void* C_NSOpenPanel_Retain(void* ptr) {
+    NSOpenPanel* nSOpenPanel = (NSOpenPanel*)ptr;
+    NSOpenPanel* result_ = [nSOpenPanel retain];
     return result_;
 }
 

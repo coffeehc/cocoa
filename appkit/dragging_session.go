@@ -33,11 +33,27 @@ func MakeDraggingSession(ptr unsafe.Pointer) NSDraggingSession {
 }
 
 func AllocDraggingSession() NSDraggingSession {
-	return MakeDraggingSession(C.C_DraggingSession_Alloc())
+	result_ := C.C_NSDraggingSession_AllocDraggingSession()
+	return MakeDraggingSession(result_)
 }
 
-func (n NSDraggingSession) Init() DraggingSession {
+func (n NSDraggingSession) Init() NSDraggingSession {
 	result_ := C.C_NSDraggingSession_Init(n.Ptr())
+	return MakeDraggingSession(result_)
+}
+
+func NewDraggingSession() NSDraggingSession {
+	result_ := C.C_NSDraggingSession_NewDraggingSession()
+	return MakeDraggingSession(result_)
+}
+
+func (n NSDraggingSession) Autorelease() NSDraggingSession {
+	result_ := C.C_NSDraggingSession_Autorelease(n.Ptr())
+	return MakeDraggingSession(result_)
+}
+
+func (n NSDraggingSession) Retain() NSDraggingSession {
+	result_ := C.C_NSDraggingSession_Retain(n.Ptr())
 	return MakeDraggingSession(result_)
 }
 

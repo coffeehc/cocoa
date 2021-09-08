@@ -5,6 +5,11 @@ void* C_BitmapImageRep_Alloc() {
     return [NSBitmapImageRep alloc];
 }
 
+void* C_NSBitmapImageRep_BitmapImageRep_ImageRepWithData(void* data) {
+    NSBitmapImageRep* result_ = [NSBitmapImageRep imageRepWithData:(NSData*)data];
+    return result_;
+}
+
 void* C_NSBitmapImageRep_InitWithCGImage(void* ptr, void* cgImage) {
     NSBitmapImageRep* nSBitmapImageRep = (NSBitmapImageRep*)ptr;
     NSBitmapImageRep* result_ = [nSBitmapImageRep initWithCGImage:(CGImageRef)cgImage];
@@ -35,8 +40,25 @@ void* C_NSBitmapImageRep_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
-void* C_NSBitmapImageRep_BitmapImageRep_ImageRepWithData(void* data) {
-    NSBitmapImageRep* result_ = [NSBitmapImageRep imageRepWithData:(NSData*)data];
+void* C_NSBitmapImageRep_AllocBitmapImageRep() {
+    NSBitmapImageRep* result_ = [NSBitmapImageRep alloc];
+    return result_;
+}
+
+void* C_NSBitmapImageRep_NewBitmapImageRep() {
+    NSBitmapImageRep* result_ = [NSBitmapImageRep new];
+    return result_;
+}
+
+void* C_NSBitmapImageRep_Autorelease(void* ptr) {
+    NSBitmapImageRep* nSBitmapImageRep = (NSBitmapImageRep*)ptr;
+    NSBitmapImageRep* result_ = [nSBitmapImageRep autorelease];
+    return result_;
+}
+
+void* C_NSBitmapImageRep_Retain(void* ptr) {
+    NSBitmapImageRep* nSBitmapImageRep = (NSBitmapImageRep*)ptr;
+    NSBitmapImageRep* result_ = [nSBitmapImageRep retain];
     return result_;
 }
 
@@ -62,7 +84,7 @@ void C_NSBitmapImageRep_ColorizeByMappingGray_ToColor_BlackMapping_WhiteMapping(
 }
 
 void* C_NSBitmapImageRep_BitmapImageRep_TIFFRepresentationOfImageRepsInArray(Array array) {
-    NSMutableArray* objcArray = [[NSMutableArray alloc] init];
+    NSMutableArray* objcArray = [NSMutableArray arrayWithCapacity:array.len];
     if (array.len > 0) {
     	void** arrayData = (void**)array.data;
     	for (int i = 0; i < array.len; i++) {
@@ -75,7 +97,7 @@ void* C_NSBitmapImageRep_BitmapImageRep_TIFFRepresentationOfImageRepsInArray(Arr
 }
 
 void* C_NSBitmapImageRep_BitmapImageRep_TIFFRepresentationOfImageRepsInArray_UsingCompression_Factor(Array array, unsigned int comp, float factor) {
-    NSMutableArray* objcArray = [[NSMutableArray alloc] init];
+    NSMutableArray* objcArray = [NSMutableArray arrayWithCapacity:array.len];
     if (array.len > 0) {
     	void** arrayData = (void**)array.data;
     	for (int i = 0; i < array.len; i++) {
@@ -94,7 +116,7 @@ void* C_NSBitmapImageRep_TIFFRepresentationUsingCompression_Factor(void* ptr, un
 }
 
 void* C_NSBitmapImageRep_BitmapImageRep_RepresentationOfImageRepsInArray_UsingType_Properties(Array imageReps, unsigned int storageType, Dictionary properties) {
-    NSMutableArray* objcImageReps = [[NSMutableArray alloc] init];
+    NSMutableArray* objcImageReps = [NSMutableArray arrayWithCapacity:imageReps.len];
     if (imageReps.len > 0) {
     	void** imageRepsData = (void**)imageReps.data;
     	for (int i = 0; i < imageReps.len; i++) {
@@ -102,7 +124,7 @@ void* C_NSBitmapImageRep_BitmapImageRep_RepresentationOfImageRepsInArray_UsingTy
     		[objcImageReps addObject:(NSImageRep*)(NSImageRep*)p];
     	}
     }
-    NSMutableDictionary* objcProperties = [[NSMutableDictionary alloc] initWithCapacity: properties.len];
+    NSMutableDictionary* objcProperties = [NSMutableDictionary dictionaryWithCapacity:properties.len];
     if (properties.len > 0) {
     	void** propertiesKeyData = (void**)properties.key_data;
     	void** propertiesValueData = (void**)properties.value_data;
@@ -118,7 +140,7 @@ void* C_NSBitmapImageRep_BitmapImageRep_RepresentationOfImageRepsInArray_UsingTy
 
 void* C_NSBitmapImageRep_RepresentationUsingType_Properties(void* ptr, unsigned int storageType, Dictionary properties) {
     NSBitmapImageRep* nSBitmapImageRep = (NSBitmapImageRep*)ptr;
-    NSMutableDictionary* objcProperties = [[NSMutableDictionary alloc] initWithCapacity: properties.len];
+    NSMutableDictionary* objcProperties = [NSMutableDictionary dictionaryWithCapacity:properties.len];
     if (properties.len > 0) {
     	void** propertiesKeyData = (void**)properties.key_data;
     	void** propertiesValueData = (void**)properties.value_data;

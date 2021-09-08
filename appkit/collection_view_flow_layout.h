@@ -5,7 +5,11 @@
 
 void* C_CollectionViewFlowLayout_Alloc();
 
+void* C_NSCollectionViewFlowLayout_AllocCollectionViewFlowLayout();
 void* C_NSCollectionViewFlowLayout_Init(void* ptr);
+void* C_NSCollectionViewFlowLayout_NewCollectionViewFlowLayout();
+void* C_NSCollectionViewFlowLayout_Autorelease(void* ptr);
+void* C_NSCollectionViewFlowLayout_Retain(void* ptr);
 void C_NSCollectionViewFlowLayout_CollapseSectionAtIndex(void* ptr, unsigned int sectionIndex);
 void C_NSCollectionViewFlowLayout_ExpandSectionAtIndex(void* ptr, unsigned int sectionIndex);
 bool C_NSCollectionViewFlowLayout_SectionAtIndexIsCollapsed(void* ptr, unsigned int sectionIndex);

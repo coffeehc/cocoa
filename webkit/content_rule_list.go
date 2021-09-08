@@ -24,11 +24,27 @@ func MakeContentRuleList(ptr unsafe.Pointer) WKContentRuleList {
 }
 
 func AllocContentRuleList() WKContentRuleList {
-	return MakeContentRuleList(C.C_ContentRuleList_Alloc())
+	result_ := C.C_WKContentRuleList_AllocContentRuleList()
+	return MakeContentRuleList(result_)
 }
 
-func (w WKContentRuleList) Init() ContentRuleList {
+func (w WKContentRuleList) Init() WKContentRuleList {
 	result_ := C.C_WKContentRuleList_Init(w.Ptr())
+	return MakeContentRuleList(result_)
+}
+
+func NewContentRuleList() WKContentRuleList {
+	result_ := C.C_WKContentRuleList_NewContentRuleList()
+	return MakeContentRuleList(result_)
+}
+
+func (w WKContentRuleList) Autorelease() WKContentRuleList {
+	result_ := C.C_WKContentRuleList_Autorelease(w.Ptr())
+	return MakeContentRuleList(result_)
+}
+
+func (w WKContentRuleList) Retain() WKContentRuleList {
+	result_ := C.C_WKContentRuleList_Retain(w.Ptr())
 	return MakeContentRuleList(result_)
 }
 

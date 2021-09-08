@@ -22,11 +22,27 @@ func MakeDecimalNumberHandler(ptr unsafe.Pointer) NSDecimalNumberHandler {
 }
 
 func AllocDecimalNumberHandler() NSDecimalNumberHandler {
-	return MakeDecimalNumberHandler(C.C_DecimalNumberHandler_Alloc())
+	result_ := C.C_NSDecimalNumberHandler_AllocDecimalNumberHandler()
+	return MakeDecimalNumberHandler(result_)
 }
 
-func (n NSDecimalNumberHandler) Init() DecimalNumberHandler {
+func (n NSDecimalNumberHandler) Init() NSDecimalNumberHandler {
 	result_ := C.C_NSDecimalNumberHandler_Init(n.Ptr())
+	return MakeDecimalNumberHandler(result_)
+}
+
+func NewDecimalNumberHandler() NSDecimalNumberHandler {
+	result_ := C.C_NSDecimalNumberHandler_NewDecimalNumberHandler()
+	return MakeDecimalNumberHandler(result_)
+}
+
+func (n NSDecimalNumberHandler) Autorelease() NSDecimalNumberHandler {
+	result_ := C.C_NSDecimalNumberHandler_Autorelease(n.Ptr())
+	return MakeDecimalNumberHandler(result_)
+}
+
+func (n NSDecimalNumberHandler) Retain() NSDecimalNumberHandler {
+	result_ := C.C_NSDecimalNumberHandler_Retain(n.Ptr())
 	return MakeDecimalNumberHandler(result_)
 }
 

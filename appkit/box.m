@@ -23,6 +23,28 @@ void* C_NSBox_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSBox_AllocBox() {
+    NSBox* result_ = [NSBox alloc];
+    return result_;
+}
+
+void* C_NSBox_NewBox() {
+    NSBox* result_ = [NSBox new];
+    return result_;
+}
+
+void* C_NSBox_Autorelease(void* ptr) {
+    NSBox* nSBox = (NSBox*)ptr;
+    NSBox* result_ = [nSBox autorelease];
+    return result_;
+}
+
+void* C_NSBox_Retain(void* ptr) {
+    NSBox* nSBox = (NSBox*)ptr;
+    NSBox* result_ = [nSBox retain];
+    return result_;
+}
+
 void C_NSBox_SetFrameFromContentFrame(void* ptr, CGRect contentFrame) {
     NSBox* nSBox = (NSBox*)ptr;
     [nSBox setFrameFromContentFrame:contentFrame];

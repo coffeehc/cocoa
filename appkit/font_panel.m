@@ -5,6 +5,11 @@ void* C_FontPanel_Alloc() {
     return [NSFontPanel alloc];
 }
 
+void* C_NSFontPanel_FontPanel_WindowWithContentViewController(void* contentViewController) {
+    NSFontPanel* result_ = [NSFontPanel windowWithContentViewController:(NSViewController*)contentViewController];
+    return result_;
+}
+
 void* C_NSFontPanel_InitWithContentRect_StyleMask_Backing_Defer(void* ptr, CGRect contentRect, unsigned int style, unsigned int backingStoreType, bool flag) {
     NSFontPanel* nSFontPanel = (NSFontPanel*)ptr;
     NSFontPanel* result_ = [nSFontPanel initWithContentRect:contentRect styleMask:style backing:backingStoreType defer:flag];
@@ -20,6 +25,28 @@ void* C_NSFontPanel_InitWithContentRect_StyleMask_Backing_Defer_Screen(void* ptr
 void* C_NSFontPanel_Init(void* ptr) {
     NSFontPanel* nSFontPanel = (NSFontPanel*)ptr;
     NSFontPanel* result_ = [nSFontPanel init];
+    return result_;
+}
+
+void* C_NSFontPanel_AllocFontPanel() {
+    NSFontPanel* result_ = [NSFontPanel alloc];
+    return result_;
+}
+
+void* C_NSFontPanel_NewFontPanel() {
+    NSFontPanel* result_ = [NSFontPanel new];
+    return result_;
+}
+
+void* C_NSFontPanel_Autorelease(void* ptr) {
+    NSFontPanel* nSFontPanel = (NSFontPanel*)ptr;
+    NSFontPanel* result_ = [nSFontPanel autorelease];
+    return result_;
+}
+
+void* C_NSFontPanel_Retain(void* ptr) {
+    NSFontPanel* nSFontPanel = (NSFontPanel*)ptr;
+    NSFontPanel* result_ = [nSFontPanel retain];
     return result_;
 }
 

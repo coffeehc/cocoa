@@ -5,6 +5,19 @@ void* C_StackView_Alloc() {
     return [NSStackView alloc];
 }
 
+void* C_NSStackView_StackViewWithViews(Array views) {
+    NSMutableArray* objcViews = [NSMutableArray arrayWithCapacity:views.len];
+    if (views.len > 0) {
+    	void** viewsData = (void**)views.data;
+    	for (int i = 0; i < views.len; i++) {
+    		void* p = viewsData[i];
+    		[objcViews addObject:(NSView*)(NSView*)p];
+    	}
+    }
+    NSStackView* result_ = [NSStackView stackViewWithViews:objcViews];
+    return result_;
+}
+
 void* C_NSStackView_InitWithFrame(void* ptr, CGRect frameRect) {
     NSStackView* nSStackView = (NSStackView*)ptr;
     NSStackView* result_ = [nSStackView initWithFrame:frameRect];
@@ -23,16 +36,25 @@ void* C_NSStackView_Init(void* ptr) {
     return result_;
 }
 
-void* C_NSStackView_StackViewWithViews(Array views) {
-    NSMutableArray* objcViews = [[NSMutableArray alloc] init];
-    if (views.len > 0) {
-    	void** viewsData = (void**)views.data;
-    	for (int i = 0; i < views.len; i++) {
-    		void* p = viewsData[i];
-    		[objcViews addObject:(NSView*)(NSView*)p];
-    	}
-    }
-    NSStackView* result_ = [NSStackView stackViewWithViews:objcViews];
+void* C_NSStackView_AllocStackView() {
+    NSStackView* result_ = [NSStackView alloc];
+    return result_;
+}
+
+void* C_NSStackView_NewStackView() {
+    NSStackView* result_ = [NSStackView new];
+    return result_;
+}
+
+void* C_NSStackView_Autorelease(void* ptr) {
+    NSStackView* nSStackView = (NSStackView*)ptr;
+    NSStackView* result_ = [nSStackView autorelease];
+    return result_;
+}
+
+void* C_NSStackView_Retain(void* ptr) {
+    NSStackView* nSStackView = (NSStackView*)ptr;
+    NSStackView* result_ = [nSStackView retain];
     return result_;
 }
 
@@ -48,7 +70,7 @@ void C_NSStackView_InsertView_AtIndex_InGravity(void* ptr, void* view, unsigned 
 
 void C_NSStackView_SetViews_InGravity(void* ptr, Array views, int gravity) {
     NSStackView* nSStackView = (NSStackView*)ptr;
-    NSMutableArray* objcViews = [[NSMutableArray alloc] init];
+    NSMutableArray* objcViews = [NSMutableArray arrayWithCapacity:views.len];
     if (views.len > 0) {
     	void** viewsData = (void**)views.data;
     	for (int i = 0; i < views.len; i++) {

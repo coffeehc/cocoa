@@ -29,22 +29,38 @@ func MakeTreeNode(ptr unsafe.Pointer) NSTreeNode {
 	}
 }
 
-func AllocTreeNode() NSTreeNode {
-	return MakeTreeNode(C.C_TreeNode_Alloc())
+func TreeNodeWithRepresentedObject(modelObject objc.Object) NSTreeNode {
+	result_ := C.C_NSTreeNode_TreeNodeWithRepresentedObject(objc.ExtractPtr(modelObject))
+	return MakeTreeNode(result_)
 }
 
-func (n NSTreeNode) InitWithRepresentedObject(modelObject objc.Object) TreeNode {
+func (n NSTreeNode) InitWithRepresentedObject(modelObject objc.Object) NSTreeNode {
 	result_ := C.C_NSTreeNode_InitWithRepresentedObject(n.Ptr(), objc.ExtractPtr(modelObject))
 	return MakeTreeNode(result_)
 }
 
-func (n NSTreeNode) Init() TreeNode {
+func AllocTreeNode() NSTreeNode {
+	result_ := C.C_NSTreeNode_AllocTreeNode()
+	return MakeTreeNode(result_)
+}
+
+func (n NSTreeNode) Init() NSTreeNode {
 	result_ := C.C_NSTreeNode_Init(n.Ptr())
 	return MakeTreeNode(result_)
 }
 
-func TreeNodeWithRepresentedObject(modelObject objc.Object) TreeNode {
-	result_ := C.C_NSTreeNode_TreeNodeWithRepresentedObject(objc.ExtractPtr(modelObject))
+func NewTreeNode() NSTreeNode {
+	result_ := C.C_NSTreeNode_NewTreeNode()
+	return MakeTreeNode(result_)
+}
+
+func (n NSTreeNode) Autorelease() NSTreeNode {
+	result_ := C.C_NSTreeNode_Autorelease(n.Ptr())
+	return MakeTreeNode(result_)
+}
+
+func (n NSTreeNode) Retain() NSTreeNode {
+	result_ := C.C_NSTreeNode_Retain(n.Ptr())
 	return MakeTreeNode(result_)
 }
 

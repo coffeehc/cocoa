@@ -46,32 +46,48 @@ func MakeSlider(ptr unsafe.Pointer) NSSlider {
 	}
 }
 
-func AllocSlider() NSSlider {
-	return MakeSlider(C.C_Slider_Alloc())
-}
-
-func (n NSSlider) InitWithFrame(frameRect foundation.Rect) Slider {
-	result_ := C.C_NSSlider_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
-	return MakeSlider(result_)
-}
-
-func (n NSSlider) InitWithCoder(coder foundation.Coder) Slider {
-	result_ := C.C_NSSlider_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeSlider(result_)
-}
-
-func (n NSSlider) Init() Slider {
-	result_ := C.C_NSSlider_Init(n.Ptr())
-	return MakeSlider(result_)
-}
-
-func SliderWithTarget_Action(target objc.Object, action objc.Selector) Slider {
+func SliderWithTarget_Action(target objc.Object, action objc.Selector) NSSlider {
 	result_ := C.C_NSSlider_SliderWithTarget_Action(objc.ExtractPtr(target), unsafe.Pointer(action))
 	return MakeSlider(result_)
 }
 
-func SliderWithValue_MinValue_MaxValue_Target_Action(value float64, minValue float64, maxValue float64, target objc.Object, action objc.Selector) Slider {
+func SliderWithValue_MinValue_MaxValue_Target_Action(value float64, minValue float64, maxValue float64, target objc.Object, action objc.Selector) NSSlider {
 	result_ := C.C_NSSlider_SliderWithValue_MinValue_MaxValue_Target_Action(C.double(value), C.double(minValue), C.double(maxValue), objc.ExtractPtr(target), unsafe.Pointer(action))
+	return MakeSlider(result_)
+}
+
+func (n NSSlider) InitWithFrame(frameRect foundation.Rect) NSSlider {
+	result_ := C.C_NSSlider_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeSlider(result_)
+}
+
+func (n NSSlider) InitWithCoder(coder foundation.Coder) NSSlider {
+	result_ := C.C_NSSlider_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeSlider(result_)
+}
+
+func (n NSSlider) Init() NSSlider {
+	result_ := C.C_NSSlider_Init(n.Ptr())
+	return MakeSlider(result_)
+}
+
+func AllocSlider() NSSlider {
+	result_ := C.C_NSSlider_AllocSlider()
+	return MakeSlider(result_)
+}
+
+func NewSlider() NSSlider {
+	result_ := C.C_NSSlider_NewSlider()
+	return MakeSlider(result_)
+}
+
+func (n NSSlider) Autorelease() NSSlider {
+	result_ := C.C_NSSlider_Autorelease(n.Ptr())
+	return MakeSlider(result_)
+}
+
+func (n NSSlider) Retain() NSSlider {
+	result_ := C.C_NSSlider_Retain(n.Ptr())
 	return MakeSlider(result_)
 }
 

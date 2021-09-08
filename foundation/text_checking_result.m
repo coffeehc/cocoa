@@ -5,9 +5,31 @@ void* C_TextCheckingResult_Alloc() {
     return [NSTextCheckingResult alloc];
 }
 
+void* C_NSTextCheckingResult_AllocTextCheckingResult() {
+    NSTextCheckingResult* result_ = [NSTextCheckingResult alloc];
+    return result_;
+}
+
 void* C_NSTextCheckingResult_Init(void* ptr) {
     NSTextCheckingResult* nSTextCheckingResult = (NSTextCheckingResult*)ptr;
     NSTextCheckingResult* result_ = [nSTextCheckingResult init];
+    return result_;
+}
+
+void* C_NSTextCheckingResult_NewTextCheckingResult() {
+    NSTextCheckingResult* result_ = [NSTextCheckingResult new];
+    return result_;
+}
+
+void* C_NSTextCheckingResult_Autorelease(void* ptr) {
+    NSTextCheckingResult* nSTextCheckingResult = (NSTextCheckingResult*)ptr;
+    NSTextCheckingResult* result_ = [nSTextCheckingResult autorelease];
+    return result_;
+}
+
+void* C_NSTextCheckingResult_Retain(void* ptr) {
+    NSTextCheckingResult* nSTextCheckingResult = (NSTextCheckingResult*)ptr;
+    NSTextCheckingResult* result_ = [nSTextCheckingResult retain];
     return result_;
 }
 
@@ -28,7 +50,7 @@ void* C_NSTextCheckingResult_TextCheckingResult_LinkCheckingResultWithRange_URL(
 }
 
 void* C_NSTextCheckingResult_TextCheckingResult_AddressCheckingResultWithRange_Components(NSRange _range, Dictionary components) {
-    NSMutableDictionary* objcComponents = [[NSMutableDictionary alloc] initWithCapacity: components.len];
+    NSMutableDictionary* objcComponents = [NSMutableDictionary dictionaryWithCapacity:components.len];
     if (components.len > 0) {
     	void** componentsKeyData = (void**)components.key_data;
     	void** componentsValueData = (void**)components.value_data;
@@ -43,7 +65,7 @@ void* C_NSTextCheckingResult_TextCheckingResult_AddressCheckingResultWithRange_C
 }
 
 void* C_NSTextCheckingResult_TextCheckingResult_TransitInformationCheckingResultWithRange_Components(NSRange _range, Dictionary components) {
-    NSMutableDictionary* objcComponents = [[NSMutableDictionary alloc] initWithCapacity: components.len];
+    NSMutableDictionary* objcComponents = [NSMutableDictionary dictionaryWithCapacity:components.len];
     if (components.len > 0) {
     	void** componentsKeyData = (void**)components.key_data;
     	void** componentsValueData = (void**)components.value_data;
@@ -110,7 +132,7 @@ NSRange C_NSTextCheckingResult_RangeWithName(void* ptr, void* name) {
 }
 
 void* C_NSTextCheckingResult_TextCheckingResult_CorrectionCheckingResultWithRange_ReplacementString_AlternativeStrings(NSRange _range, void* replacementString, Array alternativeStrings) {
-    NSMutableArray* objcAlternativeStrings = [[NSMutableArray alloc] init];
+    NSMutableArray* objcAlternativeStrings = [NSMutableArray arrayWithCapacity:alternativeStrings.len];
     if (alternativeStrings.len > 0) {
     	void** alternativeStringsData = (void**)alternativeStrings.data;
     	for (int i = 0; i < alternativeStrings.len; i++) {

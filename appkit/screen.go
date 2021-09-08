@@ -37,11 +37,27 @@ func MakeScreen(ptr unsafe.Pointer) NSScreen {
 }
 
 func AllocScreen() NSScreen {
-	return MakeScreen(C.C_Screen_Alloc())
+	result_ := C.C_NSScreen_AllocScreen()
+	return MakeScreen(result_)
 }
 
-func (n NSScreen) Init() Screen {
+func (n NSScreen) Init() NSScreen {
 	result_ := C.C_NSScreen_Init(n.Ptr())
+	return MakeScreen(result_)
+}
+
+func NewScreen() NSScreen {
+	result_ := C.C_NSScreen_NewScreen()
+	return MakeScreen(result_)
+}
+
+func (n NSScreen) Autorelease() NSScreen {
+	result_ := C.C_NSScreen_Autorelease(n.Ptr())
+	return MakeScreen(result_)
+}
+
+func (n NSScreen) Retain() NSScreen {
+	result_ := C.C_NSScreen_Retain(n.Ptr())
 	return MakeScreen(result_)
 }
 

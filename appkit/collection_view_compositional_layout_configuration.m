@@ -5,9 +5,31 @@ void* C_CollectionViewCompositionalLayoutConfiguration_Alloc() {
     return [NSCollectionViewCompositionalLayoutConfiguration alloc];
 }
 
+void* C_NSCollectionViewCompositionalLayoutConfiguration_AllocCollectionViewCompositionalLayoutConfiguration() {
+    NSCollectionViewCompositionalLayoutConfiguration* result_ = [NSCollectionViewCompositionalLayoutConfiguration alloc];
+    return result_;
+}
+
 void* C_NSCollectionViewCompositionalLayoutConfiguration_Init(void* ptr) {
     NSCollectionViewCompositionalLayoutConfiguration* nSCollectionViewCompositionalLayoutConfiguration = (NSCollectionViewCompositionalLayoutConfiguration*)ptr;
     NSCollectionViewCompositionalLayoutConfiguration* result_ = [nSCollectionViewCompositionalLayoutConfiguration init];
+    return result_;
+}
+
+void* C_NSCollectionViewCompositionalLayoutConfiguration_NewCollectionViewCompositionalLayoutConfiguration() {
+    NSCollectionViewCompositionalLayoutConfiguration* result_ = [NSCollectionViewCompositionalLayoutConfiguration new];
+    return result_;
+}
+
+void* C_NSCollectionViewCompositionalLayoutConfiguration_Autorelease(void* ptr) {
+    NSCollectionViewCompositionalLayoutConfiguration* nSCollectionViewCompositionalLayoutConfiguration = (NSCollectionViewCompositionalLayoutConfiguration*)ptr;
+    NSCollectionViewCompositionalLayoutConfiguration* result_ = [nSCollectionViewCompositionalLayoutConfiguration autorelease];
+    return result_;
+}
+
+void* C_NSCollectionViewCompositionalLayoutConfiguration_Retain(void* ptr) {
+    NSCollectionViewCompositionalLayoutConfiguration* nSCollectionViewCompositionalLayoutConfiguration = (NSCollectionViewCompositionalLayoutConfiguration*)ptr;
+    NSCollectionViewCompositionalLayoutConfiguration* result_ = [nSCollectionViewCompositionalLayoutConfiguration retain];
     return result_;
 }
 
@@ -52,7 +74,7 @@ Array C_NSCollectionViewCompositionalLayoutConfiguration_BoundarySupplementaryIt
 
 void C_NSCollectionViewCompositionalLayoutConfiguration_SetBoundarySupplementaryItems(void* ptr, Array value) {
     NSCollectionViewCompositionalLayoutConfiguration* nSCollectionViewCompositionalLayoutConfiguration = (NSCollectionViewCompositionalLayoutConfiguration*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

@@ -1,7 +1,5 @@
 package coregraphics
 
-// #cgo CFLAGS: -x objective-c
-// #cgo LDFLAGS: -framework CoreGraphics
 // #include "geometry.h"
 import "C"
 import "unsafe"

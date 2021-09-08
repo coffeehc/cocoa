@@ -6,6 +6,9 @@
 void* C_TextInputContext_Alloc();
 
 void* C_NSTextInputContext_InitWithClient(void* ptr, void* client);
+void* C_NSTextInputContext_AllocTextInputContext();
+void* C_NSTextInputContext_Autorelease(void* ptr);
+void* C_NSTextInputContext_Retain(void* ptr);
 void C_NSTextInputContext_Activate(void* ptr);
 void C_NSTextInputContext_Deactivate(void* ptr);
 bool C_NSTextInputContext_HandleEvent(void* ptr, void* event);

@@ -109,12 +109,28 @@ func MakeDocument(ptr unsafe.Pointer) NSDocument {
 	}
 }
 
-func AllocDocument() NSDocument {
-	return MakeDocument(C.C_Document_Alloc())
+func (n NSDocument) Init() NSDocument {
+	result_ := C.C_NSDocument_Init(n.Ptr())
+	return MakeDocument(result_)
 }
 
-func (n NSDocument) Init() Document {
-	result_ := C.C_NSDocument_Init(n.Ptr())
+func AllocDocument() NSDocument {
+	result_ := C.C_NSDocument_AllocDocument()
+	return MakeDocument(result_)
+}
+
+func NewDocument() NSDocument {
+	result_ := C.C_NSDocument_NewDocument()
+	return MakeDocument(result_)
+}
+
+func (n NSDocument) Autorelease() NSDocument {
+	result_ := C.C_NSDocument_Autorelease(n.Ptr())
+	return MakeDocument(result_)
+}
+
+func (n NSDocument) Retain() NSDocument {
+	result_ := C.C_NSDocument_Retain(n.Ptr())
 	return MakeDocument(result_)
 }
 

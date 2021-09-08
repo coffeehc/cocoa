@@ -5,7 +5,11 @@
 
 void* C_TableViewRowAction_Alloc();
 
+void* C_NSTableViewRowAction_AllocTableViewRowAction();
 void* C_NSTableViewRowAction_Init(void* ptr);
+void* C_NSTableViewRowAction_NewTableViewRowAction();
+void* C_NSTableViewRowAction_Autorelease(void* ptr);
+void* C_NSTableViewRowAction_Retain(void* ptr);
 int C_NSTableViewRowAction_Style(void* ptr);
 void* C_NSTableViewRowAction_Title(void* ptr);
 void C_NSTableViewRowAction_SetTitle(void* ptr, void* value);

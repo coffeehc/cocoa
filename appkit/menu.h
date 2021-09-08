@@ -7,7 +7,11 @@ void* C_Menu_Alloc();
 
 void* C_NSMenu_InitWithTitle(void* ptr, void* title);
 void* C_NSMenu_InitWithCoder(void* ptr, void* coder);
+void* C_NSMenu_AllocMenu();
 void* C_NSMenu_Init(void* ptr);
+void* C_NSMenu_NewMenu();
+void* C_NSMenu_Autorelease(void* ptr);
+void* C_NSMenu_Retain(void* ptr);
 bool C_NSMenu_MenuBarVisible();
 void C_NSMenu_SetMenuBarVisible(bool visible);
 void C_NSMenu_InsertItem_AtIndex(void* ptr, void* newItem, int index);

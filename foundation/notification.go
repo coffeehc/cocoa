@@ -23,22 +23,38 @@ func MakeNotification(ptr unsafe.Pointer) NSNotification {
 	}
 }
 
-func AllocNotification() NSNotification {
-	return MakeNotification(C.C_Notification_Alloc())
-}
-
-func (n NSNotification) Init() Notification {
+func (n NSNotification) Init() NSNotification {
 	result_ := C.C_NSNotification_Init(n.Ptr())
 	return MakeNotification(result_)
 }
 
-func (n NSNotification) InitWithCoder(coder Coder) Notification {
+func (n NSNotification) InitWithCoder(coder Coder) NSNotification {
 	result_ := C.C_NSNotification_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeNotification(result_)
 }
 
-func NotificationWithName_Object(aName NotificationName, anObject objc.Object) Notification {
+func NotificationWithName_Object(aName NotificationName, anObject objc.Object) NSNotification {
 	result_ := C.C_NSNotification_NotificationWithName_Object(NewString(string(aName)).Ptr(), objc.ExtractPtr(anObject))
+	return MakeNotification(result_)
+}
+
+func AllocNotification() NSNotification {
+	result_ := C.C_NSNotification_AllocNotification()
+	return MakeNotification(result_)
+}
+
+func NewNotification() NSNotification {
+	result_ := C.C_NSNotification_NewNotification()
+	return MakeNotification(result_)
+}
+
+func (n NSNotification) Autorelease() NSNotification {
+	result_ := C.C_NSNotification_Autorelease(n.Ptr())
+	return MakeNotification(result_)
+}
+
+func (n NSNotification) Retain() NSNotification {
+	result_ := C.C_NSNotification_Retain(n.Ptr())
 	return MakeNotification(result_)
 }
 

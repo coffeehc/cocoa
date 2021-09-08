@@ -23,6 +23,28 @@ void* C_NSTableRowView_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSTableRowView_AllocTableRowView() {
+    NSTableRowView* result_ = [NSTableRowView alloc];
+    return result_;
+}
+
+void* C_NSTableRowView_NewTableRowView() {
+    NSTableRowView* result_ = [NSTableRowView new];
+    return result_;
+}
+
+void* C_NSTableRowView_Autorelease(void* ptr) {
+    NSTableRowView* nSTableRowView = (NSTableRowView*)ptr;
+    NSTableRowView* result_ = [nSTableRowView autorelease];
+    return result_;
+}
+
+void* C_NSTableRowView_Retain(void* ptr) {
+    NSTableRowView* nSTableRowView = (NSTableRowView*)ptr;
+    NSTableRowView* result_ = [nSTableRowView retain];
+    return result_;
+}
+
 void C_NSTableRowView_DrawBackgroundInRect(void* ptr, CGRect dirtyRect) {
     NSTableRowView* nSTableRowView = (NSTableRowView*)ptr;
     [nSTableRowView drawBackgroundInRect:dirtyRect];

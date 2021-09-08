@@ -25,17 +25,33 @@ func MakeURLResponse(ptr unsafe.Pointer) NSURLResponse {
 	}
 }
 
-func AllocURLResponse() NSURLResponse {
-	return MakeURLResponse(C.C_URLResponse_Alloc())
-}
-
-func (n NSURLResponse) InitWithURL_MIMEType_ExpectedContentLength_TextEncodingName(URL URL, MIMEType string, length int, name string) URLResponse {
+func (n NSURLResponse) InitWithURL_MIMEType_ExpectedContentLength_TextEncodingName(URL URL, MIMEType string, length int, name string) NSURLResponse {
 	result_ := C.C_NSURLResponse_InitWithURL_MIMEType_ExpectedContentLength_TextEncodingName(n.Ptr(), objc.ExtractPtr(URL), NewString(MIMEType).Ptr(), C.int(length), NewString(name).Ptr())
 	return MakeURLResponse(result_)
 }
 
-func (n NSURLResponse) Init() URLResponse {
+func AllocURLResponse() NSURLResponse {
+	result_ := C.C_NSURLResponse_AllocURLResponse()
+	return MakeURLResponse(result_)
+}
+
+func (n NSURLResponse) Init() NSURLResponse {
 	result_ := C.C_NSURLResponse_Init(n.Ptr())
+	return MakeURLResponse(result_)
+}
+
+func NewURLResponse() NSURLResponse {
+	result_ := C.C_NSURLResponse_NewURLResponse()
+	return MakeURLResponse(result_)
+}
+
+func (n NSURLResponse) Autorelease() NSURLResponse {
+	result_ := C.C_NSURLResponse_Autorelease(n.Ptr())
+	return MakeURLResponse(result_)
+}
+
+func (n NSURLResponse) Retain() NSURLResponse {
+	result_ := C.C_NSURLResponse_Retain(n.Ptr())
 	return MakeURLResponse(result_)
 }
 

@@ -10,6 +10,23 @@ void* C_NSCollectionLayoutSection_CollectionLayoutSection_SectionWithGroup(void*
     return result_;
 }
 
+void* C_NSCollectionLayoutSection_AllocCollectionLayoutSection() {
+    NSCollectionLayoutSection* result_ = [NSCollectionLayoutSection alloc];
+    return result_;
+}
+
+void* C_NSCollectionLayoutSection_Autorelease(void* ptr) {
+    NSCollectionLayoutSection* nSCollectionLayoutSection = (NSCollectionLayoutSection*)ptr;
+    NSCollectionLayoutSection* result_ = [nSCollectionLayoutSection autorelease];
+    return result_;
+}
+
+void* C_NSCollectionLayoutSection_Retain(void* ptr) {
+    NSCollectionLayoutSection* nSCollectionLayoutSection = (NSCollectionLayoutSection*)ptr;
+    NSCollectionLayoutSection* result_ = [nSCollectionLayoutSection retain];
+    return result_;
+}
+
 int C_NSCollectionLayoutSection_OrthogonalScrollingBehavior(void* ptr) {
     NSCollectionLayoutSection* nSCollectionLayoutSection = (NSCollectionLayoutSection*)ptr;
     NSCollectionLayoutSectionOrthogonalScrollingBehavior result_ = [nSCollectionLayoutSection orthogonalScrollingBehavior];
@@ -73,7 +90,7 @@ Array C_NSCollectionLayoutSection_BoundarySupplementaryItems(void* ptr) {
 
 void C_NSCollectionLayoutSection_SetBoundarySupplementaryItems(void* ptr, Array value) {
     NSCollectionLayoutSection* nSCollectionLayoutSection = (NSCollectionLayoutSection*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -103,7 +120,7 @@ Array C_NSCollectionLayoutSection_DecorationItems(void* ptr) {
 
 void C_NSCollectionLayoutSection_SetDecorationItems(void* ptr, Array value) {
     NSCollectionLayoutSection* nSCollectionLayoutSection = (NSCollectionLayoutSection*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

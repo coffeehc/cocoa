@@ -45,11 +45,27 @@ func MakeParagraphStyle(ptr unsafe.Pointer) NSParagraphStyle {
 }
 
 func AllocParagraphStyle() NSParagraphStyle {
-	return MakeParagraphStyle(C.C_ParagraphStyle_Alloc())
+	result_ := C.C_NSParagraphStyle_AllocParagraphStyle()
+	return MakeParagraphStyle(result_)
 }
 
-func (n NSParagraphStyle) Init() ParagraphStyle {
+func (n NSParagraphStyle) Init() NSParagraphStyle {
 	result_ := C.C_NSParagraphStyle_Init(n.Ptr())
+	return MakeParagraphStyle(result_)
+}
+
+func NewParagraphStyle() NSParagraphStyle {
+	result_ := C.C_NSParagraphStyle_NewParagraphStyle()
+	return MakeParagraphStyle(result_)
+}
+
+func (n NSParagraphStyle) Autorelease() NSParagraphStyle {
+	result_ := C.C_NSParagraphStyle_Autorelease(n.Ptr())
+	return MakeParagraphStyle(result_)
+}
+
+func (n NSParagraphStyle) Retain() NSParagraphStyle {
+	result_ := C.C_NSParagraphStyle_Retain(n.Ptr())
 	return MakeParagraphStyle(result_)
 }
 

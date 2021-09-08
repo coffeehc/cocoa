@@ -29,11 +29,27 @@ func MakePDFPanel(ptr unsafe.Pointer) NSPDFPanel {
 }
 
 func AllocPDFPanel() NSPDFPanel {
-	return MakePDFPanel(C.C_PDFPanel_Alloc())
+	result_ := C.C_NSPDFPanel_AllocPDFPanel()
+	return MakePDFPanel(result_)
 }
 
-func (n NSPDFPanel) Init() PDFPanel {
+func (n NSPDFPanel) Init() NSPDFPanel {
 	result_ := C.C_NSPDFPanel_Init(n.Ptr())
+	return MakePDFPanel(result_)
+}
+
+func NewPDFPanel() NSPDFPanel {
+	result_ := C.C_NSPDFPanel_NewPDFPanel()
+	return MakePDFPanel(result_)
+}
+
+func (n NSPDFPanel) Autorelease() NSPDFPanel {
+	result_ := C.C_NSPDFPanel_Autorelease(n.Ptr())
+	return MakePDFPanel(result_)
+}
+
+func (n NSPDFPanel) Retain() NSPDFPanel {
+	result_ := C.C_NSPDFPanel_Retain(n.Ptr())
 	return MakePDFPanel(result_)
 }
 

@@ -11,6 +11,10 @@ void* C_NSWindowController_InitWithWindowNibName_Owner(void* ptr, void* windowNi
 void* C_NSWindowController_InitWithWindowNibPath_Owner(void* ptr, void* windowNibPath, void* owner);
 void* C_NSWindowController_InitWithCoder(void* ptr, void* coder);
 void* C_NSWindowController_Init(void* ptr);
+void* C_NSWindowController_AllocWindowController();
+void* C_NSWindowController_NewWindowController();
+void* C_NSWindowController_Autorelease(void* ptr);
+void* C_NSWindowController_Retain(void* ptr);
 void C_NSWindowController_LoadWindow(void* ptr);
 void C_NSWindowController_ShowWindow(void* ptr, void* sender);
 void C_NSWindowController_WindowDidLoad(void* ptr);

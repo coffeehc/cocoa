@@ -5,7 +5,11 @@
 
 void* C_DateFormatter_Alloc();
 
+void* C_NSDateFormatter_AllocDateFormatter();
 void* C_NSDateFormatter_Init(void* ptr);
+void* C_NSDateFormatter_NewDateFormatter();
+void* C_NSDateFormatter_Autorelease(void* ptr);
+void* C_NSDateFormatter_Retain(void* ptr);
 void* C_NSDateFormatter_DateFromString(void* ptr, void* _string);
 void* C_NSDateFormatter_StringFromDate(void* ptr, void* date);
 void* C_NSDateFormatter_DateFormatter_LocalizedStringFromDate_DateStyle_TimeStyle(void* date, unsigned int dstyle, unsigned int tstyle);

@@ -41,12 +41,33 @@ func MakeLayoutConstraint(ptr unsafe.Pointer) NSLayoutConstraint {
 	}
 }
 
-func AllocLayoutConstraint() NSLayoutConstraint {
-	return MakeLayoutConstraint(C.C_LayoutConstraint_Alloc())
+func LayoutConstraint_ConstraintWithItem_Attribute_RelatedBy_ToItem_Attribute_Multiplier_Constant(view1 objc.Object, attr1 LayoutAttribute, relation LayoutRelation, view2 objc.Object, attr2 LayoutAttribute, multiplier coregraphics.Float, c coregraphics.Float) NSLayoutConstraint {
+	result_ := C.C_NSLayoutConstraint_LayoutConstraint_ConstraintWithItem_Attribute_RelatedBy_ToItem_Attribute_Multiplier_Constant(objc.ExtractPtr(view1), C.int(int(attr1)), C.int(int(relation)), objc.ExtractPtr(view2), C.int(int(attr2)), C.double(float64(multiplier)), C.double(float64(c)))
+	return MakeLayoutConstraint(result_)
 }
 
-func (n NSLayoutConstraint) Init() LayoutConstraint {
+func AllocLayoutConstraint() NSLayoutConstraint {
+	result_ := C.C_NSLayoutConstraint_AllocLayoutConstraint()
+	return MakeLayoutConstraint(result_)
+}
+
+func (n NSLayoutConstraint) Init() NSLayoutConstraint {
 	result_ := C.C_NSLayoutConstraint_Init(n.Ptr())
+	return MakeLayoutConstraint(result_)
+}
+
+func NewLayoutConstraint() NSLayoutConstraint {
+	result_ := C.C_NSLayoutConstraint_NewLayoutConstraint()
+	return MakeLayoutConstraint(result_)
+}
+
+func (n NSLayoutConstraint) Autorelease() NSLayoutConstraint {
+	result_ := C.C_NSLayoutConstraint_Autorelease(n.Ptr())
+	return MakeLayoutConstraint(result_)
+}
+
+func (n NSLayoutConstraint) Retain() NSLayoutConstraint {
+	result_ := C.C_NSLayoutConstraint_Retain(n.Ptr())
 	return MakeLayoutConstraint(result_)
 }
 
@@ -89,11 +110,6 @@ func LayoutConstraint_ConstraintsWithVisualFormat_Options_Metrics_Views(format s
 		goResult_[idx] = MakeLayoutConstraint(r)
 	}
 	return goResult_
-}
-
-func LayoutConstraint_ConstraintWithItem_Attribute_RelatedBy_ToItem_Attribute_Multiplier_Constant(view1 objc.Object, attr1 LayoutAttribute, relation LayoutRelation, view2 objc.Object, attr2 LayoutAttribute, multiplier coregraphics.Float, c coregraphics.Float) LayoutConstraint {
-	result_ := C.C_NSLayoutConstraint_LayoutConstraint_ConstraintWithItem_Attribute_RelatedBy_ToItem_Attribute_Multiplier_Constant(objc.ExtractPtr(view1), C.int(int(attr1)), C.int(int(relation)), objc.ExtractPtr(view2), C.int(int(attr2)), C.double(float64(multiplier)), C.double(float64(c)))
-	return MakeLayoutConstraint(result_)
 }
 
 func LayoutConstraint_ActivateConstraints(constraints []LayoutConstraint) {

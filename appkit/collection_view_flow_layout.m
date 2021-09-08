@@ -5,9 +5,31 @@ void* C_CollectionViewFlowLayout_Alloc() {
     return [NSCollectionViewFlowLayout alloc];
 }
 
+void* C_NSCollectionViewFlowLayout_AllocCollectionViewFlowLayout() {
+    NSCollectionViewFlowLayout* result_ = [NSCollectionViewFlowLayout alloc];
+    return result_;
+}
+
 void* C_NSCollectionViewFlowLayout_Init(void* ptr) {
     NSCollectionViewFlowLayout* nSCollectionViewFlowLayout = (NSCollectionViewFlowLayout*)ptr;
     NSCollectionViewFlowLayout* result_ = [nSCollectionViewFlowLayout init];
+    return result_;
+}
+
+void* C_NSCollectionViewFlowLayout_NewCollectionViewFlowLayout() {
+    NSCollectionViewFlowLayout* result_ = [NSCollectionViewFlowLayout new];
+    return result_;
+}
+
+void* C_NSCollectionViewFlowLayout_Autorelease(void* ptr) {
+    NSCollectionViewFlowLayout* nSCollectionViewFlowLayout = (NSCollectionViewFlowLayout*)ptr;
+    NSCollectionViewFlowLayout* result_ = [nSCollectionViewFlowLayout autorelease];
+    return result_;
+}
+
+void* C_NSCollectionViewFlowLayout_Retain(void* ptr) {
+    NSCollectionViewFlowLayout* nSCollectionViewFlowLayout = (NSCollectionViewFlowLayout*)ptr;
+    NSCollectionViewFlowLayout* result_ = [nSCollectionViewFlowLayout retain];
     return result_;
 }
 

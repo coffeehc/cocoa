@@ -29,17 +29,33 @@ func MakeCollectionViewTransitionLayout(ptr unsafe.Pointer) NSCollectionViewTran
 	}
 }
 
-func AllocCollectionViewTransitionLayout() NSCollectionViewTransitionLayout {
-	return MakeCollectionViewTransitionLayout(C.C_CollectionViewTransitionLayout_Alloc())
-}
-
-func (n NSCollectionViewTransitionLayout) InitWithCurrentLayout_NextLayout(currentLayout CollectionViewLayout, newLayout CollectionViewLayout) CollectionViewTransitionLayout {
+func (n NSCollectionViewTransitionLayout) InitWithCurrentLayout_NextLayout(currentLayout CollectionViewLayout, newLayout CollectionViewLayout) NSCollectionViewTransitionLayout {
 	result_ := C.C_NSCollectionViewTransitionLayout_InitWithCurrentLayout_NextLayout(n.Ptr(), objc.ExtractPtr(currentLayout), objc.ExtractPtr(newLayout))
 	return MakeCollectionViewTransitionLayout(result_)
 }
 
-func (n NSCollectionViewTransitionLayout) Init() CollectionViewTransitionLayout {
+func AllocCollectionViewTransitionLayout() NSCollectionViewTransitionLayout {
+	result_ := C.C_NSCollectionViewTransitionLayout_AllocCollectionViewTransitionLayout()
+	return MakeCollectionViewTransitionLayout(result_)
+}
+
+func (n NSCollectionViewTransitionLayout) Init() NSCollectionViewTransitionLayout {
 	result_ := C.C_NSCollectionViewTransitionLayout_Init(n.Ptr())
+	return MakeCollectionViewTransitionLayout(result_)
+}
+
+func NewCollectionViewTransitionLayout() NSCollectionViewTransitionLayout {
+	result_ := C.C_NSCollectionViewTransitionLayout_NewCollectionViewTransitionLayout()
+	return MakeCollectionViewTransitionLayout(result_)
+}
+
+func (n NSCollectionViewTransitionLayout) Autorelease() NSCollectionViewTransitionLayout {
+	result_ := C.C_NSCollectionViewTransitionLayout_Autorelease(n.Ptr())
+	return MakeCollectionViewTransitionLayout(result_)
+}
+
+func (n NSCollectionViewTransitionLayout) Retain() NSCollectionViewTransitionLayout {
+	result_ := C.C_NSCollectionViewTransitionLayout_Retain(n.Ptr())
 	return MakeCollectionViewTransitionLayout(result_)
 }
 

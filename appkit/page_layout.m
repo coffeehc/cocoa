@@ -5,9 +5,31 @@ void* C_PageLayout_Alloc() {
     return [NSPageLayout alloc];
 }
 
+void* C_NSPageLayout_AllocPageLayout() {
+    NSPageLayout* result_ = [NSPageLayout alloc];
+    return result_;
+}
+
 void* C_NSPageLayout_Init(void* ptr) {
     NSPageLayout* nSPageLayout = (NSPageLayout*)ptr;
     NSPageLayout* result_ = [nSPageLayout init];
+    return result_;
+}
+
+void* C_NSPageLayout_NewPageLayout() {
+    NSPageLayout* result_ = [NSPageLayout new];
+    return result_;
+}
+
+void* C_NSPageLayout_Autorelease(void* ptr) {
+    NSPageLayout* nSPageLayout = (NSPageLayout*)ptr;
+    NSPageLayout* result_ = [nSPageLayout autorelease];
+    return result_;
+}
+
+void* C_NSPageLayout_Retain(void* ptr) {
+    NSPageLayout* nSPageLayout = (NSPageLayout*)ptr;
+    NSPageLayout* result_ = [nSPageLayout retain];
     return result_;
 }
 

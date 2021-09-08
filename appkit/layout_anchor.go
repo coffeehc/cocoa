@@ -34,11 +34,27 @@ func MakeLayoutAnchor(ptr unsafe.Pointer) NSLayoutAnchor {
 }
 
 func AllocLayoutAnchor() NSLayoutAnchor {
-	return MakeLayoutAnchor(C.C_LayoutAnchor_Alloc())
+	result_ := C.C_NSLayoutAnchor_AllocLayoutAnchor()
+	return MakeLayoutAnchor(result_)
 }
 
-func (n NSLayoutAnchor) Init() LayoutAnchor {
+func (n NSLayoutAnchor) Init() NSLayoutAnchor {
 	result_ := C.C_NSLayoutAnchor_Init(n.Ptr())
+	return MakeLayoutAnchor(result_)
+}
+
+func NewLayoutAnchor() NSLayoutAnchor {
+	result_ := C.C_NSLayoutAnchor_NewLayoutAnchor()
+	return MakeLayoutAnchor(result_)
+}
+
+func (n NSLayoutAnchor) Autorelease() NSLayoutAnchor {
+	result_ := C.C_NSLayoutAnchor_Autorelease(n.Ptr())
+	return MakeLayoutAnchor(result_)
+}
+
+func (n NSLayoutAnchor) Retain() NSLayoutAnchor {
+	result_ := C.C_NSLayoutAnchor_Retain(n.Ptr())
 	return MakeLayoutAnchor(result_)
 }
 

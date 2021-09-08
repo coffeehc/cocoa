@@ -5,7 +5,11 @@
 
 void* C_PDFPanel_Alloc();
 
+void* C_NSPDFPanel_AllocPDFPanel();
 void* C_NSPDFPanel_Init(void* ptr);
+void* C_NSPDFPanel_NewPDFPanel();
+void* C_NSPDFPanel_Autorelease(void* ptr);
+void* C_NSPDFPanel_Retain(void* ptr);
 void* C_NSPDFPanel_PDFPanel_Panel();
 void* C_NSPDFPanel_AccessoryController(void* ptr);
 void C_NSPDFPanel_SetAccessoryController(void* ptr, void* value);

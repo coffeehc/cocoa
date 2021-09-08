@@ -37,11 +37,27 @@ func MakePrintPanel(ptr unsafe.Pointer) NSPrintPanel {
 }
 
 func AllocPrintPanel() NSPrintPanel {
-	return MakePrintPanel(C.C_PrintPanel_Alloc())
+	result_ := C.C_NSPrintPanel_AllocPrintPanel()
+	return MakePrintPanel(result_)
 }
 
-func (n NSPrintPanel) Init() PrintPanel {
+func (n NSPrintPanel) Init() NSPrintPanel {
 	result_ := C.C_NSPrintPanel_Init(n.Ptr())
+	return MakePrintPanel(result_)
+}
+
+func NewPrintPanel() NSPrintPanel {
+	result_ := C.C_NSPrintPanel_NewPrintPanel()
+	return MakePrintPanel(result_)
+}
+
+func (n NSPrintPanel) Autorelease() NSPrintPanel {
+	result_ := C.C_NSPrintPanel_Autorelease(n.Ptr())
+	return MakePrintPanel(result_)
+}
+
+func (n NSPrintPanel) Retain() NSPrintPanel {
+	result_ := C.C_NSPrintPanel_Retain(n.Ptr())
 	return MakePrintPanel(result_)
 }
 

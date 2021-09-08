@@ -59,11 +59,27 @@ func MakeCollectionViewLayout(ptr unsafe.Pointer) NSCollectionViewLayout {
 }
 
 func AllocCollectionViewLayout() NSCollectionViewLayout {
-	return MakeCollectionViewLayout(C.C_CollectionViewLayout_Alloc())
+	result_ := C.C_NSCollectionViewLayout_AllocCollectionViewLayout()
+	return MakeCollectionViewLayout(result_)
 }
 
-func (n NSCollectionViewLayout) Init() CollectionViewLayout {
+func (n NSCollectionViewLayout) Init() NSCollectionViewLayout {
 	result_ := C.C_NSCollectionViewLayout_Init(n.Ptr())
+	return MakeCollectionViewLayout(result_)
+}
+
+func NewCollectionViewLayout() NSCollectionViewLayout {
+	result_ := C.C_NSCollectionViewLayout_NewCollectionViewLayout()
+	return MakeCollectionViewLayout(result_)
+}
+
+func (n NSCollectionViewLayout) Autorelease() NSCollectionViewLayout {
+	result_ := C.C_NSCollectionViewLayout_Autorelease(n.Ptr())
+	return MakeCollectionViewLayout(result_)
+}
+
+func (n NSCollectionViewLayout) Retain() NSCollectionViewLayout {
+	result_ := C.C_NSCollectionViewLayout_Retain(n.Ptr())
 	return MakeCollectionViewLayout(result_)
 }
 

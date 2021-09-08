@@ -30,11 +30,27 @@ func MakePathControlItem(ptr unsafe.Pointer) NSPathControlItem {
 }
 
 func AllocPathControlItem() NSPathControlItem {
-	return MakePathControlItem(C.C_PathControlItem_Alloc())
+	result_ := C.C_NSPathControlItem_AllocPathControlItem()
+	return MakePathControlItem(result_)
 }
 
-func (n NSPathControlItem) Init() PathControlItem {
+func (n NSPathControlItem) Init() NSPathControlItem {
 	result_ := C.C_NSPathControlItem_Init(n.Ptr())
+	return MakePathControlItem(result_)
+}
+
+func NewPathControlItem() NSPathControlItem {
+	result_ := C.C_NSPathControlItem_NewPathControlItem()
+	return MakePathControlItem(result_)
+}
+
+func (n NSPathControlItem) Autorelease() NSPathControlItem {
+	result_ := C.C_NSPathControlItem_Autorelease(n.Ptr())
+	return MakePathControlItem(result_)
+}
+
+func (n NSPathControlItem) Retain() NSPathControlItem {
+	result_ := C.C_NSPathControlItem_Retain(n.Ptr())
 	return MakePathControlItem(result_)
 }
 

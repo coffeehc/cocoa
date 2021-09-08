@@ -5,9 +5,31 @@ void* C_AttributedString_Alloc() {
     return [NSAttributedString alloc];
 }
 
+void* C_NSAttributedString_AllocAttributedString() {
+    NSAttributedString* result_ = [NSAttributedString alloc];
+    return result_;
+}
+
 void* C_NSAttributedString_Init(void* ptr) {
     NSAttributedString* nSAttributedString = (NSAttributedString*)ptr;
     NSAttributedString* result_ = [nSAttributedString init];
+    return result_;
+}
+
+void* C_NSAttributedString_NewAttributedString() {
+    NSAttributedString* result_ = [NSAttributedString new];
+    return result_;
+}
+
+void* C_NSAttributedString_Autorelease(void* ptr) {
+    NSAttributedString* nSAttributedString = (NSAttributedString*)ptr;
+    NSAttributedString* result_ = [nSAttributedString autorelease];
+    return result_;
+}
+
+void* C_NSAttributedString_Retain(void* ptr) {
+    NSAttributedString* nSAttributedString = (NSAttributedString*)ptr;
+    NSAttributedString* result_ = [nSAttributedString retain];
     return result_;
 }
 

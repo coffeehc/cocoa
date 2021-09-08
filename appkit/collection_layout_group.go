@@ -27,11 +27,7 @@ func MakeCollectionLayoutGroup(ptr unsafe.Pointer) NSCollectionLayoutGroup {
 	}
 }
 
-func AllocCollectionLayoutGroup() NSCollectionLayoutGroup {
-	return MakeCollectionLayoutGroup(C.C_CollectionLayoutGroup_Alloc())
-}
-
-func CollectionLayoutGroup_HorizontalGroupWithLayoutSize_Subitems(layoutSize CollectionLayoutSize, subitems []CollectionLayoutItem) CollectionLayoutGroup {
+func CollectionLayoutGroup_HorizontalGroupWithLayoutSize_Subitems(layoutSize CollectionLayoutSize, subitems []CollectionLayoutItem) NSCollectionLayoutGroup {
 	var cSubitems C.Array
 	if len(subitems) > 0 {
 		cSubitemsData := make([]unsafe.Pointer, len(subitems))
@@ -45,12 +41,12 @@ func CollectionLayoutGroup_HorizontalGroupWithLayoutSize_Subitems(layoutSize Col
 	return MakeCollectionLayoutGroup(result_)
 }
 
-func CollectionLayoutGroup_HorizontalGroupWithLayoutSize_Subitem_Count(layoutSize CollectionLayoutSize, subitem CollectionLayoutItem, count int) CollectionLayoutGroup {
+func CollectionLayoutGroup_HorizontalGroupWithLayoutSize_Subitem_Count(layoutSize CollectionLayoutSize, subitem CollectionLayoutItem, count int) NSCollectionLayoutGroup {
 	result_ := C.C_NSCollectionLayoutGroup_CollectionLayoutGroup_HorizontalGroupWithLayoutSize_Subitem_Count(objc.ExtractPtr(layoutSize), objc.ExtractPtr(subitem), C.int(count))
 	return MakeCollectionLayoutGroup(result_)
 }
 
-func CollectionLayoutGroup_VerticalGroupWithLayoutSize_Subitems(layoutSize CollectionLayoutSize, subitems []CollectionLayoutItem) CollectionLayoutGroup {
+func CollectionLayoutGroup_VerticalGroupWithLayoutSize_Subitems(layoutSize CollectionLayoutSize, subitems []CollectionLayoutItem) NSCollectionLayoutGroup {
 	var cSubitems C.Array
 	if len(subitems) > 0 {
 		cSubitemsData := make([]unsafe.Pointer, len(subitems))
@@ -64,8 +60,42 @@ func CollectionLayoutGroup_VerticalGroupWithLayoutSize_Subitems(layoutSize Colle
 	return MakeCollectionLayoutGroup(result_)
 }
 
-func CollectionLayoutGroup_VerticalGroupWithLayoutSize_Subitem_Count(layoutSize CollectionLayoutSize, subitem CollectionLayoutItem, count int) CollectionLayoutGroup {
+func CollectionLayoutGroup_VerticalGroupWithLayoutSize_Subitem_Count(layoutSize CollectionLayoutSize, subitem CollectionLayoutItem, count int) NSCollectionLayoutGroup {
 	result_ := C.C_NSCollectionLayoutGroup_CollectionLayoutGroup_VerticalGroupWithLayoutSize_Subitem_Count(objc.ExtractPtr(layoutSize), objc.ExtractPtr(subitem), C.int(count))
+	return MakeCollectionLayoutGroup(result_)
+}
+
+func CollectionLayoutGroup_ItemWithLayoutSize(layoutSize CollectionLayoutSize) NSCollectionLayoutGroup {
+	result_ := C.C_NSCollectionLayoutGroup_CollectionLayoutGroup_ItemWithLayoutSize(objc.ExtractPtr(layoutSize))
+	return MakeCollectionLayoutGroup(result_)
+}
+
+func CollectionLayoutGroup_ItemWithLayoutSize_SupplementaryItems(layoutSize CollectionLayoutSize, supplementaryItems []CollectionLayoutSupplementaryItem) NSCollectionLayoutGroup {
+	var cSupplementaryItems C.Array
+	if len(supplementaryItems) > 0 {
+		cSupplementaryItemsData := make([]unsafe.Pointer, len(supplementaryItems))
+		for idx, v := range supplementaryItems {
+			cSupplementaryItemsData[idx] = objc.ExtractPtr(v)
+		}
+		cSupplementaryItems.data = unsafe.Pointer(&cSupplementaryItemsData[0])
+		cSupplementaryItems.len = C.int(len(supplementaryItems))
+	}
+	result_ := C.C_NSCollectionLayoutGroup_CollectionLayoutGroup_ItemWithLayoutSize_SupplementaryItems(objc.ExtractPtr(layoutSize), cSupplementaryItems)
+	return MakeCollectionLayoutGroup(result_)
+}
+
+func AllocCollectionLayoutGroup() NSCollectionLayoutGroup {
+	result_ := C.C_NSCollectionLayoutGroup_AllocCollectionLayoutGroup()
+	return MakeCollectionLayoutGroup(result_)
+}
+
+func (n NSCollectionLayoutGroup) Autorelease() NSCollectionLayoutGroup {
+	result_ := C.C_NSCollectionLayoutGroup_Autorelease(n.Ptr())
+	return MakeCollectionLayoutGroup(result_)
+}
+
+func (n NSCollectionLayoutGroup) Retain() NSCollectionLayoutGroup {
+	result_ := C.C_NSCollectionLayoutGroup_Retain(n.Ptr())
 	return MakeCollectionLayoutGroup(result_)
 }
 

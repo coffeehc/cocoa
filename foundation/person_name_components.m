@@ -5,9 +5,31 @@ void* C_PersonNameComponents_Alloc() {
     return [NSPersonNameComponents alloc];
 }
 
+void* C_NSPersonNameComponents_AllocPersonNameComponents() {
+    NSPersonNameComponents* result_ = [NSPersonNameComponents alloc];
+    return result_;
+}
+
 void* C_NSPersonNameComponents_Init(void* ptr) {
     NSPersonNameComponents* nSPersonNameComponents = (NSPersonNameComponents*)ptr;
     NSPersonNameComponents* result_ = [nSPersonNameComponents init];
+    return result_;
+}
+
+void* C_NSPersonNameComponents_NewPersonNameComponents() {
+    NSPersonNameComponents* result_ = [NSPersonNameComponents new];
+    return result_;
+}
+
+void* C_NSPersonNameComponents_Autorelease(void* ptr) {
+    NSPersonNameComponents* nSPersonNameComponents = (NSPersonNameComponents*)ptr;
+    NSPersonNameComponents* result_ = [nSPersonNameComponents autorelease];
+    return result_;
+}
+
+void* C_NSPersonNameComponents_Retain(void* ptr) {
+    NSPersonNameComponents* nSPersonNameComponents = (NSPersonNameComponents*)ptr;
+    NSPersonNameComponents* result_ = [nSPersonNameComponents retain];
     return result_;
 }
 

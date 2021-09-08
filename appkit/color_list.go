@@ -30,22 +30,38 @@ func MakeColorList(ptr unsafe.Pointer) NSColorList {
 	}
 }
 
-func AllocColorList() NSColorList {
-	return MakeColorList(C.C_ColorList_Alloc())
-}
-
-func (n NSColorList) InitWithName(name ColorListName) ColorList {
+func (n NSColorList) InitWithName(name ColorListName) NSColorList {
 	result_ := C.C_NSColorList_InitWithName(n.Ptr(), foundation.NewString(string(name)).Ptr())
 	return MakeColorList(result_)
 }
 
-func (n NSColorList) InitWithName_FromFile(name ColorListName, path string) ColorList {
+func (n NSColorList) InitWithName_FromFile(name ColorListName, path string) NSColorList {
 	result_ := C.C_NSColorList_InitWithName_FromFile(n.Ptr(), foundation.NewString(string(name)).Ptr(), foundation.NewString(path).Ptr())
 	return MakeColorList(result_)
 }
 
-func (n NSColorList) Init() ColorList {
+func AllocColorList() NSColorList {
+	result_ := C.C_NSColorList_AllocColorList()
+	return MakeColorList(result_)
+}
+
+func (n NSColorList) Init() NSColorList {
 	result_ := C.C_NSColorList_Init(n.Ptr())
+	return MakeColorList(result_)
+}
+
+func NewColorList() NSColorList {
+	result_ := C.C_NSColorList_NewColorList()
+	return MakeColorList(result_)
+}
+
+func (n NSColorList) Autorelease() NSColorList {
+	result_ := C.C_NSColorList_Autorelease(n.Ptr())
+	return MakeColorList(result_)
+}
+
+func (n NSColorList) Retain() NSColorList {
+	result_ := C.C_NSColorList_Retain(n.Ptr())
 	return MakeColorList(result_)
 }
 

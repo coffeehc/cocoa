@@ -6,6 +6,9 @@
 void* C_CharacterSet_Alloc();
 
 void* C_NSCharacterSet_InitWithCoder(void* ptr, void* coder);
+void* C_NSCharacterSet_AllocCharacterSet();
+void* C_NSCharacterSet_Autorelease(void* ptr);
+void* C_NSCharacterSet_Retain(void* ptr);
 void* C_NSCharacterSet_CharacterSetWithCharactersInString(void* aString);
 void* C_NSCharacterSet_CharacterSetWithRange(NSRange aRange);
 void* C_NSCharacterSet_CharacterSetWithBitmapRepresentation(void* data);

@@ -5,10 +5,14 @@
 
 void* C_Window_Alloc();
 
+void* C_NSWindow_WindowWithContentViewController(void* contentViewController);
 void* C_NSWindow_InitWithContentRect_StyleMask_Backing_Defer(void* ptr, CGRect contentRect, unsigned int style, unsigned int backingStoreType, bool flag);
 void* C_NSWindow_InitWithContentRect_StyleMask_Backing_Defer_Screen(void* ptr, CGRect contentRect, unsigned int style, unsigned int backingStoreType, bool flag, void* screen);
 void* C_NSWindow_Init(void* ptr);
-void* C_NSWindow_WindowWithContentViewController(void* contentViewController);
+void* C_NSWindow_AllocWindow();
+void* C_NSWindow_NewWindow();
+void* C_NSWindow_Autorelease(void* ptr);
+void* C_NSWindow_Retain(void* ptr);
 void C_NSWindow_ToggleFullScreen(void* ptr, void* sender);
 void C_NSWindow_InvalidateShadow(void* ptr);
 bool C_NSWindow_AutorecalculatesContentBorderThicknessForEdge(void* ptr, unsigned int edge);

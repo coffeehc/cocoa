@@ -40,11 +40,27 @@ func MakeGridRow(ptr unsafe.Pointer) NSGridRow {
 }
 
 func AllocGridRow() NSGridRow {
-	return MakeGridRow(C.C_GridRow_Alloc())
+	result_ := C.C_NSGridRow_AllocGridRow()
+	return MakeGridRow(result_)
 }
 
-func (n NSGridRow) Init() GridRow {
+func (n NSGridRow) Init() NSGridRow {
 	result_ := C.C_NSGridRow_Init(n.Ptr())
+	return MakeGridRow(result_)
+}
+
+func NewGridRow() NSGridRow {
+	result_ := C.C_NSGridRow_NewGridRow()
+	return MakeGridRow(result_)
+}
+
+func (n NSGridRow) Autorelease() NSGridRow {
+	result_ := C.C_NSGridRow_Autorelease(n.Ptr())
+	return MakeGridRow(result_)
+}
+
+func (n NSGridRow) Retain() NSGridRow {
+	result_ := C.C_NSGridRow_Retain(n.Ptr())
 	return MakeGridRow(result_)
 }
 

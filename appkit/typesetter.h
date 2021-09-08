@@ -5,7 +5,11 @@
 
 void* C_Typesetter_Alloc();
 
+void* C_NSTypesetter_AllocTypesetter();
 void* C_NSTypesetter_Init(void* ptr);
+void* C_NSTypesetter_NewTypesetter();
+void* C_NSTypesetter_Autorelease(void* ptr);
+void* C_NSTypesetter_Retain(void* ptr);
 void* C_NSTypesetter_SharedSystemTypesetterForBehavior(int behavior);
 double C_NSTypesetter_BaselineOffsetInLayoutManager_GlyphIndex(void* ptr, void* layoutMgr, unsigned int glyphIndex);
 void* C_NSTypesetter_SubstituteFontForFont(void* ptr, void* originalFont);

@@ -5,11 +5,15 @@
 
 void* C_Slider_Alloc();
 
+void* C_NSSlider_SliderWithTarget_Action(void* target, void* action);
+void* C_NSSlider_SliderWithValue_MinValue_MaxValue_Target_Action(double value, double minValue, double maxValue, void* target, void* action);
 void* C_NSSlider_InitWithFrame(void* ptr, CGRect frameRect);
 void* C_NSSlider_InitWithCoder(void* ptr, void* coder);
 void* C_NSSlider_Init(void* ptr);
-void* C_NSSlider_SliderWithTarget_Action(void* target, void* action);
-void* C_NSSlider_SliderWithValue_MinValue_MaxValue_Target_Action(double value, double minValue, double maxValue, void* target, void* action);
+void* C_NSSlider_AllocSlider();
+void* C_NSSlider_NewSlider();
+void* C_NSSlider_Autorelease(void* ptr);
+void* C_NSSlider_Retain(void* ptr);
 double C_NSSlider_ClosestTickMarkValueToValue(void* ptr, double value);
 int C_NSSlider_IndexOfTickMarkAtPoint(void* ptr, CGPoint point);
 CGRect C_NSSlider_RectOfTickMarkAtIndex(void* ptr, int index);

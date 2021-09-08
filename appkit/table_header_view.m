@@ -23,6 +23,28 @@ void* C_NSTableHeaderView_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSTableHeaderView_AllocTableHeaderView() {
+    NSTableHeaderView* result_ = [NSTableHeaderView alloc];
+    return result_;
+}
+
+void* C_NSTableHeaderView_NewTableHeaderView() {
+    NSTableHeaderView* result_ = [NSTableHeaderView new];
+    return result_;
+}
+
+void* C_NSTableHeaderView_Autorelease(void* ptr) {
+    NSTableHeaderView* nSTableHeaderView = (NSTableHeaderView*)ptr;
+    NSTableHeaderView* result_ = [nSTableHeaderView autorelease];
+    return result_;
+}
+
+void* C_NSTableHeaderView_Retain(void* ptr) {
+    NSTableHeaderView* nSTableHeaderView = (NSTableHeaderView*)ptr;
+    NSTableHeaderView* result_ = [nSTableHeaderView retain];
+    return result_;
+}
+
 int C_NSTableHeaderView_ColumnAtPoint(void* ptr, CGPoint point) {
     NSTableHeaderView* nSTableHeaderView = (NSTableHeaderView*)ptr;
     NSInteger result_ = [nSTableHeaderView columnAtPoint:point];

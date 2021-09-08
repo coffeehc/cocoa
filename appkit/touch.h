@@ -5,7 +5,11 @@
 
 void* C_Touch_Alloc();
 
+void* C_NSTouch_AllocTouch();
 void* C_NSTouch_Init(void* ptr);
+void* C_NSTouch_NewTouch();
+void* C_NSTouch_Autorelease(void* ptr);
+void* C_NSTouch_Retain(void* ptr);
 CGPoint C_NSTouch_LocationInView(void* ptr, void* view);
 CGPoint C_NSTouch_PreviousLocationInView(void* ptr, void* view);
 int C_NSTouch_Type(void* ptr);

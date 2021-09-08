@@ -118,17 +118,33 @@ func MakeApplication(ptr unsafe.Pointer) NSApplication {
 	}
 }
 
-func AllocApplication() NSApplication {
-	return MakeApplication(C.C_Application_Alloc())
-}
-
-func (n NSApplication) Init() Application {
+func (n NSApplication) Init() NSApplication {
 	result_ := C.C_NSApplication_Init(n.Ptr())
 	return MakeApplication(result_)
 }
 
-func (n NSApplication) InitWithCoder(coder foundation.Coder) Application {
+func (n NSApplication) InitWithCoder(coder foundation.Coder) NSApplication {
 	result_ := C.C_NSApplication_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeApplication(result_)
+}
+
+func AllocApplication() NSApplication {
+	result_ := C.C_NSApplication_AllocApplication()
+	return MakeApplication(result_)
+}
+
+func NewApplication() NSApplication {
+	result_ := C.C_NSApplication_NewApplication()
+	return MakeApplication(result_)
+}
+
+func (n NSApplication) Autorelease() NSApplication {
+	result_ := C.C_NSApplication_Autorelease(n.Ptr())
+	return MakeApplication(result_)
+}
+
+func (n NSApplication) Retain() NSApplication {
+	result_ := C.C_NSApplication_Retain(n.Ptr())
 	return MakeApplication(result_)
 }
 

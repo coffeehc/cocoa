@@ -17,9 +17,31 @@ void* C_NSAppleEventDescriptor_InitRecordDescriptor(void* ptr) {
     return result_;
 }
 
+void* C_NSAppleEventDescriptor_AllocAppleEventDescriptor() {
+    NSAppleEventDescriptor* result_ = [NSAppleEventDescriptor alloc];
+    return result_;
+}
+
 void* C_NSAppleEventDescriptor_Init(void* ptr) {
     NSAppleEventDescriptor* nSAppleEventDescriptor = (NSAppleEventDescriptor*)ptr;
     NSAppleEventDescriptor* result_ = [nSAppleEventDescriptor init];
+    return result_;
+}
+
+void* C_NSAppleEventDescriptor_NewAppleEventDescriptor() {
+    NSAppleEventDescriptor* result_ = [NSAppleEventDescriptor new];
+    return result_;
+}
+
+void* C_NSAppleEventDescriptor_Autorelease(void* ptr) {
+    NSAppleEventDescriptor* nSAppleEventDescriptor = (NSAppleEventDescriptor*)ptr;
+    NSAppleEventDescriptor* result_ = [nSAppleEventDescriptor autorelease];
+    return result_;
+}
+
+void* C_NSAppleEventDescriptor_Retain(void* ptr) {
+    NSAppleEventDescriptor* nSAppleEventDescriptor = (NSAppleEventDescriptor*)ptr;
+    NSAppleEventDescriptor* result_ = [nSAppleEventDescriptor retain];
     return result_;
 }
 

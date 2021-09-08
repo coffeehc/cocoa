@@ -6,7 +6,7 @@ void* C_CollectionLayoutGroup_Alloc() {
 }
 
 void* C_NSCollectionLayoutGroup_CollectionLayoutGroup_HorizontalGroupWithLayoutSize_Subitems(void* layoutSize, Array subitems) {
-    NSMutableArray* objcSubitems = [[NSMutableArray alloc] init];
+    NSMutableArray* objcSubitems = [NSMutableArray arrayWithCapacity:subitems.len];
     if (subitems.len > 0) {
     	void** subitemsData = (void**)subitems.data;
     	for (int i = 0; i < subitems.len; i++) {
@@ -24,7 +24,7 @@ void* C_NSCollectionLayoutGroup_CollectionLayoutGroup_HorizontalGroupWithLayoutS
 }
 
 void* C_NSCollectionLayoutGroup_CollectionLayoutGroup_VerticalGroupWithLayoutSize_Subitems(void* layoutSize, Array subitems) {
-    NSMutableArray* objcSubitems = [[NSMutableArray alloc] init];
+    NSMutableArray* objcSubitems = [NSMutableArray arrayWithCapacity:subitems.len];
     if (subitems.len > 0) {
     	void** subitemsData = (void**)subitems.data;
     	for (int i = 0; i < subitems.len; i++) {
@@ -38,6 +38,41 @@ void* C_NSCollectionLayoutGroup_CollectionLayoutGroup_VerticalGroupWithLayoutSiz
 
 void* C_NSCollectionLayoutGroup_CollectionLayoutGroup_VerticalGroupWithLayoutSize_Subitem_Count(void* layoutSize, void* subitem, int count) {
     NSCollectionLayoutGroup* result_ = [NSCollectionLayoutGroup verticalGroupWithLayoutSize:(NSCollectionLayoutSize*)layoutSize subitem:(NSCollectionLayoutItem*)subitem count:count];
+    return result_;
+}
+
+void* C_NSCollectionLayoutGroup_CollectionLayoutGroup_ItemWithLayoutSize(void* layoutSize) {
+    NSCollectionLayoutGroup* result_ = [NSCollectionLayoutGroup itemWithLayoutSize:(NSCollectionLayoutSize*)layoutSize];
+    return result_;
+}
+
+void* C_NSCollectionLayoutGroup_CollectionLayoutGroup_ItemWithLayoutSize_SupplementaryItems(void* layoutSize, Array supplementaryItems) {
+    NSMutableArray* objcSupplementaryItems = [NSMutableArray arrayWithCapacity:supplementaryItems.len];
+    if (supplementaryItems.len > 0) {
+    	void** supplementaryItemsData = (void**)supplementaryItems.data;
+    	for (int i = 0; i < supplementaryItems.len; i++) {
+    		void* p = supplementaryItemsData[i];
+    		[objcSupplementaryItems addObject:(NSCollectionLayoutSupplementaryItem*)(NSCollectionLayoutSupplementaryItem*)p];
+    	}
+    }
+    NSCollectionLayoutGroup* result_ = [NSCollectionLayoutGroup itemWithLayoutSize:(NSCollectionLayoutSize*)layoutSize supplementaryItems:objcSupplementaryItems];
+    return result_;
+}
+
+void* C_NSCollectionLayoutGroup_AllocCollectionLayoutGroup() {
+    NSCollectionLayoutGroup* result_ = [NSCollectionLayoutGroup alloc];
+    return result_;
+}
+
+void* C_NSCollectionLayoutGroup_Autorelease(void* ptr) {
+    NSCollectionLayoutGroup* nSCollectionLayoutGroup = (NSCollectionLayoutGroup*)ptr;
+    NSCollectionLayoutGroup* result_ = [nSCollectionLayoutGroup autorelease];
+    return result_;
+}
+
+void* C_NSCollectionLayoutGroup_Retain(void* ptr) {
+    NSCollectionLayoutGroup* nSCollectionLayoutGroup = (NSCollectionLayoutGroup*)ptr;
+    NSCollectionLayoutGroup* result_ = [nSCollectionLayoutGroup retain];
     return result_;
 }
 
@@ -66,7 +101,7 @@ Array C_NSCollectionLayoutGroup_Subitems(void* ptr) {
 
 void C_NSCollectionLayoutGroup_SetSupplementaryItems(void* ptr, Array value) {
     NSCollectionLayoutGroup* nSCollectionLayoutGroup = (NSCollectionLayoutGroup*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

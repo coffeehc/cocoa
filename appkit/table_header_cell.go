@@ -25,22 +25,38 @@ func MakeTableHeaderCell(ptr unsafe.Pointer) NSTableHeaderCell {
 	}
 }
 
-func AllocTableHeaderCell() NSTableHeaderCell {
-	return MakeTableHeaderCell(C.C_TableHeaderCell_Alloc())
-}
-
-func (n NSTableHeaderCell) InitTextCell(_string string) TableHeaderCell {
+func (n NSTableHeaderCell) InitTextCell(_string string) NSTableHeaderCell {
 	result_ := C.C_NSTableHeaderCell_InitTextCell(n.Ptr(), foundation.NewString(_string).Ptr())
 	return MakeTableHeaderCell(result_)
 }
 
-func (n NSTableHeaderCell) InitWithCoder(coder foundation.Coder) TableHeaderCell {
+func (n NSTableHeaderCell) InitWithCoder(coder foundation.Coder) NSTableHeaderCell {
 	result_ := C.C_NSTableHeaderCell_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeTableHeaderCell(result_)
 }
 
-func (n NSTableHeaderCell) Init() TableHeaderCell {
+func (n NSTableHeaderCell) Init() NSTableHeaderCell {
 	result_ := C.C_NSTableHeaderCell_Init(n.Ptr())
+	return MakeTableHeaderCell(result_)
+}
+
+func AllocTableHeaderCell() NSTableHeaderCell {
+	result_ := C.C_NSTableHeaderCell_AllocTableHeaderCell()
+	return MakeTableHeaderCell(result_)
+}
+
+func NewTableHeaderCell() NSTableHeaderCell {
+	result_ := C.C_NSTableHeaderCell_NewTableHeaderCell()
+	return MakeTableHeaderCell(result_)
+}
+
+func (n NSTableHeaderCell) Autorelease() NSTableHeaderCell {
+	result_ := C.C_NSTableHeaderCell_Autorelease(n.Ptr())
+	return MakeTableHeaderCell(result_)
+}
+
+func (n NSTableHeaderCell) Retain() NSTableHeaderCell {
+	result_ := C.C_NSTableHeaderCell_Retain(n.Ptr())
 	return MakeTableHeaderCell(result_)
 }
 

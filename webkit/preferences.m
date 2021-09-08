@@ -5,9 +5,31 @@ void* C_Preferences_Alloc() {
     return [WKPreferences alloc];
 }
 
+void* C_WKPreferences_AllocPreferences() {
+    WKPreferences* result_ = [WKPreferences alloc];
+    return result_;
+}
+
 void* C_WKPreferences_Init(void* ptr) {
     WKPreferences* wKPreferences = (WKPreferences*)ptr;
     WKPreferences* result_ = [wKPreferences init];
+    return result_;
+}
+
+void* C_WKPreferences_NewPreferences() {
+    WKPreferences* result_ = [WKPreferences new];
+    return result_;
+}
+
+void* C_WKPreferences_Autorelease(void* ptr) {
+    WKPreferences* wKPreferences = (WKPreferences*)ptr;
+    WKPreferences* result_ = [wKPreferences autorelease];
+    return result_;
+}
+
+void* C_WKPreferences_Retain(void* ptr) {
+    WKPreferences* wKPreferences = (WKPreferences*)ptr;
+    WKPreferences* result_ = [wKPreferences retain];
     return result_;
 }
 

@@ -6,6 +6,9 @@
 void* C_DraggingImageComponent_Alloc();
 
 void* C_NSDraggingImageComponent_InitWithKey(void* ptr, void* key);
+void* C_NSDraggingImageComponent_AllocDraggingImageComponent();
+void* C_NSDraggingImageComponent_Autorelease(void* ptr);
+void* C_NSDraggingImageComponent_Retain(void* ptr);
 void* C_NSDraggingImageComponent_DraggingImageComponentWithKey(void* key);
 void* C_NSDraggingImageComponent_Key(void* ptr);
 void C_NSDraggingImageComponent_SetKey(void* ptr, void* value);

@@ -29,12 +29,23 @@ func MakeScriptCommandDescription(ptr unsafe.Pointer) NSScriptCommandDescription
 	}
 }
 
-func AllocScriptCommandDescription() NSScriptCommandDescription {
-	return MakeScriptCommandDescription(C.C_ScriptCommandDescription_Alloc())
+func (n NSScriptCommandDescription) InitWithCoder(inCoder Coder) NSScriptCommandDescription {
+	result_ := C.C_NSScriptCommandDescription_InitWithCoder(n.Ptr(), objc.ExtractPtr(inCoder))
+	return MakeScriptCommandDescription(result_)
 }
 
-func (n NSScriptCommandDescription) InitWithCoder(inCoder Coder) ScriptCommandDescription {
-	result_ := C.C_NSScriptCommandDescription_InitWithCoder(n.Ptr(), objc.ExtractPtr(inCoder))
+func AllocScriptCommandDescription() NSScriptCommandDescription {
+	result_ := C.C_NSScriptCommandDescription_AllocScriptCommandDescription()
+	return MakeScriptCommandDescription(result_)
+}
+
+func (n NSScriptCommandDescription) Autorelease() NSScriptCommandDescription {
+	result_ := C.C_NSScriptCommandDescription_Autorelease(n.Ptr())
+	return MakeScriptCommandDescription(result_)
+}
+
+func (n NSScriptCommandDescription) Retain() NSScriptCommandDescription {
+	result_ := C.C_NSScriptCommandDescription_Retain(n.Ptr())
 	return MakeScriptCommandDescription(result_)
 }
 

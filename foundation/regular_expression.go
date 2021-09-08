@@ -32,11 +32,27 @@ func MakeRegularExpression(ptr unsafe.Pointer) NSRegularExpression {
 }
 
 func AllocRegularExpression() NSRegularExpression {
-	return MakeRegularExpression(C.C_RegularExpression_Alloc())
+	result_ := C.C_NSRegularExpression_AllocRegularExpression()
+	return MakeRegularExpression(result_)
 }
 
-func (n NSRegularExpression) Init() RegularExpression {
+func (n NSRegularExpression) Init() NSRegularExpression {
 	result_ := C.C_NSRegularExpression_Init(n.Ptr())
+	return MakeRegularExpression(result_)
+}
+
+func NewRegularExpression() NSRegularExpression {
+	result_ := C.C_NSRegularExpression_NewRegularExpression()
+	return MakeRegularExpression(result_)
+}
+
+func (n NSRegularExpression) Autorelease() NSRegularExpression {
+	result_ := C.C_NSRegularExpression_Autorelease(n.Ptr())
+	return MakeRegularExpression(result_)
+}
+
+func (n NSRegularExpression) Retain() NSRegularExpression {
+	result_ := C.C_NSRegularExpression_Retain(n.Ptr())
 	return MakeRegularExpression(result_)
 }
 

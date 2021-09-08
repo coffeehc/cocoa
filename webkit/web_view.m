@@ -23,6 +23,28 @@ void* C_WKWebView_Init(void* ptr) {
     return result_;
 }
 
+void* C_WKWebView_AllocWebView() {
+    WKWebView* result_ = [WKWebView alloc];
+    return result_;
+}
+
+void* C_WKWebView_NewWebView() {
+    WKWebView* result_ = [WKWebView new];
+    return result_;
+}
+
+void* C_WKWebView_Autorelease(void* ptr) {
+    WKWebView* wKWebView = (WKWebView*)ptr;
+    WKWebView* result_ = [wKWebView autorelease];
+    return result_;
+}
+
+void* C_WKWebView_Retain(void* ptr) {
+    WKWebView* wKWebView = (WKWebView*)ptr;
+    WKWebView* result_ = [wKWebView retain];
+    return result_;
+}
+
 bool C_WKWebView_WebView_HandlesURLScheme(void* urlScheme) {
     BOOL result_ = [WKWebView handlesURLScheme:(NSString*)urlScheme];
     return result_;

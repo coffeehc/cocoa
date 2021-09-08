@@ -36,11 +36,27 @@ func MakeScriptClassDescription(ptr unsafe.Pointer) NSScriptClassDescription {
 }
 
 func AllocScriptClassDescription() NSScriptClassDescription {
-	return MakeScriptClassDescription(C.C_ScriptClassDescription_Alloc())
+	result_ := C.C_NSScriptClassDescription_AllocScriptClassDescription()
+	return MakeScriptClassDescription(result_)
 }
 
-func (n NSScriptClassDescription) Init() ScriptClassDescription {
+func (n NSScriptClassDescription) Init() NSScriptClassDescription {
 	result_ := C.C_NSScriptClassDescription_Init(n.Ptr())
+	return MakeScriptClassDescription(result_)
+}
+
+func NewScriptClassDescription() NSScriptClassDescription {
+	result_ := C.C_NSScriptClassDescription_NewScriptClassDescription()
+	return MakeScriptClassDescription(result_)
+}
+
+func (n NSScriptClassDescription) Autorelease() NSScriptClassDescription {
+	result_ := C.C_NSScriptClassDescription_Autorelease(n.Ptr())
+	return MakeScriptClassDescription(result_)
+}
+
+func (n NSScriptClassDescription) Retain() NSScriptClassDescription {
+	result_ := C.C_NSScriptClassDescription_Retain(n.Ptr())
 	return MakeScriptClassDescription(result_)
 }
 

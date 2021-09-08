@@ -5,7 +5,11 @@
 
 void* C_Preferences_Alloc();
 
+void* C_WKPreferences_AllocPreferences();
 void* C_WKPreferences_Init(void* ptr);
+void* C_WKPreferences_NewPreferences();
+void* C_WKPreferences_Autorelease(void* ptr);
+void* C_WKPreferences_Retain(void* ptr);
 double C_WKPreferences_MinimumFontSize(void* ptr);
 void C_WKPreferences_SetMinimumFontSize(void* ptr, double value);
 bool C_WKPreferences_TabFocusesLinks(void* ptr);

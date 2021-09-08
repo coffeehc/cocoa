@@ -17,6 +17,23 @@ void* C_NSCollectionViewCompositionalLayout_InitWithSection_Configuration(void* 
     return result_;
 }
 
+void* C_NSCollectionViewCompositionalLayout_AllocCollectionViewCompositionalLayout() {
+    NSCollectionViewCompositionalLayout* result_ = [NSCollectionViewCompositionalLayout alloc];
+    return result_;
+}
+
+void* C_NSCollectionViewCompositionalLayout_Autorelease(void* ptr) {
+    NSCollectionViewCompositionalLayout* nSCollectionViewCompositionalLayout = (NSCollectionViewCompositionalLayout*)ptr;
+    NSCollectionViewCompositionalLayout* result_ = [nSCollectionViewCompositionalLayout autorelease];
+    return result_;
+}
+
+void* C_NSCollectionViewCompositionalLayout_Retain(void* ptr) {
+    NSCollectionViewCompositionalLayout* nSCollectionViewCompositionalLayout = (NSCollectionViewCompositionalLayout*)ptr;
+    NSCollectionViewCompositionalLayout* result_ = [nSCollectionViewCompositionalLayout retain];
+    return result_;
+}
+
 void* C_NSCollectionViewCompositionalLayout_Configuration(void* ptr) {
     NSCollectionViewCompositionalLayout* nSCollectionViewCompositionalLayout = (NSCollectionViewCompositionalLayout*)ptr;
     NSCollectionViewCompositionalLayoutConfiguration* result_ = [nSCollectionViewCompositionalLayout configuration];

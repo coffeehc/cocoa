@@ -5,9 +5,14 @@
 
 void* C_SavePanel_Alloc();
 
+void* C_NSSavePanel_SavePanel_WindowWithContentViewController(void* contentViewController);
 void* C_NSSavePanel_InitWithContentRect_StyleMask_Backing_Defer(void* ptr, CGRect contentRect, unsigned int style, unsigned int backingStoreType, bool flag);
 void* C_NSSavePanel_InitWithContentRect_StyleMask_Backing_Defer_Screen(void* ptr, CGRect contentRect, unsigned int style, unsigned int backingStoreType, bool flag, void* screen);
 void* C_NSSavePanel_Init(void* ptr);
+void* C_NSSavePanel_AllocSavePanel();
+void* C_NSSavePanel_NewSavePanel();
+void* C_NSSavePanel_Autorelease(void* ptr);
+void* C_NSSavePanel_Retain(void* ptr);
 void* C_NSSavePanel_SavePanel_();
 int C_NSSavePanel_RunModal(void* ptr);
 void C_NSSavePanel_ValidateVisibleColumns(void* ptr);

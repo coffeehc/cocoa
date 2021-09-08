@@ -7,6 +7,9 @@ typedef struct {
     const void* data;
 } Data;
 
+void* Selector_SelectorFromString(const char* name);
+const char* Selector_StringFromSelector(void *selector);
+
 void* String_New(const char* str);
 
 const char* String_Value(void* ptr);
@@ -14,5 +17,3 @@ const char* String_Value(void* ptr);
 void* Data_New(void* data, int len);
 
 Data Data_ToBytes(void* ptr);
-
-void* Array_New(void* data, int len);

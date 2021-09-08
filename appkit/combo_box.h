@@ -5,9 +5,17 @@
 
 void* C_ComboBox_Alloc();
 
+void* C_NSComboBox_ComboBox_LabelWithAttributedString(void* attributedStringValue);
+void* C_NSComboBox_ComboBox_LabelWithString(void* stringValue);
+void* C_NSComboBox_ComboBox_TextFieldWithString(void* stringValue);
+void* C_NSComboBox_ComboBox_WrappingLabelWithString(void* stringValue);
 void* C_NSComboBox_InitWithFrame(void* ptr, CGRect frameRect);
 void* C_NSComboBox_InitWithCoder(void* ptr, void* coder);
 void* C_NSComboBox_Init(void* ptr);
+void* C_NSComboBox_AllocComboBox();
+void* C_NSComboBox_NewComboBox();
+void* C_NSComboBox_Autorelease(void* ptr);
+void* C_NSComboBox_Retain(void* ptr);
 void C_NSComboBox_AddItemsWithObjectValues(void* ptr, Array objects);
 void C_NSComboBox_AddItemWithObjectValue(void* ptr, void* object);
 void C_NSComboBox_InsertItemWithObjectValue_AtIndex(void* ptr, void* object, int index);

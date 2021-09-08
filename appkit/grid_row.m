@@ -5,9 +5,31 @@ void* C_GridRow_Alloc() {
     return [NSGridRow alloc];
 }
 
+void* C_NSGridRow_AllocGridRow() {
+    NSGridRow* result_ = [NSGridRow alloc];
+    return result_;
+}
+
 void* C_NSGridRow_Init(void* ptr) {
     NSGridRow* nSGridRow = (NSGridRow*)ptr;
     NSGridRow* result_ = [nSGridRow init];
+    return result_;
+}
+
+void* C_NSGridRow_NewGridRow() {
+    NSGridRow* result_ = [NSGridRow new];
+    return result_;
+}
+
+void* C_NSGridRow_Autorelease(void* ptr) {
+    NSGridRow* nSGridRow = (NSGridRow*)ptr;
+    NSGridRow* result_ = [nSGridRow autorelease];
+    return result_;
+}
+
+void* C_NSGridRow_Retain(void* ptr) {
+    NSGridRow* nSGridRow = (NSGridRow*)ptr;
+    NSGridRow* result_ = [nSGridRow retain];
     return result_;
 }
 

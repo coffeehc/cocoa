@@ -5,9 +5,19 @@ void* C_IndexPath_Alloc() {
     return [NSIndexPath alloc];
 }
 
+void* C_NSIndexPath_IndexPathWithIndex(unsigned int index) {
+    NSIndexPath* result_ = [NSIndexPath indexPathWithIndex:index];
+    return result_;
+}
+
 void* C_NSIndexPath_InitWithIndex(void* ptr, unsigned int index) {
     NSIndexPath* nSIndexPath = (NSIndexPath*)ptr;
     NSIndexPath* result_ = [nSIndexPath initWithIndex:index];
+    return result_;
+}
+
+void* C_NSIndexPath_AllocIndexPath() {
+    NSIndexPath* result_ = [NSIndexPath alloc];
     return result_;
 }
 
@@ -17,8 +27,20 @@ void* C_NSIndexPath_Init(void* ptr) {
     return result_;
 }
 
-void* C_NSIndexPath_IndexPathWithIndex(unsigned int index) {
-    NSIndexPath* result_ = [NSIndexPath indexPathWithIndex:index];
+void* C_NSIndexPath_NewIndexPath() {
+    NSIndexPath* result_ = [NSIndexPath new];
+    return result_;
+}
+
+void* C_NSIndexPath_Autorelease(void* ptr) {
+    NSIndexPath* nSIndexPath = (NSIndexPath*)ptr;
+    NSIndexPath* result_ = [nSIndexPath autorelease];
+    return result_;
+}
+
+void* C_NSIndexPath_Retain(void* ptr) {
+    NSIndexPath* nSIndexPath = (NSIndexPath*)ptr;
+    NSIndexPath* result_ = [nSIndexPath retain];
     return result_;
 }
 

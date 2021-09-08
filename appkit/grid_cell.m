@@ -5,9 +5,31 @@ void* C_GridCell_Alloc() {
     return [NSGridCell alloc];
 }
 
+void* C_NSGridCell_AllocGridCell() {
+    NSGridCell* result_ = [NSGridCell alloc];
+    return result_;
+}
+
 void* C_NSGridCell_Init(void* ptr) {
     NSGridCell* nSGridCell = (NSGridCell*)ptr;
     NSGridCell* result_ = [nSGridCell init];
+    return result_;
+}
+
+void* C_NSGridCell_NewGridCell() {
+    NSGridCell* result_ = [NSGridCell new];
+    return result_;
+}
+
+void* C_NSGridCell_Autorelease(void* ptr) {
+    NSGridCell* nSGridCell = (NSGridCell*)ptr;
+    NSGridCell* result_ = [nSGridCell autorelease];
+    return result_;
+}
+
+void* C_NSGridCell_Retain(void* ptr) {
+    NSGridCell* nSGridCell = (NSGridCell*)ptr;
+    NSGridCell* result_ = [nSGridCell retain];
     return result_;
 }
 
@@ -58,7 +80,7 @@ Array C_NSGridCell_CustomPlacementConstraints(void* ptr) {
 
 void C_NSGridCell_SetCustomPlacementConstraints(void* ptr, Array value) {
     NSGridCell* nSGridCell = (NSGridCell*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

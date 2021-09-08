@@ -63,11 +63,7 @@ func MakeProgress(ptr unsafe.Pointer) NSProgress {
 	}
 }
 
-func AllocProgress() NSProgress {
-	return MakeProgress(C.C_Progress_Alloc())
-}
-
-func (n NSProgress) InitWithParent_UserInfo(parentProgressOrNil Progress, userInfoOrNil map[ProgressUserInfoKey]objc.Object) Progress {
+func (n NSProgress) InitWithParent_UserInfo(parentProgressOrNil Progress, userInfoOrNil map[ProgressUserInfoKey]objc.Object) NSProgress {
 	var cUserInfoOrNil C.Dictionary
 	if len(userInfoOrNil) > 0 {
 		cUserInfoOrNilKeyData := make([]unsafe.Pointer, len(userInfoOrNil))
@@ -86,8 +82,28 @@ func (n NSProgress) InitWithParent_UserInfo(parentProgressOrNil Progress, userIn
 	return MakeProgress(result_)
 }
 
-func (n NSProgress) Init() Progress {
+func AllocProgress() NSProgress {
+	result_ := C.C_NSProgress_AllocProgress()
+	return MakeProgress(result_)
+}
+
+func (n NSProgress) Init() NSProgress {
 	result_ := C.C_NSProgress_Init(n.Ptr())
+	return MakeProgress(result_)
+}
+
+func NewProgress() NSProgress {
+	result_ := C.C_NSProgress_NewProgress()
+	return MakeProgress(result_)
+}
+
+func (n NSProgress) Autorelease() NSProgress {
+	result_ := C.C_NSProgress_Autorelease(n.Ptr())
+	return MakeProgress(result_)
+}
+
+func (n NSProgress) Retain() NSProgress {
+	result_ := C.C_NSProgress_Retain(n.Ptr())
 	return MakeProgress(result_)
 }
 

@@ -6,6 +6,10 @@
 void* C_UserActivity_Alloc();
 
 void* C_NSUserActivity_InitWithActivityType(void* ptr, void* activityType);
+void* C_NSUserActivity_AllocUserActivity();
+void* C_NSUserActivity_NewUserActivity();
+void* C_NSUserActivity_Autorelease(void* ptr);
+void* C_NSUserActivity_Retain(void* ptr);
 void C_NSUserActivity_BecomeCurrent(void* ptr);
 void C_NSUserActivity_ResignCurrent(void* ptr);
 void C_NSUserActivity_Invalidate(void* ptr);

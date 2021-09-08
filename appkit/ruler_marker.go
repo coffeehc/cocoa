@@ -41,17 +41,28 @@ func MakeRulerMarker(ptr unsafe.Pointer) NSRulerMarker {
 	}
 }
 
-func AllocRulerMarker() NSRulerMarker {
-	return MakeRulerMarker(C.C_RulerMarker_Alloc())
-}
-
-func (n NSRulerMarker) InitWithRulerView_MarkerLocation_Image_ImageOrigin(ruler RulerView, location coregraphics.Float, image Image, imageOrigin foundation.Point) RulerMarker {
+func (n NSRulerMarker) InitWithRulerView_MarkerLocation_Image_ImageOrigin(ruler RulerView, location coregraphics.Float, image Image, imageOrigin foundation.Point) NSRulerMarker {
 	result_ := C.C_NSRulerMarker_InitWithRulerView_MarkerLocation_Image_ImageOrigin(n.Ptr(), objc.ExtractPtr(ruler), C.double(float64(location)), objc.ExtractPtr(image), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(imageOrigin))))
 	return MakeRulerMarker(result_)
 }
 
-func (n NSRulerMarker) InitWithCoder(coder foundation.Coder) RulerMarker {
+func (n NSRulerMarker) InitWithCoder(coder foundation.Coder) NSRulerMarker {
 	result_ := C.C_NSRulerMarker_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeRulerMarker(result_)
+}
+
+func AllocRulerMarker() NSRulerMarker {
+	result_ := C.C_NSRulerMarker_AllocRulerMarker()
+	return MakeRulerMarker(result_)
+}
+
+func (n NSRulerMarker) Autorelease() NSRulerMarker {
+	result_ := C.C_NSRulerMarker_Autorelease(n.Ptr())
+	return MakeRulerMarker(result_)
+}
+
+func (n NSRulerMarker) Retain() NSRulerMarker {
+	result_ := C.C_NSRulerMarker_Retain(n.Ptr())
 	return MakeRulerMarker(result_)
 }
 

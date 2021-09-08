@@ -31,22 +31,38 @@ func MakeAppleEventDescriptor(ptr unsafe.Pointer) NSAppleEventDescriptor {
 	}
 }
 
-func AllocAppleEventDescriptor() NSAppleEventDescriptor {
-	return MakeAppleEventDescriptor(C.C_AppleEventDescriptor_Alloc())
-}
-
-func (n NSAppleEventDescriptor) InitListDescriptor() AppleEventDescriptor {
+func (n NSAppleEventDescriptor) InitListDescriptor() NSAppleEventDescriptor {
 	result_ := C.C_NSAppleEventDescriptor_InitListDescriptor(n.Ptr())
 	return MakeAppleEventDescriptor(result_)
 }
 
-func (n NSAppleEventDescriptor) InitRecordDescriptor() AppleEventDescriptor {
+func (n NSAppleEventDescriptor) InitRecordDescriptor() NSAppleEventDescriptor {
 	result_ := C.C_NSAppleEventDescriptor_InitRecordDescriptor(n.Ptr())
 	return MakeAppleEventDescriptor(result_)
 }
 
-func (n NSAppleEventDescriptor) Init() AppleEventDescriptor {
+func AllocAppleEventDescriptor() NSAppleEventDescriptor {
+	result_ := C.C_NSAppleEventDescriptor_AllocAppleEventDescriptor()
+	return MakeAppleEventDescriptor(result_)
+}
+
+func (n NSAppleEventDescriptor) Init() NSAppleEventDescriptor {
 	result_ := C.C_NSAppleEventDescriptor_Init(n.Ptr())
+	return MakeAppleEventDescriptor(result_)
+}
+
+func NewAppleEventDescriptor() NSAppleEventDescriptor {
+	result_ := C.C_NSAppleEventDescriptor_NewAppleEventDescriptor()
+	return MakeAppleEventDescriptor(result_)
+}
+
+func (n NSAppleEventDescriptor) Autorelease() NSAppleEventDescriptor {
+	result_ := C.C_NSAppleEventDescriptor_Autorelease(n.Ptr())
+	return MakeAppleEventDescriptor(result_)
+}
+
+func (n NSAppleEventDescriptor) Retain() NSAppleEventDescriptor {
+	result_ := C.C_NSAppleEventDescriptor_Retain(n.Ptr())
 	return MakeAppleEventDescriptor(result_)
 }
 

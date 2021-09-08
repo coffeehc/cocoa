@@ -17,9 +17,31 @@ void* C_NSAppearance_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSAppearance_AllocAppearance() {
+    NSAppearance* result_ = [NSAppearance alloc];
+    return result_;
+}
+
 void* C_NSAppearance_Init(void* ptr) {
     NSAppearance* nSAppearance = (NSAppearance*)ptr;
     NSAppearance* result_ = [nSAppearance init];
+    return result_;
+}
+
+void* C_NSAppearance_NewAppearance() {
+    NSAppearance* result_ = [NSAppearance new];
+    return result_;
+}
+
+void* C_NSAppearance_Autorelease(void* ptr) {
+    NSAppearance* nSAppearance = (NSAppearance*)ptr;
+    NSAppearance* result_ = [nSAppearance autorelease];
+    return result_;
+}
+
+void* C_NSAppearance_Retain(void* ptr) {
+    NSAppearance* nSAppearance = (NSAppearance*)ptr;
+    NSAppearance* result_ = [nSAppearance retain];
     return result_;
 }
 
@@ -30,7 +52,7 @@ void* C_NSAppearance_AppearanceNamed(void* name) {
 
 void* C_NSAppearance_BestMatchFromAppearancesWithNames(void* ptr, Array appearances) {
     NSAppearance* nSAppearance = (NSAppearance*)ptr;
-    NSMutableArray* objcAppearances = [[NSMutableArray alloc] init];
+    NSMutableArray* objcAppearances = [NSMutableArray arrayWithCapacity:appearances.len];
     if (appearances.len > 0) {
     	void** appearancesData = (void**)appearances.data;
     	for (int i = 0; i < appearances.len; i++) {

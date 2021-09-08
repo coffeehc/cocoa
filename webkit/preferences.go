@@ -33,11 +33,27 @@ func MakePreferences(ptr unsafe.Pointer) WKPreferences {
 }
 
 func AllocPreferences() WKPreferences {
-	return MakePreferences(C.C_Preferences_Alloc())
+	result_ := C.C_WKPreferences_AllocPreferences()
+	return MakePreferences(result_)
 }
 
-func (w WKPreferences) Init() Preferences {
+func (w WKPreferences) Init() WKPreferences {
 	result_ := C.C_WKPreferences_Init(w.Ptr())
+	return MakePreferences(result_)
+}
+
+func NewPreferences() WKPreferences {
+	result_ := C.C_WKPreferences_NewPreferences()
+	return MakePreferences(result_)
+}
+
+func (w WKPreferences) Autorelease() WKPreferences {
+	result_ := C.C_WKPreferences_Autorelease(w.Ptr())
+	return MakePreferences(result_)
+}
+
+func (w WKPreferences) Retain() WKPreferences {
+	result_ := C.C_WKPreferences_Retain(w.Ptr())
 	return MakePreferences(result_)
 }
 

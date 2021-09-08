@@ -5,7 +5,11 @@
 
 void* C_Font_Alloc();
 
+void* C_NSFont_AllocFont();
 void* C_NSFont_Init(void* ptr);
+void* C_NSFont_NewFont();
+void* C_NSFont_Autorelease(void* ptr);
+void* C_NSFont_Retain(void* ptr);
 void* C_NSFont_FontWithName_Size(void* fontName, double fontSize);
 void* C_NSFont_FontWithDescriptor_Size(void* fontDescriptor, double fontSize);
 void* C_NSFont_FontWithDescriptor_TextTransform(void* fontDescriptor, void* textTransform);

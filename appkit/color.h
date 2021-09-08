@@ -7,6 +7,10 @@ void* C_Color_Alloc();
 
 void* C_NSColor_Init(void* ptr);
 void* C_NSColor_InitWithCoder(void* ptr, void* coder);
+void* C_NSColor_AllocColor();
+void* C_NSColor_NewColor();
+void* C_NSColor_Autorelease(void* ptr);
+void* C_NSColor_Retain(void* ptr);
 void* C_NSColor_ColorWithSystemEffect(void* ptr, int systemEffect);
 void* C_NSColor_ColorUsingColorSpace(void* ptr, void* space);
 void* C_NSColor_BlendedColorWithFraction_OfColor(void* ptr, double fraction, void* color);

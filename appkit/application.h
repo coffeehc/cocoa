@@ -7,6 +7,10 @@ void* C_Application_Alloc();
 
 void* C_NSApplication_Init(void* ptr);
 void* C_NSApplication_InitWithCoder(void* ptr, void* coder);
+void* C_NSApplication_AllocApplication();
+void* C_NSApplication_NewApplication();
+void* C_NSApplication_Autorelease(void* ptr);
+void* C_NSApplication_Retain(void* ptr);
 void C_NSApplication_Run(void* ptr);
 void C_NSApplication_FinishLaunching(void* ptr);
 void C_NSApplication_Stop(void* ptr, void* sender);

@@ -23,6 +23,28 @@ void* C_NSScroller_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSScroller_AllocScroller() {
+    NSScroller* result_ = [NSScroller alloc];
+    return result_;
+}
+
+void* C_NSScroller_NewScroller() {
+    NSScroller* result_ = [NSScroller new];
+    return result_;
+}
+
+void* C_NSScroller_Autorelease(void* ptr) {
+    NSScroller* nSScroller = (NSScroller*)ptr;
+    NSScroller* result_ = [nSScroller autorelease];
+    return result_;
+}
+
+void* C_NSScroller_Retain(void* ptr) {
+    NSScroller* nSScroller = (NSScroller*)ptr;
+    NSScroller* result_ = [nSScroller retain];
+    return result_;
+}
+
 double C_NSScroller_ScrollerWidthForControlSize_ScrollerStyle(unsigned int controlSize, int scrollerStyle) {
     CGFloat result_ = [NSScroller scrollerWidthForControlSize:controlSize scrollerStyle:scrollerStyle];
     return result_;

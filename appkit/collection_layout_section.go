@@ -34,12 +34,23 @@ func MakeCollectionLayoutSection(ptr unsafe.Pointer) NSCollectionLayoutSection {
 	}
 }
 
-func AllocCollectionLayoutSection() NSCollectionLayoutSection {
-	return MakeCollectionLayoutSection(C.C_CollectionLayoutSection_Alloc())
+func CollectionLayoutSection_SectionWithGroup(group CollectionLayoutGroup) NSCollectionLayoutSection {
+	result_ := C.C_NSCollectionLayoutSection_CollectionLayoutSection_SectionWithGroup(objc.ExtractPtr(group))
+	return MakeCollectionLayoutSection(result_)
 }
 
-func CollectionLayoutSection_SectionWithGroup(group CollectionLayoutGroup) CollectionLayoutSection {
-	result_ := C.C_NSCollectionLayoutSection_CollectionLayoutSection_SectionWithGroup(objc.ExtractPtr(group))
+func AllocCollectionLayoutSection() NSCollectionLayoutSection {
+	result_ := C.C_NSCollectionLayoutSection_AllocCollectionLayoutSection()
+	return MakeCollectionLayoutSection(result_)
+}
+
+func (n NSCollectionLayoutSection) Autorelease() NSCollectionLayoutSection {
+	result_ := C.C_NSCollectionLayoutSection_Autorelease(n.Ptr())
+	return MakeCollectionLayoutSection(result_)
+}
+
+func (n NSCollectionLayoutSection) Retain() NSCollectionLayoutSection {
+	result_ := C.C_NSCollectionLayoutSection_Retain(n.Ptr())
 	return MakeCollectionLayoutSection(result_)
 }
 

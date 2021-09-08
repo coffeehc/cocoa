@@ -10,6 +10,41 @@ void* C_NSCollectionLayoutDecorationItem_CollectionLayoutDecorationItem_Backgrou
     return result_;
 }
 
+void* C_NSCollectionLayoutDecorationItem_CollectionLayoutDecorationItem_ItemWithLayoutSize(void* layoutSize) {
+    NSCollectionLayoutDecorationItem* result_ = [NSCollectionLayoutDecorationItem itemWithLayoutSize:(NSCollectionLayoutSize*)layoutSize];
+    return result_;
+}
+
+void* C_NSCollectionLayoutDecorationItem_CollectionLayoutDecorationItem_ItemWithLayoutSize_SupplementaryItems(void* layoutSize, Array supplementaryItems) {
+    NSMutableArray* objcSupplementaryItems = [NSMutableArray arrayWithCapacity:supplementaryItems.len];
+    if (supplementaryItems.len > 0) {
+    	void** supplementaryItemsData = (void**)supplementaryItems.data;
+    	for (int i = 0; i < supplementaryItems.len; i++) {
+    		void* p = supplementaryItemsData[i];
+    		[objcSupplementaryItems addObject:(NSCollectionLayoutSupplementaryItem*)(NSCollectionLayoutSupplementaryItem*)p];
+    	}
+    }
+    NSCollectionLayoutDecorationItem* result_ = [NSCollectionLayoutDecorationItem itemWithLayoutSize:(NSCollectionLayoutSize*)layoutSize supplementaryItems:objcSupplementaryItems];
+    return result_;
+}
+
+void* C_NSCollectionLayoutDecorationItem_AllocCollectionLayoutDecorationItem() {
+    NSCollectionLayoutDecorationItem* result_ = [NSCollectionLayoutDecorationItem alloc];
+    return result_;
+}
+
+void* C_NSCollectionLayoutDecorationItem_Autorelease(void* ptr) {
+    NSCollectionLayoutDecorationItem* nSCollectionLayoutDecorationItem = (NSCollectionLayoutDecorationItem*)ptr;
+    NSCollectionLayoutDecorationItem* result_ = [nSCollectionLayoutDecorationItem autorelease];
+    return result_;
+}
+
+void* C_NSCollectionLayoutDecorationItem_Retain(void* ptr) {
+    NSCollectionLayoutDecorationItem* nSCollectionLayoutDecorationItem = (NSCollectionLayoutDecorationItem*)ptr;
+    NSCollectionLayoutDecorationItem* result_ = [nSCollectionLayoutDecorationItem retain];
+    return result_;
+}
+
 void* C_NSCollectionLayoutDecorationItem_ElementKind(void* ptr) {
     NSCollectionLayoutDecorationItem* nSCollectionLayoutDecorationItem = (NSCollectionLayoutDecorationItem*)ptr;
     NSString* result_ = [nSCollectionLayoutDecorationItem elementKind];

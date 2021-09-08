@@ -5,14 +5,18 @@
 
 void* C_Button_Alloc();
 
-void* C_NSButton_InitWithFrame(void* ptr, CGRect frameRect);
-void* C_NSButton_InitWithCoder(void* ptr, void* coder);
-void* C_NSButton_Init(void* ptr);
 void* C_NSButton_Button_CheckboxWithTitle_Target_Action(void* title, void* target, void* action);
 void* C_NSButton_ButtonWithImage_Target_Action(void* image, void* target, void* action);
 void* C_NSButton_RadioButtonWithTitle_Target_Action(void* title, void* target, void* action);
 void* C_NSButton_ButtonWithTitle_Image_Target_Action(void* title, void* image, void* target, void* action);
 void* C_NSButton_ButtonWithTitle_Target_Action(void* title, void* target, void* action);
+void* C_NSButton_InitWithFrame(void* ptr, CGRect frameRect);
+void* C_NSButton_InitWithCoder(void* ptr, void* coder);
+void* C_NSButton_Init(void* ptr);
+void* C_NSButton_AllocButton();
+void* C_NSButton_NewButton();
+void* C_NSButton_Autorelease(void* ptr);
+void* C_NSButton_Retain(void* ptr);
 void C_NSButton_SetButtonType(void* ptr, unsigned int _type);
 void C_NSButton_SetPeriodicDelay_Interval(void* ptr, float delay, float interval);
 void C_NSButton_CompressWithPrioritizedCompressionOptions(void* ptr, Array prioritizedOptions);

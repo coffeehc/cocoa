@@ -23,6 +23,28 @@ void* C_NSPathControl_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSPathControl_AllocPathControl() {
+    NSPathControl* result_ = [NSPathControl alloc];
+    return result_;
+}
+
+void* C_NSPathControl_NewPathControl() {
+    NSPathControl* result_ = [NSPathControl new];
+    return result_;
+}
+
+void* C_NSPathControl_Autorelease(void* ptr) {
+    NSPathControl* nSPathControl = (NSPathControl*)ptr;
+    NSPathControl* result_ = [nSPathControl autorelease];
+    return result_;
+}
+
+void* C_NSPathControl_Retain(void* ptr) {
+    NSPathControl* nSPathControl = (NSPathControl*)ptr;
+    NSPathControl* result_ = [nSPathControl retain];
+    return result_;
+}
+
 void C_NSPathControl_SetDraggingSourceOperationMask_ForLocal(void* ptr, unsigned int mask, bool isLocal) {
     NSPathControl* nSPathControl = (NSPathControl*)ptr;
     [nSPathControl setDraggingSourceOperationMask:mask forLocal:isLocal];
@@ -102,7 +124,7 @@ Array C_NSPathControl_AllowedTypes(void* ptr) {
 
 void C_NSPathControl_SetAllowedTypes(void* ptr, Array value) {
     NSPathControl* nSPathControl = (NSPathControl*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -149,7 +171,7 @@ Array C_NSPathControl_PathItems(void* ptr) {
 
 void C_NSPathControl_SetPathItems(void* ptr, Array value) {
     NSPathControl* nSPathControl = (NSPathControl*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

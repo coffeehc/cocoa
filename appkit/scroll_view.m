@@ -23,6 +23,28 @@ void* C_NSScrollView_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSScrollView_AllocScrollView() {
+    NSScrollView* result_ = [NSScrollView alloc];
+    return result_;
+}
+
+void* C_NSScrollView_NewScrollView() {
+    NSScrollView* result_ = [NSScrollView new];
+    return result_;
+}
+
+void* C_NSScrollView_Autorelease(void* ptr) {
+    NSScrollView* nSScrollView = (NSScrollView*)ptr;
+    NSScrollView* result_ = [nSScrollView autorelease];
+    return result_;
+}
+
+void* C_NSScrollView_Retain(void* ptr) {
+    NSScrollView* nSScrollView = (NSScrollView*)ptr;
+    NSScrollView* result_ = [nSScrollView retain];
+    return result_;
+}
+
 void C_NSScrollView_AddFloatingSubview_ForAxis(void* ptr, void* view, int axis) {
     NSScrollView* nSScrollView = (NSScrollView*)ptr;
     [nSScrollView addFloatingSubview:(NSView*)view forAxis:axis];

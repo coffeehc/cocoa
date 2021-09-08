@@ -23,6 +23,28 @@ void* C_NSSwitch_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSSwitch_AllocSwitch() {
+    NSSwitch* result_ = [NSSwitch alloc];
+    return result_;
+}
+
+void* C_NSSwitch_NewSwitch() {
+    NSSwitch* result_ = [NSSwitch new];
+    return result_;
+}
+
+void* C_NSSwitch_Autorelease(void* ptr) {
+    NSSwitch* nSSwitch = (NSSwitch*)ptr;
+    NSSwitch* result_ = [nSSwitch autorelease];
+    return result_;
+}
+
+void* C_NSSwitch_Retain(void* ptr) {
+    NSSwitch* nSSwitch = (NSSwitch*)ptr;
+    NSSwitch* result_ = [nSSwitch retain];
+    return result_;
+}
+
 int C_NSSwitch_State(void* ptr) {
     NSSwitch* nSSwitch = (NSSwitch*)ptr;
     NSControlStateValue result_ = [nSSwitch state];

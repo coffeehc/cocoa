@@ -23,7 +23,7 @@ func initAndRun() {
 
 	w.SetTitle("Test widgets")
 
-	filePathField := appkit.AllocTextField().InitWithFrame(foundation.MakeRect(10, 330, 200, 20))
+	filePathField := appkit.AllocTextField().InitWithFrame(foundation.MakeRect(10, 330, 200, 20)).Autorelease()
 	cell := filePathField.Cell()
 	cell.SetWraps(false)
 	cell.SetScrollable(true)
@@ -33,24 +33,24 @@ func initAndRun() {
 	saveButton := appkits.NewPlainButton("Save...")
 	saveButton.SetFrame(foundation.MakeRect(250, 330, 80, 20))
 	actions.Set(saveButton, func(sender objc.Object) {
-		savePanel := appkit.AllocSavePanel().Init()
+		savePanel := appkit.NewSavePanel().Autorelease()
 		if savePanel.RunModal() == appkit.ModalResponseOK {
 			filePathField.SetStringValue(savePanel.URL().Path())
 		}
 	})
 	w.ContentView().AddSubview(saveButton)
 
-	presentationTF := appkit.AllocTextField().InitWithFrame(foundation.MakeRect(10, 290, 100, 25))
+	presentationTF := appkit.AllocTextField().InitWithFrame(foundation.MakeRect(10, 290, 100, 25)).Autorelease()
 	w.ContentView().AddSubview(presentationTF)
 
-	stepper := appkit.AllocStepper().InitWithFrame(foundation.MakeRect(130, 290, 16, 25))
+	stepper := appkit.AllocStepper().InitWithFrame(foundation.MakeRect(130, 290, 16, 25)).Autorelease()
 	stepper.SetDoubleValue(100)
 	w.ContentView().AddSubview(stepper)
 
-	colorWell := appkit.AllocColorWell().InitWithFrame(foundation.MakeRect(160, 290, 30, 25))
+	colorWell := appkit.AllocColorWell().InitWithFrame(foundation.MakeRect(160, 290, 30, 25)).Autorelease()
 	w.ContentView().AddSubview(colorWell)
 
-	comboBox := appkit.AllocComboBox().InitWithFrame(foundation.MakeRect(210, 290, 100, 25))
+	comboBox := appkit.AllocComboBox().InitWithFrame(foundation.MakeRect(210, 290, 100, 25)).Autorelease()
 	comboBox.AddItemsWithObjectValues([]objc.Object{
 		foundation.NewString("Test1"),
 		foundation.NewString("Test2"),
@@ -58,14 +58,14 @@ func initAndRun() {
 	comboBox.SelectItemAtIndex(0)
 	w.ContentView().AddSubview(comboBox)
 
-	slider := appkit.AllocSlider().InitWithFrame(foundation.MakeRect(330, 290, 100, 25))
+	slider := appkit.AllocSlider().InitWithFrame(foundation.MakeRect(330, 290, 100, 25)).Autorelease()
 	actions.Set(slider, func(sender objc.Object) {
 		presentationTF.SetDoubleValue(slider.DoubleValue())
 	})
 	slider.SetMaxValue(10)
 	w.ContentView().AddSubview(slider)
 
-	datePicker := appkit.AllocDatePicker().InitWithFrame(foundation.MakeRect(450, 290, 140, 25))
+	datePicker := appkit.AllocDatePicker().InitWithFrame(foundation.MakeRect(450, 290, 140, 25)).Autorelease()
 	w.ContentView().AddSubview(datePicker)
 
 	// buttons
@@ -77,10 +77,10 @@ func initAndRun() {
 	rb.SetFrame(foundation.MakeRect(150, 250, 120, 25))
 	w.ContentView().AddSubview(rb)
 
-	sw := appkit.AllocSwitch().InitWithFrame(foundation.MakeRect(260, 250, 120, 25))
+	sw := appkit.AllocSwitch().InitWithFrame(foundation.MakeRect(260, 250, 120, 25)).Autorelease()
 	w.ContentView().AddSubview(sw)
 
-	li := appkit.AllocLevelIndicator().InitWithFrame(foundation.MakeRect(370, 250, 120, 25))
+	li := appkit.AllocLevelIndicator().InitWithFrame(foundation.MakeRect(370, 250, 120, 25)).Autorelease()
 	li.SetCriticalValue(4)
 	li.SetDoubleValue(3)
 	w.ContentView().AddSubview(li)
@@ -129,7 +129,7 @@ func initAndRun() {
 	w.ContentView().AddSubview(stf)
 
 	// progress indicator
-	indicator := appkit.AllocProgressIndicator().InitWithFrame(foundation.MakeRect(10, 70, 350, 25))
+	indicator := appkit.AllocProgressIndicator().InitWithFrame(foundation.MakeRect(10, 70, 350, 25)).Autorelease()
 	indicator.SetMinValue(0)
 	indicator.SetMaxValue(1)
 	indicator.SetIndeterminate(false)

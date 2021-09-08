@@ -39,17 +39,33 @@ func MakePopover(ptr unsafe.Pointer) NSPopover {
 	}
 }
 
-func AllocPopover() NSPopover {
-	return MakePopover(C.C_Popover_Alloc())
-}
-
-func (n NSPopover) Init() Popover {
+func (n NSPopover) Init() NSPopover {
 	result_ := C.C_NSPopover_Init(n.Ptr())
 	return MakePopover(result_)
 }
 
-func (n NSPopover) InitWithCoder(coder foundation.Coder) Popover {
+func (n NSPopover) InitWithCoder(coder foundation.Coder) NSPopover {
 	result_ := C.C_NSPopover_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakePopover(result_)
+}
+
+func AllocPopover() NSPopover {
+	result_ := C.C_NSPopover_AllocPopover()
+	return MakePopover(result_)
+}
+
+func NewPopover() NSPopover {
+	result_ := C.C_NSPopover_NewPopover()
+	return MakePopover(result_)
+}
+
+func (n NSPopover) Autorelease() NSPopover {
+	result_ := C.C_NSPopover_Autorelease(n.Ptr())
+	return MakePopover(result_)
+}
+
+func (n NSPopover) Retain() NSPopover {
+	result_ := C.C_NSPopover_Retain(n.Ptr())
 	return MakePopover(result_)
 }
 

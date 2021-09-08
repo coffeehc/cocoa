@@ -60,22 +60,38 @@ func MakeTabView(ptr unsafe.Pointer) NSTabView {
 	}
 }
 
-func AllocTabView() NSTabView {
-	return MakeTabView(C.C_TabView_Alloc())
-}
-
-func (n NSTabView) InitWithFrame(frameRect foundation.Rect) TabView {
+func (n NSTabView) InitWithFrame(frameRect foundation.Rect) NSTabView {
 	result_ := C.C_NSTabView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeTabView(result_)
 }
 
-func (n NSTabView) InitWithCoder(coder foundation.Coder) TabView {
+func (n NSTabView) InitWithCoder(coder foundation.Coder) NSTabView {
 	result_ := C.C_NSTabView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeTabView(result_)
 }
 
-func (n NSTabView) Init() TabView {
+func (n NSTabView) Init() NSTabView {
 	result_ := C.C_NSTabView_Init(n.Ptr())
+	return MakeTabView(result_)
+}
+
+func AllocTabView() NSTabView {
+	result_ := C.C_NSTabView_AllocTabView()
+	return MakeTabView(result_)
+}
+
+func NewTabView() NSTabView {
+	result_ := C.C_NSTabView_NewTabView()
+	return MakeTabView(result_)
+}
+
+func (n NSTabView) Autorelease() NSTabView {
+	result_ := C.C_NSTabView_Autorelease(n.Ptr())
+	return MakeTabView(result_)
+}
+
+func (n NSTabView) Retain() NSTabView {
+	result_ := C.C_NSTabView_Retain(n.Ptr())
 	return MakeTabView(result_)
 }
 

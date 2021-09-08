@@ -11,6 +11,23 @@ void* C_NSDraggingItem_InitWithPasteboardWriter(void* ptr, void* pasteboardWrite
     return result_;
 }
 
+void* C_NSDraggingItem_AllocDraggingItem() {
+    NSDraggingItem* result_ = [NSDraggingItem alloc];
+    return result_;
+}
+
+void* C_NSDraggingItem_Autorelease(void* ptr) {
+    NSDraggingItem* nSDraggingItem = (NSDraggingItem*)ptr;
+    NSDraggingItem* result_ = [nSDraggingItem autorelease];
+    return result_;
+}
+
+void* C_NSDraggingItem_Retain(void* ptr) {
+    NSDraggingItem* nSDraggingItem = (NSDraggingItem*)ptr;
+    NSDraggingItem* result_ = [nSDraggingItem retain];
+    return result_;
+}
+
 void C_NSDraggingItem_SetDraggingFrame_Contents(void* ptr, CGRect frame, void* contents) {
     NSDraggingItem* nSDraggingItem = (NSDraggingItem*)ptr;
     [nSDraggingItem setDraggingFrame:frame contents:(id)contents];

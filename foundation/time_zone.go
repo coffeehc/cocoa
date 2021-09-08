@@ -36,42 +36,53 @@ func MakeTimeZone(ptr unsafe.Pointer) NSTimeZone {
 	}
 }
 
-func AllocTimeZone() NSTimeZone {
-	return MakeTimeZone(C.C_TimeZone_Alloc())
+func TimeZoneWithName(tzName string) NSTimeZone {
+	result_ := C.C_NSTimeZone_TimeZoneWithName(NewString(tzName).Ptr())
+	return MakeTimeZone(result_)
 }
 
-func (n NSTimeZone) InitWithName(tzName string) TimeZone {
+func TimeZoneWithName_Data(tzName string, aData []byte) NSTimeZone {
+	result_ := C.C_NSTimeZone_TimeZoneWithName_Data(NewString(tzName).Ptr(), NewData(aData).Ptr())
+	return MakeTimeZone(result_)
+}
+
+func (n NSTimeZone) InitWithName(tzName string) NSTimeZone {
 	result_ := C.C_NSTimeZone_InitWithName(n.Ptr(), NewString(tzName).Ptr())
 	return MakeTimeZone(result_)
 }
 
-func (n NSTimeZone) InitWithName_Data(tzName string, aData []byte) TimeZone {
+func (n NSTimeZone) InitWithName_Data(tzName string, aData []byte) NSTimeZone {
 	result_ := C.C_NSTimeZone_InitWithName_Data(n.Ptr(), NewString(tzName).Ptr(), NewData(aData).Ptr())
+	return MakeTimeZone(result_)
+}
+
+func TimeZoneWithAbbreviation(abbreviation string) NSTimeZone {
+	result_ := C.C_NSTimeZone_TimeZoneWithAbbreviation(NewString(abbreviation).Ptr())
+	return MakeTimeZone(result_)
+}
+
+func TimeZoneForSecondsFromGMT(seconds int) NSTimeZone {
+	result_ := C.C_NSTimeZone_TimeZoneForSecondsFromGMT(C.int(seconds))
+	return MakeTimeZone(result_)
+}
+
+func AllocTimeZone() NSTimeZone {
+	result_ := C.C_NSTimeZone_AllocTimeZone()
+	return MakeTimeZone(result_)
+}
+
+func (n NSTimeZone) Autorelease() NSTimeZone {
+	result_ := C.C_NSTimeZone_Autorelease(n.Ptr())
+	return MakeTimeZone(result_)
+}
+
+func (n NSTimeZone) Retain() NSTimeZone {
+	result_ := C.C_NSTimeZone_Retain(n.Ptr())
 	return MakeTimeZone(result_)
 }
 
 func ResetSystemTimeZone() {
 	C.C_NSTimeZone_ResetSystemTimeZone()
-}
-
-func TimeZoneWithName(tzName string) TimeZone {
-	result_ := C.C_NSTimeZone_TimeZoneWithName(NewString(tzName).Ptr())
-	return MakeTimeZone(result_)
-}
-
-func TimeZoneWithName_Data(tzName string, aData []byte) TimeZone {
-	result_ := C.C_NSTimeZone_TimeZoneWithName_Data(NewString(tzName).Ptr(), NewData(aData).Ptr())
-	return MakeTimeZone(result_)
-}
-
-func TimeZoneWithAbbreviation(abbreviation string) TimeZone {
-	result_ := C.C_NSTimeZone_TimeZoneWithAbbreviation(NewString(abbreviation).Ptr())
-	return MakeTimeZone(result_)
-}
-
-func TimeZoneForSecondsFromGMT(seconds int) TimeZone {
-	result_ := C.C_NSTimeZone_TimeZoneForSecondsFromGMT(C.int(seconds))
-	return MakeTimeZone(result_)
 }
 
 func (n NSTimeZone) AbbreviationForDate(aDate Date) string {

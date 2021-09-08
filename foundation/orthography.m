@@ -5,9 +5,19 @@ void* C_Orthography_Alloc() {
     return [NSOrthography alloc];
 }
 
+void* C_NSOrthography_DefaultOrthographyForLanguage(void* language) {
+    NSOrthography* result_ = [NSOrthography defaultOrthographyForLanguage:(NSString*)language];
+    return result_;
+}
+
 void* C_NSOrthography_InitWithCoder(void* ptr, void* coder) {
     NSOrthography* nSOrthography = (NSOrthography*)ptr;
     NSOrthography* result_ = [nSOrthography initWithCoder:(NSCoder*)coder];
+    return result_;
+}
+
+void* C_NSOrthography_AllocOrthography() {
+    NSOrthography* result_ = [NSOrthography alloc];
     return result_;
 }
 
@@ -17,8 +27,20 @@ void* C_NSOrthography_Init(void* ptr) {
     return result_;
 }
 
-void* C_NSOrthography_DefaultOrthographyForLanguage(void* language) {
-    NSOrthography* result_ = [NSOrthography defaultOrthographyForLanguage:(NSString*)language];
+void* C_NSOrthography_NewOrthography() {
+    NSOrthography* result_ = [NSOrthography new];
+    return result_;
+}
+
+void* C_NSOrthography_Autorelease(void* ptr) {
+    NSOrthography* nSOrthography = (NSOrthography*)ptr;
+    NSOrthography* result_ = [nSOrthography autorelease];
+    return result_;
+}
+
+void* C_NSOrthography_Retain(void* ptr) {
+    NSOrthography* nSOrthography = (NSOrthography*)ptr;
+    NSOrthography* result_ = [nSOrthography retain];
     return result_;
 }
 

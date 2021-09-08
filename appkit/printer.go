@@ -29,11 +29,27 @@ func MakePrinter(ptr unsafe.Pointer) NSPrinter {
 }
 
 func AllocPrinter() NSPrinter {
-	return MakePrinter(C.C_Printer_Alloc())
+	result_ := C.C_NSPrinter_AllocPrinter()
+	return MakePrinter(result_)
 }
 
-func (n NSPrinter) Init() Printer {
+func (n NSPrinter) Init() NSPrinter {
 	result_ := C.C_NSPrinter_Init(n.Ptr())
+	return MakePrinter(result_)
+}
+
+func NewPrinter() NSPrinter {
+	result_ := C.C_NSPrinter_NewPrinter()
+	return MakePrinter(result_)
+}
+
+func (n NSPrinter) Autorelease() NSPrinter {
+	result_ := C.C_NSPrinter_Autorelease(n.Ptr())
+	return MakePrinter(result_)
+}
+
+func (n NSPrinter) Retain() NSPrinter {
+	result_ := C.C_NSPrinter_Retain(n.Ptr())
 	return MakePrinter(result_)
 }
 

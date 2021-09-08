@@ -6,7 +6,11 @@
 void* C_Number_Alloc();
 
 void* C_NSNumber_InitWithCoder(void* ptr, void* coder);
+void* C_NSNumber_AllocNumber();
 void* C_NSNumber_Init(void* ptr);
+void* C_NSNumber_NewNumber();
+void* C_NSNumber_Autorelease(void* ptr);
+void* C_NSNumber_Retain(void* ptr);
 void* C_NSNumber_NumberWithBool(bool value);
 void* C_NSNumber_NumberWithDouble(double value);
 void* C_NSNumber_NumberWithFloat(float value);

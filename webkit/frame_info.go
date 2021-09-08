@@ -27,11 +27,27 @@ func MakeFrameInfo(ptr unsafe.Pointer) WKFrameInfo {
 }
 
 func AllocFrameInfo() WKFrameInfo {
-	return MakeFrameInfo(C.C_FrameInfo_Alloc())
+	result_ := C.C_WKFrameInfo_AllocFrameInfo()
+	return MakeFrameInfo(result_)
 }
 
-func (w WKFrameInfo) Init() FrameInfo {
+func (w WKFrameInfo) Init() WKFrameInfo {
 	result_ := C.C_WKFrameInfo_Init(w.Ptr())
+	return MakeFrameInfo(result_)
+}
+
+func NewFrameInfo() WKFrameInfo {
+	result_ := C.C_WKFrameInfo_NewFrameInfo()
+	return MakeFrameInfo(result_)
+}
+
+func (w WKFrameInfo) Autorelease() WKFrameInfo {
+	result_ := C.C_WKFrameInfo_Autorelease(w.Ptr())
+	return MakeFrameInfo(result_)
+}
+
+func (w WKFrameInfo) Retain() WKFrameInfo {
+	result_ := C.C_WKFrameInfo_Retain(w.Ptr())
 	return MakeFrameInfo(result_)
 }
 

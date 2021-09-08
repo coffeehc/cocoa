@@ -11,6 +11,31 @@ void* C_NSPopUpButton_InitWithFrame_PullsDown(void* ptr, CGRect buttonFrame, boo
     return result_;
 }
 
+void* C_NSPopUpButton_PopUpButton_CheckboxWithTitle_Target_Action(void* title, void* target, void* action) {
+    NSPopUpButton* result_ = [NSPopUpButton checkboxWithTitle:(NSString*)title target:(id)target action:(SEL)action];
+    return result_;
+}
+
+void* C_NSPopUpButton_PopUpButton_ButtonWithImage_Target_Action(void* image, void* target, void* action) {
+    NSPopUpButton* result_ = [NSPopUpButton buttonWithImage:(NSImage*)image target:(id)target action:(SEL)action];
+    return result_;
+}
+
+void* C_NSPopUpButton_PopUpButton_RadioButtonWithTitle_Target_Action(void* title, void* target, void* action) {
+    NSPopUpButton* result_ = [NSPopUpButton radioButtonWithTitle:(NSString*)title target:(id)target action:(SEL)action];
+    return result_;
+}
+
+void* C_NSPopUpButton_PopUpButton_ButtonWithTitle_Image_Target_Action(void* title, void* image, void* target, void* action) {
+    NSPopUpButton* result_ = [NSPopUpButton buttonWithTitle:(NSString*)title image:(NSImage*)image target:(id)target action:(SEL)action];
+    return result_;
+}
+
+void* C_NSPopUpButton_PopUpButton_ButtonWithTitle_Target_Action(void* title, void* target, void* action) {
+    NSPopUpButton* result_ = [NSPopUpButton buttonWithTitle:(NSString*)title target:(id)target action:(SEL)action];
+    return result_;
+}
+
 void* C_NSPopUpButton_InitWithCoder(void* ptr, void* coder) {
     NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
     NSPopUpButton* result_ = [nSPopUpButton initWithCoder:(NSCoder*)coder];
@@ -23,6 +48,28 @@ void* C_NSPopUpButton_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSPopUpButton_AllocPopUpButton() {
+    NSPopUpButton* result_ = [NSPopUpButton alloc];
+    return result_;
+}
+
+void* C_NSPopUpButton_NewPopUpButton() {
+    NSPopUpButton* result_ = [NSPopUpButton new];
+    return result_;
+}
+
+void* C_NSPopUpButton_Autorelease(void* ptr) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    NSPopUpButton* result_ = [nSPopUpButton autorelease];
+    return result_;
+}
+
+void* C_NSPopUpButton_Retain(void* ptr) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    NSPopUpButton* result_ = [nSPopUpButton retain];
+    return result_;
+}
+
 void C_NSPopUpButton_AddItemWithTitle(void* ptr, void* title) {
     NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
     [nSPopUpButton addItemWithTitle:(NSString*)title];
@@ -30,7 +77,7 @@ void C_NSPopUpButton_AddItemWithTitle(void* ptr, void* title) {
 
 void C_NSPopUpButton_AddItemsWithTitles(void* ptr, Array itemTitles) {
     NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
-    NSMutableArray* objcItemTitles = [[NSMutableArray alloc] init];
+    NSMutableArray* objcItemTitles = [NSMutableArray arrayWithCapacity:itemTitles.len];
     if (itemTitles.len > 0) {
     	void** itemTitlesData = (void**)itemTitles.data;
     	for (int i = 0; i < itemTitles.len; i++) {

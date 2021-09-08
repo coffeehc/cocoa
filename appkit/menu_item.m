@@ -17,9 +17,31 @@ void* C_NSMenuItem_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSMenuItem_AllocMenuItem() {
+    NSMenuItem* result_ = [NSMenuItem alloc];
+    return result_;
+}
+
 void* C_NSMenuItem_Init(void* ptr) {
     NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
     NSMenuItem* result_ = [nSMenuItem init];
+    return result_;
+}
+
+void* C_NSMenuItem_NewMenuItem() {
+    NSMenuItem* result_ = [NSMenuItem new];
+    return result_;
+}
+
+void* C_NSMenuItem_Autorelease(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    NSMenuItem* result_ = [nSMenuItem autorelease];
+    return result_;
+}
+
+void* C_NSMenuItem_Retain(void* ptr) {
+    NSMenuItem* nSMenuItem = (NSMenuItem*)ptr;
+    NSMenuItem* result_ = [nSMenuItem retain];
     return result_;
 }
 

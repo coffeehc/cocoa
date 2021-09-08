@@ -27,7 +27,18 @@ func MakeMeasurement(ptr unsafe.Pointer) NSMeasurement {
 }
 
 func AllocMeasurement() NSMeasurement {
-	return MakeMeasurement(C.C_Measurement_Alloc())
+	result_ := C.C_NSMeasurement_AllocMeasurement()
+	return MakeMeasurement(result_)
+}
+
+func (n NSMeasurement) Autorelease() NSMeasurement {
+	result_ := C.C_NSMeasurement_Autorelease(n.Ptr())
+	return MakeMeasurement(result_)
+}
+
+func (n NSMeasurement) Retain() NSMeasurement {
+	result_ := C.C_NSMeasurement_Retain(n.Ptr())
+	return MakeMeasurement(result_)
 }
 
 func (n NSMeasurement) CanBeConvertedToUnit(unit Unit) bool {

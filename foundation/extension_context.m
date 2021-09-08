@@ -5,9 +5,31 @@ void* C_ExtensionContext_Alloc() {
     return [NSExtensionContext alloc];
 }
 
+void* C_NSExtensionContext_AllocExtensionContext() {
+    NSExtensionContext* result_ = [NSExtensionContext alloc];
+    return result_;
+}
+
 void* C_NSExtensionContext_Init(void* ptr) {
     NSExtensionContext* nSExtensionContext = (NSExtensionContext*)ptr;
     NSExtensionContext* result_ = [nSExtensionContext init];
+    return result_;
+}
+
+void* C_NSExtensionContext_NewExtensionContext() {
+    NSExtensionContext* result_ = [NSExtensionContext new];
+    return result_;
+}
+
+void* C_NSExtensionContext_Autorelease(void* ptr) {
+    NSExtensionContext* nSExtensionContext = (NSExtensionContext*)ptr;
+    NSExtensionContext* result_ = [nSExtensionContext autorelease];
+    return result_;
+}
+
+void* C_NSExtensionContext_Retain(void* ptr) {
+    NSExtensionContext* nSExtensionContext = (NSExtensionContext*)ptr;
+    NSExtensionContext* result_ = [nSExtensionContext retain];
     return result_;
 }
 

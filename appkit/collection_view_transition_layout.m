@@ -11,9 +11,31 @@ void* C_NSCollectionViewTransitionLayout_InitWithCurrentLayout_NextLayout(void* 
     return result_;
 }
 
+void* C_NSCollectionViewTransitionLayout_AllocCollectionViewTransitionLayout() {
+    NSCollectionViewTransitionLayout* result_ = [NSCollectionViewTransitionLayout alloc];
+    return result_;
+}
+
 void* C_NSCollectionViewTransitionLayout_Init(void* ptr) {
     NSCollectionViewTransitionLayout* nSCollectionViewTransitionLayout = (NSCollectionViewTransitionLayout*)ptr;
     NSCollectionViewTransitionLayout* result_ = [nSCollectionViewTransitionLayout init];
+    return result_;
+}
+
+void* C_NSCollectionViewTransitionLayout_NewCollectionViewTransitionLayout() {
+    NSCollectionViewTransitionLayout* result_ = [NSCollectionViewTransitionLayout new];
+    return result_;
+}
+
+void* C_NSCollectionViewTransitionLayout_Autorelease(void* ptr) {
+    NSCollectionViewTransitionLayout* nSCollectionViewTransitionLayout = (NSCollectionViewTransitionLayout*)ptr;
+    NSCollectionViewTransitionLayout* result_ = [nSCollectionViewTransitionLayout autorelease];
+    return result_;
+}
+
+void* C_NSCollectionViewTransitionLayout_Retain(void* ptr) {
+    NSCollectionViewTransitionLayout* nSCollectionViewTransitionLayout = (NSCollectionViewTransitionLayout*)ptr;
+    NSCollectionViewTransitionLayout* result_ = [nSCollectionViewTransitionLayout retain];
     return result_;
 }
 

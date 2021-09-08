@@ -49,7 +49,7 @@
     	newSelectedCharRangesArray.len = newSelectedCharRangescount;
     }
     Array result_ = textViewDelegate_TextView_WillChangeSelectionFromCharacterRanges_ToCharacterRanges([self goID], textView, oldSelectedCharRangesArray, newSelectedCharRangesArray);
-    NSMutableArray* objcResult_ = [[NSMutableArray alloc] init];
+    NSMutableArray* objcResult_ = [NSMutableArray arrayWithCapacity:result_.len];
     if (result_.len > 0) {
     	void** result_Data = (void**)result_.data;
     	for (int i = 0; i < result_.len; i++) {
@@ -66,7 +66,7 @@
 
 - (NSArray*)textView:(NSTextView*)view writablePasteboardTypesForCell:(id)cell atIndex:(NSUInteger)charIndex {
     Array result_ = textViewDelegate_TextView_WritablePasteboardTypesForCell_AtIndex([self goID], view, cell, charIndex);
-    NSMutableArray* objcResult_ = [[NSMutableArray alloc] init];
+    NSMutableArray* objcResult_ = [NSMutableArray arrayWithCapacity:result_.len];
     if (result_.len > 0) {
     	void** result_Data = (void**)result_.data;
     	for (int i = 0; i < result_.len; i++) {
@@ -148,7 +148,7 @@
     	newTypingAttributesArray.len = newTypingAttributesCount;
     }
     Dictionary result_ = textViewDelegate_TextView_ShouldChangeTypingAttributes_ToAttributes([self goID], textView, oldTypingAttributesArray, newTypingAttributesArray);
-    NSMutableDictionary* objcResult_ = [[NSMutableDictionary alloc] initWithCapacity: result_.len];
+    NSMutableDictionary* objcResult_ = [NSMutableDictionary dictionaryWithCapacity:result_.len];
     if (result_.len > 0) {
     	void** result_KeyData = (void**)result_.key_data;
     	void** result_ValueData = (void**)result_.value_data;
@@ -226,7 +226,7 @@
     	candidatesArray.len = candidatescount;
     }
     Array result_ = textViewDelegate_TextView_Candidates_ForSelectedRange([self goID], textView, candidatesArray, selectedRange);
-    NSMutableArray* objcResult_ = [[NSMutableArray alloc] init];
+    NSMutableArray* objcResult_ = [NSMutableArray arrayWithCapacity:result_.len];
     if (result_.len > 0) {
     	void** result_Data = (void**)result_.data;
     	for (int i = 0; i < result_.len; i++) {
@@ -239,7 +239,7 @@
 
 - (NSArray*)textView:(NSTextView*)textView candidatesForSelectedRange:(NSRange)selectedRange {
     Array result_ = textViewDelegate_TextView_CandidatesForSelectedRange([self goID], textView, selectedRange);
-    NSMutableArray* objcResult_ = [[NSMutableArray alloc] init];
+    NSMutableArray* objcResult_ = [NSMutableArray arrayWithCapacity:result_.len];
     if (result_.len > 0) {
     	void** result_Data = (void**)result_.data;
     	for (int i = 0; i < result_.len; i++) {
@@ -268,7 +268,7 @@
     	identifiersArray.len = identifierscount;
     }
     Array result_ = textViewDelegate_TextView_ShouldUpdateTouchBarItemIdentifiers([self goID], textView, identifiersArray);
-    NSMutableArray* objcResult_ = [[NSMutableArray alloc] init];
+    NSMutableArray* objcResult_ = [NSMutableArray arrayWithCapacity:result_.len];
     if (result_.len > 0) {
     	void** result_Data = (void**)result_.data;
     	for (int i = 0; i < result_.len; i++) {

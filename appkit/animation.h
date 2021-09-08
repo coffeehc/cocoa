@@ -7,7 +7,11 @@ void* C_Animation_Alloc();
 
 void* C_NSAnimation_InitWithDuration_AnimationCurve(void* ptr, double duration, unsigned int animationCurve);
 void* C_NSAnimation_InitWithCoder(void* ptr, void* coder);
+void* C_NSAnimation_AllocAnimation();
 void* C_NSAnimation_Init(void* ptr);
+void* C_NSAnimation_NewAnimation();
+void* C_NSAnimation_Autorelease(void* ptr);
+void* C_NSAnimation_Retain(void* ptr);
 void C_NSAnimation_StartAnimation(void* ptr);
 void C_NSAnimation_StopAnimation(void* ptr);
 void C_NSAnimation_AddProgressMark(void* ptr, float progressMark);

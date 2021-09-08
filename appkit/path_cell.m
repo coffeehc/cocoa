@@ -29,6 +29,28 @@ void* C_NSPathCell_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSPathCell_AllocPathCell() {
+    NSPathCell* result_ = [NSPathCell alloc];
+    return result_;
+}
+
+void* C_NSPathCell_NewPathCell() {
+    NSPathCell* result_ = [NSPathCell new];
+    return result_;
+}
+
+void* C_NSPathCell_Autorelease(void* ptr) {
+    NSPathCell* nSPathCell = (NSPathCell*)ptr;
+    NSPathCell* result_ = [nSPathCell autorelease];
+    return result_;
+}
+
+void* C_NSPathCell_Retain(void* ptr) {
+    NSPathCell* nSPathCell = (NSPathCell*)ptr;
+    NSPathCell* result_ = [nSPathCell retain];
+    return result_;
+}
+
 void C_NSPathCell_MouseEntered_WithFrame_InView(void* ptr, void* event, CGRect frame, void* view) {
     NSPathCell* nSPathCell = (NSPathCell*)ptr;
     [nSPathCell mouseEntered:(NSEvent*)event withFrame:frame inView:(NSView*)view];
@@ -70,7 +92,7 @@ Array C_NSPathCell_AllowedTypes(void* ptr) {
 
 void C_NSPathCell_SetAllowedTypes(void* ptr, Array value) {
     NSPathCell* nSPathCell = (NSPathCell*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -150,7 +172,7 @@ Array C_NSPathCell_PathComponentCells(void* ptr) {
 
 void C_NSPathCell_SetPathComponentCells(void* ptr, Array value) {
     NSPathCell* nSPathCell = (NSPathCell*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

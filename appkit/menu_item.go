@@ -72,22 +72,38 @@ func MakeMenuItem(ptr unsafe.Pointer) NSMenuItem {
 	}
 }
 
-func AllocMenuItem() NSMenuItem {
-	return MakeMenuItem(C.C_MenuItem_Alloc())
-}
-
-func (n NSMenuItem) InitWithTitle_Action_KeyEquivalent(_string string, selector objc.Selector, charCode string) MenuItem {
+func (n NSMenuItem) InitWithTitle_Action_KeyEquivalent(_string string, selector objc.Selector, charCode string) NSMenuItem {
 	result_ := C.C_NSMenuItem_InitWithTitle_Action_KeyEquivalent(n.Ptr(), foundation.NewString(_string).Ptr(), unsafe.Pointer(selector), foundation.NewString(charCode).Ptr())
 	return MakeMenuItem(result_)
 }
 
-func (n NSMenuItem) InitWithCoder(coder foundation.Coder) MenuItem {
+func (n NSMenuItem) InitWithCoder(coder foundation.Coder) NSMenuItem {
 	result_ := C.C_NSMenuItem_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeMenuItem(result_)
 }
 
-func (n NSMenuItem) Init() MenuItem {
+func AllocMenuItem() NSMenuItem {
+	result_ := C.C_NSMenuItem_AllocMenuItem()
+	return MakeMenuItem(result_)
+}
+
+func (n NSMenuItem) Init() NSMenuItem {
 	result_ := C.C_NSMenuItem_Init(n.Ptr())
+	return MakeMenuItem(result_)
+}
+
+func NewMenuItem() NSMenuItem {
+	result_ := C.C_NSMenuItem_NewMenuItem()
+	return MakeMenuItem(result_)
+}
+
+func (n NSMenuItem) Autorelease() NSMenuItem {
+	result_ := C.C_NSMenuItem_Autorelease(n.Ptr())
+	return MakeMenuItem(result_)
+}
+
+func (n NSMenuItem) Retain() NSMenuItem {
+	result_ := C.C_NSMenuItem_Retain(n.Ptr())
 	return MakeMenuItem(result_)
 }
 

@@ -52,17 +52,33 @@ func MakeToolbar(ptr unsafe.Pointer) NSToolbar {
 	}
 }
 
-func AllocToolbar() NSToolbar {
-	return MakeToolbar(C.C_Toolbar_Alloc())
-}
-
-func (n NSToolbar) InitWithIdentifier(identifier ToolbarIdentifier) Toolbar {
+func (n NSToolbar) InitWithIdentifier(identifier ToolbarIdentifier) NSToolbar {
 	result_ := C.C_NSToolbar_InitWithIdentifier(n.Ptr(), foundation.NewString(string(identifier)).Ptr())
 	return MakeToolbar(result_)
 }
 
-func (n NSToolbar) Init() Toolbar {
+func (n NSToolbar) Init() NSToolbar {
 	result_ := C.C_NSToolbar_Init(n.Ptr())
+	return MakeToolbar(result_)
+}
+
+func AllocToolbar() NSToolbar {
+	result_ := C.C_NSToolbar_AllocToolbar()
+	return MakeToolbar(result_)
+}
+
+func NewToolbar() NSToolbar {
+	result_ := C.C_NSToolbar_NewToolbar()
+	return MakeToolbar(result_)
+}
+
+func (n NSToolbar) Autorelease() NSToolbar {
+	result_ := C.C_NSToolbar_Autorelease(n.Ptr())
+	return MakeToolbar(result_)
+}
+
+func (n NSToolbar) Retain() NSToolbar {
+	result_ := C.C_NSToolbar_Retain(n.Ptr())
 	return MakeToolbar(result_)
 }
 

@@ -5,7 +5,11 @@
 
 void* C_UndoManager_Alloc();
 
+void* C_NSUndoManager_AllocUndoManager();
 void* C_NSUndoManager_Init(void* ptr);
+void* C_NSUndoManager_NewUndoManager();
+void* C_NSUndoManager_Autorelease(void* ptr);
+void* C_NSUndoManager_Retain(void* ptr);
 void C_NSUndoManager_RegisterUndoWithTarget_Selector_Object(void* ptr, void* target, void* selector, void* anObject);
 void* C_NSUndoManager_PrepareWithInvocationTarget(void* ptr, void* target);
 void C_NSUndoManager_Undo(void* ptr);

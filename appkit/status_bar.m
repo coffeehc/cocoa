@@ -5,9 +5,31 @@ void* C_StatusBar_Alloc() {
     return [NSStatusBar alloc];
 }
 
+void* C_NSStatusBar_AllocStatusBar() {
+    NSStatusBar* result_ = [NSStatusBar alloc];
+    return result_;
+}
+
 void* C_NSStatusBar_Init(void* ptr) {
     NSStatusBar* nSStatusBar = (NSStatusBar*)ptr;
     NSStatusBar* result_ = [nSStatusBar init];
+    return result_;
+}
+
+void* C_NSStatusBar_NewStatusBar() {
+    NSStatusBar* result_ = [NSStatusBar new];
+    return result_;
+}
+
+void* C_NSStatusBar_Autorelease(void* ptr) {
+    NSStatusBar* nSStatusBar = (NSStatusBar*)ptr;
+    NSStatusBar* result_ = [nSStatusBar autorelease];
+    return result_;
+}
+
+void* C_NSStatusBar_Retain(void* ptr) {
+    NSStatusBar* nSStatusBar = (NSStatusBar*)ptr;
+    NSStatusBar* result_ = [nSStatusBar retain];
     return result_;
 }
 

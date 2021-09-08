@@ -36,32 +36,48 @@ func MakeURLRequest(ptr unsafe.Pointer) NSURLRequest {
 	}
 }
 
-func AllocURLRequest() NSURLRequest {
-	return MakeURLRequest(C.C_URLRequest_Alloc())
-}
-
-func (n NSURLRequest) InitWithURL(URL URL) URLRequest {
-	result_ := C.C_NSURLRequest_InitWithURL(n.Ptr(), objc.ExtractPtr(URL))
-	return MakeURLRequest(result_)
-}
-
-func (n NSURLRequest) InitWithURL_CachePolicy_TimeoutInterval(URL URL, cachePolicy URLRequestCachePolicy, timeoutInterval TimeInterval) URLRequest {
-	result_ := C.C_NSURLRequest_InitWithURL_CachePolicy_TimeoutInterval(n.Ptr(), objc.ExtractPtr(URL), C.uint(uint(cachePolicy)), C.double(float64(timeoutInterval)))
-	return MakeURLRequest(result_)
-}
-
-func (n NSURLRequest) Init() URLRequest {
-	result_ := C.C_NSURLRequest_Init(n.Ptr())
-	return MakeURLRequest(result_)
-}
-
-func URLRequest_RequestWithURL(URL URL) URLRequest {
+func URLRequest_RequestWithURL(URL URL) NSURLRequest {
 	result_ := C.C_NSURLRequest_URLRequest_RequestWithURL(objc.ExtractPtr(URL))
 	return MakeURLRequest(result_)
 }
 
-func URLRequest_RequestWithURL_CachePolicy_TimeoutInterval(URL URL, cachePolicy URLRequestCachePolicy, timeoutInterval TimeInterval) URLRequest {
+func (n NSURLRequest) InitWithURL(URL URL) NSURLRequest {
+	result_ := C.C_NSURLRequest_InitWithURL(n.Ptr(), objc.ExtractPtr(URL))
+	return MakeURLRequest(result_)
+}
+
+func URLRequest_RequestWithURL_CachePolicy_TimeoutInterval(URL URL, cachePolicy URLRequestCachePolicy, timeoutInterval TimeInterval) NSURLRequest {
 	result_ := C.C_NSURLRequest_URLRequest_RequestWithURL_CachePolicy_TimeoutInterval(objc.ExtractPtr(URL), C.uint(uint(cachePolicy)), C.double(float64(timeoutInterval)))
+	return MakeURLRequest(result_)
+}
+
+func (n NSURLRequest) InitWithURL_CachePolicy_TimeoutInterval(URL URL, cachePolicy URLRequestCachePolicy, timeoutInterval TimeInterval) NSURLRequest {
+	result_ := C.C_NSURLRequest_InitWithURL_CachePolicy_TimeoutInterval(n.Ptr(), objc.ExtractPtr(URL), C.uint(uint(cachePolicy)), C.double(float64(timeoutInterval)))
+	return MakeURLRequest(result_)
+}
+
+func AllocURLRequest() NSURLRequest {
+	result_ := C.C_NSURLRequest_AllocURLRequest()
+	return MakeURLRequest(result_)
+}
+
+func (n NSURLRequest) Init() NSURLRequest {
+	result_ := C.C_NSURLRequest_Init(n.Ptr())
+	return MakeURLRequest(result_)
+}
+
+func NewURLRequest() NSURLRequest {
+	result_ := C.C_NSURLRequest_NewURLRequest()
+	return MakeURLRequest(result_)
+}
+
+func (n NSURLRequest) Autorelease() NSURLRequest {
+	result_ := C.C_NSURLRequest_Autorelease(n.Ptr())
+	return MakeURLRequest(result_)
+}
+
+func (n NSURLRequest) Retain() NSURLRequest {
+	result_ := C.C_NSURLRequest_Retain(n.Ptr())
 	return MakeURLRequest(result_)
 }
 

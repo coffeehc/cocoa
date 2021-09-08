@@ -33,11 +33,27 @@ func MakeTouch(ptr unsafe.Pointer) NSTouch {
 }
 
 func AllocTouch() NSTouch {
-	return MakeTouch(C.C_Touch_Alloc())
+	result_ := C.C_NSTouch_AllocTouch()
+	return MakeTouch(result_)
 }
 
-func (n NSTouch) Init() Touch {
+func (n NSTouch) Init() NSTouch {
 	result_ := C.C_NSTouch_Init(n.Ptr())
+	return MakeTouch(result_)
+}
+
+func NewTouch() NSTouch {
+	result_ := C.C_NSTouch_NewTouch()
+	return MakeTouch(result_)
+}
+
+func (n NSTouch) Autorelease() NSTouch {
+	result_ := C.C_NSTouch_Autorelease(n.Ptr())
+	return MakeTouch(result_)
+}
+
+func (n NSTouch) Retain() NSTouch {
+	result_ := C.C_NSTouch_Retain(n.Ptr())
 	return MakeTouch(result_)
 }
 

@@ -32,22 +32,38 @@ func MakeColorWell(ptr unsafe.Pointer) NSColorWell {
 	}
 }
 
-func AllocColorWell() NSColorWell {
-	return MakeColorWell(C.C_ColorWell_Alloc())
-}
-
-func (n NSColorWell) InitWithFrame(frameRect foundation.Rect) ColorWell {
+func (n NSColorWell) InitWithFrame(frameRect foundation.Rect) NSColorWell {
 	result_ := C.C_NSColorWell_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeColorWell(result_)
 }
 
-func (n NSColorWell) InitWithCoder(coder foundation.Coder) ColorWell {
+func (n NSColorWell) InitWithCoder(coder foundation.Coder) NSColorWell {
 	result_ := C.C_NSColorWell_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeColorWell(result_)
 }
 
-func (n NSColorWell) Init() ColorWell {
+func (n NSColorWell) Init() NSColorWell {
 	result_ := C.C_NSColorWell_Init(n.Ptr())
+	return MakeColorWell(result_)
+}
+
+func AllocColorWell() NSColorWell {
+	result_ := C.C_NSColorWell_AllocColorWell()
+	return MakeColorWell(result_)
+}
+
+func NewColorWell() NSColorWell {
+	result_ := C.C_NSColorWell_NewColorWell()
+	return MakeColorWell(result_)
+}
+
+func (n NSColorWell) Autorelease() NSColorWell {
+	result_ := C.C_NSColorWell_Autorelease(n.Ptr())
+	return MakeColorWell(result_)
+}
+
+func (n NSColorWell) Retain() NSColorWell {
+	result_ := C.C_NSColorWell_Retain(n.Ptr())
 	return MakeColorWell(result_)
 }
 

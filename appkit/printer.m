@@ -5,9 +5,31 @@ void* C_Printer_Alloc() {
     return [NSPrinter alloc];
 }
 
+void* C_NSPrinter_AllocPrinter() {
+    NSPrinter* result_ = [NSPrinter alloc];
+    return result_;
+}
+
 void* C_NSPrinter_Init(void* ptr) {
     NSPrinter* nSPrinter = (NSPrinter*)ptr;
     NSPrinter* result_ = [nSPrinter init];
+    return result_;
+}
+
+void* C_NSPrinter_NewPrinter() {
+    NSPrinter* result_ = [NSPrinter new];
+    return result_;
+}
+
+void* C_NSPrinter_Autorelease(void* ptr) {
+    NSPrinter* nSPrinter = (NSPrinter*)ptr;
+    NSPrinter* result_ = [nSPrinter autorelease];
+    return result_;
+}
+
+void* C_NSPrinter_Retain(void* ptr) {
+    NSPrinter* nSPrinter = (NSPrinter*)ptr;
+    NSPrinter* result_ = [nSPrinter retain];
     return result_;
 }
 

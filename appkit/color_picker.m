@@ -11,9 +11,31 @@ void* C_NSColorPicker_InitWithPickerMask_ColorPanel(void* ptr, unsigned int mask
     return result_;
 }
 
+void* C_NSColorPicker_AllocColorPicker() {
+    NSColorPicker* result_ = [NSColorPicker alloc];
+    return result_;
+}
+
 void* C_NSColorPicker_Init(void* ptr) {
     NSColorPicker* nSColorPicker = (NSColorPicker*)ptr;
     NSColorPicker* result_ = [nSColorPicker init];
+    return result_;
+}
+
+void* C_NSColorPicker_NewColorPicker() {
+    NSColorPicker* result_ = [NSColorPicker new];
+    return result_;
+}
+
+void* C_NSColorPicker_Autorelease(void* ptr) {
+    NSColorPicker* nSColorPicker = (NSColorPicker*)ptr;
+    NSColorPicker* result_ = [nSColorPicker autorelease];
+    return result_;
+}
+
+void* C_NSColorPicker_Retain(void* ptr) {
+    NSColorPicker* nSColorPicker = (NSColorPicker*)ptr;
+    NSColorPicker* result_ = [nSColorPicker retain];
     return result_;
 }
 

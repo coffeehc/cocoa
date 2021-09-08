@@ -17,9 +17,31 @@ void* C_NSGestureRecognizer_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSGestureRecognizer_AllocGestureRecognizer() {
+    NSGestureRecognizer* result_ = [NSGestureRecognizer alloc];
+    return result_;
+}
+
 void* C_NSGestureRecognizer_Init(void* ptr) {
     NSGestureRecognizer* nSGestureRecognizer = (NSGestureRecognizer*)ptr;
     NSGestureRecognizer* result_ = [nSGestureRecognizer init];
+    return result_;
+}
+
+void* C_NSGestureRecognizer_NewGestureRecognizer() {
+    NSGestureRecognizer* result_ = [NSGestureRecognizer new];
+    return result_;
+}
+
+void* C_NSGestureRecognizer_Autorelease(void* ptr) {
+    NSGestureRecognizer* nSGestureRecognizer = (NSGestureRecognizer*)ptr;
+    NSGestureRecognizer* result_ = [nSGestureRecognizer autorelease];
+    return result_;
+}
+
+void* C_NSGestureRecognizer_Retain(void* ptr) {
+    NSGestureRecognizer* nSGestureRecognizer = (NSGestureRecognizer*)ptr;
+    NSGestureRecognizer* result_ = [nSGestureRecognizer retain];
     return result_;
 }
 

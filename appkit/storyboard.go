@@ -23,17 +23,33 @@ func MakeStoryboard(ptr unsafe.Pointer) NSStoryboard {
 	}
 }
 
-func AllocStoryboard() NSStoryboard {
-	return MakeStoryboard(C.C_Storyboard_Alloc())
+func StoryboardWithName_Bundle(name StoryboardName, storyboardBundleOrNil foundation.Bundle) NSStoryboard {
+	result_ := C.C_NSStoryboard_StoryboardWithName_Bundle(foundation.NewString(string(name)).Ptr(), objc.ExtractPtr(storyboardBundleOrNil))
+	return MakeStoryboard(result_)
 }
 
-func (n NSStoryboard) Init() Storyboard {
+func AllocStoryboard() NSStoryboard {
+	result_ := C.C_NSStoryboard_AllocStoryboard()
+	return MakeStoryboard(result_)
+}
+
+func (n NSStoryboard) Init() NSStoryboard {
 	result_ := C.C_NSStoryboard_Init(n.Ptr())
 	return MakeStoryboard(result_)
 }
 
-func StoryboardWithName_Bundle(name StoryboardName, storyboardBundleOrNil foundation.Bundle) Storyboard {
-	result_ := C.C_NSStoryboard_StoryboardWithName_Bundle(foundation.NewString(string(name)).Ptr(), objc.ExtractPtr(storyboardBundleOrNil))
+func NewStoryboard() NSStoryboard {
+	result_ := C.C_NSStoryboard_NewStoryboard()
+	return MakeStoryboard(result_)
+}
+
+func (n NSStoryboard) Autorelease() NSStoryboard {
+	result_ := C.C_NSStoryboard_Autorelease(n.Ptr())
+	return MakeStoryboard(result_)
+}
+
+func (n NSStoryboard) Retain() NSStoryboard {
+	result_ := C.C_NSStoryboard_Retain(n.Ptr())
 	return MakeStoryboard(result_)
 }
 

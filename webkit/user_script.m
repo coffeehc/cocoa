@@ -17,9 +17,31 @@ void* C_WKUserScript_InitWithSource_InjectionTime_ForMainFrameOnly_InContentWorl
     return result_;
 }
 
+void* C_WKUserScript_AllocUserScript() {
+    WKUserScript* result_ = [WKUserScript alloc];
+    return result_;
+}
+
 void* C_WKUserScript_Init(void* ptr) {
     WKUserScript* wKUserScript = (WKUserScript*)ptr;
     WKUserScript* result_ = [wKUserScript init];
+    return result_;
+}
+
+void* C_WKUserScript_NewUserScript() {
+    WKUserScript* result_ = [WKUserScript new];
+    return result_;
+}
+
+void* C_WKUserScript_Autorelease(void* ptr) {
+    WKUserScript* wKUserScript = (WKUserScript*)ptr;
+    WKUserScript* result_ = [wKUserScript autorelease];
+    return result_;
+}
+
+void* C_WKUserScript_Retain(void* ptr) {
+    WKUserScript* wKUserScript = (WKUserScript*)ptr;
+    WKUserScript* result_ = [wKUserScript retain];
     return result_;
 }
 

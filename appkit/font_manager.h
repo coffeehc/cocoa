@@ -5,7 +5,11 @@
 
 void* C_FontManager_Alloc();
 
+void* C_NSFontManager_AllocFontManager();
 void* C_NSFontManager_Init(void* ptr);
+void* C_NSFontManager_NewFontManager();
+void* C_NSFontManager_Autorelease(void* ptr);
+void* C_NSFontManager_Retain(void* ptr);
 Array C_NSFontManager_AvailableFontNamesWithTraits(void* ptr, unsigned int someTraits);
 void C_NSFontManager_SetSelectedFont_IsMultiple(void* ptr, void* fontObj, bool flag);
 bool C_NSFontManager_SendAction(void* ptr);

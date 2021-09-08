@@ -7,7 +7,7 @@ void* C_FontDescriptor_Alloc() {
 
 void* C_NSFontDescriptor_InitWithFontAttributes(void* ptr, Dictionary attributes) {
     NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
-    NSMutableDictionary* objcAttributes = [[NSMutableDictionary alloc] initWithCapacity: attributes.len];
+    NSMutableDictionary* objcAttributes = [NSMutableDictionary dictionaryWithCapacity:attributes.len];
     if (attributes.len > 0) {
     	void** attributesKeyData = (void**)attributes.key_data;
     	void** attributesValueData = (void**)attributes.value_data;
@@ -27,14 +27,36 @@ void* C_NSFontDescriptor_FontDescriptorWithDesign(void* ptr, void* design) {
     return result_;
 }
 
+void* C_NSFontDescriptor_AllocFontDescriptor() {
+    NSFontDescriptor* result_ = [NSFontDescriptor alloc];
+    return result_;
+}
+
 void* C_NSFontDescriptor_Init(void* ptr) {
     NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
     NSFontDescriptor* result_ = [nSFontDescriptor init];
     return result_;
 }
 
+void* C_NSFontDescriptor_NewFontDescriptor() {
+    NSFontDescriptor* result_ = [NSFontDescriptor new];
+    return result_;
+}
+
+void* C_NSFontDescriptor_Autorelease(void* ptr) {
+    NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
+    NSFontDescriptor* result_ = [nSFontDescriptor autorelease];
+    return result_;
+}
+
+void* C_NSFontDescriptor_Retain(void* ptr) {
+    NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
+    NSFontDescriptor* result_ = [nSFontDescriptor retain];
+    return result_;
+}
+
 void* C_NSFontDescriptor_PreferredFontDescriptorForTextStyle_Options(void* style, Dictionary options) {
-    NSMutableDictionary* objcOptions = [[NSMutableDictionary alloc] initWithCapacity: options.len];
+    NSMutableDictionary* objcOptions = [NSMutableDictionary dictionaryWithCapacity:options.len];
     if (options.len > 0) {
     	void** optionsKeyData = (void**)options.key_data;
     	void** optionsValueData = (void**)options.value_data;
@@ -49,7 +71,7 @@ void* C_NSFontDescriptor_PreferredFontDescriptorForTextStyle_Options(void* style
 }
 
 void* C_NSFontDescriptor_FontDescriptorWithFontAttributes(Dictionary attributes) {
-    NSMutableDictionary* objcAttributes = [[NSMutableDictionary alloc] initWithCapacity: attributes.len];
+    NSMutableDictionary* objcAttributes = [NSMutableDictionary dictionaryWithCapacity:attributes.len];
     if (attributes.len > 0) {
     	void** attributesKeyData = (void**)attributes.key_data;
     	void** attributesValueData = (void**)attributes.value_data;
@@ -75,7 +97,7 @@ void* C_NSFontDescriptor_FontDescriptorWithName_Size(void* fontName, double size
 
 void* C_NSFontDescriptor_FontDescriptorByAddingAttributes(void* ptr, Dictionary attributes) {
     NSFontDescriptor* nSFontDescriptor = (NSFontDescriptor*)ptr;
-    NSMutableDictionary* objcAttributes = [[NSMutableDictionary alloc] initWithCapacity: attributes.len];
+    NSMutableDictionary* objcAttributes = [NSMutableDictionary dictionaryWithCapacity:attributes.len];
     if (attributes.len > 0) {
     	void** attributesKeyData = (void**)attributes.key_data;
     	void** attributesValueData = (void**)attributes.value_data;

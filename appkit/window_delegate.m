@@ -85,7 +85,7 @@
 
 - (NSArray*)customWindowsToEnterFullScreenForWindow:(NSWindow*)window {
     Array result_ = windowDelegate_CustomWindowsToEnterFullScreenForWindow([self goID], window);
-    NSMutableArray* objcResult_ = [[NSMutableArray alloc] init];
+    NSMutableArray* objcResult_ = [NSMutableArray arrayWithCapacity:result_.len];
     if (result_.len > 0) {
     	void** result_Data = (void**)result_.data;
     	for (int i = 0; i < result_.len; i++) {
@@ -98,7 +98,7 @@
 
 - (NSArray*)customWindowsToEnterFullScreenForWindow:(NSWindow*)window onScreen:(NSScreen*)screen {
     Array result_ = windowDelegate_CustomWindowsToEnterFullScreenForWindow_OnScreen([self goID], window, screen);
-    NSMutableArray* objcResult_ = [[NSMutableArray alloc] init];
+    NSMutableArray* objcResult_ = [NSMutableArray arrayWithCapacity:result_.len];
     if (result_.len > 0) {
     	void** result_Data = (void**)result_.data;
     	for (int i = 0; i < result_.len; i++) {
@@ -123,7 +123,7 @@
 
 - (NSArray*)customWindowsToExitFullScreenForWindow:(NSWindow*)window {
     Array result_ = windowDelegate_CustomWindowsToExitFullScreenForWindow([self goID], window);
-    NSMutableArray* objcResult_ = [[NSMutableArray alloc] init];
+    NSMutableArray* objcResult_ = [NSMutableArray arrayWithCapacity:result_.len];
     if (result_.len > 0) {
     	void** result_Data = (void**)result_.data;
     	for (int i = 0; i < result_.len; i++) {

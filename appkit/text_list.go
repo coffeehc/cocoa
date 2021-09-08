@@ -27,17 +27,33 @@ func MakeTextList(ptr unsafe.Pointer) NSTextList {
 	}
 }
 
-func AllocTextList() NSTextList {
-	return MakeTextList(C.C_TextList_Alloc())
-}
-
-func (n NSTextList) InitWithMarkerFormat_Options(format TextListMarkerFormat, mask uint) TextList {
+func (n NSTextList) InitWithMarkerFormat_Options(format TextListMarkerFormat, mask uint) NSTextList {
 	result_ := C.C_NSTextList_InitWithMarkerFormat_Options(n.Ptr(), foundation.NewString(string(format)).Ptr(), C.uint(mask))
 	return MakeTextList(result_)
 }
 
-func (n NSTextList) Init() TextList {
+func AllocTextList() NSTextList {
+	result_ := C.C_NSTextList_AllocTextList()
+	return MakeTextList(result_)
+}
+
+func (n NSTextList) Init() NSTextList {
 	result_ := C.C_NSTextList_Init(n.Ptr())
+	return MakeTextList(result_)
+}
+
+func NewTextList() NSTextList {
+	result_ := C.C_NSTextList_NewTextList()
+	return MakeTextList(result_)
+}
+
+func (n NSTextList) Autorelease() NSTextList {
+	result_ := C.C_NSTextList_Autorelease(n.Ptr())
+	return MakeTextList(result_)
+}
+
+func (n NSTextList) Retain() NSTextList {
+	result_ := C.C_NSTextList_Retain(n.Ptr())
 	return MakeTextList(result_)
 }
 

@@ -118,17 +118,33 @@ func MakeLayoutManager(ptr unsafe.Pointer) NSLayoutManager {
 	}
 }
 
-func AllocLayoutManager() NSLayoutManager {
-	return MakeLayoutManager(C.C_LayoutManager_Alloc())
-}
-
-func (n NSLayoutManager) Init() LayoutManager {
+func (n NSLayoutManager) Init() NSLayoutManager {
 	result_ := C.C_NSLayoutManager_Init(n.Ptr())
 	return MakeLayoutManager(result_)
 }
 
-func (n NSLayoutManager) InitWithCoder(coder foundation.Coder) LayoutManager {
+func (n NSLayoutManager) InitWithCoder(coder foundation.Coder) NSLayoutManager {
 	result_ := C.C_NSLayoutManager_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeLayoutManager(result_)
+}
+
+func AllocLayoutManager() NSLayoutManager {
+	result_ := C.C_NSLayoutManager_AllocLayoutManager()
+	return MakeLayoutManager(result_)
+}
+
+func NewLayoutManager() NSLayoutManager {
+	result_ := C.C_NSLayoutManager_NewLayoutManager()
+	return MakeLayoutManager(result_)
+}
+
+func (n NSLayoutManager) Autorelease() NSLayoutManager {
+	result_ := C.C_NSLayoutManager_Autorelease(n.Ptr())
+	return MakeLayoutManager(result_)
+}
+
+func (n NSLayoutManager) Retain() NSLayoutManager {
+	result_ := C.C_NSLayoutManager_Retain(n.Ptr())
 	return MakeLayoutManager(result_)
 }
 

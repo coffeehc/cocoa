@@ -27,11 +27,27 @@ func MakeDownload(ptr unsafe.Pointer) WKDownload {
 }
 
 func AllocDownload() WKDownload {
-	return MakeDownload(C.C_Download_Alloc())
+	result_ := C.C_WKDownload_AllocDownload()
+	return MakeDownload(result_)
 }
 
-func (w WKDownload) Init() Download {
+func (w WKDownload) Init() WKDownload {
 	result_ := C.C_WKDownload_Init(w.Ptr())
+	return MakeDownload(result_)
+}
+
+func NewDownload() WKDownload {
+	result_ := C.C_WKDownload_NewDownload()
+	return MakeDownload(result_)
+}
+
+func (w WKDownload) Autorelease() WKDownload {
+	result_ := C.C_WKDownload_Autorelease(w.Ptr())
+	return MakeDownload(result_)
+}
+
+func (w WKDownload) Retain() WKDownload {
+	result_ := C.C_WKDownload_Retain(w.Ptr())
 	return MakeDownload(result_)
 }
 

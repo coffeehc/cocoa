@@ -5,9 +5,31 @@ void* C_OperationQueue_Alloc() {
     return [NSOperationQueue alloc];
 }
 
+void* C_NSOperationQueue_AllocOperationQueue() {
+    NSOperationQueue* result_ = [NSOperationQueue alloc];
+    return result_;
+}
+
 void* C_NSOperationQueue_Init(void* ptr) {
     NSOperationQueue* nSOperationQueue = (NSOperationQueue*)ptr;
     NSOperationQueue* result_ = [nSOperationQueue init];
+    return result_;
+}
+
+void* C_NSOperationQueue_NewOperationQueue() {
+    NSOperationQueue* result_ = [NSOperationQueue new];
+    return result_;
+}
+
+void* C_NSOperationQueue_Autorelease(void* ptr) {
+    NSOperationQueue* nSOperationQueue = (NSOperationQueue*)ptr;
+    NSOperationQueue* result_ = [nSOperationQueue autorelease];
+    return result_;
+}
+
+void* C_NSOperationQueue_Retain(void* ptr) {
+    NSOperationQueue* nSOperationQueue = (NSOperationQueue*)ptr;
+    NSOperationQueue* result_ = [nSOperationQueue retain];
     return result_;
 }
 
@@ -18,7 +40,7 @@ void C_NSOperationQueue_AddOperation(void* ptr, void* op) {
 
 void C_NSOperationQueue_AddOperations_WaitUntilFinished(void* ptr, Array ops, bool wait) {
     NSOperationQueue* nSOperationQueue = (NSOperationQueue*)ptr;
-    NSMutableArray* objcOps = [[NSMutableArray alloc] init];
+    NSMutableArray* objcOps = [NSMutableArray arrayWithCapacity:ops.len];
     if (ops.len > 0) {
     	void** opsData = (void**)ops.data;
     	for (int i = 0; i < ops.len; i++) {

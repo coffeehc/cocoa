@@ -6,6 +6,9 @@
 void* C_AffineTransform_Alloc();
 
 void* C_NSAffineTransform_InitWithTransform(void* ptr, void* transform);
+void* C_NSAffineTransform_AllocAffineTransform();
+void* C_NSAffineTransform_Autorelease(void* ptr);
+void* C_NSAffineTransform_Retain(void* ptr);
 void* C_NSAffineTransform_AffineTransform_Transform();
 void C_NSAffineTransform_RotateByDegrees(void* ptr, double angle);
 void C_NSAffineTransform_RotateByRadians(void* ptr, double angle);

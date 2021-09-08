@@ -6,7 +6,11 @@
 void* C_Progress_Alloc();
 
 void* C_NSProgress_InitWithParent_UserInfo(void* ptr, void* parentProgressOrNil, Dictionary userInfoOrNil);
+void* C_NSProgress_AllocProgress();
 void* C_NSProgress_Init(void* ptr);
+void* C_NSProgress_NewProgress();
+void* C_NSProgress_Autorelease(void* ptr);
+void* C_NSProgress_Retain(void* ptr);
 void* C_NSProgress_DiscreteProgressWithTotalUnitCount(long unitCount);
 void* C_NSProgress_ProgressWithTotalUnitCount(long unitCount);
 void* C_NSProgress_ProgressWithTotalUnitCount_Parent_PendingUnitCount(long unitCount, void* parent, long portionOfParentTotalUnitCount);

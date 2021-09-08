@@ -26,11 +26,27 @@ func MakeMethodSignature(ptr unsafe.Pointer) NSMethodSignature {
 }
 
 func AllocMethodSignature() NSMethodSignature {
-	return MakeMethodSignature(C.C_MethodSignature_Alloc())
+	result_ := C.C_NSMethodSignature_AllocMethodSignature()
+	return MakeMethodSignature(result_)
 }
 
-func (n NSMethodSignature) Init() MethodSignature {
+func (n NSMethodSignature) Init() NSMethodSignature {
 	result_ := C.C_NSMethodSignature_Init(n.Ptr())
+	return MakeMethodSignature(result_)
+}
+
+func NewMethodSignature() NSMethodSignature {
+	result_ := C.C_NSMethodSignature_NewMethodSignature()
+	return MakeMethodSignature(result_)
+}
+
+func (n NSMethodSignature) Autorelease() NSMethodSignature {
+	result_ := C.C_NSMethodSignature_Autorelease(n.Ptr())
+	return MakeMethodSignature(result_)
+}
+
+func (n NSMethodSignature) Retain() NSMethodSignature {
+	result_ := C.C_NSMethodSignature_Retain(n.Ptr())
 	return MakeMethodSignature(result_)
 }
 

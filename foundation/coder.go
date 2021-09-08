@@ -71,11 +71,27 @@ func MakeCoder(ptr unsafe.Pointer) NSCoder {
 }
 
 func AllocCoder() NSCoder {
-	return MakeCoder(C.C_Coder_Alloc())
+	result_ := C.C_NSCoder_AllocCoder()
+	return MakeCoder(result_)
 }
 
-func (n NSCoder) Init() Coder {
+func (n NSCoder) Init() NSCoder {
 	result_ := C.C_NSCoder_Init(n.Ptr())
+	return MakeCoder(result_)
+}
+
+func NewCoder() NSCoder {
+	result_ := C.C_NSCoder_NewCoder()
+	return MakeCoder(result_)
+}
+
+func (n NSCoder) Autorelease() NSCoder {
+	result_ := C.C_NSCoder_Autorelease(n.Ptr())
+	return MakeCoder(result_)
+}
+
+func (n NSCoder) Retain() NSCoder {
+	result_ := C.C_NSCoder_Retain(n.Ptr())
 	return MakeCoder(result_)
 }
 

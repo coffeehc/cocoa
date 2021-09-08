@@ -57,22 +57,38 @@ func MakeLevelIndicator(ptr unsafe.Pointer) NSLevelIndicator {
 	}
 }
 
-func AllocLevelIndicator() NSLevelIndicator {
-	return MakeLevelIndicator(C.C_LevelIndicator_Alloc())
-}
-
-func (n NSLevelIndicator) InitWithFrame(frameRect foundation.Rect) LevelIndicator {
+func (n NSLevelIndicator) InitWithFrame(frameRect foundation.Rect) NSLevelIndicator {
 	result_ := C.C_NSLevelIndicator_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeLevelIndicator(result_)
 }
 
-func (n NSLevelIndicator) InitWithCoder(coder foundation.Coder) LevelIndicator {
+func (n NSLevelIndicator) InitWithCoder(coder foundation.Coder) NSLevelIndicator {
 	result_ := C.C_NSLevelIndicator_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeLevelIndicator(result_)
 }
 
-func (n NSLevelIndicator) Init() LevelIndicator {
+func (n NSLevelIndicator) Init() NSLevelIndicator {
 	result_ := C.C_NSLevelIndicator_Init(n.Ptr())
+	return MakeLevelIndicator(result_)
+}
+
+func AllocLevelIndicator() NSLevelIndicator {
+	result_ := C.C_NSLevelIndicator_AllocLevelIndicator()
+	return MakeLevelIndicator(result_)
+}
+
+func NewLevelIndicator() NSLevelIndicator {
+	result_ := C.C_NSLevelIndicator_NewLevelIndicator()
+	return MakeLevelIndicator(result_)
+}
+
+func (n NSLevelIndicator) Autorelease() NSLevelIndicator {
+	result_ := C.C_NSLevelIndicator_Autorelease(n.Ptr())
+	return MakeLevelIndicator(result_)
+}
+
+func (n NSLevelIndicator) Retain() NSLevelIndicator {
+	result_ := C.C_NSLevelIndicator_Retain(n.Ptr())
 	return MakeLevelIndicator(result_)
 }
 

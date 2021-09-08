@@ -38,11 +38,7 @@ func MakeFontDescriptor(ptr unsafe.Pointer) NSFontDescriptor {
 	}
 }
 
-func AllocFontDescriptor() NSFontDescriptor {
-	return MakeFontDescriptor(C.C_FontDescriptor_Alloc())
-}
-
-func (n NSFontDescriptor) InitWithFontAttributes(attributes map[FontDescriptorAttributeName]objc.Object) FontDescriptor {
+func (n NSFontDescriptor) InitWithFontAttributes(attributes map[FontDescriptorAttributeName]objc.Object) NSFontDescriptor {
 	var cAttributes C.Dictionary
 	if len(attributes) > 0 {
 		cAttributesKeyData := make([]unsafe.Pointer, len(attributes))
@@ -61,13 +57,33 @@ func (n NSFontDescriptor) InitWithFontAttributes(attributes map[FontDescriptorAt
 	return MakeFontDescriptor(result_)
 }
 
-func (n NSFontDescriptor) FontDescriptorWithDesign(design FontDescriptorSystemDesign) FontDescriptor {
+func (n NSFontDescriptor) FontDescriptorWithDesign(design FontDescriptorSystemDesign) NSFontDescriptor {
 	result_ := C.C_NSFontDescriptor_FontDescriptorWithDesign(n.Ptr(), foundation.NewString(string(design)).Ptr())
 	return MakeFontDescriptor(result_)
 }
 
-func (n NSFontDescriptor) Init() FontDescriptor {
+func AllocFontDescriptor() NSFontDescriptor {
+	result_ := C.C_NSFontDescriptor_AllocFontDescriptor()
+	return MakeFontDescriptor(result_)
+}
+
+func (n NSFontDescriptor) Init() NSFontDescriptor {
 	result_ := C.C_NSFontDescriptor_Init(n.Ptr())
+	return MakeFontDescriptor(result_)
+}
+
+func NewFontDescriptor() NSFontDescriptor {
+	result_ := C.C_NSFontDescriptor_NewFontDescriptor()
+	return MakeFontDescriptor(result_)
+}
+
+func (n NSFontDescriptor) Autorelease() NSFontDescriptor {
+	result_ := C.C_NSFontDescriptor_Autorelease(n.Ptr())
+	return MakeFontDescriptor(result_)
+}
+
+func (n NSFontDescriptor) Retain() NSFontDescriptor {
+	result_ := C.C_NSFontDescriptor_Retain(n.Ptr())
 	return MakeFontDescriptor(result_)
 }
 

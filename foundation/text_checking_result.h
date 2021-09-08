@@ -5,7 +5,11 @@
 
 void* C_TextCheckingResult_Alloc();
 
+void* C_NSTextCheckingResult_AllocTextCheckingResult();
 void* C_NSTextCheckingResult_Init(void* ptr);
+void* C_NSTextCheckingResult_NewTextCheckingResult();
+void* C_NSTextCheckingResult_Autorelease(void* ptr);
+void* C_NSTextCheckingResult_Retain(void* ptr);
 NSRange C_NSTextCheckingResult_RangeAtIndex(void* ptr, unsigned int idx);
 void* C_NSTextCheckingResult_TextCheckingResult_ReplacementCheckingResultWithRange_ReplacementString(NSRange _range, void* replacementString);
 void* C_NSTextCheckingResult_TextCheckingResult_LinkCheckingResultWithRange_URL(NSRange _range, void* url);

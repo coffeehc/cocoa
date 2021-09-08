@@ -24,7 +24,18 @@ func MakeContentWorld(ptr unsafe.Pointer) WKContentWorld {
 }
 
 func AllocContentWorld() WKContentWorld {
-	return MakeContentWorld(C.C_ContentWorld_Alloc())
+	result_ := C.C_WKContentWorld_AllocContentWorld()
+	return MakeContentWorld(result_)
+}
+
+func (w WKContentWorld) Autorelease() WKContentWorld {
+	result_ := C.C_WKContentWorld_Autorelease(w.Ptr())
+	return MakeContentWorld(result_)
+}
+
+func (w WKContentWorld) Retain() WKContentWorld {
+	result_ := C.C_WKContentWorld_Retain(w.Ptr())
+	return MakeContentWorld(result_)
 }
 
 func ContentWorld_WorldWithName(name string) ContentWorld {

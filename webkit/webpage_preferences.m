@@ -5,9 +5,31 @@ void* C_WebpagePreferences_Alloc() {
     return [WKWebpagePreferences alloc];
 }
 
+void* C_WKWebpagePreferences_AllocWebpagePreferences() {
+    WKWebpagePreferences* result_ = [WKWebpagePreferences alloc];
+    return result_;
+}
+
 void* C_WKWebpagePreferences_Init(void* ptr) {
     WKWebpagePreferences* wKWebpagePreferences = (WKWebpagePreferences*)ptr;
     WKWebpagePreferences* result_ = [wKWebpagePreferences init];
+    return result_;
+}
+
+void* C_WKWebpagePreferences_NewWebpagePreferences() {
+    WKWebpagePreferences* result_ = [WKWebpagePreferences new];
+    return result_;
+}
+
+void* C_WKWebpagePreferences_Autorelease(void* ptr) {
+    WKWebpagePreferences* wKWebpagePreferences = (WKWebpagePreferences*)ptr;
+    WKWebpagePreferences* result_ = [wKWebpagePreferences autorelease];
+    return result_;
+}
+
+void* C_WKWebpagePreferences_Retain(void* ptr) {
+    WKWebpagePreferences* wKWebpagePreferences = (WKWebpagePreferences*)ptr;
+    WKWebpagePreferences* result_ = [wKWebpagePreferences retain];
     return result_;
 }
 

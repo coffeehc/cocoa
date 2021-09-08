@@ -11,6 +11,23 @@ void* C_NSScriptCommandDescription_InitWithCoder(void* ptr, void* inCoder) {
     return result_;
 }
 
+void* C_NSScriptCommandDescription_AllocScriptCommandDescription() {
+    NSScriptCommandDescription* result_ = [NSScriptCommandDescription alloc];
+    return result_;
+}
+
+void* C_NSScriptCommandDescription_Autorelease(void* ptr) {
+    NSScriptCommandDescription* nSScriptCommandDescription = (NSScriptCommandDescription*)ptr;
+    NSScriptCommandDescription* result_ = [nSScriptCommandDescription autorelease];
+    return result_;
+}
+
+void* C_NSScriptCommandDescription_Retain(void* ptr) {
+    NSScriptCommandDescription* nSScriptCommandDescription = (NSScriptCommandDescription*)ptr;
+    NSScriptCommandDescription* result_ = [nSScriptCommandDescription retain];
+    return result_;
+}
+
 bool C_NSScriptCommandDescription_IsOptionalArgumentWithName(void* ptr, void* argumentName) {
     NSScriptCommandDescription* nSScriptCommandDescription = (NSScriptCommandDescription*)ptr;
     BOOL result_ = [nSScriptCommandDescription isOptionalArgumentWithName:(NSString*)argumentName];

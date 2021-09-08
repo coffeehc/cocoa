@@ -57,18 +57,18 @@ func initAndRun() {
 }
 
 func setMainMenu(app appkit.Application) {
-	menu := appkit.AllocMenu().InitWithTitle("main")
+	menu := appkit.AllocMenu().InitWithTitle("main").Autorelease()
 	app.SetMainMenu(menu)
 
 	mainMenuItem := appkits.NewMenuItem("", "", nil)
-	mainMenuMenu := appkit.AllocMenu().InitWithTitle("App")
+	mainMenuMenu := appkit.AllocMenu().InitWithTitle("App").Autorelease()
 	mainMenuMenu.AddItem(appkits.NewMenuItemWithAction("Hide", "h", app.Hide))
 	mainMenuMenu.AddItem(appkits.NewMenuItemWithAction("Quit", "q", app.Terminate))
 	mainMenuItem.SetSubmenu(mainMenuMenu)
 	menu.AddItem(mainMenuItem)
 
 	testMenuItem := appkits.NewMenuItem("", "", nil)
-	testMenu := appkit.AllocMenu().InitWithTitle("Edit")
+	testMenu := appkit.AllocMenu().InitWithTitle("Edit").Autorelease()
 	testMenu.AddItem(appkits.NewMenuItem("Select All", "a", foundation.SelectorFromString("selectAll:")))
 	testMenu.AddItem(appkit.MenuItem_SeparatorItem())
 	testMenu.AddItem(appkits.NewMenuItem("Copy", "c", foundation.SelectorFromString("copy:")))
@@ -86,7 +86,7 @@ func setSystemBar(app appkit.Application) {
 	button := item.Button()
 	button.SetTitle("TestTray")
 
-	menu := appkit.AllocMenu().InitWithTitle("main")
+	menu := appkit.AllocMenu().InitWithTitle("main").Autorelease()
 	menu.AddItem(appkits.NewMenuItemWithAction("Hide", "h", app.Hide))
 	menu.AddItem(appkits.NewMenuItemWithAction("Quit", "q", app.Terminate))
 	item.SetMenu(menu)

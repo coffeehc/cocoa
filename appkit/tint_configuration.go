@@ -24,22 +24,38 @@ func MakeTintConfiguration(ptr unsafe.Pointer) NSTintConfiguration {
 	}
 }
 
-func AllocTintConfiguration() NSTintConfiguration {
-	return MakeTintConfiguration(C.C_TintConfiguration_Alloc())
-}
-
-func (n NSTintConfiguration) Init() TintConfiguration {
-	result_ := C.C_NSTintConfiguration_Init(n.Ptr())
-	return MakeTintConfiguration(result_)
-}
-
-func TintConfigurationWithFixedColor(color Color) TintConfiguration {
+func TintConfigurationWithFixedColor(color Color) NSTintConfiguration {
 	result_ := C.C_NSTintConfiguration_TintConfigurationWithFixedColor(objc.ExtractPtr(color))
 	return MakeTintConfiguration(result_)
 }
 
-func TintConfigurationWithPreferredColor(color Color) TintConfiguration {
+func TintConfigurationWithPreferredColor(color Color) NSTintConfiguration {
 	result_ := C.C_NSTintConfiguration_TintConfigurationWithPreferredColor(objc.ExtractPtr(color))
+	return MakeTintConfiguration(result_)
+}
+
+func AllocTintConfiguration() NSTintConfiguration {
+	result_ := C.C_NSTintConfiguration_AllocTintConfiguration()
+	return MakeTintConfiguration(result_)
+}
+
+func (n NSTintConfiguration) Init() NSTintConfiguration {
+	result_ := C.C_NSTintConfiguration_Init(n.Ptr())
+	return MakeTintConfiguration(result_)
+}
+
+func NewTintConfiguration() NSTintConfiguration {
+	result_ := C.C_NSTintConfiguration_NewTintConfiguration()
+	return MakeTintConfiguration(result_)
+}
+
+func (n NSTintConfiguration) Autorelease() NSTintConfiguration {
+	result_ := C.C_NSTintConfiguration_Autorelease(n.Ptr())
+	return MakeTintConfiguration(result_)
+}
+
+func (n NSTintConfiguration) Retain() NSTintConfiguration {
+	result_ := C.C_NSTintConfiguration_Retain(n.Ptr())
 	return MakeTintConfiguration(result_)
 }
 

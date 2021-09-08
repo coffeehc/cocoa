@@ -5,7 +5,11 @@
 
 void* C_LayoutGuide_Alloc();
 
+void* C_NSLayoutGuide_AllocLayoutGuide();
 void* C_NSLayoutGuide_Init(void* ptr);
+void* C_NSLayoutGuide_NewLayoutGuide();
+void* C_NSLayoutGuide_Autorelease(void* ptr);
+void* C_NSLayoutGuide_Retain(void* ptr);
 Array C_NSLayoutGuide_ConstraintsAffectingLayoutForOrientation(void* ptr, int orientation);
 void* C_NSLayoutGuide_Identifier(void* ptr);
 void C_NSLayoutGuide_SetIdentifier(void* ptr, void* value);

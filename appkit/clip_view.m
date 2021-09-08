@@ -23,6 +23,28 @@ void* C_NSClipView_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSClipView_AllocClipView() {
+    NSClipView* result_ = [NSClipView alloc];
+    return result_;
+}
+
+void* C_NSClipView_NewClipView() {
+    NSClipView* result_ = [NSClipView new];
+    return result_;
+}
+
+void* C_NSClipView_Autorelease(void* ptr) {
+    NSClipView* nSClipView = (NSClipView*)ptr;
+    NSClipView* result_ = [nSClipView autorelease];
+    return result_;
+}
+
+void* C_NSClipView_Retain(void* ptr) {
+    NSClipView* nSClipView = (NSClipView*)ptr;
+    NSClipView* result_ = [nSClipView retain];
+    return result_;
+}
+
 void C_NSClipView_ScrollToPoint(void* ptr, CGPoint newOrigin) {
     NSClipView* nSClipView = (NSClipView*)ptr;
     [nSClipView scrollToPoint:newOrigin];

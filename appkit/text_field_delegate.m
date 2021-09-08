@@ -18,7 +18,7 @@
     	candidatesArray.len = candidatescount;
     }
     Array result_ = textFieldDelegate_TextField_TextView_Candidates_ForSelectedRange([self goID], textField, textView, candidatesArray, selectedRange);
-    NSMutableArray* objcResult_ = [[NSMutableArray alloc] init];
+    NSMutableArray* objcResult_ = [NSMutableArray arrayWithCapacity:result_.len];
     if (result_.len > 0) {
     	void** result_Data = (void**)result_.data;
     	for (int i = 0; i < result_.len; i++) {
@@ -31,7 +31,7 @@
 
 - (NSArray*)textField:(NSTextField*)textField textView:(NSTextView*)textView candidatesForSelectedRange:(NSRange)selectedRange {
     Array result_ = textFieldDelegate_TextField_TextView_CandidatesForSelectedRange([self goID], textField, textView, selectedRange);
-    NSMutableArray* objcResult_ = [[NSMutableArray alloc] init];
+    NSMutableArray* objcResult_ = [NSMutableArray arrayWithCapacity:result_.len];
     if (result_.len > 0) {
     	void** result_Data = (void**)result_.data;
     	for (int i = 0; i < result_.len; i++) {

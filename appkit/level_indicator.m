@@ -23,6 +23,28 @@ void* C_NSLevelIndicator_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSLevelIndicator_AllocLevelIndicator() {
+    NSLevelIndicator* result_ = [NSLevelIndicator alloc];
+    return result_;
+}
+
+void* C_NSLevelIndicator_NewLevelIndicator() {
+    NSLevelIndicator* result_ = [NSLevelIndicator new];
+    return result_;
+}
+
+void* C_NSLevelIndicator_Autorelease(void* ptr) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    NSLevelIndicator* result_ = [nSLevelIndicator autorelease];
+    return result_;
+}
+
+void* C_NSLevelIndicator_Retain(void* ptr) {
+    NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
+    NSLevelIndicator* result_ = [nSLevelIndicator retain];
+    return result_;
+}
+
 double C_NSLevelIndicator_TickMarkValueAtIndex(void* ptr, int index) {
     NSLevelIndicator* nSLevelIndicator = (NSLevelIndicator*)ptr;
     double result_ = [nSLevelIndicator tickMarkValueAtIndex:index];

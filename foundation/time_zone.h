@@ -5,13 +5,16 @@
 
 void* C_TimeZone_Alloc();
 
-void* C_NSTimeZone_InitWithName(void* ptr, void* tzName);
-void* C_NSTimeZone_InitWithName_Data(void* ptr, void* tzName, void* aData);
-void C_NSTimeZone_ResetSystemTimeZone();
 void* C_NSTimeZone_TimeZoneWithName(void* tzName);
 void* C_NSTimeZone_TimeZoneWithName_Data(void* tzName, void* aData);
+void* C_NSTimeZone_InitWithName(void* ptr, void* tzName);
+void* C_NSTimeZone_InitWithName_Data(void* ptr, void* tzName, void* aData);
 void* C_NSTimeZone_TimeZoneWithAbbreviation(void* abbreviation);
 void* C_NSTimeZone_TimeZoneForSecondsFromGMT(int seconds);
+void* C_NSTimeZone_AllocTimeZone();
+void* C_NSTimeZone_Autorelease(void* ptr);
+void* C_NSTimeZone_Retain(void* ptr);
+void C_NSTimeZone_ResetSystemTimeZone();
 void* C_NSTimeZone_AbbreviationForDate(void* ptr, void* aDate);
 int C_NSTimeZone_SecondsFromGMTForDate(void* ptr, void* aDate);
 bool C_NSTimeZone_IsDaylightSavingTimeForDate(void* ptr, void* aDate);

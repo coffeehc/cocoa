@@ -5,6 +5,11 @@ void* C_Image_Alloc() {
     return [NSImage alloc];
 }
 
+void* C_NSImage_ImageWithSystemSymbolName_AccessibilityDescription(void* symbolName, void* description) {
+    NSImage* result_ = [NSImage imageWithSystemSymbolName:(NSString*)symbolName accessibilityDescription:(NSString*)description];
+    return result_;
+}
+
 void* C_NSImage_InitByReferencingFile(void* ptr, void* fileName) {
     NSImage* nSImage = (NSImage*)ptr;
     NSImage* result_ = [nSImage initByReferencingFile:(NSString*)fileName];
@@ -65,9 +70,31 @@ void* C_NSImage_InitWithSize(void* ptr, CGSize size) {
     return result_;
 }
 
+void* C_NSImage_AllocImage() {
+    NSImage* result_ = [NSImage alloc];
+    return result_;
+}
+
 void* C_NSImage_Init(void* ptr) {
     NSImage* nSImage = (NSImage*)ptr;
     NSImage* result_ = [nSImage init];
+    return result_;
+}
+
+void* C_NSImage_NewImage() {
+    NSImage* result_ = [NSImage new];
+    return result_;
+}
+
+void* C_NSImage_Autorelease(void* ptr) {
+    NSImage* nSImage = (NSImage*)ptr;
+    NSImage* result_ = [nSImage autorelease];
+    return result_;
+}
+
+void* C_NSImage_Retain(void* ptr) {
+    NSImage* nSImage = (NSImage*)ptr;
+    NSImage* result_ = [nSImage retain];
     return result_;
 }
 
@@ -85,11 +112,6 @@ bool C_NSImage_SetName(void* ptr, void* _string) {
 void* C_NSImage_Name(void* ptr) {
     NSImage* nSImage = (NSImage*)ptr;
     NSImageName result_ = [nSImage name];
-    return result_;
-}
-
-void* C_NSImage_ImageWithSystemSymbolName_AccessibilityDescription(void* symbolName, void* description) {
-    NSImage* result_ = [NSImage imageWithSystemSymbolName:(NSString*)symbolName accessibilityDescription:(NSString*)description];
     return result_;
 }
 
@@ -111,7 +133,7 @@ void C_NSImage_AddRepresentation(void* ptr, void* imageRep) {
 
 void C_NSImage_AddRepresentations(void* ptr, Array imageReps) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSMutableArray* objcImageReps = [[NSMutableArray alloc] init];
+    NSMutableArray* objcImageReps = [NSMutableArray arrayWithCapacity:imageReps.len];
     if (imageReps.len > 0) {
     	void** imageRepsData = (void**)imageReps.data;
     	for (int i = 0; i < imageReps.len; i++) {
@@ -129,7 +151,7 @@ void C_NSImage_RemoveRepresentation(void* ptr, void* imageRep) {
 
 void* C_NSImage_BestRepresentationForRect_Context_Hints(void* ptr, CGRect rect, void* referenceContext, Dictionary hints) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSMutableDictionary* objcHints = [[NSMutableDictionary alloc] initWithCapacity: hints.len];
+    NSMutableDictionary* objcHints = [NSMutableDictionary dictionaryWithCapacity:hints.len];
     if (hints.len > 0) {
     	void** hintsKeyData = (void**)hints.key_data;
     	void** hintsValueData = (void**)hints.value_data;
@@ -160,7 +182,7 @@ void C_NSImage_DrawInRect_FromRect_Operation_Fraction(void* ptr, CGRect rect, CG
 
 void C_NSImage_DrawInRect_FromRect_Operation_Fraction_RespectFlipped_Hints(void* ptr, CGRect dstSpacePortionRect, CGRect srcSpacePortionRect, unsigned int op, double requestedAlpha, bool respectContextIsFlipped, Dictionary hints) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSMutableDictionary* objcHints = [[NSMutableDictionary alloc] initWithCapacity: hints.len];
+    NSMutableDictionary* objcHints = [NSMutableDictionary dictionaryWithCapacity:hints.len];
     if (hints.len > 0) {
     	void** hintsKeyData = (void**)hints.key_data;
     	void** hintsValueData = (void**)hints.value_data;
@@ -212,7 +234,7 @@ void C_NSImage_CancelIncrementalLoad(void* ptr) {
 
 bool C_NSImage_HitTestRect_WithImageDestinationRect_Context_Hints_Flipped(void* ptr, CGRect testRectDestSpace, CGRect imageRectDestSpace, void* context, Dictionary hints, bool flipped) {
     NSImage* nSImage = (NSImage*)ptr;
-    NSMutableDictionary* objcHints = [[NSMutableDictionary alloc] initWithCapacity: hints.len];
+    NSMutableDictionary* objcHints = [NSMutableDictionary dictionaryWithCapacity:hints.len];
     if (hints.len > 0) {
     	void** hintsKeyData = (void**)hints.key_data;
     	void** hintsValueData = (void**)hints.value_data;

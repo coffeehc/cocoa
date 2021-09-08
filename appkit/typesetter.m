@@ -5,9 +5,31 @@ void* C_Typesetter_Alloc() {
     return [NSTypesetter alloc];
 }
 
+void* C_NSTypesetter_AllocTypesetter() {
+    NSTypesetter* result_ = [NSTypesetter alloc];
+    return result_;
+}
+
 void* C_NSTypesetter_Init(void* ptr) {
     NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
     NSTypesetter* result_ = [nSTypesetter init];
+    return result_;
+}
+
+void* C_NSTypesetter_NewTypesetter() {
+    NSTypesetter* result_ = [NSTypesetter new];
+    return result_;
+}
+
+void* C_NSTypesetter_Autorelease(void* ptr) {
+    NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
+    NSTypesetter* result_ = [nSTypesetter autorelease];
+    return result_;
+}
+
+void* C_NSTypesetter_Retain(void* ptr) {
+    NSTypesetter* nSTypesetter = (NSTypesetter*)ptr;
+    NSTypesetter* result_ = [nSTypesetter retain];
     return result_;
 }
 

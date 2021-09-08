@@ -5,9 +5,31 @@ void* C_ClassDescription_Alloc() {
     return [NSClassDescription alloc];
 }
 
+void* C_NSClassDescription_AllocClassDescription() {
+    NSClassDescription* result_ = [NSClassDescription alloc];
+    return result_;
+}
+
 void* C_NSClassDescription_Init(void* ptr) {
     NSClassDescription* nSClassDescription = (NSClassDescription*)ptr;
     NSClassDescription* result_ = [nSClassDescription init];
+    return result_;
+}
+
+void* C_NSClassDescription_NewClassDescription() {
+    NSClassDescription* result_ = [NSClassDescription new];
+    return result_;
+}
+
+void* C_NSClassDescription_Autorelease(void* ptr) {
+    NSClassDescription* nSClassDescription = (NSClassDescription*)ptr;
+    NSClassDescription* result_ = [nSClassDescription autorelease];
+    return result_;
+}
+
+void* C_NSClassDescription_Retain(void* ptr) {
+    NSClassDescription* nSClassDescription = (NSClassDescription*)ptr;
+    NSClassDescription* result_ = [nSClassDescription retain];
     return result_;
 }
 

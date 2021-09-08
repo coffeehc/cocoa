@@ -61,11 +61,27 @@ func MakeDateComponents(ptr unsafe.Pointer) NSDateComponents {
 }
 
 func AllocDateComponents() NSDateComponents {
-	return MakeDateComponents(C.C_DateComponents_Alloc())
+	result_ := C.C_NSDateComponents_AllocDateComponents()
+	return MakeDateComponents(result_)
 }
 
-func (n NSDateComponents) Init() DateComponents {
+func (n NSDateComponents) Init() NSDateComponents {
 	result_ := C.C_NSDateComponents_Init(n.Ptr())
+	return MakeDateComponents(result_)
+}
+
+func NewDateComponents() NSDateComponents {
+	result_ := C.C_NSDateComponents_NewDateComponents()
+	return MakeDateComponents(result_)
+}
+
+func (n NSDateComponents) Autorelease() NSDateComponents {
+	result_ := C.C_NSDateComponents_Autorelease(n.Ptr())
+	return MakeDateComponents(result_)
+}
+
+func (n NSDateComponents) Retain() NSDateComponents {
+	result_ := C.C_NSDateComponents_Retain(n.Ptr())
 	return MakeDateComponents(result_)
 }
 

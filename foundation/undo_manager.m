@@ -5,9 +5,31 @@ void* C_UndoManager_Alloc() {
     return [NSUndoManager alloc];
 }
 
+void* C_NSUndoManager_AllocUndoManager() {
+    NSUndoManager* result_ = [NSUndoManager alloc];
+    return result_;
+}
+
 void* C_NSUndoManager_Init(void* ptr) {
     NSUndoManager* nSUndoManager = (NSUndoManager*)ptr;
     NSUndoManager* result_ = [nSUndoManager init];
+    return result_;
+}
+
+void* C_NSUndoManager_NewUndoManager() {
+    NSUndoManager* result_ = [NSUndoManager new];
+    return result_;
+}
+
+void* C_NSUndoManager_Autorelease(void* ptr) {
+    NSUndoManager* nSUndoManager = (NSUndoManager*)ptr;
+    NSUndoManager* result_ = [nSUndoManager autorelease];
+    return result_;
+}
+
+void* C_NSUndoManager_Retain(void* ptr) {
+    NSUndoManager* nSUndoManager = (NSUndoManager*)ptr;
+    NSUndoManager* result_ = [nSUndoManager retain];
     return result_;
 }
 
@@ -190,7 +212,7 @@ Array C_NSUndoManager_RunLoopModes(void* ptr) {
 
 void C_NSUndoManager_SetRunLoopModes(void* ptr, Array value) {
     NSUndoManager* nSUndoManager = (NSUndoManager*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

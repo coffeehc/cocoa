@@ -5,9 +5,31 @@ void* C_LayoutAnchor_Alloc() {
     return [NSLayoutAnchor alloc];
 }
 
+void* C_NSLayoutAnchor_AllocLayoutAnchor() {
+    NSLayoutAnchor* result_ = [NSLayoutAnchor alloc];
+    return result_;
+}
+
 void* C_NSLayoutAnchor_Init(void* ptr) {
     NSLayoutAnchor* nSLayoutAnchor = (NSLayoutAnchor*)ptr;
     NSLayoutAnchor* result_ = [nSLayoutAnchor init];
+    return result_;
+}
+
+void* C_NSLayoutAnchor_NewLayoutAnchor() {
+    NSLayoutAnchor* result_ = [NSLayoutAnchor new];
+    return result_;
+}
+
+void* C_NSLayoutAnchor_Autorelease(void* ptr) {
+    NSLayoutAnchor* nSLayoutAnchor = (NSLayoutAnchor*)ptr;
+    NSLayoutAnchor* result_ = [nSLayoutAnchor autorelease];
+    return result_;
+}
+
+void* C_NSLayoutAnchor_Retain(void* ptr) {
+    NSLayoutAnchor* nSLayoutAnchor = (NSLayoutAnchor*)ptr;
+    NSLayoutAnchor* result_ = [nSLayoutAnchor retain];
     return result_;
 }
 

@@ -40,11 +40,27 @@ func MakeCollectionViewGridLayout(ptr unsafe.Pointer) NSCollectionViewGridLayout
 }
 
 func AllocCollectionViewGridLayout() NSCollectionViewGridLayout {
-	return MakeCollectionViewGridLayout(C.C_CollectionViewGridLayout_Alloc())
+	result_ := C.C_NSCollectionViewGridLayout_AllocCollectionViewGridLayout()
+	return MakeCollectionViewGridLayout(result_)
 }
 
-func (n NSCollectionViewGridLayout) Init() CollectionViewGridLayout {
+func (n NSCollectionViewGridLayout) Init() NSCollectionViewGridLayout {
 	result_ := C.C_NSCollectionViewGridLayout_Init(n.Ptr())
+	return MakeCollectionViewGridLayout(result_)
+}
+
+func NewCollectionViewGridLayout() NSCollectionViewGridLayout {
+	result_ := C.C_NSCollectionViewGridLayout_NewCollectionViewGridLayout()
+	return MakeCollectionViewGridLayout(result_)
+}
+
+func (n NSCollectionViewGridLayout) Autorelease() NSCollectionViewGridLayout {
+	result_ := C.C_NSCollectionViewGridLayout_Autorelease(n.Ptr())
+	return MakeCollectionViewGridLayout(result_)
+}
+
+func (n NSCollectionViewGridLayout) Retain() NSCollectionViewGridLayout {
+	result_ := C.C_NSCollectionViewGridLayout_Retain(n.Ptr())
 	return MakeCollectionViewGridLayout(result_)
 }
 

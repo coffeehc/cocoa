@@ -5,9 +5,31 @@ void* C_SnapshotConfiguration_Alloc() {
     return [WKSnapshotConfiguration alloc];
 }
 
+void* C_WKSnapshotConfiguration_AllocSnapshotConfiguration() {
+    WKSnapshotConfiguration* result_ = [WKSnapshotConfiguration alloc];
+    return result_;
+}
+
 void* C_WKSnapshotConfiguration_Init(void* ptr) {
     WKSnapshotConfiguration* wKSnapshotConfiguration = (WKSnapshotConfiguration*)ptr;
     WKSnapshotConfiguration* result_ = [wKSnapshotConfiguration init];
+    return result_;
+}
+
+void* C_WKSnapshotConfiguration_NewSnapshotConfiguration() {
+    WKSnapshotConfiguration* result_ = [WKSnapshotConfiguration new];
+    return result_;
+}
+
+void* C_WKSnapshotConfiguration_Autorelease(void* ptr) {
+    WKSnapshotConfiguration* wKSnapshotConfiguration = (WKSnapshotConfiguration*)ptr;
+    WKSnapshotConfiguration* result_ = [wKSnapshotConfiguration autorelease];
+    return result_;
+}
+
+void* C_WKSnapshotConfiguration_Retain(void* ptr) {
+    WKSnapshotConfiguration* wKSnapshotConfiguration = (WKSnapshotConfiguration*)ptr;
+    WKSnapshotConfiguration* result_ = [wKSnapshotConfiguration retain];
     return result_;
 }
 

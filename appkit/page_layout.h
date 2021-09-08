@@ -5,7 +5,11 @@
 
 void* C_PageLayout_Alloc();
 
+void* C_NSPageLayout_AllocPageLayout();
 void* C_NSPageLayout_Init(void* ptr);
+void* C_NSPageLayout_NewPageLayout();
+void* C_NSPageLayout_Autorelease(void* ptr);
+void* C_NSPageLayout_Retain(void* ptr);
 void* C_NSPageLayout_PageLayout_();
 int C_NSPageLayout_RunModal(void* ptr);
 int C_NSPageLayout_RunModalWithPrintInfo(void* ptr, void* printInfo);

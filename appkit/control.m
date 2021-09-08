@@ -23,6 +23,28 @@ void* C_NSControl_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSControl_AllocControl() {
+    NSControl* result_ = [NSControl alloc];
+    return result_;
+}
+
+void* C_NSControl_NewControl() {
+    NSControl* result_ = [NSControl new];
+    return result_;
+}
+
+void* C_NSControl_Autorelease(void* ptr) {
+    NSControl* nSControl = (NSControl*)ptr;
+    NSControl* result_ = [nSControl autorelease];
+    return result_;
+}
+
+void* C_NSControl_Retain(void* ptr) {
+    NSControl* nSControl = (NSControl*)ptr;
+    NSControl* result_ = [nSControl retain];
+    return result_;
+}
+
 void C_NSControl_TakeDoubleValueFrom(void* ptr, void* sender) {
     NSControl* nSControl = (NSControl*)ptr;
     [nSControl takeDoubleValueFrom:(id)sender];

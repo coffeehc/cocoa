@@ -23,12 +23,23 @@ func MakeCollectionLayoutSize(ptr unsafe.Pointer) NSCollectionLayoutSize {
 	}
 }
 
-func AllocCollectionLayoutSize() NSCollectionLayoutSize {
-	return MakeCollectionLayoutSize(C.C_CollectionLayoutSize_Alloc())
+func CollectionLayoutSize_SizeWithWidthDimension_HeightDimension(width CollectionLayoutDimension, height CollectionLayoutDimension) NSCollectionLayoutSize {
+	result_ := C.C_NSCollectionLayoutSize_CollectionLayoutSize_SizeWithWidthDimension_HeightDimension(objc.ExtractPtr(width), objc.ExtractPtr(height))
+	return MakeCollectionLayoutSize(result_)
 }
 
-func CollectionLayoutSize_SizeWithWidthDimension_HeightDimension(width CollectionLayoutDimension, height CollectionLayoutDimension) CollectionLayoutSize {
-	result_ := C.C_NSCollectionLayoutSize_CollectionLayoutSize_SizeWithWidthDimension_HeightDimension(objc.ExtractPtr(width), objc.ExtractPtr(height))
+func AllocCollectionLayoutSize() NSCollectionLayoutSize {
+	result_ := C.C_NSCollectionLayoutSize_AllocCollectionLayoutSize()
+	return MakeCollectionLayoutSize(result_)
+}
+
+func (n NSCollectionLayoutSize) Autorelease() NSCollectionLayoutSize {
+	result_ := C.C_NSCollectionLayoutSize_Autorelease(n.Ptr())
+	return MakeCollectionLayoutSize(result_)
+}
+
+func (n NSCollectionLayoutSize) Retain() NSCollectionLayoutSize {
+	result_ := C.C_NSCollectionLayoutSize_Retain(n.Ptr())
 	return MakeCollectionLayoutSize(result_)
 }
 

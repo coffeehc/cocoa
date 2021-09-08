@@ -55,11 +55,27 @@ func MakeUndoManager(ptr unsafe.Pointer) NSUndoManager {
 }
 
 func AllocUndoManager() NSUndoManager {
-	return MakeUndoManager(C.C_UndoManager_Alloc())
+	result_ := C.C_NSUndoManager_AllocUndoManager()
+	return MakeUndoManager(result_)
 }
 
-func (n NSUndoManager) Init() UndoManager {
+func (n NSUndoManager) Init() NSUndoManager {
 	result_ := C.C_NSUndoManager_Init(n.Ptr())
+	return MakeUndoManager(result_)
+}
+
+func NewUndoManager() NSUndoManager {
+	result_ := C.C_NSUndoManager_NewUndoManager()
+	return MakeUndoManager(result_)
+}
+
+func (n NSUndoManager) Autorelease() NSUndoManager {
+	result_ := C.C_NSUndoManager_Autorelease(n.Ptr())
+	return MakeUndoManager(result_)
+}
+
+func (n NSUndoManager) Retain() NSUndoManager {
+	result_ := C.C_NSUndoManager_Retain(n.Ptr())
 	return MakeUndoManager(result_)
 }
 

@@ -11,7 +11,7 @@ void* C_NSCollectionLayoutItem_CollectionLayoutItem_ItemWithLayoutSize(void* lay
 }
 
 void* C_NSCollectionLayoutItem_CollectionLayoutItem_ItemWithLayoutSize_SupplementaryItems(void* layoutSize, Array supplementaryItems) {
-    NSMutableArray* objcSupplementaryItems = [[NSMutableArray alloc] init];
+    NSMutableArray* objcSupplementaryItems = [NSMutableArray arrayWithCapacity:supplementaryItems.len];
     if (supplementaryItems.len > 0) {
     	void** supplementaryItemsData = (void**)supplementaryItems.data;
     	for (int i = 0; i < supplementaryItems.len; i++) {
@@ -20,6 +20,23 @@ void* C_NSCollectionLayoutItem_CollectionLayoutItem_ItemWithLayoutSize_Supplemen
     	}
     }
     NSCollectionLayoutItem* result_ = [NSCollectionLayoutItem itemWithLayoutSize:(NSCollectionLayoutSize*)layoutSize supplementaryItems:objcSupplementaryItems];
+    return result_;
+}
+
+void* C_NSCollectionLayoutItem_AllocCollectionLayoutItem() {
+    NSCollectionLayoutItem* result_ = [NSCollectionLayoutItem alloc];
+    return result_;
+}
+
+void* C_NSCollectionLayoutItem_Autorelease(void* ptr) {
+    NSCollectionLayoutItem* nSCollectionLayoutItem = (NSCollectionLayoutItem*)ptr;
+    NSCollectionLayoutItem* result_ = [nSCollectionLayoutItem autorelease];
+    return result_;
+}
+
+void* C_NSCollectionLayoutItem_Retain(void* ptr) {
+    NSCollectionLayoutItem* nSCollectionLayoutItem = (NSCollectionLayoutItem*)ptr;
+    NSCollectionLayoutItem* result_ = [nSCollectionLayoutItem retain];
     return result_;
 }
 

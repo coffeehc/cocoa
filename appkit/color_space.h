@@ -7,7 +7,11 @@ void* C_ColorSpace_Alloc();
 
 void* C_NSColorSpace_InitWithCGColorSpace(void* ptr, void* cgColorSpace);
 void* C_NSColorSpace_InitWithICCProfileData(void* ptr, void* iccData);
+void* C_NSColorSpace_AllocColorSpace();
 void* C_NSColorSpace_Init(void* ptr);
+void* C_NSColorSpace_NewColorSpace();
+void* C_NSColorSpace_Autorelease(void* ptr);
+void* C_NSColorSpace_Retain(void* ptr);
 Array C_NSColorSpace_AvailableColorSpacesWithModel(int model);
 void* C_NSColorSpace_DeviceRGBColorSpace();
 void* C_NSColorSpace_GenericRGBColorSpace();

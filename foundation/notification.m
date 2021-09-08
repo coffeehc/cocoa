@@ -22,6 +22,28 @@ void* C_NSNotification_NotificationWithName_Object(void* aName, void* anObject) 
     return result_;
 }
 
+void* C_NSNotification_AllocNotification() {
+    NSNotification* result_ = [NSNotification alloc];
+    return result_;
+}
+
+void* C_NSNotification_NewNotification() {
+    NSNotification* result_ = [NSNotification new];
+    return result_;
+}
+
+void* C_NSNotification_Autorelease(void* ptr) {
+    NSNotification* nSNotification = (NSNotification*)ptr;
+    NSNotification* result_ = [nSNotification autorelease];
+    return result_;
+}
+
+void* C_NSNotification_Retain(void* ptr) {
+    NSNotification* nSNotification = (NSNotification*)ptr;
+    NSNotification* result_ = [nSNotification retain];
+    return result_;
+}
+
 void* C_NSNotification_Name(void* ptr) {
     NSNotification* nSNotification = (NSNotification*)ptr;
     NSNotificationName result_ = [nSNotification name];

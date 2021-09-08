@@ -65,11 +65,27 @@ func MakeBezierPath(ptr unsafe.Pointer) NSBezierPath {
 }
 
 func AllocBezierPath() NSBezierPath {
-	return MakeBezierPath(C.C_BezierPath_Alloc())
+	result_ := C.C_NSBezierPath_AllocBezierPath()
+	return MakeBezierPath(result_)
 }
 
-func (n NSBezierPath) Init() BezierPath {
+func (n NSBezierPath) Init() NSBezierPath {
 	result_ := C.C_NSBezierPath_Init(n.Ptr())
+	return MakeBezierPath(result_)
+}
+
+func NewBezierPath() NSBezierPath {
+	result_ := C.C_NSBezierPath_NewBezierPath()
+	return MakeBezierPath(result_)
+}
+
+func (n NSBezierPath) Autorelease() NSBezierPath {
+	result_ := C.C_NSBezierPath_Autorelease(n.Ptr())
+	return MakeBezierPath(result_)
+}
+
+func (n NSBezierPath) Retain() NSBezierPath {
+	result_ := C.C_NSBezierPath_Retain(n.Ptr())
 	return MakeBezierPath(result_)
 }
 

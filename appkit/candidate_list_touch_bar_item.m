@@ -16,3 +16,20 @@ void* C_NSCandidateListTouchBarItem_InitWithCoder(void* ptr, void* coder) {
     NSCandidateListTouchBarItem* result_ = [nSCandidateListTouchBarItem initWithCoder:(NSCoder*)coder];
     return result_;
 }
+
+void* C_NSCandidateListTouchBarItem_AllocCandidateListTouchBarItem() {
+    NSCandidateListTouchBarItem* result_ = [NSCandidateListTouchBarItem alloc];
+    return result_;
+}
+
+void* C_NSCandidateListTouchBarItem_Autorelease(void* ptr) {
+    NSCandidateListTouchBarItem* nSCandidateListTouchBarItem = (NSCandidateListTouchBarItem*)ptr;
+    NSCandidateListTouchBarItem* result_ = [nSCandidateListTouchBarItem autorelease];
+    return result_;
+}
+
+void* C_NSCandidateListTouchBarItem_Retain(void* ptr) {
+    NSCandidateListTouchBarItem* nSCandidateListTouchBarItem = (NSCandidateListTouchBarItem*)ptr;
+    NSCandidateListTouchBarItem* result_ = [nSCandidateListTouchBarItem retain];
+    return result_;
+}

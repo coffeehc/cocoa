@@ -36,11 +36,27 @@ func MakeStatusItem(ptr unsafe.Pointer) NSStatusItem {
 }
 
 func AllocStatusItem() NSStatusItem {
-	return MakeStatusItem(C.C_StatusItem_Alloc())
+	result_ := C.C_NSStatusItem_AllocStatusItem()
+	return MakeStatusItem(result_)
 }
 
-func (n NSStatusItem) Init() StatusItem {
+func (n NSStatusItem) Init() NSStatusItem {
 	result_ := C.C_NSStatusItem_Init(n.Ptr())
+	return MakeStatusItem(result_)
+}
+
+func NewStatusItem() NSStatusItem {
+	result_ := C.C_NSStatusItem_NewStatusItem()
+	return MakeStatusItem(result_)
+}
+
+func (n NSStatusItem) Autorelease() NSStatusItem {
+	result_ := C.C_NSStatusItem_Autorelease(n.Ptr())
+	return MakeStatusItem(result_)
+}
+
+func (n NSStatusItem) Retain() NSStatusItem {
+	result_ := C.C_NSStatusItem_Retain(n.Ptr())
 	return MakeStatusItem(result_)
 }
 

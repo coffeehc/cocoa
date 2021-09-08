@@ -5,9 +5,24 @@ void* C_Error_Alloc() {
     return [NSError alloc];
 }
 
+void* C_NSError_ErrorWithDomain_Code_UserInfo(void* domain, int code, Dictionary dict) {
+    NSMutableDictionary* objcDict = [NSMutableDictionary dictionaryWithCapacity:dict.len];
+    if (dict.len > 0) {
+    	void** dictKeyData = (void**)dict.key_data;
+    	void** dictValueData = (void**)dict.value_data;
+    	for (int i = 0; i < dict.len; i++) {
+    		void* kp = dictKeyData[i];
+    		void* vp = dictValueData[i];
+    		[objcDict setObject:(NSErrorUserInfoKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    	}
+    }
+    NSError* result_ = [NSError errorWithDomain:(NSString*)domain code:code userInfo:objcDict];
+    return result_;
+}
+
 void* C_NSError_InitWithDomain_Code_UserInfo(void* ptr, void* domain, int code, Dictionary dict) {
     NSError* nSError = (NSError*)ptr;
-    NSMutableDictionary* objcDict = [[NSMutableDictionary alloc] initWithCapacity: dict.len];
+    NSMutableDictionary* objcDict = [NSMutableDictionary dictionaryWithCapacity:dict.len];
     if (dict.len > 0) {
     	void** dictKeyData = (void**)dict.key_data;
     	void** dictValueData = (void**)dict.value_data;
@@ -21,24 +36,31 @@ void* C_NSError_InitWithDomain_Code_UserInfo(void* ptr, void* domain, int code, 
     return result_;
 }
 
+void* C_NSError_AllocError() {
+    NSError* result_ = [NSError alloc];
+    return result_;
+}
+
 void* C_NSError_Init(void* ptr) {
     NSError* nSError = (NSError*)ptr;
     NSError* result_ = [nSError init];
     return result_;
 }
 
-void* C_NSError_ErrorWithDomain_Code_UserInfo(void* domain, int code, Dictionary dict) {
-    NSMutableDictionary* objcDict = [[NSMutableDictionary alloc] initWithCapacity: dict.len];
-    if (dict.len > 0) {
-    	void** dictKeyData = (void**)dict.key_data;
-    	void** dictValueData = (void**)dict.value_data;
-    	for (int i = 0; i < dict.len; i++) {
-    		void* kp = dictKeyData[i];
-    		void* vp = dictValueData[i];
-    		[objcDict setObject:(NSErrorUserInfoKey)(NSString*)kp forKey:(id)(NSString*)vp];
-    	}
-    }
-    NSError* result_ = [NSError errorWithDomain:(NSString*)domain code:code userInfo:objcDict];
+void* C_NSError_NewError() {
+    NSError* result_ = [NSError new];
+    return result_;
+}
+
+void* C_NSError_Autorelease(void* ptr) {
+    NSError* nSError = (NSError*)ptr;
+    NSError* result_ = [nSError autorelease];
+    return result_;
+}
+
+void* C_NSError_Retain(void* ptr) {
+    NSError* nSError = (NSError*)ptr;
+    NSError* result_ = [nSError retain];
     return result_;
 }
 

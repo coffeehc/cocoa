@@ -5,9 +5,31 @@ void* C_AnimationContext_Alloc() {
     return [NSAnimationContext alloc];
 }
 
+void* C_NSAnimationContext_AllocAnimationContext() {
+    NSAnimationContext* result_ = [NSAnimationContext alloc];
+    return result_;
+}
+
 void* C_NSAnimationContext_Init(void* ptr) {
     NSAnimationContext* nSAnimationContext = (NSAnimationContext*)ptr;
     NSAnimationContext* result_ = [nSAnimationContext init];
+    return result_;
+}
+
+void* C_NSAnimationContext_NewAnimationContext() {
+    NSAnimationContext* result_ = [NSAnimationContext new];
+    return result_;
+}
+
+void* C_NSAnimationContext_Autorelease(void* ptr) {
+    NSAnimationContext* nSAnimationContext = (NSAnimationContext*)ptr;
+    NSAnimationContext* result_ = [nSAnimationContext autorelease];
+    return result_;
+}
+
+void* C_NSAnimationContext_Retain(void* ptr) {
+    NSAnimationContext* nSAnimationContext = (NSAnimationContext*)ptr;
+    NSAnimationContext* result_ = [nSAnimationContext retain];
     return result_;
 }
 

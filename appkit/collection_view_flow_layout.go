@@ -46,11 +46,27 @@ func MakeCollectionViewFlowLayout(ptr unsafe.Pointer) NSCollectionViewFlowLayout
 }
 
 func AllocCollectionViewFlowLayout() NSCollectionViewFlowLayout {
-	return MakeCollectionViewFlowLayout(C.C_CollectionViewFlowLayout_Alloc())
+	result_ := C.C_NSCollectionViewFlowLayout_AllocCollectionViewFlowLayout()
+	return MakeCollectionViewFlowLayout(result_)
 }
 
-func (n NSCollectionViewFlowLayout) Init() CollectionViewFlowLayout {
+func (n NSCollectionViewFlowLayout) Init() NSCollectionViewFlowLayout {
 	result_ := C.C_NSCollectionViewFlowLayout_Init(n.Ptr())
+	return MakeCollectionViewFlowLayout(result_)
+}
+
+func NewCollectionViewFlowLayout() NSCollectionViewFlowLayout {
+	result_ := C.C_NSCollectionViewFlowLayout_NewCollectionViewFlowLayout()
+	return MakeCollectionViewFlowLayout(result_)
+}
+
+func (n NSCollectionViewFlowLayout) Autorelease() NSCollectionViewFlowLayout {
+	result_ := C.C_NSCollectionViewFlowLayout_Autorelease(n.Ptr())
+	return MakeCollectionViewFlowLayout(result_)
+}
+
+func (n NSCollectionViewFlowLayout) Retain() NSCollectionViewFlowLayout {
+	result_ := C.C_NSCollectionViewFlowLayout_Retain(n.Ptr())
 	return MakeCollectionViewFlowLayout(result_)
 }
 

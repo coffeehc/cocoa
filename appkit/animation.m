@@ -17,9 +17,31 @@ void* C_NSAnimation_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSAnimation_AllocAnimation() {
+    NSAnimation* result_ = [NSAnimation alloc];
+    return result_;
+}
+
 void* C_NSAnimation_Init(void* ptr) {
     NSAnimation* nSAnimation = (NSAnimation*)ptr;
     NSAnimation* result_ = [nSAnimation init];
+    return result_;
+}
+
+void* C_NSAnimation_NewAnimation() {
+    NSAnimation* result_ = [NSAnimation new];
+    return result_;
+}
+
+void* C_NSAnimation_Autorelease(void* ptr) {
+    NSAnimation* nSAnimation = (NSAnimation*)ptr;
+    NSAnimation* result_ = [nSAnimation autorelease];
+    return result_;
+}
+
+void* C_NSAnimation_Retain(void* ptr) {
+    NSAnimation* nSAnimation = (NSAnimation*)ptr;
+    NSAnimation* result_ = [nSAnimation retain];
     return result_;
 }
 
@@ -177,7 +199,7 @@ Array C_NSAnimation_ProgressMarks(void* ptr) {
 
 void C_NSAnimation_SetProgressMarks(void* ptr, Array value) {
     NSAnimation* nSAnimation = (NSAnimation*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

@@ -29,8 +29,30 @@ void* C_NSRulerView_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSRulerView_AllocRulerView() {
+    NSRulerView* result_ = [NSRulerView alloc];
+    return result_;
+}
+
+void* C_NSRulerView_NewRulerView() {
+    NSRulerView* result_ = [NSRulerView new];
+    return result_;
+}
+
+void* C_NSRulerView_Autorelease(void* ptr) {
+    NSRulerView* nSRulerView = (NSRulerView*)ptr;
+    NSRulerView* result_ = [nSRulerView autorelease];
+    return result_;
+}
+
+void* C_NSRulerView_Retain(void* ptr) {
+    NSRulerView* nSRulerView = (NSRulerView*)ptr;
+    NSRulerView* result_ = [nSRulerView retain];
+    return result_;
+}
+
 void C_NSRulerView_RulerView_RegisterUnitWithName_Abbreviation_UnitToPointsConversionFactor_StepUpCycle_StepDownCycle(void* unitName, void* abbreviation, double conversionFactor, Array stepUpCycle, Array stepDownCycle) {
-    NSMutableArray* objcStepUpCycle = [[NSMutableArray alloc] init];
+    NSMutableArray* objcStepUpCycle = [NSMutableArray arrayWithCapacity:stepUpCycle.len];
     if (stepUpCycle.len > 0) {
     	void** stepUpCycleData = (void**)stepUpCycle.data;
     	for (int i = 0; i < stepUpCycle.len; i++) {
@@ -38,7 +60,7 @@ void C_NSRulerView_RulerView_RegisterUnitWithName_Abbreviation_UnitToPointsConve
     		[objcStepUpCycle addObject:(NSNumber*)(NSNumber*)p];
     	}
     }
-    NSMutableArray* objcStepDownCycle = [[NSMutableArray alloc] init];
+    NSMutableArray* objcStepDownCycle = [NSMutableArray arrayWithCapacity:stepDownCycle.len];
     if (stepDownCycle.len > 0) {
     	void** stepDownCycleData = (void**)stepDownCycle.data;
     	for (int i = 0; i < stepDownCycle.len; i++) {
@@ -148,7 +170,7 @@ Array C_NSRulerView_Markers(void* ptr) {
 
 void C_NSRulerView_SetMarkers(void* ptr, Array value) {
     NSRulerView* nSRulerView = (NSRulerView*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

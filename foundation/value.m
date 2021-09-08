@@ -11,9 +11,31 @@ void* C_NSValue_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSValue_AllocValue() {
+    NSValue* result_ = [NSValue alloc];
+    return result_;
+}
+
 void* C_NSValue_Init(void* ptr) {
     NSValue* nSValue = (NSValue*)ptr;
     NSValue* result_ = [nSValue init];
+    return result_;
+}
+
+void* C_NSValue_NewValue() {
+    NSValue* result_ = [NSValue new];
+    return result_;
+}
+
+void* C_NSValue_Autorelease(void* ptr) {
+    NSValue* nSValue = (NSValue*)ptr;
+    NSValue* result_ = [nSValue autorelease];
+    return result_;
+}
+
+void* C_NSValue_Retain(void* ptr) {
+    NSValue* nSValue = (NSValue*)ptr;
+    NSValue* result_ = [nSValue retain];
     return result_;
 }
 

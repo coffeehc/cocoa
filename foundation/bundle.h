@@ -5,11 +5,15 @@
 
 void* C_Bundle_Alloc();
 
-void* C_NSBundle_InitWithURL(void* ptr, void* url);
-void* C_NSBundle_InitWithPath(void* ptr, void* path);
-void* C_NSBundle_Init(void* ptr);
 void* C_NSBundle_BundleWithURL(void* url);
 void* C_NSBundle_BundleWithPath(void* path);
+void* C_NSBundle_InitWithURL(void* ptr, void* url);
+void* C_NSBundle_InitWithPath(void* ptr, void* path);
+void* C_NSBundle_AllocBundle();
+void* C_NSBundle_Init(void* ptr);
+void* C_NSBundle_NewBundle();
+void* C_NSBundle_Autorelease(void* ptr);
+void* C_NSBundle_Retain(void* ptr);
 void* C_NSBundle_BundleWithIdentifier(void* identifier);
 void* C_NSBundle_URLForResource_WithExtension_Subdirectory(void* ptr, void* name, void* ext, void* subpath);
 void* C_NSBundle_URLForResource_WithExtension(void* ptr, void* name, void* ext);

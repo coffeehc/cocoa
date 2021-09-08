@@ -28,12 +28,23 @@ func MakeDraggingItem(ptr unsafe.Pointer) NSDraggingItem {
 	}
 }
 
-func AllocDraggingItem() NSDraggingItem {
-	return MakeDraggingItem(C.C_DraggingItem_Alloc())
+func (n NSDraggingItem) InitWithPasteboardWriter(pasteboardWriter objc.Object) NSDraggingItem {
+	result_ := C.C_NSDraggingItem_InitWithPasteboardWriter(n.Ptr(), objc.ExtractPtr(pasteboardWriter))
+	return MakeDraggingItem(result_)
 }
 
-func (n NSDraggingItem) InitWithPasteboardWriter(pasteboardWriter objc.Object) DraggingItem {
-	result_ := C.C_NSDraggingItem_InitWithPasteboardWriter(n.Ptr(), objc.ExtractPtr(pasteboardWriter))
+func AllocDraggingItem() NSDraggingItem {
+	result_ := C.C_NSDraggingItem_AllocDraggingItem()
+	return MakeDraggingItem(result_)
+}
+
+func (n NSDraggingItem) Autorelease() NSDraggingItem {
+	result_ := C.C_NSDraggingItem_Autorelease(n.Ptr())
+	return MakeDraggingItem(result_)
+}
+
+func (n NSDraggingItem) Retain() NSDraggingItem {
+	result_ := C.C_NSDraggingItem_Retain(n.Ptr())
 	return MakeDraggingItem(result_)
 }
 

@@ -41,27 +41,43 @@ func MakeImageView(ptr unsafe.Pointer) NSImageView {
 	}
 }
 
-func AllocImageView() NSImageView {
-	return MakeImageView(C.C_ImageView_Alloc())
+func ImageViewWithImage(image Image) NSImageView {
+	result_ := C.C_NSImageView_ImageViewWithImage(objc.ExtractPtr(image))
+	return MakeImageView(result_)
 }
 
-func (n NSImageView) InitWithFrame(frameRect foundation.Rect) ImageView {
+func (n NSImageView) InitWithFrame(frameRect foundation.Rect) NSImageView {
 	result_ := C.C_NSImageView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeImageView(result_)
 }
 
-func (n NSImageView) InitWithCoder(coder foundation.Coder) ImageView {
+func (n NSImageView) InitWithCoder(coder foundation.Coder) NSImageView {
 	result_ := C.C_NSImageView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeImageView(result_)
 }
 
-func (n NSImageView) Init() ImageView {
+func (n NSImageView) Init() NSImageView {
 	result_ := C.C_NSImageView_Init(n.Ptr())
 	return MakeImageView(result_)
 }
 
-func ImageViewWithImage(image Image) ImageView {
-	result_ := C.C_NSImageView_ImageViewWithImage(objc.ExtractPtr(image))
+func AllocImageView() NSImageView {
+	result_ := C.C_NSImageView_AllocImageView()
+	return MakeImageView(result_)
+}
+
+func NewImageView() NSImageView {
+	result_ := C.C_NSImageView_NewImageView()
+	return MakeImageView(result_)
+}
+
+func (n NSImageView) Autorelease() NSImageView {
+	result_ := C.C_NSImageView_Autorelease(n.Ptr())
+	return MakeImageView(result_)
+}
+
+func (n NSImageView) Retain() NSImageView {
+	result_ := C.C_NSImageView_Retain(n.Ptr())
 	return MakeImageView(result_)
 }
 

@@ -17,6 +17,28 @@ void* C_NSImageRep_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSImageRep_AllocImageRep() {
+    NSImageRep* result_ = [NSImageRep alloc];
+    return result_;
+}
+
+void* C_NSImageRep_NewImageRep() {
+    NSImageRep* result_ = [NSImageRep new];
+    return result_;
+}
+
+void* C_NSImageRep_Autorelease(void* ptr) {
+    NSImageRep* nSImageRep = (NSImageRep*)ptr;
+    NSImageRep* result_ = [nSImageRep autorelease];
+    return result_;
+}
+
+void* C_NSImageRep_Retain(void* ptr) {
+    NSImageRep* nSImageRep = (NSImageRep*)ptr;
+    NSImageRep* result_ = [nSImageRep retain];
+    return result_;
+}
+
 Array C_NSImageRep_ImageRepsWithContentsOfFile(void* filename) {
     NSArray* result_ = [NSImageRep imageRepsWithContentsOfFile:(NSString*)filename];
     Array result_Array;
@@ -110,7 +132,7 @@ bool C_NSImageRep_DrawInRect(void* ptr, CGRect rect) {
 
 bool C_NSImageRep_DrawInRect_FromRect_Operation_Fraction_RespectFlipped_Hints(void* ptr, CGRect dstSpacePortionRect, CGRect srcSpacePortionRect, unsigned int op, double requestedAlpha, bool respectContextIsFlipped, Dictionary hints) {
     NSImageRep* nSImageRep = (NSImageRep*)ptr;
-    NSMutableDictionary* objcHints = [[NSMutableDictionary alloc] initWithCapacity: hints.len];
+    NSMutableDictionary* objcHints = [NSMutableDictionary dictionaryWithCapacity:hints.len];
     if (hints.len > 0) {
     	void** hintsKeyData = (void**)hints.key_data;
     	void** hintsValueData = (void**)hints.value_data;

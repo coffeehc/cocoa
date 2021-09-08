@@ -5,7 +5,11 @@
 
 void* C_WebViewConfiguration_Alloc();
 
+void* C_WKWebViewConfiguration_AllocWebViewConfiguration();
 void* C_WKWebViewConfiguration_Init(void* ptr);
+void* C_WKWebViewConfiguration_NewWebViewConfiguration();
+void* C_WKWebViewConfiguration_Autorelease(void* ptr);
+void* C_WKWebViewConfiguration_Retain(void* ptr);
 void C_WKWebViewConfiguration_SetURLSchemeHandler_ForURLScheme(void* ptr, void* urlSchemeHandler, void* urlScheme);
 void* C_WKWebViewConfiguration_UrlSchemeHandlerForURLScheme(void* ptr, void* urlScheme);
 void* C_WKWebViewConfiguration_WebsiteDataStore(void* ptr);

@@ -36,12 +36,23 @@ func MakeAffineTransform(ptr unsafe.Pointer) NSAffineTransform {
 	}
 }
 
-func AllocAffineTransform() NSAffineTransform {
-	return MakeAffineTransform(C.C_AffineTransform_Alloc())
+func (n NSAffineTransform) InitWithTransform(transform AffineTransform) NSAffineTransform {
+	result_ := C.C_NSAffineTransform_InitWithTransform(n.Ptr(), objc.ExtractPtr(transform))
+	return MakeAffineTransform(result_)
 }
 
-func (n NSAffineTransform) InitWithTransform(transform AffineTransform) AffineTransform {
-	result_ := C.C_NSAffineTransform_InitWithTransform(n.Ptr(), objc.ExtractPtr(transform))
+func AllocAffineTransform() NSAffineTransform {
+	result_ := C.C_NSAffineTransform_AllocAffineTransform()
+	return MakeAffineTransform(result_)
+}
+
+func (n NSAffineTransform) Autorelease() NSAffineTransform {
+	result_ := C.C_NSAffineTransform_Autorelease(n.Ptr())
+	return MakeAffineTransform(result_)
+}
+
+func (n NSAffineTransform) Retain() NSAffineTransform {
+	result_ := C.C_NSAffineTransform_Retain(n.Ptr())
 	return MakeAffineTransform(result_)
 }
 

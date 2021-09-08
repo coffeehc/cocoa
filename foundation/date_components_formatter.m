@@ -5,9 +5,31 @@ void* C_DateComponentsFormatter_Alloc() {
     return [NSDateComponentsFormatter alloc];
 }
 
+void* C_NSDateComponentsFormatter_AllocDateComponentsFormatter() {
+    NSDateComponentsFormatter* result_ = [NSDateComponentsFormatter alloc];
+    return result_;
+}
+
 void* C_NSDateComponentsFormatter_Init(void* ptr) {
     NSDateComponentsFormatter* nSDateComponentsFormatter = (NSDateComponentsFormatter*)ptr;
     NSDateComponentsFormatter* result_ = [nSDateComponentsFormatter init];
+    return result_;
+}
+
+void* C_NSDateComponentsFormatter_NewDateComponentsFormatter() {
+    NSDateComponentsFormatter* result_ = [NSDateComponentsFormatter new];
+    return result_;
+}
+
+void* C_NSDateComponentsFormatter_Autorelease(void* ptr) {
+    NSDateComponentsFormatter* nSDateComponentsFormatter = (NSDateComponentsFormatter*)ptr;
+    NSDateComponentsFormatter* result_ = [nSDateComponentsFormatter autorelease];
+    return result_;
+}
+
+void* C_NSDateComponentsFormatter_Retain(void* ptr) {
+    NSDateComponentsFormatter* nSDateComponentsFormatter = (NSDateComponentsFormatter*)ptr;
+    NSDateComponentsFormatter* result_ = [nSDateComponentsFormatter retain];
     return result_;
 }
 

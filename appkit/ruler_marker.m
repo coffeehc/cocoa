@@ -17,6 +17,23 @@ void* C_NSRulerMarker_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSRulerMarker_AllocRulerMarker() {
+    NSRulerMarker* result_ = [NSRulerMarker alloc];
+    return result_;
+}
+
+void* C_NSRulerMarker_Autorelease(void* ptr) {
+    NSRulerMarker* nSRulerMarker = (NSRulerMarker*)ptr;
+    NSRulerMarker* result_ = [nSRulerMarker autorelease];
+    return result_;
+}
+
+void* C_NSRulerMarker_Retain(void* ptr) {
+    NSRulerMarker* nSRulerMarker = (NSRulerMarker*)ptr;
+    NSRulerMarker* result_ = [nSRulerMarker retain];
+    return result_;
+}
+
 void C_NSRulerMarker_DrawRect(void* ptr, CGRect rect) {
     NSRulerMarker* nSRulerMarker = (NSRulerMarker*)ptr;
     [nSRulerMarker drawRect:rect];

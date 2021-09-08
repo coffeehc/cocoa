@@ -48,22 +48,38 @@ func MakeTableColumn(ptr unsafe.Pointer) NSTableColumn {
 	}
 }
 
-func AllocTableColumn() NSTableColumn {
-	return MakeTableColumn(C.C_TableColumn_Alloc())
-}
-
-func (n NSTableColumn) InitWithIdentifier(identifier UserInterfaceItemIdentifier) TableColumn {
+func (n NSTableColumn) InitWithIdentifier(identifier UserInterfaceItemIdentifier) NSTableColumn {
 	result_ := C.C_NSTableColumn_InitWithIdentifier(n.Ptr(), foundation.NewString(string(identifier)).Ptr())
 	return MakeTableColumn(result_)
 }
 
-func (n NSTableColumn) InitWithCoder(coder foundation.Coder) TableColumn {
+func (n NSTableColumn) InitWithCoder(coder foundation.Coder) NSTableColumn {
 	result_ := C.C_NSTableColumn_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeTableColumn(result_)
 }
 
-func (n NSTableColumn) Init() TableColumn {
+func AllocTableColumn() NSTableColumn {
+	result_ := C.C_NSTableColumn_AllocTableColumn()
+	return MakeTableColumn(result_)
+}
+
+func (n NSTableColumn) Init() NSTableColumn {
 	result_ := C.C_NSTableColumn_Init(n.Ptr())
+	return MakeTableColumn(result_)
+}
+
+func NewTableColumn() NSTableColumn {
+	result_ := C.C_NSTableColumn_NewTableColumn()
+	return MakeTableColumn(result_)
+}
+
+func (n NSTableColumn) Autorelease() NSTableColumn {
+	result_ := C.C_NSTableColumn_Autorelease(n.Ptr())
+	return MakeTableColumn(result_)
+}
+
+func (n NSTableColumn) Retain() NSTableColumn {
+	result_ := C.C_NSTableColumn_Retain(n.Ptr())
 	return MakeTableColumn(result_)
 }
 

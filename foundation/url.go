@@ -57,67 +57,83 @@ func MakeURL(ptr unsafe.Pointer) NSURL {
 	}
 }
 
-func AllocURL() NSURL {
-	return MakeURL(C.C_URL_Alloc())
-}
-
-func (n NSURL) InitWithString(URLString string) URL {
-	result_ := C.C_NSURL_InitWithString(n.Ptr(), NewString(URLString).Ptr())
-	return MakeURL(result_)
-}
-
-func (n NSURL) InitWithString_RelativeToURL(URLString string, baseURL URL) URL {
-	result_ := C.C_NSURL_InitWithString_RelativeToURL(n.Ptr(), NewString(URLString).Ptr(), objc.ExtractPtr(baseURL))
-	return MakeURL(result_)
-}
-
-func (n NSURL) InitFileURLWithPath_IsDirectory(path string, isDir bool) URL {
-	result_ := C.C_NSURL_InitFileURLWithPath_IsDirectory(n.Ptr(), NewString(path).Ptr(), C.bool(isDir))
-	return MakeURL(result_)
-}
-
-func (n NSURL) InitFileURLWithPath_RelativeToURL(path string, baseURL URL) URL {
-	result_ := C.C_NSURL_InitFileURLWithPath_RelativeToURL(n.Ptr(), NewString(path).Ptr(), objc.ExtractPtr(baseURL))
-	return MakeURL(result_)
-}
-
-func (n NSURL) InitFileURLWithPath_IsDirectory_RelativeToURL(path string, isDir bool, baseURL URL) URL {
-	result_ := C.C_NSURL_InitFileURLWithPath_IsDirectory_RelativeToURL(n.Ptr(), NewString(path).Ptr(), C.bool(isDir), objc.ExtractPtr(baseURL))
-	return MakeURL(result_)
-}
-
-func (n NSURL) InitFileURLWithPath(path string) URL {
-	result_ := C.C_NSURL_InitFileURLWithPath(n.Ptr(), NewString(path).Ptr())
-	return MakeURL(result_)
-}
-
-func (n NSURL) InitAbsoluteURLWithDataRepresentation_RelativeToURL(data []byte, baseURL URL) URL {
-	result_ := C.C_NSURL_InitAbsoluteURLWithDataRepresentation_RelativeToURL(n.Ptr(), NewData(data).Ptr(), objc.ExtractPtr(baseURL))
-	return MakeURL(result_)
-}
-
-func (n NSURL) InitWithDataRepresentation_RelativeToURL(data []byte, baseURL URL) URL {
-	result_ := C.C_NSURL_InitWithDataRepresentation_RelativeToURL(n.Ptr(), NewData(data).Ptr(), objc.ExtractPtr(baseURL))
-	return MakeURL(result_)
-}
-
-func (n NSURL) InitWithScheme_Host_Path(scheme string, host string, path string) URL {
-	result_ := C.C_NSURL_InitWithScheme_Host_Path(n.Ptr(), NewString(scheme).Ptr(), NewString(host).Ptr(), NewString(path).Ptr())
-	return MakeURL(result_)
-}
-
-func (n NSURL) Init() URL {
-	result_ := C.C_NSURL_Init(n.Ptr())
-	return MakeURL(result_)
-}
-
-func URLWithString(URLString string) URL {
+func URLWithString(URLString string) NSURL {
 	result_ := C.C_NSURL_URLWithString(NewString(URLString).Ptr())
 	return MakeURL(result_)
 }
 
-func URLWithString_RelativeToURL(URLString string, baseURL URL) URL {
+func (n NSURL) InitWithString(URLString string) NSURL {
+	result_ := C.C_NSURL_InitWithString(n.Ptr(), NewString(URLString).Ptr())
+	return MakeURL(result_)
+}
+
+func URLWithString_RelativeToURL(URLString string, baseURL URL) NSURL {
 	result_ := C.C_NSURL_URLWithString_RelativeToURL(NewString(URLString).Ptr(), objc.ExtractPtr(baseURL))
+	return MakeURL(result_)
+}
+
+func (n NSURL) InitWithString_RelativeToURL(URLString string, baseURL URL) NSURL {
+	result_ := C.C_NSURL_InitWithString_RelativeToURL(n.Ptr(), NewString(URLString).Ptr(), objc.ExtractPtr(baseURL))
+	return MakeURL(result_)
+}
+
+func (n NSURL) InitFileURLWithPath_IsDirectory(path string, isDir bool) NSURL {
+	result_ := C.C_NSURL_InitFileURLWithPath_IsDirectory(n.Ptr(), NewString(path).Ptr(), C.bool(isDir))
+	return MakeURL(result_)
+}
+
+func (n NSURL) InitFileURLWithPath_RelativeToURL(path string, baseURL URL) NSURL {
+	result_ := C.C_NSURL_InitFileURLWithPath_RelativeToURL(n.Ptr(), NewString(path).Ptr(), objc.ExtractPtr(baseURL))
+	return MakeURL(result_)
+}
+
+func (n NSURL) InitFileURLWithPath_IsDirectory_RelativeToURL(path string, isDir bool, baseURL URL) NSURL {
+	result_ := C.C_NSURL_InitFileURLWithPath_IsDirectory_RelativeToURL(n.Ptr(), NewString(path).Ptr(), C.bool(isDir), objc.ExtractPtr(baseURL))
+	return MakeURL(result_)
+}
+
+func (n NSURL) InitFileURLWithPath(path string) NSURL {
+	result_ := C.C_NSURL_InitFileURLWithPath(n.Ptr(), NewString(path).Ptr())
+	return MakeURL(result_)
+}
+
+func (n NSURL) InitAbsoluteURLWithDataRepresentation_RelativeToURL(data []byte, baseURL URL) NSURL {
+	result_ := C.C_NSURL_InitAbsoluteURLWithDataRepresentation_RelativeToURL(n.Ptr(), NewData(data).Ptr(), objc.ExtractPtr(baseURL))
+	return MakeURL(result_)
+}
+
+func (n NSURL) InitWithDataRepresentation_RelativeToURL(data []byte, baseURL URL) NSURL {
+	result_ := C.C_NSURL_InitWithDataRepresentation_RelativeToURL(n.Ptr(), NewData(data).Ptr(), objc.ExtractPtr(baseURL))
+	return MakeURL(result_)
+}
+
+func (n NSURL) InitWithScheme_Host_Path(scheme string, host string, path string) NSURL {
+	result_ := C.C_NSURL_InitWithScheme_Host_Path(n.Ptr(), NewString(scheme).Ptr(), NewString(host).Ptr(), NewString(path).Ptr())
+	return MakeURL(result_)
+}
+
+func AllocURL() NSURL {
+	result_ := C.C_NSURL_AllocURL()
+	return MakeURL(result_)
+}
+
+func (n NSURL) Init() NSURL {
+	result_ := C.C_NSURL_Init(n.Ptr())
+	return MakeURL(result_)
+}
+
+func NewURL() NSURL {
+	result_ := C.C_NSURL_NewURL()
+	return MakeURL(result_)
+}
+
+func (n NSURL) Autorelease() NSURL {
+	result_ := C.C_NSURL_Autorelease(n.Ptr())
+	return MakeURL(result_)
+}
+
+func (n NSURL) Retain() NSURL {
+	result_ := C.C_NSURL_Retain(n.Ptr())
 	return MakeURL(result_)
 }
 

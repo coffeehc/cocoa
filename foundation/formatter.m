@@ -5,9 +5,31 @@ void* C_Formatter_Alloc() {
     return [NSFormatter alloc];
 }
 
+void* C_NSFormatter_AllocFormatter() {
+    NSFormatter* result_ = [NSFormatter alloc];
+    return result_;
+}
+
 void* C_NSFormatter_Init(void* ptr) {
     NSFormatter* nSFormatter = (NSFormatter*)ptr;
     NSFormatter* result_ = [nSFormatter init];
+    return result_;
+}
+
+void* C_NSFormatter_NewFormatter() {
+    NSFormatter* result_ = [NSFormatter new];
+    return result_;
+}
+
+void* C_NSFormatter_Autorelease(void* ptr) {
+    NSFormatter* nSFormatter = (NSFormatter*)ptr;
+    NSFormatter* result_ = [nSFormatter autorelease];
+    return result_;
+}
+
+void* C_NSFormatter_Retain(void* ptr) {
+    NSFormatter* nSFormatter = (NSFormatter*)ptr;
+    NSFormatter* result_ = [nSFormatter retain];
     return result_;
 }
 
@@ -19,7 +41,7 @@ void* C_NSFormatter_StringForObjectValue(void* ptr, void* obj) {
 
 void* C_NSFormatter_AttributedStringForObjectValue_WithDefaultAttributes(void* ptr, void* obj, Dictionary attrs) {
     NSFormatter* nSFormatter = (NSFormatter*)ptr;
-    NSMutableDictionary* objcAttrs = [[NSMutableDictionary alloc] initWithCapacity: attrs.len];
+    NSMutableDictionary* objcAttrs = [NSMutableDictionary dictionaryWithCapacity:attrs.len];
     if (attrs.len > 0) {
     	void** attrsKeyData = (void**)attrs.key_data;
     	void** attrsValueData = (void**)attrs.value_data;

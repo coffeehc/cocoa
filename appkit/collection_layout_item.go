@@ -27,16 +27,12 @@ func MakeCollectionLayoutItem(ptr unsafe.Pointer) NSCollectionLayoutItem {
 	}
 }
 
-func AllocCollectionLayoutItem() NSCollectionLayoutItem {
-	return MakeCollectionLayoutItem(C.C_CollectionLayoutItem_Alloc())
-}
-
-func CollectionLayoutItem_ItemWithLayoutSize(layoutSize CollectionLayoutSize) CollectionLayoutItem {
+func CollectionLayoutItem_ItemWithLayoutSize(layoutSize CollectionLayoutSize) NSCollectionLayoutItem {
 	result_ := C.C_NSCollectionLayoutItem_CollectionLayoutItem_ItemWithLayoutSize(objc.ExtractPtr(layoutSize))
 	return MakeCollectionLayoutItem(result_)
 }
 
-func CollectionLayoutItem_ItemWithLayoutSize_SupplementaryItems(layoutSize CollectionLayoutSize, supplementaryItems []CollectionLayoutSupplementaryItem) CollectionLayoutItem {
+func CollectionLayoutItem_ItemWithLayoutSize_SupplementaryItems(layoutSize CollectionLayoutSize, supplementaryItems []CollectionLayoutSupplementaryItem) NSCollectionLayoutItem {
 	var cSupplementaryItems C.Array
 	if len(supplementaryItems) > 0 {
 		cSupplementaryItemsData := make([]unsafe.Pointer, len(supplementaryItems))
@@ -47,6 +43,21 @@ func CollectionLayoutItem_ItemWithLayoutSize_SupplementaryItems(layoutSize Colle
 		cSupplementaryItems.len = C.int(len(supplementaryItems))
 	}
 	result_ := C.C_NSCollectionLayoutItem_CollectionLayoutItem_ItemWithLayoutSize_SupplementaryItems(objc.ExtractPtr(layoutSize), cSupplementaryItems)
+	return MakeCollectionLayoutItem(result_)
+}
+
+func AllocCollectionLayoutItem() NSCollectionLayoutItem {
+	result_ := C.C_NSCollectionLayoutItem_AllocCollectionLayoutItem()
+	return MakeCollectionLayoutItem(result_)
+}
+
+func (n NSCollectionLayoutItem) Autorelease() NSCollectionLayoutItem {
+	result_ := C.C_NSCollectionLayoutItem_Autorelease(n.Ptr())
+	return MakeCollectionLayoutItem(result_)
+}
+
+func (n NSCollectionLayoutItem) Retain() NSCollectionLayoutItem {
+	result_ := C.C_NSCollectionLayoutItem_Retain(n.Ptr())
 	return MakeCollectionLayoutItem(result_)
 }
 

@@ -15,6 +15,23 @@ void* C_NSCollectionLayoutSpacing_CollectionLayoutSpacing_FlexibleSpacing(double
     return result_;
 }
 
+void* C_NSCollectionLayoutSpacing_AllocCollectionLayoutSpacing() {
+    NSCollectionLayoutSpacing* result_ = [NSCollectionLayoutSpacing alloc];
+    return result_;
+}
+
+void* C_NSCollectionLayoutSpacing_Autorelease(void* ptr) {
+    NSCollectionLayoutSpacing* nSCollectionLayoutSpacing = (NSCollectionLayoutSpacing*)ptr;
+    NSCollectionLayoutSpacing* result_ = [nSCollectionLayoutSpacing autorelease];
+    return result_;
+}
+
+void* C_NSCollectionLayoutSpacing_Retain(void* ptr) {
+    NSCollectionLayoutSpacing* nSCollectionLayoutSpacing = (NSCollectionLayoutSpacing*)ptr;
+    NSCollectionLayoutSpacing* result_ = [nSCollectionLayoutSpacing retain];
+    return result_;
+}
+
 double C_NSCollectionLayoutSpacing_Spacing(void* ptr) {
     NSCollectionLayoutSpacing* nSCollectionLayoutSpacing = (NSCollectionLayoutSpacing*)ptr;
     CGFloat result_ = [nSCollectionLayoutSpacing spacing];

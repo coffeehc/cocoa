@@ -25,7 +25,18 @@ func MakeWebsiteDataStore(ptr unsafe.Pointer) WKWebsiteDataStore {
 }
 
 func AllocWebsiteDataStore() WKWebsiteDataStore {
-	return MakeWebsiteDataStore(C.C_WebsiteDataStore_Alloc())
+	result_ := C.C_WKWebsiteDataStore_AllocWebsiteDataStore()
+	return MakeWebsiteDataStore(result_)
+}
+
+func (w WKWebsiteDataStore) Autorelease() WKWebsiteDataStore {
+	result_ := C.C_WKWebsiteDataStore_Autorelease(w.Ptr())
+	return MakeWebsiteDataStore(result_)
+}
+
+func (w WKWebsiteDataStore) Retain() WKWebsiteDataStore {
+	result_ := C.C_WKWebsiteDataStore_Retain(w.Ptr())
+	return MakeWebsiteDataStore(result_)
 }
 
 func WebsiteDataStore_DefaultDataStore() WebsiteDataStore {

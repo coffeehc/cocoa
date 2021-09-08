@@ -23,6 +23,28 @@ void* C_NSProgressIndicator_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSProgressIndicator_AllocProgressIndicator() {
+    NSProgressIndicator* result_ = [NSProgressIndicator alloc];
+    return result_;
+}
+
+void* C_NSProgressIndicator_NewProgressIndicator() {
+    NSProgressIndicator* result_ = [NSProgressIndicator new];
+    return result_;
+}
+
+void* C_NSProgressIndicator_Autorelease(void* ptr) {
+    NSProgressIndicator* nSProgressIndicator = (NSProgressIndicator*)ptr;
+    NSProgressIndicator* result_ = [nSProgressIndicator autorelease];
+    return result_;
+}
+
+void* C_NSProgressIndicator_Retain(void* ptr) {
+    NSProgressIndicator* nSProgressIndicator = (NSProgressIndicator*)ptr;
+    NSProgressIndicator* result_ = [nSProgressIndicator retain];
+    return result_;
+}
+
 void C_NSProgressIndicator_StartAnimation(void* ptr, void* sender) {
     NSProgressIndicator* nSProgressIndicator = (NSProgressIndicator*)ptr;
     [nSProgressIndicator startAnimation:(id)sender];

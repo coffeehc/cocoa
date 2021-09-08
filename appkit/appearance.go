@@ -25,22 +25,38 @@ func MakeAppearance(ptr unsafe.Pointer) NSAppearance {
 	}
 }
 
-func AllocAppearance() NSAppearance {
-	return MakeAppearance(C.C_Appearance_Alloc())
-}
-
-func (n NSAppearance) InitWithAppearanceNamed_Bundle(name AppearanceName, bundle foundation.Bundle) Appearance {
+func (n NSAppearance) InitWithAppearanceNamed_Bundle(name AppearanceName, bundle foundation.Bundle) NSAppearance {
 	result_ := C.C_NSAppearance_InitWithAppearanceNamed_Bundle(n.Ptr(), foundation.NewString(string(name)).Ptr(), objc.ExtractPtr(bundle))
 	return MakeAppearance(result_)
 }
 
-func (n NSAppearance) InitWithCoder(coder foundation.Coder) Appearance {
+func (n NSAppearance) InitWithCoder(coder foundation.Coder) NSAppearance {
 	result_ := C.C_NSAppearance_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeAppearance(result_)
 }
 
-func (n NSAppearance) Init() Appearance {
+func AllocAppearance() NSAppearance {
+	result_ := C.C_NSAppearance_AllocAppearance()
+	return MakeAppearance(result_)
+}
+
+func (n NSAppearance) Init() NSAppearance {
 	result_ := C.C_NSAppearance_Init(n.Ptr())
+	return MakeAppearance(result_)
+}
+
+func NewAppearance() NSAppearance {
+	result_ := C.C_NSAppearance_NewAppearance()
+	return MakeAppearance(result_)
+}
+
+func (n NSAppearance) Autorelease() NSAppearance {
+	result_ := C.C_NSAppearance_Autorelease(n.Ptr())
+	return MakeAppearance(result_)
+}
+
+func (n NSAppearance) Retain() NSAppearance {
+	result_ := C.C_NSAppearance_Retain(n.Ptr())
 	return MakeAppearance(result_)
 }
 

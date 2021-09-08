@@ -5,7 +5,11 @@
 
 void* C_StatusBar_Alloc();
 
+void* C_NSStatusBar_AllocStatusBar();
 void* C_NSStatusBar_Init(void* ptr);
+void* C_NSStatusBar_NewStatusBar();
+void* C_NSStatusBar_Autorelease(void* ptr);
+void* C_NSStatusBar_Retain(void* ptr);
 void* C_NSStatusBar_StatusItemWithLength(void* ptr, double length);
 void C_NSStatusBar_RemoveStatusItem(void* ptr, void* item);
 void* C_NSStatusBar_SystemStatusBar();

@@ -9,6 +9,10 @@ void* C_NSRulerView_InitWithScrollView_Orientation(void* ptr, void* scrollView, 
 void* C_NSRulerView_InitWithCoder(void* ptr, void* coder);
 void* C_NSRulerView_InitWithFrame(void* ptr, CGRect frameRect);
 void* C_NSRulerView_Init(void* ptr);
+void* C_NSRulerView_AllocRulerView();
+void* C_NSRulerView_NewRulerView();
+void* C_NSRulerView_Autorelease(void* ptr);
+void* C_NSRulerView_Retain(void* ptr);
 void C_NSRulerView_RulerView_RegisterUnitWithName_Abbreviation_UnitToPointsConversionFactor_StepUpCycle_StepDownCycle(void* unitName, void* abbreviation, double conversionFactor, Array stepUpCycle, Array stepDownCycle);
 void C_NSRulerView_AddMarker(void* ptr, void* marker);
 void C_NSRulerView_RemoveMarker(void* ptr, void* marker);

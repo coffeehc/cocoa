@@ -29,6 +29,28 @@ void* C_NSUserInterfaceCompressionOptions_InitWithCoder(void* ptr, void* coder) 
     return result_;
 }
 
+void* C_NSUserInterfaceCompressionOptions_AllocUserInterfaceCompressionOptions() {
+    NSUserInterfaceCompressionOptions* result_ = [NSUserInterfaceCompressionOptions alloc];
+    return result_;
+}
+
+void* C_NSUserInterfaceCompressionOptions_NewUserInterfaceCompressionOptions() {
+    NSUserInterfaceCompressionOptions* result_ = [NSUserInterfaceCompressionOptions new];
+    return result_;
+}
+
+void* C_NSUserInterfaceCompressionOptions_Autorelease(void* ptr) {
+    NSUserInterfaceCompressionOptions* nSUserInterfaceCompressionOptions = (NSUserInterfaceCompressionOptions*)ptr;
+    NSUserInterfaceCompressionOptions* result_ = [nSUserInterfaceCompressionOptions autorelease];
+    return result_;
+}
+
+void* C_NSUserInterfaceCompressionOptions_Retain(void* ptr) {
+    NSUserInterfaceCompressionOptions* nSUserInterfaceCompressionOptions = (NSUserInterfaceCompressionOptions*)ptr;
+    NSUserInterfaceCompressionOptions* result_ = [nSUserInterfaceCompressionOptions retain];
+    return result_;
+}
+
 bool C_NSUserInterfaceCompressionOptions_ContainsOptions(void* ptr, void* options) {
     NSUserInterfaceCompressionOptions* nSUserInterfaceCompressionOptions = (NSUserInterfaceCompressionOptions*)ptr;
     BOOL result_ = [nSUserInterfaceCompressionOptions containsOptions:(NSUserInterfaceCompressionOptions*)options];

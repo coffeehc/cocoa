@@ -5,6 +5,11 @@ void* C_GridView_Alloc() {
     return [NSGridView alloc];
 }
 
+void* C_NSGridView_GridViewWithNumberOfColumns_Rows(int columnCount, int rowCount) {
+    NSGridView* result_ = [NSGridView gridViewWithNumberOfColumns:columnCount rows:rowCount];
+    return result_;
+}
+
 void* C_NSGridView_InitWithFrame(void* ptr, CGRect frameRect) {
     NSGridView* nSGridView = (NSGridView*)ptr;
     NSGridView* result_ = [nSGridView initWithFrame:frameRect];
@@ -23,8 +28,25 @@ void* C_NSGridView_Init(void* ptr) {
     return result_;
 }
 
-void* C_NSGridView_GridViewWithNumberOfColumns_Rows(int columnCount, int rowCount) {
-    NSGridView* result_ = [NSGridView gridViewWithNumberOfColumns:columnCount rows:rowCount];
+void* C_NSGridView_AllocGridView() {
+    NSGridView* result_ = [NSGridView alloc];
+    return result_;
+}
+
+void* C_NSGridView_NewGridView() {
+    NSGridView* result_ = [NSGridView new];
+    return result_;
+}
+
+void* C_NSGridView_Autorelease(void* ptr) {
+    NSGridView* nSGridView = (NSGridView*)ptr;
+    NSGridView* result_ = [nSGridView autorelease];
+    return result_;
+}
+
+void* C_NSGridView_Retain(void* ptr) {
+    NSGridView* nSGridView = (NSGridView*)ptr;
+    NSGridView* result_ = [nSGridView retain];
     return result_;
 }
 
@@ -54,7 +76,7 @@ int C_NSGridView_IndexOfRow(void* ptr, void* row) {
 
 void* C_NSGridView_AddRowWithViews(void* ptr, Array views) {
     NSGridView* nSGridView = (NSGridView*)ptr;
-    NSMutableArray* objcViews = [[NSMutableArray alloc] init];
+    NSMutableArray* objcViews = [NSMutableArray arrayWithCapacity:views.len];
     if (views.len > 0) {
     	void** viewsData = (void**)views.data;
     	for (int i = 0; i < views.len; i++) {
@@ -68,7 +90,7 @@ void* C_NSGridView_AddRowWithViews(void* ptr, Array views) {
 
 void* C_NSGridView_InsertRowAtIndex_WithViews(void* ptr, int index, Array views) {
     NSGridView* nSGridView = (NSGridView*)ptr;
-    NSMutableArray* objcViews = [[NSMutableArray alloc] init];
+    NSMutableArray* objcViews = [NSMutableArray arrayWithCapacity:views.len];
     if (views.len > 0) {
     	void** viewsData = (void**)views.data;
     	for (int i = 0; i < views.len; i++) {
@@ -92,7 +114,7 @@ void C_NSGridView_MoveRowAtIndex_ToIndex(void* ptr, int fromIndex, int toIndex) 
 
 void* C_NSGridView_AddColumnWithViews(void* ptr, Array views) {
     NSGridView* nSGridView = (NSGridView*)ptr;
-    NSMutableArray* objcViews = [[NSMutableArray alloc] init];
+    NSMutableArray* objcViews = [NSMutableArray arrayWithCapacity:views.len];
     if (views.len > 0) {
     	void** viewsData = (void**)views.data;
     	for (int i = 0; i < views.len; i++) {
@@ -106,7 +128,7 @@ void* C_NSGridView_AddColumnWithViews(void* ptr, Array views) {
 
 void* C_NSGridView_InsertColumnAtIndex_WithViews(void* ptr, int index, Array views) {
     NSGridView* nSGridView = (NSGridView*)ptr;
-    NSMutableArray* objcViews = [[NSMutableArray alloc] init];
+    NSMutableArray* objcViews = [NSMutableArray arrayWithCapacity:views.len];
     if (views.len > 0) {
     	void** viewsData = (void**)views.data;
     	for (int i = 0; i < views.len; i++) {

@@ -30,22 +30,38 @@ func MakeTableHeaderView(ptr unsafe.Pointer) NSTableHeaderView {
 	}
 }
 
-func AllocTableHeaderView() NSTableHeaderView {
-	return MakeTableHeaderView(C.C_TableHeaderView_Alloc())
-}
-
-func (n NSTableHeaderView) InitWithFrame(frameRect foundation.Rect) TableHeaderView {
+func (n NSTableHeaderView) InitWithFrame(frameRect foundation.Rect) NSTableHeaderView {
 	result_ := C.C_NSTableHeaderView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeTableHeaderView(result_)
 }
 
-func (n NSTableHeaderView) InitWithCoder(coder foundation.Coder) TableHeaderView {
+func (n NSTableHeaderView) InitWithCoder(coder foundation.Coder) NSTableHeaderView {
 	result_ := C.C_NSTableHeaderView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeTableHeaderView(result_)
 }
 
-func (n NSTableHeaderView) Init() TableHeaderView {
+func (n NSTableHeaderView) Init() NSTableHeaderView {
 	result_ := C.C_NSTableHeaderView_Init(n.Ptr())
+	return MakeTableHeaderView(result_)
+}
+
+func AllocTableHeaderView() NSTableHeaderView {
+	result_ := C.C_NSTableHeaderView_AllocTableHeaderView()
+	return MakeTableHeaderView(result_)
+}
+
+func NewTableHeaderView() NSTableHeaderView {
+	result_ := C.C_NSTableHeaderView_NewTableHeaderView()
+	return MakeTableHeaderView(result_)
+}
+
+func (n NSTableHeaderView) Autorelease() NSTableHeaderView {
+	result_ := C.C_NSTableHeaderView_Autorelease(n.Ptr())
+	return MakeTableHeaderView(result_)
+}
+
+func (n NSTableHeaderView) Retain() NSTableHeaderView {
+	result_ := C.C_NSTableHeaderView_Retain(n.Ptr())
 	return MakeTableHeaderView(result_)
 }
 

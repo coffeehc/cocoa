@@ -5,9 +5,31 @@ void* C_DockTile_Alloc() {
     return [NSDockTile alloc];
 }
 
+void* C_NSDockTile_AllocDockTile() {
+    NSDockTile* result_ = [NSDockTile alloc];
+    return result_;
+}
+
 void* C_NSDockTile_Init(void* ptr) {
     NSDockTile* nSDockTile = (NSDockTile*)ptr;
     NSDockTile* result_ = [nSDockTile init];
+    return result_;
+}
+
+void* C_NSDockTile_NewDockTile() {
+    NSDockTile* result_ = [NSDockTile new];
+    return result_;
+}
+
+void* C_NSDockTile_Autorelease(void* ptr) {
+    NSDockTile* nSDockTile = (NSDockTile*)ptr;
+    NSDockTile* result_ = [nSDockTile autorelease];
+    return result_;
+}
+
+void* C_NSDockTile_Retain(void* ptr) {
+    NSDockTile* nSDockTile = (NSDockTile*)ptr;
+    NSDockTile* result_ = [nSDockTile retain];
     return result_;
 }
 

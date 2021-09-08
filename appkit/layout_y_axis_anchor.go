@@ -27,11 +27,27 @@ func MakeLayoutYAxisAnchor(ptr unsafe.Pointer) NSLayoutYAxisAnchor {
 }
 
 func AllocLayoutYAxisAnchor() NSLayoutYAxisAnchor {
-	return MakeLayoutYAxisAnchor(C.C_LayoutYAxisAnchor_Alloc())
+	result_ := C.C_NSLayoutYAxisAnchor_AllocLayoutYAxisAnchor()
+	return MakeLayoutYAxisAnchor(result_)
 }
 
-func (n NSLayoutYAxisAnchor) Init() LayoutYAxisAnchor {
+func (n NSLayoutYAxisAnchor) Init() NSLayoutYAxisAnchor {
 	result_ := C.C_NSLayoutYAxisAnchor_Init(n.Ptr())
+	return MakeLayoutYAxisAnchor(result_)
+}
+
+func NewLayoutYAxisAnchor() NSLayoutYAxisAnchor {
+	result_ := C.C_NSLayoutYAxisAnchor_NewLayoutYAxisAnchor()
+	return MakeLayoutYAxisAnchor(result_)
+}
+
+func (n NSLayoutYAxisAnchor) Autorelease() NSLayoutYAxisAnchor {
+	result_ := C.C_NSLayoutYAxisAnchor_Autorelease(n.Ptr())
+	return MakeLayoutYAxisAnchor(result_)
+}
+
+func (n NSLayoutYAxisAnchor) Retain() NSLayoutYAxisAnchor {
+	result_ := C.C_NSLayoutYAxisAnchor_Retain(n.Ptr())
 	return MakeLayoutYAxisAnchor(result_)
 }
 

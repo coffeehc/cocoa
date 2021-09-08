@@ -15,6 +15,23 @@ void* C_NSCollectionLayoutGroupCustomItem_CollectionLayoutGroupCustomItem_Custom
     return result_;
 }
 
+void* C_NSCollectionLayoutGroupCustomItem_AllocCollectionLayoutGroupCustomItem() {
+    NSCollectionLayoutGroupCustomItem* result_ = [NSCollectionLayoutGroupCustomItem alloc];
+    return result_;
+}
+
+void* C_NSCollectionLayoutGroupCustomItem_Autorelease(void* ptr) {
+    NSCollectionLayoutGroupCustomItem* nSCollectionLayoutGroupCustomItem = (NSCollectionLayoutGroupCustomItem*)ptr;
+    NSCollectionLayoutGroupCustomItem* result_ = [nSCollectionLayoutGroupCustomItem autorelease];
+    return result_;
+}
+
+void* C_NSCollectionLayoutGroupCustomItem_Retain(void* ptr) {
+    NSCollectionLayoutGroupCustomItem* nSCollectionLayoutGroupCustomItem = (NSCollectionLayoutGroupCustomItem*)ptr;
+    NSCollectionLayoutGroupCustomItem* result_ = [nSCollectionLayoutGroupCustomItem retain];
+    return result_;
+}
+
 CGRect C_NSCollectionLayoutGroupCustomItem_Frame(void* ptr) {
     NSCollectionLayoutGroupCustomItem* nSCollectionLayoutGroupCustomItem = (NSCollectionLayoutGroupCustomItem*)ptr;
     NSRect result_ = [nSCollectionLayoutGroupCustomItem frame];

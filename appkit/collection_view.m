@@ -23,6 +23,28 @@ void* C_NSCollectionView_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSCollectionView_AllocCollectionView() {
+    NSCollectionView* result_ = [NSCollectionView alloc];
+    return result_;
+}
+
+void* C_NSCollectionView_NewCollectionView() {
+    NSCollectionView* result_ = [NSCollectionView new];
+    return result_;
+}
+
+void* C_NSCollectionView_Autorelease(void* ptr) {
+    NSCollectionView* nSCollectionView = (NSCollectionView*)ptr;
+    NSCollectionView* result_ = [nSCollectionView autorelease];
+    return result_;
+}
+
+void* C_NSCollectionView_Retain(void* ptr) {
+    NSCollectionView* nSCollectionView = (NSCollectionView*)ptr;
+    NSCollectionView* result_ = [nSCollectionView retain];
+    return result_;
+}
+
 void* C_NSCollectionView_MakeItemWithIdentifier_ForIndexPath(void* ptr, void* identifier, void* indexPath) {
     NSCollectionView* nSCollectionView = (NSCollectionView*)ptr;
     NSCollectionViewItem* result_ = [nSCollectionView makeItemWithIdentifier:(NSString*)identifier forIndexPath:(NSIndexPath*)indexPath];
@@ -255,7 +277,7 @@ Array C_NSCollectionView_Content(void* ptr) {
 
 void C_NSCollectionView_SetContent(void* ptr, Array value) {
     NSCollectionView* nSCollectionView = (NSCollectionView*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -296,7 +318,7 @@ Array C_NSCollectionView_BackgroundColors(void* ptr) {
 
 void C_NSCollectionView_SetBackgroundColors(void* ptr, Array value) {
     NSCollectionView* nSCollectionView = (NSCollectionView*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

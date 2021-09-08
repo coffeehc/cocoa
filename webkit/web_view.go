@@ -65,22 +65,38 @@ func MakeWebView(ptr unsafe.Pointer) WKWebView {
 	}
 }
 
-func AllocWebView() WKWebView {
-	return MakeWebView(C.C_WebView_Alloc())
-}
-
-func (w WKWebView) InitWithFrame_Configuration(frame coregraphics.Rect, configuration WebViewConfiguration) WebView {
+func (w WKWebView) InitWithFrame_Configuration(frame coregraphics.Rect, configuration WebViewConfiguration) WKWebView {
 	result_ := C.C_WKWebView_InitWithFrame_Configuration(w.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(frame)), objc.ExtractPtr(configuration))
 	return MakeWebView(result_)
 }
 
-func (w WKWebView) InitWithCoder(coder foundation.Coder) WebView {
+func (w WKWebView) InitWithCoder(coder foundation.Coder) WKWebView {
 	result_ := C.C_WKWebView_InitWithCoder(w.Ptr(), objc.ExtractPtr(coder))
 	return MakeWebView(result_)
 }
 
-func (w WKWebView) Init() WebView {
+func (w WKWebView) Init() WKWebView {
 	result_ := C.C_WKWebView_Init(w.Ptr())
+	return MakeWebView(result_)
+}
+
+func AllocWebView() WKWebView {
+	result_ := C.C_WKWebView_AllocWebView()
+	return MakeWebView(result_)
+}
+
+func NewWebView() WKWebView {
+	result_ := C.C_WKWebView_NewWebView()
+	return MakeWebView(result_)
+}
+
+func (w WKWebView) Autorelease() WKWebView {
+	result_ := C.C_WKWebView_Autorelease(w.Ptr())
+	return MakeWebView(result_)
+}
+
+func (w WKWebView) Retain() WKWebView {
+	result_ := C.C_WKWebView_Retain(w.Ptr())
 	return MakeWebView(result_)
 }
 

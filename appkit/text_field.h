@@ -5,13 +5,17 @@
 
 void* C_TextField_Alloc();
 
-void* C_NSTextField_InitWithFrame(void* ptr, CGRect frameRect);
-void* C_NSTextField_InitWithCoder(void* ptr, void* coder);
-void* C_NSTextField_Init(void* ptr);
 void* C_NSTextField_TextField_LabelWithAttributedString(void* attributedStringValue);
 void* C_NSTextField_TextField_LabelWithString(void* stringValue);
 void* C_NSTextField_TextFieldWithString(void* stringValue);
 void* C_NSTextField_TextField_WrappingLabelWithString(void* stringValue);
+void* C_NSTextField_InitWithFrame(void* ptr, CGRect frameRect);
+void* C_NSTextField_InitWithCoder(void* ptr, void* coder);
+void* C_NSTextField_Init(void* ptr);
+void* C_NSTextField_AllocTextField();
+void* C_NSTextField_NewTextField();
+void* C_NSTextField_Autorelease(void* ptr);
+void* C_NSTextField_Retain(void* ptr);
 void C_NSTextField_SelectText(void* ptr, void* sender);
 bool C_NSTextField_TextShouldBeginEditing(void* ptr, void* textObject);
 void C_NSTextField_TextDidBeginEditing(void* ptr, void* notification);

@@ -32,11 +32,27 @@ func MakeLayoutDimension(ptr unsafe.Pointer) NSLayoutDimension {
 }
 
 func AllocLayoutDimension() NSLayoutDimension {
-	return MakeLayoutDimension(C.C_LayoutDimension_Alloc())
+	result_ := C.C_NSLayoutDimension_AllocLayoutDimension()
+	return MakeLayoutDimension(result_)
 }
 
-func (n NSLayoutDimension) Init() LayoutDimension {
+func (n NSLayoutDimension) Init() NSLayoutDimension {
 	result_ := C.C_NSLayoutDimension_Init(n.Ptr())
+	return MakeLayoutDimension(result_)
+}
+
+func NewLayoutDimension() NSLayoutDimension {
+	result_ := C.C_NSLayoutDimension_NewLayoutDimension()
+	return MakeLayoutDimension(result_)
+}
+
+func (n NSLayoutDimension) Autorelease() NSLayoutDimension {
+	result_ := C.C_NSLayoutDimension_Autorelease(n.Ptr())
+	return MakeLayoutDimension(result_)
+}
+
+func (n NSLayoutDimension) Retain() NSLayoutDimension {
+	result_ := C.C_NSLayoutDimension_Retain(n.Ptr())
 	return MakeLayoutDimension(result_)
 }
 

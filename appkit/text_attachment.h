@@ -7,7 +7,11 @@ void* C_TextAttachment_Alloc();
 
 void* C_NSTextAttachment_InitWithFileWrapper(void* ptr, void* fileWrapper);
 void* C_NSTextAttachment_InitWithData_OfType(void* ptr, void* contentData, void* uti);
+void* C_NSTextAttachment_AllocTextAttachment();
 void* C_NSTextAttachment_Init(void* ptr);
+void* C_NSTextAttachment_NewTextAttachment();
+void* C_NSTextAttachment_Autorelease(void* ptr);
+void* C_NSTextAttachment_Retain(void* ptr);
 CGRect C_NSTextAttachment_Bounds(void* ptr);
 void C_NSTextAttachment_SetBounds(void* ptr, CGRect value);
 void* C_NSTextAttachment_Contents(void* ptr);

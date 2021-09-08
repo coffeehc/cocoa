@@ -17,9 +17,31 @@ void* C_NSTableColumn_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSTableColumn_AllocTableColumn() {
+    NSTableColumn* result_ = [NSTableColumn alloc];
+    return result_;
+}
+
 void* C_NSTableColumn_Init(void* ptr) {
     NSTableColumn* nSTableColumn = (NSTableColumn*)ptr;
     NSTableColumn* result_ = [nSTableColumn init];
+    return result_;
+}
+
+void* C_NSTableColumn_NewTableColumn() {
+    NSTableColumn* result_ = [NSTableColumn new];
+    return result_;
+}
+
+void* C_NSTableColumn_Autorelease(void* ptr) {
+    NSTableColumn* nSTableColumn = (NSTableColumn*)ptr;
+    NSTableColumn* result_ = [nSTableColumn autorelease];
+    return result_;
+}
+
+void* C_NSTableColumn_Retain(void* ptr) {
+    NSTableColumn* nSTableColumn = (NSTableColumn*)ptr;
+    NSTableColumn* result_ = [nSTableColumn retain];
     return result_;
 }
 

@@ -5,9 +5,31 @@ void* C_MeasurementFormatter_Alloc() {
     return [NSMeasurementFormatter alloc];
 }
 
+void* C_NSMeasurementFormatter_AllocMeasurementFormatter() {
+    NSMeasurementFormatter* result_ = [NSMeasurementFormatter alloc];
+    return result_;
+}
+
 void* C_NSMeasurementFormatter_Init(void* ptr) {
     NSMeasurementFormatter* nSMeasurementFormatter = (NSMeasurementFormatter*)ptr;
     NSMeasurementFormatter* result_ = [nSMeasurementFormatter init];
+    return result_;
+}
+
+void* C_NSMeasurementFormatter_NewMeasurementFormatter() {
+    NSMeasurementFormatter* result_ = [NSMeasurementFormatter new];
+    return result_;
+}
+
+void* C_NSMeasurementFormatter_Autorelease(void* ptr) {
+    NSMeasurementFormatter* nSMeasurementFormatter = (NSMeasurementFormatter*)ptr;
+    NSMeasurementFormatter* result_ = [nSMeasurementFormatter autorelease];
+    return result_;
+}
+
+void* C_NSMeasurementFormatter_Retain(void* ptr) {
+    NSMeasurementFormatter* nSMeasurementFormatter = (NSMeasurementFormatter*)ptr;
+    NSMeasurementFormatter* result_ = [nSMeasurementFormatter retain];
     return result_;
 }
 

@@ -13,7 +13,7 @@ void* C_NSMutableAttributedString_InitWithString(void* ptr, void* str) {
 
 void* C_NSMutableAttributedString_InitWithString_Attributes(void* ptr, void* str, Dictionary attrs) {
     NSMutableAttributedString* nSMutableAttributedString = (NSMutableAttributedString*)ptr;
-    NSMutableDictionary* objcAttrs = [[NSMutableDictionary alloc] initWithCapacity: attrs.len];
+    NSMutableDictionary* objcAttrs = [NSMutableDictionary dictionaryWithCapacity:attrs.len];
     if (attrs.len > 0) {
     	void** attrsKeyData = (void**)attrs.key_data;
     	void** attrsValueData = (void**)attrs.value_data;
@@ -33,9 +33,31 @@ void* C_NSMutableAttributedString_InitWithAttributedString(void* ptr, void* attr
     return result_;
 }
 
+void* C_NSMutableAttributedString_AllocMutableAttributedString() {
+    NSMutableAttributedString* result_ = [NSMutableAttributedString alloc];
+    return result_;
+}
+
 void* C_NSMutableAttributedString_Init(void* ptr) {
     NSMutableAttributedString* nSMutableAttributedString = (NSMutableAttributedString*)ptr;
     NSMutableAttributedString* result_ = [nSMutableAttributedString init];
+    return result_;
+}
+
+void* C_NSMutableAttributedString_NewMutableAttributedString() {
+    NSMutableAttributedString* result_ = [NSMutableAttributedString new];
+    return result_;
+}
+
+void* C_NSMutableAttributedString_Autorelease(void* ptr) {
+    NSMutableAttributedString* nSMutableAttributedString = (NSMutableAttributedString*)ptr;
+    NSMutableAttributedString* result_ = [nSMutableAttributedString autorelease];
+    return result_;
+}
+
+void* C_NSMutableAttributedString_Retain(void* ptr) {
+    NSMutableAttributedString* nSMutableAttributedString = (NSMutableAttributedString*)ptr;
+    NSMutableAttributedString* result_ = [nSMutableAttributedString retain];
     return result_;
 }
 

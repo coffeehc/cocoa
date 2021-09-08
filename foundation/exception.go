@@ -27,11 +27,27 @@ func MakeException(ptr unsafe.Pointer) NSException {
 }
 
 func AllocException() NSException {
-	return MakeException(C.C_Exception_Alloc())
+	result_ := C.C_NSException_AllocException()
+	return MakeException(result_)
 }
 
-func (n NSException) Init() Exception {
+func (n NSException) Init() NSException {
 	result_ := C.C_NSException_Init(n.Ptr())
+	return MakeException(result_)
+}
+
+func NewException() NSException {
+	result_ := C.C_NSException_NewException()
+	return MakeException(result_)
+}
+
+func (n NSException) Autorelease() NSException {
+	result_ := C.C_NSException_Autorelease(n.Ptr())
+	return MakeException(result_)
+}
+
+func (n NSException) Retain() NSException {
+	result_ := C.C_NSException_Retain(n.Ptr())
 	return MakeException(result_)
 }
 

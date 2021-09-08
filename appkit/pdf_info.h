@@ -5,7 +5,11 @@
 
 void* C_PDFInfo_Alloc();
 
+void* C_NSPDFInfo_AllocPDFInfo();
 void* C_NSPDFInfo_Init(void* ptr);
+void* C_NSPDFInfo_NewPDFInfo();
+void* C_NSPDFInfo_Autorelease(void* ptr);
+void* C_NSPDFInfo_Retain(void* ptr);
 void* C_NSPDFInfo_URL(void* ptr);
 void C_NSPDFInfo_SetURL(void* ptr, void* value);
 bool C_NSPDFInfo_IsFileExtensionHidden(void* ptr);

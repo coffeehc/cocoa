@@ -17,9 +17,31 @@ void* C_NSColorList_InitWithName_FromFile(void* ptr, void* name, void* path) {
     return result_;
 }
 
+void* C_NSColorList_AllocColorList() {
+    NSColorList* result_ = [NSColorList alloc];
+    return result_;
+}
+
 void* C_NSColorList_Init(void* ptr) {
     NSColorList* nSColorList = (NSColorList*)ptr;
     NSColorList* result_ = [nSColorList init];
+    return result_;
+}
+
+void* C_NSColorList_NewColorList() {
+    NSColorList* result_ = [NSColorList new];
+    return result_;
+}
+
+void* C_NSColorList_Autorelease(void* ptr) {
+    NSColorList* nSColorList = (NSColorList*)ptr;
+    NSColorList* result_ = [nSColorList autorelease];
+    return result_;
+}
+
+void* C_NSColorList_Retain(void* ptr) {
+    NSColorList* nSColorList = (NSColorList*)ptr;
+    NSColorList* result_ = [nSColorList retain];
     return result_;
 }
 

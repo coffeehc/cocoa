@@ -44,11 +44,27 @@ func MakePasteboard(ptr unsafe.Pointer) NSPasteboard {
 }
 
 func AllocPasteboard() NSPasteboard {
-	return MakePasteboard(C.C_Pasteboard_Alloc())
+	result_ := C.C_NSPasteboard_AllocPasteboard()
+	return MakePasteboard(result_)
 }
 
-func (n NSPasteboard) Init() Pasteboard {
+func (n NSPasteboard) Init() NSPasteboard {
 	result_ := C.C_NSPasteboard_Init(n.Ptr())
+	return MakePasteboard(result_)
+}
+
+func NewPasteboard() NSPasteboard {
+	result_ := C.C_NSPasteboard_NewPasteboard()
+	return MakePasteboard(result_)
+}
+
+func (n NSPasteboard) Autorelease() NSPasteboard {
+	result_ := C.C_NSPasteboard_Autorelease(n.Ptr())
+	return MakePasteboard(result_)
+}
+
+func (n NSPasteboard) Retain() NSPasteboard {
+	result_ := C.C_NSPasteboard_Retain(n.Ptr())
 	return MakePasteboard(result_)
 }
 

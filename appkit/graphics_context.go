@@ -39,11 +39,27 @@ func MakeGraphicsContext(ptr unsafe.Pointer) NSGraphicsContext {
 }
 
 func AllocGraphicsContext() NSGraphicsContext {
-	return MakeGraphicsContext(C.C_GraphicsContext_Alloc())
+	result_ := C.C_NSGraphicsContext_AllocGraphicsContext()
+	return MakeGraphicsContext(result_)
 }
 
-func (n NSGraphicsContext) Init() GraphicsContext {
+func (n NSGraphicsContext) Init() NSGraphicsContext {
 	result_ := C.C_NSGraphicsContext_Init(n.Ptr())
+	return MakeGraphicsContext(result_)
+}
+
+func NewGraphicsContext() NSGraphicsContext {
+	result_ := C.C_NSGraphicsContext_NewGraphicsContext()
+	return MakeGraphicsContext(result_)
+}
+
+func (n NSGraphicsContext) Autorelease() NSGraphicsContext {
+	result_ := C.C_NSGraphicsContext_Autorelease(n.Ptr())
+	return MakeGraphicsContext(result_)
+}
+
+func (n NSGraphicsContext) Retain() NSGraphicsContext {
+	result_ := C.C_NSGraphicsContext_Retain(n.Ptr())
 	return MakeGraphicsContext(result_)
 }
 

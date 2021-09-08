@@ -11,6 +11,28 @@ void* C_NSDocument_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSDocument_AllocDocument() {
+    NSDocument* result_ = [NSDocument alloc];
+    return result_;
+}
+
+void* C_NSDocument_NewDocument() {
+    NSDocument* result_ = [NSDocument new];
+    return result_;
+}
+
+void* C_NSDocument_Autorelease(void* ptr) {
+    NSDocument* nSDocument = (NSDocument*)ptr;
+    NSDocument* result_ = [nSDocument autorelease];
+    return result_;
+}
+
+void* C_NSDocument_Retain(void* ptr) {
+    NSDocument* nSDocument = (NSDocument*)ptr;
+    NSDocument* result_ = [nSDocument retain];
+    return result_;
+}
+
 bool C_NSDocument_CanConcurrentlyReadDocumentsOfType(void* typeName) {
     BOOL result_ = [NSDocument canConcurrentlyReadDocumentsOfType:(NSString*)typeName];
     return result_;

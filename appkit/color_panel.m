@@ -5,6 +5,11 @@ void* C_ColorPanel_Alloc() {
     return [NSColorPanel alloc];
 }
 
+void* C_NSColorPanel_ColorPanel_WindowWithContentViewController(void* contentViewController) {
+    NSColorPanel* result_ = [NSColorPanel windowWithContentViewController:(NSViewController*)contentViewController];
+    return result_;
+}
+
 void* C_NSColorPanel_InitWithContentRect_StyleMask_Backing_Defer(void* ptr, CGRect contentRect, unsigned int style, unsigned int backingStoreType, bool flag) {
     NSColorPanel* nSColorPanel = (NSColorPanel*)ptr;
     NSColorPanel* result_ = [nSColorPanel initWithContentRect:contentRect styleMask:style backing:backingStoreType defer:flag];
@@ -20,6 +25,28 @@ void* C_NSColorPanel_InitWithContentRect_StyleMask_Backing_Defer_Screen(void* pt
 void* C_NSColorPanel_Init(void* ptr) {
     NSColorPanel* nSColorPanel = (NSColorPanel*)ptr;
     NSColorPanel* result_ = [nSColorPanel init];
+    return result_;
+}
+
+void* C_NSColorPanel_AllocColorPanel() {
+    NSColorPanel* result_ = [NSColorPanel alloc];
+    return result_;
+}
+
+void* C_NSColorPanel_NewColorPanel() {
+    NSColorPanel* result_ = [NSColorPanel new];
+    return result_;
+}
+
+void* C_NSColorPanel_Autorelease(void* ptr) {
+    NSColorPanel* nSColorPanel = (NSColorPanel*)ptr;
+    NSColorPanel* result_ = [nSColorPanel autorelease];
+    return result_;
+}
+
+void* C_NSColorPanel_Retain(void* ptr) {
+    NSColorPanel* nSColorPanel = (NSColorPanel*)ptr;
+    NSColorPanel* result_ = [nSColorPanel retain];
     return result_;
 }
 

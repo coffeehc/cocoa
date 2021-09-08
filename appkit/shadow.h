@@ -6,6 +6,10 @@
 void* C_Shadow_Alloc();
 
 void* C_NSShadow_Init(void* ptr);
+void* C_NSShadow_AllocShadow();
+void* C_NSShadow_NewShadow();
+void* C_NSShadow_Autorelease(void* ptr);
+void* C_NSShadow_Retain(void* ptr);
 void C_NSShadow_Set(void* ptr);
 CGSize C_NSShadow_ShadowOffset(void* ptr);
 void C_NSShadow_SetShadowOffset(void* ptr, CGSize value);

@@ -5,7 +5,11 @@
 
 void* C_Invocation_Alloc();
 
+void* C_NSInvocation_AllocInvocation();
 void* C_NSInvocation_Init(void* ptr);
+void* C_NSInvocation_NewInvocation();
+void* C_NSInvocation_Autorelease(void* ptr);
+void* C_NSInvocation_Retain(void* ptr);
 void* C_NSInvocation_InvocationWithMethodSignature(void* sig);
 void C_NSInvocation_RetainArguments(void* ptr);
 void C_NSInvocation_Invoke(void* ptr);

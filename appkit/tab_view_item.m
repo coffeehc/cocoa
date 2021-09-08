@@ -11,9 +11,36 @@ void* C_NSTabViewItem_InitWithIdentifier(void* ptr, void* identifier) {
     return result_;
 }
 
+void* C_NSTabViewItem_TabViewItemWithViewController(void* viewController) {
+    NSTabViewItem* result_ = [NSTabViewItem tabViewItemWithViewController:(NSViewController*)viewController];
+    return result_;
+}
+
+void* C_NSTabViewItem_AllocTabViewItem() {
+    NSTabViewItem* result_ = [NSTabViewItem alloc];
+    return result_;
+}
+
 void* C_NSTabViewItem_Init(void* ptr) {
     NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
     NSTabViewItem* result_ = [nSTabViewItem init];
+    return result_;
+}
+
+void* C_NSTabViewItem_NewTabViewItem() {
+    NSTabViewItem* result_ = [NSTabViewItem new];
+    return result_;
+}
+
+void* C_NSTabViewItem_Autorelease(void* ptr) {
+    NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
+    NSTabViewItem* result_ = [nSTabViewItem autorelease];
+    return result_;
+}
+
+void* C_NSTabViewItem_Retain(void* ptr) {
+    NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
+    NSTabViewItem* result_ = [nSTabViewItem retain];
     return result_;
 }
 
@@ -25,11 +52,6 @@ void C_NSTabViewItem_DrawLabel_InRect(void* ptr, bool shouldTruncateLabel, CGRec
 CGSize C_NSTabViewItem_SizeOfLabel(void* ptr, bool computeMin) {
     NSTabViewItem* nSTabViewItem = (NSTabViewItem*)ptr;
     NSSize result_ = [nSTabViewItem sizeOfLabel:computeMin];
-    return result_;
-}
-
-void* C_NSTabViewItem_TabViewItemWithViewController(void* viewController) {
-    NSTabViewItem* result_ = [NSTabViewItem tabViewItemWithViewController:(NSViewController*)viewController];
     return result_;
 }
 

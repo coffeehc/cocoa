@@ -189,27 +189,48 @@ func MakeTextView(ptr unsafe.Pointer) NSTextView {
 	}
 }
 
-func AllocTextView() NSTextView {
-	return MakeTextView(C.C_TextView_Alloc())
-}
-
-func (n NSTextView) InitWithFrame_TextContainer(frameRect foundation.Rect, container TextContainer) TextView {
+func (n NSTextView) InitWithFrame_TextContainer(frameRect foundation.Rect, container TextContainer) NSTextView {
 	result_ := C.C_NSTextView_InitWithFrame_TextContainer(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))), objc.ExtractPtr(container))
 	return MakeTextView(result_)
 }
 
-func (n NSTextView) InitWithFrame(frameRect foundation.Rect) TextView {
+func (n NSTextView) InitWithFrame(frameRect foundation.Rect) NSTextView {
 	result_ := C.C_NSTextView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeTextView(result_)
 }
 
-func (n NSTextView) InitWithCoder(coder foundation.Coder) TextView {
+func (n NSTextView) InitWithCoder(coder foundation.Coder) NSTextView {
 	result_ := C.C_NSTextView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeTextView(result_)
 }
 
-func (n NSTextView) Init() TextView {
+func TextView_FieldEditor() NSTextView {
+	result_ := C.C_NSTextView_TextView_FieldEditor()
+	return MakeTextView(result_)
+}
+
+func (n NSTextView) Init() NSTextView {
 	result_ := C.C_NSTextView_Init(n.Ptr())
+	return MakeTextView(result_)
+}
+
+func AllocTextView() NSTextView {
+	result_ := C.C_NSTextView_AllocTextView()
+	return MakeTextView(result_)
+}
+
+func NewTextView() NSTextView {
+	result_ := C.C_NSTextView_NewTextView()
+	return MakeTextView(result_)
+}
+
+func (n NSTextView) Autorelease() NSTextView {
+	result_ := C.C_NSTextView_Autorelease(n.Ptr())
+	return MakeTextView(result_)
+}
+
+func (n NSTextView) Retain() NSTextView {
+	result_ := C.C_NSTextView_Retain(n.Ptr())
 	return MakeTextView(result_)
 }
 
@@ -604,11 +625,6 @@ func (n NSTextView) UpdateTextTouchBarItems() {
 
 func (n NSTextView) UpdateTouchBarItemIdentifiers() {
 	C.C_NSTextView_UpdateTouchBarItemIdentifiers(n.Ptr())
-}
-
-func TextView_FieldEditor() TextView {
-	result_ := C.C_NSTextView_TextView_FieldEditor()
-	return MakeTextView(result_)
 }
 
 func ScrollableDocumentContentTextView() ScrollView {

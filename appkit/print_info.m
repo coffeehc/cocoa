@@ -7,7 +7,7 @@ void* C_PrintInfo_Alloc() {
 
 void* C_NSPrintInfo_InitWithDictionary(void* ptr, Dictionary attributes) {
     NSPrintInfo* nSPrintInfo = (NSPrintInfo*)ptr;
-    NSMutableDictionary* objcAttributes = [[NSMutableDictionary alloc] initWithCapacity: attributes.len];
+    NSMutableDictionary* objcAttributes = [NSMutableDictionary dictionaryWithCapacity:attributes.len];
     if (attributes.len > 0) {
     	void** attributesKeyData = (void**)attributes.key_data;
     	void** attributesValueData = (void**)attributes.value_data;
@@ -30,6 +30,28 @@ void* C_NSPrintInfo_Init(void* ptr) {
 void* C_NSPrintInfo_InitWithCoder(void* ptr, void* coder) {
     NSPrintInfo* nSPrintInfo = (NSPrintInfo*)ptr;
     NSPrintInfo* result_ = [nSPrintInfo initWithCoder:(NSCoder*)coder];
+    return result_;
+}
+
+void* C_NSPrintInfo_AllocPrintInfo() {
+    NSPrintInfo* result_ = [NSPrintInfo alloc];
+    return result_;
+}
+
+void* C_NSPrintInfo_NewPrintInfo() {
+    NSPrintInfo* result_ = [NSPrintInfo new];
+    return result_;
+}
+
+void* C_NSPrintInfo_Autorelease(void* ptr) {
+    NSPrintInfo* nSPrintInfo = (NSPrintInfo*)ptr;
+    NSPrintInfo* result_ = [nSPrintInfo autorelease];
+    return result_;
+}
+
+void* C_NSPrintInfo_Retain(void* ptr) {
+    NSPrintInfo* nSPrintInfo = (NSPrintInfo*)ptr;
+    NSPrintInfo* result_ = [nSPrintInfo retain];
     return result_;
 }
 

@@ -22,12 +22,23 @@ func MakeUnit(ptr unsafe.Pointer) NSUnit {
 	}
 }
 
-func AllocUnit() NSUnit {
-	return MakeUnit(C.C_Unit_Alloc())
+func (n NSUnit) InitWithSymbol(symbol string) NSUnit {
+	result_ := C.C_NSUnit_InitWithSymbol(n.Ptr(), NewString(symbol).Ptr())
+	return MakeUnit(result_)
 }
 
-func (n NSUnit) InitWithSymbol(symbol string) Unit {
-	result_ := C.C_NSUnit_InitWithSymbol(n.Ptr(), NewString(symbol).Ptr())
+func AllocUnit() NSUnit {
+	result_ := C.C_NSUnit_AllocUnit()
+	return MakeUnit(result_)
+}
+
+func (n NSUnit) Autorelease() NSUnit {
+	result_ := C.C_NSUnit_Autorelease(n.Ptr())
+	return MakeUnit(result_)
+}
+
+func (n NSUnit) Retain() NSUnit {
+	result_ := C.C_NSUnit_Retain(n.Ptr())
 	return MakeUnit(result_)
 }
 

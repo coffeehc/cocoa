@@ -40,27 +40,43 @@ func MakeScriptObjectSpecifier(ptr unsafe.Pointer) NSScriptObjectSpecifier {
 	}
 }
 
-func AllocScriptObjectSpecifier() NSScriptObjectSpecifier {
-	return MakeScriptObjectSpecifier(C.C_ScriptObjectSpecifier_Alloc())
-}
-
-func (n NSScriptObjectSpecifier) InitWithContainerClassDescription_ContainerSpecifier_Key(classDesc ScriptClassDescription, container ScriptObjectSpecifier, property string) ScriptObjectSpecifier {
+func (n NSScriptObjectSpecifier) InitWithContainerClassDescription_ContainerSpecifier_Key(classDesc ScriptClassDescription, container ScriptObjectSpecifier, property string) NSScriptObjectSpecifier {
 	result_ := C.C_NSScriptObjectSpecifier_InitWithContainerClassDescription_ContainerSpecifier_Key(n.Ptr(), objc.ExtractPtr(classDesc), objc.ExtractPtr(container), NewString(property).Ptr())
 	return MakeScriptObjectSpecifier(result_)
 }
 
-func (n NSScriptObjectSpecifier) InitWithContainerSpecifier_Key(container ScriptObjectSpecifier, property string) ScriptObjectSpecifier {
+func (n NSScriptObjectSpecifier) InitWithContainerSpecifier_Key(container ScriptObjectSpecifier, property string) NSScriptObjectSpecifier {
 	result_ := C.C_NSScriptObjectSpecifier_InitWithContainerSpecifier_Key(n.Ptr(), objc.ExtractPtr(container), NewString(property).Ptr())
 	return MakeScriptObjectSpecifier(result_)
 }
 
-func (n NSScriptObjectSpecifier) InitWithCoder(inCoder Coder) ScriptObjectSpecifier {
+func (n NSScriptObjectSpecifier) InitWithCoder(inCoder Coder) NSScriptObjectSpecifier {
 	result_ := C.C_NSScriptObjectSpecifier_InitWithCoder(n.Ptr(), objc.ExtractPtr(inCoder))
 	return MakeScriptObjectSpecifier(result_)
 }
 
-func (n NSScriptObjectSpecifier) Init() ScriptObjectSpecifier {
+func AllocScriptObjectSpecifier() NSScriptObjectSpecifier {
+	result_ := C.C_NSScriptObjectSpecifier_AllocScriptObjectSpecifier()
+	return MakeScriptObjectSpecifier(result_)
+}
+
+func (n NSScriptObjectSpecifier) Init() NSScriptObjectSpecifier {
 	result_ := C.C_NSScriptObjectSpecifier_Init(n.Ptr())
+	return MakeScriptObjectSpecifier(result_)
+}
+
+func NewScriptObjectSpecifier() NSScriptObjectSpecifier {
+	result_ := C.C_NSScriptObjectSpecifier_NewScriptObjectSpecifier()
+	return MakeScriptObjectSpecifier(result_)
+}
+
+func (n NSScriptObjectSpecifier) Autorelease() NSScriptObjectSpecifier {
+	result_ := C.C_NSScriptObjectSpecifier_Autorelease(n.Ptr())
+	return MakeScriptObjectSpecifier(result_)
+}
+
+func (n NSScriptObjectSpecifier) Retain() NSScriptObjectSpecifier {
+	result_ := C.C_NSScriptObjectSpecifier_Retain(n.Ptr())
 	return MakeScriptObjectSpecifier(result_)
 }
 

@@ -56,26 +56,7 @@ func MakeStackView(ptr unsafe.Pointer) NSStackView {
 	}
 }
 
-func AllocStackView() NSStackView {
-	return MakeStackView(C.C_StackView_Alloc())
-}
-
-func (n NSStackView) InitWithFrame(frameRect foundation.Rect) StackView {
-	result_ := C.C_NSStackView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
-	return MakeStackView(result_)
-}
-
-func (n NSStackView) InitWithCoder(coder foundation.Coder) StackView {
-	result_ := C.C_NSStackView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeStackView(result_)
-}
-
-func (n NSStackView) Init() StackView {
-	result_ := C.C_NSStackView_Init(n.Ptr())
-	return MakeStackView(result_)
-}
-
-func StackViewWithViews(views []View) StackView {
+func StackViewWithViews(views []View) NSStackView {
 	var cViews C.Array
 	if len(views) > 0 {
 		cViewsData := make([]unsafe.Pointer, len(views))
@@ -86,6 +67,41 @@ func StackViewWithViews(views []View) StackView {
 		cViews.len = C.int(len(views))
 	}
 	result_ := C.C_NSStackView_StackViewWithViews(cViews)
+	return MakeStackView(result_)
+}
+
+func (n NSStackView) InitWithFrame(frameRect foundation.Rect) NSStackView {
+	result_ := C.C_NSStackView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeStackView(result_)
+}
+
+func (n NSStackView) InitWithCoder(coder foundation.Coder) NSStackView {
+	result_ := C.C_NSStackView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeStackView(result_)
+}
+
+func (n NSStackView) Init() NSStackView {
+	result_ := C.C_NSStackView_Init(n.Ptr())
+	return MakeStackView(result_)
+}
+
+func AllocStackView() NSStackView {
+	result_ := C.C_NSStackView_AllocStackView()
+	return MakeStackView(result_)
+}
+
+func NewStackView() NSStackView {
+	result_ := C.C_NSStackView_NewStackView()
+	return MakeStackView(result_)
+}
+
+func (n NSStackView) Autorelease() NSStackView {
+	result_ := C.C_NSStackView_Autorelease(n.Ptr())
+	return MakeStackView(result_)
+}
+
+func (n NSStackView) Retain() NSStackView {
+	result_ := C.C_NSStackView_Retain(n.Ptr())
 	return MakeStackView(result_)
 }
 

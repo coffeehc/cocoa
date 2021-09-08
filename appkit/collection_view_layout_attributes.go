@@ -37,32 +37,48 @@ func MakeCollectionViewLayoutAttributes(ptr unsafe.Pointer) NSCollectionViewLayo
 	}
 }
 
-func AllocCollectionViewLayoutAttributes() NSCollectionViewLayoutAttributes {
-	return MakeCollectionViewLayoutAttributes(C.C_CollectionViewLayoutAttributes_Alloc())
-}
-
-func (n NSCollectionViewLayoutAttributes) Init() CollectionViewLayoutAttributes {
-	result_ := C.C_NSCollectionViewLayoutAttributes_Init(n.Ptr())
-	return MakeCollectionViewLayoutAttributes(result_)
-}
-
-func CollectionViewLayoutAttributes_LayoutAttributesForItemWithIndexPath(indexPath foundation.IndexPath) CollectionViewLayoutAttributes {
+func CollectionViewLayoutAttributes_LayoutAttributesForItemWithIndexPath(indexPath foundation.IndexPath) NSCollectionViewLayoutAttributes {
 	result_ := C.C_NSCollectionViewLayoutAttributes_CollectionViewLayoutAttributes_LayoutAttributesForItemWithIndexPath(objc.ExtractPtr(indexPath))
 	return MakeCollectionViewLayoutAttributes(result_)
 }
 
-func CollectionViewLayoutAttributes_LayoutAttributesForSupplementaryViewOfKind_WithIndexPath(elementKind CollectionViewSupplementaryElementKind, indexPath foundation.IndexPath) CollectionViewLayoutAttributes {
+func CollectionViewLayoutAttributes_LayoutAttributesForSupplementaryViewOfKind_WithIndexPath(elementKind CollectionViewSupplementaryElementKind, indexPath foundation.IndexPath) NSCollectionViewLayoutAttributes {
 	result_ := C.C_NSCollectionViewLayoutAttributes_CollectionViewLayoutAttributes_LayoutAttributesForSupplementaryViewOfKind_WithIndexPath(foundation.NewString(string(elementKind)).Ptr(), objc.ExtractPtr(indexPath))
 	return MakeCollectionViewLayoutAttributes(result_)
 }
 
-func CollectionViewLayoutAttributes_LayoutAttributesForDecorationViewOfKind_WithIndexPath(decorationViewKind CollectionViewDecorationElementKind, indexPath foundation.IndexPath) CollectionViewLayoutAttributes {
+func CollectionViewLayoutAttributes_LayoutAttributesForDecorationViewOfKind_WithIndexPath(decorationViewKind CollectionViewDecorationElementKind, indexPath foundation.IndexPath) NSCollectionViewLayoutAttributes {
 	result_ := C.C_NSCollectionViewLayoutAttributes_CollectionViewLayoutAttributes_LayoutAttributesForDecorationViewOfKind_WithIndexPath(foundation.NewString(string(decorationViewKind)).Ptr(), objc.ExtractPtr(indexPath))
 	return MakeCollectionViewLayoutAttributes(result_)
 }
 
-func CollectionViewLayoutAttributes_LayoutAttributesForInterItemGapBeforeIndexPath(indexPath foundation.IndexPath) CollectionViewLayoutAttributes {
+func CollectionViewLayoutAttributes_LayoutAttributesForInterItemGapBeforeIndexPath(indexPath foundation.IndexPath) NSCollectionViewLayoutAttributes {
 	result_ := C.C_NSCollectionViewLayoutAttributes_CollectionViewLayoutAttributes_LayoutAttributesForInterItemGapBeforeIndexPath(objc.ExtractPtr(indexPath))
+	return MakeCollectionViewLayoutAttributes(result_)
+}
+
+func AllocCollectionViewLayoutAttributes() NSCollectionViewLayoutAttributes {
+	result_ := C.C_NSCollectionViewLayoutAttributes_AllocCollectionViewLayoutAttributes()
+	return MakeCollectionViewLayoutAttributes(result_)
+}
+
+func (n NSCollectionViewLayoutAttributes) Init() NSCollectionViewLayoutAttributes {
+	result_ := C.C_NSCollectionViewLayoutAttributes_Init(n.Ptr())
+	return MakeCollectionViewLayoutAttributes(result_)
+}
+
+func NewCollectionViewLayoutAttributes() NSCollectionViewLayoutAttributes {
+	result_ := C.C_NSCollectionViewLayoutAttributes_NewCollectionViewLayoutAttributes()
+	return MakeCollectionViewLayoutAttributes(result_)
+}
+
+func (n NSCollectionViewLayoutAttributes) Autorelease() NSCollectionViewLayoutAttributes {
+	result_ := C.C_NSCollectionViewLayoutAttributes_Autorelease(n.Ptr())
+	return MakeCollectionViewLayoutAttributes(result_)
+}
+
+func (n NSCollectionViewLayoutAttributes) Retain() NSCollectionViewLayoutAttributes {
+	result_ := C.C_NSCollectionViewLayoutAttributes_Retain(n.Ptr())
 	return MakeCollectionViewLayoutAttributes(result_)
 }
 

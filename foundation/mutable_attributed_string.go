@@ -22,16 +22,12 @@ func MakeMutableAttributedString(ptr unsafe.Pointer) NSMutableAttributedString {
 	}
 }
 
-func AllocMutableAttributedString() NSMutableAttributedString {
-	return MakeMutableAttributedString(C.C_MutableAttributedString_Alloc())
-}
-
-func (n NSMutableAttributedString) InitWithString(str string) MutableAttributedString {
+func (n NSMutableAttributedString) InitWithString(str string) NSMutableAttributedString {
 	result_ := C.C_NSMutableAttributedString_InitWithString(n.Ptr(), NewString(str).Ptr())
 	return MakeMutableAttributedString(result_)
 }
 
-func (n NSMutableAttributedString) InitWithString_Attributes(str string, attrs map[AttributedStringKey]objc.Object) MutableAttributedString {
+func (n NSMutableAttributedString) InitWithString_Attributes(str string, attrs map[AttributedStringKey]objc.Object) NSMutableAttributedString {
 	var cAttrs C.Dictionary
 	if len(attrs) > 0 {
 		cAttrsKeyData := make([]unsafe.Pointer, len(attrs))
@@ -50,13 +46,33 @@ func (n NSMutableAttributedString) InitWithString_Attributes(str string, attrs m
 	return MakeMutableAttributedString(result_)
 }
 
-func (n NSMutableAttributedString) InitWithAttributedString(attrStr AttributedString) MutableAttributedString {
+func (n NSMutableAttributedString) InitWithAttributedString(attrStr AttributedString) NSMutableAttributedString {
 	result_ := C.C_NSMutableAttributedString_InitWithAttributedString(n.Ptr(), objc.ExtractPtr(attrStr))
 	return MakeMutableAttributedString(result_)
 }
 
-func (n NSMutableAttributedString) Init() MutableAttributedString {
+func AllocMutableAttributedString() NSMutableAttributedString {
+	result_ := C.C_NSMutableAttributedString_AllocMutableAttributedString()
+	return MakeMutableAttributedString(result_)
+}
+
+func (n NSMutableAttributedString) Init() NSMutableAttributedString {
 	result_ := C.C_NSMutableAttributedString_Init(n.Ptr())
+	return MakeMutableAttributedString(result_)
+}
+
+func NewMutableAttributedString() NSMutableAttributedString {
+	result_ := C.C_NSMutableAttributedString_NewMutableAttributedString()
+	return MakeMutableAttributedString(result_)
+}
+
+func (n NSMutableAttributedString) Autorelease() NSMutableAttributedString {
+	result_ := C.C_NSMutableAttributedString_Autorelease(n.Ptr())
+	return MakeMutableAttributedString(result_)
+}
+
+func (n NSMutableAttributedString) Retain() NSMutableAttributedString {
+	result_ := C.C_NSMutableAttributedString_Retain(n.Ptr())
 	return MakeMutableAttributedString(result_)
 }
 

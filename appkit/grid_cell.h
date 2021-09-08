@@ -5,7 +5,11 @@
 
 void* C_GridCell_Alloc();
 
+void* C_NSGridCell_AllocGridCell();
 void* C_NSGridCell_Init(void* ptr);
+void* C_NSGridCell_NewGridCell();
+void* C_NSGridCell_Autorelease(void* ptr);
+void* C_NSGridCell_Retain(void* ptr);
 void* C_NSGridCell_Column(void* ptr);
 void* C_NSGridCell_Row(void* ptr);
 void* C_NSGridCell_ContentView(void* ptr);

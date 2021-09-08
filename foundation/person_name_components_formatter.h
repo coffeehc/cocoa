@@ -5,7 +5,11 @@
 
 void* C_PersonNameComponentsFormatter_Alloc();
 
+void* C_NSPersonNameComponentsFormatter_AllocPersonNameComponentsFormatter();
 void* C_NSPersonNameComponentsFormatter_Init(void* ptr);
+void* C_NSPersonNameComponentsFormatter_NewPersonNameComponentsFormatter();
+void* C_NSPersonNameComponentsFormatter_Autorelease(void* ptr);
+void* C_NSPersonNameComponentsFormatter_Retain(void* ptr);
 void* C_NSPersonNameComponentsFormatter_PersonNameComponentsFormatter_LocalizedStringFromPersonNameComponents_Style_Options(void* components, int nameFormatStyle, unsigned int nameOptions);
 void* C_NSPersonNameComponentsFormatter_StringFromPersonNameComponents(void* ptr, void* components);
 void* C_NSPersonNameComponentsFormatter_AnnotatedStringFromPersonNameComponents(void* ptr, void* components);

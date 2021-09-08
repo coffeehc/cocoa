@@ -46,22 +46,38 @@ func MakeObjectController(ptr unsafe.Pointer) NSObjectController {
 	}
 }
 
-func AllocObjectController() NSObjectController {
-	return MakeObjectController(C.C_ObjectController_Alloc())
-}
-
-func (n NSObjectController) InitWithContent(content objc.Object) ObjectController {
+func (n NSObjectController) InitWithContent(content objc.Object) NSObjectController {
 	result_ := C.C_NSObjectController_InitWithContent(n.Ptr(), objc.ExtractPtr(content))
 	return MakeObjectController(result_)
 }
 
-func (n NSObjectController) InitWithCoder(coder foundation.Coder) ObjectController {
+func (n NSObjectController) InitWithCoder(coder foundation.Coder) NSObjectController {
 	result_ := C.C_NSObjectController_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeObjectController(result_)
 }
 
-func (n NSObjectController) Init() ObjectController {
+func (n NSObjectController) Init() NSObjectController {
 	result_ := C.C_NSObjectController_Init(n.Ptr())
+	return MakeObjectController(result_)
+}
+
+func AllocObjectController() NSObjectController {
+	result_ := C.C_NSObjectController_AllocObjectController()
+	return MakeObjectController(result_)
+}
+
+func NewObjectController() NSObjectController {
+	result_ := C.C_NSObjectController_NewObjectController()
+	return MakeObjectController(result_)
+}
+
+func (n NSObjectController) Autorelease() NSObjectController {
+	result_ := C.C_NSObjectController_Autorelease(n.Ptr())
+	return MakeObjectController(result_)
+}
+
+func (n NSObjectController) Retain() NSObjectController {
+	result_ := C.C_NSObjectController_Retain(n.Ptr())
 	return MakeObjectController(result_)
 }
 

@@ -17,6 +17,28 @@ void* C_NSPopover_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSPopover_AllocPopover() {
+    NSPopover* result_ = [NSPopover alloc];
+    return result_;
+}
+
+void* C_NSPopover_NewPopover() {
+    NSPopover* result_ = [NSPopover new];
+    return result_;
+}
+
+void* C_NSPopover_Autorelease(void* ptr) {
+    NSPopover* nSPopover = (NSPopover*)ptr;
+    NSPopover* result_ = [nSPopover autorelease];
+    return result_;
+}
+
+void* C_NSPopover_Retain(void* ptr) {
+    NSPopover* nSPopover = (NSPopover*)ptr;
+    NSPopover* result_ = [nSPopover retain];
+    return result_;
+}
+
 void C_NSPopover_ShowRelativeToRect_OfView_PreferredEdge(void* ptr, CGRect positioningRect, void* positioningView, unsigned int preferredEdge) {
     NSPopover* nSPopover = (NSPopover*)ptr;
     [nSPopover showRelativeToRect:positioningRect ofView:(NSView*)positioningView preferredEdge:preferredEdge];

@@ -26,7 +26,18 @@ func MakeSecurityOrigin(ptr unsafe.Pointer) WKSecurityOrigin {
 }
 
 func AllocSecurityOrigin() WKSecurityOrigin {
-	return MakeSecurityOrigin(C.C_SecurityOrigin_Alloc())
+	result_ := C.C_WKSecurityOrigin_AllocSecurityOrigin()
+	return MakeSecurityOrigin(result_)
+}
+
+func (w WKSecurityOrigin) Autorelease() WKSecurityOrigin {
+	result_ := C.C_WKSecurityOrigin_Autorelease(w.Ptr())
+	return MakeSecurityOrigin(result_)
+}
+
+func (w WKSecurityOrigin) Retain() WKSecurityOrigin {
+	result_ := C.C_WKSecurityOrigin_Retain(w.Ptr())
+	return MakeSecurityOrigin(result_)
 }
 
 func (w WKSecurityOrigin) Host() string {

@@ -5,7 +5,11 @@
 
 void* C_BezierPath_Alloc();
 
+void* C_NSBezierPath_AllocBezierPath();
 void* C_NSBezierPath_Init(void* ptr);
+void* C_NSBezierPath_NewBezierPath();
+void* C_NSBezierPath_Autorelease(void* ptr);
+void* C_NSBezierPath_Retain(void* ptr);
 void* C_NSBezierPath_BezierPath_();
 void* C_NSBezierPath_BezierPathWithOvalInRect(CGRect rect);
 void* C_NSBezierPath_BezierPathWithRect(CGRect rect);

@@ -5,9 +5,31 @@ void* C_WindowTab_Alloc() {
     return [NSWindowTab alloc];
 }
 
+void* C_NSWindowTab_AllocWindowTab() {
+    NSWindowTab* result_ = [NSWindowTab alloc];
+    return result_;
+}
+
 void* C_NSWindowTab_Init(void* ptr) {
     NSWindowTab* nSWindowTab = (NSWindowTab*)ptr;
     NSWindowTab* result_ = [nSWindowTab init];
+    return result_;
+}
+
+void* C_NSWindowTab_NewWindowTab() {
+    NSWindowTab* result_ = [NSWindowTab new];
+    return result_;
+}
+
+void* C_NSWindowTab_Autorelease(void* ptr) {
+    NSWindowTab* nSWindowTab = (NSWindowTab*)ptr;
+    NSWindowTab* result_ = [nSWindowTab autorelease];
+    return result_;
+}
+
+void* C_NSWindowTab_Retain(void* ptr) {
+    NSWindowTab* nSWindowTab = (NSWindowTab*)ptr;
+    NSWindowTab* result_ = [nSWindowTab retain];
     return result_;
 }
 

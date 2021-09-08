@@ -128,22 +128,38 @@ func MakeBrowser(ptr unsafe.Pointer) NSBrowser {
 	}
 }
 
-func AllocBrowser() NSBrowser {
-	return MakeBrowser(C.C_Browser_Alloc())
-}
-
-func (n NSBrowser) InitWithFrame(frameRect foundation.Rect) Browser {
+func (n NSBrowser) InitWithFrame(frameRect foundation.Rect) NSBrowser {
 	result_ := C.C_NSBrowser_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeBrowser(result_)
 }
 
-func (n NSBrowser) InitWithCoder(coder foundation.Coder) Browser {
+func (n NSBrowser) InitWithCoder(coder foundation.Coder) NSBrowser {
 	result_ := C.C_NSBrowser_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeBrowser(result_)
 }
 
-func (n NSBrowser) Init() Browser {
+func (n NSBrowser) Init() NSBrowser {
 	result_ := C.C_NSBrowser_Init(n.Ptr())
+	return MakeBrowser(result_)
+}
+
+func AllocBrowser() NSBrowser {
+	result_ := C.C_NSBrowser_AllocBrowser()
+	return MakeBrowser(result_)
+}
+
+func NewBrowser() NSBrowser {
+	result_ := C.C_NSBrowser_NewBrowser()
+	return MakeBrowser(result_)
+}
+
+func (n NSBrowser) Autorelease() NSBrowser {
+	result_ := C.C_NSBrowser_Autorelease(n.Ptr())
+	return MakeBrowser(result_)
+}
+
+func (n NSBrowser) Retain() NSBrowser {
+	result_ := C.C_NSBrowser_Retain(n.Ptr())
 	return MakeBrowser(result_)
 }
 

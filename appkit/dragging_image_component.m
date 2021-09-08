@@ -11,6 +11,23 @@ void* C_NSDraggingImageComponent_InitWithKey(void* ptr, void* key) {
     return result_;
 }
 
+void* C_NSDraggingImageComponent_AllocDraggingImageComponent() {
+    NSDraggingImageComponent* result_ = [NSDraggingImageComponent alloc];
+    return result_;
+}
+
+void* C_NSDraggingImageComponent_Autorelease(void* ptr) {
+    NSDraggingImageComponent* nSDraggingImageComponent = (NSDraggingImageComponent*)ptr;
+    NSDraggingImageComponent* result_ = [nSDraggingImageComponent autorelease];
+    return result_;
+}
+
+void* C_NSDraggingImageComponent_Retain(void* ptr) {
+    NSDraggingImageComponent* nSDraggingImageComponent = (NSDraggingImageComponent*)ptr;
+    NSDraggingImageComponent* result_ = [nSDraggingImageComponent retain];
+    return result_;
+}
+
 void* C_NSDraggingImageComponent_DraggingImageComponentWithKey(void* key) {
     NSDraggingImageComponent* result_ = [NSDraggingImageComponent draggingImageComponentWithKey:(NSString*)key];
     return result_;

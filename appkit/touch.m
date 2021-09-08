@@ -5,9 +5,31 @@ void* C_Touch_Alloc() {
     return [NSTouch alloc];
 }
 
+void* C_NSTouch_AllocTouch() {
+    NSTouch* result_ = [NSTouch alloc];
+    return result_;
+}
+
 void* C_NSTouch_Init(void* ptr) {
     NSTouch* nSTouch = (NSTouch*)ptr;
     NSTouch* result_ = [nSTouch init];
+    return result_;
+}
+
+void* C_NSTouch_NewTouch() {
+    NSTouch* result_ = [NSTouch new];
+    return result_;
+}
+
+void* C_NSTouch_Autorelease(void* ptr) {
+    NSTouch* nSTouch = (NSTouch*)ptr;
+    NSTouch* result_ = [nSTouch autorelease];
+    return result_;
+}
+
+void* C_NSTouch_Retain(void* ptr) {
+    NSTouch* nSTouch = (NSTouch*)ptr;
+    NSTouch* result_ = [nSTouch retain];
     return result_;
 }
 

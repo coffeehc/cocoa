@@ -23,6 +23,28 @@ void* C_NSText_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSText_AllocText() {
+    NSText* result_ = [NSText alloc];
+    return result_;
+}
+
+void* C_NSText_NewText() {
+    NSText* result_ = [NSText new];
+    return result_;
+}
+
+void* C_NSText_Autorelease(void* ptr) {
+    NSText* nSText = (NSText*)ptr;
+    NSText* result_ = [nSText autorelease];
+    return result_;
+}
+
+void* C_NSText_Retain(void* ptr) {
+    NSText* nSText = (NSText*)ptr;
+    NSText* result_ = [nSText retain];
+    return result_;
+}
+
 void C_NSText_ToggleRuler(void* ptr, void* sender) {
     NSText* nSText = (NSText*)ptr;
     [nSText toggleRuler:(id)sender];

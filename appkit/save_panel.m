@@ -5,6 +5,11 @@ void* C_SavePanel_Alloc() {
     return [NSSavePanel alloc];
 }
 
+void* C_NSSavePanel_SavePanel_WindowWithContentViewController(void* contentViewController) {
+    NSSavePanel* result_ = [NSSavePanel windowWithContentViewController:(NSViewController*)contentViewController];
+    return result_;
+}
+
 void* C_NSSavePanel_InitWithContentRect_StyleMask_Backing_Defer(void* ptr, CGRect contentRect, unsigned int style, unsigned int backingStoreType, bool flag) {
     NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
     NSSavePanel* result_ = [nSSavePanel initWithContentRect:contentRect styleMask:style backing:backingStoreType defer:flag];
@@ -20,6 +25,28 @@ void* C_NSSavePanel_InitWithContentRect_StyleMask_Backing_Defer_Screen(void* ptr
 void* C_NSSavePanel_Init(void* ptr) {
     NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
     NSSavePanel* result_ = [nSSavePanel init];
+    return result_;
+}
+
+void* C_NSSavePanel_AllocSavePanel() {
+    NSSavePanel* result_ = [NSSavePanel alloc];
+    return result_;
+}
+
+void* C_NSSavePanel_NewSavePanel() {
+    NSSavePanel* result_ = [NSSavePanel new];
+    return result_;
+}
+
+void* C_NSSavePanel_Autorelease(void* ptr) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    NSSavePanel* result_ = [nSSavePanel autorelease];
+    return result_;
+}
+
+void* C_NSSavePanel_Retain(void* ptr) {
+    NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
+    NSSavePanel* result_ = [nSSavePanel retain];
     return result_;
 }
 
@@ -151,7 +178,7 @@ Array C_NSSavePanel_TagNames(void* ptr) {
 
 void C_NSSavePanel_SetTagNames(void* ptr, Array value) {
     NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -231,7 +258,7 @@ Array C_NSSavePanel_AllowedContentTypes(void* ptr) {
 
 void C_NSSavePanel_SetAllowedContentTypes(void* ptr, Array value) {
     NSSavePanel* nSSavePanel = (NSSavePanel*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

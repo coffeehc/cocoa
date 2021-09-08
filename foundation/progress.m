@@ -7,7 +7,7 @@ void* C_Progress_Alloc() {
 
 void* C_NSProgress_InitWithParent_UserInfo(void* ptr, void* parentProgressOrNil, Dictionary userInfoOrNil) {
     NSProgress* nSProgress = (NSProgress*)ptr;
-    NSMutableDictionary* objcUserInfoOrNil = [[NSMutableDictionary alloc] initWithCapacity: userInfoOrNil.len];
+    NSMutableDictionary* objcUserInfoOrNil = [NSMutableDictionary dictionaryWithCapacity:userInfoOrNil.len];
     if (userInfoOrNil.len > 0) {
     	void** userInfoOrNilKeyData = (void**)userInfoOrNil.key_data;
     	void** userInfoOrNilValueData = (void**)userInfoOrNil.value_data;
@@ -21,9 +21,31 @@ void* C_NSProgress_InitWithParent_UserInfo(void* ptr, void* parentProgressOrNil,
     return result_;
 }
 
+void* C_NSProgress_AllocProgress() {
+    NSProgress* result_ = [NSProgress alloc];
+    return result_;
+}
+
 void* C_NSProgress_Init(void* ptr) {
     NSProgress* nSProgress = (NSProgress*)ptr;
     NSProgress* result_ = [nSProgress init];
+    return result_;
+}
+
+void* C_NSProgress_NewProgress() {
+    NSProgress* result_ = [NSProgress new];
+    return result_;
+}
+
+void* C_NSProgress_Autorelease(void* ptr) {
+    NSProgress* nSProgress = (NSProgress*)ptr;
+    NSProgress* result_ = [nSProgress autorelease];
+    return result_;
+}
+
+void* C_NSProgress_Retain(void* ptr) {
+    NSProgress* nSProgress = (NSProgress*)ptr;
+    NSProgress* result_ = [nSProgress retain];
     return result_;
 }
 

@@ -47,22 +47,38 @@ func MakeAnimation(ptr unsafe.Pointer) NSAnimation {
 	}
 }
 
-func AllocAnimation() NSAnimation {
-	return MakeAnimation(C.C_Animation_Alloc())
-}
-
-func (n NSAnimation) InitWithDuration_AnimationCurve(duration foundation.TimeInterval, animationCurve AnimationCurve) Animation {
+func (n NSAnimation) InitWithDuration_AnimationCurve(duration foundation.TimeInterval, animationCurve AnimationCurve) NSAnimation {
 	result_ := C.C_NSAnimation_InitWithDuration_AnimationCurve(n.Ptr(), C.double(float64(duration)), C.uint(uint(animationCurve)))
 	return MakeAnimation(result_)
 }
 
-func (n NSAnimation) InitWithCoder(coder foundation.Coder) Animation {
+func (n NSAnimation) InitWithCoder(coder foundation.Coder) NSAnimation {
 	result_ := C.C_NSAnimation_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeAnimation(result_)
 }
 
-func (n NSAnimation) Init() Animation {
+func AllocAnimation() NSAnimation {
+	result_ := C.C_NSAnimation_AllocAnimation()
+	return MakeAnimation(result_)
+}
+
+func (n NSAnimation) Init() NSAnimation {
 	result_ := C.C_NSAnimation_Init(n.Ptr())
+	return MakeAnimation(result_)
+}
+
+func NewAnimation() NSAnimation {
+	result_ := C.C_NSAnimation_NewAnimation()
+	return MakeAnimation(result_)
+}
+
+func (n NSAnimation) Autorelease() NSAnimation {
+	result_ := C.C_NSAnimation_Autorelease(n.Ptr())
+	return MakeAnimation(result_)
+}
+
+func (n NSAnimation) Retain() NSAnimation {
+	result_ := C.C_NSAnimation_Retain(n.Ptr())
 	return MakeAnimation(result_)
 }
 

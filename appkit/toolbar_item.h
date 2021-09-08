@@ -6,6 +6,9 @@
 void* C_ToolbarItem_Alloc();
 
 void* C_NSToolbarItem_InitWithItemIdentifier(void* ptr, void* itemIdentifier);
+void* C_NSToolbarItem_AllocToolbarItem();
+void* C_NSToolbarItem_Autorelease(void* ptr);
+void* C_NSToolbarItem_Retain(void* ptr);
 void C_NSToolbarItem_Validate(void* ptr);
 void* C_NSToolbarItem_ItemIdentifier(void* ptr);
 void* C_NSToolbarItem_Toolbar(void* ptr);

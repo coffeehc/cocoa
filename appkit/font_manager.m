@@ -5,9 +5,31 @@ void* C_FontManager_Alloc() {
     return [NSFontManager alloc];
 }
 
+void* C_NSFontManager_AllocFontManager() {
+    NSFontManager* result_ = [NSFontManager alloc];
+    return result_;
+}
+
 void* C_NSFontManager_Init(void* ptr) {
     NSFontManager* nSFontManager = (NSFontManager*)ptr;
     NSFontManager* result_ = [nSFontManager init];
+    return result_;
+}
+
+void* C_NSFontManager_NewFontManager() {
+    NSFontManager* result_ = [NSFontManager new];
+    return result_;
+}
+
+void* C_NSFontManager_Autorelease(void* ptr) {
+    NSFontManager* nSFontManager = (NSFontManager*)ptr;
+    NSFontManager* result_ = [nSFontManager autorelease];
+    return result_;
+}
+
+void* C_NSFontManager_Retain(void* ptr) {
+    NSFontManager* nSFontManager = (NSFontManager*)ptr;
+    NSFontManager* result_ = [nSFontManager retain];
     return result_;
 }
 
@@ -166,7 +188,7 @@ void* C_NSFontManager_FontMenu(void* ptr, bool create) {
 
 void C_NSFontManager_SetSelectedAttributes_IsMultiple(void* ptr, Dictionary attributes, bool flag) {
     NSFontManager* nSFontManager = (NSFontManager*)ptr;
-    NSMutableDictionary* objcAttributes = [[NSMutableDictionary alloc] initWithCapacity: attributes.len];
+    NSMutableDictionary* objcAttributes = [NSMutableDictionary dictionaryWithCapacity:attributes.len];
     if (attributes.len > 0) {
     	void** attributesKeyData = (void**)attributes.key_data;
     	void** attributesValueData = (void**)attributes.value_data;
@@ -181,7 +203,7 @@ void C_NSFontManager_SetSelectedAttributes_IsMultiple(void* ptr, Dictionary attr
 
 Dictionary C_NSFontManager_ConvertAttributes(void* ptr, Dictionary attributes) {
     NSFontManager* nSFontManager = (NSFontManager*)ptr;
-    NSMutableDictionary* objcAttributes = [[NSMutableDictionary alloc] initWithCapacity: attributes.len];
+    NSMutableDictionary* objcAttributes = [NSMutableDictionary dictionaryWithCapacity:attributes.len];
     if (attributes.len > 0) {
     	void** attributesKeyData = (void**)attributes.key_data;
     	void** attributesValueData = (void**)attributes.value_data;

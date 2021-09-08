@@ -62,22 +62,38 @@ func MakeTreeController(ptr unsafe.Pointer) NSTreeController {
 	}
 }
 
-func AllocTreeController() NSTreeController {
-	return MakeTreeController(C.C_TreeController_Alloc())
-}
-
-func (n NSTreeController) InitWithContent(content objc.Object) TreeController {
+func (n NSTreeController) InitWithContent(content objc.Object) NSTreeController {
 	result_ := C.C_NSTreeController_InitWithContent(n.Ptr(), objc.ExtractPtr(content))
 	return MakeTreeController(result_)
 }
 
-func (n NSTreeController) InitWithCoder(coder foundation.Coder) TreeController {
+func (n NSTreeController) InitWithCoder(coder foundation.Coder) NSTreeController {
 	result_ := C.C_NSTreeController_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeTreeController(result_)
 }
 
-func (n NSTreeController) Init() TreeController {
+func (n NSTreeController) Init() NSTreeController {
 	result_ := C.C_NSTreeController_Init(n.Ptr())
+	return MakeTreeController(result_)
+}
+
+func AllocTreeController() NSTreeController {
+	result_ := C.C_NSTreeController_AllocTreeController()
+	return MakeTreeController(result_)
+}
+
+func NewTreeController() NSTreeController {
+	result_ := C.C_NSTreeController_NewTreeController()
+	return MakeTreeController(result_)
+}
+
+func (n NSTreeController) Autorelease() NSTreeController {
+	result_ := C.C_NSTreeController_Autorelease(n.Ptr())
+	return MakeTreeController(result_)
+}
+
+func (n NSTreeController) Retain() NSTreeController {
+	result_ := C.C_NSTreeController_Retain(n.Ptr())
 	return MakeTreeController(result_)
 }
 

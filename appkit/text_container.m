@@ -17,9 +17,31 @@ void* C_NSTextContainer_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSTextContainer_AllocTextContainer() {
+    NSTextContainer* result_ = [NSTextContainer alloc];
+    return result_;
+}
+
 void* C_NSTextContainer_Init(void* ptr) {
     NSTextContainer* nSTextContainer = (NSTextContainer*)ptr;
     NSTextContainer* result_ = [nSTextContainer init];
+    return result_;
+}
+
+void* C_NSTextContainer_NewTextContainer() {
+    NSTextContainer* result_ = [NSTextContainer new];
+    return result_;
+}
+
+void* C_NSTextContainer_Autorelease(void* ptr) {
+    NSTextContainer* nSTextContainer = (NSTextContainer*)ptr;
+    NSTextContainer* result_ = [nSTextContainer autorelease];
+    return result_;
+}
+
+void* C_NSTextContainer_Retain(void* ptr) {
+    NSTextContainer* nSTextContainer = (NSTextContainer*)ptr;
+    NSTextContainer* result_ = [nSTextContainer retain];
     return result_;
 }
 
@@ -80,7 +102,7 @@ Array C_NSTextContainer_ExclusionPaths(void* ptr) {
 
 void C_NSTextContainer_SetExclusionPaths(void* ptr, Array value) {
     NSTextContainer* nSTextContainer = (NSTextContainer*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

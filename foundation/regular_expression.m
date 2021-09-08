@@ -5,9 +5,31 @@ void* C_RegularExpression_Alloc() {
     return [NSRegularExpression alloc];
 }
 
+void* C_NSRegularExpression_AllocRegularExpression() {
+    NSRegularExpression* result_ = [NSRegularExpression alloc];
+    return result_;
+}
+
 void* C_NSRegularExpression_Init(void* ptr) {
     NSRegularExpression* nSRegularExpression = (NSRegularExpression*)ptr;
     NSRegularExpression* result_ = [nSRegularExpression init];
+    return result_;
+}
+
+void* C_NSRegularExpression_NewRegularExpression() {
+    NSRegularExpression* result_ = [NSRegularExpression new];
+    return result_;
+}
+
+void* C_NSRegularExpression_Autorelease(void* ptr) {
+    NSRegularExpression* nSRegularExpression = (NSRegularExpression*)ptr;
+    NSRegularExpression* result_ = [nSRegularExpression autorelease];
+    return result_;
+}
+
+void* C_NSRegularExpression_Retain(void* ptr) {
+    NSRegularExpression* nSRegularExpression = (NSRegularExpression*)ptr;
+    NSRegularExpression* result_ = [nSRegularExpression retain];
     return result_;
 }
 

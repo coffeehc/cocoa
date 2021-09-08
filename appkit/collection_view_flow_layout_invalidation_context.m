@@ -5,9 +5,31 @@ void* C_CollectionViewFlowLayoutInvalidationContext_Alloc() {
     return [NSCollectionViewFlowLayoutInvalidationContext alloc];
 }
 
+void* C_NSCollectionViewFlowLayoutInvalidationContext_AllocCollectionViewFlowLayoutInvalidationContext() {
+    NSCollectionViewFlowLayoutInvalidationContext* result_ = [NSCollectionViewFlowLayoutInvalidationContext alloc];
+    return result_;
+}
+
 void* C_NSCollectionViewFlowLayoutInvalidationContext_Init(void* ptr) {
     NSCollectionViewFlowLayoutInvalidationContext* nSCollectionViewFlowLayoutInvalidationContext = (NSCollectionViewFlowLayoutInvalidationContext*)ptr;
     NSCollectionViewFlowLayoutInvalidationContext* result_ = [nSCollectionViewFlowLayoutInvalidationContext init];
+    return result_;
+}
+
+void* C_NSCollectionViewFlowLayoutInvalidationContext_NewCollectionViewFlowLayoutInvalidationContext() {
+    NSCollectionViewFlowLayoutInvalidationContext* result_ = [NSCollectionViewFlowLayoutInvalidationContext new];
+    return result_;
+}
+
+void* C_NSCollectionViewFlowLayoutInvalidationContext_Autorelease(void* ptr) {
+    NSCollectionViewFlowLayoutInvalidationContext* nSCollectionViewFlowLayoutInvalidationContext = (NSCollectionViewFlowLayoutInvalidationContext*)ptr;
+    NSCollectionViewFlowLayoutInvalidationContext* result_ = [nSCollectionViewFlowLayoutInvalidationContext autorelease];
+    return result_;
+}
+
+void* C_NSCollectionViewFlowLayoutInvalidationContext_Retain(void* ptr) {
+    NSCollectionViewFlowLayoutInvalidationContext* nSCollectionViewFlowLayoutInvalidationContext = (NSCollectionViewFlowLayoutInvalidationContext*)ptr;
+    NSCollectionViewFlowLayoutInvalidationContext* result_ = [nSCollectionViewFlowLayoutInvalidationContext retain];
     return result_;
 }
 

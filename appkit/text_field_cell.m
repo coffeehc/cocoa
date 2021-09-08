@@ -23,6 +23,28 @@ void* C_NSTextFieldCell_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSTextFieldCell_AllocTextFieldCell() {
+    NSTextFieldCell* result_ = [NSTextFieldCell alloc];
+    return result_;
+}
+
+void* C_NSTextFieldCell_NewTextFieldCell() {
+    NSTextFieldCell* result_ = [NSTextFieldCell new];
+    return result_;
+}
+
+void* C_NSTextFieldCell_Autorelease(void* ptr) {
+    NSTextFieldCell* nSTextFieldCell = (NSTextFieldCell*)ptr;
+    NSTextFieldCell* result_ = [nSTextFieldCell autorelease];
+    return result_;
+}
+
+void* C_NSTextFieldCell_Retain(void* ptr) {
+    NSTextFieldCell* nSTextFieldCell = (NSTextFieldCell*)ptr;
+    NSTextFieldCell* result_ = [nSTextFieldCell retain];
+    return result_;
+}
+
 void C_NSTextFieldCell_SetWantsNotificationForMarkedText(void* ptr, bool flag) {
     NSTextFieldCell* nSTextFieldCell = (NSTextFieldCell*)ptr;
     [nSTextFieldCell setWantsNotificationForMarkedText:flag];
@@ -113,7 +135,7 @@ Array C_NSTextFieldCell_AllowedInputSourceLocales(void* ptr) {
 
 void C_NSTextFieldCell_SetAllowedInputSourceLocales(void* ptr, Array value) {
     NSTextFieldCell* nSTextFieldCell = (NSTextFieldCell*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

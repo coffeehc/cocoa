@@ -87,22 +87,38 @@ func MakeControl(ptr unsafe.Pointer) NSControl {
 	}
 }
 
-func AllocControl() NSControl {
-	return MakeControl(C.C_Control_Alloc())
-}
-
-func (n NSControl) InitWithFrame(frameRect foundation.Rect) Control {
+func (n NSControl) InitWithFrame(frameRect foundation.Rect) NSControl {
 	result_ := C.C_NSControl_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeControl(result_)
 }
 
-func (n NSControl) InitWithCoder(coder foundation.Coder) Control {
+func (n NSControl) InitWithCoder(coder foundation.Coder) NSControl {
 	result_ := C.C_NSControl_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeControl(result_)
 }
 
-func (n NSControl) Init() Control {
+func (n NSControl) Init() NSControl {
 	result_ := C.C_NSControl_Init(n.Ptr())
+	return MakeControl(result_)
+}
+
+func AllocControl() NSControl {
+	result_ := C.C_NSControl_AllocControl()
+	return MakeControl(result_)
+}
+
+func NewControl() NSControl {
+	result_ := C.C_NSControl_NewControl()
+	return MakeControl(result_)
+}
+
+func (n NSControl) Autorelease() NSControl {
+	result_ := C.C_NSControl_Autorelease(n.Ptr())
+	return MakeControl(result_)
+}
+
+func (n NSControl) Retain() NSControl {
+	result_ := C.C_NSControl_Retain(n.Ptr())
 	return MakeControl(result_)
 }
 

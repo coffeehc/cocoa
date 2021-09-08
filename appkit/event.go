@@ -78,11 +78,27 @@ func MakeEvent(ptr unsafe.Pointer) NSEvent {
 }
 
 func AllocEvent() NSEvent {
-	return MakeEvent(C.C_Event_Alloc())
+	result_ := C.C_NSEvent_AllocEvent()
+	return MakeEvent(result_)
 }
 
-func (n NSEvent) Init() Event {
+func (n NSEvent) Init() NSEvent {
 	result_ := C.C_NSEvent_Init(n.Ptr())
+	return MakeEvent(result_)
+}
+
+func NewEvent() NSEvent {
+	result_ := C.C_NSEvent_NewEvent()
+	return MakeEvent(result_)
+}
+
+func (n NSEvent) Autorelease() NSEvent {
+	result_ := C.C_NSEvent_Autorelease(n.Ptr())
+	return MakeEvent(result_)
+}
+
+func (n NSEvent) Retain() NSEvent {
+	result_ := C.C_NSEvent_Retain(n.Ptr())
 	return MakeEvent(result_)
 }
 

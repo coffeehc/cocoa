@@ -5,6 +5,7 @@
 
 void* C_Image_Alloc();
 
+void* C_NSImage_ImageWithSystemSymbolName_AccessibilityDescription(void* symbolName, void* description);
 void* C_NSImage_InitByReferencingFile(void* ptr, void* fileName);
 void* C_NSImage_InitByReferencingURL(void* ptr, void* url);
 void* C_NSImage_InitWithContentsOfFile(void* ptr, void* fileName);
@@ -15,11 +16,14 @@ void* C_NSImage_InitWithCGImage_Size(void* ptr, void* cgImage, CGSize size);
 void* C_NSImage_InitWithPasteboard(void* ptr, void* pasteboard);
 void* C_NSImage_InitWithCoder(void* ptr, void* coder);
 void* C_NSImage_InitWithSize(void* ptr, CGSize size);
+void* C_NSImage_AllocImage();
 void* C_NSImage_Init(void* ptr);
+void* C_NSImage_NewImage();
+void* C_NSImage_Autorelease(void* ptr);
+void* C_NSImage_Retain(void* ptr);
 void* C_NSImage_ImageNamed(void* name);
 bool C_NSImage_SetName(void* ptr, void* _string);
 void* C_NSImage_Name(void* ptr);
-void* C_NSImage_ImageWithSystemSymbolName_AccessibilityDescription(void* symbolName, void* description);
 void* C_NSImage_ImageWithSymbolConfiguration(void* ptr, void* configuration);
 bool C_NSImage_Image_CanInitWithPasteboard(void* pasteboard);
 void C_NSImage_AddRepresentation(void* ptr, void* imageRep);

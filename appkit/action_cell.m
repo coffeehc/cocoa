@@ -28,3 +28,25 @@ void* C_NSActionCell_InitWithCoder(void* ptr, void* coder) {
     NSActionCell* result_ = [nSActionCell initWithCoder:(NSCoder*)coder];
     return result_;
 }
+
+void* C_NSActionCell_AllocActionCell() {
+    NSActionCell* result_ = [NSActionCell alloc];
+    return result_;
+}
+
+void* C_NSActionCell_NewActionCell() {
+    NSActionCell* result_ = [NSActionCell new];
+    return result_;
+}
+
+void* C_NSActionCell_Autorelease(void* ptr) {
+    NSActionCell* nSActionCell = (NSActionCell*)ptr;
+    NSActionCell* result_ = [nSActionCell autorelease];
+    return result_;
+}
+
+void* C_NSActionCell_Retain(void* ptr) {
+    NSActionCell* nSActionCell = (NSActionCell*)ptr;
+    NSActionCell* result_ = [nSActionCell retain];
+    return result_;
+}

@@ -298,22 +298,38 @@ func MakeView(ptr unsafe.Pointer) NSView {
 	}
 }
 
-func AllocView() NSView {
-	return MakeView(C.C_View_Alloc())
-}
-
-func (n NSView) InitWithFrame(frameRect foundation.Rect) View {
+func (n NSView) InitWithFrame(frameRect foundation.Rect) NSView {
 	result_ := C.C_NSView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeView(result_)
 }
 
-func (n NSView) InitWithCoder(coder foundation.Coder) View {
+func (n NSView) InitWithCoder(coder foundation.Coder) NSView {
 	result_ := C.C_NSView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeView(result_)
 }
 
-func (n NSView) Init() View {
+func (n NSView) Init() NSView {
 	result_ := C.C_NSView_Init(n.Ptr())
+	return MakeView(result_)
+}
+
+func AllocView() NSView {
+	result_ := C.C_NSView_AllocView()
+	return MakeView(result_)
+}
+
+func NewView() NSView {
+	result_ := C.C_NSView_NewView()
+	return MakeView(result_)
+}
+
+func (n NSView) Autorelease() NSView {
+	result_ := C.C_NSView_Autorelease(n.Ptr())
+	return MakeView(result_)
+}
+
+func (n NSView) Retain() NSView {
+	result_ := C.C_NSView_Retain(n.Ptr())
 	return MakeView(result_)
 }
 

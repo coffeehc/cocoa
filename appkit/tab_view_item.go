@@ -43,17 +43,38 @@ func MakeTabViewItem(ptr unsafe.Pointer) NSTabViewItem {
 	}
 }
 
-func AllocTabViewItem() NSTabViewItem {
-	return MakeTabViewItem(C.C_TabViewItem_Alloc())
-}
-
-func (n NSTabViewItem) InitWithIdentifier(identifier objc.Object) TabViewItem {
+func (n NSTabViewItem) InitWithIdentifier(identifier objc.Object) NSTabViewItem {
 	result_ := C.C_NSTabViewItem_InitWithIdentifier(n.Ptr(), objc.ExtractPtr(identifier))
 	return MakeTabViewItem(result_)
 }
 
-func (n NSTabViewItem) Init() TabViewItem {
+func TabViewItemWithViewController(viewController ViewController) NSTabViewItem {
+	result_ := C.C_NSTabViewItem_TabViewItemWithViewController(objc.ExtractPtr(viewController))
+	return MakeTabViewItem(result_)
+}
+
+func AllocTabViewItem() NSTabViewItem {
+	result_ := C.C_NSTabViewItem_AllocTabViewItem()
+	return MakeTabViewItem(result_)
+}
+
+func (n NSTabViewItem) Init() NSTabViewItem {
 	result_ := C.C_NSTabViewItem_Init(n.Ptr())
+	return MakeTabViewItem(result_)
+}
+
+func NewTabViewItem() NSTabViewItem {
+	result_ := C.C_NSTabViewItem_NewTabViewItem()
+	return MakeTabViewItem(result_)
+}
+
+func (n NSTabViewItem) Autorelease() NSTabViewItem {
+	result_ := C.C_NSTabViewItem_Autorelease(n.Ptr())
+	return MakeTabViewItem(result_)
+}
+
+func (n NSTabViewItem) Retain() NSTabViewItem {
+	result_ := C.C_NSTabViewItem_Retain(n.Ptr())
 	return MakeTabViewItem(result_)
 }
 
@@ -64,11 +85,6 @@ func (n NSTabViewItem) DrawLabel_InRect(shouldTruncateLabel bool, labelRect foun
 func (n NSTabViewItem) SizeOfLabel(computeMin bool) foundation.Size {
 	result_ := C.C_NSTabViewItem_SizeOfLabel(n.Ptr(), C.bool(computeMin))
 	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
-}
-
-func TabViewItemWithViewController(viewController ViewController) TabViewItem {
-	result_ := C.C_NSTabViewItem_TabViewItemWithViewController(objc.ExtractPtr(viewController))
-	return MakeTabViewItem(result_)
 }
 
 func (n NSTabViewItem) Label() string {

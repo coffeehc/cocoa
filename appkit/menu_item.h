@@ -7,7 +7,11 @@ void* C_MenuItem_Alloc();
 
 void* C_NSMenuItem_InitWithTitle_Action_KeyEquivalent(void* ptr, void* _string, void* selector, void* charCode);
 void* C_NSMenuItem_InitWithCoder(void* ptr, void* coder);
+void* C_NSMenuItem_AllocMenuItem();
 void* C_NSMenuItem_Init(void* ptr);
+void* C_NSMenuItem_NewMenuItem();
+void* C_NSMenuItem_Autorelease(void* ptr);
+void* C_NSMenuItem_Retain(void* ptr);
 void* C_NSMenuItem_MenuItem_SeparatorItem();
 bool C_NSMenuItem_IsEnabled(void* ptr);
 void C_NSMenuItem_SetEnabled(void* ptr, bool value);

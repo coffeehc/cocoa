@@ -5,9 +5,31 @@ void* C_PersonNameComponentsFormatter_Alloc() {
     return [NSPersonNameComponentsFormatter alloc];
 }
 
+void* C_NSPersonNameComponentsFormatter_AllocPersonNameComponentsFormatter() {
+    NSPersonNameComponentsFormatter* result_ = [NSPersonNameComponentsFormatter alloc];
+    return result_;
+}
+
 void* C_NSPersonNameComponentsFormatter_Init(void* ptr) {
     NSPersonNameComponentsFormatter* nSPersonNameComponentsFormatter = (NSPersonNameComponentsFormatter*)ptr;
     NSPersonNameComponentsFormatter* result_ = [nSPersonNameComponentsFormatter init];
+    return result_;
+}
+
+void* C_NSPersonNameComponentsFormatter_NewPersonNameComponentsFormatter() {
+    NSPersonNameComponentsFormatter* result_ = [NSPersonNameComponentsFormatter new];
+    return result_;
+}
+
+void* C_NSPersonNameComponentsFormatter_Autorelease(void* ptr) {
+    NSPersonNameComponentsFormatter* nSPersonNameComponentsFormatter = (NSPersonNameComponentsFormatter*)ptr;
+    NSPersonNameComponentsFormatter* result_ = [nSPersonNameComponentsFormatter autorelease];
+    return result_;
+}
+
+void* C_NSPersonNameComponentsFormatter_Retain(void* ptr) {
+    NSPersonNameComponentsFormatter* nSPersonNameComponentsFormatter = (NSPersonNameComponentsFormatter*)ptr;
+    NSPersonNameComponentsFormatter* result_ = [nSPersonNameComponentsFormatter retain];
     return result_;
 }
 

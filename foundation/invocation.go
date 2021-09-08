@@ -31,11 +31,27 @@ func MakeInvocation(ptr unsafe.Pointer) NSInvocation {
 }
 
 func AllocInvocation() NSInvocation {
-	return MakeInvocation(C.C_Invocation_Alloc())
+	result_ := C.C_NSInvocation_AllocInvocation()
+	return MakeInvocation(result_)
 }
 
-func (n NSInvocation) Init() Invocation {
+func (n NSInvocation) Init() NSInvocation {
 	result_ := C.C_NSInvocation_Init(n.Ptr())
+	return MakeInvocation(result_)
+}
+
+func NewInvocation() NSInvocation {
+	result_ := C.C_NSInvocation_NewInvocation()
+	return MakeInvocation(result_)
+}
+
+func (n NSInvocation) Autorelease() NSInvocation {
+	result_ := C.C_NSInvocation_Autorelease(n.Ptr())
+	return MakeInvocation(result_)
+}
+
+func (n NSInvocation) Retain() NSInvocation {
+	result_ := C.C_NSInvocation_Retain(n.Ptr())
 	return MakeInvocation(result_)
 }
 

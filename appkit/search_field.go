@@ -38,22 +38,58 @@ func MakeSearchField(ptr unsafe.Pointer) NSSearchField {
 	}
 }
 
-func AllocSearchField() NSSearchField {
-	return MakeSearchField(C.C_SearchField_Alloc())
+func SearchField_LabelWithAttributedString(attributedStringValue foundation.AttributedString) NSSearchField {
+	result_ := C.C_NSSearchField_SearchField_LabelWithAttributedString(objc.ExtractPtr(attributedStringValue))
+	return MakeSearchField(result_)
 }
 
-func (n NSSearchField) InitWithFrame(frameRect foundation.Rect) SearchField {
+func SearchField_LabelWithString(stringValue string) NSSearchField {
+	result_ := C.C_NSSearchField_SearchField_LabelWithString(foundation.NewString(stringValue).Ptr())
+	return MakeSearchField(result_)
+}
+
+func SearchField_TextFieldWithString(stringValue string) NSSearchField {
+	result_ := C.C_NSSearchField_SearchField_TextFieldWithString(foundation.NewString(stringValue).Ptr())
+	return MakeSearchField(result_)
+}
+
+func SearchField_WrappingLabelWithString(stringValue string) NSSearchField {
+	result_ := C.C_NSSearchField_SearchField_WrappingLabelWithString(foundation.NewString(stringValue).Ptr())
+	return MakeSearchField(result_)
+}
+
+func (n NSSearchField) InitWithFrame(frameRect foundation.Rect) NSSearchField {
 	result_ := C.C_NSSearchField_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeSearchField(result_)
 }
 
-func (n NSSearchField) InitWithCoder(coder foundation.Coder) SearchField {
+func (n NSSearchField) InitWithCoder(coder foundation.Coder) NSSearchField {
 	result_ := C.C_NSSearchField_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeSearchField(result_)
 }
 
-func (n NSSearchField) Init() SearchField {
+func (n NSSearchField) Init() NSSearchField {
 	result_ := C.C_NSSearchField_Init(n.Ptr())
+	return MakeSearchField(result_)
+}
+
+func AllocSearchField() NSSearchField {
+	result_ := C.C_NSSearchField_AllocSearchField()
+	return MakeSearchField(result_)
+}
+
+func NewSearchField() NSSearchField {
+	result_ := C.C_NSSearchField_NewSearchField()
+	return MakeSearchField(result_)
+}
+
+func (n NSSearchField) Autorelease() NSSearchField {
+	result_ := C.C_NSSearchField_Autorelease(n.Ptr())
+	return MakeSearchField(result_)
+}
+
+func (n NSSearchField) Retain() NSSearchField {
+	result_ := C.C_NSSearchField_Retain(n.Ptr())
 	return MakeSearchField(result_)
 }
 

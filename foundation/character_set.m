@@ -11,6 +11,23 @@ void* C_NSCharacterSet_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSCharacterSet_AllocCharacterSet() {
+    NSCharacterSet* result_ = [NSCharacterSet alloc];
+    return result_;
+}
+
+void* C_NSCharacterSet_Autorelease(void* ptr) {
+    NSCharacterSet* nSCharacterSet = (NSCharacterSet*)ptr;
+    NSCharacterSet* result_ = [nSCharacterSet autorelease];
+    return result_;
+}
+
+void* C_NSCharacterSet_Retain(void* ptr) {
+    NSCharacterSet* nSCharacterSet = (NSCharacterSet*)ptr;
+    NSCharacterSet* result_ = [nSCharacterSet retain];
+    return result_;
+}
+
 void* C_NSCharacterSet_CharacterSetWithCharactersInString(void* aString) {
     NSCharacterSet* result_ = [NSCharacterSet characterSetWithCharactersInString:(NSString*)aString];
     return result_;

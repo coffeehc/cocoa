@@ -78,47 +78,63 @@ func MakeButton(ptr unsafe.Pointer) NSButton {
 	}
 }
 
-func AllocButton() NSButton {
-	return MakeButton(C.C_Button_Alloc())
-}
-
-func (n NSButton) InitWithFrame(frameRect foundation.Rect) Button {
-	result_ := C.C_NSButton_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
-	return MakeButton(result_)
-}
-
-func (n NSButton) InitWithCoder(coder foundation.Coder) Button {
-	result_ := C.C_NSButton_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeButton(result_)
-}
-
-func (n NSButton) Init() Button {
-	result_ := C.C_NSButton_Init(n.Ptr())
-	return MakeButton(result_)
-}
-
-func Button_CheckboxWithTitle_Target_Action(title string, target objc.Object, action objc.Selector) Button {
+func Button_CheckboxWithTitle_Target_Action(title string, target objc.Object, action objc.Selector) NSButton {
 	result_ := C.C_NSButton_Button_CheckboxWithTitle_Target_Action(foundation.NewString(title).Ptr(), objc.ExtractPtr(target), unsafe.Pointer(action))
 	return MakeButton(result_)
 }
 
-func ButtonWithImage_Target_Action(image Image, target objc.Object, action objc.Selector) Button {
+func ButtonWithImage_Target_Action(image Image, target objc.Object, action objc.Selector) NSButton {
 	result_ := C.C_NSButton_ButtonWithImage_Target_Action(objc.ExtractPtr(image), objc.ExtractPtr(target), unsafe.Pointer(action))
 	return MakeButton(result_)
 }
 
-func RadioButtonWithTitle_Target_Action(title string, target objc.Object, action objc.Selector) Button {
+func RadioButtonWithTitle_Target_Action(title string, target objc.Object, action objc.Selector) NSButton {
 	result_ := C.C_NSButton_RadioButtonWithTitle_Target_Action(foundation.NewString(title).Ptr(), objc.ExtractPtr(target), unsafe.Pointer(action))
 	return MakeButton(result_)
 }
 
-func ButtonWithTitle_Image_Target_Action(title string, image Image, target objc.Object, action objc.Selector) Button {
+func ButtonWithTitle_Image_Target_Action(title string, image Image, target objc.Object, action objc.Selector) NSButton {
 	result_ := C.C_NSButton_ButtonWithTitle_Image_Target_Action(foundation.NewString(title).Ptr(), objc.ExtractPtr(image), objc.ExtractPtr(target), unsafe.Pointer(action))
 	return MakeButton(result_)
 }
 
-func ButtonWithTitle_Target_Action(title string, target objc.Object, action objc.Selector) Button {
+func ButtonWithTitle_Target_Action(title string, target objc.Object, action objc.Selector) NSButton {
 	result_ := C.C_NSButton_ButtonWithTitle_Target_Action(foundation.NewString(title).Ptr(), objc.ExtractPtr(target), unsafe.Pointer(action))
+	return MakeButton(result_)
+}
+
+func (n NSButton) InitWithFrame(frameRect foundation.Rect) NSButton {
+	result_ := C.C_NSButton_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeButton(result_)
+}
+
+func (n NSButton) InitWithCoder(coder foundation.Coder) NSButton {
+	result_ := C.C_NSButton_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeButton(result_)
+}
+
+func (n NSButton) Init() NSButton {
+	result_ := C.C_NSButton_Init(n.Ptr())
+	return MakeButton(result_)
+}
+
+func AllocButton() NSButton {
+	result_ := C.C_NSButton_AllocButton()
+	return MakeButton(result_)
+}
+
+func NewButton() NSButton {
+	result_ := C.C_NSButton_NewButton()
+	return MakeButton(result_)
+}
+
+func (n NSButton) Autorelease() NSButton {
+	result_ := C.C_NSButton_Autorelease(n.Ptr())
+	return MakeButton(result_)
+}
+
+func (n NSButton) Retain() NSButton {
+	result_ := C.C_NSButton_Retain(n.Ptr())
 	return MakeButton(result_)
 }
 

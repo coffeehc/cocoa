@@ -5,7 +5,9 @@
 
 void* C_URL_Alloc();
 
+void* C_NSURL_URLWithString(void* URLString);
 void* C_NSURL_InitWithString(void* ptr, void* URLString);
+void* C_NSURL_URLWithString_RelativeToURL(void* URLString, void* baseURL);
 void* C_NSURL_InitWithString_RelativeToURL(void* ptr, void* URLString, void* baseURL);
 void* C_NSURL_InitFileURLWithPath_IsDirectory(void* ptr, void* path, bool isDir);
 void* C_NSURL_InitFileURLWithPath_RelativeToURL(void* ptr, void* path, void* baseURL);
@@ -14,9 +16,11 @@ void* C_NSURL_InitFileURLWithPath(void* ptr, void* path);
 void* C_NSURL_InitAbsoluteURLWithDataRepresentation_RelativeToURL(void* ptr, void* data, void* baseURL);
 void* C_NSURL_InitWithDataRepresentation_RelativeToURL(void* ptr, void* data, void* baseURL);
 void* C_NSURL_InitWithScheme_Host_Path(void* ptr, void* scheme, void* host, void* path);
+void* C_NSURL_AllocURL();
 void* C_NSURL_Init(void* ptr);
-void* C_NSURL_URLWithString(void* URLString);
-void* C_NSURL_URLWithString_RelativeToURL(void* URLString, void* baseURL);
+void* C_NSURL_NewURL();
+void* C_NSURL_Autorelease(void* ptr);
+void* C_NSURL_Retain(void* ptr);
 void* C_NSURL_FileURLWithPath_IsDirectory(void* path, bool isDir);
 void* C_NSURL_FileURLWithPath_RelativeToURL(void* path, void* baseURL);
 void* C_NSURL_FileURLWithPath_IsDirectory_RelativeToURL(void* path, bool isDir, void* baseURL);

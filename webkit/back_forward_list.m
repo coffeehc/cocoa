@@ -5,6 +5,23 @@ void* C_BackForwardList_Alloc() {
     return [WKBackForwardList alloc];
 }
 
+void* C_WKBackForwardList_AllocBackForwardList() {
+    WKBackForwardList* result_ = [WKBackForwardList alloc];
+    return result_;
+}
+
+void* C_WKBackForwardList_Autorelease(void* ptr) {
+    WKBackForwardList* wKBackForwardList = (WKBackForwardList*)ptr;
+    WKBackForwardList* result_ = [wKBackForwardList autorelease];
+    return result_;
+}
+
+void* C_WKBackForwardList_Retain(void* ptr) {
+    WKBackForwardList* wKBackForwardList = (WKBackForwardList*)ptr;
+    WKBackForwardList* result_ = [wKBackForwardList retain];
+    return result_;
+}
+
 void* C_WKBackForwardList_ItemAtIndex(void* ptr, int index) {
     WKBackForwardList* wKBackForwardList = (WKBackForwardList*)ptr;
     WKBackForwardListItem* result_ = [wKBackForwardList itemAtIndex:index];

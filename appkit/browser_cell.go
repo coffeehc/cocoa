@@ -31,27 +31,43 @@ func MakeBrowserCell(ptr unsafe.Pointer) NSBrowserCell {
 	}
 }
 
-func AllocBrowserCell() NSBrowserCell {
-	return MakeBrowserCell(C.C_BrowserCell_Alloc())
-}
-
-func (n NSBrowserCell) InitWithCoder(coder foundation.Coder) BrowserCell {
+func (n NSBrowserCell) InitWithCoder(coder foundation.Coder) NSBrowserCell {
 	result_ := C.C_NSBrowserCell_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeBrowserCell(result_)
 }
 
-func (n NSBrowserCell) InitImageCell(image Image) BrowserCell {
+func (n NSBrowserCell) InitImageCell(image Image) NSBrowserCell {
 	result_ := C.C_NSBrowserCell_InitImageCell(n.Ptr(), objc.ExtractPtr(image))
 	return MakeBrowserCell(result_)
 }
 
-func (n NSBrowserCell) InitTextCell(_string string) BrowserCell {
+func (n NSBrowserCell) InitTextCell(_string string) NSBrowserCell {
 	result_ := C.C_NSBrowserCell_InitTextCell(n.Ptr(), foundation.NewString(_string).Ptr())
 	return MakeBrowserCell(result_)
 }
 
-func (n NSBrowserCell) Init() BrowserCell {
+func (n NSBrowserCell) Init() NSBrowserCell {
 	result_ := C.C_NSBrowserCell_Init(n.Ptr())
+	return MakeBrowserCell(result_)
+}
+
+func AllocBrowserCell() NSBrowserCell {
+	result_ := C.C_NSBrowserCell_AllocBrowserCell()
+	return MakeBrowserCell(result_)
+}
+
+func NewBrowserCell() NSBrowserCell {
+	result_ := C.C_NSBrowserCell_NewBrowserCell()
+	return MakeBrowserCell(result_)
+}
+
+func (n NSBrowserCell) Autorelease() NSBrowserCell {
+	result_ := C.C_NSBrowserCell_Autorelease(n.Ptr())
+	return MakeBrowserCell(result_)
+}
+
+func (n NSBrowserCell) Retain() NSBrowserCell {
+	result_ := C.C_NSBrowserCell_Retain(n.Ptr())
 	return MakeBrowserCell(result_)
 }
 

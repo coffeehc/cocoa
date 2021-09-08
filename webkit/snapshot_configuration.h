@@ -5,7 +5,11 @@
 
 void* C_SnapshotConfiguration_Alloc();
 
+void* C_WKSnapshotConfiguration_AllocSnapshotConfiguration();
 void* C_WKSnapshotConfiguration_Init(void* ptr);
+void* C_WKSnapshotConfiguration_NewSnapshotConfiguration();
+void* C_WKSnapshotConfiguration_Autorelease(void* ptr);
+void* C_WKSnapshotConfiguration_Retain(void* ptr);
 CGRect C_WKSnapshotConfiguration_Rect(void* ptr);
 void C_WKSnapshotConfiguration_SetRect(void* ptr, CGRect value);
 void* C_WKSnapshotConfiguration_SnapshotWidth(void* ptr);

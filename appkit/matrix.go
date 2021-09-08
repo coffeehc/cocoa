@@ -107,27 +107,43 @@ func MakeMatrix(ptr unsafe.Pointer) NSMatrix {
 	}
 }
 
-func AllocMatrix() NSMatrix {
-	return MakeMatrix(C.C_Matrix_Alloc())
-}
-
-func (n NSMatrix) InitWithFrame(frameRect foundation.Rect) Matrix {
+func (n NSMatrix) InitWithFrame(frameRect foundation.Rect) NSMatrix {
 	result_ := C.C_NSMatrix_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeMatrix(result_)
 }
 
-func (n NSMatrix) InitWithFrame_Mode_Prototype_NumberOfRows_NumberOfColumns(frameRect foundation.Rect, mode MatrixMode, cell Cell, rowsHigh int, colsWide int) Matrix {
+func (n NSMatrix) InitWithFrame_Mode_Prototype_NumberOfRows_NumberOfColumns(frameRect foundation.Rect, mode MatrixMode, cell Cell, rowsHigh int, colsWide int) NSMatrix {
 	result_ := C.C_NSMatrix_InitWithFrame_Mode_Prototype_NumberOfRows_NumberOfColumns(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))), C.uint(uint(mode)), objc.ExtractPtr(cell), C.int(rowsHigh), C.int(colsWide))
 	return MakeMatrix(result_)
 }
 
-func (n NSMatrix) InitWithCoder(coder foundation.Coder) Matrix {
+func (n NSMatrix) InitWithCoder(coder foundation.Coder) NSMatrix {
 	result_ := C.C_NSMatrix_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeMatrix(result_)
 }
 
-func (n NSMatrix) Init() Matrix {
+func (n NSMatrix) Init() NSMatrix {
 	result_ := C.C_NSMatrix_Init(n.Ptr())
+	return MakeMatrix(result_)
+}
+
+func AllocMatrix() NSMatrix {
+	result_ := C.C_NSMatrix_AllocMatrix()
+	return MakeMatrix(result_)
+}
+
+func NewMatrix() NSMatrix {
+	result_ := C.C_NSMatrix_NewMatrix()
+	return MakeMatrix(result_)
+}
+
+func (n NSMatrix) Autorelease() NSMatrix {
+	result_ := C.C_NSMatrix_Autorelease(n.Ptr())
+	return MakeMatrix(result_)
+}
+
+func (n NSMatrix) Retain() NSMatrix {
+	result_ := C.C_NSMatrix_Retain(n.Ptr())
 	return MakeMatrix(result_)
 }
 

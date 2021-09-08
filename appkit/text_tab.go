@@ -26,11 +26,7 @@ func MakeTextTab(ptr unsafe.Pointer) NSTextTab {
 	}
 }
 
-func AllocTextTab() NSTextTab {
-	return MakeTextTab(C.C_TextTab_Alloc())
-}
-
-func (n NSTextTab) InitWithTextAlignment_Location_Options(alignment TextAlignment, loc coregraphics.Float, options map[TextTabOptionKey]objc.Object) TextTab {
+func (n NSTextTab) InitWithTextAlignment_Location_Options(alignment TextAlignment, loc coregraphics.Float, options map[TextTabOptionKey]objc.Object) NSTextTab {
 	var cOptions C.Dictionary
 	if len(options) > 0 {
 		cOptionsKeyData := make([]unsafe.Pointer, len(options))
@@ -49,8 +45,28 @@ func (n NSTextTab) InitWithTextAlignment_Location_Options(alignment TextAlignmen
 	return MakeTextTab(result_)
 }
 
-func (n NSTextTab) Init() TextTab {
+func AllocTextTab() NSTextTab {
+	result_ := C.C_NSTextTab_AllocTextTab()
+	return MakeTextTab(result_)
+}
+
+func (n NSTextTab) Init() NSTextTab {
 	result_ := C.C_NSTextTab_Init(n.Ptr())
+	return MakeTextTab(result_)
+}
+
+func NewTextTab() NSTextTab {
+	result_ := C.C_NSTextTab_NewTextTab()
+	return MakeTextTab(result_)
+}
+
+func (n NSTextTab) Autorelease() NSTextTab {
+	result_ := C.C_NSTextTab_Autorelease(n.Ptr())
+	return MakeTextTab(result_)
+}
+
+func (n NSTextTab) Retain() NSTextTab {
+	result_ := C.C_NSTextTab_Retain(n.Ptr())
 	return MakeTextTab(result_)
 }
 

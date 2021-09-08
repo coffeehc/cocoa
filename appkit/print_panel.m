@@ -5,9 +5,31 @@ void* C_PrintPanel_Alloc() {
     return [NSPrintPanel alloc];
 }
 
+void* C_NSPrintPanel_AllocPrintPanel() {
+    NSPrintPanel* result_ = [NSPrintPanel alloc];
+    return result_;
+}
+
 void* C_NSPrintPanel_Init(void* ptr) {
     NSPrintPanel* nSPrintPanel = (NSPrintPanel*)ptr;
     NSPrintPanel* result_ = [nSPrintPanel init];
+    return result_;
+}
+
+void* C_NSPrintPanel_NewPrintPanel() {
+    NSPrintPanel* result_ = [NSPrintPanel new];
+    return result_;
+}
+
+void* C_NSPrintPanel_Autorelease(void* ptr) {
+    NSPrintPanel* nSPrintPanel = (NSPrintPanel*)ptr;
+    NSPrintPanel* result_ = [nSPrintPanel autorelease];
+    return result_;
+}
+
+void* C_NSPrintPanel_Retain(void* ptr) {
+    NSPrintPanel* nSPrintPanel = (NSPrintPanel*)ptr;
+    NSPrintPanel* result_ = [nSPrintPanel retain];
     return result_;
 }
 

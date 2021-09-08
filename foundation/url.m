@@ -5,9 +5,19 @@ void* C_URL_Alloc() {
     return [NSURL alloc];
 }
 
+void* C_NSURL_URLWithString(void* URLString) {
+    NSURL* result_ = [NSURL URLWithString:(NSString*)URLString];
+    return result_;
+}
+
 void* C_NSURL_InitWithString(void* ptr, void* URLString) {
     NSURL* nSURL = (NSURL*)ptr;
     NSURL* result_ = [nSURL initWithString:(NSString*)URLString];
+    return result_;
+}
+
+void* C_NSURL_URLWithString_RelativeToURL(void* URLString, void* baseURL) {
+    NSURL* result_ = [NSURL URLWithString:(NSString*)URLString relativeToURL:(NSURL*)baseURL];
     return result_;
 }
 
@@ -59,19 +69,31 @@ void* C_NSURL_InitWithScheme_Host_Path(void* ptr, void* scheme, void* host, void
     return result_;
 }
 
+void* C_NSURL_AllocURL() {
+    NSURL* result_ = [NSURL alloc];
+    return result_;
+}
+
 void* C_NSURL_Init(void* ptr) {
     NSURL* nSURL = (NSURL*)ptr;
     NSURL* result_ = [nSURL init];
     return result_;
 }
 
-void* C_NSURL_URLWithString(void* URLString) {
-    NSURL* result_ = [NSURL URLWithString:(NSString*)URLString];
+void* C_NSURL_NewURL() {
+    NSURL* result_ = [NSURL new];
     return result_;
 }
 
-void* C_NSURL_URLWithString_RelativeToURL(void* URLString, void* baseURL) {
-    NSURL* result_ = [NSURL URLWithString:(NSString*)URLString relativeToURL:(NSURL*)baseURL];
+void* C_NSURL_Autorelease(void* ptr) {
+    NSURL* nSURL = (NSURL*)ptr;
+    NSURL* result_ = [nSURL autorelease];
+    return result_;
+}
+
+void* C_NSURL_Retain(void* ptr) {
+    NSURL* nSURL = (NSURL*)ptr;
+    NSURL* result_ = [nSURL retain];
     return result_;
 }
 
@@ -96,7 +118,7 @@ void* C_NSURL_FileURLWithPath(void* path) {
 }
 
 void* C_NSURL_FileURLWithPathComponents(Array components) {
-    NSMutableArray* objcComponents = [[NSMutableArray alloc] init];
+    NSMutableArray* objcComponents = [NSMutableArray arrayWithCapacity:components.len];
     if (components.len > 0) {
     	void** componentsData = (void**)components.data;
     	for (int i = 0; i < components.len; i++) {
@@ -164,7 +186,7 @@ void* C_NSURL_URLByAppendingPathExtension(void* ptr, void* pathExtension) {
 }
 
 Dictionary C_NSURL_URL_ResourceValuesForKeys_FromBookmarkData(Array keys, void* bookmarkData) {
-    NSMutableArray* objcKeys = [[NSMutableArray alloc] init];
+    NSMutableArray* objcKeys = [NSMutableArray arrayWithCapacity:keys.len];
     if (keys.len > 0) {
     	void** keysData = (void**)keys.data;
     	for (int i = 0; i < keys.len; i++) {

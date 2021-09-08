@@ -23,6 +23,28 @@ void* C_NSStepper_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSStepper_AllocStepper() {
+    NSStepper* result_ = [NSStepper alloc];
+    return result_;
+}
+
+void* C_NSStepper_NewStepper() {
+    NSStepper* result_ = [NSStepper new];
+    return result_;
+}
+
+void* C_NSStepper_Autorelease(void* ptr) {
+    NSStepper* nSStepper = (NSStepper*)ptr;
+    NSStepper* result_ = [nSStepper autorelease];
+    return result_;
+}
+
+void* C_NSStepper_Retain(void* ptr) {
+    NSStepper* nSStepper = (NSStepper*)ptr;
+    NSStepper* result_ = [nSStepper retain];
+    return result_;
+}
+
 double C_NSStepper_MaxValue(void* ptr) {
     NSStepper* nSStepper = (NSStepper*)ptr;
     double result_ = [nSStepper maxValue];

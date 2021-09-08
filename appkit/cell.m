@@ -29,6 +29,28 @@ void* C_NSCell_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSCell_AllocCell() {
+    NSCell* result_ = [NSCell alloc];
+    return result_;
+}
+
+void* C_NSCell_NewCell() {
+    NSCell* result_ = [NSCell new];
+    return result_;
+}
+
+void* C_NSCell_Autorelease(void* ptr) {
+    NSCell* nSCell = (NSCell*)ptr;
+    NSCell* result_ = [nSCell autorelease];
+    return result_;
+}
+
+void* C_NSCell_Retain(void* ptr) {
+    NSCell* nSCell = (NSCell*)ptr;
+    NSCell* result_ = [nSCell retain];
+    return result_;
+}
+
 void C_NSCell_SetCellAttribute_To(void* ptr, unsigned int parameter, int value) {
     NSCell* nSCell = (NSCell*)ptr;
     [nSCell setCellAttribute:parameter to:value];

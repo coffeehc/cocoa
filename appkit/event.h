@@ -5,7 +5,11 @@
 
 void* C_Event_Alloc();
 
+void* C_NSEvent_AllocEvent();
 void* C_NSEvent_Init(void* ptr);
+void* C_NSEvent_NewEvent();
+void* C_NSEvent_Autorelease(void* ptr);
+void* C_NSEvent_Retain(void* ptr);
 void* C_NSEvent_MouseEventWithType_Location_ModifierFlags_Timestamp_WindowNumber_Context_EventNumber_ClickCount_Pressure(unsigned int _type, CGPoint location, unsigned int flags, double time, int wNum, void* unusedPassNil, int eNum, int cNum, float pressure);
 void* C_NSEvent_EventWithCGEvent(void* cgEvent);
 void C_NSEvent_StartPeriodicEventsAfterDelay_WithPeriod(double delay, double period);

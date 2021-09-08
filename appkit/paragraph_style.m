@@ -5,9 +5,31 @@ void* C_ParagraphStyle_Alloc() {
     return [NSParagraphStyle alloc];
 }
 
+void* C_NSParagraphStyle_AllocParagraphStyle() {
+    NSParagraphStyle* result_ = [NSParagraphStyle alloc];
+    return result_;
+}
+
 void* C_NSParagraphStyle_Init(void* ptr) {
     NSParagraphStyle* nSParagraphStyle = (NSParagraphStyle*)ptr;
     NSParagraphStyle* result_ = [nSParagraphStyle init];
+    return result_;
+}
+
+void* C_NSParagraphStyle_NewParagraphStyle() {
+    NSParagraphStyle* result_ = [NSParagraphStyle new];
+    return result_;
+}
+
+void* C_NSParagraphStyle_Autorelease(void* ptr) {
+    NSParagraphStyle* nSParagraphStyle = (NSParagraphStyle*)ptr;
+    NSParagraphStyle* result_ = [nSParagraphStyle autorelease];
+    return result_;
+}
+
+void* C_NSParagraphStyle_Retain(void* ptr) {
+    NSParagraphStyle* nSParagraphStyle = (NSParagraphStyle*)ptr;
+    NSParagraphStyle* result_ = [nSParagraphStyle retain];
     return result_;
 }
 

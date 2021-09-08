@@ -29,12 +29,23 @@ func MakeDraggingImageComponent(ptr unsafe.Pointer) NSDraggingImageComponent {
 	}
 }
 
-func AllocDraggingImageComponent() NSDraggingImageComponent {
-	return MakeDraggingImageComponent(C.C_DraggingImageComponent_Alloc())
+func (n NSDraggingImageComponent) InitWithKey(key DraggingImageComponentKey) NSDraggingImageComponent {
+	result_ := C.C_NSDraggingImageComponent_InitWithKey(n.Ptr(), foundation.NewString(string(key)).Ptr())
+	return MakeDraggingImageComponent(result_)
 }
 
-func (n NSDraggingImageComponent) InitWithKey(key DraggingImageComponentKey) DraggingImageComponent {
-	result_ := C.C_NSDraggingImageComponent_InitWithKey(n.Ptr(), foundation.NewString(string(key)).Ptr())
+func AllocDraggingImageComponent() NSDraggingImageComponent {
+	result_ := C.C_NSDraggingImageComponent_AllocDraggingImageComponent()
+	return MakeDraggingImageComponent(result_)
+}
+
+func (n NSDraggingImageComponent) Autorelease() NSDraggingImageComponent {
+	result_ := C.C_NSDraggingImageComponent_Autorelease(n.Ptr())
+	return MakeDraggingImageComponent(result_)
+}
+
+func (n NSDraggingImageComponent) Retain() NSDraggingImageComponent {
+	result_ := C.C_NSDraggingImageComponent_Retain(n.Ptr())
 	return MakeDraggingImageComponent(result_)
 }
 

@@ -66,22 +66,38 @@ func MakeViewController(ptr unsafe.Pointer) NSViewController {
 	}
 }
 
-func AllocViewController() NSViewController {
-	return MakeViewController(C.C_ViewController_Alloc())
-}
-
-func (n NSViewController) InitWithNibName_Bundle(nibNameOrNil NibName, nibBundleOrNil foundation.Bundle) ViewController {
+func (n NSViewController) InitWithNibName_Bundle(nibNameOrNil NibName, nibBundleOrNil foundation.Bundle) NSViewController {
 	result_ := C.C_NSViewController_InitWithNibName_Bundle(n.Ptr(), foundation.NewString(string(nibNameOrNil)).Ptr(), objc.ExtractPtr(nibBundleOrNil))
 	return MakeViewController(result_)
 }
 
-func (n NSViewController) InitWithCoder(coder foundation.Coder) ViewController {
+func (n NSViewController) InitWithCoder(coder foundation.Coder) NSViewController {
 	result_ := C.C_NSViewController_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeViewController(result_)
 }
 
-func (n NSViewController) Init() ViewController {
+func (n NSViewController) Init() NSViewController {
 	result_ := C.C_NSViewController_Init(n.Ptr())
+	return MakeViewController(result_)
+}
+
+func AllocViewController() NSViewController {
+	result_ := C.C_NSViewController_AllocViewController()
+	return MakeViewController(result_)
+}
+
+func NewViewController() NSViewController {
+	result_ := C.C_NSViewController_NewViewController()
+	return MakeViewController(result_)
+}
+
+func (n NSViewController) Autorelease() NSViewController {
+	result_ := C.C_NSViewController_Autorelease(n.Ptr())
+	return MakeViewController(result_)
+}
+
+func (n NSViewController) Retain() NSViewController {
+	result_ := C.C_NSViewController_Retain(n.Ptr())
 	return MakeViewController(result_)
 }
 

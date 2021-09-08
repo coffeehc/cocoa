@@ -5,7 +5,11 @@
 
 void* C_Operation_Alloc();
 
+void* C_NSOperation_AllocOperation();
 void* C_NSOperation_Init(void* ptr);
+void* C_NSOperation_NewOperation();
+void* C_NSOperation_Autorelease(void* ptr);
+void* C_NSOperation_Retain(void* ptr);
 void C_NSOperation_Start(void* ptr);
 void C_NSOperation_Main(void* ptr);
 void C_NSOperation_Cancel(void* ptr);

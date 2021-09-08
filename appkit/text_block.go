@@ -43,12 +43,28 @@ func MakeTextBlock(ptr unsafe.Pointer) NSTextBlock {
 	}
 }
 
-func AllocTextBlock() NSTextBlock {
-	return MakeTextBlock(C.C_TextBlock_Alloc())
+func (n NSTextBlock) Init() NSTextBlock {
+	result_ := C.C_NSTextBlock_Init(n.Ptr())
+	return MakeTextBlock(result_)
 }
 
-func (n NSTextBlock) Init() TextBlock {
-	result_ := C.C_NSTextBlock_Init(n.Ptr())
+func AllocTextBlock() NSTextBlock {
+	result_ := C.C_NSTextBlock_AllocTextBlock()
+	return MakeTextBlock(result_)
+}
+
+func NewTextBlock() NSTextBlock {
+	result_ := C.C_NSTextBlock_NewTextBlock()
+	return MakeTextBlock(result_)
+}
+
+func (n NSTextBlock) Autorelease() NSTextBlock {
+	result_ := C.C_NSTextBlock_Autorelease(n.Ptr())
+	return MakeTextBlock(result_)
+}
+
+func (n NSTextBlock) Retain() NSTextBlock {
+	result_ := C.C_NSTextBlock_Retain(n.Ptr())
 	return MakeTextBlock(result_)
 }
 

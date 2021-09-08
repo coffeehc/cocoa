@@ -45,7 +45,7 @@ func initAndRun() {
 		})
 	})
 
-	gridView := appkit.AllocGridView().Init()
+	gridView := appkit.NewGridView().Autorelease()
 	for i := 0; i < 3; i++ {
 		var views []appkit.View
 		for j := 0; j < 4; j++ {

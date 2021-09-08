@@ -5,9 +5,14 @@
 
 void* C_ColorPanel_Alloc();
 
+void* C_NSColorPanel_ColorPanel_WindowWithContentViewController(void* contentViewController);
 void* C_NSColorPanel_InitWithContentRect_StyleMask_Backing_Defer(void* ptr, CGRect contentRect, unsigned int style, unsigned int backingStoreType, bool flag);
 void* C_NSColorPanel_InitWithContentRect_StyleMask_Backing_Defer_Screen(void* ptr, CGRect contentRect, unsigned int style, unsigned int backingStoreType, bool flag, void* screen);
 void* C_NSColorPanel_Init(void* ptr);
+void* C_NSColorPanel_AllocColorPanel();
+void* C_NSColorPanel_NewColorPanel();
+void* C_NSColorPanel_Autorelease(void* ptr);
+void* C_NSColorPanel_Retain(void* ptr);
 void C_NSColorPanel_ColorPanel_SetPickerMode(int mode);
 void C_NSColorPanel_ColorPanel_SetPickerMask(unsigned int mask);
 void C_NSColorPanel_SetAction(void* ptr, void* selector);

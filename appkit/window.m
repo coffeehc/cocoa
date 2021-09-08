@@ -5,6 +5,11 @@ void* C_Window_Alloc() {
     return [NSWindow alloc];
 }
 
+void* C_NSWindow_WindowWithContentViewController(void* contentViewController) {
+    NSWindow* result_ = [NSWindow windowWithContentViewController:(NSViewController*)contentViewController];
+    return result_;
+}
+
 void* C_NSWindow_InitWithContentRect_StyleMask_Backing_Defer(void* ptr, CGRect contentRect, unsigned int style, unsigned int backingStoreType, bool flag) {
     NSWindow* nSWindow = (NSWindow*)ptr;
     NSWindow* result_ = [nSWindow initWithContentRect:contentRect styleMask:style backing:backingStoreType defer:flag];
@@ -23,8 +28,25 @@ void* C_NSWindow_Init(void* ptr) {
     return result_;
 }
 
-void* C_NSWindow_WindowWithContentViewController(void* contentViewController) {
-    NSWindow* result_ = [NSWindow windowWithContentViewController:(NSViewController*)contentViewController];
+void* C_NSWindow_AllocWindow() {
+    NSWindow* result_ = [NSWindow alloc];
+    return result_;
+}
+
+void* C_NSWindow_NewWindow() {
+    NSWindow* result_ = [NSWindow new];
+    return result_;
+}
+
+void* C_NSWindow_Autorelease(void* ptr) {
+    NSWindow* nSWindow = (NSWindow*)ptr;
+    NSWindow* result_ = [nSWindow autorelease];
+    return result_;
+}
+
+void* C_NSWindow_Retain(void* ptr) {
+    NSWindow* nSWindow = (NSWindow*)ptr;
+    NSWindow* result_ = [nSWindow retain];
     return result_;
 }
 
@@ -462,7 +484,7 @@ void C_NSWindow_DragImage_At_Offset_Event_Pasteboard_Source_SlideBack(void* ptr,
 
 void C_NSWindow_RegisterForDraggedTypes(void* ptr, Array newTypes) {
     NSWindow* nSWindow = (NSWindow*)ptr;
-    NSMutableArray* objcNewTypes = [[NSMutableArray alloc] init];
+    NSMutableArray* objcNewTypes = [NSMutableArray arrayWithCapacity:newTypes.len];
     if (newTypes.len > 0) {
     	void** newTypesData = (void**)newTypes.data;
     	for (int i = 0; i < newTypes.len; i++) {
@@ -566,7 +588,7 @@ void C_NSWindow_LayoutIfNeeded(void* ptr) {
 
 void C_NSWindow_VisualizeConstraints(void* ptr, Array constraints) {
     NSWindow* nSWindow = (NSWindow*)ptr;
-    NSMutableArray* objcConstraints = [[NSMutableArray alloc] init];
+    NSMutableArray* objcConstraints = [NSMutableArray arrayWithCapacity:constraints.len];
     if (constraints.len > 0) {
     	void** constraintsData = (void**)constraints.data;
     	for (int i = 0; i < constraints.len; i++) {
@@ -1286,7 +1308,7 @@ Array C_NSWindow_TitlebarAccessoryViewControllers(void* ptr) {
 
 void C_NSWindow_SetTitlebarAccessoryViewControllers(void* ptr, Array value) {
     NSWindow* nSWindow = (NSWindow*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

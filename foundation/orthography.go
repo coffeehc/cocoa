@@ -27,22 +27,38 @@ func MakeOrthography(ptr unsafe.Pointer) NSOrthography {
 	}
 }
 
-func AllocOrthography() NSOrthography {
-	return MakeOrthography(C.C_Orthography_Alloc())
+func DefaultOrthographyForLanguage(language string) NSOrthography {
+	result_ := C.C_NSOrthography_DefaultOrthographyForLanguage(NewString(language).Ptr())
+	return MakeOrthography(result_)
 }
 
-func (n NSOrthography) InitWithCoder(coder Coder) Orthography {
+func (n NSOrthography) InitWithCoder(coder Coder) NSOrthography {
 	result_ := C.C_NSOrthography_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeOrthography(result_)
 }
 
-func (n NSOrthography) Init() Orthography {
+func AllocOrthography() NSOrthography {
+	result_ := C.C_NSOrthography_AllocOrthography()
+	return MakeOrthography(result_)
+}
+
+func (n NSOrthography) Init() NSOrthography {
 	result_ := C.C_NSOrthography_Init(n.Ptr())
 	return MakeOrthography(result_)
 }
 
-func DefaultOrthographyForLanguage(language string) Orthography {
-	result_ := C.C_NSOrthography_DefaultOrthographyForLanguage(NewString(language).Ptr())
+func NewOrthography() NSOrthography {
+	result_ := C.C_NSOrthography_NewOrthography()
+	return MakeOrthography(result_)
+}
+
+func (n NSOrthography) Autorelease() NSOrthography {
+	result_ := C.C_NSOrthography_Autorelease(n.Ptr())
+	return MakeOrthography(result_)
+}
+
+func (n NSOrthography) Retain() NSOrthography {
+	result_ := C.C_NSOrthography_Retain(n.Ptr())
 	return MakeOrthography(result_)
 }
 

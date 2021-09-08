@@ -5,15 +5,37 @@ void* C_PasteboardItem_Alloc() {
     return [NSPasteboardItem alloc];
 }
 
+void* C_NSPasteboardItem_AllocPasteboardItem() {
+    NSPasteboardItem* result_ = [NSPasteboardItem alloc];
+    return result_;
+}
+
 void* C_NSPasteboardItem_Init(void* ptr) {
     NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
     NSPasteboardItem* result_ = [nSPasteboardItem init];
     return result_;
 }
 
+void* C_NSPasteboardItem_NewPasteboardItem() {
+    NSPasteboardItem* result_ = [NSPasteboardItem new];
+    return result_;
+}
+
+void* C_NSPasteboardItem_Autorelease(void* ptr) {
+    NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
+    NSPasteboardItem* result_ = [nSPasteboardItem autorelease];
+    return result_;
+}
+
+void* C_NSPasteboardItem_Retain(void* ptr) {
+    NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
+    NSPasteboardItem* result_ = [nSPasteboardItem retain];
+    return result_;
+}
+
 void* C_NSPasteboardItem_AvailableTypeFromArray(void* ptr, Array types) {
     NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
-    NSMutableArray* objcTypes = [[NSMutableArray alloc] init];
+    NSMutableArray* objcTypes = [NSMutableArray arrayWithCapacity:types.len];
     if (types.len > 0) {
     	void** typesData = (void**)types.data;
     	for (int i = 0; i < types.len; i++) {
@@ -27,7 +49,7 @@ void* C_NSPasteboardItem_AvailableTypeFromArray(void* ptr, Array types) {
 
 bool C_NSPasteboardItem_SetDataProvider_ForTypes(void* ptr, void* dataProvider, Array types) {
     NSPasteboardItem* nSPasteboardItem = (NSPasteboardItem*)ptr;
-    NSMutableArray* objcTypes = [[NSMutableArray alloc] init];
+    NSMutableArray* objcTypes = [NSMutableArray arrayWithCapacity:types.len];
     if (types.len > 0) {
     	void** typesData = (void**)types.data;
     	for (int i = 0; i < types.len; i++) {

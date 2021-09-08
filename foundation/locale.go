@@ -50,22 +50,33 @@ func MakeLocale(ptr unsafe.Pointer) NSLocale {
 	}
 }
 
-func AllocLocale() NSLocale {
-	return MakeLocale(C.C_Locale_Alloc())
+func LocaleWithLocaleIdentifier(ident string) NSLocale {
+	result_ := C.C_NSLocale_LocaleWithLocaleIdentifier(NewString(ident).Ptr())
+	return MakeLocale(result_)
 }
 
-func (n NSLocale) InitWithLocaleIdentifier(_string string) Locale {
+func (n NSLocale) InitWithLocaleIdentifier(_string string) NSLocale {
 	result_ := C.C_NSLocale_InitWithLocaleIdentifier(n.Ptr(), NewString(_string).Ptr())
 	return MakeLocale(result_)
 }
 
-func (n NSLocale) InitWithCoder(coder Coder) Locale {
+func (n NSLocale) InitWithCoder(coder Coder) NSLocale {
 	result_ := C.C_NSLocale_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeLocale(result_)
 }
 
-func LocaleWithLocaleIdentifier(ident string) Locale {
-	result_ := C.C_NSLocale_LocaleWithLocaleIdentifier(NewString(ident).Ptr())
+func AllocLocale() NSLocale {
+	result_ := C.C_NSLocale_AllocLocale()
+	return MakeLocale(result_)
+}
+
+func (n NSLocale) Autorelease() NSLocale {
+	result_ := C.C_NSLocale_Autorelease(n.Ptr())
+	return MakeLocale(result_)
+}
+
+func (n NSLocale) Retain() NSLocale {
+	result_ := C.C_NSLocale_Retain(n.Ptr())
 	return MakeLocale(result_)
 }
 

@@ -39,11 +39,7 @@ func MakeFileWrapper(ptr unsafe.Pointer) NSFileWrapper {
 	}
 }
 
-func AllocFileWrapper() NSFileWrapper {
-	return MakeFileWrapper(C.C_FileWrapper_Alloc())
-}
-
-func (n NSFileWrapper) InitDirectoryWithFileWrappers(childrenByPreferredName map[string]FileWrapper) FileWrapper {
+func (n NSFileWrapper) InitDirectoryWithFileWrappers(childrenByPreferredName map[string]FileWrapper) NSFileWrapper {
 	var cChildrenByPreferredName C.Dictionary
 	if len(childrenByPreferredName) > 0 {
 		cChildrenByPreferredNameKeyData := make([]unsafe.Pointer, len(childrenByPreferredName))
@@ -62,28 +58,48 @@ func (n NSFileWrapper) InitDirectoryWithFileWrappers(childrenByPreferredName map
 	return MakeFileWrapper(result_)
 }
 
-func (n NSFileWrapper) InitRegularFileWithContents(contents []byte) FileWrapper {
+func (n NSFileWrapper) InitRegularFileWithContents(contents []byte) NSFileWrapper {
 	result_ := C.C_NSFileWrapper_InitRegularFileWithContents(n.Ptr(), NewData(contents).Ptr())
 	return MakeFileWrapper(result_)
 }
 
-func (n NSFileWrapper) InitSymbolicLinkWithDestinationURL(url URL) FileWrapper {
+func (n NSFileWrapper) InitSymbolicLinkWithDestinationURL(url URL) NSFileWrapper {
 	result_ := C.C_NSFileWrapper_InitSymbolicLinkWithDestinationURL(n.Ptr(), objc.ExtractPtr(url))
 	return MakeFileWrapper(result_)
 }
 
-func (n NSFileWrapper) InitWithSerializedRepresentation(serializeRepresentation []byte) FileWrapper {
+func (n NSFileWrapper) InitWithSerializedRepresentation(serializeRepresentation []byte) NSFileWrapper {
 	result_ := C.C_NSFileWrapper_InitWithSerializedRepresentation(n.Ptr(), NewData(serializeRepresentation).Ptr())
 	return MakeFileWrapper(result_)
 }
 
-func (n NSFileWrapper) InitWithCoder(inCoder Coder) FileWrapper {
+func (n NSFileWrapper) InitWithCoder(inCoder Coder) NSFileWrapper {
 	result_ := C.C_NSFileWrapper_InitWithCoder(n.Ptr(), objc.ExtractPtr(inCoder))
 	return MakeFileWrapper(result_)
 }
 
-func (n NSFileWrapper) Init() FileWrapper {
+func AllocFileWrapper() NSFileWrapper {
+	result_ := C.C_NSFileWrapper_AllocFileWrapper()
+	return MakeFileWrapper(result_)
+}
+
+func (n NSFileWrapper) Init() NSFileWrapper {
 	result_ := C.C_NSFileWrapper_Init(n.Ptr())
+	return MakeFileWrapper(result_)
+}
+
+func NewFileWrapper() NSFileWrapper {
+	result_ := C.C_NSFileWrapper_NewFileWrapper()
+	return MakeFileWrapper(result_)
+}
+
+func (n NSFileWrapper) Autorelease() NSFileWrapper {
+	result_ := C.C_NSFileWrapper_Autorelease(n.Ptr())
+	return MakeFileWrapper(result_)
+}
+
+func (n NSFileWrapper) Retain() NSFileWrapper {
+	result_ := C.C_NSFileWrapper_Retain(n.Ptr())
 	return MakeFileWrapper(result_)
 }
 

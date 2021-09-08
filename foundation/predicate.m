@@ -7,7 +7,7 @@ void* C_Predicate_Alloc() {
 
 void* C_NSPredicate_PredicateWithSubstitutionVariables(void* ptr, Dictionary variables) {
     NSPredicate* nSPredicate = (NSPredicate*)ptr;
-    NSMutableDictionary* objcVariables = [[NSMutableDictionary alloc] initWithCapacity: variables.len];
+    NSMutableDictionary* objcVariables = [NSMutableDictionary dictionaryWithCapacity:variables.len];
     if (variables.len > 0) {
     	void** variablesKeyData = (void**)variables.key_data;
     	void** variablesValueData = (void**)variables.value_data;
@@ -21,14 +21,36 @@ void* C_NSPredicate_PredicateWithSubstitutionVariables(void* ptr, Dictionary var
     return result_;
 }
 
+void* C_NSPredicate_AllocPredicate() {
+    NSPredicate* result_ = [NSPredicate alloc];
+    return result_;
+}
+
 void* C_NSPredicate_Init(void* ptr) {
     NSPredicate* nSPredicate = (NSPredicate*)ptr;
     NSPredicate* result_ = [nSPredicate init];
     return result_;
 }
 
+void* C_NSPredicate_NewPredicate() {
+    NSPredicate* result_ = [NSPredicate new];
+    return result_;
+}
+
+void* C_NSPredicate_Autorelease(void* ptr) {
+    NSPredicate* nSPredicate = (NSPredicate*)ptr;
+    NSPredicate* result_ = [nSPredicate autorelease];
+    return result_;
+}
+
+void* C_NSPredicate_Retain(void* ptr) {
+    NSPredicate* nSPredicate = (NSPredicate*)ptr;
+    NSPredicate* result_ = [nSPredicate retain];
+    return result_;
+}
+
 void* C_NSPredicate_PredicateWithFormat_ArgumentArray(void* predicateFormat, Array arguments) {
-    NSMutableArray* objcArguments = [[NSMutableArray alloc] init];
+    NSMutableArray* objcArguments = [NSMutableArray arrayWithCapacity:arguments.len];
     if (arguments.len > 0) {
     	void** argumentsData = (void**)arguments.data;
     	for (int i = 0; i < arguments.len; i++) {
@@ -58,7 +80,7 @@ bool C_NSPredicate_EvaluateWithObject(void* ptr, void* object) {
 
 bool C_NSPredicate_EvaluateWithObject_SubstitutionVariables(void* ptr, void* object, Dictionary bindings) {
     NSPredicate* nSPredicate = (NSPredicate*)ptr;
-    NSMutableDictionary* objcBindings = [[NSMutableDictionary alloc] initWithCapacity: bindings.len];
+    NSMutableDictionary* objcBindings = [NSMutableDictionary dictionaryWithCapacity:bindings.len];
     if (bindings.len > 0) {
     	void** bindingsKeyData = (void**)bindings.key_data;
     	void** bindingsValueData = (void**)bindings.value_data;

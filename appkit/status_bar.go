@@ -27,11 +27,27 @@ func MakeStatusBar(ptr unsafe.Pointer) NSStatusBar {
 }
 
 func AllocStatusBar() NSStatusBar {
-	return MakeStatusBar(C.C_StatusBar_Alloc())
+	result_ := C.C_NSStatusBar_AllocStatusBar()
+	return MakeStatusBar(result_)
 }
 
-func (n NSStatusBar) Init() StatusBar {
+func (n NSStatusBar) Init() NSStatusBar {
 	result_ := C.C_NSStatusBar_Init(n.Ptr())
+	return MakeStatusBar(result_)
+}
+
+func NewStatusBar() NSStatusBar {
+	result_ := C.C_NSStatusBar_NewStatusBar()
+	return MakeStatusBar(result_)
+}
+
+func (n NSStatusBar) Autorelease() NSStatusBar {
+	result_ := C.C_NSStatusBar_Autorelease(n.Ptr())
+	return MakeStatusBar(result_)
+}
+
+func (n NSStatusBar) Retain() NSStatusBar {
+	result_ := C.C_NSStatusBar_Retain(n.Ptr())
 	return MakeStatusBar(result_)
 }
 

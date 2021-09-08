@@ -37,22 +37,38 @@ func MakeTextFieldCell(ptr unsafe.Pointer) NSTextFieldCell {
 	}
 }
 
-func AllocTextFieldCell() NSTextFieldCell {
-	return MakeTextFieldCell(C.C_TextFieldCell_Alloc())
-}
-
-func (n NSTextFieldCell) InitTextCell(_string string) TextFieldCell {
+func (n NSTextFieldCell) InitTextCell(_string string) NSTextFieldCell {
 	result_ := C.C_NSTextFieldCell_InitTextCell(n.Ptr(), foundation.NewString(_string).Ptr())
 	return MakeTextFieldCell(result_)
 }
 
-func (n NSTextFieldCell) InitWithCoder(coder foundation.Coder) TextFieldCell {
+func (n NSTextFieldCell) InitWithCoder(coder foundation.Coder) NSTextFieldCell {
 	result_ := C.C_NSTextFieldCell_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeTextFieldCell(result_)
 }
 
-func (n NSTextFieldCell) Init() TextFieldCell {
+func (n NSTextFieldCell) Init() NSTextFieldCell {
 	result_ := C.C_NSTextFieldCell_Init(n.Ptr())
+	return MakeTextFieldCell(result_)
+}
+
+func AllocTextFieldCell() NSTextFieldCell {
+	result_ := C.C_NSTextFieldCell_AllocTextFieldCell()
+	return MakeTextFieldCell(result_)
+}
+
+func NewTextFieldCell() NSTextFieldCell {
+	result_ := C.C_NSTextFieldCell_NewTextFieldCell()
+	return MakeTextFieldCell(result_)
+}
+
+func (n NSTextFieldCell) Autorelease() NSTextFieldCell {
+	result_ := C.C_NSTextFieldCell_Autorelease(n.Ptr())
+	return MakeTextFieldCell(result_)
+}
+
+func (n NSTextFieldCell) Retain() NSTextFieldCell {
+	result_ := C.C_NSTextFieldCell_Retain(n.Ptr())
 	return MakeTextFieldCell(result_)
 }
 

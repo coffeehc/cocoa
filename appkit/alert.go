@@ -47,11 +47,27 @@ func MakeAlert(ptr unsafe.Pointer) NSAlert {
 }
 
 func AllocAlert() NSAlert {
-	return MakeAlert(C.C_Alert_Alloc())
+	result_ := C.C_NSAlert_AllocAlert()
+	return MakeAlert(result_)
 }
 
-func (n NSAlert) Init() Alert {
+func (n NSAlert) Init() NSAlert {
 	result_ := C.C_NSAlert_Init(n.Ptr())
+	return MakeAlert(result_)
+}
+
+func NewAlert() NSAlert {
+	result_ := C.C_NSAlert_NewAlert()
+	return MakeAlert(result_)
+}
+
+func (n NSAlert) Autorelease() NSAlert {
+	result_ := C.C_NSAlert_Autorelease(n.Ptr())
+	return MakeAlert(result_)
+}
+
+func (n NSAlert) Retain() NSAlert {
+	result_ := C.C_NSAlert_Retain(n.Ptr())
 	return MakeAlert(result_)
 }
 

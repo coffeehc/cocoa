@@ -66,11 +66,27 @@ func MakeTypesetter(ptr unsafe.Pointer) NSTypesetter {
 }
 
 func AllocTypesetter() NSTypesetter {
-	return MakeTypesetter(C.C_Typesetter_Alloc())
+	result_ := C.C_NSTypesetter_AllocTypesetter()
+	return MakeTypesetter(result_)
 }
 
-func (n NSTypesetter) Init() Typesetter {
+func (n NSTypesetter) Init() NSTypesetter {
 	result_ := C.C_NSTypesetter_Init(n.Ptr())
+	return MakeTypesetter(result_)
+}
+
+func NewTypesetter() NSTypesetter {
+	result_ := C.C_NSTypesetter_NewTypesetter()
+	return MakeTypesetter(result_)
+}
+
+func (n NSTypesetter) Autorelease() NSTypesetter {
+	result_ := C.C_NSTypesetter_Autorelease(n.Ptr())
+	return MakeTypesetter(result_)
+}
+
+func (n NSTypesetter) Retain() NSTypesetter {
+	result_ := C.C_NSTypesetter_Retain(n.Ptr())
 	return MakeTypesetter(result_)
 }
 

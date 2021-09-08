@@ -7,6 +7,10 @@ void* C_Popover_Alloc();
 
 void* C_NSPopover_Init(void* ptr);
 void* C_NSPopover_InitWithCoder(void* ptr, void* coder);
+void* C_NSPopover_AllocPopover();
+void* C_NSPopover_NewPopover();
+void* C_NSPopover_Autorelease(void* ptr);
+void* C_NSPopover_Retain(void* ptr);
 void C_NSPopover_ShowRelativeToRect_OfView_PreferredEdge(void* ptr, CGRect positioningRect, void* positioningView, unsigned int preferredEdge);
 void C_NSPopover_PerformClose(void* ptr, void* sender);
 void C_NSPopover_Close(void* ptr);

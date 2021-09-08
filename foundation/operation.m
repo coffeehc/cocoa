@@ -5,9 +5,31 @@ void* C_Operation_Alloc() {
     return [NSOperation alloc];
 }
 
+void* C_NSOperation_AllocOperation() {
+    NSOperation* result_ = [NSOperation alloc];
+    return result_;
+}
+
 void* C_NSOperation_Init(void* ptr) {
     NSOperation* nSOperation = (NSOperation*)ptr;
     NSOperation* result_ = [nSOperation init];
+    return result_;
+}
+
+void* C_NSOperation_NewOperation() {
+    NSOperation* result_ = [NSOperation new];
+    return result_;
+}
+
+void* C_NSOperation_Autorelease(void* ptr) {
+    NSOperation* nSOperation = (NSOperation*)ptr;
+    NSOperation* result_ = [nSOperation autorelease];
+    return result_;
+}
+
+void* C_NSOperation_Retain(void* ptr) {
+    NSOperation* nSOperation = (NSOperation*)ptr;
+    NSOperation* result_ = [nSOperation retain];
     return result_;
 }
 

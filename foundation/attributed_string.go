@@ -24,11 +24,27 @@ func MakeAttributedString(ptr unsafe.Pointer) NSAttributedString {
 }
 
 func AllocAttributedString() NSAttributedString {
-	return MakeAttributedString(C.C_AttributedString_Alloc())
+	result_ := C.C_NSAttributedString_AllocAttributedString()
+	return MakeAttributedString(result_)
 }
 
-func (n NSAttributedString) Init() AttributedString {
+func (n NSAttributedString) Init() NSAttributedString {
 	result_ := C.C_NSAttributedString_Init(n.Ptr())
+	return MakeAttributedString(result_)
+}
+
+func NewAttributedString() NSAttributedString {
+	result_ := C.C_NSAttributedString_NewAttributedString()
+	return MakeAttributedString(result_)
+}
+
+func (n NSAttributedString) Autorelease() NSAttributedString {
+	result_ := C.C_NSAttributedString_Autorelease(n.Ptr())
+	return MakeAttributedString(result_)
+}
+
+func (n NSAttributedString) Retain() NSAttributedString {
+	result_ := C.C_NSAttributedString_Retain(n.Ptr())
 	return MakeAttributedString(result_)
 }
 

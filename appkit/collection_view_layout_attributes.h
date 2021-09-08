@@ -5,11 +5,15 @@
 
 void* C_CollectionViewLayoutAttributes_Alloc();
 
-void* C_NSCollectionViewLayoutAttributes_Init(void* ptr);
 void* C_NSCollectionViewLayoutAttributes_CollectionViewLayoutAttributes_LayoutAttributesForItemWithIndexPath(void* indexPath);
 void* C_NSCollectionViewLayoutAttributes_CollectionViewLayoutAttributes_LayoutAttributesForSupplementaryViewOfKind_WithIndexPath(void* elementKind, void* indexPath);
 void* C_NSCollectionViewLayoutAttributes_CollectionViewLayoutAttributes_LayoutAttributesForDecorationViewOfKind_WithIndexPath(void* decorationViewKind, void* indexPath);
 void* C_NSCollectionViewLayoutAttributes_CollectionViewLayoutAttributes_LayoutAttributesForInterItemGapBeforeIndexPath(void* indexPath);
+void* C_NSCollectionViewLayoutAttributes_AllocCollectionViewLayoutAttributes();
+void* C_NSCollectionViewLayoutAttributes_Init(void* ptr);
+void* C_NSCollectionViewLayoutAttributes_NewCollectionViewLayoutAttributes();
+void* C_NSCollectionViewLayoutAttributes_Autorelease(void* ptr);
+void* C_NSCollectionViewLayoutAttributes_Retain(void* ptr);
 int C_NSCollectionViewLayoutAttributes_RepresentedElementCategory(void* ptr);
 void* C_NSCollectionViewLayoutAttributes_IndexPath(void* ptr);
 void C_NSCollectionViewLayoutAttributes_SetIndexPath(void* ptr, void* value);

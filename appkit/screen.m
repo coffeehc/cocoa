@@ -5,9 +5,31 @@ void* C_Screen_Alloc() {
     return [NSScreen alloc];
 }
 
+void* C_NSScreen_AllocScreen() {
+    NSScreen* result_ = [NSScreen alloc];
+    return result_;
+}
+
 void* C_NSScreen_Init(void* ptr) {
     NSScreen* nSScreen = (NSScreen*)ptr;
     NSScreen* result_ = [nSScreen init];
+    return result_;
+}
+
+void* C_NSScreen_NewScreen() {
+    NSScreen* result_ = [NSScreen new];
+    return result_;
+}
+
+void* C_NSScreen_Autorelease(void* ptr) {
+    NSScreen* nSScreen = (NSScreen*)ptr;
+    NSScreen* result_ = [nSScreen autorelease];
+    return result_;
+}
+
+void* C_NSScreen_Retain(void* ptr) {
+    NSScreen* nSScreen = (NSScreen*)ptr;
+    NSScreen* result_ = [nSScreen retain];
     return result_;
 }
 

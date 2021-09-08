@@ -5,9 +5,31 @@ void* C_Pasteboard_Alloc() {
     return [NSPasteboard alloc];
 }
 
+void* C_NSPasteboard_AllocPasteboard() {
+    NSPasteboard* result_ = [NSPasteboard alloc];
+    return result_;
+}
+
 void* C_NSPasteboard_Init(void* ptr) {
     NSPasteboard* nSPasteboard = (NSPasteboard*)ptr;
     NSPasteboard* result_ = [nSPasteboard init];
+    return result_;
+}
+
+void* C_NSPasteboard_NewPasteboard() {
+    NSPasteboard* result_ = [NSPasteboard new];
+    return result_;
+}
+
+void* C_NSPasteboard_Autorelease(void* ptr) {
+    NSPasteboard* nSPasteboard = (NSPasteboard*)ptr;
+    NSPasteboard* result_ = [nSPasteboard autorelease];
+    return result_;
+}
+
+void* C_NSPasteboard_Retain(void* ptr) {
+    NSPasteboard* nSPasteboard = (NSPasteboard*)ptr;
+    NSPasteboard* result_ = [nSPasteboard retain];
     return result_;
 }
 
@@ -86,7 +108,7 @@ void* C_NSPasteboard_StringForType(void* ptr, void* dataType) {
 
 void* C_NSPasteboard_AvailableTypeFromArray(void* ptr, Array types) {
     NSPasteboard* nSPasteboard = (NSPasteboard*)ptr;
-    NSMutableArray* objcTypes = [[NSMutableArray alloc] init];
+    NSMutableArray* objcTypes = [NSMutableArray arrayWithCapacity:types.len];
     if (types.len > 0) {
     	void** typesData = (void**)types.data;
     	for (int i = 0; i < types.len; i++) {
@@ -100,7 +122,7 @@ void* C_NSPasteboard_AvailableTypeFromArray(void* ptr, Array types) {
 
 bool C_NSPasteboard_CanReadItemWithDataConformingToTypes(void* ptr, Array types) {
     NSPasteboard* nSPasteboard = (NSPasteboard*)ptr;
-    NSMutableArray* objcTypes = [[NSMutableArray alloc] init];
+    NSMutableArray* objcTypes = [NSMutableArray arrayWithCapacity:types.len];
     if (types.len > 0) {
     	void** typesData = (void**)types.data;
     	for (int i = 0; i < types.len; i++) {
@@ -136,7 +158,7 @@ int C_NSPasteboard_PrepareForNewContentsWithOptions(void* ptr, unsigned int opti
 
 int C_NSPasteboard_DeclareTypes_Owner(void* ptr, Array newTypes, void* newOwner) {
     NSPasteboard* nSPasteboard = (NSPasteboard*)ptr;
-    NSMutableArray* objcNewTypes = [[NSMutableArray alloc] init];
+    NSMutableArray* objcNewTypes = [NSMutableArray arrayWithCapacity:newTypes.len];
     if (newTypes.len > 0) {
     	void** newTypesData = (void**)newTypes.data;
     	for (int i = 0; i < newTypes.len; i++) {
@@ -150,7 +172,7 @@ int C_NSPasteboard_DeclareTypes_Owner(void* ptr, Array newTypes, void* newOwner)
 
 int C_NSPasteboard_AddTypes_Owner(void* ptr, Array newTypes, void* newOwner) {
     NSPasteboard* nSPasteboard = (NSPasteboard*)ptr;
-    NSMutableArray* objcNewTypes = [[NSMutableArray alloc] init];
+    NSMutableArray* objcNewTypes = [NSMutableArray arrayWithCapacity:newTypes.len];
     if (newTypes.len > 0) {
     	void** newTypesData = (void**)newTypes.data;
     	for (int i = 0; i < newTypes.len; i++) {

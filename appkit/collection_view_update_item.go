@@ -26,11 +26,27 @@ func MakeCollectionViewUpdateItem(ptr unsafe.Pointer) NSCollectionViewUpdateItem
 }
 
 func AllocCollectionViewUpdateItem() NSCollectionViewUpdateItem {
-	return MakeCollectionViewUpdateItem(C.C_CollectionViewUpdateItem_Alloc())
+	result_ := C.C_NSCollectionViewUpdateItem_AllocCollectionViewUpdateItem()
+	return MakeCollectionViewUpdateItem(result_)
 }
 
-func (n NSCollectionViewUpdateItem) Init() CollectionViewUpdateItem {
+func (n NSCollectionViewUpdateItem) Init() NSCollectionViewUpdateItem {
 	result_ := C.C_NSCollectionViewUpdateItem_Init(n.Ptr())
+	return MakeCollectionViewUpdateItem(result_)
+}
+
+func NewCollectionViewUpdateItem() NSCollectionViewUpdateItem {
+	result_ := C.C_NSCollectionViewUpdateItem_NewCollectionViewUpdateItem()
+	return MakeCollectionViewUpdateItem(result_)
+}
+
+func (n NSCollectionViewUpdateItem) Autorelease() NSCollectionViewUpdateItem {
+	result_ := C.C_NSCollectionViewUpdateItem_Autorelease(n.Ptr())
+	return MakeCollectionViewUpdateItem(result_)
+}
+
+func (n NSCollectionViewUpdateItem) Retain() NSCollectionViewUpdateItem {
+	result_ := C.C_NSCollectionViewUpdateItem_Retain(n.Ptr())
 	return MakeCollectionViewUpdateItem(result_)
 }
 

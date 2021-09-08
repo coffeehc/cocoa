@@ -32,11 +32,26 @@ func MakeError(ptr unsafe.Pointer) NSError {
 	}
 }
 
-func AllocError() NSError {
-	return MakeError(C.C_Error_Alloc())
+func ErrorWithDomain_Code_UserInfo(domain ErrorDomain, code int, dict map[ErrorUserInfoKey]objc.Object) NSError {
+	var cDict C.Dictionary
+	if len(dict) > 0 {
+		cDictKeyData := make([]unsafe.Pointer, len(dict))
+		cDictValueData := make([]unsafe.Pointer, len(dict))
+		var idx = 0
+		for k, v := range dict {
+			cDictKeyData[idx] = NewString(string(k)).Ptr()
+			cDictValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cDict.key_data = unsafe.Pointer(&cDictKeyData[0])
+		cDict.value_data = unsafe.Pointer(&cDictValueData[0])
+		cDict.len = C.int(len(dict))
+	}
+	result_ := C.C_NSError_ErrorWithDomain_Code_UserInfo(NewString(string(domain)).Ptr(), C.int(code), cDict)
+	return MakeError(result_)
 }
 
-func (n NSError) InitWithDomain_Code_UserInfo(domain ErrorDomain, code int, dict map[ErrorUserInfoKey]objc.Object) Error {
+func (n NSError) InitWithDomain_Code_UserInfo(domain ErrorDomain, code int, dict map[ErrorUserInfoKey]objc.Object) NSError {
 	var cDict C.Dictionary
 	if len(dict) > 0 {
 		cDictKeyData := make([]unsafe.Pointer, len(dict))
@@ -55,27 +70,28 @@ func (n NSError) InitWithDomain_Code_UserInfo(domain ErrorDomain, code int, dict
 	return MakeError(result_)
 }
 
-func (n NSError) Init() Error {
+func AllocError() NSError {
+	result_ := C.C_NSError_AllocError()
+	return MakeError(result_)
+}
+
+func (n NSError) Init() NSError {
 	result_ := C.C_NSError_Init(n.Ptr())
 	return MakeError(result_)
 }
 
-func ErrorWithDomain_Code_UserInfo(domain ErrorDomain, code int, dict map[ErrorUserInfoKey]objc.Object) Error {
-	var cDict C.Dictionary
-	if len(dict) > 0 {
-		cDictKeyData := make([]unsafe.Pointer, len(dict))
-		cDictValueData := make([]unsafe.Pointer, len(dict))
-		var idx = 0
-		for k, v := range dict {
-			cDictKeyData[idx] = NewString(string(k)).Ptr()
-			cDictValueData[idx] = objc.ExtractPtr(v)
-			idx++
-		}
-		cDict.key_data = unsafe.Pointer(&cDictKeyData[0])
-		cDict.value_data = unsafe.Pointer(&cDictValueData[0])
-		cDict.len = C.int(len(dict))
-	}
-	result_ := C.C_NSError_ErrorWithDomain_Code_UserInfo(NewString(string(domain)).Ptr(), C.int(code), cDict)
+func NewError() NSError {
+	result_ := C.C_NSError_NewError()
+	return MakeError(result_)
+}
+
+func (n NSError) Autorelease() NSError {
+	result_ := C.C_NSError_Autorelease(n.Ptr())
+	return MakeError(result_)
+}
+
+func (n NSError) Retain() NSError {
+	result_ := C.C_NSError_Retain(n.Ptr())
 	return MakeError(result_)
 }
 

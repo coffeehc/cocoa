@@ -50,27 +50,43 @@ func MakeGridView(ptr unsafe.Pointer) NSGridView {
 	}
 }
 
-func AllocGridView() NSGridView {
-	return MakeGridView(C.C_GridView_Alloc())
+func GridViewWithNumberOfColumns_Rows(columnCount int, rowCount int) NSGridView {
+	result_ := C.C_NSGridView_GridViewWithNumberOfColumns_Rows(C.int(columnCount), C.int(rowCount))
+	return MakeGridView(result_)
 }
 
-func (n NSGridView) InitWithFrame(frameRect foundation.Rect) GridView {
+func (n NSGridView) InitWithFrame(frameRect foundation.Rect) NSGridView {
 	result_ := C.C_NSGridView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeGridView(result_)
 }
 
-func (n NSGridView) InitWithCoder(coder foundation.Coder) GridView {
+func (n NSGridView) InitWithCoder(coder foundation.Coder) NSGridView {
 	result_ := C.C_NSGridView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeGridView(result_)
 }
 
-func (n NSGridView) Init() GridView {
+func (n NSGridView) Init() NSGridView {
 	result_ := C.C_NSGridView_Init(n.Ptr())
 	return MakeGridView(result_)
 }
 
-func GridViewWithNumberOfColumns_Rows(columnCount int, rowCount int) GridView {
-	result_ := C.C_NSGridView_GridViewWithNumberOfColumns_Rows(C.int(columnCount), C.int(rowCount))
+func AllocGridView() NSGridView {
+	result_ := C.C_NSGridView_AllocGridView()
+	return MakeGridView(result_)
+}
+
+func NewGridView() NSGridView {
+	result_ := C.C_NSGridView_NewGridView()
+	return MakeGridView(result_)
+}
+
+func (n NSGridView) Autorelease() NSGridView {
+	result_ := C.C_NSGridView_Autorelease(n.Ptr())
+	return MakeGridView(result_)
+}
+
+func (n NSGridView) Retain() NSGridView {
+	result_ := C.C_NSGridView_Retain(n.Ptr())
 	return MakeGridView(result_)
 }
 

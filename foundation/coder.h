@@ -5,7 +5,11 @@
 
 void* C_Coder_Alloc();
 
+void* C_NSCoder_AllocCoder();
 void* C_NSCoder_Init(void* ptr);
+void* C_NSCoder_NewCoder();
+void* C_NSCoder_Autorelease(void* ptr);
+void* C_NSCoder_Retain(void* ptr);
 bool C_NSCoder_ContainsValueForKey(void* ptr, void* key);
 void C_NSCoder_EncodeBool_ForKey(void* ptr, bool value, void* key);
 void C_NSCoder_EncodeBycopyObject(void* ptr, void* anObject);

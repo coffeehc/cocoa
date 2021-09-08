@@ -17,6 +17,28 @@ void* C_NSLayoutManager_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSLayoutManager_AllocLayoutManager() {
+    NSLayoutManager* result_ = [NSLayoutManager alloc];
+    return result_;
+}
+
+void* C_NSLayoutManager_NewLayoutManager() {
+    NSLayoutManager* result_ = [NSLayoutManager new];
+    return result_;
+}
+
+void* C_NSLayoutManager_Autorelease(void* ptr) {
+    NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
+    NSLayoutManager* result_ = [nSLayoutManager autorelease];
+    return result_;
+}
+
+void* C_NSLayoutManager_Retain(void* ptr) {
+    NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
+    NSLayoutManager* result_ = [nSLayoutManager retain];
+    return result_;
+}
+
 void C_NSLayoutManager_ReplaceTextStorage(void* ptr, void* newTextStorage) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
     [nSLayoutManager replaceTextStorage:(NSTextStorage*)newTextStorage];
@@ -341,7 +363,7 @@ double C_NSLayoutManager_DefaultBaselineOffsetForFont(void* ptr, void* theFont) 
 
 void C_NSLayoutManager_AddTemporaryAttributes_ForCharacterRange(void* ptr, Dictionary attrs, NSRange charRange) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSMutableDictionary* objcAttrs = [[NSMutableDictionary alloc] initWithCapacity: attrs.len];
+    NSMutableDictionary* objcAttrs = [NSMutableDictionary dictionaryWithCapacity:attrs.len];
     if (attrs.len > 0) {
     	void** attrsKeyData = (void**)attrs.key_data;
     	void** attrsValueData = (void**)attrs.value_data;
@@ -361,7 +383,7 @@ void C_NSLayoutManager_AddTemporaryAttribute_Value_ForCharacterRange(void* ptr, 
 
 void C_NSLayoutManager_SetTemporaryAttributes_ForCharacterRange(void* ptr, Dictionary attrs, NSRange charRange) {
     NSLayoutManager* nSLayoutManager = (NSLayoutManager*)ptr;
-    NSMutableDictionary* objcAttrs = [[NSMutableDictionary alloc] initWithCapacity: attrs.len];
+    NSMutableDictionary* objcAttrs = [NSMutableDictionary dictionaryWithCapacity:attrs.len];
     if (attrs.len > 0) {
     	void** attrsKeyData = (void**)attrs.key_data;
     	void** attrsValueData = (void**)attrs.value_data;

@@ -5,9 +5,31 @@ void* C_PDFInfo_Alloc() {
     return [NSPDFInfo alloc];
 }
 
+void* C_NSPDFInfo_AllocPDFInfo() {
+    NSPDFInfo* result_ = [NSPDFInfo alloc];
+    return result_;
+}
+
 void* C_NSPDFInfo_Init(void* ptr) {
     NSPDFInfo* nSPDFInfo = (NSPDFInfo*)ptr;
     NSPDFInfo* result_ = [nSPDFInfo init];
+    return result_;
+}
+
+void* C_NSPDFInfo_NewPDFInfo() {
+    NSPDFInfo* result_ = [NSPDFInfo new];
+    return result_;
+}
+
+void* C_NSPDFInfo_Autorelease(void* ptr) {
+    NSPDFInfo* nSPDFInfo = (NSPDFInfo*)ptr;
+    NSPDFInfo* result_ = [nSPDFInfo autorelease];
+    return result_;
+}
+
+void* C_NSPDFInfo_Retain(void* ptr) {
+    NSPDFInfo* nSPDFInfo = (NSPDFInfo*)ptr;
+    NSPDFInfo* result_ = [nSPDFInfo retain];
     return result_;
 }
 
@@ -52,7 +74,7 @@ Array C_NSPDFInfo_TagNames(void* ptr) {
 
 void C_NSPDFInfo_SetTagNames(void* ptr, Array value) {
     NSPDFInfo* nSPDFInfo = (NSPDFInfo*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

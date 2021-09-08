@@ -25,11 +25,27 @@ func MakeFormatter(ptr unsafe.Pointer) NSFormatter {
 }
 
 func AllocFormatter() NSFormatter {
-	return MakeFormatter(C.C_Formatter_Alloc())
+	result_ := C.C_NSFormatter_AllocFormatter()
+	return MakeFormatter(result_)
 }
 
-func (n NSFormatter) Init() Formatter {
+func (n NSFormatter) Init() NSFormatter {
 	result_ := C.C_NSFormatter_Init(n.Ptr())
+	return MakeFormatter(result_)
+}
+
+func NewFormatter() NSFormatter {
+	result_ := C.C_NSFormatter_NewFormatter()
+	return MakeFormatter(result_)
+}
+
+func (n NSFormatter) Autorelease() NSFormatter {
+	result_ := C.C_NSFormatter_Autorelease(n.Ptr())
+	return MakeFormatter(result_)
+}
+
+func (n NSFormatter) Retain() NSFormatter {
+	result_ := C.C_NSFormatter_Retain(n.Ptr())
 	return MakeFormatter(result_)
 }
 

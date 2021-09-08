@@ -23,6 +23,28 @@ void* C_NSOutlineView_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSOutlineView_AllocOutlineView() {
+    NSOutlineView* result_ = [NSOutlineView alloc];
+    return result_;
+}
+
+void* C_NSOutlineView_NewOutlineView() {
+    NSOutlineView* result_ = [NSOutlineView new];
+    return result_;
+}
+
+void* C_NSOutlineView_Autorelease(void* ptr) {
+    NSOutlineView* nSOutlineView = (NSOutlineView*)ptr;
+    NSOutlineView* result_ = [nSOutlineView autorelease];
+    return result_;
+}
+
+void* C_NSOutlineView_Retain(void* ptr) {
+    NSOutlineView* nSOutlineView = (NSOutlineView*)ptr;
+    NSOutlineView* result_ = [nSOutlineView retain];
+    return result_;
+}
+
 bool C_NSOutlineView_IsExpandable(void* ptr, void* item) {
     NSOutlineView* nSOutlineView = (NSOutlineView*)ptr;
     BOOL result_ = [nSOutlineView isExpandable:(id)item];

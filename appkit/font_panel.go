@@ -30,22 +30,43 @@ func MakeFontPanel(ptr unsafe.Pointer) NSFontPanel {
 	}
 }
 
-func AllocFontPanel() NSFontPanel {
-	return MakeFontPanel(C.C_FontPanel_Alloc())
+func FontPanel_WindowWithContentViewController(contentViewController ViewController) NSFontPanel {
+	result_ := C.C_NSFontPanel_FontPanel_WindowWithContentViewController(objc.ExtractPtr(contentViewController))
+	return MakeFontPanel(result_)
 }
 
-func (n NSFontPanel) InitWithContentRect_StyleMask_Backing_Defer(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool) FontPanel {
+func (n NSFontPanel) InitWithContentRect_StyleMask_Backing_Defer(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool) NSFontPanel {
 	result_ := C.C_NSFontPanel_InitWithContentRect_StyleMask_Backing_Defer(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag))
 	return MakeFontPanel(result_)
 }
 
-func (n NSFontPanel) InitWithContentRect_StyleMask_Backing_Defer_Screen(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool, screen Screen) FontPanel {
+func (n NSFontPanel) InitWithContentRect_StyleMask_Backing_Defer_Screen(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool, screen Screen) NSFontPanel {
 	result_ := C.C_NSFontPanel_InitWithContentRect_StyleMask_Backing_Defer_Screen(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag), objc.ExtractPtr(screen))
 	return MakeFontPanel(result_)
 }
 
-func (n NSFontPanel) Init() FontPanel {
+func (n NSFontPanel) Init() NSFontPanel {
 	result_ := C.C_NSFontPanel_Init(n.Ptr())
+	return MakeFontPanel(result_)
+}
+
+func AllocFontPanel() NSFontPanel {
+	result_ := C.C_NSFontPanel_AllocFontPanel()
+	return MakeFontPanel(result_)
+}
+
+func NewFontPanel() NSFontPanel {
+	result_ := C.C_NSFontPanel_NewFontPanel()
+	return MakeFontPanel(result_)
+}
+
+func (n NSFontPanel) Autorelease() NSFontPanel {
+	result_ := C.C_NSFontPanel_Autorelease(n.Ptr())
+	return MakeFontPanel(result_)
+}
+
+func (n NSFontPanel) Retain() NSFontPanel {
+	result_ := C.C_NSFontPanel_Retain(n.Ptr())
 	return MakeFontPanel(result_)
 }
 

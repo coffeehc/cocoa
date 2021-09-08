@@ -3,6 +3,20 @@
 #include "_cgo_export.h"
 #import <objc/runtime.h>
 
+void* Object_Retain(void* ptr) {
+    NSObject* obj = (NSObject*)ptr;
+    return [obj retain];
+}
+
+void Object_Release(void* ptr) {
+    NSObject* obj = (NSObject*)ptr;
+    [obj release];
+}
+
+void* Object_Autorelease(void* ptr) {
+    NSObject* obj = (NSObject*)ptr;
+    return [obj retain];
+}
 
 void Object_Dealloc(void* ptr) {
     NSObject* obj = (NSObject*)ptr;

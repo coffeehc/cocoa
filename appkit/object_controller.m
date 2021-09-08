@@ -23,6 +23,28 @@ void* C_NSObjectController_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSObjectController_AllocObjectController() {
+    NSObjectController* result_ = [NSObjectController alloc];
+    return result_;
+}
+
+void* C_NSObjectController_NewObjectController() {
+    NSObjectController* result_ = [NSObjectController new];
+    return result_;
+}
+
+void* C_NSObjectController_Autorelease(void* ptr) {
+    NSObjectController* nSObjectController = (NSObjectController*)ptr;
+    NSObjectController* result_ = [nSObjectController autorelease];
+    return result_;
+}
+
+void* C_NSObjectController_Retain(void* ptr) {
+    NSObjectController* nSObjectController = (NSObjectController*)ptr;
+    NSObjectController* result_ = [nSObjectController retain];
+    return result_;
+}
+
 void C_NSObjectController_PrepareContent(void* ptr) {
     NSObjectController* nSObjectController = (NSObjectController*)ptr;
     [nSObjectController prepareContent];

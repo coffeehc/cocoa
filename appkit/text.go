@@ -93,22 +93,38 @@ func MakeText(ptr unsafe.Pointer) NSText {
 	}
 }
 
-func AllocText() NSText {
-	return MakeText(C.C_Text_Alloc())
-}
-
-func (n NSText) InitWithCoder(coder foundation.Coder) Text {
+func (n NSText) InitWithCoder(coder foundation.Coder) NSText {
 	result_ := C.C_NSText_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeText(result_)
 }
 
-func (n NSText) InitWithFrame(frameRect foundation.Rect) Text {
+func (n NSText) InitWithFrame(frameRect foundation.Rect) NSText {
 	result_ := C.C_NSText_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeText(result_)
 }
 
-func (n NSText) Init() Text {
+func (n NSText) Init() NSText {
 	result_ := C.C_NSText_Init(n.Ptr())
+	return MakeText(result_)
+}
+
+func AllocText() NSText {
+	result_ := C.C_NSText_AllocText()
+	return MakeText(result_)
+}
+
+func NewText() NSText {
+	result_ := C.C_NSText_NewText()
+	return MakeText(result_)
+}
+
+func (n NSText) Autorelease() NSText {
+	result_ := C.C_NSText_Autorelease(n.Ptr())
+	return MakeText(result_)
+}
+
+func (n NSText) Retain() NSText {
+	result_ := C.C_NSText_Retain(n.Ptr())
 	return MakeText(result_)
 }
 

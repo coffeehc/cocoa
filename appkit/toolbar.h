@@ -7,6 +7,10 @@ void* C_Toolbar_Alloc();
 
 void* C_NSToolbar_InitWithIdentifier(void* ptr, void* identifier);
 void* C_NSToolbar_Init(void* ptr);
+void* C_NSToolbar_AllocToolbar();
+void* C_NSToolbar_NewToolbar();
+void* C_NSToolbar_Autorelease(void* ptr);
+void* C_NSToolbar_Retain(void* ptr);
 void C_NSToolbar_InsertItemWithItemIdentifier_AtIndex(void* ptr, void* itemIdentifier, int index);
 void C_NSToolbar_RemoveItemAtIndex(void* ptr, int index);
 void C_NSToolbar_RunCustomizationPalette(void* ptr, void* sender);

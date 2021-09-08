@@ -30,11 +30,27 @@ func MakeTableViewRowAction(ptr unsafe.Pointer) NSTableViewRowAction {
 }
 
 func AllocTableViewRowAction() NSTableViewRowAction {
-	return MakeTableViewRowAction(C.C_TableViewRowAction_Alloc())
+	result_ := C.C_NSTableViewRowAction_AllocTableViewRowAction()
+	return MakeTableViewRowAction(result_)
 }
 
-func (n NSTableViewRowAction) Init() TableViewRowAction {
+func (n NSTableViewRowAction) Init() NSTableViewRowAction {
 	result_ := C.C_NSTableViewRowAction_Init(n.Ptr())
+	return MakeTableViewRowAction(result_)
+}
+
+func NewTableViewRowAction() NSTableViewRowAction {
+	result_ := C.C_NSTableViewRowAction_NewTableViewRowAction()
+	return MakeTableViewRowAction(result_)
+}
+
+func (n NSTableViewRowAction) Autorelease() NSTableViewRowAction {
+	result_ := C.C_NSTableViewRowAction_Autorelease(n.Ptr())
+	return MakeTableViewRowAction(result_)
+}
+
+func (n NSTableViewRowAction) Retain() NSTableViewRowAction {
+	result_ := C.C_NSTableViewRowAction_Retain(n.Ptr())
 	return MakeTableViewRowAction(result_)
 }
 

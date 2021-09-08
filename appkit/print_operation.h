@@ -5,7 +5,11 @@
 
 void* C_PrintOperation_Alloc();
 
+void* C_NSPrintOperation_AllocPrintOperation();
 void* C_NSPrintOperation_Init(void* ptr);
+void* C_NSPrintOperation_NewPrintOperation();
+void* C_NSPrintOperation_Autorelease(void* ptr);
+void* C_NSPrintOperation_Retain(void* ptr);
 void* C_NSPrintOperation_PrintOperation_EPSOperationWithView_InsideRect_ToData(void* view, CGRect rect, void* data);
 void* C_NSPrintOperation_PrintOperation_EPSOperationWithView_InsideRect_ToData_PrintInfo(void* view, CGRect rect, void* data, void* printInfo);
 void* C_NSPrintOperation_PrintOperation_EPSOperationWithView_InsideRect_ToPath_PrintInfo(void* view, CGRect rect, void* path, void* printInfo);

@@ -93,11 +93,27 @@ func MakeDateFormatter(ptr unsafe.Pointer) NSDateFormatter {
 }
 
 func AllocDateFormatter() NSDateFormatter {
-	return MakeDateFormatter(C.C_DateFormatter_Alloc())
+	result_ := C.C_NSDateFormatter_AllocDateFormatter()
+	return MakeDateFormatter(result_)
 }
 
-func (n NSDateFormatter) Init() DateFormatter {
+func (n NSDateFormatter) Init() NSDateFormatter {
 	result_ := C.C_NSDateFormatter_Init(n.Ptr())
+	return MakeDateFormatter(result_)
+}
+
+func NewDateFormatter() NSDateFormatter {
+	result_ := C.C_NSDateFormatter_NewDateFormatter()
+	return MakeDateFormatter(result_)
+}
+
+func (n NSDateFormatter) Autorelease() NSDateFormatter {
+	result_ := C.C_NSDateFormatter_Autorelease(n.Ptr())
+	return MakeDateFormatter(result_)
+}
+
+func (n NSDateFormatter) Retain() NSDateFormatter {
+	result_ := C.C_NSDateFormatter_Retain(n.Ptr())
 	return MakeDateFormatter(result_)
 }
 

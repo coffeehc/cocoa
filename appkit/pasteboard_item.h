@@ -5,7 +5,11 @@
 
 void* C_PasteboardItem_Alloc();
 
+void* C_NSPasteboardItem_AllocPasteboardItem();
 void* C_NSPasteboardItem_Init(void* ptr);
+void* C_NSPasteboardItem_NewPasteboardItem();
+void* C_NSPasteboardItem_Autorelease(void* ptr);
+void* C_NSPasteboardItem_Retain(void* ptr);
 void* C_NSPasteboardItem_AvailableTypeFromArray(void* ptr, Array types);
 bool C_NSPasteboardItem_SetDataProvider_ForTypes(void* ptr, void* dataProvider, Array types);
 bool C_NSPasteboardItem_SetData_ForType(void* ptr, void* data, void* _type);

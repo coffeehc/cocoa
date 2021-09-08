@@ -10,6 +10,23 @@ void* C_NSCollectionLayoutEdgeSpacing_CollectionLayoutEdgeSpacing_SpacingForLead
     return result_;
 }
 
+void* C_NSCollectionLayoutEdgeSpacing_AllocCollectionLayoutEdgeSpacing() {
+    NSCollectionLayoutEdgeSpacing* result_ = [NSCollectionLayoutEdgeSpacing alloc];
+    return result_;
+}
+
+void* C_NSCollectionLayoutEdgeSpacing_Autorelease(void* ptr) {
+    NSCollectionLayoutEdgeSpacing* nSCollectionLayoutEdgeSpacing = (NSCollectionLayoutEdgeSpacing*)ptr;
+    NSCollectionLayoutEdgeSpacing* result_ = [nSCollectionLayoutEdgeSpacing autorelease];
+    return result_;
+}
+
+void* C_NSCollectionLayoutEdgeSpacing_Retain(void* ptr) {
+    NSCollectionLayoutEdgeSpacing* nSCollectionLayoutEdgeSpacing = (NSCollectionLayoutEdgeSpacing*)ptr;
+    NSCollectionLayoutEdgeSpacing* result_ = [nSCollectionLayoutEdgeSpacing retain];
+    return result_;
+}
+
 void* C_NSCollectionLayoutEdgeSpacing_Leading(void* ptr) {
     NSCollectionLayoutEdgeSpacing* nSCollectionLayoutEdgeSpacing = (NSCollectionLayoutEdgeSpacing*)ptr;
     NSCollectionLayoutSpacing* result_ = [nSCollectionLayoutEdgeSpacing leading];

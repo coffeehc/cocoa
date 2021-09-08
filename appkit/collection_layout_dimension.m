@@ -25,6 +25,23 @@ void* C_NSCollectionLayoutDimension_CollectionLayoutDimension_FractionalWidthDim
     return result_;
 }
 
+void* C_NSCollectionLayoutDimension_AllocCollectionLayoutDimension() {
+    NSCollectionLayoutDimension* result_ = [NSCollectionLayoutDimension alloc];
+    return result_;
+}
+
+void* C_NSCollectionLayoutDimension_Autorelease(void* ptr) {
+    NSCollectionLayoutDimension* nSCollectionLayoutDimension = (NSCollectionLayoutDimension*)ptr;
+    NSCollectionLayoutDimension* result_ = [nSCollectionLayoutDimension autorelease];
+    return result_;
+}
+
+void* C_NSCollectionLayoutDimension_Retain(void* ptr) {
+    NSCollectionLayoutDimension* nSCollectionLayoutDimension = (NSCollectionLayoutDimension*)ptr;
+    NSCollectionLayoutDimension* result_ = [nSCollectionLayoutDimension retain];
+    return result_;
+}
+
 double C_NSCollectionLayoutDimension_Dimension(void* ptr) {
     NSCollectionLayoutDimension* nSCollectionLayoutDimension = (NSCollectionLayoutDimension*)ptr;
     CGFloat result_ = [nSCollectionLayoutDimension dimension];

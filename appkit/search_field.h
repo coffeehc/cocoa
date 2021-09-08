@@ -5,9 +5,17 @@
 
 void* C_SearchField_Alloc();
 
+void* C_NSSearchField_SearchField_LabelWithAttributedString(void* attributedStringValue);
+void* C_NSSearchField_SearchField_LabelWithString(void* stringValue);
+void* C_NSSearchField_SearchField_TextFieldWithString(void* stringValue);
+void* C_NSSearchField_SearchField_WrappingLabelWithString(void* stringValue);
 void* C_NSSearchField_InitWithFrame(void* ptr, CGRect frameRect);
 void* C_NSSearchField_InitWithCoder(void* ptr, void* coder);
 void* C_NSSearchField_Init(void* ptr);
+void* C_NSSearchField_AllocSearchField();
+void* C_NSSearchField_NewSearchField();
+void* C_NSSearchField_Autorelease(void* ptr);
+void* C_NSSearchField_Retain(void* ptr);
 void* C_NSSearchField_SearchMenuTemplate(void* ptr);
 void C_NSSearchField_SetSearchMenuTemplate(void* ptr, void* value);
 bool C_NSSearchField_SendsSearchStringImmediately(void* ptr);

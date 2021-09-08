@@ -5,10 +5,14 @@
 
 void* C_GridView_Alloc();
 
+void* C_NSGridView_GridViewWithNumberOfColumns_Rows(int columnCount, int rowCount);
 void* C_NSGridView_InitWithFrame(void* ptr, CGRect frameRect);
 void* C_NSGridView_InitWithCoder(void* ptr, void* coder);
 void* C_NSGridView_Init(void* ptr);
-void* C_NSGridView_GridViewWithNumberOfColumns_Rows(int columnCount, int rowCount);
+void* C_NSGridView_AllocGridView();
+void* C_NSGridView_NewGridView();
+void* C_NSGridView_Autorelease(void* ptr);
+void* C_NSGridView_Retain(void* ptr);
 int C_NSGridView_IndexOfColumn(void* ptr, void* column);
 void* C_NSGridView_RowAtIndex(void* ptr, int index);
 void* C_NSGridView_ColumnAtIndex(void* ptr, int index);

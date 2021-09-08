@@ -29,11 +29,27 @@ func MakePersonNameComponentsFormatter(ptr unsafe.Pointer) NSPersonNameComponent
 }
 
 func AllocPersonNameComponentsFormatter() NSPersonNameComponentsFormatter {
-	return MakePersonNameComponentsFormatter(C.C_PersonNameComponentsFormatter_Alloc())
+	result_ := C.C_NSPersonNameComponentsFormatter_AllocPersonNameComponentsFormatter()
+	return MakePersonNameComponentsFormatter(result_)
 }
 
-func (n NSPersonNameComponentsFormatter) Init() PersonNameComponentsFormatter {
+func (n NSPersonNameComponentsFormatter) Init() NSPersonNameComponentsFormatter {
 	result_ := C.C_NSPersonNameComponentsFormatter_Init(n.Ptr())
+	return MakePersonNameComponentsFormatter(result_)
+}
+
+func NewPersonNameComponentsFormatter() NSPersonNameComponentsFormatter {
+	result_ := C.C_NSPersonNameComponentsFormatter_NewPersonNameComponentsFormatter()
+	return MakePersonNameComponentsFormatter(result_)
+}
+
+func (n NSPersonNameComponentsFormatter) Autorelease() NSPersonNameComponentsFormatter {
+	result_ := C.C_NSPersonNameComponentsFormatter_Autorelease(n.Ptr())
+	return MakePersonNameComponentsFormatter(result_)
+}
+
+func (n NSPersonNameComponentsFormatter) Retain() NSPersonNameComponentsFormatter {
+	result_ := C.C_NSPersonNameComponentsFormatter_Retain(n.Ptr())
 	return MakePersonNameComponentsFormatter(result_)
 }
 

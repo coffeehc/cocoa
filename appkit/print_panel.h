@@ -5,7 +5,11 @@
 
 void* C_PrintPanel_Alloc();
 
+void* C_NSPrintPanel_AllocPrintPanel();
 void* C_NSPrintPanel_Init(void* ptr);
+void* C_NSPrintPanel_NewPrintPanel();
+void* C_NSPrintPanel_Autorelease(void* ptr);
+void* C_NSPrintPanel_Retain(void* ptr);
 void* C_NSPrintPanel_PrintPanel_();
 void* C_NSPrintPanel_DefaultButtonTitle(void* ptr);
 void C_NSPrintPanel_SetDefaultButtonTitle(void* ptr, void* defaultButtonTitle);

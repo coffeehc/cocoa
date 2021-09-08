@@ -27,12 +27,19 @@ func initAndRun() {
 	sv := appkits.NewVerticalStackView()
 	w.SetContentView(sv)
 
-	webView := webkit.AllocWebView().Init()
+	webView := webkit.NewWebView().Autorelease()
 	webView.SetTranslatesAutoresizingMaskIntoConstraints(false)
-	webView.LoadRequest(foundation.AllocURLRequest().InitWithURL(foundation.URLWithString("https://www.baidu.com")))
+	webView.LoadRequest(foundation.AllocURLRequest().InitWithURL(foundation.URLWithString("https://www.baidu.com")).Autorelease())
 	sv.AddView_InGravity(webView, appkit.StackViewGravityTop)
 
 	snapshotButton := appkits.NewPlainButton("capture")
+
+	snapshotWin := appkits.NewWindow(0, 0)
+	snapshotWin.SetTitle("Test widgets")
+
+	snapshotWebView := webkit.NewWebView().Autorelease()
+	snapshotWebView.SetTranslatesAutoresizingMaskIntoConstraints(false)
+	snapshotWin.SetContentView(snapshotWebView)
 
 	webView.SetNavigationDelegate((&webkit.NavigationDelegate{
 		WebView_DidFinishNavigation: func(webView webkit.WebView, navigation webkit.Navigation) {
@@ -44,20 +51,13 @@ func initAndRun() {
 				width := foundation.MakeNumber(value.Ptr()).DoubleValue()
 				webView.EvaluateJavaScript("document.body.scrollHeight", func(value objc.Object, err foundation.Error) {
 					height := foundation.MakeNumber(value.Ptr()).DoubleValue()
-					nw := appkits.NewWindow(width, height)
-					nw.SetTitle("Test widgets")
-
-					nwv := webkit.AllocWebView().Init()
-					nwv.SetTranslatesAutoresizingMaskIntoConstraints(false)
-					//nwv.SetFrame(foundation.MakeRect(0, 0, width, height))
-					//nwv.WidthAnchor().ConstraintEqualToConstant(width).SetActive(true)
-					nwv.LoadRequest(foundation.AllocURLRequest().InitWithURL(foundation.URLWithString("https://www.baidu.com")))
-					nw.SetContentView(nwv)
+					snapshotWin.SetFrame_Display(foundation.MakeRect(0, 0, width, height), true)
+					snapshotWebView.LoadRequest(foundation.AllocURLRequest().InitWithURL(foundation.URLWithString("https://www.baidu.com")))
 
 					actions.Set(snapshotButton, func(sender objc.Object) {
-						nwv.TakeSnapshotWithConfiguration(nil, func(image appkit.Image, err foundation.Error) {
+						snapshotWebView.TakeSnapshotWithConfiguration(nil, func(image appkit.Image, err foundation.Error) {
 							imageRef := image.CGImageForProposedRect_Context_Hints()
-							imageRepo := appkit.AllocBitmapImageRep().InitWithCGImage(imageRef)
+							imageRepo := appkit.AllocBitmapImageRep().InitWithCGImage(imageRef).Autorelease()
 							imageRepo.SetSize(image.Size())
 							pngData := imageRepo.RepresentationUsingType_Properties(appkit.BitmapImageFileTypePNG, nil)
 
@@ -66,7 +66,6 @@ func initAndRun() {
 							} else {
 								fmt.Println("image captured to webview_screenshot.png")
 							}
-							nw.Close()
 						})
 					})
 				})
@@ -75,6 +74,12 @@ func initAndRun() {
 	}).ToObjc())
 
 	sv.AddView_InGravity(snapshotButton, appkit.StackViewGravityTop)
+
+	delegates.Set(w, &appkit.WindowDelegate{
+		WindowWillClose: func(notification foundation.Notification) {
+			snapshotWin.Close()
+		},
+	})
 
 	w.MakeKeyAndOrderFront(nil)
 	w.Center()

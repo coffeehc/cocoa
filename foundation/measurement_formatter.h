@@ -5,7 +5,11 @@
 
 void* C_MeasurementFormatter_Alloc();
 
+void* C_NSMeasurementFormatter_AllocMeasurementFormatter();
 void* C_NSMeasurementFormatter_Init(void* ptr);
+void* C_NSMeasurementFormatter_NewMeasurementFormatter();
+void* C_NSMeasurementFormatter_Autorelease(void* ptr);
+void* C_NSMeasurementFormatter_Retain(void* ptr);
 void* C_NSMeasurementFormatter_StringFromMeasurement(void* ptr, void* measurement);
 void* C_NSMeasurementFormatter_StringFromUnit(void* ptr, void* unit);
 unsigned int C_NSMeasurementFormatter_UnitOptions(void* ptr);

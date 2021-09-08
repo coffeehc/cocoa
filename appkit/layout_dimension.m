@@ -5,9 +5,31 @@ void* C_LayoutDimension_Alloc() {
     return [NSLayoutDimension alloc];
 }
 
+void* C_NSLayoutDimension_AllocLayoutDimension() {
+    NSLayoutDimension* result_ = [NSLayoutDimension alloc];
+    return result_;
+}
+
 void* C_NSLayoutDimension_Init(void* ptr) {
     NSLayoutDimension* nSLayoutDimension = (NSLayoutDimension*)ptr;
     NSLayoutDimension* result_ = [nSLayoutDimension init];
+    return result_;
+}
+
+void* C_NSLayoutDimension_NewLayoutDimension() {
+    NSLayoutDimension* result_ = [NSLayoutDimension new];
+    return result_;
+}
+
+void* C_NSLayoutDimension_Autorelease(void* ptr) {
+    NSLayoutDimension* nSLayoutDimension = (NSLayoutDimension*)ptr;
+    NSLayoutDimension* result_ = [nSLayoutDimension autorelease];
+    return result_;
+}
+
+void* C_NSLayoutDimension_Retain(void* ptr) {
+    NSLayoutDimension* nSLayoutDimension = (NSLayoutDimension*)ptr;
+    NSLayoutDimension* result_ = [nSLayoutDimension retain];
     return result_;
 }
 

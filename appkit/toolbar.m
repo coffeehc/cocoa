@@ -17,6 +17,28 @@ void* C_NSToolbar_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSToolbar_AllocToolbar() {
+    NSToolbar* result_ = [NSToolbar alloc];
+    return result_;
+}
+
+void* C_NSToolbar_NewToolbar() {
+    NSToolbar* result_ = [NSToolbar new];
+    return result_;
+}
+
+void* C_NSToolbar_Autorelease(void* ptr) {
+    NSToolbar* nSToolbar = (NSToolbar*)ptr;
+    NSToolbar* result_ = [nSToolbar autorelease];
+    return result_;
+}
+
+void* C_NSToolbar_Retain(void* ptr) {
+    NSToolbar* nSToolbar = (NSToolbar*)ptr;
+    NSToolbar* result_ = [nSToolbar retain];
+    return result_;
+}
+
 void C_NSToolbar_InsertItemWithItemIdentifier_AtIndex(void* ptr, void* itemIdentifier, int index) {
     NSToolbar* nSToolbar = (NSToolbar*)ptr;
     [nSToolbar insertItemWithItemIdentifier:(NSString*)itemIdentifier atIndex:index];
@@ -34,7 +56,7 @@ void C_NSToolbar_RunCustomizationPalette(void* ptr, void* sender) {
 
 void C_NSToolbar_SetConfigurationFromDictionary(void* ptr, Dictionary configDict) {
     NSToolbar* nSToolbar = (NSToolbar*)ptr;
-    NSMutableDictionary* objcConfigDict = [[NSMutableDictionary alloc] initWithCapacity: configDict.len];
+    NSMutableDictionary* objcConfigDict = [NSMutableDictionary dictionaryWithCapacity:configDict.len];
     if (configDict.len > 0) {
     	void** configDictKeyData = (void**)configDict.key_data;
     	void** configDictValueData = (void**)configDict.value_data;

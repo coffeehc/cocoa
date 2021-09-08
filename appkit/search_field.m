@@ -5,6 +5,26 @@ void* C_SearchField_Alloc() {
     return [NSSearchField alloc];
 }
 
+void* C_NSSearchField_SearchField_LabelWithAttributedString(void* attributedStringValue) {
+    NSSearchField* result_ = [NSSearchField labelWithAttributedString:(NSAttributedString*)attributedStringValue];
+    return result_;
+}
+
+void* C_NSSearchField_SearchField_LabelWithString(void* stringValue) {
+    NSSearchField* result_ = [NSSearchField labelWithString:(NSString*)stringValue];
+    return result_;
+}
+
+void* C_NSSearchField_SearchField_TextFieldWithString(void* stringValue) {
+    NSSearchField* result_ = [NSSearchField textFieldWithString:(NSString*)stringValue];
+    return result_;
+}
+
+void* C_NSSearchField_SearchField_WrappingLabelWithString(void* stringValue) {
+    NSSearchField* result_ = [NSSearchField wrappingLabelWithString:(NSString*)stringValue];
+    return result_;
+}
+
 void* C_NSSearchField_InitWithFrame(void* ptr, CGRect frameRect) {
     NSSearchField* nSSearchField = (NSSearchField*)ptr;
     NSSearchField* result_ = [nSSearchField initWithFrame:frameRect];
@@ -20,6 +40,28 @@ void* C_NSSearchField_InitWithCoder(void* ptr, void* coder) {
 void* C_NSSearchField_Init(void* ptr) {
     NSSearchField* nSSearchField = (NSSearchField*)ptr;
     NSSearchField* result_ = [nSSearchField init];
+    return result_;
+}
+
+void* C_NSSearchField_AllocSearchField() {
+    NSSearchField* result_ = [NSSearchField alloc];
+    return result_;
+}
+
+void* C_NSSearchField_NewSearchField() {
+    NSSearchField* result_ = [NSSearchField new];
+    return result_;
+}
+
+void* C_NSSearchField_Autorelease(void* ptr) {
+    NSSearchField* nSSearchField = (NSSearchField*)ptr;
+    NSSearchField* result_ = [nSSearchField autorelease];
+    return result_;
+}
+
+void* C_NSSearchField_Retain(void* ptr) {
+    NSSearchField* nSSearchField = (NSSearchField*)ptr;
+    NSSearchField* result_ = [nSSearchField retain];
     return result_;
 }
 
@@ -75,7 +117,7 @@ Array C_NSSearchField_RecentSearches(void* ptr) {
 
 void C_NSSearchField_SetRecentSearches(void* ptr, Array value) {
     NSSearchField* nSSearchField = (NSSearchField*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

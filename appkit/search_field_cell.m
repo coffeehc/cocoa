@@ -23,6 +23,28 @@ void* C_NSSearchFieldCell_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSSearchFieldCell_AllocSearchFieldCell() {
+    NSSearchFieldCell* result_ = [NSSearchFieldCell alloc];
+    return result_;
+}
+
+void* C_NSSearchFieldCell_NewSearchFieldCell() {
+    NSSearchFieldCell* result_ = [NSSearchFieldCell new];
+    return result_;
+}
+
+void* C_NSSearchFieldCell_Autorelease(void* ptr) {
+    NSSearchFieldCell* nSSearchFieldCell = (NSSearchFieldCell*)ptr;
+    NSSearchFieldCell* result_ = [nSSearchFieldCell autorelease];
+    return result_;
+}
+
+void* C_NSSearchFieldCell_Retain(void* ptr) {
+    NSSearchFieldCell* nSSearchFieldCell = (NSSearchFieldCell*)ptr;
+    NSSearchFieldCell* result_ = [nSSearchFieldCell retain];
+    return result_;
+}
+
 void C_NSSearchFieldCell_ResetSearchButtonCell(void* ptr) {
     NSSearchFieldCell* nSSearchFieldCell = (NSSearchFieldCell*)ptr;
     [nSSearchFieldCell resetSearchButtonCell];
@@ -136,7 +158,7 @@ Array C_NSSearchFieldCell_RecentSearches(void* ptr) {
 
 void C_NSSearchFieldCell_SetRecentSearches(void* ptr, Array value) {
     NSSearchFieldCell* nSSearchFieldCell = (NSSearchFieldCell*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

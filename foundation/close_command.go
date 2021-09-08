@@ -22,17 +22,28 @@ func MakeCloseCommand(ptr unsafe.Pointer) NSCloseCommand {
 	}
 }
 
-func AllocCloseCommand() NSCloseCommand {
-	return MakeCloseCommand(C.C_CloseCommand_Alloc())
-}
-
-func (n NSCloseCommand) InitWithCommandDescription(commandDef ScriptCommandDescription) CloseCommand {
+func (n NSCloseCommand) InitWithCommandDescription(commandDef ScriptCommandDescription) NSCloseCommand {
 	result_ := C.C_NSCloseCommand_InitWithCommandDescription(n.Ptr(), objc.ExtractPtr(commandDef))
 	return MakeCloseCommand(result_)
 }
 
-func (n NSCloseCommand) InitWithCoder(inCoder Coder) CloseCommand {
+func (n NSCloseCommand) InitWithCoder(inCoder Coder) NSCloseCommand {
 	result_ := C.C_NSCloseCommand_InitWithCoder(n.Ptr(), objc.ExtractPtr(inCoder))
+	return MakeCloseCommand(result_)
+}
+
+func AllocCloseCommand() NSCloseCommand {
+	result_ := C.C_NSCloseCommand_AllocCloseCommand()
+	return MakeCloseCommand(result_)
+}
+
+func (n NSCloseCommand) Autorelease() NSCloseCommand {
+	result_ := C.C_NSCloseCommand_Autorelease(n.Ptr())
+	return MakeCloseCommand(result_)
+}
+
+func (n NSCloseCommand) Retain() NSCloseCommand {
+	result_ := C.C_NSCloseCommand_Retain(n.Ptr())
 	return MakeCloseCommand(result_)
 }
 

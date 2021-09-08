@@ -26,11 +26,27 @@ func MakeNavigationResponse(ptr unsafe.Pointer) WKNavigationResponse {
 }
 
 func AllocNavigationResponse() WKNavigationResponse {
-	return MakeNavigationResponse(C.C_NavigationResponse_Alloc())
+	result_ := C.C_WKNavigationResponse_AllocNavigationResponse()
+	return MakeNavigationResponse(result_)
 }
 
-func (w WKNavigationResponse) Init() NavigationResponse {
+func (w WKNavigationResponse) Init() WKNavigationResponse {
 	result_ := C.C_WKNavigationResponse_Init(w.Ptr())
+	return MakeNavigationResponse(result_)
+}
+
+func NewNavigationResponse() WKNavigationResponse {
+	result_ := C.C_WKNavigationResponse_NewNavigationResponse()
+	return MakeNavigationResponse(result_)
+}
+
+func (w WKNavigationResponse) Autorelease() WKNavigationResponse {
+	result_ := C.C_WKNavigationResponse_Autorelease(w.Ptr())
+	return MakeNavigationResponse(result_)
+}
+
+func (w WKNavigationResponse) Retain() WKNavigationResponse {
+	result_ := C.C_WKNavigationResponse_Retain(w.Ptr())
 	return MakeNavigationResponse(result_)
 }
 

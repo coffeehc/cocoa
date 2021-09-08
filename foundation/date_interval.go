@@ -29,27 +29,43 @@ func MakeDateInterval(ptr unsafe.Pointer) NSDateInterval {
 	}
 }
 
-func AllocDateInterval() NSDateInterval {
-	return MakeDateInterval(C.C_DateInterval_Alloc())
-}
-
-func (n NSDateInterval) Init() DateInterval {
+func (n NSDateInterval) Init() NSDateInterval {
 	result_ := C.C_NSDateInterval_Init(n.Ptr())
 	return MakeDateInterval(result_)
 }
 
-func (n NSDateInterval) InitWithStartDate_Duration(startDate Date, duration TimeInterval) DateInterval {
+func (n NSDateInterval) InitWithStartDate_Duration(startDate Date, duration TimeInterval) NSDateInterval {
 	result_ := C.C_NSDateInterval_InitWithStartDate_Duration(n.Ptr(), objc.ExtractPtr(startDate), C.double(float64(duration)))
 	return MakeDateInterval(result_)
 }
 
-func (n NSDateInterval) InitWithStartDate_EndDate(startDate Date, endDate Date) DateInterval {
+func (n NSDateInterval) InitWithStartDate_EndDate(startDate Date, endDate Date) NSDateInterval {
 	result_ := C.C_NSDateInterval_InitWithStartDate_EndDate(n.Ptr(), objc.ExtractPtr(startDate), objc.ExtractPtr(endDate))
 	return MakeDateInterval(result_)
 }
 
-func (n NSDateInterval) InitWithCoder(coder Coder) DateInterval {
+func (n NSDateInterval) InitWithCoder(coder Coder) NSDateInterval {
 	result_ := C.C_NSDateInterval_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeDateInterval(result_)
+}
+
+func AllocDateInterval() NSDateInterval {
+	result_ := C.C_NSDateInterval_AllocDateInterval()
+	return MakeDateInterval(result_)
+}
+
+func NewDateInterval() NSDateInterval {
+	result_ := C.C_NSDateInterval_NewDateInterval()
+	return MakeDateInterval(result_)
+}
+
+func (n NSDateInterval) Autorelease() NSDateInterval {
+	result_ := C.C_NSDateInterval_Autorelease(n.Ptr())
+	return MakeDateInterval(result_)
+}
+
+func (n NSDateInterval) Retain() NSDateInterval {
+	result_ := C.C_NSDateInterval_Retain(n.Ptr())
 	return MakeDateInterval(result_)
 }
 

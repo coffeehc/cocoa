@@ -5,7 +5,11 @@
 
 void* C_ByteCountFormatter_Alloc();
 
+void* C_NSByteCountFormatter_AllocByteCountFormatter();
 void* C_NSByteCountFormatter_Init(void* ptr);
+void* C_NSByteCountFormatter_NewByteCountFormatter();
+void* C_NSByteCountFormatter_Autorelease(void* ptr);
+void* C_NSByteCountFormatter_Retain(void* ptr);
 void* C_NSByteCountFormatter_StringFromMeasurement(void* ptr, void* measurement);
 void* C_NSByteCountFormatter_ByteCountFormatter_StringFromMeasurement_CountStyle(void* measurement, int countStyle);
 int C_NSByteCountFormatter_FormattingContext(void* ptr);

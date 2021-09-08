@@ -50,22 +50,38 @@ func MakeBox(ptr unsafe.Pointer) NSBox {
 	}
 }
 
-func AllocBox() NSBox {
-	return MakeBox(C.C_Box_Alloc())
-}
-
-func (n NSBox) InitWithFrame(frameRect foundation.Rect) Box {
+func (n NSBox) InitWithFrame(frameRect foundation.Rect) NSBox {
 	result_ := C.C_NSBox_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeBox(result_)
 }
 
-func (n NSBox) InitWithCoder(coder foundation.Coder) Box {
+func (n NSBox) InitWithCoder(coder foundation.Coder) NSBox {
 	result_ := C.C_NSBox_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeBox(result_)
 }
 
-func (n NSBox) Init() Box {
+func (n NSBox) Init() NSBox {
 	result_ := C.C_NSBox_Init(n.Ptr())
+	return MakeBox(result_)
+}
+
+func AllocBox() NSBox {
+	result_ := C.C_NSBox_AllocBox()
+	return MakeBox(result_)
+}
+
+func NewBox() NSBox {
+	result_ := C.C_NSBox_NewBox()
+	return MakeBox(result_)
+}
+
+func (n NSBox) Autorelease() NSBox {
+	result_ := C.C_NSBox_Autorelease(n.Ptr())
+	return MakeBox(result_)
+}
+
+func (n NSBox) Retain() NSBox {
+	result_ := C.C_NSBox_Retain(n.Ptr())
 	return MakeBox(result_)
 }
 

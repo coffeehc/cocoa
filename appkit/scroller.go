@@ -36,22 +36,38 @@ func MakeScroller(ptr unsafe.Pointer) NSScroller {
 	}
 }
 
-func AllocScroller() NSScroller {
-	return MakeScroller(C.C_Scroller_Alloc())
-}
-
-func (n NSScroller) InitWithFrame(frameRect foundation.Rect) Scroller {
+func (n NSScroller) InitWithFrame(frameRect foundation.Rect) NSScroller {
 	result_ := C.C_NSScroller_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeScroller(result_)
 }
 
-func (n NSScroller) InitWithCoder(coder foundation.Coder) Scroller {
+func (n NSScroller) InitWithCoder(coder foundation.Coder) NSScroller {
 	result_ := C.C_NSScroller_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeScroller(result_)
 }
 
-func (n NSScroller) Init() Scroller {
+func (n NSScroller) Init() NSScroller {
 	result_ := C.C_NSScroller_Init(n.Ptr())
+	return MakeScroller(result_)
+}
+
+func AllocScroller() NSScroller {
+	result_ := C.C_NSScroller_AllocScroller()
+	return MakeScroller(result_)
+}
+
+func NewScroller() NSScroller {
+	result_ := C.C_NSScroller_NewScroller()
+	return MakeScroller(result_)
+}
+
+func (n NSScroller) Autorelease() NSScroller {
+	result_ := C.C_NSScroller_Autorelease(n.Ptr())
+	return MakeScroller(result_)
+}
+
+func (n NSScroller) Retain() NSScroller {
+	result_ := C.C_NSScroller_Retain(n.Ptr())
 	return MakeScroller(result_)
 }
 

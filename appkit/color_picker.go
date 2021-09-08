@@ -32,17 +32,33 @@ func MakeColorPicker(ptr unsafe.Pointer) NSColorPicker {
 	}
 }
 
-func AllocColorPicker() NSColorPicker {
-	return MakeColorPicker(C.C_ColorPicker_Alloc())
-}
-
-func (n NSColorPicker) InitWithPickerMask_ColorPanel(mask uint, owningColorPanel ColorPanel) ColorPicker {
+func (n NSColorPicker) InitWithPickerMask_ColorPanel(mask uint, owningColorPanel ColorPanel) NSColorPicker {
 	result_ := C.C_NSColorPicker_InitWithPickerMask_ColorPanel(n.Ptr(), C.uint(mask), objc.ExtractPtr(owningColorPanel))
 	return MakeColorPicker(result_)
 }
 
-func (n NSColorPicker) Init() ColorPicker {
+func AllocColorPicker() NSColorPicker {
+	result_ := C.C_NSColorPicker_AllocColorPicker()
+	return MakeColorPicker(result_)
+}
+
+func (n NSColorPicker) Init() NSColorPicker {
 	result_ := C.C_NSColorPicker_Init(n.Ptr())
+	return MakeColorPicker(result_)
+}
+
+func NewColorPicker() NSColorPicker {
+	result_ := C.C_NSColorPicker_NewColorPicker()
+	return MakeColorPicker(result_)
+}
+
+func (n NSColorPicker) Autorelease() NSColorPicker {
+	result_ := C.C_NSColorPicker_Autorelease(n.Ptr())
+	return MakeColorPicker(result_)
+}
+
+func (n NSColorPicker) Retain() NSColorPicker {
+	result_ := C.C_NSColorPicker_Retain(n.Ptr())
 	return MakeColorPicker(result_)
 }
 

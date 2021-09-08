@@ -5,9 +5,31 @@ void* C_Exception_Alloc() {
     return [NSException alloc];
 }
 
+void* C_NSException_AllocException() {
+    NSException* result_ = [NSException alloc];
+    return result_;
+}
+
 void* C_NSException_Init(void* ptr) {
     NSException* nSException = (NSException*)ptr;
     NSException* result_ = [nSException init];
+    return result_;
+}
+
+void* C_NSException_NewException() {
+    NSException* result_ = [NSException new];
+    return result_;
+}
+
+void* C_NSException_Autorelease(void* ptr) {
+    NSException* nSException = (NSException*)ptr;
+    NSException* result_ = [nSException autorelease];
+    return result_;
+}
+
+void* C_NSException_Retain(void* ptr) {
+    NSException* nSException = (NSException*)ptr;
+    NSException* result_ = [nSException retain];
     return result_;
 }
 

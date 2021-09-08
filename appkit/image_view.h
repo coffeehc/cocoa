@@ -5,10 +5,14 @@
 
 void* C_ImageView_Alloc();
 
+void* C_NSImageView_ImageViewWithImage(void* image);
 void* C_NSImageView_InitWithFrame(void* ptr, CGRect frameRect);
 void* C_NSImageView_InitWithCoder(void* ptr, void* coder);
 void* C_NSImageView_Init(void* ptr);
-void* C_NSImageView_ImageViewWithImage(void* image);
+void* C_NSImageView_AllocImageView();
+void* C_NSImageView_NewImageView();
+void* C_NSImageView_Autorelease(void* ptr);
+void* C_NSImageView_Retain(void* ptr);
 void* C_NSImageView_Image(void* ptr);
 void C_NSImageView_SetImage(void* ptr, void* value);
 unsigned int C_NSImageView_ImageFrameStyle(void* ptr);

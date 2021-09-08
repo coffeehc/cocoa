@@ -20,6 +20,23 @@ void* C_NSCollectionLayoutAnchor_CollectionLayoutAnchor_LayoutAnchorWithEdges_Fr
     return result_;
 }
 
+void* C_NSCollectionLayoutAnchor_AllocCollectionLayoutAnchor() {
+    NSCollectionLayoutAnchor* result_ = [NSCollectionLayoutAnchor alloc];
+    return result_;
+}
+
+void* C_NSCollectionLayoutAnchor_Autorelease(void* ptr) {
+    NSCollectionLayoutAnchor* nSCollectionLayoutAnchor = (NSCollectionLayoutAnchor*)ptr;
+    NSCollectionLayoutAnchor* result_ = [nSCollectionLayoutAnchor autorelease];
+    return result_;
+}
+
+void* C_NSCollectionLayoutAnchor_Retain(void* ptr) {
+    NSCollectionLayoutAnchor* nSCollectionLayoutAnchor = (NSCollectionLayoutAnchor*)ptr;
+    NSCollectionLayoutAnchor* result_ = [nSCollectionLayoutAnchor retain];
+    return result_;
+}
+
 unsigned int C_NSCollectionLayoutAnchor_Edges(void* ptr) {
     NSCollectionLayoutAnchor* nSCollectionLayoutAnchor = (NSCollectionLayoutAnchor*)ptr;
     NSDirectionalRectEdge result_ = [nSCollectionLayoutAnchor edges];

@@ -24,12 +24,23 @@ func MakeCharacterSet(ptr unsafe.Pointer) NSCharacterSet {
 	}
 }
 
-func AllocCharacterSet() NSCharacterSet {
-	return MakeCharacterSet(C.C_CharacterSet_Alloc())
+func (n NSCharacterSet) InitWithCoder(coder Coder) NSCharacterSet {
+	result_ := C.C_NSCharacterSet_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeCharacterSet(result_)
 }
 
-func (n NSCharacterSet) InitWithCoder(coder Coder) CharacterSet {
-	result_ := C.C_NSCharacterSet_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+func AllocCharacterSet() NSCharacterSet {
+	result_ := C.C_NSCharacterSet_AllocCharacterSet()
+	return MakeCharacterSet(result_)
+}
+
+func (n NSCharacterSet) Autorelease() NSCharacterSet {
+	result_ := C.C_NSCharacterSet_Autorelease(n.Ptr())
+	return MakeCharacterSet(result_)
+}
+
+func (n NSCharacterSet) Retain() NSCharacterSet {
+	result_ := C.C_NSCharacterSet_Retain(n.Ptr())
 	return MakeCharacterSet(result_)
 }
 

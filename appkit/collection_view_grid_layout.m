@@ -5,9 +5,31 @@ void* C_CollectionViewGridLayout_Alloc() {
     return [NSCollectionViewGridLayout alloc];
 }
 
+void* C_NSCollectionViewGridLayout_AllocCollectionViewGridLayout() {
+    NSCollectionViewGridLayout* result_ = [NSCollectionViewGridLayout alloc];
+    return result_;
+}
+
 void* C_NSCollectionViewGridLayout_Init(void* ptr) {
     NSCollectionViewGridLayout* nSCollectionViewGridLayout = (NSCollectionViewGridLayout*)ptr;
     NSCollectionViewGridLayout* result_ = [nSCollectionViewGridLayout init];
+    return result_;
+}
+
+void* C_NSCollectionViewGridLayout_NewCollectionViewGridLayout() {
+    NSCollectionViewGridLayout* result_ = [NSCollectionViewGridLayout new];
+    return result_;
+}
+
+void* C_NSCollectionViewGridLayout_Autorelease(void* ptr) {
+    NSCollectionViewGridLayout* nSCollectionViewGridLayout = (NSCollectionViewGridLayout*)ptr;
+    NSCollectionViewGridLayout* result_ = [nSCollectionViewGridLayout autorelease];
+    return result_;
+}
+
+void* C_NSCollectionViewGridLayout_Retain(void* ptr) {
+    NSCollectionViewGridLayout* nSCollectionViewGridLayout = (NSCollectionViewGridLayout*)ptr;
+    NSCollectionViewGridLayout* result_ = [nSCollectionViewGridLayout retain];
     return result_;
 }
 
@@ -107,7 +129,7 @@ Array C_NSCollectionViewGridLayout_BackgroundColors(void* ptr) {
 
 void C_NSCollectionViewGridLayout_SetBackgroundColors(void* ptr, Array value) {
     NSCollectionViewGridLayout* nSCollectionViewGridLayout = (NSCollectionViewGridLayout*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

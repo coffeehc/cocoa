@@ -5,9 +5,19 @@ void* C_URLRequest_Alloc() {
     return [NSURLRequest alloc];
 }
 
+void* C_NSURLRequest_URLRequest_RequestWithURL(void* URL) {
+    NSURLRequest* result_ = [NSURLRequest requestWithURL:(NSURL*)URL];
+    return result_;
+}
+
 void* C_NSURLRequest_InitWithURL(void* ptr, void* URL) {
     NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
     NSURLRequest* result_ = [nSURLRequest initWithURL:(NSURL*)URL];
+    return result_;
+}
+
+void* C_NSURLRequest_URLRequest_RequestWithURL_CachePolicy_TimeoutInterval(void* URL, unsigned int cachePolicy, double timeoutInterval) {
+    NSURLRequest* result_ = [NSURLRequest requestWithURL:(NSURL*)URL cachePolicy:cachePolicy timeoutInterval:timeoutInterval];
     return result_;
 }
 
@@ -17,19 +27,31 @@ void* C_NSURLRequest_InitWithURL_CachePolicy_TimeoutInterval(void* ptr, void* UR
     return result_;
 }
 
+void* C_NSURLRequest_AllocURLRequest() {
+    NSURLRequest* result_ = [NSURLRequest alloc];
+    return result_;
+}
+
 void* C_NSURLRequest_Init(void* ptr) {
     NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
     NSURLRequest* result_ = [nSURLRequest init];
     return result_;
 }
 
-void* C_NSURLRequest_URLRequest_RequestWithURL(void* URL) {
-    NSURLRequest* result_ = [NSURLRequest requestWithURL:(NSURL*)URL];
+void* C_NSURLRequest_NewURLRequest() {
+    NSURLRequest* result_ = [NSURLRequest new];
     return result_;
 }
 
-void* C_NSURLRequest_URLRequest_RequestWithURL_CachePolicy_TimeoutInterval(void* URL, unsigned int cachePolicy, double timeoutInterval) {
-    NSURLRequest* result_ = [NSURLRequest requestWithURL:(NSURL*)URL cachePolicy:cachePolicy timeoutInterval:timeoutInterval];
+void* C_NSURLRequest_Autorelease(void* ptr) {
+    NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
+    NSURLRequest* result_ = [nSURLRequest autorelease];
+    return result_;
+}
+
+void* C_NSURLRequest_Retain(void* ptr) {
+    NSURLRequest* nSURLRequest = (NSURLRequest*)ptr;
+    NSURLRequest* result_ = [nSURLRequest retain];
     return result_;
 }
 

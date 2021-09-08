@@ -15,6 +15,41 @@ void* C_NSCollectionLayoutSupplementaryItem_CollectionLayoutSupplementaryItem_Su
     return result_;
 }
 
+void* C_NSCollectionLayoutSupplementaryItem_CollectionLayoutSupplementaryItem_ItemWithLayoutSize(void* layoutSize) {
+    NSCollectionLayoutSupplementaryItem* result_ = [NSCollectionLayoutSupplementaryItem itemWithLayoutSize:(NSCollectionLayoutSize*)layoutSize];
+    return result_;
+}
+
+void* C_NSCollectionLayoutSupplementaryItem_CollectionLayoutSupplementaryItem_ItemWithLayoutSize_SupplementaryItems(void* layoutSize, Array supplementaryItems) {
+    NSMutableArray* objcSupplementaryItems = [NSMutableArray arrayWithCapacity:supplementaryItems.len];
+    if (supplementaryItems.len > 0) {
+    	void** supplementaryItemsData = (void**)supplementaryItems.data;
+    	for (int i = 0; i < supplementaryItems.len; i++) {
+    		void* p = supplementaryItemsData[i];
+    		[objcSupplementaryItems addObject:(NSCollectionLayoutSupplementaryItem*)(NSCollectionLayoutSupplementaryItem*)p];
+    	}
+    }
+    NSCollectionLayoutSupplementaryItem* result_ = [NSCollectionLayoutSupplementaryItem itemWithLayoutSize:(NSCollectionLayoutSize*)layoutSize supplementaryItems:objcSupplementaryItems];
+    return result_;
+}
+
+void* C_NSCollectionLayoutSupplementaryItem_AllocCollectionLayoutSupplementaryItem() {
+    NSCollectionLayoutSupplementaryItem* result_ = [NSCollectionLayoutSupplementaryItem alloc];
+    return result_;
+}
+
+void* C_NSCollectionLayoutSupplementaryItem_Autorelease(void* ptr) {
+    NSCollectionLayoutSupplementaryItem* nSCollectionLayoutSupplementaryItem = (NSCollectionLayoutSupplementaryItem*)ptr;
+    NSCollectionLayoutSupplementaryItem* result_ = [nSCollectionLayoutSupplementaryItem autorelease];
+    return result_;
+}
+
+void* C_NSCollectionLayoutSupplementaryItem_Retain(void* ptr) {
+    NSCollectionLayoutSupplementaryItem* nSCollectionLayoutSupplementaryItem = (NSCollectionLayoutSupplementaryItem*)ptr;
+    NSCollectionLayoutSupplementaryItem* result_ = [nSCollectionLayoutSupplementaryItem retain];
+    return result_;
+}
+
 void* C_NSCollectionLayoutSupplementaryItem_ItemAnchor(void* ptr) {
     NSCollectionLayoutSupplementaryItem* nSCollectionLayoutSupplementaryItem = (NSCollectionLayoutSupplementaryItem*)ptr;
     NSCollectionLayoutAnchor* result_ = [nSCollectionLayoutSupplementaryItem itemAnchor];

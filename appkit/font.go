@@ -49,11 +49,27 @@ func MakeFont(ptr unsafe.Pointer) NSFont {
 }
 
 func AllocFont() NSFont {
-	return MakeFont(C.C_Font_Alloc())
+	result_ := C.C_NSFont_AllocFont()
+	return MakeFont(result_)
 }
 
-func (n NSFont) Init() Font {
+func (n NSFont) Init() NSFont {
 	result_ := C.C_NSFont_Init(n.Ptr())
+	return MakeFont(result_)
+}
+
+func NewFont() NSFont {
+	result_ := C.C_NSFont_NewFont()
+	return MakeFont(result_)
+}
+
+func (n NSFont) Autorelease() NSFont {
+	result_ := C.C_NSFont_Autorelease(n.Ptr())
+	return MakeFont(result_)
+}
+
+func (n NSFont) Retain() NSFont {
+	result_ := C.C_NSFont_Retain(n.Ptr())
 	return MakeFont(result_)
 }
 

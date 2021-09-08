@@ -27,27 +27,38 @@ func MakeCollectionLayoutDimension(ptr unsafe.Pointer) NSCollectionLayoutDimensi
 	}
 }
 
-func AllocCollectionLayoutDimension() NSCollectionLayoutDimension {
-	return MakeCollectionLayoutDimension(C.C_CollectionLayoutDimension_Alloc())
-}
-
-func CollectionLayoutDimension_AbsoluteDimension(absoluteDimension coregraphics.Float) CollectionLayoutDimension {
+func CollectionLayoutDimension_AbsoluteDimension(absoluteDimension coregraphics.Float) NSCollectionLayoutDimension {
 	result_ := C.C_NSCollectionLayoutDimension_CollectionLayoutDimension_AbsoluteDimension(C.double(float64(absoluteDimension)))
 	return MakeCollectionLayoutDimension(result_)
 }
 
-func CollectionLayoutDimension_EstimatedDimension(estimatedDimension coregraphics.Float) CollectionLayoutDimension {
+func CollectionLayoutDimension_EstimatedDimension(estimatedDimension coregraphics.Float) NSCollectionLayoutDimension {
 	result_ := C.C_NSCollectionLayoutDimension_CollectionLayoutDimension_EstimatedDimension(C.double(float64(estimatedDimension)))
 	return MakeCollectionLayoutDimension(result_)
 }
 
-func CollectionLayoutDimension_FractionalHeightDimension(fractionalHeight coregraphics.Float) CollectionLayoutDimension {
+func CollectionLayoutDimension_FractionalHeightDimension(fractionalHeight coregraphics.Float) NSCollectionLayoutDimension {
 	result_ := C.C_NSCollectionLayoutDimension_CollectionLayoutDimension_FractionalHeightDimension(C.double(float64(fractionalHeight)))
 	return MakeCollectionLayoutDimension(result_)
 }
 
-func CollectionLayoutDimension_FractionalWidthDimension(fractionalWidth coregraphics.Float) CollectionLayoutDimension {
+func CollectionLayoutDimension_FractionalWidthDimension(fractionalWidth coregraphics.Float) NSCollectionLayoutDimension {
 	result_ := C.C_NSCollectionLayoutDimension_CollectionLayoutDimension_FractionalWidthDimension(C.double(float64(fractionalWidth)))
+	return MakeCollectionLayoutDimension(result_)
+}
+
+func AllocCollectionLayoutDimension() NSCollectionLayoutDimension {
+	result_ := C.C_NSCollectionLayoutDimension_AllocCollectionLayoutDimension()
+	return MakeCollectionLayoutDimension(result_)
+}
+
+func (n NSCollectionLayoutDimension) Autorelease() NSCollectionLayoutDimension {
+	result_ := C.C_NSCollectionLayoutDimension_Autorelease(n.Ptr())
+	return MakeCollectionLayoutDimension(result_)
+}
+
+func (n NSCollectionLayoutDimension) Retain() NSCollectionLayoutDimension {
+	result_ := C.C_NSCollectionLayoutDimension_Retain(n.Ptr())
 	return MakeCollectionLayoutDimension(result_)
 }
 

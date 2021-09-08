@@ -35,11 +35,27 @@ func MakePDFInfo(ptr unsafe.Pointer) NSPDFInfo {
 }
 
 func AllocPDFInfo() NSPDFInfo {
-	return MakePDFInfo(C.C_PDFInfo_Alloc())
+	result_ := C.C_NSPDFInfo_AllocPDFInfo()
+	return MakePDFInfo(result_)
 }
 
-func (n NSPDFInfo) Init() PDFInfo {
+func (n NSPDFInfo) Init() NSPDFInfo {
 	result_ := C.C_NSPDFInfo_Init(n.Ptr())
+	return MakePDFInfo(result_)
+}
+
+func NewPDFInfo() NSPDFInfo {
+	result_ := C.C_NSPDFInfo_NewPDFInfo()
+	return MakePDFInfo(result_)
+}
+
+func (n NSPDFInfo) Autorelease() NSPDFInfo {
+	result_ := C.C_NSPDFInfo_Autorelease(n.Ptr())
+	return MakePDFInfo(result_)
+}
+
+func (n NSPDFInfo) Retain() NSPDFInfo {
+	result_ := C.C_NSPDFInfo_Retain(n.Ptr())
 	return MakePDFInfo(result_)
 }
 

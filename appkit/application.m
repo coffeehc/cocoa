@@ -17,6 +17,28 @@ void* C_NSApplication_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSApplication_AllocApplication() {
+    NSApplication* result_ = [NSApplication alloc];
+    return result_;
+}
+
+void* C_NSApplication_NewApplication() {
+    NSApplication* result_ = [NSApplication new];
+    return result_;
+}
+
+void* C_NSApplication_Autorelease(void* ptr) {
+    NSApplication* nSApplication = (NSApplication*)ptr;
+    NSApplication* result_ = [nSApplication autorelease];
+    return result_;
+}
+
+void* C_NSApplication_Retain(void* ptr) {
+    NSApplication* nSApplication = (NSApplication*)ptr;
+    NSApplication* result_ = [nSApplication retain];
+    return result_;
+}
+
 void C_NSApplication_Run(void* ptr) {
     NSApplication* nSApplication = (NSApplication*)ptr;
     [nSApplication run];
@@ -278,7 +300,7 @@ void C_NSApplication_OrderFrontStandardAboutPanel(void* ptr, void* sender) {
 
 void C_NSApplication_OrderFrontStandardAboutPanelWithOptions(void* ptr, Dictionary optionsDictionary) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSMutableDictionary* objcOptionsDictionary = [[NSMutableDictionary alloc] initWithCapacity: optionsDictionary.len];
+    NSMutableDictionary* objcOptionsDictionary = [NSMutableDictionary dictionaryWithCapacity:optionsDictionary.len];
     if (optionsDictionary.len > 0) {
     	void** optionsDictionaryKeyData = (void**)optionsDictionary.key_data;
     	void** optionsDictionaryValueData = (void**)optionsDictionary.value_data;
@@ -323,7 +345,7 @@ void C_NSApplication_UpdateWindowsItem(void* ptr, void* win) {
 
 void C_NSApplication_RegisterServicesMenuSendTypes_ReturnTypes(void* ptr, Array sendTypes, Array returnTypes) {
     NSApplication* nSApplication = (NSApplication*)ptr;
-    NSMutableArray* objcSendTypes = [[NSMutableArray alloc] init];
+    NSMutableArray* objcSendTypes = [NSMutableArray arrayWithCapacity:sendTypes.len];
     if (sendTypes.len > 0) {
     	void** sendTypesData = (void**)sendTypes.data;
     	for (int i = 0; i < sendTypes.len; i++) {
@@ -331,7 +353,7 @@ void C_NSApplication_RegisterServicesMenuSendTypes_ReturnTypes(void* ptr, Array 
     		[objcSendTypes addObject:(NSPasteboardType)(NSString*)p];
     	}
     }
-    NSMutableArray* objcReturnTypes = [[NSMutableArray alloc] init];
+    NSMutableArray* objcReturnTypes = [NSMutableArray arrayWithCapacity:returnTypes.len];
     if (returnTypes.len > 0) {
     	void** returnTypesData = (void**)returnTypes.data;
     	for (int i = 0; i < returnTypes.len; i++) {

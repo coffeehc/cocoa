@@ -5,9 +5,31 @@ void* C_StatusItem_Alloc() {
     return [NSStatusItem alloc];
 }
 
+void* C_NSStatusItem_AllocStatusItem() {
+    NSStatusItem* result_ = [NSStatusItem alloc];
+    return result_;
+}
+
 void* C_NSStatusItem_Init(void* ptr) {
     NSStatusItem* nSStatusItem = (NSStatusItem*)ptr;
     NSStatusItem* result_ = [nSStatusItem init];
+    return result_;
+}
+
+void* C_NSStatusItem_NewStatusItem() {
+    NSStatusItem* result_ = [NSStatusItem new];
+    return result_;
+}
+
+void* C_NSStatusItem_Autorelease(void* ptr) {
+    NSStatusItem* nSStatusItem = (NSStatusItem*)ptr;
+    NSStatusItem* result_ = [nSStatusItem autorelease];
+    return result_;
+}
+
+void* C_NSStatusItem_Retain(void* ptr) {
+    NSStatusItem* nSStatusItem = (NSStatusItem*)ptr;
+    NSStatusItem* result_ = [nSStatusItem retain];
     return result_;
 }
 

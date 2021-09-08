@@ -54,12 +54,28 @@ func MakeUserActivity(ptr unsafe.Pointer) NSUserActivity {
 	}
 }
 
-func AllocUserActivity() NSUserActivity {
-	return MakeUserActivity(C.C_UserActivity_Alloc())
+func (n NSUserActivity) InitWithActivityType(activityType string) NSUserActivity {
+	result_ := C.C_NSUserActivity_InitWithActivityType(n.Ptr(), NewString(activityType).Ptr())
+	return MakeUserActivity(result_)
 }
 
-func (n NSUserActivity) InitWithActivityType(activityType string) UserActivity {
-	result_ := C.C_NSUserActivity_InitWithActivityType(n.Ptr(), NewString(activityType).Ptr())
+func AllocUserActivity() NSUserActivity {
+	result_ := C.C_NSUserActivity_AllocUserActivity()
+	return MakeUserActivity(result_)
+}
+
+func NewUserActivity() NSUserActivity {
+	result_ := C.C_NSUserActivity_NewUserActivity()
+	return MakeUserActivity(result_)
+}
+
+func (n NSUserActivity) Autorelease() NSUserActivity {
+	result_ := C.C_NSUserActivity_Autorelease(n.Ptr())
+	return MakeUserActivity(result_)
+}
+
+func (n NSUserActivity) Retain() NSUserActivity {
+	result_ := C.C_NSUserActivity_Retain(n.Ptr())
 	return MakeUserActivity(result_)
 }
 

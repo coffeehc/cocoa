@@ -5,9 +5,31 @@ void* C_PDFPanel_Alloc() {
     return [NSPDFPanel alloc];
 }
 
+void* C_NSPDFPanel_AllocPDFPanel() {
+    NSPDFPanel* result_ = [NSPDFPanel alloc];
+    return result_;
+}
+
 void* C_NSPDFPanel_Init(void* ptr) {
     NSPDFPanel* nSPDFPanel = (NSPDFPanel*)ptr;
     NSPDFPanel* result_ = [nSPDFPanel init];
+    return result_;
+}
+
+void* C_NSPDFPanel_NewPDFPanel() {
+    NSPDFPanel* result_ = [NSPDFPanel new];
+    return result_;
+}
+
+void* C_NSPDFPanel_Autorelease(void* ptr) {
+    NSPDFPanel* nSPDFPanel = (NSPDFPanel*)ptr;
+    NSPDFPanel* result_ = [nSPDFPanel autorelease];
+    return result_;
+}
+
+void* C_NSPDFPanel_Retain(void* ptr) {
+    NSPDFPanel* nSPDFPanel = (NSPDFPanel*)ptr;
+    NSPDFPanel* result_ = [nSPDFPanel retain];
     return result_;
 }
 

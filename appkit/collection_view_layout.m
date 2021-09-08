@@ -5,9 +5,31 @@ void* C_CollectionViewLayout_Alloc() {
     return [NSCollectionViewLayout alloc];
 }
 
+void* C_NSCollectionViewLayout_AllocCollectionViewLayout() {
+    NSCollectionViewLayout* result_ = [NSCollectionViewLayout alloc];
+    return result_;
+}
+
 void* C_NSCollectionViewLayout_Init(void* ptr) {
     NSCollectionViewLayout* nSCollectionViewLayout = (NSCollectionViewLayout*)ptr;
     NSCollectionViewLayout* result_ = [nSCollectionViewLayout init];
+    return result_;
+}
+
+void* C_NSCollectionViewLayout_NewCollectionViewLayout() {
+    NSCollectionViewLayout* result_ = [NSCollectionViewLayout new];
+    return result_;
+}
+
+void* C_NSCollectionViewLayout_Autorelease(void* ptr) {
+    NSCollectionViewLayout* nSCollectionViewLayout = (NSCollectionViewLayout*)ptr;
+    NSCollectionViewLayout* result_ = [nSCollectionViewLayout autorelease];
+    return result_;
+}
+
+void* C_NSCollectionViewLayout_Retain(void* ptr) {
+    NSCollectionViewLayout* nSCollectionViewLayout = (NSCollectionViewLayout*)ptr;
+    NSCollectionViewLayout* result_ = [nSCollectionViewLayout retain];
     return result_;
 }
 
@@ -77,7 +99,7 @@ CGPoint C_NSCollectionViewLayout_TargetContentOffsetForProposedContentOffset_Wit
 
 void C_NSCollectionViewLayout_PrepareForCollectionViewUpdates(void* ptr, Array updateItems) {
     NSCollectionViewLayout* nSCollectionViewLayout = (NSCollectionViewLayout*)ptr;
-    NSMutableArray* objcUpdateItems = [[NSMutableArray alloc] init];
+    NSMutableArray* objcUpdateItems = [NSMutableArray arrayWithCapacity:updateItems.len];
     if (updateItems.len > 0) {
     	void** updateItemsData = (void**)updateItems.data;
     	for (int i = 0; i < updateItems.len; i++) {

@@ -7,6 +7,10 @@ void* C_ImageRep_Alloc();
 
 void* C_NSImageRep_Init(void* ptr);
 void* C_NSImageRep_InitWithCoder(void* ptr, void* coder);
+void* C_NSImageRep_AllocImageRep();
+void* C_NSImageRep_NewImageRep();
+void* C_NSImageRep_Autorelease(void* ptr);
+void* C_NSImageRep_Retain(void* ptr);
 Array C_NSImageRep_ImageRepsWithContentsOfFile(void* filename);
 Array C_NSImageRep_ImageRepsWithPasteboard(void* pasteboard);
 Array C_NSImageRep_ImageRepsWithContentsOfURL(void* url);

@@ -29,6 +29,28 @@ void* C_NSBrowserCell_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSBrowserCell_AllocBrowserCell() {
+    NSBrowserCell* result_ = [NSBrowserCell alloc];
+    return result_;
+}
+
+void* C_NSBrowserCell_NewBrowserCell() {
+    NSBrowserCell* result_ = [NSBrowserCell new];
+    return result_;
+}
+
+void* C_NSBrowserCell_Autorelease(void* ptr) {
+    NSBrowserCell* nSBrowserCell = (NSBrowserCell*)ptr;
+    NSBrowserCell* result_ = [nSBrowserCell autorelease];
+    return result_;
+}
+
+void* C_NSBrowserCell_Retain(void* ptr) {
+    NSBrowserCell* nSBrowserCell = (NSBrowserCell*)ptr;
+    NSBrowserCell* result_ = [nSBrowserCell retain];
+    return result_;
+}
+
 void C_NSBrowserCell_Reset(void* ptr) {
     NSBrowserCell* nSBrowserCell = (NSBrowserCell*)ptr;
     [nSBrowserCell reset];

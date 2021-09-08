@@ -11,6 +11,23 @@ void* C_NSTextInputContext_InitWithClient(void* ptr, void* client) {
     return result_;
 }
 
+void* C_NSTextInputContext_AllocTextInputContext() {
+    NSTextInputContext* result_ = [NSTextInputContext alloc];
+    return result_;
+}
+
+void* C_NSTextInputContext_Autorelease(void* ptr) {
+    NSTextInputContext* nSTextInputContext = (NSTextInputContext*)ptr;
+    NSTextInputContext* result_ = [nSTextInputContext autorelease];
+    return result_;
+}
+
+void* C_NSTextInputContext_Retain(void* ptr) {
+    NSTextInputContext* nSTextInputContext = (NSTextInputContext*)ptr;
+    NSTextInputContext* result_ = [nSTextInputContext retain];
+    return result_;
+}
+
 void C_NSTextInputContext_Activate(void* ptr) {
     NSTextInputContext* nSTextInputContext = (NSTextInputContext*)ptr;
     [nSTextInputContext activate];
@@ -83,7 +100,7 @@ Array C_NSTextInputContext_AllowedInputSourceLocales(void* ptr) {
 
 void C_NSTextInputContext_SetAllowedInputSourceLocales(void* ptr, Array value) {
     NSTextInputContext* nSTextInputContext = (NSTextInputContext*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

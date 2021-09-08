@@ -306,27 +306,43 @@ func MakeWindow(ptr unsafe.Pointer) NSWindow {
 	}
 }
 
-func AllocWindow() NSWindow {
-	return MakeWindow(C.C_Window_Alloc())
+func WindowWithContentViewController(contentViewController ViewController) NSWindow {
+	result_ := C.C_NSWindow_WindowWithContentViewController(objc.ExtractPtr(contentViewController))
+	return MakeWindow(result_)
 }
 
-func (n NSWindow) InitWithContentRect_StyleMask_Backing_Defer(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool) Window {
+func (n NSWindow) InitWithContentRect_StyleMask_Backing_Defer(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool) NSWindow {
 	result_ := C.C_NSWindow_InitWithContentRect_StyleMask_Backing_Defer(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag))
 	return MakeWindow(result_)
 }
 
-func (n NSWindow) InitWithContentRect_StyleMask_Backing_Defer_Screen(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool, screen Screen) Window {
+func (n NSWindow) InitWithContentRect_StyleMask_Backing_Defer_Screen(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool, screen Screen) NSWindow {
 	result_ := C.C_NSWindow_InitWithContentRect_StyleMask_Backing_Defer_Screen(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag), objc.ExtractPtr(screen))
 	return MakeWindow(result_)
 }
 
-func (n NSWindow) Init() Window {
+func (n NSWindow) Init() NSWindow {
 	result_ := C.C_NSWindow_Init(n.Ptr())
 	return MakeWindow(result_)
 }
 
-func WindowWithContentViewController(contentViewController ViewController) Window {
-	result_ := C.C_NSWindow_WindowWithContentViewController(objc.ExtractPtr(contentViewController))
+func AllocWindow() NSWindow {
+	result_ := C.C_NSWindow_AllocWindow()
+	return MakeWindow(result_)
+}
+
+func NewWindow() NSWindow {
+	result_ := C.C_NSWindow_NewWindow()
+	return MakeWindow(result_)
+}
+
+func (n NSWindow) Autorelease() NSWindow {
+	result_ := C.C_NSWindow_Autorelease(n.Ptr())
+	return MakeWindow(result_)
+}
+
+func (n NSWindow) Retain() NSWindow {
+	result_ := C.C_NSWindow_Retain(n.Ptr())
 	return MakeWindow(result_)
 }
 

@@ -6,8 +6,17 @@
 void* C_PopUpButton_Alloc();
 
 void* C_NSPopUpButton_InitWithFrame_PullsDown(void* ptr, CGRect buttonFrame, bool flag);
+void* C_NSPopUpButton_PopUpButton_CheckboxWithTitle_Target_Action(void* title, void* target, void* action);
+void* C_NSPopUpButton_PopUpButton_ButtonWithImage_Target_Action(void* image, void* target, void* action);
+void* C_NSPopUpButton_PopUpButton_RadioButtonWithTitle_Target_Action(void* title, void* target, void* action);
+void* C_NSPopUpButton_PopUpButton_ButtonWithTitle_Image_Target_Action(void* title, void* image, void* target, void* action);
+void* C_NSPopUpButton_PopUpButton_ButtonWithTitle_Target_Action(void* title, void* target, void* action);
 void* C_NSPopUpButton_InitWithCoder(void* ptr, void* coder);
 void* C_NSPopUpButton_Init(void* ptr);
+void* C_NSPopUpButton_AllocPopUpButton();
+void* C_NSPopUpButton_NewPopUpButton();
+void* C_NSPopUpButton_Autorelease(void* ptr);
+void* C_NSPopUpButton_Retain(void* ptr);
 void C_NSPopUpButton_AddItemWithTitle(void* ptr, void* title);
 void C_NSPopUpButton_AddItemsWithTitles(void* ptr, Array itemTitles);
 void C_NSPopUpButton_InsertItemWithTitle_AtIndex(void* ptr, void* title, int index);

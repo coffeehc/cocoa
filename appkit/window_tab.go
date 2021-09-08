@@ -31,11 +31,27 @@ func MakeWindowTab(ptr unsafe.Pointer) NSWindowTab {
 }
 
 func AllocWindowTab() NSWindowTab {
-	return MakeWindowTab(C.C_WindowTab_Alloc())
+	result_ := C.C_NSWindowTab_AllocWindowTab()
+	return MakeWindowTab(result_)
 }
 
-func (n NSWindowTab) Init() WindowTab {
+func (n NSWindowTab) Init() NSWindowTab {
 	result_ := C.C_NSWindowTab_Init(n.Ptr())
+	return MakeWindowTab(result_)
+}
+
+func NewWindowTab() NSWindowTab {
+	result_ := C.C_NSWindowTab_NewWindowTab()
+	return MakeWindowTab(result_)
+}
+
+func (n NSWindowTab) Autorelease() NSWindowTab {
+	result_ := C.C_NSWindowTab_Autorelease(n.Ptr())
+	return MakeWindowTab(result_)
+}
+
+func (n NSWindowTab) Retain() NSWindowTab {
+	result_ := C.C_NSWindowTab_Retain(n.Ptr())
 	return MakeWindowTab(result_)
 }
 

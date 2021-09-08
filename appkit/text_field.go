@@ -67,42 +67,58 @@ func MakeTextField(ptr unsafe.Pointer) NSTextField {
 	}
 }
 
-func AllocTextField() NSTextField {
-	return MakeTextField(C.C_TextField_Alloc())
-}
-
-func (n NSTextField) InitWithFrame(frameRect foundation.Rect) TextField {
-	result_ := C.C_NSTextField_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
-	return MakeTextField(result_)
-}
-
-func (n NSTextField) InitWithCoder(coder foundation.Coder) TextField {
-	result_ := C.C_NSTextField_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
-	return MakeTextField(result_)
-}
-
-func (n NSTextField) Init() TextField {
-	result_ := C.C_NSTextField_Init(n.Ptr())
-	return MakeTextField(result_)
-}
-
-func TextField_LabelWithAttributedString(attributedStringValue foundation.AttributedString) TextField {
+func TextField_LabelWithAttributedString(attributedStringValue foundation.AttributedString) NSTextField {
 	result_ := C.C_NSTextField_TextField_LabelWithAttributedString(objc.ExtractPtr(attributedStringValue))
 	return MakeTextField(result_)
 }
 
-func TextField_LabelWithString(stringValue string) TextField {
+func TextField_LabelWithString(stringValue string) NSTextField {
 	result_ := C.C_NSTextField_TextField_LabelWithString(foundation.NewString(stringValue).Ptr())
 	return MakeTextField(result_)
 }
 
-func TextFieldWithString(stringValue string) TextField {
+func TextFieldWithString(stringValue string) NSTextField {
 	result_ := C.C_NSTextField_TextFieldWithString(foundation.NewString(stringValue).Ptr())
 	return MakeTextField(result_)
 }
 
-func TextField_WrappingLabelWithString(stringValue string) TextField {
+func TextField_WrappingLabelWithString(stringValue string) NSTextField {
 	result_ := C.C_NSTextField_TextField_WrappingLabelWithString(foundation.NewString(stringValue).Ptr())
+	return MakeTextField(result_)
+}
+
+func (n NSTextField) InitWithFrame(frameRect foundation.Rect) NSTextField {
+	result_ := C.C_NSTextField_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeTextField(result_)
+}
+
+func (n NSTextField) InitWithCoder(coder foundation.Coder) NSTextField {
+	result_ := C.C_NSTextField_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeTextField(result_)
+}
+
+func (n NSTextField) Init() NSTextField {
+	result_ := C.C_NSTextField_Init(n.Ptr())
+	return MakeTextField(result_)
+}
+
+func AllocTextField() NSTextField {
+	result_ := C.C_NSTextField_AllocTextField()
+	return MakeTextField(result_)
+}
+
+func NewTextField() NSTextField {
+	result_ := C.C_NSTextField_NewTextField()
+	return MakeTextField(result_)
+}
+
+func (n NSTextField) Autorelease() NSTextField {
+	result_ := C.C_NSTextField_Autorelease(n.Ptr())
+	return MakeTextField(result_)
+}
+
+func (n NSTextField) Retain() NSTextField {
+	result_ := C.C_NSTextField_Retain(n.Ptr())
 	return MakeTextField(result_)
 }
 

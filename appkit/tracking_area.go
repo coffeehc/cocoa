@@ -27,11 +27,7 @@ func MakeTrackingArea(ptr unsafe.Pointer) NSTrackingArea {
 	}
 }
 
-func AllocTrackingArea() NSTrackingArea {
-	return MakeTrackingArea(C.C_TrackingArea_Alloc())
-}
-
-func (n NSTrackingArea) InitWithRect_Options_Owner_UserInfo(rect foundation.Rect, options TrackingAreaOptions, owner objc.Object, userInfo map[objc.Object]objc.Object) TrackingArea {
+func (n NSTrackingArea) InitWithRect_Options_Owner_UserInfo(rect foundation.Rect, options TrackingAreaOptions, owner objc.Object, userInfo map[objc.Object]objc.Object) NSTrackingArea {
 	var cUserInfo C.Dictionary
 	if len(userInfo) > 0 {
 		cUserInfoKeyData := make([]unsafe.Pointer, len(userInfo))
@@ -50,8 +46,28 @@ func (n NSTrackingArea) InitWithRect_Options_Owner_UserInfo(rect foundation.Rect
 	return MakeTrackingArea(result_)
 }
 
-func (n NSTrackingArea) Init() TrackingArea {
+func AllocTrackingArea() NSTrackingArea {
+	result_ := C.C_NSTrackingArea_AllocTrackingArea()
+	return MakeTrackingArea(result_)
+}
+
+func (n NSTrackingArea) Init() NSTrackingArea {
 	result_ := C.C_NSTrackingArea_Init(n.Ptr())
+	return MakeTrackingArea(result_)
+}
+
+func NewTrackingArea() NSTrackingArea {
+	result_ := C.C_NSTrackingArea_NewTrackingArea()
+	return MakeTrackingArea(result_)
+}
+
+func (n NSTrackingArea) Autorelease() NSTrackingArea {
+	result_ := C.C_NSTrackingArea_Autorelease(n.Ptr())
+	return MakeTrackingArea(result_)
+}
+
+func (n NSTrackingArea) Retain() NSTrackingArea {
+	result_ := C.C_NSTrackingArea_Retain(n.Ptr())
 	return MakeTrackingArea(result_)
 }
 

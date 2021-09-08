@@ -11,6 +11,23 @@ void* C_NSToolbarItem_InitWithItemIdentifier(void* ptr, void* itemIdentifier) {
     return result_;
 }
 
+void* C_NSToolbarItem_AllocToolbarItem() {
+    NSToolbarItem* result_ = [NSToolbarItem alloc];
+    return result_;
+}
+
+void* C_NSToolbarItem_Autorelease(void* ptr) {
+    NSToolbarItem* nSToolbarItem = (NSToolbarItem*)ptr;
+    NSToolbarItem* result_ = [nSToolbarItem autorelease];
+    return result_;
+}
+
+void* C_NSToolbarItem_Retain(void* ptr) {
+    NSToolbarItem* nSToolbarItem = (NSToolbarItem*)ptr;
+    NSToolbarItem* result_ = [nSToolbarItem retain];
+    return result_;
+}
+
 void C_NSToolbarItem_Validate(void* ptr) {
     NSToolbarItem* nSToolbarItem = (NSToolbarItem*)ptr;
     [nSToolbarItem validate];

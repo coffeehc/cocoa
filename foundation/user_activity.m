@@ -11,6 +11,28 @@ void* C_NSUserActivity_InitWithActivityType(void* ptr, void* activityType) {
     return result_;
 }
 
+void* C_NSUserActivity_AllocUserActivity() {
+    NSUserActivity* result_ = [NSUserActivity alloc];
+    return result_;
+}
+
+void* C_NSUserActivity_NewUserActivity() {
+    NSUserActivity* result_ = [NSUserActivity new];
+    return result_;
+}
+
+void* C_NSUserActivity_Autorelease(void* ptr) {
+    NSUserActivity* nSUserActivity = (NSUserActivity*)ptr;
+    NSUserActivity* result_ = [nSUserActivity autorelease];
+    return result_;
+}
+
+void* C_NSUserActivity_Retain(void* ptr) {
+    NSUserActivity* nSUserActivity = (NSUserActivity*)ptr;
+    NSUserActivity* result_ = [nSUserActivity retain];
+    return result_;
+}
+
 void C_NSUserActivity_BecomeCurrent(void* ptr) {
     NSUserActivity* nSUserActivity = (NSUserActivity*)ptr;
     [nSUserActivity becomeCurrent];

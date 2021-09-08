@@ -7,6 +7,9 @@ void* C_RulerMarker_Alloc();
 
 void* C_NSRulerMarker_InitWithRulerView_MarkerLocation_Image_ImageOrigin(void* ptr, void* ruler, double location, void* image, CGPoint imageOrigin);
 void* C_NSRulerMarker_InitWithCoder(void* ptr, void* coder);
+void* C_NSRulerMarker_AllocRulerMarker();
+void* C_NSRulerMarker_Autorelease(void* ptr);
+void* C_NSRulerMarker_Retain(void* ptr);
 void C_NSRulerMarker_DrawRect(void* ptr, CGRect rect);
 bool C_NSRulerMarker_TrackMouse_Adding(void* ptr, void* mouseDownEvent, bool isAdding);
 void* C_NSRulerMarker_Ruler(void* ptr);

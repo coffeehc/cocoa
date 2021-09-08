@@ -5,7 +5,11 @@
 
 void* C_DateComponentsFormatter_Alloc();
 
+void* C_NSDateComponentsFormatter_AllocDateComponentsFormatter();
 void* C_NSDateComponentsFormatter_Init(void* ptr);
+void* C_NSDateComponentsFormatter_NewDateComponentsFormatter();
+void* C_NSDateComponentsFormatter_Autorelease(void* ptr);
+void* C_NSDateComponentsFormatter_Retain(void* ptr);
 void* C_NSDateComponentsFormatter_StringFromDateComponents(void* ptr, void* components);
 void* C_NSDateComponentsFormatter_StringFromDate_ToDate(void* ptr, void* startDate, void* endDate);
 void* C_NSDateComponentsFormatter_StringFromTimeInterval(void* ptr, double ti);

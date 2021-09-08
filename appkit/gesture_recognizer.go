@@ -75,22 +75,38 @@ func MakeGestureRecognizer(ptr unsafe.Pointer) NSGestureRecognizer {
 	}
 }
 
-func AllocGestureRecognizer() NSGestureRecognizer {
-	return MakeGestureRecognizer(C.C_GestureRecognizer_Alloc())
-}
-
-func (n NSGestureRecognizer) InitWithTarget_Action(target objc.Object, action objc.Selector) GestureRecognizer {
+func (n NSGestureRecognizer) InitWithTarget_Action(target objc.Object, action objc.Selector) NSGestureRecognizer {
 	result_ := C.C_NSGestureRecognizer_InitWithTarget_Action(n.Ptr(), objc.ExtractPtr(target), unsafe.Pointer(action))
 	return MakeGestureRecognizer(result_)
 }
 
-func (n NSGestureRecognizer) InitWithCoder(coder foundation.Coder) GestureRecognizer {
+func (n NSGestureRecognizer) InitWithCoder(coder foundation.Coder) NSGestureRecognizer {
 	result_ := C.C_NSGestureRecognizer_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeGestureRecognizer(result_)
 }
 
-func (n NSGestureRecognizer) Init() GestureRecognizer {
+func AllocGestureRecognizer() NSGestureRecognizer {
+	result_ := C.C_NSGestureRecognizer_AllocGestureRecognizer()
+	return MakeGestureRecognizer(result_)
+}
+
+func (n NSGestureRecognizer) Init() NSGestureRecognizer {
 	result_ := C.C_NSGestureRecognizer_Init(n.Ptr())
+	return MakeGestureRecognizer(result_)
+}
+
+func NewGestureRecognizer() NSGestureRecognizer {
+	result_ := C.C_NSGestureRecognizer_NewGestureRecognizer()
+	return MakeGestureRecognizer(result_)
+}
+
+func (n NSGestureRecognizer) Autorelease() NSGestureRecognizer {
+	result_ := C.C_NSGestureRecognizer_Autorelease(n.Ptr())
+	return MakeGestureRecognizer(result_)
+}
+
+func (n NSGestureRecognizer) Retain() NSGestureRecognizer {
+	result_ := C.C_NSGestureRecognizer_Retain(n.Ptr())
 	return MakeGestureRecognizer(result_)
 }
 

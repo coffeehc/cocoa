@@ -5,6 +5,26 @@ void* C_ComboBox_Alloc() {
     return [NSComboBox alloc];
 }
 
+void* C_NSComboBox_ComboBox_LabelWithAttributedString(void* attributedStringValue) {
+    NSComboBox* result_ = [NSComboBox labelWithAttributedString:(NSAttributedString*)attributedStringValue];
+    return result_;
+}
+
+void* C_NSComboBox_ComboBox_LabelWithString(void* stringValue) {
+    NSComboBox* result_ = [NSComboBox labelWithString:(NSString*)stringValue];
+    return result_;
+}
+
+void* C_NSComboBox_ComboBox_TextFieldWithString(void* stringValue) {
+    NSComboBox* result_ = [NSComboBox textFieldWithString:(NSString*)stringValue];
+    return result_;
+}
+
+void* C_NSComboBox_ComboBox_WrappingLabelWithString(void* stringValue) {
+    NSComboBox* result_ = [NSComboBox wrappingLabelWithString:(NSString*)stringValue];
+    return result_;
+}
+
 void* C_NSComboBox_InitWithFrame(void* ptr, CGRect frameRect) {
     NSComboBox* nSComboBox = (NSComboBox*)ptr;
     NSComboBox* result_ = [nSComboBox initWithFrame:frameRect];
@@ -23,9 +43,31 @@ void* C_NSComboBox_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSComboBox_AllocComboBox() {
+    NSComboBox* result_ = [NSComboBox alloc];
+    return result_;
+}
+
+void* C_NSComboBox_NewComboBox() {
+    NSComboBox* result_ = [NSComboBox new];
+    return result_;
+}
+
+void* C_NSComboBox_Autorelease(void* ptr) {
+    NSComboBox* nSComboBox = (NSComboBox*)ptr;
+    NSComboBox* result_ = [nSComboBox autorelease];
+    return result_;
+}
+
+void* C_NSComboBox_Retain(void* ptr) {
+    NSComboBox* nSComboBox = (NSComboBox*)ptr;
+    NSComboBox* result_ = [nSComboBox retain];
+    return result_;
+}
+
 void C_NSComboBox_AddItemsWithObjectValues(void* ptr, Array objects) {
     NSComboBox* nSComboBox = (NSComboBox*)ptr;
-    NSMutableArray* objcObjects = [[NSMutableArray alloc] init];
+    NSMutableArray* objcObjects = [NSMutableArray arrayWithCapacity:objects.len];
     if (objects.len > 0) {
     	void** objectsData = (void**)objects.data;
     	for (int i = 0; i < objects.len; i++) {

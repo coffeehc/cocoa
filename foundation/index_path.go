@@ -28,22 +28,38 @@ func MakeIndexPath(ptr unsafe.Pointer) NSIndexPath {
 	}
 }
 
-func AllocIndexPath() NSIndexPath {
-	return MakeIndexPath(C.C_IndexPath_Alloc())
+func IndexPathWithIndex(index uint) NSIndexPath {
+	result_ := C.C_NSIndexPath_IndexPathWithIndex(C.uint(index))
+	return MakeIndexPath(result_)
 }
 
-func (n NSIndexPath) InitWithIndex(index uint) IndexPath {
+func (n NSIndexPath) InitWithIndex(index uint) NSIndexPath {
 	result_ := C.C_NSIndexPath_InitWithIndex(n.Ptr(), C.uint(index))
 	return MakeIndexPath(result_)
 }
 
-func (n NSIndexPath) Init() IndexPath {
+func AllocIndexPath() NSIndexPath {
+	result_ := C.C_NSIndexPath_AllocIndexPath()
+	return MakeIndexPath(result_)
+}
+
+func (n NSIndexPath) Init() NSIndexPath {
 	result_ := C.C_NSIndexPath_Init(n.Ptr())
 	return MakeIndexPath(result_)
 }
 
-func IndexPathWithIndex(index uint) IndexPath {
-	result_ := C.C_NSIndexPath_IndexPathWithIndex(C.uint(index))
+func NewIndexPath() NSIndexPath {
+	result_ := C.C_NSIndexPath_NewIndexPath()
+	return MakeIndexPath(result_)
+}
+
+func (n NSIndexPath) Autorelease() NSIndexPath {
+	result_ := C.C_NSIndexPath_Autorelease(n.Ptr())
+	return MakeIndexPath(result_)
+}
+
+func (n NSIndexPath) Retain() NSIndexPath {
+	result_ := C.C_NSIndexPath_Retain(n.Ptr())
 	return MakeIndexPath(result_)
 }
 

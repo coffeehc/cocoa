@@ -41,11 +41,27 @@ func MakeByteCountFormatter(ptr unsafe.Pointer) NSByteCountFormatter {
 }
 
 func AllocByteCountFormatter() NSByteCountFormatter {
-	return MakeByteCountFormatter(C.C_ByteCountFormatter_Alloc())
+	result_ := C.C_NSByteCountFormatter_AllocByteCountFormatter()
+	return MakeByteCountFormatter(result_)
 }
 
-func (n NSByteCountFormatter) Init() ByteCountFormatter {
+func (n NSByteCountFormatter) Init() NSByteCountFormatter {
 	result_ := C.C_NSByteCountFormatter_Init(n.Ptr())
+	return MakeByteCountFormatter(result_)
+}
+
+func NewByteCountFormatter() NSByteCountFormatter {
+	result_ := C.C_NSByteCountFormatter_NewByteCountFormatter()
+	return MakeByteCountFormatter(result_)
+}
+
+func (n NSByteCountFormatter) Autorelease() NSByteCountFormatter {
+	result_ := C.C_NSByteCountFormatter_Autorelease(n.Ptr())
+	return MakeByteCountFormatter(result_)
+}
+
+func (n NSByteCountFormatter) Retain() NSByteCountFormatter {
+	result_ := C.C_NSByteCountFormatter_Retain(n.Ptr())
 	return MakeByteCountFormatter(result_)
 }
 

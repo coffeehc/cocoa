@@ -132,7 +132,7 @@
 
 - (NSArray*)tableView:(NSTableView*)tableView rowActionsForRow:(NSInteger)row edge:(NSTableRowActionEdge)edge {
     Array result_ = tableViewDelegate_TableView_RowActionsForRow_Edge([self goID], tableView, row, edge);
-    NSMutableArray* objcResult_ = [[NSMutableArray alloc] init];
+    NSMutableArray* objcResult_ = [NSMutableArray arrayWithCapacity:result_.len];
     if (result_.len > 0) {
     	void** result_Data = (void**)result_.data;
     	for (int i = 0; i < result_.len; i++) {

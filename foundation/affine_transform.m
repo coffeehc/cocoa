@@ -11,6 +11,23 @@ void* C_NSAffineTransform_InitWithTransform(void* ptr, void* transform) {
     return result_;
 }
 
+void* C_NSAffineTransform_AllocAffineTransform() {
+    NSAffineTransform* result_ = [NSAffineTransform alloc];
+    return result_;
+}
+
+void* C_NSAffineTransform_Autorelease(void* ptr) {
+    NSAffineTransform* nSAffineTransform = (NSAffineTransform*)ptr;
+    NSAffineTransform* result_ = [nSAffineTransform autorelease];
+    return result_;
+}
+
+void* C_NSAffineTransform_Retain(void* ptr) {
+    NSAffineTransform* nSAffineTransform = (NSAffineTransform*)ptr;
+    NSAffineTransform* result_ = [nSAffineTransform retain];
+    return result_;
+}
+
 void* C_NSAffineTransform_AffineTransform_Transform() {
     NSAffineTransform* result_ = [NSAffineTransform transform];
     return result_;

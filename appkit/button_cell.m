@@ -29,6 +29,28 @@ void* C_NSButtonCell_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSButtonCell_AllocButtonCell() {
+    NSButtonCell* result_ = [NSButtonCell alloc];
+    return result_;
+}
+
+void* C_NSButtonCell_NewButtonCell() {
+    NSButtonCell* result_ = [NSButtonCell new];
+    return result_;
+}
+
+void* C_NSButtonCell_Autorelease(void* ptr) {
+    NSButtonCell* nSButtonCell = (NSButtonCell*)ptr;
+    NSButtonCell* result_ = [nSButtonCell autorelease];
+    return result_;
+}
+
+void* C_NSButtonCell_Retain(void* ptr) {
+    NSButtonCell* nSButtonCell = (NSButtonCell*)ptr;
+    NSButtonCell* result_ = [nSButtonCell retain];
+    return result_;
+}
+
 void C_NSButtonCell_SetPeriodicDelay_Interval(void* ptr, float delay, float interval) {
     NSButtonCell* nSButtonCell = (NSButtonCell*)ptr;
     [nSButtonCell setPeriodicDelay:delay interval:interval];

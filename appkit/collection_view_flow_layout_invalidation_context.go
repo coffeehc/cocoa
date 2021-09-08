@@ -25,11 +25,27 @@ func MakeCollectionViewFlowLayoutInvalidationContext(ptr unsafe.Pointer) NSColle
 }
 
 func AllocCollectionViewFlowLayoutInvalidationContext() NSCollectionViewFlowLayoutInvalidationContext {
-	return MakeCollectionViewFlowLayoutInvalidationContext(C.C_CollectionViewFlowLayoutInvalidationContext_Alloc())
+	result_ := C.C_NSCollectionViewFlowLayoutInvalidationContext_AllocCollectionViewFlowLayoutInvalidationContext()
+	return MakeCollectionViewFlowLayoutInvalidationContext(result_)
 }
 
-func (n NSCollectionViewFlowLayoutInvalidationContext) Init() CollectionViewFlowLayoutInvalidationContext {
+func (n NSCollectionViewFlowLayoutInvalidationContext) Init() NSCollectionViewFlowLayoutInvalidationContext {
 	result_ := C.C_NSCollectionViewFlowLayoutInvalidationContext_Init(n.Ptr())
+	return MakeCollectionViewFlowLayoutInvalidationContext(result_)
+}
+
+func NewCollectionViewFlowLayoutInvalidationContext() NSCollectionViewFlowLayoutInvalidationContext {
+	result_ := C.C_NSCollectionViewFlowLayoutInvalidationContext_NewCollectionViewFlowLayoutInvalidationContext()
+	return MakeCollectionViewFlowLayoutInvalidationContext(result_)
+}
+
+func (n NSCollectionViewFlowLayoutInvalidationContext) Autorelease() NSCollectionViewFlowLayoutInvalidationContext {
+	result_ := C.C_NSCollectionViewFlowLayoutInvalidationContext_Autorelease(n.Ptr())
+	return MakeCollectionViewFlowLayoutInvalidationContext(result_)
+}
+
+func (n NSCollectionViewFlowLayoutInvalidationContext) Retain() NSCollectionViewFlowLayoutInvalidationContext {
+	result_ := C.C_NSCollectionViewFlowLayoutInvalidationContext_Retain(n.Ptr())
 	return MakeCollectionViewFlowLayoutInvalidationContext(result_)
 }
 

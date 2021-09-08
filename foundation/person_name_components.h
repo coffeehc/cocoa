@@ -5,7 +5,11 @@
 
 void* C_PersonNameComponents_Alloc();
 
+void* C_NSPersonNameComponents_AllocPersonNameComponents();
 void* C_NSPersonNameComponents_Init(void* ptr);
+void* C_NSPersonNameComponents_NewPersonNameComponents();
+void* C_NSPersonNameComponents_Autorelease(void* ptr);
+void* C_NSPersonNameComponents_Retain(void* ptr);
 void* C_NSPersonNameComponents_NamePrefix(void* ptr);
 void C_NSPersonNameComponents_SetNamePrefix(void* ptr, void* value);
 void* C_NSPersonNameComponents_GivenName(void* ptr);

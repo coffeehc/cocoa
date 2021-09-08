@@ -6,10 +6,14 @@
 void* C_TabViewItem_Alloc();
 
 void* C_NSTabViewItem_InitWithIdentifier(void* ptr, void* identifier);
+void* C_NSTabViewItem_TabViewItemWithViewController(void* viewController);
+void* C_NSTabViewItem_AllocTabViewItem();
 void* C_NSTabViewItem_Init(void* ptr);
+void* C_NSTabViewItem_NewTabViewItem();
+void* C_NSTabViewItem_Autorelease(void* ptr);
+void* C_NSTabViewItem_Retain(void* ptr);
 void C_NSTabViewItem_DrawLabel_InRect(void* ptr, bool shouldTruncateLabel, CGRect labelRect);
 CGSize C_NSTabViewItem_SizeOfLabel(void* ptr, bool computeMin);
-void* C_NSTabViewItem_TabViewItemWithViewController(void* viewController);
 void* C_NSTabViewItem_Label(void* ptr);
 void C_NSTabViewItem_SetLabel(void* ptr, void* value);
 unsigned int C_NSTabViewItem_TabState(void* ptr);

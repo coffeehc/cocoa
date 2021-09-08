@@ -5,9 +5,31 @@ void* C_UserContentController_Alloc() {
     return [WKUserContentController alloc];
 }
 
+void* C_WKUserContentController_AllocUserContentController() {
+    WKUserContentController* result_ = [WKUserContentController alloc];
+    return result_;
+}
+
 void* C_WKUserContentController_Init(void* ptr) {
     WKUserContentController* wKUserContentController = (WKUserContentController*)ptr;
     WKUserContentController* result_ = [wKUserContentController init];
+    return result_;
+}
+
+void* C_WKUserContentController_NewUserContentController() {
+    WKUserContentController* result_ = [WKUserContentController new];
+    return result_;
+}
+
+void* C_WKUserContentController_Autorelease(void* ptr) {
+    WKUserContentController* wKUserContentController = (WKUserContentController*)ptr;
+    WKUserContentController* result_ = [wKUserContentController autorelease];
+    return result_;
+}
+
+void* C_WKUserContentController_Retain(void* ptr) {
+    WKUserContentController* wKUserContentController = (WKUserContentController*)ptr;
+    WKUserContentController* result_ = [wKUserContentController retain];
     return result_;
 }
 

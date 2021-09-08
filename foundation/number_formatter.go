@@ -154,11 +154,27 @@ func MakeNumberFormatter(ptr unsafe.Pointer) NSNumberFormatter {
 }
 
 func AllocNumberFormatter() NSNumberFormatter {
-	return MakeNumberFormatter(C.C_NumberFormatter_Alloc())
+	result_ := C.C_NSNumberFormatter_AllocNumberFormatter()
+	return MakeNumberFormatter(result_)
 }
 
-func (n NSNumberFormatter) Init() NumberFormatter {
+func (n NSNumberFormatter) Init() NSNumberFormatter {
 	result_ := C.C_NSNumberFormatter_Init(n.Ptr())
+	return MakeNumberFormatter(result_)
+}
+
+func NewNumberFormatter() NSNumberFormatter {
+	result_ := C.C_NSNumberFormatter_NewNumberFormatter()
+	return MakeNumberFormatter(result_)
+}
+
+func (n NSNumberFormatter) Autorelease() NSNumberFormatter {
+	result_ := C.C_NSNumberFormatter_Autorelease(n.Ptr())
+	return MakeNumberFormatter(result_)
+}
+
+func (n NSNumberFormatter) Retain() NSNumberFormatter {
+	result_ := C.C_NSNumberFormatter_Retain(n.Ptr())
 	return MakeNumberFormatter(result_)
 }
 

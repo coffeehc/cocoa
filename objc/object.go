@@ -16,6 +16,11 @@ type PointerHolder interface {
 // Object is interface for all objc NSObject type
 type Object interface {
 	PointerHolder
+	// Retain0 call retain, but return no value, to avoiding subtypes return type conflicting
+	Retain0()
+	Release()
+	// Autorelease0 call autorelease, but return no value, to avoiding subtypes return type conflicting
+	Autorelease0()
 	Dealloc()
 }
 
@@ -64,10 +69,29 @@ func (o NSObject) PerformSelector_WithObject_WithObject(sel Selector, obj1, obj2
 	return MakeObject(rp)
 }
 
+func (o NSObject) Retain0() {
+	C.Object_Retain(o.Ptr())
+}
+
+func (o NSObject) Retain() NSObject {
+	p := C.Object_Retain(o.Ptr())
+	return MakeObject(p)
+}
+
+func (o NSObject) Release() {
+	C.Object_Release(o.Ptr())
+}
+
+func (o NSObject) Autorelease0() {
+	C.Object_Autorelease(o.Ptr())
+}
+
+func (o NSObject) Autorelease() NSObject {
+	p := C.Object_Autorelease(o.Ptr())
+	return MakeObject(p)
+}
+
 func (o NSObject) Dealloc() {
-	if o.Ptr() == nil {
-		panic("objc object is null")
-	}
 	C.Object_Dealloc(o.Ptr())
 }
 

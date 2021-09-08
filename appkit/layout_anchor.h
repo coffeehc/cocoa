@@ -5,7 +5,11 @@
 
 void* C_LayoutAnchor_Alloc();
 
+void* C_NSLayoutAnchor_AllocLayoutAnchor();
 void* C_NSLayoutAnchor_Init(void* ptr);
+void* C_NSLayoutAnchor_NewLayoutAnchor();
+void* C_NSLayoutAnchor_Autorelease(void* ptr);
+void* C_NSLayoutAnchor_Retain(void* ptr);
 void* C_NSLayoutAnchor_ConstraintEqualToAnchor(void* ptr, void* anchor);
 void* C_NSLayoutAnchor_ConstraintEqualToAnchor_Constant(void* ptr, void* anchor, double c);
 void* C_NSLayoutAnchor_ConstraintGreaterThanOrEqualToAnchor(void* ptr, void* anchor);

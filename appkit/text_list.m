@@ -11,9 +11,31 @@ void* C_NSTextList_InitWithMarkerFormat_Options(void* ptr, void* format, unsigne
     return result_;
 }
 
+void* C_NSTextList_AllocTextList() {
+    NSTextList* result_ = [NSTextList alloc];
+    return result_;
+}
+
 void* C_NSTextList_Init(void* ptr) {
     NSTextList* nSTextList = (NSTextList*)ptr;
     NSTextList* result_ = [nSTextList init];
+    return result_;
+}
+
+void* C_NSTextList_NewTextList() {
+    NSTextList* result_ = [NSTextList new];
+    return result_;
+}
+
+void* C_NSTextList_Autorelease(void* ptr) {
+    NSTextList* nSTextList = (NSTextList*)ptr;
+    NSTextList* result_ = [nSTextList autorelease];
+    return result_;
+}
+
+void* C_NSTextList_Retain(void* ptr) {
+    NSTextList* nSTextList = (NSTextList*)ptr;
+    NSTextList* result_ = [nSTextList retain];
     return result_;
 }
 

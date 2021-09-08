@@ -36,11 +36,27 @@ func MakeUserContentController(ptr unsafe.Pointer) WKUserContentController {
 }
 
 func AllocUserContentController() WKUserContentController {
-	return MakeUserContentController(C.C_UserContentController_Alloc())
+	result_ := C.C_WKUserContentController_AllocUserContentController()
+	return MakeUserContentController(result_)
 }
 
-func (w WKUserContentController) Init() UserContentController {
+func (w WKUserContentController) Init() WKUserContentController {
 	result_ := C.C_WKUserContentController_Init(w.Ptr())
+	return MakeUserContentController(result_)
+}
+
+func NewUserContentController() WKUserContentController {
+	result_ := C.C_WKUserContentController_NewUserContentController()
+	return MakeUserContentController(result_)
+}
+
+func (w WKUserContentController) Autorelease() WKUserContentController {
+	result_ := C.C_WKUserContentController_Autorelease(w.Ptr())
+	return MakeUserContentController(result_)
+}
+
+func (w WKUserContentController) Retain() WKUserContentController {
+	result_ := C.C_WKUserContentController_Retain(w.Ptr())
 	return MakeUserContentController(result_)
 }
 

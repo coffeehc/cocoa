@@ -29,17 +29,28 @@ func MakeTouchBarItem(ptr unsafe.Pointer) NSTouchBarItem {
 	}
 }
 
-func AllocTouchBarItem() NSTouchBarItem {
-	return MakeTouchBarItem(C.C_TouchBarItem_Alloc())
-}
-
-func (n NSTouchBarItem) InitWithIdentifier(identifier TouchBarItemIdentifier) TouchBarItem {
+func (n NSTouchBarItem) InitWithIdentifier(identifier TouchBarItemIdentifier) NSTouchBarItem {
 	result_ := C.C_NSTouchBarItem_InitWithIdentifier(n.Ptr(), foundation.NewString(string(identifier)).Ptr())
 	return MakeTouchBarItem(result_)
 }
 
-func (n NSTouchBarItem) InitWithCoder(coder foundation.Coder) TouchBarItem {
+func (n NSTouchBarItem) InitWithCoder(coder foundation.Coder) NSTouchBarItem {
 	result_ := C.C_NSTouchBarItem_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeTouchBarItem(result_)
+}
+
+func AllocTouchBarItem() NSTouchBarItem {
+	result_ := C.C_NSTouchBarItem_AllocTouchBarItem()
+	return MakeTouchBarItem(result_)
+}
+
+func (n NSTouchBarItem) Autorelease() NSTouchBarItem {
+	result_ := C.C_NSTouchBarItem_Autorelease(n.Ptr())
+	return MakeTouchBarItem(result_)
+}
+
+func (n NSTouchBarItem) Retain() NSTouchBarItem {
+	result_ := C.C_NSTouchBarItem_Retain(n.Ptr())
 	return MakeTouchBarItem(result_)
 }
 

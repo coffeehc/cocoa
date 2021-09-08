@@ -5,9 +5,31 @@ void* C_WindowFeatures_Alloc() {
     return [WKWindowFeatures alloc];
 }
 
+void* C_WKWindowFeatures_AllocWindowFeatures() {
+    WKWindowFeatures* result_ = [WKWindowFeatures alloc];
+    return result_;
+}
+
 void* C_WKWindowFeatures_Init(void* ptr) {
     WKWindowFeatures* wKWindowFeatures = (WKWindowFeatures*)ptr;
     WKWindowFeatures* result_ = [wKWindowFeatures init];
+    return result_;
+}
+
+void* C_WKWindowFeatures_NewWindowFeatures() {
+    WKWindowFeatures* result_ = [WKWindowFeatures new];
+    return result_;
+}
+
+void* C_WKWindowFeatures_Autorelease(void* ptr) {
+    WKWindowFeatures* wKWindowFeatures = (WKWindowFeatures*)ptr;
+    WKWindowFeatures* result_ = [wKWindowFeatures autorelease];
+    return result_;
+}
+
+void* C_WKWindowFeatures_Retain(void* ptr) {
+    WKWindowFeatures* wKWindowFeatures = (WKWindowFeatures*)ptr;
+    WKWindowFeatures* result_ = [wKWindowFeatures retain];
     return result_;
 }
 

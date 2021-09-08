@@ -5,7 +5,11 @@
 
 void* C_WindowTabGroup_Alloc();
 
+void* C_NSWindowTabGroup_AllocWindowTabGroup();
 void* C_NSWindowTabGroup_Init(void* ptr);
+void* C_NSWindowTabGroup_NewWindowTabGroup();
+void* C_NSWindowTabGroup_Autorelease(void* ptr);
+void* C_NSWindowTabGroup_Retain(void* ptr);
 void C_NSWindowTabGroup_AddWindow(void* ptr, void* window);
 void C_NSWindowTabGroup_InsertWindow_AtIndex(void* ptr, void* window, int index);
 void C_NSWindowTabGroup_RemoveWindow(void* ptr, void* window);

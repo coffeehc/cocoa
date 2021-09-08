@@ -26,11 +26,27 @@ func MakeClassDescription(ptr unsafe.Pointer) NSClassDescription {
 }
 
 func AllocClassDescription() NSClassDescription {
-	return MakeClassDescription(C.C_ClassDescription_Alloc())
+	result_ := C.C_NSClassDescription_AllocClassDescription()
+	return MakeClassDescription(result_)
 }
 
-func (n NSClassDescription) Init() ClassDescription {
+func (n NSClassDescription) Init() NSClassDescription {
 	result_ := C.C_NSClassDescription_Init(n.Ptr())
+	return MakeClassDescription(result_)
+}
+
+func NewClassDescription() NSClassDescription {
+	result_ := C.C_NSClassDescription_NewClassDescription()
+	return MakeClassDescription(result_)
+}
+
+func (n NSClassDescription) Autorelease() NSClassDescription {
+	result_ := C.C_NSClassDescription_Autorelease(n.Ptr())
+	return MakeClassDescription(result_)
+}
+
+func (n NSClassDescription) Retain() NSClassDescription {
+	result_ := C.C_NSClassDescription_Retain(n.Ptr())
 	return MakeClassDescription(result_)
 }
 

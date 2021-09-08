@@ -5,9 +5,31 @@ void* C_DraggingSession_Alloc() {
     return [NSDraggingSession alloc];
 }
 
+void* C_NSDraggingSession_AllocDraggingSession() {
+    NSDraggingSession* result_ = [NSDraggingSession alloc];
+    return result_;
+}
+
 void* C_NSDraggingSession_Init(void* ptr) {
     NSDraggingSession* nSDraggingSession = (NSDraggingSession*)ptr;
     NSDraggingSession* result_ = [nSDraggingSession init];
+    return result_;
+}
+
+void* C_NSDraggingSession_NewDraggingSession() {
+    NSDraggingSession* result_ = [NSDraggingSession new];
+    return result_;
+}
+
+void* C_NSDraggingSession_Autorelease(void* ptr) {
+    NSDraggingSession* nSDraggingSession = (NSDraggingSession*)ptr;
+    NSDraggingSession* result_ = [nSDraggingSession autorelease];
+    return result_;
+}
+
+void* C_NSDraggingSession_Retain(void* ptr) {
+    NSDraggingSession* nSDraggingSession = (NSDraggingSession*)ptr;
+    NSDraggingSession* result_ = [nSDraggingSession retain];
     return result_;
 }
 

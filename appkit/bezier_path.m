@@ -5,9 +5,31 @@ void* C_BezierPath_Alloc() {
     return [NSBezierPath alloc];
 }
 
+void* C_NSBezierPath_AllocBezierPath() {
+    NSBezierPath* result_ = [NSBezierPath alloc];
+    return result_;
+}
+
 void* C_NSBezierPath_Init(void* ptr) {
     NSBezierPath* nSBezierPath = (NSBezierPath*)ptr;
     NSBezierPath* result_ = [nSBezierPath init];
+    return result_;
+}
+
+void* C_NSBezierPath_NewBezierPath() {
+    NSBezierPath* result_ = [NSBezierPath new];
+    return result_;
+}
+
+void* C_NSBezierPath_Autorelease(void* ptr) {
+    NSBezierPath* nSBezierPath = (NSBezierPath*)ptr;
+    NSBezierPath* result_ = [nSBezierPath autorelease];
+    return result_;
+}
+
+void* C_NSBezierPath_Retain(void* ptr) {
+    NSBezierPath* nSBezierPath = (NSBezierPath*)ptr;
+    NSBezierPath* result_ = [nSBezierPath retain];
     return result_;
 }
 

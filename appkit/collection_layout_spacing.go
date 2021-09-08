@@ -25,17 +25,28 @@ func MakeCollectionLayoutSpacing(ptr unsafe.Pointer) NSCollectionLayoutSpacing {
 	}
 }
 
-func AllocCollectionLayoutSpacing() NSCollectionLayoutSpacing {
-	return MakeCollectionLayoutSpacing(C.C_CollectionLayoutSpacing_Alloc())
-}
-
-func CollectionLayoutSpacing_FixedSpacing(fixedSpacing coregraphics.Float) CollectionLayoutSpacing {
+func CollectionLayoutSpacing_FixedSpacing(fixedSpacing coregraphics.Float) NSCollectionLayoutSpacing {
 	result_ := C.C_NSCollectionLayoutSpacing_CollectionLayoutSpacing_FixedSpacing(C.double(float64(fixedSpacing)))
 	return MakeCollectionLayoutSpacing(result_)
 }
 
-func CollectionLayoutSpacing_FlexibleSpacing(flexibleSpacing coregraphics.Float) CollectionLayoutSpacing {
+func CollectionLayoutSpacing_FlexibleSpacing(flexibleSpacing coregraphics.Float) NSCollectionLayoutSpacing {
 	result_ := C.C_NSCollectionLayoutSpacing_CollectionLayoutSpacing_FlexibleSpacing(C.double(float64(flexibleSpacing)))
+	return MakeCollectionLayoutSpacing(result_)
+}
+
+func AllocCollectionLayoutSpacing() NSCollectionLayoutSpacing {
+	result_ := C.C_NSCollectionLayoutSpacing_AllocCollectionLayoutSpacing()
+	return MakeCollectionLayoutSpacing(result_)
+}
+
+func (n NSCollectionLayoutSpacing) Autorelease() NSCollectionLayoutSpacing {
+	result_ := C.C_NSCollectionLayoutSpacing_Autorelease(n.Ptr())
+	return MakeCollectionLayoutSpacing(result_)
+}
+
+func (n NSCollectionLayoutSpacing) Retain() NSCollectionLayoutSpacing {
+	result_ := C.C_NSCollectionLayoutSpacing_Retain(n.Ptr())
 	return MakeCollectionLayoutSpacing(result_)
 }
 

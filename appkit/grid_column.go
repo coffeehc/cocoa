@@ -38,11 +38,27 @@ func MakeGridColumn(ptr unsafe.Pointer) NSGridColumn {
 }
 
 func AllocGridColumn() NSGridColumn {
-	return MakeGridColumn(C.C_GridColumn_Alloc())
+	result_ := C.C_NSGridColumn_AllocGridColumn()
+	return MakeGridColumn(result_)
 }
 
-func (n NSGridColumn) Init() GridColumn {
+func (n NSGridColumn) Init() NSGridColumn {
 	result_ := C.C_NSGridColumn_Init(n.Ptr())
+	return MakeGridColumn(result_)
+}
+
+func NewGridColumn() NSGridColumn {
+	result_ := C.C_NSGridColumn_NewGridColumn()
+	return MakeGridColumn(result_)
+}
+
+func (n NSGridColumn) Autorelease() NSGridColumn {
+	result_ := C.C_NSGridColumn_Autorelease(n.Ptr())
+	return MakeGridColumn(result_)
+}
+
+func (n NSGridColumn) Retain() NSGridColumn {
+	result_ := C.C_NSGridColumn_Retain(n.Ptr())
 	return MakeGridColumn(result_)
 }
 

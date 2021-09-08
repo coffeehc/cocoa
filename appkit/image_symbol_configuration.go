@@ -24,11 +24,27 @@ func MakeImageSymbolConfiguration(ptr unsafe.Pointer) NSImageSymbolConfiguration
 }
 
 func AllocImageSymbolConfiguration() NSImageSymbolConfiguration {
-	return MakeImageSymbolConfiguration(C.C_ImageSymbolConfiguration_Alloc())
+	result_ := C.C_NSImageSymbolConfiguration_AllocImageSymbolConfiguration()
+	return MakeImageSymbolConfiguration(result_)
 }
 
-func (n NSImageSymbolConfiguration) Init() ImageSymbolConfiguration {
+func (n NSImageSymbolConfiguration) Init() NSImageSymbolConfiguration {
 	result_ := C.C_NSImageSymbolConfiguration_Init(n.Ptr())
+	return MakeImageSymbolConfiguration(result_)
+}
+
+func NewImageSymbolConfiguration() NSImageSymbolConfiguration {
+	result_ := C.C_NSImageSymbolConfiguration_NewImageSymbolConfiguration()
+	return MakeImageSymbolConfiguration(result_)
+}
+
+func (n NSImageSymbolConfiguration) Autorelease() NSImageSymbolConfiguration {
+	result_ := C.C_NSImageSymbolConfiguration_Autorelease(n.Ptr())
+	return MakeImageSymbolConfiguration(result_)
+}
+
+func (n NSImageSymbolConfiguration) Retain() NSImageSymbolConfiguration {
+	result_ := C.C_NSImageSymbolConfiguration_Retain(n.Ptr())
 	return MakeImageSymbolConfiguration(result_)
 }
 

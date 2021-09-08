@@ -47,22 +47,38 @@ func MakeProgressIndicator(ptr unsafe.Pointer) NSProgressIndicator {
 	}
 }
 
-func AllocProgressIndicator() NSProgressIndicator {
-	return MakeProgressIndicator(C.C_ProgressIndicator_Alloc())
-}
-
-func (n NSProgressIndicator) InitWithFrame(frameRect foundation.Rect) ProgressIndicator {
+func (n NSProgressIndicator) InitWithFrame(frameRect foundation.Rect) NSProgressIndicator {
 	result_ := C.C_NSProgressIndicator_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeProgressIndicator(result_)
 }
 
-func (n NSProgressIndicator) InitWithCoder(coder foundation.Coder) ProgressIndicator {
+func (n NSProgressIndicator) InitWithCoder(coder foundation.Coder) NSProgressIndicator {
 	result_ := C.C_NSProgressIndicator_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeProgressIndicator(result_)
 }
 
-func (n NSProgressIndicator) Init() ProgressIndicator {
+func (n NSProgressIndicator) Init() NSProgressIndicator {
 	result_ := C.C_NSProgressIndicator_Init(n.Ptr())
+	return MakeProgressIndicator(result_)
+}
+
+func AllocProgressIndicator() NSProgressIndicator {
+	result_ := C.C_NSProgressIndicator_AllocProgressIndicator()
+	return MakeProgressIndicator(result_)
+}
+
+func NewProgressIndicator() NSProgressIndicator {
+	result_ := C.C_NSProgressIndicator_NewProgressIndicator()
+	return MakeProgressIndicator(result_)
+}
+
+func (n NSProgressIndicator) Autorelease() NSProgressIndicator {
+	result_ := C.C_NSProgressIndicator_Autorelease(n.Ptr())
+	return MakeProgressIndicator(result_)
+}
+
+func (n NSProgressIndicator) Retain() NSProgressIndicator {
+	result_ := C.C_NSProgressIndicator_Retain(n.Ptr())
 	return MakeProgressIndicator(result_)
 }
 

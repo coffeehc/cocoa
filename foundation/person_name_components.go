@@ -36,11 +36,27 @@ func MakePersonNameComponents(ptr unsafe.Pointer) NSPersonNameComponents {
 }
 
 func AllocPersonNameComponents() NSPersonNameComponents {
-	return MakePersonNameComponents(C.C_PersonNameComponents_Alloc())
+	result_ := C.C_NSPersonNameComponents_AllocPersonNameComponents()
+	return MakePersonNameComponents(result_)
 }
 
-func (n NSPersonNameComponents) Init() PersonNameComponents {
+func (n NSPersonNameComponents) Init() NSPersonNameComponents {
 	result_ := C.C_NSPersonNameComponents_Init(n.Ptr())
+	return MakePersonNameComponents(result_)
+}
+
+func NewPersonNameComponents() NSPersonNameComponents {
+	result_ := C.C_NSPersonNameComponents_NewPersonNameComponents()
+	return MakePersonNameComponents(result_)
+}
+
+func (n NSPersonNameComponents) Autorelease() NSPersonNameComponents {
+	result_ := C.C_NSPersonNameComponents_Autorelease(n.Ptr())
+	return MakePersonNameComponents(result_)
+}
+
+func (n NSPersonNameComponents) Retain() NSPersonNameComponents {
+	result_ := C.C_NSPersonNameComponents_Retain(n.Ptr())
 	return MakePersonNameComponents(result_)
 }
 

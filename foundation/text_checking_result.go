@@ -38,11 +38,27 @@ func MakeTextCheckingResult(ptr unsafe.Pointer) NSTextCheckingResult {
 }
 
 func AllocTextCheckingResult() NSTextCheckingResult {
-	return MakeTextCheckingResult(C.C_TextCheckingResult_Alloc())
+	result_ := C.C_NSTextCheckingResult_AllocTextCheckingResult()
+	return MakeTextCheckingResult(result_)
 }
 
-func (n NSTextCheckingResult) Init() TextCheckingResult {
+func (n NSTextCheckingResult) Init() NSTextCheckingResult {
 	result_ := C.C_NSTextCheckingResult_Init(n.Ptr())
+	return MakeTextCheckingResult(result_)
+}
+
+func NewTextCheckingResult() NSTextCheckingResult {
+	result_ := C.C_NSTextCheckingResult_NewTextCheckingResult()
+	return MakeTextCheckingResult(result_)
+}
+
+func (n NSTextCheckingResult) Autorelease() NSTextCheckingResult {
+	result_ := C.C_NSTextCheckingResult_Autorelease(n.Ptr())
+	return MakeTextCheckingResult(result_)
+}
+
+func (n NSTextCheckingResult) Retain() NSTextCheckingResult {
+	result_ := C.C_NSTextCheckingResult_Retain(n.Ptr())
 	return MakeTextCheckingResult(result_)
 }
 

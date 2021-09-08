@@ -35,17 +35,33 @@ func MakeNumber(ptr unsafe.Pointer) NSNumber {
 	}
 }
 
-func AllocNumber() NSNumber {
-	return MakeNumber(C.C_Number_Alloc())
-}
-
-func (n NSNumber) InitWithCoder(coder Coder) Number {
+func (n NSNumber) InitWithCoder(coder Coder) NSNumber {
 	result_ := C.C_NSNumber_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeNumber(result_)
 }
 
-func (n NSNumber) Init() Number {
+func AllocNumber() NSNumber {
+	result_ := C.C_NSNumber_AllocNumber()
+	return MakeNumber(result_)
+}
+
+func (n NSNumber) Init() NSNumber {
 	result_ := C.C_NSNumber_Init(n.Ptr())
+	return MakeNumber(result_)
+}
+
+func NewNumber() NSNumber {
+	result_ := C.C_NSNumber_NewNumber()
+	return MakeNumber(result_)
+}
+
+func (n NSNumber) Autorelease() NSNumber {
+	result_ := C.C_NSNumber_Autorelease(n.Ptr())
+	return MakeNumber(result_)
+}
+
+func (n NSNumber) Retain() NSNumber {
+	result_ := C.C_NSNumber_Retain(n.Ptr())
 	return MakeNumber(result_)
 }
 

@@ -23,6 +23,28 @@ void* C_NSViewController_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSViewController_AllocViewController() {
+    NSViewController* result_ = [NSViewController alloc];
+    return result_;
+}
+
+void* C_NSViewController_NewViewController() {
+    NSViewController* result_ = [NSViewController new];
+    return result_;
+}
+
+void* C_NSViewController_Autorelease(void* ptr) {
+    NSViewController* nSViewController = (NSViewController*)ptr;
+    NSViewController* result_ = [nSViewController autorelease];
+    return result_;
+}
+
+void* C_NSViewController_Retain(void* ptr) {
+    NSViewController* nSViewController = (NSViewController*)ptr;
+    NSViewController* result_ = [nSViewController retain];
+    return result_;
+}
+
 void C_NSViewController_LoadView(void* ptr) {
     NSViewController* nSViewController = (NSViewController*)ptr;
     [nSViewController loadView];
@@ -215,7 +237,7 @@ Array C_NSViewController_ChildViewControllers(void* ptr) {
 
 void C_NSViewController_SetChildViewControllers(void* ptr, Array value) {
     NSViewController* nSViewController = (NSViewController*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

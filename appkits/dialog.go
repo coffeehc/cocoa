@@ -51,7 +51,7 @@ func NewDialog(width, height float64) Dialog {
 	view.RightAnchor().ConstraintEqualToAnchor(contentView.RightAnchor()).SetActive(true)
 
 	return &DialogImpl{
-		NSPanel: panel.(appkit.NSPanel),
+		NSPanel: panel,
 		content: view,
 		ok:      ok,
 		cancel:  cancel,

@@ -34,11 +34,27 @@ func MakeGridCell(ptr unsafe.Pointer) NSGridCell {
 }
 
 func AllocGridCell() NSGridCell {
-	return MakeGridCell(C.C_GridCell_Alloc())
+	result_ := C.C_NSGridCell_AllocGridCell()
+	return MakeGridCell(result_)
 }
 
-func (n NSGridCell) Init() GridCell {
+func (n NSGridCell) Init() NSGridCell {
 	result_ := C.C_NSGridCell_Init(n.Ptr())
+	return MakeGridCell(result_)
+}
+
+func NewGridCell() NSGridCell {
+	result_ := C.C_NSGridCell_NewGridCell()
+	return MakeGridCell(result_)
+}
+
+func (n NSGridCell) Autorelease() NSGridCell {
+	result_ := C.C_NSGridCell_Autorelease(n.Ptr())
+	return MakeGridCell(result_)
+}
+
+func (n NSGridCell) Retain() NSGridCell {
+	result_ := C.C_NSGridCell_Retain(n.Ptr())
 	return MakeGridCell(result_)
 }
 

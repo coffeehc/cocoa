@@ -27,22 +27,38 @@ func MakeCursor(ptr unsafe.Pointer) NSCursor {
 	}
 }
 
-func AllocCursor() NSCursor {
-	return MakeCursor(C.C_Cursor_Alloc())
-}
-
-func (n NSCursor) InitWithImage_HotSpot(newImage Image, point foundation.Point) Cursor {
+func (n NSCursor) InitWithImage_HotSpot(newImage Image, point foundation.Point) NSCursor {
 	result_ := C.C_NSCursor_InitWithImage_HotSpot(n.Ptr(), objc.ExtractPtr(newImage), *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(point))))
 	return MakeCursor(result_)
 }
 
-func (n NSCursor) InitWithCoder(coder foundation.Coder) Cursor {
+func (n NSCursor) InitWithCoder(coder foundation.Coder) NSCursor {
 	result_ := C.C_NSCursor_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeCursor(result_)
 }
 
-func (n NSCursor) Init() Cursor {
+func AllocCursor() NSCursor {
+	result_ := C.C_NSCursor_AllocCursor()
+	return MakeCursor(result_)
+}
+
+func (n NSCursor) Init() NSCursor {
 	result_ := C.C_NSCursor_Init(n.Ptr())
+	return MakeCursor(result_)
+}
+
+func NewCursor() NSCursor {
+	result_ := C.C_NSCursor_NewCursor()
+	return MakeCursor(result_)
+}
+
+func (n NSCursor) Autorelease() NSCursor {
+	result_ := C.C_NSCursor_Autorelease(n.Ptr())
+	return MakeCursor(result_)
+}
+
+func (n NSCursor) Retain() NSCursor {
+	result_ := C.C_NSCursor_Retain(n.Ptr())
 	return MakeCursor(result_)
 }
 

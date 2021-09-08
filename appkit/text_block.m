@@ -11,6 +11,28 @@ void* C_NSTextBlock_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSTextBlock_AllocTextBlock() {
+    NSTextBlock* result_ = [NSTextBlock alloc];
+    return result_;
+}
+
+void* C_NSTextBlock_NewTextBlock() {
+    NSTextBlock* result_ = [NSTextBlock new];
+    return result_;
+}
+
+void* C_NSTextBlock_Autorelease(void* ptr) {
+    NSTextBlock* nSTextBlock = (NSTextBlock*)ptr;
+    NSTextBlock* result_ = [nSTextBlock autorelease];
+    return result_;
+}
+
+void* C_NSTextBlock_Retain(void* ptr) {
+    NSTextBlock* nSTextBlock = (NSTextBlock*)ptr;
+    NSTextBlock* result_ = [nSTextBlock retain];
+    return result_;
+}
+
 void C_NSTextBlock_SetValue_Type_ForDimension(void* ptr, double val, unsigned int _type, unsigned int dimension) {
     NSTextBlock* nSTextBlock = (NSTextBlock*)ptr;
     [nSTextBlock setValue:val type:_type forDimension:dimension];

@@ -5,12 +5,16 @@
 
 void* C_BitmapImageRep_Alloc();
 
+void* C_NSBitmapImageRep_BitmapImageRep_ImageRepWithData(void* data);
 void* C_NSBitmapImageRep_InitWithCGImage(void* ptr, void* cgImage);
 void* C_NSBitmapImageRep_InitWithData(void* ptr, void* data);
 void* C_NSBitmapImageRep_InitForIncrementalLoad(void* ptr);
 void* C_NSBitmapImageRep_Init(void* ptr);
 void* C_NSBitmapImageRep_InitWithCoder(void* ptr, void* coder);
-void* C_NSBitmapImageRep_BitmapImageRep_ImageRepWithData(void* data);
+void* C_NSBitmapImageRep_AllocBitmapImageRep();
+void* C_NSBitmapImageRep_NewBitmapImageRep();
+void* C_NSBitmapImageRep_Autorelease(void* ptr);
+void* C_NSBitmapImageRep_Retain(void* ptr);
 Array C_NSBitmapImageRep_BitmapImageRep_ImageRepsWithData(void* data);
 void C_NSBitmapImageRep_ColorizeByMappingGray_ToColor_BlackMapping_WhiteMapping(void* ptr, double midPoint, void* midPointColor, void* shadowColor, void* lightColor);
 void* C_NSBitmapImageRep_BitmapImageRep_TIFFRepresentationOfImageRepsInArray(Array array);

@@ -22,16 +22,27 @@ func MakeCandidateListTouchBarItem(ptr unsafe.Pointer) NSCandidateListTouchBarIt
 	}
 }
 
-func AllocCandidateListTouchBarItem() NSCandidateListTouchBarItem {
-	return MakeCandidateListTouchBarItem(C.C_CandidateListTouchBarItem_Alloc())
-}
-
-func (n NSCandidateListTouchBarItem) InitWithIdentifier(identifier TouchBarItemIdentifier) CandidateListTouchBarItem {
+func (n NSCandidateListTouchBarItem) InitWithIdentifier(identifier TouchBarItemIdentifier) NSCandidateListTouchBarItem {
 	result_ := C.C_NSCandidateListTouchBarItem_InitWithIdentifier(n.Ptr(), foundation.NewString(string(identifier)).Ptr())
 	return MakeCandidateListTouchBarItem(result_)
 }
 
-func (n NSCandidateListTouchBarItem) InitWithCoder(coder foundation.Coder) CandidateListTouchBarItem {
+func (n NSCandidateListTouchBarItem) InitWithCoder(coder foundation.Coder) NSCandidateListTouchBarItem {
 	result_ := C.C_NSCandidateListTouchBarItem_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeCandidateListTouchBarItem(result_)
+}
+
+func AllocCandidateListTouchBarItem() NSCandidateListTouchBarItem {
+	result_ := C.C_NSCandidateListTouchBarItem_AllocCandidateListTouchBarItem()
+	return MakeCandidateListTouchBarItem(result_)
+}
+
+func (n NSCandidateListTouchBarItem) Autorelease() NSCandidateListTouchBarItem {
+	result_ := C.C_NSCandidateListTouchBarItem_Autorelease(n.Ptr())
+	return MakeCandidateListTouchBarItem(result_)
+}
+
+func (n NSCandidateListTouchBarItem) Retain() NSCandidateListTouchBarItem {
+	result_ := C.C_NSCandidateListTouchBarItem_Retain(n.Ptr())
 	return MakeCandidateListTouchBarItem(result_)
 }

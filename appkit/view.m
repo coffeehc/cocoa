@@ -23,6 +23,28 @@ void* C_NSView_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSView_AllocView() {
+    NSView* result_ = [NSView alloc];
+    return result_;
+}
+
+void* C_NSView_NewView() {
+    NSView* result_ = [NSView new];
+    return result_;
+}
+
+void* C_NSView_Autorelease(void* ptr) {
+    NSView* nSView = (NSView*)ptr;
+    NSView* result_ = [nSView autorelease];
+    return result_;
+}
+
+void* C_NSView_Retain(void* ptr) {
+    NSView* nSView = (NSView*)ptr;
+    NSView* result_ = [nSView retain];
+    return result_;
+}
+
 void C_NSView_PrepareForReuse(void* ptr) {
     NSView* nSView = (NSView*)ptr;
     [nSView prepareForReuse];
@@ -392,7 +414,7 @@ void C_NSView_AddConstraint(void* ptr, void* constraint) {
 
 void C_NSView_AddConstraints(void* ptr, Array constraints) {
     NSView* nSView = (NSView*)ptr;
-    NSMutableArray* objcConstraints = [[NSMutableArray alloc] init];
+    NSMutableArray* objcConstraints = [NSMutableArray arrayWithCapacity:constraints.len];
     if (constraints.len > 0) {
     	void** constraintsData = (void**)constraints.data;
     	for (int i = 0; i < constraints.len; i++) {
@@ -410,7 +432,7 @@ void C_NSView_RemoveConstraint(void* ptr, void* constraint) {
 
 void C_NSView_RemoveConstraints(void* ptr, Array constraints) {
     NSView* nSView = (NSView*)ptr;
-    NSMutableArray* objcConstraints = [[NSMutableArray alloc] init];
+    NSMutableArray* objcConstraints = [NSMutableArray arrayWithCapacity:constraints.len];
     if (constraints.len > 0) {
     	void** constraintsData = (void**)constraints.data;
     	for (int i = 0; i < constraints.len; i++) {
@@ -529,7 +551,7 @@ void C_NSView_SetKeyboardFocusRingNeedsDisplayInRect(void* ptr, CGRect rect) {
 
 bool C_NSView_EnterFullScreenMode_WithOptions(void* ptr, void* screen, Dictionary options) {
     NSView* nSView = (NSView*)ptr;
-    NSMutableDictionary* objcOptions = [[NSMutableDictionary alloc] initWithCapacity: options.len];
+    NSMutableDictionary* objcOptions = [NSMutableDictionary dictionaryWithCapacity:options.len];
     if (options.len > 0) {
     	void** optionsKeyData = (void**)options.key_data;
     	void** optionsValueData = (void**)options.value_data;
@@ -545,7 +567,7 @@ bool C_NSView_EnterFullScreenMode_WithOptions(void* ptr, void* screen, Dictionar
 
 void C_NSView_ExitFullScreenModeWithOptions(void* ptr, Dictionary options) {
     NSView* nSView = (NSView*)ptr;
-    NSMutableDictionary* objcOptions = [[NSMutableDictionary alloc] initWithCapacity: options.len];
+    NSMutableDictionary* objcOptions = [NSMutableDictionary dictionaryWithCapacity:options.len];
     if (options.len > 0) {
     	void** optionsKeyData = (void**)options.key_data;
     	void** optionsValueData = (void**)options.value_data;
@@ -646,7 +668,7 @@ void C_NSView_ReflectScrolledClipView(void* ptr, void* clipView) {
 
 void C_NSView_RegisterForDraggedTypes(void* ptr, Array newTypes) {
     NSView* nSView = (NSView*)ptr;
-    NSMutableArray* objcNewTypes = [[NSMutableArray alloc] init];
+    NSMutableArray* objcNewTypes = [NSMutableArray arrayWithCapacity:newTypes.len];
     if (newTypes.len > 0) {
     	void** newTypesData = (void**)newTypes.data;
     	for (int i = 0; i < newTypes.len; i++) {
@@ -664,7 +686,7 @@ void C_NSView_UnregisterDraggedTypes(void* ptr) {
 
 void* C_NSView_BeginDraggingSessionWithItems_Event_Source(void* ptr, Array items, void* event, void* source) {
     NSView* nSView = (NSView*)ptr;
-    NSMutableArray* objcItems = [[NSMutableArray alloc] init];
+    NSMutableArray* objcItems = [NSMutableArray arrayWithCapacity:items.len];
     if (items.len > 0) {
     	void** itemsData = (void**)items.data;
     	for (int i = 0; i < items.len; i++) {
@@ -882,7 +904,7 @@ Array C_NSView_Subviews(void* ptr) {
 
 void C_NSView_SetSubviews(void* ptr, Array value) {
     NSView* nSView = (NSView*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -1450,7 +1472,7 @@ Array C_NSView_GestureRecognizers(void* ptr) {
 
 void C_NSView_SetGestureRecognizers(void* ptr, Array value) {
     NSView* nSView = (NSView*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {

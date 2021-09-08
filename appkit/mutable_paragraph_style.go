@@ -47,11 +47,27 @@ func MakeMutableParagraphStyle(ptr unsafe.Pointer) NSMutableParagraphStyle {
 }
 
 func AllocMutableParagraphStyle() NSMutableParagraphStyle {
-	return MakeMutableParagraphStyle(C.C_MutableParagraphStyle_Alloc())
+	result_ := C.C_NSMutableParagraphStyle_AllocMutableParagraphStyle()
+	return MakeMutableParagraphStyle(result_)
 }
 
-func (n NSMutableParagraphStyle) Init() MutableParagraphStyle {
+func (n NSMutableParagraphStyle) Init() NSMutableParagraphStyle {
 	result_ := C.C_NSMutableParagraphStyle_Init(n.Ptr())
+	return MakeMutableParagraphStyle(result_)
+}
+
+func NewMutableParagraphStyle() NSMutableParagraphStyle {
+	result_ := C.C_NSMutableParagraphStyle_NewMutableParagraphStyle()
+	return MakeMutableParagraphStyle(result_)
+}
+
+func (n NSMutableParagraphStyle) Autorelease() NSMutableParagraphStyle {
+	result_ := C.C_NSMutableParagraphStyle_Autorelease(n.Ptr())
+	return MakeMutableParagraphStyle(result_)
+}
+
+func (n NSMutableParagraphStyle) Retain() NSMutableParagraphStyle {
+	result_ := C.C_NSMutableParagraphStyle_Retain(n.Ptr())
 	return MakeMutableParagraphStyle(result_)
 }
 

@@ -56,17 +56,33 @@ func MakeColor(ptr unsafe.Pointer) NSColor {
 	}
 }
 
-func AllocColor() NSColor {
-	return MakeColor(C.C_Color_Alloc())
-}
-
-func (n NSColor) Init() Color {
+func (n NSColor) Init() NSColor {
 	result_ := C.C_NSColor_Init(n.Ptr())
 	return MakeColor(result_)
 }
 
-func (n NSColor) InitWithCoder(coder foundation.Coder) Color {
+func (n NSColor) InitWithCoder(coder foundation.Coder) NSColor {
 	result_ := C.C_NSColor_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeColor(result_)
+}
+
+func AllocColor() NSColor {
+	result_ := C.C_NSColor_AllocColor()
+	return MakeColor(result_)
+}
+
+func NewColor() NSColor {
+	result_ := C.C_NSColor_NewColor()
+	return MakeColor(result_)
+}
+
+func (n NSColor) Autorelease() NSColor {
+	result_ := C.C_NSColor_Autorelease(n.Ptr())
+	return MakeColor(result_)
+}
+
+func (n NSColor) Retain() NSColor {
+	result_ := C.C_NSColor_Retain(n.Ptr())
 	return MakeColor(result_)
 }
 

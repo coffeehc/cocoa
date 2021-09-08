@@ -29,6 +29,28 @@ void* C_NSMatrix_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSMatrix_AllocMatrix() {
+    NSMatrix* result_ = [NSMatrix alloc];
+    return result_;
+}
+
+void* C_NSMatrix_NewMatrix() {
+    NSMatrix* result_ = [NSMatrix new];
+    return result_;
+}
+
+void* C_NSMatrix_Autorelease(void* ptr) {
+    NSMatrix* nSMatrix = (NSMatrix*)ptr;
+    NSMatrix* result_ = [nSMatrix autorelease];
+    return result_;
+}
+
+void* C_NSMatrix_Retain(void* ptr) {
+    NSMatrix* nSMatrix = (NSMatrix*)ptr;
+    NSMatrix* result_ = [nSMatrix retain];
+    return result_;
+}
+
 void C_NSMatrix_AddColumn(void* ptr) {
     NSMatrix* nSMatrix = (NSMatrix*)ptr;
     [nSMatrix addColumn];
@@ -36,7 +58,7 @@ void C_NSMatrix_AddColumn(void* ptr) {
 
 void C_NSMatrix_AddColumnWithCells(void* ptr, Array newCells) {
     NSMatrix* nSMatrix = (NSMatrix*)ptr;
-    NSMutableArray* objcNewCells = [[NSMutableArray alloc] init];
+    NSMutableArray* objcNewCells = [NSMutableArray arrayWithCapacity:newCells.len];
     if (newCells.len > 0) {
     	void** newCellsData = (void**)newCells.data;
     	for (int i = 0; i < newCells.len; i++) {
@@ -54,7 +76,7 @@ void C_NSMatrix_AddRow(void* ptr) {
 
 void C_NSMatrix_AddRowWithCells(void* ptr, Array newCells) {
     NSMatrix* nSMatrix = (NSMatrix*)ptr;
-    NSMutableArray* objcNewCells = [[NSMutableArray alloc] init];
+    NSMutableArray* objcNewCells = [NSMutableArray arrayWithCapacity:newCells.len];
     if (newCells.len > 0) {
     	void** newCellsData = (void**)newCells.data;
     	for (int i = 0; i < newCells.len; i++) {
@@ -78,7 +100,7 @@ void C_NSMatrix_InsertColumn(void* ptr, int column) {
 
 void C_NSMatrix_InsertColumn_WithCells(void* ptr, int column, Array newCells) {
     NSMatrix* nSMatrix = (NSMatrix*)ptr;
-    NSMutableArray* objcNewCells = [[NSMutableArray alloc] init];
+    NSMutableArray* objcNewCells = [NSMutableArray arrayWithCapacity:newCells.len];
     if (newCells.len > 0) {
     	void** newCellsData = (void**)newCells.data;
     	for (int i = 0; i < newCells.len; i++) {
@@ -96,7 +118,7 @@ void C_NSMatrix_InsertRow(void* ptr, int row) {
 
 void C_NSMatrix_InsertRow_WithCells(void* ptr, int row, Array newCells) {
     NSMatrix* nSMatrix = (NSMatrix*)ptr;
-    NSMutableArray* objcNewCells = [[NSMutableArray alloc] init];
+    NSMutableArray* objcNewCells = [NSMutableArray arrayWithCapacity:newCells.len];
     if (newCells.len > 0) {
     	void** newCellsData = (void**)newCells.data;
     	for (int i = 0; i < newCells.len; i++) {

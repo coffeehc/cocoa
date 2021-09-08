@@ -26,7 +26,18 @@ func MakeBackForwardListItem(ptr unsafe.Pointer) WKBackForwardListItem {
 }
 
 func AllocBackForwardListItem() WKBackForwardListItem {
-	return MakeBackForwardListItem(C.C_BackForwardListItem_Alloc())
+	result_ := C.C_WKBackForwardListItem_AllocBackForwardListItem()
+	return MakeBackForwardListItem(result_)
+}
+
+func (w WKBackForwardListItem) Autorelease() WKBackForwardListItem {
+	result_ := C.C_WKBackForwardListItem_Autorelease(w.Ptr())
+	return MakeBackForwardListItem(result_)
+}
+
+func (w WKBackForwardListItem) Retain() WKBackForwardListItem {
+	result_ := C.C_WKBackForwardListItem_Retain(w.Ptr())
+	return MakeBackForwardListItem(result_)
 }
 
 func (w WKBackForwardListItem) Title() string {

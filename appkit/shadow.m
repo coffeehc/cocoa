@@ -11,6 +11,28 @@ void* C_NSShadow_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSShadow_AllocShadow() {
+    NSShadow* result_ = [NSShadow alloc];
+    return result_;
+}
+
+void* C_NSShadow_NewShadow() {
+    NSShadow* result_ = [NSShadow new];
+    return result_;
+}
+
+void* C_NSShadow_Autorelease(void* ptr) {
+    NSShadow* nSShadow = (NSShadow*)ptr;
+    NSShadow* result_ = [nSShadow autorelease];
+    return result_;
+}
+
+void* C_NSShadow_Retain(void* ptr) {
+    NSShadow* nSShadow = (NSShadow*)ptr;
+    NSShadow* result_ = [nSShadow retain];
+    return result_;
+}
+
 void C_NSShadow_Set(void* ptr) {
     NSShadow* nSShadow = (NSShadow*)ptr;
     [nSShadow set];

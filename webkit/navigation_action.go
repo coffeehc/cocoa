@@ -31,11 +31,27 @@ func MakeNavigationAction(ptr unsafe.Pointer) WKNavigationAction {
 }
 
 func AllocNavigationAction() WKNavigationAction {
-	return MakeNavigationAction(C.C_NavigationAction_Alloc())
+	result_ := C.C_WKNavigationAction_AllocNavigationAction()
+	return MakeNavigationAction(result_)
 }
 
-func (w WKNavigationAction) Init() NavigationAction {
+func (w WKNavigationAction) Init() WKNavigationAction {
 	result_ := C.C_WKNavigationAction_Init(w.Ptr())
+	return MakeNavigationAction(result_)
+}
+
+func NewNavigationAction() WKNavigationAction {
+	result_ := C.C_WKNavigationAction_NewNavigationAction()
+	return MakeNavigationAction(result_)
+}
+
+func (w WKNavigationAction) Autorelease() WKNavigationAction {
+	result_ := C.C_WKNavigationAction_Autorelease(w.Ptr())
+	return MakeNavigationAction(result_)
+}
+
+func (w WKNavigationAction) Retain() WKNavigationAction {
+	result_ := C.C_WKNavigationAction_Retain(w.Ptr())
 	return MakeNavigationAction(result_)
 }
 

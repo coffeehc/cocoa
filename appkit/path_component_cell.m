@@ -23,6 +23,28 @@ void* C_NSPathComponentCell_Init(void* ptr) {
     return result_;
 }
 
+void* C_NSPathComponentCell_AllocPathComponentCell() {
+    NSPathComponentCell* result_ = [NSPathComponentCell alloc];
+    return result_;
+}
+
+void* C_NSPathComponentCell_NewPathComponentCell() {
+    NSPathComponentCell* result_ = [NSPathComponentCell new];
+    return result_;
+}
+
+void* C_NSPathComponentCell_Autorelease(void* ptr) {
+    NSPathComponentCell* nSPathComponentCell = (NSPathComponentCell*)ptr;
+    NSPathComponentCell* result_ = [nSPathComponentCell autorelease];
+    return result_;
+}
+
+void* C_NSPathComponentCell_Retain(void* ptr) {
+    NSPathComponentCell* nSPathComponentCell = (NSPathComponentCell*)ptr;
+    NSPathComponentCell* result_ = [nSPathComponentCell retain];
+    return result_;
+}
+
 void* C_NSPathComponentCell_URL(void* ptr) {
     NSPathComponentCell* nSPathComponentCell = (NSPathComponentCell*)ptr;
     NSURL* result_ = [nSPathComponentCell URL];

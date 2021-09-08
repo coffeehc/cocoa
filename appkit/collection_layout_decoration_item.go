@@ -4,6 +4,7 @@ package appkit
 import "C"
 import (
 	"github.com/hsiafan/cocoa/foundation"
+	"github.com/hsiafan/cocoa/objc"
 	"unsafe"
 )
 
@@ -24,12 +25,42 @@ func MakeCollectionLayoutDecorationItem(ptr unsafe.Pointer) NSCollectionLayoutDe
 	}
 }
 
-func AllocCollectionLayoutDecorationItem() NSCollectionLayoutDecorationItem {
-	return MakeCollectionLayoutDecorationItem(C.C_CollectionLayoutDecorationItem_Alloc())
+func CollectionLayoutDecorationItem_BackgroundDecorationItemWithElementKind(elementKind string) NSCollectionLayoutDecorationItem {
+	result_ := C.C_NSCollectionLayoutDecorationItem_CollectionLayoutDecorationItem_BackgroundDecorationItemWithElementKind(foundation.NewString(elementKind).Ptr())
+	return MakeCollectionLayoutDecorationItem(result_)
 }
 
-func CollectionLayoutDecorationItem_BackgroundDecorationItemWithElementKind(elementKind string) CollectionLayoutDecorationItem {
-	result_ := C.C_NSCollectionLayoutDecorationItem_CollectionLayoutDecorationItem_BackgroundDecorationItemWithElementKind(foundation.NewString(elementKind).Ptr())
+func CollectionLayoutDecorationItem_ItemWithLayoutSize(layoutSize CollectionLayoutSize) NSCollectionLayoutDecorationItem {
+	result_ := C.C_NSCollectionLayoutDecorationItem_CollectionLayoutDecorationItem_ItemWithLayoutSize(objc.ExtractPtr(layoutSize))
+	return MakeCollectionLayoutDecorationItem(result_)
+}
+
+func CollectionLayoutDecorationItem_ItemWithLayoutSize_SupplementaryItems(layoutSize CollectionLayoutSize, supplementaryItems []CollectionLayoutSupplementaryItem) NSCollectionLayoutDecorationItem {
+	var cSupplementaryItems C.Array
+	if len(supplementaryItems) > 0 {
+		cSupplementaryItemsData := make([]unsafe.Pointer, len(supplementaryItems))
+		for idx, v := range supplementaryItems {
+			cSupplementaryItemsData[idx] = objc.ExtractPtr(v)
+		}
+		cSupplementaryItems.data = unsafe.Pointer(&cSupplementaryItemsData[0])
+		cSupplementaryItems.len = C.int(len(supplementaryItems))
+	}
+	result_ := C.C_NSCollectionLayoutDecorationItem_CollectionLayoutDecorationItem_ItemWithLayoutSize_SupplementaryItems(objc.ExtractPtr(layoutSize), cSupplementaryItems)
+	return MakeCollectionLayoutDecorationItem(result_)
+}
+
+func AllocCollectionLayoutDecorationItem() NSCollectionLayoutDecorationItem {
+	result_ := C.C_NSCollectionLayoutDecorationItem_AllocCollectionLayoutDecorationItem()
+	return MakeCollectionLayoutDecorationItem(result_)
+}
+
+func (n NSCollectionLayoutDecorationItem) Autorelease() NSCollectionLayoutDecorationItem {
+	result_ := C.C_NSCollectionLayoutDecorationItem_Autorelease(n.Ptr())
+	return MakeCollectionLayoutDecorationItem(result_)
+}
+
+func (n NSCollectionLayoutDecorationItem) Retain() NSCollectionLayoutDecorationItem {
+	result_ := C.C_NSCollectionLayoutDecorationItem_Retain(n.Ptr())
 	return MakeCollectionLayoutDecorationItem(result_)
 }
 

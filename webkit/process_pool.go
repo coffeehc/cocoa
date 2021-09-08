@@ -22,10 +22,26 @@ func MakeProcessPool(ptr unsafe.Pointer) WKProcessPool {
 }
 
 func AllocProcessPool() WKProcessPool {
-	return MakeProcessPool(C.C_ProcessPool_Alloc())
+	result_ := C.C_WKProcessPool_AllocProcessPool()
+	return MakeProcessPool(result_)
 }
 
-func (w WKProcessPool) Init() ProcessPool {
+func (w WKProcessPool) Init() WKProcessPool {
 	result_ := C.C_WKProcessPool_Init(w.Ptr())
+	return MakeProcessPool(result_)
+}
+
+func NewProcessPool() WKProcessPool {
+	result_ := C.C_WKProcessPool_NewProcessPool()
+	return MakeProcessPool(result_)
+}
+
+func (w WKProcessPool) Autorelease() WKProcessPool {
+	result_ := C.C_WKProcessPool_Autorelease(w.Ptr())
+	return MakeProcessPool(result_)
+}
+
+func (w WKProcessPool) Retain() WKProcessPool {
+	result_ := C.C_WKProcessPool_Retain(w.Ptr())
 	return MakeProcessPool(result_)
 }

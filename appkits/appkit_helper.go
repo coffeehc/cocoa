@@ -9,7 +9,7 @@ import (
 
 // NewPlainButton return a new common used Button
 func NewPlainButton(title string) appkit.Button {
-	btn := appkit.AllocButton().Init()
+	btn := appkit.NewButton().Autorelease()
 	btn.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	btn.SetBezelStyle(appkit.BezelStyleRounded)
 	btn.SetTitle(title)
@@ -18,7 +18,7 @@ func NewPlainButton(title string) appkit.Button {
 
 // NewCheckBox return a new common used switch Button
 func NewCheckBox(title string) appkit.Button {
-	btn := appkit.AllocButton().Init()
+	btn := appkit.NewButton().Autorelease()
 	btn.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	btn.SetButtonType(appkit.ButtonTypeSwitch)
 	btn.SetTitle(title)
@@ -27,7 +27,7 @@ func NewCheckBox(title string) appkit.Button {
 
 // NewRadioButton return a new common used radio Button
 func NewRadioButton(title string) appkit.Button {
-	btn := appkit.AllocButton().Init()
+	btn := appkit.NewButton().Autorelease()
 	btn.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	btn.SetButtonType(appkit.ButtonTypeRadio)
 	btn.SetTitle(title)
@@ -36,7 +36,7 @@ func NewRadioButton(title string) appkit.Button {
 
 // NewLabel create a text field, which looks like a Label
 func NewLabel(title string) appkit.TextField {
-	tf := appkit.AllocTextField().Init()
+	tf := appkit.NewTextField().Autorelease()
 	tf.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	tf.SetBezeled(false)
 	tf.SetDrawsBackground(false)
@@ -48,24 +48,24 @@ func NewLabel(title string) appkit.TextField {
 
 // NewTextField return a plain TextField
 func NewTextField() appkit.TextField {
-	field := appkit.AllocTextField().Init()
-	field.SetTranslatesAutoresizingMaskIntoConstraints(false)
-	field.SetUsesSingleLineMode(true)
-	cell := field.Cell()
+	tf := appkit.NewTextField().Autorelease()
+	tf.SetTranslatesAutoresizingMaskIntoConstraints(false)
+	tf.SetUsesSingleLineMode(true)
+	cell := tf.Cell()
 	cell.SetScrollable(true)
 	cell.SetWraps(false)
-	return field
+	return tf
 }
 
 // NewSecureTextField return a plain SecureTextField
 func NewSecureTextField() appkit.SecureTextField {
-	field := appkit.AllocSecureTextField().Init()
-	field.SetTranslatesAutoresizingMaskIntoConstraints(false)
-	field.SetUsesSingleLineMode(true)
-	cell := field.Cell()
+	stf := appkit.NewSecureTextField().Autorelease()
+	stf.SetTranslatesAutoresizingMaskIntoConstraints(false)
+	stf.SetUsesSingleLineMode(true)
+	cell := stf.Cell()
 	cell.SetScrollable(true)
 	cell.SetWraps(false)
-	return field
+	return stf
 }
 
 // NewWindow create a common window with close/minimize buttons
@@ -75,7 +75,7 @@ func NewWindow(width, height float64) appkit.Window {
 		appkit.WindowStyleMaskTitled|appkit.WindowStyleMaskClosable|appkit.WindowStyleMaskResizable|appkit.WindowStyleMaskMiniaturizable,
 		appkit.BackingStoreBuffered,
 		false,
-	)
+	).Autorelease()
 }
 
 // NewWindowWithStyle create a common window with styles
@@ -85,31 +85,31 @@ func NewWindowWithStyle(width, height float64, style appkit.WindowStyleMask) app
 		style,
 		appkit.BackingStoreBuffered,
 		false,
-	)
+	).Autorelease()
 }
 
 // NewMenuItem create a new menu item, with selector
 func NewMenuItem(title string, charCode string, selector objc.Selector) appkit.MenuItem {
-	return appkit.AllocMenuItem().InitWithTitle_Action_KeyEquivalent(title, selector, charCode)
+	return appkit.AllocMenuItem().InitWithTitle_Action_KeyEquivalent(title, selector, charCode).Autorelease()
 }
 
 // NewMenuItemWithAction create a new menu item with action
 func NewMenuItemWithAction(title string, charCode string, handler actions.ActionHandler) appkit.MenuItem {
-	item := appkit.AllocMenuItem().InitWithTitle_Action_KeyEquivalent(title, nil, charCode)
+	item := appkit.AllocMenuItem().InitWithTitle_Action_KeyEquivalent(title, nil, charCode).Autorelease()
 	actions.Set(item, handler)
 	return item
 }
 
 // NewSubMenuItem create a menu item that hold a sub menu
 func NewSubMenuItem(menu appkit.Menu) appkit.MenuItem {
-	item := appkit.AllocMenuItem().InitWithTitle_Action_KeyEquivalent("", nil, "")
+	item := appkit.AllocMenuItem().InitWithTitle_Action_KeyEquivalent("", nil, "").Autorelease()
 	item.SetMenu(menu)
 	return item
 }
 
 // NewView create new View
 func NewView() appkit.View {
-	v := appkit.AllocView().Init()
+	v := appkit.NewView().Autorelease()
 	v.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	return v
 }
@@ -145,7 +145,7 @@ func NewScrollableTextView() TextScrollView {
 
 // NewVerticalStackView return a new vertical StackView
 func NewVerticalStackView() appkit.StackView {
-	sv := appkit.AllocStackView().Init()
+	sv := appkit.NewStackView().Autorelease()
 	sv.SetOrientation(appkit.UserInterfaceLayoutOrientationVertical)
 	sv.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	return sv
@@ -153,7 +153,7 @@ func NewVerticalStackView() appkit.StackView {
 
 // NewHorizontalStackView return a new horizontal StackView
 func NewHorizontalStackView() appkit.StackView {
-	sv := appkit.AllocStackView().Init()
+	sv := appkit.NewStackView().Autorelease()
 	sv.SetOrientation(appkit.UserInterfaceLayoutOrientationHorizontal)
 	sv.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	return sv

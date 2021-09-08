@@ -47,22 +47,38 @@ func MakeSplitView(ptr unsafe.Pointer) NSSplitView {
 	}
 }
 
-func AllocSplitView() NSSplitView {
-	return MakeSplitView(C.C_SplitView_Alloc())
-}
-
-func (n NSSplitView) InitWithFrame(frameRect foundation.Rect) SplitView {
+func (n NSSplitView) InitWithFrame(frameRect foundation.Rect) NSSplitView {
 	result_ := C.C_NSSplitView_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeSplitView(result_)
 }
 
-func (n NSSplitView) InitWithCoder(coder foundation.Coder) SplitView {
+func (n NSSplitView) InitWithCoder(coder foundation.Coder) NSSplitView {
 	result_ := C.C_NSSplitView_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeSplitView(result_)
 }
 
-func (n NSSplitView) Init() SplitView {
+func (n NSSplitView) Init() NSSplitView {
 	result_ := C.C_NSSplitView_Init(n.Ptr())
+	return MakeSplitView(result_)
+}
+
+func AllocSplitView() NSSplitView {
+	result_ := C.C_NSSplitView_AllocSplitView()
+	return MakeSplitView(result_)
+}
+
+func NewSplitView() NSSplitView {
+	result_ := C.C_NSSplitView_NewSplitView()
+	return MakeSplitView(result_)
+}
+
+func (n NSSplitView) Autorelease() NSSplitView {
+	result_ := C.C_NSSplitView_Autorelease(n.Ptr())
+	return MakeSplitView(result_)
+}
+
+func (n NSSplitView) Retain() NSSplitView {
+	result_ := C.C_NSSplitView_Retain(n.Ptr())
 	return MakeSplitView(result_)
 }
 

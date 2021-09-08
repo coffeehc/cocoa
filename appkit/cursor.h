@@ -7,7 +7,11 @@ void* C_Cursor_Alloc();
 
 void* C_NSCursor_InitWithImage_HotSpot(void* ptr, void* newImage, CGPoint point);
 void* C_NSCursor_InitWithCoder(void* ptr, void* coder);
+void* C_NSCursor_AllocCursor();
 void* C_NSCursor_Init(void* ptr);
+void* C_NSCursor_NewCursor();
+void* C_NSCursor_Autorelease(void* ptr);
+void* C_NSCursor_Retain(void* ptr);
 void C_NSCursor_Cursor_Hide();
 void C_NSCursor_Cursor_Unhide();
 void C_NSCursor_Cursor_SetHiddenUntilMouseMoves(bool flag);

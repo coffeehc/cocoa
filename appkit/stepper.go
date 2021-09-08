@@ -33,22 +33,38 @@ func MakeStepper(ptr unsafe.Pointer) NSStepper {
 	}
 }
 
-func AllocStepper() NSStepper {
-	return MakeStepper(C.C_Stepper_Alloc())
-}
-
-func (n NSStepper) InitWithFrame(frameRect foundation.Rect) Stepper {
+func (n NSStepper) InitWithFrame(frameRect foundation.Rect) NSStepper {
 	result_ := C.C_NSStepper_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
 	return MakeStepper(result_)
 }
 
-func (n NSStepper) InitWithCoder(coder foundation.Coder) Stepper {
+func (n NSStepper) InitWithCoder(coder foundation.Coder) NSStepper {
 	result_ := C.C_NSStepper_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeStepper(result_)
 }
 
-func (n NSStepper) Init() Stepper {
+func (n NSStepper) Init() NSStepper {
 	result_ := C.C_NSStepper_Init(n.Ptr())
+	return MakeStepper(result_)
+}
+
+func AllocStepper() NSStepper {
+	result_ := C.C_NSStepper_AllocStepper()
+	return MakeStepper(result_)
+}
+
+func NewStepper() NSStepper {
+	result_ := C.C_NSStepper_NewStepper()
+	return MakeStepper(result_)
+}
+
+func (n NSStepper) Autorelease() NSStepper {
+	result_ := C.C_NSStepper_Autorelease(n.Ptr())
+	return MakeStepper(result_)
+}
+
+func (n NSStepper) Retain() NSStepper {
+	result_ := C.C_NSStepper_Retain(n.Ptr())
 	return MakeStepper(result_)
 }
 

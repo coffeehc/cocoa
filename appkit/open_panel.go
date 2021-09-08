@@ -38,22 +38,43 @@ func MakeOpenPanel(ptr unsafe.Pointer) NSOpenPanel {
 	}
 }
 
-func AllocOpenPanel() NSOpenPanel {
-	return MakeOpenPanel(C.C_OpenPanel_Alloc())
+func OpenPanel_WindowWithContentViewController(contentViewController ViewController) NSOpenPanel {
+	result_ := C.C_NSOpenPanel_OpenPanel_WindowWithContentViewController(objc.ExtractPtr(contentViewController))
+	return MakeOpenPanel(result_)
 }
 
-func (n NSOpenPanel) InitWithContentRect_StyleMask_Backing_Defer(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool) OpenPanel {
+func (n NSOpenPanel) InitWithContentRect_StyleMask_Backing_Defer(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool) NSOpenPanel {
 	result_ := C.C_NSOpenPanel_InitWithContentRect_StyleMask_Backing_Defer(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag))
 	return MakeOpenPanel(result_)
 }
 
-func (n NSOpenPanel) InitWithContentRect_StyleMask_Backing_Defer_Screen(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool, screen Screen) OpenPanel {
+func (n NSOpenPanel) InitWithContentRect_StyleMask_Backing_Defer_Screen(contentRect foundation.Rect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool, screen Screen) NSOpenPanel {
 	result_ := C.C_NSOpenPanel_InitWithContentRect_StyleMask_Backing_Defer_Screen(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(contentRect))), C.uint(uint(style)), C.uint(uint(backingStoreType)), C.bool(flag), objc.ExtractPtr(screen))
 	return MakeOpenPanel(result_)
 }
 
-func (n NSOpenPanel) Init() OpenPanel {
+func (n NSOpenPanel) Init() NSOpenPanel {
 	result_ := C.C_NSOpenPanel_Init(n.Ptr())
+	return MakeOpenPanel(result_)
+}
+
+func AllocOpenPanel() NSOpenPanel {
+	result_ := C.C_NSOpenPanel_AllocOpenPanel()
+	return MakeOpenPanel(result_)
+}
+
+func NewOpenPanel() NSOpenPanel {
+	result_ := C.C_NSOpenPanel_NewOpenPanel()
+	return MakeOpenPanel(result_)
+}
+
+func (n NSOpenPanel) Autorelease() NSOpenPanel {
+	result_ := C.C_NSOpenPanel_Autorelease(n.Ptr())
+	return MakeOpenPanel(result_)
+}
+
+func (n NSOpenPanel) Retain() NSOpenPanel {
+	result_ := C.C_NSOpenPanel_Retain(n.Ptr())
 	return MakeOpenPanel(result_)
 }
 

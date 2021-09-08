@@ -5,9 +5,31 @@ void* C_PathControlItem_Alloc() {
     return [NSPathControlItem alloc];
 }
 
+void* C_NSPathControlItem_AllocPathControlItem() {
+    NSPathControlItem* result_ = [NSPathControlItem alloc];
+    return result_;
+}
+
 void* C_NSPathControlItem_Init(void* ptr) {
     NSPathControlItem* nSPathControlItem = (NSPathControlItem*)ptr;
     NSPathControlItem* result_ = [nSPathControlItem init];
+    return result_;
+}
+
+void* C_NSPathControlItem_NewPathControlItem() {
+    NSPathControlItem* result_ = [NSPathControlItem new];
+    return result_;
+}
+
+void* C_NSPathControlItem_Autorelease(void* ptr) {
+    NSPathControlItem* nSPathControlItem = (NSPathControlItem*)ptr;
+    NSPathControlItem* result_ = [nSPathControlItem autorelease];
+    return result_;
+}
+
+void* C_NSPathControlItem_Retain(void* ptr) {
+    NSPathControlItem* nSPathControlItem = (NSPathControlItem*)ptr;
+    NSPathControlItem* result_ = [nSPathControlItem retain];
     return result_;
 }
 

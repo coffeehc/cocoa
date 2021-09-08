@@ -29,17 +29,33 @@ func MakeValue(ptr unsafe.Pointer) NSValue {
 	}
 }
 
-func AllocValue() NSValue {
-	return MakeValue(C.C_Value_Alloc())
-}
-
-func (n NSValue) InitWithCoder(coder Coder) Value {
+func (n NSValue) InitWithCoder(coder Coder) NSValue {
 	result_ := C.C_NSValue_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakeValue(result_)
 }
 
-func (n NSValue) Init() Value {
+func AllocValue() NSValue {
+	result_ := C.C_NSValue_AllocValue()
+	return MakeValue(result_)
+}
+
+func (n NSValue) Init() NSValue {
 	result_ := C.C_NSValue_Init(n.Ptr())
+	return MakeValue(result_)
+}
+
+func NewValue() NSValue {
+	result_ := C.C_NSValue_NewValue()
+	return MakeValue(result_)
+}
+
+func (n NSValue) Autorelease() NSValue {
+	result_ := C.C_NSValue_Autorelease(n.Ptr())
+	return MakeValue(result_)
+}
+
+func (n NSValue) Retain() NSValue {
+	result_ := C.C_NSValue_Retain(n.Ptr())
 	return MakeValue(result_)
 }
 

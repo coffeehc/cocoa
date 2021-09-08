@@ -5,6 +5,11 @@ void* C_ImageView_Alloc() {
     return [NSImageView alloc];
 }
 
+void* C_NSImageView_ImageViewWithImage(void* image) {
+    NSImageView* result_ = [NSImageView imageViewWithImage:(NSImage*)image];
+    return result_;
+}
+
 void* C_NSImageView_InitWithFrame(void* ptr, CGRect frameRect) {
     NSImageView* nSImageView = (NSImageView*)ptr;
     NSImageView* result_ = [nSImageView initWithFrame:frameRect];
@@ -23,8 +28,25 @@ void* C_NSImageView_Init(void* ptr) {
     return result_;
 }
 
-void* C_NSImageView_ImageViewWithImage(void* image) {
-    NSImageView* result_ = [NSImageView imageViewWithImage:(NSImage*)image];
+void* C_NSImageView_AllocImageView() {
+    NSImageView* result_ = [NSImageView alloc];
+    return result_;
+}
+
+void* C_NSImageView_NewImageView() {
+    NSImageView* result_ = [NSImageView new];
+    return result_;
+}
+
+void* C_NSImageView_Autorelease(void* ptr) {
+    NSImageView* nSImageView = (NSImageView*)ptr;
+    NSImageView* result_ = [nSImageView autorelease];
+    return result_;
+}
+
+void* C_NSImageView_Retain(void* ptr) {
+    NSImageView* nSImageView = (NSImageView*)ptr;
+    NSImageView* result_ = [nSImageView retain];
     return result_;
 }
 

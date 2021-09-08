@@ -7,7 +7,11 @@ void* C_TableColumn_Alloc();
 
 void* C_NSTableColumn_InitWithIdentifier(void* ptr, void* identifier);
 void* C_NSTableColumn_InitWithCoder(void* ptr, void* coder);
+void* C_NSTableColumn_AllocTableColumn();
 void* C_NSTableColumn_Init(void* ptr);
+void* C_NSTableColumn_NewTableColumn();
+void* C_NSTableColumn_Autorelease(void* ptr);
+void* C_NSTableColumn_Retain(void* ptr);
 void C_NSTableColumn_SizeToFit(void* ptr);
 void* C_NSTableColumn_TableView(void* ptr);
 void C_NSTableColumn_SetTableView(void* ptr, void* value);

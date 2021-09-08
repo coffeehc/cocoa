@@ -5,7 +5,11 @@
 
 void* C_GraphicsContext_Alloc();
 
+void* C_NSGraphicsContext_AllocGraphicsContext();
 void* C_NSGraphicsContext_Init(void* ptr);
+void* C_NSGraphicsContext_NewGraphicsContext();
+void* C_NSGraphicsContext_Autorelease(void* ptr);
+void* C_NSGraphicsContext_Retain(void* ptr);
 void* C_NSGraphicsContext_GraphicsContextWithAttributes(Dictionary attributes);
 void* C_NSGraphicsContext_GraphicsContextWithBitmapImageRep(void* bitmapRep);
 void* C_NSGraphicsContext_GraphicsContextWithCGContext_Flipped(void* graphicsPort, bool initialFlippedState);

@@ -5,9 +5,31 @@ void* C_MethodSignature_Alloc() {
     return [NSMethodSignature alloc];
 }
 
+void* C_NSMethodSignature_AllocMethodSignature() {
+    NSMethodSignature* result_ = [NSMethodSignature alloc];
+    return result_;
+}
+
 void* C_NSMethodSignature_Init(void* ptr) {
     NSMethodSignature* nSMethodSignature = (NSMethodSignature*)ptr;
     NSMethodSignature* result_ = [nSMethodSignature init];
+    return result_;
+}
+
+void* C_NSMethodSignature_NewMethodSignature() {
+    NSMethodSignature* result_ = [NSMethodSignature new];
+    return result_;
+}
+
+void* C_NSMethodSignature_Autorelease(void* ptr) {
+    NSMethodSignature* nSMethodSignature = (NSMethodSignature*)ptr;
+    NSMethodSignature* result_ = [nSMethodSignature autorelease];
+    return result_;
+}
+
+void* C_NSMethodSignature_Retain(void* ptr) {
+    NSMethodSignature* nSMethodSignature = (NSMethodSignature*)ptr;
+    NSMethodSignature* result_ = [nSMethodSignature retain];
     return result_;
 }
 

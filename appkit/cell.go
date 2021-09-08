@@ -155,27 +155,43 @@ func MakeCell(ptr unsafe.Pointer) NSCell {
 	}
 }
 
-func AllocCell() NSCell {
-	return MakeCell(C.C_Cell_Alloc())
-}
-
-func (n NSCell) InitImageCell(image Image) Cell {
+func (n NSCell) InitImageCell(image Image) NSCell {
 	result_ := C.C_NSCell_InitImageCell(n.Ptr(), objc.ExtractPtr(image))
 	return MakeCell(result_)
 }
 
-func (n NSCell) InitTextCell(_string string) Cell {
+func (n NSCell) InitTextCell(_string string) NSCell {
 	result_ := C.C_NSCell_InitTextCell(n.Ptr(), foundation.NewString(_string).Ptr())
 	return MakeCell(result_)
 }
 
-func (n NSCell) Init() Cell {
+func (n NSCell) Init() NSCell {
 	result_ := C.C_NSCell_Init(n.Ptr())
 	return MakeCell(result_)
 }
 
-func (n NSCell) InitWithCoder(coder foundation.Coder) Cell {
+func (n NSCell) InitWithCoder(coder foundation.Coder) NSCell {
 	result_ := C.C_NSCell_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
+	return MakeCell(result_)
+}
+
+func AllocCell() NSCell {
+	result_ := C.C_NSCell_AllocCell()
+	return MakeCell(result_)
+}
+
+func NewCell() NSCell {
+	result_ := C.C_NSCell_NewCell()
+	return MakeCell(result_)
+}
+
+func (n NSCell) Autorelease() NSCell {
+	result_ := C.C_NSCell_Autorelease(n.Ptr())
+	return MakeCell(result_)
+}
+
+func (n NSCell) Retain() NSCell {
+	result_ := C.C_NSCell_Retain(n.Ptr())
 	return MakeCell(result_)
 }
 

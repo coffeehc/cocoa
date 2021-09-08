@@ -23,9 +23,36 @@ void* C_NSTextView_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSTextView_TextView_FieldEditor() {
+    NSTextView* result_ = [NSTextView fieldEditor];
+    return result_;
+}
+
 void* C_NSTextView_Init(void* ptr) {
     NSTextView* nSTextView = (NSTextView*)ptr;
     NSTextView* result_ = [nSTextView init];
+    return result_;
+}
+
+void* C_NSTextView_AllocTextView() {
+    NSTextView* result_ = [NSTextView alloc];
+    return result_;
+}
+
+void* C_NSTextView_NewTextView() {
+    NSTextView* result_ = [NSTextView new];
+    return result_;
+}
+
+void* C_NSTextView_Autorelease(void* ptr) {
+    NSTextView* nSTextView = (NSTextView*)ptr;
+    NSTextView* result_ = [nSTextView autorelease];
+    return result_;
+}
+
+void* C_NSTextView_Retain(void* ptr) {
+    NSTextView* nSTextView = (NSTextView*)ptr;
+    NSTextView* result_ = [nSTextView retain];
     return result_;
 }
 
@@ -100,7 +127,7 @@ void C_NSTextView_ToggleAutomaticLinkDetection(void* ptr, void* sender) {
 
 void C_NSTextView_SetSelectedRanges_Affinity_StillSelecting(void* ptr, Array ranges, unsigned int affinity, bool stillSelectingFlag) {
     NSTextView* nSTextView = (NSTextView*)ptr;
-    NSMutableArray* objcRanges = [[NSMutableArray alloc] init];
+    NSMutableArray* objcRanges = [NSMutableArray arrayWithCapacity:ranges.len];
     if (ranges.len > 0) {
     	void** rangesData = (void**)ranges.data;
     	for (int i = 0; i < ranges.len; i++) {
@@ -124,7 +151,7 @@ unsigned int C_NSTextView_CharacterIndexForInsertionAtPoint(void* ptr, CGPoint p
 
 void* C_NSTextView_PreferredPasteboardTypeFromArray_RestrictedToTypesFromArray(void* ptr, Array availableTypes, Array allowedTypes) {
     NSTextView* nSTextView = (NSTextView*)ptr;
-    NSMutableArray* objcAvailableTypes = [[NSMutableArray alloc] init];
+    NSMutableArray* objcAvailableTypes = [NSMutableArray arrayWithCapacity:availableTypes.len];
     if (availableTypes.len > 0) {
     	void** availableTypesData = (void**)availableTypes.data;
     	for (int i = 0; i < availableTypes.len; i++) {
@@ -132,7 +159,7 @@ void* C_NSTextView_PreferredPasteboardTypeFromArray_RestrictedToTypesFromArray(v
     		[objcAvailableTypes addObject:(NSPasteboardType)(NSString*)p];
     	}
     }
-    NSMutableArray* objcAllowedTypes = [[NSMutableArray alloc] init];
+    NSMutableArray* objcAllowedTypes = [NSMutableArray arrayWithCapacity:allowedTypes.len];
     if (allowedTypes.len > 0) {
     	void** allowedTypesData = (void**)allowedTypes.data;
     	for (int i = 0; i < allowedTypes.len; i++) {
@@ -164,7 +191,7 @@ bool C_NSTextView_WriteSelectionToPasteboard_Type(void* ptr, void* pboard, void*
 
 bool C_NSTextView_WriteSelectionToPasteboard_Types(void* ptr, void* pboard, Array types) {
     NSTextView* nSTextView = (NSTextView*)ptr;
-    NSMutableArray* objcTypes = [[NSMutableArray alloc] init];
+    NSMutableArray* objcTypes = [NSMutableArray arrayWithCapacity:types.len];
     if (types.len > 0) {
     	void** typesData = (void**)types.data;
     	for (int i = 0; i < types.len; i++) {
@@ -290,7 +317,7 @@ bool C_NSTextView_ShouldChangeTextInRange_ReplacementString(void* ptr, NSRange a
 
 bool C_NSTextView_ShouldChangeTextInRanges_ReplacementStrings(void* ptr, Array affectedRanges, Array replacementStrings) {
     NSTextView* nSTextView = (NSTextView*)ptr;
-    NSMutableArray* objcAffectedRanges = [[NSMutableArray alloc] init];
+    NSMutableArray* objcAffectedRanges = [NSMutableArray arrayWithCapacity:affectedRanges.len];
     if (affectedRanges.len > 0) {
     	void** affectedRangesData = (void**)affectedRanges.data;
     	for (int i = 0; i < affectedRanges.len; i++) {
@@ -298,7 +325,7 @@ bool C_NSTextView_ShouldChangeTextInRanges_ReplacementStrings(void* ptr, Array a
     		[objcAffectedRanges addObject:(NSValue*)(NSValue*)p];
     	}
     }
-    NSMutableArray* objcReplacementStrings = [[NSMutableArray alloc] init];
+    NSMutableArray* objcReplacementStrings = [NSMutableArray arrayWithCapacity:replacementStrings.len];
     if (replacementStrings.len > 0) {
     	void** replacementStringsData = (void**)replacementStrings.data;
     	for (int i = 0; i < replacementStrings.len; i++) {
@@ -496,11 +523,6 @@ void C_NSTextView_UpdateTouchBarItemIdentifiers(void* ptr) {
     [nSTextView updateTouchBarItemIdentifiers];
 }
 
-void* C_NSTextView_TextView_FieldEditor() {
-    NSTextView* result_ = [NSTextView fieldEditor];
-    return result_;
-}
-
 void* C_NSTextView_ScrollableDocumentContentTextView() {
     NSScrollView* result_ = [NSTextView scrollableDocumentContentTextView];
     return result_;
@@ -592,7 +614,7 @@ Array C_NSTextView_AllowedInputSourceLocales(void* ptr) {
 
 void C_NSTextView_SetAllowedInputSourceLocales(void* ptr, Array value) {
     NSTextView* nSTextView = (NSTextView*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -715,7 +737,7 @@ Array C_NSTextView_SelectedRanges(void* ptr) {
 
 void C_NSTextView_SetSelectedRanges(void* ptr, Array value) {
     NSTextView* nSTextView = (NSTextView*)ptr;
-    NSMutableArray* objcValue = [[NSMutableArray alloc] init];
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
@@ -778,7 +800,7 @@ Dictionary C_NSTextView_SelectedTextAttributes(void* ptr) {
 
 void C_NSTextView_SetSelectedTextAttributes(void* ptr, Dictionary value) {
     NSTextView* nSTextView = (NSTextView*)ptr;
-    NSMutableDictionary* objcValue = [[NSMutableDictionary alloc] initWithCapacity: value.len];
+    NSMutableDictionary* objcValue = [NSMutableDictionary dictionaryWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueKeyData = (void**)value.key_data;
     	void** valueValueData = (void**)value.value_data;
@@ -815,7 +837,7 @@ Dictionary C_NSTextView_MarkedTextAttributes(void* ptr) {
 
 void C_NSTextView_SetMarkedTextAttributes(void* ptr, Dictionary value) {
     NSTextView* nSTextView = (NSTextView*)ptr;
-    NSMutableDictionary* objcValue = [[NSMutableDictionary alloc] initWithCapacity: value.len];
+    NSMutableDictionary* objcValue = [NSMutableDictionary dictionaryWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueKeyData = (void**)value.key_data;
     	void** valueValueData = (void**)value.value_data;
@@ -852,7 +874,7 @@ Dictionary C_NSTextView_LinkTextAttributes(void* ptr) {
 
 void C_NSTextView_SetLinkTextAttributes(void* ptr, Dictionary value) {
     NSTextView* nSTextView = (NSTextView*)ptr;
-    NSMutableDictionary* objcValue = [[NSMutableDictionary alloc] initWithCapacity: value.len];
+    NSMutableDictionary* objcValue = [NSMutableDictionary dictionaryWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueKeyData = (void**)value.key_data;
     	void** valueValueData = (void**)value.value_data;
@@ -923,7 +945,7 @@ Dictionary C_NSTextView_TypingAttributes(void* ptr) {
 
 void C_NSTextView_SetTypingAttributes(void* ptr, Dictionary value) {
     NSTextView* nSTextView = (NSTextView*)ptr;
-    NSMutableDictionary* objcValue = [[NSMutableDictionary alloc] initWithCapacity: value.len];
+    NSMutableDictionary* objcValue = [NSMutableDictionary dictionaryWithCapacity:value.len];
     if (value.len > 0) {
     	void** valueKeyData = (void**)value.key_data;
     	void** valueValueData = (void**)value.value_data;

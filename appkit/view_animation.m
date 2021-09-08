@@ -17,8 +17,30 @@ void* C_NSViewAnimation_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_NSViewAnimation_AllocViewAnimation() {
+    NSViewAnimation* result_ = [NSViewAnimation alloc];
+    return result_;
+}
+
 void* C_NSViewAnimation_Init(void* ptr) {
     NSViewAnimation* nSViewAnimation = (NSViewAnimation*)ptr;
     NSViewAnimation* result_ = [nSViewAnimation init];
+    return result_;
+}
+
+void* C_NSViewAnimation_NewViewAnimation() {
+    NSViewAnimation* result_ = [NSViewAnimation new];
+    return result_;
+}
+
+void* C_NSViewAnimation_Autorelease(void* ptr) {
+    NSViewAnimation* nSViewAnimation = (NSViewAnimation*)ptr;
+    NSViewAnimation* result_ = [nSViewAnimation autorelease];
+    return result_;
+}
+
+void* C_NSViewAnimation_Retain(void* ptr) {
+    NSViewAnimation* nSViewAnimation = (NSViewAnimation*)ptr;
+    NSViewAnimation* result_ = [nSViewAnimation retain];
     return result_;
 }
