@@ -18,21 +18,21 @@ type Dialog interface {
 	RunModal() appkit.ModalResponse
 }
 
-// DialogImpl implements Dialog
-type DialogImpl struct {
+// GoDialog implements Dialog
+type GoDialog struct {
 	appkit.NSPanel
 	content appkit.View
 	ok      appkit.Button
 	cancel  appkit.Button
 }
 
-// NewDialog create new DialogImpl
-func NewDialog(width, height float64) Dialog {
-	panel := appkit.AllocPanel().Init()
+// NewDialog create new GoDialog
+func NewDialog(width, height float64) *GoDialog {
+	panel := appkit.NewPanel().Autorelease()
 	panel.SetFrame_Display(foundation.MakeRect(0, 0, width, height), true)
 
 	contentView := panel.ContentView()
-	view := appkit.AllocView().Init()
+	view := appkit.NewView().Autorelease()
 	view.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	ok := NewPlainButton("OK")
 	cancel := NewPlainButton("Cancel")
@@ -50,7 +50,7 @@ func NewDialog(width, height float64) Dialog {
 	view.TopAnchor().ConstraintEqualToAnchor(contentView.TopAnchor()).SetActive(true)
 	view.RightAnchor().ConstraintEqualToAnchor(contentView.RightAnchor()).SetActive(true)
 
-	return &DialogImpl{
+	return &GoDialog{
 		NSPanel: panel,
 		content: view,
 		ok:      ok,
@@ -58,8 +58,8 @@ func NewDialog(width, height float64) Dialog {
 	}
 }
 
-// SetView set inner content view for DialogImpl
-func (d *DialogImpl) SetView(view appkit.View) {
+// SetView set inner content view for GoDialog
+func (d *GoDialog) SetView(view appkit.View) {
 	d.content.AddSubview(view)
 	view.LeftAnchor().ConstraintEqualToAnchor(d.content.LeftAnchor()).SetActive(true)
 	view.TopAnchor().ConstraintEqualToAnchor(d.content.TopAnchor()).SetActive(true)
@@ -67,7 +67,7 @@ func (d *DialogImpl) SetView(view appkit.View) {
 	view.BottomAnchor().ConstraintEqualToAnchor(d.content.BottomAnchor()).SetActive(true)
 }
 
-func (d *DialogImpl) Show(handle func()) {
+func (d *GoDialog) Show(handle func()) {
 	actions.Set(d.ok, func(sender objc.Object) {
 		handle()
 		d.Close()
@@ -80,7 +80,7 @@ func (d *DialogImpl) Show(handle func()) {
 	d.MakeKeyAndOrderFront(d.NSPanel)
 }
 
-func (d *DialogImpl) RunModal() appkit.ModalResponse {
+func (d *GoDialog) RunModal() appkit.ModalResponse {
 	app := appkit.SharedApplication()
 
 	actions.Set(d.ok, func(sender objc.Object) {

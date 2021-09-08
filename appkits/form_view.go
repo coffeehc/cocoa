@@ -33,37 +33,37 @@ const (
 	LabelAlignmentCenter   = 2
 )
 
-// FormViewImpl implements FormView
-type FormViewImpl struct {
+// GoFormView implements FormView
+type GoFormView struct {
 	appkit.NSGridView
 
 	labelFont appkit.Font
 }
 
 // NewFormView create new form view
-func NewFormView() FormView {
+func NewFormView() *GoFormView {
 	gv := appkit.GridViewWithNumberOfColumns_Rows(2, 0)
 	gv.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	gv.SetContentHuggingPriority_ForOrientation(appkit.LayoutPriorityDefaultHigh, appkit.LayoutConstraintOrientationHorizontal)
 	gv.SetContentHuggingPriority_ForOrientation(appkit.LayoutPriorityDefaultHigh, appkit.LayoutConstraintOrientationVertical)
 
-	return &FormViewImpl{
+	return &GoFormView{
 		NSGridView: gv,
 	}
 }
 
-func (f *FormViewImpl) AddExpandRow() {
-	v := appkit.AllocView().Init()
+func (f *GoFormView) AddExpandRow() {
+	v := appkit.NewView().Autorelease()
 	v.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	f.AddRowWithViews([]appkit.View{NewView(), NewView()})
 }
 
-func (f *FormViewImpl) AddRow(name string, control appkit.Control) {
+func (f *GoFormView) AddRow(name string, control appkit.Control) {
 	label := f.newLabel(name)
 	f.AddRowWithViews([]appkit.View{label, control})
 }
 
-func (f *FormViewImpl) InsertRow(index int, name string, control appkit.Control) {
+func (f *GoFormView) InsertRow(index int, name string, control appkit.Control) {
 	if index > f.NumberOfRows() {
 		panic("index out of row range")
 	}
@@ -71,15 +71,15 @@ func (f *FormViewImpl) InsertRow(index int, name string, control appkit.Control)
 	f.InsertRowAtIndex_WithViews(index, []appkit.View{label, control})
 }
 
-func (f *FormViewImpl) SetRowSpacing(spacing float64) {
+func (f *GoFormView) SetRowSpacing(spacing float64) {
 	f.SetRowSpacing(spacing)
 }
 
-func (f *FormViewImpl) SetLabelWidth(width float64) {
+func (f *GoFormView) SetLabelWidth(width float64) {
 	f.ColumnAtIndex(0).SetWidth(width)
 }
 
-func (f *FormViewImpl) SetLabelAlignment(alignment LabelAlignment) {
+func (f *GoFormView) SetLabelAlignment(alignment LabelAlignment) {
 	switch alignment {
 	case LabelAlignmentLeading:
 		f.ColumnAtIndex(0).SetXPlacement(appkit.GridCellPlacementLeading)
@@ -90,7 +90,7 @@ func (f *FormViewImpl) SetLabelAlignment(alignment LabelAlignment) {
 	}
 }
 
-func (f *FormViewImpl) SetLabelFont(font appkit.Font) {
+func (f *GoFormView) SetLabelFont(font appkit.Font) {
 	f.labelFont = font
 	labelColumn := f.ColumnAtIndex(0)
 	size := labelColumn.NumberOfCells()
@@ -101,11 +101,11 @@ func (f *FormViewImpl) SetLabelFont(font appkit.Font) {
 	}
 }
 
-func (f *FormViewImpl) SetLabelControlSpacing(spacing float64) {
+func (f *GoFormView) SetLabelControlSpacing(spacing float64) {
 	f.SetColumnSpacing(spacing)
 }
 
-func (f *FormViewImpl) newLabel(name string) appkit.TextField {
+func (f *GoFormView) newLabel(name string) appkit.TextField {
 	label := NewLabel(name)
 	label.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	if f.labelFont != nil && f.labelFont.Ptr() != nil {
