@@ -4,6 +4,7 @@ import (
 	"github.com/hsiafan/cocoa/appkit"
 	"github.com/hsiafan/cocoa/appkits"
 	"github.com/hsiafan/cocoa/foundation"
+	"github.com/hsiafan/cocoa/helper/delegates"
 	"github.com/hsiafan/cocoa/objc"
 	"runtime"
 )
@@ -40,7 +41,7 @@ func initAndRun() {
 	w.MakeKeyAndOrderFront(nil)
 	w.Center()
 
-	appDelegate := &appkit.ApplicationDelegate{
+	delegates.Set(app, &appkit.ApplicationDelegate{
 		ApplicationDidFinishLaunching: func(notification foundation.Notification) {
 			app.SetActivationPolicy(appkit.ApplicationActivationPolicyRegular)
 			app.ActivateIgnoringOtherApps(true)
@@ -48,8 +49,7 @@ func initAndRun() {
 		ApplicationShouldTerminateAfterLastWindowClosed: func(sender appkit.Application) bool {
 			return true
 		},
-	}
-	app.SetDelegate(appDelegate.ToObjc())
+	})
 
 	app.Run()
 }

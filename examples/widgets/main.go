@@ -6,6 +6,7 @@ import (
 	"github.com/hsiafan/cocoa/appkits"
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/helper/actions"
+	"github.com/hsiafan/cocoa/helper/delegates"
 	"github.com/hsiafan/cocoa/objc"
 	"runtime"
 	"time"
@@ -104,14 +105,13 @@ func initAndRun() {
 	label := appkits.NewLabel("")
 	label.SetFrame(foundation.MakeRect(170, 100, 150, 25))
 	w.ContentView().AddSubview(label)
-	tfDelegate := &appkit.TextFieldDelegate{
+	delegates.Set(tf, &appkit.TextFieldDelegate{
 		ControlTextDidChange: func(obj foundation.Notification) {
 			objc.DispatchAsyncToMainQueue(func() {
 				label.SetStringValue(tf.StringValue())
 			})
 		},
-	}
-	tf.SetDelegate(tfDelegate.ToObjc())
+	})
 	actions.Set(btn, func(sender objc.Object) {
 		label.SetTextColor(appkit.RedColor())
 	})
@@ -119,14 +119,13 @@ func initAndRun() {
 	// password
 	stf := appkits.NewSecureTextField()
 	stf.SetFrame(foundation.MakeRect(340, 100, 150, 25))
-	stfDelegate := &appkit.TextFieldDelegate{
+	delegates.Set(stf, &appkit.TextFieldDelegate{
 		ControlTextDidChange: func(obj foundation.Notification) {
 			objc.DispatchAsyncToMainQueue(func() {
 				label.SetStringValue(tf.StringValue())
 			})
 		},
-	}
-	stf.SetDelegate(stfDelegate.ToObjc())
+	})
 	w.ContentView().AddSubview(stf)
 
 	// progress indicator
@@ -162,17 +161,16 @@ func initAndRun() {
 	appkit.MakeTextView(sv2.DocumentView().Ptr()).SetAllowsUndo(true)
 	w.ContentView().AddSubview(sv2)
 
-	winDelegate := &appkit.WindowDelegate{
+	delegates.Set(w, &appkit.WindowDelegate{
 		WindowDidMove: func(notification foundation.Notification) {
 			frame := w.Frame()
 			fmt.Println("window move to ", frame.Origin.X, frame.Origin.Y)
 		},
-	}
-	w.SetDelegate(winDelegate.ToObjc())
+	})
 	w.Center()
 	w.MakeKeyAndOrderFront(nil)
 
-	appDelegate := &appkit.ApplicationDelegate{
+	delegates.Set(app, &appkit.ApplicationDelegate{
 		ApplicationDidFinishLaunching: func(notification foundation.Notification) {
 			app.SetActivationPolicy(appkit.ApplicationActivationPolicyRegular)
 			app.ActivateIgnoringOtherApps(true)
@@ -180,8 +178,7 @@ func initAndRun() {
 		ApplicationShouldTerminateAfterLastWindowClosed: func(sender appkit.Application) bool {
 			return true
 		},
-	}
-	app.SetDelegate(appDelegate.ToObjc())
+	})
 
 	app.Run()
 }
