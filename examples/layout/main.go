@@ -83,6 +83,6 @@ func initAndRun() {
 }
 
 func main() {
-	objc.WithAutoreleasePool(initAndRun)
+	initAndRun()
 
 }

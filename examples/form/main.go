@@ -5,7 +5,6 @@ import (
 	"github.com/hsiafan/cocoa/appkits"
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/helper/delegates"
-	"github.com/hsiafan/cocoa/objc"
 	"runtime"
 )
 
@@ -55,6 +54,5 @@ func initAndRun() {
 }
 
 func main() {
-	objc.WithAutoreleasePool(initAndRun)
-
+	initAndRun()
 }
