@@ -14,3 +14,4 @@ void Object_Dealloc(void* ptr);
 void* Object_PerformSelector(void* ptr, void* sel_p);
 void* Object_PerformSelector_WithObject(void* ptr, void* sel_p, void* param);
 void* Object_PerformSelector_WithObject_WithObject(void* ptr, void* sel_p, void* param1, void* param2);
+const char* Object_Description(void* ptr);

@@ -1,4 +1,5 @@
 #import <objc/NSObject.h>
+#import <Foundation/NSString.h>
 #import "object.h"
 #include "_cgo_export.h"
 #import <objc/runtime.h>
@@ -64,4 +65,8 @@ void* Object_PerformSelector_WithObject(void* ptr, void* sel_p, void* param) {
 void* Object_PerformSelector_WithObject_WithObject(void* ptr, void* sel_p, void* param1, void* param2) {
     NSObject* obj = (NSObject*)ptr;
     return [obj performSelector:(SEL)sel_p withObject:(NSObject*)param1  withObject:(NSObject*)param2];
+}
+
+const char* Object_Description(void* ptr) {
+    return [[((NSObject*)ptr) description]UTF8String];
 }

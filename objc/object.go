@@ -3,6 +3,7 @@ package objc
 // #import "object.h"
 import "C"
 import (
+	"fmt"
 	"unsafe"
 )
 
@@ -15,14 +16,18 @@ type PointerHolder interface {
 // Object is interface for all objc NSObject type
 type Object interface {
 	PointerHolder
+	fmt.Stringer
 	// Retain0 call retain, but return no value, to avoiding subtypes return type conflicting
 	Retain0()
 	Release()
 	// Autorelease0 call autorelease, but return no value, to avoiding subtypes return type conflicting
 	Autorelease0()
-	Copy() Object
-	MutableCopy() Object
+
+	//Copy() Object
+	//MutableCopy() Object
+
 	Dealloc()
+	Description() string
 }
 
 // ExtractPtr return the objc ptr hold by Object. If is nil, or contains a nil pointer, return nil
@@ -40,6 +45,10 @@ type NSObject struct {
 
 func MakeObject(ptr unsafe.Pointer) NSObject {
 	return NSObject{ptr}
+}
+
+func (o NSObject) Ptr() unsafe.Pointer {
+	return o.ptr
 }
 
 func AllocObject() NSObject {
@@ -125,6 +134,10 @@ func (o NSObject) Dealloc() {
 	C.Object_Dealloc(o.Ptr())
 }
 
-func (o NSObject) Ptr() unsafe.Pointer {
-	return o.ptr
+func (o NSObject) Description() string {
+	return C.GoString(C.Object_Description(o.Ptr()))
+}
+
+func (o NSObject) String() string {
+	return o.Description()
 }
