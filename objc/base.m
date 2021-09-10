@@ -15,3 +15,22 @@ void Run_WithAutoreleasePool(uintptr_t ptr) {
         runTask(ptr);
     }
 }
+
+@interface Parasite : NSObject
+@property(nonatomic, assign) uintptr_t hookPtr;
+@end
+
+@implementation Parasite
+- (void)dealloc {
+    runDeallocTask(self.hookPtr);
+    [super dealloc];
+}
+@end
+
+static void *kDeallocHookAssociation = &kDeallocHookAssociation;
+
+void Dealloc_AddHook(void* ptr, uintptr_t hookPtr) {
+    Parasite *parasite = [Parasite alloc];
+    parasite.hookPtr = hookPtr;
+    objc_setAssociatedObject((NSObject*)ptr, &kDeallocHookAssociation, parasite, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}

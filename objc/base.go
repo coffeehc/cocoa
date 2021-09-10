@@ -26,3 +26,20 @@ func runTask(p C.uintptr_t) {
 	task()
 	h.Delete()
 }
+
+// AddDeallocHook add cocoa object dealloc hook
+func AddDeallocHook(obj Object, hook func()) {
+	if obj.Ptr() == nil {
+		panic("cocoa pointer is nil")
+	}
+	h := cgo.NewHandle(hook)
+	C.Dealloc_AddHook(obj.Ptr(), C.uintptr_t(h))
+}
+
+//export runDeallocTask
+func runDeallocTask(p C.uintptr_t) {
+	h := cgo.Handle(p)
+	task := h.Value().(func())
+	task()
+	h.Delete()
+}

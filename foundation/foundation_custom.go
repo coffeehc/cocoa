@@ -82,7 +82,7 @@ func MakeData(ptr unsafe.Pointer) NSData {
 func NewData(bytes []byte) NSData {
 	size := len(bytes)
 	var p unsafe.Pointer
-	if size <= 0 {
+	if size == 0 {
 		p = C.Data_New(unsafe.Pointer(nil), 0)
 	} else {
 		p = C.Data_New(unsafe.Pointer(&bytes[0]), C.int(size))

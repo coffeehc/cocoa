@@ -3,11 +3,10 @@ package objc
 // #import "object.h"
 import "C"
 import (
-	"runtime/cgo"
 	"unsafe"
 )
 
-// PointerHolder is a interface for holding a objc pointer
+// PointerHolder is an interface for holding an objc pointer
 type PointerHolder interface {
 	// Ptr return the delegate objc pointer
 	Ptr() unsafe.Pointer
@@ -21,6 +20,8 @@ type Object interface {
 	Release()
 	// Autorelease0 call autorelease, but return no value, to avoiding subtypes return type conflicting
 	Autorelease0()
+	Copy() Object
+	MutableCopy() Object
 	Dealloc()
 }
 
@@ -35,6 +36,35 @@ func ExtractPtr(o PointerHolder) unsafe.Pointer {
 // NSObject is wrapper for objc-NSObject
 type NSObject struct {
 	ptr unsafe.Pointer
+}
+
+func MakeObject(ptr unsafe.Pointer) NSObject {
+	return NSObject{ptr}
+}
+
+func AllocObject() NSObject {
+	result_ := C.C_NSObject_AllocObject()
+	return MakeObject(result_)
+}
+
+func (o NSObject) Init() NSObject {
+	result_ := C.C_NSObject_Init(o.Ptr())
+	return MakeObject(result_)
+}
+
+func NewObject() NSObject {
+	result_ := C.C_NSObject_NewObject()
+	return MakeObject(result_)
+}
+
+func (o NSObject) Copy() Object {
+	result_ := C.C_NSObject_Copy(o.Ptr())
+	return MakeObject(result_)
+}
+
+func (o NSObject) MutableCopy() Object {
+	result_ := C.C_NSObject_MutableCopy(o.Ptr())
+	return MakeObject(result_)
 }
 
 func (o NSObject) PerformSelector(sel Selector) Object {
@@ -97,25 +127,4 @@ func (o NSObject) Dealloc() {
 
 func (o NSObject) Ptr() unsafe.Pointer {
 	return o.ptr
-}
-
-func MakeObject(ptr unsafe.Pointer) NSObject {
-	return NSObject{ptr}
-}
-
-// AddDeallocHook add cocoa object dealloc hook
-func AddDeallocHook(obj Object, hook func()) {
-	if obj.Ptr() == nil {
-		panic("cocoa pointer is nil")
-	}
-	h := cgo.NewHandle(hook)
-	C.Dealloc_AddHook(obj.Ptr(), C.uintptr_t(h))
-}
-
-//export runDeallocTask
-func runDeallocTask(p C.uintptr_t) {
-	h := cgo.Handle(p)
-	task := h.Value().(func())
-	task()
-	h.Delete()
 }
