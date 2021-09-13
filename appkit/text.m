@@ -70,7 +70,7 @@ void C_NSText_SelectAll(void* ptr, void* sender) {
     [nSText selectAll:(id)sender];
 }
 
-void C_NSText_Copy(void* ptr, void* sender) {
+void C_NSText_Copy_(void* ptr, void* sender) {
     NSText* nSText = (NSText*)ptr;
     [nSText copy:(id)sender];
 }

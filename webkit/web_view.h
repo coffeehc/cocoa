@@ -18,11 +18,16 @@ void* C_WKWebView_LoadHTMLString_BaseURL(void* ptr, void* _string, void* baseURL
 void* C_WKWebView_LoadFileURL_AllowingReadAccessToURL(void* ptr, void* URL, void* readAccessURL);
 void* C_WKWebView_LoadData_MIMEType_CharacterEncodingName_BaseURL(void* ptr, void* data, void* MIMEType, void* characterEncodingName, void* baseURL);
 void* C_WKWebView_Reload(void* ptr);
+void C_WKWebView_Reload_(void* ptr, void* sender);
 void* C_WKWebView_ReloadFromOrigin(void* ptr);
+void C_WKWebView_ReloadFromOrigin_(void* ptr, void* sender);
 void C_WKWebView_StopLoading(void* ptr);
+void C_WKWebView_StopLoading_(void* ptr, void* sender);
 void C_WKWebView_SetMagnification_CenteredAtPoint(void* ptr, double magnification, CGPoint point);
-void C_WKWebView_GoBack(void* ptr, void* sender);
-void C_WKWebView_GoForward(void* ptr, void* sender);
+void C_WKWebView_GoBack_(void* ptr, void* sender);
+void* C_WKWebView_GoBack(void* ptr);
+void C_WKWebView_GoForward_(void* ptr, void* sender);
+void* C_WKWebView_GoForward(void* ptr);
 void* C_WKWebView_GoToBackForwardListItem(void* ptr, void* item);
 void* C_WKWebView_PrintOperationWithPrintInfo(void* ptr, void* printInfo);
 void C_WKWebView_CloseAllMediaPresentations(void* ptr);

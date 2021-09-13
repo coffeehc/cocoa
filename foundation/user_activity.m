@@ -16,11 +16,6 @@ void* C_NSUserActivity_AllocUserActivity() {
     return result_;
 }
 
-void* C_NSUserActivity_NewUserActivity() {
-    NSUserActivity* result_ = [NSUserActivity new];
-    return result_;
-}
-
 void* C_NSUserActivity_Autorelease(void* ptr) {
     NSUserActivity* nSUserActivity = (NSUserActivity*)ptr;
     NSUserActivity* result_ = [nSUserActivity autorelease];

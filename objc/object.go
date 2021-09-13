@@ -23,8 +23,8 @@ type Object interface {
 	// Autorelease0 call autorelease, but return no value, to avoiding subtypes return type conflicting
 	Autorelease0()
 
-	//Copy() Object
-	//MutableCopy() Object
+	Copy() Object
+	MutableCopy() Object
 
 	Dealloc()
 	Description() string

@@ -40,7 +40,7 @@ func AnimatablePropertyContainer_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.P
 	selName := objc.Sel_GetName(sel)
 	delegate := cgo.Handle(hp).Value().(*AnimatablePropertyContainer)
 	switch selName {
-	case "animator:":
+	case "animator":
 		return delegate.Animator != nil
 	case "animationForKey:":
 		return delegate.AnimationForKey != nil

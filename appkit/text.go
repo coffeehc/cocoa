@@ -16,7 +16,7 @@ type Text interface {
 	ReplaceCharactersInRange_WithRTFD(_range foundation.Range, rtfdData []byte)
 	ReplaceCharactersInRange_WithString(_range foundation.Range, _string string)
 	SelectAll(sender objc.Object)
-	Copy(sender objc.Object)
+	Copy_(sender objc.Object)
 	Cut(sender objc.Object)
 	Paste(sender objc.Object)
 	CopyFont(sender objc.Object)
@@ -148,8 +148,8 @@ func (n NSText) SelectAll(sender objc.Object) {
 	C.C_NSText_SelectAll(n.Ptr(), objc.ExtractPtr(sender))
 }
 
-func (n NSText) Copy(sender objc.Object) {
-	C.C_NSText_Copy(n.Ptr(), objc.ExtractPtr(sender))
+func (n NSText) Copy_(sender objc.Object) {
+	C.C_NSText_Copy_(n.Ptr(), objc.ExtractPtr(sender))
 }
 
 func (n NSText) Cut(sender objc.Object) {

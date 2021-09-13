@@ -18,11 +18,16 @@ type WebView interface {
 	LoadFileURL_AllowingReadAccessToURL(URL foundation.URL, readAccessURL foundation.URL) Navigation
 	LoadData_MIMEType_CharacterEncodingName_BaseURL(data []byte, MIMEType string, characterEncodingName string, baseURL foundation.URL) Navigation
 	Reload() Navigation
+	Reload_(sender objc.Object)
 	ReloadFromOrigin() Navigation
+	ReloadFromOrigin_(sender objc.Object)
 	StopLoading()
+	StopLoading_(sender objc.Object)
 	SetMagnification_CenteredAtPoint(magnification coregraphics.Float, point coregraphics.Point)
-	GoBack(sender objc.Object)
-	GoForward(sender objc.Object)
+	GoBack_(sender objc.Object)
+	GoBack() Navigation
+	GoForward_(sender objc.Object)
+	GoForward() Navigation
 	GoToBackForwardListItem(item BackForwardListItem) Navigation
 	PrintOperationWithPrintInfo(printInfo appkit.PrintInfo) appkit.PrintOperation
 	CloseAllMediaPresentations()
@@ -130,25 +135,47 @@ func (w WKWebView) Reload() Navigation {
 	return MakeNavigation(result_)
 }
 
+func (w WKWebView) Reload_(sender objc.Object) {
+	C.C_WKWebView_Reload_(w.Ptr(), objc.ExtractPtr(sender))
+}
+
 func (w WKWebView) ReloadFromOrigin() Navigation {
 	result_ := C.C_WKWebView_ReloadFromOrigin(w.Ptr())
 	return MakeNavigation(result_)
+}
+
+func (w WKWebView) ReloadFromOrigin_(sender objc.Object) {
+	C.C_WKWebView_ReloadFromOrigin_(w.Ptr(), objc.ExtractPtr(sender))
 }
 
 func (w WKWebView) StopLoading() {
 	C.C_WKWebView_StopLoading(w.Ptr())
 }
 
+func (w WKWebView) StopLoading_(sender objc.Object) {
+	C.C_WKWebView_StopLoading_(w.Ptr(), objc.ExtractPtr(sender))
+}
+
 func (w WKWebView) SetMagnification_CenteredAtPoint(magnification coregraphics.Float, point coregraphics.Point) {
 	C.C_WKWebView_SetMagnification_CenteredAtPoint(w.Ptr(), C.double(float64(magnification)), *(*C.CGPoint)(coregraphics.ToCGPointPointer(point)))
 }
 
-func (w WKWebView) GoBack(sender objc.Object) {
-	C.C_WKWebView_GoBack(w.Ptr(), objc.ExtractPtr(sender))
+func (w WKWebView) GoBack_(sender objc.Object) {
+	C.C_WKWebView_GoBack_(w.Ptr(), objc.ExtractPtr(sender))
 }
 
-func (w WKWebView) GoForward(sender objc.Object) {
-	C.C_WKWebView_GoForward(w.Ptr(), objc.ExtractPtr(sender))
+func (w WKWebView) GoBack() Navigation {
+	result_ := C.C_WKWebView_GoBack(w.Ptr())
+	return MakeNavigation(result_)
+}
+
+func (w WKWebView) GoForward_(sender objc.Object) {
+	C.C_WKWebView_GoForward_(w.Ptr(), objc.ExtractPtr(sender))
+}
+
+func (w WKWebView) GoForward() Navigation {
+	result_ := C.C_WKWebView_GoForward(w.Ptr())
+	return MakeNavigation(result_)
 }
 
 func (w WKWebView) GoToBackForwardListItem(item BackForwardListItem) Navigation {

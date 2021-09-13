@@ -105,11 +105,11 @@ func ColorPickingDefault_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) 
 		return delegate.SetMode != nil
 	case "insertNewButtonImage:in:":
 		return delegate.InsertNewButtonImage_In != nil
-	case "provideNewButtonImage:":
+	case "provideNewButtonImage":
 		return delegate.ProvideNewButtonImage != nil
-	case "minContentSize:":
+	case "minContentSize":
 		return delegate.MinContentSize != nil
-	case "buttonToolTip:":
+	case "buttonToolTip":
 		return delegate.ButtonToolTip != nil
 	case "alphaControlAddedOrRemoved:":
 		return delegate.AlphaControlAddedOrRemoved != nil

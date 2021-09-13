@@ -41,7 +41,7 @@ func DraggingInfo_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	switch selName {
 	case "slideDraggedImageTo:":
 		return delegate.SlideDraggedImageTo != nil
-	case "resetSpringLoading:":
+	case "resetSpringLoading":
 		return delegate.ResetSpringLoading != nil
 	default:
 		return false

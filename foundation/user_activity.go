@@ -64,11 +64,6 @@ func AllocUserActivity() NSUserActivity {
 	return MakeUserActivity(result_)
 }
 
-func NewUserActivity() NSUserActivity {
-	result_ := C.C_NSUserActivity_NewUserActivity()
-	return MakeUserActivity(result_)
-}
-
 func (n NSUserActivity) Autorelease() NSUserActivity {
 	result_ := C.C_NSUserActivity_Autorelease(n.Ptr())
 	return MakeUserActivity(result_)

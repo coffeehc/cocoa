@@ -17,7 +17,7 @@ void C_NSText_ReplaceCharactersInRange_WithRTF(void* ptr, NSRange _range, void* 
 void C_NSText_ReplaceCharactersInRange_WithRTFD(void* ptr, NSRange _range, void* rtfdData);
 void C_NSText_ReplaceCharactersInRange_WithString(void* ptr, NSRange _range, void* _string);
 void C_NSText_SelectAll(void* ptr, void* sender);
-void C_NSText_Copy(void* ptr, void* sender);
+void C_NSText_Copy_(void* ptr, void* sender);
 void C_NSText_Cut(void* ptr, void* sender);
 void C_NSText_Paste(void* ptr, void* sender);
 void C_NSText_CopyFont(void* ptr, void* sender);

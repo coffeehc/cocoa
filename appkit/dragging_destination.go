@@ -93,7 +93,7 @@ func DraggingDestination_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) 
 	switch selName {
 	case "draggingEntered:":
 		return delegate.DraggingEntered != nil
-	case "wantsPeriodicDraggingUpdates:":
+	case "wantsPeriodicDraggingUpdates":
 		return delegate.WantsPeriodicDraggingUpdates != nil
 	case "draggingUpdated:":
 		return delegate.DraggingUpdated != nil

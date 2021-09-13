@@ -80,10 +80,20 @@ void* C_WKWebView_Reload(void* ptr) {
     return result_;
 }
 
+void C_WKWebView_Reload_(void* ptr, void* sender) {
+    WKWebView* wKWebView = (WKWebView*)ptr;
+    [wKWebView reload:(id)sender];
+}
+
 void* C_WKWebView_ReloadFromOrigin(void* ptr) {
     WKWebView* wKWebView = (WKWebView*)ptr;
     WKNavigation* result_ = [wKWebView reloadFromOrigin];
     return result_;
+}
+
+void C_WKWebView_ReloadFromOrigin_(void* ptr, void* sender) {
+    WKWebView* wKWebView = (WKWebView*)ptr;
+    [wKWebView reloadFromOrigin:(id)sender];
 }
 
 void C_WKWebView_StopLoading(void* ptr) {
@@ -91,19 +101,36 @@ void C_WKWebView_StopLoading(void* ptr) {
     [wKWebView stopLoading];
 }
 
+void C_WKWebView_StopLoading_(void* ptr, void* sender) {
+    WKWebView* wKWebView = (WKWebView*)ptr;
+    [wKWebView stopLoading:(id)sender];
+}
+
 void C_WKWebView_SetMagnification_CenteredAtPoint(void* ptr, double magnification, CGPoint point) {
     WKWebView* wKWebView = (WKWebView*)ptr;
     [wKWebView setMagnification:magnification centeredAtPoint:point];
 }
 
-void C_WKWebView_GoBack(void* ptr, void* sender) {
+void C_WKWebView_GoBack_(void* ptr, void* sender) {
     WKWebView* wKWebView = (WKWebView*)ptr;
     [wKWebView goBack:(id)sender];
 }
 
-void C_WKWebView_GoForward(void* ptr, void* sender) {
+void* C_WKWebView_GoBack(void* ptr) {
+    WKWebView* wKWebView = (WKWebView*)ptr;
+    WKNavigation* result_ = [wKWebView goBack];
+    return result_;
+}
+
+void C_WKWebView_GoForward_(void* ptr, void* sender) {
     WKWebView* wKWebView = (WKWebView*)ptr;
     [wKWebView goForward:(id)sender];
+}
+
+void* C_WKWebView_GoForward(void* ptr) {
+    WKWebView* wKWebView = (WKWebView*)ptr;
+    WKNavigation* result_ = [wKWebView goForward];
+    return result_;
 }
 
 void* C_WKWebView_GoToBackForwardListItem(void* ptr, void* item) {
