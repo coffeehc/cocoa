@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/hsiafan/cocoa/appkit"
 	"github.com/hsiafan/cocoa/appkits"
+	"github.com/hsiafan/cocoa/appkits/layouts"
 	"github.com/hsiafan/cocoa/foundation"
 	"github.com/hsiafan/cocoa/helper/actions"
 	"github.com/hsiafan/cocoa/helper/delegates"
@@ -64,7 +65,8 @@ func initAndRun() {
 	stackView.SetAlignment(appkit.LayoutAttributeCenterX)
 	stackView.SetSpacing(10)
 
-	w.SetContentView(stackView)
+	w.ContentView().AddSubview(stackView)
+	layouts.SetMargin(w.ContentView(), stackView, 20, 10)
 
 	w.MakeKeyAndOrderFront(nil)
 	w.Center()
