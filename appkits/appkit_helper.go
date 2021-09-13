@@ -115,29 +115,23 @@ func NewView() appkit.NSView {
 }
 
 // TextScrollView is appkit.ScrollView that contains a TextView
-type TextScrollView interface {
-	appkit.ScrollView
-	TextView() appkit.NSTextView
-}
-
-// GoTextScrollView implements TextScrollView
-type GoTextScrollView struct {
+type TextScrollView struct {
 	appkit.NSScrollView
 	textView appkit.NSTextView
 }
 
 // TextView return the inner TextView
-func (t *GoTextScrollView) TextView() appkit.NSTextView {
+func (t *TextScrollView) TextView() appkit.NSTextView {
 	return t.textView
 }
 
 // NewScrollableTextView create and return new scrollable text view.
-func NewScrollableTextView() *GoTextScrollView {
+func NewScrollableTextView() *TextScrollView {
 	stv := appkit.ScrollableTextView()
 	stv.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	tv := appkit.MakeTextView(stv.DocumentView().Ptr())
 	tv.SetAllowsUndo(true)
-	return &GoTextScrollView{
+	return &TextScrollView{
 		NSScrollView: stv.(appkit.NSScrollView),
 		textView:     tv,
 	}

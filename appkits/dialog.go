@@ -8,26 +8,15 @@ import (
 )
 
 // Dialog is appkit.Panel with optional OK|CANCEL buttons
-type Dialog interface {
-	appkit.Panel
-	// SetView set the view for Dialog
-	SetView(view appkit.View)
-	// Show display dialog in non-modal mode
-	Show(handle func())
-	// RunModal display dialog in modal mode
-	RunModal() appkit.ModalResponse
-}
-
-// GoDialog implements Dialog
-type GoDialog struct {
+type Dialog struct {
 	appkit.NSPanel
 	content appkit.View
 	ok      appkit.Button
 	cancel  appkit.Button
 }
 
-// NewDialog create new GoDialog
-func NewDialog(width, height float64) *GoDialog {
+// NewDialog create new Dialog
+func NewDialog(width, height float64) *Dialog {
 	panel := appkit.NewPanel().Autorelease()
 	panel.SetFrame_Display(foundation.MakeRect(0, 0, width, height), true)
 
@@ -50,7 +39,7 @@ func NewDialog(width, height float64) *GoDialog {
 	view.TopAnchor().ConstraintEqualToAnchor(contentView.TopAnchor()).SetActive(true)
 	view.RightAnchor().ConstraintEqualToAnchor(contentView.RightAnchor()).SetActive(true)
 
-	return &GoDialog{
+	return &Dialog{
 		NSPanel: panel,
 		content: view,
 		ok:      ok,
@@ -58,8 +47,8 @@ func NewDialog(width, height float64) *GoDialog {
 	}
 }
 
-// SetView set inner content view for GoDialog
-func (d *GoDialog) SetView(view appkit.View) {
+// SetView set inner content view for Dialog
+func (d *Dialog) SetView(view appkit.View) {
 	d.content.AddSubview(view)
 	view.LeftAnchor().ConstraintEqualToAnchor(d.content.LeftAnchor()).SetActive(true)
 	view.TopAnchor().ConstraintEqualToAnchor(d.content.TopAnchor()).SetActive(true)
@@ -67,7 +56,8 @@ func (d *GoDialog) SetView(view appkit.View) {
 	view.BottomAnchor().ConstraintEqualToAnchor(d.content.BottomAnchor()).SetActive(true)
 }
 
-func (d *GoDialog) Show(handle func()) {
+// Show display dialog in non-modal mode
+func (d *Dialog) Show(handle func()) {
 	actions.Set(d.ok, func(sender objc.Object) {
 		handle()
 		d.Close()
@@ -80,7 +70,8 @@ func (d *GoDialog) Show(handle func()) {
 	d.MakeKeyAndOrderFront(d.NSPanel)
 }
 
-func (d *GoDialog) RunModal() appkit.ModalResponse {
+// RunModal display dialog in modal mode
+func (d *Dialog) RunModal() appkit.ModalResponse {
 	app := appkit.SharedApplication()
 
 	actions.Set(d.ok, func(sender objc.Object) {

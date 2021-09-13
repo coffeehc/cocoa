@@ -4,27 +4,6 @@ import (
 	"github.com/hsiafan/cocoa/appkit"
 )
 
-// FormView ia an appkit.View that arrange form field name and controls.
-type FormView interface {
-	appkit.View
-	// AddExpandRow add a row, expand to fill parent view height.
-	AddExpandRow()
-	// AddRow add a new form row
-	AddRow(name string, control appkit.Control)
-	// InsertRow insert a new form row at specific location
-	InsertRow(index int, name string, control appkit.Control)
-	// SetRowSpacing set spacing between rows.
-	SetRowSpacing(spacing float64)
-	// SetLabelWidth set width for labels
-	SetLabelWidth(width float64)
-	// SetLabelAlignment set label text alignment
-	SetLabelAlignment(alignment LabelAlignment)
-	// SetLabelFont set label font
-	SetLabelFont(font appkit.Font)
-	// SetLabelControlSpacing set spacing between label and control
-	SetLabelControlSpacing(spacing float64)
-}
-
 type LabelAlignment int
 
 const (
@@ -33,37 +12,40 @@ const (
 	LabelAlignmentCenter   = 2
 )
 
-// GoFormView implements FormView
-type GoFormView struct {
+// FormView ia an appkit.View that arrange form field name and controls.
+type FormView struct {
 	appkit.NSGridView
 
 	labelFont appkit.Font
 }
 
 // NewFormView create new form view
-func NewFormView() *GoFormView {
+func NewFormView() *FormView {
 	gv := appkit.GridViewWithNumberOfColumns_Rows(2, 0)
 	gv.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	gv.SetContentHuggingPriority_ForOrientation(appkit.LayoutPriorityDefaultHigh, appkit.LayoutConstraintOrientationHorizontal)
 	gv.SetContentHuggingPriority_ForOrientation(appkit.LayoutPriorityDefaultHigh, appkit.LayoutConstraintOrientationVertical)
 
-	return &GoFormView{
+	return &FormView{
 		NSGridView: gv,
 	}
 }
 
-func (f *GoFormView) AddExpandRow() {
+// AddExpandRow add a row, expand to fill parent view height.
+func (f *FormView) AddExpandRow() {
 	v := appkit.NewView().Autorelease()
 	v.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	f.AddRowWithViews([]appkit.View{NewView(), NewView()})
 }
 
-func (f *GoFormView) AddRow(name string, control appkit.Control) {
+// AddRow add a new form row
+func (f *FormView) AddRow(name string, control appkit.Control) {
 	label := f.newLabel(name)
 	f.AddRowWithViews([]appkit.View{label, control})
 }
 
-func (f *GoFormView) InsertRow(index int, name string, control appkit.Control) {
+// InsertRow insert a new form row at specific location
+func (f *FormView) InsertRow(index int, name string, control appkit.Control) {
 	if index > f.NumberOfRows() {
 		panic("index out of row range")
 	}
@@ -71,15 +53,18 @@ func (f *GoFormView) InsertRow(index int, name string, control appkit.Control) {
 	f.InsertRowAtIndex_WithViews(index, []appkit.View{label, control})
 }
 
-func (f *GoFormView) SetRowSpacing(spacing float64) {
+// SetRowSpacing set spacing between rows.
+func (f *FormView) SetRowSpacing(spacing float64) {
 	f.SetRowSpacing(spacing)
 }
 
-func (f *GoFormView) SetLabelWidth(width float64) {
+// SetLabelWidth set width for labels
+func (f *FormView) SetLabelWidth(width float64) {
 	f.ColumnAtIndex(0).SetWidth(width)
 }
 
-func (f *GoFormView) SetLabelAlignment(alignment LabelAlignment) {
+// SetLabelAlignment set label text alignment
+func (f *FormView) SetLabelAlignment(alignment LabelAlignment) {
 	switch alignment {
 	case LabelAlignmentLeading:
 		f.ColumnAtIndex(0).SetXPlacement(appkit.GridCellPlacementLeading)
@@ -90,7 +75,8 @@ func (f *GoFormView) SetLabelAlignment(alignment LabelAlignment) {
 	}
 }
 
-func (f *GoFormView) SetLabelFont(font appkit.Font) {
+// SetLabelFont set label font
+func (f *FormView) SetLabelFont(font appkit.Font) {
 	f.labelFont = font
 	labelColumn := f.ColumnAtIndex(0)
 	size := labelColumn.NumberOfCells()
@@ -101,11 +87,12 @@ func (f *GoFormView) SetLabelFont(font appkit.Font) {
 	}
 }
 
-func (f *GoFormView) SetLabelControlSpacing(spacing float64) {
+// SetLabelControlSpacing set spacing between label and control
+func (f *FormView) SetLabelControlSpacing(spacing float64) {
 	f.SetColumnSpacing(spacing)
 }
 
-func (f *GoFormView) newLabel(name string) appkit.TextField {
+func (f *FormView) newLabel(name string) appkit.TextField {
 	label := NewLabel(name)
 	label.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	if f.labelFont != nil && f.labelFont.Ptr() != nil {
