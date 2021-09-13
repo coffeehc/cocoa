@@ -57,29 +57,3 @@ func (n NSAttributedString) Length() uint {
 	result_ := C.C_NSAttributedString_Length(n.Ptr())
 	return uint(result_)
 }
-
-func AttributedString_TextTypes() []string {
-	result_ := C.C_NSAttributedString_AttributedString_TextTypes()
-	if result_.len > 0 {
-		defer C.free(result_.data)
-	}
-	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
-	var goResult_ = make([]string, len(result_Slice))
-	for idx, r := range result_Slice {
-		goResult_[idx] = MakeString(r).String()
-	}
-	return goResult_
-}
-
-func AttributedString_TextUnfilteredTypes() []string {
-	result_ := C.C_NSAttributedString_AttributedString_TextUnfilteredTypes()
-	if result_.len > 0 {
-		defer C.free(result_.data)
-	}
-	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
-	var goResult_ = make([]string, len(result_Slice))
-	for idx, r := range result_Slice {
-		goResult_[idx] = MakeString(r).String()
-	}
-	return goResult_
-}

@@ -13,8 +13,6 @@ type IndexPath interface {
 	IndexPathByRemovingLastIndex() IndexPath
 	Compare(otherObject IndexPath) ComparisonResult
 	IndexAtPosition(position uint) uint
-	Section() int
-	Item() int
 	Length() uint
 }
 
@@ -63,11 +61,6 @@ func (n NSIndexPath) Retain() NSIndexPath {
 	return MakeIndexPath(result_)
 }
 
-func IndexPathForItem_InSection(item int, section int) IndexPath {
-	result_ := C.C_NSIndexPath_IndexPathForItem_InSection(C.int(item), C.int(section))
-	return MakeIndexPath(result_)
-}
-
 func (n NSIndexPath) IndexPathByAddingIndex(index uint) IndexPath {
 	result_ := C.C_NSIndexPath_IndexPathByAddingIndex(n.Ptr(), C.uint(index))
 	return MakeIndexPath(result_)
@@ -86,16 +79,6 @@ func (n NSIndexPath) Compare(otherObject IndexPath) ComparisonResult {
 func (n NSIndexPath) IndexAtPosition(position uint) uint {
 	result_ := C.C_NSIndexPath_IndexAtPosition(n.Ptr(), C.uint(position))
 	return uint(result_)
-}
-
-func (n NSIndexPath) Section() int {
-	result_ := C.C_NSIndexPath_Section(n.Ptr())
-	return int(result_)
-}
-
-func (n NSIndexPath) Item() int {
-	result_ := C.C_NSIndexPath_Item(n.Ptr())
-	return int(result_)
 }
 
 func (n NSIndexPath) Length() uint {

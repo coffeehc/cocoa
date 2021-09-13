@@ -10,10 +10,6 @@ import (
 type ExtensionContext interface {
 	objc.Object
 	CancelRequestWithError(error Error)
-	MediaPlayingStarted()
-	MediaPlayingPaused()
-	DismissNotificationContentExtension()
-	PerformNotificationDefaultAction()
 	InputItems() []objc.Object
 }
 
@@ -54,22 +50,6 @@ func (n NSExtensionContext) Retain() NSExtensionContext {
 
 func (n NSExtensionContext) CancelRequestWithError(error Error) {
 	C.C_NSExtensionContext_CancelRequestWithError(n.Ptr(), objc.ExtractPtr(error))
-}
-
-func (n NSExtensionContext) MediaPlayingStarted() {
-	C.C_NSExtensionContext_MediaPlayingStarted(n.Ptr())
-}
-
-func (n NSExtensionContext) MediaPlayingPaused() {
-	C.C_NSExtensionContext_MediaPlayingPaused(n.Ptr())
-}
-
-func (n NSExtensionContext) DismissNotificationContentExtension() {
-	C.C_NSExtensionContext_DismissNotificationContentExtension(n.Ptr())
-}
-
-func (n NSExtensionContext) PerformNotificationDefaultAction() {
-	C.C_NSExtensionContext_PerformNotificationDefaultAction(n.Ptr())
 }
 
 func (n NSExtensionContext) InputItems() []objc.Object {

@@ -11,8 +11,4 @@ void* C_NSExtensionContext_NewExtensionContext();
 void* C_NSExtensionContext_Autorelease(void* ptr);
 void* C_NSExtensionContext_Retain(void* ptr);
 void C_NSExtensionContext_CancelRequestWithError(void* ptr, void* error);
-void C_NSExtensionContext_MediaPlayingStarted(void* ptr);
-void C_NSExtensionContext_MediaPlayingPaused(void* ptr);
-void C_NSExtensionContext_DismissNotificationContentExtension(void* ptr);
-void C_NSExtensionContext_PerformNotificationDefaultAction(void* ptr);
 Array C_NSExtensionContext_InputItems(void* ptr);

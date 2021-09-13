@@ -85,16 +85,6 @@ CGSize C_NSAffineTransform_TransformSize(void* ptr, CGSize aSize) {
     return result_;
 }
 
-void C_NSAffineTransform_Set(void* ptr) {
-    NSAffineTransform* nSAffineTransform = (NSAffineTransform*)ptr;
-    [nSAffineTransform set];
-}
-
-void C_NSAffineTransform_Concat(void* ptr) {
-    NSAffineTransform* nSAffineTransform = (NSAffineTransform*)ptr;
-    [nSAffineTransform concat];
-}
-
 NSAffineTransformStruct C_NSAffineTransform_TransformStruct(void* ptr) {
     NSAffineTransform* nSAffineTransform = (NSAffineTransform*)ptr;
     NSAffineTransformStruct result_ = [nSAffineTransform transformStruct];

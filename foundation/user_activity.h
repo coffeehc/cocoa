@@ -41,4 +41,3 @@ void* C_NSUserActivity_WebpageURL(void* ptr);
 void C_NSUserActivity_SetWebpageURL(void* ptr, void* value);
 void* C_NSUserActivity_ReferrerURL(void* ptr);
 void C_NSUserActivity_SetReferrerURL(void* ptr, void* value);
-Array C_NSUserActivity_ContextIdentifierPath(void* ptr);

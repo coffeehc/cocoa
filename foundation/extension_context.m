@@ -38,26 +38,6 @@ void C_NSExtensionContext_CancelRequestWithError(void* ptr, void* error) {
     [nSExtensionContext cancelRequestWithError:(NSError*)error];
 }
 
-void C_NSExtensionContext_MediaPlayingStarted(void* ptr) {
-    NSExtensionContext* nSExtensionContext = (NSExtensionContext*)ptr;
-    [nSExtensionContext mediaPlayingStarted];
-}
-
-void C_NSExtensionContext_MediaPlayingPaused(void* ptr) {
-    NSExtensionContext* nSExtensionContext = (NSExtensionContext*)ptr;
-    [nSExtensionContext mediaPlayingPaused];
-}
-
-void C_NSExtensionContext_DismissNotificationContentExtension(void* ptr) {
-    NSExtensionContext* nSExtensionContext = (NSExtensionContext*)ptr;
-    [nSExtensionContext dismissNotificationContentExtension];
-}
-
-void C_NSExtensionContext_PerformNotificationDefaultAction(void* ptr) {
-    NSExtensionContext* nSExtensionContext = (NSExtensionContext*)ptr;
-    [nSExtensionContext performNotificationDefaultAction];
-}
-
 Array C_NSExtensionContext_InputItems(void* ptr) {
     NSExtensionContext* nSExtensionContext = (NSExtensionContext*)ptr;
     NSArray* result_ = [nSExtensionContext inputItems];

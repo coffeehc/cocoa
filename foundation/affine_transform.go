@@ -20,8 +20,6 @@ type AffineTransform interface {
 	Invert()
 	TransformPoint(aPoint Point) Point
 	TransformSize(aSize Size) Size
-	Set()
-	Concat()
 	TransformStruct() AffineTransformStruct
 	SetTransformStruct(value AffineTransformStruct)
 }
@@ -101,14 +99,6 @@ func (n NSAffineTransform) TransformPoint(aPoint Point) Point {
 func (n NSAffineTransform) TransformSize(aSize Size) Size {
 	result_ := C.C_NSAffineTransform_TransformSize(n.Ptr(), *(*C.CGSize)(coregraphics.ToCGSizePointer(coregraphics.Size(aSize))))
 	return Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
-}
-
-func (n NSAffineTransform) Set() {
-	C.C_NSAffineTransform_Set(n.Ptr())
-}
-
-func (n NSAffineTransform) Concat() {
-	C.C_NSAffineTransform_Concat(n.Ptr())
 }
 
 func (n NSAffineTransform) TransformStruct() AffineTransformStruct {

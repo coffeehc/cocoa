@@ -41,7 +41,6 @@ type UserActivity interface {
 	SetWebpageURL(value URL)
 	ReferrerURL() URL
 	SetReferrerURL(value URL)
-	ContextIdentifierPath() []string
 }
 
 type NSUserActivity struct {
@@ -215,17 +214,4 @@ func (n NSUserActivity) ReferrerURL() URL {
 
 func (n NSUserActivity) SetReferrerURL(value URL) {
 	C.C_NSUserActivity_SetReferrerURL(n.Ptr(), objc.ExtractPtr(value))
-}
-
-func (n NSUserActivity) ContextIdentifierPath() []string {
-	result_ := C.C_NSUserActivity_ContextIdentifierPath(n.Ptr())
-	if result_.len > 0 {
-		defer C.free(result_.data)
-	}
-	result_Slice := unsafe.Slice((*unsafe.Pointer)(result_.data), int(result_.len))
-	var goResult_ = make([]string, len(result_Slice))
-	for idx, r := range result_Slice {
-		goResult_[idx] = MakeString(r).String()
-	}
-	return goResult_
 }

@@ -20,7 +20,5 @@ void C_NSAffineTransform_PrependTransform(void* ptr, void* transform);
 void C_NSAffineTransform_Invert(void* ptr);
 CGPoint C_NSAffineTransform_TransformPoint(void* ptr, CGPoint aPoint);
 CGSize C_NSAffineTransform_TransformSize(void* ptr, CGSize aSize);
-void C_NSAffineTransform_Set(void* ptr);
-void C_NSAffineTransform_Concat(void* ptr);
 NSAffineTransformStruct C_NSAffineTransform_TransformStruct(void* ptr);
 void C_NSAffineTransform_SetTransformStruct(void* ptr, NSAffineTransformStruct value);

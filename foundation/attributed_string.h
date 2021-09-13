@@ -12,5 +12,3 @@ void* C_NSAttributedString_Autorelease(void* ptr);
 void* C_NSAttributedString_Retain(void* ptr);
 void* C_NSAttributedString_String(void* ptr);
 unsigned int C_NSAttributedString_Length(void* ptr);
-Array C_NSAttributedString_AttributedString_TextTypes();
-Array C_NSAttributedString_AttributedString_TextUnfilteredTypes();
