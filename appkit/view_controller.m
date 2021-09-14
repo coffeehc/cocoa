@@ -242,7 +242,7 @@ void C_NSViewController_SetChildViewControllers(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSViewController*)(NSViewController*)p];
+    		[objcValue addObject:(NSViewController*)p];
     	}
     }
     [nSViewController setChildViewControllers:objcValue];

@@ -57,7 +57,7 @@ void C_NSTreeNode_SortWithSortDescriptors_Recursively(void* ptr, Array sortDescr
     	void** sortDescriptorsData = (void**)sortDescriptors.data;
     	for (int i = 0; i < sortDescriptors.len; i++) {
     		void* p = sortDescriptorsData[i];
-    		[objcSortDescriptors addObject:(NSSortDescriptor*)(NSSortDescriptor*)p];
+    		[objcSortDescriptors addObject:(NSSortDescriptor*)p];
     	}
     }
     [nSTreeNode sortWithSortDescriptors:objcSortDescriptors recursively:recursively];

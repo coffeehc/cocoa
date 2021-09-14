@@ -217,7 +217,7 @@ void C_NSUndoManager_SetRunLoopModes(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSRunLoopMode)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSUndoManager setRunLoopModes:objcValue];

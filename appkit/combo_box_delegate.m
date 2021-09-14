@@ -39,7 +39,7 @@
     	void** result_Data = (void**)result_.data;
     	for (int i = 0; i < result_.len; i++) {
     		void* p = result_Data[i];
-    		[objcResult_ addObject:(NSTextCheckingResult*)(NSTextCheckingResult*)p];
+    		[objcResult_ addObject:(NSTextCheckingResult*)p];
     	}
     }
     return objcResult_;
@@ -52,7 +52,7 @@
     	void** result_Data = (void**)result_.data;
     	for (int i = 0; i < result_.len; i++) {
     		void* p = result_Data[i];
-    		[objcResult_ addObject:(NSObject*)(NSObject*)p];
+    		[objcResult_ addObject:(NSObject*)p];
     	}
     }
     return objcResult_;

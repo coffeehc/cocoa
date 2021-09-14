@@ -57,7 +57,7 @@ void* C_NSTextCheckingResult_TextCheckingResult_AddressCheckingResultWithRange_C
     	for (int i = 0; i < components.len; i++) {
     		void* kp = componentsKeyData[i];
     		void* vp = componentsValueData[i];
-    		[objcComponents setObject:(NSTextCheckingKey)(NSString*)kp forKey:(NSString*)(NSString*)vp];
+    		[objcComponents setObject:(NSString*)kp forKey:(NSString*)vp];
     	}
     }
     NSTextCheckingResult* result_ = [NSTextCheckingResult addressCheckingResultWithRange:_range components:objcComponents];
@@ -72,7 +72,7 @@ void* C_NSTextCheckingResult_TextCheckingResult_TransitInformationCheckingResult
     	for (int i = 0; i < components.len; i++) {
     		void* kp = componentsKeyData[i];
     		void* vp = componentsValueData[i];
-    		[objcComponents setObject:(NSTextCheckingKey)(NSString*)kp forKey:(NSString*)(NSString*)vp];
+    		[objcComponents setObject:(NSString*)kp forKey:(NSString*)vp];
     	}
     }
     NSTextCheckingResult* result_ = [NSTextCheckingResult transitInformationCheckingResultWithRange:_range components:objcComponents];
@@ -137,7 +137,7 @@ void* C_NSTextCheckingResult_TextCheckingResult_CorrectionCheckingResultWithRang
     	void** alternativeStringsData = (void**)alternativeStrings.data;
     	for (int i = 0; i < alternativeStrings.len; i++) {
     		void* p = alternativeStringsData[i];
-    		[objcAlternativeStrings addObject:(NSString*)(NSString*)p];
+    		[objcAlternativeStrings addObject:(NSString*)p];
     	}
     }
     NSTextCheckingResult* result_ = [NSTextCheckingResult correctionCheckingResultWithRange:_range replacementString:(NSString*)replacementString alternativeStrings:objcAlternativeStrings];

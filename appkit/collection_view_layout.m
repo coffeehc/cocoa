@@ -104,7 +104,7 @@ void C_NSCollectionViewLayout_PrepareForCollectionViewUpdates(void* ptr, Array u
     	void** updateItemsData = (void**)updateItems.data;
     	for (int i = 0; i < updateItems.len; i++) {
     		void* p = updateItemsData[i];
-    		[objcUpdateItems addObject:(NSCollectionViewUpdateItem*)(NSCollectionViewUpdateItem*)p];
+    		[objcUpdateItems addObject:(NSCollectionViewUpdateItem*)p];
     	}
     }
     [nSCollectionViewLayout prepareForCollectionViewUpdates:objcUpdateItems];

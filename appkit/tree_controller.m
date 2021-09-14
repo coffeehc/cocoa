@@ -63,7 +63,7 @@ bool C_NSTreeController_SetSelectionIndexPaths(void* ptr, Array indexPaths) {
     	void** indexPathsData = (void**)indexPaths.data;
     	for (int i = 0; i < indexPaths.len; i++) {
     		void* p = indexPathsData[i];
-    		[objcIndexPaths addObject:(NSIndexPath*)(NSIndexPath*)p];
+    		[objcIndexPaths addObject:(NSIndexPath*)p];
     	}
     }
     BOOL result_ = [nSTreeController setSelectionIndexPaths:objcIndexPaths];
@@ -77,7 +77,7 @@ bool C_NSTreeController_AddSelectionIndexPaths(void* ptr, Array indexPaths) {
     	void** indexPathsData = (void**)indexPaths.data;
     	for (int i = 0; i < indexPaths.len; i++) {
     		void* p = indexPathsData[i];
-    		[objcIndexPaths addObject:(NSIndexPath*)(NSIndexPath*)p];
+    		[objcIndexPaths addObject:(NSIndexPath*)p];
     	}
     }
     BOOL result_ = [nSTreeController addSelectionIndexPaths:objcIndexPaths];
@@ -91,7 +91,7 @@ bool C_NSTreeController_RemoveSelectionIndexPaths(void* ptr, Array indexPaths) {
     	void** indexPathsData = (void**)indexPaths.data;
     	for (int i = 0; i < indexPaths.len; i++) {
     		void* p = indexPathsData[i];
-    		[objcIndexPaths addObject:(NSIndexPath*)(NSIndexPath*)p];
+    		[objcIndexPaths addObject:(NSIndexPath*)p];
     	}
     }
     BOOL result_ = [nSTreeController removeSelectionIndexPaths:objcIndexPaths];
@@ -125,7 +125,7 @@ void C_NSTreeController_InsertObjects_AtArrangedObjectIndexPaths(void* ptr, Arra
     	void** objectsData = (void**)objects.data;
     	for (int i = 0; i < objects.len; i++) {
     		void* p = objectsData[i];
-    		[objcObjects addObject:(NSObject*)(NSObject*)p];
+    		[objcObjects addObject:(NSObject*)p];
     	}
     }
     NSMutableArray* objcIndexPaths = [NSMutableArray arrayWithCapacity:indexPaths.len];
@@ -133,7 +133,7 @@ void C_NSTreeController_InsertObjects_AtArrangedObjectIndexPaths(void* ptr, Arra
     	void** indexPathsData = (void**)indexPaths.data;
     	for (int i = 0; i < indexPaths.len; i++) {
     		void* p = indexPathsData[i];
-    		[objcIndexPaths addObject:(NSIndexPath*)(NSIndexPath*)p];
+    		[objcIndexPaths addObject:(NSIndexPath*)p];
     	}
     }
     [nSTreeController insertObjects:objcObjects atArrangedObjectIndexPaths:objcIndexPaths];
@@ -151,7 +151,7 @@ void C_NSTreeController_RemoveObjectsAtArrangedObjectIndexPaths(void* ptr, Array
     	void** indexPathsData = (void**)indexPaths.data;
     	for (int i = 0; i < indexPaths.len; i++) {
     		void* p = indexPathsData[i];
-    		[objcIndexPaths addObject:(NSIndexPath*)(NSIndexPath*)p];
+    		[objcIndexPaths addObject:(NSIndexPath*)p];
     	}
     }
     [nSTreeController removeObjectsAtArrangedObjectIndexPaths:objcIndexPaths];
@@ -169,7 +169,7 @@ void C_NSTreeController_MoveNodes_ToIndexPath(void* ptr, Array nodes, void* star
     	void** nodesData = (void**)nodes.data;
     	for (int i = 0; i < nodes.len; i++) {
     		void* p = nodesData[i];
-    		[objcNodes addObject:(NSTreeNode*)(NSTreeNode*)p];
+    		[objcNodes addObject:(NSTreeNode*)p];
     	}
     }
     [nSTreeController moveNodes:objcNodes toIndexPath:(NSIndexPath*)startingIndexPath];
@@ -217,7 +217,7 @@ void C_NSTreeController_SetSortDescriptors(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSSortDescriptor*)(NSSortDescriptor*)p];
+    		[objcValue addObject:(NSSortDescriptor*)p];
     	}
     }
     [nSTreeController setSortDescriptors:objcValue];

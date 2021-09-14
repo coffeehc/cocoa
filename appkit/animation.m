@@ -204,7 +204,7 @@ void C_NSAnimation_SetProgressMarks(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSNumber*)(NSNumber*)p];
+    		[objcValue addObject:(NSNumber*)p];
     	}
     }
     [nSAnimation setProgressMarks:objcValue];

@@ -79,7 +79,7 @@ void C_NSCollectionViewCompositionalLayoutConfiguration_SetBoundarySupplementary
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSCollectionLayoutBoundarySupplementaryItem*)(NSCollectionLayoutBoundarySupplementaryItem*)p];
+    		[objcValue addObject:(NSCollectionLayoutBoundarySupplementaryItem*)p];
     	}
     }
     [nSCollectionViewCompositionalLayoutConfiguration setBoundarySupplementaryItems:objcValue];

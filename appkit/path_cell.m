@@ -97,7 +97,7 @@ void C_NSPathCell_SetAllowedTypes(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSString*)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSPathCell setAllowedTypes:objcValue];
@@ -177,7 +177,7 @@ void C_NSPathCell_SetPathComponentCells(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSPathComponentCell*)(NSPathComponentCell*)p];
+    		[objcValue addObject:(NSPathComponentCell*)p];
     	}
     }
     [nSPathCell setPathComponentCells:objcValue];

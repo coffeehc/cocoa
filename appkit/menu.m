@@ -236,7 +236,7 @@ void C_NSMenu_SetItemArray(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSMenuItem*)(NSMenuItem*)p];
+    		[objcValue addObject:(NSMenuItem*)p];
     	}
     }
     [nSMenu setItemArray:objcValue];

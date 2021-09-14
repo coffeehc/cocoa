@@ -370,7 +370,7 @@ void C_NSLayoutManager_AddTemporaryAttributes_ForCharacterRange(void* ptr, Dicti
     	for (int i = 0; i < attrs.len; i++) {
     		void* kp = attrsKeyData[i];
     		void* vp = attrsValueData[i];
-    		[objcAttrs setObject:(NSAttributedStringKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcAttrs setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     [nSLayoutManager addTemporaryAttributes:objcAttrs forCharacterRange:charRange];
@@ -390,7 +390,7 @@ void C_NSLayoutManager_SetTemporaryAttributes_ForCharacterRange(void* ptr, Dicti
     	for (int i = 0; i < attrs.len; i++) {
     		void* kp = attrsKeyData[i];
     		void* vp = attrsValueData[i];
-    		[objcAttrs setObject:(NSAttributedStringKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcAttrs setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     [nSLayoutManager setTemporaryAttributes:objcAttrs forCharacterRange:charRange];

@@ -110,7 +110,7 @@ void C_NSMutableParagraphStyle_SetTabStops(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSTextTab*)(NSTextTab*)p];
+    		[objcValue addObject:(NSTextTab*)p];
     	}
     }
     [nSMutableParagraphStyle setTabStops:objcValue];
@@ -128,7 +128,7 @@ void C_NSMutableParagraphStyle_SetTextBlocks(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSTextBlock*)(NSTextBlock*)p];
+    		[objcValue addObject:(NSTextBlock*)p];
     	}
     }
     [nSMutableParagraphStyle setTextBlocks:objcValue];
@@ -141,7 +141,7 @@ void C_NSMutableParagraphStyle_SetTextLists(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSTextList*)(NSTextList*)p];
+    		[objcValue addObject:(NSTextList*)p];
     	}
     }
     [nSMutableParagraphStyle setTextLists:objcValue];

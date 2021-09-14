@@ -137,7 +137,7 @@
     	void** result_Data = (void**)result_.data;
     	for (int i = 0; i < result_.len; i++) {
     		void* p = result_Data[i];
-    		[objcResult_ addObject:(NSTableViewRowAction*)(NSTableViewRowAction*)p];
+    		[objcResult_ addObject:(NSTableViewRowAction*)p];
     	}
     }
     return objcResult_;

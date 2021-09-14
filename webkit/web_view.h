@@ -7,6 +7,7 @@ void* C_WebView_Alloc();
 
 void* C_WKWebView_InitWithFrame_Configuration(void* ptr, CGRect frame, void* configuration);
 void* C_WKWebView_InitWithCoder(void* ptr, void* coder);
+void* C_WKWebView_InitWithFrame(void* ptr, CGRect frameRect);
 void* C_WKWebView_Init(void* ptr);
 void* C_WKWebView_AllocWebView();
 void* C_WKWebView_NewWebView();

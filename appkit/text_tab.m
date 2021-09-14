@@ -14,7 +14,7 @@ void* C_NSTextTab_InitWithTextAlignment_Location_Options(void* ptr, int alignmen
     	for (int i = 0; i < options.len; i++) {
     		void* kp = optionsKeyData[i];
     		void* vp = optionsValueData[i];
-    		[objcOptions setObject:(NSTextTabOptionKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcOptions setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     NSTextTab* result_ = [nSTextTab initWithTextAlignment:alignment location:loc options:objcOptions];

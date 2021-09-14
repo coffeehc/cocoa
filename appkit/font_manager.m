@@ -195,7 +195,7 @@ void C_NSFontManager_SetSelectedAttributes_IsMultiple(void* ptr, Dictionary attr
     	for (int i = 0; i < attributes.len; i++) {
     		void* kp = attributesKeyData[i];
     		void* vp = attributesValueData[i];
-    		[objcAttributes setObject:(NSString*)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcAttributes setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     [nSFontManager setSelectedAttributes:objcAttributes isMultiple:flag];
@@ -210,7 +210,7 @@ Dictionary C_NSFontManager_ConvertAttributes(void* ptr, Dictionary attributes) {
     	for (int i = 0; i < attributes.len; i++) {
     		void* kp = attributesKeyData[i];
     		void* vp = attributesValueData[i];
-    		[objcAttributes setObject:(NSString*)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcAttributes setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     NSDictionary* result_ = [nSFontManager convertAttributes:objcAttributes];

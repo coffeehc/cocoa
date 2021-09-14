@@ -36,6 +36,12 @@ void* C_NSPopUpButton_PopUpButton_ButtonWithTitle_Target_Action(void* title, voi
     return result_;
 }
 
+void* C_NSPopUpButton_InitWithFrame(void* ptr, CGRect frameRect) {
+    NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
+    NSPopUpButton* result_ = [nSPopUpButton initWithFrame:frameRect];
+    return result_;
+}
+
 void* C_NSPopUpButton_InitWithCoder(void* ptr, void* coder) {
     NSPopUpButton* nSPopUpButton = (NSPopUpButton*)ptr;
     NSPopUpButton* result_ = [nSPopUpButton initWithCoder:(NSCoder*)coder];
@@ -82,7 +88,7 @@ void C_NSPopUpButton_AddItemsWithTitles(void* ptr, Array itemTitles) {
     	void** itemTitlesData = (void**)itemTitles.data;
     	for (int i = 0; i < itemTitles.len; i++) {
     		void* p = itemTitlesData[i];
-    		[objcItemTitles addObject:(NSString*)(NSString*)p];
+    		[objcItemTitles addObject:(NSString*)p];
     	}
     }
     [nSPopUpButton addItemsWithTitles:objcItemTitles];

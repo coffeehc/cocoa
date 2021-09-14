@@ -14,7 +14,7 @@ void* C_NSFileWrapper_InitDirectoryWithFileWrappers(void* ptr, Dictionary childr
     	for (int i = 0; i < childrenByPreferredName.len; i++) {
     		void* kp = childrenByPreferredNameKeyData[i];
     		void* vp = childrenByPreferredNameValueData[i];
-    		[objcChildrenByPreferredName setObject:(NSString*)(NSString*)kp forKey:(NSFileWrapper*)(NSString*)vp];
+    		[objcChildrenByPreferredName setObject:(NSString*)kp forKey:(NSFileWrapper*)vp];
     	}
     }
     NSFileWrapper* result_ = [nSFileWrapper initDirectoryWithFileWrappers:objcChildrenByPreferredName];
@@ -207,7 +207,7 @@ void C_NSFileWrapper_SetFileAttributes(void* ptr, Dictionary value) {
     	for (int i = 0; i < value.len; i++) {
     		void* kp = valueKeyData[i];
     		void* vp = valueValueData[i];
-    		[objcValue setObject:(NSString*)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcValue setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     [nSFileWrapper setFileAttributes:objcValue];

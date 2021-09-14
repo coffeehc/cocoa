@@ -165,7 +165,7 @@ void C_NSTabView_SetTabViewItems(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSTabViewItem*)(NSTabViewItem*)p];
+    		[objcValue addObject:(NSTabViewItem*)p];
     	}
     }
     [nSTabView setTabViewItems:objcValue];

@@ -107,7 +107,7 @@ void C_NSTextContainer_SetExclusionPaths(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSBezierPath*)(NSBezierPath*)p];
+    		[objcValue addObject:(NSBezierPath*)p];
     	}
     }
     [nSTextContainer setExclusionPaths:objcValue];

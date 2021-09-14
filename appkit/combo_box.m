@@ -72,7 +72,7 @@ void C_NSComboBox_AddItemsWithObjectValues(void* ptr, Array objects) {
     	void** objectsData = (void**)objects.data;
     	for (int i = 0; i < objects.len; i++) {
     		void* p = objectsData[i];
-    		[objcObjects addObject:(NSObject*)(NSObject*)p];
+    		[objcObjects addObject:(NSObject*)p];
     	}
     }
     [nSComboBox addItemsWithObjectValues:objcObjects];

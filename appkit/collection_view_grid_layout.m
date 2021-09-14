@@ -134,7 +134,7 @@ void C_NSCollectionViewGridLayout_SetBackgroundColors(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSColor*)(NSColor*)p];
+    		[objcValue addObject:(NSColor*)p];
     	}
     }
     [nSCollectionViewGridLayout setBackgroundColors:objcValue];

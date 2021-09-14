@@ -41,7 +41,7 @@ void* C_NSGraphicsContext_GraphicsContextWithAttributes(Dictionary attributes) {
     	for (int i = 0; i < attributes.len; i++) {
     		void* kp = attributesKeyData[i];
     		void* vp = attributesValueData[i];
-    		[objcAttributes setObject:(NSGraphicsContextAttributeKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcAttributes setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     NSGraphicsContext* result_ = [NSGraphicsContext graphicsContextWithAttributes:objcAttributes];

@@ -17,6 +17,12 @@ void* C_WKWebView_InitWithCoder(void* ptr, void* coder) {
     return result_;
 }
 
+void* C_WKWebView_InitWithFrame(void* ptr, CGRect frameRect) {
+    WKWebView* wKWebView = (WKWebView*)ptr;
+    WKWebView* result_ = [wKWebView initWithFrame:frameRect];
+    return result_;
+}
+
 void* C_WKWebView_Init(void* ptr) {
     WKWebView* wKWebView = (WKWebView*)ptr;
     WKWebView* result_ = [wKWebView init];

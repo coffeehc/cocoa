@@ -86,6 +86,11 @@ func PopUpButton_ButtonWithTitle_Target_Action(title string, target objc.Object,
 	return MakePopUpButton(result_)
 }
 
+func (n NSPopUpButton) InitWithFrame(frameRect foundation.Rect) NSPopUpButton {
+	result_ := C.C_NSPopUpButton_InitWithFrame(n.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakePopUpButton(result_)
+}
+
 func (n NSPopUpButton) InitWithCoder(coder foundation.Coder) NSPopUpButton {
 	result_ := C.C_NSPopUpButton_InitWithCoder(n.Ptr(), objc.ExtractPtr(coder))
 	return MakePopUpButton(result_)

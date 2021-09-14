@@ -81,7 +81,7 @@ void* C_NSGridView_AddRowWithViews(void* ptr, Array views) {
     	void** viewsData = (void**)views.data;
     	for (int i = 0; i < views.len; i++) {
     		void* p = viewsData[i];
-    		[objcViews addObject:(NSView*)(NSView*)p];
+    		[objcViews addObject:(NSView*)p];
     	}
     }
     NSGridRow* result_ = [nSGridView addRowWithViews:objcViews];
@@ -95,7 +95,7 @@ void* C_NSGridView_InsertRowAtIndex_WithViews(void* ptr, int index, Array views)
     	void** viewsData = (void**)views.data;
     	for (int i = 0; i < views.len; i++) {
     		void* p = viewsData[i];
-    		[objcViews addObject:(NSView*)(NSView*)p];
+    		[objcViews addObject:(NSView*)p];
     	}
     }
     NSGridRow* result_ = [nSGridView insertRowAtIndex:index withViews:objcViews];
@@ -119,7 +119,7 @@ void* C_NSGridView_AddColumnWithViews(void* ptr, Array views) {
     	void** viewsData = (void**)views.data;
     	for (int i = 0; i < views.len; i++) {
     		void* p = viewsData[i];
-    		[objcViews addObject:(NSView*)(NSView*)p];
+    		[objcViews addObject:(NSView*)p];
     	}
     }
     NSGridColumn* result_ = [nSGridView addColumnWithViews:objcViews];
@@ -133,7 +133,7 @@ void* C_NSGridView_InsertColumnAtIndex_WithViews(void* ptr, int index, Array vie
     	void** viewsData = (void**)views.data;
     	for (int i = 0; i < views.len; i++) {
     		void* p = viewsData[i];
-    		[objcViews addObject:(NSView*)(NSView*)p];
+    		[objcViews addObject:(NSView*)p];
     	}
     }
     NSGridColumn* result_ = [nSGridView insertColumnAtIndex:index withViews:objcViews];

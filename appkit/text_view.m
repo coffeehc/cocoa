@@ -132,7 +132,7 @@ void C_NSTextView_SetSelectedRanges_Affinity_StillSelecting(void* ptr, Array ran
     	void** rangesData = (void**)ranges.data;
     	for (int i = 0; i < ranges.len; i++) {
     		void* p = rangesData[i];
-    		[objcRanges addObject:(NSValue*)(NSValue*)p];
+    		[objcRanges addObject:(NSValue*)p];
     	}
     }
     [nSTextView setSelectedRanges:objcRanges affinity:affinity stillSelecting:stillSelectingFlag];
@@ -156,7 +156,7 @@ void* C_NSTextView_PreferredPasteboardTypeFromArray_RestrictedToTypesFromArray(v
     	void** availableTypesData = (void**)availableTypes.data;
     	for (int i = 0; i < availableTypes.len; i++) {
     		void* p = availableTypesData[i];
-    		[objcAvailableTypes addObject:(NSPasteboardType)(NSString*)p];
+    		[objcAvailableTypes addObject:(NSString*)p];
     	}
     }
     NSMutableArray* objcAllowedTypes = [NSMutableArray arrayWithCapacity:allowedTypes.len];
@@ -164,7 +164,7 @@ void* C_NSTextView_PreferredPasteboardTypeFromArray_RestrictedToTypesFromArray(v
     	void** allowedTypesData = (void**)allowedTypes.data;
     	for (int i = 0; i < allowedTypes.len; i++) {
     		void* p = allowedTypesData[i];
-    		[objcAllowedTypes addObject:(NSPasteboardType)(NSString*)p];
+    		[objcAllowedTypes addObject:(NSString*)p];
     	}
     }
     NSPasteboardType result_ = [nSTextView preferredPasteboardTypeFromArray:objcAvailableTypes restrictedToTypesFromArray:objcAllowedTypes];
@@ -196,7 +196,7 @@ bool C_NSTextView_WriteSelectionToPasteboard_Types(void* ptr, void* pboard, Arra
     	void** typesData = (void**)types.data;
     	for (int i = 0; i < types.len; i++) {
     		void* p = typesData[i];
-    		[objcTypes addObject:(NSPasteboardType)(NSString*)p];
+    		[objcTypes addObject:(NSString*)p];
     	}
     }
     BOOL result_ = [nSTextView writeSelectionToPasteboard:(NSPasteboard*)pboard types:objcTypes];
@@ -322,7 +322,7 @@ bool C_NSTextView_ShouldChangeTextInRanges_ReplacementStrings(void* ptr, Array a
     	void** affectedRangesData = (void**)affectedRanges.data;
     	for (int i = 0; i < affectedRanges.len; i++) {
     		void* p = affectedRangesData[i];
-    		[objcAffectedRanges addObject:(NSValue*)(NSValue*)p];
+    		[objcAffectedRanges addObject:(NSValue*)p];
     	}
     }
     NSMutableArray* objcReplacementStrings = [NSMutableArray arrayWithCapacity:replacementStrings.len];
@@ -330,7 +330,7 @@ bool C_NSTextView_ShouldChangeTextInRanges_ReplacementStrings(void* ptr, Array a
     	void** replacementStringsData = (void**)replacementStrings.data;
     	for (int i = 0; i < replacementStrings.len; i++) {
     		void* p = replacementStringsData[i];
-    		[objcReplacementStrings addObject:(NSString*)(NSString*)p];
+    		[objcReplacementStrings addObject:(NSString*)p];
     	}
     }
     BOOL result_ = [nSTextView shouldChangeTextInRanges:objcAffectedRanges replacementStrings:objcReplacementStrings];
@@ -619,7 +619,7 @@ void C_NSTextView_SetAllowedInputSourceLocales(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSString*)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSTextView setAllowedInputSourceLocales:objcValue];
@@ -742,7 +742,7 @@ void C_NSTextView_SetSelectedRanges(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSValue*)(NSValue*)p];
+    		[objcValue addObject:(NSValue*)p];
     	}
     }
     [nSTextView setSelectedRanges:objcValue];
@@ -807,7 +807,7 @@ void C_NSTextView_SetSelectedTextAttributes(void* ptr, Dictionary value) {
     	for (int i = 0; i < value.len; i++) {
     		void* kp = valueKeyData[i];
     		void* vp = valueValueData[i];
-    		[objcValue setObject:(NSAttributedStringKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcValue setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     [nSTextView setSelectedTextAttributes:objcValue];
@@ -844,7 +844,7 @@ void C_NSTextView_SetMarkedTextAttributes(void* ptr, Dictionary value) {
     	for (int i = 0; i < value.len; i++) {
     		void* kp = valueKeyData[i];
     		void* vp = valueValueData[i];
-    		[objcValue setObject:(NSAttributedStringKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcValue setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     [nSTextView setMarkedTextAttributes:objcValue];
@@ -881,7 +881,7 @@ void C_NSTextView_SetLinkTextAttributes(void* ptr, Dictionary value) {
     	for (int i = 0; i < value.len; i++) {
     		void* kp = valueKeyData[i];
     		void* vp = valueValueData[i];
-    		[objcValue setObject:(NSAttributedStringKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcValue setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     [nSTextView setLinkTextAttributes:objcValue];
@@ -952,7 +952,7 @@ void C_NSTextView_SetTypingAttributes(void* ptr, Dictionary value) {
     	for (int i = 0; i < value.len; i++) {
     		void* kp = valueKeyData[i];
     		void* vp = valueValueData[i];
-    		[objcValue setObject:(NSAttributedStringKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcValue setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     [nSTextView setTypingAttributes:objcValue];

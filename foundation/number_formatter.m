@@ -519,7 +519,7 @@ void C_NSNumberFormatter_SetTextAttributesForNegativeValues(void* ptr, Dictionar
     	for (int i = 0; i < value.len; i++) {
     		void* kp = valueKeyData[i];
     		void* vp = valueValueData[i];
-    		[objcValue setObject:(NSString*)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcValue setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     [nSNumberFormatter setTextAttributesForNegativeValues:objcValue];
@@ -556,7 +556,7 @@ void C_NSNumberFormatter_SetTextAttributesForPositiveValues(void* ptr, Dictionar
     	for (int i = 0; i < value.len; i++) {
     		void* kp = valueKeyData[i];
     		void* vp = valueValueData[i];
-    		[objcValue setObject:(NSString*)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcValue setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     [nSNumberFormatter setTextAttributesForPositiveValues:objcValue];
@@ -604,7 +604,7 @@ void C_NSNumberFormatter_SetTextAttributesForZero(void* ptr, Dictionary value) {
     	for (int i = 0; i < value.len; i++) {
     		void* kp = valueKeyData[i];
     		void* vp = valueValueData[i];
-    		[objcValue setObject:(NSString*)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcValue setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     [nSNumberFormatter setTextAttributesForZero:objcValue];
@@ -652,7 +652,7 @@ void C_NSNumberFormatter_SetTextAttributesForNil(void* ptr, Dictionary value) {
     	for (int i = 0; i < value.len; i++) {
     		void* kp = valueKeyData[i];
     		void* vp = valueValueData[i];
-    		[objcValue setObject:(NSString*)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcValue setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     [nSNumberFormatter setTextAttributesForNil:objcValue];
@@ -700,7 +700,7 @@ void C_NSNumberFormatter_SetTextAttributesForNotANumber(void* ptr, Dictionary va
     	for (int i = 0; i < value.len; i++) {
     		void* kp = valueKeyData[i];
     		void* vp = valueValueData[i];
-    		[objcValue setObject:(NSString*)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcValue setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     [nSNumberFormatter setTextAttributesForNotANumber:objcValue];
@@ -737,7 +737,7 @@ void C_NSNumberFormatter_SetTextAttributesForPositiveInfinity(void* ptr, Diction
     	for (int i = 0; i < value.len; i++) {
     		void* kp = valueKeyData[i];
     		void* vp = valueValueData[i];
-    		[objcValue setObject:(NSString*)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcValue setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     [nSNumberFormatter setTextAttributesForPositiveInfinity:objcValue];
@@ -774,7 +774,7 @@ void C_NSNumberFormatter_SetTextAttributesForNegativeInfinity(void* ptr, Diction
     	for (int i = 0; i < value.len; i++) {
     		void* kp = valueKeyData[i];
     		void* vp = valueValueData[i];
-    		[objcValue setObject:(NSString*)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcValue setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     [nSNumberFormatter setTextAttributesForNegativeInfinity:objcValue];

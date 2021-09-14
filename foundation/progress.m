@@ -14,7 +14,7 @@ void* C_NSProgress_InitWithParent_UserInfo(void* ptr, void* parentProgressOrNil,
     	for (int i = 0; i < userInfoOrNil.len; i++) {
     		void* kp = userInfoOrNilKeyData[i];
     		void* vp = userInfoOrNilValueData[i];
-    		[objcUserInfoOrNil setObject:(NSProgressUserInfoKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcUserInfoOrNil setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     NSProgress* result_ = [nSProgress initWithParent:(NSProgress*)parentProgressOrNil userInfo:objcUserInfoOrNil];

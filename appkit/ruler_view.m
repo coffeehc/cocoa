@@ -57,7 +57,7 @@ void C_NSRulerView_RulerView_RegisterUnitWithName_Abbreviation_UnitToPointsConve
     	void** stepUpCycleData = (void**)stepUpCycle.data;
     	for (int i = 0; i < stepUpCycle.len; i++) {
     		void* p = stepUpCycleData[i];
-    		[objcStepUpCycle addObject:(NSNumber*)(NSNumber*)p];
+    		[objcStepUpCycle addObject:(NSNumber*)p];
     	}
     }
     NSMutableArray* objcStepDownCycle = [NSMutableArray arrayWithCapacity:stepDownCycle.len];
@@ -65,7 +65,7 @@ void C_NSRulerView_RulerView_RegisterUnitWithName_Abbreviation_UnitToPointsConve
     	void** stepDownCycleData = (void**)stepDownCycle.data;
     	for (int i = 0; i < stepDownCycle.len; i++) {
     		void* p = stepDownCycleData[i];
-    		[objcStepDownCycle addObject:(NSNumber*)(NSNumber*)p];
+    		[objcStepDownCycle addObject:(NSNumber*)p];
     	}
     }
     [NSRulerView registerUnitWithName:(NSString*)unitName abbreviation:(NSString*)abbreviation unitToPointsConversionFactor:conversionFactor stepUpCycle:objcStepUpCycle stepDownCycle:objcStepDownCycle];
@@ -175,7 +175,7 @@ void C_NSRulerView_SetMarkers(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSRulerMarker*)(NSRulerMarker*)p];
+    		[objcValue addObject:(NSRulerMarker*)p];
     	}
     }
     [nSRulerView setMarkers:objcValue];

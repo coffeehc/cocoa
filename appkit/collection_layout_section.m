@@ -95,7 +95,7 @@ void C_NSCollectionLayoutSection_SetBoundarySupplementaryItems(void* ptr, Array 
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSCollectionLayoutBoundarySupplementaryItem*)(NSCollectionLayoutBoundarySupplementaryItem*)p];
+    		[objcValue addObject:(NSCollectionLayoutBoundarySupplementaryItem*)p];
     	}
     }
     [nSCollectionLayoutSection setBoundarySupplementaryItems:objcValue];
@@ -125,7 +125,7 @@ void C_NSCollectionLayoutSection_SetDecorationItems(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSCollectionLayoutDecorationItem*)(NSCollectionLayoutDecorationItem*)p];
+    		[objcValue addObject:(NSCollectionLayoutDecorationItem*)p];
     	}
     }
     [nSCollectionLayoutSection setDecorationItems:objcValue];

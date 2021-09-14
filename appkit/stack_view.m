@@ -11,7 +11,7 @@ void* C_NSStackView_StackViewWithViews(Array views) {
     	void** viewsData = (void**)views.data;
     	for (int i = 0; i < views.len; i++) {
     		void* p = viewsData[i];
-    		[objcViews addObject:(NSView*)(NSView*)p];
+    		[objcViews addObject:(NSView*)p];
     	}
     }
     NSStackView* result_ = [NSStackView stackViewWithViews:objcViews];
@@ -75,7 +75,7 @@ void C_NSStackView_SetViews_InGravity(void* ptr, Array views, int gravity) {
     	void** viewsData = (void**)views.data;
     	for (int i = 0; i < views.len; i++) {
     		void* p = viewsData[i];
-    		[objcViews addObject:(NSView*)(NSView*)p];
+    		[objcViews addObject:(NSView*)p];
     	}
     }
     [nSStackView setViews:objcViews inGravity:gravity];

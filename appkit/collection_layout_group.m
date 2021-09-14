@@ -11,7 +11,7 @@ void* C_NSCollectionLayoutGroup_CollectionLayoutGroup_HorizontalGroupWithLayoutS
     	void** subitemsData = (void**)subitems.data;
     	for (int i = 0; i < subitems.len; i++) {
     		void* p = subitemsData[i];
-    		[objcSubitems addObject:(NSCollectionLayoutItem*)(NSCollectionLayoutItem*)p];
+    		[objcSubitems addObject:(NSCollectionLayoutItem*)p];
     	}
     }
     NSCollectionLayoutGroup* result_ = [NSCollectionLayoutGroup horizontalGroupWithLayoutSize:(NSCollectionLayoutSize*)layoutSize subitems:objcSubitems];
@@ -29,7 +29,7 @@ void* C_NSCollectionLayoutGroup_CollectionLayoutGroup_VerticalGroupWithLayoutSiz
     	void** subitemsData = (void**)subitems.data;
     	for (int i = 0; i < subitems.len; i++) {
     		void* p = subitemsData[i];
-    		[objcSubitems addObject:(NSCollectionLayoutItem*)(NSCollectionLayoutItem*)p];
+    		[objcSubitems addObject:(NSCollectionLayoutItem*)p];
     	}
     }
     NSCollectionLayoutGroup* result_ = [NSCollectionLayoutGroup verticalGroupWithLayoutSize:(NSCollectionLayoutSize*)layoutSize subitems:objcSubitems];
@@ -52,7 +52,7 @@ void* C_NSCollectionLayoutGroup_CollectionLayoutGroup_ItemWithLayoutSize_Supplem
     	void** supplementaryItemsData = (void**)supplementaryItems.data;
     	for (int i = 0; i < supplementaryItems.len; i++) {
     		void* p = supplementaryItemsData[i];
-    		[objcSupplementaryItems addObject:(NSCollectionLayoutSupplementaryItem*)(NSCollectionLayoutSupplementaryItem*)p];
+    		[objcSupplementaryItems addObject:(NSCollectionLayoutSupplementaryItem*)p];
     	}
     }
     NSCollectionLayoutGroup* result_ = [NSCollectionLayoutGroup itemWithLayoutSize:(NSCollectionLayoutSize*)layoutSize supplementaryItems:objcSupplementaryItems];
@@ -106,7 +106,7 @@ void C_NSCollectionLayoutGroup_SetSupplementaryItems(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSCollectionLayoutSupplementaryItem*)(NSCollectionLayoutSupplementaryItem*)p];
+    		[objcValue addObject:(NSCollectionLayoutSupplementaryItem*)p];
     	}
     }
     [nSCollectionLayoutGroup setSupplementaryItems:objcValue];

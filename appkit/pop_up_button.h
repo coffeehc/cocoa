@@ -11,6 +11,7 @@ void* C_NSPopUpButton_PopUpButton_ButtonWithImage_Target_Action(void* image, voi
 void* C_NSPopUpButton_PopUpButton_RadioButtonWithTitle_Target_Action(void* title, void* target, void* action);
 void* C_NSPopUpButton_PopUpButton_ButtonWithTitle_Image_Target_Action(void* title, void* image, void* target, void* action);
 void* C_NSPopUpButton_PopUpButton_ButtonWithTitle_Target_Action(void* title, void* target, void* action);
+void* C_NSPopUpButton_InitWithFrame(void* ptr, CGRect frameRect);
 void* C_NSPopUpButton_InitWithCoder(void* ptr, void* coder);
 void* C_NSPopUpButton_Init(void* ptr);
 void* C_NSPopUpButton_AllocPopUpButton();

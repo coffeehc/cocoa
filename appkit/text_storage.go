@@ -47,35 +47,6 @@ func MakeTextStorage(ptr unsafe.Pointer) NSTextStorage {
 	}
 }
 
-func (n NSTextStorage) InitWithString(str string) NSTextStorage {
-	result_ := C.C_NSTextStorage_InitWithString(n.Ptr(), foundation.NewString(str).Ptr())
-	return MakeTextStorage(result_)
-}
-
-func (n NSTextStorage) InitWithString_Attributes(str string, attrs map[foundation.AttributedStringKey]objc.Object) NSTextStorage {
-	var cAttrs C.Dictionary
-	if len(attrs) > 0 {
-		cAttrsKeyData := make([]unsafe.Pointer, len(attrs))
-		cAttrsValueData := make([]unsafe.Pointer, len(attrs))
-		var idx = 0
-		for k, v := range attrs {
-			cAttrsKeyData[idx] = foundation.NewString(string(k)).Ptr()
-			cAttrsValueData[idx] = objc.ExtractPtr(v)
-			idx++
-		}
-		cAttrs.key_data = unsafe.Pointer(&cAttrsKeyData[0])
-		cAttrs.value_data = unsafe.Pointer(&cAttrsValueData[0])
-		cAttrs.len = C.int(len(attrs))
-	}
-	result_ := C.C_NSTextStorage_InitWithString_Attributes(n.Ptr(), foundation.NewString(str).Ptr(), cAttrs)
-	return MakeTextStorage(result_)
-}
-
-func (n NSTextStorage) InitWithAttributedString(attrStr foundation.AttributedString) NSTextStorage {
-	result_ := C.C_NSTextStorage_InitWithAttributedString(n.Ptr(), objc.ExtractPtr(attrStr))
-	return MakeTextStorage(result_)
-}
-
 func AllocTextStorage() NSTextStorage {
 	result_ := C.C_NSTextStorage_AllocTextStorage()
 	return MakeTextStorage(result_)

@@ -57,7 +57,7 @@ void* C_NSAppearance_BestMatchFromAppearancesWithNames(void* ptr, Array appearan
     	void** appearancesData = (void**)appearances.data;
     	for (int i = 0; i < appearances.len; i++) {
     		void* p = appearancesData[i];
-    		[objcAppearances addObject:(NSAppearanceName)(NSString*)p];
+    		[objcAppearances addObject:(NSString*)p];
     	}
     }
     NSAppearanceName result_ = [nSAppearance bestMatchFromAppearancesWithNames:objcAppearances];

@@ -21,7 +21,7 @@ void* C_NSCollectionLayoutDecorationItem_CollectionLayoutDecorationItem_ItemWith
     	void** supplementaryItemsData = (void**)supplementaryItems.data;
     	for (int i = 0; i < supplementaryItems.len; i++) {
     		void* p = supplementaryItemsData[i];
-    		[objcSupplementaryItems addObject:(NSCollectionLayoutSupplementaryItem*)(NSCollectionLayoutSupplementaryItem*)p];
+    		[objcSupplementaryItems addObject:(NSCollectionLayoutSupplementaryItem*)p];
     	}
     }
     NSCollectionLayoutDecorationItem* result_ = [NSCollectionLayoutDecorationItem itemWithLayoutSize:(NSCollectionLayoutSize*)layoutSize supplementaryItems:objcSupplementaryItems];

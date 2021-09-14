@@ -123,7 +123,7 @@ void* C_NSURL_FileURLWithPathComponents(Array components) {
     	void** componentsData = (void**)components.data;
     	for (int i = 0; i < components.len; i++) {
     		void* p = componentsData[i];
-    		[objcComponents addObject:(NSString*)(NSString*)p];
+    		[objcComponents addObject:(NSString*)p];
     	}
     }
     NSURL* result_ = [NSURL fileURLWithPathComponents:objcComponents];
@@ -191,7 +191,7 @@ Dictionary C_NSURL_URL_ResourceValuesForKeys_FromBookmarkData(Array keys, void* 
     	void** keysData = (void**)keys.data;
     	for (int i = 0; i < keys.len; i++) {
     		void* p = keysData[i];
-    		[objcKeys addObject:(NSURLResourceKey)(NSString*)p];
+    		[objcKeys addObject:(NSString*)p];
     	}
     }
     NSDictionary* result_ = [NSURL resourceValuesForKeys:objcKeys fromBookmarkData:(NSData*)bookmarkData];

@@ -489,7 +489,7 @@ void C_NSWindow_RegisterForDraggedTypes(void* ptr, Array newTypes) {
     	void** newTypesData = (void**)newTypes.data;
     	for (int i = 0; i < newTypes.len; i++) {
     		void* p = newTypesData[i];
-    		[objcNewTypes addObject:(NSPasteboardType)(NSString*)p];
+    		[objcNewTypes addObject:(NSString*)p];
     	}
     }
     [nSWindow registerForDraggedTypes:objcNewTypes];
@@ -593,7 +593,7 @@ void C_NSWindow_VisualizeConstraints(void* ptr, Array constraints) {
     	void** constraintsData = (void**)constraints.data;
     	for (int i = 0; i < constraints.len; i++) {
     		void* p = constraintsData[i];
-    		[objcConstraints addObject:(NSLayoutConstraint*)(NSLayoutConstraint*)p];
+    		[objcConstraints addObject:(NSLayoutConstraint*)p];
     	}
     }
     [nSWindow visualizeConstraints:objcConstraints];
@@ -1313,7 +1313,7 @@ void C_NSWindow_SetTitlebarAccessoryViewControllers(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSTitlebarAccessoryViewController*)(NSTitlebarAccessoryViewController*)p];
+    		[objcValue addObject:(NSTitlebarAccessoryViewController*)p];
     	}
     }
     [nSWindow setTitlebarAccessoryViewControllers:objcValue];

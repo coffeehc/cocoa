@@ -14,7 +14,7 @@ void* C_NSFontDescriptor_InitWithFontAttributes(void* ptr, Dictionary attributes
     	for (int i = 0; i < attributes.len; i++) {
     		void* kp = attributesKeyData[i];
     		void* vp = attributesValueData[i];
-    		[objcAttributes setObject:(NSFontDescriptorAttributeName)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcAttributes setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     NSFontDescriptor* result_ = [nSFontDescriptor initWithFontAttributes:objcAttributes];
@@ -63,7 +63,7 @@ void* C_NSFontDescriptor_PreferredFontDescriptorForTextStyle_Options(void* style
     	for (int i = 0; i < options.len; i++) {
     		void* kp = optionsKeyData[i];
     		void* vp = optionsValueData[i];
-    		[objcOptions setObject:(NSFontTextStyleOptionKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcOptions setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     NSFontDescriptor* result_ = [NSFontDescriptor preferredFontDescriptorForTextStyle:(NSString*)style options:objcOptions];
@@ -78,7 +78,7 @@ void* C_NSFontDescriptor_FontDescriptorWithFontAttributes(Dictionary attributes)
     	for (int i = 0; i < attributes.len; i++) {
     		void* kp = attributesKeyData[i];
     		void* vp = attributesValueData[i];
-    		[objcAttributes setObject:(NSFontDescriptorAttributeName)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcAttributes setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     NSFontDescriptor* result_ = [NSFontDescriptor fontDescriptorWithFontAttributes:objcAttributes];
@@ -104,7 +104,7 @@ void* C_NSFontDescriptor_FontDescriptorByAddingAttributes(void* ptr, Dictionary 
     	for (int i = 0; i < attributes.len; i++) {
     		void* kp = attributesKeyData[i];
     		void* vp = attributesValueData[i];
-    		[objcAttributes setObject:(NSFontDescriptorAttributeName)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcAttributes setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     NSFontDescriptor* result_ = [nSFontDescriptor fontDescriptorByAddingAttributes:objcAttributes];

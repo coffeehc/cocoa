@@ -163,7 +163,7 @@ void C_NSSearchFieldCell_SetRecentSearches(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSString*)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSSearchFieldCell setRecentSearches:objcValue];

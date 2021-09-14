@@ -54,7 +54,7 @@
     	void** result_Data = (void**)result_.data;
     	for (int i = 0; i < result_.len; i++) {
     		void* p = result_Data[i];
-    		[objcResult_ addObject:(NSValue*)(NSValue*)p];
+    		[objcResult_ addObject:(NSValue*)p];
     	}
     }
     return objcResult_;
@@ -71,7 +71,7 @@
     	void** result_Data = (void**)result_.data;
     	for (int i = 0; i < result_.len; i++) {
     		void* p = result_Data[i];
-    		[objcResult_ addObject:(NSPasteboardType)(NSString*)p];
+    		[objcResult_ addObject:(NSString*)p];
     	}
     }
     return objcResult_;
@@ -155,7 +155,7 @@
     	for (int i = 0; i < result_.len; i++) {
     		void* kp = result_KeyData[i];
     		void* vp = result_ValueData[i];
-    		[objcResult_ setObject:(NSAttributedStringKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcResult_ setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     return objcResult_;
@@ -231,7 +231,7 @@
     	void** result_Data = (void**)result_.data;
     	for (int i = 0; i < result_.len; i++) {
     		void* p = result_Data[i];
-    		[objcResult_ addObject:(NSTextCheckingResult*)(NSTextCheckingResult*)p];
+    		[objcResult_ addObject:(NSTextCheckingResult*)p];
     	}
     }
     return objcResult_;
@@ -244,7 +244,7 @@
     	void** result_Data = (void**)result_.data;
     	for (int i = 0; i < result_.len; i++) {
     		void* p = result_Data[i];
-    		[objcResult_ addObject:(NSObject*)(NSObject*)p];
+    		[objcResult_ addObject:(NSObject*)p];
     	}
     }
     return objcResult_;
@@ -273,7 +273,7 @@
     	void** result_Data = (void**)result_.data;
     	for (int i = 0; i < result_.len; i++) {
     		void* p = result_Data[i];
-    		[objcResult_ addObject:(NSTouchBarItemIdentifier)(NSString*)p];
+    		[objcResult_ addObject:(NSString*)p];
     	}
     }
     return objcResult_;

@@ -134,7 +134,7 @@ void C_NSResponder_InterpretKeyEvents(void* ptr, Array eventArray) {
     	void** eventArrayData = (void**)eventArray.data;
     	for (int i = 0; i < eventArray.len; i++) {
     		void* p = eventArrayData[i];
-    		[objcEventArray addObject:(NSEvent*)(NSEvent*)p];
+    		[objcEventArray addObject:(NSEvent*)p];
     	}
     }
     [nSResponder interpretKeyEvents:objcEventArray];

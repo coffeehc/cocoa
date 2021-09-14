@@ -183,7 +183,7 @@ void C_NSSavePanel_SetTagNames(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSString*)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSSavePanel setTagNames:objcValue];
@@ -263,7 +263,7 @@ void C_NSSavePanel_SetAllowedContentTypes(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(UTType*)(UTType*)p];
+    		[objcValue addObject:(UTType*)p];
     	}
     }
     [nSSavePanel setAllowedContentTypes:objcValue];

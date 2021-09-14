@@ -113,7 +113,7 @@ void* C_NSPasteboard_AvailableTypeFromArray(void* ptr, Array types) {
     	void** typesData = (void**)types.data;
     	for (int i = 0; i < types.len; i++) {
     		void* p = typesData[i];
-    		[objcTypes addObject:(NSPasteboardType)(NSString*)p];
+    		[objcTypes addObject:(NSString*)p];
     	}
     }
     NSPasteboardType result_ = [nSPasteboard availableTypeFromArray:objcTypes];
@@ -127,7 +127,7 @@ bool C_NSPasteboard_CanReadItemWithDataConformingToTypes(void* ptr, Array types)
     	void** typesData = (void**)types.data;
     	for (int i = 0; i < types.len; i++) {
     		void* p = typesData[i];
-    		[objcTypes addObject:(NSString*)(NSString*)p];
+    		[objcTypes addObject:(NSString*)p];
     	}
     }
     BOOL result_ = [nSPasteboard canReadItemWithDataConformingToTypes:objcTypes];
@@ -163,7 +163,7 @@ int C_NSPasteboard_DeclareTypes_Owner(void* ptr, Array newTypes, void* newOwner)
     	void** newTypesData = (void**)newTypes.data;
     	for (int i = 0; i < newTypes.len; i++) {
     		void* p = newTypesData[i];
-    		[objcNewTypes addObject:(NSPasteboardType)(NSString*)p];
+    		[objcNewTypes addObject:(NSString*)p];
     	}
     }
     NSInteger result_ = [nSPasteboard declareTypes:objcNewTypes owner:(id)newOwner];
@@ -177,7 +177,7 @@ int C_NSPasteboard_AddTypes_Owner(void* ptr, Array newTypes, void* newOwner) {
     	void** newTypesData = (void**)newTypes.data;
     	for (int i = 0; i < newTypes.len; i++) {
     		void* p = newTypesData[i];
-    		[objcNewTypes addObject:(NSPasteboardType)(NSString*)p];
+    		[objcNewTypes addObject:(NSString*)p];
     	}
     }
     NSInteger result_ = [nSPasteboard addTypes:objcNewTypes owner:(id)newOwner];

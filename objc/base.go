@@ -2,7 +2,13 @@ package objc
 
 // #import "base.h"
 import "C"
-import "runtime/cgo"
+import (
+	"runtime/cgo"
+	"unsafe"
+)
+
+// IMP is function pointer
+type IMP unsafe.Pointer
 
 // DispatchAsyncToMainQueue schedule task to run in main thread async, it does the same thing as
 // 	dispatch_async(dispatch_get_main_queue(), ^{

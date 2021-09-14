@@ -5,34 +5,6 @@ void* C_TextStorage_Alloc() {
     return [NSTextStorage alloc];
 }
 
-void* C_NSTextStorage_InitWithString(void* ptr, void* str) {
-    NSTextStorage* nSTextStorage = (NSTextStorage*)ptr;
-    NSTextStorage* result_ = [nSTextStorage initWithString:(NSString*)str];
-    return result_;
-}
-
-void* C_NSTextStorage_InitWithString_Attributes(void* ptr, void* str, Dictionary attrs) {
-    NSTextStorage* nSTextStorage = (NSTextStorage*)ptr;
-    NSMutableDictionary* objcAttrs = [NSMutableDictionary dictionaryWithCapacity:attrs.len];
-    if (attrs.len > 0) {
-    	void** attrsKeyData = (void**)attrs.key_data;
-    	void** attrsValueData = (void**)attrs.value_data;
-    	for (int i = 0; i < attrs.len; i++) {
-    		void* kp = attrsKeyData[i];
-    		void* vp = attrsValueData[i];
-    		[objcAttrs setObject:(NSAttributedStringKey)(NSString*)kp forKey:(id)(NSString*)vp];
-    	}
-    }
-    NSTextStorage* result_ = [nSTextStorage initWithString:(NSString*)str attributes:objcAttrs];
-    return result_;
-}
-
-void* C_NSTextStorage_InitWithAttributedString(void* ptr, void* attrStr) {
-    NSTextStorage* nSTextStorage = (NSTextStorage*)ptr;
-    NSTextStorage* result_ = [nSTextStorage initWithAttributedString:(NSAttributedString*)attrStr];
-    return result_;
-}
-
 void* C_NSTextStorage_AllocTextStorage() {
     NSTextStorage* result_ = [NSTextStorage alloc];
     return result_;
@@ -167,7 +139,7 @@ void C_NSTextStorage_SetAttributeRuns(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSTextStorage*)(NSTextStorage*)p];
+    		[objcValue addObject:(NSTextStorage*)p];
     	}
     }
     [nSTextStorage setAttributeRuns:objcValue];
@@ -197,7 +169,7 @@ void C_NSTextStorage_SetParagraphs(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSTextStorage*)(NSTextStorage*)p];
+    		[objcValue addObject:(NSTextStorage*)p];
     	}
     }
     [nSTextStorage setParagraphs:objcValue];
@@ -227,7 +199,7 @@ void C_NSTextStorage_SetWords(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSTextStorage*)(NSTextStorage*)p];
+    		[objcValue addObject:(NSTextStorage*)p];
     	}
     }
     [nSTextStorage setWords:objcValue];
@@ -257,7 +229,7 @@ void C_NSTextStorage_SetCharacters(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSTextStorage*)(NSTextStorage*)p];
+    		[objcValue addObject:(NSTextStorage*)p];
     	}
     }
     [nSTextStorage setCharacters:objcValue];

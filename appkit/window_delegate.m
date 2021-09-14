@@ -90,7 +90,7 @@
     	void** result_Data = (void**)result_.data;
     	for (int i = 0; i < result_.len; i++) {
     		void* p = result_Data[i];
-    		[objcResult_ addObject:(NSWindow*)(NSWindow*)p];
+    		[objcResult_ addObject:(NSWindow*)p];
     	}
     }
     return objcResult_;
@@ -103,7 +103,7 @@
     	void** result_Data = (void**)result_.data;
     	for (int i = 0; i < result_.len; i++) {
     		void* p = result_Data[i];
-    		[objcResult_ addObject:(NSWindow*)(NSWindow*)p];
+    		[objcResult_ addObject:(NSWindow*)p];
     	}
     }
     return objcResult_;
@@ -128,7 +128,7 @@
     	void** result_Data = (void**)result_.data;
     	for (int i = 0; i < result_.len; i++) {
     		void* p = result_Data[i];
-    		[objcResult_ addObject:(NSWindow*)(NSWindow*)p];
+    		[objcResult_ addObject:(NSWindow*)p];
     	}
     }
     return objcResult_;

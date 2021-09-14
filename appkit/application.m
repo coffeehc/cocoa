@@ -307,7 +307,7 @@ void C_NSApplication_OrderFrontStandardAboutPanelWithOptions(void* ptr, Dictiona
     	for (int i = 0; i < optionsDictionary.len; i++) {
     		void* kp = optionsDictionaryKeyData[i];
     		void* vp = optionsDictionaryValueData[i];
-    		[objcOptionsDictionary setObject:(NSAboutPanelOptionKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcOptionsDictionary setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     [nSApplication orderFrontStandardAboutPanelWithOptions:objcOptionsDictionary];
@@ -350,7 +350,7 @@ void C_NSApplication_RegisterServicesMenuSendTypes_ReturnTypes(void* ptr, Array 
     	void** sendTypesData = (void**)sendTypes.data;
     	for (int i = 0; i < sendTypes.len; i++) {
     		void* p = sendTypesData[i];
-    		[objcSendTypes addObject:(NSPasteboardType)(NSString*)p];
+    		[objcSendTypes addObject:(NSString*)p];
     	}
     }
     NSMutableArray* objcReturnTypes = [NSMutableArray arrayWithCapacity:returnTypes.len];
@@ -358,7 +358,7 @@ void C_NSApplication_RegisterServicesMenuSendTypes_ReturnTypes(void* ptr, Array 
     	void** returnTypesData = (void**)returnTypes.data;
     	for (int i = 0; i < returnTypes.len; i++) {
     		void* p = returnTypesData[i];
-    		[objcReturnTypes addObject:(NSPasteboardType)(NSString*)p];
+    		[objcReturnTypes addObject:(NSString*)p];
     	}
     }
     [nSApplication registerServicesMenuSendTypes:objcSendTypes returnTypes:objcReturnTypes];

@@ -40,7 +40,7 @@ void C_NSDiffableDataSourceSnapshot_AppendSectionsWithIdentifiers(void* ptr, Arr
     	void** sectionIdentifiersData = (void**)sectionIdentifiers.data;
     	for (int i = 0; i < sectionIdentifiers.len; i++) {
     		void* p = sectionIdentifiersData[i];
-    		[objcSectionIdentifiers addObject:(NSObject*)(NSObject*)p];
+    		[objcSectionIdentifiers addObject:(NSObject*)p];
     	}
     }
     [nSDiffableDataSourceSnapshot appendSectionsWithIdentifiers:objcSectionIdentifiers];

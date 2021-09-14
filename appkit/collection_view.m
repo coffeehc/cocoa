@@ -282,7 +282,7 @@ void C_NSCollectionView_SetContent(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(id)(id)p];
+    		[objcValue addObject:(id)p];
     	}
     }
     [nSCollectionView setContent:objcValue];
@@ -323,7 +323,7 @@ void C_NSCollectionView_SetBackgroundColors(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSColor*)(NSColor*)p];
+    		[objcValue addObject:(NSColor*)p];
     	}
     }
     [nSCollectionView setBackgroundColors:objcValue];

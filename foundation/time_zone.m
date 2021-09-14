@@ -164,7 +164,7 @@ void C_NSTimeZone_TimeZone_SetAbbreviationDictionary(Dictionary value) {
     	for (int i = 0; i < value.len; i++) {
     		void* kp = valueKeyData[i];
     		void* vp = valueValueData[i];
-    		[objcValue setObject:(NSString*)(NSString*)kp forKey:(NSString*)(NSString*)vp];
+    		[objcValue setObject:(NSString*)kp forKey:(NSString*)vp];
     	}
     }
     [NSTimeZone setAbbreviationDictionary:objcValue];

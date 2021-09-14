@@ -45,7 +45,7 @@ void C_NSOperationQueue_AddOperations_WaitUntilFinished(void* ptr, Array ops, bo
     	void** opsData = (void**)ops.data;
     	for (int i = 0; i < ops.len; i++) {
     		void* p = opsData[i];
-    		[objcOps addObject:(NSOperation*)(NSOperation*)p];
+    		[objcOps addObject:(NSOperation*)p];
     	}
     }
     [nSOperationQueue addOperations:objcOps waitUntilFinished:wait];

@@ -73,7 +73,7 @@ void* C_NSLocale_LocaleIdentifierFromComponents(Dictionary dict) {
     	for (int i = 0; i < dict.len; i++) {
     		void* kp = dictKeyData[i];
     		void* vp = dictValueData[i];
-    		[objcDict setObject:(NSString*)(NSString*)kp forKey:(NSString*)(NSString*)vp];
+    		[objcDict setObject:(NSString*)kp forKey:(NSString*)vp];
     	}
     }
     NSString* result_ = [NSLocale localeIdentifierFromComponents:objcDict];

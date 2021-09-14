@@ -419,7 +419,7 @@ void C_NSView_AddConstraints(void* ptr, Array constraints) {
     	void** constraintsData = (void**)constraints.data;
     	for (int i = 0; i < constraints.len; i++) {
     		void* p = constraintsData[i];
-    		[objcConstraints addObject:(NSLayoutConstraint*)(NSLayoutConstraint*)p];
+    		[objcConstraints addObject:(NSLayoutConstraint*)p];
     	}
     }
     [nSView addConstraints:objcConstraints];
@@ -437,7 +437,7 @@ void C_NSView_RemoveConstraints(void* ptr, Array constraints) {
     	void** constraintsData = (void**)constraints.data;
     	for (int i = 0; i < constraints.len; i++) {
     		void* p = constraintsData[i];
-    		[objcConstraints addObject:(NSLayoutConstraint*)(NSLayoutConstraint*)p];
+    		[objcConstraints addObject:(NSLayoutConstraint*)p];
     	}
     }
     [nSView removeConstraints:objcConstraints];
@@ -558,7 +558,7 @@ bool C_NSView_EnterFullScreenMode_WithOptions(void* ptr, void* screen, Dictionar
     	for (int i = 0; i < options.len; i++) {
     		void* kp = optionsKeyData[i];
     		void* vp = optionsValueData[i];
-    		[objcOptions setObject:(NSViewFullScreenModeOptionKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcOptions setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     BOOL result_ = [nSView enterFullScreenMode:(NSScreen*)screen withOptions:objcOptions];
@@ -574,7 +574,7 @@ void C_NSView_ExitFullScreenModeWithOptions(void* ptr, Dictionary options) {
     	for (int i = 0; i < options.len; i++) {
     		void* kp = optionsKeyData[i];
     		void* vp = optionsValueData[i];
-    		[objcOptions setObject:(NSViewFullScreenModeOptionKey)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcOptions setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     [nSView exitFullScreenModeWithOptions:objcOptions];
@@ -673,7 +673,7 @@ void C_NSView_RegisterForDraggedTypes(void* ptr, Array newTypes) {
     	void** newTypesData = (void**)newTypes.data;
     	for (int i = 0; i < newTypes.len; i++) {
     		void* p = newTypesData[i];
-    		[objcNewTypes addObject:(NSPasteboardType)(NSString*)p];
+    		[objcNewTypes addObject:(NSString*)p];
     	}
     }
     [nSView registerForDraggedTypes:objcNewTypes];
@@ -691,7 +691,7 @@ void* C_NSView_BeginDraggingSessionWithItems_Event_Source(void* ptr, Array items
     	void** itemsData = (void**)items.data;
     	for (int i = 0; i < items.len; i++) {
     		void* p = itemsData[i];
-    		[objcItems addObject:(NSDraggingItem*)(NSDraggingItem*)p];
+    		[objcItems addObject:(NSDraggingItem*)p];
     	}
     }
     NSDraggingSession* result_ = [nSView beginDraggingSessionWithItems:objcItems event:(NSEvent*)event source:(id)source];
@@ -909,7 +909,7 @@ void C_NSView_SetSubviews(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSView*)(NSView*)p];
+    		[objcValue addObject:(NSView*)p];
     	}
     }
     [nSView setSubviews:objcValue];
@@ -1477,7 +1477,7 @@ void C_NSView_SetGestureRecognizers(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSGestureRecognizer*)(NSGestureRecognizer*)p];
+    		[objcValue addObject:(NSGestureRecognizer*)p];
     	}
     }
     [nSView setGestureRecognizers:objcValue];

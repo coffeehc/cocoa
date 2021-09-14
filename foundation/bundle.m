@@ -215,7 +215,7 @@ Array C_NSBundle_Bundle_PreferredLocalizationsFromArray(Array localizationsArray
     	void** localizationsArrayData = (void**)localizationsArray.data;
     	for (int i = 0; i < localizationsArray.len; i++) {
     		void* p = localizationsArrayData[i];
-    		[objcLocalizationsArray addObject:(NSString*)(NSString*)p];
+    		[objcLocalizationsArray addObject:(NSString*)p];
     	}
     }
     NSArray* result_ = [NSBundle preferredLocalizationsFromArray:objcLocalizationsArray];
@@ -239,7 +239,7 @@ Array C_NSBundle_Bundle_PreferredLocalizationsFromArray_ForPreferences(Array loc
     	void** localizationsArrayData = (void**)localizationsArray.data;
     	for (int i = 0; i < localizationsArray.len; i++) {
     		void* p = localizationsArrayData[i];
-    		[objcLocalizationsArray addObject:(NSString*)(NSString*)p];
+    		[objcLocalizationsArray addObject:(NSString*)p];
     	}
     }
     NSMutableArray* objcPreferencesArray = [NSMutableArray arrayWithCapacity:preferencesArray.len];
@@ -247,7 +247,7 @@ Array C_NSBundle_Bundle_PreferredLocalizationsFromArray_ForPreferences(Array loc
     	void** preferencesArrayData = (void**)preferencesArray.data;
     	for (int i = 0; i < preferencesArray.len; i++) {
     		void* p = preferencesArrayData[i];
-    		[objcPreferencesArray addObject:(NSString*)(NSString*)p];
+    		[objcPreferencesArray addObject:(NSString*)p];
     	}
     }
     NSArray* result_ = [NSBundle preferredLocalizationsFromArray:objcLocalizationsArray forPreferences:objcPreferencesArray];

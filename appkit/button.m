@@ -87,7 +87,7 @@ void C_NSButton_CompressWithPrioritizedCompressionOptions(void* ptr, Array prior
     	void** prioritizedOptionsData = (void**)prioritizedOptions.data;
     	for (int i = 0; i < prioritizedOptions.len; i++) {
     		void* p = prioritizedOptionsData[i];
-    		[objcPrioritizedOptions addObject:(NSUserInterfaceCompressionOptions*)(NSUserInterfaceCompressionOptions*)p];
+    		[objcPrioritizedOptions addObject:(NSUserInterfaceCompressionOptions*)p];
     	}
     }
     [nSButton compressWithPrioritizedCompressionOptions:objcPrioritizedOptions];
@@ -100,7 +100,7 @@ CGSize C_NSButton_MinimumSizeWithPrioritizedCompressionOptions(void* ptr, Array 
     	void** prioritizedOptionsData = (void**)prioritizedOptions.data;
     	for (int i = 0; i < prioritizedOptions.len; i++) {
     		void* p = prioritizedOptionsData[i];
-    		[objcPrioritizedOptions addObject:(NSUserInterfaceCompressionOptions*)(NSUserInterfaceCompressionOptions*)p];
+    		[objcPrioritizedOptions addObject:(NSUserInterfaceCompressionOptions*)p];
     	}
     }
     NSSize result_ = [nSButton minimumSizeWithPrioritizedCompressionOptions:objcPrioritizedOptions];

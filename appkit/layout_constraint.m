@@ -46,7 +46,7 @@ Array C_NSLayoutConstraint_LayoutConstraint_ConstraintsWithVisualFormat_Options_
     	for (int i = 0; i < metrics.len; i++) {
     		void* kp = metricsKeyData[i];
     		void* vp = metricsValueData[i];
-    		[objcMetrics setObject:(NSString*)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcMetrics setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     NSMutableDictionary* objcViews = [NSMutableDictionary dictionaryWithCapacity:views.len];
@@ -56,7 +56,7 @@ Array C_NSLayoutConstraint_LayoutConstraint_ConstraintsWithVisualFormat_Options_
     	for (int i = 0; i < views.len; i++) {
     		void* kp = viewsKeyData[i];
     		void* vp = viewsValueData[i];
-    		[objcViews setObject:(NSString*)(NSString*)kp forKey:(id)(NSString*)vp];
+    		[objcViews setObject:(NSString*)kp forKey:(id)vp];
     	}
     }
     NSArray* result_ = [NSLayoutConstraint constraintsWithVisualFormat:(NSString*)format options:opts metrics:objcMetrics views:objcViews];
@@ -80,7 +80,7 @@ void C_NSLayoutConstraint_LayoutConstraint_ActivateConstraints(Array constraints
     	void** constraintsData = (void**)constraints.data;
     	for (int i = 0; i < constraints.len; i++) {
     		void* p = constraintsData[i];
-    		[objcConstraints addObject:(NSLayoutConstraint*)(NSLayoutConstraint*)p];
+    		[objcConstraints addObject:(NSLayoutConstraint*)p];
     	}
     }
     [NSLayoutConstraint activateConstraints:objcConstraints];
@@ -92,7 +92,7 @@ void C_NSLayoutConstraint_LayoutConstraint_DeactivateConstraints(Array constrain
     	void** constraintsData = (void**)constraints.data;
     	for (int i = 0; i < constraints.len; i++) {
     		void* p = constraintsData[i];
-    		[objcConstraints addObject:(NSLayoutConstraint*)(NSLayoutConstraint*)p];
+    		[objcConstraints addObject:(NSLayoutConstraint*)p];
     	}
     }
     [NSLayoutConstraint deactivateConstraints:objcConstraints];

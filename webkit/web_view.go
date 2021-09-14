@@ -80,6 +80,11 @@ func (w WKWebView) InitWithCoder(coder foundation.Coder) WKWebView {
 	return MakeWebView(result_)
 }
 
+func (w WKWebView) InitWithFrame(frameRect foundation.Rect) WKWebView {
+	result_ := C.C_WKWebView_InitWithFrame(w.Ptr(), *(*C.CGRect)(coregraphics.ToCGRectPointer(coregraphics.Rect(frameRect))))
+	return MakeWebView(result_)
+}
+
 func (w WKWebView) Init() WKWebView {
 	result_ := C.C_WKWebView_Init(w.Ptr())
 	return MakeWebView(result_)

@@ -12,7 +12,7 @@ void* C_NSSharingServicePicker_InitWithItems(void* ptr, Array items) {
     	void** itemsData = (void**)items.data;
     	for (int i = 0; i < items.len; i++) {
     		void* p = itemsData[i];
-    		[objcItems addObject:(NSObject*)(NSObject*)p];
+    		[objcItems addObject:(NSObject*)p];
     	}
     }
     NSSharingServicePicker* result_ = [nSSharingServicePicker initWithItems:objcItems];

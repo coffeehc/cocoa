@@ -40,7 +40,7 @@ void* C_NSPasteboardItem_AvailableTypeFromArray(void* ptr, Array types) {
     	void** typesData = (void**)types.data;
     	for (int i = 0; i < types.len; i++) {
     		void* p = typesData[i];
-    		[objcTypes addObject:(NSPasteboardType)(NSString*)p];
+    		[objcTypes addObject:(NSString*)p];
     	}
     }
     NSPasteboardType result_ = [nSPasteboardItem availableTypeFromArray:objcTypes];
@@ -54,7 +54,7 @@ bool C_NSPasteboardItem_SetDataProvider_ForTypes(void* ptr, void* dataProvider, 
     	void** typesData = (void**)types.data;
     	for (int i = 0; i < types.len; i++) {
     		void* p = typesData[i];
-    		[objcTypes addObject:(NSPasteboardType)(NSString*)p];
+    		[objcTypes addObject:(NSString*)p];
     	}
     }
     BOOL result_ = [nSPasteboardItem setDataProvider:(id)dataProvider forTypes:objcTypes];

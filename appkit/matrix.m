@@ -63,7 +63,7 @@ void C_NSMatrix_AddColumnWithCells(void* ptr, Array newCells) {
     	void** newCellsData = (void**)newCells.data;
     	for (int i = 0; i < newCells.len; i++) {
     		void* p = newCellsData[i];
-    		[objcNewCells addObject:(NSCell*)(NSCell*)p];
+    		[objcNewCells addObject:(NSCell*)p];
     	}
     }
     [nSMatrix addColumnWithCells:objcNewCells];
@@ -81,7 +81,7 @@ void C_NSMatrix_AddRowWithCells(void* ptr, Array newCells) {
     	void** newCellsData = (void**)newCells.data;
     	for (int i = 0; i < newCells.len; i++) {
     		void* p = newCellsData[i];
-    		[objcNewCells addObject:(NSCell*)(NSCell*)p];
+    		[objcNewCells addObject:(NSCell*)p];
     	}
     }
     [nSMatrix addRowWithCells:objcNewCells];
@@ -105,7 +105,7 @@ void C_NSMatrix_InsertColumn_WithCells(void* ptr, int column, Array newCells) {
     	void** newCellsData = (void**)newCells.data;
     	for (int i = 0; i < newCells.len; i++) {
     		void* p = newCellsData[i];
-    		[objcNewCells addObject:(NSCell*)(NSCell*)p];
+    		[objcNewCells addObject:(NSCell*)p];
     	}
     }
     [nSMatrix insertColumn:column withCells:objcNewCells];
@@ -123,7 +123,7 @@ void C_NSMatrix_InsertRow_WithCells(void* ptr, int row, Array newCells) {
     	void** newCellsData = (void**)newCells.data;
     	for (int i = 0; i < newCells.len; i++) {
     		void* p = newCellsData[i];
-    		[objcNewCells addObject:(NSCell*)(NSCell*)p];
+    		[objcNewCells addObject:(NSCell*)p];
     	}
     }
     [nSMatrix insertRow:row withCells:objcNewCells];

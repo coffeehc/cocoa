@@ -794,7 +794,7 @@ void C_NSTableView_SetSortDescriptors(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSSortDescriptor*)(NSSortDescriptor*)p];
+    		[objcValue addObject:(NSSortDescriptor*)p];
     	}
     }
     [nSTableView setSortDescriptors:objcValue];

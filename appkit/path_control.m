@@ -129,7 +129,7 @@ void C_NSPathControl_SetAllowedTypes(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSString*)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSPathControl setAllowedTypes:objcValue];
@@ -176,7 +176,7 @@ void C_NSPathControl_SetPathItems(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSPathControlItem*)(NSPathControlItem*)p];
+    		[objcValue addObject:(NSPathControlItem*)p];
     	}
     }
     [nSPathControl setPathItems:objcValue];

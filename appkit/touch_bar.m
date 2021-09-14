@@ -91,7 +91,7 @@ void C_NSTouchBar_SetDefaultItemIdentifiers(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSTouchBarItemIdentifier)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSTouchBar setDefaultItemIdentifiers:objcValue];
@@ -177,7 +177,7 @@ void C_NSTouchBar_SetCustomizationAllowedItemIdentifiers(void* ptr, Array value)
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSTouchBarItemIdentifier)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSTouchBar setCustomizationAllowedItemIdentifiers:objcValue];
@@ -207,7 +207,7 @@ void C_NSTouchBar_SetCustomizationRequiredItemIdentifiers(void* ptr, Array value
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSTouchBarItemIdentifier)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSTouchBar setCustomizationRequiredItemIdentifiers:objcValue];

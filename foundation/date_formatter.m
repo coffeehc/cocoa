@@ -258,7 +258,7 @@ void C_NSDateFormatter_SetWeekdaySymbols(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSString*)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSDateFormatter setWeekdaySymbols:objcValue];
@@ -288,7 +288,7 @@ void C_NSDateFormatter_SetShortWeekdaySymbols(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSString*)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSDateFormatter setShortWeekdaySymbols:objcValue];
@@ -318,7 +318,7 @@ void C_NSDateFormatter_SetVeryShortWeekdaySymbols(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSString*)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSDateFormatter setVeryShortWeekdaySymbols:objcValue];
@@ -348,7 +348,7 @@ void C_NSDateFormatter_SetStandaloneWeekdaySymbols(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSString*)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSDateFormatter setStandaloneWeekdaySymbols:objcValue];
@@ -378,7 +378,7 @@ void C_NSDateFormatter_SetShortStandaloneWeekdaySymbols(void* ptr, Array value) 
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSString*)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSDateFormatter setShortStandaloneWeekdaySymbols:objcValue];
@@ -408,7 +408,7 @@ void C_NSDateFormatter_SetVeryShortStandaloneWeekdaySymbols(void* ptr, Array val
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSString*)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSDateFormatter setVeryShortStandaloneWeekdaySymbols:objcValue];
@@ -438,7 +438,7 @@ void C_NSDateFormatter_SetMonthSymbols(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSString*)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSDateFormatter setMonthSymbols:objcValue];
@@ -468,7 +468,7 @@ void C_NSDateFormatter_SetShortMonthSymbols(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSString*)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSDateFormatter setShortMonthSymbols:objcValue];
@@ -498,7 +498,7 @@ void C_NSDateFormatter_SetVeryShortMonthSymbols(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSString*)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSDateFormatter setVeryShortMonthSymbols:objcValue];
@@ -528,7 +528,7 @@ void C_NSDateFormatter_SetStandaloneMonthSymbols(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSString*)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSDateFormatter setStandaloneMonthSymbols:objcValue];
@@ -558,7 +558,7 @@ void C_NSDateFormatter_SetShortStandaloneMonthSymbols(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSString*)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSDateFormatter setShortStandaloneMonthSymbols:objcValue];
@@ -588,7 +588,7 @@ void C_NSDateFormatter_SetVeryShortStandaloneMonthSymbols(void* ptr, Array value
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSString*)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSDateFormatter setVeryShortStandaloneMonthSymbols:objcValue];
@@ -618,7 +618,7 @@ void C_NSDateFormatter_SetQuarterSymbols(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSString*)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSDateFormatter setQuarterSymbols:objcValue];
@@ -648,7 +648,7 @@ void C_NSDateFormatter_SetShortQuarterSymbols(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSString*)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSDateFormatter setShortQuarterSymbols:objcValue];
@@ -678,7 +678,7 @@ void C_NSDateFormatter_SetStandaloneQuarterSymbols(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSString*)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSDateFormatter setStandaloneQuarterSymbols:objcValue];
@@ -708,7 +708,7 @@ void C_NSDateFormatter_SetShortStandaloneQuarterSymbols(void* ptr, Array value) 
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSString*)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSDateFormatter setShortStandaloneQuarterSymbols:objcValue];
@@ -738,7 +738,7 @@ void C_NSDateFormatter_SetEraSymbols(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSString*)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSDateFormatter setEraSymbols:objcValue];
@@ -768,7 +768,7 @@ void C_NSDateFormatter_SetLongEraSymbols(void* ptr, Array value) {
     	void** valueData = (void**)value.data;
     	for (int i = 0; i < value.len; i++) {
     		void* p = valueData[i];
-    		[objcValue addObject:(NSString*)(NSString*)p];
+    		[objcValue addObject:(NSString*)p];
     	}
     }
     [nSDateFormatter setLongEraSymbols:objcValue];
