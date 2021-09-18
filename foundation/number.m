@@ -1,5 +1,7 @@
-#import <Foundation/Foundation.h>
 #import "number.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSValue.h>
 
 void* C_Number_Alloc() {
     return [NSNumber alloc];

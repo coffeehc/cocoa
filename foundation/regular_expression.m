@@ -1,5 +1,7 @@
-#import <Foundation/Foundation.h>
 #import "regular_expression.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSRegularExpression.h>
 
 void* C_RegularExpression_Alloc() {
     return [NSRegularExpression alloc];

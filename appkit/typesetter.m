@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "typesetter.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSTypesetter.h>
 
 void* C_Typesetter_Alloc() {
     return [NSTypesetter alloc];

@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "text_tab.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSParagraphStyle.h>
 
 void* C_TextTab_Alloc() {
     return [NSTextTab alloc];

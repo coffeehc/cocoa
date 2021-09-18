@@ -1,4 +1,3 @@
-#import <Appkit/Appkit.h>
 #import "animatable_property_container.h"
 #import "_cgo_export.h"
 

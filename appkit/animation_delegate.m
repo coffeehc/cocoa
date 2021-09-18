@@ -1,4 +1,3 @@
-#import <Appkit/Appkit.h>
 #import "animation_delegate.h"
 #import "_cgo_export.h"
 

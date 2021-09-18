@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "glyph_generator.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSGlyphGenerator.h>
 
 void* C_GlyphGenerator_Alloc() {
     return [NSGlyphGenerator alloc];

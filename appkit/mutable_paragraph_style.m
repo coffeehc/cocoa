@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "mutable_paragraph_style.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSParagraphStyle.h>
 
 void* C_MutableParagraphStyle_Alloc() {
     return [NSMutableParagraphStyle alloc];

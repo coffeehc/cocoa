@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "collection_layout_anchor.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSCollectionViewCompositionalLayout.h>
 
 void* C_CollectionLayoutAnchor_Alloc() {
     return [NSCollectionLayoutAnchor alloc];

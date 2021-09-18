@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "color_space.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSColorSpace.h>
 
 void* C_ColorSpace_Alloc() {
     return [NSColorSpace alloc];

@@ -1,4 +1,3 @@
-#import <Appkit/Appkit.h>
 #import "touch_bar_delegate.h"
 #import "_cgo_export.h"
 

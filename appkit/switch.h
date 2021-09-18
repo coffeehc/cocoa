@@ -1,7 +1,8 @@
 #import <stdbool.h>
 #import <stdlib.h>
 #import <utils.h>
-#import <Appkit/Appkit.h>
+#import <Foundation/NSGeometry.h>
+#import <Foundation/NSRange.h>
 
 void* C_Switch_Alloc();
 

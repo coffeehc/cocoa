@@ -1,5 +1,7 @@
-#import <Foundation/Foundation.h>
 #import "attributed_string.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSAttributedString.h>
 
 void* C_AttributedString_Alloc() {
     return [NSAttributedString alloc];

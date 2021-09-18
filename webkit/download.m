@@ -1,5 +1,7 @@
-#import <WebKit/WebKit.h>
 #import "download.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <WebKit/WKDownload.h>
 
 void* C_Download_Alloc() {
     return [WKDownload alloc];

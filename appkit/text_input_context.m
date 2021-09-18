@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "text_input_context.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSTextInputContext.h>
 
 void* C_TextInputContext_Alloc() {
     return [NSTextInputContext alloc];

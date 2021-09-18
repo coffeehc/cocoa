@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "font_panel.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSFontPanel.h>
 
 void* C_FontPanel_Alloc() {
     return [NSFontPanel alloc];

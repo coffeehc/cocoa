@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "status_bar.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSStatusBar.h>
 
 void* C_StatusBar_Alloc() {
     return [NSStatusBar alloc];

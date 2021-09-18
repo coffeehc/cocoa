@@ -1,4 +1,3 @@
-#import <WebKit/WebKit.h>
 #import "ui_delegate.h"
 #import "_cgo_export.h"
 

@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "application.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/AppKit.h>
 
 void* C_Application_Alloc() {
     return [NSApplication alloc];

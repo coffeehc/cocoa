@@ -2,7 +2,7 @@
 #import <stdint.h>
 #import <stdlib.h>
 #import <utils.h>
-#import <Appkit/Appkit.h>
+#import <AppKit/NSAnimation.h>
 
 @interface NSAnimatablePropertyContainerAdaptor : NSObject <NSAnimatablePropertyContainer>
 @property (assign) uintptr_t goID;

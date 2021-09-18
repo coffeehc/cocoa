@@ -1,5 +1,7 @@
-#import <Foundation/Foundation.h>
 #import "date_components.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSCalendar.h>
 
 void* C_DateComponents_Alloc() {
     return [NSDateComponents alloc];

@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "appearance.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSAppearance.h>
 
 void* C_Appearance_Alloc() {
     return [NSAppearance alloc];

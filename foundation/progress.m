@@ -1,5 +1,7 @@
-#import <Foundation/Foundation.h>
 #import "progress.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSProgress.h>
 
 void* C_Progress_Alloc() {
     return [NSProgress alloc];

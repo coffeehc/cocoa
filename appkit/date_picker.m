@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "date_picker.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSDatePicker.h>
 
 void* C_DatePicker_Alloc() {
     return [NSDatePicker alloc];

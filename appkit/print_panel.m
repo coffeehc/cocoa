@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "print_panel.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSPrintPanel.h>
 
 void* C_PrintPanel_Alloc() {
     return [NSPrintPanel alloc];

@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "touch.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSTouch.h>
 
 void* C_Touch_Alloc() {
     return [NSTouch alloc];

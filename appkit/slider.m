@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "slider.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSSlider.h>
 
 void* C_Slider_Alloc() {
     return [NSSlider alloc];

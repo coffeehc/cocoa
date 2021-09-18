@@ -1,5 +1,7 @@
-#import <Foundation/Foundation.h>
 #import "url_response.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSURLResponse.h>
 
 void* C_URLResponse_Alloc() {
     return [NSURLResponse alloc];

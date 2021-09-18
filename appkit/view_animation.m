@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "view_animation.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSAnimation.h>
 
 void* C_ViewAnimation_Alloc() {
     return [NSViewAnimation alloc];

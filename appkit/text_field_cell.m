@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "text_field_cell.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSTextFieldCell.h>
 
 void* C_TextFieldCell_Alloc() {
     return [NSTextFieldCell alloc];

@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "collection_view_grid_layout.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSCollectionViewGridLayout.h>
 
 void* C_CollectionViewGridLayout_Alloc() {
     return [NSCollectionViewGridLayout alloc];

@@ -1,5 +1,6 @@
-#import <Appkit/Appkit.h>
 #import "collection_layout_item.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
 
 void* C_CollectionLayoutItem_Alloc() {
     return [NSCollectionLayoutItem alloc];

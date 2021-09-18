@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "color_well.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSColorWell.h>
 
 void* C_ColorWell_Alloc() {
     return [NSColorWell alloc];

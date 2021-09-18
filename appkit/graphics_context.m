@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "graphics_context.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSGraphicsContext.h>
 
 void* C_GraphicsContext_Alloc() {
     return [NSGraphicsContext alloc];

@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "dragging_session.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSDraggingSession.h>
 
 void* C_DraggingSession_Alloc() {
     return [NSDraggingSession alloc];

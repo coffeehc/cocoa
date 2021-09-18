@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "text_storage.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSTextStorage.h>
 
 void* C_TextStorage_Alloc() {
     return [NSTextStorage alloc];

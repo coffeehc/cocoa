@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "image_rep.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSImageRep.h>
 
 void* C_ImageRep_Alloc() {
     return [NSImageRep alloc];

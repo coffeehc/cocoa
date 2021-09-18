@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "animation_context.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSAnimationContext.h>
 
 void* C_AnimationContext_Alloc() {
     return [NSAnimationContext alloc];

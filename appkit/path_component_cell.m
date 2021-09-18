@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "path_component_cell.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSPathComponentCell.h>
 
 void* C_PathComponentCell_Alloc() {
     return [NSPathComponentCell alloc];

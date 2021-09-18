@@ -1,5 +1,7 @@
-#import <Foundation/Foundation.h>
 #import "bundle.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSBundle.h>
 
 void* C_Bundle_Alloc() {
     return [NSBundle alloc];

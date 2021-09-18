@@ -1,5 +1,7 @@
-#import <WebKit/WebKit.h>
 #import "process_pool.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <WebKit/WKProcessPool.h>
 
 void* C_ProcessPool_Alloc() {
     return [WKProcessPool alloc];

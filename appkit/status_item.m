@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "status_item.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSStatusItem.h>
 
 void* C_StatusItem_Alloc() {
     return [NSStatusItem alloc];

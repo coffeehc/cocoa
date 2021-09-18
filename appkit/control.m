@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "control.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSControl.h>
 
 void* C_Control_Alloc() {
     return [NSControl alloc];

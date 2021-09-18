@@ -1,4 +1,3 @@
-#import <WebKit/WebKit.h>
 #import "navigation_delegate.h"
 #import "_cgo_export.h"
 

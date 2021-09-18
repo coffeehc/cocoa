@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "collection_view_layout_attributes.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSCollectionViewLayout.h>
 
 void* C_CollectionViewLayoutAttributes_Alloc() {
     return [NSCollectionViewLayoutAttributes alloc];

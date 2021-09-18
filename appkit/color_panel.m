@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "color_panel.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSColorPanel.h>
 
 void* C_ColorPanel_Alloc() {
     return [NSColorPanel alloc];

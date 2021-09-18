@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "ruler_marker.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSRulerMarker.h>
 
 void* C_RulerMarker_Alloc() {
     return [NSRulerMarker alloc];

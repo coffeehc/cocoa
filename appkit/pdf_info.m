@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "pdf_info.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSPDFInfo.h>
 
 void* C_PDFInfo_Alloc() {
     return [NSPDFInfo alloc];

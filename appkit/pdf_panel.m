@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "pdf_panel.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSPDFPanel.h>
 
 void* C_PDFPanel_Alloc() {
     return [NSPDFPanel alloc];

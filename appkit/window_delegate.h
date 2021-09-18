@@ -2,7 +2,7 @@
 #import <stdint.h>
 #import <stdlib.h>
 #import <utils.h>
-#import <Appkit/Appkit.h>
+#import <AppKit/NSWindow.h>
 
 @interface NSWindowDelegateAdaptor : NSObject <NSWindowDelegate>
 @property (assign) uintptr_t goID;

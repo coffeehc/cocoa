@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "menu.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSMenu.h>
 
 void* C_Menu_Alloc() {
     return [NSMenu alloc];

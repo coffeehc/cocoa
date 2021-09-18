@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "progress_indicator.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSProgressIndicator.h>
 
 void* C_ProgressIndicator_Alloc() {
     return [NSProgressIndicator alloc];

@@ -1,5 +1,7 @@
-#import <WebKit/WebKit.h>
 #import "website_data_store.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <WebKit/WKWebsiteDataStore.h>
 
 void* C_WebsiteDataStore_Alloc() {
     return [WKWebsiteDataStore alloc];

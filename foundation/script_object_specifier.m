@@ -1,5 +1,7 @@
-#import <Foundation/Foundation.h>
 #import "script_object_specifier.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSScriptObjectSpecifiers.h>
 
 void* C_ScriptObjectSpecifier_Alloc() {
     return [NSScriptObjectSpecifier alloc];

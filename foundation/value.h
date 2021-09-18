@@ -1,7 +1,8 @@
 #import <stdbool.h>
 #import <stdlib.h>
 #import <utils.h>
-#import <Foundation/Foundation.h>
+#import <Foundation/NSGeometry.h>
+#import <Foundation/NSRange.h>
 
 void* C_Value_Alloc();
 

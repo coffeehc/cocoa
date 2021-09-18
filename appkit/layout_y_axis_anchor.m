@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "layout_y_axis_anchor.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSLayoutAnchor.h>
 
 void* C_LayoutYAxisAnchor_Alloc() {
     return [NSLayoutYAxisAnchor alloc];

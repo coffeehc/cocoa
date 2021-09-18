@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "collection_view_update_item.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSCollectionViewLayout.h>
 
 void* C_CollectionViewUpdateItem_Alloc() {
     return [NSCollectionViewUpdateItem alloc];

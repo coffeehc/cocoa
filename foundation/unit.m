@@ -1,5 +1,7 @@
-#import <Foundation/Foundation.h>
 #import "unit.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSUnit.h>
 
 void* C_Unit_Alloc() {
     return [NSUnit alloc];

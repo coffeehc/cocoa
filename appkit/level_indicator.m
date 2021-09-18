@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "level_indicator.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSLevelIndicator.h>
 
 void* C_LevelIndicator_Alloc() {
     return [NSLevelIndicator alloc];

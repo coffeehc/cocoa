@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "secure_text_field.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSSecureTextField.h>
 
 void* C_SecureTextField_Alloc() {
     return [NSSecureTextField alloc];

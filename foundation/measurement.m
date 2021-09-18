@@ -1,5 +1,7 @@
-#import <Foundation/Foundation.h>
 #import "measurement.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSMeasurement.h>
 
 void* C_Measurement_Alloc() {
     return [NSMeasurement alloc];

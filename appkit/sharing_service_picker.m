@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "sharing_service_picker.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSSharingService.h>
 
 void* C_SharingServicePicker_Alloc() {
     return [NSSharingServicePicker alloc];

@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "layout_guide.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSLayoutGuide.h>
 
 void* C_LayoutGuide_Alloc() {
     return [NSLayoutGuide alloc];

@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "text.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSText.h>
 
 void* C_Text_Alloc() {
     return [NSText alloc];

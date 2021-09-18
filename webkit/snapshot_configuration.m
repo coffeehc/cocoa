@@ -1,5 +1,7 @@
-#import <WebKit/WebKit.h>
 #import "snapshot_configuration.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <WebKit/WKSnapshotConfiguration.h>
 
 void* C_SnapshotConfiguration_Alloc() {
     return [WKSnapshotConfiguration alloc];

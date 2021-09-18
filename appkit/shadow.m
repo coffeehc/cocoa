@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "shadow.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSShadow.h>
 
 void* C_Shadow_Alloc() {
     return [NSShadow alloc];

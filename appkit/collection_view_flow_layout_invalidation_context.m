@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "collection_view_flow_layout_invalidation_context.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSCollectionViewFlowLayout.h>
 
 void* C_CollectionViewFlowLayoutInvalidationContext_Alloc() {
     return [NSCollectionViewFlowLayoutInvalidationContext alloc];

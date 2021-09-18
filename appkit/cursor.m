@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "cursor.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSCursor.h>
 
 void* C_Cursor_Alloc() {
     return [NSCursor alloc];

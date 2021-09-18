@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "window_tab_group.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSWindowTabGroup.h>
 
 void* C_WindowTabGroup_Alloc() {
     return [NSWindowTabGroup alloc];

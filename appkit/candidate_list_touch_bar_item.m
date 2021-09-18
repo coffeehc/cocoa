@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "candidate_list_touch_bar_item.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSCandidateListTouchBarItem.h>
 
 void* C_CandidateListTouchBarItem_Alloc() {
     return [NSCandidateListTouchBarItem alloc];

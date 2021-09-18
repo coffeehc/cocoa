@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "collection_layout_size.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSCollectionViewCompositionalLayout.h>
 
 void* C_CollectionLayoutSize_Alloc() {
     return [NSCollectionLayoutSize alloc];

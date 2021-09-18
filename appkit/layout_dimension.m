@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "layout_dimension.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSLayoutAnchor.h>
 
 void* C_LayoutDimension_Alloc() {
     return [NSLayoutDimension alloc];

@@ -1,5 +1,7 @@
-#import <WebKit/WebKit.h>
 #import "http_cookie_store.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <WebKit/WKHTTPCookieStore.h>
 
 void* C_HTTPCookieStore_Alloc() {
     return [WKHTTPCookieStore alloc];

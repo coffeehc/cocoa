@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "bitmap_image_rep.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSBitmapImageRep.h>
 
 void* C_BitmapImageRep_Alloc() {
     return [NSBitmapImageRep alloc];

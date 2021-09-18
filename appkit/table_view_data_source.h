@@ -2,7 +2,7 @@
 #import <stdint.h>
 #import <stdlib.h>
 #import <utils.h>
-#import <Appkit/Appkit.h>
+#import <AppKit/NSTableView.h>
 
 @interface NSTableViewDataSourceAdaptor : NSObject <NSTableViewDataSource>
 @property (assign) uintptr_t goID;

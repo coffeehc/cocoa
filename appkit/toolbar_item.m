@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "toolbar_item.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSToolbarItem.h>
 
 void* C_ToolbarItem_Alloc() {
     return [NSToolbarItem alloc];

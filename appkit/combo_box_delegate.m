@@ -1,4 +1,3 @@
-#import <Appkit/Appkit.h>
 #import "combo_box_delegate.h"
 #import "_cgo_export.h"
 

@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "ruler_view.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSRulerView.h>
 
 void* C_RulerView_Alloc() {
     return [NSRulerView alloc];

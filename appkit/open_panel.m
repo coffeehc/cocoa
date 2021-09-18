@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "open_panel.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSOpenPanel.h>
 
 void* C_OpenPanel_Alloc() {
     return [NSOpenPanel alloc];

@@ -2,7 +2,7 @@
 #import <stdint.h>
 #import <stdlib.h>
 #import <utils.h>
-#import <WebKit/WebKit.h>
+#import <WebKit/WKNavigationDelegate.h>
 
 @interface WKNavigationDelegateAdaptor : NSObject <WKNavigationDelegate>
 @property (assign) uintptr_t goID;

@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "switch.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSSwitch.h>
 
 void* C_Switch_Alloc() {
     return [NSSwitch alloc];

@@ -1,4 +1,3 @@
-#import <Appkit/Appkit.h>
 #import "dragging_source.h"
 #import "_cgo_export.h"
 

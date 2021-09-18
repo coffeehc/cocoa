@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "dock_tile.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSDockTile.h>
 
 void* C_DockTile_Alloc() {
     return [NSDockTile alloc];

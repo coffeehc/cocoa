@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "text_block.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSTextTable.h>
 
 void* C_TextBlock_Alloc() {
     return [NSTextBlock alloc];

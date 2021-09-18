@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "grid_row.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSGridView.h>
 
 void* C_GridRow_Alloc() {
     return [NSGridRow alloc];

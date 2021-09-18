@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "button.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSButton.h>
 
 void* C_Button_Alloc() {
     return [NSButton alloc];

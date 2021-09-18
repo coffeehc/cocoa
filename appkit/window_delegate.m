@@ -1,4 +1,3 @@
-#import <Appkit/Appkit.h>
 #import "window_delegate.h"
 #import "_cgo_export.h"
 

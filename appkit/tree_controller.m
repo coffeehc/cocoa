@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "tree_controller.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSTreeController.h>
 
 void* C_TreeController_Alloc() {
     return [NSTreeController alloc];

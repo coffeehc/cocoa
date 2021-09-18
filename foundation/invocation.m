@@ -1,5 +1,7 @@
-#import <Foundation/Foundation.h>
 #import "invocation.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSInvocation.h>
 
 void* C_Invocation_Alloc() {
     return [NSInvocation alloc];

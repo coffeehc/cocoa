@@ -1,4 +1,3 @@
-#import <Appkit/Appkit.h>
 #import "color_picking_default.h"
 #import "_cgo_export.h"
 

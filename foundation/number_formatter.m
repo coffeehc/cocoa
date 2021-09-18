@@ -1,5 +1,7 @@
-#import <Foundation/Foundation.h>
 #import "number_formatter.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSNumberFormatter.h>
 
 void* C_NumberFormatter_Alloc() {
     return [NSNumberFormatter alloc];

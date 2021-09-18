@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "diffable_data_source_snapshot.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSDiffableDataSource.h>
 
 void* C_DiffableDataSourceSnapshot_Alloc() {
     return [NSDiffableDataSourceSnapshot alloc];

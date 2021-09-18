@@ -2,7 +2,7 @@
 #import <stdint.h>
 #import <stdlib.h>
 #import <utils.h>
-#import <Appkit/Appkit.h>
+#import <AppKit/NSTextField.h>
 
 @interface NSTextFieldDelegateAdaptor : NSObject <NSTextFieldDelegate>
 @property (assign) uintptr_t goID;

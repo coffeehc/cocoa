@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "touch_bar_item.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSTouchBarItem.h>
 
 void* C_TouchBarItem_Alloc() {
     return [NSTouchBarItem alloc];

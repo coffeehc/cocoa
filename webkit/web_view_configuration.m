@@ -1,5 +1,7 @@
-#import <WebKit/WebKit.h>
 #import "web_view_configuration.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <WebKit/WKWebViewConfiguration.h>
 
 void* C_WebViewConfiguration_Alloc() {
     return [WKWebViewConfiguration alloc];

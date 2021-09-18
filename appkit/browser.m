@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "browser.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSBrowser.h>
 
 void* C_Browser_Alloc() {
     return [NSBrowser alloc];

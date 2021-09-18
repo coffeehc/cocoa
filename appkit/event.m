@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "event.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSEvent.h>
 
 void* C_Event_Alloc() {
     return [NSEvent alloc];

@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "alert.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSAlert.h>
 
 void* C_Alert_Alloc() {
     return [NSAlert alloc];

@@ -1,7 +1,8 @@
 #import <stdbool.h>
 #import <stdlib.h>
 #import <utils.h>
-#import <WebKit/WebKit.h>
+#import <Foundation/NSGeometry.h>
+#import <Foundation/NSRange.h>
 
 void* C_WebViewConfiguration_Alloc();
 

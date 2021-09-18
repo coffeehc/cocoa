@@ -1,5 +1,7 @@
-#import <Foundation/Foundation.h>
 #import "measurement_formatter.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSMeasurementFormatter.h>
 
 void* C_MeasurementFormatter_Alloc() {
     return [NSMeasurementFormatter alloc];

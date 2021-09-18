@@ -1,5 +1,7 @@
-#import <Foundation/Foundation.h>
 #import "orthography.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSOrthography.h>
 
 void* C_Orthography_Alloc() {
     return [NSOrthography alloc];

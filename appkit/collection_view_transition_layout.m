@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "collection_view_transition_layout.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSCollectionViewTransitionLayout.h>
 
 void* C_CollectionViewTransitionLayout_Alloc() {
     return [NSCollectionViewTransitionLayout alloc];

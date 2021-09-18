@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "tab_view_item.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSTabViewItem.h>
 
 void* C_TabViewItem_Alloc() {
     return [NSTabViewItem alloc];

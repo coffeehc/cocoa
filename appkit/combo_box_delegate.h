@@ -2,7 +2,7 @@
 #import <stdint.h>
 #import <stdlib.h>
 #import <utils.h>
-#import <Appkit/Appkit.h>
+#import <AppKit/NSComboBox.h>
 
 @interface NSComboBoxDelegateAdaptor : NSObject <NSComboBoxDelegate>
 @property (assign) uintptr_t goID;

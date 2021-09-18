@@ -1,7 +1,8 @@
 #import <stdbool.h>
 #import <stdlib.h>
 #import <utils.h>
-#import <Appkit/Appkit.h>
+#import <Foundation/NSGeometry.h>
+#import <Foundation/NSRange.h>
 
 void* C_Responder_Alloc();
 
@@ -65,7 +66,6 @@ void C_NSResponder_SmartMagnifyWithEvent(void* ptr, void* event);
 bool C_NSResponder_WantsScrollEventsForSwipeTrackingOnAxis(void* ptr, int axis);
 void C_NSResponder_PerformTextFinderAction(void* ptr, void* sender);
 void C_NSResponder_EncodeRestorableStateWithCoder_BackgroundQueue(void* ptr, void* coder, void* queue);
-void* C_NSResponder_MakeTouchBar(void* ptr);
 void C_NSResponder_NewWindowForTab(void* ptr, void* sender);
 void C_NSResponder_ShowContextHelp(void* ptr, void* sender);
 bool C_NSResponder_AcceptsFirstResponder(void* ptr);
@@ -77,5 +77,3 @@ void C_NSResponder_SetUserActivity(void* ptr, void* value);
 void* C_NSResponder_Menu(void* ptr);
 void C_NSResponder_SetMenu(void* ptr, void* value);
 void* C_NSResponder_UndoManager(void* ptr);
-void* C_NSResponder_TouchBar(void* ptr);
-void C_NSResponder_SetTouchBar(void* ptr, void* value);

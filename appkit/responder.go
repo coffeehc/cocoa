@@ -64,7 +64,6 @@ type Responder interface {
 	WantsScrollEventsForSwipeTrackingOnAxis(axis EventGestureAxis) bool
 	PerformTextFinderAction(sender objc.Object)
 	EncodeRestorableStateWithCoder_BackgroundQueue(coder foundation.Coder, queue foundation.OperationQueue)
-	MakeTouchBar() TouchBar
 	NewWindowForTab(sender objc.Object)
 	ShowContextHelp(sender objc.Object)
 	AcceptsFirstResponder() bool
@@ -75,8 +74,6 @@ type Responder interface {
 	Menu() Menu
 	SetMenu(value Menu)
 	UndoManager() foundation.UndoManager
-	TouchBar() TouchBar
-	SetTouchBar(value TouchBar)
 }
 
 type NSResponder struct {
@@ -356,11 +353,6 @@ func (n NSResponder) EncodeRestorableStateWithCoder_BackgroundQueue(coder founda
 	C.C_NSResponder_EncodeRestorableStateWithCoder_BackgroundQueue(n.Ptr(), objc.ExtractPtr(coder), objc.ExtractPtr(queue))
 }
 
-func (n NSResponder) MakeTouchBar() TouchBar {
-	result_ := C.C_NSResponder_MakeTouchBar(n.Ptr())
-	return MakeTouchBar(result_)
-}
-
 func (n NSResponder) NewWindowForTab(sender objc.Object) {
 	C.C_NSResponder_NewWindowForTab(n.Ptr(), objc.ExtractPtr(sender))
 }
@@ -417,13 +409,4 @@ func (n NSResponder) SetMenu(value Menu) {
 func (n NSResponder) UndoManager() foundation.UndoManager {
 	result_ := C.C_NSResponder_UndoManager(n.Ptr())
 	return foundation.MakeUndoManager(result_)
-}
-
-func (n NSResponder) TouchBar() TouchBar {
-	result_ := C.C_NSResponder_TouchBar(n.Ptr())
-	return MakeTouchBar(result_)
-}
-
-func (n NSResponder) SetTouchBar(value TouchBar) {
-	C.C_NSResponder_SetTouchBar(n.Ptr(), objc.ExtractPtr(value))
 }

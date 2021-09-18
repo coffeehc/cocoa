@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "action_cell.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSActionCell.h>
 
 void* C_ActionCell_Alloc() {
     return [NSActionCell alloc];

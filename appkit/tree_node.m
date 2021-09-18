@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "tree_node.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSTreeNode.h>
 
 void* C_TreeNode_Alloc() {
     return [NSTreeNode alloc];

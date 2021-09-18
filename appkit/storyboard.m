@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "storyboard.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSStoryboard.h>
 
 void* C_Storyboard_Alloc() {
     return [NSStoryboard alloc];

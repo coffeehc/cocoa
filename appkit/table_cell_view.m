@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "table_cell_view.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSTableCellView.h>
 
 void* C_TableCellView_Alloc() {
     return [NSTableCellView alloc];

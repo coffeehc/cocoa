@@ -2,7 +2,7 @@
 #import <stdint.h>
 #import <stdlib.h>
 #import <utils.h>
-#import <Appkit/Appkit.h>
+#import <AppKit/NSCollectionView.h>
 
 @interface NSCollectionViewDataSourceAdaptor : NSObject <NSCollectionViewDataSource>
 @property (assign) uintptr_t goID;

@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "table_view_row_action.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSTableViewRowAction.h>
 
 void* C_TableViewRowAction_Alloc() {
     return [NSTableViewRowAction alloc];

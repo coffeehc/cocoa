@@ -1,5 +1,7 @@
-#import <Foundation/Foundation.h>
 #import "url.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSURL.h>
 
 void* C_URL_Alloc() {
     return [NSURL alloc];

@@ -1,5 +1,7 @@
-#import <Foundation/Foundation.h>
 #import "method_signature.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSMethodSignature.h>
 
 void* C_MethodSignature_Alloc() {
     return [NSMethodSignature alloc];

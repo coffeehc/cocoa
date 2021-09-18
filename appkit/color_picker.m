@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "color_picker.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSColorPicker.h>
 
 void* C_ColorPicker_Alloc() {
     return [NSColorPicker alloc];

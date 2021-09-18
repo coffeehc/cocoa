@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "view.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/AppKit.h>
 
 void* C_View_Alloc() {
     return [NSView alloc];

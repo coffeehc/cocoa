@@ -1,5 +1,7 @@
-#import <Foundation/Foundation.h>
 #import "user_activity.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSUserActivity.h>
 
 void* C_UserActivity_Alloc() {
     return [NSUserActivity alloc];

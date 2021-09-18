@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "combo_box.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSComboBox.h>
 
 void* C_ComboBox_Alloc() {
     return [NSComboBox alloc];

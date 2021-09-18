@@ -1,7 +1,9 @@
 #import <stdbool.h>
 #import <stdlib.h>
 #import <utils.h>
-#import <Foundation/Foundation.h>
+#import <Foundation/NSGeometry.h>
+#import <Foundation/NSRange.h>
+#import <Foundation/NSAffineTransform.h>
 
 void* C_AffineTransform_Alloc();
 

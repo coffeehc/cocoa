@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "print_info.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSPrintInfo.h>
 
 void* C_PrintInfo_Alloc() {
     return [NSPrintInfo alloc];

@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "browser_cell.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSBrowserCell.h>
 
 void* C_BrowserCell_Alloc() {
     return [NSBrowserCell alloc];

@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "document.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/AppKit.h>
 
 void* C_Document_Alloc() {
     return [NSDocument alloc];

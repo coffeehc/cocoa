@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "cell.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSCell.h>
 
 void* C_Cell_Alloc() {
     return [NSCell alloc];

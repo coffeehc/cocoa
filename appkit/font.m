@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "font.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSFont.h>
 
 void* C_Font_Alloc() {
     return [NSFont alloc];

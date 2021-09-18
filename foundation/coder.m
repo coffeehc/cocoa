@@ -1,5 +1,7 @@
-#import <Foundation/Foundation.h>
 #import "coder.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSCoder.h>
 
 void* C_Coder_Alloc() {
     return [NSCoder alloc];

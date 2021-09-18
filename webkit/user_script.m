@@ -1,5 +1,7 @@
-#import <WebKit/WebKit.h>
 #import "user_script.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <WebKit/WKUserScript.h>
 
 void* C_UserScript_Alloc() {
     return [WKUserScript alloc];

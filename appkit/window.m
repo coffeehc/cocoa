@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "window.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/AppKit.h>
 
 void* C_Window_Alloc() {
     return [NSWindow alloc];

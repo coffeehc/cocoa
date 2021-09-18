@@ -1,5 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "tint_configuration.h"
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSArray.h>
+#import <AppKit/NSTintConfiguration.h>
 
 void* C_TintConfiguration_Alloc() {
     return [NSTintConfiguration alloc];
