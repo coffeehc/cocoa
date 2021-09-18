@@ -1,5 +1,10 @@
 #import "collection_view_section_header_view.h"
 #import "_cgo_export.h"
+#import <AppKit/NSCollectionView.h>
+
+@interface NSCollectionViewSectionHeaderViewAdaptor : NSObject <NSCollectionViewSectionHeaderView>
+@property (assign) uintptr_t goID;
+@end
 
 @implementation NSCollectionViewSectionHeaderViewAdaptor
 

@@ -1,5 +1,10 @@
 #import "dragging_info.h"
 #import "_cgo_export.h"
+#import <AppKit/NSDragging.h>
+
+@interface NSDraggingInfoAdaptor : NSObject <NSDraggingInfo>
+@property (assign) uintptr_t goID;
+@end
 
 @implementation NSDraggingInfoAdaptor
 

@@ -1,5 +1,10 @@
 #import "browser_delegate.h"
 #import "_cgo_export.h"
+#import <AppKit/NSBrowser.h>
+
+@interface NSBrowserDelegateAdaptor : NSObject <NSBrowserDelegate>
+@property (assign) uintptr_t goID;
+@end
 
 @implementation NSBrowserDelegateAdaptor
 

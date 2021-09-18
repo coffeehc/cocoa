@@ -1,5 +1,10 @@
 #import "outline_view_data_source.h"
 #import "_cgo_export.h"
+#import <AppKit/NSOutlineView.h>
+
+@interface NSOutlineViewDataSourceAdaptor : NSObject <NSOutlineViewDataSource>
+@property (assign) uintptr_t goID;
+@end
 
 @implementation NSOutlineViewDataSourceAdaptor
 

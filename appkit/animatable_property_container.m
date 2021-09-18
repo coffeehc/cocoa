@@ -1,5 +1,10 @@
 #import "animatable_property_container.h"
 #import "_cgo_export.h"
+#import <AppKit/NSAnimation.h>
+
+@interface NSAnimatablePropertyContainerAdaptor : NSObject <NSAnimatablePropertyContainer>
+@property (assign) uintptr_t goID;
+@end
 
 @implementation NSAnimatablePropertyContainerAdaptor
 

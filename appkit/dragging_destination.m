@@ -1,5 +1,10 @@
 #import "dragging_destination.h"
 #import "_cgo_export.h"
+#import <AppKit/NSDragging.h>
+
+@interface NSDraggingDestinationAdaptor : NSObject <NSDraggingDestination>
+@property (assign) uintptr_t goID;
+@end
 
 @implementation NSDraggingDestinationAdaptor
 

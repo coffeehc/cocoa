@@ -1,5 +1,10 @@
 #import "path_control_delegate.h"
 #import "_cgo_export.h"
+#import <AppKit/NSPathControl.h>
+
+@interface NSPathControlDelegateAdaptor : NSObject <NSPathControlDelegate>
+@property (assign) uintptr_t goID;
+@end
 
 @implementation NSPathControlDelegateAdaptor
 

@@ -1,5 +1,10 @@
 #import "window_delegate.h"
 #import "_cgo_export.h"
+#import <AppKit/NSWindow.h>
+
+@interface NSWindowDelegateAdaptor : NSObject <NSWindowDelegate>
+@property (assign) uintptr_t goID;
+@end
 
 @implementation NSWindowDelegateAdaptor
 

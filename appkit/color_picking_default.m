@@ -1,5 +1,10 @@
 #import "color_picking_default.h"
 #import "_cgo_export.h"
+#import <AppKit/NSColorPicking.h>
+
+@interface NSColorPickingDefaultAdaptor : NSObject <NSColorPickingDefault>
+@property (assign) uintptr_t goID;
+@end
 
 @implementation NSColorPickingDefaultAdaptor
 

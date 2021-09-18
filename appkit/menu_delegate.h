@@ -2,10 +2,7 @@
 #import <stdint.h>
 #import <stdlib.h>
 #import <utils.h>
-#import <AppKit/NSMenu.h>
-
-@interface NSMenuDelegateAdaptor : NSObject <NSMenuDelegate>
-@property (assign) uintptr_t goID;
-@end
+#import <Foundation/NSGeometry.h>
+#import <Foundation/NSRange.h>
 
 void* WrapMenuDelegate(uintptr_t goID);

@@ -1,5 +1,10 @@
 #import "table_view_data_source.h"
 #import "_cgo_export.h"
+#import <AppKit/NSTableView.h>
+
+@interface NSTableViewDataSourceAdaptor : NSObject <NSTableViewDataSource>
+@property (assign) uintptr_t goID;
+@end
 
 @implementation NSTableViewDataSourceAdaptor
 

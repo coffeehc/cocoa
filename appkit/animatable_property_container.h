@@ -2,10 +2,7 @@
 #import <stdint.h>
 #import <stdlib.h>
 #import <utils.h>
-#import <AppKit/NSAnimation.h>
-
-@interface NSAnimatablePropertyContainerAdaptor : NSObject <NSAnimatablePropertyContainer>
-@property (assign) uintptr_t goID;
-@end
+#import <Foundation/NSGeometry.h>
+#import <Foundation/NSRange.h>
 
 void* WrapAnimatablePropertyContainer(uintptr_t goID);

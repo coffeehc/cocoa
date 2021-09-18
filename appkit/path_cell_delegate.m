@@ -1,5 +1,10 @@
 #import "path_cell_delegate.h"
 #import "_cgo_export.h"
+#import <AppKit/NSPathCell.h>
+
+@interface NSPathCellDelegateAdaptor : NSObject <NSPathCellDelegate>
+@property (assign) uintptr_t goID;
+@end
 
 @implementation NSPathCellDelegateAdaptor
 

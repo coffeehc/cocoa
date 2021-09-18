@@ -1,5 +1,10 @@
 #import "combo_box_delegate.h"
 #import "_cgo_export.h"
+#import <AppKit/NSComboBox.h>
+
+@interface NSComboBoxDelegateAdaptor : NSObject <NSComboBoxDelegate>
+@property (assign) uintptr_t goID;
+@end
 
 @implementation NSComboBoxDelegateAdaptor
 

@@ -2,10 +2,7 @@
 #import <stdint.h>
 #import <stdlib.h>
 #import <utils.h>
-#import <WebKit/WKNavigationDelegate.h>
-
-@interface WKNavigationDelegateAdaptor : NSObject <WKNavigationDelegate>
-@property (assign) uintptr_t goID;
-@end
+#import <Foundation/NSGeometry.h>
+#import <Foundation/NSRange.h>
 
 void* WrapNavigationDelegate(uintptr_t goID);

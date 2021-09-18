@@ -2,10 +2,7 @@
 #import <stdint.h>
 #import <stdlib.h>
 #import <utils.h>
-#import <AppKit/NSFontPanel.h>
-
-@interface NSFontChangingAdaptor : NSObject <NSFontChanging>
-@property (assign) uintptr_t goID;
-@end
+#import <Foundation/NSGeometry.h>
+#import <Foundation/NSRange.h>
 
 void* WrapFontChanging(uintptr_t goID);

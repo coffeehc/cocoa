@@ -1,6 +1,7 @@
-#import <Appkit/Appkit.h>
 #import "appkit_custom.h"
 #include "_cgo_export.h"
+#import <Appkit/NSImage.h>
+#import <Appkit/NSSavePanel.h>
 
 void* C_NSImage_CGImageForProposedRect_Context_Hints(void* ptr) {
     NSImage* image = (NSImage*)ptr;

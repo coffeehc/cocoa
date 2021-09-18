@@ -2,10 +2,7 @@
 #import <stdint.h>
 #import <stdlib.h>
 #import <utils.h>
-#import <AppKit/NSAlert.h>
-
-@interface NSAlertDelegateAdaptor : NSObject <NSAlertDelegate>
-@property (assign) uintptr_t goID;
-@end
+#import <Foundation/NSGeometry.h>
+#import <Foundation/NSRange.h>
 
 void* WrapAlertDelegate(uintptr_t goID);

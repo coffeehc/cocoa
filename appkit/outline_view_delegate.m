@@ -1,5 +1,10 @@
 #import "outline_view_delegate.h"
 #import "_cgo_export.h"
+#import <AppKit/NSOutlineView.h>
+
+@interface NSOutlineViewDelegateAdaptor : NSObject <NSOutlineViewDelegate>
+@property (assign) uintptr_t goID;
+@end
 
 @implementation NSOutlineViewDelegateAdaptor
 

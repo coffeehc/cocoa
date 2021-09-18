@@ -1,5 +1,10 @@
 #import "table_view_delegate.h"
 #import "_cgo_export.h"
+#import <AppKit/NSTableView.h>
+
+@interface NSTableViewDelegateAdaptor : NSObject <NSTableViewDelegate>
+@property (assign) uintptr_t goID;
+@end
 
 @implementation NSTableViewDelegateAdaptor
 

@@ -2,10 +2,7 @@
 #import <stdint.h>
 #import <stdlib.h>
 #import <utils.h>
-#import <AppKit/NSCollectionView.h>
-
-@interface NSCollectionViewDataSourceAdaptor : NSObject <NSCollectionViewDataSource>
-@property (assign) uintptr_t goID;
-@end
+#import <Foundation/NSGeometry.h>
+#import <Foundation/NSRange.h>
 
 void* WrapCollectionViewDataSource(uintptr_t goID);

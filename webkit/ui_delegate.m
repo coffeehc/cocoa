@@ -1,5 +1,10 @@
 #import "ui_delegate.h"
 #import "_cgo_export.h"
+#import <WebKit/WKUIDelegate.h>
+
+@interface WKUIDelegateAdaptor : NSObject <WKUIDelegate>
+@property (assign) uintptr_t goID;
+@end
 
 @implementation WKUIDelegateAdaptor
 

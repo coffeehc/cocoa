@@ -2,10 +2,7 @@
 #import <stdint.h>
 #import <stdlib.h>
 #import <utils.h>
-#import <AppKit/NSPathCell.h>
-
-@interface NSPathCellDelegateAdaptor : NSObject <NSPathCellDelegate>
-@property (assign) uintptr_t goID;
-@end
+#import <Foundation/NSGeometry.h>
+#import <Foundation/NSRange.h>
 
 void* WrapPathCellDelegate(uintptr_t goID);

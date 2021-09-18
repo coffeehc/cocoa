@@ -1,5 +1,10 @@
 #import "collection_view_element.h"
 #import "_cgo_export.h"
+#import <AppKit/NSCollectionView.h>
+
+@interface NSCollectionViewElementAdaptor : NSObject <NSCollectionViewElement>
+@property (assign) uintptr_t goID;
+@end
 
 @implementation NSCollectionViewElementAdaptor
 

@@ -2,10 +2,7 @@
 #import <stdint.h>
 #import <stdlib.h>
 #import <utils.h>
-#import <WebKit/WKUIDelegate.h>
-
-@interface WKUIDelegateAdaptor : NSObject <WKUIDelegate>
-@property (assign) uintptr_t goID;
-@end
+#import <Foundation/NSGeometry.h>
+#import <Foundation/NSRange.h>
 
 void* WrapUIDelegate(uintptr_t goID);

@@ -1,5 +1,10 @@
 #import "control_text_editing_delegate.h"
 #import "_cgo_export.h"
+#import <AppKit/NSControl.h>
+
+@interface NSControlTextEditingDelegateAdaptor : NSObject <NSControlTextEditingDelegate>
+@property (assign) uintptr_t goID;
+@end
 
 @implementation NSControlTextEditingDelegateAdaptor
 

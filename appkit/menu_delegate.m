@@ -1,5 +1,10 @@
 #import "menu_delegate.h"
 #import "_cgo_export.h"
+#import <AppKit/NSMenu.h>
+
+@interface NSMenuDelegateAdaptor : NSObject <NSMenuDelegate>
+@property (assign) uintptr_t goID;
+@end
 
 @implementation NSMenuDelegateAdaptor
 

@@ -2,10 +2,7 @@
 #import <stdint.h>
 #import <stdlib.h>
 #import <utils.h>
-#import <AppKit/NSColorPicking.h>
-
-@interface NSColorPickingCustomAdaptor : NSObject <NSColorPickingCustom>
-@property (assign) uintptr_t goID;
-@end
+#import <Foundation/NSGeometry.h>
+#import <Foundation/NSRange.h>
 
 void* WrapColorPickingCustom(uintptr_t goID);

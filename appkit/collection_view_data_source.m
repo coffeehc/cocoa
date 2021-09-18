@@ -1,5 +1,10 @@
 #import "collection_view_data_source.h"
 #import "_cgo_export.h"
+#import <AppKit/NSCollectionView.h>
+
+@interface NSCollectionViewDataSourceAdaptor : NSObject <NSCollectionViewDataSource>
+@property (assign) uintptr_t goID;
+@end
 
 @implementation NSCollectionViewDataSourceAdaptor
 
