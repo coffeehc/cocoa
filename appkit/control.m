@@ -2,6 +2,7 @@
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
 #import <AppKit/NSControl.h>
+#import <AppKit/NSLayoutConstraint.h>
 
 void* C_Control_Alloc() {
     return [NSControl alloc];

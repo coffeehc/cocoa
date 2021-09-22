@@ -21,6 +21,7 @@ type Document interface {
 	WindowControllerWillLoadNib(windowController WindowController)
 	ShowWindows()
 	SetWindow(window Window)
+	SetDisplayName(displayNameOrNil string)
 	DefaultDraftName() string
 	EncodeRestorableStateWithCoder_BackgroundQueue(coder foundation.Coder, queue foundation.OperationQueue)
 	ScheduleAutosaving()
@@ -197,6 +198,10 @@ func (n NSDocument) ShowWindows() {
 
 func (n NSDocument) SetWindow(window Window) {
 	C.C_NSDocument_SetWindow(n.Ptr(), objc.ExtractPtr(window))
+}
+
+func (n NSDocument) SetDisplayName(displayNameOrNil string) {
+	C.C_NSDocument_SetDisplayName(n.Ptr(), foundation.NewString(displayNameOrNil).Ptr())
 }
 
 func (n NSDocument) DefaultDraftName() string {

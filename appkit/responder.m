@@ -3,6 +3,7 @@
 #import <Foundation/NSArray.h>
 #import <AppKit/NSResponder.h>
 #import <AppKit/NSTouchBar.h>
+#import <AppKit/NSWindowRestoration.h>
 
 void* C_Responder_Alloc() {
     return [NSResponder alloc];
@@ -332,6 +333,12 @@ void C_NSResponder_EncodeRestorableStateWithCoder_BackgroundQueue(void* ptr, voi
     [nSResponder encodeRestorableStateWithCoder:(NSCoder*)coder backgroundQueue:(NSOperationQueue*)queue];
 }
 
+void* C_NSResponder_MakeTouchBar(void* ptr) {
+    NSResponder* nSResponder = (NSResponder*)ptr;
+    NSTouchBar* result_ = [nSResponder makeTouchBar];
+    return result_;
+}
+
 void C_NSResponder_NewWindowForTab(void* ptr, void* sender) {
     NSResponder* nSResponder = (NSResponder*)ptr;
     [nSResponder newWindowForTab:(id)sender];
@@ -401,4 +408,15 @@ void* C_NSResponder_UndoManager(void* ptr) {
     NSResponder* nSResponder = (NSResponder*)ptr;
     NSUndoManager* result_ = [nSResponder undoManager];
     return result_;
+}
+
+void* C_NSResponder_TouchBar(void* ptr) {
+    NSResponder* nSResponder = (NSResponder*)ptr;
+    NSTouchBar* result_ = [nSResponder touchBar];
+    return result_;
+}
+
+void C_NSResponder_SetTouchBar(void* ptr, void* value) {
+    NSResponder* nSResponder = (NSResponder*)ptr;
+    [nSResponder setTouchBar:(NSTouchBar*)value];
 }

@@ -1,7 +1,12 @@
 #import "application.h"
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
-#import <AppKit/AppKit.h>
+#import <AppKit/NSApplication.h>
+#import <AppKit/NSTouchBar.h>
+#import <AppKit/NSWindowRestoration.h>
+#import <AppKit/NSApplicationScripting.h>
+#import <AppKit/NSUserInterfaceItemSearching.h>
+#import <AppKit/NSHelpManager.h>
 
 void* C_Application_Alloc() {
     return [NSApplication alloc];

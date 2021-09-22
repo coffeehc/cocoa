@@ -2,6 +2,7 @@
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
 #import <AppKit/NSTextStorage.h>
+#import <AppKit/NSTextStorageScripting.h>
 
 void* C_TextStorage_Alloc() {
     return [NSTextStorage alloc];

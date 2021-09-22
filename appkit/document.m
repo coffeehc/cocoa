@@ -1,7 +1,9 @@
 #import "document.h"
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
-#import <AppKit/AppKit.h>
+#import <AppKit/NSDocument.h>
+#import <AppKit/NSWindowRestoration.h>
+#import <AppKit/NSDocumentScripting.h>
 
 void* C_Document_Alloc() {
     return [NSDocument alloc];
@@ -112,6 +114,11 @@ void C_NSDocument_ShowWindows(void* ptr) {
 void C_NSDocument_SetWindow(void* ptr, void* window) {
     NSDocument* nSDocument = (NSDocument*)ptr;
     [nSDocument setWindow:(NSWindow*)window];
+}
+
+void C_NSDocument_SetDisplayName(void* ptr, void* displayNameOrNil) {
+    NSDocument* nSDocument = (NSDocument*)ptr;
+    [nSDocument setDisplayName:(NSString*)displayNameOrNil];
 }
 
 void* C_NSDocument_DefaultDraftName(void* ptr) {

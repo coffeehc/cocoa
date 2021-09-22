@@ -1,7 +1,13 @@
 #import "view.h"
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
-#import <AppKit/AppKit.h>
+#import <AppKit/NSView.h>
+#import <AppKit/NSLayoutConstraint.h>
+#import <AppKit/NSLayoutGuide.h>
+#import <AppKit/NSClipView.h>
+#import <AppKit/NSRulerView.h>
+#import <AppKit/NSPressureConfiguration.h>
+#import <AppKit/NSCandidateListTouchBarItem.h>
 
 void* C_View_Alloc() {
     return [NSView alloc];

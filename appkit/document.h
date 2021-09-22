@@ -24,6 +24,7 @@ void C_NSDocument_WindowControllerDidLoadNib(void* ptr, void* windowController);
 void C_NSDocument_WindowControllerWillLoadNib(void* ptr, void* windowController);
 void C_NSDocument_ShowWindows(void* ptr);
 void C_NSDocument_SetWindow(void* ptr, void* window);
+void C_NSDocument_SetDisplayName(void* ptr, void* displayNameOrNil);
 void* C_NSDocument_DefaultDraftName(void* ptr);
 void C_NSDocument_EncodeRestorableStateWithCoder_BackgroundQueue(void* ptr, void* coder, void* queue);
 void C_NSDocument_ScheduleAutosaving(void* ptr);
