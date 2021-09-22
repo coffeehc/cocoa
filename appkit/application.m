@@ -7,6 +7,8 @@
 #import <AppKit/NSApplicationScripting.h>
 #import <AppKit/NSUserInterfaceItemSearching.h>
 #import <AppKit/NSHelpManager.h>
+#import <AppKit/NSColorPanel.h>
+#import <AppKit/NSPageLayout.h>
 
 void* C_Application_Alloc() {
     return [NSApplication alloc];
