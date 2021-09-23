@@ -1,5 +1,6 @@
-#import <Foundation/Foundation.h>
 #import "foundation_custom.h"
+#import <Foundation/NSString.h>
+#import <Foundation/NSData.h>
 
 void* String_New(const char* str) {
     return [NSString stringWithUTF8String:str];

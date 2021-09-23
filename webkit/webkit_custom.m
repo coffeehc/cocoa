@@ -1,6 +1,6 @@
-#import <WebKit/WebKit.h>
 #include "_cgo_export.h"
 #import "webkit_custom.h"
+#import <WebKit/WKWebView.h>
 
 void WebView_TakeSnapshotWithConfiguration(void* ptr, void* configuration, uintptr_t handler) {
     WKWebView* wKWebView = (WKWebView*)ptr;
