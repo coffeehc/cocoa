@@ -68,3 +68,5 @@ int C_NSMenu_UserInterfaceLayoutDirection(void* ptr);
 void C_NSMenu_SetUserInterfaceLayoutDirection(void* ptr, int value);
 void* C_NSMenu_Delegate(void* ptr);
 void C_NSMenu_SetDelegate(void* ptr, void* value);
+
+void* WrapMenuDelegate(uintptr_t goID);

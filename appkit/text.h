@@ -84,3 +84,5 @@ bool C_NSText_IsHorizontallyResizable(void* ptr);
 void C_NSText_SetHorizontallyResizable(void* ptr, bool value);
 void* C_NSText_Delegate(void* ptr);
 void C_NSText_SetDelegate(void* ptr, void* value);
+
+void* WrapTextDelegate(uintptr_t goID);

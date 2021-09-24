@@ -77,3 +77,16 @@ void* C_NSImage_AccessibilityDescription(void* ptr);
 void C_NSImage_SetAccessibilityDescription(void* ptr, void* value);
 bool C_NSImage_MatchesOnlyOnBestFittingAxis(void* ptr);
 void C_NSImage_SetMatchesOnlyOnBestFittingAxis(void* ptr, bool value);
+
+void* C_ImageSymbolConfiguration_Alloc();
+
+void* C_NSImageSymbolConfiguration_AllocImageSymbolConfiguration();
+void* C_NSImageSymbolConfiguration_Init(void* ptr);
+void* C_NSImageSymbolConfiguration_NewImageSymbolConfiguration();
+void* C_NSImageSymbolConfiguration_Autorelease(void* ptr);
+void* C_NSImageSymbolConfiguration_Retain(void* ptr);
+void* C_NSImageSymbolConfiguration_ImageSymbolConfiguration_ConfigurationWithPointSize_Weight(double pointSize, double weight);
+void* C_NSImageSymbolConfiguration_ImageSymbolConfiguration_ConfigurationWithPointSize_Weight_Scale(double pointSize, double weight, int scale);
+void* C_NSImageSymbolConfiguration_ImageSymbolConfiguration_ConfigurationWithTextStyle(void* style);
+void* C_NSImageSymbolConfiguration_ImageSymbolConfiguration_ConfigurationWithTextStyle_Scale(void* style, int scale);
+void* C_NSImageSymbolConfiguration_ImageSymbolConfiguration_ConfigurationWithScale(int scale);

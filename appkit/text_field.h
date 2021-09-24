@@ -62,3 +62,5 @@ void* C_NSTextField_Delegate(void* ptr);
 void C_NSTextField_SetDelegate(void* ptr, void* value);
 unsigned int C_NSTextField_LineBreakStrategy(void* ptr);
 void C_NSTextField_SetLineBreakStrategy(void* ptr, unsigned int value);
+
+void* WrapTextFieldDelegate(uintptr_t goID);

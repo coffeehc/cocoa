@@ -38,3 +38,5 @@ void* C_NSPathCell_URL(void* ptr);
 void C_NSPathCell_SetURL(void* ptr, void* value);
 void* C_NSPathCell_Delegate(void* ptr);
 void C_NSPathCell_SetDelegate(void* ptr, void* value);
+
+void* WrapPathCellDelegate(uintptr_t goID);

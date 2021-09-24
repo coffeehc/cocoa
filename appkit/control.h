@@ -78,3 +78,5 @@ bool C_NSControl_IgnoresMultiClick(void* ptr);
 void C_NSControl_SetIgnoresMultiClick(void* ptr, bool value);
 void* C_NSControl_Cell(void* ptr);
 void C_NSControl_SetCell(void* ptr, void* value);
+
+void* WrapControlTextEditingDelegate(uintptr_t goID);

@@ -48,3 +48,7 @@ bool C_NSOutlineView_IndentationMarkerFollowsCell(void* ptr);
 void C_NSOutlineView_SetIndentationMarkerFollowsCell(void* ptr, bool value);
 bool C_NSOutlineView_AutosaveExpandedItems(void* ptr);
 void C_NSOutlineView_SetAutosaveExpandedItems(void* ptr, bool value);
+
+void* WrapOutlineViewDataSource(uintptr_t goID);
+
+void* WrapOutlineViewDelegate(uintptr_t goID);

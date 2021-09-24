@@ -53,3 +53,7 @@ int C_NSComboBox_IndexOfSelectedItem(void* ptr);
 void* C_NSComboBox_ObjectValueOfSelectedItem(void* ptr);
 bool C_NSComboBox_Completes(void* ptr);
 void C_NSComboBox_SetCompletes(void* ptr, bool value);
+
+void* WrapComboBoxDataSource(uintptr_t goID);
+
+void* WrapComboBoxDelegate(uintptr_t goID);

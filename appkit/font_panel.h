@@ -24,3 +24,5 @@ bool C_NSFontPanel_IsEnabled(void* ptr);
 void C_NSFontPanel_SetEnabled(void* ptr, bool value);
 void* C_NSFontPanel_AccessoryView(void* ptr);
 void C_NSFontPanel_SetAccessoryView(void* ptr, void* value);
+
+void* WrapFontChanging(uintptr_t goID);

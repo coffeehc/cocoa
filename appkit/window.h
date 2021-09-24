@@ -309,3 +309,5 @@ unsigned int C_NSWindow_StyleMask(void* ptr);
 void C_NSWindow_SetStyleMask(void* ptr, unsigned int value);
 int C_NSWindow_WindowTitlebarLayoutDirection(void* ptr);
 bool C_NSWindow_IsZoomable(void* ptr);
+
+void* WrapWindowDelegate(uintptr_t goID);

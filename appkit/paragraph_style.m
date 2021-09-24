@@ -203,3 +203,266 @@ int C_NSParagraphStyle_BaseWritingDirection(void* ptr) {
     NSWritingDirection result_ = [nSParagraphStyle baseWritingDirection];
     return result_;
 }
+
+void* C_MutableParagraphStyle_Alloc() {
+    return [NSMutableParagraphStyle alloc];
+}
+
+void* C_NSMutableParagraphStyle_AllocMutableParagraphStyle() {
+    NSMutableParagraphStyle* result_ = [NSMutableParagraphStyle alloc];
+    return result_;
+}
+
+void* C_NSMutableParagraphStyle_Init(void* ptr) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    NSMutableParagraphStyle* result_ = [nSMutableParagraphStyle init];
+    return result_;
+}
+
+void* C_NSMutableParagraphStyle_NewMutableParagraphStyle() {
+    NSMutableParagraphStyle* result_ = [NSMutableParagraphStyle new];
+    return result_;
+}
+
+void* C_NSMutableParagraphStyle_Autorelease(void* ptr) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    NSMutableParagraphStyle* result_ = [nSMutableParagraphStyle autorelease];
+    return result_;
+}
+
+void* C_NSMutableParagraphStyle_Retain(void* ptr) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    NSMutableParagraphStyle* result_ = [nSMutableParagraphStyle retain];
+    return result_;
+}
+
+void C_NSMutableParagraphStyle_SetParagraphStyle(void* ptr, void* obj) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    [nSMutableParagraphStyle setParagraphStyle:(NSParagraphStyle*)obj];
+}
+
+void C_NSMutableParagraphStyle_AddTabStop(void* ptr, void* anObject) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    [nSMutableParagraphStyle addTabStop:(NSTextTab*)anObject];
+}
+
+void C_NSMutableParagraphStyle_RemoveTabStop(void* ptr, void* anObject) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    [nSMutableParagraphStyle removeTabStop:(NSTextTab*)anObject];
+}
+
+void C_NSMutableParagraphStyle_SetAlignment(void* ptr, int value) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    [nSMutableParagraphStyle setAlignment:value];
+}
+
+void C_NSMutableParagraphStyle_SetFirstLineHeadIndent(void* ptr, double value) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    [nSMutableParagraphStyle setFirstLineHeadIndent:value];
+}
+
+void C_NSMutableParagraphStyle_SetHeadIndent(void* ptr, double value) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    [nSMutableParagraphStyle setHeadIndent:value];
+}
+
+void C_NSMutableParagraphStyle_SetTailIndent(void* ptr, double value) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    [nSMutableParagraphStyle setTailIndent:value];
+}
+
+void C_NSMutableParagraphStyle_SetLineHeightMultiple(void* ptr, double value) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    [nSMutableParagraphStyle setLineHeightMultiple:value];
+}
+
+void C_NSMutableParagraphStyle_SetMaximumLineHeight(void* ptr, double value) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    [nSMutableParagraphStyle setMaximumLineHeight:value];
+}
+
+void C_NSMutableParagraphStyle_SetMinimumLineHeight(void* ptr, double value) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    [nSMutableParagraphStyle setMinimumLineHeight:value];
+}
+
+void C_NSMutableParagraphStyle_SetLineSpacing(void* ptr, double value) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    [nSMutableParagraphStyle setLineSpacing:value];
+}
+
+void C_NSMutableParagraphStyle_SetParagraphSpacing(void* ptr, double value) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    [nSMutableParagraphStyle setParagraphSpacing:value];
+}
+
+void C_NSMutableParagraphStyle_SetParagraphSpacingBefore(void* ptr, double value) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    [nSMutableParagraphStyle setParagraphSpacingBefore:value];
+}
+
+void C_NSMutableParagraphStyle_SetBaseWritingDirection(void* ptr, int value) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    [nSMutableParagraphStyle setBaseWritingDirection:value];
+}
+
+void C_NSMutableParagraphStyle_SetTabStops(void* ptr, Array value) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSTextTab*)p];
+    	}
+    }
+    [nSMutableParagraphStyle setTabStops:objcValue];
+}
+
+void C_NSMutableParagraphStyle_SetDefaultTabInterval(void* ptr, double value) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    [nSMutableParagraphStyle setDefaultTabInterval:value];
+}
+
+void C_NSMutableParagraphStyle_SetTextBlocks(void* ptr, Array value) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSTextBlock*)p];
+    	}
+    }
+    [nSMutableParagraphStyle setTextBlocks:objcValue];
+}
+
+void C_NSMutableParagraphStyle_SetTextLists(void* ptr, Array value) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    NSMutableArray* objcValue = [NSMutableArray arrayWithCapacity:value.len];
+    if (value.len > 0) {
+    	void** valueData = (void**)value.data;
+    	for (int i = 0; i < value.len; i++) {
+    		void* p = valueData[i];
+    		[objcValue addObject:(NSTextList*)p];
+    	}
+    }
+    [nSMutableParagraphStyle setTextLists:objcValue];
+}
+
+void C_NSMutableParagraphStyle_SetLineBreakMode(void* ptr, unsigned int value) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    [nSMutableParagraphStyle setLineBreakMode:value];
+}
+
+void C_NSMutableParagraphStyle_SetLineBreakStrategy(void* ptr, unsigned int value) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    [nSMutableParagraphStyle setLineBreakStrategy:value];
+}
+
+void C_NSMutableParagraphStyle_SetHyphenationFactor(void* ptr, float value) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    [nSMutableParagraphStyle setHyphenationFactor:value];
+}
+
+void C_NSMutableParagraphStyle_SetTighteningFactorForTruncation(void* ptr, float value) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    [nSMutableParagraphStyle setTighteningFactorForTruncation:value];
+}
+
+void C_NSMutableParagraphStyle_SetAllowsDefaultTighteningForTruncation(void* ptr, bool value) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    [nSMutableParagraphStyle setAllowsDefaultTighteningForTruncation:value];
+}
+
+void C_NSMutableParagraphStyle_SetHeaderLevel(void* ptr, int value) {
+    NSMutableParagraphStyle* nSMutableParagraphStyle = (NSMutableParagraphStyle*)ptr;
+    [nSMutableParagraphStyle setHeaderLevel:value];
+}
+
+void* C_TextTab_Alloc() {
+    return [NSTextTab alloc];
+}
+
+void* C_NSTextTab_InitWithTextAlignment_Location_Options(void* ptr, int alignment, double loc, Dictionary options) {
+    NSTextTab* nSTextTab = (NSTextTab*)ptr;
+    NSMutableDictionary* objcOptions = [NSMutableDictionary dictionaryWithCapacity:options.len];
+    if (options.len > 0) {
+    	void** optionsKeyData = (void**)options.key_data;
+    	void** optionsValueData = (void**)options.value_data;
+    	for (int i = 0; i < options.len; i++) {
+    		void* kp = optionsKeyData[i];
+    		void* vp = optionsValueData[i];
+    		[objcOptions setObject:(NSString*)kp forKey:(id)vp];
+    	}
+    }
+    NSTextTab* result_ = [nSTextTab initWithTextAlignment:alignment location:loc options:objcOptions];
+    return result_;
+}
+
+void* C_NSTextTab_AllocTextTab() {
+    NSTextTab* result_ = [NSTextTab alloc];
+    return result_;
+}
+
+void* C_NSTextTab_Init(void* ptr) {
+    NSTextTab* nSTextTab = (NSTextTab*)ptr;
+    NSTextTab* result_ = [nSTextTab init];
+    return result_;
+}
+
+void* C_NSTextTab_NewTextTab() {
+    NSTextTab* result_ = [NSTextTab new];
+    return result_;
+}
+
+void* C_NSTextTab_Autorelease(void* ptr) {
+    NSTextTab* nSTextTab = (NSTextTab*)ptr;
+    NSTextTab* result_ = [nSTextTab autorelease];
+    return result_;
+}
+
+void* C_NSTextTab_Retain(void* ptr) {
+    NSTextTab* nSTextTab = (NSTextTab*)ptr;
+    NSTextTab* result_ = [nSTextTab retain];
+    return result_;
+}
+
+void* C_NSTextTab_TextTab_ColumnTerminatorsForLocale(void* aLocale) {
+    NSCharacterSet* result_ = [NSTextTab columnTerminatorsForLocale:(NSLocale*)aLocale];
+    return result_;
+}
+
+double C_NSTextTab_Location(void* ptr) {
+    NSTextTab* nSTextTab = (NSTextTab*)ptr;
+    CGFloat result_ = [nSTextTab location];
+    return result_;
+}
+
+int C_NSTextTab_Alignment(void* ptr) {
+    NSTextTab* nSTextTab = (NSTextTab*)ptr;
+    NSTextAlignment result_ = [nSTextTab alignment];
+    return result_;
+}
+
+Dictionary C_NSTextTab_Options(void* ptr) {
+    NSTextTab* nSTextTab = (NSTextTab*)ptr;
+    NSDictionary* result_ = [nSTextTab options];
+    Dictionary result_Array;
+    NSArray * result_Keys = [result_ allKeys];
+    int result_Count = [result_Keys count];
+    if (result_Count > 0) {
+    	void** result_KeyData = malloc(result_Count * sizeof(void*));
+    	void** result_ValueData = malloc(result_Count * sizeof(void*));
+    	for (int i = 0; i < result_Count; i++) {
+    		NSTextTabOptionKey kp = [result_Keys objectAtIndex:i];
+    		id vp = result_[kp];
+    		 result_KeyData[i] = kp;
+    		 result_ValueData[i] = vp;
+    	}
+    	result_Array.key_data = result_KeyData;
+    	result_Array.value_data = result_ValueData;
+    	result_Array.len = result_Count;
+    }
+    return result_Array;
+}

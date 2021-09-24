@@ -37,3 +37,5 @@ void* C_NSAlert_Icon(void* ptr);
 void C_NSAlert_SetIcon(void* ptr, void* value);
 Array C_NSAlert_Buttons(void* ptr);
 void* C_NSAlert_Window(void* ptr);
+
+void* WrapAlertDelegate(uintptr_t goID);

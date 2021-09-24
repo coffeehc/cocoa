@@ -2,6 +2,7 @@
 #import <AppKit/NSAnimation.h>
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDictionary.h>
+#import <_cgo_export.h>
 
 void* C_Animation_Alloc() {
     return [NSAnimation alloc];
@@ -210,4 +211,94 @@ void C_NSAnimation_SetProgressMarks(void* ptr, Array value) {
     	}
     }
     [nSAnimation setProgressMarks:objcValue];
+}
+
+void* C_ViewAnimation_Alloc() {
+    return [NSViewAnimation alloc];
+}
+
+void* C_NSViewAnimation_InitWithDuration_AnimationCurve(void* ptr, double duration, unsigned int animationCurve) {
+    NSViewAnimation* nSViewAnimation = (NSViewAnimation*)ptr;
+    NSViewAnimation* result_ = [nSViewAnimation initWithDuration:duration animationCurve:animationCurve];
+    return result_;
+}
+
+void* C_NSViewAnimation_InitWithCoder(void* ptr, void* coder) {
+    NSViewAnimation* nSViewAnimation = (NSViewAnimation*)ptr;
+    NSViewAnimation* result_ = [nSViewAnimation initWithCoder:(NSCoder*)coder];
+    return result_;
+}
+
+void* C_NSViewAnimation_AllocViewAnimation() {
+    NSViewAnimation* result_ = [NSViewAnimation alloc];
+    return result_;
+}
+
+void* C_NSViewAnimation_Init(void* ptr) {
+    NSViewAnimation* nSViewAnimation = (NSViewAnimation*)ptr;
+    NSViewAnimation* result_ = [nSViewAnimation init];
+    return result_;
+}
+
+void* C_NSViewAnimation_NewViewAnimation() {
+    NSViewAnimation* result_ = [NSViewAnimation new];
+    return result_;
+}
+
+void* C_NSViewAnimation_Autorelease(void* ptr) {
+    NSViewAnimation* nSViewAnimation = (NSViewAnimation*)ptr;
+    NSViewAnimation* result_ = [nSViewAnimation autorelease];
+    return result_;
+}
+
+void* C_NSViewAnimation_Retain(void* ptr) {
+    NSViewAnimation* nSViewAnimation = (NSViewAnimation*)ptr;
+    NSViewAnimation* result_ = [nSViewAnimation retain];
+    return result_;
+}
+
+@interface NSAnimationDelegateAdaptor : NSObject <NSAnimationDelegate>
+@property (assign) uintptr_t goID;
+@end
+
+@implementation NSAnimationDelegateAdaptor
+
+
+- (void)animationDidEnd:(NSAnimation*)animation {
+    animationDelegate_AnimationDidEnd([self goID], animation);
+}
+
+- (void)animationDidStop:(NSAnimation*)animation {
+    animationDelegate_AnimationDidStop([self goID], animation);
+}
+
+- (BOOL)animationShouldStart:(NSAnimation*)animation {
+    bool result_ = animationDelegate_AnimationShouldStart([self goID], animation);
+    return result_;
+}
+
+- (float)animation:(NSAnimation*)animation valueForProgress:(NSAnimationProgress)progress {
+    float result_ = animationDelegate_Animation_ValueForProgress([self goID], animation, progress);
+    return result_;
+}
+
+- (void)animation:(NSAnimation*)animation didReachProgressMark:(NSAnimationProgress)progress {
+    animationDelegate_Animation_DidReachProgressMark([self goID], animation, progress);
+}
+
+
+- (BOOL)respondsToSelector:(SEL)aSelector {
+	return AnimationDelegate_RespondsTo([self goID], aSelector);
+}
+
+- (void)dealloc {
+	deleteAppKitHandle([self goID]);
+	[super dealloc];
+}
+@end
+
+void* WrapAnimationDelegate(uintptr_t goID) {
+    NSAnimationDelegateAdaptor* adaptor = [[NSAnimationDelegateAdaptor alloc] init];
+    adaptor.goID = goID;
+    return adaptor;
 }

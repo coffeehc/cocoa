@@ -51,3 +51,5 @@ unsigned int C_NSTabView_ControlSize(void* ptr);
 void C_NSTabView_SetControlSize(void* ptr, unsigned int value);
 bool C_NSTabView_AllowsTruncatedLabels(void* ptr);
 void C_NSTabView_SetAllowsTruncatedLabels(void* ptr, bool value);
+
+void* WrapTabViewDelegate(uintptr_t goID);

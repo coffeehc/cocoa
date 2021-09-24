@@ -207,3 +207,281 @@ func (n NSParagraphStyle) BaseWritingDirection() WritingDirection {
 	result_ := C.C_NSParagraphStyle_BaseWritingDirection(n.Ptr())
 	return WritingDirection(int(result_))
 }
+
+type MutableParagraphStyle interface {
+	ParagraphStyle
+	SetParagraphStyle(obj ParagraphStyle)
+	AddTabStop(anObject TextTab)
+	RemoveTabStop(anObject TextTab)
+	SetAlignment(value TextAlignment)
+	SetFirstLineHeadIndent(value coregraphics.Float)
+	SetHeadIndent(value coregraphics.Float)
+	SetTailIndent(value coregraphics.Float)
+	SetLineHeightMultiple(value coregraphics.Float)
+	SetMaximumLineHeight(value coregraphics.Float)
+	SetMinimumLineHeight(value coregraphics.Float)
+	SetLineSpacing(value coregraphics.Float)
+	SetParagraphSpacing(value coregraphics.Float)
+	SetParagraphSpacingBefore(value coregraphics.Float)
+	SetBaseWritingDirection(value WritingDirection)
+	SetTabStops(value []TextTab)
+	SetDefaultTabInterval(value coregraphics.Float)
+	SetTextBlocks(value []TextBlock)
+	SetTextLists(value []TextList)
+	SetLineBreakMode(value LineBreakMode)
+	SetLineBreakStrategy(value LineBreakStrategy)
+	SetHyphenationFactor(value float32)
+	SetTighteningFactorForTruncation(value float32)
+	SetAllowsDefaultTighteningForTruncation(value bool)
+	SetHeaderLevel(value int)
+}
+
+type NSMutableParagraphStyle struct {
+	NSParagraphStyle
+}
+
+func MakeMutableParagraphStyle(ptr unsafe.Pointer) NSMutableParagraphStyle {
+	return NSMutableParagraphStyle{
+		NSParagraphStyle: MakeParagraphStyle(ptr),
+	}
+}
+
+func AllocMutableParagraphStyle() NSMutableParagraphStyle {
+	result_ := C.C_NSMutableParagraphStyle_AllocMutableParagraphStyle()
+	return MakeMutableParagraphStyle(result_)
+}
+
+func (n NSMutableParagraphStyle) Init() NSMutableParagraphStyle {
+	result_ := C.C_NSMutableParagraphStyle_Init(n.Ptr())
+	return MakeMutableParagraphStyle(result_)
+}
+
+func NewMutableParagraphStyle() NSMutableParagraphStyle {
+	result_ := C.C_NSMutableParagraphStyle_NewMutableParagraphStyle()
+	return MakeMutableParagraphStyle(result_)
+}
+
+func (n NSMutableParagraphStyle) Autorelease() NSMutableParagraphStyle {
+	result_ := C.C_NSMutableParagraphStyle_Autorelease(n.Ptr())
+	return MakeMutableParagraphStyle(result_)
+}
+
+func (n NSMutableParagraphStyle) Retain() NSMutableParagraphStyle {
+	result_ := C.C_NSMutableParagraphStyle_Retain(n.Ptr())
+	return MakeMutableParagraphStyle(result_)
+}
+
+func (n NSMutableParagraphStyle) SetParagraphStyle(obj ParagraphStyle) {
+	C.C_NSMutableParagraphStyle_SetParagraphStyle(n.Ptr(), objc.ExtractPtr(obj))
+}
+
+func (n NSMutableParagraphStyle) AddTabStop(anObject TextTab) {
+	C.C_NSMutableParagraphStyle_AddTabStop(n.Ptr(), objc.ExtractPtr(anObject))
+}
+
+func (n NSMutableParagraphStyle) RemoveTabStop(anObject TextTab) {
+	C.C_NSMutableParagraphStyle_RemoveTabStop(n.Ptr(), objc.ExtractPtr(anObject))
+}
+
+func (n NSMutableParagraphStyle) SetAlignment(value TextAlignment) {
+	C.C_NSMutableParagraphStyle_SetAlignment(n.Ptr(), C.int(int(value)))
+}
+
+func (n NSMutableParagraphStyle) SetFirstLineHeadIndent(value coregraphics.Float) {
+	C.C_NSMutableParagraphStyle_SetFirstLineHeadIndent(n.Ptr(), C.double(float64(value)))
+}
+
+func (n NSMutableParagraphStyle) SetHeadIndent(value coregraphics.Float) {
+	C.C_NSMutableParagraphStyle_SetHeadIndent(n.Ptr(), C.double(float64(value)))
+}
+
+func (n NSMutableParagraphStyle) SetTailIndent(value coregraphics.Float) {
+	C.C_NSMutableParagraphStyle_SetTailIndent(n.Ptr(), C.double(float64(value)))
+}
+
+func (n NSMutableParagraphStyle) SetLineHeightMultiple(value coregraphics.Float) {
+	C.C_NSMutableParagraphStyle_SetLineHeightMultiple(n.Ptr(), C.double(float64(value)))
+}
+
+func (n NSMutableParagraphStyle) SetMaximumLineHeight(value coregraphics.Float) {
+	C.C_NSMutableParagraphStyle_SetMaximumLineHeight(n.Ptr(), C.double(float64(value)))
+}
+
+func (n NSMutableParagraphStyle) SetMinimumLineHeight(value coregraphics.Float) {
+	C.C_NSMutableParagraphStyle_SetMinimumLineHeight(n.Ptr(), C.double(float64(value)))
+}
+
+func (n NSMutableParagraphStyle) SetLineSpacing(value coregraphics.Float) {
+	C.C_NSMutableParagraphStyle_SetLineSpacing(n.Ptr(), C.double(float64(value)))
+}
+
+func (n NSMutableParagraphStyle) SetParagraphSpacing(value coregraphics.Float) {
+	C.C_NSMutableParagraphStyle_SetParagraphSpacing(n.Ptr(), C.double(float64(value)))
+}
+
+func (n NSMutableParagraphStyle) SetParagraphSpacingBefore(value coregraphics.Float) {
+	C.C_NSMutableParagraphStyle_SetParagraphSpacingBefore(n.Ptr(), C.double(float64(value)))
+}
+
+func (n NSMutableParagraphStyle) SetBaseWritingDirection(value WritingDirection) {
+	C.C_NSMutableParagraphStyle_SetBaseWritingDirection(n.Ptr(), C.int(int(value)))
+}
+
+func (n NSMutableParagraphStyle) SetTabStops(value []TextTab) {
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = objc.ExtractPtr(v)
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
+	}
+	C.C_NSMutableParagraphStyle_SetTabStops(n.Ptr(), cValue)
+}
+
+func (n NSMutableParagraphStyle) SetDefaultTabInterval(value coregraphics.Float) {
+	C.C_NSMutableParagraphStyle_SetDefaultTabInterval(n.Ptr(), C.double(float64(value)))
+}
+
+func (n NSMutableParagraphStyle) SetTextBlocks(value []TextBlock) {
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = objc.ExtractPtr(v)
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
+	}
+	C.C_NSMutableParagraphStyle_SetTextBlocks(n.Ptr(), cValue)
+}
+
+func (n NSMutableParagraphStyle) SetTextLists(value []TextList) {
+	var cValue C.Array
+	if len(value) > 0 {
+		cValueData := make([]unsafe.Pointer, len(value))
+		for idx, v := range value {
+			cValueData[idx] = objc.ExtractPtr(v)
+		}
+		cValue.data = unsafe.Pointer(&cValueData[0])
+		cValue.len = C.int(len(value))
+	}
+	C.C_NSMutableParagraphStyle_SetTextLists(n.Ptr(), cValue)
+}
+
+func (n NSMutableParagraphStyle) SetLineBreakMode(value LineBreakMode) {
+	C.C_NSMutableParagraphStyle_SetLineBreakMode(n.Ptr(), C.uint(uint(value)))
+}
+
+func (n NSMutableParagraphStyle) SetLineBreakStrategy(value LineBreakStrategy) {
+	C.C_NSMutableParagraphStyle_SetLineBreakStrategy(n.Ptr(), C.uint(uint(value)))
+}
+
+func (n NSMutableParagraphStyle) SetHyphenationFactor(value float32) {
+	C.C_NSMutableParagraphStyle_SetHyphenationFactor(n.Ptr(), C.float(value))
+}
+
+func (n NSMutableParagraphStyle) SetTighteningFactorForTruncation(value float32) {
+	C.C_NSMutableParagraphStyle_SetTighteningFactorForTruncation(n.Ptr(), C.float(value))
+}
+
+func (n NSMutableParagraphStyle) SetAllowsDefaultTighteningForTruncation(value bool) {
+	C.C_NSMutableParagraphStyle_SetAllowsDefaultTighteningForTruncation(n.Ptr(), C.bool(value))
+}
+
+func (n NSMutableParagraphStyle) SetHeaderLevel(value int) {
+	C.C_NSMutableParagraphStyle_SetHeaderLevel(n.Ptr(), C.int(value))
+}
+
+type TextTab interface {
+	objc.Object
+	Location() coregraphics.Float
+	Alignment() TextAlignment
+	Options() map[TextTabOptionKey]objc.Object
+}
+
+type NSTextTab struct {
+	objc.NSObject
+}
+
+func MakeTextTab(ptr unsafe.Pointer) NSTextTab {
+	return NSTextTab{
+		NSObject: objc.MakeObject(ptr),
+	}
+}
+
+func (n NSTextTab) InitWithTextAlignment_Location_Options(alignment TextAlignment, loc coregraphics.Float, options map[TextTabOptionKey]objc.Object) NSTextTab {
+	var cOptions C.Dictionary
+	if len(options) > 0 {
+		cOptionsKeyData := make([]unsafe.Pointer, len(options))
+		cOptionsValueData := make([]unsafe.Pointer, len(options))
+		var idx = 0
+		for k, v := range options {
+			cOptionsKeyData[idx] = foundation.NewString(string(k)).Ptr()
+			cOptionsValueData[idx] = objc.ExtractPtr(v)
+			idx++
+		}
+		cOptions.key_data = unsafe.Pointer(&cOptionsKeyData[0])
+		cOptions.value_data = unsafe.Pointer(&cOptionsValueData[0])
+		cOptions.len = C.int(len(options))
+	}
+	result_ := C.C_NSTextTab_InitWithTextAlignment_Location_Options(n.Ptr(), C.int(int(alignment)), C.double(float64(loc)), cOptions)
+	return MakeTextTab(result_)
+}
+
+func AllocTextTab() NSTextTab {
+	result_ := C.C_NSTextTab_AllocTextTab()
+	return MakeTextTab(result_)
+}
+
+func (n NSTextTab) Init() NSTextTab {
+	result_ := C.C_NSTextTab_Init(n.Ptr())
+	return MakeTextTab(result_)
+}
+
+func NewTextTab() NSTextTab {
+	result_ := C.C_NSTextTab_NewTextTab()
+	return MakeTextTab(result_)
+}
+
+func (n NSTextTab) Autorelease() NSTextTab {
+	result_ := C.C_NSTextTab_Autorelease(n.Ptr())
+	return MakeTextTab(result_)
+}
+
+func (n NSTextTab) Retain() NSTextTab {
+	result_ := C.C_NSTextTab_Retain(n.Ptr())
+	return MakeTextTab(result_)
+}
+
+func TextTab_ColumnTerminatorsForLocale(aLocale foundation.Locale) foundation.CharacterSet {
+	result_ := C.C_NSTextTab_TextTab_ColumnTerminatorsForLocale(objc.ExtractPtr(aLocale))
+	return foundation.MakeCharacterSet(result_)
+}
+
+func (n NSTextTab) Location() coregraphics.Float {
+	result_ := C.C_NSTextTab_Location(n.Ptr())
+	return coregraphics.Float(float64(result_))
+}
+
+func (n NSTextTab) Alignment() TextAlignment {
+	result_ := C.C_NSTextTab_Alignment(n.Ptr())
+	return TextAlignment(int(result_))
+}
+
+func (n NSTextTab) Options() map[TextTabOptionKey]objc.Object {
+	result_ := C.C_NSTextTab_Options(n.Ptr())
+	if result_.len > 0 {
+		defer C.free(result_.key_data)
+		defer C.free(result_.value_data)
+	}
+	result_KeySlice := unsafe.Slice((*unsafe.Pointer)(result_.key_data), int(result_.len))
+	result_ValueSlice := unsafe.Slice((*unsafe.Pointer)(result_.value_data), int(result_.len))
+	var goResult_ = make(map[TextTabOptionKey]objc.Object)
+	for idx, k := range result_KeySlice {
+		v := result_ValueSlice[idx]
+		goResult_[TextTabOptionKey(foundation.MakeString(k).String())] = objc.MakeObject(v)
+	}
+	return goResult_
+}

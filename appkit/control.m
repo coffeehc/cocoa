@@ -3,6 +3,7 @@
 #import <AppKit/NSLayoutConstraint.h>
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDictionary.h>
+#import <_cgo_export.h>
 
 void* C_Control_Alloc() {
     return [NSControl alloc];
@@ -393,4 +394,69 @@ void* C_NSControl_Cell(void* ptr) {
 void C_NSControl_SetCell(void* ptr, void* value) {
     NSControl* nSControl = (NSControl*)ptr;
     [nSControl setCell:(NSCell*)value];
+}
+
+@interface NSControlTextEditingDelegateAdaptor : NSObject <NSControlTextEditingDelegate>
+@property (assign) uintptr_t goID;
+@end
+
+@implementation NSControlTextEditingDelegateAdaptor
+
+
+- (BOOL)control:(NSControl*)control isValidObject:(id)obj {
+    bool result_ = controlTextEditingDelegate_Control_IsValidObject([self goID], control, obj);
+    return result_;
+}
+
+- (void)control:(NSControl*)control didFailToValidatePartialString:(NSString*)_string errorDescription:(NSString*)error {
+    controlTextEditingDelegate_Control_DidFailToValidatePartialString_ErrorDescription([self goID], control, _string, error);
+}
+
+- (BOOL)control:(NSControl*)control didFailToFormatString:(NSString*)_string errorDescription:(NSString*)error {
+    bool result_ = controlTextEditingDelegate_Control_DidFailToFormatString_ErrorDescription([self goID], control, _string, error);
+    return result_;
+}
+
+- (BOOL)control:(NSControl*)control textShouldBeginEditing:(NSText*)fieldEditor {
+    bool result_ = controlTextEditingDelegate_Control_TextShouldBeginEditing([self goID], control, fieldEditor);
+    return result_;
+}
+
+- (BOOL)control:(NSControl*)control textShouldEndEditing:(NSText*)fieldEditor {
+    bool result_ = controlTextEditingDelegate_Control_TextShouldEndEditing([self goID], control, fieldEditor);
+    return result_;
+}
+
+- (BOOL)control:(NSControl*)control textView:(NSTextView*)textView doCommandBySelector:(SEL)commandSelector {
+    bool result_ = controlTextEditingDelegate_Control_TextView_DoCommandBySelector([self goID], control, textView, commandSelector);
+    return result_;
+}
+
+- (void)controlTextDidBeginEditing:(NSNotification*)obj {
+    controlTextEditingDelegate_ControlTextDidBeginEditing([self goID], obj);
+}
+
+- (void)controlTextDidChange:(NSNotification*)obj {
+    controlTextEditingDelegate_ControlTextDidChange([self goID], obj);
+}
+
+- (void)controlTextDidEndEditing:(NSNotification*)obj {
+    controlTextEditingDelegate_ControlTextDidEndEditing([self goID], obj);
+}
+
+
+- (BOOL)respondsToSelector:(SEL)aSelector {
+	return ControlTextEditingDelegate_RespondsTo([self goID], aSelector);
+}
+
+- (void)dealloc {
+	deleteAppKitHandle([self goID]);
+	[super dealloc];
+}
+@end
+
+void* WrapControlTextEditingDelegate(uintptr_t goID) {
+    NSControlTextEditingDelegateAdaptor* adaptor = [[NSControlTextEditingDelegateAdaptor alloc] init];
+    adaptor.goID = goID;
+    return adaptor;
 }

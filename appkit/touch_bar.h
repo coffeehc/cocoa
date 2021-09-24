@@ -34,3 +34,5 @@ Array C_NSTouchBar_CustomizationRequiredItemIdentifiers(void* ptr);
 void C_NSTouchBar_SetCustomizationRequiredItemIdentifiers(void* ptr, Array value);
 bool C_NSTouchBar_AutomaticCustomizeTouchBarMenuItemEnabled();
 void C_NSTouchBar_SetAutomaticCustomizeTouchBarMenuItemEnabled(bool value);
+
+void* WrapTouchBarDelegate(uintptr_t goID);

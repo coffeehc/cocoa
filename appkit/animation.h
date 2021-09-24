@@ -39,3 +39,15 @@ void C_NSAnimation_SetCurrentProgress(void* ptr, float value);
 float C_NSAnimation_CurrentValue(void* ptr);
 Array C_NSAnimation_ProgressMarks(void* ptr);
 void C_NSAnimation_SetProgressMarks(void* ptr, Array value);
+
+void* C_ViewAnimation_Alloc();
+
+void* C_NSViewAnimation_InitWithDuration_AnimationCurve(void* ptr, double duration, unsigned int animationCurve);
+void* C_NSViewAnimation_InitWithCoder(void* ptr, void* coder);
+void* C_NSViewAnimation_AllocViewAnimation();
+void* C_NSViewAnimation_Init(void* ptr);
+void* C_NSViewAnimation_NewViewAnimation();
+void* C_NSViewAnimation_Autorelease(void* ptr);
+void* C_NSViewAnimation_Retain(void* ptr);
+
+void* WrapAnimationDelegate(uintptr_t goID);

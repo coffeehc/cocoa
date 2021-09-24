@@ -36,3 +36,5 @@ void* C_NSPathControl_PlaceholderAttributedString(void* ptr);
 void C_NSPathControl_SetPlaceholderAttributedString(void* ptr, void* value);
 void* C_NSPathControl_PlaceholderString(void* ptr);
 void C_NSPathControl_SetPlaceholderString(void* ptr, void* value);
+
+void* WrapPathControlDelegate(uintptr_t goID);

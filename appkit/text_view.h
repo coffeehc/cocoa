@@ -187,3 +187,5 @@ void C_NSTextView_SetUsesAdaptiveColorMappingForDarkAppearance(void* ptr, bool v
 bool C_NSTextView_UsesRolloverButtonForSelection(void* ptr);
 void C_NSTextView_SetUsesRolloverButtonForSelection(void* ptr, bool value);
 bool C_NSTextView_TextView_StronglyReferencesTextStorage();
+
+void* WrapTextViewDelegate(uintptr_t goID);

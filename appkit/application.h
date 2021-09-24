@@ -111,3 +111,5 @@ void* C_NSApplication_WindowsMenu(void* ptr);
 void C_NSApplication_SetWindowsMenu(void* ptr, void* value);
 void* C_NSApplication_ServicesMenu(void* ptr);
 void C_NSApplication_SetServicesMenu(void* ptr, void* value);
+
+void* WrapApplicationDelegate(uintptr_t goID);

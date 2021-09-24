@@ -57,3 +57,5 @@ CGPoint C_NSViewController_PreferredScreenOrigin(void* ptr);
 void C_NSViewController_SetPreferredScreenOrigin(void* ptr, CGPoint value);
 CGSize C_NSViewController_PreferredMaximumSize(void* ptr);
 CGSize C_NSViewController_PreferredMinimumSize(void* ptr);
+
+void* WrapViewControllerPresentationAnimator(uintptr_t goID);

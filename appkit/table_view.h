@@ -146,3 +146,7 @@ void C_NSTableView_SetSortDescriptors(void* ptr, Array value);
 bool C_NSTableView_RowActionsVisible(void* ptr);
 void C_NSTableView_SetRowActionsVisible(void* ptr, bool value);
 void* C_NSTableView_HiddenRowIndexes(void* ptr);
+
+void* WrapTableViewDelegate(uintptr_t goID);
+
+void* WrapTableViewDataSource(uintptr_t goID);

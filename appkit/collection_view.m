@@ -2,6 +2,7 @@
 #import <AppKit/NSCollectionView.h>
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDictionary.h>
+#import <_cgo_export.h>
 
 void* C_CollectionView_Alloc() {
     return [NSCollectionView alloc];
@@ -429,4 +430,255 @@ void* C_NSCollectionView_SelectionIndexes(void* ptr) {
 void C_NSCollectionView_SetSelectionIndexes(void* ptr, void* value) {
     NSCollectionView* nSCollectionView = (NSCollectionView*)ptr;
     [nSCollectionView setSelectionIndexes:(NSIndexSet*)value];
+}
+
+void* C_CollectionViewItem_Alloc() {
+    return [NSCollectionViewItem alloc];
+}
+
+void* C_NSCollectionViewItem_InitWithNibName_Bundle(void* ptr, void* nibNameOrNil, void* nibBundleOrNil) {
+    NSCollectionViewItem* nSCollectionViewItem = (NSCollectionViewItem*)ptr;
+    NSCollectionViewItem* result_ = [nSCollectionViewItem initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil];
+    return result_;
+}
+
+void* C_NSCollectionViewItem_InitWithCoder(void* ptr, void* coder) {
+    NSCollectionViewItem* nSCollectionViewItem = (NSCollectionViewItem*)ptr;
+    NSCollectionViewItem* result_ = [nSCollectionViewItem initWithCoder:(NSCoder*)coder];
+    return result_;
+}
+
+void* C_NSCollectionViewItem_Init(void* ptr) {
+    NSCollectionViewItem* nSCollectionViewItem = (NSCollectionViewItem*)ptr;
+    NSCollectionViewItem* result_ = [nSCollectionViewItem init];
+    return result_;
+}
+
+void* C_NSCollectionViewItem_AllocCollectionViewItem() {
+    NSCollectionViewItem* result_ = [NSCollectionViewItem alloc];
+    return result_;
+}
+
+void* C_NSCollectionViewItem_NewCollectionViewItem() {
+    NSCollectionViewItem* result_ = [NSCollectionViewItem new];
+    return result_;
+}
+
+void* C_NSCollectionViewItem_Autorelease(void* ptr) {
+    NSCollectionViewItem* nSCollectionViewItem = (NSCollectionViewItem*)ptr;
+    NSCollectionViewItem* result_ = [nSCollectionViewItem autorelease];
+    return result_;
+}
+
+void* C_NSCollectionViewItem_Retain(void* ptr) {
+    NSCollectionViewItem* nSCollectionViewItem = (NSCollectionViewItem*)ptr;
+    NSCollectionViewItem* result_ = [nSCollectionViewItem retain];
+    return result_;
+}
+
+bool C_NSCollectionViewItem_IsSelected(void* ptr) {
+    NSCollectionViewItem* nSCollectionViewItem = (NSCollectionViewItem*)ptr;
+    BOOL result_ = [nSCollectionViewItem isSelected];
+    return result_;
+}
+
+void C_NSCollectionViewItem_SetSelected(void* ptr, bool value) {
+    NSCollectionViewItem* nSCollectionViewItem = (NSCollectionViewItem*)ptr;
+    [nSCollectionViewItem setSelected:value];
+}
+
+int C_NSCollectionViewItem_HighlightState(void* ptr) {
+    NSCollectionViewItem* nSCollectionViewItem = (NSCollectionViewItem*)ptr;
+    NSCollectionViewItemHighlightState result_ = [nSCollectionViewItem highlightState];
+    return result_;
+}
+
+void C_NSCollectionViewItem_SetHighlightState(void* ptr, int value) {
+    NSCollectionViewItem* nSCollectionViewItem = (NSCollectionViewItem*)ptr;
+    [nSCollectionViewItem setHighlightState:value];
+}
+
+void* C_NSCollectionViewItem_CollectionView(void* ptr) {
+    NSCollectionViewItem* nSCollectionViewItem = (NSCollectionViewItem*)ptr;
+    NSCollectionView* result_ = [nSCollectionViewItem collectionView];
+    return result_;
+}
+
+Array C_NSCollectionViewItem_DraggingImageComponents(void* ptr) {
+    NSCollectionViewItem* nSCollectionViewItem = (NSCollectionViewItem*)ptr;
+    NSArray* result_ = [nSCollectionViewItem draggingImageComponents];
+    Array result_Array;
+    int result_count = [result_ count];
+    if (result_count > 0) {
+    	void** result_Data = malloc(result_count * sizeof(void*));
+    	for (int i = 0; i < result_count; i++) {
+    		 void* p = [result_ objectAtIndex:i];
+    		 result_Data[i] = p;
+    	}
+    	result_Array.data = result_Data;
+    	result_Array.len = result_count;
+    }
+    return result_Array;
+}
+
+@interface NSCollectionViewDataSourceAdaptor : NSObject <NSCollectionViewDataSource>
+@property (assign) uintptr_t goID;
+@end
+
+@implementation NSCollectionViewDataSourceAdaptor
+
+
+- (NSInteger)numberOfSectionsInCollectionView:(NSCollectionView*)collectionView {
+    int result_ = collectionViewDataSource_NumberOfSectionsInCollectionView([self goID], collectionView);
+    return result_;
+}
+
+- (NSInteger)collectionView:(NSCollectionView*)collectionView numberOfItemsInSection:(NSInteger)section {
+    int result_ = collectionViewDataSource_CollectionView_NumberOfItemsInSection([self goID], collectionView, section);
+    return result_;
+}
+
+- (NSCollectionViewItem*)collectionView:(NSCollectionView*)collectionView itemForRepresentedObjectAtIndexPath:(NSIndexPath*)indexPath {
+    void* result_ = collectionViewDataSource_CollectionView_ItemForRepresentedObjectAtIndexPath([self goID], collectionView, indexPath);
+    return (NSCollectionViewItem*)result_;
+}
+
+- (NSView*)collectionView:(NSCollectionView*)collectionView viewForSupplementaryElementOfKind:(NSCollectionViewSupplementaryElementKind)kind atIndexPath:(NSIndexPath*)indexPath {
+    void* result_ = collectionViewDataSource_CollectionView_ViewForSupplementaryElementOfKind_AtIndexPath([self goID], collectionView, kind, indexPath);
+    return (NSView*)result_;
+}
+
+
+- (BOOL)respondsToSelector:(SEL)aSelector {
+	return CollectionViewDataSource_RespondsTo([self goID], aSelector);
+}
+
+- (void)dealloc {
+	deleteAppKitHandle([self goID]);
+	[super dealloc];
+}
+@end
+
+void* WrapCollectionViewDataSource(uintptr_t goID) {
+    NSCollectionViewDataSourceAdaptor* adaptor = [[NSCollectionViewDataSourceAdaptor alloc] init];
+    adaptor.goID = goID;
+    return adaptor;
+}
+
+@interface NSCollectionViewDelegateAdaptor : NSObject <NSCollectionViewDelegate>
+@property (assign) uintptr_t goID;
+@end
+
+@implementation NSCollectionViewDelegateAdaptor
+
+
+- (NSSet*)collectionView:(NSCollectionView*)collectionView shouldSelectItemsAtIndexPaths:(NSSet*)indexPaths {
+    void* result_ = collectionViewDelegate_CollectionView_ShouldSelectItemsAtIndexPaths([self goID], collectionView, indexPaths);
+    return (NSSet*)result_;
+}
+
+- (void)collectionView:(NSCollectionView*)collectionView didSelectItemsAtIndexPaths:(NSSet*)indexPaths {
+    collectionViewDelegate_CollectionView_DidSelectItemsAtIndexPaths([self goID], collectionView, indexPaths);
+}
+
+- (NSSet*)collectionView:(NSCollectionView*)collectionView shouldDeselectItemsAtIndexPaths:(NSSet*)indexPaths {
+    void* result_ = collectionViewDelegate_CollectionView_ShouldDeselectItemsAtIndexPaths([self goID], collectionView, indexPaths);
+    return (NSSet*)result_;
+}
+
+- (void)collectionView:(NSCollectionView*)collectionView didDeselectItemsAtIndexPaths:(NSSet*)indexPaths {
+    collectionViewDelegate_CollectionView_DidDeselectItemsAtIndexPaths([self goID], collectionView, indexPaths);
+}
+
+- (NSSet*)collectionView:(NSCollectionView*)collectionView shouldChangeItemsAtIndexPaths:(NSSet*)indexPaths toHighlightState:(NSCollectionViewItemHighlightState)highlightState {
+    void* result_ = collectionViewDelegate_CollectionView_ShouldChangeItemsAtIndexPaths_ToHighlightState([self goID], collectionView, indexPaths, highlightState);
+    return (NSSet*)result_;
+}
+
+- (void)collectionView:(NSCollectionView*)collectionView didChangeItemsAtIndexPaths:(NSSet*)indexPaths toHighlightState:(NSCollectionViewItemHighlightState)highlightState {
+    collectionViewDelegate_CollectionView_DidChangeItemsAtIndexPaths_ToHighlightState([self goID], collectionView, indexPaths, highlightState);
+}
+
+- (void)collectionView:(NSCollectionView*)collectionView willDisplayItem:(NSCollectionViewItem*)item forRepresentedObjectAtIndexPath:(NSIndexPath*)indexPath {
+    collectionViewDelegate_CollectionView_WillDisplayItem_ForRepresentedObjectAtIndexPath([self goID], collectionView, item, indexPath);
+}
+
+- (void)collectionView:(NSCollectionView*)collectionView didEndDisplayingItem:(NSCollectionViewItem*)item forRepresentedObjectAtIndexPath:(NSIndexPath*)indexPath {
+    collectionViewDelegate_CollectionView_DidEndDisplayingItem_ForRepresentedObjectAtIndexPath([self goID], collectionView, item, indexPath);
+}
+
+- (void)collectionView:(NSCollectionView*)collectionView willDisplaySupplementaryView:(NSView*)view forElementKind:(NSCollectionViewSupplementaryElementKind)elementKind atIndexPath:(NSIndexPath*)indexPath {
+    collectionViewDelegate_CollectionView_WillDisplaySupplementaryView_ForElementKind_AtIndexPath([self goID], collectionView, view, elementKind, indexPath);
+}
+
+- (void)collectionView:(NSCollectionView*)collectionView didEndDisplayingSupplementaryView:(NSView*)view forElementOfKind:(NSCollectionViewSupplementaryElementKind)elementKind atIndexPath:(NSIndexPath*)indexPath {
+    collectionViewDelegate_CollectionView_DidEndDisplayingSupplementaryView_ForElementOfKind_AtIndexPath([self goID], collectionView, view, elementKind, indexPath);
+}
+
+- (NSCollectionViewTransitionLayout*)collectionView:(NSCollectionView*)collectionView transitionLayoutForOldLayout:(NSCollectionViewLayout*)fromLayout newLayout:(NSCollectionViewLayout*)toLayout {
+    void* result_ = collectionViewDelegate_CollectionView_TransitionLayoutForOldLayout_NewLayout([self goID], collectionView, fromLayout, toLayout);
+    return (NSCollectionViewTransitionLayout*)result_;
+}
+
+- (BOOL)collectionView:(NSCollectionView*)collectionView canDragItemsAtIndexPaths:(NSSet*)indexPaths withEvent:(NSEvent*)event {
+    bool result_ = collectionViewDelegate_CollectionView_CanDragItemsAtIndexPaths_WithEvent([self goID], collectionView, indexPaths, event);
+    return result_;
+}
+
+- (id)collectionView:(NSCollectionView*)collectionView pasteboardWriterForItemAtIndexPath:(NSIndexPath*)indexPath {
+    void* result_ = collectionViewDelegate_CollectionView_PasteboardWriterForItemAtIndexPath([self goID], collectionView, indexPath);
+    return (id)result_;
+}
+
+- (void)collectionView:(NSCollectionView*)collectionView draggingSession:(NSDraggingSession*)session willBeginAtPoint:(NSPoint)screenPoint forItemsAtIndexPaths:(NSSet*)indexPaths {
+    collectionViewDelegate_CollectionView_DraggingSession_WillBeginAtPoint_ForItemsAtIndexPaths([self goID], collectionView, session, screenPoint, indexPaths);
+}
+
+- (void)collectionView:(NSCollectionView*)collectionView draggingSession:(NSDraggingSession*)session endedAtPoint:(NSPoint)screenPoint dragOperation:(NSDragOperation)operation {
+    collectionViewDelegate_CollectionView_DraggingSession_EndedAtPoint_DragOperation([self goID], collectionView, session, screenPoint, operation);
+}
+
+- (void)collectionView:(NSCollectionView*)collectionView updateDraggingItemsForDrag:(id)draggingInfo {
+    collectionViewDelegate_CollectionView_UpdateDraggingItemsForDrag([self goID], collectionView, draggingInfo);
+}
+
+- (BOOL)collectionView:(NSCollectionView*)collectionView acceptDrop:(id)draggingInfo indexPath:(NSIndexPath*)indexPath dropOperation:(NSCollectionViewDropOperation)dropOperation {
+    bool result_ = collectionViewDelegate_CollectionView_AcceptDrop_IndexPath_DropOperation([self goID], collectionView, draggingInfo, indexPath, dropOperation);
+    return result_;
+}
+
+- (BOOL)collectionView:(NSCollectionView*)collectionView canDragItemsAtIndexes:(NSIndexSet*)indexes withEvent:(NSEvent*)event {
+    bool result_ = collectionViewDelegate_CollectionView_CanDragItemsAtIndexes_WithEvent([self goID], collectionView, indexes, event);
+    return result_;
+}
+
+- (id)collectionView:(NSCollectionView*)collectionView pasteboardWriterForItemAtIndex:(NSUInteger)index {
+    void* result_ = collectionViewDelegate_CollectionView_PasteboardWriterForItemAtIndex([self goID], collectionView, index);
+    return (id)result_;
+}
+
+- (void)collectionView:(NSCollectionView*)collectionView draggingSession:(NSDraggingSession*)session willBeginAtPoint:(NSPoint)screenPoint forItemsAtIndexes:(NSIndexSet*)indexes {
+    collectionViewDelegate_CollectionView_DraggingSession_WillBeginAtPoint_ForItemsAtIndexes([self goID], collectionView, session, screenPoint, indexes);
+}
+
+- (BOOL)collectionView:(NSCollectionView*)collectionView acceptDrop:(id)draggingInfo index:(NSInteger)index dropOperation:(NSCollectionViewDropOperation)dropOperation {
+    bool result_ = collectionViewDelegate_CollectionView_AcceptDrop_Index_DropOperation([self goID], collectionView, draggingInfo, index, dropOperation);
+    return result_;
+}
+
+
+- (BOOL)respondsToSelector:(SEL)aSelector {
+	return CollectionViewDelegate_RespondsTo([self goID], aSelector);
+}
+
+- (void)dealloc {
+	deleteAppKitHandle([self goID]);
+	[super dealloc];
+}
+@end
+
+void* WrapCollectionViewDelegate(uintptr_t goID) {
+    NSCollectionViewDelegateAdaptor* adaptor = [[NSCollectionViewDelegateAdaptor alloc] init];
+    adaptor.goID = goID;
+    return adaptor;
 }
