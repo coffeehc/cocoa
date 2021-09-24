@@ -1,7 +1,7 @@
 #import "table_column.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSTableColumn.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_TableColumn_Alloc() {
     return [NSTableColumn alloc];

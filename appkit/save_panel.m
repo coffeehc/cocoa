@@ -1,7 +1,7 @@
 #import "save_panel.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSSavePanel.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_SavePanel_Alloc() {
     return [NSSavePanel alloc];

@@ -1,7 +1,7 @@
 #import "outline_view.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSOutlineView.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_OutlineView_Alloc() {
     return [NSOutlineView alloc];

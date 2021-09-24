@@ -1,6 +1,6 @@
 #import "extension_context.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSExtensionContext.h>
 
 void* C_ExtensionContext_Alloc() {

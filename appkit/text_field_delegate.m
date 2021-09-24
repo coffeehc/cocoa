@@ -1,6 +1,8 @@
 #import "text_field_delegate.h"
-#import "_cgo_export.h"
 #import <AppKit/NSTextField.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
+#import <_cgo_export.h>
 
 @interface NSTextFieldDelegateAdaptor : NSObject <NSTextFieldDelegate>
 @property (assign) uintptr_t goID;

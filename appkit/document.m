@@ -1,9 +1,9 @@
 #import "document.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSDocument.h>
-#import <AppKit/NSWindowRestoration.h>
 #import <AppKit/NSDocumentScripting.h>
+#import <AppKit/NSWindowRestoration.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_Document_Alloc() {
     return [NSDocument alloc];

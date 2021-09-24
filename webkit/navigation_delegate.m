@@ -1,6 +1,8 @@
 #import "navigation_delegate.h"
-#import "_cgo_export.h"
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <WebKit/WKNavigationDelegate.h>
+#import <_cgo_export.h>
 
 @interface WKNavigationDelegateAdaptor : NSObject <WKNavigationDelegate>
 @property (assign) uintptr_t goID;

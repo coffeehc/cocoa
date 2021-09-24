@@ -1,6 +1,7 @@
 #import "affine_transform.h"
-#import <Foundation/NSDictionary.h>
+#import <Foundation/NSAffineTransform.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_AffineTransform_Alloc() {
     return [NSAffineTransform alloc];

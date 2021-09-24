@@ -1,7 +1,7 @@
 #import "text_container.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSTextContainer.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_TextContainer_Alloc() {
     return [NSTextContainer alloc];

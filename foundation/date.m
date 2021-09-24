@@ -1,7 +1,7 @@
 #import "date.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDate.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_Date_Alloc() {
     return [NSDate alloc];

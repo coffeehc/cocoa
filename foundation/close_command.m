@@ -1,6 +1,6 @@
 #import "close_command.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSScriptStandardSuiteCommands.h>
 
 void* C_CloseCommand_Alloc() {

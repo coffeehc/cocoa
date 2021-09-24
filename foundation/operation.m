@@ -1,6 +1,6 @@
 #import "operation.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSOperation.h>
 
 void* C_Operation_Alloc() {

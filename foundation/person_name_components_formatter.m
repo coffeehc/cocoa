@@ -1,6 +1,6 @@
 #import "person_name_components_formatter.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSPersonNameComponentsFormatter.h>
 
 void* C_PersonNameComponentsFormatter_Alloc() {

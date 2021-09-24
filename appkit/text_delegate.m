@@ -1,6 +1,8 @@
 #import "text_delegate.h"
-#import "_cgo_export.h"
 #import <AppKit/NSText.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
+#import <_cgo_export.h>
 
 @interface NSTextDelegateAdaptor : NSObject <NSTextDelegate>
 @property (assign) uintptr_t goID;

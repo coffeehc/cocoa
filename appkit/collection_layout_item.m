@@ -1,6 +1,7 @@
 #import "collection_layout_item.h"
-#import <Foundation/NSDictionary.h>
+#import <AppKit/NSCollectionViewCompositionalLayout.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_CollectionLayoutItem_Alloc() {
     return [NSCollectionLayoutItem alloc];

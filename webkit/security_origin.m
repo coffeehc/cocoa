@@ -1,6 +1,6 @@
 #import "security_origin.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <WebKit/WKSecurityOrigin.h>
 
 void* C_SecurityOrigin_Alloc() {

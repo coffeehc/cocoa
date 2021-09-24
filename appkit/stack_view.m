@@ -1,7 +1,7 @@
 #import "stack_view.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSStackView.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_StackView_Alloc() {
     return [NSStackView alloc];

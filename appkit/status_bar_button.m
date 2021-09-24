@@ -1,7 +1,7 @@
 #import "status_bar_button.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSStatusBarButton.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_StatusBarButton_Alloc() {
     return [NSStatusBarButton alloc];

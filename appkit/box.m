@@ -1,7 +1,7 @@
 #import "box.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSBox.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_Box_Alloc() {
     return [NSBox alloc];

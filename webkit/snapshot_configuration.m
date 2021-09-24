@@ -1,6 +1,6 @@
 #import "snapshot_configuration.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <WebKit/WKSnapshotConfiguration.h>
 
 void* C_SnapshotConfiguration_Alloc() {

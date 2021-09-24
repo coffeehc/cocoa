@@ -1,6 +1,6 @@
 #import "index_set.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSIndexSet.h>
 
 void* C_IndexSet_Alloc() {

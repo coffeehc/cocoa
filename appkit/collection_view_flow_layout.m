@@ -1,7 +1,7 @@
 #import "collection_view_flow_layout.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSCollectionViewFlowLayout.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_CollectionViewFlowLayout_Alloc() {
     return [NSCollectionViewFlowLayout alloc];

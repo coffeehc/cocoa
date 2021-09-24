@@ -1,7 +1,7 @@
 #import "text_list.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSTextList.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_TextList_Alloc() {
     return [NSTextList alloc];

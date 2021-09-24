@@ -1,7 +1,7 @@
 #import "collection_layout_spacing.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSCollectionViewCompositionalLayout.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_CollectionLayoutSpacing_Alloc() {
     return [NSCollectionLayoutSpacing alloc];

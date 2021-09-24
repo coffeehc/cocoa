@@ -1,7 +1,7 @@
 #import "titlebar_accessory_view_controller.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSTitlebarAccessoryViewController.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_TitlebarAccessoryViewController_Alloc() {
     return [NSTitlebarAccessoryViewController alloc];

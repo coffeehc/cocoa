@@ -1,6 +1,6 @@
 #import "navigation_action.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <WebKit/WKNavigationAction.h>
 
 void* C_NavigationAction_Alloc() {

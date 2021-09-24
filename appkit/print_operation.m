@@ -1,7 +1,7 @@
 #import "print_operation.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSPrintOperation.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_PrintOperation_Alloc() {
     return [NSPrintOperation alloc];

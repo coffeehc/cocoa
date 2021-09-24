@@ -1,7 +1,7 @@
 #import "byte_count_formatter.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
 #import <Foundation/NSByteCountFormatter.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_ByteCountFormatter_Alloc() {
     return [NSByteCountFormatter alloc];

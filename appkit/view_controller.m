@@ -1,7 +1,7 @@
 #import "view_controller.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSViewController.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_ViewController_Alloc() {
     return [NSViewController alloc];

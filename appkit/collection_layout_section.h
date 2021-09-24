@@ -1,9 +1,10 @@
-#import <stdbool.h>
-#import <stdlib.h>
-#import <utils.h>
+#import <AppKit/NSCollectionViewCompositionalLayout.h>
 #import <Foundation/NSGeometry.h>
 #import <Foundation/NSRange.h>
-#import <AppKit/NSCollectionViewCompositionalLayout.h>
+#import <stdbool.h>
+#import <stdint.h>
+#import <stdlib.h>
+#import <utils.h>
 
 void* C_CollectionLayoutSection_Alloc();
 

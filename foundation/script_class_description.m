@@ -1,6 +1,6 @@
 #import "script_class_description.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSScriptClassDescription.h>
 
 void* C_ScriptClassDescription_Alloc() {

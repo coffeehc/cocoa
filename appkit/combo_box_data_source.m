@@ -1,6 +1,8 @@
 #import "combo_box_data_source.h"
-#import "_cgo_export.h"
 #import <AppKit/NSComboBox.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
+#import <_cgo_export.h>
 
 @interface NSComboBoxDataSourceAdaptor : NSObject <NSComboBoxDataSource>
 @property (assign) uintptr_t goID;

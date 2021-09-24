@@ -1,7 +1,7 @@
 #import "collection_view_diffable_data_source.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSDiffableDataSource.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_CollectionViewDiffableDataSource_Alloc() {
     return [NSCollectionViewDiffableDataSource alloc];

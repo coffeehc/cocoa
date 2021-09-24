@@ -1,6 +1,6 @@
 #import "script_command_description.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSScriptCommandDescription.h>
 
 void* C_ScriptCommandDescription_Alloc() {

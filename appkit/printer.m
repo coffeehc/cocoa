@@ -1,7 +1,7 @@
 #import "printer.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSPrinter.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_Printer_Alloc() {
     return [NSPrinter alloc];

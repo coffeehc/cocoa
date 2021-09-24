@@ -1,6 +1,6 @@
 #import "index_path.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSIndexPath.h>
 
 void* C_IndexPath_Alloc() {

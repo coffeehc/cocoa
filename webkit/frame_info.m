@@ -1,6 +1,6 @@
 #import "frame_info.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <WebKit/WKFrameInfo.h>
 
 void* C_FrameInfo_Alloc() {

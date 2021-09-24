@@ -1,7 +1,7 @@
 #import "touch_bar.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSTouchBar.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_TouchBar_Alloc() {
     return [NSTouchBar alloc];

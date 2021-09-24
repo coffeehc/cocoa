@@ -1,6 +1,6 @@
 #import "text_checking_result.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSTextCheckingResult.h>
 
 void* C_TextCheckingResult_Alloc() {

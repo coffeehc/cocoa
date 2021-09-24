@@ -1,10 +1,10 @@
 #import "window.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
-#import <AppKit/NSWindow.h>
-#import <AppKit/NSWindowScripting.h>
 #import <AppKit/NSLayoutConstraint.h>
+#import <AppKit/NSWindow.h>
 #import <AppKit/NSWindowRestoration.h>
+#import <AppKit/NSWindowScripting.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_Window_Alloc() {
     return [NSWindow alloc];

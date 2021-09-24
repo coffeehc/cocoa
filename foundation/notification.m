@@ -1,6 +1,6 @@
 #import "notification.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSNotification.h>
 
 void* C_Notification_Alloc() {

@@ -1,8 +1,8 @@
 #import "control.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSControl.h>
 #import <AppKit/NSLayoutConstraint.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_Control_Alloc() {
     return [NSControl alloc];

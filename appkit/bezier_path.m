@@ -1,7 +1,7 @@
 #import "bezier_path.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSBezierPath.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_BezierPath_Alloc() {
     return [NSBezierPath alloc];

@@ -1,7 +1,7 @@
 #import "paragraph_style.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSParagraphStyle.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_ParagraphStyle_Alloc() {
     return [NSParagraphStyle alloc];

@@ -1,7 +1,7 @@
 #import "window_tab.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSWindowTab.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_WindowTab_Alloc() {
     return [NSWindowTab alloc];

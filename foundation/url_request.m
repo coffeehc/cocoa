@@ -1,6 +1,6 @@
 #import "url_request.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSURLRequest.h>
 
 void* C_URLRequest_Alloc() {

@@ -1,6 +1,6 @@
 #import "predicate.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSPredicate.h>
 
 void* C_Predicate_Alloc() {

@@ -1,7 +1,7 @@
 #import "font_descriptor.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSFontDescriptor.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_FontDescriptor_Alloc() {
     return [NSFontDescriptor alloc];

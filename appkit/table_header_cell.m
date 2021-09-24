@@ -1,7 +1,7 @@
 #import "table_header_cell.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSTableHeaderCell.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_TableHeaderCell_Alloc() {
     return [NSTableHeaderCell alloc];

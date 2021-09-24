@@ -1,7 +1,7 @@
 #import "gesture_recognizer.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSGestureRecognizer.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_GestureRecognizer_Alloc() {
     return [NSGestureRecognizer alloc];

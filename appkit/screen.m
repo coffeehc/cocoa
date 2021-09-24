@@ -1,7 +1,7 @@
 #import "screen.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSScreen.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_Screen_Alloc() {
     return [NSScreen alloc];

@@ -1,7 +1,7 @@
 #import "split_view.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSSplitView.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_SplitView_Alloc() {
     return [NSSplitView alloc];

@@ -1,7 +1,7 @@
 #import "toolbar.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSToolbar.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_Toolbar_Alloc() {
     return [NSToolbar alloc];

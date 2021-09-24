@@ -1,7 +1,7 @@
 #import "color.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSColor.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_Color_Alloc() {
     return [NSColor alloc];

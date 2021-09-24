@@ -1,6 +1,8 @@
 #import "view_controller_presentation_animator.h"
-#import "_cgo_export.h"
 #import <AppKit/NSViewController.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
+#import <_cgo_export.h>
 
 @interface NSViewControllerPresentationAnimatorAdaptor : NSObject <NSViewControllerPresentationAnimator>
 @property (assign) uintptr_t goID;

@@ -1,7 +1,7 @@
 #import "grid_view.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSGridView.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_GridView_Alloc() {
     return [NSGridView alloc];

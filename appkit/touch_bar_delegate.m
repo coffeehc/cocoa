@@ -1,6 +1,8 @@
 #import "touch_bar_delegate.h"
-#import "_cgo_export.h"
 #import <AppKit/NSTouchBar.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
+#import <_cgo_export.h>
 
 @interface NSTouchBarDelegateAdaptor : NSObject <NSTouchBarDelegate>
 @property (assign) uintptr_t goID;

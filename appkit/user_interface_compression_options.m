@@ -1,7 +1,7 @@
 #import "user_interface_compression_options.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSUserInterfaceCompression.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_UserInterfaceCompressionOptions_Alloc() {
     return [NSUserInterfaceCompressionOptions alloc];

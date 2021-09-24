@@ -1,7 +1,7 @@
 #import "decimal_number_handler.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDecimalNumber.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_DecimalNumberHandler_Alloc() {
     return [NSDecimalNumberHandler alloc];

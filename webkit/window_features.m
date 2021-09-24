@@ -1,6 +1,6 @@
 #import "window_features.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <WebKit/WKWindowFeatures.h>
 
 void* C_WindowFeatures_Alloc() {

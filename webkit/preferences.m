@@ -1,6 +1,6 @@
 #import "preferences.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <WebKit/WKPreferences.h>
 
 void* C_Preferences_Alloc() {

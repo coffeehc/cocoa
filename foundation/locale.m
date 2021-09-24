@@ -1,6 +1,6 @@
 #import "locale.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSLocale.h>
 
 void* C_Locale_Alloc() {

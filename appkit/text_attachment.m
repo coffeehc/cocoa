@@ -1,7 +1,7 @@
 #import "text_attachment.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSTextAttachment.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_TextAttachment_Alloc() {
     return [NSTextAttachment alloc];

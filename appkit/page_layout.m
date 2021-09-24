@@ -1,7 +1,7 @@
 #import "page_layout.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSPageLayout.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_PageLayout_Alloc() {
     return [NSPageLayout alloc];

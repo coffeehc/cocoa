@@ -1,7 +1,7 @@
 #import "pasteboard_item.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSPasteboardItem.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_PasteboardItem_Alloc() {
     return [NSPasteboardItem alloc];

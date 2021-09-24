@@ -1,6 +1,6 @@
 #import "back_forward_list.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <WebKit/WKBackForwardList.h>
 
 void* C_BackForwardList_Alloc() {

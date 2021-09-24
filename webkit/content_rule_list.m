@@ -1,6 +1,6 @@
 #import "content_rule_list.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <WebKit/WKContentRuleList.h>
 
 void* C_ContentRuleList_Alloc() {

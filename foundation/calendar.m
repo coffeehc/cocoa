@@ -1,7 +1,7 @@
 #import "calendar.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
 #import <Foundation/NSCalendar.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_Calendar_Alloc() {
     return [NSCalendar alloc];

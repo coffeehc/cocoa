@@ -1,7 +1,7 @@
 #import "apple_event_descriptor.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <Foundation/NSAppleEventDescriptor.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_AppleEventDescriptor_Alloc() {
     return [NSAppleEventDescriptor alloc];

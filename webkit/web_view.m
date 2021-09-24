@@ -1,6 +1,6 @@
 #import "web_view.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <WebKit/WKWebView.h>
 
 void* C_WebView_Alloc() {

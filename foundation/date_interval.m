@@ -1,7 +1,7 @@
 #import "date_interval.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDateInterval.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_DateInterval_Alloc() {
     return [NSDateInterval alloc];

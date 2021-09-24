@@ -1,9 +1,9 @@
 #import "responder.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSResponder.h>
 #import <AppKit/NSTouchBar.h>
 #import <AppKit/NSWindowRestoration.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_Responder_Alloc() {
     return [NSResponder alloc];

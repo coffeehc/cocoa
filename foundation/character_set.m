@@ -1,7 +1,7 @@
 #import "character_set.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
 #import <Foundation/NSCharacterSet.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSURL.h>
 
 void* C_CharacterSet_Alloc() {

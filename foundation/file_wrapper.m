@@ -1,6 +1,6 @@
 #import "file_wrapper.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSFileWrapper.h>
 
 void* C_FileWrapper_Alloc() {

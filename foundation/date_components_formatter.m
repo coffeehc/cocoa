@@ -1,7 +1,7 @@
 #import "date_components_formatter.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDateComponentsFormatter.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_DateComponentsFormatter_Alloc() {
     return [NSDateComponentsFormatter alloc];

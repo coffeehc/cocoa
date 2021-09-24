@@ -1,7 +1,7 @@
 #import "tracking_area.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSTrackingArea.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_TrackingArea_Alloc() {
     return [NSTrackingArea alloc];

@@ -1,6 +1,6 @@
 #import "error.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSError.h>
 
 void* C_Error_Alloc() {

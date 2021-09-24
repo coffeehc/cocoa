@@ -1,7 +1,7 @@
 #import "controller.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSController.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_Controller_Alloc() {
     return [NSController alloc];

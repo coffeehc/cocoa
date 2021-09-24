@@ -1,7 +1,7 @@
 #import "search_field.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSSearchField.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_SearchField_Alloc() {
     return [NSSearchField alloc];

@@ -1,7 +1,7 @@
 #import "collection_layout_boundary_supplementary_item.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSCollectionViewCompositionalLayout.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_CollectionLayoutBoundarySupplementaryItem_Alloc() {
     return [NSCollectionLayoutBoundarySupplementaryItem alloc];

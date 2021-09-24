@@ -1,7 +1,7 @@
 #import "text_view.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSTextView.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_TextView_Alloc() {
     return [NSTextView alloc];

@@ -1,7 +1,7 @@
 #import "scroller.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSScroller.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_Scroller_Alloc() {
     return [NSScroller alloc];

@@ -1,7 +1,7 @@
 #import "dragging_image_component.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSDraggingItem.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_DraggingImageComponent_Alloc() {
     return [NSDraggingImageComponent alloc];

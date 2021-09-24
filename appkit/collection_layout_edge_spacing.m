@@ -1,7 +1,7 @@
 #import "collection_layout_edge_spacing.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSCollectionViewCompositionalLayout.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_CollectionLayoutEdgeSpacing_Alloc() {
     return [NSCollectionLayoutEdgeSpacing alloc];

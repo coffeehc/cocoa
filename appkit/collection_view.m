@@ -1,7 +1,7 @@
 #import "collection_view.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSCollectionView.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_CollectionView_Alloc() {
     return [NSCollectionView alloc];

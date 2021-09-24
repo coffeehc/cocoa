@@ -1,6 +1,8 @@
 #import "font_changing.h"
-#import "_cgo_export.h"
 #import <AppKit/NSFontPanel.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
+#import <_cgo_export.h>
 
 @interface NSFontChangingAdaptor : NSObject <NSFontChanging>
 @property (assign) uintptr_t goID;

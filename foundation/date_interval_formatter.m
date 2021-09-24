@@ -1,7 +1,7 @@
 #import "date_interval_formatter.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDateIntervalFormatter.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_DateIntervalFormatter_Alloc() {
     return [NSDateIntervalFormatter alloc];

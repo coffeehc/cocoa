@@ -1,6 +1,8 @@
 #import "tab_view_delegate.h"
-#import "_cgo_export.h"
 #import <AppKit/NSTabView.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
+#import <_cgo_export.h>
 
 @interface NSTabViewDelegateAdaptor : NSObject <NSTabViewDelegate>
 @property (assign) uintptr_t goID;

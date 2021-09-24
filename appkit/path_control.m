@@ -1,7 +1,7 @@
 #import "path_control.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSPathControl.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_PathControl_Alloc() {
     return [NSPathControl alloc];

@@ -1,6 +1,8 @@
 #import "animation_delegate.h"
-#import "_cgo_export.h"
 #import <AppKit/NSAnimation.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
+#import <_cgo_export.h>
 
 @interface NSAnimationDelegateAdaptor : NSObject <NSAnimationDelegate>
 @property (assign) uintptr_t goID;

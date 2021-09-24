@@ -1,7 +1,7 @@
 #import "table_header_view.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSTableHeaderView.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_TableHeaderView_Alloc() {
     return [NSTableHeaderView alloc];

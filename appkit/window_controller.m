@@ -1,7 +1,7 @@
 #import "window_controller.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSWindowController.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_WindowController_Alloc() {
     return [NSWindowController alloc];

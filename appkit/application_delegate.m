@@ -1,6 +1,8 @@
 #import "application_delegate.h"
-#import "_cgo_export.h"
 #import <AppKit/NSApplication.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
+#import <_cgo_export.h>
 
 @interface NSApplicationDelegateAdaptor : NSObject <NSApplicationDelegate>
 @property (assign) uintptr_t goID;

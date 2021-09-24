@@ -1,6 +1,6 @@
 #import "number.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSValue.h>
 
 void* C_Number_Alloc() {

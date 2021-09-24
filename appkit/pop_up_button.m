@@ -1,7 +1,7 @@
 #import "pop_up_button.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSPopUpButton.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_PopUpButton_Alloc() {
     return [NSPopUpButton alloc];

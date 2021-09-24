@@ -1,7 +1,7 @@
 #import "stepper.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSStepper.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_Stepper_Alloc() {
     return [NSStepper alloc];

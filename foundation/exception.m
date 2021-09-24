@@ -1,6 +1,6 @@
 #import "exception.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSException.h>
 
 void* C_Exception_Alloc() {

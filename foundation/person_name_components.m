@@ -1,6 +1,6 @@
 #import "person_name_components.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSPersonNameComponents.h>
 
 void* C_PersonNameComponents_Alloc() {

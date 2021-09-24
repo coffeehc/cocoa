@@ -1,6 +1,6 @@
 #import "undo_manager.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSUndoManager.h>
 
 void* C_UndoManager_Alloc() {

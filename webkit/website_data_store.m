@@ -1,6 +1,6 @@
 #import "website_data_store.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <WebKit/WKWebsiteDataStore.h>
 
 void* C_WebsiteDataStore_Alloc() {

@@ -1,7 +1,7 @@
 #import "layout_constraint.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSLayoutConstraint.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_LayoutConstraint_Alloc() {
     return [NSLayoutConstraint alloc];

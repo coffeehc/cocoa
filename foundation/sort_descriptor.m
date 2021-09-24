@@ -1,6 +1,6 @@
 #import "sort_descriptor.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSSortDescriptor.h>
 
 void* C_SortDescriptor_Alloc() {

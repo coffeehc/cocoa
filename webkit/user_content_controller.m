@@ -1,6 +1,6 @@
 #import "user_content_controller.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <WebKit/WKUserContentController.h>
 
 void* C_UserContentController_Alloc() {

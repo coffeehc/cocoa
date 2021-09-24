@@ -1,7 +1,7 @@
 #import "image_symbol_configuration.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSImage.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_ImageSymbolConfiguration_Alloc() {
     return [NSImageSymbolConfiguration alloc];

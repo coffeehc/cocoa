@@ -1,7 +1,7 @@
 #import "pressure_configuration.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSPressureConfiguration.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_PressureConfiguration_Alloc() {
     return [NSPressureConfiguration alloc];

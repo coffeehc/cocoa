@@ -1,6 +1,8 @@
 #import "collection_view_delegate_flow_layout.h"
-#import "_cgo_export.h"
 #import <AppKit/NSCollectionViewFlowLayout.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
+#import <_cgo_export.h>
 
 @interface NSCollectionViewDelegateFlowLayoutAdaptor : NSObject <NSCollectionViewDelegateFlowLayout>
 @property (assign) uintptr_t goID;

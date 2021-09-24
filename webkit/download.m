@@ -1,6 +1,6 @@
 #import "download.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <WebKit/WKDownload.h>
 
 void* C_Download_Alloc() {

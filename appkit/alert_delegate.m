@@ -1,6 +1,8 @@
 #import "alert_delegate.h"
-#import "_cgo_export.h"
 #import <AppKit/NSAlert.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
+#import <_cgo_export.h>
 
 @interface NSAlertDelegateAdaptor : NSObject <NSAlertDelegate>
 @property (assign) uintptr_t goID;

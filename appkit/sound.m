@@ -1,7 +1,7 @@
 #import "sound.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSSound.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_Sound_Alloc() {
     return [NSSound alloc];

@@ -1,7 +1,7 @@
 #import "class_description.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
 #import <Foundation/NSClassDescription.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_ClassDescription_Alloc() {
     return [NSClassDescription alloc];

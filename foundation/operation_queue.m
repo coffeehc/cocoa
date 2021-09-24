@@ -1,6 +1,6 @@
 #import "operation_queue.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSOperation.h>
 
 void* C_OperationQueue_Alloc() {

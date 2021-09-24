@@ -1,6 +1,8 @@
 #import "color_picking_custom.h"
-#import "_cgo_export.h"
 #import <AppKit/NSColorPicking.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
+#import <_cgo_export.h>
 
 @interface NSColorPickingCustomAdaptor : NSObject <NSColorPickingCustom>
 @property (assign) uintptr_t goID;

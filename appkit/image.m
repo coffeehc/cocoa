@@ -1,7 +1,7 @@
 #import "image.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSImage.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_Image_Alloc() {
     return [NSImage alloc];

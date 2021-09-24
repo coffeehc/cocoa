@@ -1,7 +1,7 @@
 #import "nib.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSNib.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_Nib_Alloc() {
     return [NSNib alloc];

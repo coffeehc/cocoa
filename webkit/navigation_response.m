@@ -1,6 +1,6 @@
 #import "navigation_response.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <WebKit/WKNavigationResponse.h>
 
 void* C_NavigationResponse_Alloc() {

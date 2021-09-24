@@ -1,6 +1,8 @@
 #import "spring_loading_destination.h"
-#import "_cgo_export.h"
 #import <AppKit/NSDragging.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
+#import <_cgo_export.h>
 
 @interface NSSpringLoadingDestinationAdaptor : NSObject <NSSpringLoadingDestination>
 @property (assign) uintptr_t goID;

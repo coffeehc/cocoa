@@ -1,7 +1,7 @@
 #import "button_cell.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSButtonCell.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_ButtonCell_Alloc() {
     return [NSButtonCell alloc];

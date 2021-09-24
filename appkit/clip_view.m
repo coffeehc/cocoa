@@ -1,7 +1,7 @@
 #import "clip_view.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSClipView.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_ClipView_Alloc() {
     return [NSClipView alloc];

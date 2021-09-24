@@ -1,6 +1,6 @@
 #import "webpage_preferences.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <WebKit/WKWebpagePreferences.h>
 
 void* C_WebpagePreferences_Alloc() {

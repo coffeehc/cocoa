@@ -1,6 +1,6 @@
 #import "content_world.h"
-#import <Foundation/NSDictionary.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 #import <WebKit/WKContentWorld.h>
 
 void* C_ContentWorld_Alloc() {

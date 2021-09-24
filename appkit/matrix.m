@@ -1,7 +1,7 @@
 #import "matrix.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSMatrix.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_Matrix_Alloc() {
     return [NSMatrix alloc];

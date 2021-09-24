@@ -1,7 +1,7 @@
 #import "scroll_view.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSScrollView.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_ScrollView_Alloc() {
     return [NSScrollView alloc];

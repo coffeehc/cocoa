@@ -1,7 +1,7 @@
 #import "table_view.h"
-#import <Foundation/NSDictionary.h>
-#import <Foundation/NSArray.h>
 #import <AppKit/NSTableView.h>
+#import <Foundation/NSArray.h>
+#import <Foundation/NSDictionary.h>
 
 void* C_TableView_Alloc() {
     return [NSTableView alloc];
