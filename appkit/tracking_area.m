@@ -16,7 +16,7 @@ void* C_NSTrackingArea_InitWithRect_Options_Owner_UserInfo(void* ptr, CGRect rec
     	for (int i = 0; i < userInfo.len; i++) {
     		void* kp = userInfoKeyData[i];
     		void* vp = userInfoValueData[i];
-    		[objcUserInfo setObject:(id)kp forKey:(id)vp];
+    		[objcUserInfo setObject:(id)vp forKey:(id<NSCopying>)(id)kp];
     	}
     }
     NSTrackingArea* result_ = [nSTrackingArea initWithRect:rect options:options owner:(id)owner userInfo:objcUserInfo];

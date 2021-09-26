@@ -15,7 +15,7 @@ void* C_NSError_ErrorWithDomain_Code_UserInfo(void* domain, int code, Dictionary
     	for (int i = 0; i < dict.len; i++) {
     		void* kp = dictKeyData[i];
     		void* vp = dictValueData[i];
-    		[objcDict setObject:(NSString*)kp forKey:(id)vp];
+    		[objcDict setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     NSError* result_ = [NSError errorWithDomain:(NSString*)domain code:code userInfo:objcDict];
@@ -31,7 +31,7 @@ void* C_NSError_InitWithDomain_Code_UserInfo(void* ptr, void* domain, int code, 
     	for (int i = 0; i < dict.len; i++) {
     		void* kp = dictKeyData[i];
     		void* vp = dictValueData[i];
-    		[objcDict setObject:(NSString*)kp forKey:(id)vp];
+    		[objcDict setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     NSError* result_ = [nSError initWithDomain:(NSString*)domain code:code userInfo:objcDict];

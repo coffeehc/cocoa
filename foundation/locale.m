@@ -75,7 +75,7 @@ void* C_NSLocale_LocaleIdentifierFromComponents(Dictionary dict) {
     	for (int i = 0; i < dict.len; i++) {
     		void* kp = dictKeyData[i];
     		void* vp = dictValueData[i];
-    		[objcDict setObject:(NSString*)kp forKey:(NSString*)vp];
+    		[objcDict setObject:(NSString*)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     NSString* result_ = [NSLocale localeIdentifierFromComponents:objcDict];

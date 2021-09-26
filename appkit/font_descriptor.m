@@ -16,7 +16,7 @@ void* C_NSFontDescriptor_InitWithFontAttributes(void* ptr, Dictionary attributes
     	for (int i = 0; i < attributes.len; i++) {
     		void* kp = attributesKeyData[i];
     		void* vp = attributesValueData[i];
-    		[objcAttributes setObject:(NSString*)kp forKey:(id)vp];
+    		[objcAttributes setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     NSFontDescriptor* result_ = [nSFontDescriptor initWithFontAttributes:objcAttributes];
@@ -65,7 +65,7 @@ void* C_NSFontDescriptor_PreferredFontDescriptorForTextStyle_Options(void* style
     	for (int i = 0; i < options.len; i++) {
     		void* kp = optionsKeyData[i];
     		void* vp = optionsValueData[i];
-    		[objcOptions setObject:(NSString*)kp forKey:(id)vp];
+    		[objcOptions setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     NSFontDescriptor* result_ = [NSFontDescriptor preferredFontDescriptorForTextStyle:(NSString*)style options:objcOptions];
@@ -80,7 +80,7 @@ void* C_NSFontDescriptor_FontDescriptorWithFontAttributes(Dictionary attributes)
     	for (int i = 0; i < attributes.len; i++) {
     		void* kp = attributesKeyData[i];
     		void* vp = attributesValueData[i];
-    		[objcAttributes setObject:(NSString*)kp forKey:(id)vp];
+    		[objcAttributes setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     NSFontDescriptor* result_ = [NSFontDescriptor fontDescriptorWithFontAttributes:objcAttributes];
@@ -106,7 +106,7 @@ void* C_NSFontDescriptor_FontDescriptorByAddingAttributes(void* ptr, Dictionary 
     	for (int i = 0; i < attributes.len; i++) {
     		void* kp = attributesKeyData[i];
     		void* vp = attributesValueData[i];
-    		[objcAttributes setObject:(NSString*)kp forKey:(id)vp];
+    		[objcAttributes setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     NSFontDescriptor* result_ = [nSFontDescriptor fontDescriptorByAddingAttributes:objcAttributes];

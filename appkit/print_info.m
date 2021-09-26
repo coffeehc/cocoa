@@ -16,7 +16,7 @@ void* C_NSPrintInfo_InitWithDictionary(void* ptr, Dictionary attributes) {
     	for (int i = 0; i < attributes.len; i++) {
     		void* kp = attributesKeyData[i];
     		void* vp = attributesValueData[i];
-    		[objcAttributes setObject:(NSString*)kp forKey:(id)vp];
+    		[objcAttributes setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     NSPrintInfo* result_ = [nSPrintInfo initWithDictionary:objcAttributes];

@@ -133,7 +133,7 @@ void* C_NSBitmapImageRep_BitmapImageRep_RepresentationOfImageRepsInArray_UsingTy
     	for (int i = 0; i < properties.len; i++) {
     		void* kp = propertiesKeyData[i];
     		void* vp = propertiesValueData[i];
-    		[objcProperties setObject:(NSString*)kp forKey:(id)vp];
+    		[objcProperties setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     NSData* result_ = [NSBitmapImageRep representationOfImageRepsInArray:objcImageReps usingType:storageType properties:objcProperties];
@@ -149,7 +149,7 @@ void* C_NSBitmapImageRep_RepresentationUsingType_Properties(void* ptr, unsigned 
     	for (int i = 0; i < properties.len; i++) {
     		void* kp = propertiesKeyData[i];
     		void* vp = propertiesValueData[i];
-    		[objcProperties setObject:(NSString*)kp forKey:(id)vp];
+    		[objcProperties setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     NSData* result_ = [nSBitmapImageRep representationUsingType:storageType properties:objcProperties];

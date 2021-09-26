@@ -68,7 +68,7 @@ void* C_NSFont_PreferredFontForTextStyle_Options(void* style, Dictionary options
     	for (int i = 0; i < options.len; i++) {
     		void* kp = optionsKeyData[i];
     		void* vp = optionsValueData[i];
-    		[objcOptions setObject:(NSString*)kp forKey:(id)vp];
+    		[objcOptions setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     NSFont* result_ = [NSFont preferredFontForTextStyle:(NSString*)style options:objcOptions];

@@ -65,7 +65,7 @@ void C_NSToolbar_SetConfigurationFromDictionary(void* ptr, Dictionary configDict
     	for (int i = 0; i < configDict.len; i++) {
     		void* kp = configDictKeyData[i];
     		void* vp = configDictValueData[i];
-    		[objcConfigDict setObject:(NSString*)kp forKey:(id)vp];
+    		[objcConfigDict setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     [nSToolbar setConfigurationFromDictionary:objcConfigDict];

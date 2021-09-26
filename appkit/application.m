@@ -317,7 +317,7 @@ void C_NSApplication_OrderFrontStandardAboutPanelWithOptions(void* ptr, Dictiona
     	for (int i = 0; i < optionsDictionary.len; i++) {
     		void* kp = optionsDictionaryKeyData[i];
     		void* vp = optionsDictionaryValueData[i];
-    		[objcOptionsDictionary setObject:(NSString*)kp forKey:(id)vp];
+    		[objcOptionsDictionary setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     [nSApplication orderFrontStandardAboutPanelWithOptions:objcOptionsDictionary];

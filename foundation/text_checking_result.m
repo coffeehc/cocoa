@@ -59,7 +59,7 @@ void* C_NSTextCheckingResult_TextCheckingResult_AddressCheckingResultWithRange_C
     	for (int i = 0; i < components.len; i++) {
     		void* kp = componentsKeyData[i];
     		void* vp = componentsValueData[i];
-    		[objcComponents setObject:(NSString*)kp forKey:(NSString*)vp];
+    		[objcComponents setObject:(NSString*)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     NSTextCheckingResult* result_ = [NSTextCheckingResult addressCheckingResultWithRange:_range components:objcComponents];
@@ -74,7 +74,7 @@ void* C_NSTextCheckingResult_TextCheckingResult_TransitInformationCheckingResult
     	for (int i = 0; i < components.len; i++) {
     		void* kp = componentsKeyData[i];
     		void* vp = componentsValueData[i];
-    		[objcComponents setObject:(NSString*)kp forKey:(NSString*)vp];
+    		[objcComponents setObject:(NSString*)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     NSTextCheckingResult* result_ = [NSTextCheckingResult transitInformationCheckingResultWithRange:_range components:objcComponents];

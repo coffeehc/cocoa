@@ -160,7 +160,7 @@ void* C_NSImage_BestRepresentationForRect_Context_Hints(void* ptr, CGRect rect, 
     	for (int i = 0; i < hints.len; i++) {
     		void* kp = hintsKeyData[i];
     		void* vp = hintsValueData[i];
-    		[objcHints setObject:(NSString*)kp forKey:(id)vp];
+    		[objcHints setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     NSImageRep* result_ = [nSImage bestRepresentationForRect:rect context:(NSGraphicsContext*)referenceContext hints:objcHints];
@@ -191,7 +191,7 @@ void C_NSImage_DrawInRect_FromRect_Operation_Fraction_RespectFlipped_Hints(void*
     	for (int i = 0; i < hints.len; i++) {
     		void* kp = hintsKeyData[i];
     		void* vp = hintsValueData[i];
-    		[objcHints setObject:(NSString*)kp forKey:(id)vp];
+    		[objcHints setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     [nSImage drawInRect:dstSpacePortionRect fromRect:srcSpacePortionRect operation:op fraction:requestedAlpha respectFlipped:respectContextIsFlipped hints:objcHints];
@@ -243,7 +243,7 @@ bool C_NSImage_HitTestRect_WithImageDestinationRect_Context_Hints_Flipped(void* 
     	for (int i = 0; i < hints.len; i++) {
     		void* kp = hintsKeyData[i];
     		void* vp = hintsValueData[i];
-    		[objcHints setObject:(NSString*)kp forKey:(id)vp];
+    		[objcHints setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     BOOL result_ = [nSImage hitTestRect:testRectDestSpace withImageDestinationRect:imageRectDestSpace context:(NSGraphicsContext*)context hints:objcHints flipped:flipped];

@@ -117,7 +117,7 @@ void C_NSScriptCommand_SetArguments(void* ptr, Dictionary value) {
     	for (int i = 0; i < value.len; i++) {
     		void* kp = valueKeyData[i];
     		void* vp = valueValueData[i];
-    		[objcValue setObject:(NSString*)kp forKey:(id)vp];
+    		[objcValue setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     [nSScriptCommand setArguments:objcValue];

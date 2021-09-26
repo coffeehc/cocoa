@@ -16,7 +16,7 @@ void* C_NSPredicate_PredicateWithSubstitutionVariables(void* ptr, Dictionary var
     	for (int i = 0; i < variables.len; i++) {
     		void* kp = variablesKeyData[i];
     		void* vp = variablesValueData[i];
-    		[objcVariables setObject:(NSString*)kp forKey:(id)vp];
+    		[objcVariables setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     NSPredicate* result_ = [nSPredicate predicateWithSubstitutionVariables:objcVariables];
@@ -89,7 +89,7 @@ bool C_NSPredicate_EvaluateWithObject_SubstitutionVariables(void* ptr, void* obj
     	for (int i = 0; i < bindings.len; i++) {
     		void* kp = bindingsKeyData[i];
     		void* vp = bindingsValueData[i];
-    		[objcBindings setObject:(NSString*)kp forKey:(id)vp];
+    		[objcBindings setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     BOOL result_ = [nSPredicate evaluateWithObject:(id)object substitutionVariables:objcBindings];

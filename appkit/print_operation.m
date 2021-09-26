@@ -36,12 +36,12 @@ void* C_NSPrintOperation_Retain(void* ptr) {
 }
 
 void* C_NSPrintOperation_PrintOperation_EPSOperationWithView_InsideRect_ToData(void* view, CGRect rect, void* data) {
-    NSPrintOperation* result_ = [NSPrintOperation EPSOperationWithView:(NSView*)view insideRect:rect toData:(NSData*)data];
+    NSPrintOperation* result_ = [NSPrintOperation EPSOperationWithView:(NSView*)view insideRect:rect toData:(NSMutableData*)data];
     return result_;
 }
 
 void* C_NSPrintOperation_PrintOperation_EPSOperationWithView_InsideRect_ToData_PrintInfo(void* view, CGRect rect, void* data, void* printInfo) {
-    NSPrintOperation* result_ = [NSPrintOperation EPSOperationWithView:(NSView*)view insideRect:rect toData:(NSData*)data printInfo:(NSPrintInfo*)printInfo];
+    NSPrintOperation* result_ = [NSPrintOperation EPSOperationWithView:(NSView*)view insideRect:rect toData:(NSMutableData*)data printInfo:(NSPrintInfo*)printInfo];
     return result_;
 }
 
@@ -51,12 +51,12 @@ void* C_NSPrintOperation_PrintOperation_EPSOperationWithView_InsideRect_ToPath_P
 }
 
 void* C_NSPrintOperation_PrintOperation_PDFOperationWithView_InsideRect_ToData(void* view, CGRect rect, void* data) {
-    NSPrintOperation* result_ = [NSPrintOperation PDFOperationWithView:(NSView*)view insideRect:rect toData:(NSData*)data];
+    NSPrintOperation* result_ = [NSPrintOperation PDFOperationWithView:(NSView*)view insideRect:rect toData:(NSMutableData*)data];
     return result_;
 }
 
 void* C_NSPrintOperation_PrintOperation_PDFOperationWithView_InsideRect_ToData_PrintInfo(void* view, CGRect rect, void* data, void* printInfo) {
-    NSPrintOperation* result_ = [NSPrintOperation PDFOperationWithView:(NSView*)view insideRect:rect toData:(NSData*)data printInfo:(NSPrintInfo*)printInfo];
+    NSPrintOperation* result_ = [NSPrintOperation PDFOperationWithView:(NSView*)view insideRect:rect toData:(NSMutableData*)data printInfo:(NSPrintInfo*)printInfo];
     return result_;
 }
 

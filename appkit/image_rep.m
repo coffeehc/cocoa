@@ -141,7 +141,7 @@ bool C_NSImageRep_DrawInRect_FromRect_Operation_Fraction_RespectFlipped_Hints(vo
     	for (int i = 0; i < hints.len; i++) {
     		void* kp = hintsKeyData[i];
     		void* vp = hintsValueData[i];
-    		[objcHints setObject:(NSString*)kp forKey:(id)vp];
+    		[objcHints setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     BOOL result_ = [nSImageRep drawInRect:dstSpacePortionRect fromRect:srcSpacePortionRect operation:op fraction:requestedAlpha respectFlipped:respectContextIsFlipped hints:objcHints];

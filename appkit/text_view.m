@@ -810,7 +810,7 @@ void C_NSTextView_SetSelectedTextAttributes(void* ptr, Dictionary value) {
     	for (int i = 0; i < value.len; i++) {
     		void* kp = valueKeyData[i];
     		void* vp = valueValueData[i];
-    		[objcValue setObject:(NSString*)kp forKey:(id)vp];
+    		[objcValue setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     [nSTextView setSelectedTextAttributes:objcValue];
@@ -847,7 +847,7 @@ void C_NSTextView_SetMarkedTextAttributes(void* ptr, Dictionary value) {
     	for (int i = 0; i < value.len; i++) {
     		void* kp = valueKeyData[i];
     		void* vp = valueValueData[i];
-    		[objcValue setObject:(NSString*)kp forKey:(id)vp];
+    		[objcValue setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     [nSTextView setMarkedTextAttributes:objcValue];
@@ -884,7 +884,7 @@ void C_NSTextView_SetLinkTextAttributes(void* ptr, Dictionary value) {
     	for (int i = 0; i < value.len; i++) {
     		void* kp = valueKeyData[i];
     		void* vp = valueValueData[i];
-    		[objcValue setObject:(NSString*)kp forKey:(id)vp];
+    		[objcValue setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     [nSTextView setLinkTextAttributes:objcValue];
@@ -955,7 +955,7 @@ void C_NSTextView_SetTypingAttributes(void* ptr, Dictionary value) {
     	for (int i = 0; i < value.len; i++) {
     		void* kp = valueKeyData[i];
     		void* vp = valueValueData[i];
-    		[objcValue setObject:(NSString*)kp forKey:(id)vp];
+    		[objcValue setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     [nSTextView setTypingAttributes:objcValue];
@@ -1392,7 +1392,7 @@ bool C_NSTextView_TextView_StronglyReferencesTextStorage() {
     	for (int i = 0; i < result_.len; i++) {
     		void* kp = result_KeyData[i];
     		void* vp = result_ValueData[i];
-    		[objcResult_ setObject:(NSString*)kp forKey:(id)vp];
+    		[objcResult_ setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     return objcResult_;

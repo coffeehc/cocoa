@@ -566,7 +566,7 @@ bool C_NSView_EnterFullScreenMode_WithOptions(void* ptr, void* screen, Dictionar
     	for (int i = 0; i < options.len; i++) {
     		void* kp = optionsKeyData[i];
     		void* vp = optionsValueData[i];
-    		[objcOptions setObject:(NSString*)kp forKey:(id)vp];
+    		[objcOptions setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     BOOL result_ = [nSView enterFullScreenMode:(NSScreen*)screen withOptions:objcOptions];
@@ -582,7 +582,7 @@ void C_NSView_ExitFullScreenModeWithOptions(void* ptr, Dictionary options) {
     	for (int i = 0; i < options.len; i++) {
     		void* kp = optionsKeyData[i];
     		void* vp = optionsValueData[i];
-    		[objcOptions setObject:(NSString*)kp forKey:(id)vp];
+    		[objcOptions setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     [nSView exitFullScreenModeWithOptions:objcOptions];

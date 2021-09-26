@@ -50,7 +50,7 @@ void* C_NSFormatter_AttributedStringForObjectValue_WithDefaultAttributes(void* p
     	for (int i = 0; i < attrs.len; i++) {
     		void* kp = attrsKeyData[i];
     		void* vp = attrsValueData[i];
-    		[objcAttrs setObject:(NSString*)kp forKey:(id)vp];
+    		[objcAttrs setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     NSAttributedString* result_ = [nSFormatter attributedStringForObjectValue:(id)obj withDefaultAttributes:objcAttrs];

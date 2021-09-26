@@ -48,7 +48,7 @@ Array C_NSLayoutConstraint_LayoutConstraint_ConstraintsWithVisualFormat_Options_
     	for (int i = 0; i < metrics.len; i++) {
     		void* kp = metricsKeyData[i];
     		void* vp = metricsValueData[i];
-    		[objcMetrics setObject:(NSString*)kp forKey:(id)vp];
+    		[objcMetrics setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     NSMutableDictionary* objcViews = [NSMutableDictionary dictionaryWithCapacity:views.len];
@@ -58,7 +58,7 @@ Array C_NSLayoutConstraint_LayoutConstraint_ConstraintsWithVisualFormat_Options_
     	for (int i = 0; i < views.len; i++) {
     		void* kp = viewsKeyData[i];
     		void* vp = viewsValueData[i];
-    		[objcViews setObject:(NSString*)kp forKey:(id)vp];
+    		[objcViews setObject:(id)vp forKey:(id<NSCopying>)(NSString*)kp];
     	}
     }
     NSArray* result_ = [NSLayoutConstraint constraintsWithVisualFormat:(NSString*)format options:opts metrics:objcMetrics views:objcViews];
