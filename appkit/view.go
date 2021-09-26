@@ -1738,7 +1738,7 @@ func (n NSView) SafeAreaRect() foundation.Rect {
 	return foundation.Rect(coregraphics.FromCGRectPointer(unsafe.Pointer(&result_)))
 }
 
-func View_CompatibleWithResponsiveScrolling() bool {
-	result_ := C.C_NSView_View_CompatibleWithResponsiveScrolling()
+func View_IsCompatibleWithResponsiveScrolling() bool {
+	result_ := C.C_NSView_View_IsCompatibleWithResponsiveScrolling()
 	return bool(result_)
 }

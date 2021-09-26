@@ -32,7 +32,7 @@ Array C_NSTouchBar_CustomizationAllowedItemIdentifiers(void* ptr);
 void C_NSTouchBar_SetCustomizationAllowedItemIdentifiers(void* ptr, Array value);
 Array C_NSTouchBar_CustomizationRequiredItemIdentifiers(void* ptr);
 void C_NSTouchBar_SetCustomizationRequiredItemIdentifiers(void* ptr, Array value);
-bool C_NSTouchBar_AutomaticCustomizeTouchBarMenuItemEnabled();
+bool C_NSTouchBar_IsAutomaticCustomizeTouchBarMenuItemEnabled();
 void C_NSTouchBar_SetAutomaticCustomizeTouchBarMenuItemEnabled(bool value);
 
 void* WrapTouchBarDelegate(uintptr_t goID);

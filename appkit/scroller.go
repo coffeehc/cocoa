@@ -140,7 +140,7 @@ func (n NSScroller) KnobProportion() coregraphics.Float {
 	return coregraphics.Float(float64(result_))
 }
 
-func CompatibleWithOverlayScrollers() bool {
-	result_ := C.C_NSScroller_CompatibleWithOverlayScrollers()
+func IsCompatibleWithOverlayScrollers() bool {
+	result_ := C.C_NSScroller_IsCompatibleWithOverlayScrollers()
 	return bool(result_)
 }

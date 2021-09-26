@@ -293,4 +293,4 @@ bool C_NSView_IsVerticalContentSizeConstraintActive(void* ptr);
 void C_NSView_SetVerticalContentSizeConstraintActive(void* ptr, bool value);
 NSEdgeInsets C_NSView_SafeAreaInsets(void* ptr);
 CGRect C_NSView_SafeAreaRect(void* ptr);
-bool C_NSView_View_CompatibleWithResponsiveScrolling();
+bool C_NSView_View_IsCompatibleWithResponsiveScrolling();

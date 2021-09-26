@@ -29,4 +29,4 @@ void C_NSScroller_SetScrollerStyle(void* ptr, int value);
 int C_NSScroller_KnobStyle(void* ptr);
 void C_NSScroller_SetKnobStyle(void* ptr, int value);
 double C_NSScroller_KnobProportion(void* ptr);
-bool C_NSScroller_CompatibleWithOverlayScrollers();
+bool C_NSScroller_IsCompatibleWithOverlayScrollers();

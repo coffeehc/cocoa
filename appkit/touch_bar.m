@@ -216,8 +216,8 @@ void C_NSTouchBar_SetCustomizationRequiredItemIdentifiers(void* ptr, Array value
     [nSTouchBar setCustomizationRequiredItemIdentifiers:objcValue];
 }
 
-bool C_NSTouchBar_AutomaticCustomizeTouchBarMenuItemEnabled() {
-    BOOL result_ = [NSTouchBar automaticCustomizeTouchBarMenuItemEnabled];
+bool C_NSTouchBar_IsAutomaticCustomizeTouchBarMenuItemEnabled() {
+    BOOL result_ = [NSTouchBar isAutomaticCustomizeTouchBarMenuItemEnabled];
     return result_;
 }
 

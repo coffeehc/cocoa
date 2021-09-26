@@ -397,8 +397,8 @@ func (n NSEvent) Magnification() coregraphics.Float {
 	return coregraphics.Float(float64(result_))
 }
 
-func Event_MouseCoalescingEnabled() bool {
-	result_ := C.C_NSEvent_Event_MouseCoalescingEnabled()
+func Event_IsMouseCoalescingEnabled() bool {
+	result_ := C.C_NSEvent_Event_IsMouseCoalescingEnabled()
 	return bool(result_)
 }
 
@@ -431,8 +431,8 @@ func (n NSEvent) Phase() EventPhase {
 	return EventPhase(uint(result_))
 }
 
-func SwipeTrackingFromScrollEventsEnabled() bool {
-	result_ := C.C_NSEvent_SwipeTrackingFromScrollEventsEnabled()
+func IsSwipeTrackingFromScrollEventsEnabled() bool {
+	result_ := C.C_NSEvent_IsSwipeTrackingFromScrollEventsEnabled()
 	return bool(result_)
 }
 

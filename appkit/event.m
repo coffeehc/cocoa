@@ -381,8 +381,8 @@ double C_NSEvent_Magnification(void* ptr) {
     return result_;
 }
 
-bool C_NSEvent_Event_MouseCoalescingEnabled() {
-    BOOL result_ = [NSEvent mouseCoalescingEnabled];
+bool C_NSEvent_Event_IsMouseCoalescingEnabled() {
+    BOOL result_ = [NSEvent isMouseCoalescingEnabled];
     return result_;
 }
 
@@ -420,8 +420,8 @@ unsigned int C_NSEvent_Phase(void* ptr) {
     return result_;
 }
 
-bool C_NSEvent_SwipeTrackingFromScrollEventsEnabled() {
-    BOOL result_ = [NSEvent swipeTrackingFromScrollEventsEnabled];
+bool C_NSEvent_IsSwipeTrackingFromScrollEventsEnabled() {
+    BOOL result_ = [NSEvent isSwipeTrackingFromScrollEventsEnabled];
     return result_;
 }
 

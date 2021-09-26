@@ -218,8 +218,8 @@ func (n NSTouchBar) SetCustomizationRequiredItemIdentifiers(value []TouchBarItem
 	C.C_NSTouchBar_SetCustomizationRequiredItemIdentifiers(n.Ptr(), cValue)
 }
 
-func AutomaticCustomizeTouchBarMenuItemEnabled() bool {
-	result_ := C.C_NSTouchBar_AutomaticCustomizeTouchBarMenuItemEnabled()
+func IsAutomaticCustomizeTouchBarMenuItemEnabled() bool {
+	result_ := C.C_NSTouchBar_IsAutomaticCustomizeTouchBarMenuItemEnabled()
 	return bool(result_)
 }
 

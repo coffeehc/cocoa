@@ -1740,7 +1740,7 @@ CGRect C_NSView_SafeAreaRect(void* ptr) {
     return result_;
 }
 
-bool C_NSView_View_CompatibleWithResponsiveScrolling() {
-    BOOL result_ = [NSView compatibleWithResponsiveScrolling];
+bool C_NSView_View_IsCompatibleWithResponsiveScrolling() {
+    BOOL result_ = [NSView isCompatibleWithResponsiveScrolling];
     return result_;
 }
