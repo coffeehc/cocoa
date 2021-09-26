@@ -107,11 +107,6 @@ func (n NSURL) InitWithDataRepresentation_RelativeToURL(data []byte, baseURL URL
 	return MakeURL(result_)
 }
 
-func (n NSURL) InitWithScheme_Host_Path(scheme string, host string, path string) NSURL {
-	result_ := C.C_NSURL_InitWithScheme_Host_Path(n.Ptr(), NewString(scheme).Ptr(), NewString(host).Ptr(), NewString(path).Ptr())
-	return MakeURL(result_)
-}
-
 func AllocURL() NSURL {
 	result_ := C.C_NSURL_AllocURL()
 	return MakeURL(result_)

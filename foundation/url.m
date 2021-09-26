@@ -65,12 +65,6 @@ void* C_NSURL_InitWithDataRepresentation_RelativeToURL(void* ptr, void* data, vo
     return result_;
 }
 
-void* C_NSURL_InitWithScheme_Host_Path(void* ptr, void* scheme, void* host, void* path) {
-    NSURL* nSURL = (NSURL*)ptr;
-    NSURL* result_ = [nSURL initWithScheme:(NSString*)scheme host:(NSString*)host path:(NSString*)path];
-    return result_;
-}
-
 void* C_NSURL_AllocURL() {
     NSURL* result_ = [NSURL alloc];
     return result_;
