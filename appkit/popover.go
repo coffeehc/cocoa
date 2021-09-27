@@ -14,6 +14,8 @@ type Popover interface {
 	ShowRelativeToRect_OfView_PreferredEdge(positioningRect foundation.Rect, positioningView View, preferredEdge foundation.RectEdge)
 	PerformClose(sender objc.Object)
 	Close()
+	ContentViewController() ViewController
+	SetContentViewController(value ViewController)
 	Behavior() PopoverBehavior
 	SetBehavior(value PopoverBehavior)
 	PositioningRect() foundation.Rect
@@ -27,6 +29,8 @@ type Popover interface {
 	SetContentSize(value foundation.Size)
 	IsShown() bool
 	IsDetached() bool
+	Delegate() objc.Object
+	SetDelegate(value objc.Object)
 }
 
 type NSPopover struct {
@@ -79,6 +83,15 @@ func (n NSPopover) PerformClose(sender objc.Object) {
 
 func (n NSPopover) Close() {
 	C.C_NSPopover_Close(n.Ptr())
+}
+
+func (n NSPopover) ContentViewController() ViewController {
+	result_ := C.C_NSPopover_ContentViewController(n.Ptr())
+	return MakeViewController(result_)
+}
+
+func (n NSPopover) SetContentViewController(value ViewController) {
+	C.C_NSPopover_SetContentViewController(n.Ptr(), objc.ExtractPtr(value))
 }
 
 func (n NSPopover) Behavior() PopoverBehavior {
@@ -139,4 +152,13 @@ func (n NSPopover) IsShown() bool {
 func (n NSPopover) IsDetached() bool {
 	result_ := C.C_NSPopover_IsDetached(n.Ptr())
 	return bool(result_)
+}
+
+func (n NSPopover) Delegate() objc.Object {
+	result_ := C.C_NSPopover_Delegate(n.Ptr())
+	return objc.MakeObject(result_)
+}
+
+func (n NSPopover) SetDelegate(value objc.Object) {
+	C.C_NSPopover_SetDelegate(n.Ptr(), objc.ExtractPtr(value))
 }

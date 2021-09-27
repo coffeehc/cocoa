@@ -58,6 +58,28 @@ void C_NSTableCellView_SetObjectValue(void* ptr, void* value) {
     [nSTableCellView setObjectValue:(id)value];
 }
 
+void* C_NSTableCellView_ImageView(void* ptr) {
+    NSTableCellView* nSTableCellView = (NSTableCellView*)ptr;
+    NSImageView* result_ = [nSTableCellView imageView];
+    return result_;
+}
+
+void C_NSTableCellView_SetImageView(void* ptr, void* value) {
+    NSTableCellView* nSTableCellView = (NSTableCellView*)ptr;
+    [nSTableCellView setImageView:(NSImageView*)value];
+}
+
+void* C_NSTableCellView_TextField(void* ptr) {
+    NSTableCellView* nSTableCellView = (NSTableCellView*)ptr;
+    NSTextField* result_ = [nSTableCellView textField];
+    return result_;
+}
+
+void C_NSTableCellView_SetTextField(void* ptr, void* value) {
+    NSTableCellView* nSTableCellView = (NSTableCellView*)ptr;
+    [nSTableCellView setTextField:(NSTextField*)value];
+}
+
 int C_NSTableCellView_BackgroundStyle(void* ptr) {
     NSTableCellView* nSTableCellView = (NSTableCellView*)ptr;
     NSBackgroundStyle result_ = [nSTableCellView backgroundStyle];

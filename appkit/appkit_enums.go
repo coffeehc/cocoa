@@ -2069,3 +2069,5 @@ const (
 	PrintingReplyLater ApplicationPrintReply = 2
 	PrintingFailure    ApplicationPrintReply = 3
 )
+
+type SpringLoadingHighlight int

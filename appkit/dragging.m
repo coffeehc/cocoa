@@ -164,3 +164,102 @@ void* WrapSpringLoadingDestination(uintptr_t goID) {
     adaptor.goID = goID;
     return adaptor;
 }
+
+@interface NSDraggingInfoAdaptor : NSObject <NSDraggingInfo>
+@property (assign) uintptr_t goID;
+@end
+
+@implementation NSDraggingInfoAdaptor
+
+
+- (void)slideDraggedImageTo:(NSPoint)screenPoint {
+    draggingInfo_SlideDraggedImageTo([self goID], screenPoint);
+}
+
+- (void)resetSpringLoading {
+    draggingInfo_ResetSpringLoading([self goID]);
+}
+
+- (NSPasteboard*)draggingPasteboard {
+    void* result_ = draggingInfo_DraggingPasteboard([self goID]);
+    return (NSPasteboard*)result_;
+}
+
+- (NSInteger)draggingSequenceNumber {
+    int result_ = draggingInfo_DraggingSequenceNumber([self goID]);
+    return result_;
+}
+
+- (id)draggingSource {
+    void* result_ = draggingInfo_DraggingSource([self goID]);
+    return (id)result_;
+}
+
+- (NSDragOperation)draggingSourceOperationMask {
+    unsigned int result_ = draggingInfo_DraggingSourceOperationMask([self goID]);
+    return result_;
+}
+
+- (NSPoint)draggingLocation {
+    CGPoint result_ = draggingInfo_DraggingLocation([self goID]);
+    return result_;
+}
+
+- (NSWindow*)draggingDestinationWindow {
+    void* result_ = draggingInfo_DraggingDestinationWindow([self goID]);
+    return (NSWindow*)result_;
+}
+
+- (void)setNumberOfValidItemsForDrop:(NSInteger)value {
+    draggingInfo_SetNumberOfValidItemsForDrop([self goID], value);
+}
+
+- (NSInteger)numberOfValidItemsForDrop {
+    int result_ = draggingInfo_NumberOfValidItemsForDrop([self goID]);
+    return result_;
+}
+
+- (NSPoint)draggedImageLocation {
+    CGPoint result_ = draggingInfo_DraggedImageLocation([self goID]);
+    return result_;
+}
+
+- (void)setAnimatesToDestination:(BOOL)value {
+    draggingInfo_SetAnimatesToDestination([self goID], value);
+}
+
+- (BOOL)animatesToDestination {
+    bool result_ = draggingInfo_AnimatesToDestination([self goID]);
+    return result_;
+}
+
+- (void)setDraggingFormation:(NSDraggingFormation)value {
+    draggingInfo_SetDraggingFormation([self goID], value);
+}
+
+- (NSDraggingFormation)draggingFormation {
+    int result_ = draggingInfo_DraggingFormation([self goID]);
+    return result_;
+}
+
+- (NSSpringLoadingHighlight)springLoadingHighlight {
+    int result_ = draggingInfo_SpringLoadingHighlight([self goID]);
+    return result_;
+}
+
+
+- (BOOL)respondsToSelector:(SEL)aSelector {
+	return DraggingInfo_RespondsTo([self goID], aSelector);
+}
+
+- (void)dealloc {
+	deleteAppKitHandle([self goID]);
+	[super dealloc];
+}
+@end
+
+void* WrapDraggingInfo(uintptr_t goID) {
+    NSDraggingInfoAdaptor* adaptor = [[NSDraggingInfoAdaptor alloc] init];
+    adaptor.goID = goID;
+    return adaptor;
+}

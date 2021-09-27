@@ -39,6 +39,8 @@ type ViewController interface {
 	SetRepresentedObject(value objc.Object)
 	NibBundle() foundation.Bundle
 	NibName() NibName
+	View() View
+	SetView(value View)
 	Title() string
 	SetTitle(value string)
 	Storyboard() Storyboard
@@ -55,6 +57,8 @@ type ViewController interface {
 	SetPreferredScreenOrigin(value foundation.Point)
 	PreferredMaximumSize() foundation.Size
 	PreferredMinimumSize() foundation.Size
+	SourceItemView() View
+	SetSourceItemView(value View)
 }
 
 type NSViewController struct {
@@ -214,6 +218,15 @@ func (n NSViewController) NibName() NibName {
 	return NibName(foundation.MakeString(result_).String())
 }
 
+func (n NSViewController) View() View {
+	result_ := C.C_NSViewController_View(n.Ptr())
+	return MakeView(result_)
+}
+
+func (n NSViewController) SetView(value View) {
+	C.C_NSViewController_SetView(n.Ptr(), objc.ExtractPtr(value))
+}
+
 func (n NSViewController) Title() string {
 	result_ := C.C_NSViewController_Title(n.Ptr())
 	return foundation.MakeString(result_).String()
@@ -313,6 +326,15 @@ func (n NSViewController) PreferredMaximumSize() foundation.Size {
 func (n NSViewController) PreferredMinimumSize() foundation.Size {
 	result_ := C.C_NSViewController_PreferredMinimumSize(n.Ptr())
 	return foundation.Size(coregraphics.FromCGSizePointer(unsafe.Pointer(&result_)))
+}
+
+func (n NSViewController) SourceItemView() View {
+	result_ := C.C_NSViewController_SourceItemView(n.Ptr())
+	return MakeView(result_)
+}
+
+func (n NSViewController) SetSourceItemView(value View) {
+	C.C_NSViewController_SetSourceItemView(n.Ptr(), objc.ExtractPtr(value))
 }
 
 type ViewControllerPresentationAnimator interface {

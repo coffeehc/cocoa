@@ -13,6 +13,10 @@ type TableCellView interface {
 	View
 	ObjectValue() objc.Object
 	SetObjectValue(value objc.Object)
+	ImageView() ImageView
+	SetImageView(value ImageView)
+	TextField() TextField
+	SetTextField(value TextField)
 	BackgroundStyle() BackgroundStyle
 	SetBackgroundStyle(value BackgroundStyle)
 	RowSizeStyle() TableViewRowSizeStyle
@@ -72,6 +76,24 @@ func (n NSTableCellView) ObjectValue() objc.Object {
 
 func (n NSTableCellView) SetObjectValue(value objc.Object) {
 	C.C_NSTableCellView_SetObjectValue(n.Ptr(), objc.ExtractPtr(value))
+}
+
+func (n NSTableCellView) ImageView() ImageView {
+	result_ := C.C_NSTableCellView_ImageView(n.Ptr())
+	return MakeImageView(result_)
+}
+
+func (n NSTableCellView) SetImageView(value ImageView) {
+	C.C_NSTableCellView_SetImageView(n.Ptr(), objc.ExtractPtr(value))
+}
+
+func (n NSTableCellView) TextField() TextField {
+	result_ := C.C_NSTableCellView_TextField(n.Ptr())
+	return MakeTextField(result_)
+}
+
+func (n NSTableCellView) SetTextField(value TextField) {
+	C.C_NSTableCellView_SetTextField(n.Ptr(), objc.ExtractPtr(value))
 }
 
 func (n NSTableCellView) BackgroundStyle() BackgroundStyle {

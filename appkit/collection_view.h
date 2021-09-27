@@ -85,6 +85,10 @@ void* C_NSCollectionViewItem_AllocCollectionViewItem();
 void* C_NSCollectionViewItem_NewCollectionViewItem();
 void* C_NSCollectionViewItem_Autorelease(void* ptr);
 void* C_NSCollectionViewItem_Retain(void* ptr);
+void* C_NSCollectionViewItem_ImageView(void* ptr);
+void C_NSCollectionViewItem_SetImageView(void* ptr, void* value);
+void* C_NSCollectionViewItem_TextField(void* ptr);
+void C_NSCollectionViewItem_SetTextField(void* ptr, void* value);
 bool C_NSCollectionViewItem_IsSelected(void* ptr);
 void C_NSCollectionViewItem_SetSelected(void* ptr, bool value);
 int C_NSCollectionViewItem_HighlightState(void* ptr);
@@ -95,3 +99,7 @@ Array C_NSCollectionViewItem_DraggingImageComponents(void* ptr);
 void* WrapCollectionViewDataSource(uintptr_t goID);
 
 void* WrapCollectionViewDelegate(uintptr_t goID);
+
+void* WrapCollectionViewSectionHeaderView(uintptr_t goID);
+
+void* WrapCollectionViewElement(uintptr_t goID);

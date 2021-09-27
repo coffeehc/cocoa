@@ -263,3 +263,179 @@ func SpringLoadingDestination_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Poin
 		return false
 	}
 }
+
+type DraggingInfo interface {
+	SlideDraggedImageTo(screenPoint foundation.Point)
+	ResetSpringLoading()
+	DraggingPasteboard() Pasteboard
+	DraggingSequenceNumber() int
+	DraggingSource() objc.Object
+	DraggingSourceOperationMask() DragOperation
+	DraggingLocation() foundation.Point
+	DraggingDestinationWindow() Window
+	NumberOfValidItemsForDrop() int
+	SetNumberOfValidItemsForDrop(value int)
+	DraggedImageLocation() foundation.Point
+	AnimatesToDestination() bool
+	SetAnimatesToDestination(value bool)
+	DraggingFormation() DraggingFormation
+	SetDraggingFormation(value DraggingFormation)
+	SpringLoadingHighlight() SpringLoadingHighlight
+}
+
+func DraggingInfoToObjc(protocol DraggingInfo) objc.Object {
+	h := cgo.NewHandle(protocol)
+	ptr := C.WrapDraggingInfo(C.uintptr_t(h))
+	return objc.MakeObject(ptr)
+}
+
+//export draggingInfo_SlideDraggedImageTo
+func draggingInfo_SlideDraggedImageTo(hp C.uintptr_t, screenPoint C.CGPoint) {
+	protocol := cgo.Handle(hp).Value().(DraggingInfo)
+	protocol.SlideDraggedImageTo(foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&screenPoint))))
+}
+
+//export draggingInfo_ResetSpringLoading
+func draggingInfo_ResetSpringLoading(hp C.uintptr_t) {
+	protocol := cgo.Handle(hp).Value().(DraggingInfo)
+	protocol.ResetSpringLoading()
+}
+
+//export draggingInfo_DraggingPasteboard
+func draggingInfo_DraggingPasteboard(hp C.uintptr_t) unsafe.Pointer {
+	protocol := cgo.Handle(hp).Value().(DraggingInfo)
+	result := protocol.DraggingPasteboard()
+	return objc.ExtractPtr(result)
+}
+
+//export draggingInfo_DraggingSequenceNumber
+func draggingInfo_DraggingSequenceNumber(hp C.uintptr_t) C.int {
+	protocol := cgo.Handle(hp).Value().(DraggingInfo)
+	result := protocol.DraggingSequenceNumber()
+	return C.int(result)
+}
+
+//export draggingInfo_DraggingSource
+func draggingInfo_DraggingSource(hp C.uintptr_t) unsafe.Pointer {
+	protocol := cgo.Handle(hp).Value().(DraggingInfo)
+	result := protocol.DraggingSource()
+	return objc.ExtractPtr(result)
+}
+
+//export draggingInfo_DraggingSourceOperationMask
+func draggingInfo_DraggingSourceOperationMask(hp C.uintptr_t) C.uint {
+	protocol := cgo.Handle(hp).Value().(DraggingInfo)
+	result := protocol.DraggingSourceOperationMask()
+	return C.uint(uint(result))
+}
+
+//export draggingInfo_DraggingLocation
+func draggingInfo_DraggingLocation(hp C.uintptr_t) C.CGPoint {
+	protocol := cgo.Handle(hp).Value().(DraggingInfo)
+	result := protocol.DraggingLocation()
+	return *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(result)))
+}
+
+//export draggingInfo_DraggingDestinationWindow
+func draggingInfo_DraggingDestinationWindow(hp C.uintptr_t) unsafe.Pointer {
+	protocol := cgo.Handle(hp).Value().(DraggingInfo)
+	result := protocol.DraggingDestinationWindow()
+	return objc.ExtractPtr(result)
+}
+
+//export draggingInfo_SetNumberOfValidItemsForDrop
+func draggingInfo_SetNumberOfValidItemsForDrop(hp C.uintptr_t, value C.int) {
+	protocol := cgo.Handle(hp).Value().(DraggingInfo)
+	protocol.SetNumberOfValidItemsForDrop(int(value))
+}
+
+//export draggingInfo_NumberOfValidItemsForDrop
+func draggingInfo_NumberOfValidItemsForDrop(hp C.uintptr_t) C.int {
+	protocol := cgo.Handle(hp).Value().(DraggingInfo)
+	result := protocol.NumberOfValidItemsForDrop()
+	return C.int(result)
+}
+
+//export draggingInfo_DraggedImageLocation
+func draggingInfo_DraggedImageLocation(hp C.uintptr_t) C.CGPoint {
+	protocol := cgo.Handle(hp).Value().(DraggingInfo)
+	result := protocol.DraggedImageLocation()
+	return *(*C.CGPoint)(coregraphics.ToCGPointPointer(coregraphics.Point(result)))
+}
+
+//export draggingInfo_SetAnimatesToDestination
+func draggingInfo_SetAnimatesToDestination(hp C.uintptr_t, value C.bool) {
+	protocol := cgo.Handle(hp).Value().(DraggingInfo)
+	protocol.SetAnimatesToDestination(bool(value))
+}
+
+//export draggingInfo_AnimatesToDestination
+func draggingInfo_AnimatesToDestination(hp C.uintptr_t) C.bool {
+	protocol := cgo.Handle(hp).Value().(DraggingInfo)
+	result := protocol.AnimatesToDestination()
+	return C.bool(result)
+}
+
+//export draggingInfo_SetDraggingFormation
+func draggingInfo_SetDraggingFormation(hp C.uintptr_t, value C.int) {
+	protocol := cgo.Handle(hp).Value().(DraggingInfo)
+	protocol.SetDraggingFormation(DraggingFormation(int(value)))
+}
+
+//export draggingInfo_DraggingFormation
+func draggingInfo_DraggingFormation(hp C.uintptr_t) C.int {
+	protocol := cgo.Handle(hp).Value().(DraggingInfo)
+	result := protocol.DraggingFormation()
+	return C.int(int(result))
+}
+
+//export draggingInfo_SpringLoadingHighlight
+func draggingInfo_SpringLoadingHighlight(hp C.uintptr_t) C.int {
+	protocol := cgo.Handle(hp).Value().(DraggingInfo)
+	result := protocol.SpringLoadingHighlight()
+	return C.int(int(result))
+}
+
+//export DraggingInfo_RespondsTo
+func DraggingInfo_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
+	sel := objc.Selector(selectorPtr)
+	selName := objc.Sel_GetName(sel)
+	protocol := cgo.Handle(hp).Value().(DraggingInfo)
+	_ = protocol
+	switch selName {
+	case "slideDraggedImageTo:":
+		return true
+	case "resetSpringLoading":
+		return true
+	case "draggingPasteboard":
+		return true
+	case "draggingSequenceNumber":
+		return true
+	case "draggingSource":
+		return true
+	case "draggingSourceOperationMask":
+		return true
+	case "draggingLocation":
+		return true
+	case "draggingDestinationWindow":
+		return true
+	case "setNumberOfValidItemsForDrop:":
+		fallthrough
+	case "numberOfValidItemsForDrop":
+		return true
+	case "draggedImageLocation":
+		return true
+	case "setAnimatesToDestination:":
+		fallthrough
+	case "animatesToDestination":
+		return true
+	case "setDraggingFormation:":
+		fallthrough
+	case "draggingFormation":
+		return true
+	case "springLoadingHighlight":
+		return true
+	default:
+		return false
+	}
+}

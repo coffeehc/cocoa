@@ -41,6 +41,8 @@ void* C_NSViewController_RepresentedObject(void* ptr);
 void C_NSViewController_SetRepresentedObject(void* ptr, void* value);
 void* C_NSViewController_NibBundle(void* ptr);
 void* C_NSViewController_NibName(void* ptr);
+void* C_NSViewController_View(void* ptr);
+void C_NSViewController_SetView(void* ptr, void* value);
 void* C_NSViewController_Title(void* ptr);
 void C_NSViewController_SetTitle(void* ptr, void* value);
 void* C_NSViewController_Storyboard(void* ptr);
@@ -57,5 +59,7 @@ CGPoint C_NSViewController_PreferredScreenOrigin(void* ptr);
 void C_NSViewController_SetPreferredScreenOrigin(void* ptr, CGPoint value);
 CGSize C_NSViewController_PreferredMaximumSize(void* ptr);
 CGSize C_NSViewController_PreferredMinimumSize(void* ptr);
+void* C_NSViewController_SourceItemView(void* ptr);
+void C_NSViewController_SetSourceItemView(void* ptr, void* value);
 
 void* WrapViewControllerPresentationAnimator(uintptr_t goID);

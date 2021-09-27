@@ -56,6 +56,17 @@ void C_NSPopover_Close(void* ptr) {
     [nSPopover close];
 }
 
+void* C_NSPopover_ContentViewController(void* ptr) {
+    NSPopover* nSPopover = (NSPopover*)ptr;
+    NSViewController* result_ = [nSPopover contentViewController];
+    return result_;
+}
+
+void C_NSPopover_SetContentViewController(void* ptr, void* value) {
+    NSPopover* nSPopover = (NSPopover*)ptr;
+    [nSPopover setContentViewController:(NSViewController*)value];
+}
+
 int C_NSPopover_Behavior(void* ptr) {
     NSPopover* nSPopover = (NSPopover*)ptr;
     NSPopoverBehavior result_ = [nSPopover behavior];
@@ -127,4 +138,15 @@ bool C_NSPopover_IsDetached(void* ptr) {
     NSPopover* nSPopover = (NSPopover*)ptr;
     BOOL result_ = [nSPopover isDetached];
     return result_;
+}
+
+void* C_NSPopover_Delegate(void* ptr) {
+    NSPopover* nSPopover = (NSPopover*)ptr;
+    id result_ = [nSPopover delegate];
+    return result_;
+}
+
+void C_NSPopover_SetDelegate(void* ptr, void* value) {
+    NSPopover* nSPopover = (NSPopover*)ptr;
+    [nSPopover setDelegate:(id)value];
 }

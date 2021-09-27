@@ -187,6 +187,17 @@ void* C_NSViewController_NibName(void* ptr) {
     return result_;
 }
 
+void* C_NSViewController_View(void* ptr) {
+    NSViewController* nSViewController = (NSViewController*)ptr;
+    NSView* result_ = [nSViewController view];
+    return result_;
+}
+
+void C_NSViewController_SetView(void* ptr, void* value) {
+    NSViewController* nSViewController = (NSViewController*)ptr;
+    [nSViewController setView:(NSView*)value];
+}
+
 void* C_NSViewController_Title(void* ptr) {
     NSViewController* nSViewController = (NSViewController*)ptr;
     NSString* result_ = [nSViewController title];
@@ -307,6 +318,17 @@ CGSize C_NSViewController_PreferredMinimumSize(void* ptr) {
     NSViewController* nSViewController = (NSViewController*)ptr;
     NSSize result_ = [nSViewController preferredMinimumSize];
     return result_;
+}
+
+void* C_NSViewController_SourceItemView(void* ptr) {
+    NSViewController* nSViewController = (NSViewController*)ptr;
+    NSView* result_ = [nSViewController sourceItemView];
+    return result_;
+}
+
+void C_NSViewController_SetSourceItemView(void* ptr, void* value) {
+    NSViewController* nSViewController = (NSViewController*)ptr;
+    [nSViewController setSourceItemView:(NSView*)value];
 }
 
 @interface NSViewControllerPresentationAnimatorAdaptor : NSObject <NSViewControllerPresentationAnimator>

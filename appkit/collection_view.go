@@ -438,6 +438,10 @@ func (n NSCollectionView) SetSelectionIndexes(value foundation.IndexSet) {
 
 type CollectionViewItem interface {
 	ViewController
+	ImageView() ImageView
+	SetImageView(value ImageView)
+	TextField() TextField
+	SetTextField(value TextField)
 	IsSelected() bool
 	SetSelected(value bool)
 	HighlightState() CollectionViewItemHighlightState
@@ -489,6 +493,24 @@ func (n NSCollectionViewItem) Autorelease() NSCollectionViewItem {
 func (n NSCollectionViewItem) Retain() NSCollectionViewItem {
 	result_ := C.C_NSCollectionViewItem_Retain(n.Ptr())
 	return MakeCollectionViewItem(result_)
+}
+
+func (n NSCollectionViewItem) ImageView() ImageView {
+	result_ := C.C_NSCollectionViewItem_ImageView(n.Ptr())
+	return MakeImageView(result_)
+}
+
+func (n NSCollectionViewItem) SetImageView(value ImageView) {
+	C.C_NSCollectionViewItem_SetImageView(n.Ptr(), objc.ExtractPtr(value))
+}
+
+func (n NSCollectionViewItem) TextField() TextField {
+	result_ := C.C_NSCollectionViewItem_TextField(n.Ptr())
+	return MakeTextField(result_)
+}
+
+func (n NSCollectionViewItem) SetTextField(value TextField) {
+	C.C_NSCollectionViewItem_SetTextField(n.Ptr(), objc.ExtractPtr(value))
 }
 
 func (n NSCollectionViewItem) IsSelected() bool {
@@ -804,6 +826,208 @@ func CollectionViewDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointe
 		return delegate.CollectionView_DraggingSession_WillBeginAtPoint_ForItemsAtIndexes != nil
 	case "collectionView:acceptDrop:index:dropOperation:":
 		return delegate.CollectionView_AcceptDrop_Index_DropOperation != nil
+	default:
+		return false
+	}
+}
+
+type CollectionViewSectionHeaderView interface {
+	HasPrepareForReuse() bool
+	PrepareForReuse()
+	HasPreferredLayoutAttributesFittingAttributes() bool
+	PreferredLayoutAttributesFittingAttributes(layoutAttributes CollectionViewLayoutAttributes) CollectionViewLayoutAttributes
+	HasApplyLayoutAttributes() bool
+	ApplyLayoutAttributes(layoutAttributes CollectionViewLayoutAttributes)
+	HasWillTransitionFromLayout_ToLayout() bool
+	WillTransitionFromLayout_ToLayout(oldLayout CollectionViewLayout, newLayout CollectionViewLayout)
+	HasDidTransitionFromLayout_ToLayout() bool
+	DidTransitionFromLayout_ToLayout(oldLayout CollectionViewLayout, newLayout CollectionViewLayout)
+	HasSectionCollapseButton() bool
+	SectionCollapseButton() Button
+	SetSectionCollapseButton(value Button)
+	Identifier() UserInterfaceItemIdentifier
+	SetIdentifier(value UserInterfaceItemIdentifier)
+}
+
+func CollectionViewSectionHeaderViewToObjc(protocol CollectionViewSectionHeaderView) objc.Object {
+	h := cgo.NewHandle(protocol)
+	ptr := C.WrapCollectionViewSectionHeaderView(C.uintptr_t(h))
+	return objc.MakeObject(ptr)
+}
+
+//export collectionViewSectionHeaderView_PrepareForReuse
+func collectionViewSectionHeaderView_PrepareForReuse(hp C.uintptr_t) {
+	protocol := cgo.Handle(hp).Value().(CollectionViewSectionHeaderView)
+	protocol.PrepareForReuse()
+}
+
+//export collectionViewSectionHeaderView_PreferredLayoutAttributesFittingAttributes
+func collectionViewSectionHeaderView_PreferredLayoutAttributesFittingAttributes(hp C.uintptr_t, layoutAttributes unsafe.Pointer) unsafe.Pointer {
+	protocol := cgo.Handle(hp).Value().(CollectionViewSectionHeaderView)
+	result := protocol.PreferredLayoutAttributesFittingAttributes(MakeCollectionViewLayoutAttributes(layoutAttributes))
+	return objc.ExtractPtr(result)
+}
+
+//export collectionViewSectionHeaderView_ApplyLayoutAttributes
+func collectionViewSectionHeaderView_ApplyLayoutAttributes(hp C.uintptr_t, layoutAttributes unsafe.Pointer) {
+	protocol := cgo.Handle(hp).Value().(CollectionViewSectionHeaderView)
+	protocol.ApplyLayoutAttributes(MakeCollectionViewLayoutAttributes(layoutAttributes))
+}
+
+//export collectionViewSectionHeaderView_WillTransitionFromLayout_ToLayout
+func collectionViewSectionHeaderView_WillTransitionFromLayout_ToLayout(hp C.uintptr_t, oldLayout unsafe.Pointer, newLayout unsafe.Pointer) {
+	protocol := cgo.Handle(hp).Value().(CollectionViewSectionHeaderView)
+	protocol.WillTransitionFromLayout_ToLayout(MakeCollectionViewLayout(oldLayout), MakeCollectionViewLayout(newLayout))
+}
+
+//export collectionViewSectionHeaderView_DidTransitionFromLayout_ToLayout
+func collectionViewSectionHeaderView_DidTransitionFromLayout_ToLayout(hp C.uintptr_t, oldLayout unsafe.Pointer, newLayout unsafe.Pointer) {
+	protocol := cgo.Handle(hp).Value().(CollectionViewSectionHeaderView)
+	protocol.DidTransitionFromLayout_ToLayout(MakeCollectionViewLayout(oldLayout), MakeCollectionViewLayout(newLayout))
+}
+
+//export collectionViewSectionHeaderView_SetSectionCollapseButton
+func collectionViewSectionHeaderView_SetSectionCollapseButton(hp C.uintptr_t, value unsafe.Pointer) {
+	protocol := cgo.Handle(hp).Value().(CollectionViewSectionHeaderView)
+	protocol.SetSectionCollapseButton(MakeButton(value))
+}
+
+//export collectionViewSectionHeaderView_SectionCollapseButton
+func collectionViewSectionHeaderView_SectionCollapseButton(hp C.uintptr_t) unsafe.Pointer {
+	protocol := cgo.Handle(hp).Value().(CollectionViewSectionHeaderView)
+	result := protocol.SectionCollapseButton()
+	return objc.ExtractPtr(result)
+}
+
+//export collectionViewSectionHeaderView_SetIdentifier
+func collectionViewSectionHeaderView_SetIdentifier(hp C.uintptr_t, value unsafe.Pointer) {
+	protocol := cgo.Handle(hp).Value().(CollectionViewSectionHeaderView)
+	protocol.SetIdentifier(UserInterfaceItemIdentifier(foundation.MakeString(value).String()))
+}
+
+//export collectionViewSectionHeaderView_Identifier
+func collectionViewSectionHeaderView_Identifier(hp C.uintptr_t) unsafe.Pointer {
+	protocol := cgo.Handle(hp).Value().(CollectionViewSectionHeaderView)
+	result := protocol.Identifier()
+	return foundation.NewString(string(result)).Ptr()
+}
+
+//export CollectionViewSectionHeaderView_RespondsTo
+func CollectionViewSectionHeaderView_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
+	sel := objc.Selector(selectorPtr)
+	selName := objc.Sel_GetName(sel)
+	protocol := cgo.Handle(hp).Value().(CollectionViewSectionHeaderView)
+	_ = protocol
+	switch selName {
+	case "prepareForReuse":
+		return protocol.HasPrepareForReuse()
+	case "preferredLayoutAttributesFittingAttributes:":
+		return protocol.HasPreferredLayoutAttributesFittingAttributes()
+	case "applyLayoutAttributes:":
+		return protocol.HasApplyLayoutAttributes()
+	case "willTransitionFromLayout:toLayout:":
+		return protocol.HasWillTransitionFromLayout_ToLayout()
+	case "didTransitionFromLayout:toLayout:":
+		return protocol.HasDidTransitionFromLayout_ToLayout()
+	case "setSectionCollapseButton:":
+		fallthrough
+	case "sectionCollapseButton":
+		return protocol.HasSectionCollapseButton()
+	case "setIdentifier:":
+		fallthrough
+	case "identifier":
+		return true
+	default:
+		return false
+	}
+}
+
+type CollectionViewElement interface {
+	HasPrepareForReuse() bool
+	PrepareForReuse()
+	HasPreferredLayoutAttributesFittingAttributes() bool
+	PreferredLayoutAttributesFittingAttributes(layoutAttributes CollectionViewLayoutAttributes) CollectionViewLayoutAttributes
+	HasApplyLayoutAttributes() bool
+	ApplyLayoutAttributes(layoutAttributes CollectionViewLayoutAttributes)
+	HasWillTransitionFromLayout_ToLayout() bool
+	WillTransitionFromLayout_ToLayout(oldLayout CollectionViewLayout, newLayout CollectionViewLayout)
+	HasDidTransitionFromLayout_ToLayout() bool
+	DidTransitionFromLayout_ToLayout(oldLayout CollectionViewLayout, newLayout CollectionViewLayout)
+	Identifier() UserInterfaceItemIdentifier
+	SetIdentifier(value UserInterfaceItemIdentifier)
+}
+
+func CollectionViewElementToObjc(protocol CollectionViewElement) objc.Object {
+	h := cgo.NewHandle(protocol)
+	ptr := C.WrapCollectionViewElement(C.uintptr_t(h))
+	return objc.MakeObject(ptr)
+}
+
+//export collectionViewElement_PrepareForReuse
+func collectionViewElement_PrepareForReuse(hp C.uintptr_t) {
+	protocol := cgo.Handle(hp).Value().(CollectionViewElement)
+	protocol.PrepareForReuse()
+}
+
+//export collectionViewElement_PreferredLayoutAttributesFittingAttributes
+func collectionViewElement_PreferredLayoutAttributesFittingAttributes(hp C.uintptr_t, layoutAttributes unsafe.Pointer) unsafe.Pointer {
+	protocol := cgo.Handle(hp).Value().(CollectionViewElement)
+	result := protocol.PreferredLayoutAttributesFittingAttributes(MakeCollectionViewLayoutAttributes(layoutAttributes))
+	return objc.ExtractPtr(result)
+}
+
+//export collectionViewElement_ApplyLayoutAttributes
+func collectionViewElement_ApplyLayoutAttributes(hp C.uintptr_t, layoutAttributes unsafe.Pointer) {
+	protocol := cgo.Handle(hp).Value().(CollectionViewElement)
+	protocol.ApplyLayoutAttributes(MakeCollectionViewLayoutAttributes(layoutAttributes))
+}
+
+//export collectionViewElement_WillTransitionFromLayout_ToLayout
+func collectionViewElement_WillTransitionFromLayout_ToLayout(hp C.uintptr_t, oldLayout unsafe.Pointer, newLayout unsafe.Pointer) {
+	protocol := cgo.Handle(hp).Value().(CollectionViewElement)
+	protocol.WillTransitionFromLayout_ToLayout(MakeCollectionViewLayout(oldLayout), MakeCollectionViewLayout(newLayout))
+}
+
+//export collectionViewElement_DidTransitionFromLayout_ToLayout
+func collectionViewElement_DidTransitionFromLayout_ToLayout(hp C.uintptr_t, oldLayout unsafe.Pointer, newLayout unsafe.Pointer) {
+	protocol := cgo.Handle(hp).Value().(CollectionViewElement)
+	protocol.DidTransitionFromLayout_ToLayout(MakeCollectionViewLayout(oldLayout), MakeCollectionViewLayout(newLayout))
+}
+
+//export collectionViewElement_SetIdentifier
+func collectionViewElement_SetIdentifier(hp C.uintptr_t, value unsafe.Pointer) {
+	protocol := cgo.Handle(hp).Value().(CollectionViewElement)
+	protocol.SetIdentifier(UserInterfaceItemIdentifier(foundation.MakeString(value).String()))
+}
+
+//export collectionViewElement_Identifier
+func collectionViewElement_Identifier(hp C.uintptr_t) unsafe.Pointer {
+	protocol := cgo.Handle(hp).Value().(CollectionViewElement)
+	result := protocol.Identifier()
+	return foundation.NewString(string(result)).Ptr()
+}
+
+//export CollectionViewElement_RespondsTo
+func CollectionViewElement_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
+	sel := objc.Selector(selectorPtr)
+	selName := objc.Sel_GetName(sel)
+	protocol := cgo.Handle(hp).Value().(CollectionViewElement)
+	_ = protocol
+	switch selName {
+	case "prepareForReuse":
+		return protocol.HasPrepareForReuse()
+	case "preferredLayoutAttributesFittingAttributes:":
+		return protocol.HasPreferredLayoutAttributesFittingAttributes()
+	case "applyLayoutAttributes:":
+		return protocol.HasApplyLayoutAttributes()
+	case "willTransitionFromLayout:toLayout:":
+		return protocol.HasWillTransitionFromLayout_ToLayout()
+	case "didTransitionFromLayout:toLayout:":
+		return protocol.HasDidTransitionFromLayout_ToLayout()
+	case "setIdentifier:":
+		fallthrough
+	case "identifier":
+		return true
 	default:
 		return false
 	}

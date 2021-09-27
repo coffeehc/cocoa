@@ -476,6 +476,28 @@ void* C_NSCollectionViewItem_Retain(void* ptr) {
     return result_;
 }
 
+void* C_NSCollectionViewItem_ImageView(void* ptr) {
+    NSCollectionViewItem* nSCollectionViewItem = (NSCollectionViewItem*)ptr;
+    NSImageView* result_ = [nSCollectionViewItem imageView];
+    return result_;
+}
+
+void C_NSCollectionViewItem_SetImageView(void* ptr, void* value) {
+    NSCollectionViewItem* nSCollectionViewItem = (NSCollectionViewItem*)ptr;
+    [nSCollectionViewItem setImageView:(NSImageView*)value];
+}
+
+void* C_NSCollectionViewItem_TextField(void* ptr) {
+    NSCollectionViewItem* nSCollectionViewItem = (NSCollectionViewItem*)ptr;
+    NSTextField* result_ = [nSCollectionViewItem textField];
+    return result_;
+}
+
+void C_NSCollectionViewItem_SetTextField(void* ptr, void* value) {
+    NSCollectionViewItem* nSCollectionViewItem = (NSCollectionViewItem*)ptr;
+    [nSCollectionViewItem setTextField:(NSTextField*)value];
+}
+
 bool C_NSCollectionViewItem_IsSelected(void* ptr) {
     NSCollectionViewItem* nSCollectionViewItem = (NSCollectionViewItem*)ptr;
     BOOL result_ = [nSCollectionViewItem isSelected];
@@ -679,6 +701,123 @@ void* WrapCollectionViewDataSource(uintptr_t goID) {
 
 void* WrapCollectionViewDelegate(uintptr_t goID) {
     NSCollectionViewDelegateAdaptor* adaptor = [[NSCollectionViewDelegateAdaptor alloc] init];
+    adaptor.goID = goID;
+    return adaptor;
+}
+
+@interface NSCollectionViewSectionHeaderViewAdaptor : NSObject <NSCollectionViewSectionHeaderView>
+@property (assign) uintptr_t goID;
+@end
+
+@implementation NSCollectionViewSectionHeaderViewAdaptor
+
+
+- (void)prepareForReuse {
+    collectionViewSectionHeaderView_PrepareForReuse([self goID]);
+}
+
+- (NSCollectionViewLayoutAttributes*)preferredLayoutAttributesFittingAttributes:(NSCollectionViewLayoutAttributes*)layoutAttributes {
+    void* result_ = collectionViewSectionHeaderView_PreferredLayoutAttributesFittingAttributes([self goID], layoutAttributes);
+    return (NSCollectionViewLayoutAttributes*)result_;
+}
+
+- (void)applyLayoutAttributes:(NSCollectionViewLayoutAttributes*)layoutAttributes {
+    collectionViewSectionHeaderView_ApplyLayoutAttributes([self goID], layoutAttributes);
+}
+
+- (void)willTransitionFromLayout:(NSCollectionViewLayout*)oldLayout toLayout:(NSCollectionViewLayout*)newLayout {
+    collectionViewSectionHeaderView_WillTransitionFromLayout_ToLayout([self goID], oldLayout, newLayout);
+}
+
+- (void)didTransitionFromLayout:(NSCollectionViewLayout*)oldLayout toLayout:(NSCollectionViewLayout*)newLayout {
+    collectionViewSectionHeaderView_DidTransitionFromLayout_ToLayout([self goID], oldLayout, newLayout);
+}
+
+- (void)setSectionCollapseButton:(NSButton*)value {
+    collectionViewSectionHeaderView_SetSectionCollapseButton([self goID], value);
+}
+
+- (NSButton*)sectionCollapseButton {
+    void* result_ = collectionViewSectionHeaderView_SectionCollapseButton([self goID]);
+    return (NSButton*)result_;
+}
+
+- (void)setIdentifier:(NSUserInterfaceItemIdentifier)value {
+    collectionViewSectionHeaderView_SetIdentifier([self goID], value);
+}
+
+- (NSUserInterfaceItemIdentifier)identifier {
+    void* result_ = collectionViewSectionHeaderView_Identifier([self goID]);
+    return (NSString*)result_;
+}
+
+
+- (BOOL)respondsToSelector:(SEL)aSelector {
+	return CollectionViewSectionHeaderView_RespondsTo([self goID], aSelector);
+}
+
+- (void)dealloc {
+	deleteAppKitHandle([self goID]);
+	[super dealloc];
+}
+@end
+
+void* WrapCollectionViewSectionHeaderView(uintptr_t goID) {
+    NSCollectionViewSectionHeaderViewAdaptor* adaptor = [[NSCollectionViewSectionHeaderViewAdaptor alloc] init];
+    adaptor.goID = goID;
+    return adaptor;
+}
+
+@interface NSCollectionViewElementAdaptor : NSObject <NSCollectionViewElement>
+@property (assign) uintptr_t goID;
+@end
+
+@implementation NSCollectionViewElementAdaptor
+
+
+- (void)prepareForReuse {
+    collectionViewElement_PrepareForReuse([self goID]);
+}
+
+- (NSCollectionViewLayoutAttributes*)preferredLayoutAttributesFittingAttributes:(NSCollectionViewLayoutAttributes*)layoutAttributes {
+    void* result_ = collectionViewElement_PreferredLayoutAttributesFittingAttributes([self goID], layoutAttributes);
+    return (NSCollectionViewLayoutAttributes*)result_;
+}
+
+- (void)applyLayoutAttributes:(NSCollectionViewLayoutAttributes*)layoutAttributes {
+    collectionViewElement_ApplyLayoutAttributes([self goID], layoutAttributes);
+}
+
+- (void)willTransitionFromLayout:(NSCollectionViewLayout*)oldLayout toLayout:(NSCollectionViewLayout*)newLayout {
+    collectionViewElement_WillTransitionFromLayout_ToLayout([self goID], oldLayout, newLayout);
+}
+
+- (void)didTransitionFromLayout:(NSCollectionViewLayout*)oldLayout toLayout:(NSCollectionViewLayout*)newLayout {
+    collectionViewElement_DidTransitionFromLayout_ToLayout([self goID], oldLayout, newLayout);
+}
+
+- (void)setIdentifier:(NSUserInterfaceItemIdentifier)value {
+    collectionViewElement_SetIdentifier([self goID], value);
+}
+
+- (NSUserInterfaceItemIdentifier)identifier {
+    void* result_ = collectionViewElement_Identifier([self goID]);
+    return (NSString*)result_;
+}
+
+
+- (BOOL)respondsToSelector:(SEL)aSelector {
+	return CollectionViewElement_RespondsTo([self goID], aSelector);
+}
+
+- (void)dealloc {
+	deleteAppKitHandle([self goID]);
+	[super dealloc];
+}
+@end
+
+void* WrapCollectionViewElement(uintptr_t goID) {
+    NSCollectionViewElementAdaptor* adaptor = [[NSCollectionViewElementAdaptor alloc] init];
     adaptor.goID = goID;
     return adaptor;
 }
