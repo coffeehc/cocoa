@@ -172,6 +172,19 @@ void* WrapSpringLoadingDestination(uintptr_t goID) {
 @implementation NSDraggingInfoAdaptor
 
 
+- (NSArray*)namesOfPromisedFilesDroppedAtDestination:(NSURL*)dropDestination {
+    Array result_ = draggingInfo_NamesOfPromisedFilesDroppedAtDestination([self goID], dropDestination);
+    NSMutableArray* objcResult_ = [NSMutableArray arrayWithCapacity:result_.len];
+    if (result_.len > 0) {
+    	void** result_Data = (void**)result_.data;
+    	for (int i = 0; i < result_.len; i++) {
+    		void* p = result_Data[i];
+    		[objcResult_ addObject:(NSString*)p];
+    	}
+    }
+    return objcResult_;
+}
+
 - (void)slideDraggedImageTo:(NSPoint)screenPoint {
     draggingInfo_SlideDraggedImageTo([self goID], screenPoint);
 }
@@ -217,6 +230,11 @@ void* WrapSpringLoadingDestination(uintptr_t goID) {
 - (NSInteger)numberOfValidItemsForDrop {
     int result_ = draggingInfo_NumberOfValidItemsForDrop([self goID]);
     return result_;
+}
+
+- (NSImage*)draggedImage {
+    void* result_ = draggingInfo_DraggedImage([self goID]);
+    return (NSImage*)result_;
 }
 
 - (NSPoint)draggedImageLocation {

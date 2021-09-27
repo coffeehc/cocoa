@@ -265,6 +265,7 @@ func SpringLoadingDestination_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Poin
 }
 
 type DraggingInfo interface {
+	NamesOfPromisedFilesDroppedAtDestination(dropDestination foundation.URL) []string
 	SlideDraggedImageTo(screenPoint foundation.Point)
 	ResetSpringLoading()
 	DraggingPasteboard() Pasteboard
@@ -275,6 +276,7 @@ type DraggingInfo interface {
 	DraggingDestinationWindow() Window
 	NumberOfValidItemsForDrop() int
 	SetNumberOfValidItemsForDrop(value int)
+	DraggedImage() Image
 	DraggedImageLocation() foundation.Point
 	AnimatesToDestination() bool
 	SetAnimatesToDestination(value bool)
@@ -287,6 +289,22 @@ func DraggingInfoToObjc(protocol DraggingInfo) objc.Object {
 	h := cgo.NewHandle(protocol)
 	ptr := C.WrapDraggingInfo(C.uintptr_t(h))
 	return objc.MakeObject(ptr)
+}
+
+//export draggingInfo_NamesOfPromisedFilesDroppedAtDestination
+func draggingInfo_NamesOfPromisedFilesDroppedAtDestination(hp C.uintptr_t, dropDestination unsafe.Pointer) C.Array {
+	protocol := cgo.Handle(hp).Value().(DraggingInfo)
+	result := protocol.NamesOfPromisedFilesDroppedAtDestination(foundation.MakeURL(dropDestination))
+	var cResult C.Array
+	if len(result) > 0 {
+		cResultData := make([]unsafe.Pointer, len(result))
+		for idx, v := range result {
+			cResultData[idx] = foundation.NewString(v).Ptr()
+		}
+		cResult.data = unsafe.Pointer(&cResultData[0])
+		cResult.len = C.int(len(result))
+	}
+	return cResult
 }
 
 //export draggingInfo_SlideDraggedImageTo
@@ -356,6 +374,13 @@ func draggingInfo_NumberOfValidItemsForDrop(hp C.uintptr_t) C.int {
 	return C.int(result)
 }
 
+//export draggingInfo_DraggedImage
+func draggingInfo_DraggedImage(hp C.uintptr_t) unsafe.Pointer {
+	protocol := cgo.Handle(hp).Value().(DraggingInfo)
+	result := protocol.DraggedImage()
+	return objc.ExtractPtr(result)
+}
+
 //export draggingInfo_DraggedImageLocation
 func draggingInfo_DraggedImageLocation(hp C.uintptr_t) C.CGPoint {
 	protocol := cgo.Handle(hp).Value().(DraggingInfo)
@@ -403,6 +428,8 @@ func DraggingInfo_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	protocol := cgo.Handle(hp).Value().(DraggingInfo)
 	_ = protocol
 	switch selName {
+	case "namesOfPromisedFilesDroppedAtDestination:":
+		return true
 	case "slideDraggedImageTo:":
 		return true
 	case "resetSpringLoading":
@@ -422,6 +449,8 @@ func DraggingInfo_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	case "setNumberOfValidItemsForDrop:":
 		fallthrough
 	case "numberOfValidItemsForDrop":
+		return true
+	case "draggedImage":
 		return true
 	case "draggedImageLocation":
 		return true
