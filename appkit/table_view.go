@@ -1206,87 +1206,97 @@ func TableViewDelegate_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bo
 	}
 }
 
-type TableViewDataSource struct {
-	NumberOfRowsInTableView                                  func(tableView TableView) int
-	TableView_ObjectValueForTableColumn_Row                  func(tableView TableView, tableColumn TableColumn, row int) objc.Object
-	TableView_SetObjectValue_ForTableColumn_Row              func(tableView TableView, object objc.Object, tableColumn TableColumn, row int)
-	TableView_PasteboardWriterForRow                         func(tableView TableView, row int) objc.Object
-	TableView_AcceptDrop_Row_DropOperation                   func(tableView TableView, info objc.Object, row int, dropOperation TableViewDropOperation) bool
-	TableView_ValidateDrop_ProposedRow_ProposedDropOperation func(tableView TableView, info objc.Object, row int, dropOperation TableViewDropOperation) DragOperation
-	TableView_DraggingSession_WillBeginAtPoint_ForRowIndexes func(tableView TableView, session DraggingSession, screenPoint foundation.Point, rowIndexes foundation.IndexSet)
-	TableView_UpdateDraggingItemsForDrag                     func(tableView TableView, draggingInfo objc.Object)
-	TableView_DraggingSession_EndedAtPoint_Operation         func(tableView TableView, session DraggingSession, screenPoint foundation.Point, operation DragOperation)
-	TableView_SortDescriptorsDidChange                       func(tableView TableView, oldDescriptors []foundation.SortDescriptor)
+type TableViewDataSource interface {
+	HasNumberOfRowsInTableView() bool
+	NumberOfRowsInTableView(tableView TableView) int
+	HasTableView_ObjectValueForTableColumn_Row() bool
+	TableView_ObjectValueForTableColumn_Row(tableView TableView, tableColumn TableColumn, row int) objc.Object
+	HasTableView_SetObjectValue_ForTableColumn_Row() bool
+	TableView_SetObjectValue_ForTableColumn_Row(tableView TableView, object objc.Object, tableColumn TableColumn, row int)
+	HasTableView_PasteboardWriterForRow() bool
+	TableView_PasteboardWriterForRow(tableView TableView, row int) objc.Object
+	HasTableView_AcceptDrop_Row_DropOperation() bool
+	TableView_AcceptDrop_Row_DropOperation(tableView TableView, info objc.Object, row int, dropOperation TableViewDropOperation) bool
+	HasTableView_ValidateDrop_ProposedRow_ProposedDropOperation() bool
+	TableView_ValidateDrop_ProposedRow_ProposedDropOperation(tableView TableView, info objc.Object, row int, dropOperation TableViewDropOperation) DragOperation
+	HasTableView_DraggingSession_WillBeginAtPoint_ForRowIndexes() bool
+	TableView_DraggingSession_WillBeginAtPoint_ForRowIndexes(tableView TableView, session DraggingSession, screenPoint foundation.Point, rowIndexes foundation.IndexSet)
+	HasTableView_UpdateDraggingItemsForDrag() bool
+	TableView_UpdateDraggingItemsForDrag(tableView TableView, draggingInfo objc.Object)
+	HasTableView_DraggingSession_EndedAtPoint_Operation() bool
+	TableView_DraggingSession_EndedAtPoint_Operation(tableView TableView, session DraggingSession, screenPoint foundation.Point, operation DragOperation)
+	HasTableView_SortDescriptorsDidChange() bool
+	TableView_SortDescriptorsDidChange(tableView TableView, oldDescriptors []foundation.SortDescriptor)
 }
 
-func (delegate *TableViewDataSource) ToObjc() objc.Object {
-	h := cgo.NewHandle(delegate)
+func TableViewDataSourceToObjc(protocol TableViewDataSource) objc.Object {
+	h := cgo.NewHandle(protocol)
 	ptr := C.WrapTableViewDataSource(C.uintptr_t(h))
 	return objc.MakeObject(ptr)
 }
 
 //export tableViewDataSource_NumberOfRowsInTableView
 func tableViewDataSource_NumberOfRowsInTableView(hp C.uintptr_t, tableView unsafe.Pointer) C.int {
-	delegate := cgo.Handle(hp).Value().(*TableViewDataSource)
-	result := delegate.NumberOfRowsInTableView(MakeTableView(tableView))
+	protocol := cgo.Handle(hp).Value().(TableViewDataSource)
+	result := protocol.NumberOfRowsInTableView(MakeTableView(tableView))
 	return C.int(result)
 }
 
 //export tableViewDataSource_TableView_ObjectValueForTableColumn_Row
 func tableViewDataSource_TableView_ObjectValueForTableColumn_Row(hp C.uintptr_t, tableView unsafe.Pointer, tableColumn unsafe.Pointer, row C.int) unsafe.Pointer {
-	delegate := cgo.Handle(hp).Value().(*TableViewDataSource)
-	result := delegate.TableView_ObjectValueForTableColumn_Row(MakeTableView(tableView), MakeTableColumn(tableColumn), int(row))
+	protocol := cgo.Handle(hp).Value().(TableViewDataSource)
+	result := protocol.TableView_ObjectValueForTableColumn_Row(MakeTableView(tableView), MakeTableColumn(tableColumn), int(row))
 	return objc.ExtractPtr(result)
 }
 
 //export tableViewDataSource_TableView_SetObjectValue_ForTableColumn_Row
 func tableViewDataSource_TableView_SetObjectValue_ForTableColumn_Row(hp C.uintptr_t, tableView unsafe.Pointer, object unsafe.Pointer, tableColumn unsafe.Pointer, row C.int) {
-	delegate := cgo.Handle(hp).Value().(*TableViewDataSource)
-	delegate.TableView_SetObjectValue_ForTableColumn_Row(MakeTableView(tableView), objc.MakeObject(object), MakeTableColumn(tableColumn), int(row))
+	protocol := cgo.Handle(hp).Value().(TableViewDataSource)
+	protocol.TableView_SetObjectValue_ForTableColumn_Row(MakeTableView(tableView), objc.MakeObject(object), MakeTableColumn(tableColumn), int(row))
 }
 
 //export tableViewDataSource_TableView_PasteboardWriterForRow
 func tableViewDataSource_TableView_PasteboardWriterForRow(hp C.uintptr_t, tableView unsafe.Pointer, row C.int) unsafe.Pointer {
-	delegate := cgo.Handle(hp).Value().(*TableViewDataSource)
-	result := delegate.TableView_PasteboardWriterForRow(MakeTableView(tableView), int(row))
+	protocol := cgo.Handle(hp).Value().(TableViewDataSource)
+	result := protocol.TableView_PasteboardWriterForRow(MakeTableView(tableView), int(row))
 	return objc.ExtractPtr(result)
 }
 
 //export tableViewDataSource_TableView_AcceptDrop_Row_DropOperation
 func tableViewDataSource_TableView_AcceptDrop_Row_DropOperation(hp C.uintptr_t, tableView unsafe.Pointer, info unsafe.Pointer, row C.int, dropOperation C.uint) C.bool {
-	delegate := cgo.Handle(hp).Value().(*TableViewDataSource)
-	result := delegate.TableView_AcceptDrop_Row_DropOperation(MakeTableView(tableView), objc.MakeObject(info), int(row), TableViewDropOperation(uint(dropOperation)))
+	protocol := cgo.Handle(hp).Value().(TableViewDataSource)
+	result := protocol.TableView_AcceptDrop_Row_DropOperation(MakeTableView(tableView), objc.MakeObject(info), int(row), TableViewDropOperation(uint(dropOperation)))
 	return C.bool(result)
 }
 
 //export tableViewDataSource_TableView_ValidateDrop_ProposedRow_ProposedDropOperation
 func tableViewDataSource_TableView_ValidateDrop_ProposedRow_ProposedDropOperation(hp C.uintptr_t, tableView unsafe.Pointer, info unsafe.Pointer, row C.int, dropOperation C.uint) C.uint {
-	delegate := cgo.Handle(hp).Value().(*TableViewDataSource)
-	result := delegate.TableView_ValidateDrop_ProposedRow_ProposedDropOperation(MakeTableView(tableView), objc.MakeObject(info), int(row), TableViewDropOperation(uint(dropOperation)))
+	protocol := cgo.Handle(hp).Value().(TableViewDataSource)
+	result := protocol.TableView_ValidateDrop_ProposedRow_ProposedDropOperation(MakeTableView(tableView), objc.MakeObject(info), int(row), TableViewDropOperation(uint(dropOperation)))
 	return C.uint(uint(result))
 }
 
 //export tableViewDataSource_TableView_DraggingSession_WillBeginAtPoint_ForRowIndexes
 func tableViewDataSource_TableView_DraggingSession_WillBeginAtPoint_ForRowIndexes(hp C.uintptr_t, tableView unsafe.Pointer, session unsafe.Pointer, screenPoint C.CGPoint, rowIndexes unsafe.Pointer) {
-	delegate := cgo.Handle(hp).Value().(*TableViewDataSource)
-	delegate.TableView_DraggingSession_WillBeginAtPoint_ForRowIndexes(MakeTableView(tableView), MakeDraggingSession(session), foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&screenPoint))), foundation.MakeIndexSet(rowIndexes))
+	protocol := cgo.Handle(hp).Value().(TableViewDataSource)
+	protocol.TableView_DraggingSession_WillBeginAtPoint_ForRowIndexes(MakeTableView(tableView), MakeDraggingSession(session), foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&screenPoint))), foundation.MakeIndexSet(rowIndexes))
 }
 
 //export tableViewDataSource_TableView_UpdateDraggingItemsForDrag
 func tableViewDataSource_TableView_UpdateDraggingItemsForDrag(hp C.uintptr_t, tableView unsafe.Pointer, draggingInfo unsafe.Pointer) {
-	delegate := cgo.Handle(hp).Value().(*TableViewDataSource)
-	delegate.TableView_UpdateDraggingItemsForDrag(MakeTableView(tableView), objc.MakeObject(draggingInfo))
+	protocol := cgo.Handle(hp).Value().(TableViewDataSource)
+	protocol.TableView_UpdateDraggingItemsForDrag(MakeTableView(tableView), objc.MakeObject(draggingInfo))
 }
 
 //export tableViewDataSource_TableView_DraggingSession_EndedAtPoint_Operation
 func tableViewDataSource_TableView_DraggingSession_EndedAtPoint_Operation(hp C.uintptr_t, tableView unsafe.Pointer, session unsafe.Pointer, screenPoint C.CGPoint, operation C.uint) {
-	delegate := cgo.Handle(hp).Value().(*TableViewDataSource)
-	delegate.TableView_DraggingSession_EndedAtPoint_Operation(MakeTableView(tableView), MakeDraggingSession(session), foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&screenPoint))), DragOperation(uint(operation)))
+	protocol := cgo.Handle(hp).Value().(TableViewDataSource)
+	protocol.TableView_DraggingSession_EndedAtPoint_Operation(MakeTableView(tableView), MakeDraggingSession(session), foundation.Point(coregraphics.FromCGPointPointer(unsafe.Pointer(&screenPoint))), DragOperation(uint(operation)))
 }
 
 //export tableViewDataSource_TableView_SortDescriptorsDidChange
 func tableViewDataSource_TableView_SortDescriptorsDidChange(hp C.uintptr_t, tableView unsafe.Pointer, oldDescriptors C.Array) {
-	delegate := cgo.Handle(hp).Value().(*TableViewDataSource)
+	protocol := cgo.Handle(hp).Value().(TableViewDataSource)
 	if oldDescriptors.len > 0 {
 		defer C.free(oldDescriptors.data)
 	}
@@ -1295,35 +1305,36 @@ func tableViewDataSource_TableView_SortDescriptorsDidChange(hp C.uintptr_t, tabl
 	for idx, r := range oldDescriptorsSlice {
 		goOldDescriptors[idx] = foundation.MakeSortDescriptor(r)
 	}
-	delegate.TableView_SortDescriptorsDidChange(MakeTableView(tableView), goOldDescriptors)
+	protocol.TableView_SortDescriptorsDidChange(MakeTableView(tableView), goOldDescriptors)
 }
 
 //export TableViewDataSource_RespondsTo
 func TableViewDataSource_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
-	delegate := cgo.Handle(hp).Value().(*TableViewDataSource)
+	protocol := cgo.Handle(hp).Value().(TableViewDataSource)
+	_ = protocol
 	switch selName {
 	case "numberOfRowsInTableView:":
-		return delegate.NumberOfRowsInTableView != nil
+		return protocol.HasNumberOfRowsInTableView()
 	case "tableView:objectValueForTableColumn:row:":
-		return delegate.TableView_ObjectValueForTableColumn_Row != nil
+		return protocol.HasTableView_ObjectValueForTableColumn_Row()
 	case "tableView:setObjectValue:forTableColumn:row:":
-		return delegate.TableView_SetObjectValue_ForTableColumn_Row != nil
+		return protocol.HasTableView_SetObjectValue_ForTableColumn_Row()
 	case "tableView:pasteboardWriterForRow:":
-		return delegate.TableView_PasteboardWriterForRow != nil
+		return protocol.HasTableView_PasteboardWriterForRow()
 	case "tableView:acceptDrop:row:dropOperation:":
-		return delegate.TableView_AcceptDrop_Row_DropOperation != nil
+		return protocol.HasTableView_AcceptDrop_Row_DropOperation()
 	case "tableView:validateDrop:proposedRow:proposedDropOperation:":
-		return delegate.TableView_ValidateDrop_ProposedRow_ProposedDropOperation != nil
+		return protocol.HasTableView_ValidateDrop_ProposedRow_ProposedDropOperation()
 	case "tableView:draggingSession:willBeginAtPoint:forRowIndexes:":
-		return delegate.TableView_DraggingSession_WillBeginAtPoint_ForRowIndexes != nil
+		return protocol.HasTableView_DraggingSession_WillBeginAtPoint_ForRowIndexes()
 	case "tableView:updateDraggingItemsForDrag:":
-		return delegate.TableView_UpdateDraggingItemsForDrag != nil
+		return protocol.HasTableView_UpdateDraggingItemsForDrag()
 	case "tableView:draggingSession:endedAtPoint:operation:":
-		return delegate.TableView_DraggingSession_EndedAtPoint_Operation != nil
+		return protocol.HasTableView_DraggingSession_EndedAtPoint_Operation()
 	case "tableView:sortDescriptorsDidChange:":
-		return delegate.TableView_SortDescriptorsDidChange != nil
+		return protocol.HasTableView_SortDescriptorsDidChange()
 	default:
 		return false
 	}

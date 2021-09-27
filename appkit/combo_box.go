@@ -285,44 +285,48 @@ func (n NSComboBox) SetCompletes(value bool) {
 	C.C_NSComboBox_SetCompletes(n.Ptr(), C.bool(value))
 }
 
-type ComboBoxDataSource struct {
-	ComboBox_CompletedString            func(comboBox ComboBox, _string string) string
-	ComboBox_IndexOfItemWithStringValue func(comboBox ComboBox, _string string) uint
-	ComboBox_ObjectValueForItemAtIndex  func(comboBox ComboBox, index int) objc.Object
-	NumberOfItemsInComboBox             func(comboBox ComboBox) int
+type ComboBoxDataSource interface {
+	HasComboBox_CompletedString() bool
+	ComboBox_CompletedString(comboBox ComboBox, _string string) string
+	HasComboBox_IndexOfItemWithStringValue() bool
+	ComboBox_IndexOfItemWithStringValue(comboBox ComboBox, _string string) uint
+	HasComboBox_ObjectValueForItemAtIndex() bool
+	ComboBox_ObjectValueForItemAtIndex(comboBox ComboBox, index int) objc.Object
+	HasNumberOfItemsInComboBox() bool
+	NumberOfItemsInComboBox(comboBox ComboBox) int
 }
 
-func (delegate *ComboBoxDataSource) ToObjc() objc.Object {
-	h := cgo.NewHandle(delegate)
+func ComboBoxDataSourceToObjc(protocol ComboBoxDataSource) objc.Object {
+	h := cgo.NewHandle(protocol)
 	ptr := C.WrapComboBoxDataSource(C.uintptr_t(h))
 	return objc.MakeObject(ptr)
 }
 
 //export comboBoxDataSource_ComboBox_CompletedString
 func comboBoxDataSource_ComboBox_CompletedString(hp C.uintptr_t, comboBox unsafe.Pointer, _string unsafe.Pointer) unsafe.Pointer {
-	delegate := cgo.Handle(hp).Value().(*ComboBoxDataSource)
-	result := delegate.ComboBox_CompletedString(MakeComboBox(comboBox), foundation.MakeString(_string).String())
+	protocol := cgo.Handle(hp).Value().(ComboBoxDataSource)
+	result := protocol.ComboBox_CompletedString(MakeComboBox(comboBox), foundation.MakeString(_string).String())
 	return foundation.NewString(result).Ptr()
 }
 
 //export comboBoxDataSource_ComboBox_IndexOfItemWithStringValue
 func comboBoxDataSource_ComboBox_IndexOfItemWithStringValue(hp C.uintptr_t, comboBox unsafe.Pointer, _string unsafe.Pointer) C.uint {
-	delegate := cgo.Handle(hp).Value().(*ComboBoxDataSource)
-	result := delegate.ComboBox_IndexOfItemWithStringValue(MakeComboBox(comboBox), foundation.MakeString(_string).String())
+	protocol := cgo.Handle(hp).Value().(ComboBoxDataSource)
+	result := protocol.ComboBox_IndexOfItemWithStringValue(MakeComboBox(comboBox), foundation.MakeString(_string).String())
 	return C.uint(result)
 }
 
 //export comboBoxDataSource_ComboBox_ObjectValueForItemAtIndex
 func comboBoxDataSource_ComboBox_ObjectValueForItemAtIndex(hp C.uintptr_t, comboBox unsafe.Pointer, index C.int) unsafe.Pointer {
-	delegate := cgo.Handle(hp).Value().(*ComboBoxDataSource)
-	result := delegate.ComboBox_ObjectValueForItemAtIndex(MakeComboBox(comboBox), int(index))
+	protocol := cgo.Handle(hp).Value().(ComboBoxDataSource)
+	result := protocol.ComboBox_ObjectValueForItemAtIndex(MakeComboBox(comboBox), int(index))
 	return objc.ExtractPtr(result)
 }
 
 //export comboBoxDataSource_NumberOfItemsInComboBox
 func comboBoxDataSource_NumberOfItemsInComboBox(hp C.uintptr_t, comboBox unsafe.Pointer) C.int {
-	delegate := cgo.Handle(hp).Value().(*ComboBoxDataSource)
-	result := delegate.NumberOfItemsInComboBox(MakeComboBox(comboBox))
+	protocol := cgo.Handle(hp).Value().(ComboBoxDataSource)
+	result := protocol.NumberOfItemsInComboBox(MakeComboBox(comboBox))
 	return C.int(result)
 }
 
@@ -330,16 +334,17 @@ func comboBoxDataSource_NumberOfItemsInComboBox(hp C.uintptr_t, comboBox unsafe.
 func ComboBoxDataSource_RespondsTo(hp C.uintptr_t, selectorPtr unsafe.Pointer) bool {
 	sel := objc.Selector(selectorPtr)
 	selName := objc.Sel_GetName(sel)
-	delegate := cgo.Handle(hp).Value().(*ComboBoxDataSource)
+	protocol := cgo.Handle(hp).Value().(ComboBoxDataSource)
+	_ = protocol
 	switch selName {
 	case "comboBox:completedString:":
-		return delegate.ComboBox_CompletedString != nil
+		return protocol.HasComboBox_CompletedString()
 	case "comboBox:indexOfItemWithStringValue:":
-		return delegate.ComboBox_IndexOfItemWithStringValue != nil
+		return protocol.HasComboBox_IndexOfItemWithStringValue()
 	case "comboBox:objectValueForItemAtIndex:":
-		return delegate.ComboBox_ObjectValueForItemAtIndex != nil
+		return protocol.HasComboBox_ObjectValueForItemAtIndex()
 	case "numberOfItemsInComboBox:":
-		return delegate.NumberOfItemsInComboBox != nil
+		return protocol.HasNumberOfItemsInComboBox()
 	default:
 		return false
 	}
