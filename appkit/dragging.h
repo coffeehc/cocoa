@@ -10,5 +10,3 @@ void* WrapDraggingSource(uintptr_t goID);
 void* WrapDraggingDestination(uintptr_t goID);
 
 void* WrapSpringLoadingDestination(uintptr_t goID);
-
-void* WrapDraggingInfo(uintptr_t goID);
